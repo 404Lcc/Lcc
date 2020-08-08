@@ -1,0 +1,45 @@
+﻿using Model;
+
+public class TipsWindowPool
+{
+    public Pool<TipsWindow> tipswindowpool;
+    public int tipswindowmax;
+    public TipsWindowPool()
+    {
+    }
+    public TipsWindowPool(int tipswindowmax)
+    {
+        this.tipswindowmax = tipswindowmax;
+        tipswindowpool = new Pool<TipsWindow>(tipswindowmax);
+    }
+    public void InitPool()
+    {
+        for (int i = 0; i < tipswindowmax; i++)
+        {
+            TipsWindow tipswindow = GameUtil.GetComponent<TipsWindow>(IO.assetManager.LoadGameObject("TipsWindow", false, IO.gui.transform, false, AssetType.UI, AssetType.Tool));
+            Enqueue(tipswindow);
+        }
+    }
+    public int Count
+    {
+        get
+        {
+            return tipswindowpool.Count;
+        }
+    }
+    public void Enqueue(TipsWindow tipswindow)
+    {
+        tipswindow.gameObject.SetActive(false);
+        tipswindowpool.Enqueue(tipswindow);
+    }
+    public TipsWindow Dequeue()
+    {
+        if (Count == 0)
+        {
+            InitPool();
+        }
+        TipsWindow tipswindow = tipswindowpool.Dequeue();
+        tipswindow.gameObject.SetActive(true);
+        return tipswindow;
+    }
+}
