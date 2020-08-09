@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 
-public class Info
+namespace Model
 {
-    public InfoState state;
-    public GameObject container;
-    public virtual void OpenPanel()
+    public class Info
     {
-    }
-    public virtual void ClosePanel()
-    {
-    }
-    public bool ContainerExist()
-    {
-        if (container == null) return false;
-        return true;
+        public InfoState state;
+        public GameObject container;
+        public virtual void OpenPanel()
+        {
+        }
+        public virtual void ClosePanel()
+        {
+        }
+        public bool ContainerExist()
+        {
+            if (container == null) return false;
+            return true;
+        }
     }
 }

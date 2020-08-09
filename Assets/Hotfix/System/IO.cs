@@ -7,7 +7,6 @@ namespace Hotfix
         private static GManager _gManager;
         private static PanelManager _panelManager;
         private static LogManager _logManager;
-        private static LoadSceneManager _loadsceneManager;
         private static LanguageManager _languageManager;
         private static GameDataManager _gamedataManager;
         private static GameEventManager _gameeventManager;
@@ -52,17 +51,6 @@ namespace Hotfix
                     IO._logManager = GameUtil.GetComponent<LogManager>(IO.gManager.gameObject);
                 }
                 return IO._logManager;
-            }
-        }
-        public static LoadSceneManager loadsceneManager
-        {
-            get
-            {
-                if (IO._loadsceneManager == null)
-                {
-                    IO._loadsceneManager = GameUtil.GetComponent<LoadSceneManager>(IO.gManager.gameObject);
-                }
-                return IO._loadsceneManager;
             }
         }
         public static LanguageManager languageManager

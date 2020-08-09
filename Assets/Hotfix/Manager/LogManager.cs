@@ -54,14 +54,14 @@ namespace Hotfix
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public LogInfo CreateLog(LogType type, string information)
+        public LogInfo CreateLog(LogType type, string log)
         {
             LogInfo info = new LogInfo();
             info.state = InfoState.Close;
-            info.container = Model.IO.containerManager.CreateContainer(type, true);
+            info.container = Model.IO.containerManager.CreateContainer(GameUtil.ConvertLogTypeToString(type), true);
             info.type = type;
-            info.information = GameUtil.GetChildComponent<Text>(info.container, "Information");
-            info.SetInformation(information);
+            info.logtext = GameUtil.GetChildComponent<Text>(info.container, "Log");
+            info.SetLog(log);
             info.ClosePanel();
             logs.Add(type, info);
             return info;
@@ -74,7 +74,7 @@ namespace Hotfix
         {
             if (LogExist(type))
             {
-                Model.IO.containerManager.RemoveContainer(type);
+                Model.IO.containerManager.RemoveContainer(GameUtil.ConvertLogTypeToString(type));
                 LogInfo info = GetLogInfo(type);
                 GameUtil.SafeDestroy(info.container);
                 logs.Remove(type);
@@ -142,16 +142,16 @@ namespace Hotfix
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public LogInfo OpenLog(LogType type, string information)
+        public LogInfo OpenLog(LogType type, string log)
         {
             if (LogExist(type))
             {
                 LogInfo info = GetLogInfo(type);
-                info.SetInformation(information);
+                info.SetLog(log);
                 info.OpenPanel();
                 return info;
             }
-            LogInfo temp = CreateLog(type, information);
+            LogInfo temp = CreateLog(type, log);
             temp.OpenPanel();
             return temp;
         }

@@ -38,7 +38,7 @@ namespace Hotfix
         {
             PanelInfo info = new PanelInfo();
             info.state = InfoState.Close;
-            info.container = Model.IO.containerManager.CreateContainer(type, true);
+            info.container = Model.IO.containerManager.CreateContainer(GameUtil.ConvertPanelTypeToString(type), true);
             info.type = type;
             info.ClosePanel();
             panels.Add(type, info);
@@ -52,7 +52,7 @@ namespace Hotfix
         {
             if (PanelExist(type))
             {
-                Model.IO.containerManager.RemoveContainer(type);
+                Model.IO.containerManager.RemoveContainer(GameUtil.ConvertPanelTypeToString(type));
                 PanelInfo info = GetPanelInfo(type);
                 GameUtil.SafeDestroy(info.container);
                 panels.Remove(type);

@@ -1,3 +1,6 @@
-﻿public class Util
+﻿namespace Hotfix
 {
+    public static class Util
+    {
+    }
 }

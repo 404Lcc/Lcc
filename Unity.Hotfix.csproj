@@ -55,45 +55,55 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Hotfix\System\Data\AStarNode.cs" />
-    <Compile Include="Assets\Hotfix\System\Type\CommandType.cs" />
+    <Compile Include="Assets\Hotfix\UI\LogSystem\LogInfo.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\AStarNodeData.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\Enum\CommandType.cs" />
     <Compile Include="Assets\Hotfix\Manager\LanguageManager.cs" />
-    <Compile Include="Assets\Hotfix\Manager\LoadSceneManager.cs" />
     <Compile Include="Assets\Hotfix\Socket\SocketModel.cs" />
     <Compile Include="Assets\Hotfix\Manager\PanelManager.cs" />
-    <Compile Include="Assets\Hotfix\System\Type\LanguageType.cs" />
-    <Compile Include="Assets\Hotfix\System\Type\CommandCVType.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\Enum\LanguageType.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\Enum\CommandCVType.cs" />
     <Compile Include="Assets\Hotfix\Manager\CharacterManager.cs" />
+    <Compile Include="Assets\Hotfix\UI\PanelSystem\PanelInfo.cs" />
     <Compile Include="Assets\Hotfix\Manager\VideoManager.cs" />
     <Compile Include="Assets\Hotfix\Manager\TimerManager.cs" />
     <Compile Include="Assets\Hotfix\Data\System\DataList.cs" />
-    <Compile Include="Assets\Hotfix\System\Type\CommandVarietyType.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\Enum\CommandVarietyType.cs" />
     <Compile Include="Assets\Hotfix\Hotfix.cs" />
-    <Compile Include="Assets\Hotfix\System\Type\GameEventType.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\Enum\UI\LogType.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\Enum\GameEventType.cs" />
+    <Compile Include="Assets\Hotfix\UI\BaseSystem\Info.cs" />
     <Compile Include="Assets\Hotfix\Data\System\UserSetData.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\Enum\UI\InfoState.cs" />
     <Compile Include="Assets\Hotfix\Manager\GameDataManager.cs" />
     <Compile Include="Assets\Hotfix\System\Util\JsonUtil.cs" />
     <Compile Include="Assets\Hotfix\Socket\CenterHandler.cs" />
     <Compile Include="Assets\Hotfix\System\Util\Util.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\Enum\PathType.cs" />
     <Compile Include="Assets\Hotfix\Manager\GManager.cs" />
     <Compile Include="Assets\Hotfix\Data\System\UserData.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\Const\AssetType.cs" />
     <Compile Include="Assets\Hotfix\Socket\EncodingTool.cs" />
     <Compile Include="Assets\Hotfix\Socket\SendTool.cs" />
     <Compile Include="Assets\Hotfix\Manager\LogManager.cs" />
     <Compile Include="Assets\Hotfix\Manager\AudioManager.cs" />
-    <Compile Include="Assets\Hotfix\System\Type\DisplayModeType.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\Enum\DisplayModeType.cs" />
     <Compile Include="Assets\Hotfix\Manager\VoiceManager.cs" />
-    <Compile Include="Assets\Hotfix\System\Type\CVType.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\Enum\CVType.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\Const\SceneName.cs" />
     <Compile Include="Assets\Hotfix\Socket\ClientNet.cs" />
-    <Compile Include="Assets\Hotfix\System\Type\ResolutionType.cs" />
+    <Compile Include="Assets\Hotfix\UI\Panel\Load\LoadPanel.cs" />
+    <Compile Include="Assets\Hotfix\System\Pool\Pool.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\Enum\UI\PanelType.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\Enum\ResolutionType.cs" />
     <Compile Include="Assets\Hotfix\Manager\AStarManager.cs" />
     <Compile Include="Assets\Hotfix\Manager\GameEventManager.cs" />
     <Compile Include="Assets\Hotfix\Manager\CommandManager.cs" />
     <Compile Include="Assets\Hotfix\System\Util\GameUtil.cs" />
     <Compile Include="Assets\Hotfix\Manager\GameTimeManager.cs" />
-    <Compile Include="Assets\Hotfix\System\Data\TimerEvent.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\TimerData.cs" />
     <Compile Include="Assets\Hotfix\System\IO.cs" />
-    <Compile Include="Assets\Hotfix\System\Data\Command.cs" />
+    <Compile Include="Assets\Hotfix\System\Data\CommandData.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
@@ -295,6 +305,9 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.1.1f1c1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    </Reference>
     <Reference Include="ILRuntim.Mono.Cecil">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.3\Plugins\ILRuntim.Mono.Cecil.dll</HintPath>
     </Reference>
@@ -303,9 +316,6 @@
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.3\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
-      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.1.1f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>

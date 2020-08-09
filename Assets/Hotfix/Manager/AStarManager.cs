@@ -11,7 +11,7 @@ namespace Hotfix
         public bool bshowpath;
         private int w;
         private int h;
-        private AStarNode[,] nodes;
+        private AStarNodeData[,] astarnodedatas;
 
         private Transform walls;
         private Transform paths;
@@ -24,7 +24,7 @@ namespace Hotfix
 
             w = Mathf.RoundToInt(GameUtil.GetComponent<BoxCollider2D>(map).bounds.size.x * ratio);
             h = Mathf.RoundToInt(GameUtil.GetComponent<BoxCollider2D>(map).bounds.size.y * ratio);
-            nodes = new AStarNode[w * 2, h * 2];
+            astarnodedatas = new AStarNodeData[w * 2, h * 2];
             walls = new GameObject("Walls").transform;
             paths = new GameObject("Paths").transform;
             //将墙的信息写入格子中
@@ -41,7 +41,7 @@ namespace Hotfix
                     {
                         bwall = true;
                     }
-                    nodes[x, y] = new AStarNode(bwall, pos, x, y);
+                    astarnodedatas[x, y] = new AStarNodeData(bwall, pos, x, y);
                     if (bwall)
                     {
                         //InitWallGrid(Model.IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
@@ -59,7 +59,7 @@ namespace Hotfix
                     {
                         bwall = true;
                     }
-                    nodes[w - x, y] = new AStarNode(bwall, pos, x, y);
+                    astarnodedatas[w - x, y] = new AStarNodeData(bwall, pos, x, y);
                     if (bwall)
                     {
                         //InitWallGrid(Model.IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
@@ -77,7 +77,7 @@ namespace Hotfix
                     {
                         bwall = true;
                     }
-                    nodes[x, h - y] = new AStarNode(bwall, pos, x, y);
+                    astarnodedatas[x, h - y] = new AStarNodeData(bwall, pos, x, y);
                     if (bwall)
                     {
                         //InitWallGrid(Model.IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
@@ -95,7 +95,7 @@ namespace Hotfix
                     {
                         bwall = true;
                     }
-                    nodes[w - x, h - y] = new AStarNode(bwall, pos, x, y);
+                    astarnodedatas[w - x, h - y] = new AStarNodeData(bwall, pos, x, y);
                     if (bwall)
                     {
                         //InitWallGrid(Model.IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
@@ -120,7 +120,7 @@ namespace Hotfix
         /// </summary>
         /// <param name="pos"></param>
         /// <returns></returns>
-        public AStarNode GetNode(Vector3 pos)
+        public AStarNodeData GetAStarNodeData(Vector3 pos)
         {
             int x = Mathf.RoundToInt(pos.x * 2);
             int y = Mathf.RoundToInt(pos.y * 2);
@@ -142,16 +142,16 @@ namespace Hotfix
             {
                 y = Mathf.Clamp(y, 0, h);
             }
-            return nodes[x, y];
+            return astarnodedatas[x, y];
         }
         /// <summary>
         /// 取得周围的节点
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        public List<AStarNode> GetNodeAround(AStarNode node)
+        public List<AStarNodeData> GetAStarNodeDataAround(AStarNodeData astarnodedata)
         {
-            List<AStarNode> list = new List<AStarNode>();
+            List<AStarNodeData> list = new List<AStarNodeData>();
             for (int i = -1; i <= 1; i++)
             {
                 for (int j = -1; j <= 1; j++)
@@ -161,8 +161,8 @@ namespace Hotfix
                     {
                         continue;
                     }
-                    int x = node.x + i;
-                    int y = node.y + j;
+                    int x = astarnodedata.x + i;
+                    int y = astarnodedata.y + j;
                     if (x < 0)
                     {
                         x = w - x;
@@ -193,7 +193,7 @@ namespace Hotfix
                             continue;
                         }
                     }
-                    list.Add(nodes[x, y]);
+                    list.Add(astarnodedatas[x, y]);
                 }
             }
             return list;
@@ -204,9 +204,9 @@ namespace Hotfix
         /// <param name="startnode"></param>
         /// <param name="endnode"></param>
         /// <returns></returns>
-        public int GetNodeDistance(AStarNode startnode, AStarNode endnode)
+        public int GetAStarNodeDataDistance(AStarNodeData startastarnodedata, AStarNodeData endastarnodedata)
         {
-            return Diagonal(startnode, endnode);
+            return Diagonal(startastarnodedata, endastarnodedata);
         }
         /// <summary>
         /// 对角线估价法
@@ -216,10 +216,10 @@ namespace Hotfix
         /// <param name="diagcost"></param>
         /// <param name="straightcost"></param>
         /// <returns></returns>
-        public int Diagonal(AStarNode startnode, AStarNode endnode, int diagcost = 14, int straightcost = 10)
+        public int Diagonal(AStarNodeData startastarnodedata, AStarNodeData endastarnodedata, int diagcost = 14, int straightcost = 10)
         {
-            int dx = Mathf.Abs(startnode.x - endnode.x);
-            int dy = Mathf.Abs(startnode.y - endnode.y);
+            int dx = Mathf.Abs(startastarnodedata.x - endastarnodedata.x);
+            int dy = Mathf.Abs(startastarnodedata.y - endastarnodedata.y);
             int diag = Mathf.Min(dx, dy);
             int straight = dx + dy;
             return diagcost * diag + straightcost * (straight - 2 * diag);
@@ -228,15 +228,15 @@ namespace Hotfix
         /// 更新路径
         /// </summary>
         /// <param name="nodes"></param>
-        public void UpdatePath(List<AStarNode> nodes)
+        public void UpdatePath(List<AStarNodeData> endastarnodedatas)
         {
             foreach (Transform item in paths)
             {
                 GameUtil.SafeDestroy(item.gameObject);
             }
-            for (int i = 0; i < nodes.Count; i++)
+            for (int i = 0; i < endastarnodedatas.Count; i++)
             {
-                //InitWallGrid(Model.IO.assetManager.LoadGameObject("Path", false, paths, true, AssetType.UI, AssetType.Tool), nodes[i].pos, bshowpath);
+                //InitWallGrid(IO.assetManager.LoadGameObject("Path", false, paths, true, AssetType.UI, AssetType.Tool), endastarnodedatas[i].pos, bshowpath);
             }
         }
         /// <summary>
@@ -245,13 +245,13 @@ namespace Hotfix
         /// <param name="startnode"></param>
         /// <param name="endnode"></param>
         /// <returns></returns>
-        public List<AStarNode> GeneratePath(AStarNode startnode, AStarNode endnode)
+        public List<AStarNodeData> GeneratePath(AStarNodeData startastarnodedata, AStarNodeData endastarnodedata)
         {
-            List<AStarNode> path = new List<AStarNode>();
-            if (endnode != null)
+            List<AStarNodeData> path = new List<AStarNodeData>();
+            if (endastarnodedata != null)
             {
-                AStarNode temp = endnode;
-                while (temp != startnode)
+                AStarNodeData temp = endastarnodedata;
+                while (temp != startastarnodedata)
                 {
                     path.Add(temp);
                     temp = temp.parent;
@@ -261,48 +261,48 @@ namespace Hotfix
             UpdatePath(path);
             return path;
         }
-        public List<AStarNode> AStarFindPath(Vector3 start, Vector3 end)
+        public List<AStarNodeData> AStarFindPath(Vector3 start, Vector3 end)
         {
-            AStarNode startnode = GetNode(start);
-            AStarNode endnode = GetNode(end);
-            List<AStarNode> openlist = new List<AStarNode>();//等待检查列表
-            HashSet<AStarNode> closelist = new HashSet<AStarNode>();//检查完成列表
-            openlist.Add(startnode);
+            AStarNodeData startastarnodedata = GetAStarNodeData(start);
+            AStarNodeData endastarnodedata = GetAStarNodeData(end);
+            List<AStarNodeData> openlist = new List<AStarNodeData>();//等待检查列表
+            HashSet<AStarNodeData> closelist = new HashSet<AStarNodeData>();//检查完成列表
+            openlist.Add(startastarnodedata);
             while (openlist.Count > 0)
             {
-                AStarNode curnode = openlist[0];
+                AStarNodeData current = openlist[0];
                 for (int i = 0; i < openlist.Count; i++)
                 {
                     //等待检查列表里最短距离的节点
-                    if (openlist[i].fcost <= curnode.fcost && openlist[i].hcost < curnode.hcost)
+                    if (openlist[i].fcost <= current.fcost && openlist[i].hcost < current.hcost)
                     {
-                        curnode = openlist[i];
+                        current = openlist[i];
                     }
                 }
-                openlist.Remove(curnode);
-                closelist.Add(curnode);
-                if (curnode == endnode)
+                openlist.Remove(current);
+                closelist.Add(current);
+                if (current == endastarnodedata)
                 {
-                    return GeneratePath(startnode, endnode);
+                    return GeneratePath(startastarnodedata, endastarnodedata);
                 }
-                foreach (AStarNode item in GetNodeAround(curnode))
+                foreach (AStarNodeData item in GetAStarNodeDataAround(current))
                 {
                     if (item.bwall || closelist.Contains(item))
                     {
                         continue;
                     }
                     //计算与开始节点的距离
-                    int gcost = curnode.gcost + GetNodeDistance(curnode, item);
+                    int gcost = current.gcost + GetAStarNodeDataDistance(current, item);
                     //如果不在等待检查列表中或者与开始节点的距离更小
                     if (!openlist.Contains(item) || gcost < item.gcost)
                     {
                         //更新与开始节点的距离
                         item.gcost = gcost;
                         //更新与end节点的距离
-                        item.hcost = GetNodeDistance(item, endnode);
+                        item.hcost = GetAStarNodeDataDistance(item, endastarnodedata);
                         //更新父节点为当前选定的节点
                         //在考查从一个节点移动到另一个节点时,总是拿自身节点周围的8个相邻节点来说事儿,相对于周边的节点来讲,自身节点称为它们的父节点.
-                        item.parent = curnode;
+                        item.parent = current;
                         if (!openlist.Contains(item))
                         {
                             openlist.Add(item);
@@ -310,7 +310,7 @@ namespace Hotfix
                     }
                 }
             }
-            return GeneratePath(startnode, null);
+            return GeneratePath(startastarnodedata, null);
         }
     }
 }

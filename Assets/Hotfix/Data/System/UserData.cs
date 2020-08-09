@@ -1,3 +1,6 @@
-﻿public class UserData
+﻿namespace Hotfix
 {
+    public class UserData
+    {
+    }
 }

@@ -1,30 +1,33 @@
 ﻿using UnityEngine;
 
-public class PanelInfo : Info
+namespace Model
 {
-    public PanelType type;
-    public override void OpenPanel()
+    public class PanelInfo : Info
     {
-        if (ContainerExist())
+        public PanelType type;
+        public override void OpenPanel()
         {
-            state = InfoState.Open;
-            container.SetActive(true);
+            if (ContainerExist())
+            {
+                state = InfoState.Open;
+                container.SetActive(true);
+            }
+            else
+            {
+                Debug.Log(type.ToString() + ":null");
+            }
         }
-        else
+        public override void ClosePanel()
         {
-            Debug.Log(type.ToString() + ":null");
-        }
-    }
-    public override void ClosePanel()
-    {
-        if (ContainerExist())
-        {
-            state = InfoState.Close;
-            container.SetActive(false);
-        }
-        else
-        {
-            Debug.Log(type.ToString() + ":null");
+            if (ContainerExist())
+            {
+                state = InfoState.Close;
+                container.SetActive(false);
+            }
+            else
+            {
+                Debug.Log(type.ToString() + ":null");
+            }
         }
     }
 }

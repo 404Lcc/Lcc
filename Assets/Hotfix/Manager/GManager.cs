@@ -12,7 +12,34 @@ namespace Hotfix
         }
         void Start()
         {
-            IO.panelManager.OpenPanel(PanelType.Login);
+            Model.IO.loadsceneManager.LoadScene(SceneName.Login, () =>
+            {
+                IO.panelManager.OpenPanel(PanelType.Login);
+            }, AssetType.Scene);
+        }
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (IO.panelManager.IsOpenPanel(PanelType.Set))
+                {
+                    return;
+                }
+                if (IO.panelManager.IsOpenPanel(PanelType.Quit))
+                {
+                    return;
+                }
+                if (!IO.panelManager.IsOpenPanel(PanelType.Load))
+                {
+                }
+            }
+            if (Application.platform == RuntimePlatform.WindowsEditor)
+            {
+                if (Input.GetKeyDown(KeyCode.C))
+                {
+                    ScreenCapture.CaptureScreenshot(GameUtil.GetPath(PathType.PersistentDataPath, "Res") + "Screenshot.png");
+                }
+            }
         }
         /// <summary>
         /// 初始化管理类
@@ -21,7 +48,6 @@ namespace Hotfix
         {
             GameUtil.AddComponent<PanelManager>(gameObject);
             GameUtil.AddComponent<LogManager>(gameObject);
-            GameUtil.AddComponent<LoadSceneManager>(gameObject);
             GameUtil.AddComponent<LanguageManager>(gameObject);
             GameUtil.AddComponent<GameDataManager>(gameObject);
             GameUtil.AddComponent<GameEventManager>(gameObject);

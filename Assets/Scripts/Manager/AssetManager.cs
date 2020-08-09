@@ -21,7 +21,7 @@ namespace Model
             assetdic = new Dictionary<string, AssetData>();
             //assetrequestdic = new Dictionary<string, AssetRequest>();
         }
-        private AssetData LoadAssetData(string name, string suffix, bool bkeep, Type type, bool assetbundlemodel, params AssetType[] types)
+        private AssetData LoadAssetData(string name, string suffix, bool bkeep, Type type, bool bassetbundle, params string[] types)
         {
             if (types.Length == 0) return null;
             string path = string.Empty;
@@ -41,11 +41,12 @@ namespace Model
             {
                 AssetData assetdata = new AssetData();
 #if AssetBundle
-                //AssetBundle assetbundle = AssetBundle.LoadFromFile(path);
-                //Object asset = assetbundle.LoadAsset(assetbundle.GetAllAssetNames()[0]);
-                //assetbundle.Unload(false);
-                if (assetbundlemodel)
+                if (bassetbundle)
                 {
+                    //AssetBundle assetbundle = AssetBundle.LoadFromFile(path);
+                    //Object asset = assetbundle.LoadAsset(assetbundle.GetAllAssetNames()[0]);
+                    //assetbundle.Unload(false);
+
                     //AssetRequest request = LoadAsset("Assets/Resources/" + path + suffix, type);
                     //Object asset = request.asset;
                     //assetdata.asset = asset;
@@ -125,29 +126,29 @@ namespace Model
             //Assets.RemoveUnusedAssets();
             GC.Collect();
         }
-        public T LoadAssetData<T>(string name, string suffix, bool bkeep, bool assetbundlemodel, params AssetType[] types) where T : Object
+        public T LoadAssetData<T>(string name, string suffix, bool bkeep, bool bassetbundle, params string[] types) where T : Object
         {
-            AssetData asset = LoadAssetData(name, suffix, bkeep, typeof(T), assetbundlemodel, types);
+            AssetData asset = LoadAssetData(name, suffix, bkeep, typeof(T), bassetbundle, types);
             return (T)asset.asset;
         }
-        public GameObject LoadGameObject(string name, bool bkeep, bool assetbundlemodel, params AssetType[] types)
+        public GameObject LoadGameObject(string name, bool bkeep, bool bassetbundle, params string[] types)
         {
-            AssetData assetdata = LoadAssetData(name, "*.prefab", bkeep, typeof(Object), assetbundlemodel, types);
+            AssetData assetdata = LoadAssetData(name, "*.prefab", bkeep, typeof(Object), bassetbundle, types);
             if (assetdata.asset == null) return null;
             GameObject obj = Instantiate(assetdata.asset) as GameObject;
             return obj;
         }
-        public T LoadGameObject<T>(string name, bool bkeep, bool assetbundlemodel, params AssetType[] types) where T : Component
+        public T LoadGameObject<T>(string name, bool bkeep, bool bassetbundle, params string[] types) where T : Component
         {
-            AssetData assetdata = LoadAssetData(name, "*.prefab", bkeep, typeof(Object), assetbundlemodel, types);
+            AssetData assetdata = LoadAssetData(name, "*.prefab", bkeep, typeof(Object), bassetbundle, types);
             if (assetdata.asset == null) return null;
             GameObject obj = Instantiate(assetdata.asset) as GameObject;
             T component = GameUtil.GetComponent<T>(obj);
             return component;
         }
-        public GameObject LoadGameObject(string name, bool bkeep, Transform parent, bool assetbundlemodel, params AssetType[] types)
+        public GameObject LoadGameObject(string name, bool bkeep, bool bassetbundle, Transform parent, params string[] types)
         {
-            AssetData assetdata = LoadAssetData(name, "*.prefab", bkeep, typeof(Object), assetbundlemodel, types);
+            AssetData assetdata = LoadAssetData(name, "*.prefab", bkeep, typeof(Object), bassetbundle, types);
             if (assetdata.asset == null) return null;
             GameObject obj = Instantiate(assetdata.asset) as GameObject;
             obj.transform.SetParent(parent);
@@ -156,9 +157,9 @@ namespace Model
             obj.transform.localScale = Vector3.one;
             return obj;
         }
-        public T LoadGameObject<T>(string name, bool bkeep, Transform parent, bool assetbundlemodel, params AssetType[] types) where T : Component
+        public T LoadGameObject<T>(string name, bool bkeep, bool bassetbundle, Transform parent, params string[] types) where T : Component
         {
-            AssetData assetdata = LoadAssetData(name, "*.prefab", bkeep, typeof(Object), assetbundlemodel, types);
+            AssetData assetdata = LoadAssetData(name, "*.prefab", bkeep, typeof(Object), bassetbundle, types);
             if (assetdata.asset == null) return null;
             GameObject obj = Instantiate(assetdata.asset) as GameObject;
             obj.transform.SetParent(parent);

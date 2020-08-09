@@ -13,30 +13,6 @@ namespace Model
             //开屏界面-资源更新界面-初始化IL-开始界面
             IO.panelManager.OpenPanel(PanelType.Launch);
         }
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (IO.panelManager.IsOpenPanel(PanelType.Set))
-                {
-                    return;
-                }
-                if (IO.panelManager.IsOpenPanel(PanelType.Quit))
-                {
-                    return;
-                }
-                if (!IO.panelManager.IsOpenPanel(PanelType.Launch) && !IO.panelManager.IsOpenPanel(PanelType.Load))
-                {
-                }
-            }
-            if (Application.platform == RuntimePlatform.WindowsEditor)
-            {
-                if (Input.GetKeyDown(KeyCode.C))
-                {
-                    ScreenCapture.CaptureScreenshot(GameUtil.GetPath(PathType.PersistentDataPath, "Res") + "Screenshot.png");
-                }
-            }
-        }
         /// <summary>
         /// 初始化管理类
         /// </summary>

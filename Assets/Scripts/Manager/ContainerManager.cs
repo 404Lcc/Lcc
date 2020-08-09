@@ -17,13 +17,14 @@ namespace Model
         /// <summary>
         /// 创建容器
         /// </summary>
-        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <param name="bassetbundle"></param>
         /// <returns></returns>
-        public GameObject CreateContainer(PanelType type, bool assetbundlemodel)
+        public GameObject CreateContainer(string name, bool bassetbundle)
         {
-            GameObject obj = IO.assetManager.LoadGameObject(GameUtil.ConvertPanelTypeToString(type), false, assetbundlemodel, AssetType.UI);
+            GameObject obj = IO.assetManager.LoadGameObject(name, false, bassetbundle, AssetType.UI);
             if (obj == null) return null;
-            obj.name = GameUtil.ConvertPanelTypeToString(type);
+            obj.name = name;
             obj.transform.SetParent(IO.gui.transform);
             RectTransform rect = GameUtil.GetComponent<RectTransform>(obj);
             rect.sizeDelta = Vector2.zero;
@@ -33,84 +34,35 @@ namespace Model
             rect.localPosition = Vector3.zero;
             rect.localRotation = Quaternion.identity;
             rect.localScale = Vector3.one;
-            InitContainer(type, obj);
-            return obj;
-        }
-        /// <summary>
-        /// 创建容器
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public GameObject CreateContainer(LogType type, bool assetbundlemodel)
-        {
-            GameObject obj = IO.assetManager.LoadGameObject(GameUtil.ConvertLogTypeToString(type), false, assetbundlemodel, AssetType.UI);
-            if (obj == null) return null;
-            obj.name = GameUtil.ConvertLogTypeToString(type);
-            obj.transform.SetParent(IO.gui.transform);
-            RectTransform rect = GameUtil.GetComponent<RectTransform>(obj);
-            rect.sizeDelta = Vector2.zero;
-            rect.anchorMin = Vector2.zero;
-            rect.anchorMax = Vector2.one;
-            rect.pivot = new Vector2(0.5f, 0.5f);
-            rect.localPosition = Vector3.zero;
-            rect.localRotation = Quaternion.identity;
-            rect.localScale = Vector3.one;
-            InitContainer(type, obj);
+            InitContainer(name, obj);
             return obj;
         }
         /// <summary>
         /// 初始化容器
         /// </summary>
-        /// <param name="type"></param>
+        /// <param name="name"></param>
         /// <param name="obj"></param>
-        private void InitContainer(PanelType type, GameObject obj)
+        private void InitContainer(string name, GameObject obj)
         {
-            AddContainer(type, obj);
-        }
-        /// <summary>
-        /// 初始化容器
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="obj"></param>
-        private void InitContainer(LogType type, GameObject obj)
-        {
-            AddContainer(type, obj);
+            AddContainer(name, obj);
         }
         /// <summary>
         /// 增加容器
         /// </summary>
-        /// <param name="type"></param>
+        /// <param name="name"></param>
         /// <param name="obj"></param>
-        public void AddContainer(PanelType type, GameObject obj)
+        public void AddContainer(string name, GameObject obj)
         {
             if (obj == null) return;
-            containers.Add(type, obj);
-        }
-        /// <summary>
-        /// 增加容器
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="obj"></param>
-        public void AddContainer(LogType type, GameObject obj)
-        {
-            if (obj == null) return;
-            containers.Add(type, obj);
+            containers.Add(name, obj);
         }
         /// <summary>
         /// 删除容器
         /// </summary>
-        /// <param name="type"></param>
-        public void RemoveContainer(PanelType type)
+        /// <param name="name"></param>
+        public void RemoveContainer(string name)
         {
-            containers.Remove(type);
-        }
-        /// <summary>
-        /// 删除容器
-        /// </summary>
-        /// <param name="type"></param>
-        public void RemoveContainer(LogType type)
-        {
-            containers.Remove(type);
+            containers.Remove(name);
         }
     }
 }

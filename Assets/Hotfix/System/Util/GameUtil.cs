@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
@@ -226,7 +225,7 @@ namespace Hotfix
         /// <param name="name"></param>
         /// <param name="image"></param>
         /// <param name="types"></param>
-        public static void SetImage(string name, Image image, params AssetType[] types)
+        public static void SetImage(string name, Image image, params string[] types)
         {
             if (string.IsNullOrEmpty(name)) return;
             Sprite sprite = Model.IO.assetManager.LoadAssetData<Sprite>(name, ".png", false, true, types);
@@ -238,7 +237,7 @@ namespace Hotfix
         /// <param name="name"></param>
         /// <param name="spriterenderer"></param>
         /// <param name="types"></param>
-        public static void SetImage(string name, SpriteRenderer spriterenderer, params AssetType[] types)
+        public static void SetImage(string name, SpriteRenderer spriterenderer, params string[] types)
         {
             if (string.IsNullOrEmpty(name)) return;
             Sprite sprite = Model.IO.assetManager.LoadAssetData<Sprite>(name, ".png", false, true, types);

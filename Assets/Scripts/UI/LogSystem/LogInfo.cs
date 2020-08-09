@@ -1,38 +1,41 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class LogInfo : Info
+namespace Model
 {
-    public LogType type;
-    public string value;
-    public Text information;
-    public void SetInformation(string value)
+    public class LogInfo : Info
     {
-        this.value = value;
-        information.text = value;
-    }
-    public override void OpenPanel()
-    {
-        if (ContainerExist())
+        public LogType type;
+        public string log;
+        public Text logtext;
+        public void SetLog(string log)
         {
-            state = InfoState.Open;
-            container.SetActive(true);
+            this.log = log;
+            logtext.text = log;
         }
-        else
+        public override void OpenPanel()
         {
-            Debug.Log(type.ToString() + ":null");
+            if (ContainerExist())
+            {
+                state = InfoState.Open;
+                container.SetActive(true);
+            }
+            else
+            {
+                Debug.Log(type.ToString() + ":null");
+            }
         }
-    }
-    public override void ClosePanel()
-    {
-        if (ContainerExist())
+        public override void ClosePanel()
         {
-            state = InfoState.Close;
-            container.SetActive(false);
-        }
-        else
-        {
-            Debug.Log(type.ToString() + ":null");
+            if (ContainerExist())
+            {
+                state = InfoState.Close;
+                container.SetActive(false);
+            }
+            else
+            {
+                Debug.Log(type.ToString() + ":null");
+            }
         }
     }
 }

@@ -1,28 +1,31 @@
 ﻿using System.Collections.Generic;
 
-public class Pool<T>
+namespace Model
 {
-    public Queue<T> pool;
-    public Pool()
+    public class Pool<T>
     {
-    }
-    public Pool(int max)
-    {
-        pool = new Queue<T>(max);
-    }
-    public int Count
-    {
-        get
+        public Queue<T> pool;
+        public Pool()
         {
-            return pool.Count;
         }
-    }
-    public void Enqueue(T t)
-    {
-        pool.Enqueue(t);
-    }
-    public T Dequeue()
-    {
-        return pool.Dequeue();
+        public Pool(int max)
+        {
+            pool = new Queue<T>(max);
+        }
+        public int Count
+        {
+            get
+            {
+                return pool.Count;
+            }
+        }
+        public void Enqueue(T t)
+        {
+            pool.Enqueue(t);
+        }
+        public T Dequeue()
+        {
+            return pool.Dequeue();
+        }
     }
 }

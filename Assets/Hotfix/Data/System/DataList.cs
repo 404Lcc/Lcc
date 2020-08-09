@@ -1,4 +1,7 @@
-﻿public class DataList
+﻿namespace Hotfix
 {
-    public static string[] datalist = new string[0];
+    public class DataList
+    {
+        public static string[] datalist = new string[0];
+    }
 }

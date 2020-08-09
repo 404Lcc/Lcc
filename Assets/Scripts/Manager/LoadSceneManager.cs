@@ -8,15 +8,9 @@ namespace Model
 {
     public class LoadSceneManager : MonoBehaviour
     {
-        private AsyncOperation async;
-        private uint process;
-        public int Process
-        {
-            get
-            {
-                return (int)process;
-            }
-        }
+        public AsyncOperation async;
+        public Action complete;
+        public int process;
         void Start()
         {
         }
@@ -25,7 +19,7 @@ namespace Model
             if (async == null) return;
             if (async.progress < 0.9f)
             {
-                process = (uint)async.progress * 100;
+                process = (int)(async.progress * 100);
             }
             else
             {
@@ -33,26 +27,17 @@ namespace Model
             }
             if (async.isDone)
             {
-                if (LoadData.bloadpanel) IO.panelManager.ClearPanel(PanelType.Load);
-                LoadData.action?.Invoke();
-                IO.panelManager.OpenPanel(LoadData.open.ToArray());
-                IO.panelManager.ClearPanel(LoadData.clear.ToArray());
-                LoadData.loadid = 0;
-                LoadData.open.Clear();
-                LoadData.clear.Clear();
-                LoadData.bloadpanel = false;
-                LoadData.action = null;
+                complete?.Invoke();
                 async.allowSceneActivation = true;
                 async = null;
+                complete = null;
                 process = 0;
             }
         }
-        public void StartLoadScene()
+        public void LoadScene(string name, Action complete, params string[] types)
         {
-            StartCoroutine(LoadScene());
-        }
-        public void LoadSceneData(string name, string suffix, params AssetType[] types)
-        {
+#if AssetBundle
+            this.complete = complete;
             if (types.Length == 0) return;
             string path = string.Empty;
             for (int i = 0; i < types.Length; i++)
@@ -63,29 +48,26 @@ namespace Model
                     path += name;
                 }
             }
-            //StartCoroutine(LoadSceneAsync("Assets/Resources/" + path + suffix, false, (SceneAssetRequest request) =>
-            //{
-            //    while (!request.isDone)
-            //    {
-            //        process = (uint)request.progress;
-            //    }
-            //    if (request.isDone)
-            //    {
-            //        if (LoadData.bloadpanel) IO.panelManager.ClearPanel(PanelType.Load);
-            //        LoadData.action?.Invoke();
-            //        IO.panelManager.OpenPanel(LoadData.open.ToArray());
-            //        IO.panelManager.ClearPanel(LoadData.clear.ToArray());
-            //        LoadData.loadid = 0;
-            //        LoadData.open.Clear();
-            //        LoadData.clear.Clear();
-            //        LoadData.bloadpanel = false;
-            //        LoadData.action = null;
-            //    }
-            //}));
+            StartCoroutine(LoadSceneAsync("Assets/Resources/" + path + ".scene", false, (SceneAssetRequest request) =>
+            {
+                while (!request.isDone)
+                {
+                    process = request.progress;
+                }
+                if (request.isDone)
+                {
+                    complete?.Invoke();
+                    complete = null;
+                    process = 0;
+                }
+            }));
+#else
+            StartCoroutine(LoadScene(name));
+#endif
         }
-        public IEnumerator LoadScene()
+        public IEnumerator LoadScene(string name)
         {
-            async = SceneManager.LoadSceneAsync(LoadData.loadid);
+            async = SceneManager.LoadSceneAsync(name);
             async.allowSceneActivation = false;
             yield return async;
         }

@@ -38,7 +38,7 @@ namespace Model
         {
             PanelInfo info = new PanelInfo();
             info.state = InfoState.Close;
-            info.container = IO.containerManager.CreateContainer(type, false);
+            info.container = IO.containerManager.CreateContainer(GameUtil.ConvertPanelTypeToString(type), false);
             info.type = type;
             info.ClosePanel();
             panels.Add(type, info);
@@ -52,7 +52,7 @@ namespace Model
         {
             if (PanelExist(type))
             {
-                IO.containerManager.RemoveContainer(type);
+                IO.containerManager.RemoveContainer(GameUtil.ConvertPanelTypeToString(type));
                 PanelInfo info = GetPanelInfo(type);
                 GameUtil.SafeDestroy(info.container);
                 panels.Remove(type);

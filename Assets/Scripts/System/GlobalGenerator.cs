@@ -1,61 +1,63 @@
-﻿using Model;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class GlobalGenerator : MonoBehaviour
+namespace Model
 {
-    void Start()
+    public class GlobalGenerator : MonoBehaviour
     {
-        InitGui();
-        InitGManager();
-        InitAudioSource();
-        InitVideoPlayer();
-    }
-    /// <summary>
-    /// 初始化UI
-    /// </summary>
-    private void InitGui()
-    {
-        if (IO.gui == null)
+        void Start()
         {
-            GameObject original = Instantiate(Resources.Load("Game/Canvas")) as GameObject;
-            original.name = "Canvas";
-            DontDestroyOnLoad(original);
+            InitGui();
+            InitGManager();
+            InitAudioSource();
+            InitVideoPlayer();
         }
-    }
-    /// <summary>
-    /// 初始化游戏管理器
-    /// </summary>
-    private void InitGManager()
-    {
-        if (IO.gManager == null)
+        /// <summary>
+        /// 初始化UI
+        /// </summary>
+        private void InitGui()
         {
-            GameObject original = Instantiate(Resources.Load("Game/GManager")) as GameObject;
-            original.name = "GManager";
-            DontDestroyOnLoad(original);
+            if (IO.gui == null)
+            {
+                GameObject original = Instantiate(Resources.Load("Game/Canvas")) as GameObject;
+                original.name = "Canvas";
+                DontDestroyOnLoad(original);
+            }
         }
-    }
-    /// <summary>
-    /// 初始化AudioSource
-    /// </summary>
-    private void InitAudioSource()
-    {
-        if (IO.audioSource == null)
+        /// <summary>
+        /// 初始化游戏管理器
+        /// </summary>
+        private void InitGManager()
         {
-            GameObject original = Instantiate(Resources.Load("Game/AudioSource")) as GameObject;
-            original.name = "AudioSource";
-            DontDestroyOnLoad(original);
+            if (IO.gManager == null)
+            {
+                GameObject original = Instantiate(Resources.Load("Game/GManager")) as GameObject;
+                original.name = "GManager";
+                DontDestroyOnLoad(original);
+            }
         }
-    }
-    /// <summary>
-    /// 初始化VideoPlayer
-    /// </summary>
-    private void InitVideoPlayer()
-    {
-        if (IO.videoPlayer == null)
+        /// <summary>
+        /// 初始化AudioSource
+        /// </summary>
+        private void InitAudioSource()
         {
-            GameObject original = Instantiate(Resources.Load("Game/VideoPlayer")) as GameObject;
-            original.name = "VideoPlayer";
-            DontDestroyOnLoad(original);
+            if (IO.audioSource == null)
+            {
+                GameObject original = Instantiate(Resources.Load("Game/AudioSource")) as GameObject;
+                original.name = "AudioSource";
+                DontDestroyOnLoad(original);
+            }
+        }
+        /// <summary>
+        /// 初始化VideoPlayer
+        /// </summary>
+        private void InitVideoPlayer()
+        {
+            if (IO.videoPlayer == null)
+            {
+                GameObject original = Instantiate(Resources.Load("Game/VideoPlayer")) as GameObject;
+                original.name = "VideoPlayer";
+                DontDestroyOnLoad(original);
+            }
         }
     }
 }

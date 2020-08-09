@@ -1,9 +1,12 @@
-﻿public class UserSetData
+﻿namespace Hotfix
 {
-    public static int audio = 20;
-    public static int voice = 100;
-    public static CVType cvtype = CVType.Chinese;
-    public static LanguageType languagetype = LanguageType.Chinese;
-    public static DisplayModeType displaymodetype = DisplayModeType.FullScreen;
-    public static ResolutionType resolutiontype = ResolutionType.Resolution1920x1080;
+    public class UserSetData
+    {
+        public static int audio = 20;
+        public static int voice = 100;
+        public static CVType cvtype = CVType.Chinese;
+        public static LanguageType languagetype = LanguageType.Chinese;
+        public static DisplayModeType displaymodetype = DisplayModeType.FullScreen;
+        public static ResolutionType resolutiontype = ResolutionType.Resolution1920x1080;
+    }
 }
