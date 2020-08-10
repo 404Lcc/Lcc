@@ -130,6 +130,7 @@ namespace Hotfix
             }
             PanelInfo temp = CreatePanel(type);
             temp.OpenPanel();
+            BindingPanel(type, temp.container);
             return temp;
         }
         /// <summary>
@@ -268,6 +269,26 @@ namespace Hotfix
                 return false;
             }
             return false;
+        }
+        /// <summary>
+        /// 绑定面板
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="container"></param>
+        public void BindingPanel(PanelType type, GameObject container)
+        {
+            switch (type)
+            {
+                case PanelType.Load:
+                    GameUtil.AddComponent<LoadPanel>(container);
+                    break;
+                case PanelType.Set:
+                    break;
+                case PanelType.Quit:
+                    break;
+                case PanelType.Login:
+                    break;
+            }
         }
     }
 }
