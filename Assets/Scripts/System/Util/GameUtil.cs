@@ -97,7 +97,7 @@ namespace Model
             {
                 sub += subs[i] + "/";
             }
-            sub += sub[subs.Length - 1];
+            sub += subs[subs.Length - 1];
             Transform transform = go.transform.Find(sub);
             if (transform == null) return null;
             return transform.gameObject;

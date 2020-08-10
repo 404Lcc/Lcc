@@ -36,8 +36,9 @@ namespace Model
         }
         public void LoadScene(string name, Action complete, params string[] types)
         {
-#if AssetBundle
             this.complete = complete;
+            SceneManager.LoadScene(SceneName.Load);
+#if AssetBundle
             if (types.Length == 0) return;
             string path = string.Empty;
             for (int i = 0; i < types.Length; i++)
