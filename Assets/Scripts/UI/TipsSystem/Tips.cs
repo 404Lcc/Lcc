@@ -7,14 +7,18 @@ namespace Model
     public class Tips : MonoBehaviour
     {
         public int id;
-        public string information;
+        public string info;
 
-        public Text informationtext;
-        public void InitTips(string information, Vector2 position, Vector2 offset, float duration, Transform parent = null)
+        public Text infotext;
+        void Update()
         {
-            this.information = information;
+            transform.SetAsLastSibling();
+        }
+        public void InitTips(string info, Vector2 position, Vector2 offset, float duration, Transform parent = null)
+        {
+            this.info = info;
 
-            informationtext.text = information;
+            infotext.text = info;
 
             if (parent == null)
             {
@@ -28,16 +32,12 @@ namespace Model
             rect.localPosition = position;
             rect.localRotation = Quaternion.identity;
             rect.localScale = Vector3.one;
-            informationtext.CrossFadeAlpha(0, duration, true);
+            infotext.CrossFadeAlpha(0, duration, true);
             Vector3 target = new Vector3(position.x + offset.x, position.y + offset.y, 0);
             //DOTween.To(() => rect.localPosition, x => rect.localPosition = x, target, duration).SetEase(Ease.OutCubic).OnComplete(() =>
             //{
             //    IO.tipsManager.DeleteTips(id);
             //});
-        }
-        void Update()
-        {
-            transform.SetAsLastSibling();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Model
         public int id;
         public bool state;
         public string title;
-        public string information;
+        public string info;
         public string confirm;
         public string cancel;
         public Action<bool> complete;
@@ -23,33 +23,22 @@ namespace Model
         }
 
         public Text titletext;
-        public Text informationtext;
+        public Text infotext;
         public Text confirmtext;
         public Text canceltext;
         public Button confirmbtn;
         public Button cancelbtn;
-        void Awake()
-        {
-            titletext = GameUtil.GetChildComponent<Text>(gameObject, "Title");
-            informationtext = GameUtil.GetChildComponent<Text>(gameObject, "Information");
-            confirmtext = GameUtil.GetChildComponent<Text>(gameObject, "ConfirmBtn", "Text");
-            canceltext = GameUtil.GetChildComponent<Text>(gameObject, "CancelBtn", "Text");
-            confirmbtn = GameUtil.GetChildComponent<Button>(gameObject, "ConfirmBtn");
-            cancelbtn = GameUtil.GetChildComponent<Button>(gameObject, "CancelBtn");
-            confirmbtn.onClick.AddListener(OnConfirm);
-            cancelbtn.onClick.AddListener(OnCancel);
-        }
-        public void InitTipsWindow(string title, string information, string confirm = "确定", string cancel = "取消", Transform parent = null)
+        public void InitTipsWindow(string title, string info, string confirm = "确定", string cancel = "取消", Transform parent = null)
         {
             state = true;
 
             this.title = title;
-            this.information = information;
+            this.info = info;
             this.confirm = confirm;
             this.cancel = cancel;
 
             titletext.text = title;
-            informationtext.text = information;
+            infotext.text = info;
             confirmtext.text = confirm;
             canceltext.text = cancel;
 
