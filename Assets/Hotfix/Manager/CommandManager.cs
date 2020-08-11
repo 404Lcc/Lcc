@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 namespace Hotfix
@@ -34,12 +35,41 @@ namespace Hotfix
         public void AddCommand(CommandData commanddata)
         {
             if (commanddata == null) return;
-            commanddatalist.Add(commanddata);
+            CommandData target;
+            switch (commanddata.variety)
+            {
+                default:
+                    target = new CommandData();
+                    break;
+            }
+            FieldInfo[] fieldinfos = target.GetType().GetFields();
+            foreach (FieldInfo item in fieldinfos)
+            {
+                item.SetValue(target, item.GetValue(commanddata));
+            }
+            commanddatalist.Add(target);
         }
         public void AddCommands(CommandData[] commanddatas)
         {
             if (commanddatas == null) return;
-            commanddatalist.AddRange(commanddatas);
+            List<CommandData> targetlist = new List<CommandData>();
+            foreach (CommandData item in commanddatas)
+            {
+                CommandData target;
+                switch (item.variety)
+                {
+                    default:
+                        target = new CommandData();
+                        break;
+                }
+                FieldInfo[] fieldinfos = target.GetType().GetFields();
+                foreach (FieldInfo fieldinfoitem in fieldinfos)
+                {
+                    fieldinfoitem.SetValue(target, fieldinfoitem.GetValue(item));
+                }
+                targetlist.Add(target);
+            }
+            commanddatalist.AddRange(targetlist.ToArray());
         }
         public void SetCommandType(CommandType type)
         {
