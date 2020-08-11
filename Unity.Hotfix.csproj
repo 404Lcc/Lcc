@@ -56,7 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Hotfix\UI\LogSystem\LogInfo.cs" />
-    <Compile Include="Assets\Hotfix\System\Data\AStarNodeData.cs" />
     <Compile Include="Assets\Hotfix\System\Data\Enum\CommandType.cs" />
     <Compile Include="Assets\Hotfix\Manager\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\Socket\SocketModel.cs" />
@@ -96,7 +95,6 @@
     <Compile Include="Assets\Hotfix\System\Pool\Pool.cs" />
     <Compile Include="Assets\Hotfix\System\Data\Enum\UI\PanelType.cs" />
     <Compile Include="Assets\Hotfix\System\Data\Enum\ResolutionType.cs" />
-    <Compile Include="Assets\Hotfix\Manager\AStarManager.cs" />
     <Compile Include="Assets\Hotfix\Manager\GameEventManager.cs" />
     <Compile Include="Assets\Hotfix\Manager\CommandManager.cs" />
     <Compile Include="Assets\Hotfix\System\Util\GameUtil.cs" />

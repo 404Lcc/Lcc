@@ -18,13 +18,14 @@ namespace Model
         private static TipsManager _tipsManager;
         private static TipsWindowManager _tipswindowManager;
         private static LoadSceneManager _loadsceneManager;
+        private static AStarManager _astarManager;
         public static GameObject gui
         {
             get
             {
                 if (IO._gui == null)
                 {
-                    IO._gui = GameUtil.GetGameObjectConvertedToTag("Gui");
+                    IO._gui = GameUtil.GetGameObjectConvertedToTag("GUI");
                 }
                 return IO._gui;
             }
@@ -165,6 +166,17 @@ namespace Model
                     IO._loadsceneManager = GameUtil.GetComponent<LoadSceneManager>(IO.gManager.gameObject);
                 }
                 return IO._loadsceneManager;
+            }
+        }
+        public static AStarManager astarManager
+        {
+            get
+            {
+                if (IO._astarManager == null)
+                {
+                    IO._astarManager = GameUtil.GetComponent<AStarManager>(IO.gManager.gameObject);
+                }
+                return IO._astarManager;
             }
         }
     }

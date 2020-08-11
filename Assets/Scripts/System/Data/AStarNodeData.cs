@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hotfix
+namespace Model
 {
     public class AStarNodeData
     {

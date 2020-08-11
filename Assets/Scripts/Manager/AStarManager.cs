@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Hotfix
+namespace Model
 {
     public class AStarManager : MonoBehaviour
     {
@@ -44,7 +44,7 @@ namespace Hotfix
                     astarnodedatas[x, y] = new AStarNodeData(bwall, pos, x, y);
                     if (bwall)
                     {
-                        //InitWallGrid(Model.IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
+                        //InitWallGrid(IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
                     }
                 }
             }
@@ -62,7 +62,7 @@ namespace Hotfix
                     astarnodedatas[w - x, y] = new AStarNodeData(bwall, pos, x, y);
                     if (bwall)
                     {
-                        //InitWallGrid(Model.IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
+                        //InitWallGrid(IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
                     }
                 }
             }
@@ -80,7 +80,7 @@ namespace Hotfix
                     astarnodedatas[x, h - y] = new AStarNodeData(bwall, pos, x, y);
                     if (bwall)
                     {
-                        //InitWallGrid(Model.IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
+                        //InitWallGrid(IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
                     }
                 }
             }
@@ -98,7 +98,7 @@ namespace Hotfix
                     astarnodedatas[w - x, h - y] = new AStarNodeData(bwall, pos, x, y);
                     if (bwall)
                     {
-                        //InitWallGrid(Model.IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
+                        //InitWallGrid(IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
                     }
                 }
             }

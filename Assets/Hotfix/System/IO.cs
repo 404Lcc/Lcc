@@ -17,7 +17,6 @@ namespace Hotfix
         private static TimerManager _timerManager;
         private static GameTimeManager _gametimeManager;
         private static CharacterManager _characterManager;
-        private static AStarManager _astarManager;
         public static GManager gManager
         {
             get
@@ -161,17 +160,6 @@ namespace Hotfix
                     IO._characterManager = GameUtil.GetComponent<CharacterManager>(IO.gManager.gameObject);
                 }
                 return IO._characterManager;
-            }
-        }
-        public static AStarManager astarManager
-        {
-            get
-            {
-                if (IO._astarManager == null)
-                {
-                    IO._astarManager = GameUtil.GetComponent<AStarManager>(IO.gManager.gameObject);
-                }
-                return IO._astarManager;
             }
         }
     }

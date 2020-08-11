@@ -16,7 +16,7 @@ namespace Hotfix
             if (IO.gManager == null)
             {
                 GameObject original = new GameObject();
-                original.name = "GManager";
+                original.name = "HotfixManager";
                 original.tag = "HotfixManager";
                 GameUtil.AddComponent<GManager>(original);
                 DontDestroyOnLoad(original);

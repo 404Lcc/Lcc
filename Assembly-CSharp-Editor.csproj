@@ -59,6 +59,7 @@
     <Compile Include="Assets\Editor\ILRuntime\ILRuntimeCLRBinding.cs" />
     <Compile Include="Assets\Editor\ILRuntime\MonoBehaviourAdapterEditor.cs" />
     <Compile Include="Assets\Editor\BuildHotfix.cs" />
+    <Compile Include="Assets\Editor\Preprocess.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

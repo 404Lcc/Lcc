@@ -27,6 +27,7 @@ namespace Model
             GameUtil.AddComponent<TipsManager>(gameObject);
             GameUtil.AddComponent<TipsWindowManager>(gameObject);
             GameUtil.AddComponent<LoadSceneManager>(gameObject);
+            GameUtil.AddComponent<AStarManager>(gameObject);
         }
     }
 }

@@ -58,7 +58,6 @@ namespace Hotfix
             GameUtil.AddComponent<TimerManager>(gameObject);
             GameUtil.AddComponent<GameTimeManager>(gameObject);
             GameUtil.AddComponent<CharacterManager>(gameObject);
-            GameUtil.AddComponent<AStarManager>(gameObject);
         }
         /// <summary>
         /// 初始化设置

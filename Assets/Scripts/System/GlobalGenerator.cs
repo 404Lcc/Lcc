@@ -6,7 +6,7 @@ namespace Model
     {
         void Start()
         {
-            InitGui();
+            InitGUI();
             InitGManager();
             InitAudioSource();
             InitVideoPlayer();
@@ -14,7 +14,7 @@ namespace Model
         /// <summary>
         /// 初始化UI
         /// </summary>
-        private void InitGui()
+        private void InitGUI()
         {
             if (IO.gui == null)
             {
@@ -30,8 +30,8 @@ namespace Model
         {
             if (IO.gManager == null)
             {
-                GameObject original = Instantiate(Resources.Load("Game/GManager")) as GameObject;
-                original.name = "GManager";
+                GameObject original = Instantiate(Resources.Load("Game/ModelManager")) as GameObject;
+                original.name = "ModelManager";
                 DontDestroyOnLoad(original);
             }
         }
