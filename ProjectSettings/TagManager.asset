@@ -4,10 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - ModelManager
   - GUI
-  - VideoPlayer
+  - ModelManager
+  - HotfixManager
   - AudioSource
+  - VideoPlayer
   layers:
   - Default
   - TransparentFX
