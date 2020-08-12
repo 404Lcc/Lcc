@@ -6,7 +6,7 @@ namespace Hotfix
 {
     public class CommandManager : MonoBehaviour
     {
-        public List<CommandData> commanddatalist;
+        public List<CommandData> commanddatas;
         public int index;
         public CommandType commandtype;
         void Awake()
@@ -30,7 +30,7 @@ namespace Hotfix
         }
         public void InitManager()
         {
-            commanddatalist = new List<CommandData>();
+            commanddatas = new List<CommandData>();
         }
         public void AddCommand(CommandData commanddata)
         {
@@ -47,7 +47,7 @@ namespace Hotfix
             {
                 item.SetValue(target, item.GetValue(commanddata));
             }
-            commanddatalist.Add(target);
+            commanddatas.Add(target);
         }
         public void AddCommands(CommandData[] commanddatas)
         {
@@ -69,7 +69,7 @@ namespace Hotfix
                 }
                 targetlist.Add(target);
             }
-            commanddatalist.AddRange(targetlist.ToArray());
+            this.commanddatas.AddRange(targetlist.ToArray());
         }
         public void SetCommandType(CommandType type)
         {
@@ -77,7 +77,7 @@ namespace Hotfix
         }
         public void AutomaticExcute()
         {
-            if (index < commanddatalist.Count)
+            if (index < commanddatas.Count)
             {
                 Excute();
                 Next();
@@ -85,7 +85,7 @@ namespace Hotfix
         }
         public void ManuallyExcute()
         {
-            if (index < commanddatalist.Count)
+            if (index < commanddatas.Count)
             {
                 if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
                 {
@@ -98,9 +98,9 @@ namespace Hotfix
         {
             set
             {
-                if (index < commanddatalist.Count)
+                if (index < commanddatas.Count)
                 {
-                    commanddatalist[index].bcondition = value;
+                    commanddatas[index].bcondition = value;
                 }
             }
         }
@@ -108,9 +108,9 @@ namespace Hotfix
         {
             get
             {
-                if (index < commanddatalist.Count)
+                if (index < commanddatas.Count)
                 {
-                    return commanddatalist[index].bcondition;
+                    return commanddatas[index].bcondition;
                 }
                 return true;
             }
@@ -119,9 +119,9 @@ namespace Hotfix
         {
             set
             {
-                if (index < commanddatalist.Count)
+                if (index < commanddatas.Count)
                 {
-                    commanddatalist[index].bfinish = value;
+                    commanddatas[index].bfinish = value;
                 }
             }
         }
@@ -129,32 +129,32 @@ namespace Hotfix
         {
             get
             {
-                if (index < commanddatalist.Count)
+                if (index < commanddatas.Count)
                 {
-                    return commanddatalist[index].bfinish;
+                    return commanddatas[index].bfinish;
                 }
                 return true;
             }
         }
         public void Excute()
         {
-            if (commanddatalist[index].bcondition)
+            if (commanddatas[index].bcondition)
             {
-                if (!commanddatalist[index].bexcute)
+                if (!commanddatas[index].bexcute)
                 {
-                    commanddatalist[index].Execute();
-                    commanddatalist[index].bexcute = true;
+                    commanddatas[index].Execute();
+                    commanddatas[index].bexcute = true;
                 }
             }
         }
         public void Next()
         {
-            if (commanddatalist[index].bexcute && commanddatalist[index].bfinish)
+            if (commanddatas[index].bexcute && commanddatas[index].bfinish)
             {
                 index += 1;
-                if (index >= commanddatalist.Count)
+                if (index >= commanddatas.Count)
                 {
-                    commanddatalist.Clear();
+                    commanddatas.Clear();
                     index = 0;
                     commandtype = CommandType.Automatic;
                 }
@@ -162,7 +162,7 @@ namespace Hotfix
         }
         public bool IsFinishAllCommand()
         {
-            if (commanddatalist.Count == 0) return true;
+            if (commanddatas.Count == 0) return true;
             return false;
         }
     }
