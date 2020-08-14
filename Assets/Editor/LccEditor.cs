@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -9,107 +8,6 @@ public class LccEditor : EditorWindow
     private string[] layers = { };
     private string tag;
     private string layer;
-    [MenuItem("Lcc/LccEditor")]
-    private static void ShowLcc()
-    {
-        LccEditor lcc = GetWindow<LccEditor>();
-        lcc.position = new Rect(0, 0, 600, 600);
-        lcc.Show();
-    }
-    [MenuItem("Lcc/ILRuntime")]
-    private static void ILRuntime()
-    {
-        BuildTargetGroup buildtargetgroup;
-#if UNITY_STANDALONE
-        buildtargetgroup = BuildTargetGroup.Standalone;
-#endif
-#if UNITY_ANDROID
-        buildtargetgroup = BuildTargetGroup.Android;
-#endif
-#if UNITY_IOS
-        buildtargetgroup = BuildTargetGroup.iOS;
-#endif
-        string define = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildtargetgroup);
-        List<string> definelist = new List<string>(define.Split(';'));
-        if (!definelist.Contains("ILRuntime"))
-        {
-            define += ";ILRuntime";
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildtargetgroup, define);
-        }
-    }
-    [MenuItem("Lcc/Mono")]
-    private static void Mono()
-    {
-        BuildTargetGroup buildtargetgroup;
-#if UNITY_STANDALONE
-        buildtargetgroup = BuildTargetGroup.Standalone;
-#endif
-#if UNITY_ANDROID
-        buildtargetgroup = BuildTargetGroup.Android;
-#endif
-#if UNITY_IOS
-        buildtargetgroup = BuildTargetGroup.iOS;
-#endif
-        string define = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildtargetgroup);
-        List<string> definelist = new List<string>(define.Split(';'));
-        if (definelist.Contains("ILRuntime"))
-        {
-            definelist.Remove("ILRuntime");
-            define = string.Empty;
-            foreach (string item in definelist)
-            {
-                define += item + ";";
-            }
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildtargetgroup, define);
-        }
-    }
-    [MenuItem("Lcc/AssetBundle")]
-    private static void AssetBundle()
-    {
-        BuildTargetGroup buildtargetgroup;
-#if UNITY_STANDALONE
-        buildtargetgroup = BuildTargetGroup.Standalone;
-#endif
-#if UNITY_ANDROID
-        buildtargetgroup = BuildTargetGroup.Android;
-#endif
-#if UNITY_IOS
-        buildtargetgroup = BuildTargetGroup.iOS;
-#endif
-        string define = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildtargetgroup);
-        List<string> definelist = new List<string>(define.Split(';'));
-        if (!definelist.Contains("AssetBundle"))
-        {
-            define += ";AssetBundle";
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildtargetgroup, define);
-        }
-    }
-    [MenuItem("Lcc/Resources")]
-    private static void Resources()
-    {
-        BuildTargetGroup buildtargetgroup;
-#if UNITY_STANDALONE
-        buildtargetgroup = BuildTargetGroup.Standalone;
-#endif
-#if UNITY_ANDROID
-        buildtargetgroup = BuildTargetGroup.Android;
-#endif
-#if UNITY_IOS
-        buildtargetgroup = BuildTargetGroup.iOS;
-#endif
-        string define = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildtargetgroup);
-        List<string> definelist = new List<string>(define.Split(';'));
-        if (definelist.Contains("AssetBundle"))
-        {
-            definelist.Remove("AssetBundle");
-            define = string.Empty;
-            foreach (string item in definelist)
-            {
-                define += item + ";";
-            }
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildtargetgroup, define);
-        }
-    }
     void OnGUI()
     {
         GUILayout.BeginHorizontal();
@@ -176,7 +74,7 @@ public class LccEditor : EditorWindow
                 ShowNotification(new GUIContent("增加失败"));
                 return;
             }
-            string tips = string.Empty;
+            string tips;
             if (AddTag(tag))
             {
                 tips = tag + "增加成功";
@@ -196,7 +94,7 @@ public class LccEditor : EditorWindow
                 ShowNotification(new GUIContent("增加失败"));
                 return;
             }
-            string tips = string.Empty;
+            string tips;
             if (AddLayer(layer))
             {
                 tips = layer + "增加成功";
@@ -207,6 +105,13 @@ public class LccEditor : EditorWindow
             }
             ShowNotification(new GUIContent(tips));
         }
+    }
+    [MenuItem("Lcc/LccEditor")]
+    private static void ShowLcc()
+    {
+        LccEditor lcc = GetWindow<LccEditor>();
+        lcc.position = new Rect(0, 0, 600, 600);
+        lcc.Show();
     }
     /// <summary>
     /// tag是否存在

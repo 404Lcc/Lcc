@@ -11,7 +11,7 @@ public static class DisplayMode
     static extern bool SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
     [DllImport("user32.dll")]
     static extern IntPtr GetForegroundWindow();
-    // not used rigth now
+    //not used rigth now
     //const uint SWP_NOMOVE = 0x2;
     //const uint SWP_NOSIZE = 1;
     //const uint SWP_NOZORDER = 0x4;
@@ -27,6 +27,6 @@ public static class DisplayMode
         int posx = (Screen.currentResolution.width - width) / 2;
         int posy = (Screen.currentResolution.height - height) / 2;
         SetWindowLong(GetForegroundWindow(), GWL_STYLE, WS_POPUP);
-        bool result = SetWindowPos(GetForegroundWindow(), 0, posx, posy, width, height, SWP_SHOWWINDOW);
+        SetWindowPos(GetForegroundWindow(), 0, posx, posy, width, height, SWP_SHOWWINDOW);
     }
 }

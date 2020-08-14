@@ -2,12 +2,12 @@
 
 public class DelayDestroy : MonoBehaviour
 {
-    public float time = 1.0f;
+    public float time = 1;
     void Start()
     {
         Invoke("DelayFunction", time);
     }
-    private void DelayFunction()
+    void DelayFunction()
     {
         Destroy(gameObject);
     }

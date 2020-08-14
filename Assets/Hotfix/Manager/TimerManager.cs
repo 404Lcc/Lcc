@@ -5,7 +5,7 @@ namespace Hotfix
 {
     public class TimerManager : MonoBehaviour
     {
-        public List<TimerData> timerdatas;
+        public List<TimerData> timerdatalist;
         public int index;
         void Awake()
         {
@@ -20,12 +20,12 @@ namespace Hotfix
         }
         public void InitManager()
         {
-            timerdatas = new List<TimerData>();
+            timerdatalist = new List<TimerData>();
         }
         public TimerData TimerStart(float delay, TimerDelegate timerdelegate)
         {
-            TimerData timer = new TimerData(timerdatas.Count + 1, timerdelegate, Time.time, Time.time + delay);
-            timerdatas.Add(timer);
+            TimerData timer = new TimerData(timerdatalist.Count + 1, timerdelegate, Time.time, Time.time + delay);
+            timerdatalist.Add(timer);
             return timer;
         }
         public void TimerExcute(TimerData timer)
@@ -39,14 +39,14 @@ namespace Hotfix
         }
         public void AutomaticExcute()
         {
-            if (index < timerdatas.Count)
+            if (index < timerdatalist.Count)
             {
                 Excute();
             }
         }
         public void Excute()
         {
-            TimerData timer = timerdatas[index];
+            TimerData timer = timerdatalist[index];
             if (timer.id == -1)
             {
                 Next();
@@ -61,9 +61,9 @@ namespace Hotfix
         public void Next()
         {
             index += 1;
-            if (index >= timerdatas.Count)
+            if (index >= timerdatalist.Count)
             {
-                timerdatas.Clear();
+                timerdatalist.Clear();
                 index = 0;
             }
         }

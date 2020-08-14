@@ -60,6 +60,7 @@
     <Compile Include="Assets\Editor\ILRuntime\MonoBehaviourAdapterEditor.cs" />
     <Compile Include="Assets\Editor\BuildHotfix.cs" />
     <Compile Include="Assets\Editor\Preprocess.cs" />
+    <Compile Include="Assets\Editor\Lcc.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
