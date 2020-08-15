@@ -5,11 +5,19 @@ Lcc框架
 
 **简介**
 
-[Lcc](https://github.com/404Lcc/Lcc)是基于Unity的轻量级框架
+[Lcc](https://github.com/404Lcc/Lcc)是针对Unity开发的轻量级框架，可快速上手开发**Steam**、**安卓**、**IOS**等项目
+
+**热更新**
+
+1. XLua
+
+2. ILRuntime
+
+3. 资源热更新XAsset(可选)
+
+4. C#代码加密
 
 ## 主要功能
-
-**热更新(可选)XLua、ILRuntime**
 
 **UI管理**
 
@@ -17,13 +25,17 @@ Lcc框架
 
 **音频管理**
 
+**多文本管理**
+
 **A星寻路**
 
 **数据加密**
 
-**TCP、Http等协议**
+**事件系统**
 
-**XAsset(可选)**
+**命令系统**
+
+**TCP、Http等协议**
 
 ## 快速开始
 
