@@ -1,8 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using Model;
+using System;
+using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine;
 
 public class Lcc : EditorWindow
 {
+    [MenuItem("Lcc/ViewPersistentData")]
+    private static void ViewPersistentData()
+    {
+        EditorUtility.OpenWithDefaultApp(Application.persistentDataPath);
+    }
+    [MenuItem("Lcc/BuildPlayer")]
+    private static void BuildPlayer()
+    {
+        List<string> arglist = new List<string>();
+        foreach (string item in Environment.GetCommandLineArgs())
+        {
+            arglist.Add(item);
+        }
+        string name = PlayerSettings.productName + " v" + PlayerSettings.bundleVersion;
+        switch (EditorUserBuildSettings.activeBuildTarget)
+        {
+            case BuildTarget.StandaloneWindows:
+                name += ".exe";
+                break;
+            case BuildTarget.Android:
+                name += ".apk";
+                break;
+        }
+        string locationpathname = GameUtil.GetPath(PathType.PersistentDataPath, "Build") + name;
+        BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, locationpathname, EditorUserBuildSettings.activeBuildTarget, EditorUserBuildSettings.development ? BuildOptions.Development : BuildOptions.None);
+    }
     [MenuItem("Lcc/ILRuntime")]
     private static void ILRuntime()
     {
