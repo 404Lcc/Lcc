@@ -13,11 +13,17 @@ Lcc框架
 
 **UI管理**
 
+**场景管理**
+
+**音频管理**
+
 **A星寻路**
 
 **数据加密**
 
-**支持TCP、Http等协议**
+**TCP、Http等协议**
+
+**XAsset(可选)**
 
 ## 快速开始
 
@@ -30,7 +36,7 @@ IO.panelManager.OpenPanel(PanelType.Launch);
 **场景加载**
 
 ``` csharp
-Model.IO.loadsceneManager.LoadScene(SceneName.Login, null, AssetType.Scene);
+IO.loadsceneManager.LoadScene(SceneName.Login, null, AssetType.Scene);
 ```
 
 ## 开发环境
