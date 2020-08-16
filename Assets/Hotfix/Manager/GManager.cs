@@ -12,9 +12,10 @@ namespace Hotfix
         }
         void Start()
         {
+            Model.IO.panelManager.ClearPanel(Model.PanelType.Launch);
+            IO.panelManager.OpenPanel(PanelType.Load);
             Model.IO.loadsceneManager.LoadScene(SceneName.Login, () =>
             {
-                Model.IO.panelManager.ClearPanel(Model.PanelType.Launch);
                 IO.panelManager.OpenPanel(PanelType.Login);
             }, AssetType.Scene);
         }
