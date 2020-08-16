@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Hotfix;
+using UnityEngine;
 
 public class LoadPanel : MonoBehaviour
 {
@@ -12,10 +13,17 @@ public class LoadPanel : MonoBehaviour
     }
     void Update()
     {
-        
+        if (Model.IO.loadsceneManager.process >= 100)
+        {
+            OnHidePanel();
+        }
     }
     public void InitPanel()
     {
 
+    }
+    public void OnHidePanel()
+    {
+        IO.panelManager.ClearPanel(PanelType.Load);
     }
 }
