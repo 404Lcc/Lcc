@@ -6,14 +6,6 @@ public class LaunchPanel : MonoBehaviour
     {
         InitPanel();
     }
-    void Start()
-    {
-        
-    }
-    void Update()
-    {
-        
-    }
     public void InitPanel()
     {
 
