@@ -29,6 +29,7 @@
         }
         public void Enqueue(Tips tips)
         {
+            tips.transform.SetParent(IO.gui.transform);
             tips.gameObject.SetActive(false);
             tipspool.Enqueue(tips);
         }
@@ -39,6 +40,7 @@
                 InitPool();
             }
             Tips tips = tipspool.Dequeue();
+            tips.transform.SetParent(IO.gui.transform);
             tips.gameObject.SetActive(true);
             return tips;
         }
