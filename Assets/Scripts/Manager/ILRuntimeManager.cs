@@ -24,10 +24,14 @@ namespace Model
         public void LoadHotfixAssembly()
         {
             TextAsset dllasset = IO.assetManager.LoadAssetData<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.Text);
-            TextAsset pdbasset = IO.assetManager.LoadAssetData<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.Text);
             MemoryStream dll = new MemoryStream(dllasset.bytes);
+#if Release
+            appdomain.LoadAssembly(dll, null, new PdbReaderProvider());
+#else
+            TextAsset pdbasset = IO.assetManager.LoadAssetData<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.Text);
             MemoryStream pdb = new MemoryStream(pdbasset.bytes);
             appdomain.LoadAssembly(dll, pdb, new PdbReaderProvider());
+#endif
             InitializeILRuntime();
             OnHotfixLoaded();
         }
