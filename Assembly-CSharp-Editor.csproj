@@ -55,12 +55,12 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Editor\LccEditor.cs" />
+    <Compile Include="Assets\Editor\EditorWindow\LccEditorWindow.cs" />
     <Compile Include="Assets\Editor\ILRuntime\ILRuntimeCLRBinding.cs" />
     <Compile Include="Assets\Editor\ILRuntime\MonoBehaviourAdapterEditor.cs" />
-    <Compile Include="Assets\Editor\BuildHotfix.cs" />
-    <Compile Include="Assets\Editor\Lcc.cs" />
-    <Compile Include="Assets\Editor\Preprocess.cs" />
+    <Compile Include="Assets\Editor\Tool\BuildHotfix.cs" />
+    <Compile Include="Assets\Editor\Tool\Preprocess.cs" />
+    <Compile Include="Assets\Editor\MenuItem\LccMenuItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -2,7 +2,7 @@
 using UnityEditorInternal;
 using UnityEngine;
 
-public class LccEditor : EditorWindow
+public class LccEditorWindow : EditorWindow
 {
     private string[] tags = { "GUI", "ModelManager", "HotfixManager", "AudioSource", "VideoPlayer" };
     private string[] layers = { };
@@ -109,7 +109,7 @@ public class LccEditor : EditorWindow
     [MenuItem("Lcc/LccEditor")]
     private static void ShowLcc()
     {
-        LccEditor lcc = GetWindow<LccEditor>();
+        LccEditorWindow lcc = GetWindow<LccEditorWindow>();
         lcc.position = new Rect(0, 0, 600, 600);
         lcc.Show();
     }

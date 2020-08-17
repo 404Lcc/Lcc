@@ -1,10 +1,11 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-public class Lcc : EditorWindow
+public class LccMenuItem
 {
     [MenuItem("Lcc/ViewPersistentData")]
     private static void ViewPersistentData()
@@ -125,5 +126,71 @@ public class Lcc : EditorWindow
             }
             PlayerSettings.SetScriptingDefineSymbolsForGroup(buildtargetgroup, define);
         }
+    }
+    [MenuItem("Lcc/Release")]
+    private static void Release()
+    {
+        BuildTargetGroup buildtargetgroup;
+#if UNITY_STANDALONE
+        buildtargetgroup = BuildTargetGroup.Standalone;
+#endif
+#if UNITY_ANDROID
+        buildtargetgroup = BuildTargetGroup.Android;
+#endif
+#if UNITY_IOS
+        buildtargetgroup = BuildTargetGroup.iOS;
+#endif
+        string define = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildtargetgroup);
+        List<string> definelist = new List<string>(define.Split(';'));
+        if (!definelist.Contains("Release"))
+        {
+            define += ";Release";
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildtargetgroup, define);
+        }
+    }
+    [MenuItem("Lcc/Debug")]
+    private static void Debug()
+    {
+        BuildTargetGroup buildtargetgroup;
+#if UNITY_STANDALONE
+        buildtargetgroup = BuildTargetGroup.Standalone;
+#endif
+#if UNITY_ANDROID
+        buildtargetgroup = BuildTargetGroup.Android;
+#endif
+#if UNITY_IOS
+        buildtargetgroup = BuildTargetGroup.iOS;
+#endif
+        string define = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildtargetgroup);
+        List<string> definelist = new List<string>(define.Split(';'));
+        if (definelist.Contains("Release"))
+        {
+            definelist.Remove("Release");
+            define = string.Empty;
+            foreach (string item in definelist)
+            {
+                define += item + ";";
+            }
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildtargetgroup, define);
+        }
+    }
+    [MenuItem("Assets/Lcc/BuildRelease")]
+    private static void BuildRelease()
+    {
+#if Release
+        if (File.Exists("Assets/Resources/Text/Unity.Hotfix.dll.bytes"))
+        {
+            File.Delete("Assets/Resources/Text/Unity.Hotfix.dll.bytes");
+        }
+        if (File.Exists("Assets/Resources/Text/Unity.Hotfix.pdb.bytes"))
+        {
+            File.Delete("Assets/Resources/Text/Unity.Hotfix.pdb.bytes");
+        }
+        if (File.Exists("Temp/bin/Release/Unity.Hotfix.dll"))
+        {
+            File.Copy("Temp/bin/Release/Unity.Hotfix.dll", "Assets/Resources/Text/Unity.Hotfix.dll.bytes", true);
+            AssetDatabase.Refresh();
+        }
+#endif
     }
 }
