@@ -4,16 +4,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class EncodingTool
 {
-    private static EncodingTool instance;
+    private static EncodingTool _instance;
     public static EncodingTool Instance
     {
         get
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = new EncodingTool();
+                _instance = new EncodingTool();
             }
-            return instance;
+            return _instance;
         }
     }
     public byte[] LengthEncode(byte[] data)
@@ -27,9 +27,9 @@ public class EncodingTool
         writer.Close();
         return data;
     }
-    public byte[] LengthDecode(ref List<byte> cache)
+    public byte[] LengthDecode(ref List<byte> cacheList)
     {
-        MemoryStream stream = new MemoryStream(cache.ToArray());
+        MemoryStream stream = new MemoryStream(cacheList.ToArray());
         BinaryReader reader = new BinaryReader(stream);
         int length = reader.ReadInt32();
         if (length > stream.Length - stream.Position)
@@ -37,8 +37,8 @@ public class EncodingTool
             return null;
         }
         byte[] data = reader.ReadBytes(length);
-        cache.Clear();
-        cache.AddRange(reader.ReadBytes((int)(stream.Length - stream.Position)));
+        cacheList.Clear();
+        cacheList.AddRange(reader.ReadBytes((int)(stream.Length - stream.Position)));
         stream.Close();
         reader.Close();
         return data;

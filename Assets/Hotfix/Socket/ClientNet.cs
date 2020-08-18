@@ -10,8 +10,8 @@ public class ClientNet
     public string ip;
     public int port;
     public byte[] data;
-    public List<byte> cache;
-    public bool breceive;
+    public List<byte> cacheList;
+    public bool receive;
     public ClientNet(CenterHandler handler, string ip, int port)
     {
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -19,7 +19,7 @@ public class ClientNet
         this.ip = ip;
         this.port = port;
         data = new byte[1024];
-        cache = new List<byte>();
+        cacheList = new List<byte>();
     }
     public void Init()
     {
@@ -34,25 +34,25 @@ public class ClientNet
         int length = socket.EndReceive(result);
         byte[] data = new byte[length];
         Buffer.BlockCopy(this.data, 0, data, 0, length);
-        cache.AddRange(data);
-        if (!breceive)
+        cacheList.AddRange(data);
+        if (!receive)
         {
-            breceive = true;
+            receive = true;
             ReceiveHandle();
         }
         Receive();
     }
     public void ReceiveHandle()
     {
-        if (cache.Count < 4)
+        if (cacheList.Count < 4)
         {
-            breceive = false;
+            receive = false;
             return;
         }
-        byte[] data = EncodingTool.Instance.LengthDecode(ref cache);
+        byte[] data = EncodingTool.Instance.LengthDecode(ref cacheList);
         if (data == null)
         {
-            breceive = false;
+            receive = false;
             return;
         }
         SocketModel model = EncodingTool.Instance.SocketModelDncode(data);
@@ -72,7 +72,7 @@ public class ClientNet
         socket.Shutdown(SocketShutdown.Both);
         socket.Close();
         socket = null;
-        cache.Clear();
-        breceive = false;
+        cacheList.Clear();
+        receive = false;
     }
 }

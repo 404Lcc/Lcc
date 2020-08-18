@@ -2,19 +2,19 @@
 {
     public class TipsPool
     {
-        public Pool<Tips> tipspool;
-        public int tipsmax;
+        public Pool<Tips> tipsPool;
+        public int tipsMax;
         public TipsPool()
         {
         }
-        public TipsPool(int tipsmax)
+        public TipsPool(int tipsMax)
         {
-            this.tipsmax = tipsmax;
-            tipspool = new Pool<Tips>(tipsmax);
+            this.tipsMax = tipsMax;
+            tipsPool = new Pool<Tips>(tipsMax);
         }
         public void InitPool()
         {
-            for (int i = 0; i < tipsmax; i++)
+            for (int i = 0; i < tipsMax; i++)
             {
                 Tips tips = GameUtil.GetComponent<Tips>(IO.assetManager.LoadGameObject("Tips", false, false, IO.gui.transform, AssetType.UI, AssetType.Tool));
                 Enqueue(tips);
@@ -24,14 +24,14 @@
         {
             get
             {
-                return tipspool.Count;
+                return tipsPool.Count;
             }
         }
         public void Enqueue(Tips tips)
         {
             tips.transform.SetParent(IO.gui.transform);
             tips.gameObject.SetActive(false);
-            tipspool.Enqueue(tips);
+            tipsPool.Enqueue(tips);
         }
         public Tips Dequeue()
         {
@@ -39,7 +39,7 @@
             {
                 InitPool();
             }
-            Tips tips = tipspool.Dequeue();
+            Tips tips = tipsPool.Dequeue();
             tips.transform.SetParent(IO.gui.transform);
             tips.gameObject.SetActive(true);
             return tips;

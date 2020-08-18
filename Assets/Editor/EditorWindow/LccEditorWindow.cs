@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class LccEditorWindow : EditorWindow
 {
-    private string[] tags = { "GUI", "ModelManager", "HotfixManager", "AudioSource", "VideoPlayer" };
-    private string[] layers = { };
-    private string tag;
-    private string layer;
+    private string[] _tags = { "GUI", "ModelManager", "HotfixManager", "AudioSource", "VideoPlayer" };
+    private string[] _layers = { };
+    private string _tag;
+    private string _layer;
     void OnGUI()
     {
         GUILayout.BeginHorizontal();
@@ -16,7 +16,7 @@ public class LccEditorWindow : EditorWindow
         {
             string succe = string.Empty;
             string failure = string.Empty;
-            foreach (string item in tags)
+            foreach (string item in _tags)
             {
                 if (AddTag(item))
                 {
@@ -44,7 +44,7 @@ public class LccEditorWindow : EditorWindow
         {
             string succe = string.Empty;
             string failure = string.Empty;
-            foreach (string item in layers)
+            foreach (string item in _layers)
             {
                 if (AddLayer(item))
                 {
@@ -66,42 +66,42 @@ public class LccEditorWindow : EditorWindow
         }
         GUILayout.EndHorizontal();
 
-        tag = EditorGUILayout.TextField("自定义Tag", tag);
+        _tag = EditorGUILayout.TextField("自定义Tag", _tag);
         if (GUILayout.Button(new GUIContent("增加Tag")))
         {
-            if (string.IsNullOrEmpty(tag))
+            if (string.IsNullOrEmpty(_tag))
             {
                 ShowNotification(new GUIContent("增加失败"));
                 return;
             }
             string tips;
-            if (AddTag(tag))
+            if (AddTag(_tag))
             {
-                tips = tag + "增加成功";
+                tips = _tag + "增加成功";
             }
             else
             {
-                tips = tag + "增加失败";
+                tips = _tag + "增加失败";
             }
             ShowNotification(new GUIContent(tips));
         }
 
-        layer = EditorGUILayout.TextField("自定义Layer", layer);
+        _layer = EditorGUILayout.TextField("自定义Layer", _layer);
         if (GUILayout.Button(new GUIContent("增加Layer")))
         {
-            if (string.IsNullOrEmpty(layer))
+            if (string.IsNullOrEmpty(_layer))
             {
                 ShowNotification(new GUIContent("增加失败"));
                 return;
             }
             string tips;
-            if (AddLayer(layer))
+            if (AddLayer(_layer))
             {
-                tips = layer + "增加成功";
+                tips = _layer + "增加成功";
             }
             else
             {
-                tips = layer + "增加失败";
+                tips = _layer + "增加失败";
             }
             ShowNotification(new GUIContent(tips));
         }
@@ -148,25 +148,25 @@ public class LccEditorWindow : EditorWindow
     {
         if (!TagExist(tag))
         {
-            SerializedObject tagmanager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
+            SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
             //获取tagmanager所有列表信息
-            SerializedProperty serializedproperty = tagmanager.GetIterator();
+            SerializedProperty serializedProperty = tagManager.GetIterator();
             //判断向后是否还有信息,如果没有则返回false
-            while (serializedproperty.NextVisible(true))
+            while (serializedProperty.NextVisible(true))
             {
-                if (serializedproperty.name == "tags")
+                if (serializedProperty.name == "tags")
                 {
-                    for (int i = 0; i < serializedproperty.arraySize; i++)
+                    for (int i = 0; i < serializedProperty.arraySize; i++)
                     {
                         //获取信息
-                        SerializedProperty data = serializedproperty.GetArrayElementAtIndex(i);
+                        SerializedProperty data = serializedProperty.GetArrayElementAtIndex(i);
                         //如果为空,则可以填写自己的层名称
                         if (string.IsNullOrEmpty(data.stringValue))
                         {
                             //设置名字
                             data.stringValue = tag;
                             //保存修改的属性
-                            tagmanager.ApplyModifiedProperties();
+                            tagManager.ApplyModifiedProperties();
                             return true;
                         }
                     }
@@ -185,20 +185,20 @@ public class LccEditorWindow : EditorWindow
     {
         if (!LayerExist(layer))
         {
-            SerializedObject tagmanager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
-            SerializedProperty serializedproperty = tagmanager.GetIterator();
-            while (serializedproperty.NextVisible(true))
+            SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
+            SerializedProperty serializedProperty = tagManager.GetIterator();
+            while (serializedProperty.NextVisible(true))
             {
-                if (serializedproperty.name == "layers")
+                if (serializedProperty.name == "layers")
                 {
                     //层默认是32个,只能从第8个开始写入自己的层
-                    for (int i = 8; i < serializedproperty.arraySize; i++)
+                    for (int i = 8; i < serializedProperty.arraySize; i++)
                     {
-                        SerializedProperty data = serializedproperty.GetArrayElementAtIndex(i);
+                        SerializedProperty data = serializedProperty.GetArrayElementAtIndex(i);
                         if (string.IsNullOrEmpty(data.stringValue))
                         {
                             data.stringValue = layer;
-                            tagmanager.ApplyModifiedProperties();
+                            tagManager.ApplyModifiedProperties();
                             return true;
                         }
                     }

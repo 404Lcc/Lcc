@@ -45,7 +45,7 @@ namespace Hotfix
         public static string GetPath(PathType type, params string[] folders)
         {
             string path = string.Empty;
-            string subpath = string.Empty;
+            string subPath = string.Empty;
             switch (type)
             {
                 case PathType.DataPath:
@@ -60,10 +60,10 @@ namespace Hotfix
             }
             for (int i = 0; i < folders.Length; i++)
             {
-                subpath += folders[i] + "/";
+                subPath += folders[i] + "/";
             }
-            if (string.IsNullOrEmpty(subpath)) return path;
-            return path + subpath;
+            if (string.IsNullOrEmpty(subPath)) return path;
+            return path + subPath;
         }
         /// <summary>
         /// 获取物体
@@ -160,8 +160,8 @@ namespace Hotfix
         //public static void SafeDestroy<T>(GameObject go) where T : Component
         //{
         //    if (go == null) return;
-        //    T temp = GetComponent<T>(go);
-        //    Destroy(temp);
+        //    T component = GetComponent<T>(go);
+        //    Destroy(component);
         //}
         /// <summary>
         /// 删除物体
@@ -186,8 +186,7 @@ namespace Hotfix
         /// <returns></returns>
         public static PanelType ConvertStringToPanelType(string name)
         {
-            int n = name.IndexOf("Panel");
-            name = name.Substring(0, n);
+            name = name.Substring(0, name.IndexOf("Panel"));
             return (PanelType)Enum.Parse(typeof(PanelType), name);
         }
         /// <summary>
@@ -206,8 +205,7 @@ namespace Hotfix
         /// <returns></returns>
         public static LogType ConvertStringToLogType(string name)
         {
-            int n = name.IndexOf("Panel");
-            name = name.Substring(0, n);
+            name = name.Substring(0, name.IndexOf("Panel"));
             return (LogType)Enum.Parse(typeof(LogType), name);
         }
         /// <summary>
@@ -260,12 +258,12 @@ namespace Hotfix
         public static void CreateDirectory(string path, params string[] folders)
         {
             CreateDirectory(path);
-            string subpath = string.Empty;
+            string subPath = string.Empty;
             for (int i = 0; i < folders.Length; i++)
             {
-                subpath += folders[i];
-                CreateDirectory(path + "/" + subpath);
-                subpath += "/";
+                subPath += folders[i];
+                CreateDirectory(path + "/" + subPath);
+                subPath += "/";
             }
         }
         /// <summary>
@@ -301,145 +299,127 @@ namespace Hotfix
         public static IEnumerator Download(string url, string name, string folder)
         {
             url = Uri.EscapeUriString(url);
-            UnityWebRequest webrequest = UnityWebRequest.Get(url);
-            yield return webrequest.SendWebRequest();
-            if (webrequest.isNetworkError || webrequest.isHttpError)
+            UnityWebRequest webRequest = UnityWebRequest.Get(url);
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                print(webrequest.error);
+                Debug.Log(webRequest.error);
             }
             else
             {
-                byte[] bytes = webrequest.downloadHandler.data;
+                byte[] bytes = webRequest.downloadHandler.data;
                 SaveAsset(GetPath(PathType.PersistentDataPath, folder), name, bytes);
             }
         }
         public static IEnumerator Download(string url, Action<byte[]> action)
         {
             url = Uri.EscapeUriString(url);
-            UnityWebRequest webrequest = UnityWebRequest.Get(url);
-            yield return webrequest.SendWebRequest();
-            if (webrequest.isNetworkError || webrequest.isHttpError)
+            UnityWebRequest webRequest = UnityWebRequest.Get(url);
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                print(webrequest.error);
+                Debug.Log(webRequest.error);
             }
             else
             {
-                byte[] bytes = webrequest.downloadHandler.data;
+                byte[] bytes = webRequest.downloadHandler.data;
                 action(bytes);
             }
         }
         public static IEnumerator Download(string url, Action<Texture2D> action)
         {
             url = Uri.EscapeUriString(url);
-            UnityWebRequest webrequest = UnityWebRequest.Get(url);
+            UnityWebRequest webRequest = UnityWebRequest.Get(url);
             DownloadHandlerTexture download = new DownloadHandlerTexture(true);
-            webrequest.downloadHandler = download;
-            yield return webrequest.SendWebRequest();
-            Texture2D texture = null;
-            if (webrequest.isNetworkError || webrequest.isHttpError)
+            webRequest.downloadHandler = download;
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                print(webrequest.error);
+                Debug.Log(webRequest.error);
             }
             else
             {
-                texture = download.texture;
-                action(texture);
+                action(download.texture);
             }
         }
         public static IEnumerator Download(string url, Action<Texture2D, byte[]> action)
         {
             url = Uri.EscapeUriString(url);
-            UnityWebRequest webrequest = UnityWebRequest.Get(url);
+            UnityWebRequest webRequest = UnityWebRequest.Get(url);
             DownloadHandlerTexture download = new DownloadHandlerTexture(true);
-            webrequest.downloadHandler = download;
-            yield return webrequest.SendWebRequest();
-            Texture2D texture = null;
-            byte[] bytes = null;
-            if (webrequest.isNetworkError || webrequest.isHttpError)
+            webRequest.downloadHandler = download;
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                print(webrequest.error);
+                Debug.Log(webRequest.error);
             }
             else
             {
-                texture = download.texture;
-                bytes = download.data;
-                action(texture, bytes);
+                action(download.texture, download.data);
             }
         }
         public static IEnumerator Download(string url, AudioType type, Action<AudioClip> action)
         {
             url = Uri.EscapeUriString(url);
-            UnityWebRequest webrequest = UnityWebRequest.Get(url);
-            DownloadHandlerAudioClip download = new DownloadHandlerAudioClip(webrequest.url, type);
-            webrequest.downloadHandler = download;
-            yield return webrequest.SendWebRequest();
-            AudioClip clip = null;
-            if (webrequest.isNetworkError || webrequest.isHttpError)
+            UnityWebRequest webRequest = UnityWebRequest.Get(url);
+            DownloadHandlerAudioClip download = new DownloadHandlerAudioClip(webRequest.url, type);
+            webRequest.downloadHandler = download;
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                print(webrequest.error);
+                Debug.Log(webRequest.error);
             }
             else
             {
-                clip = download.audioClip;
-                action(clip);
+                action(download.audioClip);
             }
         }
         public static IEnumerator Download(string url, AudioType type, Action<AudioClip, byte[]> action)
         {
             url = Uri.EscapeUriString(url);
-            UnityWebRequest webrequest = UnityWebRequest.Get(url);
-            DownloadHandlerAudioClip download = new DownloadHandlerAudioClip(webrequest.url, type);
-            webrequest.downloadHandler = download;
-            yield return webrequest.SendWebRequest();
-            AudioClip clip = null;
-            byte[] bytes = null;
-            if (webrequest.isNetworkError || webrequest.isHttpError)
+            UnityWebRequest webRequest = UnityWebRequest.Get(url);
+            DownloadHandlerAudioClip download = new DownloadHandlerAudioClip(webRequest.url, type);
+            webRequest.downloadHandler = download;
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                print(webrequest.error);
+                Debug.Log(webRequest.error);
             }
             else
             {
-                clip = download.audioClip;
-                bytes = download.data;
-                action(clip, bytes);
+                action(download.audioClip, download.data);
             }
         }
         public static IEnumerator Download(string url, Action<AssetBundle> action)
         {
             url = Uri.EscapeUriString(url);
-            UnityWebRequest webrequest = UnityWebRequest.Get(url);
-            DownloadHandlerAssetBundle download = new DownloadHandlerAssetBundle(webrequest.url, uint.MaxValue);
-            webrequest.downloadHandler = download;
-            yield return webrequest.SendWebRequest();
-            AssetBundle asset = null;
-            if (webrequest.isNetworkError || webrequest.isHttpError)
+            UnityWebRequest webRequest = UnityWebRequest.Get(url);
+            DownloadHandlerAssetBundle download = new DownloadHandlerAssetBundle(webRequest.url, uint.MaxValue);
+            webRequest.downloadHandler = download;
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                print(webrequest.error);
+                Debug.Log(webRequest.error);
             }
             else
             {
-                asset = download.assetBundle;
-                action(asset);
+                action(download.assetBundle);
             }
         }
         public static IEnumerator Download(string url, Action<AssetBundle, byte[]> action)
         {
             url = Uri.EscapeUriString(url);
-            UnityWebRequest webrequest = UnityWebRequest.Get(url);
-            DownloadHandlerAssetBundle download = new DownloadHandlerAssetBundle(webrequest.url, uint.MaxValue);
-            webrequest.downloadHandler = download;
-            yield return webrequest.SendWebRequest();
-            AssetBundle asset = null;
-            byte[] bytes = null;
-            if (webrequest.isNetworkError || webrequest.isHttpError)
+            UnityWebRequest webRequest = UnityWebRequest.Get(url);
+            DownloadHandlerAssetBundle download = new DownloadHandlerAssetBundle(webRequest.url, uint.MaxValue);
+            webRequest.downloadHandler = download;
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                print(webrequest.error);
+                Debug.Log(webRequest.error);
             }
             else
             {
-                asset = download.assetBundle;
-                bytes = download.data;
-                action(asset, bytes);
+                action(download.assetBundle, download.data);
             }
         }
         /// <summary>
@@ -472,10 +452,10 @@ namespace Hotfix
         /// <summary>
         /// 设置分辨率
         /// </summary>
-        /// <param name="bresolution"></param>
+        /// <param name="resolution"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        public static void SetResolution(bool bresolution, int width = 0, int height = 0)
+        public static void SetResolution(bool resolution, int width = 0, int height = 0)
         {
             Resolution[] resolutions = Screen.resolutions;
             if (width == 0)
@@ -486,46 +466,46 @@ namespace Hotfix
             {
                 height = resolutions[resolutions.Length - 1].width;
             }
-            Screen.SetResolution(width, height, bresolution);
+            Screen.SetResolution(width, height, resolution);
         }
         /// <summary>
         /// 加密
         /// </summary>
         /// <param name="key"></param>
-        /// <param name="str"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
-        public static string RijndaelEncrypt(string key, string str)
+        public static string RijndaelEncrypt(string key, string value)
         {
-            byte[] keybytes = Encoding.UTF8.GetBytes(key);
-            byte[] strbytes = Encoding.UTF8.GetBytes(str);
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            byte[] valueBytes = Encoding.UTF8.GetBytes(value);
             //加密
             RijndaelManaged rijndael = new RijndaelManaged();
-            rijndael.Key = keybytes;
+            rijndael.Key = keyBytes;
             rijndael.Mode = CipherMode.ECB;
             rijndael.Padding = PaddingMode.PKCS7;
             ICryptoTransform crypto = rijndael.CreateEncryptor();
             //加密后的数据
-            byte[] bytes = crypto.TransformFinalBlock(strbytes, 0, strbytes.Length);
+            byte[] bytes = crypto.TransformFinalBlock(valueBytes, 0, valueBytes.Length);
             return Convert.ToBase64String(bytes, 0, bytes.Length);
         }
         /// <summary>
         /// 解密
         /// </summary>
         /// <param name="key"></param>
-        /// <param name="str"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
-        public static string RijndaelDecrypt(string key, string str)
+        public static string RijndaelDecrypt(string key, string value)
         {
-            byte[] keybytes = Encoding.UTF8.GetBytes(key);
-            byte[] strbytes = Convert.FromBase64String(str);
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            byte[] valueBytes = Convert.FromBase64String(value);
             //解密
             RijndaelManaged rijndael = new RijndaelManaged();
-            rijndael.Key = keybytes;
+            rijndael.Key = keyBytes;
             rijndael.Mode = CipherMode.ECB;
             rijndael.Padding = PaddingMode.PKCS7;
             ICryptoTransform crypto = rijndael.CreateDecryptor();
             //解密后的数据
-            byte[] bytes = crypto.TransformFinalBlock(strbytes, 0, strbytes.Length);
+            byte[] bytes = crypto.TransformFinalBlock(valueBytes, 0, valueBytes.Length);
             return Encoding.UTF8.GetString(bytes, 0, bytes.Length);
         }
     }

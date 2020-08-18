@@ -14,20 +14,14 @@ namespace Model
         public string confirm;
         public string cancel;
         public Action<bool> complete;
-        public object Current
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public object Current => null;
 
-        public Text titletext;
-        public Text infotext;
-        public Text confirmtext;
-        public Text canceltext;
-        public Button confirmbtn;
-        public Button cancelbtn;
+        public Text titleText;
+        public Text infoText;
+        public Text confirmText;
+        public Text cancelText;
+        public Button confirmBtn;
+        public Button cancelBtn;
         public void InitTipsWindow(string title, string info, string confirm = "确定", string cancel = "取消", Transform parent = null)
         {
             state = true;
@@ -37,10 +31,10 @@ namespace Model
             this.confirm = confirm;
             this.cancel = cancel;
 
-            titletext.text = title;
-            infotext.text = info;
-            confirmtext.text = confirm;
-            canceltext.text = cancel;
+            titleText.text = title;
+            infoText.text = info;
+            confirmText.text = confirm;
+            cancelText.text = cancel;
 
             if (parent == null)
             {

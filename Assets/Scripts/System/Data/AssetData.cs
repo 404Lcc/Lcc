@@ -7,6 +7,6 @@ namespace Model
         public Object asset;
         public string[] types;
         public string name;
-        public bool bkeep;
+        public bool keep;
     }
 }

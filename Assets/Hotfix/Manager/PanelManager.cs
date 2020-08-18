@@ -77,10 +77,10 @@ namespace Hotfix
         /// <returns></returns>
         public void ClearExceptPanel(PanelType[] types)
         {
-            List<PanelType> typeslist = new List<PanelType>(types);
+            List<PanelType> typeList = new List<PanelType>(types);
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
-                if (!typeslist.Contains(item))
+                if (!typeList.Contains(item))
                 {
                     ClearPanel(item);
                 }
@@ -128,10 +128,13 @@ namespace Hotfix
                 info.OpenPanel();
                 return info;
             }
-            PanelInfo temp = CreatePanel(type);
-            temp.OpenPanel();
-            BindingPanel(type, temp.container);
-            return temp;
+            else
+            {
+                PanelInfo info = CreatePanel(type);
+                info.OpenPanel();
+                BindingPanel(type, info.container);
+                return info;
+            }
         }
         /// <summary>
         /// 打开面板
@@ -140,12 +143,12 @@ namespace Hotfix
         /// <returns></returns>
         public PanelInfo[] OpenPanel(PanelType[] types)
         {
-            List<PanelInfo> infos = new List<PanelInfo>();
+            List<PanelInfo> infoList = new List<PanelInfo>();
             foreach (PanelType item in types)
             {
-                infos.Add(OpenPanel(item));
+                infoList.Add(OpenPanel(item));
             }
-            return infos.ToArray();
+            return infoList.ToArray();
         }
         /// <summary>
         /// 打开剩下所有面板
@@ -154,28 +157,28 @@ namespace Hotfix
         /// <returns></returns>
         public PanelInfo[] OpenExceptPanel(PanelType[] types)
         {
-            List<PanelInfo> infos = new List<PanelInfo>();
-            List<PanelType> typeslist = new List<PanelType>(types);
+            List<PanelInfo> infoList = new List<PanelInfo>();
+            List<PanelType> typeList = new List<PanelType>(types);
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
-                if (!typeslist.Contains(item))
+                if (!typeList.Contains(item))
                 {
-                    infos.Add(OpenPanel(item));
+                    infoList.Add(OpenPanel(item));
                 }
             }
-            return infos.ToArray();
+            return infoList.ToArray();
         }
         /// <summary>
         /// 打开全部面板
         /// </summary>
         public PanelInfo[] OpenAllPanels()
         {
-            List<PanelInfo> infos = new List<PanelInfo>();
+            List<PanelInfo> infoList = new List<PanelInfo>();
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
-                infos.Add(OpenPanel(item));
+                infoList.Add(OpenPanel(item));
             }
-            return infos.ToArray();
+            return infoList.ToArray();
         }
         /// <summary>
         /// 隐藏面板
@@ -190,9 +193,12 @@ namespace Hotfix
                 info.ClosePanel();
                 return info;
             }
-            PanelInfo temp = CreatePanel(type);
-            temp.ClosePanel();
-            return temp;
+            else
+            {
+                PanelInfo info = CreatePanel(type);
+                info.ClosePanel();
+                return info;
+            }
         }
         /// <summary>
         /// 隐藏面板
@@ -201,12 +207,12 @@ namespace Hotfix
         /// <returns></returns>
         public PanelInfo[] ClosePanel(PanelType[] types)
         {
-            List<PanelInfo> infos = new List<PanelInfo>();
+            List<PanelInfo> infoList = new List<PanelInfo>();
             foreach (PanelType item in types)
             {
-                infos.Add(ClosePanel(item));
+                infoList.Add(ClosePanel(item));
             }
-            return infos.ToArray();
+            return infoList.ToArray();
         }
         /// <summary>
         /// 隐藏剩下所有面板
@@ -215,28 +221,28 @@ namespace Hotfix
         /// <returns></returns>
         public PanelInfo[] CloseExceptPanel(PanelType[] types)
         {
-            List<PanelInfo> infos = new List<PanelInfo>();
-            List<PanelType> typeslist = new List<PanelType>(types);
+            List<PanelInfo> infoList = new List<PanelInfo>();
+            List<PanelType> typeList = new List<PanelType>(types);
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
-                if (!typeslist.Contains(item))
+                if (!typeList.Contains(item))
                 {
-                    infos.Add(ClosePanel(item));
+                    infoList.Add(ClosePanel(item));
                 }
             }
-            return infos.ToArray();
+            return infoList.ToArray();
         }
         /// <summary>
         /// 隐藏全部面板
         /// </summary>
         public PanelInfo[] CloseAllPanels()
         {
-            List<PanelInfo> infos = new List<PanelInfo>();
+            List<PanelInfo> infoList = new List<PanelInfo>();
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
-                infos.Add(ClosePanel(item));
+                infoList.Add(ClosePanel(item));
             }
-            return infos.ToArray();
+            return infoList.ToArray();
         }
         /// <summary>
         /// 获取面板

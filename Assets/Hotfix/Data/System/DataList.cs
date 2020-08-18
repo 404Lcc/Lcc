@@ -1,7 +1,9 @@
-﻿namespace Hotfix
+﻿using System.Collections.Generic;
+
+namespace Hotfix
 {
     public class DataList
     {
-        public static string[] datalist = new string[0];
+        public static List<string> dataList = new List<string>();
     }
 }

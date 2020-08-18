@@ -51,38 +51,38 @@ namespace Hotfix
             if (DataListExist())
             {
                 GetDataList();
-                return DataList.datalist.Length;
+                return DataList.dataList.Count;
             }
             return 0;
         }
 
-        public bool UserExist(string dataname)
+        public bool UserExist(string name)
         {
             GameUtil.CreateDirectory(Application.persistentDataPath, "Res");
-            FileInfo info = new FileInfo(GameUtil.GetPath(PathType.PersistentDataPath, "Res") + dataname + ".lcc");
+            FileInfo info = new FileInfo(GameUtil.GetPath(PathType.PersistentDataPath, "Res") + name + ".lcc");
             if (info.Exists)
             {
                 return true;
             }
             return false;
         }
-        public void GetUserData(string dataname)
+        public void GetUserData(string name)
         {
-            if (UserExist(dataname))
+            if (UserExist(name))
             {
-                JsonUtil.ToUserData(JsonUtil.GetUserData(GameUtil.GetPath(PathType.PersistentDataPath, "Res"), dataname + ".lcc"));
+                JsonUtil.ToUserData(JsonUtil.GetUserData(GameUtil.GetPath(PathType.PersistentDataPath, "Res"), name + ".lcc"));
             }
         }
-        public void SaveUserData(string dataname)
+        public void SaveUserData(string name)
         {
             GameUtil.CreateDirectory(Application.persistentDataPath, "Res");
-            JsonUtil.SetUserData(GameUtil.GetPath(PathType.PersistentDataPath, "Res"), dataname + ".lcc", JsonUtil.ToUserDataInstance());
+            JsonUtil.SetUserData(GameUtil.GetPath(PathType.PersistentDataPath, "Res"), name + ".lcc", JsonUtil.ToUserDataInstance());
         }
-        public void DeleteUserData(string dataname)
+        public void DeleteUserData(string name)
         {
-            if (UserExist(dataname))
+            if (UserExist(name))
             {
-                FileInfo info = new FileInfo(GameUtil.GetPath(PathType.PersistentDataPath, "Res") + dataname + ".lcc");
+                FileInfo info = new FileInfo(GameUtil.GetPath(PathType.PersistentDataPath, "Res") + name + ".lcc");
                 info.Delete();
             }
         }
@@ -127,18 +127,17 @@ namespace Hotfix
             }
         }
 
-        //public void SetValue(DOGetter<float> getter, DOSetter<float> setter, int value, int timer, bool bsave, bool bpanel = false, PanelType[] types = null, Action action = null)
+        //public void SetValue(DOGetter<float> getter, DOSetter<float> setter, int value, int timer, bool save, bool panel = false, PanelType[] types = null, Action action = null)
         //{
-        //    if (bpanel)
+        //    if (panel)
         //    {
         //    }
         //    DOTween.To(getter, setter, value, timer).OnComplete(() =>
         //    {
         //        action();
-        //        if (bsave)
+        //        if (save)
         //        {
-        //        //SaveUserData(UserData.dataname);
-        //    }
+        //        }
         //    });
         //}
     }

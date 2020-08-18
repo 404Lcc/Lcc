@@ -4,28 +4,28 @@ namespace Model
 {
     public class Pool<T>
     {
-        public Queue<T> pool;
+        public Queue<T> poolQueue;
         public Pool()
         {
         }
         public Pool(int max)
         {
-            pool = new Queue<T>(max);
+            poolQueue = new Queue<T>(max);
         }
         public int Count
         {
             get
             {
-                return pool.Count;
+                return poolQueue.Count;
             }
         }
         public void Enqueue(T t)
         {
-            pool.Enqueue(t);
+            poolQueue.Enqueue(t);
         }
         public T Dequeue()
         {
-            return pool.Dequeue();
+            return poolQueue.Dequeue();
         }
     }
 }

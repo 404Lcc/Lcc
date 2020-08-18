@@ -13,12 +13,12 @@ namespace Model
         }
         public void LoadHotfixAssembly()
         {
-            TextAsset dllasset = IO.assetManager.LoadAssetData<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.Text);
+            TextAsset dllAsset = IO.assetManager.LoadAssetData<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.Text);
 #if Release
-            assembly = AppDomain.CurrentDomain.Load(dllasset.bytes);
+            assembly = AppDomain.CurrentDomain.Load(dllAsset.bytes);
 #else
-            TextAsset pdbasset = IO.assetManager.LoadAssetData<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.Text);
-            assembly = AppDomain.CurrentDomain.Load(dllasset.bytes, pdbasset.bytes);
+            TextAsset pdbAsset = IO.assetManager.LoadAssetData<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.Text);
+            assembly = AppDomain.CurrentDomain.Load(dllAsset.bytes, pdbAsset.bytes);
 #endif
             OnHotfixLoaded();
         }
@@ -26,8 +26,8 @@ namespace Model
         {
             object instance = assembly.CreateInstance("Hotfix.Hotfix");
             Type type = instance.GetType();
-            MethodInfo methodinfo = type.GetMethod("InitHotfix");
-            methodinfo.Invoke(null, null);
+            MethodInfo methodInfo = type.GetMethod("InitHotfix");
+            methodInfo.Invoke(null, null);
         }
     }
 }

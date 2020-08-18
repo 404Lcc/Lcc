@@ -7,11 +7,11 @@ namespace Hotfix
     {
         public LogType type;
         public string log;
-        public Text logtext;
+        public Text logText;
         public void SetLog(string log)
         {
             this.log = log;
-            logtext.text = log;
+            logText.text = log;
         }
         public override void OpenPanel()
         {

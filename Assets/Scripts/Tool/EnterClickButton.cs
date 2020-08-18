@@ -11,23 +11,23 @@ public class ExitClickEvent : UnityEvent { }
 public class EnterClickButton : Button
 {
     [SerializeField]
-    public EnterClickEvent enterclick;
+    public EnterClickEvent enterClick;
     [SerializeField]
-    public ExitClickEvent exitclick;
+    public ExitClickEvent exitClick;
     public override void OnPointerEnter(PointerEventData eventData)
     {
         base.OnPointerEnter(eventData);
-        if (enterclick != null)
+        if (enterClick != null)
         {
-            enterclick.Invoke();
+            enterClick.Invoke();
         }
     }
     public override void OnPointerExit(PointerEventData eventData)
     {
         base.OnPointerExit(eventData);
-        if (exitclick != null)
+        if (exitClick != null)
         {
-            exitclick.Invoke();
+            exitClick.Invoke();
         }
     }
 }

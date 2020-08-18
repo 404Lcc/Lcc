@@ -14,8 +14,14 @@ namespace Hotfix
         }
         public bool ContainerExist()
         {
-            if (container == null) return false;
-            return true;
+            if (container == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

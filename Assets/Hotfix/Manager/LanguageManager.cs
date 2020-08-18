@@ -17,9 +17,7 @@ namespace Hotfix
         public void ChangeLanguage(LanguageType type)
         {
             TextAsset asset = Model.IO.assetManager.LoadAssetData<TextAsset>(type.ToString(), ".txt", false, true, AssetType.Game);
-            string text = asset.text;
-            string[] all = text.Split('\n');
-            foreach (string item in all)
+            foreach (string item in asset.text.Split('\n'))
             {
                 if (string.IsNullOrEmpty(item))
                 {

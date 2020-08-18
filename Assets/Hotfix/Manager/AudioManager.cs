@@ -42,7 +42,7 @@ namespace Hotfix
                 audios.Remove(audio);
             }
         }
-        public AudioClip PlayAudio(string audio, bool insideoutside, AudioSource source)
+        public AudioClip PlayAudio(string audio, bool inside, AudioSource source)
         {
             if (AudioExist(audio))
             {
@@ -51,7 +51,7 @@ namespace Hotfix
                 source.Play();
                 return clip;
             }
-            if (insideoutside)
+            if (inside)
             {
                 AudioClip temp = LoadAudio(audio);
                 source.clip = temp;

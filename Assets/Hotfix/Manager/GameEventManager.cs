@@ -8,8 +8,8 @@ namespace Hotfix
     public delegate bool GameDispatcherConditionDelegate();
     public class GameEventManager : MonoBehaviour
     {
-        public Hashtable gameevents;
-        public Hashtable gamedispatcherconditions;
+        public Hashtable gameEvents;
+        public Hashtable gameDispatcherConditions;
         void Awake()
         {
             InitManager();
@@ -23,8 +23,8 @@ namespace Hotfix
         }
         public void InitManager()
         {
-            gameevents = new Hashtable();
-            gamedispatcherconditions = new Hashtable();
+            gameEvents = new Hashtable();
+            gameDispatcherConditions = new Hashtable();
         }
         /// <summary>
         /// 增加事件
@@ -33,7 +33,7 @@ namespace Hotfix
         /// <param name="value"></param>
         public void AddGameEventDelegate(GameEventType type, GameEventDelegate value)
         {
-            gameevents.Add(type, value);
+            gameEvents.Add(type, value);
         }
         /// <summary>
         /// 移除事件
@@ -41,7 +41,7 @@ namespace Hotfix
         /// <param name="type"></param>
         public void RemoveGameEventDelegate(GameEventType type)
         {
-            gameevents.Remove(type);
+            gameEvents.Remove(type);
         }
         /// <summary>
         /// 获取事件
@@ -50,7 +50,7 @@ namespace Hotfix
         /// <returns></returns>
         public GameEventDelegate GetGameEventDelegate(GameEventType type)
         {
-            return gameevents[type] as GameEventDelegate;
+            return gameEvents[type] as GameEventDelegate;
         }
         /// <summary>
         /// 增加分发条件
@@ -59,7 +59,7 @@ namespace Hotfix
         /// <param name="value"></param>
         public void AddGameDispatcherCondition(GameEventType type, GameDispatcherConditionDelegate value)
         {
-            gamedispatcherconditions.Add(type, value);
+            gameDispatcherConditions.Add(type, value);
         }
         /// <summary>
         /// 移除分发条件
@@ -67,7 +67,7 @@ namespace Hotfix
         /// <param name="type"></param>
         public void RemoveGameDispatcherCondition(GameEventType type)
         {
-            gamedispatcherconditions.Remove(type);
+            gameDispatcherConditions.Remove(type);
         }
         /// <summary>
         /// 获取分发条件
@@ -76,7 +76,7 @@ namespace Hotfix
         /// <returns></returns>
         public GameDispatcherConditionDelegate GetGameDispatcherCondition(GameEventType type)
         {
-            return gamedispatcherconditions[type] as GameDispatcherConditionDelegate;
+            return gameDispatcherConditions[type] as GameDispatcherConditionDelegate;
         }
         /// <summary>
         /// 分发事件
@@ -84,32 +84,28 @@ namespace Hotfix
         /// <param name="type"></param>
         public void DispatcherEvent(GameEventType type)
         {
-            GameEventDelegate eventdelegate = gameevents[type] as GameEventDelegate;
-            if (eventdelegate != null)
-            {
-                eventdelegate();
-            }
+            ((GameEventDelegate)gameEvents[type])?.Invoke();
         }
         /// <summary>
         /// 自动分发
         /// </summary>
         public void AutoGameDispatcher()
         {
-            List<GameEventType> list = new List<GameEventType>();
-            IDictionaryEnumerator enumerator = gamedispatcherconditions.GetEnumerator();
+            List<GameEventType> typeList = new List<GameEventType>();
+            IDictionaryEnumerator enumerator = gameDispatcherConditions.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                GameDispatcherConditionDelegate conditiondelegate = enumerator.Value as GameDispatcherConditionDelegate;
-                if (conditiondelegate())
+                GameDispatcherConditionDelegate conditionDelegate = enumerator.Value as GameDispatcherConditionDelegate;
+                if (conditionDelegate())
                 {
-                    list.Add((GameEventType)enumerator.Key);
+                    typeList.Add((GameEventType)enumerator.Key);
                     DispatcherEvent((GameEventType)enumerator.Key);
                 }
             }
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < typeList.Count; i++)
             {
-                RemoveGameEventDelegate(list[i]);
-                RemoveGameDispatcherCondition(list[i]);
+                RemoveGameEventDelegate(typeList[i]);
+                RemoveGameDispatcherCondition(typeList[i]);
             }
         }
     }

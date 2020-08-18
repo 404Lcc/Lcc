@@ -18,11 +18,11 @@ namespace Model
         /// 创建容器
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="bassetbundle"></param>
+        /// <param name="assetBundleMode"></param>
         /// <returns></returns>
-        public GameObject CreateContainer(string name, bool bassetbundle)
+        public GameObject CreateContainer(string name, bool assetBundleMode)
         {
-            GameObject obj = IO.assetManager.LoadGameObject(name, false, bassetbundle, AssetType.UI);
+            GameObject obj = IO.assetManager.LoadGameObject(name, false, assetBundleMode, AssetType.UI);
             if (obj == null) return null;
             obj.name = name;
             obj.transform.SetParent(IO.gui.transform);

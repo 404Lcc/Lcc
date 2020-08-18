@@ -15,22 +15,22 @@ namespace Model
 {
     public class ILRuntimeManager : MonoBehaviour
     {
-        public AppDomain appdomain;
+        public AppDomain appDomain;
         public void InitManager()
         {
-            appdomain = new AppDomain();
+            appDomain = new AppDomain();
             LoadHotfixAssembly();
         }
         public void LoadHotfixAssembly()
         {
-            TextAsset dllasset = IO.assetManager.LoadAssetData<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.Text);
-            MemoryStream dll = new MemoryStream(dllasset.bytes);
+            TextAsset dllAsset = IO.assetManager.LoadAssetData<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.Text);
+            MemoryStream dll = new MemoryStream(dllAsset.bytes);
 #if Release
             appdomain.LoadAssembly(dll, null, new PdbReaderProvider());
 #else
-            TextAsset pdbasset = IO.assetManager.LoadAssetData<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.Text);
-            MemoryStream pdb = new MemoryStream(pdbasset.bytes);
-            appdomain.LoadAssembly(dll, pdb, new PdbReaderProvider());
+            TextAsset pdbAsset = IO.assetManager.LoadAssetData<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.Text);
+            MemoryStream pdb = new MemoryStream(pdbAsset.bytes);
+            appDomain.LoadAssembly(dll, pdb, new PdbReaderProvider());
 #endif
             InitializeILRuntime();
             OnHotfixLoaded();
@@ -38,23 +38,23 @@ namespace Model
         public unsafe void InitializeILRuntime()
         {
 #if UNITY_EDITOR
-            appdomain.DebugService.StartDebugService(56000);
+            appDomain.DebugService.StartDebugService(56000);
 #endif
 #if DEBUG && (UNITY_EDITOR || UNITY_ANDROID || UNITY_IPHONE)
-            appdomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;
+            appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;
 #endif
-            appdomain.RegisterCrossBindingAdaptor(new MonoBehaviourAdapter());
-            appdomain.RegisterCrossBindingAdaptor(new CoroutineAdapter());
+            appDomain.RegisterCrossBindingAdaptor(new MonoBehaviourAdapter());
+            appDomain.RegisterCrossBindingAdaptor(new CoroutineAdapter());
 
-            JsonMapper.RegisterILRuntimeCLRRedirection(appdomain);
+            JsonMapper.RegisterILRuntimeCLRRedirection(appDomain);
 
-            //CLRBindings.Initialize(appdomain);
+            //CLRBindings.Initialize(appDomain);
 
             SetupCLRRedirection();
         }
         public unsafe void OnHotfixLoaded()
         {
-            appdomain.Invoke("Hotfix.Hotfix", "InitHotfix", null, null);
+            appDomain.Invoke("Hotfix.Hotfix", "InitHotfix", null, null);
         }
         public unsafe void SetupCLRRedirection()
         {
@@ -63,11 +63,11 @@ namespace Model
             {
                 if (i.Name == "AddComponent" && i.GetGenericArguments().Length == 1)
                 {
-                    appdomain.RegisterCLRMethodRedirection(i, AddComponent);
+                    appDomain.RegisterCLRMethodRedirection(i, AddComponent);
                 }
                 if (i.Name == "GetComponent" && i.GetGenericArguments().Length == 1)
                 {
-                    appdomain.RegisterCLRMethodRedirection(i, GetComponent);
+                    appDomain.RegisterCLRMethodRedirection(i, GetComponent);
                 }
             }
         }

@@ -5,46 +5,46 @@ namespace Model
 {
     public class AStarManager : MonoBehaviour
     {
-        public float noderadius;
+        public float radius;
         public LayerMask layer;
-        public bool bshowwall;
-        public bool bshowpath;
-        private int w;
-        private int h;
-        private AStarNodeData[,] astarnodedatas;
+        public bool showWall;
+        public bool showPath;
+        public int w;
+        public int h;
+        public AStarNodeData[,] aStarNodeDatas;
 
-        private Transform walls;
-        private Transform paths;
-        public void InitManager(float noderadius, LayerMask layer, bool bshowwall, bool bshowpath, GameObject map, float ratio = 1)
+        public Transform wall;
+        public Transform path;
+        public void InitManager(float radius, LayerMask layer, bool showWall, bool showPath, GameObject map, float ratio = 1)
         {
-            this.noderadius = noderadius;
+            this.radius = radius;
             this.layer = layer;
-            this.bshowwall = bshowwall;
-            this.bshowpath = bshowpath;
+            this.showWall = showWall;
+            this.showPath = showPath;
 
             w = Mathf.RoundToInt(GameUtil.GetComponent<BoxCollider2D>(map).bounds.size.x * ratio);
             h = Mathf.RoundToInt(GameUtil.GetComponent<BoxCollider2D>(map).bounds.size.y * ratio);
-            astarnodedatas = new AStarNodeData[w * 2, h * 2];
-            walls = new GameObject("Walls").transform;
-            paths = new GameObject("Paths").transform;
+            aStarNodeDatas = new AStarNodeData[w * 2, h * 2];
+            wall = new GameObject("Wall").transform;
+            path = new GameObject("Path").transform;
             //将墙的信息写入格子中
             for (int x = 0; x <= w; x++)
             {
                 for (int y = 0; y <= h; y++)
                 {
-                    Vector3 pos = new Vector3(x * 0.5f, y * 0.5f, 0);
+                    Vector3 localPosition = new Vector3(x * 0.5f, y * 0.5f, 0);
                     //通过节点中心发射圆形射线,检测当前位置是否可以行走
-                    bool bwall = false;
-                    //bwall = Physics.CheckSphere(pos, noderadius, layer); 3D
-                    Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, noderadius, layer);
+                    bool wall = false;
+                    //bwall = Physics.CheckSphere(localPosition, nodeRadius, layer); 3D
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll(localPosition, radius, layer);
                     if (colliders.Length > 0)
                     {
-                        bwall = true;
+                        wall = true;
                     }
-                    astarnodedatas[x, y] = new AStarNodeData(bwall, pos, x, y);
-                    if (bwall)
+                    aStarNodeDatas[x, y] = new AStarNodeData(wall, localPosition, x, y);
+                    if (wall)
                     {
-                        //InitWallGrid(IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
+                        //InitWallGrid(IO.assetManager.LoadGameObject("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, showWall);
                     }
                 }
             }
@@ -52,17 +52,17 @@ namespace Model
             {
                 for (int y = 0; y <= h; y++)
                 {
-                    Vector3 pos = new Vector3(x * 0.5f, y * 0.5f, 0);
-                    bool bwall = false;
-                    Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, noderadius, layer);
+                    Vector3 localPosition = new Vector3(x * 0.5f, y * 0.5f, 0);
+                    bool wall = false;
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll(localPosition, radius, layer);
                     if (colliders.Length > 0)
                     {
-                        bwall = true;
+                        wall = true;
                     }
-                    astarnodedatas[w - x, y] = new AStarNodeData(bwall, pos, x, y);
-                    if (bwall)
+                    aStarNodeDatas[w - x, y] = new AStarNodeData(wall, localPosition, x, y);
+                    if (wall)
                     {
-                        //InitWallGrid(IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
+                        //InitWallGrid(IO.assetManager.LoadGameObject("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, showWall);
                     }
                 }
             }
@@ -70,17 +70,17 @@ namespace Model
             {
                 for (int y = -h + 1; y < 0; y++)
                 {
-                    Vector3 pos = new Vector3(x * 0.5f, y * 0.5f, 0);
-                    bool bwall = false;
-                    Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, noderadius, layer);
+                    Vector3 localPosition = new Vector3(x * 0.5f, y * 0.5f, 0);
+                    bool wall = false;
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll(localPosition, radius, layer);
                     if (colliders.Length > 0)
                     {
-                        bwall = true;
+                        wall = true;
                     }
-                    astarnodedatas[x, h - y] = new AStarNodeData(bwall, pos, x, y);
-                    if (bwall)
+                    aStarNodeDatas[x, h - y] = new AStarNodeData(wall, localPosition, x, y);
+                    if (wall)
                     {
-                        //InitWallGrid(IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
+                        //InitWallGrid(IO.assetManager.LoadGameObject("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, showWall);
                     }
                 }
             }
@@ -88,42 +88,42 @@ namespace Model
             {
                 for (int y = -h + 1; y < 0; y++)
                 {
-                    Vector3 pos = new Vector3(x * 0.5f, y * 0.5f, 0);
-                    bool bwall = false;
-                    Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, noderadius, layer);
+                    Vector3 localPosition = new Vector3(x * 0.5f, y * 0.5f, 0);
+                    bool wall = false;
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll(localPosition, radius, layer);
                     if (colliders.Length > 0)
                     {
-                        bwall = true;
+                        wall = true;
                     }
-                    astarnodedatas[w - x, h - y] = new AStarNodeData(bwall, pos, x, y);
-                    if (bwall)
+                    aStarNodeDatas[w - x, h - y] = new AStarNodeData(wall, localPosition, x, y);
+                    if (wall)
                     {
-                        //InitWallGrid(IO.assetManager.LoadGameObject("Wall", false, walls, true, AssetType.UI, AssetType.Tool), pos, bshowwall);
+                        //InitWallGrid(IO.assetManager.LoadGameObject("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, showWall);
                     }
                 }
             }
         }
-        public GameObject InitWallGrid(GameObject nodewall, Vector3 pos, bool bshowwall)
+        public GameObject InitWallGrid(GameObject wall, Vector3 localPosition, bool showWall)
         {
-            nodewall.transform.localPosition = pos;
-            nodewall.SetActive(bshowwall);
-            return nodewall;
+            wall.transform.localPosition = localPosition;
+            wall.SetActive(showWall);
+            return wall;
         }
-        public GameObject InitPathGrid(GameObject nodepath, Vector3 pos, bool bshowpath)
+        public GameObject InitPathGrid(GameObject path, Vector3 localPosition, bool showPath)
         {
-            nodepath.transform.localPosition = pos;
-            nodepath.SetActive(bshowwall);
-            return nodepath;
+            path.transform.localPosition = localPosition;
+            path.SetActive(showPath);
+            return path;
         }
         /// <summary>
         /// 根据坐标获得一个节点
         /// </summary>
         /// <param name="pos"></param>
         /// <returns></returns>
-        public AStarNodeData GetAStarNodeData(Vector3 pos)
+        public AStarNodeData GetAStarNodeData(Vector3 localPosition)
         {
-            int x = Mathf.RoundToInt(pos.x * 2);
-            int y = Mathf.RoundToInt(pos.y * 2);
+            int x = Mathf.RoundToInt(localPosition.x * 2);
+            int y = Mathf.RoundToInt(localPosition.y * 2);
             if (x < 0)
             {
                 x = w - x;
@@ -142,16 +142,16 @@ namespace Model
             {
                 y = Mathf.Clamp(y, 0, h);
             }
-            return astarnodedatas[x, y];
+            return aStarNodeDatas[x, y];
         }
         /// <summary>
         /// 取得周围的节点
         /// </summary>
-        /// <param name="node"></param>
+        /// <param name="aStarNodeData"></param>
         /// <returns></returns>
-        public List<AStarNodeData> GetAStarNodeDataAround(AStarNodeData astarnodedata)
+        public List<AStarNodeData> GetAStarNodeDataAround(AStarNodeData data)
         {
-            List<AStarNodeData> list = new List<AStarNodeData>();
+            List<AStarNodeData> dataList = new List<AStarNodeData>();
             for (int i = -1; i <= 1; i++)
             {
                 for (int j = -1; j <= 1; j++)
@@ -161,8 +161,8 @@ namespace Model
                     {
                         continue;
                     }
-                    int x = astarnodedata.x + i;
-                    int y = astarnodedata.y + j;
+                    int x = data.x + i;
+                    int y = data.y + j;
                     if (x < 0)
                     {
                         x = w - x;
@@ -193,124 +193,124 @@ namespace Model
                             continue;
                         }
                     }
-                    list.Add(astarnodedatas[x, y]);
+                    dataList.Add(aStarNodeDatas[x, y]);
                 }
             }
-            return list;
+            return dataList;
         }
         /// <summary>
         /// 获取两个节点之间的距离
         /// </summary>
-        /// <param name="startnode"></param>
-        /// <param name="endnode"></param>
+        /// <param name="startAStarNodeData"></param>
+        /// <param name="endAStarNodeData"></param>
         /// <returns></returns>
-        public int GetAStarNodeDataDistance(AStarNodeData startastarnodedata, AStarNodeData endastarnodedata)
+        public int GetAStarNodeDataDistance(AStarNodeData startAStarNodeData, AStarNodeData endAStarNodeData)
         {
-            return Diagonal(startastarnodedata, endastarnodedata);
+            return Diagonal(startAStarNodeData, endAStarNodeData);
         }
         /// <summary>
         /// 对角线估价法
         /// </summary>
-        /// <param name="startnode"></param>
-        /// <param name="endnode"></param>
-        /// <param name="diagcost"></param>
-        /// <param name="straightcost"></param>
+        /// <param name="startAStarNodeData"></param>
+        /// <param name="endAStarNodeData"></param>
+        /// <param name="diagCost"></param>
+        /// <param name="straightCost"></param>
         /// <returns></returns>
-        public int Diagonal(AStarNodeData startastarnodedata, AStarNodeData endastarnodedata, int diagcost = 14, int straightcost = 10)
+        public int Diagonal(AStarNodeData startAStarNodeData, AStarNodeData endAStarNodeData, int diagCost = 14, int straightCost = 10)
         {
-            int dx = Mathf.Abs(startastarnodedata.x - endastarnodedata.x);
-            int dy = Mathf.Abs(startastarnodedata.y - endastarnodedata.y);
+            int dx = Mathf.Abs(startAStarNodeData.x - endAStarNodeData.x);
+            int dy = Mathf.Abs(startAStarNodeData.y - endAStarNodeData.y);
             int diag = Mathf.Min(dx, dy);
             int straight = dx + dy;
-            return diagcost * diag + straightcost * (straight - 2 * diag);
+            return diagCost * diag + straightCost * (straight - 2 * diag);
         }
         /// <summary>
         /// 更新路径
         /// </summary>
-        /// <param name="nodes"></param>
-        public void UpdatePath(List<AStarNodeData> endastarnodedatas)
+        /// <param name="endAStarNodeDataList"></param>
+        public void UpdatePath(List<AStarNodeData> endAStarNodeDataList)
         {
-            foreach (Transform item in paths)
+            foreach (Transform item in path)
             {
                 GameUtil.SafeDestroy(item.gameObject);
             }
-            for (int i = 0; i < endastarnodedatas.Count; i++)
+            for (int i = 0; i < endAStarNodeDataList.Count; i++)
             {
-                //InitWallGrid(IO.assetManager.LoadGameObject("Path", false, paths, true, AssetType.UI, AssetType.Tool), endastarnodedatas[i].pos, bshowpath);
+                //InitWallGrid(IO.assetManager.LoadGameObject("Path", false, false, path, AssetType.UI, AssetType.Tool), endAStarNodeDataList[i].localPosition, showPath);
             }
         }
         /// <summary>
         /// 生成路径
         /// </summary>
-        /// <param name="startnode"></param>
-        /// <param name="endnode"></param>
+        /// <param name="startAStarNodeData"></param>
+        /// <param name="endAStarNodeData"></param>
         /// <returns></returns>
-        public List<AStarNodeData> GeneratePath(AStarNodeData startastarnodedata, AStarNodeData endastarnodedata)
+        public List<AStarNodeData> GeneratePath(AStarNodeData startAStarNodeData, AStarNodeData endAStarNodeData)
         {
-            List<AStarNodeData> path = new List<AStarNodeData>();
-            if (endastarnodedata != null)
+            List<AStarNodeData> pathList = new List<AStarNodeData>();
+            if (endAStarNodeData != null)
             {
-                AStarNodeData temp = endastarnodedata;
-                while (temp != startastarnodedata)
+                AStarNodeData temp = endAStarNodeData;
+                while (temp != startAStarNodeData)
                 {
-                    path.Add(temp);
+                    pathList.Add(temp);
                     temp = temp.parent;
                 }
-                path.Reverse();
+                pathList.Reverse();
             }
-            UpdatePath(path);
-            return path;
+            UpdatePath(pathList);
+            return pathList;
         }
         public List<AStarNodeData> AStarFindPath(Vector3 start, Vector3 end)
         {
-            AStarNodeData startastarnodedata = GetAStarNodeData(start);
-            AStarNodeData endastarnodedata = GetAStarNodeData(end);
-            List<AStarNodeData> openlist = new List<AStarNodeData>();//等待检查列表
-            HashSet<AStarNodeData> closelist = new HashSet<AStarNodeData>();//检查完成列表
-            openlist.Add(startastarnodedata);
-            while (openlist.Count > 0)
+            AStarNodeData startAStarNodeData = GetAStarNodeData(start);
+            AStarNodeData endAStarNodeData = GetAStarNodeData(end);
+            List<AStarNodeData> openList = new List<AStarNodeData>();//等待检查列表
+            HashSet<AStarNodeData> closeList = new HashSet<AStarNodeData>();//检查完成列表
+            openList.Add(startAStarNodeData);
+            while (openList.Count > 0)
             {
-                AStarNodeData current = openlist[0];
-                for (int i = 0; i < openlist.Count; i++)
+                AStarNodeData current = openList[0];
+                for (int i = 0; i < openList.Count; i++)
                 {
                     //等待检查列表里最短距离的节点
-                    if (openlist[i].fcost <= current.fcost && openlist[i].hcost < current.hcost)
+                    if (openList[i].fCost <= current.fCost && openList[i].hCost < current.hCost)
                     {
-                        current = openlist[i];
+                        current = openList[i];
                     }
                 }
-                openlist.Remove(current);
-                closelist.Add(current);
-                if (current == endastarnodedata)
+                openList.Remove(current);
+                closeList.Add(current);
+                if (current == endAStarNodeData)
                 {
-                    return GeneratePath(startastarnodedata, endastarnodedata);
+                    return GeneratePath(startAStarNodeData, endAStarNodeData);
                 }
                 foreach (AStarNodeData item in GetAStarNodeDataAround(current))
                 {
-                    if (item.bwall || closelist.Contains(item))
+                    if (item.wall || closeList.Contains(item))
                     {
                         continue;
                     }
                     //计算与开始节点的距离
-                    int gcost = current.gcost + GetAStarNodeDataDistance(current, item);
+                    int gCost = current.gCost + GetAStarNodeDataDistance(current, item);
                     //如果不在等待检查列表中或者与开始节点的距离更小
-                    if (!openlist.Contains(item) || gcost < item.gcost)
+                    if (!openList.Contains(item) || gCost < item.gCost)
                     {
                         //更新与开始节点的距离
-                        item.gcost = gcost;
+                        item.gCost = gCost;
                         //更新与end节点的距离
-                        item.hcost = GetAStarNodeDataDistance(item, endastarnodedata);
+                        item.hCost = GetAStarNodeDataDistance(item, endAStarNodeData);
                         //更新父节点为当前选定的节点
                         //在考查从一个节点移动到另一个节点时,总是拿自身节点周围的8个相邻节点来说事儿,相对于周边的节点来讲,自身节点称为它们的父节点.
                         item.parent = current;
-                        if (!openlist.Contains(item))
+                        if (!openList.Contains(item))
                         {
-                            openlist.Add(item);
+                            openList.Add(item);
                         }
                     }
                 }
             }
-            return GeneratePath(startastarnodedata, null);
+            return GeneratePath(startAStarNodeData, null);
         }
     }
 }

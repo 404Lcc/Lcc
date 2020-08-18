@@ -6,19 +6,19 @@ namespace Hotfix
     {
         public static void InitHotfix()
         {
-            InitGManager();
+            InitManager();
         }
         /// <summary>
-        /// 初始化游戏管理器
+        /// 初始化管理器
         /// </summary>
-        private static void InitGManager()
+        private static void InitManager()
         {
-            if (IO.gManager == null)
+            if (IO.manager == null)
             {
                 GameObject original = new GameObject();
                 original.name = "HotfixManager";
                 original.tag = "HotfixManager";
-                GameUtil.AddComponent<GManager>(original);
+                GameUtil.AddComponent<Manager>(original);
                 DontDestroyOnLoad(original);
             }
         }

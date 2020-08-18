@@ -4,162 +4,162 @@ namespace Hotfix
 {
     public class IO : MonoBehaviour
     {
-        private static GManager _gManager;
+        private static Manager _manager;
         private static PanelManager _panelManager;
         private static LogManager _logManager;
         private static LanguageManager _languageManager;
-        private static GameDataManager _gamedataManager;
-        private static GameEventManager _gameeventManager;
+        private static GameDataManager _gameDataManager;
+        private static GameEventManager _gameEventManager;
         private static AudioManager _audioManager;
         private static VoiceManager _voiceManager;
         private static VideoManager _videoManager;
         private static CommandManager _commandManager;
         private static TimerManager _timerManager;
-        private static GameTimeManager _gametimeManager;
+        private static GameTimeManager _gameTimeManager;
         private static CharacterManager _characterManager;
-        public static GManager gManager
+        public static Manager manager
         {
             get
             {
-                if (IO._gManager == null)
+                if (_manager == null)
                 {
                     GameObject manager = GameUtil.GetGameObjectConvertedToTag("HotfixManager");
                     if (manager == null) return null;
-                    IO._gManager = GameUtil.GetComponent<GManager>(manager);
+                    _manager = GameUtil.GetComponent<Manager>(manager);
                 }
-                return IO._gManager;
+                return _manager;
             }
         }
         public static PanelManager panelManager
         {
             get
             {
-                if (IO._panelManager == null)
+                if (_panelManager == null)
                 {
-                    IO._panelManager = GameUtil.GetComponent<PanelManager>(IO.gManager.gameObject);
+                    _panelManager = GameUtil.GetComponent<PanelManager>(manager.gameObject);
                 }
-                return IO._panelManager;
+                return _panelManager;
             }
         }
         public static LogManager logManager
         {
             get
             {
-                if (IO._logManager == null)
+                if (_logManager == null)
                 {
-                    IO._logManager = GameUtil.GetComponent<LogManager>(IO.gManager.gameObject);
+                    _logManager = GameUtil.GetComponent<LogManager>(manager.gameObject);
                 }
-                return IO._logManager;
+                return _logManager;
             }
         }
         public static LanguageManager languageManager
         {
             get
             {
-                if (IO._languageManager == null)
+                if (_languageManager == null)
                 {
-                    IO._languageManager = GameUtil.GetComponent<LanguageManager>(IO.gManager.gameObject);
+                    _languageManager = GameUtil.GetComponent<LanguageManager>(manager.gameObject);
                 }
-                return IO._languageManager;
+                return _languageManager;
             }
         }
-        public static GameDataManager gamedataManager
+        public static GameDataManager gameDataManager
         {
             get
             {
-                if (IO._gamedataManager == null)
+                if (_gameDataManager == null)
                 {
-                    IO._gamedataManager = GameUtil.GetComponent<GameDataManager>(IO.gManager.gameObject);
+                    _gameDataManager = GameUtil.GetComponent<GameDataManager>(manager.gameObject);
                 }
-                return IO._gamedataManager;
+                return _gameDataManager;
             }
         }
-        public static GameEventManager gameeventManager
+        public static GameEventManager gameEventManager
         {
             get
             {
-                if (IO._gameeventManager == null)
+                if (_gameEventManager == null)
                 {
-                    IO._gameeventManager = GameUtil.GetComponent<GameEventManager>(IO.gManager.gameObject);
+                    _gameEventManager = GameUtil.GetComponent<GameEventManager>(manager.gameObject);
                 }
-                return IO._gameeventManager;
+                return _gameEventManager;
             }
         }
         public static AudioManager audioManager
         {
             get
             {
-                if (IO._audioManager == null)
+                if (_audioManager == null)
                 {
-                    IO._audioManager = GameUtil.GetComponent<AudioManager>(IO.gManager.gameObject);
+                    _audioManager = GameUtil.GetComponent<AudioManager>(manager.gameObject);
                 }
-                return IO._audioManager;
+                return _audioManager;
             }
         }
         public static VoiceManager voiceManager
         {
             get
             {
-                if (IO._voiceManager == null)
+                if (_voiceManager == null)
                 {
-                    IO._voiceManager = GameUtil.GetComponent<VoiceManager>(IO.gManager.gameObject);
+                    _voiceManager = GameUtil.GetComponent<VoiceManager>(manager.gameObject);
                 }
-                return IO._voiceManager;
+                return _voiceManager;
             }
         }
         public static VideoManager videoManager
         {
             get
             {
-                if (IO._videoManager == null)
+                if (_videoManager == null)
                 {
-                    IO._videoManager = GameUtil.GetComponent<VideoManager>(IO.gManager.gameObject);
+                    _videoManager = GameUtil.GetComponent<VideoManager>(manager.gameObject);
                 }
-                return IO._videoManager;
+                return _videoManager;
             }
         }
         public static CommandManager commandManager
         {
             get
             {
-                if (IO._commandManager == null)
+                if (_commandManager == null)
                 {
-                    IO._commandManager = GameUtil.GetComponent<CommandManager>(IO.gManager.gameObject);
+                    _commandManager = GameUtil.GetComponent<CommandManager>(manager.gameObject);
                 }
-                return IO._commandManager;
+                return _commandManager;
             }
         }
         public static TimerManager timerManager
         {
             get
             {
-                if (IO._timerManager == null)
+                if (_timerManager == null)
                 {
-                    IO._timerManager = GameUtil.GetComponent<TimerManager>(IO.gManager.gameObject);
+                    _timerManager = GameUtil.GetComponent<TimerManager>(manager.gameObject);
                 }
-                return IO._timerManager;
+                return _timerManager;
             }
         }
-        public static GameTimeManager gametimeManager
+        public static GameTimeManager gameTimeManager
         {
             get
             {
-                if (IO._gametimeManager == null)
+                if (_gameTimeManager == null)
                 {
-                    IO._gametimeManager = GameUtil.GetComponent<GameTimeManager>(IO.gManager.gameObject);
+                    _gameTimeManager = GameUtil.GetComponent<GameTimeManager>(manager.gameObject);
                 }
-                return IO._gametimeManager;
+                return _gameTimeManager;
             }
         }
         public static CharacterManager characterManager
         {
             get
             {
-                if (IO._characterManager == null)
+                if (_characterManager == null)
                 {
-                    IO._characterManager = GameUtil.GetComponent<CharacterManager>(IO.gManager.gameObject);
+                    _characterManager = GameUtil.GetComponent<CharacterManager>(manager.gameObject);
                 }
-                return IO._characterManager;
+                return _characterManager;
             }
         }
     }

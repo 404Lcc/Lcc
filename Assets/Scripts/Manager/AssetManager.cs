@@ -10,18 +10,18 @@ namespace Model
 {
     public class AssetManager : MonoBehaviour
     {
-        public Dictionary<string, AssetData> assetdic;
-        //public Dictionary<string, AssetRequest> assetrequestdic;
+        public Dictionary<string, AssetData> assetDic;
+        //public Dictionary<string, AssetRequest> assetRequestDic;
         void Awake()
         {
             InitManager();
         }
         public void InitManager()
         {
-            assetdic = new Dictionary<string, AssetData>();
-            //assetrequestdic = new Dictionary<string, AssetRequest>();
+            assetDic = new Dictionary<string, AssetData>();
+            //assetRequestDic = new Dictionary<string, AssetRequest>();
         }
-        private AssetData LoadAssetData(string name, string suffix, bool bkeep, Type type, bool bassetbundle, params string[] types)
+        private AssetData LoadAssetData(string name, string suffix, bool keep, Type type, bool assetBundleMode, params string[] types)
         {
             if (types.Length == 0) return null;
             string path = string.Empty;
@@ -33,55 +33,55 @@ namespace Model
                     path += name;
                 }
             }
-            if (assetdic.ContainsKey(path))
+            if (assetDic.ContainsKey(path))
             {
-                return assetdic[path];
+                return assetDic[path];
             }
             else
             {
-                AssetData assetdata = new AssetData();
+                AssetData assetData = new AssetData();
 #if AssetBundle
-                if (bassetbundle)
+                if (assetBundleMode)
                 {
-                    //AssetBundle assetbundle = AssetBundle.LoadFromFile(path);
-                    //Object asset = assetbundle.LoadAsset(assetbundle.GetAllAssetNames()[0]);
-                    //assetbundle.Unload(false);
+                    //AssetBundle assetBundle = AssetBundle.LoadFromFile(path);
+                    //Object asset = assetBundle.LoadAsset(assetBundle.GetAllAssetNames()[0]);
+                    //assetBundle.Unload(false);
 
                     //AssetRequest request = LoadAsset("Assets/Resources/" + path + suffix, type);
                     //Object asset = request.asset;
-                    //assetdata.asset = asset;
-                    //assetdata.types = types;
-                    //assetdata.name = name;
-                    //assetdata.bkeep = bkeep;
-                    //assetdic.Add(path, assetdata);
-                    //assetrequestdic.Add(path, request);
+                    //assetData.asset = asset;
+                    //assetData.types = types;
+                    //assetData.name = name;
+                    //assetData.keep = keep;
+                    //assetDic.Add(path, assetData);
+                    //assetRequestDic.Add(path, request);
                 }
                 else
                 {
                     Object asset = Resources.Load(path, type);
-                    assetdata.asset = asset;
-                    assetdata.types = types;
-                    assetdata.name = name;
-                    assetdata.bkeep = bkeep;
-                    assetdic.Add(path, assetdata);
+                    assetData.asset = asset;
+                    assetData.types = types;
+                    assetData.name = name;
+                    assetData.keep = keep;
+                    assetDic.Add(path, assetData);
                 }
 #else
                 Object asset = Resources.Load(path, type);
-                assetdata.asset = asset;
-                assetdata.types = types;
-                assetdata.name = name;
-                assetdata.bkeep = bkeep;
-                assetdic.Add(path, assetdata);
+                assetData.asset = asset;
+                assetData.types = types;
+                assetData.name = name;
+                assetData.keep = keep;
+                assetDic.Add(path, assetData);
 #endif
-                return assetdata;
+                return assetData;
             }
         }
         public void UnloadAssetsData()
         {
             string all = string.Empty;
-            foreach (string item in assetdic.Keys)
+            foreach (string item in assetDic.Keys)
             {
-                if (!assetdic[item].bkeep)
+                if (!assetDic[item].keep)
                 {
                     all += item + ",";
                 }
@@ -89,77 +89,77 @@ namespace Model
             foreach (string item in all.Split(','))
             {
                 if (string.IsNullOrEmpty(item)) continue;
-                Object temp = assetdic[item].asset;
+                Object obj = assetDic[item].asset;
                 if (item.Contains("."))
                 {
-                    if (temp)
+                    if (obj)
                     {
-                        if (temp.GetType() != typeof(GameObject) && temp.GetType() != typeof(Component))
+                        if (obj.GetType() != typeof(GameObject) && obj.GetType() != typeof(Component))
                         {
                             //Resources.UnloadAsset仅能释放非GameObject和Component的资源 比如Texture Mesh等真正的资源 对于由Prefab加载出来的Object或Component,则不能通过该函数来进行释放
-                            Resources.UnloadAsset(temp);
-                            assetdic.Remove(item);
+                            Resources.UnloadAsset(obj);
+                            assetDic.Remove(item);
                         }
                     }
                     else
                     {
-                        assetdic.Remove(item);
+                        assetDic.Remove(item);
                     }
                 }
                 else
                 {
-                    //assetrequestdic[item].Release();
-                    assetdic.Remove(item);
-                    //assetrequestdic.Remove(item);
+                    //assetRequestDic[item].Release();
+                    assetDic.Remove(item);
+                    //assetRequestDic.Remove(item);
                 }
             }
         }
         public void UnloadAllAssetsData()
         {
-            //foreach (var item in assetrequestdic.Values)
+            //foreach (AssetRequest item in assetRequestDic.Values)
             //{
             //    item.Release();
             //}
-            assetdic.Clear();
-            //assetrequestdic.Clear();
+            assetDic.Clear();
+            //assetRequestDic.Clear();
             Resources.UnloadUnusedAssets();
             //Assets.RemoveUnusedAssets();
             GC.Collect();
         }
-        public T LoadAssetData<T>(string name, string suffix, bool bkeep, bool bassetbundle, params string[] types) where T : Object
+        public T LoadAssetData<T>(string name, string suffix, bool keep, bool assetBundleMode, params string[] types) where T : Object
         {
-            AssetData asset = LoadAssetData(name, suffix, bkeep, typeof(T), bassetbundle, types);
+            AssetData asset = LoadAssetData(name, suffix, keep, typeof(T), assetBundleMode, types);
             return (T)asset.asset;
         }
-        public GameObject LoadGameObject(string name, bool bkeep, bool bassetbundle, params string[] types)
+        public GameObject LoadGameObject(string name, bool keep, bool assetBundleMode, params string[] types)
         {
-            AssetData assetdata = LoadAssetData(name, "*.prefab", bkeep, typeof(Object), bassetbundle, types);
-            if (assetdata.asset == null) return null;
-            GameObject obj = Instantiate(assetdata.asset) as GameObject;
+            AssetData assetData = LoadAssetData(name, "*.prefab", keep, typeof(Object), assetBundleMode, types);
+            if (assetData.asset == null) return null;
+            GameObject obj = Instantiate(assetData.asset) as GameObject;
             return obj;
         }
-        public T LoadGameObject<T>(string name, bool bkeep, bool bassetbundle, params string[] types) where T : Component
+        public T LoadGameObject<T>(string name, bool keep, bool assetBundleMode, params string[] types) where T : Component
         {
-            AssetData assetdata = LoadAssetData(name, "*.prefab", bkeep, typeof(Object), bassetbundle, types);
-            if (assetdata.asset == null) return null;
-            GameObject obj = Instantiate(assetdata.asset) as GameObject;
+            AssetData assetData = LoadAssetData(name, "*.prefab", keep, typeof(Object), assetBundleMode, types);
+            if (assetData.asset == null) return null;
+            GameObject obj = Instantiate(assetData.asset) as GameObject;
             T component = GameUtil.GetComponent<T>(obj);
             return component;
         }
-        public GameObject LoadGameObject(string name, bool bkeep, bool bassetbundle, Transform parent, params string[] types)
+        public GameObject LoadGameObject(string name, bool keep, bool assetBundleMode, Transform parent, params string[] types)
         {
-            AssetData assetdata = LoadAssetData(name, "*.prefab", bkeep, typeof(Object), bassetbundle, types);
-            if (assetdata.asset == null) return null;
-            GameObject obj = Instantiate(assetdata.asset) as GameObject;
+            AssetData assetData = LoadAssetData(name, "*.prefab", keep, typeof(Object), assetBundleMode, types);
+            if (assetData.asset == null) return null;
+            GameObject obj = Instantiate(assetData.asset) as GameObject;
             obj.transform.SetParent(parent);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;
             obj.transform.localScale = Vector3.one;
             return obj;
         }
-        public T LoadGameObject<T>(string name, bool bkeep, bool bassetbundle, Transform parent, params string[] types) where T : Component
+        public T LoadGameObject<T>(string name, bool keep, bool assetBundleMode, Transform parent, params string[] types) where T : Component
         {
-            AssetData assetdata = LoadAssetData(name, "*.prefab", bkeep, typeof(Object), bassetbundle, types);
+            AssetData assetdata = LoadAssetData(name, "*.prefab", keep, typeof(Object), assetBundleMode, types);
             if (assetdata.asset == null) return null;
             GameObject obj = Instantiate(assetdata.asset) as GameObject;
             obj.transform.SetParent(parent);
@@ -186,7 +186,7 @@ namespace Model
         }
         //public AssetRequest LoadAsset(string path, Type type)
         //{
-        //    var request = Assets.LoadAsset(path, type);
+        //    AssetRequest request = Assets.LoadAsset(path, type);
         //    return request;
         //}
         //public IEnumerator LoadAssetAsync(string path, Type type)

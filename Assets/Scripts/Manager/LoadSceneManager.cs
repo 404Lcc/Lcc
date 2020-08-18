@@ -11,6 +11,9 @@ namespace Model
         public AsyncOperation async;
         public Action complete;
         public int process;
+        void Awake()
+        {
+        }
         void Start()
         {
         }

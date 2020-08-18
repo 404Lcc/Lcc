@@ -41,7 +41,7 @@ namespace Hotfix
                 videos.Remove(video);
             }
         }
-        public void PlayVideo(string video, bool insideoutside, VideoPlayer player, RawImage image, int width = 1920, int height = 1080)
+        public void PlayVideo(string video, bool inside, VideoPlayer player, RawImage image, int width = 1920, int height = 1080)
         {
             if (VideoExist(video))
             {
@@ -51,7 +51,7 @@ namespace Hotfix
                 player.Play();
                 return;
             }
-            if (insideoutside)
+            if (inside)
             {
                 player.source = VideoSource.VideoClip;
                 player.clip = LoadVideo(video);
@@ -90,9 +90,9 @@ namespace Hotfix
             }
             return null;
         }
-        public bool IsPlayVideo(string video, bool insideoutside, VideoPlayer player)
+        public bool IsPlayVideo(string video, bool inside, VideoPlayer player)
         {
-            if (insideoutside)
+            if (inside)
             {
                 if (GetVideoClip(video))
                 {

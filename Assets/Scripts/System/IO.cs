@@ -6,7 +6,7 @@ namespace Model
     public class IO : MonoBehaviour
     {
         private static GameObject _gui;
-        private static GManager _gManager;
+        private static Manager _manager;
         private static AudioSource _audioSource;
         private static VideoPlayer _videoplayer;
         private static ILRuntimeManager _ilruntimeManager;
@@ -23,160 +23,160 @@ namespace Model
         {
             get
             {
-                if (IO._gui == null)
+                if (_gui == null)
                 {
-                    IO._gui = GameUtil.GetGameObjectConvertedToTag("GUI");
+                    _gui = GameUtil.GetGameObjectConvertedToTag("GUI");
                 }
-                return IO._gui;
+                return _gui;
             }
         }
-        public static GManager gManager
+        public static Manager manager
         {
             get
             {
-                if (IO._gManager == null)
+                if (_manager == null)
                 {
                     GameObject manager = GameUtil.GetGameObjectConvertedToTag("ModelManager");
                     if (manager == null) return null;
-                    IO._gManager = GameUtil.GetComponent<GManager>(manager);
+                    _manager = GameUtil.GetComponent<Manager>(manager);
                 }
-                return IO._gManager;
+                return _manager;
             }
         }
         public static AudioSource audioSource
         {
             get
             {
-                if (IO._audioSource == null)
+                if (_audioSource == null)
                 {
                     GameObject audiosource = GameUtil.GetGameObjectConvertedToTag("AudioSource");
                     if (audiosource == null) return null;
-                    IO._audioSource = GameUtil.GetComponent<AudioSource>(audiosource);
+                    _audioSource = GameUtil.GetComponent<AudioSource>(audiosource);
                 }
-                return IO._audioSource;
+                return _audioSource;
             }
         }
         public static VideoPlayer videoPlayer
         {
             get
             {
-                if (IO._videoplayer == null)
+                if (_videoplayer == null)
                 {
                     GameObject videoplayer = GameUtil.GetGameObjectConvertedToTag("AudioSource");
                     if (videoplayer == null) return null;
-                    IO._videoplayer = GameUtil.GetComponent<VideoPlayer>(videoplayer);
+                    _videoplayer = GameUtil.GetComponent<VideoPlayer>(videoplayer);
                 }
-                return IO._videoplayer;
+                return _videoplayer;
             }
         }
         public static ILRuntimeManager ilruntimeManager
         {
             get
             {
-                if (IO._ilruntimeManager == null)
+                if (_ilruntimeManager == null)
                 {
-                    IO._ilruntimeManager = GameUtil.GetComponent<ILRuntimeManager>(IO.gManager.gameObject);
+                    _ilruntimeManager = GameUtil.GetComponent<ILRuntimeManager>(manager.gameObject);
                 }
-                return IO._ilruntimeManager;
+                return _ilruntimeManager;
             }
         }
         public static MonoManager monoManager
         {
             get
             {
-                if (IO._monoManager == null)
+                if (_monoManager == null)
                 {
-                    IO._monoManager = GameUtil.GetComponent<MonoManager>(IO.gManager.gameObject);
+                    _monoManager = GameUtil.GetComponent<MonoManager>(manager.gameObject);
                 }
-                return IO._monoManager;
+                return _monoManager;
             }
         }
         public static AssetManager assetManager
         {
             get
             {
-                if (IO._assetManager == null)
+                if (_assetManager == null)
                 {
-                    IO._assetManager = GameUtil.GetComponent<AssetManager>(IO.gManager.gameObject);
+                    _assetManager = GameUtil.GetComponent<AssetManager>(manager.gameObject);
                 }
-                return IO._assetManager;
+                return _assetManager;
             }
         }
         public static PanelManager panelManager
         {
             get
             {
-                if (IO._panelManager == null)
+                if (_panelManager == null)
                 {
-                    IO._panelManager = GameUtil.GetComponent<PanelManager>(IO.gManager.gameObject);
+                    _panelManager = GameUtil.GetComponent<PanelManager>(manager.gameObject);
                 }
-                return IO._panelManager;
+                return _panelManager;
             }
         }
         public static LogManager logManager
         {
             get
             {
-                if (IO._logManager == null)
+                if (_logManager == null)
                 {
-                    IO._logManager = GameUtil.GetComponent<LogManager>(IO.gManager.gameObject);
+                    _logManager = GameUtil.GetComponent<LogManager>(manager.gameObject);
                 }
-                return IO._logManager;
+                return _logManager;
             }
         }
         public static ContainerManager containerManager
         {
             get
             {
-                if (IO._containerManager == null)
+                if (_containerManager == null)
                 {
-                    IO._containerManager = GameUtil.GetComponent<ContainerManager>(IO.gManager.gameObject);
+                    _containerManager = GameUtil.GetComponent<ContainerManager>(manager.gameObject);
                 }
-                return IO._containerManager;
+                return _containerManager;
             }
         }
         public static TipsManager tipsManager
         {
             get
             {
-                if (IO._tipsManager == null)
+                if (_tipsManager == null)
                 {
-                    IO._tipsManager = GameUtil.GetComponent<TipsManager>(IO.gManager.gameObject);
+                    _tipsManager = GameUtil.GetComponent<TipsManager>(manager.gameObject);
                 }
-                return IO._tipsManager;
+                return _tipsManager;
             }
         }
         public static TipsWindowManager tipswindowManager
         {
             get
             {
-                if (IO._tipswindowManager == null)
+                if (_tipswindowManager == null)
                 {
-                    IO._tipswindowManager = GameUtil.GetComponent<TipsWindowManager>(IO.gManager.gameObject);
+                    _tipswindowManager = GameUtil.GetComponent<TipsWindowManager>(manager.gameObject);
                 }
-                return IO._tipswindowManager;
+                return _tipswindowManager;
             }
         }
         public static LoadSceneManager loadsceneManager
         {
             get
             {
-                if (IO._loadsceneManager == null)
+                if (_loadsceneManager == null)
                 {
-                    IO._loadsceneManager = GameUtil.GetComponent<LoadSceneManager>(IO.gManager.gameObject);
+                    _loadsceneManager = GameUtil.GetComponent<LoadSceneManager>(manager.gameObject);
                 }
-                return IO._loadsceneManager;
+                return _loadsceneManager;
             }
         }
         public static AStarManager astarManager
         {
             get
             {
-                if (IO._astarManager == null)
+                if (_astarManager == null)
                 {
-                    IO._astarManager = GameUtil.GetComponent<AStarManager>(IO.gManager.gameObject);
+                    _astarManager = GameUtil.GetComponent<AStarManager>(manager.gameObject);
                 }
-                return IO._astarManager;
+                return _astarManager;
             }
         }
     }

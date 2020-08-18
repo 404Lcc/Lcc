@@ -7,7 +7,7 @@ namespace Model
         void Start()
         {
             InitGUI();
-            InitGManager();
+            InitManager();
             InitAudioSource();
             InitVideoPlayer();
         }
@@ -24,11 +24,11 @@ namespace Model
             }
         }
         /// <summary>
-        /// 初始化游戏管理器
+        /// 初始化管理器
         /// </summary>
-        private void InitGManager()
+        private void InitManager()
         {
-            if (IO.gManager == null)
+            if (IO.manager == null)
             {
                 GameObject original = Instantiate(Resources.Load("Game/ModelManager")) as GameObject;
                 original.name = "ModelManager";

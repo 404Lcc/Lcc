@@ -29,11 +29,9 @@ namespace Hotfix
         {
             if (type == UnityEngine.LogType.Error)
             {
-                print(logString);
             }
             if (type == UnityEngine.LogType.Log)
             {
-                print(logString);
             }
         }
         /// <summary>
@@ -53,6 +51,7 @@ namespace Hotfix
         /// 创建Log
         /// </summary>
         /// <param name="type"></param>
+        /// <param name="log"></param>
         /// <returns></returns>
         public LogInfo CreateLog(LogType type, string log)
         {
@@ -60,7 +59,7 @@ namespace Hotfix
             info.state = InfoState.Close;
             info.container = Model.IO.containerManager.CreateContainer(GameUtil.ConvertLogTypeToString(type), true);
             info.type = type;
-            info.logtext = GameUtil.GetChildComponent<Text>(info.container, "Log");
+            info.logText = GameUtil.GetChildComponent<Text>(info.container, "Log");
             info.SetLog(log);
             info.ClosePanel();
             logs.Add(type, info);
@@ -99,10 +98,10 @@ namespace Hotfix
         /// <returns></returns>
         public void ClearExceptLog(LogType[] types)
         {
-            List<LogType> typeslist = new List<LogType>(types);
+            List<LogType> typeList = new List<LogType>(types);
             foreach (LogType item in Enum.GetValues(typeof(LogType)))
             {
-                if (!typeslist.Contains(item))
+                if (!typeList.Contains(item))
                 {
                     ClearLog(item);
                 }
@@ -141,6 +140,7 @@ namespace Hotfix
         /// 打开Log
         /// </summary>
         /// <param name="type"></param>
+        /// <param name="log"></param>
         /// <returns></returns>
         public LogInfo OpenLog(LogType type, string log)
         {
@@ -159,13 +159,14 @@ namespace Hotfix
         /// 打开Log
         /// </summary>
         /// <param name="types"></param>
+        /// <param name="info"></param>
         /// <returns></returns>
-        public LogInfo[] OpenLog(LogType[] types, string information)
+        public LogInfo[] OpenLog(LogType[] types, string info)
         {
             List<LogInfo> infos = new List<LogInfo>();
             foreach (LogType item in types)
             {
-                infos.Add(OpenLog(item, information));
+                infos.Add(OpenLog(item, info));
             }
             return infos.ToArray();
         }
@@ -173,31 +174,34 @@ namespace Hotfix
         /// 打开剩下所有Log
         /// </summary>
         /// <param name="types"></param>
+        /// <param name="info"></param>
         /// <returns></returns>
-        public LogInfo[] OpenExceptLog(LogType[] types, string information)
+        public LogInfo[] OpenExceptLog(LogType[] types, string info)
         {
-            List<LogInfo> infos = new List<LogInfo>();
-            List<LogType> typeslist = new List<LogType>(types);
+            List<LogInfo> infoList = new List<LogInfo>();
+            List<LogType> typeList = new List<LogType>(types);
             foreach (LogType item in Enum.GetValues(typeof(LogType)))
             {
-                if (!typeslist.Contains(item))
+                if (!typeList.Contains(item))
                 {
-                    infos.Add(OpenLog(item, information));
+                    infoList.Add(OpenLog(item, info));
                 }
             }
-            return infos.ToArray();
+            return infoList.ToArray();
         }
         /// <summary>
         /// 打开全部Log
         /// </summary>
-        public LogInfo[] OpenAllLogs(string information)
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public LogInfo[] OpenAllLogs(string info)
         {
-            List<LogInfo> infos = new List<LogInfo>();
+            List<LogInfo> infoList = new List<LogInfo>();
             foreach (LogType item in Enum.GetValues(typeof(LogType)))
             {
-                infos.Add(OpenLog(item, information));
+                infoList.Add(OpenLog(item, info));
             }
-            return infos.ToArray();
+            return infoList.ToArray();
         }
         /// <summary>
         /// 隐藏Log
@@ -223,12 +227,12 @@ namespace Hotfix
         /// <returns></returns>
         public LogInfo[] CloseLog(LogType[] types)
         {
-            List<LogInfo> infos = new List<LogInfo>();
+            List<LogInfo> infoList = new List<LogInfo>();
             foreach (LogType item in types)
             {
-                infos.Add(CloseLog(item));
+                infoList.Add(CloseLog(item));
             }
-            return infos.ToArray();
+            return infoList.ToArray();
         }
         /// <summary>
         /// 隐藏剩下所有Log
@@ -237,28 +241,28 @@ namespace Hotfix
         /// <returns></returns>
         public LogInfo[] CloseExceptLog(LogType[] types)
         {
-            List<LogInfo> infos = new List<LogInfo>();
-            List<LogType> typeslist = new List<LogType>(types);
+            List<LogInfo> infoList = new List<LogInfo>();
+            List<LogType> typelist = new List<LogType>(types);
             foreach (LogType item in Enum.GetValues(typeof(LogType)))
             {
-                if (!typeslist.Contains(item))
+                if (!typelist.Contains(item))
                 {
-                    infos.Add(CloseLog(item));
+                    infoList.Add(CloseLog(item));
                 }
             }
-            return infos.ToArray();
+            return infoList.ToArray();
         }
         /// <summary>
         /// 隐藏全部Log
         /// </summary>
         public LogInfo[] CloseAllLogs()
         {
-            List<LogInfo> infos = new List<LogInfo>();
+            List<LogInfo> infoList = new List<LogInfo>();
             foreach (LogType item in Enum.GetValues(typeof(LogType)))
             {
-                infos.Add(CloseLog(item));
+                infoList.Add(CloseLog(item));
             }
-            return infos.ToArray();
+            return infoList.ToArray();
         }
         /// <summary>
         /// 获取Log

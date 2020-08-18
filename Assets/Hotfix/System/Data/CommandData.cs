@@ -4,9 +4,9 @@
     {
         public int id;
         public CommandVarietyType variety;
-        public bool bexcute;
-        public bool bcondition;
-        public bool bfinish;
+        public bool excute;
+        public bool condition;
+        public bool finish;
         public virtual void Execute()
         {
         }

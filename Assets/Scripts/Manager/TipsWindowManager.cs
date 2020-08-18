@@ -6,55 +6,55 @@ namespace Model
     public class TipsWindowManager : MonoBehaviour
     {
         [Header("地图中的TipsWindow")]
-        public Hashtable tipswindows = new Hashtable();
+        public Hashtable tipsWindows = new Hashtable();
         [Header("TipsWindow对象池")]
-        public TipsWindowPool tipswindowpool;
-        public int tipswindowid;
-        public void InitManager(TipsWindowPool tipswindowpool)
+        public TipsWindowPool tipsWindowPool;
+        public int tipsWindowId;
+        public void InitManager(TipsWindowPool tipsWindowPool)
         {
-            this.tipswindowpool = tipswindowpool;
-            tipswindowpool.InitPool();
+            this.tipsWindowPool = tipsWindowPool;
+            tipsWindowPool.InitPool();
         }
 
-        public TipsWindow CreateTipsWindow(string title, string information, string confirm, string cancel, Transform parent = null)
+        public TipsWindow CreateTipsWindow(string title, string info, string confirm, string cancel, Transform parent = null)
         {
-            TipsWindow tipswindow = tipswindowpool.Dequeue();
-            tipswindow.InitTipsWindow(title, information, confirm, cancel, parent);
-            GenerateID(tipswindow);
-            tipswindows.Add(tipswindow.id, tipswindow);
-            return tipswindow;
+            TipsWindow tipsWindow = tipsWindowPool.Dequeue();
+            tipsWindow.InitTipsWindow(title, info, confirm, cancel, parent);
+            GenerateID(tipsWindow);
+            tipsWindows.Add(tipsWindow.id, tipsWindow);
+            return tipsWindow;
         }
         public TipsWindow GetTipsWindow(int id)
         {
-            TipsWindow tipswindow = tipswindows[id] as TipsWindow;
-            if (tipswindow == null) return null;
-            return tipswindow;
+            TipsWindow tipsWindow = tipsWindows[id] as TipsWindow;
+            if (tipsWindow == null) return null;
+            return tipsWindow;
         }
         public void DeleteTipsWindow(int id)
         {
-            TipsWindow tipswindow = GetTipsWindow(id);
-            if (tipswindow == null) return;
-            tipswindowpool.Enqueue(tipswindow);
-            tipswindows.Remove(id);
+            TipsWindow tipsWindow = GetTipsWindow(id);
+            if (tipsWindow == null) return;
+            tipsWindowPool.Enqueue(tipsWindow);
+            tipsWindows.Remove(id);
         }
-        public void GenerateID(TipsWindow tipswindow)
+        public void GenerateID(TipsWindow tipsWindow)
         {
-            if (tipswindows.Count == 0)
+            if (tipsWindows.Count == 0)
             {
-                tipswindowid++;
-                tipswindow.id = tipswindowid;
+                tipsWindowId++;
+                tipsWindow.id = tipsWindowId;
                 return;
             }
-            for (int i = 1; i <= tipswindows.Count; i++)
+            for (int i = 1; i <= tipsWindows.Count; i++)
             {
-                if (!tipswindows.ContainsKey(i))
+                if (!tipsWindows.ContainsKey(i))
                 {
-                    tipswindow.id = i;
+                    tipsWindow.id = i;
                     return;
                 }
             }
-            tipswindowid++;
-            tipswindow.id = tipswindowid;
+            tipsWindowId++;
+            tipsWindow.id = tipsWindowId;
         }
     }
 }

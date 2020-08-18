@@ -24,9 +24,9 @@ public static class DisplayMode
     {
         yield return new WaitForEndOfFrame();
         yield return new WaitForFixedUpdate();
-        int posx = (Screen.currentResolution.width - width) / 2;
-        int posy = (Screen.currentResolution.height - height) / 2;
+        int X = (Screen.currentResolution.width - width) / 2;
+        int Y = (Screen.currentResolution.height - height) / 2;
         SetWindowLong(GetForegroundWindow(), GWL_STYLE, WS_POPUP);
-        SetWindowPos(GetForegroundWindow(), 0, posx, posy, width, height, SWP_SHOWWINDOW);
+        SetWindowPos(GetForegroundWindow(), 0, X, Y, width, height, SWP_SHOWWINDOW);
     }
 }

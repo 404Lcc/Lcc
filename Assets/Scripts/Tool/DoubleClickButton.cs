@@ -8,29 +8,29 @@ using UnityEngine.UI;
 public class DoubleClickEvent : UnityEvent { }
 public class DoubleClickButton : Button
 {
-    private DateTime first;
-    private DateTime second;
+    private DateTime _first;
+    private DateTime _second;
     [SerializeField]
-    public DoubleClickEvent doubleclick;
+    public DoubleClickEvent doubleClick;
     public override void OnPointerDown(PointerEventData eventData)
     {
         base.OnPointerDown(eventData);
-        if (first.Equals(default(DateTime)))
+        if (_first.Equals(default))
         {
-            first = DateTime.Now;
+            _first = DateTime.Now;
         }
         else
         {
-            second = DateTime.Now;
+            _second = DateTime.Now;
         }
     }
     public override void OnPointerUp(PointerEventData eventData)
     {
         base.OnPointerUp(eventData);
         //在第二次鼠标抬起时触发,时差小于600ms
-        if (!first.Equals(default(DateTime)) && !second.Equals(default(DateTime)))
+        if (!_first.Equals(default) && !_second.Equals(default))
         {
-            var time = second - first;
+            TimeSpan time = _second - _first;
             float milliseconds = time.Seconds * 1000 + time.Milliseconds;
             if (milliseconds < 600)
             {
@@ -49,15 +49,15 @@ public class DoubleClickButton : Button
     }
     private void Press()
     {
-        if (doubleclick != null)
+        if (doubleClick != null)
         {
-            doubleclick.Invoke();
+            doubleClick.Invoke();
         }
         ResetTime();
     }
     private void ResetTime()
     {
-        first = default(DateTime);
-        second = default(DateTime);
+        _first = default;
+        _second = default;
     }
 }

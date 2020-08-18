@@ -2,7 +2,7 @@
 
 namespace Model
 {
-    public class GManager : MonoBehaviour
+    public class Manager : MonoBehaviour
     {
         void Awake()
         {

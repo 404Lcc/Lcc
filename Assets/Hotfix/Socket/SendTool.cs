@@ -1,15 +1,15 @@
 ﻿public class SendTool
 {
-    private static SendTool instance;
+    private static SendTool _instance;
     public static SendTool Instance
     {
         get
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = new SendTool();
+                _instance = new SendTool();
             }
-            return instance;
+            return _instance;
         }
     }
     public void Send(ClientNet net, byte type, int area, int command, object message)

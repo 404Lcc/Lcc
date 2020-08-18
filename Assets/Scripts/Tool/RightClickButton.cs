@@ -9,7 +9,7 @@ public class RightClickEvent : UnityEvent { }
 public class RightClickButton : Button
 {
     [SerializeField]
-    public RightClickEvent rightclick;
+    public RightClickEvent rightClick;
     public override void OnPointerDown(PointerEventData eventData)
     {
         base.OnPointerDown(eventData);
@@ -20,9 +20,9 @@ public class RightClickButton : Button
     }
     private void Press()
     {
-        if (rightclick != null)
+        if (rightClick != null)
         {
-            rightclick.Invoke();
+            rightClick.Invoke();
         }
     }
 }

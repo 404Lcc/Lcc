@@ -8,29 +8,29 @@ using UnityEngine.UI;
 public class LongClickEvent : UnityEvent { }
 public class LongClickButton : Button
 {
-    private DateTime first;
-    private DateTime second;
+    private DateTime _first;
+    private DateTime _second;
     [SerializeField]
-    public LongClickEvent longclick;
+    public LongClickEvent longClick;
     public override void OnPointerDown(PointerEventData eventData)
     {
         base.OnPointerDown(eventData);
-        if (first.Equals(default(DateTime)))
+        if (_first.Equals(default))
         {
-            first = DateTime.Now;
+            _first = DateTime.Now;
         }
     }
     public override void OnPointerUp(PointerEventData eventData)
     {
         base.OnPointerUp(eventData);
         //在鼠标抬起时触发,时差大于200ms
-        if (!first.Equals(default(DateTime)))
+        if (!_first.Equals(default))
         {
-            second = DateTime.Now;
+            _second = DateTime.Now;
         }
-        if (!first.Equals(default(DateTime)) && !second.Equals(default(DateTime)))
+        if (!_first.Equals(default) && !_second.Equals(default))
         {
-            var time = second - first;
+            TimeSpan time = _second - _first;
             float milliseconds = time.Seconds * 1000 + time.Milliseconds;
             if (milliseconds > 200)
             {
@@ -49,15 +49,15 @@ public class LongClickButton : Button
     }
     private void Press()
     {
-        if (longclick != null)
+        if (longClick != null)
         {
-            longclick.Invoke();
+            longClick.Invoke();
         }
         ResetTime();
     }
     private void ResetTime()
     {
-        first = default(DateTime);
-        second = default(DateTime);
+        _first = default;
+        _second = default;
     }
 }

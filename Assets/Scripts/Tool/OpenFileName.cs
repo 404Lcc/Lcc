@@ -28,6 +28,7 @@ public class OpenFileName
     public int reservedInt = 0;
     public int flagsEx = 0;
 }
+
 public class LocalDialog
 {
     //链接指定系统函数 打开文件对话框

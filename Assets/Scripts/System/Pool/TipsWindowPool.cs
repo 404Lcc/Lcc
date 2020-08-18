@@ -2,36 +2,36 @@
 {
     public class TipsWindowPool
     {
-        public Pool<TipsWindow> tipswindowpool;
-        public int tipswindowmax;
+        public Pool<TipsWindow> tipsWindowPool;
+        public int tipsWindowMax;
         public TipsWindowPool()
         {
         }
-        public TipsWindowPool(int tipswindowmax)
+        public TipsWindowPool(int tipsWindowMax)
         {
-            this.tipswindowmax = tipswindowmax;
-            tipswindowpool = new Pool<TipsWindow>(tipswindowmax);
+            this.tipsWindowMax = tipsWindowMax;
+            tipsWindowPool = new Pool<TipsWindow>(tipsWindowMax);
         }
         public void InitPool()
         {
-            for (int i = 0; i < tipswindowmax; i++)
+            for (int i = 0; i < tipsWindowMax; i++)
             {
-                TipsWindow tipswindow = GameUtil.GetComponent<TipsWindow>(IO.assetManager.LoadGameObject("TipsWindow", false, false, IO.gui.transform, AssetType.UI, AssetType.Tool));
-                Enqueue(tipswindow);
+                TipsWindow tipsWindow = GameUtil.GetComponent<TipsWindow>(IO.assetManager.LoadGameObject("TipsWindow", false, false, IO.gui.transform, AssetType.UI, AssetType.Tool));
+                Enqueue(tipsWindow);
             }
         }
         public int Count
         {
             get
             {
-                return tipswindowpool.Count;
+                return tipsWindowPool.Count;
             }
         }
-        public void Enqueue(TipsWindow tipswindow)
+        public void Enqueue(TipsWindow tipsWindow)
         {
-            tipswindow.transform.SetParent(IO.gui.transform);
-            tipswindow.gameObject.SetActive(false);
-            tipswindowpool.Enqueue(tipswindow);
+            tipsWindow.transform.SetParent(IO.gui.transform);
+            tipsWindow.gameObject.SetActive(false);
+            tipsWindowPool.Enqueue(tipsWindow);
         }
         public TipsWindow Dequeue()
         {
@@ -39,10 +39,10 @@
             {
                 InitPool();
             }
-            TipsWindow tipswindow = tipswindowpool.Dequeue();
-            tipswindow.transform.SetParent(IO.gui.transform);
-            tipswindow.gameObject.SetActive(true);
-            return tipswindow;
+            TipsWindow tipsWindow = tipsWindowPool.Dequeue();
+            tipsWindow.transform.SetParent(IO.gui.transform);
+            tipsWindow.gameObject.SetActive(true);
+            return tipsWindow;
         }
     }
 }

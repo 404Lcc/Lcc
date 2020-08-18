@@ -8,18 +8,18 @@ namespace Model
         [Header("地图中的Tips")]
         public Hashtable tipss = new Hashtable();
         [Header("Tips对象池")]
-        public TipsPool tipspool;
-        public int tipsid;
-        public void InitManager(TipsPool tipspool)
+        public TipsPool tipsPool;
+        public int tipsId;
+        public void InitManager(TipsPool tipsPool)
         {
-            this.tipspool = tipspool;
-            tipspool.InitPool();
+            this.tipsPool = tipsPool;
+            tipsPool.InitPool();
         }
 
-        public Tips CreateTips(string information, Vector2 position, Vector2 offset, float duration, Transform parent = null)
+        public Tips CreateTips(string info, Vector2 localPosition, Vector2 offset, float duration, Transform parent = null)
         {
-            Tips tips = tipspool.Dequeue();
-            tips.InitTips(information, position, offset, duration, parent);
+            Tips tips = tipsPool.Dequeue();
+            tips.InitTips(info, localPosition, offset, duration, parent);
             GenerateID(tips);
             tipss.Add(tips.id, tips);
             return tips;
@@ -34,15 +34,15 @@ namespace Model
         {
             Tips tips = GetTips(id);
             if (tips == null) return;
-            tipspool.Enqueue(tips);
+            tipsPool.Enqueue(tips);
             tipss.Remove(id);
         }
         public void GenerateID(Tips tips)
         {
             if (tipss.Count == 0)
             {
-                tipsid++;
-                tips.id = tipsid;
+                tipsId++;
+                tips.id = tipsId;
                 return;
             }
             for (int i = 1; i <= tipss.Count; i++)
@@ -53,8 +53,8 @@ namespace Model
                     return;
                 }
             }
-            tipsid++;
-            tips.id = tipsid;
+            tipsId++;
+            tips.id = tipsId;
         }
     }
 }

@@ -3,12 +3,11 @@ using UnityEngine;
 
 namespace Hotfix
 {
-    public class GManager : MonoBehaviour
+    public class Manager : MonoBehaviour
     {
         void Awake()
         {
             InitManagers();
-            InitGameSet();
         }
         void Start()
         {
@@ -66,20 +65,20 @@ namespace Hotfix
         /// </summary>
         private void InitGameSet()
         {
-            IO.gamedataManager.GetUserSetData();
+            IO.gameDataManager.GetUserSetData();
             IO.audioManager.SetVolume(UserSetData.audio, Model.IO.audioSource);
-            string name = Enum.GetName(typeof(ResolutionType), UserSetData.resolutiontype).Substring(10);
+            string name = Enum.GetName(typeof(ResolutionType), UserSetData.resolutionType).Substring(10);
             int width = int.Parse(name.Substring(0, name.IndexOf('x')));
             int height = int.Parse(name.Substring(name.IndexOf('x') + 1));
-            if (UserSetData.displaymodetype == DisplayModeType.FullScreen)
+            if (UserSetData.displayModeType == DisplayModeType.FullScreen)
             {
                 GameUtil.SetResolution(true, width, height);
             }
-            else if (UserSetData.displaymodetype == DisplayModeType.Window)
+            else if (UserSetData.displayModeType == DisplayModeType.Window)
             {
                 GameUtil.SetResolution(false, width, height);
             }
-            else if (UserSetData.displaymodetype == DisplayModeType.BorderlessWindow)
+            else if (UserSetData.displayModeType == DisplayModeType.BorderlessWindow)
             {
                 GameUtil.SetResolution(false, width, height);
                 StartCoroutine(DisplayMode.SetNoFrame(width, height));

@@ -1,4 +1,5 @@
 ﻿using LitJson;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -7,13 +8,13 @@ namespace Hotfix
 {
     public class DataListInstance
     {
-        public string[] datalist;
+        public List<string> dataList;
         public DataListInstance()
         {
         }
-        public DataListInstance(string[] datalist)
+        public DataListInstance(List<string> dataList)
         {
-            this.datalist = datalist;
+            this.dataList = dataList;
         }
     }
 
@@ -28,21 +29,21 @@ namespace Hotfix
     {
         public int audio;
         public int voice;
-        public CVType cvtype;
-        public LanguageType languagetype;
-        public DisplayModeType displaymodetype;
-        public ResolutionType resolutiontype;
+        public CVType cvType;
+        public LanguageType languageType;
+        public DisplayModeType displayModeType;
+        public ResolutionType resolutionType;
         public UserSetDataInstance()
         {
         }
-        public UserSetDataInstance(int audio, int voice, CVType cvtype, LanguageType languagetype, DisplayModeType displaymodetype, ResolutionType resolutiontype)
+        public UserSetDataInstance(int audio, int voice, CVType cvType, LanguageType languageType, DisplayModeType displayModeType, ResolutionType resolutionType)
         {
             this.audio = audio;
             this.voice = voice;
-            this.cvtype = cvtype;
-            this.languagetype = languagetype;
-            this.displaymodetype = displaymodetype;
-            this.resolutiontype = resolutiontype;
+            this.cvType = cvType;
+            this.languageType = languageType;
+            this.displayModeType = displayModeType;
+            this.resolutionType = resolutionType;
         }
     }
 
@@ -50,11 +51,11 @@ namespace Hotfix
     {
         public static DataListInstance ToDataListInstance()
         {
-            return new DataListInstance(DataList.datalist);
+            return new DataListInstance(DataList.dataList);
         }
         public static void ToDataList(DataListInstance value)
         {
-            DataList.datalist = value.datalist;
+            DataList.dataList = value.dataList;
         }
         public static string SetDataList(string path, string name, object obj)
         {
@@ -121,16 +122,16 @@ namespace Hotfix
 
         public static UserSetDataInstance ToUserSetDataInstance()
         {
-            return new UserSetDataInstance(UserSetData.audio, UserSetData.voice, UserSetData.cvtype, UserSetData.languagetype, UserSetData.displaymodetype, UserSetData.resolutiontype);
+            return new UserSetDataInstance(UserSetData.audio, UserSetData.voice, UserSetData.cvType, UserSetData.languageType, UserSetData.displayModeType, UserSetData.resolutionType);
         }
         public static void ToUserSetData(UserSetDataInstance value)
         {
             UserSetData.audio = value.audio;
             UserSetData.voice = value.voice;
-            UserSetData.cvtype = value.cvtype;
-            UserSetData.languagetype = value.languagetype;
-            UserSetData.displaymodetype = value.displaymodetype;
-            UserSetData.resolutiontype = value.resolutiontype;
+            UserSetData.cvType = value.cvType;
+            UserSetData.languageType = value.languageType;
+            UserSetData.displayModeType = value.displayModeType;
+            UserSetData.resolutionType = value.resolutionType;
         }
         public static string SetUserSetData(string path, string name, object obj)
         {

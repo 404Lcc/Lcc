@@ -79,7 +79,7 @@
     <Compile Include="Assets\Hotfix\Socket\CenterHandler.cs" />
     <Compile Include="Assets\Hotfix\System\Util\Util.cs" />
     <Compile Include="Assets\Hotfix\System\Data\Enum\PathType.cs" />
-    <Compile Include="Assets\Hotfix\Manager\GManager.cs" />
+    <Compile Include="Assets\Hotfix\Manager\Manager.cs" />
     <Compile Include="Assets\Hotfix\Data\System\UserData.cs" />
     <Compile Include="Assets\Hotfix\System\Data\Const\AssetType.cs" />
     <Compile Include="Assets\Hotfix\Socket\EncodingTool.cs" />

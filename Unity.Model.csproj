@@ -70,7 +70,7 @@
     <Compile Include="Assets\Scripts\UI\TipsSystem\Tips.cs" />
     <Compile Include="Assets\Scripts\System\Data\Enum\PathType.cs" />
     <Compile Include="Assets\Scripts\System\Pool\TipsPool.cs" />
-    <Compile Include="Assets\Scripts\Manager\GManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\Manager.cs" />
     <Compile Include="Assets\Scripts\Manager\TipsManager.cs" />
     <Compile Include="Assets\Scripts\UI\LogSystem\LogInfo.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonData.cs" />

@@ -4,25 +4,25 @@
     public class TimerData
     {
         public int id;
-        public TimerDelegate timerdelegate;
+        public TimerDelegate timerDelegate;
         public float start;
         public float end;
 
-        public TimerData(int id, TimerDelegate timerdelegate, float start, float end)
+        public TimerData(int id, TimerDelegate timerDelegate, float start, float end)
         {
             this.id = id;
-            this.timerdelegate = timerdelegate;
+            this.timerDelegate = timerDelegate;
             this.start = start;
             this.end = end;
         }
         public void Excute()
         {
-            timerdelegate();
+            timerDelegate();
         }
         public void Reset()
         {
             id = -1;
-            timerdelegate = () => { };
+            timerDelegate = null;
             start = -1;
             end = -1;
         }
