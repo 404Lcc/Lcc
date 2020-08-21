@@ -314,6 +314,32 @@ namespace Hotfix
             return bytes;
         }
         /// <summary>
+        /// 上传资源
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="field"></param>
+        /// <param name="bytes"></param>
+        /// <param name="name"></param>
+        /// <param name="mime"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public static IEnumerator Upload(string url, string field, byte[] bytes, string name, string mime, Action<bool> action)
+        {
+            WWWForm form = new WWWForm();
+            form.AddBinaryData(field, bytes, name, mime);
+            url = Uri.EscapeUriString(url);
+            UnityWebRequest webRequest = UnityWebRequest.Post(url, form);
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError || webRequest.isHttpError)
+            {
+                Debug.Log(webRequest.error);
+            }
+            else
+            {
+                action(true);
+            }
+        }
+        /// <summary>
         /// 下载资源
         /// </summary>
         /// <param name="url"></param>
