@@ -169,21 +169,6 @@ namespace Model
             T component = GameUtil.GetComponent<T>(obj);
             return component;
         }
-        public byte[] LoadBytes(string path, string name)
-        {
-            Stream stream;
-            FileInfo info = new FileInfo(path + name);
-            if (info.Exists)
-            {
-                stream = info.Open(FileMode.Open);
-                byte[] bytes = new byte[stream.Length];
-                stream.Read(bytes, 0, (int)stream.Length);
-                stream.Close();
-                stream.Dispose();
-                return bytes;
-            }
-            return null;
-        }
         //public AssetRequest LoadAsset(string path, Type type)
         //{
         //    AssetRequest request = Assets.LoadAsset(path, type);

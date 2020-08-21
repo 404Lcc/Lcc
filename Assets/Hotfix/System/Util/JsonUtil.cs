@@ -65,24 +65,8 @@ namespace Hotfix
         }
         public static DataListInstance GetDataList(string path, string name)
         {
-            DataListInstance instance;
-            Stream stream;
-            FileInfo info = new FileInfo(path + name);
-            if (info.Exists)
-            {
-                stream = info.OpenRead();
-            }
-            else
-            {
-                return null;
-            }
-            byte[] bytes = new byte[stream.Length];
-            stream.Read(bytes, 0, bytes.Length);
-            string value = GameUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", Encoding.UTF8.GetString(bytes));
-            stream.Close();
-            stream.Dispose();
-            instance = JsonMapper.ToObject<DataListInstance>(value);
-            return instance;
+            string value = GameUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", Encoding.UTF8.GetString(GameUtil.GetAsset(path, name)));
+            return JsonMapper.ToObject<DataListInstance>(value);
         }
 
         public static UserDataInstance ToUserDataInstance()
@@ -100,24 +84,8 @@ namespace Hotfix
         }
         public static UserDataInstance GetUserData(string path, string name)
         {
-            UserDataInstance instance;
-            Stream stream;
-            FileInfo info = new FileInfo(path + name);
-            if (info.Exists)
-            {
-                stream = info.OpenRead();
-            }
-            else
-            {
-                return null;
-            }
-            byte[] bytes = new byte[stream.Length];
-            stream.Read(bytes, 0, bytes.Length);
-            string value = GameUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", Encoding.UTF8.GetString(bytes));
-            stream.Close();
-            stream.Dispose();
-            instance = JsonMapper.ToObject<UserDataInstance>(value);
-            return instance;
+            string value = GameUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", Encoding.UTF8.GetString(GameUtil.GetAsset(path, name)));
+            return JsonMapper.ToObject<UserDataInstance>(value);
         }
 
         public static UserSetDataInstance ToUserSetDataInstance()
@@ -141,24 +109,8 @@ namespace Hotfix
         }
         public static UserSetDataInstance GetUserSetData(string path, string name)
         {
-            UserSetDataInstance instance;
-            Stream stream;
-            FileInfo info = new FileInfo(path + name);
-            if (info.Exists)
-            {
-                stream = info.OpenRead();
-            }
-            else
-            {
-                return null;
-            }
-            byte[] bytes = new byte[stream.Length];
-            stream.Read(bytes, 0, bytes.Length);
-            string value = GameUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", Encoding.UTF8.GetString(bytes));
-            stream.Close();
-            stream.Dispose();
-            instance = JsonMapper.ToObject<UserSetDataInstance>(value);
-            return instance;
+            string value = GameUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", Encoding.UTF8.GetString(GameUtil.GetAsset(path, name)));
+            return JsonMapper.ToObject<UserSetDataInstance>(value);
         }
     }
 }

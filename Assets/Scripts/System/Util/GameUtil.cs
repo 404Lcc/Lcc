@@ -290,6 +290,30 @@ namespace Model
             stream.Dispose();
         }
         /// <summary>
+        /// 获取资源
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static byte[] GetAsset(string path, string name)
+        {
+            Stream stream;
+            FileInfo info = new FileInfo(path + name);
+            if (info.Exists)
+            {
+                stream = info.OpenRead();
+            }
+            else
+            {
+                return null;
+            }
+            byte[] bytes = new byte[stream.Length];
+            stream.Read(bytes, 0, bytes.Length);
+            stream.Close();
+            stream.Dispose();
+            return bytes;
+        }
+        /// <summary>
         /// 下载资源
         /// </summary>
         /// <param name="url"></param>
@@ -432,14 +456,10 @@ namespace Model
         {
             //加密结果"x2"结果为32位,"x3"结果为48位,"x4"结果为64位
             MD5 md5 = new MD5CryptoServiceProvider();
-            Stream stream;
-            FileInfo info = new FileInfo(path + name);
-            if (info.Exists)
+            byte[] bytes = GetAsset(path, name);
+            if (bytes == null)
             {
-                stream = info.Open(FileMode.Open);
-                byte[] bytes = md5.ComputeHash(stream);
-                stream.Close();
-                stream.Dispose();
+                bytes = md5.ComputeHash(bytes);
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < bytes.Length; i++)
                 {
@@ -447,7 +467,7 @@ namespace Model
                 }
                 return sb.ToString();
             }
-            return string.Empty;
+            return null;
         }
         /// <summary>
         /// 设置分辨率

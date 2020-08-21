@@ -61,6 +61,7 @@
     <Compile Include="Assets\Editor\Tool\BuildHotfix.cs" />
     <Compile Include="Assets\Editor\Tool\Preprocess.cs" />
     <Compile Include="Assets\Editor\MenuItem\LccMenuItem.cs" />
+    <Compile Include="Assets\Editor\EditorWindow\UploadEditorWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
