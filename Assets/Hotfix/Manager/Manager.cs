@@ -13,7 +13,7 @@ namespace Hotfix
         {
             Model.IO.panelManager.ClearPanel(Model.PanelType.Launch);
             IO.panelManager.OpenPanel(PanelType.Load);
-            Model.IO.loadsceneManager.LoadScene(SceneName.Login, () =>
+            Model.IO.loadSceneManager.LoadScene(SceneName.Login, () =>
             {
                 IO.panelManager.OpenPanel(PanelType.Login);
             }, AssetType.Scene);

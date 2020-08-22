@@ -8,17 +8,17 @@ namespace Model
         private static GameObject _gui;
         private static Manager _manager;
         private static AudioSource _audioSource;
-        private static VideoPlayer _videoplayer;
-        private static ILRuntimeManager _ilruntimeManager;
+        private static VideoPlayer _videoPlayer;
+        private static ILRuntimeManager _ilRuntimeManager;
         private static MonoManager _monoManager;
         private static AssetManager _assetManager;
         private static PanelManager _panelManager;
         private static LogManager _logManager;
         private static ContainerManager _containerManager;
         private static TipsManager _tipsManager;
-        private static TipsWindowManager _tipswindowManager;
-        private static LoadSceneManager _loadsceneManager;
-        private static AStarManager _astarManager;
+        private static TipsWindowManager _tipsWindowManager;
+        private static LoadSceneManager _loadSceneManager;
+        private static AStarManager _aStarManager;
         public static GameObject gui
         {
             get
@@ -60,24 +60,24 @@ namespace Model
         {
             get
             {
-                if (_videoplayer == null)
+                if (_videoPlayer == null)
                 {
                     GameObject videoplayer = GameUtil.GetGameObjectConvertedToTag("AudioSource");
                     if (videoplayer == null) return null;
-                    _videoplayer = GameUtil.GetComponent<VideoPlayer>(videoplayer);
+                    _videoPlayer = GameUtil.GetComponent<VideoPlayer>(videoplayer);
                 }
-                return _videoplayer;
+                return _videoPlayer;
             }
         }
-        public static ILRuntimeManager ilruntimeManager
+        public static ILRuntimeManager ilRuntimeManager
         {
             get
             {
-                if (_ilruntimeManager == null)
+                if (_ilRuntimeManager == null)
                 {
-                    _ilruntimeManager = GameUtil.GetComponent<ILRuntimeManager>(manager.gameObject);
+                    _ilRuntimeManager = GameUtil.GetComponent<ILRuntimeManager>(manager.gameObject);
                 }
-                return _ilruntimeManager;
+                return _ilRuntimeManager;
             }
         }
         public static MonoManager monoManager
@@ -146,37 +146,37 @@ namespace Model
                 return _tipsManager;
             }
         }
-        public static TipsWindowManager tipswindowManager
+        public static TipsWindowManager tipsWindowManager
         {
             get
             {
-                if (_tipswindowManager == null)
+                if (_tipsWindowManager == null)
                 {
-                    _tipswindowManager = GameUtil.GetComponent<TipsWindowManager>(manager.gameObject);
+                    _tipsWindowManager = GameUtil.GetComponent<TipsWindowManager>(manager.gameObject);
                 }
-                return _tipswindowManager;
+                return _tipsWindowManager;
             }
         }
-        public static LoadSceneManager loadsceneManager
+        public static LoadSceneManager loadSceneManager
         {
             get
             {
-                if (_loadsceneManager == null)
+                if (_loadSceneManager == null)
                 {
-                    _loadsceneManager = GameUtil.GetComponent<LoadSceneManager>(manager.gameObject);
+                    _loadSceneManager = GameUtil.GetComponent<LoadSceneManager>(manager.gameObject);
                 }
-                return _loadsceneManager;
+                return _loadSceneManager;
             }
         }
-        public static AStarManager astarManager
+        public static AStarManager aStarManager
         {
             get
             {
-                if (_astarManager == null)
+                if (_aStarManager == null)
                 {
-                    _astarManager = GameUtil.GetComponent<AStarManager>(manager.gameObject);
+                    _aStarManager = GameUtil.GetComponent<AStarManager>(manager.gameObject);
                 }
-                return _astarManager;
+                return _aStarManager;
             }
         }
     }

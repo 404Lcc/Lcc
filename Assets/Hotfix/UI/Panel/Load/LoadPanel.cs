@@ -13,7 +13,7 @@ public class LoadPanel : MonoBehaviour
     }
     void Update()
     {
-        if (Model.IO.loadsceneManager.process >= 100)
+        if (Model.IO.loadSceneManager.process >= 100)
         {
             OnHidePanel();
         }

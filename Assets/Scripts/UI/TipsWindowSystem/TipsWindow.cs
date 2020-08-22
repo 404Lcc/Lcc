@@ -74,7 +74,7 @@ namespace Model
         {
             state = false;
             complete = null;
-            IO.tipswindowManager.DeleteTipsWindow(id);
+            IO.tipsWindowManager.DeleteTipsWindow(id);
         }
     }
 }
