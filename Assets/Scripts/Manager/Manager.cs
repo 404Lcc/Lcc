@@ -10,6 +10,8 @@ namespace Model
         }
         void Start()
         {
+            IO.tipsManager.InitManager(new TipsPool(1));
+            IO.tipsWindowManager.InitManager(new TipsWindowPool(1));
             //开屏界面-资源更新界面-初始化IL-开始界面
             IO.panelManager.OpenPanel(PanelType.Launch);
         }
