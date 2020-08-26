@@ -133,14 +133,14 @@ namespace Model
         }
         public GameObject LoadGameObject(string name, bool keep, bool assetBundleMode, params string[] types)
         {
-            AssetData assetData = LoadAssetData(name, "*.prefab", keep, typeof(Object), assetBundleMode, types);
+            AssetData assetData = LoadAssetData(name, ".prefab", keep, typeof(Object), assetBundleMode, types);
             if (assetData.asset == null) return null;
             GameObject obj = Instantiate(assetData.asset) as GameObject;
             return obj;
         }
         public T LoadGameObject<T>(string name, bool keep, bool assetBundleMode, params string[] types) where T : Component
         {
-            AssetData assetData = LoadAssetData(name, "*.prefab", keep, typeof(Object), assetBundleMode, types);
+            AssetData assetData = LoadAssetData(name, ".prefab", keep, typeof(Object), assetBundleMode, types);
             if (assetData.asset == null) return null;
             GameObject obj = Instantiate(assetData.asset) as GameObject;
             T component = GameUtil.GetComponent<T>(obj);
@@ -148,7 +148,7 @@ namespace Model
         }
         public GameObject LoadGameObject(string name, bool keep, bool assetBundleMode, Transform parent, params string[] types)
         {
-            AssetData assetData = LoadAssetData(name, "*.prefab", keep, typeof(Object), assetBundleMode, types);
+            AssetData assetData = LoadAssetData(name, ".prefab", keep, typeof(Object), assetBundleMode, types);
             if (assetData.asset == null) return null;
             GameObject obj = Instantiate(assetData.asset) as GameObject;
             obj.transform.SetParent(parent);
@@ -159,7 +159,7 @@ namespace Model
         }
         public T LoadGameObject<T>(string name, bool keep, bool assetBundleMode, Transform parent, params string[] types) where T : Component
         {
-            AssetData assetdata = LoadAssetData(name, "*.prefab", keep, typeof(Object), assetBundleMode, types);
+            AssetData assetdata = LoadAssetData(name, ".prefab", keep, typeof(Object), assetBundleMode, types);
             if (assetdata.asset == null) return null;
             GameObject obj = Instantiate(assetdata.asset) as GameObject;
             obj.transform.SetParent(parent);

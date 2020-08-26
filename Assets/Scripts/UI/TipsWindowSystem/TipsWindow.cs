@@ -20,8 +20,6 @@ namespace Model
         public Text infoText;
         public Text confirmText;
         public Text cancelText;
-        public Button confirmBtn;
-        public Button cancelBtn;
         public void InitTipsWindow(string title, string info, string confirm = "确定", string cancel = "取消", Transform parent = null)
         {
             state = true;

@@ -9,7 +9,6 @@ public class LoadPanel : MonoBehaviour
     }
     void Start()
     {
-        
     }
     void Update()
     {
@@ -20,7 +19,6 @@ public class LoadPanel : MonoBehaviour
     }
     public void InitPanel()
     {
-
     }
     public void OnHidePanel()
     {

@@ -41,7 +41,7 @@ namespace Model
         public void ClearAllTipsWindow()
         {
             List<int> idList = new List<int>();
-            foreach (object item in tipsWindows)
+            foreach (object item in tipsWindows.Keys)
             {
                 idList.Add((int)item);
             }

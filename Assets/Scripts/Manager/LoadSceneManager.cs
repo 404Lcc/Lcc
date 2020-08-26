@@ -52,11 +52,11 @@ namespace Model
                     path += name;
                 }
             }
-            StartCoroutine(LoadSceneAsync("Assets/Resources/" + path + ".scene", false, (SceneAssetRequest request) =>
+            StartCoroutine(LoadSceneAsync("Assets/Resources/" + path + ".unity", false, (SceneAssetRequest request) =>
             {
                 while (!request.isDone)
                 {
-                    process = request.progress;
+                    process = (int)request.progress;
                 }
                 if (request.isDone)
                 {
