@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Model
@@ -16,7 +17,7 @@ namespace Model
             tipsWindowPool.InitPool();
         }
 
-        public TipsWindow CreateTipsWindow(string title, string info, string confirm, string cancel, Transform parent = null)
+        public TipsWindow OpenTipsWindow(string title, string info, string confirm, string cancel, Transform parent = null)
         {
             TipsWindow tipsWindow = tipsWindowPool.Dequeue();
             tipsWindow.InitTipsWindow(title, info, confirm, cancel, parent);
@@ -30,12 +31,27 @@ namespace Model
             if (tipsWindow == null) return null;
             return tipsWindow;
         }
-        public void DeleteTipsWindow(int id)
+        public void ClearTipsWindow(int id)
         {
             TipsWindow tipsWindow = GetTipsWindow(id);
             if (tipsWindow == null) return;
             tipsWindowPool.Enqueue(tipsWindow);
             tipsWindows.Remove(id);
+        }
+        public void ClearAllTipsWindow()
+        {
+            List<int> idList = new List<int>();
+            foreach (object item in tipsWindows)
+            {
+                idList.Add((int)item);
+            }
+            foreach (int item in idList)
+            {
+                TipsWindow tipsWindow = GetTipsWindow(item);
+                if (tipsWindow == null) return;
+                tipsWindowPool.Enqueue(tipsWindow);
+                tipsWindows.Remove(item);
+            }
         }
         public void GenerateID(TipsWindow tipsWindow)
         {

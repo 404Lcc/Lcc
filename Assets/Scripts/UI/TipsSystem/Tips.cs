@@ -36,7 +36,7 @@ namespace Model
             Vector3 target = new Vector3(localPosition.x + offset.x, localPosition.y + offset.y, 0);
             //DOTween.To(() => rect.localPosition, x => rect.localPosition = x, target, duration).SetEase(Ease.OutCubic).OnComplete(() =>
             //{
-            //    IO.tipsManager.DeleteTips(id);
+            //    IO.tipsManager.ClearTips(id);
             //});
         }
     }
