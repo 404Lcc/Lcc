@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -61,6 +60,7 @@ namespace Hotfix
             for (int i = 0; i < folders.Length; i++)
             {
                 subPath += folders[i] + "/";
+                CreateDirectory(path + subPath);
             }
             if (string.IsNullOrEmpty(subPath)) return path;
             return path + subPath;
@@ -152,11 +152,11 @@ namespace Hotfix
             if (obj == null) return null;
             return AddComponent<T>(obj);
         }
-        ///// <summary>
-        ///// 删除组件
-        ///// </summary>
-        ///// <typeparam name="T"></typeparam>
-        ///// <param name="go"></param>
+        /// <summary>
+        /// 删除组件
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="go"></param>
         //public static void SafeDestroy<T>(GameObject go) where T : Component
         //{
         //    if (go == null) return;
@@ -346,7 +346,7 @@ namespace Hotfix
         /// <param name="name"></param>
         /// <param name="folder"></param>
         /// <returns></returns>
-        public static IEnumerator Download(string url, string name, string folder)
+        public static IEnumerator Download(string url, string name, params string[] folders)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
@@ -358,7 +358,7 @@ namespace Hotfix
             else
             {
                 byte[] bytes = webRequest.downloadHandler.data;
-                SaveAsset(GetPath(PathType.PersistentDataPath, folder), name, bytes);
+                SaveAsset(GetPath(PathType.PersistentDataPath, folders), name, bytes);
             }
         }
         public static IEnumerator Download(string url, Action<byte[]> action)

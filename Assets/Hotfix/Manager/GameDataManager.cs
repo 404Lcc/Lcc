@@ -18,7 +18,6 @@ namespace Hotfix
 
         public bool DataListExist()
         {
-            GameUtil.CreateDirectory(Application.persistentDataPath, "Res");
             FileInfo info = new FileInfo(GameUtil.GetPath(PathType.PersistentDataPath, "Res") + "DataList.lcc");
             if (info.Exists)
             {
@@ -35,7 +34,6 @@ namespace Hotfix
         }
         public void SaveDataList()
         {
-            GameUtil.CreateDirectory(Application.persistentDataPath, "Res");
             JsonUtil.SetDataList(GameUtil.GetPath(PathType.PersistentDataPath, "Res"), "DataList.lcc", JsonUtil.ToDataListInstance());
         }
         public void DeleteDataList()
@@ -58,7 +56,6 @@ namespace Hotfix
 
         public bool UserExist(string name)
         {
-            GameUtil.CreateDirectory(Application.persistentDataPath, "Res");
             FileInfo info = new FileInfo(GameUtil.GetPath(PathType.PersistentDataPath, "Res") + name + ".lcc");
             if (info.Exists)
             {
@@ -75,7 +72,6 @@ namespace Hotfix
         }
         public void SaveUserData(string name)
         {
-            GameUtil.CreateDirectory(Application.persistentDataPath, "Res");
             JsonUtil.SetUserData(GameUtil.GetPath(PathType.PersistentDataPath, "Res"), name + ".lcc", JsonUtil.ToUserDataInstance());
         }
         public void DeleteUserData(string name)
@@ -89,7 +85,6 @@ namespace Hotfix
 
         public bool UserSetExist()
         {
-            GameUtil.CreateDirectory(Application.persistentDataPath, "Res");
             FileInfo info = new FileInfo(GameUtil.GetPath(PathType.PersistentDataPath, "Res") + "UserSet.lcc");
             if (info.Exists)
             {
@@ -106,7 +101,6 @@ namespace Hotfix
         }
         public void SaveUserSetData()
         {
-            GameUtil.CreateDirectory(Application.persistentDataPath, "Res");
             JsonUtil.SetUserSetData(GameUtil.GetPath(PathType.PersistentDataPath, "Res"), "UserSet.lcc", JsonUtil.ToUserSetDataInstance());
         }
         public void DeleteUserSetData()
