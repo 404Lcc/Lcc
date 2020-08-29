@@ -4,25 +4,28 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[Serializable]
-public class RightClickEvent : UnityEvent { }
-public class RightClickButton : Button
+namespace Model
 {
-    [SerializeField]
-    public RightClickEvent rightClick;
-    public override void OnPointerDown(PointerEventData eventData)
+    [Serializable]
+    public class RightClickEvent : UnityEvent { }
+    public class RightClickButton : Button
     {
-        base.OnPointerDown(eventData);
-        if (Input.GetMouseButtonDown(1))
+        [SerializeField]
+        public RightClickEvent rightClick;
+        public override void OnPointerDown(PointerEventData eventData)
         {
-            Press();
+            base.OnPointerDown(eventData);
+            if (Input.GetMouseButtonDown(1))
+            {
+                Press();
+            }
         }
-    }
-    private void Press()
-    {
-        if (rightClick != null)
+        private void Press()
         {
-            rightClick.Invoke();
+            if (rightClick != null)
+            {
+                rightClick.Invoke();
+            }
         }
     }
 }

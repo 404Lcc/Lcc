@@ -105,6 +105,8 @@
     <Compile Include="Assets\Scripts\Manager\AssetManager.cs" />
     <Compile Include="Assets\Scripts\System\Data\AssetData.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonWriter.cs" />
+    <Compile Include="Assets\Scripts\Tool\Drag.cs" />
+    <Compile Include="Assets\Scripts\Tool\LocalDialog.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />

@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 
-public class DelayDestroy : MonoBehaviour
+namespace Model
 {
-    public float time = 1;
-    void Start()
+    public class DelayDestroy : MonoBehaviour
     {
-        Invoke("DelayFunction", time);
-    }
-    void DelayFunction()
-    {
-        Destroy(gameObject);
+        public float time = 1;
+        void Start()
+        {
+            Invoke("DelayFunction", time);
+        }
+        void DelayFunction()
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -4,60 +4,63 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[Serializable]
-public class DoubleClickEvent : UnityEvent { }
-public class DoubleClickButton : Button
+namespace Model
 {
-    private DateTime _first;
-    private DateTime _second;
-    [SerializeField]
-    public DoubleClickEvent doubleClick;
-    public override void OnPointerDown(PointerEventData eventData)
+    [Serializable]
+    public class DoubleClickEvent : UnityEvent { }
+    public class DoubleClickButton : Button
     {
-        base.OnPointerDown(eventData);
-        if (_first.Equals(default))
+        private DateTime _first;
+        private DateTime _second;
+        [SerializeField]
+        public DoubleClickEvent doubleClick;
+        public override void OnPointerDown(PointerEventData eventData)
         {
-            _first = DateTime.Now;
-        }
-        else
-        {
-            _second = DateTime.Now;
-        }
-    }
-    public override void OnPointerUp(PointerEventData eventData)
-    {
-        base.OnPointerUp(eventData);
-        //在第二次鼠标抬起时触发,时差小于600ms
-        if (!_first.Equals(default) && !_second.Equals(default))
-        {
-            TimeSpan time = _second - _first;
-            float milliseconds = time.Seconds * 1000 + time.Milliseconds;
-            if (milliseconds < 600)
+            base.OnPointerDown(eventData);
+            if (_first.Equals(default))
             {
-                Press();
+                _first = DateTime.Now;
             }
             else
             {
-                ResetTime();
+                _second = DateTime.Now;
             }
         }
-    }
-    public override void OnPointerExit(PointerEventData eventData)
-    {
-        base.OnPointerExit(eventData);
-        ResetTime();
-    }
-    private void Press()
-    {
-        if (doubleClick != null)
+        public override void OnPointerUp(PointerEventData eventData)
         {
-            doubleClick.Invoke();
+            base.OnPointerUp(eventData);
+            //在第二次鼠标抬起时触发,时差小于600ms
+            if (!_first.Equals(default) && !_second.Equals(default))
+            {
+                TimeSpan time = _second - _first;
+                float milliseconds = time.Seconds * 1000 + time.Milliseconds;
+                if (milliseconds < 600)
+                {
+                    Press();
+                }
+                else
+                {
+                    ResetTime();
+                }
+            }
         }
-        ResetTime();
-    }
-    private void ResetTime()
-    {
-        _first = default;
-        _second = default;
+        public override void OnPointerExit(PointerEventData eventData)
+        {
+            base.OnPointerExit(eventData);
+            ResetTime();
+        }
+        private void Press()
+        {
+            if (doubleClick != null)
+            {
+                doubleClick.Invoke();
+            }
+            ResetTime();
+        }
+        private void ResetTime()
+        {
+            _first = default;
+            _second = default;
+        }
     }
 }

@@ -80,7 +80,7 @@ namespace Hotfix
             else if (UserSetData.displayModeType == DisplayModeType.BorderlessWindow)
             {
                 GameUtil.SetResolution(false, width, height);
-                StartCoroutine(DisplayMode.SetNoFrame(width, height));
+                StartCoroutine(Model.DisplayMode.SetNoFrame(width, height));
             }
             QualitySettings.SetQualityLevel(6, true);
         }

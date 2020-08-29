@@ -1,15 +1,18 @@
 using UnityEngine;
 
-public class Delay : MonoBehaviour
+namespace Model
 {
-    public float time = 1;
-    void Start()
+    public class Delay : MonoBehaviour
     {
-        gameObject.SetActive(false);
-        Invoke("DelayFunction", time);
-    }
-    void DelayFunction()
-    {
-        gameObject.SetActive(true);
+        public float time = 1;
+        void Start()
+        {
+            gameObject.SetActive(false);
+            Invoke("DelayFunction", time);
+        }
+        void DelayFunction()
+        {
+            gameObject.SetActive(true);
+        }
     }
 }

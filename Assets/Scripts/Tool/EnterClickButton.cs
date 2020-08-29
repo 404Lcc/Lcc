@@ -4,30 +4,33 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[Serializable]
-public class EnterClickEvent : UnityEvent { }
-[Serializable]
-public class ExitClickEvent : UnityEvent { }
-public class EnterClickButton : Button
+namespace Model
 {
-    [SerializeField]
-    public EnterClickEvent enterClick;
-    [SerializeField]
-    public ExitClickEvent exitClick;
-    public override void OnPointerEnter(PointerEventData eventData)
+    [Serializable]
+    public class EnterClickEvent : UnityEvent { }
+    [Serializable]
+    public class ExitClickEvent : UnityEvent { }
+    public class EnterClickButton : Button
     {
-        base.OnPointerEnter(eventData);
-        if (enterClick != null)
+        [SerializeField]
+        public EnterClickEvent enterClick;
+        [SerializeField]
+        public ExitClickEvent exitClick;
+        public override void OnPointerEnter(PointerEventData eventData)
         {
-            enterClick.Invoke();
+            base.OnPointerEnter(eventData);
+            if (enterClick != null)
+            {
+                enterClick.Invoke();
+            }
         }
-    }
-    public override void OnPointerExit(PointerEventData eventData)
-    {
-        base.OnPointerExit(eventData);
-        if (exitClick != null)
+        public override void OnPointerExit(PointerEventData eventData)
         {
-            exitClick.Invoke();
+            base.OnPointerExit(eventData);
+            if (exitClick != null)
+            {
+                exitClick.Invoke();
+            }
         }
     }
 }

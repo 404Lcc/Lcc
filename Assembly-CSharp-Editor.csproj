@@ -60,8 +60,8 @@
     <Compile Include="Assets\Editor\ILRuntime\MonoBehaviourAdapterEditor.cs" />
     <Compile Include="Assets\Editor\Tool\BuildHotfix.cs" />
     <Compile Include="Assets\Editor\Tool\Preprocess.cs" />
-    <Compile Include="Assets\Editor\MenuItem\LccMenuItem.cs" />
     <Compile Include="Assets\Editor\EditorWindow\UploadEditorWindow.cs" />
+    <Compile Include="Assets\Editor\MenuItem\LccMenuItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

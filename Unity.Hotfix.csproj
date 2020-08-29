@@ -102,6 +102,8 @@
     <Compile Include="Assets\Hotfix\System\Data\TimerData.cs" />
     <Compile Include="Assets\Hotfix\System\IO.cs" />
     <Compile Include="Assets\Hotfix\System\Data\CommandData.cs" />
+    <Compile Include="Assets\Hotfix\Game\Camera\SmoothFoolow.cs" />
+    <Compile Include="Assets\Hotfix\Tool\Joystack\Joystack.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
