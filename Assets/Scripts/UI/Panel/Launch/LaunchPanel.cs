@@ -9,6 +9,15 @@ public class LaunchPanel : MonoBehaviour
     }
     public void InitPanel()
     {
+#if AssetBundle
+        IO.panelManager.OpenPanel(PanelType.Updater);
+#else
+#if ILRuntime
+        IO.ilRuntimeManager.InitManager();
+#else
+        IO.monoManager.InitManager();
+#endif
+#endif
         OnHidePanel();
     }
     public void OnHidePanel()

@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\System\Adapter\CoroutineAdapter.cs" />
     <Compile Include="Assets\Scripts\Manager\MonoManager.cs" />
     <Compile Include="Assets\Scripts\UI\TipsSystem\Tips.cs" />
+    <Compile Include="Assets\Scripts\Tool\Drag.cs" />
     <Compile Include="Assets\Scripts\System\Data\Enum\PathType.cs" />
     <Compile Include="Assets\Scripts\System\Pool\TipsPool.cs" />
     <Compile Include="Assets\Scripts\Manager\Manager.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Assets\Scripts\Manager\PanelManager.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonMapper.cs" />
     <Compile Include="Assets\Scripts\System\IO.cs" />
+    <Compile Include="Assets\Scripts\Tool\LocalDialog.cs" />
     <Compile Include="Assets\Scripts\System\Data\Const\SceneName.cs" />
     <Compile Include="Assets\Scripts\Manager\AStarManager.cs" />
     <Compile Include="Assets\Scripts\LitJson\Lexer.cs" />
@@ -105,8 +107,6 @@
     <Compile Include="Assets\Scripts\Manager\AssetManager.cs" />
     <Compile Include="Assets\Scripts\System\Data\AssetData.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonWriter.cs" />
-    <Compile Include="Assets\Scripts\Tool\Drag.cs" />
-    <Compile Include="Assets\Scripts\Tool\LocalDialog.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />
