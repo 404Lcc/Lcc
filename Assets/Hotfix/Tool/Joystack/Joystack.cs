@@ -14,6 +14,7 @@ namespace Hotfix
         public float maxDistance;
         //激活移动的最低距离
         public float activeDistance;
+        public float angle;
         void Awake()
         {
             maxDistance = 120;
@@ -47,6 +48,7 @@ namespace Hotfix
             {
                 normalDistance = Vector3.zero;
             }
+            angle = Mathf.Atan2(normalDistance.x, normalDistance.y) * Mathf.Rad2Deg;
         }
         public void OnBeginDrag()
         {
