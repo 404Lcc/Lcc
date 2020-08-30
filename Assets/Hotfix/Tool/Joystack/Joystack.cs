@@ -5,25 +5,27 @@ namespace Hotfix
 {
     public class Joystack : MonoBehaviour
     {
-        public Vector3 origin;
-        public bool drag;
-        public float distance;
-        //标准化移动的距离
-        public Vector3 normalDistance;
+        public static Joystack instance;
         //最大拖动距离
         public float maxDistance;
         //激活移动的最低距离
         public float activeDistance;
+        public Vector3 origin;
+        public float distance;
+        //标准化移动的距离
+        public Vector2 normalDistance;
+        public bool drag;
         public float angle;
         void Awake()
         {
+            instance = this;
             maxDistance = 120;
             activeDistance = 5;
+            //设置原点
+            origin = transform.localPosition;
             Drag.GetDrag(gameObject).beginDrag = OnBeginDrag;
             Drag.GetDrag(gameObject).drag = OnDrag;
             Drag.GetDrag(gameObject).endDrag = OnEndDrag;
-            //设置原点
-            origin = transform.localPosition;
         }
         void Start()
         {
@@ -42,11 +44,10 @@ namespace Hotfix
             if (distance >= activeDistance)
             {
                 normalDistance = (transform.localPosition - origin).normalized;
-                normalDistance = new Vector3(normalDistance.x, 0, normalDistance.y);
             }
             else
             {
-                normalDistance = Vector3.zero;
+                normalDistance = Vector2.zero;
             }
             angle = Mathf.Atan2(normalDistance.x, normalDistance.y) * Mathf.Rad2Deg;
         }

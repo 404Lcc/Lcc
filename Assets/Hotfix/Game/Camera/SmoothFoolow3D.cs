@@ -9,15 +9,17 @@ namespace Hotfix
         public float damping;
         public float limitYMin;
         public float limitYMax;
+        //相机的距离比例
+        public float proportion;
         public float speedX;
         public float speedY;
         public float angleX;
         public float angleY;
         public bool touch;
         public bool mouse;
-        public bool needdamping;
-        public bool touch1ui;
-        public bool touch2ui;
+        public bool needDamping;
+        public bool touch1UI;
+        public bool touch2UI;
         public Vector3 offset;
         public Transform target;
         void Awake()
@@ -26,17 +28,18 @@ namespace Hotfix
             damping = 6;
             limitYMin = -10;
             limitYMax = 35;
+            proportion = 1;
             if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
             {
-                speedX = 1.5f;
-                speedY = 1.5f;
+                speedX = 200;
+                speedY = 200;
                 touch = false;
                 mouse = true;
             }
             else
             {
-                speedX = 0.3f;
-                speedY = 0.3f;
+                speedX = 100;
+                speedY = 100;
                 touch = true;
                 mouse = false;
             }
@@ -50,11 +53,7 @@ namespace Hotfix
             {
                 if (Input.touchCount == 1)
                 {
-                    if (Input.GetTouch(0).phase == TouchPhase.Began)
-                    {
-                        touch1ui = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
-                    }
-                    if (touch1ui)
+                    if (Joystack.instance.angle != 0)
                     {
                         //第一根手指按在摇杆上
                     }
@@ -71,13 +70,13 @@ namespace Hotfix
                 {
                     if (Input.GetTouch(0).phase == TouchPhase.Began)
                     {
-                        touch1ui = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+                        touch1UI = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
                     }
                     if (Input.GetTouch(1).phase == TouchPhase.Began)
                     {
-                        touch2ui = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(1).fingerId);
+                        touch2UI = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(1).fingerId);
                     }
-                    if (touch1ui)
+                    if (touch1UI)
                     {
                         //第一根手指按在摇杆上
                     }
@@ -90,7 +89,7 @@ namespace Hotfix
                         }
 
                     }
-                    if (touch2ui)
+                    if (touch2UI)
                     {
                         //第二根手指按在摇杆上
                     }
@@ -106,16 +105,28 @@ namespace Hotfix
             }
             if (mouse)
             {
-                ComputeAngle();
+                if (Joystack.instance.angle != 0)
+                {
+                    //第一根手指按在摇杆上
+                }
+                else
+                {
+                    //第一根手指按在屏幕上
+                    if (Input.GetMouseButton(0))
+                    {
+                        ComputeAngle();
+                    }
+                }
             }
         }
         void LateUpdate()
         {
             if (target != null)
             {
+                PreventThroughWall();
                 Quaternion localRotation = Quaternion.Euler(angleY, angleX, 0);
                 Vector3 localPosition = localRotation * new Vector3(0, 0, -distance) + target.localPosition + offset;
-                if (needdamping)
+                if (needDamping)
                 {
                     transform.localRotation = Quaternion.Lerp(transform.localRotation, localRotation, Time.deltaTime * damping);
                     transform.localPosition = Vector3.Lerp(transform.localPosition, localPosition, Time.deltaTime * damping);
@@ -133,8 +144,8 @@ namespace Hotfix
             {
                 if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
                 {
-                    angleX += Input.GetAxis("Mouse X") * speedX * Screen.dpi;
-                    angleY -= Input.GetAxis("Mouse Y") * speedY * Screen.dpi;
+                    angleX += Input.GetAxis("Mouse X") / Screen.dpi * speedX;
+                    angleY -= Input.GetAxis("Mouse Y") / Screen.dpi * speedY;
                     angleX = ClampAngle(angleX);
                     angleY = Mathf.Clamp(angleY, limitYMin, limitYMax);
                 }
@@ -144,8 +155,8 @@ namespace Hotfix
         {
             if (touch)
             {
-                angleX += Input.GetTouch(index).deltaPosition.x * speedX * Screen.dpi;
-                angleY -= Input.GetTouch(index).deltaPosition.y * speedY * Screen.dpi;
+                angleX += Input.GetTouch(index).deltaPosition.x / Screen.dpi * speedX;
+                angleY -= Input.GetTouch(index).deltaPosition.y / Screen.dpi * speedY;
                 angleX = ClampAngle(angleX);
                 angleY = Mathf.Clamp(angleY, limitYMin, limitYMax);
             }
@@ -161,6 +172,23 @@ namespace Hotfix
                 angle -= 360;
             }
             return angle;
+        }
+        public void PreventThroughWall()
+        {
+            //从目标点到相机
+            Vector3 direction = (transform.localPosition - target.localPosition).normalized;
+            Ray ray = new Ray(target.localPosition, direction);
+            if (Physics.Raycast(ray, out RaycastHit hit, distance, LayerMask.GetMask("Wall")))
+            {
+                if (hit.collider.tag.Equals("Wall"))
+                {
+                    proportion = Mathf.Min(1, Vector3.Distance(hit.point, target.localPosition) / distance);
+                }
+                else
+                {
+                    proportion = 1;
+                }
+            }
         }
     }
 }
