@@ -5,7 +5,7 @@ namespace Model
     public class Delay : MonoBehaviour
     {
         public float time = 1;
-        void Start()
+        void Awake()
         {
             gameObject.SetActive(false);
             Invoke("DelayFunction", time);

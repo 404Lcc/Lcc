@@ -11,17 +11,11 @@ namespace Hotfix
         public Vector3 min;
         public Vector3 max;
         public Vector2 half;
+
         public Transform target;
         void Awake()
         {
-            smooth = 1;
-            follow = true;
-            box = GameUtil.GetComponent<BoxCollider2D>(GameUtil.GetGameObjectConvertedToTag("Map"));
-            margin = Vector2.zero;
-            //边界左下角
-            min = box.bounds.min;
-            //边界右上角
-            max = box.bounds.max;
+            InitSmoothFoolow();
         }
         void Start()
         {
@@ -48,6 +42,33 @@ namespace Hotfix
                 localPosition.y = Mathf.Clamp(localPosition.y, min.y + half.y, max.y - half.y);
                 transform.localPosition = localPosition;
             }
+        }
+        public void InitSmoothFoolow()
+        {
+            smooth = 1;
+            follow = true;
+            box = GameUtil.GetComponent<BoxCollider2D>(GameUtil.GetGameObjectConvertedToTag("Map"));
+            margin = Vector2.zero;
+            //边界左下角
+            min = box.bounds.min;
+            //边界右上角
+            max = box.bounds.max;
+        }
+        public void InitSmoothFoolow(int smooth, bool follow, BoxCollider2D box, Vector2 margin, Vector3 min, Vector3 max, Transform target)
+        {
+            this.smooth = smooth;
+            this.follow = follow;
+            this.box = box;
+            this.margin = margin;
+            //边界左下角
+            this.min = min;
+            //边界右上角
+            this.max = max;
+            this.target = target;
+        }
+        public void SetTarget(Transform target)
+        {
+            this.target = target;
         }
     }
 }

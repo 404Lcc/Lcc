@@ -5,7 +5,7 @@ namespace Model
     public class DelayDestroy : MonoBehaviour
     {
         public float time = 1;
-        void Start()
+        void Awake()
         {
             Invoke("DelayFunction", time);
         }

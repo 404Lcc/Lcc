@@ -242,6 +242,17 @@ namespace Hotfix
             spriterenderer.sprite = sprite;
         }
         /// <summary>
+        /// 屏幕坐标转换UI坐标
+        /// </summary>
+        /// <param name="rect"></param>
+        /// <param name="screenPoint"></param>
+        /// <returns></returns>
+        public static Vector2 ScreenToUgui(RectTransform rect, Vector2 screenPoint)
+        {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, screenPoint, null, out Vector2 localPosition);
+            return localPosition;
+        }
+        /// <summary>
         /// 创建文件夹
         /// </summary>
         /// <param name="path"></param>

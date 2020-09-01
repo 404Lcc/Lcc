@@ -15,34 +15,17 @@ namespace Hotfix
         public float speedY;
         public float angleX;
         public float angleY;
+        public bool needDamping;
         public bool touch;
         public bool mouse;
-        public bool needDamping;
-        public bool touch1UI;
-        public bool touch2UI;
+        public bool touchRightUI;
         public Vector3 offset;
+
         public Transform target;
+        public Transform lockTarget;
         void Awake()
         {
-            distance = 3;
-            damping = 6;
-            limitYMin = -10;
-            limitYMax = 35;
-            proportion = 1;
-            if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
-            {
-                speedX = 200;
-                speedY = 200;
-                touch = false;
-                mouse = true;
-            }
-            else
-            {
-                speedX = 100;
-                speedY = 100;
-                touch = true;
-                mouse = false;
-            }
+            InitSmoothFoolow();
         }
         void Start()
         {
@@ -51,9 +34,11 @@ namespace Hotfix
         {
             if (touch)
             {
+                PreventThroughWall();
                 if (Input.touchCount == 1)
                 {
-                    if (Joystack.instance.angle != 0)
+                    //常规操作
+                    if (Joystack.instance.standard)
                     {
                         //第一根手指按在摇杆上
                     }
@@ -68,44 +53,72 @@ namespace Hotfix
                 }
                 if (Input.touchCount == 2)
                 {
-                    if (Input.GetTouch(0).phase == TouchPhase.Began)
+                    //常规操作
+                    if (Joystack.instance.standard)
                     {
-                        touch1UI = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
-                    }
-                    if (Input.GetTouch(1).phase == TouchPhase.Began)
-                    {
-                        touch2UI = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(1).fingerId);
-                    }
-                    if (touch1UI)
-                    {
-                        //第一根手指按在摇杆上
-                    }
-                    else
-                    {
-                        //第一根手指按在屏幕上
-                        if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                        //找到最右边的手指
+                        int right;
+                        float point1 = Input.GetTouch(0).position.x;
+                        float point2 = Input.GetTouch(1).position.x;
+                        if (point1 > point2)
                         {
-                            ComputeAngle(0);
+                            right = 0;
                         }
+                        else
+                        {
+                            right = 1;
+                        }
+                        //第二根手指第一次触摸屏幕时 判断最右边手指是否在UI上
+                        if (Input.GetTouch(1).phase == TouchPhase.Began)
+                        {
+                            touchRightUI = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(right).fingerId);
+                        }
+                        //如果最右边的手指是第一个手指
+                        if (right == 0)
+                        {
+                            if (touchRightUI)
+                            {
+                                //第一根手指按在UI上
+                            }
+                            else
+                            {
+                                //第一根手指按在屏幕上
+                                if (Input.GetTouch(right).phase == TouchPhase.Moved)
+                                {
+                                    ComputeAngle(right);
+                                }
 
-                    }
-                    if (touch2UI)
-                    {
-                        //第二根手指按在摇杆上
+                            }
+                        }
+                        //如果最右边的手指是第二个手指
+                        if (right == 1)
+                        {
+                            if (touchRightUI)
+                            {
+                                //第二根手指按在UI上
+                            }
+                            else
+                            {
+                                //第二根手指按在屏幕上
+                                if (Input.GetTouch(right).phase == TouchPhase.Moved)
+                                {
+                                    ComputeAngle(right);
+                                }
+                            }
+                        }
                     }
                     else
                     {
-                        //第二根手指按在屏幕上
-                        if (Input.GetTouch(1).phase == TouchPhase.Moved)
-                        {
-                            ComputeAngle(1);
-                        }
+                        //非常规操作
+                        ComputeAngle(1);
                     }
                 }
             }
             if (mouse)
             {
-                if (Joystack.instance.angle != 0)
+                PreventThroughWall();
+                //常规操作
+                if (Joystack.instance.standard)
                 {
                     //第一根手指按在摇杆上
                 }
@@ -123,9 +136,18 @@ namespace Hotfix
         {
             if (target != null)
             {
-                PreventThroughWall();
-                Quaternion localRotation = Quaternion.Euler(angleY, angleX, 0);
-                Vector3 localPosition = localRotation * new Vector3(0, 0, -distance) + target.localPosition + offset;
+                Quaternion localRotation;
+                if (lockTarget != null)
+                {
+                    localRotation = Quaternion.LookRotation((lockTarget.localPosition - target.localPosition).normalized);
+                    angleY = localRotation.eulerAngles.x;
+                    angleX = localRotation.eulerAngles.y;
+                }
+                else
+                {
+                    localRotation = Quaternion.Euler(angleY, angleX, 0);
+                }
+                Vector3 localPosition = localRotation * new Vector3(0, 0, -distance * proportion) + target.localPosition + offset;
                 if (needDamping)
                 {
                     transform.localRotation = Quaternion.Lerp(transform.localRotation, localRotation, Time.deltaTime * damping);
@@ -137,6 +159,49 @@ namespace Hotfix
                     transform.localPosition = localPosition;
                 }
             }
+        }
+        public void InitSmoothFoolow()
+        {
+            distance = 3;
+            damping = 45;
+            limitYMin = -10;
+            limitYMax = 40;
+            proportion = 1;
+            needDamping = true;
+            if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+            {
+                speedX = 200;
+                speedY = 200;
+                touch = false;
+                mouse = true;
+            }
+            else
+            {
+                speedX = 30;
+                speedY = 30;
+                touch = true;
+                mouse = false;
+            }
+            offset = new Vector3(0, 1.5f, 0);
+        }
+        public void InitSmoothFoolow(float distance, float damping, float limitYMin, float limitYMax, float proportion, bool needDamping, Vector3 offset, Transform target)
+        {
+            this.distance = distance;
+            this.damping = damping;
+            this.limitYMin = limitYMin;
+            this.limitYMax = limitYMax;
+            this.proportion = proportion;
+            this.needDamping = needDamping;
+            this.offset = offset;
+            this.target = target;
+        }
+        public void SetTarget(Transform target)
+        {
+            this.target = target;
+        }
+        public void SetLockTarget(Transform lockTarget)
+        {
+            this.lockTarget = lockTarget;
         }
         public void ComputeAngle()
         {
@@ -180,9 +245,16 @@ namespace Hotfix
             Ray ray = new Ray(target.localPosition, direction);
             if (Physics.Raycast(ray, out RaycastHit hit, distance, LayerMask.GetMask("Wall")))
             {
-                if (hit.collider.tag.Equals("Wall"))
+                if (hit.collider != null)
                 {
-                    proportion = Mathf.Min(1, Vector3.Distance(hit.point, target.localPosition) / distance);
+                    if (hit.collider.tag == "Wall")
+                    {
+                        proportion = Mathf.Min(1, Vector3.Distance(hit.point, target.localPosition) / distance);
+                    }
+                    else
+                    {
+                        proportion = 1;
+                    }
                 }
                 else
                 {

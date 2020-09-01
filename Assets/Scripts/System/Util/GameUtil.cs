@@ -177,7 +177,7 @@ namespace Model
         /// </summary>
         public static void UnloadAssets()
         {
-            Model.IO.assetManager.UnloadAllAssetsData();
+            IO.assetManager.UnloadAllAssetsData();
         }
         /// <summary>
         /// 转化成Panel类型
@@ -240,6 +240,17 @@ namespace Model
             if (string.IsNullOrEmpty(name)) return;
             Sprite sprite = IO.assetManager.LoadAssetData<Sprite>(name, ".png", false, true, types);
             spriterenderer.sprite = sprite;
+        }
+        /// <summary>
+        /// 屏幕坐标转换UI坐标
+        /// </summary>
+        /// <param name="rect"></param>
+        /// <param name="screenPoint"></param>
+        /// <returns></returns>
+        public static Vector2 ScreenToUgui(RectTransform rect, Vector2 screenPoint)
+        {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, screenPoint, null, out Vector2 localPosition);
+            return localPosition;
         }
         /// <summary>
         /// 创建文件夹
