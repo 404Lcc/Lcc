@@ -12,7 +12,7 @@ public class LoadPanel : MonoBehaviour
     }
     void Update()
     {
-        if (Model.IO.loadSceneManager.process >= 100)
+        if (Model.LoadSceneManager.Instance.process >= 100)
         {
             OnHidePanel();
         }
@@ -22,6 +22,6 @@ public class LoadPanel : MonoBehaviour
     }
     public void OnHidePanel()
     {
-        IO.panelManager.ClearPanel(PanelType.Load);
+        PanelManager.Instance.ClearPanel(PanelType.Load);
     }
 }

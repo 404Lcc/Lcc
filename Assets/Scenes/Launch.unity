@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 865489370}
   - component: {fileID: 865489369}
   m_Layer: 0
-  m_Name: GlobalGenerator
+  m_Name: Init
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\EditorWindow\LccEditorWindow.cs" />
     <Compile Include="Assets\Editor\ILRuntime\ILRuntimeCLRBinding.cs" />
+    <Compile Include="Assets\Editor\ILRuntime\ILRuntimeCrossBinding.cs" />
     <Compile Include="Assets\Editor\ILRuntime\MonoBehaviourAdapterEditor.cs" />
     <Compile Include="Assets\Editor\Tool\BuildHotfix.cs" />
     <Compile Include="Assets\Editor\Tool\Preprocess.cs" />
@@ -266,13 +267,13 @@
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntim.Mono.Cecil">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.3\Plugins\ILRuntim.Mono.Cecil.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.4\Plugins\ILRuntim.Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Mdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.3\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.4\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.3\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.4\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.0\net35\unity-custom\nunit.framework.dll</HintPath>

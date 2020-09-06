@@ -56,57 +56,63 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Tool\OpenFileName.cs" />
-    <Compile Include="Assets\Scripts\System\Data\AStarNodeData.cs" />
-    <Compile Include="Assets\Scripts\System\GlobalGenerator.cs" />
-    <Compile Include="Assets\Scripts\System\Data\Enum\UI\PanelType.cs" />
-    <Compile Include="Assets\Scripts\System\Pool\Pool.cs" />
-    <Compile Include="Assets\Scripts\Manager\LoadSceneManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\ILRuntimeManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\View\Base\IView.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Data\AStarNodeData.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Init\Init.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Data\Enum\UI\PanelType.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Pool\Pool.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Manager\LoadSceneManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Manager\ILRuntimeManager.cs" />
     <Compile Include="Assets\Scripts\Tool\DelayDestroy.cs" />
     <Compile Include="Assets\Scripts\Tool\LongClickButton.cs" />
-    <Compile Include="Assets\Scripts\UI\PanelSystem\PanelInfo.cs" />
-    <Compile Include="Assets\Scripts\System\Adapter\CoroutineAdapter.cs" />
-    <Compile Include="Assets\Scripts\Manager\MonoManager.cs" />
-    <Compile Include="Assets\Scripts\UI\TipsSystem\Tips.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\UI\Panel\PanelInfo.cs" />
+    <Compile Include="Assets\Scripts\Runtime\ILRuntime\Adapter\CoroutineAdapter.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Manager\MonoManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\UI\Tips\Tips.cs" />
     <Compile Include="Assets\Scripts\Tool\Drag.cs" />
-    <Compile Include="Assets\Scripts\System\Data\Enum\PathType.cs" />
-    <Compile Include="Assets\Scripts\System\Pool\TipsPool.cs" />
-    <Compile Include="Assets\Scripts\Manager\Manager.cs" />
-    <Compile Include="Assets\Scripts\Manager\TipsManager.cs" />
-    <Compile Include="Assets\Scripts\UI\LogSystem\LogInfo.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Data\Enum\PathType.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Pool\TipsPool.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Object\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Manager\Manager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Manager\TipsManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\UI\Log\LogInfo.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonData.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonMockWrapper.cs" />
-    <Compile Include="Assets\Scripts\System\Data\Enum\UI\InfoState.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Data\Enum\UI\InfoState.cs" />
     <Compile Include="Assets\Scripts\Tool\Delay.cs" />
-    <Compile Include="Assets\Scripts\UI\BaseSystem\Info.cs" />
-    <Compile Include="Assets\Scripts\UI\TipsWindowSystem\TipsWindow.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\UI\Base\Info.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\UI\TipsWindow\TipsWindow.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonReader.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonException.cs" />
     <Compile Include="Assets\Scripts\Tool\EnterClickButton.cs" />
-    <Compile Include="Assets\Scripts\Manager\LogManager.cs" />
-    <Compile Include="Assets\Scripts\System\Data\Enum\UI\LogType.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\DataBinder\Binding.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Manager\LogManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Data\Enum\UI\LogType.cs" />
     <Compile Include="Assets\Scripts\LitJson\ParserToken.cs" />
-    <Compile Include="Assets\Scripts\Manager\ContainerManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\TipsWindowManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Manager\ContainerManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Manager\TipsWindowManager.cs" />
     <Compile Include="Assets\Scripts\Tool\RightClickButton.cs" />
-    <Compile Include="Assets\Scripts\System\Data\Const\AssetType.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\View\Base\ViewBase.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Data\Const\AssetType.cs" />
     <Compile Include="Assets\Scripts\Tool\DisplayMode.cs" />
     <Compile Include="Assets\Scripts\LitJson\IJsonWrapper.cs" />
-    <Compile Include="Assets\Scripts\System\Pool\TipsWindowPool.cs" />
-    <Compile Include="Assets\Scripts\System\Util\GameUtil.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Pool\TipsWindowPool.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Util\GameUtil.cs" />
     <Compile Include="Assets\Scripts\Tool\DoubleClickButton.cs" />
-    <Compile Include="Assets\Scripts\System\Adapter\MonoBehaviourAdapter.cs" />
-    <Compile Include="Assets\Scripts\Manager\PanelManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\ViewModel\Base\ViewModelBase.cs" />
+    <Compile Include="Assets\Scripts\Runtime\ILRuntime\Adapter\MonoBehaviourAdapter.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Manager\PanelManager.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonMapper.cs" />
-    <Compile Include="Assets\Scripts\System\IO.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Object\Objects.cs" />
     <Compile Include="Assets\Scripts\Tool\LocalDialog.cs" />
-    <Compile Include="Assets\Scripts\System\Data\Const\SceneName.cs" />
-    <Compile Include="Assets\Scripts\Manager\AStarManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Data\Const\SceneName.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Manager\AStarManager.cs" />
     <Compile Include="Assets\Scripts\LitJson\Lexer.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Launch\LaunchPanel.cs" />
-    <Compile Include="Assets\Scripts\Manager\AssetManager.cs" />
-    <Compile Include="Assets\Scripts\System\Data\AssetData.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Manager\AssetManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Data\AssetData.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonWriter.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\DataBinder\DataBinder.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />
@@ -312,13 +318,13 @@
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntim.Mono.Cecil">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.3\Plugins\ILRuntim.Mono.Cecil.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.4\Plugins\ILRuntim.Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Mdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.3\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.4\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.3\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.4\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.1.1f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>
