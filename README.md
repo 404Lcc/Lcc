@@ -42,13 +42,13 @@ Lcc框架
 **UI**
 
 ``` csharp
-IO.panelManager.OpenPanel(PanelType.Launch);
+PanelManager.Instance.OpenPanel(PanelType.Launch);
 ```
 
 **场景加载**
 
 ``` csharp
-IO.loadsceneManager.LoadScene(SceneName.Login, null, AssetType.Scene);
+LoadSceneManager.Instance.LoadScene(SceneName.Login, null, AssetType.Scene);
 ```
 
 ## 开发环境
