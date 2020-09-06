@@ -5,7 +5,7 @@ Lcc框架
 
 **简介**
 
-[Lcc](https://github.com/404Lcc/Lcc)是针对Unity开发的轻量级框架，可快速上手开发**Steam**、**安卓**、**IOS**等项目
+[Lcc](https://github.com/404Lcc/Lcc)是针对Unity开发的轻量级框架，可快速上手开发**Steam**、**安卓**、**IOS**等项目。
 
 **热更新**
 
@@ -40,6 +40,8 @@ Lcc框架
 ## 快速开始
 
 **UI**
+
+支持MVVM，提供了视图、视图模型、数据绑定。
 
 ``` csharp
 PanelManager.Instance.OpenPanel(PanelType.Launch);
