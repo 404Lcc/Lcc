@@ -9,15 +9,15 @@ Lcc框架
 
 **热更新**
 
-1. [XLua](https://github.com/Tencent/xLua)
+1. Lua方案[XLua](https://github.com/Tencent/xLua)
 
-2. [ILRuntime](https://github.com/Ourpalm/ILRuntime)
+2. C#方案[ILRuntime](https://github.com/Ourpalm/ILRuntime)
 
 3. 资源热更新[XAsset](https://github.com/xasset/xasset)
 
 4. C#代码加密
 
-**热更新注意项**
+**ILRuntime热更新注意项**
 
 1. 组件缓存
 
@@ -25,7 +25,9 @@ Lcc框架
 
 3. for代替foreach
 
-4. IL适配器可通过编辑器工具生成基础模板，大部分时候不用自己编写
+4. 适配器可通过编辑器工具生成基础模板，大部分时候不用自己编写
+
+5. 打包之前一定要生成CLR绑定代码，否则会被IL2CPP裁剪
 
 ## 主要功能
 
