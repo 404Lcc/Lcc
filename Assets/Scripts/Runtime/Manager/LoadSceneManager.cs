@@ -1,0 +1,85 @@
+﻿//using libx;
+using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace Model
+{
+    public class LoadSceneManager : Singleton<LoadSceneManager>
+    {
+        public AsyncOperation async;
+        public Action complete;
+        public int process;
+        void Awake()
+        {
+        }
+        void Start()
+        {
+        }
+        void Update()
+        {
+            if (async == null) return;
+            if (async.progress < 0.9f)
+            {
+                process = (int)(async.progress * 100);
+            }
+            else
+            {
+                process = 100;
+            }
+            if (async.isDone)
+            {
+                complete?.Invoke();
+                async.allowSceneActivation = true;
+                async = null;
+                complete = null;
+                process = 0;
+            }
+        }
+        public void LoadScene(string name, Action complete, params string[] types)
+        {
+            this.complete = complete;
+            SceneManager.LoadScene(SceneName.Load);
+#if AssetBundle
+            if (types.Length == 0) return;
+            string path = string.Empty;
+            for (int i = 0; i < types.Length; i++)
+            {
+                path += types[i] + "/";
+                if (i == types.Length - 1)
+                {
+                    path += name;
+                }
+            }
+            StartCoroutine(LoadSceneAsync("Assets/Resources/" + path + ".unity", false, (SceneAssetRequest request) =>
+            {
+                while (!request.isDone)
+                {
+                    process = (int)request.progress;
+                }
+                if (request.isDone)
+                {
+                    complete?.Invoke();
+                    complete = null;
+                    process = 0;
+                }
+            }));
+#else
+            StartCoroutine(LoadScene(name));
+#endif
+        }
+        public IEnumerator LoadScene(string name)
+        {
+            async = SceneManager.LoadSceneAsync(name);
+            async.allowSceneActivation = false;
+            yield return async;
+        }
+        //public IEnumerator LoadSceneAsync(string path, bool additive, Action<SceneAssetRequest> action)
+        //{
+        //    SceneAssetRequest request = Assets.LoadSceneAsync(path, additive);
+        //    yield return request;
+        //    action?.Invoke(request);
+        //}
+    }
+}
