@@ -16,7 +16,7 @@ public class UploadEditorWindow : EditorWindow
         GUILayout.EndHorizontal();
     }
     [MenuItem("Lcc/UploadEditor")]
-    private static void ShowLcc()
+    private static void ShowUpload()
     {
         UploadEditorWindow upload = GetWindow<UploadEditorWindow>();
         upload.position = new Rect(0, 0, 600, 600);

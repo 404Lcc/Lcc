@@ -192,4 +192,32 @@ public class LccMenuItem
         }
 #endif
     }
+    [MenuItem("Assets/Lcc/Create/Hotfix/Panel")]
+    private static void CreateHotfixPanel()
+    {
+        string pathName = CreateScriptAction.GetSelectedPath() + "/NewHotfixPanel.cs";
+        Texture2D icon = (Texture2D)EditorGUIUtility.IconContent("cs Script Icon").image;
+        ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<CreateScriptAction>(), pathName, icon, "Assets/Editor/Model/NewHotfixPanel.cs");
+    }
+    [MenuItem("Assets/Lcc/Create/Hotfix/ViewModel")]
+    private static void CreateHotfixViewModel()
+    {
+        string pathName = CreateScriptAction.GetSelectedPath() + "/NewHotfixViewModel.cs";
+        Texture2D icon = (Texture2D)EditorGUIUtility.IconContent("cs Script Icon").image;
+        ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<CreateScriptAction>(), pathName, icon, "Assets/Editor/Model/NewHotfixViewModel.cs");
+    }
+    [MenuItem("Assets/Lcc/Create/Model/Panel")]
+    private static void CreateModelPanel()
+    {
+        string pathName = CreateScriptAction.GetSelectedPath() + "/NewModelPanel.cs";
+        Texture2D icon = (Texture2D)EditorGUIUtility.IconContent("cs Script Icon").image;
+        ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<CreateScriptAction>(), pathName, icon, "Assets/Editor/Model/NewModelPanel.cs");
+    }
+    [MenuItem("Assets/Lcc/Create/Model/ViewModel")]
+    private static void CreateModelViewModel()
+    {
+        string pathName = CreateScriptAction.GetSelectedPath() + "/NewModelViewModel.cs";
+        Texture2D icon = (Texture2D)EditorGUIUtility.IconContent("cs Script Icon").image;
+        ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<CreateScriptAction>(), pathName, icon, "Assets/Editor/Model/NewModelViewModel.cs");
+    }
 }

@@ -107,12 +107,12 @@
     <Compile Include="Assets\Scripts\Tool\LocalDialog.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Data\Const\SceneName.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\AStarManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\DataBinder\DataBinder.cs" />
     <Compile Include="Assets\Scripts\LitJson\Lexer.cs" />
     <Compile Include="Assets\Scripts\UI\Panel\Launch\LaunchPanel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\AssetManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Data\AssetData.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonWriter.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\DataBinder\DataBinder.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />

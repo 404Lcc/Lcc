@@ -58,11 +58,17 @@
     <Compile Include="Assets\Editor\EditorWindow\LccEditorWindow.cs" />
     <Compile Include="Assets\Editor\ILRuntime\ILRuntimeCLRBinding.cs" />
     <Compile Include="Assets\Editor\ILRuntime\ILRuntimeCrossBinding.cs" />
+    <Compile Include="Assets\Editor\Model\NewModelViewModel.cs" />
+    <Compile Include="Assets\Editor\Model\NewHotfixViewModel.cs" />
     <Compile Include="Assets\Editor\ILRuntime\MonoBehaviourAdapterEditor.cs" />
     <Compile Include="Assets\Editor\Tool\BuildHotfix.cs" />
+    <Compile Include="Assets\Editor\Model\NewModelPanel.cs" />
     <Compile Include="Assets\Editor\Tool\Preprocess.cs" />
     <Compile Include="Assets\Editor\EditorWindow\UploadEditorWindow.cs" />
+    <Compile Include="Assets\Editor\Tool\CreateAssetAction.cs" />
     <Compile Include="Assets\Editor\MenuItem\LccMenuItem.cs" />
+    <Compile Include="Assets\Editor\Model\NewHotfixPanel.cs" />
+    <Compile Include="Assets\Editor\EditorWindow\ILRuntimeCrossBindingEditorWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
