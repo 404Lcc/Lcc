@@ -1,27 +1,27 @@
-﻿using Model;
-using UnityEngine;
-
-public class LaunchPanel : MonoBehaviour
+﻿namespace Model
 {
-    void Start()
+    public class LaunchPanel : ObjectBase
     {
-        InitPanel();
-    }
-    public void InitPanel()
-    {
+        public override void Start()
+        {
+            InitPanel();
+        }
+        public void InitPanel()
+        {
 #if AssetBundle
-        PanelManager.Instance.OpenPanel(PanelType.Updater);
+            PanelManager.Instance.OpenPanel(PanelType.Updater);
 #else
 #if ILRuntime
-        ILRuntimeManager.Instance.InitManager();
+            ILRuntimeManager.Instance.InitManager();
 #else
-        MonoManager.Instance.InitManager();
+            MonoManager.Instance.InitManager();
 #endif
 #endif
-        OnHidePanel();
-    }
-    public void OnHidePanel()
-    {
-        PanelManager.Instance.ClearPanel(PanelType.Launch);
+            OnHidePanel();
+        }
+        public void OnHidePanel()
+        {
+            PanelManager.Instance.ClearPanel(PanelType.Launch);
+        }
     }
 }

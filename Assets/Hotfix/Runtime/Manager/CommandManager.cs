@@ -6,17 +6,10 @@ namespace Hotfix
 {
     public class CommandManager : Singleton<CommandManager>
     {
-        public List<CommandData> commandDataList;
+        public List<CommandData> commandDataList = new List<CommandData>();
         public int index;
         public CommandType commandType;
-        void Awake()
-        {
-            InitManager();
-        }
-        void Start()
-        {
-        }
-        void Update()
+        public override void Update()
         {
             switch (commandType)
             {
@@ -27,10 +20,6 @@ namespace Hotfix
                     ManuallyExcute();
                     break;
             }
-        }
-        public void InitManager()
-        {
-            commandDataList = new List<CommandData>();
         }
         public void AddCommand(CommandData commandData)
         {

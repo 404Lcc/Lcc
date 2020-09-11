@@ -4,13 +4,13 @@ using UnityEngine.UI;
 
 namespace Model
 {
-    public class Tips : MonoBehaviour
+    public class Tips : ObjectBase
     {
         public int id;
         public string info;
 
         public Text infoText;
-        void Update()
+        public override void Update()
         {
             transform.SetAsLastSibling();
         }

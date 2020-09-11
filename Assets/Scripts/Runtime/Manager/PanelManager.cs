@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Model
 {
     public class PanelManager : Singleton<PanelManager>
     {
-        public Hashtable panels;
-        void Awake()
-        {
-            InitManager();
-        }
-        public void InitManager()
-        {
-            panels = new Hashtable();
-        }
+        public Hashtable panels = new Hashtable();
         /// <summary>
         /// 面板是否存在
         /// </summary>
@@ -38,7 +31,14 @@ namespace Model
             PanelInfo info = new PanelInfo();
             info.state = InfoState.Close;
             info.container = ContainerManager.Instance.CreateContainer(GameUtil.ConvertPanelTypeToString(type), false);
+            if (info.container == null) return null;
             info.type = type;
+            Assembly assembly = type.GetType().Assembly;
+            Type classType = assembly.GetType("Model." + GameUtil.ConvertPanelTypeToString(type));
+            if (classType != null)
+            {
+                LccViewFactory.CreateView(classType, info.container);
+            }
             info.ClosePanel();
             panels.Add(type, info);
             return info;

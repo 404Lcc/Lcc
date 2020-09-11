@@ -7,15 +7,7 @@ namespace Hotfix
 {
     public class VideoManager : Singleton<VideoManager>
     {
-        public Hashtable videos;
-        void Awake()
-        {
-            InitManager();
-        }
-        public void InitManager()
-        {
-            videos = new Hashtable();
-        }
+        public Hashtable videos = new Hashtable();
         private bool VideoExist(string video)
         {
             if (videos.ContainsKey(video))

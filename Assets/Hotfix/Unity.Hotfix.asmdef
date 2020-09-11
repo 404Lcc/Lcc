@@ -1,7 +1,8 @@
 {
     "name": "Unity.Hotfix",
     "references": [
-        "GUID:0d1ae7fff56963548a2a2a16dab3c5c6"
+        "GUID:0d1ae7fff56963548a2a2a16dab3c5c6",
+        "GUID:7a1fa966b0ea23f40a6a4dc4dab1e297"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -5,22 +5,11 @@ namespace Hotfix
 {
     public class TimerManager : Singleton<TimerManager>
     {
-        public List<TimerData> timerDataList;
+        public List<TimerData> timerDataList = new List<TimerData>();
         public int index;
-        void Awake()
-        {
-            InitManager();
-        }
-        void Start()
-        {
-        }
-        void Update()
+        public override void Update()
         {
             AutomaticExcute();
-        }
-        public void InitManager()
-        {
-            timerDataList = new List<TimerData>();
         }
         public TimerData TimerStart(float delay, TimerDelegate timerDelegate)
         {

@@ -1,17 +1,12 @@
-﻿using UnityEngine;
-
-namespace Hotfix
+﻿namespace Hotfix
 {
-    public class NewHotfixPanel : MonoBehaviour
+    public class NewHotfixPanel : ObjectBase
     {
-        void Awake()
+        public override void Start()
         {
             InitPanel();
         }
-        void Start()
-        {
-        }
-        void Update()
+        public override void Update()
         {
         }
         public void InitPanel()

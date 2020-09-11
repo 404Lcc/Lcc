@@ -7,14 +7,14 @@ namespace Model
         void Start()
         {
             InitGUI();
-            InitManager();
             InitAudioSource();
             InitVideoPlayer();
+            Manager.Instance.InitManagers();
         }
         /// <summary>
         /// 初始化UI
         /// </summary>
-        private void InitGUI()
+        public void InitGUI()
         {
             if (Objects.gui == null)
             {
@@ -24,21 +24,9 @@ namespace Model
             }
         }
         /// <summary>
-        /// 初始化管理器
-        /// </summary>
-        private void InitManager()
-        {
-            if (Objects.manager == null)
-            {
-                GameObject original = Instantiate(Resources.Load("Game/ModelManager")) as GameObject;
-                original.name = "ModelManager";
-                DontDestroyOnLoad(original);
-            }
-        }
-        /// <summary>
         /// 初始化AudioSource
         /// </summary>
-        private void InitAudioSource()
+        public void InitAudioSource()
         {
             if (Objects.audioSource == null)
             {
@@ -50,7 +38,7 @@ namespace Model
         /// <summary>
         /// 初始化VideoPlayer
         /// </summary>
-        private void InitVideoPlayer()
+        public void InitVideoPlayer()
         {
             if (Objects.videoPlayer == null)
             {

@@ -2,7 +2,7 @@
 
 namespace Hotfix
 {
-    public class Hotfix : MonoBehaviour
+    public class Hotfix
     {
         public static void InitHotfix()
         {
@@ -11,16 +11,9 @@ namespace Hotfix
         /// <summary>
         /// 初始化管理器
         /// </summary>
-        private static void InitManager()
+        public static void InitManager()
         {
-            if (Objects.manager == null)
-            {
-                GameObject original = new GameObject();
-                original.name = "HotfixManager";
-                original.tag = "HotfixManager";
-                GameUtil.AddComponent<Manager>(original);
-                DontDestroyOnLoad(original);
-            }
+            Manager.Instance.InitManagers();
         }
     }
 }

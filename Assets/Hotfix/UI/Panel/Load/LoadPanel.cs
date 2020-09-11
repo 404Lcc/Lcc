@@ -1,27 +1,24 @@
-﻿using Hotfix;
-using UnityEngine;
-
-public class LoadPanel : MonoBehaviour
+﻿namespace Hotfix
 {
-    void Awake()
+    public class LoadPanel : ObjectBase
     {
-        InitPanel();
-    }
-    void Start()
-    {
-    }
-    void Update()
-    {
-        if (Model.LoadSceneManager.Instance.process >= 100)
+        public override void Start()
         {
-            OnHidePanel();
+            InitPanel();
         }
-    }
-    public void InitPanel()
-    {
-    }
-    public void OnHidePanel()
-    {
-        PanelManager.Instance.ClearPanel(PanelType.Load);
+        public override void Update()
+        {
+            if (Model.LoadSceneManager.Instance.process >= 100)
+            {
+                OnHidePanel();
+            }
+        }
+        public void InitPanel()
+        {
+        }
+        public void OnHidePanel()
+        {
+            PanelManager.Instance.ClearPanel(PanelType.Load);
+        }
     }
 }

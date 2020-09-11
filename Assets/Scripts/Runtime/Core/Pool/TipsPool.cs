@@ -16,7 +16,7 @@
         {
             for (int i = 0; i < tipsMax; i++)
             {
-                Tips tips = GameUtil.GetComponent<Tips>(AssetManager.Instance.LoadGameObject("Tips", false, false, Objects.gui.transform, AssetType.UI, AssetType.Tool));
+                Tips tips = LccViewFactory.CreateView<Tips>(AssetManager.Instance.LoadGameObject("Tips", false, false, Objects.gui.transform, AssetType.UI, AssetType.Tool));
                 Enqueue(tips);
             }
         }

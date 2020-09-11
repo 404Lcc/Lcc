@@ -5,15 +5,7 @@ namespace Hotfix
 {
     public class LanguageManager : Singleton<LanguageManager>
     {
-        public Hashtable languages;
-        void Awake()
-        {
-            InitManager();
-        }
-        public void InitManager()
-        {
-            languages = new Hashtable();
-        }
+        public Hashtable languages = new Hashtable();
         public void ChangeLanguage(LanguageType type)
         {
             TextAsset asset = Model.AssetManager.Instance.LoadAssetData<TextAsset>(type.ToString(), ".txt", false, true, AssetType.Game);

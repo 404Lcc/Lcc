@@ -1,19 +1,17 @@
-﻿namespace Model
+﻿namespace Hotfix
 {
-    public class NewModelPanel : ObjectBase
+    public class LoginPanel : ObjectBase
     {
         public override void Start()
         {
             InitPanel();
-        }
-        public override void Update()
-        {
         }
         public void InitPanel()
         {
         }
         public void OnHidePanel()
         {
+            PanelManager.Instance.ClearPanel(PanelType.Login);
         }
     }
 }

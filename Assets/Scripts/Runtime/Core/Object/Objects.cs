@@ -6,7 +6,6 @@ namespace Model
     public class Objects
     {
         private static GameObject _gui;
-        private static Manager _manager;
         private static AudioSource _audioSource;
         private static VideoPlayer _videoPlayer;
         public static GameObject gui
@@ -18,19 +17,6 @@ namespace Model
                     _gui = GameUtil.GetGameObjectConvertedToTag("GUI");
                 }
                 return _gui;
-            }
-        }
-        public static Manager manager
-        {
-            get
-            {
-                if (_manager == null)
-                {
-                    GameObject manager = GameUtil.GetGameObjectConvertedToTag("ModelManager");
-                    if (manager == null) return null;
-                    _manager = GameUtil.GetComponent<Manager>(manager);
-                }
-                return _manager;
             }
         }
         public static AudioSource audioSource

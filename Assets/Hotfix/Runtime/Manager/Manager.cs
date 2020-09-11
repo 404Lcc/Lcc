@@ -5,11 +5,7 @@ namespace Hotfix
 {
     public class Manager : Singleton<Manager>
     {
-        void Awake()
-        {
-            InitManagers();
-        }
-        void Start()
+        public override void Start()
         {
             PanelManager.Instance.OpenPanel(PanelType.Load);
             Model.LoadSceneManager.Instance.LoadScene(SceneName.Login, () =>
@@ -17,7 +13,7 @@ namespace Hotfix
                 PanelManager.Instance.OpenPanel(PanelType.Login);
             }, AssetType.Scene);
         }
-        void Update()
+        public override void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -44,20 +40,8 @@ namespace Hotfix
         /// <summary>
         /// 初始化管理类
         /// </summary>
-        private void InitManagers()
+        public void InitManagers()
         {
-            GameUtil.AddComponent<PanelManager>(gameObject);
-            GameUtil.AddComponent<LogManager>(gameObject);
-            GameUtil.AddComponent<LanguageManager>(gameObject);
-            GameUtil.AddComponent<GameDataManager>(gameObject);
-            GameUtil.AddComponent<GameEventManager>(gameObject);
-            GameUtil.AddComponent<AudioManager>(gameObject);
-            GameUtil.AddComponent<VoiceManager>(gameObject);
-            GameUtil.AddComponent<VideoManager>(gameObject);
-            GameUtil.AddComponent<CommandManager>(gameObject);
-            GameUtil.AddComponent<TimerManager>(gameObject);
-            GameUtil.AddComponent<GameTimeManager>(gameObject);
-            GameUtil.AddComponent<CharacterManager>(gameObject);
         }
         /// <summary>
         /// 初始化设置
@@ -80,7 +64,7 @@ namespace Hotfix
             else if (UserSetData.displayModeType == DisplayModeType.BorderlessWindow)
             {
                 GameUtil.SetResolution(false, width, height);
-                StartCoroutine(Model.DisplayMode.SetNoFrame(width, height));
+                //StartCoroutine(Model.DisplayMode.SetNoFrame(width, height));
             }
             QualitySettings.SetQualityLevel(6, true);
         }

@@ -6,10 +6,11 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace Model
 {
-    public class GameUtil : MonoBehaviour
+    public static class GameUtil
     {
         public static string GetDataPath
         {
@@ -161,7 +162,7 @@ namespace Model
         {
             if (go == null) return;
             T component = GetComponent<T>(go);
-            Destroy(component);
+            Object.Destroy(component);
         }
         /// <summary>
         /// 删除物体
@@ -170,7 +171,7 @@ namespace Model
         public static void SafeDestroy(GameObject go)
         {
             if (go == null) return;
-            Destroy(go);
+            Object.Destroy(go);
         }
         /// <summary>
         /// 卸载资源

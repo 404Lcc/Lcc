@@ -8,22 +8,14 @@ namespace Hotfix
 {
     public class LogManager : Singleton<LogManager>
     {
-        public Hashtable logs;
-        void Awake()
-        {
-            InitManager();
-        }
-        void OnEnable()
+        public Hashtable logs = new Hashtable();
+        public override void OnEnable()
         {
             Application.logMessageReceived += HandleLog;
         }
-        void OnDisable()
+        public override void OnDisable()
         {
             Application.logMessageReceived -= HandleLog;
-        }
-        public void InitManager()
-        {
-            logs = new Hashtable();
         }
         private void HandleLog(string logString, string stackTrace, UnityEngine.LogType type)
         {

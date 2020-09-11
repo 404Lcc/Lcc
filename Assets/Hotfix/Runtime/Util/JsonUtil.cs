@@ -1,7 +1,6 @@
 ﻿using LitJson;
 using System.Collections.Generic;
 using System.Text;
-using UnityEngine;
 
 namespace Hotfix
 {
@@ -46,7 +45,7 @@ namespace Hotfix
         }
     }
 
-    public class JsonUtil : MonoBehaviour
+    public static class JsonUtil
     {
         public static DataListInstance ToDataListInstance()
         {

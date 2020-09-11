@@ -10,17 +10,8 @@ namespace Model
 {
     public class AssetManager : Singleton<AssetManager>
     {
-        public Dictionary<string, AssetData> assetDic;
-        //public Dictionary<string, AssetRequest> assetRequestDic;
-        void Awake()
-        {
-            InitManager();
-        }
-        public void InitManager()
-        {
-            assetDic = new Dictionary<string, AssetData>();
-            //assetRequestDic = new Dictionary<string, AssetRequest>();
-        }
+        public Dictionary<string, AssetData> assetDic = new Dictionary<string, AssetData>();
+        //public Dictionary<string, AssetRequest> assetRequestDic = new Dictionary<string, AssetRequest>();
         private AssetData LoadAssetData(string name, string suffix, bool keep, Type type, bool assetBundleMode, params string[] types)
         {
             if (types.Length == 0) return null;
@@ -135,14 +126,14 @@ namespace Model
         {
             AssetData assetData = LoadAssetData(name, ".prefab", keep, typeof(Object), assetBundleMode, types);
             if (assetData.asset == null) return null;
-            GameObject obj = Instantiate(assetData.asset) as GameObject;
+            GameObject obj = Object.Instantiate(assetData.asset) as GameObject;
             return obj;
         }
         public T LoadGameObject<T>(string name, bool keep, bool assetBundleMode, params string[] types) where T : Component
         {
             AssetData assetData = LoadAssetData(name, ".prefab", keep, typeof(Object), assetBundleMode, types);
             if (assetData.asset == null) return null;
-            GameObject obj = Instantiate(assetData.asset) as GameObject;
+            GameObject obj = Object.Instantiate(assetData.asset) as GameObject;
             T component = GameUtil.GetComponent<T>(obj);
             return component;
         }
@@ -150,7 +141,7 @@ namespace Model
         {
             AssetData assetData = LoadAssetData(name, ".prefab", keep, typeof(Object), assetBundleMode, types);
             if (assetData.asset == null) return null;
-            GameObject obj = Instantiate(assetData.asset) as GameObject;
+            GameObject obj = Object.Instantiate(assetData.asset) as GameObject;
             obj.transform.SetParent(parent);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;
@@ -161,7 +152,7 @@ namespace Model
         {
             AssetData assetdata = LoadAssetData(name, ".prefab", keep, typeof(Object), assetBundleMode, types);
             if (assetdata.asset == null) return null;
-            GameObject obj = Instantiate(assetdata.asset) as GameObject;
+            GameObject obj = Object.Instantiate(assetdata.asset) as GameObject;
             obj.transform.SetParent(parent);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;

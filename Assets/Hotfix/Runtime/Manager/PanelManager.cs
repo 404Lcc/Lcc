@@ -1,21 +1,14 @@
-﻿using System;
+﻿using ILRuntime.CLR.TypeSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Reflection;
 
 namespace Hotfix
 {
     public class PanelManager : Singleton<PanelManager>
     {
-        public Hashtable panels;
-        void Awake()
-        {
-            InitManager();
-        }
-        public void InitManager()
-        {
-            panels = new Hashtable();
-        }
+        public Hashtable panels = new Hashtable();
         /// <summary>
         /// 面板是否存在
         /// </summary>
@@ -39,7 +32,22 @@ namespace Hotfix
             PanelInfo info = new PanelInfo();
             info.state = InfoState.Close;
             info.container = Model.ContainerManager.Instance.CreateContainer(GameUtil.ConvertPanelTypeToString(type), true);
+            if (info.container == null) return null;
             info.type = type;
+#if ILRuntime
+            if (Model.ILRuntimeManager.Instance.appDomain.LoadedTypes.ContainsKey("Hotfix." + GameUtil.ConvertPanelTypeToString(type)))
+            {
+                IType iType = Model.ILRuntimeManager.Instance.appDomain.LoadedTypes["Hotfix." + GameUtil.ConvertPanelTypeToString(type)];
+                LccViewFactory.CreateView(iType.ReflectionType, info.container);
+            }
+#else
+            Assembly assembly = type.GetType().Assembly;
+            Type classType = assembly.GetType("Hotfix." + GameUtil.ConvertPanelTypeToString(type));
+            if (classType != null)
+            {
+                LccViewFactory.CreateView(classType, info.container);
+            }
+#endif
             info.ClosePanel();
             panels.Add(type, info);
             return info;
@@ -132,7 +140,6 @@ namespace Hotfix
             {
                 PanelInfo info = CreatePanel(type);
                 info.OpenPanel();
-                BindingPanel(type, info.container);
                 return info;
             }
         }
@@ -275,26 +282,6 @@ namespace Hotfix
                 return false;
             }
             return false;
-        }
-        /// <summary>
-        /// 绑定面板
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="container"></param>
-        public void BindingPanel(PanelType type, GameObject container)
-        {
-            switch (type)
-            {
-                case PanelType.Load:
-                    GameUtil.AddComponent<LoadPanel>(container);
-                    break;
-                case PanelType.Set:
-                    break;
-                case PanelType.Quit:
-                    break;
-                case PanelType.Login:
-                    break;
-            }
         }
     }
 }

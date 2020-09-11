@@ -6,15 +6,7 @@ namespace Hotfix
 {
     public class VoiceManager : Singleton<VoiceManager>
     {
-        public Hashtable voices;
-        void Awake()
-        {
-            InitManager();
-        }
-        public void InitManager()
-        {
-            voices = new Hashtable();
-        }
+        public Hashtable voices = new Hashtable();
         private bool AudioExist(string audio)
         {
             if (voices.ContainsKey(audio))
@@ -31,7 +23,7 @@ namespace Hotfix
         }
         public void LoadAudio(string audio, AudioType type, Action<AudioClip> action)
         {
-            StartCoroutine(GameUtil.Download(audio, type, action));
+            //StartCoroutine(GameUtil.Download(audio, type, action));
         }
         public void RemoveAudio(string audio, AudioSource source)
         {

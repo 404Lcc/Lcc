@@ -16,7 +16,7 @@
         {
             for (int i = 0; i < tipsWindowMax; i++)
             {
-                TipsWindow tipsWindow = GameUtil.GetComponent<TipsWindow>(AssetManager.Instance.LoadGameObject("TipsWindow", false, false, Objects.gui.transform, AssetType.UI, AssetType.Tool));
+                TipsWindow tipsWindow = LccViewFactory.CreateView<TipsWindow>(AssetManager.Instance.LoadGameObject("TipsWindow", false, false, Objects.gui.transform, AssetType.UI, AssetType.Tool));
                 Enqueue(tipsWindow);
             }
         }

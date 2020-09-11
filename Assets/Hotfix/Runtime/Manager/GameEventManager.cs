@@ -7,23 +7,11 @@ namespace Hotfix
     public delegate bool GameDispatcherConditionDelegate();
     public class GameEventManager : Singleton<GameEventManager>
     {
-        public Hashtable gameEvents;
-        public Hashtable gameDispatcherConditions;
-        void Awake()
-        {
-            InitManager();
-        }
-        void Start()
-        {
-        }
-        void Update()
+        public Hashtable gameEvents = new Hashtable();
+        public Hashtable gameDispatcherConditions = new Hashtable();
+        public override void Update()
         {
             AutoGameDispatcher();
-        }
-        public void InitManager()
-        {
-            gameEvents = new Hashtable();
-            gameDispatcherConditions = new Hashtable();
         }
         /// <summary>
         /// 增加事件

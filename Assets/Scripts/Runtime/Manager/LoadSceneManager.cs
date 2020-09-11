@@ -11,13 +11,7 @@ namespace Model
         public AsyncOperation async;
         public Action complete;
         public int process;
-        void Awake()
-        {
-        }
-        void Start()
-        {
-        }
-        void Update()
+        public override void Update()
         {
             if (async == null) return;
             if (async.progress < 0.9f)
@@ -66,7 +60,7 @@ namespace Model
                 }
             }));
 #else
-            StartCoroutine(LoadScene(name));
+            //StartCoroutine(LoadScene(name));
 #endif
         }
         public IEnumerator LoadScene(string name)

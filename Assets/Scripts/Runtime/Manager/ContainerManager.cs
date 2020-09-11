@@ -5,15 +5,7 @@ namespace Model
 {
     public class ContainerManager : Singleton<ContainerManager>
     {
-        public Hashtable containers;
-        void Awake()
-        {
-            InitManager();
-        }
-        public void InitManager()
-        {
-            containers = new Hashtable();
-        }
+        public Hashtable containers = new Hashtable();
         /// <summary>
         /// 创建容器
         /// </summary>

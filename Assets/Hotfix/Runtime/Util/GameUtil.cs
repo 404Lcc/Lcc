@@ -6,10 +6,11 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace Hotfix
 {
-    public class GameUtil : MonoBehaviour
+    public static class GameUtil
     {
         public static string GetDataPath
         {
@@ -157,12 +158,12 @@ namespace Hotfix
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="go"></param>
-        //public static void SafeDestroy<T>(GameObject go) where T : Component
-        //{
-        //    if (go == null) return;
-        //    T component = GetComponent<T>(go);
-        //    Destroy(component);
-        //}
+        public static void SafeDestroy<T>(GameObject go) where T : Component
+        {
+            if (go == null) return;
+            T component = GetComponent<T>(go);
+            Object.Destroy(component);
+        }
         /// <summary>
         /// 删除物体
         /// </summary>
@@ -170,7 +171,7 @@ namespace Hotfix
         public static void SafeDestroy(GameObject go)
         {
             if (go == null) return;
-            Destroy(go);
+            Object.Destroy(go);
         }
         /// <summary>
         /// 卸载资源
