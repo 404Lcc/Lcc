@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-
-namespace Hotfix
+﻿namespace Hotfix
 {
-    public class ViewBase<T> : MonoBehaviour, IView<T> where T : ViewModelBase
+    public class ViewBase<T> : ObjectBase, IView<T> where T : ViewModelBase
     {
         public bool init;
         public Binding<T> binding;

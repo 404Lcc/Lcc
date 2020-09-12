@@ -6,13 +6,6 @@
         {
             InitPanel();
         }
-        public override void Update()
-        {
-            if (Model.LoadSceneManager.Instance.process >= 100)
-            {
-                OnHidePanel();
-            }
-        }
         public void InitPanel()
         {
         }

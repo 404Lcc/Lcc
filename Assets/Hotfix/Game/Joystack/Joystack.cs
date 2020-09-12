@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Hotfix
 {
-    public class Joystack : MonoBehaviour
+    public class Joystack : ObjectBase
     {
         public static Joystack instance;
         //最大拖动距离
@@ -22,14 +22,11 @@ namespace Hotfix
 
         public GameObject joystack;
         public GameObject joystackBG;
-        void Awake()
+        public override void Start()
         {
             instance = this;
         }
-        void Start()
-        {
-        }
-        void Update()
+        public override void Update()
         {
             //根据触摸位置算出来的拖动距离
             distance = Vector3.Distance(joystack.transform.localPosition, origin);

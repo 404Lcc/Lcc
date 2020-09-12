@@ -37,8 +37,6 @@ namespace Model
 #if DEBUG && (UNITY_EDITOR || UNITY_ANDROID || UNITY_IPHONE)
             appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;
 #endif
-            appDomain.RegisterCrossBindingAdaptor(new CoroutineAdapter());
-
             JsonMapper.RegisterILRuntimeCLRRedirection(appDomain);
 
             //CLRBindings.Initialize(appDomain);

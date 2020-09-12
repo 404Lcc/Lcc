@@ -1,17 +1,15 @@
-﻿using UnityEngine;
-
-namespace Model
+﻿namespace Model
 {
-    public class DelayDestroy : MonoBehaviour
+    public class DelayDestroy : ObjectBase
     {
         public float time = 1;
-        void Awake()
+        public override void Start()
         {
             Invoke("DelayFunction", time);
         }
-        void DelayFunction()
+        public void DelayFunction()
         {
-            Destroy(gameObject);
+            GameUtil.SafeDestroy(gameObject);
         }
     }
 }

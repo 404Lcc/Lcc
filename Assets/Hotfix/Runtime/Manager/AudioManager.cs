@@ -23,7 +23,7 @@ namespace Hotfix
         }
         public void LoadAudio(string audio, AudioType type, Action<AudioClip> action)
         {
-            //StartCoroutine(GameUtil.Download(audio, type, action));
+            StartCoroutine(GameUtil.Download(audio, type, action));
         }
         public void RemoveAudio(string audio, AudioSource source)
         {

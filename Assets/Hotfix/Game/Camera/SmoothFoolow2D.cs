@@ -2,30 +2,23 @@
 
 namespace Hotfix
 {
-    public class SmoothFoolow2D : MonoBehaviour
+    public class SmoothFoolow2D : ObjectBase
     {
-        public int smooth;
-        public bool follow;
-        public BoxCollider2D box;
+        public int smooth = 1;
+        public bool follow = true;
         public Vector2 margin;
+        public BoxCollider2D box;
         public Vector3 min;
         public Vector3 max;
         public Vector2 half;
 
         public Transform target;
-        void Awake()
-        {
-            InitSmoothFoolow();
-        }
-        void Start()
-        {
-        }
-        void Update()
+        public override void Update()
         {
             half.x = Camera.main.orthographicSize * Screen.width / Screen.height;
             half.y = Camera.main.orthographicSize;
         }
-        void LateUpdate()
+        public override void LateUpdate()
         {
             if (follow)
             {
@@ -43,23 +36,12 @@ namespace Hotfix
                 transform.localPosition = localPosition;
             }
         }
-        public void InitSmoothFoolow()
-        {
-            smooth = 1;
-            follow = true;
-            box = GameUtil.GetComponent<BoxCollider2D>(GameUtil.GetGameObjectConvertedToTag("Map"));
-            margin = Vector2.zero;
-            //边界左下角
-            min = box.bounds.min;
-            //边界右上角
-            max = box.bounds.max;
-        }
-        public void InitSmoothFoolow(int smooth, bool follow, BoxCollider2D box, Vector2 margin, Vector3 min, Vector3 max, Transform target)
+        public void InitSmoothFoolow(int smooth, bool follow, Vector2 margin, BoxCollider2D box, Vector3 min, Vector3 max, Transform target)
         {
             this.smooth = smooth;
             this.follow = follow;
-            this.box = box;
             this.margin = margin;
+            this.box = box;
             //边界左下角
             this.min = min;
             //边界右上角

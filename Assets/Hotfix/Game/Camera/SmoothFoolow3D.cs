@@ -3,34 +3,27 @@ using UnityEngine.EventSystems;
 
 namespace Hotfix
 {
-    public class SmoothFoolow3D : MonoBehaviour
+    public class SmoothFoolow3D : ObjectBase
     {
-        public float distance;
-        public float damping;
-        public float limitYMin;
-        public float limitYMax;
+        public float distance = 3;
+        public float damping = 45;
+        public float limitYMin = -10;
+        public float limitYMax = 40;
         //相机的距离比例
-        public float proportion;
+        public float proportion = 1;
         public float speedX;
         public float speedY;
         public float angleX;
         public float angleY;
-        public bool needDamping;
+        public bool needDamping = true;
         public bool touch;
         public bool mouse;
         public bool touchRightUI;
-        public Vector3 offset;
+        public Vector3 offset = new Vector3(0, 1.5f, 0);
 
         public Transform target;
         public Transform lockTarget;
-        void Awake()
-        {
-            InitSmoothFoolow();
-        }
-        void Start()
-        {
-        }
-        void Update()
+        public override void Update()
         {
             if (touch)
             {
@@ -132,7 +125,7 @@ namespace Hotfix
                 }
             }
         }
-        void LateUpdate()
+        public override void LateUpdate()
         {
             if (target != null)
             {
@@ -160,14 +153,16 @@ namespace Hotfix
                 }
             }
         }
-        public void InitSmoothFoolow()
+        public void InitSmoothFoolow(float distance, float damping, float limitYMin, float limitYMax, float proportion, bool needDamping, Vector3 offset, Transform target)
         {
-            distance = 3;
-            damping = 45;
-            limitYMin = -10;
-            limitYMax = 40;
-            proportion = 1;
-            needDamping = true;
+            this.distance = distance;
+            this.damping = damping;
+            this.limitYMin = limitYMin;
+            this.limitYMax = limitYMax;
+            this.proportion = proportion;
+            this.needDamping = needDamping;
+            this.offset = offset;
+            this.target = target;
             if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
             {
                 speedX = 200;
@@ -182,18 +177,6 @@ namespace Hotfix
                 touch = true;
                 mouse = false;
             }
-            offset = new Vector3(0, 1.5f, 0);
-        }
-        public void InitSmoothFoolow(float distance, float damping, float limitYMin, float limitYMax, float proportion, bool needDamping, Vector3 offset, Transform target)
-        {
-            this.distance = distance;
-            this.damping = damping;
-            this.limitYMin = limitYMin;
-            this.limitYMax = limitYMax;
-            this.proportion = proportion;
-            this.needDamping = needDamping;
-            this.offset = offset;
-            this.target = target;
         }
         public void SetTarget(Transform target)
         {

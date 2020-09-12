@@ -60,7 +60,7 @@ namespace Model
                 }
             }));
 #else
-            //StartCoroutine(LoadScene(name));
+            StartCoroutine(LoadScene(name));
 #endif
         }
         public IEnumerator LoadScene(string name)

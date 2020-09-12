@@ -7,7 +7,6 @@ namespace Hotfix
     {
         public override void Start()
         {
-            PanelManager.Instance.OpenPanel(PanelType.Load);
             Model.LoadSceneManager.Instance.LoadScene(SceneName.Login, () =>
             {
                 PanelManager.Instance.OpenPanel(PanelType.Login);
@@ -46,7 +45,7 @@ namespace Hotfix
         /// <summary>
         /// 初始化设置
         /// </summary>
-        private void InitUserSet()
+        public void InitUserSet()
         {
             GameDataManager.Instance.GetUserSetData();
             AudioManager.Instance.SetVolume(UserSetData.audio, Model.Objects.audioSource);
@@ -64,7 +63,7 @@ namespace Hotfix
             else if (UserSetData.displayModeType == DisplayModeType.BorderlessWindow)
             {
                 GameUtil.SetResolution(false, width, height);
-                //StartCoroutine(Model.DisplayMode.SetNoFrame(width, height));
+                StartCoroutine(Model.DisplayMode.SetNoFrame(width, height));
             }
             QualitySettings.SetQualityLevel(6, true);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -42,7 +43,6 @@ namespace Model
                 OnEnable();
             }
         }
-        #region 变量自动引用
         public void AutoReference()
         {
             Dictionary<string, FieldInfo> dic = new Dictionary<string, FieldInfo>();
@@ -83,7 +83,26 @@ namespace Model
                 AutoReference(transform.GetChild(i), dic);
             }
         }
-        #endregion
+        public void Invoke(string methodName, float time)
+        {
+            lccView?.Invoke(methodName, time);
+        }
+        public Coroutine StartCoroutine(IEnumerator enumerator)
+        {
+            return lccView?.StartCoroutine(enumerator);
+        }
+        public void StopCoroutine(IEnumerator enumerator)
+        {
+            lccView?.StopCoroutine(enumerator);
+        }
+        public void StopCoroutine(Coroutine coroutine)
+        {
+            lccView?.StopCoroutine(coroutine);
+        }
+        public void StopAllCoroutines()
+        {
+            lccView?.StopAllCoroutines();
+        }
         public virtual void Awake()
         {
         }

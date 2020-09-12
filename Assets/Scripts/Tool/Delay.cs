@@ -1,16 +1,14 @@
-using UnityEngine;
-
 namespace Model
 {
-    public class Delay : MonoBehaviour
+    public class Delay : ObjectBase
     {
         public float time = 1;
-        void Awake()
+        public override void Start()
         {
             gameObject.SetActive(false);
             Invoke("DelayFunction", time);
         }
-        void DelayFunction()
+        public void DelayFunction()
         {
             gameObject.SetActive(true);
         }
