@@ -1,11 +1,24 @@
 # Lcc
+
 Lcc框架
+
+优点：高扩展，低耦合，快速开发
 
 ## V1.0
 
 **简介**
 
-[Lcc](https://github.com/404Lcc/Lcc)是针对Unity开发的轻量级框架，可快速上手开发**Steam**、**安卓**、**IOS**等项目。
+[Lcc](https://github.com/404Lcc/Lcc)是针对Unity开发的轻量级框架，可快速上手开发**Steam**、**安卓**、**IOS**等项目
+
+1. 适配ILRuntime所以主工程集与热更程集不继承MonoBehaviour而继承ObjectBase并且实现MonoBehaviour的生命周期方便快速入手
+
+2. 场景里面的所有脚本都通过LccView来管理，通过LccView工厂可快速获取到ObjectBase
+
+3. 通过继承ObjectBase编写代码避免了一些坑点而且可以无缝切换过来
+
+4. 提供编辑器工具帮助快速配置项目出包
+
+5. 提供主工程集与热更程集代码模板，无需编写样板代码
 
 **热更新**
 
@@ -49,17 +62,21 @@ Lcc框架
 
 **TCP、Http等协议**
 
+以上都是通过LccView进行管理
+
 ## 快速开始
 
 **UI**
 
-支持MVVM，提供了视图、视图模型、数据绑定。
+支持MVVM，提供了视图、视图模型、数据绑定
 
 ``` csharp
 PanelManager.Instance.OpenPanel(PanelType.Launch);
 ```
 
 **场景加载**
+
+提供加载ab包场景或者加载本地场景
 
 ``` csharp
 LoadSceneManager.Instance.LoadScene(SceneName.Login, null, AssetType.Scene);
@@ -75,4 +92,4 @@ LoadSceneManager.Instance.LoadScene(SceneName.Login, null, AssetType.Scene);
 
 ## 项目
 
-- [幻世激战](https://www.taptap.com/app/20877)
+- [个人独立游戏](https://www.taptap.com/developer/6782)
