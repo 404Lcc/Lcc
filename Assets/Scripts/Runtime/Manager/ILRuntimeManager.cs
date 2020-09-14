@@ -18,7 +18,7 @@ namespace Model
         public void LoadHotfixAssembly()
         {
             TextAsset dllAsset = AssetManager.Instance.LoadAssetData<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.Text);
-            MemoryStream dll = new MemoryStream(dllAsset.bytes);
+            MemoryStream dll = new MemoryStream(GameUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes));
 #if Release
             appDomain.LoadAssembly(dll, null, new PdbReaderProvider());
 #else

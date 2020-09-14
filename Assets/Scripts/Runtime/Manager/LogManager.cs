@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,6 +52,12 @@ namespace Model
             info.state = InfoState.Close;
             info.container = ContainerManager.Instance.CreateContainer(GameUtil.ConvertLogTypeToString(type), false);
             info.type = type;
+            Assembly assembly = type.GetType().Assembly;
+            Type classType = assembly.GetType("Model." + GameUtil.ConvertLogTypeToString(type));
+            if (classType != null)
+            {
+                LccViewFactory.CreateView(classType, info.container);
+            }
             info.logText = GameUtil.GetChildComponent<Text>(info.container, "Log");
             info.SetLog(log);
             info.ClosePanel();

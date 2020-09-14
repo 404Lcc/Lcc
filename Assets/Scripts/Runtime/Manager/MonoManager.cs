@@ -15,10 +15,10 @@ namespace Model
         {
             TextAsset dllAsset = AssetManager.Instance.LoadAssetData<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.Text);
 #if Release
-            assembly = AppDomain.CurrentDomain.Load(dllAsset.bytes);
+            assembly = AppDomain.CurrentDomain.Load(GameUtil.RijndaelDecrypt(Encoding.UTF8.GetBytes("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"), dllAsset.bytes));
 #else
             TextAsset pdbAsset = AssetManager.Instance.LoadAssetData<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.Text);
-            assembly = AppDomain.CurrentDomain.Load(dllAsset.bytes, pdbAsset.bytes);
+            assembly = AppDomain.CurrentDomain.Load(GameUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes), pdbAsset.bytes);
 #endif
             OnHotfixLoaded();
         }

@@ -279,15 +279,14 @@ namespace Model
             }
         }
         /// <summary>
-        /// 保存资源到本地
+        /// 保存资源
         /// </summary>
         /// <param name="path"></param>
-        /// <param name="name"></param>
         /// <param name="bytes"></param>
-        public static void SaveAsset(string path, string name, byte[] bytes)
+        public static void SaveAsset(string path, byte[] bytes)
         {
             Stream stream;
-            FileInfo info = new FileInfo(path + name);
+            FileInfo info = new FileInfo(path);
             if (info.Exists)
             {
                 info.Delete();
@@ -302,15 +301,24 @@ namespace Model
             stream.Dispose();
         }
         /// <summary>
-        /// 获取资源
+        /// 保存资源
         /// </summary>
         /// <param name="path"></param>
         /// <param name="name"></param>
+        /// <param name="bytes"></param>
+        public static void SaveAsset(string path, string name, byte[] bytes)
+        {
+            SaveAsset(path + "/" + name, bytes);
+        }
+        /// <summary>
+        /// 获取资源
+        /// </summary>
+        /// <param name="path"></param>
         /// <returns></returns>
-        public static byte[] GetAsset(string path, string name)
+        public static byte[] GetAsset(string path)
         {
             Stream stream;
-            FileInfo info = new FileInfo(path + name);
+            FileInfo info = new FileInfo(path);
             if (info.Exists)
             {
                 stream = info.OpenRead();
@@ -324,6 +332,16 @@ namespace Model
             stream.Close();
             stream.Dispose();
             return bytes;
+        }
+        /// <summary>
+        /// 获取资源
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static byte[] GetAsset(string path, string name)
+        {
+            return GetAsset(path + "/" + name);
         }
         /// <summary>
         /// 上传资源
@@ -370,7 +388,7 @@ namespace Model
             else
             {
                 byte[] bytes = webRequest.downloadHandler.data;
-                SaveAsset(GetPath(PathType.PersistentDataPath, folders), name, bytes);
+                SaveAsset(GetPath(PathType.PersistentDataPath, folders) + name, bytes);
             }
         }
         public static IEnumerator Download(string url, Action<byte[]> action)
@@ -488,13 +506,12 @@ namespace Model
         /// 生成MD5
         /// </summary>
         /// <param name="path"></param>
-        /// <param name="name"></param>
         /// <returns></returns>
-        public static string CreateMD5(string path, string name)
+        public static string CreateMD5(string path)
         {
-            //加密结果"x2"结果为32位,"x3"结果为48位,"x4"结果为64位
+            //加密结果"x2"结果为32位 "x3"结果为48位 "x4"结果为64位
             MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] bytes = GetAsset(path, name);
+            byte[] bytes = GetAsset(path);
             if (bytes == null)
             {
                 bytes = md5.ComputeHash(bytes);
@@ -506,6 +523,16 @@ namespace Model
                 return sb.ToString();
             }
             return null;
+        }
+        /// <summary>
+        /// 生成MD5
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static string CreateMD5(string path, string name)
+        {
+            return CreateMD5(path + "/" + name);
         }
         /// <summary>
         /// 设置分辨率
@@ -529,13 +556,11 @@ namespace Model
         /// <summary>
         /// 加密
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
+        /// <param name="keyBytes"></param>
+        /// <param name="valueBytes"></param>
         /// <returns></returns>
-        public static string RijndaelEncrypt(string key, string value)
+        public static byte[] RijndaelEncrypt(byte[] keyBytes, byte[] valueBytes)
         {
-            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
-            byte[] valueBytes = Encoding.UTF8.GetBytes(value);
             //加密
             RijndaelManaged rijndael = new RijndaelManaged();
             rijndael.Key = keyBytes;
@@ -543,8 +568,59 @@ namespace Model
             rijndael.Padding = PaddingMode.PKCS7;
             ICryptoTransform crypto = rijndael.CreateEncryptor();
             //加密后的数据
-            byte[] bytes = crypto.TransformFinalBlock(valueBytes, 0, valueBytes.Length);
+            return crypto.TransformFinalBlock(valueBytes, 0, valueBytes.Length);
+        }
+        /// <summary>
+        /// 加密
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="valueBytes"></param>
+        /// <returns></returns>
+        public static byte[] RijndaelEncrypt(string key, byte[] valueBytes)
+        {
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            return RijndaelEncrypt(keyBytes, valueBytes);
+        }
+        /// <summary>
+        /// 加密
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string RijndaelEncrypt(string key, string value)
+        {
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            byte[] valueBytes = Encoding.UTF8.GetBytes(value);
+            byte[] bytes = RijndaelEncrypt(keyBytes, valueBytes);
             return Convert.ToBase64String(bytes, 0, bytes.Length);
+        }
+        /// <summary>
+        /// 解密
+        /// </summary>
+        /// <param name="keyBytes"></param>
+        /// <param name="valueBytes"></param>
+        /// <returns></returns>
+        public static byte[] RijndaelDecrypt(byte[] keyBytes, byte[] valueBytes)
+        {
+            //解密
+            RijndaelManaged rijndael = new RijndaelManaged();
+            rijndael.Key = keyBytes;
+            rijndael.Mode = CipherMode.ECB;
+            rijndael.Padding = PaddingMode.PKCS7;
+            ICryptoTransform crypto = rijndael.CreateDecryptor();
+            //解密后的数据
+            return crypto.TransformFinalBlock(valueBytes, 0, valueBytes.Length);
+        }
+        /// <summary>
+        /// 解密
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="valueBytes"></param>
+        /// <returns></returns>
+        public static byte[] RijndaelDecrypt(string key, byte[] valueBytes)
+        {
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            return RijndaelDecrypt(keyBytes, valueBytes);
         }
         /// <summary>
         /// 解密
@@ -556,14 +632,7 @@ namespace Model
         {
             byte[] keyBytes = Encoding.UTF8.GetBytes(key);
             byte[] valueBytes = Convert.FromBase64String(value);
-            //解密
-            RijndaelManaged rijndael = new RijndaelManaged();
-            rijndael.Key = keyBytes;
-            rijndael.Mode = CipherMode.ECB;
-            rijndael.Padding = PaddingMode.PKCS7;
-            ICryptoTransform crypto = rijndael.CreateDecryptor();
-            //解密后的数据
-            byte[] bytes = crypto.TransformFinalBlock(valueBytes, 0, valueBytes.Length);
+            byte[] bytes = RijndaelDecrypt(keyBytes, valueBytes);
             return Encoding.UTF8.GetString(bytes, 0, bytes.Length);
         }
     }
