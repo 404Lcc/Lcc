@@ -1,5 +1,4 @@
-﻿using ILRuntime.CLR.TypeSystem;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -34,20 +33,12 @@ namespace Hotfix
             info.container = Model.ContainerManager.Instance.CreateContainer(GameUtil.ConvertPanelTypeToString(type), true);
             if (info.container == null) return null;
             info.type = type;
-#if ILRuntime
-            if (Model.ILRuntimeManager.Instance.appDomain.LoadedTypes.ContainsKey("Hotfix." + GameUtil.ConvertPanelTypeToString(type)))
-            {
-                IType iType = Model.ILRuntimeManager.Instance.appDomain.LoadedTypes["Hotfix." + GameUtil.ConvertPanelTypeToString(type)];
-                LccViewFactory.CreateView(iType.ReflectionType, info.container);
-            }
-#else
             Assembly assembly = type.GetType().Assembly;
-            Type classType = assembly.GetType("Hotfix." + GameUtil.ConvertPanelTypeToString(type));
+            Type classType = assembly.GetType(type.GetType().Namespace + "." + GameUtil.ConvertPanelTypeToString(type));
             if (classType != null)
             {
                 LccViewFactory.CreateView(classType, info.container);
             }
-#endif
             info.ClosePanel();
             panels.Add(type, info);
             return info;

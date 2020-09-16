@@ -53,7 +53,7 @@ namespace Model
             info.container = ContainerManager.Instance.CreateContainer(GameUtil.ConvertLogTypeToString(type), false);
             info.type = type;
             Assembly assembly = type.GetType().Assembly;
-            Type classType = assembly.GetType("Model." + GameUtil.ConvertLogTypeToString(type));
+            Type classType = assembly.GetType(type.GetType().Namespace + "." + GameUtil.ConvertLogTypeToString(type));
             if (classType != null)
             {
                 LccViewFactory.CreateView(classType, info.container);

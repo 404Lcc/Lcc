@@ -1,5 +1,4 @@
-﻿using ILRuntime.CLR.TypeSystem;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -53,20 +52,12 @@ namespace Hotfix
             info.state = InfoState.Close;
             info.container = Model.ContainerManager.Instance.CreateContainer(GameUtil.ConvertLogTypeToString(type), true);
             info.type = type;
-#if ILRuntime
-            if (Model.ILRuntimeManager.Instance.appDomain.LoadedTypes.ContainsKey("Hotfix." + GameUtil.ConvertLogTypeToString(type)))
-            {
-                IType iType = Model.ILRuntimeManager.Instance.appDomain.LoadedTypes["Hotfix." + GameUtil.ConvertLogTypeToString(type)];
-                LccViewFactory.CreateView(iType.ReflectionType, info.container);
-            }
-#else
             Assembly assembly = type.GetType().Assembly;
-            Type classType = assembly.GetType("Hotfix." + GameUtil.ConvertLogTypeToString(type));
+            Type classType = assembly.GetType(type.GetType().Namespace + "." + GameUtil.ConvertLogTypeToString(type));
             if (classType != null)
             {
                 LccViewFactory.CreateView(classType, info.container);
             }
-#endif
             info.logText = GameUtil.GetChildComponent<Text>(info.container, "Log");
             info.SetLog(log);
             info.ClosePanel();

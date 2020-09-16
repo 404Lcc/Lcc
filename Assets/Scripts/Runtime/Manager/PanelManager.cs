@@ -34,7 +34,7 @@ namespace Model
             if (info.container == null) return null;
             info.type = type;
             Assembly assembly = type.GetType().Assembly;
-            Type classType = assembly.GetType("Model." + GameUtil.ConvertPanelTypeToString(type));
+            Type classType = assembly.GetType(type.GetType().Namespace + "." + GameUtil.ConvertPanelTypeToString(type));
             if (classType != null)
             {
                 LccViewFactory.CreateView(classType, info.container);

@@ -56,8 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Hotfix\Runtime\Core\DataBinder\DataBinder.cs" />
-    <Compile Include="Assets\Hotfix\Game\Camera\SmoothFoolow2D.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\UI\Log\LogInfo.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Camera\SmoothFoolow2D.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Data\UI\LogInfo.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\CommandType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Socket\SocketModel.cs" />
@@ -65,33 +65,33 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\LanguageType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\CommandCVType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\CharacterManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\UI\Panel\PanelInfo.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Data\UI\PanelInfo.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\VideoManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\TimerManager.cs" />
     <Compile Include="Assets\Hotfix\Data\System\DataList.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Singleton.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\CommandVarietyType.cs" />
-    <Compile Include="Assets\Hotfix\Game\Camera\SmoothFoolow3D.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Camera\SmoothFoolow3D.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Init\Hotfix.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\UI\LogType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\GameEventType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\ViewModel\Base\ViewModelBase.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\UI\Base\Info.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\ViewModel\ViewModelBase.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Data\UI\InfoBase.cs" />
     <Compile Include="Assets\Hotfix\Data\System\UserSetData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\UI\InfoState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameDataManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Util\JsonUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Socket\CenterHandler.cs" />
-    <Compile Include="Assets\Hotfix\Game\Joystack\Joystack.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Joystack\Joystack.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Util\Util.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\PathType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Manager.cs" />
     <Compile Include="Assets\Hotfix\Data\System\UserData.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\View\Base\IView.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\View\IView.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\AssetType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Socket\EncodingTool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Socket\SendTool.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\View\Base\ViewBase.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\View\ViewBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\LogManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\ObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\AudioManager.cs" />
@@ -113,6 +113,9 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\TimerData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\LccViewFactory.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\CommandData.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\EventManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Event\IEvent.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Event\EventHandlerAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

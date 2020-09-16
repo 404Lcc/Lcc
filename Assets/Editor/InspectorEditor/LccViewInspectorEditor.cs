@@ -15,7 +15,7 @@ public class LccViewInspectorEditor : Editor
             Selection.activeObject = null;
             EditorGUIUtility.PingObject(Selection.activeObject);
             string[] infos = lccView.className.Split('.');
-            string name = infos[0].Replace("Model", "Scripts");
+            string name = infos[0].Replace(lccView.GetType().Namespace, "Scripts");
             string[] files = Directory.GetFiles("Assets/" + name, "*.cs", SearchOption.AllDirectories);
             foreach (string item in files)
             {

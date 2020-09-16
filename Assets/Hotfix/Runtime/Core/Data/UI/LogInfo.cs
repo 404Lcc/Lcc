@@ -1,10 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Hotfix
 {
-    public class PanelInfo : Info
+    public class LogInfo : InfoBase
     {
-        public PanelType type;
+        public LogType type;
+        public string log;
+        public Text logText;
+        public void SetLog(string log)
+        {
+            this.log = log;
+            logText.text = log;
+        }
         public override void OpenPanel()
         {
             if (ContainerExist())

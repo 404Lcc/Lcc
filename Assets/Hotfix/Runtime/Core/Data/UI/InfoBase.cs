@@ -2,7 +2,7 @@
 
 namespace Hotfix
 {
-    public class Info
+    public class InfoBase
     {
         public InfoState state;
         public GameObject container;

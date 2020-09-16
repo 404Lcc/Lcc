@@ -2,7 +2,7 @@
 
 namespace Model
 {
-    public class Info
+    public class InfoBase
     {
         public InfoState state;
         public GameObject container;
