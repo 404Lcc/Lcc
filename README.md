@@ -10,15 +10,23 @@ Lcc框架
 
 [Lcc](https://github.com/404Lcc/Lcc)是针对Unity开发的轻量级框架，可快速上手开发**Steam**、**安卓**、**IOS**等项目
 
+**特点**
+
 1. 适配ILRuntime所以主工程集与热更程集不继承MonoBehaviour而继承ObjectBase并且实现MonoBehaviour的生命周期方便快速入手
 
 2. 场景里面的所有脚本都通过LccView来管理，通过LccView工厂可快速获取到ObjectBase
 
-3. 通过继承ObjectBase编写代码避免了一些坑点而且可以无缝切换过来
+3. 通过继承ObjectBase编写代码避免了一些坑点而且可以无缝切换
 
 4. 提供编辑器工具帮助快速配置项目出包
 
 5. 提供主工程集与热更程集代码模板，无需编写样板代码
+
+6. 定义自定义Handler既可处理事件，使结构清晰
+
+7. 消息分发省去大量switch编写，标记特性即可处理消息
+
+8. 代码全自动加密
 
 **热更新**
 
@@ -27,8 +35,6 @@ Lcc框架
 2. C#方案[ILRuntime](https://github.com/Ourpalm/ILRuntime)
 
 3. 资源热更新[XAsset](https://github.com/xasset/xasset)
-
-4. C#代码加密
 
 **ILRuntime热更新注意项**
 
@@ -45,6 +51,8 @@ Lcc框架
 ## 主要功能
 
 **UI管理**
+
+UI容器，UI管理，UI工具等
 
 **场景管理**
 
