@@ -8,6 +8,7 @@
         }
         public void InitPanel()
         {
+            ViewModel = new LoginModel();
         }
         public void OnHidePanel()
         {

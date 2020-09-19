@@ -8,6 +8,7 @@
         }
         public void InitPanel()
         {
+            ViewModel = new LaunchModel();
 #if AssetBundle
             PanelManager.Instance.OpenPanel(PanelType.Updater);
 #else
