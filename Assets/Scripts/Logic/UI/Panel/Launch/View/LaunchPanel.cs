@@ -1,6 +1,6 @@
 ﻿namespace Model
 {
-    public class LaunchPanel : ObjectBase
+    public class LaunchPanel : ViewBase<LaunchModel>
     {
         public override void Start()
         {

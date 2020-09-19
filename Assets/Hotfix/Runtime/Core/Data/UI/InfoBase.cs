@@ -5,6 +5,7 @@ namespace Hotfix
     public class InfoBase
     {
         public InfoState state;
+        public ObjectBase objectBase;
         public GameObject container;
         public virtual void OpenPanel()
         {

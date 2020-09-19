@@ -55,6 +55,7 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Runtime\Core\Event\IEvent.cs" />
     <Compile Include="Assets\Scripts\Tool\OpenFileName.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\IView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Data\AStarNodeData.cs" />
@@ -62,7 +63,9 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Data\Config\Enum\UI\PanelType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Pool\Pool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\LoadSceneManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Socket\SocketModel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\ILRuntimeManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Event\EventHandlerAttribute.cs" />
     <Compile Include="Assets\Scripts\Tool\DelayDestroy.cs" />
     <Compile Include="Assets\Scripts\Tool\LongClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Data\UI\PanelInfo.cs" />
@@ -70,10 +73,12 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Data\UI\Tips.cs" />
     <Compile Include="Assets\Scripts\Tool\Drag.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Data\Config\Enum\PathType.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Manager\EventManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Pool\TipsPool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\Singleton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\Manager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\TipsManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Socket\CenterHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Data\UI\LogInfo.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonData.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonMockWrapper.cs" />
@@ -92,6 +97,8 @@
     <Compile Include="Assets\Scripts\Runtime\Manager\TipsWindowManager.cs" />
     <Compile Include="Assets\Scripts\Tool\RightClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\ViewBase.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Socket\EncodingTool.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Socket\SendTool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Data\Config\AssetType.cs" />
     <Compile Include="Assets\Scripts\Tool\DisplayMode.cs" />
     <Compile Include="Assets\Scripts\LitJson\IJsonWrapper.cs" />
@@ -101,6 +108,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Object\LccViewFactory.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\LccView.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Socket\ClientNet.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\PanelManager.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonMapper.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\Objects.cs" />
@@ -109,14 +117,12 @@
     <Compile Include="Assets\Scripts\Runtime\Manager\AStarManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\DataBinder\DataBinder.cs" />
     <Compile Include="Assets\Scripts\LitJson\Lexer.cs" />
-    <Compile Include="Assets\Scripts\UI\Panel\Launch\LaunchPanel.cs" />
+    <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\View\LaunchPanel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\AssetManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Data\AssetData.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonWriter.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\ObjectBase.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Event\EventHandlerAttribute.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Event\IEvent.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Manager\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\ViewModel\LaunchModel.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />

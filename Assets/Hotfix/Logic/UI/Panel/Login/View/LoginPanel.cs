@@ -1,6 +1,6 @@
 ﻿namespace Hotfix
 {
-    public class LoginPanel : ObjectBase
+    public class LoginPanel : ViewBase<LoginModel>
     {
         public override void Start()
         {

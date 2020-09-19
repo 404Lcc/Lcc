@@ -56,7 +56,7 @@ namespace Hotfix
             Type classType = assembly.GetType(type.GetType().Namespace + "." + GameUtil.ConvertLogTypeToString(type));
             if (classType != null)
             {
-                LccViewFactory.CreateView(classType, info.container);
+                info.objectBase = LccViewFactory.CreateView(classType, info.container);
             }
             info.logText = GameUtil.GetChildComponent<Text>(info.container, "Log");
             info.SetLog(log);
@@ -274,6 +274,22 @@ namespace Hotfix
             {
                 LogInfo info = logs[type] as LogInfo;
                 return info;
+            }
+            return null;
+        }
+        /// <summary>
+        /// 获取Log
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public T GetLogInfo<T>(LogType type) where T : ObjectBase
+        {
+            if (LogExist(type))
+            {
+                LogInfo info = logs[type] as LogInfo;
+                if (info.objectBase == null) return null;
+                return (T)info.objectBase;
             }
             return null;
         }

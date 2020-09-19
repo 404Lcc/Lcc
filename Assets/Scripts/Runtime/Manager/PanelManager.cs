@@ -37,7 +37,7 @@ namespace Model
             Type classType = assembly.GetType(type.GetType().Namespace + "." + GameUtil.ConvertPanelTypeToString(type));
             if (classType != null)
             {
-                LccViewFactory.CreateView(classType, info.container);
+                info.objectBase = LccViewFactory.CreateView(classType, info.container);
             }
             info.ClosePanel();
             panels.Add(type, info);
@@ -253,6 +253,22 @@ namespace Model
             {
                 PanelInfo info = panels[type] as PanelInfo;
                 return info;
+            }
+            return null;
+        }
+        /// <summary>
+        /// 获取面板
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public T GetPanelInfo<T>(PanelType type) where T : ObjectBase
+        {
+            if (PanelExist(type))
+            {
+                PanelInfo info = panels[type] as PanelInfo;
+                if (info.objectBase == null) return null;
+                return (T)info.objectBase;
             }
             return null;
         }
