@@ -6,7 +6,7 @@
         {
             get; set;
         }
-        void OpenPanel();
         void ClosePanel();
+        void ClearPanel();
     }
 }

@@ -23,7 +23,7 @@ namespace Hotfix
                 return gameObject.transform;
             }
         }
-        public void InitObjectBase(GameObject gameObject)
+        public void InitObjectBase(GameObject gameObject, object data = null)
         {
             this.gameObject = gameObject;
             AutoReference();
@@ -41,8 +41,8 @@ namespace Hotfix
             if (gameObject.activeSelf)
             {
                 Awake();
-                OnEnable();
             }
+            InitData(data);
         }
         public void AutoReference()
         {
@@ -133,6 +133,9 @@ namespace Hotfix
             lccView = null;
             gameObject = null;
             OnDestroy();
+        }
+        public virtual void InitData(object data)
+        {
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Model
             InitGUI();
             InitAudioSource();
             InitVideoPlayer();
-            Manager.Instance.InitManagers();
+            Manager.Instance.InitManager();
         }
         /// <summary>
         /// 初始化UI

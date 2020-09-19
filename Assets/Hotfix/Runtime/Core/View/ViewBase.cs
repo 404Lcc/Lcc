@@ -1,10 +1,16 @@
-﻿namespace Hotfix
+﻿using System;
+
+namespace Hotfix
 {
     public class ViewBase<T> : ObjectBase, IView<T> where T : ViewModelBase
     {
         public bool init;
         public Binding<T> binding;
         protected DataBinder<T> dataBinder;
+        public ViewBase()
+        {
+            ViewModel = Activator.CreateInstance<T>();
+        }
         public T ViewModel
         {
             get
@@ -32,11 +38,15 @@
             dataBinder.UnBind(oldValue);
             dataBinder.Bind(newValue);
         }
-        public virtual void OpenPanel()
-        {
-        }
         public virtual void ClosePanel()
         {
+            PanelType type = GameUtil.ConvertStringToPanelType(GetType().Name);
+            PanelManager.Instance.ClosePanel(type);
+        }
+        public virtual void ClearPanel()
+        {
+            PanelType type = GameUtil.ConvertStringToPanelType(GetType().Name);
+            PanelManager.Instance.ClearPanel(type);
         }
     }
 }

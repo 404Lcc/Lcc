@@ -26,7 +26,7 @@ namespace Hotfix
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public PanelInfo CreatePanel(PanelType type)
+        public PanelInfo CreatePanel(PanelType type, object data = null)
         {
             PanelInfo info = new PanelInfo();
             info.state = InfoState.Close;
@@ -37,7 +37,7 @@ namespace Hotfix
             Type classType = assembly.GetType(type.GetType().Namespace + "." + GameUtil.ConvertPanelTypeToString(type));
             if (classType != null)
             {
-                info.objectBase = LccViewFactory.CreateView(classType, info.container);
+                info.objectBase = LccViewFactory.CreateView(classType, info.container, data);
             }
             info.ClosePanel();
             panels.Add(type, info);
@@ -119,7 +119,7 @@ namespace Hotfix
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public PanelInfo OpenPanel(PanelType type)
+        public PanelInfo OpenPanel(PanelType type, object data = null)
         {
             if (PanelExist(type))
             {
@@ -129,7 +129,7 @@ namespace Hotfix
             }
             else
             {
-                PanelInfo info = CreatePanel(type);
+                PanelInfo info = CreatePanel(type, data);
                 info.OpenPanel();
                 return info;
             }
@@ -183,7 +183,7 @@ namespace Hotfix
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public PanelInfo ClosePanel(PanelType type)
+        public PanelInfo ClosePanel(PanelType type, object data = null)
         {
             if (PanelExist(type))
             {
@@ -193,7 +193,7 @@ namespace Hotfix
             }
             else
             {
-                PanelInfo info = CreatePanel(type);
+                PanelInfo info = CreatePanel(type, data);
                 info.ClosePanel();
                 return info;
             }

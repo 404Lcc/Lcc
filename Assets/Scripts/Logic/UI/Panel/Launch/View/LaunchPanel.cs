@@ -4,11 +4,6 @@
     {
         public override void Start()
         {
-            InitPanel();
-        }
-        public void InitPanel()
-        {
-            ViewModel = new LaunchModel();
 #if AssetBundle
             PanelManager.Instance.OpenPanel(PanelType.Updater);
 #else
@@ -18,11 +13,7 @@
             MonoManager.Instance.InitManager();
 #endif
 #endif
-            OnHidePanel();
-        }
-        public void OnHidePanel()
-        {
-            PanelManager.Instance.ClearPanel(PanelType.Launch);
+            ClearPanel();
         }
     }
 }

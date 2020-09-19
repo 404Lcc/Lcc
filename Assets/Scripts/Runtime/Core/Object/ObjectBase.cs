@@ -22,7 +22,7 @@ namespace Model
                 return gameObject.transform;
             }
         }
-        public void InitObjectBase(GameObject gameObject)
+        public void InitObjectBase(GameObject gameObject, object data = null)
         {
             this.gameObject = gameObject;
             AutoReference();
@@ -40,8 +40,8 @@ namespace Model
             if (gameObject.activeSelf)
             {
                 Awake();
-                OnEnable();
             }
+            InitData(data);
         }
         public void AutoReference()
         {
@@ -132,6 +132,9 @@ namespace Model
             lccView = null;
             gameObject = null;
             OnDestroy();
+        }
+        public virtual void InitData(object data)
+        {
         }
     }
 }

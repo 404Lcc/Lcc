@@ -13,7 +13,7 @@ namespace Hotfix
         /// </summary>
         public static void InitManager()
         {
-            Manager.Instance.InitManagers();
+            Manager.Instance.InitManager();
         }
     }
 }

@@ -39,7 +39,7 @@ namespace Hotfix
         /// <summary>
         /// 初始化管理类
         /// </summary>
-        public void InitManagers()
+        public void InitManager()
         {
         }
         /// <summary>
