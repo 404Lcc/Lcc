@@ -1,5 +1,6 @@
 ﻿#if UNITY_EDITOR
 using ILRuntime.Runtime.Enviorment;
+using Model;
 using System.IO;
 using System.Reflection;
 using UnityEditor;
@@ -14,7 +15,10 @@ public class ILRuntimeCLRBinding
         AppDomain domain = new AppDomain();
         using (FileStream fs = new FileStream("Assets/Resources/Text/Unity.Hotfix.dll.bytes", FileMode.Open, FileAccess.Read))
         {
-            domain.LoadAssembly(fs);
+            byte[] bytes = new byte[fs.ReadByte()];
+            fs.Read(bytes, 0, bytes.Length);
+            MemoryStream dll = new MemoryStream(GameUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", bytes));
+            domain.LoadAssembly(dll);
             //Crossbind Adapter is needed to generate the correct binding code
             InitILRuntime(domain);
             ILRuntime.Runtime.CLRBinding.BindingCodeGenerator.GenerateBindingCode(domain, "Assets/Scripts/Runtime/ILRuntime/Generated");
