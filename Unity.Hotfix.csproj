@@ -57,7 +57,6 @@
   <ItemGroup>
     <Compile Include="Assets\Hotfix\Runtime\Core\DataBinder\DataBinder.cs" />
     <Compile Include="Assets\Hotfix\Logic\Camera\SmoothFoolow2D.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Data\UI\LogInfo.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Event\EventHandlerAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\CommandType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\LanguageManager.cs" />
@@ -91,7 +90,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\View\IView.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\AssetType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\ViewBase.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\LogManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\ObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\AudioManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\DisplayModeType.cs" />
@@ -100,6 +98,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\SceneName.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Load\View\LoadPanel.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\View\LoginPanel.cs" />
+    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Load\ViewModel\LoadModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Pool\Pool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\UI\PanelType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\ResolutionType.cs" />
@@ -109,10 +108,11 @@
     <Compile Include="Assets\Hotfix\Runtime\Util\GameUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameTimeManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\TimerData.cs" />
+    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\ViewModel\LoginModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\LccViewFactory.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\CommandData.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Load\ViewModel\LoadModel.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\ViewModel\LoginModel.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Handler\PanelObjectBaseHandler.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Handler\ObjectBaseHandler.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

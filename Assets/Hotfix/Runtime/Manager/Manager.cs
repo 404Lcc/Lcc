@@ -41,6 +41,7 @@ namespace Hotfix
         /// </summary>
         public void InitManager()
         {
+            PanelManager.Instance.InitManager(new PanelObjectBaseHandler(false, true, AssetType.UI));
         }
         /// <summary>
         /// 初始化设置

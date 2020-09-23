@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Hotfix
 {
     public class PanelManager : Singleton<PanelManager>
     {
         public Hashtable panels = new Hashtable();
+        public PanelObjectBaseHandler handler;
+        public void InitManager(PanelObjectBaseHandler handler)
+        {
+            this.handler = handler;
+        }
         /// <summary>
         /// 面板是否存在
         /// </summary>
@@ -25,21 +29,11 @@ namespace Hotfix
         /// 创建面板
         /// </summary>
         /// <param name="type"></param>
+        /// <param name="data"></param>
         /// <returns></returns>
         public PanelInfo CreatePanel(PanelType type, object data = null)
         {
-            PanelInfo info = new PanelInfo();
-            info.state = InfoState.Close;
-            info.container = Model.ContainerManager.Instance.CreateContainer(GameUtil.ConvertPanelTypeToString(type), true);
-            if (info.container == null) return null;
-            info.type = type;
-            Assembly assembly = type.GetType().Assembly;
-            Type classType = assembly.GetType(type.GetType().Namespace + "." + GameUtil.ConvertPanelTypeToString(type));
-            if (classType != null)
-            {
-                info.objectBase = LccViewFactory.CreateView(classType, info.container, data);
-            }
-            info.ClosePanel();
+            PanelInfo info = handler.CreatePanel(type, data);
             panels.Add(type, info);
             return info;
         }
@@ -51,7 +45,6 @@ namespace Hotfix
         {
             if (PanelExist(type))
             {
-                Model.ContainerManager.Instance.RemoveContainer(GameUtil.ConvertPanelTypeToString(type));
                 PanelInfo info = GetPanelInfo(type);
                 GameUtil.SafeDestroy(info.container);
                 panels.Remove(type);
@@ -118,6 +111,7 @@ namespace Hotfix
         /// 打开面板
         /// </summary>
         /// <param name="type"></param>
+        /// <param name="data"></param>
         /// <returns></returns>
         public PanelInfo OpenPanel(PanelType type, object data = null)
         {

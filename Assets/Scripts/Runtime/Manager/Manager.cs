@@ -14,6 +14,7 @@
         /// </summary>
         public void InitManager()
         {
+            PanelManager.Instance.InitManager(new PanelObjectBaseHandler(false, false, AssetType.UI));
         }
     }
 }
