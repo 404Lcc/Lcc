@@ -60,6 +60,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Event\EventHandlerAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\CommandType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\LanguageManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Handler\PanelObjectBaseHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Event\IEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\PanelManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\LanguageType.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Pool\Pool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\UI\PanelType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\Config\Enum\ResolutionType.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Handler\ObjectBaseHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameEventManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\DataBinder\Binding.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\CommandManager.cs" />
@@ -111,8 +113,7 @@
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\ViewModel\LoginModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\LccViewFactory.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Data\CommandData.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Handler\PanelObjectBaseHandler.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Handler\ObjectBaseHandler.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Event\EventBase.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

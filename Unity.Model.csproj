@@ -67,8 +67,10 @@
     <Compile Include="Assets\Scripts\Runtime\Manager\ILRuntimeManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Event\EventHandlerAttribute.cs" />
     <Compile Include="Assets\Scripts\Tool\DelayDestroy.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Handler\PanelObjectBaseHandler.cs" />
     <Compile Include="Assets\Scripts\Tool\LongClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Data\UI\PanelInfo.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Handler\ObjectBaseHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\MonoManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\Tips.cs" />
     <Compile Include="Assets\Scripts\Tool\Drag.cs" />
@@ -120,8 +122,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Data\AssetData.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonWriter.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\ObjectBase.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Handler\ObjectBaseHandler.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Handler\PanelObjectBaseHandler.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Event\EventBase.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />

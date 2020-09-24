@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using UnityEngine;
 
 namespace Hotfix
 {
@@ -10,23 +11,27 @@ namespace Hotfix
         {
             foreach (Type item in GetType().Assembly.GetTypes())
             {
-                object[] objects = item.GetCustomAttributes(typeof(EventHandlerAttribute), false);
+                if (item.IsAbstract) continue;
+                object[] objects = item.GetCustomAttributes(typeof(EventHandlerAttribute), true);
                 if (objects.Length > 0)
                 {
-                    EventHandlerAttribute eventHandlerAttribute = (EventHandlerAttribute)objects[0];
-                    events.Add(eventHandlerAttribute.eventName, item);
+                    IEvent iEvent = (IEvent)Activator.CreateInstance(item);
+                    events.Add(iEvent.GetEventType(), iEvent);
                 }
             }
         }
-        public void Run(string eventName)
+        public void Publish<T>(T data)
         {
-            IEvent iEvent = (IEvent)Activator.CreateInstance((Type)events[eventName]);
-            iEvent.Run();
-        }
-        public void Run<T>(string eventName, T data)
-        {
-            IEvent iEvent = (IEvent)Activator.CreateInstance((Type)events[eventName]);
-            iEvent.Run(data);
+            Type dataType = typeof(T);
+            if (events.ContainsKey(dataType))
+            {
+                EventBase<T> eventBase = (EventBase<T>)events[dataType];
+                eventBase.Publish(data);
+            }
+            else
+            {
+                Debug.Log("事件不存在" + dataType.Name);
+            }
         }
     }
 }
