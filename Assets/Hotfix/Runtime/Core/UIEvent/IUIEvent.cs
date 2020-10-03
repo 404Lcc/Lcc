@@ -1,6 +1,6 @@
 ﻿namespace Hotfix
 {
-    public enum LogType
+    public interface IUIEvent
     {
     }
 }

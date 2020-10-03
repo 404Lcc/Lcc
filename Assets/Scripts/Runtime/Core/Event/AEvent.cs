@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace Hotfix
+namespace Model
 {
     [EventHandler]
-    public abstract class EventBase<T> : IEvent
+    public abstract class AEvent<T> : IEvent
     {
         public Type GetEventType()
         {

@@ -58,13 +58,15 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Event\IEvent.cs" />
     <Compile Include="Assets\Scripts\Tool\OpenFileName.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\IView.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Manager\UIEventManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Data\AStarNodeData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Init\Init.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Data\Config\Enum\UI\PanelType.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Data\Config\Enum\PanelType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Pool\Pool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\LoadSceneManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Socket\SocketModel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\ILRuntimeManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\UIEvent\IUIEvent.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Event\EventHandlerAttribute.cs" />
     <Compile Include="Assets\Scripts\Tool\DelayDestroy.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\PanelObjectBaseHandler.cs" />
@@ -81,9 +83,11 @@
     <Compile Include="Assets\Scripts\Runtime\Manager\Manager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\TipsManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Socket\CenterHandler.cs" />
+    <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\EventHandler\LaunchEventHandler.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonData.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Init\InitEventHandler.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonMockWrapper.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Data\Config\Enum\UI\InfoState.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Data\Config\Enum\InfoState.cs" />
     <Compile Include="Assets\Scripts\Tool\Delay.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Data\UI\InfoBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\TipsWindow.cs" />
@@ -92,9 +96,9 @@
     <Compile Include="Assets\Scripts\LitJson\JsonException.cs" />
     <Compile Include="Assets\Scripts\Tool\EnterClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\DataBinder\Binding.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Data\Config\Enum\UI\LogType.cs" />
     <Compile Include="Assets\Scripts\LitJson\ParserToken.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\TipsWindowManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\UIEvent\AUIEvent.cs" />
     <Compile Include="Assets\Scripts\Tool\RightClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\ViewBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Socket\EncodingTool.cs" />
@@ -104,17 +108,21 @@
     <Compile Include="Assets\Scripts\LitJson\IJsonWrapper.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Pool\TipsWindowPool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Util\GameUtil.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Event\AEvent.cs" />
     <Compile Include="Assets\Scripts\Tool\DoubleClickButton.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Object\LccViewFactory.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Factory\LccViewFactory.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\LccView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Socket\ClientNet.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\UIEvent\UIEventHandlerAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\PanelManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Data\Config\UIEventType.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonMapper.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\Objects.cs" />
     <Compile Include="Assets\Scripts\Tool\LocalDialog.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Data\Config\SceneName.cs" />
     <Compile Include="Assets\Scripts\Runtime\Manager\AStarManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Data\EventType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\DataBinder\DataBinder.cs" />
     <Compile Include="Assets\Scripts\LitJson\Lexer.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\View\LaunchPanel.cs" />
@@ -122,7 +130,6 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Data\AssetData.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonWriter.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\ObjectBase.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Event\EventBase.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />

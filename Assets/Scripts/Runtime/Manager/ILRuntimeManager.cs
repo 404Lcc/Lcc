@@ -43,7 +43,7 @@ namespace Model
         }
         public unsafe void OnHotfixLoaded()
         {
-            appDomain.Invoke("Hotfix.Hotfix", "InitHotfix", null, null);
+            appDomain.Invoke("Hotfix.Init", "InitHotfix", null, null);
         }
     }
 }

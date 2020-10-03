@@ -126,14 +126,16 @@ namespace Model
         {
             AssetData assetData = LoadAssetData(name, ".prefab", keep, typeof(Object), assetBundleMode, types);
             if (assetData.asset == null) return null;
-            GameObject obj = Object.Instantiate(assetData.asset) as GameObject;
+            GameObject obj = (GameObject)Object.Instantiate(assetData.asset);
+            obj.name = name;
             return obj;
         }
         public T LoadGameObject<T>(string name, bool keep, bool assetBundleMode, params string[] types) where T : Component
         {
             AssetData assetData = LoadAssetData(name, ".prefab", keep, typeof(Object), assetBundleMode, types);
             if (assetData.asset == null) return null;
-            GameObject obj = Object.Instantiate(assetData.asset) as GameObject;
+            GameObject obj = (GameObject)Object.Instantiate(assetData.asset);
+            obj.name = name;
             T component = GameUtil.GetComponent<T>(obj);
             return component;
         }
@@ -141,7 +143,8 @@ namespace Model
         {
             AssetData assetData = LoadAssetData(name, ".prefab", keep, typeof(Object), assetBundleMode, types);
             if (assetData.asset == null) return null;
-            GameObject obj = Object.Instantiate(assetData.asset) as GameObject;
+            GameObject obj = (GameObject)Object.Instantiate(assetData.asset);
+            obj.name = name;
             obj.transform.SetParent(parent);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;
@@ -152,7 +155,8 @@ namespace Model
         {
             AssetData assetdata = LoadAssetData(name, ".prefab", keep, typeof(Object), assetBundleMode, types);
             if (assetdata.asset == null) return null;
-            GameObject obj = Object.Instantiate(assetdata.asset) as GameObject;
+            GameObject obj = (GameObject)Object.Instantiate(assetdata.asset);
+            obj.name = name;
             obj.transform.SetParent(parent);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;

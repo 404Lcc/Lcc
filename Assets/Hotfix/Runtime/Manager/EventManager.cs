@@ -12,8 +12,8 @@ namespace Hotfix
             foreach (Type item in GetType().Assembly.GetTypes())
             {
                 if (item.IsAbstract) continue;
-                object[] objects = item.GetCustomAttributes(typeof(EventHandlerAttribute), true);
-                if (objects.Length > 0)
+                EventHandlerAttribute[] eventHandlerAttributes = (EventHandlerAttribute[])item.GetCustomAttributes(typeof(EventHandlerAttribute), true);
+                if (eventHandlerAttributes.Length > 0)
                 {
                     IEvent iEvent = (IEvent)Activator.CreateInstance(item);
                     events.Add(iEvent.GetEventType(), iEvent);
@@ -22,15 +22,15 @@ namespace Hotfix
         }
         public void Publish<T>(T data)
         {
-            Type dataType = typeof(T);
-            if (events.ContainsKey(dataType))
+            Type type = typeof(T);
+            if (events.ContainsKey(type))
             {
-                EventBase<T> eventBase = (EventBase<T>)events[dataType];
-                eventBase.Publish(data);
+                AEvent<T> aEvent = (AEvent<T>)events[type];
+                aEvent.Publish(data);
             }
             else
             {
-                Debug.Log("事件不存在" + dataType.Name);
+                Debug.Log("事件不存在" + type.Name);
             }
         }
     }

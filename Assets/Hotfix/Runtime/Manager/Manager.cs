@@ -5,13 +5,6 @@ namespace Hotfix
 {
     public class Manager : Singleton<Manager>
     {
-        public override void Start()
-        {
-            Model.LoadSceneManager.Instance.LoadScene(SceneName.Login, () =>
-            {
-                PanelManager.Instance.OpenPanel(PanelType.Login);
-            }, AssetType.Scene);
-        }
         public override void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -41,7 +34,10 @@ namespace Hotfix
         /// </summary>
         public void InitManager()
         {
-            PanelManager.Instance.InitManager(new PanelObjectBaseHandler(false, true, AssetType.UI));
+            Model.LoadSceneManager.Instance.LoadScene(SceneName.Login, () =>
+            {
+                UIEventManager.Instance.Publish(UIEventType.Login);
+            }, AssetType.Scene);
         }
         /// <summary>
         /// 初始化设置

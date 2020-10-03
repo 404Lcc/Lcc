@@ -1,6 +1,6 @@
 ﻿namespace Model
 {
-    public enum LogType
+    public interface IUIEvent
     {
     }
 }

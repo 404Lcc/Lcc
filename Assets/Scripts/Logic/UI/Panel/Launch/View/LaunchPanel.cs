@@ -5,7 +5,7 @@
         public override void Start()
         {
 #if AssetBundle
-            PanelManager.Instance.OpenPanel(PanelType.Updater);
+            //更新界面
 #else
 #if ILRuntime
             ILRuntimeManager.Instance.InitManager();

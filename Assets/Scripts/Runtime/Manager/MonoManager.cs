@@ -24,7 +24,7 @@ namespace Model
         }
         public unsafe void OnHotfixLoaded()
         {
-            object instance = assembly.CreateInstance("Hotfix.Hotfix");
+            object instance = assembly.CreateInstance("Hotfix.Init");
             Type type = instance.GetType();
             MethodInfo methodInfo = type.GetMethod("InitHotfix");
             methodInfo.Invoke(null, null);
