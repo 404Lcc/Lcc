@@ -26,7 +26,7 @@ namespace Model
         {
             this.gameObject = gameObject;
             AutoReference();
-            lccView = GameUtil.AddComponent<LccView>(gameObject);
+            lccView = Util.AddComponent<LccView>(gameObject);
             lccView.className = GetType().FullName;
             lccView.type = this;
             lccView.awake += Awake;

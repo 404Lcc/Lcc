@@ -19,18 +19,12 @@ namespace Model
         public override void OnPointerEnter(PointerEventData eventData)
         {
             base.OnPointerEnter(eventData);
-            if (enterClick != null)
-            {
-                enterClick.Invoke();
-            }
+            enterClick?.Invoke();
         }
         public override void OnPointerExit(PointerEventData eventData)
         {
             base.OnPointerExit(eventData);
-            if (exitClick != null)
-            {
-                exitClick.Invoke();
-            }
+            exitClick?.Invoke();
         }
     }
 }

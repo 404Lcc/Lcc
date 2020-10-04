@@ -51,10 +51,7 @@ namespace Model
         }
         private void Press()
         {
-            if (doubleClick != null)
-            {
-                doubleClick.Invoke();
-            }
+            doubleClick?.Invoke();
             ResetTime();
         }
         private void ResetTime()

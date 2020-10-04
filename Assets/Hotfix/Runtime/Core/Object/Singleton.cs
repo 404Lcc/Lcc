@@ -6,7 +6,7 @@ namespace Hotfix
 {
     public class Singleton<T> : ObjectBase where T : ObjectBase
     {
-        private static readonly object lockobject = new object();
+        private static readonly object lockObject = new object();
         private static T _instance;
         public static T Instance
         {
@@ -14,7 +14,7 @@ namespace Hotfix
             {
                 if (_instance == null)
                 {
-                    lock (lockobject)
+                    lock (lockObject)
                     {
                         _instance = Activator.CreateInstance<T>();
                         GameObject obj = new GameObject(_instance.ToString());

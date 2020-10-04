@@ -4,8 +4,8 @@ namespace Model
 {
     public class UIEventHandlerAttribute : Attribute
     {
-        public string uiEventType;
-        public UIEventHandlerAttribute(string uiEventType)
+        public UIEventType uiEventType;
+        public UIEventHandlerAttribute(UIEventType uiEventType)
         {
             this.uiEventType = uiEventType;
         }

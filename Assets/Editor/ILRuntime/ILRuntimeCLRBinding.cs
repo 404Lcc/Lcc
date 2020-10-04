@@ -17,7 +17,7 @@ public class ILRuntimeCLRBinding
         {
             byte[] bytes = new byte[fs.ReadByte()];
             fs.Read(bytes, 0, bytes.Length);
-            MemoryStream dll = new MemoryStream(GameUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", bytes));
+            MemoryStream dll = new MemoryStream(Util.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", bytes));
             domain.LoadAssembly(dll);
             //Crossbind Adapter is needed to generate the correct binding code
             InitILRuntime(domain);

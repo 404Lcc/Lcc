@@ -51,10 +51,7 @@ namespace Model
         }
         private void Press()
         {
-            if (longClick != null)
-            {
-                longClick.Invoke();
-            }
+            longClick?.Invoke();
             ResetTime();
         }
         private void ResetTime()

@@ -21,10 +21,10 @@ namespace Model
             }
             else
             {
-                Drag listener = GameUtil.GetComponent<Drag>(go);
+                Drag listener = Util.GetComponent<Drag>(go);
                 if (listener == null)
                 {
-                    listener = GameUtil.AddComponent<Drag>(go);
+                    listener = Util.AddComponent<Drag>(go);
                 }
                 return listener;
             }

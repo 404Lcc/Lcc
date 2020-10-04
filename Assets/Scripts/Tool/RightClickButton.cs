@@ -22,10 +22,7 @@ namespace Model
         }
         private void Press()
         {
-            if (rightClick != null)
-            {
-                rightClick.Invoke();
-            }
+            rightClick?.Invoke();
         }
     }
 }

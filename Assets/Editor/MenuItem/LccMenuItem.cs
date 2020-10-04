@@ -30,7 +30,7 @@ public class LccMenuItem
                 name += ".apk";
                 break;
         }
-        string locationPathName = GameUtil.GetPath(PathType.PersistentDataPath, "Build") + name;
+        string locationPathName = Util.GetPath(PathType.PersistentDataPath, "Build") + name;
         BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, locationPathName, EditorUserBuildSettings.activeBuildTarget, EditorUserBuildSettings.development ? BuildOptions.Development : BuildOptions.None);
     }
     [MenuItem("Lcc/ILRuntime")]

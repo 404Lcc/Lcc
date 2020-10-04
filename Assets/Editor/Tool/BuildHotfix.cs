@@ -30,7 +30,7 @@ public class BuildHotfix
         {
             File.Copy("Library/ScriptAssemblies/Unity.Hotfix.dll", "Assets/Resources/Text/Unity.Hotfix.dll.bytes", true);
             File.Copy("Library/ScriptAssemblies/Unity.Hotfix.pdb", "Assets/Resources/Text/Unity.Hotfix.pdb.bytes", true);
-            GameUtil.SaveAsset("Assets/Resources/Text/Unity.Hotfix.dll.bytes", GameUtil.RijndaelEncrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", GameUtil.GetAsset("Assets/Resources/Text/Unity.Hotfix.dll.bytes")));
+            Util.SaveAsset("Assets/Resources/Text/Unity.Hotfix.dll.bytes", Util.RijndaelEncrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", Util.GetAsset("Assets/Resources/Text/Unity.Hotfix.dll.bytes")));
             Debug.Log("复制Hotfix.dll Hotfix.pdb");
             AssetDatabase.Refresh();
         }

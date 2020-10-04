@@ -9,7 +9,7 @@
         }
         public void DelayFunction()
         {
-            GameUtil.SafeDestroy(gameObject);
+            Util.SafeDestroy(gameObject);
         }
     }
 }

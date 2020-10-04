@@ -14,7 +14,7 @@ namespace Model
             {
                 if (_gui == null)
                 {
-                    _gui = GameUtil.GetGameObjectConvertedToTag("GUI");
+                    _gui = Util.GetGameObjectConvertedToTag("GUI");
                 }
                 return _gui;
             }
@@ -25,9 +25,9 @@ namespace Model
             {
                 if (_audioSource == null)
                 {
-                    GameObject audiosource = GameUtil.GetGameObjectConvertedToTag("AudioSource");
+                    GameObject audiosource = Util.GetGameObjectConvertedToTag("AudioSource");
                     if (audiosource == null) return null;
-                    _audioSource = GameUtil.GetComponent<AudioSource>(audiosource);
+                    _audioSource = Util.GetComponent<AudioSource>(audiosource);
                 }
                 return _audioSource;
             }
@@ -38,9 +38,9 @@ namespace Model
             {
                 if (_videoPlayer == null)
                 {
-                    GameObject videoplayer = GameUtil.GetGameObjectConvertedToTag("AudioSource");
+                    GameObject videoplayer = Util.GetGameObjectConvertedToTag("AudioSource");
                     if (videoplayer == null) return null;
-                    _videoPlayer = GameUtil.GetComponent<VideoPlayer>(videoplayer);
+                    _videoPlayer = Util.GetComponent<VideoPlayer>(videoplayer);
                 }
                 return _videoPlayer;
             }

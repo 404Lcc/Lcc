@@ -27,7 +27,7 @@ namespace Hotfix
         {
             this.gameObject = gameObject;
             AutoReference();
-            lccView = Model.GameUtil.AddComponent<LccView>(gameObject);
+            lccView = Model.Util.AddComponent<LccView>(gameObject);
             lccView.className = GetType().FullName;
             lccView.type = this;
             lccView.awake += Awake;
