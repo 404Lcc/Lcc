@@ -28,11 +28,11 @@ public class ILRuntimeCrossBindingEditorWindow : EditorWindow
                 ShowNotification(new GUIContent("没有此脚本"));
                 return;
             }
-            if (File.Exists("Assets/Scripts/Runtime/ILRuntime/Adapter/" + _class + "Adapter.cs"))
+            if (File.Exists("Assets/Scripts/Runtime/Core/ILRuntime/Adapter/" + _class + "Adapter.cs"))
             {
-                File.Delete("Assets/Scripts/Runtime/ILRuntime/Adapter/" + _class + "Adapter.cs");
+                File.Delete("Assets/Scripts/Runtime/Core/ILRuntime/Adapter/" + _class + "Adapter.cs");
             }
-            using (StreamWriter sw = new StreamWriter("Assets/Scripts/Runtime/ILRuntime/Adapter/" + _class + "Adapter.cs"))
+            using (StreamWriter sw = new StreamWriter("Assets/Scripts/Runtime/Core/ILRuntime/Adapter/" + _class + "Adapter.cs"))
             {
                 sw.WriteLine(CrossBindingCodeGenerator.GenerateCrossBindingAdapterCode(type, _namespace));
             }
@@ -43,8 +43,8 @@ public class ILRuntimeCrossBindingEditorWindow : EditorWindow
     [MenuItem("Lcc/ILRuntimeCrossBindingEditor")]
     private static void ShowILRuntimeCrossBinding()
     {
-        ILRuntimeCrossBindingEditorWindow ilruntimeCrossBinding = GetWindow<ILRuntimeCrossBindingEditorWindow>();
-        ilruntimeCrossBinding.position = new Rect(0, 0, 600, 600);
-        ilruntimeCrossBinding.Show();
+        ILRuntimeCrossBindingEditorWindow ilRuntimeCrossBinding = GetWindow<ILRuntimeCrossBindingEditorWindow>();
+        ilRuntimeCrossBinding.position = new Rect(0, 0, 600, 600);
+        ilRuntimeCrossBinding.Show();
     }
 }

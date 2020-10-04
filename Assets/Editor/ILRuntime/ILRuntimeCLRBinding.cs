@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using ILRuntime.Runtime.CLRBinding;
 using ILRuntime.Runtime.Enviorment;
 using Model;
 using System.IO;
@@ -21,7 +22,7 @@ public class ILRuntimeCLRBinding
             domain.LoadAssembly(dll);
             //Crossbind Adapter is needed to generate the correct binding code
             InitILRuntime(domain);
-            ILRuntime.Runtime.CLRBinding.BindingCodeGenerator.GenerateBindingCode(domain, "Assets/Scripts/Runtime/ILRuntime/Generated");
+            BindingCodeGenerator.GenerateBindingCode(domain, "Assets/Scripts/Runtime/Core/ILRuntime/Generated");
         }
         AssetDatabase.Refresh();
     }
