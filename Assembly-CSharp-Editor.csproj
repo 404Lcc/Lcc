@@ -63,6 +63,7 @@
     <Compile Include="Assets\Editor\ObjectType\ObjectType\RectObjectType.cs" />
     <Compile Include="Assets\Editor\ObjectType\ObjectType\ColorObjectType.cs" />
     <Compile Include="Assets\Editor\ObjectType\ObjectTypeAttribute.cs" />
+    <Compile Include="Assets\Editor\ObjectType\ObjectType\Vector2IntObjectType.cs" />
     <Compile Include="Assets\Editor\ObjectType\ObjectType\ObjectObjectType.cs" />
     <Compile Include="Assets\Editor\Model\NewModelViewModel.cs" />
     <Compile Include="Assets\Editor\Model\NewHotfixViewModel.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets\Editor\EditorWindow\UploadEditorWindow.cs" />
     <Compile Include="Assets\Editor\ObjectType\ObjectType\EnumObjectType.cs" />
     <Compile Include="Assets\Editor\Tool\CreateAssetAction.cs" />
+    <Compile Include="Assets\Editor\ObjectType\ObjectType\Vector3IntObjectType.cs" />
     <Compile Include="Assets\Editor\ObjectType\ObjectType\FloatObjectType.cs" />
     <Compile Include="Assets\Editor\ObjectType\ObjectType\IntObjectType.cs" />
     <Compile Include="Assets\Editor\ObjectType\ObjectType\DoubleObjectType.cs" />
@@ -88,8 +90,6 @@
     <Compile Include="Assets\Editor\MenuItem\LccMenuItem.cs" />
     <Compile Include="Assets\Editor\Model\NewHotfixPanel.cs" />
     <Compile Include="Assets\Editor\ObjectType\ObjectType\Vector4ObjectType.cs" />
-    <Compile Include="Assets\Editor\ObjectType\ObjectType\Vector2IntObjectType.cs" />
-    <Compile Include="Assets\Editor\ObjectType\ObjectType\Vector3IntObjectType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
