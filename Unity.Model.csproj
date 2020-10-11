@@ -82,7 +82,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Object\Singleton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Manager.cs" />
     <Compile Include="Assets\Scripts\Module\Tips\TipsManager.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Socket\CenterHandler.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Socket\ICenterHandler.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\EventHandler\LaunchEventHandler.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Init\InitEventHandler.cs" />
@@ -101,8 +101,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\UIEvent\AUIEvent.cs" />
     <Compile Include="Assets\Scripts\Tool\RightClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Panel\View\ViewBase.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Socket\EncodingTool.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Socket\SendTool.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Socket\EncodingUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Asset\AssetType.cs" />
     <Compile Include="Assets\Scripts\Tool\DisplayMode.cs" />
     <Compile Include="Assets\Scripts\LitJson\IJsonWrapper.cs" />
@@ -113,7 +112,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Object\LccViewFactory.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Panel\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\LccView.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Socket\ClientNet.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Socket\ClientNetworkManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\UIEvent\UIEventHandlerAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Panel\PanelManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\UIEvent\UIEventType.cs" />

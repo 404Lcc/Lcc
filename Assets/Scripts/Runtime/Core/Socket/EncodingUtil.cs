@@ -4,32 +4,20 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Model
 {
-    public class EncodingTool
+    public static class EncodingUtil
     {
-        private static EncodingTool _instance;
-        public static EncodingTool Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new EncodingTool();
-                }
-                return _instance;
-            }
-        }
-        public byte[] LengthEncode(byte[] data)
+        public static byte[] LengthEncode(byte[] bytes)
         {
             MemoryStream stream = new MemoryStream();
             BinaryWriter writer = new BinaryWriter(stream);
-            writer.Write(data.Length);
-            writer.Write(data);
-            data = stream.ToArray();
+            writer.Write(bytes.Length);
+            writer.Write(bytes);
+            bytes = stream.ToArray();
             stream.Close();
             writer.Close();
-            return data;
+            return bytes;
         }
-        public byte[] LengthDecode(ref List<byte> cacheList)
+        public static byte[] LengthDecode(ref List<byte> cacheList)
         {
             MemoryStream stream = new MemoryStream(cacheList.ToArray());
             BinaryReader reader = new BinaryReader(stream);
@@ -38,14 +26,14 @@ namespace Model
             {
                 return null;
             }
-            byte[] data = reader.ReadBytes(length);
+            byte[] bytes = reader.ReadBytes(length);
             cacheList.Clear();
             cacheList.AddRange(reader.ReadBytes((int)(stream.Length - stream.Position)));
             stream.Close();
             reader.Close();
-            return data;
+            return bytes;
         }
-        public byte[] SocketModelEncode(SocketModel model)
+        public static byte[] SocketModelEncode(SocketModel model)
         {
             MemoryStream stream = new MemoryStream();
             BinaryWriter writer = new BinaryWriter(stream);
@@ -56,15 +44,15 @@ namespace Model
             {
                 writer.Write(SerializationEncode(model.message));
             }
-            byte[] data = stream.ToArray();
+            byte[] bytes = stream.ToArray();
             stream.Close();
             writer.Close();
-            return data;
+            return bytes;
 
         }
-        public SocketModel SocketModelDncode(byte[] data)
+        public static SocketModel SocketModelDncode(byte[] bytes)
         {
-            MemoryStream stream = new MemoryStream(data);
+            MemoryStream stream = new MemoryStream(bytes);
             BinaryReader reader = new BinaryReader(stream);
             SocketModel model = new SocketModel();
             model.type = reader.ReadByte();
@@ -78,18 +66,18 @@ namespace Model
             reader.Close();
             return model;
         }
-        public byte[] SerializationEncode(object obj)
+        public static byte[] SerializationEncode(object obj)
         {
             MemoryStream stream = new MemoryStream();
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(stream, obj);
-            byte[] data = stream.ToArray();
+            byte[] bytes = stream.ToArray();
             stream.Close();
-            return data;
+            return bytes;
         }
-        public object DeserializationDecode(byte[] data)
+        public static object DeserializationDecode(byte[] bytes)
         {
-            MemoryStream stream = new MemoryStream(data);
+            MemoryStream stream = new MemoryStream(bytes);
             BinaryFormatter formatter = new BinaryFormatter();
             object obj = formatter.Deserialize(stream);
             stream.Close();

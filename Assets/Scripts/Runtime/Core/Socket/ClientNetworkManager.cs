@@ -5,38 +5,33 @@ using System.Net.Sockets;
 
 namespace Model
 {
-    public class ClientNet
+    public class ClientNetworkManager : Singleton<ClientNetworkManager>
     {
         public Socket socket;
-        public CenterHandler handler;
+        public ICenterHandler iCenterHandler;
         public string ip;
         public int port;
-        public byte[] data;
-        public List<byte> cacheList;
+        public byte[] bytes = new byte[1024];
+        public List<byte> cacheList = new List<byte>();
         public bool receive;
-        public ClientNet(CenterHandler handler, string ip, int port)
+        public void InitManager(ICenterHandler iCenterHandler, string ip, int port)
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            this.handler = handler;
+            this.iCenterHandler = iCenterHandler;
             this.ip = ip;
             this.port = port;
-            data = new byte[1024];
-            cacheList = new List<byte>();
-        }
-        public void Init()
-        {
             socket.Connect(new IPEndPoint(IPAddress.Parse(ip), port));
         }
         public void Receive()
         {
-            socket.BeginReceive(data, 0, 1024, SocketFlags.None, ReceiveCompleted, data);
+            socket.BeginReceive(bytes, 0, 1024, SocketFlags.None, ReceiveCompleted, bytes);
         }
         public void ReceiveCompleted(IAsyncResult result)
         {
             int length = socket.EndReceive(result);
-            byte[] data = new byte[length];
-            Buffer.BlockCopy(this.data, 0, data, 0, length);
-            cacheList.AddRange(data);
+            byte[] bytes = new byte[length];
+            Buffer.BlockCopy(this.bytes, 0, bytes, 0, length);
+            cacheList.AddRange(bytes);
             if (!receive)
             {
                 receive = true;
@@ -51,23 +46,28 @@ namespace Model
                 receive = false;
                 return;
             }
-            byte[] data = EncodingTool.Instance.LengthDecode(ref cacheList);
+            byte[] data = EncodingUtil.LengthDecode(ref cacheList);
             if (data == null)
             {
                 receive = false;
                 return;
             }
-            SocketModel model = EncodingTool.Instance.SocketModelDncode(data);
-            handler.Receive(model);
+            SocketModel model = EncodingUtil.SocketModelDncode(data);
+            iCenterHandler.Receive(model);
             ReceiveHandle();
         }
-        public void Send(byte[] data)
+        public void Send(byte[] bytes)
         {
-            socket.BeginSend(data, 0, data.Length, SocketFlags.None, SendCompleted, data);
+            socket.BeginSend(bytes, 0, bytes.Length, SocketFlags.None, SendCompleted, bytes);
+        }
+        public void Send(byte type, int area, int command, object message)
+        {
+            SocketModel model = new SocketModel(type, area, command, message);
+            byte[] bytes = EncodingUtil.LengthEncode(EncodingUtil.SocketModelEncode(model));
+            Send(bytes);
         }
         public void SendCompleted(IAsyncResult result)
         {
-
         }
         public void Close()
         {
