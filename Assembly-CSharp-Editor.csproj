@@ -88,6 +88,8 @@
     <Compile Include="Assets\Editor\MenuItem\LccMenuItem.cs" />
     <Compile Include="Assets\Editor\Model\NewHotfixPanel.cs" />
     <Compile Include="Assets\Editor\ObjectType\ObjectType\Vector4ObjectType.cs" />
+    <Compile Include="Assets\Editor\ObjectType\ObjectType\Vector2IntObjectType.cs" />
+    <Compile Include="Assets\Editor\ObjectType\ObjectType\Vector3IntObjectType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
