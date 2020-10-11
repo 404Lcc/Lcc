@@ -87,19 +87,19 @@ namespace Model
         /// <summary>
         /// 获取子物体
         /// </summary>
-        /// <param name="go"></param>
+        /// <param name="gameObject"></param>
         /// <param name="subs"></param>
         /// <returns></returns>
-        public static GameObject GetChildGameObject(GameObject go, params string[] subs)
+        public static GameObject GetChildGameObject(GameObject gameObject, params string[] subs)
         {
-            if (go == null) return null;
+            if (gameObject == null) return null;
             string sub = string.Empty;
             for (int i = 0; i < subs.Length - 1; i++)
             {
                 sub += subs[i] + "/";
             }
             sub += subs[subs.Length - 1];
-            Transform transform = go.transform.Find(sub);
+            Transform transform = gameObject.transform.Find(sub);
             if (transform == null) return null;
             return transform.gameObject;
         }
@@ -107,71 +107,71 @@ namespace Model
         /// 获取组件
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="go"></param>
+        /// <param name="gameObject"></param>
         /// <returns></returns>
-        public static T GetComponent<T>(GameObject go) where T : Component
+        public static T GetComponent<T>(GameObject gameObject) where T : Component
         {
-            if (go == null) return null;
-            return go.GetComponent<T>();
+            if (gameObject == null) return null;
+            return gameObject.GetComponent<T>();
         }
         /// <summary>
         /// 获取子物体组件
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="go"></param>
+        /// <param name="gameObject"></param>
         /// <param name="subs"></param>
         /// <returns></returns>
-        public static T GetChildComponent<T>(GameObject go, params string[] subs) where T : Component
+        public static T GetChildComponent<T>(GameObject gameObject, params string[] subs) where T : Component
         {
-            GameObject obj = GetChildGameObject(go, subs);
-            if (obj == null) return null;
-            return GetComponent<T>(obj);
+            GameObject subGameObject = GetChildGameObject(gameObject, subs);
+            if (subGameObject == null) return null;
+            return GetComponent<T>(subGameObject);
         }
         /// <summary>
         /// 增加组件
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="go"></param>
+        /// <param name="gameObject"></param>
         /// <returns></returns>
-        public static T AddComponent<T>(GameObject go) where T : Component
+        public static T AddComponent<T>(GameObject gameObject) where T : Component
         {
-            if (go == null) return null;
-            T component = go.GetComponent<T>();
+            if (gameObject == null) return null;
+            T component = gameObject.GetComponent<T>();
             if (component != null) return null;
-            return go.AddComponent<T>();
+            return gameObject.AddComponent<T>();
         }
         /// <summary>
         /// 增加子物体组件
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="go"></param>
+        /// <param name="gameObject"></param>
         /// <param name="subs"></param>
         /// <returns></returns>
-        public static T AddChildComponent<T>(GameObject go, params string[] subs) where T : Component
+        public static T AddChildComponent<T>(GameObject gameObject, params string[] subs) where T : Component
         {
-            GameObject obj = GetChildGameObject(go, subs);
-            if (obj == null) return null;
-            return AddComponent<T>(obj);
+            GameObject subGameObject = GetChildGameObject(gameObject, subs);
+            if (subGameObject == null) return null;
+            return AddComponent<T>(subGameObject);
         }
         /// <summary>
         /// 删除组件
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="go"></param>
-        public static void SafeDestroy<T>(GameObject go) where T : Component
+        /// <param name="gameObject"></param>
+        public static void SafeDestroy<T>(GameObject gameObject) where T : Component
         {
-            if (go == null) return;
-            T component = GetComponent<T>(go);
+            if (gameObject == null) return;
+            T component = GetComponent<T>(gameObject);
             Object.Destroy(component);
         }
         /// <summary>
         /// 删除物体
         /// </summary>
-        /// <param name="go"></param>
-        public static void SafeDestroy(GameObject go)
+        /// <param name="gameObject"></param>
+        public static void SafeDestroy(GameObject gameObject)
         {
-            if (go == null) return;
-            Object.Destroy(go);
+            if (gameObject == null) return;
+            Object.Destroy(gameObject);
         }
         /// <summary>
         /// 卸载资源

@@ -80,15 +80,15 @@ namespace Model
             foreach (string item in all.Split(','))
             {
                 if (string.IsNullOrEmpty(item)) continue;
-                Object obj = assetDic[item].asset;
+                Object asset = assetDic[item].asset;
                 if (item.Contains("."))
                 {
-                    if (obj)
+                    if (asset)
                     {
-                        if (obj.GetType() != typeof(GameObject) && obj.GetType() != typeof(Component))
+                        if (asset.GetType() != typeof(GameObject) && asset.GetType() != typeof(Component))
                         {
                             //Resources.UnloadAsset仅能释放非GameObject和Component的资源 比如Texture Mesh等真正的资源 对于由Prefab加载出来的Object或Component,则不能通过该函数来进行释放
-                            Resources.UnloadAsset(obj);
+                            Resources.UnloadAsset(asset);
                             assetDic.Remove(item);
                         }
                     }
@@ -119,49 +119,49 @@ namespace Model
         }
         public T LoadAssetData<T>(string name, string suffix, bool isKeep, bool isAssetBundle, params string[] types) where T : Object
         {
-            AssetData asset = LoadAssetData(name, suffix, isKeep, typeof(T), isAssetBundle, types);
-            return (T)asset.asset;
+            AssetData assetData = LoadAssetData(name, suffix, isKeep, typeof(T), isAssetBundle, types);
+            return (T)assetData.asset;
         }
         public GameObject LoadGameObject(string name, bool isKeep, bool isAssetBundle, params string[] types)
         {
             AssetData assetData = LoadAssetData(name, ".prefab", isKeep, typeof(Object), isAssetBundle, types);
             if (assetData.asset == null) return null;
-            GameObject obj = (GameObject)Object.Instantiate(assetData.asset);
-            obj.name = name;
-            return obj;
+            GameObject gameObject = (GameObject)Object.Instantiate(assetData.asset);
+            gameObject.name = name;
+            return gameObject;
         }
         public T LoadGameObject<T>(string name, bool isKeep, bool isAssetBundle, params string[] types) where T : Component
         {
             AssetData assetData = LoadAssetData(name, ".prefab", isKeep, typeof(Object), isAssetBundle, types);
             if (assetData.asset == null) return null;
-            GameObject obj = (GameObject)Object.Instantiate(assetData.asset);
-            obj.name = name;
-            T component = Util.GetComponent<T>(obj);
+            GameObject gameObject = (GameObject)Object.Instantiate(assetData.asset);
+            gameObject.name = name;
+            T component = Util.GetComponent<T>(gameObject);
             return component;
         }
         public GameObject LoadGameObject(string name, bool isKeep, bool isAssetBundle, Transform parent, params string[] types)
         {
             AssetData assetData = LoadAssetData(name, ".prefab", isKeep, typeof(Object), isAssetBundle, types);
             if (assetData.asset == null) return null;
-            GameObject obj = (GameObject)Object.Instantiate(assetData.asset);
-            obj.name = name;
-            obj.transform.SetParent(parent);
-            obj.transform.localPosition = Vector3.zero;
-            obj.transform.localRotation = Quaternion.identity;
-            obj.transform.localScale = Vector3.one;
-            return obj;
+            GameObject gameObject = (GameObject)Object.Instantiate(assetData.asset);
+            gameObject.name = name;
+            gameObject.transform.SetParent(parent);
+            gameObject.transform.localPosition = Vector3.zero;
+            gameObject.transform.localRotation = Quaternion.identity;
+            gameObject.transform.localScale = Vector3.one;
+            return gameObject;
         }
         public T LoadGameObject<T>(string name, bool isKeep, bool isAssetBundle, Transform parent, params string[] types) where T : Component
         {
             AssetData assetdata = LoadAssetData(name, ".prefab", isKeep, typeof(Object), isAssetBundle, types);
             if (assetdata.asset == null) return null;
-            GameObject obj = (GameObject)Object.Instantiate(assetdata.asset);
-            obj.name = name;
-            obj.transform.SetParent(parent);
-            obj.transform.localPosition = Vector3.zero;
-            obj.transform.localRotation = Quaternion.identity;
-            obj.transform.localScale = Vector3.one;
-            T component = Util.GetComponent<T>(obj);
+            GameObject gameObject = (GameObject)Object.Instantiate(assetdata.asset);
+            gameObject.name = name;
+            gameObject.transform.SetParent(parent);
+            gameObject.transform.localPosition = Vector3.zero;
+            gameObject.transform.localRotation = Quaternion.identity;
+            gameObject.transform.localScale = Vector3.one;
+            T component = Util.GetComponent<T>(gameObject);
             return component;
         }
         //public AssetRequest LoadAsset(string path, Type type)

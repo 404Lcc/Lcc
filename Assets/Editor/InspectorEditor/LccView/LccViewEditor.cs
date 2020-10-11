@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(LccView))]
-public class LccViewInspectorEditor : Editor
+public class LccViewEditor : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -26,5 +26,6 @@ public class LccViewInspectorEditor : Editor
                 }
             }
         }
+        ObjectTypeUtil.Draw(lccView.type);
     }
 }

@@ -66,6 +66,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Event\IEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Panel\PanelManager.cs" />
     <Compile Include="Assets\Hotfix\Data\User\Config\LanguageType.cs" />
+    <Compile Include="Assets\Hotfix\Data\User\Instance\UserSetDataInstance.cs" />
     <Compile Include="Assets\Hotfix\Module\Character\CharacterManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Panel\Panel.cs" />
     <Compile Include="Assets\Hotfix\Module\Video\VideoManager.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets\Hotfix\Module\GameData\GameDataManager.cs" />
     <Compile Include="Assets\Hotfix\Data\User\Util\UserUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\UIEvent\UIEventHandlerAttribute.cs" />
+    <Compile Include="Assets\Hotfix\Data\User\Instance\UserDataInstance.cs" />
     <Compile Include="Assets\Hotfix\Module\Joystack\Joystack.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\PathType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Event\EventManager.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Assets\Hotfix\Data\User\Config\CVType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Scene\SceneName.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Load\View\LoadPanel.cs" />
+    <Compile Include="Assets\Hotfix\Data\User\Instance\DataListInstance.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\View\LoginPanel.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Load\ViewModel\LoadModel.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Load\EventHandler\LoadEventHandler.cs" />
@@ -120,9 +123,6 @@
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\ViewModel\LoginModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\LccViewFactory.cs" />
     <Compile Include="Assets\Hotfix\Module\Command\CommandData.cs" />
-    <Compile Include="Assets\Hotfix\Data\User\Instance\DataListInstance.cs" />
-    <Compile Include="Assets\Hotfix\Data\User\Instance\UserDataInstance.cs" />
-    <Compile Include="Assets\Hotfix\Data\User\Instance\UserSetDataInstance.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

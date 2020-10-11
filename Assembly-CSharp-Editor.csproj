@@ -55,7 +55,7 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Editor\InspectorEditor\LccViewInspectorEditor.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\LccView\LccViewEditor.cs" />
     <Compile Include="Assets\Editor\EditorWindow\LccEditorWindow.cs" />
     <Compile Include="Assets\Editor\ILRuntime\ILRuntimeCLRBinding.cs" />
     <Compile Include="Assets\Editor\ILRuntime\ILRuntimeCrossBinding.cs" />
@@ -69,6 +69,25 @@
     <Compile Include="Assets\Editor\Tool\CreateAssetAction.cs" />
     <Compile Include="Assets\Editor\MenuItem\LccMenuItem.cs" />
     <Compile Include="Assets\Editor\Model\NewHotfixPanel.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\IObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectTypeAttribute.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectTypeUtil.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\AnimationCurveObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\BoolObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\BoundsObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\CharObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\ColorObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\DoubleObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\EnumObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\FloatObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\IntObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\LongObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\RectObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\StringObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\ObjectObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\Vector2ObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\Vector3ObjectType.cs" />
+    <Compile Include="Assets\Editor\InspectorEditor\ObjectType\ObjectType\Vector4ObjectType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

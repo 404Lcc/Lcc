@@ -14,8 +14,8 @@ namespace Hotfix
         }
         public override GameObject CreateContainer(string name)
         {
-            GameObject obj = base.CreateContainer(name);
-            RectTransform rect = Util.GetComponent<RectTransform>(obj);
+            GameObject gameObject = base.CreateContainer(name);
+            RectTransform rect = Util.GetComponent<RectTransform>(gameObject);
             rect.sizeDelta = Vector2.zero;
             rect.anchorMin = Vector2.zero;
             rect.anchorMax = Vector2.one;
@@ -23,7 +23,7 @@ namespace Hotfix
             rect.localPosition = Vector3.zero;
             rect.localRotation = Quaternion.identity;
             rect.localScale = Vector3.one;
-            return obj;
+            return gameObject;
         }
         public Panel CreatePanel(PanelType type, object data = null)
         {

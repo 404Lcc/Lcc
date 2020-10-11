@@ -17,9 +17,9 @@ namespace Hotfix
                     lock (lockObject)
                     {
                         _instance = Activator.CreateInstance<T>();
-                        GameObject obj = new GameObject(_instance.ToString());
-                        _instance.InitObjectBase(obj);
-                        Object.DontDestroyOnLoad(obj);
+                        GameObject gameObject = new GameObject(_instance.ToString());
+                        _instance.InitObjectBase(gameObject);
+                        Object.DontDestroyOnLoad(gameObject);
                     }
                 }
                 return _instance;
