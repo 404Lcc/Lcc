@@ -1,6 +1,6 @@
-﻿using System;
+﻿using System.Reflection;
 
 public interface IObjectType
 {
-    object Draw(Type type, string name, object value);
+    void Draw(object obj, FieldInfo field);
 }

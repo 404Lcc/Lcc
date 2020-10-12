@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -36,8 +35,13 @@ public static class ObjectTypeUtil
             }
             if (objectTypes.ContainsKey(item.FieldType))
             {
-                object value = ((IObjectType)objectTypes[item.FieldType]).Draw(item.FieldType, item.Name.First().ToString().ToUpper() + item.Name.Substring(1), item.GetValue(obj));
-                item.SetValue(obj, value);
+                ((IObjectType)objectTypes[item.FieldType]).Draw(obj, item);
+                continue;
+            }
+            if (item.FieldType.IsDefined(typeof(SerializableAttribute), false))
+            {
+                ((IObjectType)objectTypes[typeof(object)]).Draw(item.GetValue(obj), item);
+                continue;
             }
         }
         EditorGUILayout.EndVertical();

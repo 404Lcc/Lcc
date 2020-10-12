@@ -1,11 +1,14 @@
-﻿using System;
+﻿using System.Linq;
+using System.Reflection;
 using UnityEditor;
 
 [ObjectType(typeof(int))]
 public class IntObjectType : IObjectType
 {
-    public object Draw(Type type, string name, object value)
+    public void Draw(object obj, FieldInfo field)
     {
-        return EditorGUILayout.IntField(name, (int)value);
+        string name = field.Name.First().ToString().ToUpper() + field.Name.Substring(1);
+        object value = field.GetValue(obj);
+        field.SetValue(obj, EditorGUILayout.IntField(name, (int)value));
     }
 }

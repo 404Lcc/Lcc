@@ -1,11 +1,14 @@
-﻿using System;
+﻿using System.Linq;
+using System.Reflection;
 using UnityEditor;
 
 [ObjectType(typeof(float))]
 public class FloatObjectType : IObjectType
 {
-    public object Draw(Type type, string name, object value)
+    public void Draw(object obj, FieldInfo field)
     {
-        return EditorGUILayout.FloatField(name, (float)value);
+        string name = field.Name.First().ToString().ToUpper() + field.Name.Substring(1);
+        object value = field.GetValue(obj);
+        field.SetValue(obj, EditorGUILayout.FloatField(name, (float)value));
     }
 }
