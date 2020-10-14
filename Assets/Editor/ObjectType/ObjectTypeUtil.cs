@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections;
 using System.Reflection;
 using UnityEditor;
@@ -38,7 +39,7 @@ public static class ObjectTypeUtil
                 ((IObjectType)objectTypes[item.FieldType]).Draw(obj, item);
                 continue;
             }
-            if (item.FieldType.IsDefined(typeof(SerializableAttribute), false))
+            if (item.IsDefined(typeof(ShowObjectInInspectorAttribute), false))
             {
                 ((IObjectType)objectTypes[typeof(object)]).Draw(item.GetValue(obj), item);
                 continue;

@@ -71,6 +71,7 @@
     <Compile Include="Assets\Editor\EditorWindow\ILRuntimeCrossBindingEditorWindow.cs" />
     <Compile Include="Assets\Editor\ObjectType\ObjectType\BoundsObjectType.cs" />
     <Compile Include="Assets\Editor\ObjectType\ObjectType\CharObjectType.cs" />
+    <Compile Include="Assets\Editor\ObjectType\ObjectType\ObjectObjectType.cs" />
     <Compile Include="Assets\Editor\Tool\BuildHotfix.cs" />
     <Compile Include="Assets\Editor\ObjectType\ObjectType\BoolObjectType.cs" />
     <Compile Include="Assets\Editor\Model\NewModelPanel.cs" />
@@ -90,7 +91,6 @@
     <Compile Include="Assets\Editor\MenuItem\LccMenuItem.cs" />
     <Compile Include="Assets\Editor\Model\NewHotfixPanel.cs" />
     <Compile Include="Assets\Editor\ObjectType\ObjectType\Vector4ObjectType.cs" />
-    <Compile Include="Assets\Editor\ObjectType\ObjectType\ObjectObjectType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

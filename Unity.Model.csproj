@@ -129,6 +129,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Asset\AssetData.cs" />
     <Compile Include="Assets\Scripts\LitJson\JsonWriter.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\ObjectBase.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Object\ShowObjectInInspectorAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />
