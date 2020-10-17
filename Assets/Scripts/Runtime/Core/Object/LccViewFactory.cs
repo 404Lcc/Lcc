@@ -19,7 +19,7 @@ namespace Model
         }
         public static T GetView<T>(GameObject gameObject) where T : ObjectBase
         {
-            LccView lccView = Util.GetChildComponent<LccView>(gameObject, typeof(T).FullName);
+            LccView lccView = gameObject.GetChildComponent<LccView>(typeof(T).FullName);
             return lccView.GetType<T>();
         }
     }

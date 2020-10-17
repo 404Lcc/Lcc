@@ -18,11 +18,11 @@ public class ILRuntimeCLRBinding
         {
             byte[] bytes = new byte[fs.ReadByte()];
             fs.Read(bytes, 0, bytes.Length);
-            MemoryStream dll = new MemoryStream(Util.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", bytes));
+            MemoryStream dll = new MemoryStream(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", bytes));
             domain.LoadAssembly(dll);
             //Crossbind Adapter is needed to generate the correct binding code
             InitILRuntime(domain);
-            BindingCodeGenerator.GenerateBindingCode(domain, "Assets/Scripts/Runtime/Core/ILRuntime/Generated");
+            BindingCodeGenerator.GenerateBindingCode(domain, "Assets/Scripts/Runtime/Core/Manager/ILRuntime/Generated");
         }
         AssetDatabase.Refresh();
     }

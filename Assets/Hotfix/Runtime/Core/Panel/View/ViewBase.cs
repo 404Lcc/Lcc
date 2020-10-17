@@ -40,12 +40,12 @@ namespace Hotfix
         }
         public virtual void ClosePanel()
         {
-            PanelType type = Util.ConvertStringToPanelType(GetType().Name);
+            PanelType type = GetType().Name.ToPanelType();
             PanelManager.Instance.ClosePanel(type);
         }
         public virtual void ClearPanel()
         {
-            PanelType type = Util.ConvertStringToPanelType(GetType().Name);
+            PanelType type = GetType().Name.ToPanelType();
             PanelManager.Instance.ClearPanel(type);
         }
     }

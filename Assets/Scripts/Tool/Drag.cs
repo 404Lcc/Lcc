@@ -13,21 +13,15 @@ namespace Model
         public VoidDelegate beginDrag;
         public VectorDelegate drag;
         public VoidDelegate endDrag;
-        public static Drag GetDrag(GameObject go)
+        public static Drag GetDrag(GameObject gameObject)
         {
-            if (go == null)
+            if (gameObject == null) return null;
+            Drag listener = gameObject.GetComponent<Drag>();
+            if (listener == null)
             {
-                return null;
+                listener = gameObject.AddComponent<Drag>();
             }
-            else
-            {
-                Drag listener = Util.GetComponent<Drag>(go);
-                if (listener == null)
-                {
-                    listener = Util.AddComponent<Drag>(go);
-                }
-                return listener;
-            }
+            return listener;
         }
         public override void OnPointerDown(PointerEventData eventData)
         {
