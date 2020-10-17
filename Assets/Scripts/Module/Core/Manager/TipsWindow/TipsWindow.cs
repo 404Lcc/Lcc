@@ -20,10 +20,10 @@ namespace Model
         public Text infoText;
         public Text confirmText;
         public Text cancelText;
-        public void InitTipsWindow(string title, string info, string confirm = "确定", string cancel = "取消", Transform parent = null)
+        public void InitTipsWindow(int id, bool state, string title, string info, string confirm = "确定", string cancel = "取消", Transform parent = null)
         {
-            state = true;
-
+            this.id = id;
+            this.state = state;
             this.title = title;
             this.info = info;
             this.confirm = confirm;

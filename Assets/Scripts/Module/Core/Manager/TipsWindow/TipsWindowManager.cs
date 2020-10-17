@@ -17,11 +17,10 @@ namespace Model
             tipsWindowPool.InitPool();
         }
 
-        public TipsWindow OpenTipsWindow(string title, string info, string confirm, string cancel, Transform parent = null)
+        public TipsWindow CreateTipsWindow(string title, string info, string confirm, string cancel, Transform parent = null)
         {
             TipsWindow tipsWindow = tipsWindowPool.Dequeue();
-            tipsWindow.InitTipsWindow(title, info, confirm, cancel, parent);
-            GenerateID(tipsWindow);
+            tipsWindow.InitTipsWindow(IdUtil.Generate(), true, title, info, confirm, cancel, parent);
             tipsWindows.Add(tipsWindow.id, tipsWindow);
             return tipsWindow;
         }
@@ -52,25 +51,6 @@ namespace Model
                 tipsWindowPool.Enqueue(tipsWindow);
                 tipsWindows.Remove(item);
             }
-        }
-        public void GenerateID(TipsWindow tipsWindow)
-        {
-            if (tipsWindows.Count == 0)
-            {
-                tipsWindowId++;
-                tipsWindow.id = tipsWindowId;
-                return;
-            }
-            for (int i = 1; i <= tipsWindows.Count; i++)
-            {
-                if (!tipsWindows.ContainsKey(i))
-                {
-                    tipsWindow.id = i;
-                    return;
-                }
-            }
-            tipsWindowId++;
-            tipsWindow.id = tipsWindowId;
         }
     }
 }

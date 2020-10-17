@@ -14,8 +14,9 @@ namespace Model
         {
             transform.SetAsLastSibling();
         }
-        public void InitTips(string info, Vector2 localPosition, Vector2 offset, float duration, Transform parent = null)
+        public void InitTips(int id, string info, Vector2 localPosition, Vector2 offset, float duration, Transform parent = null)
         {
+            this.id = id;
             this.info = info;
 
             infoText.text = info;

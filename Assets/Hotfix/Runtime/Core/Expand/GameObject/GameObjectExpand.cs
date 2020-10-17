@@ -12,7 +12,7 @@ namespace Hotfix
             {
                 child += childs[i] + "/";
             }
-            child += child[childs.Length - 1];
+            child += childs[childs.Length - 1];
             Transform childTransform = gameObject.transform.Find(child);
             if (childTransform == null) return null;
             return childTransform.gameObject;

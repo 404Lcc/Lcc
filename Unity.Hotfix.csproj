@@ -56,7 +56,7 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Hotfix\Runtime\Core\Panel\DataBinder\DataBinder.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\View\DataBinder\DataBinder.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Camera\SmoothFoolow2D.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventHandlerAttribute.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandType.cs" />
@@ -86,7 +86,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Init\Init.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Event\EventType.cs" />
     <Compile Include="Assets\Hotfix\Module\Config\GameEvent\GameEventType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Panel\ViewModel\ViewModelBase.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelBase.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\User\UserSetData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelState.cs" />
@@ -100,10 +100,10 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Manager\Manager.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\User\UserData.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Panel\View\IView.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\View\View\IView.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\AUIEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Asset\AssetType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Panel\View\ViewBase.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\View\View\ViewBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\ObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Transform\TransformExpand.cs" />
@@ -128,7 +128,7 @@
     <Compile Include="Assets\Hotfix\Module\Config\User\ResolutionType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Handler\ObjectBase\ObjectBaseHandler.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\GameEvent\GameEventManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Panel\DataBinder\Binding.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\View\DataBinder\Binding.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Lcc\LccUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Image\ImageExpand.cs" />
@@ -137,6 +137,9 @@
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\ViewModel\LoginModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\LccViewFactory.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandData.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Util\Id\IdUtil.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\Item\ItemType.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

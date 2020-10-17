@@ -17,11 +17,10 @@ namespace Model
             tipsPool.InitPool();
         }
 
-        public Tips OpenTips(string info, Vector2 localPosition, Vector2 offset, float duration, Transform parent = null)
+        public Tips CreateTips(string info, Vector2 localPosition, Vector2 offset, float duration, Transform parent = null)
         {
             Tips tips = tipsPool.Dequeue();
-            tips.InitTips(info, localPosition, offset, duration, parent);
-            GenerateID(tips);
+            tips.InitTips(IdUtil.Generate(), info, localPosition, offset, duration, parent);
             tipss.Add(tips.id, tips);
             return tips;
         }
@@ -52,25 +51,6 @@ namespace Model
                 tipsPool.Enqueue(tips);
                 tipss.Remove(item);
             }
-        }
-        public void GenerateID(Tips tips)
-        {
-            if (tipss.Count == 0)
-            {
-                tipsId++;
-                tips.id = tipsId;
-                return;
-            }
-            for (int i = 1; i <= tipss.Count; i++)
-            {
-                if (!tipss.ContainsKey(i))
-                {
-                    tips.id = i;
-                    return;
-                }
-            }
-            tipsId++;
-            tips.id = tipsId;
         }
     }
 }

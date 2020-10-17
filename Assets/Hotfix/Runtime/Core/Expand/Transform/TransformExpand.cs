@@ -4,7 +4,7 @@ namespace Hotfix
 {
     public static class TransformExpand
     {
-        public static Transform GetChildTransform(this Transform transform, params string[] childs)
+        public static GameObject GetChildGameObject(this Transform transform, params string[] childs)
         {
             if (transform == null) return null;
             string child = string.Empty;
@@ -12,10 +12,10 @@ namespace Hotfix
             {
                 child += childs[i] + "/";
             }
-            child += child[childs.Length - 1];
+            child += childs[childs.Length - 1];
             Transform childTransform = transform.Find(child);
             if (childTransform == null) return null;
-            return childTransform;
+            return childTransform.gameObject;
         }
         public static void SafeDestroy(this Transform transform)
         {
@@ -24,15 +24,15 @@ namespace Hotfix
         }
         public static T GetChildComponent<T>(this Transform transform, params string[] childs) where T : Component
         {
-            Transform childTransform = transform.GetChildTransform(childs);
-            if (childTransform == null) return null;
-            return childTransform.GetComponent<T>();
+            GameObject childGameObject = transform.GetChildGameObject(childs);
+            if (childGameObject == null) return null;
+            return childGameObject.GetComponent<T>();
         }
         public static T AddChildComponent<T>(this Transform transform, params string[] childs) where T : Component
         {
-            Transform childTransform = transform.GetChildTransform(childs);
-            if (childTransform == null) return null;
-            return childTransform.gameObject.AddComponent<T>();
+            GameObject childGameObject = transform.GetChildGameObject(childs);
+            if (childGameObject == null) return null;
+            return childGameObject.AddComponent<T>();
         }
         public static void SafeDestroy<T>(this Transform transform) where T : Component
         {
