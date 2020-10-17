@@ -47,6 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
+    <UnityProjectGeneratorVersion>2.0.3</UnityProjectGeneratorVersion>
     <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2020.1.8f1c1</UnityVersion>
@@ -295,13 +296,13 @@
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntim.Mono.Cecil">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.4\Plugins\ILRuntim.Mono.Cecil.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.5\Plugins\ILRuntim.Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Mdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.4\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.5\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.4\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.5\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.0\net35\unity-custom\nunit.framework.dll</HintPath>
@@ -689,6 +690,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Unity.Plugin.csproj">
+      <Project>{5EA2499E-1565-15A6-B023-5851A150FF4C}</Project>
+      <Name>Unity.Plugin</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Hotfix.csproj">
       <Project>{8543BC6F-FEC6-BDFC-0BD5-AB0B4E96C57B}</Project>
       <Name>Unity.Hotfix</Name>

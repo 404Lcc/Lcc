@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{8543BC6F-FEC6-BDFC-0BD5-AB0B4E96C57B}</ProjectGuid>
+    <ProjectGuid>{2EF26173-D4CB-9E9B-5DCF-5990CFBEB812}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Unity.Hotfix</AssemblyName>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -26,7 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,7 +35,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -56,90 +56,34 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Hotfix\Runtime\Core\Panel\DataBinder\DataBinder.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Camera\SmoothFoolow2D.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventHandlerAttribute.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandType.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Manager\Language\LanguageManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Handler\Panel\PanelObjectBaseHandler.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\String\StringExpand.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEventManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Config\UIEvent\UIEventType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\IEvent.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Util\Web\WebUtil.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Vector2\Vector2Expand.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
-    <Compile Include="Assets\Hotfix\Module\Config\User\LanguageType.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Util\User\UserSetDataInstance.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Manager\Character\CharacterManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelData.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Manager\Video\VideoManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Util\Path\PathUtil.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Util\Directory\DirectoryUtil.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\SpriteRenderer\SpriteRendererExpand.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Manager\Timer\TimerManager.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\User\DataList.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Object\Singleton.cs" />
-    <Compile Include="Assets\Hotfix\Module\Config\Command\CommandDataType.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Camera\SmoothFoolow3D.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Init\Init.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Config\Event\EventType.cs" />
-    <Compile Include="Assets\Hotfix\Module\Config\GameEvent\GameEventType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Panel\ViewModel\ViewModelBase.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelBase.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\User\UserSetData.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelState.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Manager\GameData\GameDataManager.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Util\User\UserUtil.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEventHandlerAttribute.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Util\User\UserDataInstance.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\PanelType\PanelTypeExpand.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Joystack\Joystack.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Util\Path\PathType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Manager\Manager.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\User\UserData.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Panel\View\IView.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\AUIEvent.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Config\Asset\AssetType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Panel\View\ViewBase.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Object\ObjectBase.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Manager\Audio\AudioManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Transform\TransformExpand.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Init\InitEventHandler.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\User\DisplayModeType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Util\File\FileUtil.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Manager\Voice\VoiceManager.cs" />
-    <Compile Include="Assets\Hotfix\Module\Config\User\CVType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Config\Scene\SceneName.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Load\View\LoadPanel.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Util\User\DataListInstance.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\View\LoginPanel.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Load\ViewModel\LoadModel.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Util\MD5\MD5Util.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Load\EventHandler\LoadEventHandler.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Pool\Pool.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Util\Rijndael\RijndaelUtil.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\AEvent.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\IUIEvent.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\EventHandler\LoginEventHandler.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Config\Panel\PanelType.cs" />
-    <Compile Include="Assets\Hotfix\Module\Config\User\ResolutionType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Handler\ObjectBase\ObjectBaseHandler.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Manager\GameEvent\GameEventManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Panel\DataBinder\Binding.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Util\Lcc\LccUtil.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Image\ImageExpand.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Manager\GameTime\GameTimeManager.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Manager\Timer\TimerData.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\ViewModel\LoginModel.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Object\LccViewFactory.cs" />
-    <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandData.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\02_Invocation\Invocation.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\06_CLRBinding\CLRBindingDemo.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\04_Inheritance\InheritanceAdapter.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\10_LitJson\LitJsonDemo.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\09_Reflection\ReflectionDemo.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\07_Coroutine\CoroutineAdapter.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\11_ValueTypeBinding\Vector3Binder.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\07_Coroutine\CoroutineDemo.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\11_ValueTypeBinding\ValueTypeBindingDemo.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\01_HelloWorld\HelloWorld.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\03_Delegate\DelegateDemo.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\11_ValueTypeBinding\Vector2Binder.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\05_CLRRedirection\CLRRedirectionDemo.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\11_ValueTypeBinding\QuaternionBinder.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\04_Inheritance\Inheritance.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\08_MonoBehaviour\MonoBehaviourAdapter.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\LitJson\JsonReader.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\LitJson\JsonData.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\LitJson\JsonException.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\LitJson\JsonMockWrapper.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\LitJson\ParserToken.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\LitJson\IJsonWrapper.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\Scripts\Examples\08_MonoBehaviour\MonoBehaviourDemo.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\LitJson\JsonMapper.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\LitJson\JsonWriter.cs" />
+    <Compile Include="Assets\Samples\ILRuntime\1.6.5\Demo\LitJson\Lexer.cs" />
   </ItemGroup>
   <ItemGroup>
-     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\2020.1.8f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -328,18 +272,6 @@
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>C:\Program Files\2020.1.8f1c1\Editor\Data\Managed\UnityEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Graphs">
-      <HintPath>C:\Program Files\2020.1.8f1c1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>C:\Program Files\2020.1.8f1c1\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
-      <HintPath>C:\Program Files\2020.1.8f1c1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
-      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntim.Mono.Cecil">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.5\Plugins\ILRuntim.Mono.Cecil.dll</HintPath>
@@ -695,20 +627,45 @@
     <Reference Include="System.Xml.XPath.XDocument">
       <HintPath>C:\Program Files\2020.1.8f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VSCode.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="ILRuntime">
       <HintPath>Library\ScriptAssemblies\ILRuntime.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.Plugin.csproj">
       <Project>{5EA2499E-1565-15A6-B023-5851A150FF4C}</Project>
       <Name>Unity.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Hotfix.csproj">
+      <Project>{8543BC6F-FEC6-BDFC-0BD5-AB0B4E96C57B}</Project>
+      <Name>Unity.Hotfix</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Model.csproj">
       <Project>{57D111B4-22B4-6CA1-C350-5090EBF41DC0}</Project>
