@@ -4,6 +4,7 @@ using System.Collections;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public static class ObjectTypeUtil
 {
@@ -37,6 +38,11 @@ public static class ObjectTypeUtil
             if (objectTypes.ContainsKey(item.FieldType))
             {
                 ((IObjectType)objectTypes[item.FieldType]).Draw(obj, item);
+                continue;
+            }
+            if (item.FieldType.IsSubclassOf(typeof(Object)))
+            {
+                ((IObjectType)objectTypes[typeof(Object)]).Draw(obj, item);
                 continue;
             }
             if (item.IsDefined(typeof(ShowObjectInInspectorAttribute), false))
