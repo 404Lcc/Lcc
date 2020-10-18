@@ -1,7 +1,7 @@
 ﻿namespace Hotfix
 {
     [UIEventHandler(UIEventType.Login)]
-    public class LoginEventHandler : AUIEvent
+    public class LoginUIEventHandler : UIEvent
     {
         public override void Publish()
         {

@@ -1,6 +1,6 @@
-﻿namespace Model
+﻿namespace Hotfix
 {
-    public class AUIEvent : IUIEvent
+    public class UIEvent : IUIEvent
     {
         public virtual void Publish()
         {

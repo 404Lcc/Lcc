@@ -6,7 +6,7 @@ namespace Hotfix
 {
     public class UIEventManager : Singleton<UIEventManager>
     {
-        public Hashtable events = new Hashtable();
+        public Hashtable uiEvents = new Hashtable();
         public void InitManager()
         {
             foreach (Type item in GetType().Assembly.GetTypes())
@@ -15,17 +15,17 @@ namespace Hotfix
                 UIEventHandlerAttribute[] uiEventHandlerAttributes = (UIEventHandlerAttribute[])item.GetCustomAttributes(typeof(UIEventHandlerAttribute), false);
                 if (uiEventHandlerAttributes.Length > 0)
                 {
-                    AUIEvent aUIEvent = (AUIEvent)Activator.CreateInstance(item);
-                    events.Add(uiEventHandlerAttributes[0].uiEventType, aUIEvent);
+                    UIEvent uiEvent = (UIEvent)Activator.CreateInstance(item);
+                    uiEvents.Add(uiEventHandlerAttributes[0].uiEventType, uiEvent);
                 }
             }
         }
         public void Publish(UIEventType uiEventType)
         {
-            if (events.ContainsKey(uiEventType))
+            if (uiEvents.ContainsKey(uiEventType))
             {
-                AUIEvent aUIEvent = (AUIEvent)events[uiEventType];
-                aUIEvent.Publish();
+                UIEvent uiEvent = (UIEvent)uiEvents[uiEventType];
+                uiEvent.Publish();
             }
             else
             {
@@ -34,10 +34,10 @@ namespace Hotfix
         }
         public void Publish<T>(UIEventType uiEventType, T data)
         {
-            if (events.ContainsKey(uiEventType))
+            if (uiEvents.ContainsKey(uiEventType))
             {
-                AUIEvent aUIEvent = (AUIEvent)events[uiEventType];
-                aUIEvent.Publish(data);
+                UIEvent uiEvent = (UIEvent)uiEvents[uiEventType];
+                uiEvent.Publish(data);
             }
             else
             {

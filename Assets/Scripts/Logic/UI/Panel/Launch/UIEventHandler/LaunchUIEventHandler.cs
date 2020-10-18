@@ -1,7 +1,7 @@
 ﻿namespace Model
 {
     [UIEventHandler(UIEventType.Launch)]
-    public class LaunchEventHandler : AUIEvent
+    public class LaunchUIEventHandler : UIEvent
     {
         public override void Publish()
         {

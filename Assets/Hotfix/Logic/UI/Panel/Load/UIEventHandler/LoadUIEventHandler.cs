@@ -1,7 +1,7 @@
 ﻿namespace Hotfix
 {
     [UIEventHandler(UIEventType.Load)]
-    public class LoadEventHandler : AUIEvent
+    public class LoadUIEventHandler : UIEvent
     {
     }
 }

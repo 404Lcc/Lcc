@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\IEvent.cs" />
     <Compile Include="Assets\Scripts\Tool\OpenFileName.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Expand\ItemType\ItemTypeExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\View\IView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEventManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\File\FileUtil.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Assets\Scripts\Tool\LongClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\ObjectBase\ObjectBaseHandler.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\SpriteRenderer\SpriteRendererExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Mono\MonoManager.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Tips\Tips.cs" />
@@ -93,8 +95,8 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Manager\Manager.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Tips\TipsManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\ICenterHandler.cs" />
-    <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\EventHandler\LaunchEventHandler.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Init\InitEventHandler.cs" />
+    <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\UIEventHandler\LaunchUIEventHandler.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Init\EventHandler\InitEventHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\PanelType\PanelTypeExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelState.cs" />
     <Compile Include="Assets\Scripts\Tool\Delay.cs" />
@@ -104,11 +106,12 @@
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\ViewModel\LaunchModel.cs" />
     <Compile Include="Assets\Scripts\Tool\EnterClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\DataBinder\Binding.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\ItemView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Rijndael\RijndaelUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\String\StringExpand.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\TipsWindow\TipsWindowManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Web\WebUtil.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\AUIEvent.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEvent.cs" />
     <Compile Include="Assets\Scripts\Tool\RightClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\View\ViewBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Encoding\EncodingUtil.cs" />
@@ -123,6 +126,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Object\LccView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\ClientNetworkManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Id\IdUtil.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Handler\Item\ItemObjectBaseHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEventHandlerAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\UIEvent\UIEventType.cs" />
@@ -132,19 +136,15 @@
     <Compile Include="Assets\Scripts\Tool\LocalDialog.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Scene\SceneName.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\AStar\AStarManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\ItemData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Event\EventType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\DataBinder\DataBinder.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\View\LaunchPanel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetData.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Object\ObjectBase.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\ItemManager.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\ItemBase.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\ItemData.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Expand\ItemType\ItemTypeExpand.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Handler\Item\ItemObjectBaseHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelView.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\ItemView.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Object\ObjectBase.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\ItemBase.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />
