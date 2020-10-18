@@ -36,7 +36,7 @@ namespace Model
 
             if (parent == null)
             {
-                transform.SetParent(Objects.gui.transform);
+                transform.SetParent(Objects.GUI.transform);
             }
             else
             {

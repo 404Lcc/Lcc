@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Model
 {
@@ -20,9 +21,9 @@ namespace Model
             }
             return false;
         }
-        public ItemData CreateItem(ItemType type, object data = null)
+        public ItemData CreateItem(ItemType type, object data, Transform parent)
         {
-            ItemData itemData = handler.CreateItem(type, data);
+            ItemData itemData = handler.CreateItem(type, data, parent);
             if (ItemExist(type))
             {
                 ((List<ItemData>)items[type]).Add(itemData);

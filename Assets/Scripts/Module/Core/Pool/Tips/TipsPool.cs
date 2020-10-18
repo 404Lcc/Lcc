@@ -16,7 +16,7 @@
         {
             for (int i = 0; i < tipsMax; i++)
             {
-                Tips tips = LccViewFactory.CreateView<Tips>(AssetManager.Instance.LoadGameObject("Tips", false, false, Objects.gui.transform, AssetType.UI, AssetType.Tool));
+                Tips tips = LccViewFactory.CreateView<Tips>(AssetManager.Instance.LoadGameObject("Tips", false, false, Objects.GUI.transform, AssetType.UI, AssetType.Tool));
                 Enqueue(tips);
             }
         }
@@ -29,7 +29,7 @@
         }
         public void Enqueue(Tips tips)
         {
-            tips.transform.SetParent(Objects.gui.transform);
+            tips.transform.SetParent(Objects.GUI.transform);
             tips.gameObject.SetActive(false);
             tipsPool.Enqueue(tips);
         }
@@ -40,7 +40,7 @@
                 InitPool();
             }
             Tips tips = tipsPool.Dequeue();
-            tips.transform.SetParent(Objects.gui.transform);
+            tips.transform.SetParent(Objects.GUI.transform);
             tips.gameObject.SetActive(true);
             return tips;
         }

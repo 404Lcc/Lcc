@@ -13,12 +13,12 @@ namespace Model
             this.isAssetBundle = isAssetBundle;
             this.types = types;
         }
-        public virtual GameObject CreateGameObject(string name)
+        public virtual GameObject CreateGameObject(string name, Transform parent)
         {
             GameObject gameObject = Model.AssetManager.Instance.LoadGameObject(name, false, isAssetBundle, AssetType.UI);
             if (gameObject == null) return null;
             gameObject.name = name;
-            gameObject.transform.SetParent(Model.Objects.gui.transform);
+            gameObject.transform.SetParent(parent);
             gameObject.transform.localPosition = Vector3.zero;
             gameObject.transform.localRotation = Quaternion.identity;
             gameObject.transform.localScale = Vector3.one;

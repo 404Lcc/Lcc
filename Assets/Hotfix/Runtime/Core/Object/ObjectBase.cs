@@ -29,6 +29,9 @@ namespace Hotfix
             AutoReference();
             GameObject childGameObject = new GameObject(GetType().FullName);
             childGameObject.transform.SetParent(gameObject.transform);
+            childGameObject.transform.localPosition = Vector3.zero;
+            childGameObject.transform.localRotation = Quaternion.identity;
+            childGameObject.transform.localScale = Vector3.one;
             lccView = childGameObject.AddComponent<LccView>();
             lccView.className = GetType().FullName;
             lccView.type = this;

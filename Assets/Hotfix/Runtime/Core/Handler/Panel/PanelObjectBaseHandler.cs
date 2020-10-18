@@ -12,9 +12,9 @@ namespace Hotfix
             this.isAssetBundle = isAssetBundle;
             this.types = types;
         }
-        public override GameObject CreateGameObject(string name)
+        public override GameObject CreateGameObject(string name, Transform parent)
         {
-            GameObject gameObject = base.CreateGameObject(name);
+            GameObject gameObject = base.CreateGameObject(name, parent);
             RectTransform rect = gameObject.GetComponent<RectTransform>();
             rect.sizeDelta = Vector2.zero;
             rect.anchorMin = Vector2.zero;
@@ -25,11 +25,11 @@ namespace Hotfix
             rect.localScale = Vector3.one;
             return gameObject;
         }
-        public PanelData CreatePanel(PanelType type, object data = null)
+        public PanelData CreatePanel(PanelType type, object data)
         {
             PanelData panelData = new PanelData();
             panelData.state = PanelState.Close;
-            panelData.gameObject = CreateGameObject(type.ToPanelString());
+            panelData.gameObject = CreateGameObject(type.ToPanelString(), Model.Objects.GUI.transform);
             if (panelData.gameObject == null) return null;
             panelData.type = type;
             Assembly assembly = type.GetType().Assembly;

@@ -8,7 +8,7 @@ namespace Model
         private static GameObject _gui;
         private static AudioSource _audioSource;
         private static VideoPlayer _videoPlayer;
-        public static GameObject gui
+        public static GameObject GUI
         {
             get
             {
@@ -19,7 +19,7 @@ namespace Model
                 return _gui;
             }
         }
-        public static AudioSource audioSource
+        public static AudioSource AudioSource
         {
             get
             {
@@ -32,13 +32,13 @@ namespace Model
                 return _audioSource;
             }
         }
-        public static VideoPlayer videoPlayer
+        public static VideoPlayer VideoPlayer
         {
             get
             {
                 if (_videoPlayer == null)
                 {
-                    GameObject gameObject = "AudioSource".GetGameObjectToTag();
+                    GameObject gameObject = "VideoPlayer".GetGameObjectToTag();
                     if (gameObject == null) return null;
                     _videoPlayer = gameObject.GetComponent<VideoPlayer>();
                 }

@@ -16,7 +16,7 @@
         {
             for (int i = 0; i < tipsWindowMax; i++)
             {
-                TipsWindow tipsWindow = LccViewFactory.CreateView<TipsWindow>(AssetManager.Instance.LoadGameObject("TipsWindow", false, false, Objects.gui.transform, AssetType.UI, AssetType.Tool));
+                TipsWindow tipsWindow = LccViewFactory.CreateView<TipsWindow>(AssetManager.Instance.LoadGameObject("TipsWindow", false, false, Objects.GUI.transform, AssetType.UI, AssetType.Tool));
                 Enqueue(tipsWindow);
             }
         }
@@ -29,7 +29,7 @@
         }
         public void Enqueue(TipsWindow tipsWindow)
         {
-            tipsWindow.transform.SetParent(Objects.gui.transform);
+            tipsWindow.transform.SetParent(Objects.GUI.transform);
             tipsWindow.gameObject.SetActive(false);
             tipsWindowPool.Enqueue(tipsWindow);
         }
@@ -40,7 +40,7 @@
                 InitPool();
             }
             TipsWindow tipsWindow = tipsWindowPool.Dequeue();
-            tipsWindow.transform.SetParent(Objects.gui.transform);
+            tipsWindow.transform.SetParent(Objects.GUI.transform);
             tipsWindow.gameObject.SetActive(true);
             return tipsWindow;
         }

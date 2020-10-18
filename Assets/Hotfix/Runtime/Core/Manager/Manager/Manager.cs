@@ -45,7 +45,7 @@ namespace Hotfix
         public void InitUserSet()
         {
             GameDataManager.Instance.GetUserSetData();
-            AudioManager.Instance.SetVolume(UserSetData.audio, Model.Objects.audioSource);
+            AudioManager.Instance.SetVolume(UserSetData.audio, Model.Objects.AudioSource);
             string name = Enum.GetName(typeof(ResolutionType), UserSetData.resolutionType).Substring(10);
             int width = int.Parse(name.Substring(0, name.IndexOf('x')));
             int height = int.Parse(name.Substring(name.IndexOf('x') + 1));
