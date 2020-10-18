@@ -6,7 +6,5 @@
         {
             get; set;
         }
-        void ClosePanel();
-        void ClearPanel();
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Hotfix
 {
-    public class PanelObjectBaseHandler : ObjectBaseHandler
+    public class ItemObjectBaseHandler : ObjectBaseHandler
     {
-        public PanelObjectBaseHandler(bool isKeep, bool isAssetBundle, params string[] types) : base(isKeep, isAssetBundle, types)
+        public ItemObjectBaseHandler(bool isKeep, bool isAssetBundle, params string[] types) : base(isKeep, isAssetBundle, types)
         {
             this.isKeep = isKeep;
             this.isAssetBundle = isAssetBundle;
@@ -25,21 +25,19 @@ namespace Hotfix
             rect.localScale = Vector3.one;
             return gameObject;
         }
-        public PanelData CreatePanel(PanelType type, object data = null)
+        public ItemData CreateItem(ItemType type, object data = null)
         {
-            PanelData panelData = new PanelData();
-            panelData.state = PanelState.Close;
-            panelData.gameObject = CreateGameObject(type.ToPanelString());
-            if (panelData.gameObject == null) return null;
-            panelData.type = type;
+            ItemData itemData = new ItemData();
+            itemData.gameObject = CreateGameObject(type.ToItemString());
+            if (itemData.gameObject == null) return null;
+            itemData.type = type;
             Assembly assembly = type.GetType().Assembly;
-            Type classType = assembly.GetType(type.GetType().Namespace + "." + type.ToPanelString());
+            Type classType = assembly.GetType(type.GetType().Namespace + "." + type.ToItemString());
             if (classType != null)
             {
-                panelData.objectBase = LccViewFactory.CreateView(classType, panelData.gameObject, data);
+                itemData.objectBase = LccViewFactory.CreateView(classType, itemData.gameObject, data);
             }
-            panelData.ClosePanel();
-            return panelData;
+            return itemData;
         }
     }
 }

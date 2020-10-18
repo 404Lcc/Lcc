@@ -38,76 +38,6 @@ namespace Hotfix
             return panelData;
         }
         /// <summary>
-        /// 删除面板
-        /// </summary>
-        /// <param name="type"></param>
-        public void ClearPanel(PanelType type)
-        {
-            if (PanelExist(type))
-            {
-                PanelData panelData = GetPanelInfo(type);
-                panelData.gameObject.SafeDestroy();
-                panels.Remove(type);
-            }
-        }
-        /// <summary>
-        /// 删除面板
-        /// </summary>
-        /// <param name="types"></param>
-        /// <returns></returns>
-        public void ClearPanel(PanelType[] types)
-        {
-            foreach (PanelType item in types)
-            {
-                ClearPanel(item);
-            }
-        }
-        /// <summary>
-        /// 删除剩下所有面板
-        /// </summary>
-        /// <param name="types"></param>
-        /// <returns></returns>
-        public void ClearExceptPanel(PanelType[] types)
-        {
-            List<PanelType> typeList = new List<PanelType>(types);
-            foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
-            {
-                if (!typeList.Contains(item))
-                {
-                    ClearPanel(item);
-                }
-            }
-        }
-        /// <summary>
-        /// 删除全部面板
-        /// </summary>
-        public void ClearAllPanels()
-        {
-            foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
-            {
-                ClearPanel(item);
-            }
-        }
-        /// <summary>
-        /// 删除全部打开的面板
-        /// </summary>
-        /// <returns></returns>
-        public int ClearOpenPanels()
-        {
-            int number = 0;
-            IDictionaryEnumerator enumerator = panels.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                PanelData panelData = (PanelData)enumerator.Value;
-                if (panelData.state == PanelState.Open)
-                {
-                    ClearPanel(panelData.type);
-                    number++;
-                }
-            }
-            return number;
-        }
-        /// <summary>
         /// 打开面板
         /// </summary>
         /// <param name="type"></param>
@@ -117,7 +47,7 @@ namespace Hotfix
         {
             if (PanelExist(type))
             {
-                PanelData panelData = GetPanelInfo(type);
+                PanelData panelData = GetPanel(type);
                 panelData.OpenPanel();
                 return panelData;
             }
@@ -181,7 +111,7 @@ namespace Hotfix
         {
             if (PanelExist(type))
             {
-                PanelData panelData = GetPanelInfo(type);
+                PanelData panelData = GetPanel(type);
                 panelData.ClosePanel();
                 return panelData;
             }
@@ -237,15 +167,85 @@ namespace Hotfix
             return panelDataList.ToArray();
         }
         /// <summary>
+        /// 删除面板
+        /// </summary>
+        /// <param name="type"></param>
+        public void ClearPanel(PanelType type)
+        {
+            if (PanelExist(type))
+            {
+                PanelData panelData = GetPanel(type);
+                panelData.gameObject.SafeDestroy();
+                panels.Remove(type);
+            }
+        }
+        /// <summary>
+        /// 删除面板
+        /// </summary>
+        /// <param name="types"></param>
+        /// <returns></returns>
+        public void ClearPanel(PanelType[] types)
+        {
+            foreach (PanelType item in types)
+            {
+                ClearPanel(item);
+            }
+        }
+        /// <summary>
+        /// 删除剩下所有面板
+        /// </summary>
+        /// <param name="types"></param>
+        /// <returns></returns>
+        public void ClearExceptPanel(PanelType[] types)
+        {
+            List<PanelType> typeList = new List<PanelType>(types);
+            foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
+            {
+                if (!typeList.Contains(item))
+                {
+                    ClearPanel(item);
+                }
+            }
+        }
+        /// <summary>
+        /// 删除全部面板
+        /// </summary>
+        public void ClearAllPanels()
+        {
+            foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
+            {
+                ClearPanel(item);
+            }
+        }
+        /// <summary>
+        /// 删除全部打开的面板
+        /// </summary>
+        /// <returns></returns>
+        public int ClearOpenPanels()
+        {
+            int number = 0;
+            IDictionaryEnumerator enumerator = panels.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                PanelData panelData = (PanelData)enumerator.Value;
+                if (panelData.state == PanelState.Open)
+                {
+                    ClearPanel(panelData.type);
+                    number++;
+                }
+            }
+            return number;
+        }
+        /// <summary>
         /// 获取面板
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public PanelData GetPanelInfo(PanelType type)
+        public PanelData GetPanel(PanelType type)
         {
             if (PanelExist(type))
             {
-                PanelData panelData = panels[type] as PanelData;
+                PanelData panelData = (PanelData)panels[type];
                 return panelData;
             }
             return null;
@@ -256,12 +256,11 @@ namespace Hotfix
         /// <typeparam name="T"></typeparam>
         /// <param name="type"></param>
         /// <returns></returns>
-        public T GetPanelInfo<T>(PanelType type) where T : ObjectBase
+        public T GetPanel<T>(PanelType type) where T : ObjectBase
         {
             if (PanelExist(type))
             {
-                PanelData panelData = panels[type] as PanelData;
-                if (panelData.objectBase == null) return null;
+                PanelData panelData = (PanelData)panels[type];
                 return (T)panelData.objectBase;
             }
             return null;
@@ -275,7 +274,7 @@ namespace Hotfix
         {
             if (PanelExist(type))
             {
-                PanelData panelData = GetPanelInfo(type);
+                PanelData panelData = GetPanel(type);
                 if (panelData.state == PanelState.Open)
                 {
                     return true;

@@ -24,12 +24,6 @@ namespace Model
             tipss.Add(tips.id, tips);
             return tips;
         }
-        public Tips GetTips(int id)
-        {
-            Tips tips = tipss[id] as Tips;
-            if (tips == null) return null;
-            return tips;
-        }
         public void ClearTips(int id)
         {
             Tips tips = GetTips(id);
@@ -37,7 +31,7 @@ namespace Model
             tipsPool.Enqueue(tips);
             tipss.Remove(id);
         }
-        public void ClearAllTipsWindow()
+        public void ClearAllTipss()
         {
             List<int> idList = new List<int>();
             foreach (object item in tipss.Keys)
@@ -51,6 +45,12 @@ namespace Model
                 tipsPool.Enqueue(tips);
                 tipss.Remove(item);
             }
+        }
+        public Tips GetTips(int id)
+        {
+            Tips tips = (Tips)tipss[id];
+            if (tips == null) return null;
+            return tips;
         }
     }
 }

@@ -1,18 +1,11 @@
 ﻿namespace Model
 {
-    public class NewModelPanel : ObjectBase
+    public class NewModelPanel : PanelView<NewModelViewModel>
     {
         public override void Start()
         {
-            InitPanel();
         }
         public override void Update()
-        {
-        }
-        public void InitPanel()
-        {
-        }
-        public void OnHidePanel()
         {
         }
     }

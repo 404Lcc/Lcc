@@ -24,12 +24,6 @@ namespace Model
             tipsWindows.Add(tipsWindow.id, tipsWindow);
             return tipsWindow;
         }
-        public TipsWindow GetTipsWindow(int id)
-        {
-            TipsWindow tipsWindow = tipsWindows[id] as TipsWindow;
-            if (tipsWindow == null) return null;
-            return tipsWindow;
-        }
         public void ClearTipsWindow(int id)
         {
             TipsWindow tipsWindow = GetTipsWindow(id);
@@ -37,7 +31,7 @@ namespace Model
             tipsWindowPool.Enqueue(tipsWindow);
             tipsWindows.Remove(id);
         }
-        public void ClearAllTipsWindow()
+        public void ClearAllTipsWindows()
         {
             List<int> idList = new List<int>();
             foreach (object item in tipsWindows.Keys)
@@ -51,6 +45,12 @@ namespace Model
                 tipsWindowPool.Enqueue(tipsWindow);
                 tipsWindows.Remove(item);
             }
+        }
+        public TipsWindow GetTipsWindow(int id)
+        {
+            TipsWindow tipsWindow = (TipsWindow)tipsWindows[id];
+            if (tipsWindow == null) return null;
+            return tipsWindow;
         }
     }
 }

@@ -70,6 +70,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Vector2\Vector2Expand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
     <Compile Include="Assets\Hotfix\Module\Config\User\LanguageType.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Util\User\UserSetDataInstance.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Character\CharacterManager.cs" />
@@ -83,8 +84,10 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Singleton.cs" />
     <Compile Include="Assets\Hotfix\Module\Config\Command\CommandDataType.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Camera\SmoothFoolow3D.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\Item\ItemType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Init\Init.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Event\EventType.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Util\Id\IdUtil.cs" />
     <Compile Include="Assets\Hotfix\Module\Config\GameEvent\GameEventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelBase.cs" />
@@ -137,9 +140,13 @@
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\ViewModel\LoginModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\LccViewFactory.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandData.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Util\Id\IdUtil.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Config\Item\ItemType.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelView.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\ItemType\ItemTypeExpand.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Handler\Item\ItemObjectBaseHandler.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Item\ItemBase.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Item\ItemView.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Item\ItemManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Item\ItemData.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

@@ -13,7 +13,7 @@ namespace Hotfix
             this.isAssetBundle = isAssetBundle;
             this.types = types;
         }
-        public virtual GameObject CreateContainer(string name)
+        public virtual GameObject CreateGameObject(string name)
         {
             GameObject gameObject = Model.AssetManager.Instance.LoadGameObject(name, false, isAssetBundle, AssetType.UI);
             if (gameObject == null) return null;

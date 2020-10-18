@@ -12,9 +12,9 @@ namespace Model
             this.isAssetBundle = isAssetBundle;
             this.types = types;
         }
-        public override GameObject CreateContainer(string name)
+        public override GameObject CreateGameObject(string name)
         {
-            GameObject gameObject = base.CreateContainer(name);
+            GameObject gameObject = base.CreateGameObject(name);
             RectTransform rect = gameObject.GetComponent<RectTransform>();
             rect.sizeDelta = Vector2.zero;
             rect.anchorMin = Vector2.zero;
@@ -27,19 +27,19 @@ namespace Model
         }
         public PanelData CreatePanel(PanelType type, object data = null)
         {
-            PanelData info = new PanelData();
-            info.state = PanelState.Close;
-            info.gameObject = CreateContainer(type.ToPanelString());
-            if (info.gameObject == null) return null;
-            info.type = type;
+            PanelData panelData = new PanelData();
+            panelData.state = PanelState.Close;
+            panelData.gameObject = CreateGameObject(type.ToPanelString());
+            if (panelData.gameObject == null) return null;
+            panelData.type = type;
             Assembly assembly = type.GetType().Assembly;
             Type classType = assembly.GetType(type.GetType().Namespace + "." + type.ToPanelString());
             if (classType != null)
             {
-                info.objectBase = LccViewFactory.CreateView(classType, info.gameObject, data);
+                panelData.objectBase = LccViewFactory.CreateView(classType, panelData.gameObject, data);
             }
-            info.ClosePanel();
-            return info;
+            panelData.ClosePanel();
+            return panelData;
         }
     }
 }

@@ -38,15 +38,5 @@ namespace Model
             dataBinder.UnBind(oldValue);
             dataBinder.Bind(newValue);
         }
-        public virtual void ClosePanel()
-        {
-            PanelType type = GetType().Name.ToPanelType();
-            PanelManager.Instance.ClosePanel(type);
-        }
-        public virtual void ClearPanel()
-        {
-            PanelType type = GetType().Name.ToPanelType();
-            PanelManager.Instance.ClearPanel(type);
-        }
     }
 }

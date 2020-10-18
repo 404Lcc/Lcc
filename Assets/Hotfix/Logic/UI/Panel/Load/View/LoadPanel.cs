@@ -1,6 +1,6 @@
 ﻿namespace Hotfix
 {
-    public class LoadPanel : ViewBase<LoadModel>
+    public class LoadPanel : PanelView<LoadModel>
     {
         public override void Start()
         {

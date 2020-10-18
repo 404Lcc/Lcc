@@ -71,8 +71,10 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\ILRuntimeManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\IUIEvent.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\ShowObjectInInspectorAttribute.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\EventHandlerAttribute.cs" />
     <Compile Include="Assets\Scripts\Tool\DelayDestroy.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Config\Item\ItemType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\Panel\PanelObjectBaseHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Transform\TransformExpand.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\LccView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\ClientNetworkManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Util\Id\IdUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEventHandlerAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\UIEvent\UIEventType.cs" />
@@ -135,9 +138,13 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\ObjectBase.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Util\Id\IdUtil.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Config\Item\ItemType.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\ItemManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\ItemBase.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\ItemData.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Expand\ItemType\ItemTypeExpand.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Handler\Item\ItemObjectBaseHandler.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelView.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\ItemView.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />
