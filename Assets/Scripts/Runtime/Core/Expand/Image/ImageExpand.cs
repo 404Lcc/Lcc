@@ -8,7 +8,7 @@ namespace Model
         public static void SetSprite(this Image image, string name, params string[] types)
         {
             if (string.IsNullOrEmpty(name)) return;
-            Sprite sprite = Model.AssetManager.Instance.LoadAssetData<Sprite>(name, ".png", false, true, types);
+            Sprite sprite = AssetManager.Instance.LoadAssetData<Sprite>(name, ".png", false, true, types);
             image.sprite = sprite;
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Model
 {
-    public class TipsWindow : ObjectBase, IEnumerator
+    public class TipsWindow : AObjectBase, IEnumerator
     {
         public int id;
         public bool state;

@@ -1,6 +1,6 @@
 namespace Model
 {
-    public class Delay : ObjectBase
+    public class Delay : AObjectBase
     {
         public float time = 1;
         public override void Start()

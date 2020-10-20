@@ -2,7 +2,7 @@
 
 namespace Hotfix
 {
-    public class SmoothFoolow2D : ObjectBase
+    public class SmoothFoolow2D : AObjectBase
     {
         public int smooth = 1;
         public bool isFollow = true;

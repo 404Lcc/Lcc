@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-namespace Hotfix
+namespace Model
 {
-    public class ObjectBaseHandler
+    public abstract class AObjectBaseHandler
     {
         public bool isKeep;
         public bool isAssetBundle;
         public string[] types;
-        public ObjectBaseHandler(bool isKeep, bool isAssetBundle, params string[] types)
+        public AObjectBaseHandler(bool isKeep, bool isAssetBundle, params string[] types)
         {
             this.isKeep = isKeep;
             this.isAssetBundle = isAssetBundle;
@@ -15,7 +15,7 @@ namespace Hotfix
         }
         public virtual GameObject CreateGameObject(string name, Transform parent)
         {
-            GameObject gameObject = Model.AssetManager.Instance.LoadGameObject(name, false, isAssetBundle, AssetType.UI);
+            GameObject gameObject = AssetManager.Instance.LoadGameObject(name, false, isAssetBundle, AssetType.UI);
             if (gameObject == null) return null;
             gameObject.name = name;
             gameObject.transform.SetParent(parent);

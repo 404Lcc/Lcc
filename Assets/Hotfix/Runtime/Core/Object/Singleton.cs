@@ -4,7 +4,7 @@ using Object = UnityEngine.Object;
 
 namespace Hotfix
 {
-    public class Singleton<T> : ObjectBase where T : ObjectBase
+    public class Singleton<T> : AObjectBase where T : AObjectBase
     {
         private static readonly object lockObject = new object();
         private static T _instance;
@@ -18,7 +18,7 @@ namespace Hotfix
                     {
                         _instance = Activator.CreateInstance<T>();
                         GameObject gameObject = new GameObject(_instance.ToString());
-                        _instance.InitObjectBase(gameObject);
+                        _instance.InitObject(gameObject);
                         Object.DontDestroyOnLoad(gameObject);
                     }
                 }

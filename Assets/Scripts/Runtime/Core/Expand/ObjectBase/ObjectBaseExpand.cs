@@ -4,45 +4,45 @@ namespace Model
 {
     public static class ObjectBaseExpand
     {
-        public static GameObject GetChildGameObject(this ObjectBase objectBase, params string[] childs)
+        public static GameObject GetChildGameObject(this AObjectBase aObjectBase, params string[] childs)
         {
-            if (objectBase == null) return null;
+            if (aObjectBase == null) return null;
             string child = string.Empty;
             for (int i = 0; i < childs.Length - 1; i++)
             {
                 child += childs[i] + "/";
             }
             child += childs[childs.Length - 1];
-            Transform childTransform = objectBase.gameObject.transform.Find(child);
+            Transform childTransform = aObjectBase.gameObject.transform.Find(child);
             if (childTransform == null) return null;
             return childTransform.gameObject;
         }
-        public static void SafeDestroy(this ObjectBase objectBase)
+        public static void SafeDestroy(this AObjectBase aObjectBase)
         {
-            if (objectBase == null) return;
-            Object.Destroy(objectBase.gameObject);
+            if (aObjectBase == null) return;
+            Object.Destroy(aObjectBase.gameObject);
         }
-        public static T GetComponent<T>(this ObjectBase objectBase) where T : ObjectBase
+        public static T GetComponent<T>(this AObjectBase aObjectBase) where T : AObjectBase
         {
-            if (objectBase == null) return null;
-            return LccViewFactory.GetView<T>(objectBase.gameObject);
+            if (aObjectBase == null) return null;
+            return LccViewFactory.GetView<T>(aObjectBase.gameObject);
         }
-        public static T GetChildComponent<T>(this ObjectBase objectBase, params string[] childs) where T : ObjectBase
+        public static T GetChildComponent<T>(this AObjectBase aObjectBase, params string[] childs) where T : AObjectBase
         {
-            GameObject childGameObject = objectBase.GetChildGameObject(childs);
+            GameObject childGameObject = aObjectBase.GetChildGameObject(childs);
             if (childGameObject == null) return null;
             return LccViewFactory.GetView<T>(childGameObject);
         }
-        public static T AddChildComponent<T>(this ObjectBase objectBase, params string[] childs) where T : ObjectBase
+        public static T AddChildComponent<T>(this AObjectBase aObjectBase, params string[] childs) where T : AObjectBase
         {
-            GameObject childGameObject = objectBase.GetChildGameObject(childs);
+            GameObject childGameObject = aObjectBase.GetChildGameObject(childs);
             if (childGameObject == null) return null;
             return LccViewFactory.CreateView<T>(childGameObject);
         }
-        public static void SafeDestroy<T>(this ObjectBase objectBase) where T : ObjectBase
+        public static void SafeDestroy<T>(this AObjectBase aObjectBase) where T : AObjectBase
         {
-            if (objectBase == null) return;
-            T component = objectBase.GetComponent<T>();
+            if (aObjectBase == null) return;
+            T component = aObjectBase.GetComponent<T>();
             if (component == null) return;
             Object.Destroy(component.gameObject);
         }

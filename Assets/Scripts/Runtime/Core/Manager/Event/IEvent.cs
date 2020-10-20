@@ -4,6 +4,6 @@ namespace Model
 {
     public interface IEvent
     {
-        Type GetEventType();
+        Type EventType();
     }
 }

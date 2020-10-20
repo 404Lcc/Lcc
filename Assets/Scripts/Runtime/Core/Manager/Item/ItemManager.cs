@@ -21,32 +21,32 @@ namespace Model
             }
             return false;
         }
-        public ItemData CreateItem(ItemType type, object data, Transform parent)
+        public Item CreateItem(ItemType type, object data, Transform parent)
         {
-            ItemData itemData = handler.CreateItem(type, data, parent);
+            Item item = handler.CreateItem(type, data, parent);
             if (ItemExist(type))
             {
-                ((List<ItemData>)items[type]).Add(itemData);
-                return itemData;
+                ((List<Item>)items[type]).Add(item);
+                return item;
             }
             else
             {
-                List<ItemData> itemDataList = new List<ItemData>();
-                itemDataList.Add(itemData);
-                items.Add(type, itemDataList);
-                return itemData;
+                List<Item> itemList = new List<Item>();
+                itemList.Add(item);
+                items.Add(type, itemList);
+                return item;
             }
         }
         public void ClearItems(ItemType type)
         {
             if (ItemExist(type))
             {
-                ItemData[] itemDatas = GetItems(type);
-                foreach (ItemData item in itemDatas)
+                Item[] items = GetItems(type);
+                foreach (Item item in items)
                 {
-                    item.gameObject.SafeDestroy();
+                    item.AObjectBase.gameObject.SafeDestroy();
                 }
-                items.Remove(type);
+                this.items.Remove(type);
             }
         }
         public void ClearAllItems()
@@ -56,26 +56,26 @@ namespace Model
                 ClearItems(item);
             }
         }
-        public ItemData[] GetItems(ItemType type)
+        public Item[] GetItems(ItemType type)
         {
             if (ItemExist(type))
             {
-                ItemData[] itemDatas = (ItemData[])items[type];
-                return itemDatas;
+                Item[] items = (Item[])this.items[type];
+                return items;
             }
             return null;
         }
-        public T[] GetItems<T>(ItemType type) where T : ObjectBase
+        public T[] GetItems<T>(ItemType type) where T : AObjectBase
         {
             if (ItemExist(type))
             {
-                ItemData[] itemDatas = (ItemData[])items[type];
-                List<T> objectBaseList = new List<T>();
-                foreach (ItemData item in itemDatas)
+                Item[] items = (Item[])this.items[type];
+                List<T> aObjectBaseList = new List<T>();
+                foreach (Item item in items)
                 {
-                    objectBaseList.Add((T)item.objectBase);
+                    aObjectBaseList.Add((T)item.AObjectBase);
                 }
-                return objectBaseList.ToArray();
+                return aObjectBaseList.ToArray();
             }
             return null;
         }

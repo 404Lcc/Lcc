@@ -5,7 +5,7 @@ namespace Hotfix
     [EventHandler]
     public abstract class AEvent<T> : IEvent
     {
-        public Type GetEventType()
+        public Type EventType()
         {
             return typeof(T);
         }

@@ -5,19 +5,19 @@ namespace Model
 {
     public static class LccViewFactory
     {
-        public static ObjectBase CreateView(Type type, GameObject gameObject, object data = null)
+        public static AObjectBase CreateView(Type type, GameObject gameObject, object data = null)
         {
-            ObjectBase objectBase = (ObjectBase)Activator.CreateInstance(type);
-            objectBase.InitObjectBase(gameObject, data);
-            return objectBase;
+            AObjectBase aObjectBase = (AObjectBase)Activator.CreateInstance(type);
+            aObjectBase.InitObject(gameObject, data);
+            return aObjectBase;
         }
-        public static T CreateView<T>(GameObject gameObject, object data = null) where T : ObjectBase
+        public static T CreateView<T>(GameObject gameObject, object data = null) where T : AObjectBase
         {
-            ObjectBase objectBase = Activator.CreateInstance<T>();
-            objectBase.InitObjectBase(gameObject, data);
-            return (T)objectBase;
+            AObjectBase aObjectBase = Activator.CreateInstance<T>();
+            aObjectBase.InitObject(gameObject, data);
+            return (T)aObjectBase;
         }
-        public static T GetView<T>(GameObject gameObject) where T : ObjectBase
+        public static T GetView<T>(GameObject gameObject) where T : AObjectBase
         {
             LccView lccView = gameObject.GetChildComponent<LccView>(typeof(T).FullName);
             return lccView.GetType<T>();

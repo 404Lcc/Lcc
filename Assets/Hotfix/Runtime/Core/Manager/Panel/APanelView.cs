@@ -1,6 +1,6 @@
-﻿namespace Model
+﻿namespace Hotfix
 {
-    public class PanelView<T> : ViewBase<T> where T : ViewModelBase
+    public abstract class APanelView<T> : AViewBase<T> where T : ViewModelBase
     {
         public virtual void ClosePanel()
         {

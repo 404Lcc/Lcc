@@ -9,7 +9,7 @@ namespace Model
         /// </summary>
         public static void UnloadAssets()
         {
-            Model.AssetManager.Instance.UnloadAllAssetsData();
+            AssetManager.Instance.UnloadAllAssetsData();
         }
         /// <summary>
         /// 设置分辨率

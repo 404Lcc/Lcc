@@ -31,11 +31,11 @@ namespace Hotfix
         /// <param name="type"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public PanelData CreatePanel(PanelType type, object data = null)
+        public Panel CreatePanel(PanelType type, object data = null)
         {
-            PanelData panelData = handler.CreatePanel(type, data);
-            panels.Add(type, panelData);
-            return panelData;
+            Panel panel = handler.CreatePanel(type, data);
+            panels.Add(type, panel);
+            return panel;
         }
         /// <summary>
         /// 打开面板
@@ -43,19 +43,19 @@ namespace Hotfix
         /// <param name="type"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public PanelData OpenPanel(PanelType type, object data = null)
+        public Panel OpenPanel(PanelType type, object data = null)
         {
             if (PanelExist(type))
             {
-                PanelData panelData = GetPanel(type);
-                panelData.OpenPanel();
-                return panelData;
+                Panel panel = GetPanel(type);
+                panel.OpenPanel();
+                return panel;
             }
             else
             {
-                PanelData panelData = CreatePanel(type, data);
-                panelData.OpenPanel();
-                return panelData;
+                Panel panel = CreatePanel(type, data);
+                panel.OpenPanel();
+                return panel;
             }
         }
         /// <summary>
@@ -63,63 +63,63 @@ namespace Hotfix
         /// </summary>
         /// <param name="types"></param>
         /// <returns></returns>
-        public PanelData[] OpenPanel(PanelType[] types)
+        public Panel[] OpenPanel(PanelType[] types)
         {
-            List<PanelData> panelDataList = new List<PanelData>();
+            List<Panel> panelList = new List<Panel>();
             foreach (PanelType item in types)
             {
-                panelDataList.Add(OpenPanel(item));
+                panelList.Add(OpenPanel(item));
             }
-            return panelDataList.ToArray();
+            return panelList.ToArray();
         }
         /// <summary>
         /// 打开剩下所有面板
         /// </summary>
         /// <param name="types"></param>
         /// <returns></returns>
-        public PanelData[] OpenExceptPanel(PanelType[] types)
+        public Panel[] OpenExceptPanel(PanelType[] types)
         {
-            List<PanelData> panelDataList = new List<PanelData>();
+            List<Panel> panelList = new List<Panel>();
             List<PanelType> typeList = new List<PanelType>(types);
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
                 if (!typeList.Contains(item))
                 {
-                    panelDataList.Add(OpenPanel(item));
+                    panelList.Add(OpenPanel(item));
                 }
             }
-            return panelDataList.ToArray();
+            return panelList.ToArray();
         }
         /// <summary>
         /// 打开全部面板
         /// </summary>
-        public PanelData[] OpenAllPanels()
+        public Panel[] OpenAllPanels()
         {
-            List<PanelData> panelDataList = new List<PanelData>();
+            List<Panel> panelList = new List<Panel>();
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
-                panelDataList.Add(OpenPanel(item));
+                panelList.Add(OpenPanel(item));
             }
-            return panelDataList.ToArray();
+            return panelList.ToArray();
         }
         /// <summary>
         /// 隐藏面板
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public PanelData ClosePanel(PanelType type, object data = null)
+        public Panel ClosePanel(PanelType type, object data = null)
         {
             if (PanelExist(type))
             {
-                PanelData panelData = GetPanel(type);
-                panelData.ClosePanel();
-                return panelData;
+                Panel panel = GetPanel(type);
+                panel.ClosePanel();
+                return panel;
             }
             else
             {
-                PanelData panelData = CreatePanel(type, data);
-                panelData.ClosePanel();
-                return panelData;
+                Panel panel = CreatePanel(type, data);
+                panel.ClosePanel();
+                return panel;
             }
         }
         /// <summary>
@@ -127,44 +127,44 @@ namespace Hotfix
         /// </summary>
         /// <param name="types"></param>
         /// <returns></returns>
-        public PanelData[] ClosePanel(PanelType[] types)
+        public Panel[] ClosePanel(PanelType[] types)
         {
-            List<PanelData> panelDataList = new List<PanelData>();
+            List<Panel> panelList = new List<Panel>();
             foreach (PanelType item in types)
             {
-                panelDataList.Add(ClosePanel(item));
+                panelList.Add(ClosePanel(item));
             }
-            return panelDataList.ToArray();
+            return panelList.ToArray();
         }
         /// <summary>
         /// 隐藏剩下所有面板
         /// </summary>
         /// <param name="types"></param>
         /// <returns></returns>
-        public PanelData[] CloseExceptPanel(PanelType[] types)
+        public Panel[] CloseExceptPanel(PanelType[] types)
         {
-            List<PanelData> panelDataList = new List<PanelData>();
+            List<Panel> panelList = new List<Panel>();
             List<PanelType> typeList = new List<PanelType>(types);
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
                 if (!typeList.Contains(item))
                 {
-                    panelDataList.Add(ClosePanel(item));
+                    panelList.Add(ClosePanel(item));
                 }
             }
-            return panelDataList.ToArray();
+            return panelList.ToArray();
         }
         /// <summary>
         /// 隐藏全部面板
         /// </summary>
-        public PanelData[] CloseAllPanels()
+        public Panel[] CloseAllPanels()
         {
-            List<PanelData> panelDataList = new List<PanelData>();
+            List<Panel> panelList = new List<Panel>();
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
-                panelDataList.Add(ClosePanel(item));
+                panelList.Add(ClosePanel(item));
             }
-            return panelDataList.ToArray();
+            return panelList.ToArray();
         }
         /// <summary>
         /// 删除面板
@@ -174,8 +174,8 @@ namespace Hotfix
         {
             if (PanelExist(type))
             {
-                PanelData panelData = GetPanel(type);
-                panelData.gameObject.SafeDestroy();
+                Panel panel = GetPanel(type);
+                panel.AObjectBase.gameObject.SafeDestroy();
                 panels.Remove(type);
             }
         }
@@ -227,10 +227,10 @@ namespace Hotfix
             IDictionaryEnumerator enumerator = panels.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                PanelData panelData = (PanelData)enumerator.Value;
-                if (panelData.state == PanelState.Open)
+                Panel panel = (Panel)enumerator.Value;
+                if (panel.State == PanelState.Open)
                 {
-                    ClearPanel(panelData.type);
+                    ClearPanel(panel.Type);
                     number++;
                 }
             }
@@ -241,12 +241,12 @@ namespace Hotfix
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public PanelData GetPanel(PanelType type)
+        public Panel GetPanel(PanelType type)
         {
             if (PanelExist(type))
             {
-                PanelData panelData = (PanelData)panels[type];
-                return panelData;
+                Panel panel = (Panel)panels[type];
+                return panel;
             }
             return null;
         }
@@ -256,12 +256,12 @@ namespace Hotfix
         /// <typeparam name="T"></typeparam>
         /// <param name="type"></param>
         /// <returns></returns>
-        public T GetPanel<T>(PanelType type) where T : ObjectBase
+        public T GetPanel<T>(PanelType type) where T : AObjectBase
         {
             if (PanelExist(type))
             {
-                PanelData panelData = (PanelData)panels[type];
-                return (T)panelData.objectBase;
+                Panel panel = (Panel)panels[type];
+                return (T)panel.AObjectBase;
             }
             return null;
         }
@@ -274,8 +274,8 @@ namespace Hotfix
         {
             if (PanelExist(type))
             {
-                PanelData panelData = GetPanel(type);
-                if (panelData.state == PanelState.Open)
+                Panel panel = GetPanel(type);
+                if (panel.State == PanelState.Open)
                 {
                     return true;
                 }

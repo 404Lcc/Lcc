@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace Hotfix
 {
-    public class SmoothFoolow3D : ObjectBase
+    public class SmoothFoolow3D : AObjectBase
     {
         public float distance = 3;
         public float damping = 45;

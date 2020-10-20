@@ -4,6 +4,6 @@ namespace Hotfix
 {
     public interface IEvent
     {
-        Type GetEventType();
+        Type EventType();
     }
 }

@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Model
+namespace Hotfix
 {
-    public class ObjectBase
+    public class AObjectBase
     {
         public LccView lccView;
         public GameObject gameObject;
@@ -22,7 +23,7 @@ namespace Model
                 return gameObject.transform;
             }
         }
-        public void InitObjectBase(GameObject gameObject, object data = null)
+        public void InitObject(GameObject gameObject, object data = null)
         {
             this.gameObject = gameObject;
             AutoReference();

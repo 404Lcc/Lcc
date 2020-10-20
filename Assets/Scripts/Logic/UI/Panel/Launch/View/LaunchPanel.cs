@@ -1,6 +1,6 @@
 ﻿namespace Model
 {
-    public class LaunchPanel : PanelView<LaunchModel>
+    public class LaunchPanel : APanelView<LaunchModel>
     {
         public override void Start()
         {

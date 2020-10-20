@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Hotfix
 {
-    public class ItemObjectBaseHandler : ObjectBaseHandler
+    public class ItemObjectBaseHandler : AObjectBaseHandler
     {
         public ItemObjectBaseHandler(bool isKeep, bool isAssetBundle, params string[] types) : base(isKeep, isAssetBundle, types)
         {
@@ -25,19 +25,19 @@ namespace Hotfix
             rect.localScale = Vector3.one;
             return gameObject;
         }
-        public ItemData CreateItem(ItemType type, object data, Transform parent)
+        public Item CreateItem(ItemType type, object data, Transform parent)
         {
-            ItemData itemData = new ItemData();
-            itemData.gameObject = CreateGameObject(type.ToItemString(), parent);
-            if (itemData.gameObject == null) return null;
-            itemData.type = type;
+            Item item = new Item();
+            GameObject gameObject = CreateGameObject(type.ToItemString(), parent);
+            if (gameObject == null) return null;
+            item.Type = type;
             Assembly assembly = type.GetType().Assembly;
             Type classType = assembly.GetType(type.GetType().Namespace + "." + type.ToItemString());
             if (classType != null)
             {
-                itemData.objectBase = LccViewFactory.CreateView(classType, itemData.gameObject, data);
+                item.AObjectBase = LccViewFactory.CreateView(classType, gameObject, data);
             }
-            return itemData;
+            return item;
         }
     }
 }

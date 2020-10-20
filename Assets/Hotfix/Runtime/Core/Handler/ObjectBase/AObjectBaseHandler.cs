@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-namespace Model
+namespace Hotfix
 {
-    public class ObjectBaseHandler
+    public abstract class AObjectBaseHandler
     {
         public bool isKeep;
         public bool isAssetBundle;
         public string[] types;
-        public ObjectBaseHandler(bool isKeep, bool isAssetBundle, params string[] types)
+        public AObjectBaseHandler(bool isKeep, bool isAssetBundle, params string[] types)
         {
             this.isKeep = isKeep;
             this.isAssetBundle = isAssetBundle;

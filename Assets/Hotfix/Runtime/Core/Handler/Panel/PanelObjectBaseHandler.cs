@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Hotfix
 {
-    public class PanelObjectBaseHandler : ObjectBaseHandler
+    public class PanelObjectBaseHandler : AObjectBaseHandler
     {
         public PanelObjectBaseHandler(bool isKeep, bool isAssetBundle, params string[] types) : base(isKeep, isAssetBundle, types)
         {
@@ -25,21 +25,21 @@ namespace Hotfix
             rect.localScale = Vector3.one;
             return gameObject;
         }
-        public PanelData CreatePanel(PanelType type, object data)
+        public Panel CreatePanel(PanelType type, object data)
         {
-            PanelData panelData = new PanelData();
-            panelData.state = PanelState.Close;
-            panelData.gameObject = CreateGameObject(type.ToPanelString(), Model.Objects.GUI.transform);
-            if (panelData.gameObject == null) return null;
-            panelData.type = type;
+            Panel panel = new Panel();
+            panel.State = PanelState.Close;
+            GameObject gameObject = CreateGameObject(type.ToPanelString(), Model.Objects.GUI.transform);
+            if (gameObject == null) return null;
+            panel.Type = type;
             Assembly assembly = type.GetType().Assembly;
             Type classType = assembly.GetType(type.GetType().Namespace + "." + type.ToPanelString());
             if (classType != null)
             {
-                panelData.objectBase = LccViewFactory.CreateView(classType, panelData.gameObject, data);
+                panel.AObjectBase = LccViewFactory.CreateView(classType, gameObject, data);
             }
-            panelData.ClosePanel();
-            return panelData;
+            panel.ClosePanel();
+            return panel;
         }
     }
 }

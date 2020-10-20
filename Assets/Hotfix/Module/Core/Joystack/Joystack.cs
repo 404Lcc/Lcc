@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Hotfix
 {
-    public class Joystack : ObjectBase
+    public class Joystack : AObjectBase
     {
         public static Joystack instance;
         //最大拖动距离

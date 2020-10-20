@@ -1,6 +1,6 @@
 ﻿namespace Hotfix
 {
-    public class NewHotfixPanel : PanelView<NewHotfixViewModel>
+    public class NewHotfixPanel : APanelView<NewHotfixViewModel>
     {
         public override void Start()
         {

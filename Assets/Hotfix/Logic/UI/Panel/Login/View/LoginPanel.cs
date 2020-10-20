@@ -1,6 +1,6 @@
 ﻿namespace Hotfix
 {
-    public class LoginPanel : PanelView<LoginModel>
+    public class LoginPanel : APanelView<LoginModel>
     {
         public override void Start()
         {

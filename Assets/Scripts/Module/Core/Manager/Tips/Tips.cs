@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Model
 {
-    public class Tips : ObjectBase
+    public class Tips : AObjectBase
     {
         public int id;
         public string info;

@@ -1,6 +1,6 @@
 ﻿namespace Model
 {
-    public class NewModelPanel : PanelView<NewModelViewModel>
+    public class NewModelPanel : APanelView<NewModelViewModel>
     {
         public override void Start()
         {

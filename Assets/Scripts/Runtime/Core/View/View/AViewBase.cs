@@ -2,12 +2,12 @@
 
 namespace Model
 {
-    public class ViewBase<T> : ObjectBase, IView<T> where T : ViewModelBase
+    public abstract class AViewBase<T> : AObjectBase, IView<T> where T : ViewModelBase
     {
         public bool isInit;
         public Binding<T> binding;
         protected DataBinder<T> dataBinder;
-        public ViewBase()
+        public AViewBase()
         {
             ViewModel = Activator.CreateInstance<T>();
         }

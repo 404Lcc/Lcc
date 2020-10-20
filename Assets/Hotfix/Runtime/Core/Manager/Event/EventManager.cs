@@ -16,7 +16,7 @@ namespace Hotfix
                 if (eventHandlerAttributes.Length > 0)
                 {
                     IEvent iEvent = (IEvent)Activator.CreateInstance(item);
-                    events.Add(iEvent.GetEventType(), iEvent);
+                    events.Add(iEvent.EventType(), iEvent);
                 }
             }
         }
