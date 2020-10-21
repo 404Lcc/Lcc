@@ -1,45 +1,31 @@
 ﻿namespace Model
 {
-    public class TipsPool
+    public class TipsPool : APool<Tips>
     {
-        public Pool<Tips> tipsPool;
-        public int tipsMax;
-        public TipsPool()
+        public TipsPool(int size) : base(size)
         {
         }
-        public TipsPool(int tipsMax)
+        public override void InitPool()
         {
-            this.tipsMax = tipsMax;
-            tipsPool = new Pool<Tips>(tipsMax);
-        }
-        public void InitPool()
-        {
-            for (int i = 0; i < tipsMax; i++)
+            for (int i = 0; i < size; i++)
             {
                 Tips tips = LccViewFactory.CreateView<Tips>(AssetManager.Instance.LoadGameObject("Tips", false, false, Objects.GUI.transform, AssetType.UI, AssetType.Tool));
                 Enqueue(tips);
             }
         }
-        public int Count
+        public override void Enqueue(Tips item)
         {
-            get
-            {
-                return tipsPool.Count;
-            }
+            item.transform.SetParent(Objects.GUI.transform);
+            item.gameObject.SetActive(false);
+            poolQueue.Enqueue(item);
         }
-        public void Enqueue(Tips tips)
-        {
-            tips.transform.SetParent(Objects.GUI.transform);
-            tips.gameObject.SetActive(false);
-            tipsPool.Enqueue(tips);
-        }
-        public Tips Dequeue()
+        public override Tips Dequeue()
         {
             if (Count == 0)
             {
                 InitPool();
             }
-            Tips tips = tipsPool.Dequeue();
+            Tips tips = poolQueue.Dequeue();
             tips.transform.SetParent(Objects.GUI.transform);
             tips.gameObject.SetActive(true);
             return tips;

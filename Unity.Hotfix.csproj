@@ -56,11 +56,13 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\DataBinder\DataBinder.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Camera\SmoothFoolow2D.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventHandlerAttribute.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandType.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Language\LanguageManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\AConfig.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Handler\Panel\PanelObjectBaseHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\String\StringExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEventManager.cs" />
@@ -101,11 +103,13 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEventHandlerAttribute.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Util\User\UserDataInstance.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\PanelType\PanelTypeExpand.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Joystack\Joystack.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Item\AItemView.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Manager\Manager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\IConfig.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\User\UserData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\View\IView.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEvent.cs" />
@@ -114,6 +118,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\AObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Item\Item.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\IConfigBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Init\EventHandler\InitEventHandler.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\User\DisplayModeType.cs" />
@@ -128,7 +133,7 @@
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Load\ViewModel\LoadModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\MD5\MD5Util.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Load\UIEventHandler\LoadUIEventHandler.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Pool\Pool.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Pool\APool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Rijndael\RijndaelUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\AEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\IUIEvent.cs" />
@@ -147,11 +152,6 @@
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\ViewModel\LoginModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\LccViewFactory.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandData.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\IConfig.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\IConfigBase.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\AConfig.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
