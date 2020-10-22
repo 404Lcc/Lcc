@@ -1,16 +1,19 @@
-﻿using UnityEngine;
-using System.IO;
-using ILRuntime.Runtime.Enviorment;
-using ILRuntime.Mono.Cecil.Pdb;
-using System.Threading;
+﻿using ILRuntime.Mono.Cecil.Pdb;
 using LitJson;
-//using ILRuntime.Runtime.Generated;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using UnityEngine;
+using AppDomain = ILRuntime.Runtime.Enviorment.AppDomain;
 
-namespace Model
+namespace LccModel
 {
     public class ILRuntimeManager : Singleton<ILRuntimeManager>
     {
         public AppDomain appDomain = new AppDomain();
+        public List<Type> typeList = new List<Type>();
         public void InitManager()
         {
             LoadHotfixAssembly();
@@ -40,10 +43,12 @@ namespace Model
             JsonMapper.RegisterILRuntimeCLRRedirection(appDomain);
 
             //CLRBindings.Initialize(appDomain);
+
+            typeList = appDomain.LoadedTypes.Values.Select(x => x.ReflectionType).ToList();
         }
         public unsafe void OnHotfixLoaded()
         {
-            appDomain.Invoke("Hotfix.Init", "InitHotfix", null, null);
+            appDomain.Invoke("LccHotfix.Init", "InitHotfix", null, null);
         }
     }
 }

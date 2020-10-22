@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Model
+namespace LccModel
 {
     public static class ImageExpand
     {

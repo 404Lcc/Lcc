@@ -5,7 +5,7 @@ using System.Reflection;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Model
+namespace LccModel
 {
     public abstract class AObjectBase
     {

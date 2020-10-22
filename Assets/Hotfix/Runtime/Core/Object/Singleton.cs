@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public class Singleton<T> : AObjectBase where T : AObjectBase
     {

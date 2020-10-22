@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Model
+namespace LccModel
 {
     public static class FileUtil
     {

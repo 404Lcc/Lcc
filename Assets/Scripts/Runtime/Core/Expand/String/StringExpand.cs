@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Model
+namespace LccModel
 {
     public static class StringExpand
     {

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public class VoiceManager : Singleton<VoiceManager>
     {
@@ -17,7 +17,7 @@ namespace Hotfix
         }
         public AudioClip LoadAudio(string audio)
         {
-            AudioClip clip = Model.AssetManager.Instance.LoadAssetData<AudioClip>(audio, ".mp3", false, true, AssetType.Audio);
+            AudioClip clip = LccModel.AssetManager.Instance.LoadAssetData<AudioClip>(audio, ".mp3", false, true, AssetType.Audio);
             voices.Add(audio, clip);
             return clip;
         }

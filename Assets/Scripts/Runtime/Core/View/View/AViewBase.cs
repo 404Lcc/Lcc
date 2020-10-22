@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Model
+namespace LccModel
 {
     public abstract class AViewBase<T> : AObjectBase, IView<T> where T : ViewModelBase
     {

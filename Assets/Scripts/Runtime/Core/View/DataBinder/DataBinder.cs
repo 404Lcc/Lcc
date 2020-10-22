@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace Model
+namespace LccModel
 {
     public class DataBinder<T> where T : ViewModelBase
     {

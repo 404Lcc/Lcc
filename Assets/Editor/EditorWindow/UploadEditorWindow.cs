@@ -1,25 +1,28 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-public class UploadEditorWindow : EditorWindow
+namespace LccEditor
 {
-    private string _url;
-    void OnGUI()
+    public class UploadEditorWindow : EditorWindow
     {
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("上传");
-        _url = EditorGUILayout.TextField("url", _url);
-        if (GUILayout.Button(new GUIContent("确定")))
+        private string _url;
+        void OnGUI()
         {
-            
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("上传");
+            _url = EditorGUILayout.TextField("url", _url);
+            if (GUILayout.Button(new GUIContent("确定")))
+            {
+
+            }
+            GUILayout.EndHorizontal();
         }
-        GUILayout.EndHorizontal();
-    }
-    [MenuItem("Lcc/UploadEditor")]
-    private static void ShowUpload()
-    {
-        UploadEditorWindow upload = GetWindow<UploadEditorWindow>();
-        upload.position = new Rect(0, 0, 600, 600);
-        upload.Show();
+        [MenuItem("Lcc/UploadEditor")]
+        private static void ShowUpload()
+        {
+            UploadEditorWindow upload = GetWindow<UploadEditorWindow>();
+            upload.position = new Rect(0, 0, 600, 600);
+            upload.Show();
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public static class DirectoryUtil
     {

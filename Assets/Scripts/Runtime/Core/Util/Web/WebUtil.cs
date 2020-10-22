@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Model
+namespace LccModel
 {
     public static class WebUtil
     {

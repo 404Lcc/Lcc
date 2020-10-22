@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public static class LccUtil
     {
@@ -9,7 +9,7 @@ namespace Hotfix
         /// </summary>
         public static void UnloadAssets()
         {
-            Model.AssetManager.Instance.UnloadAllAssetsData();
+            LccModel.AssetManager.Instance.UnloadAllAssetsData();
         }
         /// <summary>
         /// 设置分辨率

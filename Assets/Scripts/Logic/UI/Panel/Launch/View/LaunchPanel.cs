@@ -1,4 +1,4 @@
-﻿namespace Model
+﻿namespace LccModel
 {
     public class LaunchPanel : APanelView<LaunchModel>
     {

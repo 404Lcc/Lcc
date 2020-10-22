@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public class UIEventManager : Singleton<UIEventManager>
     {

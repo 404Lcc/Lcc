@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Model
+namespace LccModel
 {
     public class ItemManager : Singleton<ItemManager>
     {

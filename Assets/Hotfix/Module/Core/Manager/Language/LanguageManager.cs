@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public class LanguageManager : Singleton<LanguageManager>
     {
         public Hashtable languages = new Hashtable();
         public void ChangeLanguage(LanguageType type)
         {
-            TextAsset asset = Model.AssetManager.Instance.LoadAssetData<TextAsset>(type.ToString(), ".txt", false, true, AssetType.Game);
+            TextAsset asset = LccModel.AssetManager.Instance.LoadAssetData<TextAsset>(type.ToString(), ".txt", false, true, AssetType.Game);
             foreach (string item in asset.text.Split('\n'))
             {
                 if (string.IsNullOrEmpty(item))

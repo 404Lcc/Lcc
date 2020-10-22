@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public abstract class AConfig<T> : IConfigBase where T : IConfig
     {
@@ -17,7 +17,7 @@ namespace Hotfix
         }
         public void InitConfig()
         {
-            string config = Model.AssetManager.Instance.LoadAssetData<TextAsset>(typeof(T).Name, ".txt", false, true, AssetType.Text).text;
+            string config = LccModel.AssetManager.Instance.LoadAssetData<TextAsset>(typeof(T).Name, ".txt", false, true, AssetType.Text).text;
             configDict = JsonMapper.ToObject<Dictionary<int, T>>(config);
         }
         public T GetConfig(int id)

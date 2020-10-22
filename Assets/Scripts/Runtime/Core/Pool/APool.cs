@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Model
+namespace LccModel
 {
     public abstract class APool<T>
     {

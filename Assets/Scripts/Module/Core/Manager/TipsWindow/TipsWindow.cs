@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Model
+namespace LccModel
 {
     public class TipsWindow : AObjectBase, IEnumerator
     {

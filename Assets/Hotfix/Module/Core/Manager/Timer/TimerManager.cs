@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public class TimerManager : Singleton<TimerManager>
     {

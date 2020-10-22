@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public static class SpriteRendererExpand
     {
         public static void SetSprite(this SpriteRenderer spriteRenderer, string name, params string[] types)
         {
             if (string.IsNullOrEmpty(name)) return;
-            Sprite sprite = Model.AssetManager.Instance.LoadAssetData<Sprite>(name, ".png", false, true, types);
+            Sprite sprite = LccModel.AssetManager.Instance.LoadAssetData<Sprite>(name, ".png", false, true, types);
             spriteRenderer.sprite = sprite;
         }
     }

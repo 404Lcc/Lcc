@@ -1,4 +1,4 @@
-﻿using Model;
+﻿using LccModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Reflection;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public class AObjectBase
     {

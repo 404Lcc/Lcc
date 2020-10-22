@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Model
+namespace LccModel
 {
     public static class MD5Util
     {

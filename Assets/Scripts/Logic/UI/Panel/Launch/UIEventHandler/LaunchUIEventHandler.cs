@@ -1,4 +1,4 @@
-﻿namespace Model
+﻿namespace LccModel
 {
     [UIEventHandler(UIEventType.Launch)]
     public class LaunchUIEventHandler : UIEvent

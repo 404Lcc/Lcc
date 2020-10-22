@@ -1,4 +1,4 @@
-﻿namespace Hotfix
+﻿namespace LccHotfix
 {
     public class ViewModelBase
     {

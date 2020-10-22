@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Model
+namespace LccModel
 {
     public class TipsWindowManager : Singleton<TipsWindowManager>
     {

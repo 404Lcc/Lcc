@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public static class MD5Util
     {

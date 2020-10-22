@@ -1,4 +1,4 @@
-﻿namespace Hotfix
+﻿namespace LccHotfix
 {
     [UIEventHandler(UIEventType.Login)]
     public class LoginUIEventHandler : UIEvent

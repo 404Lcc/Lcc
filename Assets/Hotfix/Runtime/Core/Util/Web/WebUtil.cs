@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public static class WebUtil
     {

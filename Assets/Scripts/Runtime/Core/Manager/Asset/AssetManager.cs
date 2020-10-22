@@ -6,7 +6,7 @@ using System.IO;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Model
+namespace LccModel
 {
     public class AssetManager : Singleton<AssetManager>
     {

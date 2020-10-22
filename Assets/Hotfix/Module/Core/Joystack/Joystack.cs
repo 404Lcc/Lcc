@@ -1,8 +1,8 @@
-﻿using Model;
+﻿using LccModel;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public class Joystack : AObjectBase
     {

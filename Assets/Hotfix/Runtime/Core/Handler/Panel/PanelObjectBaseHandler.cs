@@ -2,7 +2,7 @@
 using System.Reflection;
 using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public class PanelObjectBaseHandler : AObjectBaseHandler
     {
@@ -29,7 +29,7 @@ namespace Hotfix
         {
             Panel panel = new Panel();
             panel.State = PanelState.Close;
-            GameObject gameObject = CreateGameObject(type.ToPanelString(), Model.Objects.GUI.transform);
+            GameObject gameObject = CreateGameObject(type.ToPanelString(), LccModel.Objects.GUI.transform);
             if (gameObject == null) return null;
             panel.Type = type;
             Assembly assembly = type.GetType().Assembly;

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Model
+namespace LccModel
 {
     public class Singleton<T> : AObjectBase where T : AObjectBase
     {

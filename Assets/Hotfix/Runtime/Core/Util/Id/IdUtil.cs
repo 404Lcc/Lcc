@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public static class IdUtil
     {

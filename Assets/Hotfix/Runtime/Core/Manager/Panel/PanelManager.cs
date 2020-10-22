@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public class PanelManager : Singleton<PanelManager>
     {

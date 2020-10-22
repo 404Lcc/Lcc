@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Model
+namespace LccModel
 {
     public class AStarNodeData
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Model
+namespace LccModel
 {
     public abstract class AConfig<T> : IConfigBase where T : IConfig
     {

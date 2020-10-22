@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public class VideoManager : Singleton<VideoManager>
     {
@@ -18,7 +18,7 @@ namespace Hotfix
         }
         public VideoClip LoadVideo(string video)
         {
-            VideoClip clip = Model.AssetManager.Instance.LoadAssetData<VideoClip>(video, ".mp4", false, true, AssetType.Video);
+            VideoClip clip = LccModel.AssetManager.Instance.LoadAssetData<VideoClip>(video, ".mp4", false, true, AssetType.Video);
             videos.Add(video, clip);
             return clip;
         }

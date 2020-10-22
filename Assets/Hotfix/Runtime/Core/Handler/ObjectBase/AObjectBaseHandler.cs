@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public abstract class AObjectBaseHandler
     {
@@ -15,7 +15,7 @@ namespace Hotfix
         }
         public virtual GameObject CreateGameObject(string name, Transform parent)
         {
-            GameObject gameObject = Model.AssetManager.Instance.LoadGameObject(name, false, isAssetBundle, AssetType.UI);
+            GameObject gameObject = LccModel.AssetManager.Instance.LoadGameObject(name, false, isAssetBundle, AssetType.UI);
             if (gameObject == null) return null;
             gameObject.name = name;
             gameObject.transform.SetParent(parent);

@@ -1,7 +1,7 @@
 ﻿using LitJson;
 using System.Text;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public static class UserUtil
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public static class GameObjectExpand
     {

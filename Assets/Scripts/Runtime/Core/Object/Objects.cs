@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Video;
 
-namespace Model
+namespace LccModel
 {
     public class Objects
     {

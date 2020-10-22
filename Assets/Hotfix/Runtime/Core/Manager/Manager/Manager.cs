@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public class Manager : Singleton<Manager>
     {
@@ -29,23 +29,17 @@ namespace Hotfix
                 }
             }
         }
-        /// <summary>
-        /// 初始化管理类
-        /// </summary>
         public void InitManager()
         {
-            Model.SceneLoadManager.Instance.LoadScene(SceneName.Login, () =>
+            LccModel.SceneLoadManager.Instance.LoadScene(SceneName.Login, () =>
             {
                 UIEventManager.Instance.Publish(UIEventType.Login);
             }, AssetType.Scene);
         }
-        /// <summary>
-        /// 初始化设置
-        /// </summary>
         public void InitUserSet()
         {
             GameDataManager.Instance.GetUserSetData();
-            AudioManager.Instance.SetVolume(UserSetData.audio, Model.Objects.AudioSource);
+            AudioManager.Instance.SetVolume(UserSetData.audio, LccModel.Objects.AudioSource);
             string name = Enum.GetName(typeof(ResolutionType), UserSetData.resolutionType).Substring(10);
             int width = int.Parse(name.Substring(0, name.IndexOf('x')));
             int height = int.Parse(name.Substring(name.IndexOf('x') + 1));
@@ -60,7 +54,7 @@ namespace Hotfix
             else if (UserSetData.displayModeType == DisplayModeType.BorderlessWindow)
             {
                 LccUtil.SetResolution(false, width, height);
-                StartCoroutine(Model.DisplayMode.SetNoFrame(width, height));
+                StartCoroutine(LccModel.DisplayMode.SetNoFrame(width, height));
             }
             QualitySettings.SetQualityLevel(6, true);
         }

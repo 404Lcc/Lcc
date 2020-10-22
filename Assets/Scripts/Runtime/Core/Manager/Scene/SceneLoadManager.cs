@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Model
+namespace LccModel
 {
     public class SceneLoadManager : Singleton<SceneLoadManager>
     {

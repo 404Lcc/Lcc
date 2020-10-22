@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Model
+namespace LccModel
 {
     public class UIEventManager : Singleton<UIEventManager>
     {

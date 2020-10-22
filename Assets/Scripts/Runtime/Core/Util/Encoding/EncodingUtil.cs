@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Model
+namespace LccModel
 {
     public static class EncodingUtil
     {

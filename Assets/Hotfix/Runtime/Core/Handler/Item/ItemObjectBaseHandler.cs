@@ -2,7 +2,7 @@
 using System.Reflection;
 using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public class ItemObjectBaseHandler : AObjectBaseHandler
     {

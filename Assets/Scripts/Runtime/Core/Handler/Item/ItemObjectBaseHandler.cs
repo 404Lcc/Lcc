@@ -2,7 +2,7 @@
 using System.Reflection;
 using UnityEngine;
 
-namespace Model
+namespace LccModel
 {
     public class ItemObjectBaseHandler : AObjectBaseHandler
     {

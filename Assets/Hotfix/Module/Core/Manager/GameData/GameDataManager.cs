@@ -3,7 +3,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public class GameDataManager : Singleton<GameDataManager>
     {

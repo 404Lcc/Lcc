@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public static class StringExpand
     {

@@ -1,4 +1,4 @@
-﻿namespace Model
+﻿namespace LccModel
 {
     public abstract class APanelView<T> : AViewBase<T> where T : ViewModelBase
     {

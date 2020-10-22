@@ -1,8 +1,8 @@
-﻿using Model;
+﻿using LccModel;
 using System;
 using UnityEngine;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public static class LccViewFactory
     {

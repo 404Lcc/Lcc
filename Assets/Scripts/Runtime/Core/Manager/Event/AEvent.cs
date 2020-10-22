@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Model
+namespace LccModel
 {
     [EventHandler]
     public abstract class AEvent<T> : IEvent

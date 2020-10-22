@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Model
+namespace LccModel
 {
     public class PanelManager : Singleton<PanelManager>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hotfix
+namespace LccHotfix
 {
     public class TimerData
     {

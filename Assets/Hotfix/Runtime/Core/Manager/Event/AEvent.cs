@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hotfix
+namespace LccHotfix
 {
     [EventHandler]
     public abstract class AEvent<T> : IEvent
