@@ -1,8 +1,8 @@
 ﻿namespace LccModel
 {
-    public enum UIEventType
+    public class UIEventType
     {
-        Launch,
-        Updater,
+        public const string Launch = "Launch";
+        public const string Updater = "Updater";
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using UnityEngine;
 
 namespace LccModel
@@ -32,8 +31,7 @@ namespace LccModel
             GameObject gameObject = CreateGameObject(type.ToPanelString(), Objects.GUI.transform);
             if (gameObject == null) return null;
             panel.Type = type;
-            Assembly assembly = type.GetType().Assembly;
-            Type classType = assembly.GetType(type.GetType().Namespace + "." + type.ToPanelString());
+            Type classType = Manager.Instance.GetType(type.ToPanelString());
             if (classType != null)
             {
                 panel.AObjectBase = LccViewFactory.CreateView(classType, gameObject, data);

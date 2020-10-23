@@ -4,8 +4,8 @@ namespace LccModel
 {
     public class UIEventHandlerAttribute : Attribute
     {
-        public UIEventType uiEventType;
-        public UIEventHandlerAttribute(UIEventType uiEventType)
+        public string uiEventType;
+        public UIEventHandlerAttribute(string uiEventType)
         {
             this.uiEventType = uiEventType;
         }

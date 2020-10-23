@@ -4,10 +4,9 @@
     {
         public static void InitHotfix()
         {
+            Manager.Instance.InitManager();
             EventManager.Instance.InitManager();
             UIEventManager.Instance.InitManager();
-
-            PanelManager.Instance.InitManager(new PanelObjectBaseHandler(false, true, AssetType.UI));
 
             EventManager.Instance.Publish(new Start());
         }

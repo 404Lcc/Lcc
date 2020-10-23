@@ -1,31 +1,28 @@
 ﻿using System;
 using System.Collections;
-using System.IO;
-using System.Reflection;
 
 namespace LccModel
 {
     public class Manager : Singleton<Manager>
     {
-        public Hashtable assemblys = new Hashtable();
+        public Hashtable types = new Hashtable();
         public void InitManager()
         {
-            foreach (Assembly item in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (Type item in GetType().Assembly.GetTypes())
             {
-                if (!assemblys.ContainsKey(item.ManifestModule.Name))
+                if (!types.ContainsKey(item.Name))
                 {
-                    assemblys.Add(Path.GetFileNameWithoutExtension(item.ManifestModule.Name), item);
+                    types.Add(item.Name, item);
                 }
             }
-            UIEventManager.Instance.Publish(UIEventType.Launch);
         }
-        public Assembly GetAssembly(string name)
+        public Type GetType(string name)
         {
-            return (Assembly)assemblys[name];
+            return (Type)types[name];
         }
-        public Type[] GetAssemblyTypes(string name)
+        public Type[] GetTypes()
         {
-            return GetAssembly(name).GetTypes();
+            return (Type[])types.Values;
         }
     }
 }

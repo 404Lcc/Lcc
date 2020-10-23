@@ -76,10 +76,12 @@
     <Compile Include="Assets\Editor\Util\Build\BuildHotfix.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\BoolObjectType.cs" />
     <Compile Include="Assets\Editor\Model\NewModelPanel.cs" />
+    <Compile Include="Assets\Editor\Util\Excel\Cell.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\AnimationCurveObjectType.cs" />
     <Compile Include="Assets\Editor\Util\Build\Preprocess.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\Vector3ObjectType.cs" />
     <Compile Include="Assets\Editor\EditorWindow\UploadEditorWindow.cs" />
+    <Compile Include="Assets\Editor\Util\Excel\ExcelExportUtil.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\EnumObjectType.cs" />
     <Compile Include="Assets\Editor\Util\Model\CreateAssetAction.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\Vector3IntObjectType.cs" />
@@ -92,8 +94,6 @@
     <Compile Include="Assets\Editor\MenuItem\Lcc\LccMenuItem.cs" />
     <Compile Include="Assets\Editor\Model\NewHotfixPanel.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\Vector4ObjectType.cs" />
-    <Compile Include="Assets\Editor\Util\Excel\ExcelExportUtil.cs" />
-    <Compile Include="Assets\Editor\Util\Excel\Cell.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Editor\Unity.Editor.asmdef" />
@@ -298,6 +298,18 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI">
+      <HintPath>Assets\Plugins\NPOI\net45\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="ILRuntim.Mono.Cecil">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.5\Plugins\ILRuntim.Mono.Cecil.dll</HintPath>
     </Reference>
@@ -306,18 +318,6 @@
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.5\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI">
-      <HintPath>Assets\Plugins\NPOI\net45\NPOI.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OpenXmlFormats.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OOXML">
-      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OOXML.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\2020.1.8f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>

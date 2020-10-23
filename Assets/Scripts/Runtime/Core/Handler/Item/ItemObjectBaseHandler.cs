@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using UnityEngine;
 
 namespace LccModel
@@ -31,8 +30,7 @@ namespace LccModel
             GameObject gameObject = CreateGameObject(type.ToItemString(), parent);
             if (gameObject == null) return null;
             item.Type = type;
-            Assembly assembly = type.GetType().Assembly;
-            Type classType = assembly.GetType(type.GetType().Namespace + "." + type.ToItemString());
+            Type classType = Manager.Instance.GetType(type.ToItemString());
             if (classType != null)
             {
                 item.AObjectBase = LccViewFactory.CreateView(classType, gameObject, data);

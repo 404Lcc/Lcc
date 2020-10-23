@@ -59,7 +59,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\DataBinder\DataBinder.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Camera\SmoothFoolow2D.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventHandlerAttribute.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandType.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\AConfig.cs" />
@@ -100,10 +99,8 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelState.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\GameData\GameDataManager.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Util\User\UserUtil.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEventHandlerAttribute.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Util\User\UserDataInstance.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\PanelType\PanelTypeExpand.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Joystack\Joystack.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Item\AItemView.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Path\PathType.cs" />
@@ -152,6 +149,7 @@
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\ViewModel\LoginModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\LccViewFactory.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandData.cs" />
+    <Compile Include="Assets\Hotfix\Module\Core\Manager\User\UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
@@ -356,6 +354,18 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI">
+      <HintPath>Assets\Plugins\NPOI\net45\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="ILRuntim.Mono.Cecil">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.5\Plugins\ILRuntim.Mono.Cecil.dll</HintPath>
     </Reference>
@@ -364,18 +374,6 @@
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.5\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI">
-      <HintPath>Assets\Plugins\NPOI\net45\NPOI.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OpenXmlFormats.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OOXML">
-      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OOXML.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\2020.1.8f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>

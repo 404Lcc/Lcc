@@ -10,7 +10,7 @@ namespace LccModel
         public Hashtable configs = new Hashtable();
         public void InitManager()
         {
-            foreach (Type item in GetType().Assembly.GetTypes())
+            foreach (Type item in Manager.Instance.types.Values)
             {
                 if (item.IsAbstract) continue;
                 ConfigAttribute[] configAttributes = (ConfigAttribute[])item.GetCustomAttributes(typeof(ConfigAttribute), false);

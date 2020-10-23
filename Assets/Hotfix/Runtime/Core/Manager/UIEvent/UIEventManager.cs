@@ -9,10 +9,10 @@ namespace LccHotfix
         public Hashtable uiEvents = new Hashtable();
         public void InitManager()
         {
-            foreach (Type item in GetType().Assembly.GetTypes())
+            foreach (Type item in Manager.Instance.types.Values)
             {
                 if (item.IsAbstract) continue;
-                UIEventHandlerAttribute[] uiEventHandlerAttributes = (UIEventHandlerAttribute[])item.GetCustomAttributes(typeof(UIEventHandlerAttribute), false);
+                LccModel.UIEventHandlerAttribute[] uiEventHandlerAttributes = (LccModel.UIEventHandlerAttribute[])item.GetCustomAttributes(typeof(LccModel.UIEventHandlerAttribute), false);
                 if (uiEventHandlerAttributes.Length > 0)
                 {
                     UIEvent uiEvent = (UIEvent)Activator.CreateInstance(item);
@@ -20,7 +20,7 @@ namespace LccHotfix
                 }
             }
         }
-        public void Publish(UIEventType uiEventType)
+        public void Publish(string uiEventType)
         {
             if (uiEvents.ContainsKey(uiEventType))
             {
@@ -32,7 +32,7 @@ namespace LccHotfix
                 Debug.Log("事件不存在" + uiEventType);
             }
         }
-        public void Publish<T>(UIEventType uiEventType, T data)
+        public void Publish<T>(string uiEventType, T data)
         {
             if (uiEvents.ContainsKey(uiEventType))
             {

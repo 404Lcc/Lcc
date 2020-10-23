@@ -9,10 +9,10 @@ namespace LccModel
         public Hashtable events = new Hashtable();
         public void InitManager()
         {
-            foreach (Type item in GetType().Assembly.GetTypes())
+            foreach (Type item in Manager.Instance.types.Values)
             {
                 if (item.IsAbstract) continue;
-                EventHandlerAttribute[] eventHandlerAttributes = (EventHandlerAttribute[])item.GetCustomAttributes(typeof(EventHandlerAttribute), true);
+                EventHandlerAttribute[] eventHandlerAttributes = (EventHandlerAttribute[])item.GetCustomAttributes(typeof(EventHandlerAttribute), false);
                 if (eventHandlerAttributes.Length > 0)
                 {
                     IEvent iEvent = (IEvent)Activator.CreateInstance(item);

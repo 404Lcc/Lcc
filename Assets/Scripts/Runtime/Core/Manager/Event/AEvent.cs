@@ -2,7 +2,6 @@
 
 namespace LccModel
 {
-    [EventHandler]
     public abstract class AEvent<T> : IEvent
     {
         public Type EventType()

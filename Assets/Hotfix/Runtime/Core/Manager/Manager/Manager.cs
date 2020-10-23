@@ -1,62 +1,41 @@
 ﻿using System;
-using UnityEngine;
+using System.Collections;
 
 namespace LccHotfix
 {
     public class Manager : Singleton<Manager>
     {
-        public override void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (PanelManager.Instance.IsOpenPanel(PanelType.Set))
-                {
-                    return;
-                }
-                if (PanelManager.Instance.IsOpenPanel(PanelType.Quit))
-                {
-                    return;
-                }
-                if (!PanelManager.Instance.IsOpenPanel(PanelType.Load))
-                {
-                }
-            }
-            if (Application.platform == RuntimePlatform.WindowsEditor)
-            {
-                if (Input.GetKeyDown(KeyCode.C))
-                {
-                    ScreenCapture.CaptureScreenshot(PathUtil.GetPath(PathType.PersistentDataPath, "Res") + "Screenshot.png");
-                }
-            }
-        }
+        public Hashtable types = new Hashtable();
         public void InitManager()
         {
-            LccModel.SceneLoadManager.Instance.LoadScene(SceneName.Login, () =>
+            if (LccModel.MonoManager.Instance.typeList.Count != 0)
             {
-                UIEventManager.Instance.Publish(UIEventType.Login);
-            }, AssetType.Scene);
+                foreach (Type item in LccModel.MonoManager.Instance.typeList)
+                {
+                    if (!types.ContainsKey(item.Name))
+                    {
+                        types.Add(item.Name, item);
+                    }
+                }
+            }
+            else
+            {
+                foreach (Type item in LccModel.ILRuntimeManager.Instance.typeList)
+                {
+                    if (!types.ContainsKey(item.Name))
+                    {
+                        types.Add(item.Name, item);
+                    }
+                }
+            }
         }
-        public void InitUserSet()
+        public Type GetType(string name)
         {
-            GameDataManager.Instance.GetUserSetData();
-            AudioManager.Instance.SetVolume(UserSetData.audio, LccModel.Objects.AudioSource);
-            string name = Enum.GetName(typeof(ResolutionType), UserSetData.resolutionType).Substring(10);
-            int width = int.Parse(name.Substring(0, name.IndexOf('x')));
-            int height = int.Parse(name.Substring(name.IndexOf('x') + 1));
-            if (UserSetData.displayModeType == DisplayModeType.FullScreen)
-            {
-                LccUtil.SetResolution(true, width, height);
-            }
-            else if (UserSetData.displayModeType == DisplayModeType.Window)
-            {
-                LccUtil.SetResolution(false, width, height);
-            }
-            else if (UserSetData.displayModeType == DisplayModeType.BorderlessWindow)
-            {
-                LccUtil.SetResolution(false, width, height);
-                StartCoroutine(LccModel.DisplayMode.SetNoFrame(width, height));
-            }
-            QualitySettings.SetQualityLevel(6, true);
+            return (Type)types[name];
+        }
+        public Type[] GetTypes()
+        {
+            return (Type[])types.Values;
         }
     }
 }

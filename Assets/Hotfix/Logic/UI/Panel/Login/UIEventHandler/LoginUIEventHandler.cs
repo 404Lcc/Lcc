@@ -1,6 +1,6 @@
 ﻿namespace LccHotfix
 {
-    [UIEventHandler(UIEventType.Login)]
+    [LccModel.UIEventHandler(UIEventType.Login)]
     public class LoginUIEventHandler : UIEvent
     {
         public override void Publish()
