@@ -2,6 +2,9 @@
 {
     public class TipsPool : APool<Tips>
     {
+        public TipsPool()
+        {
+        }
         public TipsPool(int size) : base(size)
         {
         }

@@ -528,7 +528,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    1: ILRuntime
+    1: 
   platformArchitecture: {}
   scriptingBackend:
     Standalone: 1

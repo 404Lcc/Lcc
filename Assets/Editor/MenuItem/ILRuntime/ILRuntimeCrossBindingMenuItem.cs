@@ -8,7 +8,7 @@ using UnityEngine;
 namespace LccEditor
 {
     [Obfuscation(Exclude = true)]
-    public class ILRuntimeCrossBinding
+    public class ILRuntimeCrossBindingMenuItem
     {
         [MenuItem("ILRuntime/生成跨域继承适配器")]
         public static void GenerateCrossbindAdapter()

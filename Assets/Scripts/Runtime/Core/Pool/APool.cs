@@ -6,6 +6,9 @@ namespace LccModel
     {
         public int size;
         public Queue<T> poolQueue;
+        public APool()
+        {
+        }
         public APool(int size)
         {
             this.size = size;

@@ -9,7 +9,7 @@ using UnityEditor;
 namespace LccEditor
 {
     [Obfuscation(Exclude = true)]
-    public class ILRuntimeCLRBinding
+    public class ILRuntimeCLRBindingMenuItem
     {
         [MenuItem("ILRuntime/通过自动分析热更DLL生成CLR绑定")]
         public static void GenerateCLRBindingByAnalysis()

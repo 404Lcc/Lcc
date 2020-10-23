@@ -2,6 +2,9 @@
 {
     public class TipsWindowPool : APool<TipsWindow>
     {
+        public TipsWindowPool()
+        {
+        }
         public TipsWindowPool(int size) : base(size)
         {
         }
