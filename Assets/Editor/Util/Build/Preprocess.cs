@@ -8,7 +8,10 @@ namespace LccEditor
 {
     public class Preprocess : IPreprocessBuildWithReport, IPostprocessBuildWithReport
     {
-        public int callbackOrder => 0;
+        public int callbackOrder
+        {
+            get; set;
+        }
         public void OnPreprocessBuild(BuildReport report)
         {
 #if Release

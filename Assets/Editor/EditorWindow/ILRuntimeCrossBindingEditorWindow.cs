@@ -43,7 +43,7 @@ namespace LccEditor
             GUILayout.EndHorizontal();
         }
         [MenuItem("Lcc/ILRuntimeCrossBindingEditor")]
-        private static void ShowILRuntimeCrossBinding()
+        public static void ShowILRuntimeCrossBinding()
         {
             ILRuntimeCrossBindingEditorWindow ilRuntimeCrossBinding = GetWindow<ILRuntimeCrossBindingEditorWindow>();
             ilRuntimeCrossBinding.position = new Rect(0, 0, 600, 600);

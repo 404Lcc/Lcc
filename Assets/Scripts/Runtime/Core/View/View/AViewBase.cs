@@ -5,8 +5,8 @@ namespace LccModel
     public abstract class AViewBase<T> : AObjectBase, IView<T> where T : ViewModelBase
     {
         public bool isInit;
+        public DataBinding<T> dataBinding;
         public Binding<T> binding;
-        protected DataBinder<T> dataBinder;
         public AViewBase()
         {
             ViewModel = Activator.CreateInstance<T>();
@@ -29,14 +29,14 @@ namespace LccModel
         public virtual void InitView()
         {
             isInit = true;
+            dataBinding = new DataBinding<T>();
             binding = new Binding<T>();
-            dataBinder = new DataBinder<T>();
             binding.OnValueChange += Binding;
         }
         public virtual void Binding(T oldValue, T newValue)
         {
-            dataBinder.UnBind(oldValue);
-            dataBinder.Bind(newValue);
+            dataBinding.UnBind(oldValue);
+            dataBinding.Bind(newValue);
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace LccHotfix
+namespace LccModel
 {
-    public interface IConfigBase
+    public interface IConfigTable
     {
         Type ConfigType
         {
             get;
         }
-        void InitConfig();
+        void InitConfigTable();
     }
 }

@@ -57,11 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\View\DataBinder\DataBinder.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\View\DataBinding\DataBinding.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Camera\SmoothFoolow2D.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandType.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Language\LanguageManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\AConfig.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\AConfigTable.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\User\UserManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Handler\Panel\PanelObjectBaseHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\String\StringExpand.cs" />
@@ -116,7 +116,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\AObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Item\Item.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Audio\AudioManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\IConfigBase.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\IConfigTable.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Init\EventHandler\InitEventHandler.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\User\DisplayModeType.cs" />
@@ -141,7 +141,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Handler\Item\ItemObjectBaseHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Handler\ObjectBase\AObjectBaseHandler.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\GameEvent\GameEventManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\View\DataBinder\Binding.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\View\DataBinding\Binding.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Lcc\LccUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Image\ImageExpand.cs" />

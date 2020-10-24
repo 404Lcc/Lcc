@@ -16,9 +16,9 @@ namespace LccHotfix
                 LccModel.ConfigAttribute[] configAttributes = (LccModel.ConfigAttribute[])item.GetCustomAttributes(typeof(LccModel.ConfigAttribute), false);
                 if (configAttributes.Length > 0)
                 {
-                    IConfigBase iConfigBase = (IConfigBase)Activator.CreateInstance(item);
-                    iConfigBase.InitConfig();
-                    configs.Add(iConfigBase.ConfigType, iConfigBase);
+                    IConfigTable iConfigTable = (IConfigTable)Activator.CreateInstance(item);
+                    iConfigTable.InitConfigTable();
+                    configs.Add(iConfigTable.ConfigType, iConfigTable);
                 }
             }
         }
@@ -27,8 +27,8 @@ namespace LccHotfix
             Type type = typeof(T);
             if (configs.ContainsKey(type))
             {
-                AConfig<T> aConfig = (AConfig<T>)configs[type];
-                return aConfig.GetConfig(id);
+                AConfigTable<T> aConfigTable = (AConfigTable<T>)configs[type];
+                return aConfigTable.GetConfig(id);
             }
             else
             {
@@ -36,13 +36,13 @@ namespace LccHotfix
                 return default;
             }
         }
-        public Dictionary<int, T> GetConfig<T>() where T : IConfig
+        public Dictionary<int, T> GetConfigs<T>() where T : IConfig
         {
             Type type = typeof(T);
             if (configs.ContainsKey(type))
             {
-                AConfig<T> aConfig = (AConfig<T>)configs[type];
-                return aConfig.GetConfig();
+                AConfigTable<T> aConfigTable = (AConfigTable<T>)configs[type];
+                return aConfigTable.GetConfigs();
             }
             else
             {

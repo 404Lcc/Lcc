@@ -5,12 +5,12 @@ namespace LccEditor
 {
     public class UploadEditorWindow : EditorWindow
     {
-        private string _url;
+        public string url;
         void OnGUI()
         {
             GUILayout.BeginHorizontal();
             GUILayout.Label("上传");
-            _url = EditorGUILayout.TextField("url", _url);
+            url = EditorGUILayout.TextField("url", url);
             if (GUILayout.Button(new GUIContent("确定")))
             {
 
@@ -18,7 +18,7 @@ namespace LccEditor
             GUILayout.EndHorizontal();
         }
         [MenuItem("Lcc/UploadEditor")]
-        private static void ShowUpload()
+        public static void ShowUpload()
         {
             UploadEditorWindow upload = GetWindow<UploadEditorWindow>();
             upload.position = new Rect(0, 0, 600, 600);

@@ -8,6 +8,7 @@
         public const string Game = "Game";
         public const string Model = "Model";
         public const string Text = "Text";
+        public const string Config = "Config";
         public const string UI = "UI";
         public const string Item = "Item";
         public const string Video = "Video";

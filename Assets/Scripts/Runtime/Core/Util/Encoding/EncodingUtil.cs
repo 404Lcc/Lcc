@@ -8,79 +8,93 @@ namespace LccModel
     {
         public static byte[] LengthEncode(byte[] bytes)
         {
-            MemoryStream stream = new MemoryStream();
-            BinaryWriter writer = new BinaryWriter(stream);
-            writer.Write(bytes.Length);
-            writer.Write(bytes);
-            bytes = stream.ToArray();
-            stream.Close();
-            writer.Close();
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(bytes.Length);
+                    writer.Write(bytes);
+                    bytes = stream.ToArray();
+                }
+            }
             return bytes;
         }
         public static byte[] LengthDecode(ref List<byte> cacheList)
         {
-            MemoryStream stream = new MemoryStream(cacheList.ToArray());
-            BinaryReader reader = new BinaryReader(stream);
-            int length = reader.ReadInt32();
-            if (length > stream.Length - stream.Position)
+            byte[] bytes;
+            using (MemoryStream stream = new MemoryStream(cacheList.ToArray()))
             {
-                return null;
+                using (BinaryReader reader = new BinaryReader(stream))
+                {
+                    int length = reader.ReadInt32();
+                    if (length > stream.Length - stream.Position)
+                    {
+                        return null;
+                    }
+                    bytes = reader.ReadBytes(length);
+                    cacheList.Clear();
+                    cacheList.AddRange(reader.ReadBytes((int)(stream.Length - stream.Position)));
+                }
             }
-            byte[] bytes = reader.ReadBytes(length);
-            cacheList.Clear();
-            cacheList.AddRange(reader.ReadBytes((int)(stream.Length - stream.Position)));
-            stream.Close();
-            reader.Close();
             return bytes;
         }
         public static byte[] SocketModelEncode(SocketModel model)
         {
-            MemoryStream stream = new MemoryStream();
-            BinaryWriter writer = new BinaryWriter(stream);
-            writer.Write(model.type);
-            writer.Write(model.area);
-            writer.Write(model.command);
-            if (model.message != null)
+            byte[] bytes;
+            using (MemoryStream stream = new MemoryStream())
             {
-                writer.Write(SerializationEncode(model.message));
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(model.type);
+                    writer.Write(model.area);
+                    writer.Write(model.command);
+                    if (model.message != null)
+                    {
+                        writer.Write(SerializationEncode(model.message));
+                    }
+                    bytes = stream.ToArray();
+                }
             }
-            byte[] bytes = stream.ToArray();
-            stream.Close();
-            writer.Close();
             return bytes;
 
         }
         public static SocketModel SocketModelDncode(byte[] bytes)
         {
-            MemoryStream stream = new MemoryStream(bytes);
-            BinaryReader reader = new BinaryReader(stream);
             SocketModel model = new SocketModel();
-            model.type = reader.ReadByte();
-            model.area = reader.ReadInt32();
-            model.command = reader.ReadInt32();
-            if (stream.Length > stream.Position)
+            using (MemoryStream stream = new MemoryStream(bytes))
             {
-                model.message = DeserializationDecode(reader.ReadBytes((int)(stream.Length - stream.Position)));
+                using (BinaryReader reader = new BinaryReader(stream))
+                {
+                    model.type = reader.ReadByte();
+                    model.area = reader.ReadInt32();
+                    model.command = reader.ReadInt32();
+                    if (stream.Length > stream.Position)
+                    {
+                        model.message = DeserializationDecode(reader.ReadBytes((int)(stream.Length - stream.Position)));
+                    }
+                }
             }
-            stream.Close();
-            reader.Close();
             return model;
         }
         public static byte[] SerializationEncode(object obj)
         {
-            MemoryStream stream = new MemoryStream();
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, obj);
-            byte[] bytes = stream.ToArray();
-            stream.Close();
+            byte[] bytes;
+            using (MemoryStream stream = new MemoryStream())
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, obj);
+                bytes = stream.ToArray();
+            }
             return bytes;
         }
         public static object DeserializationDecode(byte[] bytes)
         {
-            MemoryStream stream = new MemoryStream(bytes);
-            BinaryFormatter formatter = new BinaryFormatter();
-            object obj = formatter.Deserialize(stream);
-            stream.Close();
+            object obj;
+            using (MemoryStream stream = new MemoryStream(bytes))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                obj = formatter.Deserialize(stream);
+            }
             return obj;
         }
     }

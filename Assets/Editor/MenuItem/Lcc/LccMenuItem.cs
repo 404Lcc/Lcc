@@ -10,12 +10,12 @@ namespace LccEditor
     public class LccMenuItem
     {
         [MenuItem("Lcc/ViewPersistentData")]
-        private static void ViewPersistentData()
+        public static void ViewPersistentData()
         {
             EditorUtility.OpenWithDefaultApp(Application.persistentDataPath);
         }
         [MenuItem("Lcc/BuildPlayer")]
-        private static void BuildPlayer()
+        public static void BuildPlayer()
         {
             List<string> argList = new List<string>();
             foreach (string item in Environment.GetCommandLineArgs())
@@ -36,7 +36,7 @@ namespace LccEditor
             BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, locationPathName, EditorUserBuildSettings.activeBuildTarget, EditorUserBuildSettings.development ? BuildOptions.Development : BuildOptions.None);
         }
         [MenuItem("Lcc/ILRuntime")]
-        private static void ILRuntime()
+        public static void ILRuntime()
         {
             BuildTargetGroup buildTargetGroup;
 #if UNITY_STANDALONE
@@ -57,7 +57,7 @@ namespace LccEditor
             }
         }
         [MenuItem("Lcc/Mono")]
-        private static void Mono()
+        public static void Mono()
         {
             BuildTargetGroup buildTargetGroup;
 #if UNITY_STANDALONE
@@ -83,7 +83,7 @@ namespace LccEditor
             }
         }
         [MenuItem("Lcc/AssetBundle")]
-        private static void AssetBundle()
+        public static void AssetBundle()
         {
             BuildTargetGroup buildTargetGroup;
 #if UNITY_STANDALONE
@@ -104,7 +104,7 @@ namespace LccEditor
             }
         }
         [MenuItem("Lcc/Resources")]
-        private static void Resources()
+        public static void Resources()
         {
             BuildTargetGroup buildTargetGroup;
 #if UNITY_STANDALONE
@@ -130,7 +130,7 @@ namespace LccEditor
             }
         }
         [MenuItem("Lcc/Release")]
-        private static void Release()
+        public static void Release()
         {
             BuildTargetGroup buildTargetGroup;
 #if UNITY_STANDALONE
@@ -151,7 +151,7 @@ namespace LccEditor
             }
         }
         [MenuItem("Lcc/Debug")]
-        private static void Debug()
+        public static void Debug()
         {
             BuildTargetGroup buildTargetGroup;
 #if UNITY_STANDALONE
@@ -176,8 +176,13 @@ namespace LccEditor
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, define);
             }
         }
+        [MenuItem("Lcc/ExcelExport")]
+        public static void ExcelExport()
+        {
+            ExcelExportUtil.ExportAll();
+        }
         [MenuItem("Assets/Lcc/BuildRelease")]
-        private static void BuildRelease()
+        public static void BuildRelease()
         {
 #if Release
         if (File.Exists("Assets/Resources/Text/Unity.Hotfix.dll.bytes"))
@@ -197,28 +202,28 @@ namespace LccEditor
 #endif
         }
         [MenuItem("Assets/Lcc/Create/Hotfix/Panel")]
-        private static void CreateHotfixPanel()
+        public static void CreateHotfixPanel()
         {
             string pathName = CreateScriptAction.GetSelectedPath() + "/NewHotfixPanel.cs";
             Texture2D icon = (Texture2D)EditorGUIUtility.IconContent("cs Script Icon").image;
             ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<CreateScriptAction>(), pathName, icon, "Assets/Editor/Model/NewHotfixPanel.cs");
         }
         [MenuItem("Assets/Lcc/Create/Hotfix/ViewModel")]
-        private static void CreateHotfixViewModel()
+        public static void CreateHotfixViewModel()
         {
             string pathName = CreateScriptAction.GetSelectedPath() + "/NewHotfixViewModel.cs";
             Texture2D icon = (Texture2D)EditorGUIUtility.IconContent("cs Script Icon").image;
             ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<CreateScriptAction>(), pathName, icon, "Assets/Editor/Model/NewHotfixViewModel.cs");
         }
         [MenuItem("Assets/Lcc/Create/Model/Panel")]
-        private static void CreateModelPanel()
+        public static void CreateModelPanel()
         {
             string pathName = CreateScriptAction.GetSelectedPath() + "/NewModelPanel.cs";
             Texture2D icon = (Texture2D)EditorGUIUtility.IconContent("cs Script Icon").image;
             ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<CreateScriptAction>(), pathName, icon, "Assets/Editor/Model/NewModelPanel.cs");
         }
         [MenuItem("Assets/Lcc/Create/Model/ViewModel")]
-        private static void CreateModelViewModel()
+        public static void CreateModelViewModel()
         {
             string pathName = CreateScriptAction.GetSelectedPath() + "/NewModelViewModel.cs";
             Texture2D icon = (Texture2D)EditorGUIUtility.IconContent("cs Script Icon").image;

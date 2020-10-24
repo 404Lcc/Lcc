@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace LccModel
 {
-    public abstract class AConfig<T> : IConfigBase where T : IConfig
+    public abstract class AConfigTable<T> : IConfigTable where T : IConfig
     {
         public Dictionary<int, T> configDict = new Dictionary<int, T>();
         public Type ConfigType
@@ -15,16 +15,16 @@ namespace LccModel
                 return typeof(T);
             }
         }
-        public void InitConfig()
+        public void InitConfigTable()
         {
-            string config = AssetManager.Instance.LoadAssetData<TextAsset>(typeof(T).Name, ".txt", false, true, AssetType.Text).text;
+            string config = AssetManager.Instance.LoadAssetData<TextAsset>(typeof(T).Name, ".txt", false, true, AssetType.Config).text;
             configDict = JsonMapper.ToObject<Dictionary<int, T>>(config);
         }
         public T GetConfig(int id)
         {
             return configDict[id];
         }
-        public Dictionary<int, T> GetConfig()
+        public Dictionary<int, T> GetConfigs()
         {
             return configDict;
         }

@@ -79,7 +79,7 @@
     <Compile Include="Assets\Scripts\Runtime\Config\Item\ItemType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\Panel\PanelObjectBaseHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\IConfigBase.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\IConfigTable.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Scripts\Util\LongClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\Panel.cs" />
@@ -108,7 +108,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathUtil.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\ViewModel\LaunchModel.cs" />
     <Compile Include="Assets\Scripts\Util\EnterClickButton.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\View\DataBinder\Binding.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\View\DataBinding\Binding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\AItemView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Rijndael\RijndaelUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\String\StringExpand.cs" />
@@ -142,8 +142,8 @@
     <Compile Include="Assets\Scripts\Module\Core\Manager\AStar\AStarManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\Item.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Event\EventType.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\View\DataBinder\DataBinder.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\AConfig.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\View\DataBinding\DataBinding.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\AConfigTable.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\View\LaunchPanel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetData.cs" />

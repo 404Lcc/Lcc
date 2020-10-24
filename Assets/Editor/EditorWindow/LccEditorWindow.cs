@@ -6,10 +6,10 @@ namespace LccEditor
 {
     public class LccEditorWindow : EditorWindow
     {
-        private string[] _tags = { "GUI", "ModelManager", "HotfixManager", "AudioSource", "VideoPlayer" };
-        private string[] _layers = { };
-        private string _tag;
-        private string _layer;
+        public string[] tags = { "GUI", "ModelManager", "HotfixManager", "AudioSource", "VideoPlayer" };
+        public string[] layers = { };
+        public string tag;
+        public string layer;
         void OnGUI()
         {
             GUILayout.BeginHorizontal();
@@ -18,7 +18,7 @@ namespace LccEditor
             {
                 string succe = string.Empty;
                 string failure = string.Empty;
-                foreach (string item in _tags)
+                foreach (string item in tags)
                 {
                     if (AddTag(item))
                     {
@@ -46,7 +46,7 @@ namespace LccEditor
             {
                 string succe = string.Empty;
                 string failure = string.Empty;
-                foreach (string item in _layers)
+                foreach (string item in layers)
                 {
                     if (AddLayer(item))
                     {
@@ -68,48 +68,48 @@ namespace LccEditor
             }
             GUILayout.EndHorizontal();
 
-            _tag = EditorGUILayout.TextField("自定义Tag", _tag);
+            tag = EditorGUILayout.TextField("自定义Tag", tag);
             if (GUILayout.Button(new GUIContent("增加Tag")))
             {
-                if (string.IsNullOrEmpty(_tag))
+                if (string.IsNullOrEmpty(tag))
                 {
                     ShowNotification(new GUIContent("增加失败"));
                     return;
                 }
                 string tips;
-                if (AddTag(_tag))
+                if (AddTag(tag))
                 {
-                    tips = _tag + "增加成功";
+                    tips = tag + "增加成功";
                 }
                 else
                 {
-                    tips = _tag + "增加失败";
+                    tips = tag + "增加失败";
                 }
                 ShowNotification(new GUIContent(tips));
             }
 
-            _layer = EditorGUILayout.TextField("自定义Layer", _layer);
+            layer = EditorGUILayout.TextField("自定义Layer", layer);
             if (GUILayout.Button(new GUIContent("增加Layer")))
             {
-                if (string.IsNullOrEmpty(_layer))
+                if (string.IsNullOrEmpty(layer))
                 {
                     ShowNotification(new GUIContent("增加失败"));
                     return;
                 }
                 string tips;
-                if (AddLayer(_layer))
+                if (AddLayer(layer))
                 {
-                    tips = _layer + "增加成功";
+                    tips = layer + "增加成功";
                 }
                 else
                 {
-                    tips = _layer + "增加失败";
+                    tips = layer + "增加失败";
                 }
                 ShowNotification(new GUIContent(tips));
             }
         }
         [MenuItem("Lcc/LccEditor")]
-        private static void ShowLcc()
+        public static void ShowLcc()
         {
             LccEditorWindow lcc = GetWindow<LccEditorWindow>();
             lcc.position = new Rect(0, 0, 600, 600);
@@ -120,7 +120,7 @@ namespace LccEditor
         /// </summary>
         /// <param name="tag"></param>
         /// <returns></returns>
-        private bool TagExist(string tag)
+        public bool TagExist(string tag)
         {
             foreach (string item in InternalEditorUtility.tags)
             {
@@ -133,7 +133,7 @@ namespace LccEditor
         /// </summary>
         /// <param name="layer"></param>
         /// <returns></returns>
-        private bool LayerExist(string layer)
+        public bool LayerExist(string layer)
         {
             foreach (string item in InternalEditorUtility.layers)
             {
@@ -146,7 +146,7 @@ namespace LccEditor
         /// </summary>
         /// <param name="tag"></param>
         /// <returns></returns>
-        private bool AddTag(string tag)
+        public bool AddTag(string tag)
         {
             if (!TagExist(tag))
             {
@@ -183,7 +183,7 @@ namespace LccEditor
         /// </summary>
         /// <param name="layer"></param>
         /// <returns></returns>
-        private bool AddLayer(string layer)
+        public bool AddLayer(string layer)
         {
             if (!LayerExist(layer))
             {

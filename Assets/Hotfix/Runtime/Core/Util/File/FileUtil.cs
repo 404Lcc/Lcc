@@ -11,20 +11,13 @@ namespace LccHotfix
         /// <param name="bytes"></param>
         public static void SaveAsset(string path, byte[] bytes)
         {
-            Stream stream;
-            FileInfo info = new FileInfo(path);
-            if (info.Exists)
+            if (File.Exists(path))
             {
-                info.Delete();
-                stream = info.Create();
+                using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
+                {
+                    fileStream.Write(bytes, 0, bytes.Length);
+                }
             }
-            else
-            {
-                stream = info.Create();
-            }
-            stream.Write(bytes, 0, bytes.Length);
-            stream.Close();
-            stream.Dispose();
         }
         /// <summary>
         /// 保存资源
@@ -43,21 +36,17 @@ namespace LccHotfix
         /// <returns></returns>
         public static byte[] GetAsset(string path)
         {
-            Stream stream;
-            FileInfo info = new FileInfo(path);
-            if (info.Exists)
+            byte[] bytes;
+            if (File.Exists(path))
             {
-                stream = info.OpenRead();
+                using (FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    bytes = new byte[fileStream.Length];
+                    fileStream.Read(bytes, 0, bytes.Length);
+                }
+                return bytes;
             }
-            else
-            {
-                return null;
-            }
-            byte[] bytes = new byte[stream.Length];
-            stream.Read(bytes, 0, bytes.Length);
-            stream.Close();
-            stream.Dispose();
-            return bytes;
+            return null;
         }
         /// <summary>
         /// 获取资源
