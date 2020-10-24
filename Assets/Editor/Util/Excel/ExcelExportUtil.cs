@@ -191,11 +191,11 @@ namespace LccEditor
         }
         public static string GetCell(ISheet sheet, int row, int cell)
         {
-            return sheet?.GetRow(row)?.GetCell(cell)?.ToString()?.ToLower() ?? string.Empty;
+            return sheet?.GetRow(row)?.GetCell(cell)?.ToString() ?? string.Empty;
         }
         public static string GetCell(IRow row, int cell)
         {
-            return row?.GetCell(cell)?.ToString()?.ToLower() ?? string.Empty;
+            return row?.GetCell(cell)?.ToString() ?? string.Empty;
         }
     }
 }

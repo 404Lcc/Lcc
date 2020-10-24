@@ -1,28 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace LccModel
+namespace LccHotfix
 {
-    public class DataBinding<T> where T : ViewModelBase
+    public class ViewModelBinding<T> where T : ViewModelBase
     {
-        public delegate void DataBindingHandler(T viewModel);
-        public delegate void UnDataBindingHandler(T viewModel);
+        public delegate void ViewModelBindingHandler(T viewModel);
+        public delegate void UnViewModelBindingHandler(T viewModel);
 
-        public List<DataBindingHandler> dataBindingList;
-        public List<UnDataBindingHandler> unDataBindingList;
-        public DataBinding()
+        public List<ViewModelBindingHandler> viewModelBindingList;
+        public List<UnViewModelBindingHandler> unViewModelBindingList;
+        public ViewModelBinding()
         {
-            dataBindingList = new List<DataBindingHandler>();
-            unDataBindingList = new List<UnDataBindingHandler>();
+            viewModelBindingList = new List<ViewModelBindingHandler>();
+            unViewModelBindingList = new List<UnViewModelBindingHandler>();
         }
         public void Add<TProperty>(string name, Binding<TProperty>.ValueChangeHandler valueChangeHandler)
         {
             FieldInfo fieldInfo = typeof(T).GetField(name, BindingFlags.Instance | BindingFlags.Public);
-            dataBindingList.Add((viewModel) =>
+            viewModelBindingList.Add((viewModel) =>
             {
                 GetPropertyValue<TProperty>(viewModel, fieldInfo).OnValueChange += valueChangeHandler;
             });
-            unDataBindingList.Add((viewModel) =>
+            unViewModelBindingList.Add((viewModel) =>
             {
                 GetPropertyValue<TProperty>(viewModel, fieldInfo).OnValueChange -= valueChangeHandler;
             });
@@ -35,9 +35,9 @@ namespace LccModel
         {
             if (viewModel != null)
             {
-                for (int i = 0; i < dataBindingList.Count; i++)
+                for (int i = 0; i < viewModelBindingList.Count; i++)
                 {
-                    dataBindingList[i](viewModel);
+                    viewModelBindingList[i](viewModel);
                 }
             }
         }
@@ -45,9 +45,9 @@ namespace LccModel
         {
             if (viewModel != null)
             {
-                for (int i = 0; i < unDataBindingList.Count; i++)
+                for (int i = 0; i < unViewModelBindingList.Count; i++)
                 {
-                    unDataBindingList[i](viewModel);
+                    unViewModelBindingList[i](viewModel);
                 }
             }
         }

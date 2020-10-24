@@ -108,7 +108,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathUtil.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\ViewModel\LaunchModel.cs" />
     <Compile Include="Assets\Scripts\Util\EnterClickButton.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\View\DataBinding\Binding.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\View\Binding\Binding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\AItemView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Rijndael\RijndaelUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\String\StringExpand.cs" />
@@ -142,7 +142,7 @@
     <Compile Include="Assets\Scripts\Module\Core\Manager\AStar\AStarManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\Item.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Event\EventType.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\View\DataBinding\DataBinding.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\View\Binding\ViewModelBinding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\AConfigTable.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\View\LaunchPanel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetManager.cs" />
