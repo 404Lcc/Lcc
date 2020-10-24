@@ -7,6 +7,7 @@
             Manager.Instance.InitManager();
             EventManager.Instance.InitManager();
             UIEventManager.Instance.InitManager();
+            ConfigManager.Instance.InitManager();
 
             EventManager.Instance.Publish(new Start());
         }

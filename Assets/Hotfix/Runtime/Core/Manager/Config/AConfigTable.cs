@@ -17,8 +17,11 @@ namespace LccHotfix
         }
         public void InitConfigTable()
         {
-            string config = LccModel.AssetManager.Instance.LoadAssetData<TextAsset>(typeof(T).Name, ".txt", false, true, AssetType.Text).text;
-            configDict = JsonMapper.ToObject<Dictionary<int, T>>(config);
+            string config = LccModel.AssetManager.Instance.LoadAssetData<TextAsset>(typeof(T).Name, ".txt", false, true, AssetType.Config).text;
+            foreach (KeyValuePair<string, T> item in JsonMapper.ToObject<Dictionary<string, T>>(config))
+            {
+                configDict.Add(int.Parse(item.Key), item.Value);
+            }
         }
         public T GetConfig(int id)
         {

@@ -18,7 +18,10 @@ namespace LccModel
         public void InitConfigTable()
         {
             string config = AssetManager.Instance.LoadAssetData<TextAsset>(typeof(T).Name, ".txt", false, true, AssetType.Config).text;
-            configDict = JsonMapper.ToObject<Dictionary<int, T>>(config);
+            foreach (KeyValuePair<string, T> item in JsonMapper.ToObject<Dictionary<string, T>>(config))
+            {
+                configDict.Add(int.Parse(item.Key), item.Value);
+            }
         }
         public T GetConfig(int id)
         {

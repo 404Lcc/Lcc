@@ -20,11 +20,8 @@ namespace LccEditor
         {
             foreach (string item in Directory.GetFiles("Assets/Excels"))
             {
-                XSSFWorkbook xssfWorkbook;
-                using (FileStream fileStream = new FileStream(item, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                {
-                    xssfWorkbook = new XSSFWorkbook(fileStream);
-                }
+                if (Path.GetExtension(item) != ".xlsx") continue;
+                XSSFWorkbook xssfWorkbook = new XSSFWorkbook(item);
                 using (FileStream fileStream = new FileStream($"Assets/Resources/Config/{Path.GetFileNameWithoutExtension(item)}.txt", FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
                 {
                     using (StreamWriter streamWriter = new StreamWriter(fileStream))
@@ -39,23 +36,20 @@ namespace LccEditor
         {
             foreach (string item in Directory.GetFiles("Assets/Excels"))
             {
+                if (Path.GetExtension(item) != ".xlsx") continue;
                 using (FileStream fileStream = new FileStream($"Assets/Scripts/Runtime/Config/ConfigTable/{Path.GetFileNameWithoutExtension(item)}Table.cs", FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
                 {
                     using (StreamWriter streamWriter = new StreamWriter(fileStream))
                     {
-                        streamWriter.WriteLine(SheetToAConfigTable("namespace LccModel\n{\n", $"{Path.GetFileNameWithoutExtension(item)}Table"));
+                        streamWriter.WriteLine(SheetToAConfigTable("namespace LccModel\n", $"{Path.GetFileNameWithoutExtension(item)}"));
                     }
                 }
-                XSSFWorkbook xssfWorkbook;
-                using (FileStream fileStream = new FileStream(item, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                {
-                    xssfWorkbook = new XSSFWorkbook(fileStream);
-                }
+                XSSFWorkbook xssfWorkbook = new XSSFWorkbook(item);
                 using (FileStream fileStream = new FileStream($"Assets/Scripts/Runtime/Config/Config/{Path.GetFileNameWithoutExtension(item)}.cs", FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
                 {
                     using (StreamWriter streamWriter = new StreamWriter(fileStream))
                     {
-                        streamWriter.WriteLine(SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccModel\n{\n", $"{Path.GetFileNameWithoutExtension(item)}"));
+                        streamWriter.WriteLine(SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccModel\n", $"{Path.GetFileNameWithoutExtension(item)}"));
                     }
                 }
             }
@@ -65,23 +59,20 @@ namespace LccEditor
         {
             foreach (string item in Directory.GetFiles("Assets/Excels"))
             {
+                if (Path.GetExtension(item) != ".xlsx") continue;
                 using (FileStream fileStream = new FileStream($"Assets/Hotfix/Runtime/Config/ConfigTable/{Path.GetFileNameWithoutExtension(item)}Table.cs", FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
                 {
                     using (StreamWriter streamWriter = new StreamWriter(fileStream))
                     {
-                        streamWriter.WriteLine(SheetToAConfigTable("namespace LccHotfix\n{\n", $"{Path.GetFileNameWithoutExtension(item)}Table"));
+                        streamWriter.WriteLine(SheetToAConfigTable("using LccModel;\n\nnamespace LccHotfix\n", $"{Path.GetFileNameWithoutExtension(item)}"));
                     }
                 }
-                XSSFWorkbook xssfWorkbook;
-                using (FileStream fileStream = new FileStream(item, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                {
-                    xssfWorkbook = new XSSFWorkbook(fileStream);
-                }
+                XSSFWorkbook xssfWorkbook = new XSSFWorkbook(item);
                 using (FileStream fileStream = new FileStream($"Assets/Hotfix/Runtime/Config/Config/{Path.GetFileNameWithoutExtension(item)}.cs", FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
                 {
                     using (StreamWriter streamWriter = new StreamWriter(fileStream))
                     {
-                        streamWriter.WriteLine(SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccHotfix\n{\n", $"{Path.GetFileNameWithoutExtension(item)}"));
+                        streamWriter.WriteLine(SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccHotfix\n", $"{Path.GetFileNameWithoutExtension(item)}"));
                     }
                 }
             }
@@ -90,64 +81,58 @@ namespace LccEditor
         public static string SheetToJson(ISheet sheet)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("[");
+            stringBuilder.Append("{\n\t");
             //第0行格子个数
             int count = sheet.GetRow(0).LastCellNum;
             List<Cell> cellList = new List<Cell>();
             for (int i = 0; i < count; i++)
             {
-                string name = GetCell(sheet, 0, i);
-                string type = GetCell(sheet, 1, i);
-                string desc = GetCell(sheet, 2, i);
-                cellList.Add(new Cell(name, type, desc));
+                string fieldName = GetCell(sheet, 0, i);
+                string fieldType = GetCell(sheet, 1, i);
+                string fieldDesc = GetCell(sheet, 2, i);
+                cellList.Add(new Cell(fieldName, fieldType, fieldDesc));
             }
             //从第三行开始到最后
-            for (int i = 3; i < sheet.LastRowNum; i++)
+            for (int i = 3; i <= sheet.LastRowNum; i++)
             {
-                if (string.IsNullOrEmpty(GetCell(sheet, i, 0)))
-                {
-                    continue;
-                }
+                if (string.IsNullOrEmpty(GetCell(sheet, i, 0))) continue;
                 IRow iRow = sheet.GetRow(i);
-                stringBuilder.Append("{");
                 for (int j = 0; j < count; j++)
                 {
                     if (j > 0)
                     {
-                        stringBuilder.Append(",");
+                        stringBuilder.Append(", ");
                     }
-                    Cell cell = cellList[0];
-                    if (cell.desc.ToLower().StartsWith("#"))
-                    {
-                        continue;
-                    }
+                    Cell cell = cellList[j];
+                    if (cell.desc.StartsWith("#")) continue;
                     string value = GetCell(iRow, j);
                     if (cell.name == "id")
                     {
-                        stringBuilder.Append($"[{value}, {{");
+                        stringBuilder.Append($"\"{value}\" : {{");
                     }
                     stringBuilder.Append($"\"{cell.name}\" : {Convert(cell.type, value)}");
                 }
                 if (i < sheet.LastRowNum)
                 {
-                    stringBuilder.Append("}],");
+                    stringBuilder.Append("},\n\t");
                 }
                 else
                 {
-                    stringBuilder.Append("}]");
+                    stringBuilder.Append("}\n");
                 }
             }
-            stringBuilder.Append("]");
+            stringBuilder.Append("}");
             return stringBuilder.ToString();
         }
         public static string SheetToAConfigTable(string classHead, string configName)
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(classHead);
+            stringBuilder.Append("{\n");
             stringBuilder.Append("\t[Config]\n");
             stringBuilder.Append($"\tpublic class {configName}Table : AConfigTable<{configName}>\n");
             stringBuilder.Append("\t{\n");
-            stringBuilder.Append("\t}");
+            stringBuilder.Append("\t}\n");
             stringBuilder.Append("}");
             return stringBuilder.ToString();
         }
@@ -155,35 +140,29 @@ namespace LccEditor
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(classHead);
-            stringBuilder.Append("\t[Config]\n");
+            stringBuilder.Append("{\n");
             stringBuilder.Append($"\tpublic class {configName} : IConfig\n");
             stringBuilder.Append("\t{\n");
-            stringBuilder.Append("\t\tpublic int id\n");
+            stringBuilder.Append("\t\tpublic int Id\n");
             stringBuilder.Append("\t\t{\n");
-            stringBuilder.Append("\t\tget; set;\n");
-            stringBuilder.Append("\t\t}\n");
+            stringBuilder.Append("\t\t\tget; set;\n");
+            stringBuilder.Append("\t\t}");
             //第0行格子个数
             int count = sheet.GetRow(0).LastCellNum;
             for (int i = 0; i < count; i++)
             {
-                string name = GetCell(sheet, 0, i);
-                string type = GetCell(sheet, 1, i);
-                string desc = GetCell(sheet, 2, i);
-                if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(type) || desc.StartsWith("#"))
-                {
-                    continue;
-                }
-                if (name == "id")
-                {
-                    continue;
-                }
+                string fieldName = GetCell(sheet, 0, i);
+                string fieldType = GetCell(sheet, 1, i);
+                string fieldDesc = GetCell(sheet, 2, i);
+                if (string.IsNullOrEmpty(fieldName) || string.IsNullOrEmpty(fieldType) || fieldDesc.StartsWith("#")) continue;
+                if (fieldName == "id") continue;
                 if (i > 0)
                 {
                     stringBuilder.Append("\n");
                 }
-                stringBuilder.Append($"\t\tpublic {type} {name};");
+                stringBuilder.Append($"\t\tpublic {fieldType} {fieldName};\n");
             }
-            stringBuilder.Append("\t}");
+            stringBuilder.Append("\t}\n");
             stringBuilder.Append("}");
             return stringBuilder.ToString();
         }
@@ -212,11 +191,11 @@ namespace LccEditor
         }
         public static string GetCell(ISheet sheet, int row, int cell)
         {
-            return sheet?.GetRow(row)?.GetCell(cell)?.ToString() ?? string.Empty;
+            return sheet?.GetRow(row)?.GetCell(cell)?.ToString()?.ToLower() ?? string.Empty;
         }
         public static string GetCell(IRow row, int cell)
         {
-            return row?.GetCell(cell)?.ToString() ?? string.Empty;
+            return row?.GetCell(cell)?.ToString()?.ToLower() ?? string.Empty;
         }
     }
 }
