@@ -55,11 +55,11 @@ namespace LccHotfix
             this.joystackBG = joystackBG;
             //设置原点
             origin = joystack.transform.localPosition;
-            Drag.GetDrag(gameObject).down = OnDown;
-            Drag.GetDrag(gameObject).up = OnUp;
-            Drag.GetDrag(gameObject).beginDrag = OnBeginDrag;
-            Drag.GetDrag(gameObject).drag = OnDrag;
-            Drag.GetDrag(gameObject).endDrag = OnEndDrag;
+            DragEventTrigger.GetDragEventTrigger(gameObject).Down += OnDown;
+            DragEventTrigger.GetDragEventTrigger(gameObject).UP += OnUp;
+            DragEventTrigger.GetDragEventTrigger(gameObject).BeginDrag += OnBeginDrag;
+            DragEventTrigger.GetDragEventTrigger(gameObject).Drag += OnDrag;
+            DragEventTrigger.GetDragEventTrigger(gameObject).EndDrag += OnEndDrag;
             joystack.SetActive(false);
             joystackBG.SetActive(false);
         }

@@ -15,16 +15,17 @@ namespace LccModel
             viewModelBindingList = new List<ViewModelBindingHandler>();
             unViewModelBindingList = new List<UnViewModelBindingHandler>();
         }
-        public void Add<TProperty>(string name, Binding<TProperty>.ValueChangeHandler valueChangeHandler)
+        public void Add<TProperty>(string name, Binding<TProperty>.ValueChangeHandler valueChange)
         {
             FieldInfo fieldInfo = typeof(T).GetField(name, BindingFlags.Instance | BindingFlags.Public);
+            if (fieldInfo == null) return;
             viewModelBindingList.Add((viewModel) =>
             {
-                GetPropertyValue<TProperty>(viewModel, fieldInfo).OnValueChange += valueChangeHandler;
+                GetPropertyValue<TProperty>(viewModel, fieldInfo).ValueChange += valueChange;
             });
             unViewModelBindingList.Add((viewModel) =>
             {
-                GetPropertyValue<TProperty>(viewModel, fieldInfo).OnValueChange -= valueChangeHandler;
+                GetPropertyValue<TProperty>(viewModel, fieldInfo).ValueChange -= valueChange;
             });
         }
         public Binding<TProperty> GetPropertyValue<TProperty>(T viewModel, FieldInfo fieldInfo)

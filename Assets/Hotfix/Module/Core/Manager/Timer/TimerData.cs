@@ -5,24 +5,24 @@ namespace LccHotfix
     public class TimerData
     {
         public int id;
-        public Action action;
+        public event Action Complete;
         public float start;
         public float end;
-        public TimerData(int id, Action action, float start, float end)
+        public TimerData(int id, Action complete, float start, float end)
         {
             this.id = id;
-            this.action = action;
+            Complete += complete;
             this.start = start;
             this.end = end;
         }
         public void Excute()
         {
-            action();
+            Complete();
         }
         public void Reset()
         {
             id = -1;
-            action = null;
+            Complete = null;
             start = -1;
             end = -1;
         }

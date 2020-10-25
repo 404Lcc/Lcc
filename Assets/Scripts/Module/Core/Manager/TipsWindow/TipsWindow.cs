@@ -13,8 +13,11 @@ namespace LccModel
         public string info;
         public string confirm;
         public string cancel;
-        public Action<bool> complete;
-        public object Current => null;
+        public event Action<bool> Complete;
+        public object Current
+        {
+            get; set;
+        }
 
         public Text titleText;
         public Text infoText;
@@ -53,12 +56,12 @@ namespace LccModel
         }
         public void OnConfirm()
         {
-            complete?.Invoke(true);
+            Complete?.Invoke(true);
             OnHideTipsWindow();
         }
         public void OnCancel()
         {
-            complete?.Invoke(false);
+            Complete?.Invoke(false);
             OnHideTipsWindow();
         }
         public bool MoveNext()
@@ -71,7 +74,7 @@ namespace LccModel
         public void OnHideTipsWindow()
         {
             state = false;
-            complete = null;
+            Complete = null;
             TipsWindowManager.Instance.ClearTipsWindow(id);
         }
     }

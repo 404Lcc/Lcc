@@ -50,42 +50,42 @@ namespace LccModel
         }
         public void AutoReference()
         {
-            Dictionary<string, FieldInfo> dic = new Dictionary<string, FieldInfo>();
-            FieldInfo[] fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            Dictionary<string, FieldInfo> fieldInfoDict = new Dictionary<string, FieldInfo>();
+            FieldInfo[] fieldInfos = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             Type objectType = typeof(Object);
-            foreach (FieldInfo item in fields)
+            foreach (FieldInfo item in fieldInfos)
             {
                 if (item.FieldType.IsSubclassOf(objectType))
                 {
-                    dic[item.Name.ToLower()] = item;
+                    fieldInfoDict[item.Name.ToLower()] = item;
                 }
             }
-            if (dic.Count > 0)
+            if (fieldInfoDict.Count > 0)
             {
-                AutoReference(transform, dic);
+                AutoReference(transform, fieldInfoDict);
             }
         }
-        public void AutoReference(Transform transform, Dictionary<string, FieldInfo> dic)
+        public void AutoReference(Transform transform, Dictionary<string, FieldInfo> fieldInfoDict)
         {
             string name = transform.name.ToLower();
-            if (dic.ContainsKey(name))
+            if (fieldInfoDict.ContainsKey(name))
             {
-                if (dic[name].FieldType.Equals(typeof(GameObject)))
+                if (fieldInfoDict[name].FieldType.Equals(typeof(GameObject)))
                 {
-                    dic[name].SetValue(this, transform.gameObject);
+                    fieldInfoDict[name].SetValue(this, transform.gameObject);
                 }
-                else if (dic[name].FieldType.Equals(typeof(Transform)))
+                else if (fieldInfoDict[name].FieldType.Equals(typeof(Transform)))
                 {
-                    dic[name].SetValue(this, transform);
+                    fieldInfoDict[name].SetValue(this, transform);
                 }
                 else
                 {
-                    dic[name].SetValue(this, transform.GetComponent(dic[name].FieldType));
+                    fieldInfoDict[name].SetValue(this, transform.GetComponent(fieldInfoDict[name].FieldType));
                 }
             }
             for (int i = 0; i < transform.childCount; i++)
             {
-                AutoReference(transform.GetChild(i), dic);
+                AutoReference(transform.GetChild(i), fieldInfoDict);
             }
         }
         public void Invoke(string methodName, float time)

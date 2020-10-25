@@ -89,7 +89,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\SpriteRenderer\SpriteRendererExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Mono\MonoManager.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Tips\Tips.cs" />
-    <Compile Include="Assets\Scripts\Util\Drag.cs" />
+    <Compile Include="Assets\Scripts\Util\DragEventTrigger.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\MD5\MD5Util.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\EventManager.cs" />

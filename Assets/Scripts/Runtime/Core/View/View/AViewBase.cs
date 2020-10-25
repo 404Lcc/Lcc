@@ -31,12 +31,20 @@ namespace LccModel
             isInit = true;
             viewModelBinding = new ViewModelBinding<T>();
             binding = new Binding<T>();
-            binding.OnValueChange += Binding;
+            binding.ValueChange += Binding;
         }
         public virtual void Binding(T oldValue, T newValue)
         {
             viewModelBinding.UnBind(oldValue);
             viewModelBinding.Bind(newValue);
+        }
+        public void Binding<TProperty>(string name, Binding<TProperty>.ValueChangeHandler valueChange)
+        {
+            viewModelBinding.Add(name, valueChange);
+        }
+        public void Binding<TProperty>(Binding<TProperty> binding, Binding<TProperty>.ValueChangeHandler valueChange)
+        {
+            viewModelBinding.Add(nameof(binding), valueChange);
         }
     }
 }

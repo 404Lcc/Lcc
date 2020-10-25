@@ -12,19 +12,15 @@ namespace LccHotfix
         {
             AutomaticExcute();
         }
-        public TimerData TimerStart(float delay, Action action)
+        public TimerData TimerStart(float delay, Action complete)
         {
-            TimerData timer = new TimerData(timerDataList.Count + 1, action, Time.time, Time.time + delay);
+            TimerData timer = new TimerData(timerDataList.Count + 1, complete, Time.time, Time.time + delay);
             timerDataList.Add(timer);
             return timer;
         }
-        public void TimerExcute(TimerData timer)
+        public void Excute(TimerData timer)
         {
             timer.Excute();
-            timer.Reset();
-        }
-        public void TimerReset(TimerData timer)
-        {
             timer.Reset();
         }
         public void AutomaticExcute()
@@ -33,6 +29,10 @@ namespace LccHotfix
             {
                 Excute();
             }
+        }
+        public void Reset(TimerData timer)
+        {
+            timer.Reset();
         }
         public void Excute()
         {
