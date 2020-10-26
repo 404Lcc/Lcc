@@ -2,7 +2,7 @@
 
 namespace LccHotfix
 {
-    public class DataList
+    public static class DataList
     {
         public static List<string> dataList = new List<string>();
     }

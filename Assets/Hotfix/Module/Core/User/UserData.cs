@@ -1,6 +1,6 @@
 ﻿namespace LccHotfix
 {
-    public class UserData
+    public static class UserData
     {
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace LccHotfix
 {
-    public class UserSetData
+    public static class UserSetData
     {
         public static int audio = 20;
         public static int voice = 100;

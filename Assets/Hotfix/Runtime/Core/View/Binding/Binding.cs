@@ -4,7 +4,7 @@
     {
         public delegate void ValueChangeHandler(T oldValue, T newValue);
         public event ValueChangeHandler ValueChange;
-        private T _value;
+        private T _value = default;
         public Binding()
         {
         }

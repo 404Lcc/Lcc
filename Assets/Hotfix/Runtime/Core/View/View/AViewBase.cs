@@ -5,8 +5,8 @@ namespace LccHotfix
     public abstract class AViewBase<T> : AObjectBase, IView<T> where T : ViewModelBase
     {
         public bool isInit;
-        public ViewModelBinding<T> viewModelBinding;
-        public Binding<T> binding;
+        public ViewModelBinding<T> viewModelBinding = new ViewModelBinding<T>();
+        public Binding<T> binding = new Binding<T>();
         public AViewBase()
         {
             ViewModel = Activator.CreateInstance<T>();
@@ -21,17 +21,15 @@ namespace LccHotfix
             {
                 if (!isInit)
                 {
-                    InitView();
+                    isInit = true;
+                    binding.ValueChange += Binding;
+                    InitView(value);
                 }
                 binding.Value = value;
             }
         }
-        public virtual void InitView()
+        public virtual void InitView(T viewModel)
         {
-            isInit = true;
-            viewModelBinding = new ViewModelBinding<T>();
-            binding = new Binding<T>();
-            binding.ValueChange += Binding;
         }
         public virtual void Binding(T oldValue, T newValue)
         {
@@ -41,10 +39,6 @@ namespace LccHotfix
         public void Binding<TProperty>(string name, Binding<TProperty>.ValueChangeHandler valueChange)
         {
             viewModelBinding.Add(name, valueChange);
-        }
-        public void Binding<TProperty>(Binding<TProperty> binding, Binding<TProperty>.ValueChangeHandler valueChange)
-        {
-            viewModelBinding.Add(nameof(binding), valueChange);
         }
     }
 }
