@@ -99,13 +99,14 @@ namespace LccEditor
                 IRow iRow = sheet.GetRow(i);
                 for (int j = 0; j < count; j++)
                 {
+                    Cell cell = cellList[j];
+                    if (cell.desc.StartsWith("#")) continue;
+                    string value = GetCell(iRow, j);
+                    if (string.IsNullOrEmpty(value)) continue;
                     if (j > 0)
                     {
                         stringBuilder.Append(", ");
                     }
-                    Cell cell = cellList[j];
-                    if (cell.desc.StartsWith("#")) continue;
-                    string value = GetCell(iRow, j);
                     if (cell.name == "id")
                     {
                         stringBuilder.Append($"\"{value}\" : {{");
