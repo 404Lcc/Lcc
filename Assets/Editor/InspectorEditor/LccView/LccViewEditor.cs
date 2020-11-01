@@ -20,13 +20,13 @@ namespace LccEditor
                 switch (Path.GetFileNameWithoutExtension(lccView.type.GetType().Assembly.ManifestModule.Name))
                 {
                     case "Unity.Model":
-                        name = "Scripts";
+                        directoryName = "Scripts";
                         break;
                     case "Unity.Hotfix":
-                        name = "Hotfix";
+                        directoryName = "Hotfix";
                         break;
                     case "ILRuntime":
-                        name = "Hotfix";
+                        directoryName = "Hotfix";
                         break;
                 }
                 string fileName = lccView.className.Split('.')[1];
