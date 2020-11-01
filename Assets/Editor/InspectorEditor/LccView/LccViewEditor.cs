@@ -16,12 +16,24 @@ namespace LccEditor
             {
                 Selection.activeObject = null;
                 EditorGUIUtility.PingObject(Selection.activeObject);
-                string[] infos = lccView.className.Split('.');
-                string name = infos[0].Replace(lccView.GetType().Namespace, "Scripts");
-                string[] files = Directory.GetFiles("Assets/" + name, "*.cs", SearchOption.AllDirectories);
+                string directoryName = string.Empty;
+                switch (Path.GetFileNameWithoutExtension(lccView.type.GetType().Assembly.ManifestModule.Name))
+                {
+                    case "Unity.Model":
+                        name = "Scripts";
+                        break;
+                    case "Unity.Hotfix":
+                        name = "Hotfix";
+                        break;
+                    case "ILRuntime":
+                        name = "Hotfix";
+                        break;
+                }
+                string fileName = lccView.className.Split('.')[1];
+                string[] files = Directory.GetFiles("Assets/" + directoryName, "*.cs", SearchOption.AllDirectories);
                 foreach (string item in files)
                 {
-                    if (item.Substring(item.LastIndexOf(@"\") + 1) == infos[1] + ".cs")
+                    if (item.Substring(item.LastIndexOf(@"\") + 1) == fileName + ".cs")
                     {
                         Selection.activeObject = AssetDatabase.LoadAssetAtPath<TextAsset>(item);
                         EditorGUIUtility.PingObject(Selection.activeObject);
