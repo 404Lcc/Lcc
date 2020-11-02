@@ -11,12 +11,9 @@ namespace LccHotfix
         /// <param name="bytes"></param>
         public static void SaveAsset(string path, byte[] bytes)
         {
-            if (File.Exists(path))
+            using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
             {
-                using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-                {
-                    fileStream.Write(bytes, 0, bytes.Length);
-                }
+                fileStream.Write(bytes, 0, bytes.Length);
             }
         }
         /// <summary>
