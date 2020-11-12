@@ -36,13 +36,15 @@ Lcc框架
 
 10. 代码全自动加密
 
+11. 异步加载
+
 **热更新**
 
 1. Lua方案[XLua](https://github.com/Tencent/xLua)
 
 2. C#方案[ILRuntime](https://github.com/Ourpalm/ILRuntime)
 
-3. 资源热更新[XAsset](https://github.com/xasset/xasset)
+3. 资源热更新Addressable
 
 **ILRuntime热更新注意项**
 
