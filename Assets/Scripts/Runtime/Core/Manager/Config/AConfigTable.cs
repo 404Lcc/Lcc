@@ -15,10 +15,10 @@ namespace LccModel
                 return typeof(T);
             }
         }
-        public void InitConfigTable()
+        public async void InitConfigTable()
         {
-            string config = AssetManager.Instance.LoadAssetData<TextAsset>(typeof(T).Name, ".txt", false, true, AssetType.Config).text;
-            foreach (KeyValuePair<string, T> item in JsonMapper.ToObject<Dictionary<string, T>>(config))
+            TextAsset asset = await AssetManager.Instance.LoadAsset<TextAsset>(typeof(T).Name, ".txt", false, true, AssetType.Config);
+            foreach (KeyValuePair<string, T> item in JsonMapper.ToObject<Dictionary<string, T>>(asset.text))
             {
                 configDict.Add(int.Parse(item.Key), item.Value);
             }

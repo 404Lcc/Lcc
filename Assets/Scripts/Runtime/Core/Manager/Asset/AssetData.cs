@@ -8,5 +8,6 @@ namespace LccModel
         public string[] types;
         public string name;
         public bool isKeep;
+        public bool isAssetBundle;
     }
 }

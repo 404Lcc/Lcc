@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace LccHotfix
@@ -11,9 +12,9 @@ namespace LccHotfix
             this.isAssetBundle = isAssetBundle;
             this.types = types;
         }
-        public override GameObject CreateGameObject(string name, Transform parent)
+        public async override Task<GameObject> CreateGameObject(string name, Transform parent)
         {
-            GameObject gameObject = base.CreateGameObject(name, parent);
+            GameObject gameObject = await base.CreateGameObject(name, parent);
             RectTransform rect = gameObject.GetComponent<RectTransform>();
             rect.sizeDelta = Vector2.zero;
             rect.anchorMin = Vector2.zero;
@@ -24,11 +25,11 @@ namespace LccHotfix
             rect.localScale = Vector3.one;
             return gameObject;
         }
-        public Panel CreatePanel(PanelType type, object data)
+        public async Task<Panel> CreatePanel(PanelType type, object data)
         {
             Panel panel = new Panel();
             panel.State = PanelState.Close;
-            GameObject gameObject = CreateGameObject(type.ToPanelString(), LccModel.Objects.GUI.transform);
+            GameObject gameObject = await CreateGameObject(type.ToPanelString(), LccModel.Objects.GUI.transform);
             if (gameObject == null) return null;
             panel.Type = type;
             Type classType = Manager.Instance.GetType(type.ToPanelString());

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace LccHotfix
@@ -15,9 +16,9 @@ namespace LccHotfix
             }
             return false;
         }
-        public AudioClip LoadAudio(string audio)
+        public async Task<AudioClip> LoadAudio(string audio)
         {
-            AudioClip clip = LccModel.AssetManager.Instance.LoadAssetData<AudioClip>(audio, ".mp3", false, true, AssetType.Audio);
+            AudioClip clip = await LccModel.AssetManager.Instance.LoadAsset<AudioClip>(audio, ".mp3", false, true, AssetType.Audio);
             voices.Add(audio, clip);
             return clip;
         }
@@ -34,7 +35,7 @@ namespace LccHotfix
                 voices.Remove(audio);
             }
         }
-        public AudioClip PlayAudio(string audio, bool isInside, AudioSource source)
+        public async Task<AudioClip> PlayAudio(string audio, bool isInside, AudioSource source)
         {
             if (AudioExist(audio))
             {
@@ -45,7 +46,7 @@ namespace LccHotfix
             }
             if (isInside)
             {
-                AudioClip temp = LoadAudio(audio);
+                AudioClip temp = await LoadAudio(audio);
                 source.clip = temp;
                 source.Play();
                 return temp;

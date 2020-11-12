@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Threading.Tasks;
+using UnityEngine;
 
 namespace LccModel
 {
@@ -13,9 +14,9 @@ namespace LccModel
             this.isAssetBundle = isAssetBundle;
             this.types = types;
         }
-        public virtual GameObject CreateGameObject(string name, Transform parent)
+        public async virtual Task<GameObject> CreateGameObject(string name, Transform parent)
         {
-            GameObject gameObject = AssetManager.Instance.LoadGameObject(name, false, isAssetBundle, AssetType.UI);
+            GameObject gameObject = await AssetManager.Instance.InstantiateAsset(name, false, isAssetBundle, AssetType.UI);
             if (gameObject == null) return null;
             gameObject.name = name;
             gameObject.transform.SetParent(parent);

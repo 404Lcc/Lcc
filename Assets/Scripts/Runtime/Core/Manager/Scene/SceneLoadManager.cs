@@ -1,5 +1,4 @@
-﻿//using libx;
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -46,19 +45,6 @@ namespace LccModel
                     path += name;
                 }
             }
-            StartCoroutine(LoadSceneAsync("Assets/Resources/" + path + ".unity", false, (SceneAssetRequest request) =>
-            {
-                while (!request.isDone)
-                {
-                    process = (int)request.progress;
-                }
-                if (request.isDone)
-                {
-                    complete?.Invoke();
-                    complete = null;
-                    process = 0;
-                }
-            }));
 #else
             StartCoroutine(LoadScene(name));
 #endif
@@ -69,11 +55,5 @@ namespace LccModel
             async.allowSceneActivation = false;
             yield return async;
         }
-        //public IEnumerator LoadSceneAsync(string path, bool additive, Action<SceneAssetRequest> action)
-        //{
-        //    SceneAssetRequest request = Assets.LoadSceneAsync(path, additive);
-        //    yield return request;
-        //    action?.Invoke(request);
-        //}
     }
 }

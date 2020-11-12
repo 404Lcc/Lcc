@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace LccModel
@@ -21,9 +22,9 @@ namespace LccModel
             }
             return false;
         }
-        public Item CreateItem(ItemType type, object data, Transform parent)
+        public async Task<Item> CreateItem(ItemType type, object data, Transform parent)
         {
-            Item item = handler.CreateItem(type, data, parent);
+            Item item = await handler.CreateItem(type, data, parent);
             if (ItemExist(type))
             {
                 ((List<Item>)items[type]).Add(item);

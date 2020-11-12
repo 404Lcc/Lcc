@@ -2,7 +2,9 @@
     "name": "Unity.Model",
     "references": [
         "GUID:7a1fa966b0ea23f40a6a4dc4dab1e297",
-        "GUID:dd2a4188e8935ed40955e4cca5467075"
+        "GUID:dd2a4188e8935ed40955e4cca5467075",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:84651a3751eca9349aac36a66bba901b"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -5,10 +5,10 @@ namespace LccModel
 {
     public static class ImageExpand
     {
-        public static void SetSprite(this Image image, string name, params string[] types)
+        public async static void SetSprite(this Image image, string name, params string[] types)
         {
             if (string.IsNullOrEmpty(name)) return;
-            Sprite sprite = AssetManager.Instance.LoadAssetData<Sprite>(name, ".png", false, true, types);
+            Sprite sprite = await AssetManager.Instance.LoadAsset<Sprite>(name, ".png", false, true, types);
             image.sprite = sprite;
         }
     }

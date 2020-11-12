@@ -1,9 +1,9 @@
-﻿//using libx;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using Object = UnityEngine.Object;
 
 namespace LccModel
@@ -11,8 +11,7 @@ namespace LccModel
     public class AssetManager : Singleton<AssetManager>
     {
         public Dictionary<string, AssetData> assetDic = new Dictionary<string, AssetData>();
-        //public Dictionary<string, AssetRequest> assetRequestDic = new Dictionary<string, AssetRequest>();
-        private AssetData LoadAssetData(string name, string suffix, bool isKeep, Type type, bool isAssetBundle, params string[] types)
+        private async Task<AssetData> LoadAssetData<T>(string name, string suffix, bool isKeep, bool isAssetBundle, params string[] types) where T : Object
         {
             if (types.Length == 0) return null;
             string path = string.Empty;
@@ -34,34 +33,33 @@ namespace LccModel
 #if AssetBundle
                 if (isAssetBundle)
                 {
-                    //AssetBundle assetBundle = AssetBundle.LoadFromFile(path);
-                    //Object asset = assetBundle.LoadAsset(assetBundle.GetAllAssetNames()[0]);
-                    //assetBundle.Unload(false);
-
-                    //AssetRequest request = LoadAsset("Assets/Resources/" + path + suffix, type);
-                    //Object asset = request.asset;
-                    //assetData.asset = asset;
-                    //assetData.types = types;
-                    //assetData.name = name;
-                    //assetData.isKeep = isKeep;
-                    //assetDic.Add(path, assetData);
-                    //assetRequestDic.Add(path, request);
-                }
-                else
-                {
-                    Object asset = Resources.Load(path, type);
+                    AsyncOperationHandle<T> handler = Addressables.LoadAssetAsync<T>("Assets/Resources/" + path);
+                    await handler.Task;
+                    Object asset = handler.Result;
                     assetData.asset = asset;
                     assetData.types = types;
                     assetData.name = name;
                     assetData.isKeep = isKeep;
+                    assetData.isAssetBundle = isAssetBundle;
+                    assetDic.Add(path, assetData);
+                }
+                else
+                {
+                    Object asset = Resources.Load<T>(path);
+                    assetData.asset = asset;
+                    assetData.types = types;
+                    assetData.name = name;
+                    assetData.isKeep = isKeep;
+                    assetData.isAssetBundle = isAssetBundle;
                     assetDic.Add(path, assetData);
                 }
 #else
-                Object asset = Resources.Load(path, type);
+                Object asset = Resources.Load<T>(path);
                 assetData.asset = asset;
                 assetData.types = types;
                 assetData.name = name;
                 assetData.isKeep = isKeep;
+                assetData.isAssetBundle = isAssetBundle;
                 assetDic.Add(path, assetData);
 #endif
                 return assetData;
@@ -99,49 +97,41 @@ namespace LccModel
                 }
                 else
                 {
-                    //assetRequestDic[item].Release();
                     assetDic.Remove(item);
-                    //assetRequestDic.Remove(item);
                 }
             }
         }
         public void UnloadAllAssetsData()
         {
-            //foreach (AssetRequest item in assetRequestDic.Values)
-            //{
-            //    item.Release();
-            //}
             assetDic.Clear();
-            //assetRequestDic.Clear();
             Resources.UnloadUnusedAssets();
-            //Assets.RemoveUnusedAssets();
             GC.Collect();
         }
-        public T LoadAssetData<T>(string name, string suffix, bool isKeep, bool isAssetBundle, params string[] types) where T : Object
+        public async Task<T> LoadAsset<T>(string name, string suffix, bool isKeep, bool isAssetBundle, params string[] types) where T : Object
         {
-            AssetData assetData = LoadAssetData(name, suffix, isKeep, typeof(T), isAssetBundle, types);
+            AssetData assetData = await LoadAssetData<T>(name, suffix, isKeep, isAssetBundle, types);
             return (T)assetData.asset;
         }
-        public GameObject LoadGameObject(string name, bool isKeep, bool isAssetBundle, params string[] types)
+        public async Task<GameObject> InstantiateAsset(string name, bool isKeep, bool isAssetBundle, params string[] types)
         {
-            AssetData assetData = LoadAssetData(name, ".prefab", isKeep, typeof(Object), isAssetBundle, types);
+            AssetData assetData = await LoadAssetData<GameObject>(name, ".prefab", isKeep, isAssetBundle, types);
             if (assetData.asset == null) return null;
             GameObject gameObject = (GameObject)Object.Instantiate(assetData.asset);
             gameObject.name = name;
             return gameObject;
         }
-        public T LoadGameObject<T>(string name, bool isKeep, bool isAssetBundle, params string[] types) where T : Component
+        public async Task<T> InstantiateAsset<T>(string name, bool isKeep, bool isAssetBundle, params string[] types) where T : Component
         {
-            AssetData assetData = LoadAssetData(name, ".prefab", isKeep, typeof(Object), isAssetBundle, types);
+            AssetData assetData = await LoadAssetData<GameObject>(name, ".prefab", isKeep, isAssetBundle, types);
             if (assetData.asset == null) return null;
             GameObject gameObject = (GameObject)Object.Instantiate(assetData.asset);
             gameObject.name = name;
-            T component = gameObject.GetComponent<T>();
+            T component = gameObject.AddComponent<T>();
             return component;
         }
-        public GameObject LoadGameObject(string name, bool isKeep, bool isAssetBundle, Transform parent, params string[] types)
+        public async Task<GameObject> InstantiateAsset(string name, bool isKeep, bool isAssetBundle, Transform parent, params string[] types)
         {
-            AssetData assetData = LoadAssetData(name, ".prefab", isKeep, typeof(Object), isAssetBundle, types);
+            AssetData assetData = await LoadAssetData<GameObject>(name, ".prefab", isKeep, isAssetBundle, types);
             if (assetData.asset == null) return null;
             GameObject gameObject = (GameObject)Object.Instantiate(assetData.asset);
             gameObject.name = name;
@@ -151,9 +141,9 @@ namespace LccModel
             gameObject.transform.localScale = Vector3.one;
             return gameObject;
         }
-        public T LoadGameObject<T>(string name, bool isKeep, bool isAssetBundle, Transform parent, params string[] types) where T : Component
+        public async Task<T> InstantiateAsset<T>(string name, bool isKeep, bool isAssetBundle, Transform parent, params string[] types) where T : Component
         {
-            AssetData assetdata = LoadAssetData(name, ".prefab", isKeep, typeof(Object), isAssetBundle, types);
+            AssetData assetdata = await LoadAssetData<GameObject>(name, ".prefab", isKeep, isAssetBundle, types);
             if (assetdata.asset == null) return null;
             GameObject gameObject = (GameObject)Object.Instantiate(assetdata.asset);
             gameObject.name = name;
@@ -161,17 +151,8 @@ namespace LccModel
             gameObject.transform.localPosition = Vector3.zero;
             gameObject.transform.localRotation = Quaternion.identity;
             gameObject.transform.localScale = Vector3.one;
-            T component = gameObject.GetComponent<T>();
+            T component = gameObject.AddComponent<T>();
             return component;
         }
-        //public AssetRequest LoadAsset(string path, Type type)
-        //{
-        //    AssetRequest request = Assets.LoadAsset(path, type);
-        //    return request;
-        //}
-        //public IEnumerator LoadAssetAsync(string path, Type type)
-        //{
-        //    yield return Assets.LoadAssetAsync(path, type);
-        //}
     }
 }
