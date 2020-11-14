@@ -12,7 +12,7 @@ namespace LccHotfix
             this.isAssetBundle = isAssetBundle;
             this.types = types;
         }
-        public async override Task<GameObject> CreateGameObject(string name, Transform parent)
+        public override async Task<GameObject> CreateGameObject(string name, Transform parent)
         {
             GameObject gameObject = await base.CreateGameObject(name, parent);
             RectTransform rect = gameObject.GetComponent<RectTransform>();

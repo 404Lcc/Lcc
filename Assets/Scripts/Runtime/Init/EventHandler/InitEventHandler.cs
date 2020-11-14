@@ -5,7 +5,7 @@ namespace LccModel
     [EventHandler]
     public class InitEventHandler : AEvent<Start>
     {
-        public async override void Publish(Start data)
+        public override async void Publish(Start data)
         {
             Object.DontDestroyOnLoad(await AssetManager.Instance.InstantiateAsset("Canvas", false, false, AssetType.Game));
             Object.DontDestroyOnLoad(await AssetManager.Instance.InstantiateAsset("AudioSource", false, false, AssetType.Game));

@@ -5,13 +5,6 @@ namespace LccHotfix
     public static class LccUtil
     {
         /// <summary>
-        /// 卸载资源
-        /// </summary>
-        public static void UnloadAssets()
-        {
-            LccModel.AssetManager.Instance.UnloadAllAssetsData();
-        }
-        /// <summary>
         /// 设置分辨率
         /// </summary>
         /// <param name="isFullscreen"></param>

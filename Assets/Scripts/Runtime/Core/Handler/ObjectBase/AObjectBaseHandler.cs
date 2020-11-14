@@ -14,7 +14,7 @@ namespace LccModel
             this.isAssetBundle = isAssetBundle;
             this.types = types;
         }
-        public async virtual Task<GameObject> CreateGameObject(string name, Transform parent)
+        public virtual async Task<GameObject> CreateGameObject(string name, Transform parent)
         {
             GameObject gameObject = await AssetManager.Instance.InstantiateAsset(name, false, isAssetBundle, AssetType.UI);
             if (gameObject == null) return null;

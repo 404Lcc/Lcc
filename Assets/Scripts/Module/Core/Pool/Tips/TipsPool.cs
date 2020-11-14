@@ -8,7 +8,7 @@
         public TipsPool(int size) : base(size)
         {
         }
-        public async override void InitPool()
+        public override async void InitPool()
         {
             for (int i = 0; i < size; i++)
             {

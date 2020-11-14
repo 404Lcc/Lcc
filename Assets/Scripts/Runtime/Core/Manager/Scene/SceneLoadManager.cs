@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
 namespace LccModel
@@ -30,12 +33,9 @@ namespace LccModel
                 process = 0;
             }
         }
-        public void LoadScene(string name, Action complete, params string[] types)
+        private string GetAssetPath(string name, params string[] types)
         {
-            this.complete = complete;
-            SceneManager.LoadScene(SceneName.Load);
-#if AssetBundle
-            if (types.Length == 0) return;
+            if (types.Length == 0) return name;
             string path = string.Empty;
             for (int i = 0; i < types.Length; i++)
             {
@@ -45,15 +45,51 @@ namespace LccModel
                     path += name;
                 }
             }
-#else
-            StartCoroutine(LoadScene(name));
-#endif
+            return path;
         }
-        public IEnumerator LoadScene(string name)
+        private IEnumerator LoadScene(string name, string suffix, bool isAssetBundle, params string[] types)
         {
+#if AssetBundle
+            if (isAssetBundle)
+            {
+#if !UNITY_EDITOR
+                string path = GetAssetPath(name, types);
+                AsyncOperationHandle<SceneInstance> handler = Addressables.LoadSceneAsync("Assets/Bundles/" + path + suffix);
+                yield return handler;
+                async = handler.Result.ActivateAsync();
+                async.allowSceneActivation = false;
+                yield return async;
+                yield return Addressables.UnloadSceneAsync(handler.Result);
+
+#else
+                async = SceneManager.LoadSceneAsync(name);
+                async.allowSceneActivation = false;
+                yield return async;
+#endif
+            }
+            else
+            {
+                async = SceneManager.LoadSceneAsync(name);
+                async.allowSceneActivation = false;
+                yield return async;
+            }
+#else
             async = SceneManager.LoadSceneAsync(name);
             async.allowSceneActivation = false;
             yield return async;
+#endif
+        }
+        public void LoadScene(string name, string suffix, bool isAssetBundle, Action complete, params string[] types)
+        {
+            this.complete = complete;
+            SceneManager.LoadScene(SceneName.Load);
+            StartCoroutine(LoadScene(name, suffix, isAssetBundle, types));
+        }
+        public void LoadScene(string name, bool isAssetBundle, Action complete, params string[] types)
+        {
+            this.complete = complete;
+            SceneManager.LoadScene(SceneName.Load);
+            StartCoroutine(LoadScene(name, ".unity", isAssetBundle, types));
         }
     }
 }
