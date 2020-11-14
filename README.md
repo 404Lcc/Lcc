@@ -95,7 +95,7 @@ PanelManager.Instance.OpenPanel(PanelType.Launch);
 提供加载ab包场景或者加载本地场景
 
 ``` csharp
-LoadSceneManager.Instance.LoadScene(SceneName.Login, null, AssetType.Scene);
+LoadSceneManager.Instance.LoadScene(SceneName.Login, true, null, AssetType.Scene);
 ```
 
 ## 开发环境
