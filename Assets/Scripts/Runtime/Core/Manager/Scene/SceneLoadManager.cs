@@ -56,9 +56,6 @@ namespace LccModel
                 string path = GetAssetPath(name, types);
                 AsyncOperationHandle<SceneInstance> handler = Addressables.LoadSceneAsync("Assets/Bundles/" + path + suffix);
                 yield return handler;
-                async = handler.Result.ActivateAsync();
-                async.allowSceneActivation = false;
-                yield return async;
                 yield return Addressables.UnloadSceneAsync(handler.Result);
 
 #else
