@@ -46,7 +46,7 @@ Lcc框架
 
 2. C#方案[ILRuntime](https://github.com/Ourpalm/ILRuntime)
 
-3. 资源热更新Addressable
+3. 资源热更新方案Addressable
 
 **ILRuntime热更新注意项**
 
