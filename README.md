@@ -12,7 +12,7 @@ Lcc框架
 
 **特点**
 
-1. 适配ILRuntime，主工程集与热更程集不继承MonoBehaviour而继承ObjectBase实现生命周期，并对原有的生命周期进行了拓展
+1. 适配ILRuntime，主工程集与热更程集不继承MonoBehaviour而继承ObjectBase并对原有的生命周期进行拓展
 
 2. 场景里面的所有脚本都通过LccView来管理，通过LccView工厂可快速获取到ObjectBase
 
