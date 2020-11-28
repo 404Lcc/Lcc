@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\UIEventHandler\LaunchUIEventHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Init\EventHandler\InitEventHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\PanelType\PanelTypeExpand.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Addressables\AddressablesManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelState.cs" />
     <Compile Include="Assets\Scripts\Util\Delay.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\IPanel.cs" />
@@ -150,7 +151,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\APanelView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\AObjectBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\IItem.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Addressables\AddressablesManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Expand\Task\TaskExpand.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />

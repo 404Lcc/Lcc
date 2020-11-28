@@ -16,7 +16,7 @@ namespace LccEditor
         {
             //用新的分析热更dll调用引用来生成绑定代码
             AppDomain domain = new AppDomain();
-            using (FileStream fs = new FileStream("Assets/Resources/Text/Unity.Hotfix.dll.bytes", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream("Assets/Resources/DLL/Unity.Hotfix.dll.bytes", FileMode.Open, FileAccess.Read))
             {
                 byte[] bytes = new byte[fs.ReadByte()];
                 fs.Read(bytes, 0, bytes.Length);

@@ -4,7 +4,7 @@
     {
         public static string ToItemString(this ItemType type)
         {
-            return type.ToString() + "Item";
+            return $"{type}Item";
         }
     }
 }

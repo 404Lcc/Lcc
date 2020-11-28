@@ -9,7 +9,7 @@ namespace LccHotfix
     public class VideoManager : Singleton<VideoManager>
     {
         public Hashtable videos = new Hashtable();
-        private bool VideoExist(string video)
+        public bool VideoExist(string video)
         {
             if (videos.ContainsKey(video))
             {
@@ -17,9 +17,9 @@ namespace LccHotfix
             }
             return false;
         }
-        public async Task<VideoClip> LoadVideo(string video)
+        public async Task<VideoClip> LoadVideoAsync(string video)
         {
-            VideoClip clip = await LccModel.AssetManager.Instance.LoadAsset<VideoClip>(video, ".mp4", false, true, AssetType.Video);
+            VideoClip clip = await LccModel.AssetManager.Instance.LoadAssetAsync<VideoClip>(video, ".mp4", false, true, AssetType.Video);
             videos.Add(video, clip);
             return clip;
         }
@@ -34,30 +34,34 @@ namespace LccHotfix
                 videos.Remove(video);
             }
         }
-        public async void PlayVideo(string video, bool isInside, VideoPlayer player, RawImage image, int width = 1920, int height = 1080)
+        public async Task<VideoClip> PlayVideoAsync(string video, bool isInside, VideoPlayer player, RawImage image, int width = 1920, int height = 1080)
         {
+            player.targetTexture = new RenderTexture(width, height, 0);
             if (VideoExist(video))
             {
+                VideoClip clip = GetVideoClip(video);
                 player.source = VideoSource.VideoClip;
-                player.clip = GetVideoClip(video);
+                player.clip = clip;
                 image.texture = player.targetTexture;
                 player.Play();
-                return;
+                return clip;
             }
             if (isInside)
             {
+                VideoClip clip = await LoadVideoAsync(video);
                 player.source = VideoSource.VideoClip;
-                player.clip = await LoadVideo(video);
+                player.clip = clip;
                 image.texture = player.targetTexture;
                 player.Play();
+                return clip;
             }
             else
             {
                 player.source = VideoSource.Url;
                 player.url = video;
-                player.targetTexture = new RenderTexture(width, height, 0);
                 image.texture = player.targetTexture;
                 player.Play();
+                return null;
             }
         }
         public void PauseVideo(VideoPlayer player)

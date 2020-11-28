@@ -10,7 +10,7 @@ namespace LccModel
         public int y;
         public int gCost;
         public int hCost;
-        public int fCost
+        public int FCost
         {
             get
             {

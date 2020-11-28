@@ -24,7 +24,7 @@ namespace LccModel
         /// <param name="bytes"></param>
         public static void SaveAsset(string path, string name, byte[] bytes)
         {
-            SaveAsset(path + "/" + name, bytes);
+            SaveAsset($"{path}/{name}", bytes);
         }
         /// <summary>
         /// 获取资源
@@ -53,7 +53,7 @@ namespace LccModel
         /// <returns></returns>
         public static byte[] GetAsset(string path, string name)
         {
-            return GetAsset(path + "/" + name);
+            return GetAsset($"{path}/{name}");
         }
     }
 }

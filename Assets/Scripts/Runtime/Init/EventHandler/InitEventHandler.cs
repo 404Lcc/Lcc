@@ -7,12 +7,12 @@ namespace LccModel
     {
         public override async void Publish(Start data)
         {
-            Object.DontDestroyOnLoad(await AssetManager.Instance.InstantiateAsset("Canvas", false, false, AssetType.Game));
-            Object.DontDestroyOnLoad(await AssetManager.Instance.InstantiateAsset("AudioSource", false, false, AssetType.Game));
-            Object.DontDestroyOnLoad(await AssetManager.Instance.InstantiateAsset("VideoPlayer", false, false, AssetType.Game));
+            Object.DontDestroyOnLoad(await AssetManager.Instance.InstantiateAssetAsync("Canvas", false, false, AssetType.Game));
+            Object.DontDestroyOnLoad(await AssetManager.Instance.InstantiateAssetAsync("AudioSource", false, false, AssetType.Game));
+            Object.DontDestroyOnLoad(await AssetManager.Instance.InstantiateAssetAsync("VideoPlayer", false, false, AssetType.Game));
 
-            PanelManager.Instance.InitManager(new PanelObjectBaseHandler(false, false, AssetType.UI));
-            ItemManager.Instance.InitManager(new ItemObjectBaseHandler(false, false, AssetType.Item));
+            PanelManager.Instance.InitManager(new PanelObjectBaseHandler(false, false, AssetType.Prefab, AssetType.Panel));
+            ItemManager.Instance.InitManager(new ItemObjectBaseHandler(false, false, AssetType.Prefab, AssetType.Item));
             //TipsManager.Instance.InitManager(new TipsPool(10));
             //TipsWindowManager.Instance.InitManager(new TipsWindowPool(10));
 

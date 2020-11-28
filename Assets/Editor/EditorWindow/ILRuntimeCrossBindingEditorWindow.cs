@@ -24,17 +24,17 @@ namespace LccEditor
             if (GUILayout.Button(new GUIContent("生成")))
             {
                 string path = "Library/ScriptAssemblies/Unity.Model.dll";
-                Type type = Assembly.LoadFile(path).GetType(_namespace + "." + _class);
+                Type type = Assembly.LoadFile(path).GetType($"{_namespace}.{_class}");
                 if (type == null)
                 {
                     ShowNotification(new GUIContent("没有此脚本"));
                     return;
                 }
-                if (File.Exists("Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/" + _class + "Adapter.cs"))
+                if (File.Exists($"Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/{_class}Adapter.cs"))
                 {
-                    File.Delete("Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/" + _class + "Adapter.cs");
+                    File.Delete($"Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/{_class}Adapter.cs");
                 }
-                using (StreamWriter sw = new StreamWriter("Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/" + _class + "Adapter.cs"))
+                using (StreamWriter sw = new StreamWriter($"Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/{_class}Adapter.cs"))
                 {
                     sw.WriteLine(CrossBindingCodeGenerator.GenerateCrossBindingAdapterCode(type, _namespace));
                 }

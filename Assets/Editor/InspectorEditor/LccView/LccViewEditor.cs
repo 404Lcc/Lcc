@@ -30,10 +30,10 @@ namespace LccEditor
                         break;
                 }
                 string fileName = lccView.className.Split('.')[1];
-                string[] files = Directory.GetFiles("Assets/" + directoryName, "*.cs", SearchOption.AllDirectories);
+                string[] files = Directory.GetFiles($"Assets/{directoryName}", "*.cs", SearchOption.AllDirectories);
                 foreach (string item in files)
                 {
-                    if (item.Substring(item.LastIndexOf(@"\") + 1) == fileName + ".cs")
+                    if (item.Substring(item.LastIndexOf(@"\") + 1) == $"{fileName}.cs")
                     {
                         Selection.activeObject = AssetDatabase.LoadAssetAtPath<TextAsset>(item);
                         EditorGUIUtility.PingObject(Selection.activeObject);

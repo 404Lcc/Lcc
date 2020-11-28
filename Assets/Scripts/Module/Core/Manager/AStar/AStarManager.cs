@@ -35,7 +35,7 @@ namespace LccModel
                     Vector3 localPosition = new Vector3(x * 0.5f, y * 0.5f, 0);
                     //通过节点中心发射圆形射线,检测当前位置是否可以行走
                     bool wall = false;
-                    //bwall = Physics.CheckSphere(localPosition, nodeRadius, layer); 3D
+                    //wall = Physics.CheckSphere(localPosition, radius, layer); 3D
                     Collider2D[] colliders = Physics2D.OverlapCircleAll(localPosition, radius, layer);
                     if (colliders.Length > 0)
                     {
@@ -44,7 +44,7 @@ namespace LccModel
                     aStarNodeDatas[x, y] = new AStarNodeData(wall, localPosition, x, y);
                     if (wall)
                     {
-                        //InitWallGrid(AssetManager.Instance.LoadGameObject("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, isShowWall);
+                        //InitWallGrid(await AssetManager.Instance.InstantiateAssetAsync("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, isShowWall);
                     }
                 }
             }
@@ -62,7 +62,7 @@ namespace LccModel
                     aStarNodeDatas[w - x, y] = new AStarNodeData(wall, localPosition, x, y);
                     if (wall)
                     {
-                        //InitWallGrid(AssetManager.Instance.LoadGameObject("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, isShowWall);
+                        //InitWallGrid(await AssetManager.Instance.InstantiateAssetAsync("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, isShowWall);
                     }
                 }
             }
@@ -80,7 +80,7 @@ namespace LccModel
                     aStarNodeDatas[x, h - y] = new AStarNodeData(wall, localPosition, x, y);
                     if (wall)
                     {
-                        //InitWallGrid(AssetManager.Instance.LoadGameObject("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, isShowWall);
+                        //InitWallGrid(await AssetManager.Instance.InstantiateAssetAsync("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, isShowWall);
                     }
                 }
             }
@@ -98,22 +98,22 @@ namespace LccModel
                     aStarNodeDatas[w - x, h - y] = new AStarNodeData(wall, localPosition, x, y);
                     if (wall)
                     {
-                        //InitWallGrid(AssetManager.Instance.LoadGameObject("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, isShowWall);
+                        //InitWallGrid(await AssetManager.Instance.InstantiateAssetAsync("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, isShowWall);
                     }
                 }
             }
         }
-        public GameObject InitWallGrid(GameObject wall, Vector3 localPosition, bool isShowWall)
+        public GameObject InitWallGrid(GameObject gameObject, Vector3 localPosition, bool isShowWall)
         {
-            wall.transform.localPosition = localPosition;
-            wall.SetActive(isShowWall);
-            return wall;
+            gameObject.transform.localPosition = localPosition;
+            gameObject.SetActive(isShowWall);
+            return gameObject;
         }
-        public GameObject InitPathGrid(GameObject path, Vector3 localPosition, bool isShowPath)
+        public GameObject InitPathGrid(GameObject gameObject, Vector3 localPosition, bool isShowPath)
         {
-            path.transform.localPosition = localPosition;
-            path.SetActive(isShowPath);
-            return path;
+            gameObject.transform.localPosition = localPosition;
+            gameObject.SetActive(isShowPath);
+            return gameObject;
         }
         /// <summary>
         /// 根据坐标获得一个节点
@@ -236,7 +236,7 @@ namespace LccModel
             }
             for (int i = 0; i < endAStarNodeDataList.Count; i++)
             {
-                //InitWallGrid(AssetManager.Instance.LoadGameObject("Path", false, false, path, AssetType.UI, AssetType.Tool), endAStarNodeDataList[i].localPosition, isShowPath);
+                //InitWallGrid(await AssetManager.Instance.InstantiateAssetAsync("Path", false, false, path, AssetType.UI, AssetType.Tool), endAStarNodeDataList[i].localPosition, isShowPath);
             }
         }
         /// <summary>
@@ -274,7 +274,7 @@ namespace LccModel
                 for (int i = 0; i < openList.Count; i++)
                 {
                     //等待检查列表里最短距离的节点
-                    if (openList[i].fCost <= current.fCost && openList[i].hCost < current.hCost)
+                    if (openList[i].FCost <= current.FCost && openList[i].hCost < current.hCost)
                     {
                         current = openList[i];
                     }

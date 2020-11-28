@@ -13,6 +13,18 @@ namespace LccHotfix
         public Vector2 half;
 
         public Transform target;
+        public void InitSmoothFoolow(int smooth, bool isFollow, Vector2 margin, BoxCollider2D box, Vector3 min, Vector3 max, Transform target)
+        {
+            this.smooth = smooth;
+            this.isFollow = isFollow;
+            this.margin = margin;
+            this.box = box;
+            //边界左下角
+            this.min = min;
+            //边界右上角
+            this.max = max;
+            this.target = target;
+        }
         public override void Update()
         {
             half.x = Camera.main.orthographicSize * Screen.width / Screen.height;
@@ -35,18 +47,6 @@ namespace LccHotfix
                 localPosition.y = Mathf.Clamp(localPosition.y, min.y + half.y, max.y - half.y);
                 transform.localPosition = localPosition;
             }
-        }
-        public void InitSmoothFoolow(int smooth, bool isFollow, Vector2 margin, BoxCollider2D box, Vector3 min, Vector3 max, Transform target)
-        {
-            this.smooth = smooth;
-            this.isFollow = isFollow;
-            this.margin = margin;
-            this.box = box;
-            //边界左下角
-            this.min = min;
-            //边界右上角
-            this.max = max;
-            this.target = target;
         }
         public void SetTarget(Transform target)
         {

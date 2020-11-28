@@ -22,6 +22,22 @@ namespace LccHotfix
 
         public GameObject joystack;
         public GameObject joystackBG;
+        public void InitJoystack(float maxDistance, float activeDistance, GameObject joystack, GameObject joystackBG)
+        {
+            this.maxDistance = maxDistance;
+            this.activeDistance = activeDistance;
+            this.joystack = joystack;
+            this.joystackBG = joystackBG;
+            //设置原点
+            origin = joystack.transform.localPosition;
+            DragEventTrigger.GetDragEventTrigger(gameObject).Down += OnDown;
+            DragEventTrigger.GetDragEventTrigger(gameObject).UP += OnUp;
+            DragEventTrigger.GetDragEventTrigger(gameObject).BeginDrag += OnBeginDrag;
+            DragEventTrigger.GetDragEventTrigger(gameObject).Drag += OnDrag;
+            DragEventTrigger.GetDragEventTrigger(gameObject).EndDrag += OnEndDrag;
+            joystack.SetActive(false);
+            joystackBG.SetActive(false);
+        }
         public override void Start()
         {
             instance = this;
@@ -46,22 +62,6 @@ namespace LccHotfix
                 normalDistance = Vector2.zero;
             }
             angle = Mathf.Atan2(normalDistance.x, normalDistance.y) * Mathf.Rad2Deg;
-        }
-        public void InitJoystack(float maxDistance, float activeDistance, GameObject joystack, GameObject joystackBG)
-        {
-            this.maxDistance = maxDistance;
-            this.activeDistance = activeDistance;
-            this.joystack = joystack;
-            this.joystackBG = joystackBG;
-            //设置原点
-            origin = joystack.transform.localPosition;
-            DragEventTrigger.GetDragEventTrigger(gameObject).Down += OnDown;
-            DragEventTrigger.GetDragEventTrigger(gameObject).UP += OnUp;
-            DragEventTrigger.GetDragEventTrigger(gameObject).BeginDrag += OnBeginDrag;
-            DragEventTrigger.GetDragEventTrigger(gameObject).Drag += OnDrag;
-            DragEventTrigger.GetDragEventTrigger(gameObject).EndDrag += OnEndDrag;
-            joystack.SetActive(false);
-            joystackBG.SetActive(false);
         }
         public void OnDown(PointerEventData eventData)
         {

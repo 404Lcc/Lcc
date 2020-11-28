@@ -8,7 +8,7 @@ namespace LccHotfix
         public Hashtable languages = new Hashtable();
         public async void ChangeLanguage(LanguageType type)
         {
-            TextAsset asset = await LccModel.AssetManager.Instance.LoadAsset<TextAsset>(type.ToString(), ".txt", false, true, AssetType.Game);
+            TextAsset asset = await LccModel.AssetManager.Instance.LoadAssetAsync<TextAsset>(type.ToString(), ".txt", false, true, AssetType.Game);
             foreach (string item in asset.text.Split('\n'))
             {
                 if (string.IsNullOrEmpty(item))

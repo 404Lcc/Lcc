@@ -18,7 +18,7 @@ namespace LccModel
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        private bool PanelExist(PanelType type)
+        public bool PanelExist(PanelType type)
         {
             if (panels.ContainsKey(type))
             {
@@ -32,9 +32,9 @@ namespace LccModel
         /// <param name="type"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public async Task<Panel> CreatePanel(PanelType type, object data = null)
+        public async Task<Panel> CreatePanelAsync(PanelType type, object data = null)
         {
-            Panel panel = await handler.CreatePanel(type, data);
+            Panel panel = await handler.CreatePanelAsync(type, data);
             panels.Add(type, panel);
             return panel;
         }
@@ -44,7 +44,7 @@ namespace LccModel
         /// <param name="type"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public async Task<Panel> OpenPanel(PanelType type, object data = null)
+        public async Task<Panel> OpenPanelAsync(PanelType type, object data = null)
         {
             if (PanelExist(type))
             {
@@ -54,7 +54,7 @@ namespace LccModel
             }
             else
             {
-                Panel panel = await CreatePanel(type, data);
+                Panel panel = await CreatePanelAsync(type, data);
                 panel.OpenPanel();
                 return panel;
             }
@@ -64,12 +64,12 @@ namespace LccModel
         /// </summary>
         /// <param name="types"></param>
         /// <returns></returns>
-        public async Task<Panel[]> OpenPanel(PanelType[] types)
+        public async Task<Panel[]> OpenPanelsAsync(PanelType[] types)
         {
             List<Panel> panelList = new List<Panel>();
             foreach (PanelType item in types)
             {
-                panelList.Add(await OpenPanel(item));
+                panelList.Add(await OpenPanelAsync(item));
             }
             return panelList.ToArray();
         }
@@ -78,7 +78,7 @@ namespace LccModel
         /// </summary>
         /// <param name="types"></param>
         /// <returns></returns>
-        public async Task<Panel[]> OpenExceptPanel(PanelType[] types)
+        public async Task<Panel[]> OpenExceptPanelsAsync(PanelType[] types)
         {
             List<Panel> panelList = new List<Panel>();
             List<PanelType> typeList = new List<PanelType>(types);
@@ -86,7 +86,7 @@ namespace LccModel
             {
                 if (!typeList.Contains(item))
                 {
-                    panelList.Add(await OpenPanel(item));
+                    panelList.Add(await OpenPanelAsync(item));
                 }
             }
             return panelList.ToArray();
@@ -94,12 +94,12 @@ namespace LccModel
         /// <summary>
         /// 打开全部面板
         /// </summary>
-        public async Task<Panel[]> OpenAllPanels()
+        public async Task<Panel[]> OpenAllPanelsAsync()
         {
             List<Panel> panelList = new List<Panel>();
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
-                panelList.Add(await OpenPanel(item));
+                panelList.Add(await OpenPanelAsync(item));
             }
             return panelList.ToArray();
         }
@@ -108,7 +108,7 @@ namespace LccModel
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public async Task<Panel> ClosePanel(PanelType type, object data = null)
+        public async Task<Panel> ClosePanelAsync(PanelType type, object data = null)
         {
             if (PanelExist(type))
             {
@@ -118,7 +118,7 @@ namespace LccModel
             }
             else
             {
-                Panel panel = await CreatePanel(type, data);
+                Panel panel = await CreatePanelAsync(type, data);
                 panel.ClosePanel();
                 return panel;
             }
@@ -128,12 +128,12 @@ namespace LccModel
         /// </summary>
         /// <param name="types"></param>
         /// <returns></returns>
-        public async Task<Panel[]> ClosePanel(PanelType[] types)
+        public async Task<Panel[]> ClosePanelsAsync(PanelType[] types)
         {
             List<Panel> panelList = new List<Panel>();
             foreach (PanelType item in types)
             {
-                panelList.Add(await ClosePanel(item));
+                panelList.Add(await ClosePanelAsync(item));
             }
             return panelList.ToArray();
         }
@@ -142,7 +142,7 @@ namespace LccModel
         /// </summary>
         /// <param name="types"></param>
         /// <returns></returns>
-        public async Task<Panel[]> CloseExceptPanel(PanelType[] types)
+        public async Task<Panel[]> CloseExceptPanelsAsync(PanelType[] types)
         {
             List<Panel> panelList = new List<Panel>();
             List<PanelType> typeList = new List<PanelType>(types);
@@ -150,7 +150,7 @@ namespace LccModel
             {
                 if (!typeList.Contains(item))
                 {
-                    panelList.Add(await ClosePanel(item));
+                    panelList.Add(await ClosePanelAsync(item));
                 }
             }
             return panelList.ToArray();
@@ -158,12 +158,12 @@ namespace LccModel
         /// <summary>
         /// 隐藏全部面板
         /// </summary>
-        public async Task<Panel[]> CloseAllPanels()
+        public async Task<Panel[]> CloseAllPanelsAsync()
         {
             List<Panel> panelList = new List<Panel>();
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
-                panelList.Add(await ClosePanel(item));
+                panelList.Add(await ClosePanelAsync(item));
             }
             return panelList.ToArray();
         }
@@ -185,7 +185,7 @@ namespace LccModel
         /// </summary>
         /// <param name="types"></param>
         /// <returns></returns>
-        public void ClearPanel(PanelType[] types)
+        public void ClearPanels(PanelType[] types)
         {
             foreach (PanelType item in types)
             {
@@ -197,7 +197,7 @@ namespace LccModel
         /// </summary>
         /// <param name="types"></param>
         /// <returns></returns>
-        public void ClearExceptPanel(PanelType[] types)
+        public void ClearExceptPanels(PanelType[] types)
         {
             List<PanelType> typeList = new List<PanelType>(types);
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))

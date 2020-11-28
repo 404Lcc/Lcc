@@ -18,7 +18,7 @@ namespace LccModel
             string path = string.Empty;
             for (int i = 0; i < types.Length; i++)
             {
-                path += types[i] + "/";
+                path += $"{types[i]}/";
                 if (i == types.Length - 1)
                 {
                     path += name;
@@ -26,7 +26,7 @@ namespace LccModel
             }
             return path;
         }
-        private async Task<AssetData> LoadAssetData<T>(string name, string suffix, bool isKeep, bool isAssetBundle, params string[] types) where T : Object
+        private async Task<AssetData> LoadAssetDataAsync<T>(string name, string suffix, bool isKeep, bool isAssetBundle, params string[] types) where T : Object
         {
             string path = GetAssetPath(name, types);
             if (assetDict.ContainsKey(path))
@@ -40,7 +40,7 @@ namespace LccModel
                 if (isAssetBundle)
                 {
 #if !UNITY_EDITOR
-                    AsyncOperationHandle<T> handler = Addressables.LoadAssetAsync<T>("Assets/Bundles/" + path + suffix);
+                    AsyncOperationHandle<T> handler = Addressables.LoadAssetAsync<T>($"Assets/Bundles/{path}{suffix}");
                     await handler.Task;
                     Object asset = handler.Result;
                     assetData.asset = asset;
@@ -107,32 +107,32 @@ namespace LccModel
 #endif
             }
         }
-        public async Task<T> LoadAsset<T>(string name, string suffix, bool isKeep, bool isAssetBundle, params string[] types) where T : Object
+        public async Task<T> LoadAssetAsync<T>(string name, string suffix, bool isKeep, bool isAssetBundle, params string[] types) where T : Object
         {
-            AssetData assetData = await LoadAssetData<T>(name, suffix, isKeep, isAssetBundle, types);
+            AssetData assetData = await LoadAssetDataAsync<T>(name, suffix, isKeep, isAssetBundle, types);
             if (assetData == null) return null;
             return (T)assetData.asset;
         }
-        public async Task<GameObject> InstantiateAsset(string name, bool isKeep, bool isAssetBundle, params string[] types)
+        public async Task<GameObject> InstantiateAssetAsync(string name, bool isKeep, bool isAssetBundle, params string[] types)
         {
-            AssetData assetData = await LoadAssetData<GameObject>(name, ".prefab", isKeep, isAssetBundle, types);
+            AssetData assetData = await LoadAssetDataAsync<GameObject>(name, ".prefab", isKeep, isAssetBundle, types);
             if (assetData == null) return null;
             GameObject gameObject = (GameObject)Object.Instantiate(assetData.asset);
             gameObject.name = name;
             return gameObject;
         }
-        public async Task<T> InstantiateAsset<T>(string name, bool isKeep, bool isAssetBundle, params string[] types) where T : Component
+        public async Task<T> InstantiateAssetAsync<T>(string name, bool isKeep, bool isAssetBundle, params string[] types) where T : Component
         {
-            AssetData assetData = await LoadAssetData<GameObject>(name, ".prefab", isKeep, isAssetBundle, types);
+            AssetData assetData = await LoadAssetDataAsync<GameObject>(name, ".prefab", isKeep, isAssetBundle, types);
             if (assetData == null) return null;
             GameObject gameObject = (GameObject)Object.Instantiate(assetData.asset);
             gameObject.name = name;
             T component = gameObject.AddComponent<T>();
             return component;
         }
-        public async Task<GameObject> InstantiateAsset(string name, bool isKeep, bool isAssetBundle, Transform parent, params string[] types)
+        public async Task<GameObject> InstantiateAssetAsync(string name, bool isKeep, bool isAssetBundle, Transform parent, params string[] types)
         {
-            AssetData assetData = await LoadAssetData<GameObject>(name, ".prefab", isKeep, isAssetBundle, types);
+            AssetData assetData = await LoadAssetDataAsync<GameObject>(name, ".prefab", isKeep, isAssetBundle, types);
             if (assetData == null) return null;
             GameObject gameObject = (GameObject)Object.Instantiate(assetData.asset);
             gameObject.name = name;
@@ -142,9 +142,9 @@ namespace LccModel
             gameObject.transform.localScale = Vector3.one;
             return gameObject;
         }
-        public async Task<T> InstantiateAsset<T>(string name, bool isKeep, bool isAssetBundle, Transform parent, params string[] types) where T : Component
+        public async Task<T> InstantiateAssetAsync<T>(string name, bool isKeep, bool isAssetBundle, Transform parent, params string[] types) where T : Component
         {
-            AssetData assetData = await LoadAssetData<GameObject>(name, ".prefab", isKeep, isAssetBundle, types);
+            AssetData assetData = await LoadAssetDataAsync<GameObject>(name, ".prefab", isKeep, isAssetBundle, types);
             if (assetData == null) return null;
             GameObject gameObject = (GameObject)Object.Instantiate(assetData.asset);
             gameObject.name = name;
@@ -172,7 +172,7 @@ namespace LccModel
             {
                 if (!assetDict[item].isKeep)
                 {
-                    all += item + ",";
+                    all += $"{item},";
                 }
             }
             foreach (string item in all.Split(','))

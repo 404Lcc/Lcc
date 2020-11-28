@@ -17,7 +17,7 @@ namespace LccHotfix
                     lock (lockObject)
                     {
                         _instance = Activator.CreateInstance<T>();
-                        GameObject gameObject = new GameObject(_instance.ToString());
+                        GameObject gameObject = new GameObject($"{_instance}");
                         _instance.InitObject(gameObject);
                         Object.DontDestroyOnLoad(gameObject);
                     }

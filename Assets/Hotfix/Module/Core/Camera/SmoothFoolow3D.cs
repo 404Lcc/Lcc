@@ -23,6 +23,31 @@ namespace LccHotfix
 
         public Transform target;
         public Transform lockTarget;
+        public void InitSmoothFoolow(float distance, float damping, float limitYMin, float limitYMax, float proportion, bool isNeedDamping, Vector3 offset, Transform target)
+        {
+            this.distance = distance;
+            this.damping = damping;
+            this.limitYMin = limitYMin;
+            this.limitYMax = limitYMax;
+            this.proportion = proportion;
+            this.isNeedDamping = isNeedDamping;
+            this.offset = offset;
+            this.target = target;
+            if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+            {
+                speedX = 200;
+                speedY = 200;
+                isTouch = false;
+                isMouse = true;
+            }
+            else
+            {
+                speedX = 30;
+                speedY = 30;
+                isTouch = true;
+                isMouse = false;
+            }
+        }
         public override void Update()
         {
             if (isTouch)
@@ -151,31 +176,6 @@ namespace LccHotfix
                     transform.localRotation = localRotation;
                     transform.localPosition = localPosition;
                 }
-            }
-        }
-        public void InitSmoothFoolow(float distance, float damping, float limitYMin, float limitYMax, float proportion, bool isNeedDamping, Vector3 offset, Transform target)
-        {
-            this.distance = distance;
-            this.damping = damping;
-            this.limitYMin = limitYMin;
-            this.limitYMax = limitYMax;
-            this.proportion = proportion;
-            this.isNeedDamping = isNeedDamping;
-            this.offset = offset;
-            this.target = target;
-            if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
-            {
-                speedX = 200;
-                speedY = 200;
-                isTouch = false;
-                isMouse = true;
-            }
-            else
-            {
-                speedX = 30;
-                speedY = 30;
-                isTouch = true;
-                isMouse = false;
             }
         }
         public void SetTarget(Transform target)

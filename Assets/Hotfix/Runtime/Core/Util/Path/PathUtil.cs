@@ -8,24 +8,21 @@ namespace LccHotfix
         {
             get
             {
-                string path = Application.dataPath + "/";
-                return path;
+                return $"{Application.dataPath}/";
             }
         }
         public static string GetStreamingAssetsPath
         {
             get
             {
-                string path = Application.streamingAssetsPath + "/";
-                return path;
+                return $"{Application.streamingAssetsPath}/";
             }
         }
         public static string GetPersistentDataPath
         {
             get
             {
-                string path = Application.persistentDataPath + "/";
-                return path;
+                return $"{Application.persistentDataPath}/";
             }
         }
         /// <summary>
@@ -52,7 +49,7 @@ namespace LccHotfix
             }
             for (int i = 0; i < folders.Length; i++)
             {
-                subPath += folders[i] + "/";
+                subPath += $"{folders[i]}/";
                 DirectoryUtil.CreateDirectory(path + subPath);
             }
             if (string.IsNullOrEmpty(subPath)) return path;

@@ -22,7 +22,7 @@ namespace LccEditor
             {
                 argList.Add(item);
             }
-            string name = PlayerSettings.productName + " v" + PlayerSettings.bundleVersion;
+            string name = $"{PlayerSettings.productName} v{PlayerSettings.bundleVersion}";
             switch (EditorUserBuildSettings.activeBuildTarget)
             {
                 case BuildTarget.StandaloneWindows:
@@ -77,7 +77,7 @@ namespace LccEditor
                 define = string.Empty;
                 foreach (string item in defineList)
                 {
-                    define += item + ";";
+                    define += $"{item};";
                 }
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, define);
             }
@@ -124,7 +124,7 @@ namespace LccEditor
                 define = string.Empty;
                 foreach (string item in defineList)
                 {
-                    define += item + ";";
+                    define += $"{item};";
                 }
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, define);
             }
@@ -171,7 +171,7 @@ namespace LccEditor
                 define = string.Empty;
                 foreach (string item in defineList)
                 {
-                    define += item + ";";
+                    define += $"{item};";
                 }
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, define);
             }
@@ -204,28 +204,28 @@ namespace LccEditor
         [MenuItem("Assets/Lcc/Create/Hotfix/Panel")]
         public static void CreateHotfixPanel()
         {
-            string pathName = CreateScriptAction.GetSelectedPath() + "/NewHotfixPanel.cs";
+            string pathName = $"{CreateScriptAction.GetSelectedPath()}/NewHotfixPanel.cs";
             Texture2D icon = (Texture2D)EditorGUIUtility.IconContent("cs Script Icon").image;
             ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<CreateScriptAction>(), pathName, icon, "Assets/Editor/Model/NewHotfixPanel.cs");
         }
         [MenuItem("Assets/Lcc/Create/Hotfix/ViewModel")]
         public static void CreateHotfixViewModel()
         {
-            string pathName = CreateScriptAction.GetSelectedPath() + "/NewHotfixViewModel.cs";
+            string pathName = $"{CreateScriptAction.GetSelectedPath()}/NewHotfixViewModel.cs";
             Texture2D icon = (Texture2D)EditorGUIUtility.IconContent("cs Script Icon").image;
             ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<CreateScriptAction>(), pathName, icon, "Assets/Editor/Model/NewHotfixViewModel.cs");
         }
         [MenuItem("Assets/Lcc/Create/Model/Panel")]
         public static void CreateModelPanel()
         {
-            string pathName = CreateScriptAction.GetSelectedPath() + "/NewModelPanel.cs";
+            string pathName = $"{CreateScriptAction.GetSelectedPath()}/NewModelPanel.cs";
             Texture2D icon = (Texture2D)EditorGUIUtility.IconContent("cs Script Icon").image;
             ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<CreateScriptAction>(), pathName, icon, "Assets/Editor/Model/NewModelPanel.cs");
         }
         [MenuItem("Assets/Lcc/Create/Model/ViewModel")]
         public static void CreateModelViewModel()
         {
-            string pathName = CreateScriptAction.GetSelectedPath() + "/NewModelViewModel.cs";
+            string pathName = $"{CreateScriptAction.GetSelectedPath()}/NewModelViewModel.cs";
             Texture2D icon = (Texture2D)EditorGUIUtility.IconContent("cs Script Icon").image;
             ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<CreateScriptAction>(), pathName, icon, "Assets/Editor/Model/NewModelViewModel.cs");
         }

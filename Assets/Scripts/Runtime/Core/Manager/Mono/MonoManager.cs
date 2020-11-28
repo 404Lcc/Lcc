@@ -16,11 +16,11 @@ namespace LccModel
         }
         public async void LoadHotfixAssembly()
         {
-            TextAsset dllAsset = await AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.Text);
+            TextAsset dllAsset = await AssetManager.Instance.LoadAssetAsync<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.DLL);
 #if Release
             assembly = AppDomain.CurrentDomain.Load(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes));
 #else
-            TextAsset pdbAsset = await AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.Text);
+            TextAsset pdbAsset = await AssetManager.Instance.LoadAssetAsync<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.DLL);
             assembly = AppDomain.CurrentDomain.Load(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes), pdbAsset.bytes);
 #endif
             typeList = assembly.GetTypes().ToList();

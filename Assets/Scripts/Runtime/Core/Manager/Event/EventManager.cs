@@ -30,7 +30,7 @@ namespace LccModel
             }
             else
             {
-                Debug.Log("事件不存在" + type.Name);
+                Debug.Log($"事件不存在{type.Name}");
             }
         }
     }

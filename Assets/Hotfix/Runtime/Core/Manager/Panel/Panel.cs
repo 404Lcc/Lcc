@@ -36,7 +36,7 @@ namespace LccHotfix
             }
             else
             {
-                Debug.Log("Panel不存在" + Type);
+                Debug.Log($"Panel不存在{Type}");
             }
         }
         public void ClosePanel()
@@ -48,7 +48,7 @@ namespace LccHotfix
             }
             else
             {
-                Debug.Log("Panel不存在" + Type);
+                Debug.Log($"Panel不存在{Type}");
             }
         }
     }

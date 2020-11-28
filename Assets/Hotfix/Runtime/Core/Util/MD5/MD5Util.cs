@@ -23,7 +23,7 @@ namespace LccHotfix
                 {
                     sb.Append(bytes[i].ToString("x2"));
                 }
-                return sb.ToString();
+                return $"{sb}";
             }
             return null;
         }
@@ -35,7 +35,7 @@ namespace LccHotfix
         /// <returns></returns>
         public static string CreateMD5(string path, string name)
         {
-            return CreateMD5(path + "/" + name);
+            return CreateMD5($"{path}/{name}");
         }
     }
 }

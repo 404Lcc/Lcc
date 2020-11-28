@@ -17,7 +17,7 @@ namespace LccModel
         }
         public async void InitConfigTable()
         {
-            TextAsset asset = await AssetManager.Instance.LoadAsset<TextAsset>(typeof(T).Name, ".txt", false, true, AssetType.Config);
+            TextAsset asset = await AssetManager.Instance.LoadAssetAsync<TextAsset>(typeof(T).Name, ".txt", false, true, AssetType.Config);
             foreach (KeyValuePair<string, T> item in JsonMapper.ToObject<Dictionary<string, T>>(asset.text))
             {
                 configDict.Add(int.Parse(item.Key), item.Value);

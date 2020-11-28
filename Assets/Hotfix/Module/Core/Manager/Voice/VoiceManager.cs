@@ -8,7 +8,7 @@ namespace LccHotfix
     public class VoiceManager : Singleton<VoiceManager>
     {
         public Hashtable voices = new Hashtable();
-        private bool AudioExist(string audio)
+        public bool AudioExist(string audio)
         {
             if (voices.ContainsKey(audio))
             {
@@ -16,9 +16,9 @@ namespace LccHotfix
             }
             return false;
         }
-        public async Task<AudioClip> LoadAudio(string audio)
+        public async Task<AudioClip> LoadAudioAsync(string audio)
         {
-            AudioClip clip = await LccModel.AssetManager.Instance.LoadAsset<AudioClip>(audio, ".mp3", false, true, AssetType.Audio);
+            AudioClip clip = await LccModel.AssetManager.Instance.LoadAssetAsync<AudioClip>(audio, ".mp3", false, true, AssetType.Audio);
             voices.Add(audio, clip);
             return clip;
         }
@@ -35,7 +35,7 @@ namespace LccHotfix
                 voices.Remove(audio);
             }
         }
-        public async Task<AudioClip> PlayAudio(string audio, bool isInside, AudioSource source)
+        public async Task<AudioClip> PlayAudioAsync(string audio, bool isInside, AudioSource source)
         {
             if (AudioExist(audio))
             {
@@ -46,7 +46,7 @@ namespace LccHotfix
             }
             if (isInside)
             {
-                AudioClip temp = await LoadAudio(audio);
+                AudioClip temp = await LoadAudioAsync(audio);
                 source.clip = temp;
                 source.Play();
                 return temp;

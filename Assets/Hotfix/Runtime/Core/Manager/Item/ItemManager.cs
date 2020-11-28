@@ -14,7 +14,7 @@ namespace LccHotfix
         {
             this.handler = handler;
         }
-        private bool ItemExist(ItemType type)
+        public bool ItemExist(ItemType type)
         {
             if (items.ContainsKey(type))
             {
@@ -22,9 +22,9 @@ namespace LccHotfix
             }
             return false;
         }
-        public async Task<Item> CreateItem(ItemType type, object data, Transform parent)
+        public async Task<Item> CreateItemAsync(ItemType type, object data, Transform parent)
         {
-            Item item = await handler.CreateItem(type, data, parent);
+            Item item = await handler.CreateItemAsync(type, data, parent);
             if (ItemExist(type))
             {
                 ((List<Item>)items[type]).Add(item);

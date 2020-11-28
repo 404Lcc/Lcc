@@ -25,7 +25,7 @@ namespace LccHotfix
             for (int i = 0; i < folders.Length; i++)
             {
                 subPath += folders[i];
-                CreateDirectory(path + "/" + subPath);
+                CreateDirectory($"{path}/{subPath}");
                 subPath += "/";
             }
         }

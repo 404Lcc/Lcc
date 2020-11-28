@@ -41,7 +41,7 @@ namespace LccEditor
                 {
                     using (StreamWriter streamWriter = new StreamWriter(fileStream))
                     {
-                        streamWriter.WriteLine(SheetToAConfigTable("namespace LccModel\n", $"{Path.GetFileNameWithoutExtension(item)}"));
+                        streamWriter.WriteLine(SheetToAConfigTable("namespace LccModel\n", Path.GetFileNameWithoutExtension(item)));
                     }
                 }
                 XSSFWorkbook xssfWorkbook = new XSSFWorkbook(item);
@@ -49,7 +49,7 @@ namespace LccEditor
                 {
                     using (StreamWriter streamWriter = new StreamWriter(fileStream))
                     {
-                        streamWriter.WriteLine(SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccModel\n", $"{Path.GetFileNameWithoutExtension(item)}"));
+                        streamWriter.WriteLine(SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccModel\n", Path.GetFileNameWithoutExtension(item)));
                     }
                 }
             }
@@ -64,7 +64,7 @@ namespace LccEditor
                 {
                     using (StreamWriter streamWriter = new StreamWriter(fileStream))
                     {
-                        streamWriter.WriteLine(SheetToAConfigTable("using LccModel;\n\nnamespace LccHotfix\n", $"{Path.GetFileNameWithoutExtension(item)}"));
+                        streamWriter.WriteLine(SheetToAConfigTable("using LccModel;\n\nnamespace LccHotfix\n", Path.GetFileNameWithoutExtension(item)));
                     }
                 }
                 XSSFWorkbook xssfWorkbook = new XSSFWorkbook(item);
@@ -72,7 +72,7 @@ namespace LccEditor
                 {
                     using (StreamWriter streamWriter = new StreamWriter(fileStream))
                     {
-                        streamWriter.WriteLine(SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccHotfix\n", $"{Path.GetFileNameWithoutExtension(item)}"));
+                        streamWriter.WriteLine(SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccHotfix\n", Path.GetFileNameWithoutExtension(item)));
                     }
                 }
             }

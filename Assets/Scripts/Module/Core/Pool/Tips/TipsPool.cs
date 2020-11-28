@@ -12,7 +12,7 @@
         {
             for (int i = 0; i < size; i++)
             {
-                Tips tips = LccViewFactory.CreateView<Tips>(await AssetManager.Instance.InstantiateAsset("Tips", false, false, Objects.GUI.transform, AssetType.UI, AssetType.Tool));
+                Tips tips = LccViewFactory.CreateView<Tips>(await AssetManager.Instance.InstantiateAssetAsync("Tips", false, false, Objects.GUI.transform, AssetType.Panel, AssetType.Tool));
                 Enqueue(tips);
             }
         }

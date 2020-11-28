@@ -32,7 +32,7 @@ namespace LccModel
             }
             else
             {
-                Debug.Log("Config不存在" + type.Name);
+                Debug.Log($"Config不存在{type.Name}");
                 return default;
             }
         }
@@ -46,7 +46,7 @@ namespace LccModel
             }
             else
             {
-                Debug.Log("Config不存在" + type.Name);
+                Debug.Log($"Config不存在{type.Name}");
                 return default;
             }
         }

@@ -12,9 +12,9 @@ namespace LccHotfix
             this.isAssetBundle = isAssetBundle;
             this.types = types;
         }
-        public override async Task<GameObject> CreateGameObject(string name, Transform parent)
+        public override async Task<GameObject> CreateGameObjectAsync(string name, Transform parent)
         {
-            GameObject gameObject = await base.CreateGameObject(name, parent);
+            GameObject gameObject = await base.CreateGameObjectAsync(name, parent);
             RectTransform rect = gameObject.GetComponent<RectTransform>();
             rect.sizeDelta = Vector2.zero;
             rect.anchorMin = Vector2.zero;
@@ -25,10 +25,10 @@ namespace LccHotfix
             rect.localScale = Vector3.one;
             return gameObject;
         }
-        public async Task<Item> CreateItem(ItemType type, object data, Transform parent)
+        public async Task<Item> CreateItemAsync(ItemType type, object data, Transform parent)
         {
             Item item = new Item();
-            GameObject gameObject = await CreateGameObject(type.ToItemString(), parent);
+            GameObject gameObject = await CreateGameObjectAsync(type.ToItemString(), parent);
             if (gameObject == null) return null;
             item.Type = type;
             Type classType = Manager.Instance.GetType(type.ToItemString());

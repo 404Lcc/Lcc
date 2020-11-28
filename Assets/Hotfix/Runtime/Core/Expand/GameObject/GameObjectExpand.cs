@@ -10,7 +10,7 @@ namespace LccHotfix
             string child = string.Empty;
             for (int i = 0; i < childs.Length - 1; i++)
             {
-                child += childs[i] + "/";
+                child += $"{childs[i]}/";
             }
             child += childs[childs.Length - 1];
             Transform childTransform = gameObject.transform.Find(child);

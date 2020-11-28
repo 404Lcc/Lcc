@@ -5,8 +5,8 @@
     {
         public override void Publish(Start data)
         {
-            PanelManager.Instance.InitManager(new PanelObjectBaseHandler(false, true, AssetType.UI));
-            ItemManager.Instance.InitManager(new ItemObjectBaseHandler(false, true, AssetType.Item));
+            PanelManager.Instance.InitManager(new PanelObjectBaseHandler(false, true, AssetType.Prefab, AssetType.Panel));
+            ItemManager.Instance.InitManager(new ItemObjectBaseHandler(false, true, AssetType.Prefab, AssetType.Item));
 
             LccModel.SceneLoadManager.Instance.LoadScene(SceneName.Login, true, () =>
             {

@@ -54,7 +54,7 @@ namespace LccModel
             {
 #if !UNITY_EDITOR
                 string path = GetAssetPath(name, types);
-                AsyncOperationHandle<SceneInstance> handler = Addressables.LoadSceneAsync("Assets/Bundles/" + path + suffix);
+                AsyncOperationHandle<SceneInstance> handler = Addressables.LoadSceneAsync($"Assets/Bundles/{path}{suffix}");
                 yield return handler;
 
 #else

@@ -22,11 +22,11 @@ namespace LccEditor
                 {
                     if (AddTag(item))
                     {
-                        succe += item + " ";
+                        succe += $"{item} ";
                     }
                     else
                     {
-                        failure += item + " ";
+                        failure += $"{item} ";
                     }
                 }
                 if (!string.IsNullOrEmpty(succe))
@@ -50,11 +50,11 @@ namespace LccEditor
                 {
                     if (AddLayer(item))
                     {
-                        succe += item + " ";
+                        succe += $"{item} ";
                     }
                     else
                     {
-                        failure += item + " ";
+                        failure += $"{item} ";
                     }
                 }
                 if (!string.IsNullOrEmpty(succe))
@@ -79,11 +79,11 @@ namespace LccEditor
                 string tips;
                 if (AddTag(tag))
                 {
-                    tips = tag + "增加成功";
+                    tips = $"{tag}增加成功";
                 }
                 else
                 {
-                    tips = tag + "增加失败";
+                    tips = $"{tag}增加失败";
                 }
                 ShowNotification(new GUIContent(tips));
             }
@@ -99,11 +99,11 @@ namespace LccEditor
                 string tips;
                 if (AddLayer(layer))
                 {
-                    tips = layer + "增加成功";
+                    tips = $"{layer}增加成功";
                 }
                 else
                 {
-                    tips = layer + "增加失败";
+                    tips = $"{layer}增加失败";
                 }
                 ShowNotification(new GUIContent(tips));
             }

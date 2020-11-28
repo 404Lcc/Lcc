@@ -4,7 +4,7 @@
     {
         public static string ToPanelString(this PanelType type)
         {
-            return type.ToString() + "Panel";
+            return $"{type}Panel";
         }
     }
 }
