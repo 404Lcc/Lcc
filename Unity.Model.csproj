@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\Util\OpenFileName.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\ItemType\ItemTypeExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\View\IView.cs" />
+    <Compile Include="Assets\Scripts\Module\Core\Manager\GameEvent\GameEventData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEventManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\File\FileUtil.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\AStar\AStarNodeData.cs" />
@@ -161,7 +162,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Object\AObjectBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\IItem.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Log\LogUtil.cs" />
-    <Compile Include="Assets\Scripts\Module\Core\Manager\GameEvent\GameEventData.cs" />
+    <Compile Include="Assets\Scripts\Util\LanguageText.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />

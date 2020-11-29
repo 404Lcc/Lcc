@@ -135,12 +135,12 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Handler\ObjectBase\AObjectBaseHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\Binding\Binding.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Util\Log\LogUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Lcc\LccUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Image\ImageExpand.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\ViewModel\LoginModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\LccViewFactory.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandData.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Util\Log\LogUtil.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
