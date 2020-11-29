@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace LccHotfix
+﻿namespace LccHotfix
 {
     public class Panel : IPanel
     {
@@ -36,7 +34,7 @@ namespace LccHotfix
             }
             else
             {
-                Debug.Log($"Panel不存在{Type}");
+                LogUtil.Log($"Panel不存在{Type}");
             }
         }
         public void ClosePanel()
@@ -48,7 +46,7 @@ namespace LccHotfix
             }
             else
             {
-                Debug.Log($"Panel不存在{Type}");
+                LogUtil.Log($"Panel不存在{Type}");
             }
         }
     }

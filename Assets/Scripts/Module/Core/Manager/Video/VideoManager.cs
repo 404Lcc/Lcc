@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-namespace LccHotfix
+namespace LccModel
 {
     public class VideoManager : Singleton<VideoManager>
     {
@@ -19,7 +19,7 @@ namespace LccHotfix
         }
         public async Task<VideoClip> LoadVideoAsync(string video)
         {
-            VideoClip clip = await LccModel.AssetManager.Instance.LoadAssetAsync<VideoClip>(video, ".mp4", false, true, AssetType.Video);
+            VideoClip clip = await AssetManager.Instance.LoadAssetAsync<VideoClip>(video, ".mp4", false, true, AssetType.Video);
             videos.Add(video, clip);
             return clip;
         }

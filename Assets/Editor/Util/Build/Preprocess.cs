@@ -1,8 +1,9 @@
-﻿using System.IO;
+﻿using LccModel;
+using System.IO;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
-using UnityEngine;
+using FileUtil = LccModel.FileUtil;
 
 namespace LccEditor
 {
@@ -26,25 +27,25 @@ namespace LccEditor
         if (File.Exists("Temp/bin/Release/Unity.Hotfix.dll"))
         {
             File.Copy("Temp/bin/Release/Unity.Hotfix.dll", "Assets/Resources/DLL/Unity.Hotfix.dll.bytes", true);
-            GameUtil.SaveAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes", GameUtil.RijndaelEncrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", GameUtil.GetAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes")));
+            FileUtil.SaveAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes", RijndaelUtil.RijndaelEncrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileUtil.GetAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes")));
             AssetDatabase.Refresh();
         }
 #endif
             if (File.Exists("Assets/Hotfix/Unity.Hotfix.asmdef"))
             {
                 File.Move("Assets/Hotfix/Unity.Hotfix.asmdef", "Assets/Hotfix/Unity.Hotfix.asmdef~");
-                Debug.Log("卸载Hotfix");
+                LogUtil.Log("卸载Hotfix");
                 AssetDatabase.Refresh();
             }
             else
             {
                 if (File.Exists("Assets/Hotfix/Unity.Hotfix.asmdef~"))
                 {
-                    Debug.Log("卸载Hotfix");
+                    LogUtil.Log("卸载Hotfix");
                 }
                 else
                 {
-                    Debug.Log("Hotfix丢失");
+                    LogUtil.Log("Hotfix丢失");
                 }
             }
         }
@@ -53,18 +54,18 @@ namespace LccEditor
             if (File.Exists("Assets/Hotfix/Unity.Hotfix.asmdef~"))
             {
                 File.Move("Assets/Hotfix/Unity.Hotfix.asmdef~", "Assets/Hotfix/Unity.Hotfix.asmdef");
-                Debug.Log("安装Hotfix");
+                LogUtil.Log("安装Hotfix");
                 AssetDatabase.Refresh();
             }
             else
             {
                 if (File.Exists("Assets/Hotfix/Unity.Hotfix.asmdef"))
                 {
-                    Debug.Log("安装Hotfix");
+                    LogUtil.Log("安装Hotfix");
                 }
                 else
                 {
-                    Debug.Log("Hotfix丢失");
+                    LogUtil.Log("Hotfix丢失");
                 }
             }
         }

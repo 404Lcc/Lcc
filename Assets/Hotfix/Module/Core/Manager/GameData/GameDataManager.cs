@@ -121,14 +121,14 @@ namespace LccHotfix
             }
         }
 
-        //public void SetValue(DOGetter<float> getter, DOSetter<float> setter, int value, int timer, bool isSave, bool isOpenPanel = false, PanelType[] types = null, Action action = null)
+        //public void SetValue(DOGetter<float> getter, DOSetter<float> setter, int value, int timer, bool isSave, bool isOpenPanel = false, PanelType[] types = null, Action callback = null)
         //{
         //    if (isOpenPanel)
         //    {
         //    }
         //    DOTween.To(getter, setter, value, timer).OnComplete(() =>
         //    {
-        //        action();
+        //        callback?.Invoke();
         //        if (isSave)
         //        {
         //        }

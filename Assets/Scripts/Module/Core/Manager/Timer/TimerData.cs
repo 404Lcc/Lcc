@@ -1,30 +1,30 @@
 ﻿using System;
 
-namespace LccHotfix
+namespace LccModel
 {
     public class TimerData
     {
-        public int id;
-        public event Action Complete;
+        public int id = -1;
+        public event Action Callback;
         public float start;
         public float end;
-        public TimerData(int id, Action complete, float start, float end)
+        public TimerData(int id, Action callback, float start, float end)
         {
             this.id = id;
-            Complete += complete;
+            Callback += callback;
             this.start = start;
             this.end = end;
         }
         public void Excute()
         {
-            Complete();
+            Callback?.Invoke();
         }
         public void Reset()
         {
             id = -1;
-            Complete = null;
-            start = -1;
-            end = -1;
+            Callback = null;
+            start = 0;
+            end = 0;
         }
     }
 }

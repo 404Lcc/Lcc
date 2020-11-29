@@ -11,7 +11,7 @@ namespace LccModel
     public class SceneLoadManager : Singleton<SceneLoadManager>
     {
         public AsyncOperation async;
-        public Action complete;
+        public event Action Callback;
         public int process;
         public override void Update()
         {
@@ -26,10 +26,10 @@ namespace LccModel
             }
             if (async.isDone)
             {
-                complete?.Invoke();
+                Callback?.Invoke();
                 async.allowSceneActivation = true;
                 async = null;
-                complete = null;
+                Callback = null;
                 process = 0;
             }
         }
@@ -75,15 +75,15 @@ namespace LccModel
             yield return async;
 #endif
         }
-        public void LoadScene(string name, string suffix, bool isAssetBundle, Action complete, params string[] types)
+        public void LoadScene(string name, string suffix, bool isAssetBundle, Action callback, params string[] types)
         {
-            this.complete = complete;
+            Callback = callback;
             SceneManager.LoadScene(SceneName.Load);
             StartCoroutine(LoadScene(name, suffix, isAssetBundle, types));
         }
-        public void LoadScene(string name, bool isAssetBundle, Action complete, params string[] types)
+        public void LoadScene(string name, bool isAssetBundle, Action callback, params string[] types)
         {
-            this.complete = complete;
+            Callback = callback;
             SceneManager.LoadScene(SceneName.Load);
             StartCoroutine(LoadScene(name, ".unity", isAssetBundle, types));
         }

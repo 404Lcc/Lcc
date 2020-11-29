@@ -15,9 +15,9 @@ namespace LccModel
         /// <param name="bytes"></param>
         /// <param name="name"></param>
         /// <param name="mime"></param>
-        /// <param name="action"></param>
+        /// <param name="callback"></param>
         /// <returns></returns>
-        public static IEnumerator Upload(string url, string field, byte[] bytes, string name, string mime, Action<bool> action)
+        public static IEnumerator Upload(string url, string field, byte[] bytes, string name, string mime, Action<bool> callback)
         {
             WWWForm form = new WWWForm();
             form.AddBinaryData(field, bytes, name, mime);
@@ -26,11 +26,11 @@ namespace LccModel
             yield return webRequest.SendWebRequest();
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                Debug.Log(webRequest.error);
+                LogUtil.Log(webRequest.error);
             }
             else
             {
-                action(true);
+                callback(true);
             }
         }
         /// <summary>
@@ -47,7 +47,7 @@ namespace LccModel
             yield return webRequest.SendWebRequest();
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                Debug.Log(webRequest.error);
+                LogUtil.Log(webRequest.error);
             }
             else
             {
@@ -55,22 +55,22 @@ namespace LccModel
                 FileUtil.SaveAsset(PathUtil.GetPath(PathType.PersistentDataPath, folders) + name, bytes);
             }
         }
-        public static IEnumerator Download(string url, Action<byte[]> action)
+        public static IEnumerator Download(string url, Action<byte[]> callback)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
             yield return webRequest.SendWebRequest();
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                Debug.Log(webRequest.error);
+                LogUtil.Log(webRequest.error);
             }
             else
             {
                 byte[] bytes = webRequest.downloadHandler.data;
-                action(bytes);
+                callback(bytes);
             }
         }
-        public static IEnumerator Download(string url, Action<Texture2D> action)
+        public static IEnumerator Download(string url, Action<Texture2D> callback)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
@@ -79,14 +79,14 @@ namespace LccModel
             yield return webRequest.SendWebRequest();
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                Debug.Log(webRequest.error);
+                LogUtil.Log(webRequest.error);
             }
             else
             {
-                action(download.texture);
+                callback(download.texture);
             }
         }
-        public static IEnumerator Download(string url, Action<Texture2D, byte[]> action)
+        public static IEnumerator Download(string url, Action<Texture2D, byte[]> callback)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
@@ -95,14 +95,14 @@ namespace LccModel
             yield return webRequest.SendWebRequest();
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                Debug.Log(webRequest.error);
+                LogUtil.Log(webRequest.error);
             }
             else
             {
-                action(download.texture, download.data);
+                callback(download.texture, download.data);
             }
         }
-        public static IEnumerator Download(string url, AudioType type, Action<AudioClip> action)
+        public static IEnumerator Download(string url, AudioType type, Action<AudioClip> callback)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
@@ -111,14 +111,14 @@ namespace LccModel
             yield return webRequest.SendWebRequest();
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                Debug.Log(webRequest.error);
+                LogUtil.Log(webRequest.error);
             }
             else
             {
-                action(download.audioClip);
+                callback(download.audioClip);
             }
         }
-        public static IEnumerator Download(string url, AudioType type, Action<AudioClip, byte[]> action)
+        public static IEnumerator Download(string url, AudioType type, Action<AudioClip, byte[]> callback)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
@@ -127,14 +127,14 @@ namespace LccModel
             yield return webRequest.SendWebRequest();
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                Debug.Log(webRequest.error);
+                LogUtil.Log(webRequest.error);
             }
             else
             {
-                action(download.audioClip, download.data);
+                callback(download.audioClip, download.data);
             }
         }
-        public static IEnumerator Download(string url, Action<AssetBundle> action)
+        public static IEnumerator Download(string url, Action<AssetBundle> callback)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
@@ -143,14 +143,14 @@ namespace LccModel
             yield return webRequest.SendWebRequest();
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                Debug.Log(webRequest.error);
+                LogUtil.Log(webRequest.error);
             }
             else
             {
-                action(download.assetBundle);
+                callback(download.assetBundle);
             }
         }
-        public static IEnumerator Download(string url, Action<AssetBundle, byte[]> action)
+        public static IEnumerator Download(string url, Action<AssetBundle, byte[]> callback)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
@@ -159,11 +159,11 @@ namespace LccModel
             yield return webRequest.SendWebRequest();
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
-                Debug.Log(webRequest.error);
+                LogUtil.Log(webRequest.error);
             }
             else
             {
-                action(download.assetBundle, download.data);
+                callback(download.assetBundle, download.data);
             }
         }
     }

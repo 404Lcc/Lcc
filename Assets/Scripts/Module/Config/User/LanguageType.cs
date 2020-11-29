@@ -1,4 +1,4 @@
-﻿namespace LccHotfix
+﻿namespace LccModel
 {
     public enum LanguageType
     {

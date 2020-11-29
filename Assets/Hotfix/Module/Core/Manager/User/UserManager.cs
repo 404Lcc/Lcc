@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LccModel;
+using System;
 using UnityEngine;
 
 namespace LccHotfix
@@ -8,7 +9,7 @@ namespace LccHotfix
         public void InitManager()
         {
             GameDataManager.Instance.GetUserSetData();
-            AudioManager.Instance.SetVolume(UserSetData.audio, LccModel.Objects.AudioSource);
+            AudioManager.Instance.SetVolume(UserSetData.audio, Objects.AudioSource);
             string name = Enum.GetName(typeof(ResolutionType), UserSetData.resolutionType).Substring(10);
             int width = int.Parse(name.Substring(0, name.IndexOf('x')));
             int height = int.Parse(name.Substring(name.IndexOf('x') + 1));
@@ -23,7 +24,7 @@ namespace LccHotfix
             else if (UserSetData.displayModeType == DisplayModeType.BorderlessWindow)
             {
                 LccUtil.SetResolution(false, width, height);
-                StartCoroutine(LccModel.DisplayMode.SetNoFrame(width, height));
+                StartCoroutine(DisplayMode.SetNoFrame(width, height));
             }
             QualitySettings.SetQualityLevel(6, true);
         }

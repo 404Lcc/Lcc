@@ -3,14 +3,14 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace LccHotfix
+namespace LccModel
 {
-    public class AudioManager : Singleton<AudioManager>
+    public class VoiceManager : Singleton<VoiceManager>
     {
-        public Hashtable audios = new Hashtable();
+        public Hashtable voices = new Hashtable();
         public bool AudioExist(string audio)
         {
-            if (audios.ContainsKey(audio))
+            if (voices.ContainsKey(audio))
             {
                 return true;
             }
@@ -18,13 +18,13 @@ namespace LccHotfix
         }
         public async Task<AudioClip> LoadAudioAsync(string audio)
         {
-            AudioClip clip = await LccModel.AssetManager.Instance.LoadAssetAsync<AudioClip>(audio, ".mp3", false, true, AssetType.Audio);
-            audios.Add(audio, clip);
+            AudioClip clip = await AssetManager.Instance.LoadAssetAsync<AudioClip>(audio, ".mp3", false, true, AssetType.Audio);
+            voices.Add(audio, clip);
             return clip;
         }
-        public void LoadAudio(string audio, AudioType type, Action<AudioClip> action)
+        public void LoadAudio(string audio, AudioType type, Action<AudioClip> callback)
         {
-            StartCoroutine(WebUtil.Download(audio, type, action));
+            StartCoroutine(WebUtil.Download(audio, type, callback));
         }
         public void RemoveAudio(string audio, AudioSource source)
         {
@@ -32,7 +32,7 @@ namespace LccHotfix
             {
                 source.clip = null;
                 source.Stop();
-                audios.Remove(audio);
+                voices.Remove(audio);
             }
         }
         public async Task<AudioClip> PlayAudioAsync(string audio, bool isInside, AudioSource source)
@@ -55,7 +55,7 @@ namespace LccHotfix
             {
                 LoadAudio(audio, AudioType.WAV, (AudioClip clip) =>
                 {
-                    audios.Add(audio, clip);
+                    voices.Add(audio, clip);
                     source.clip = clip;
                     source.Play();
                 });
@@ -77,7 +77,7 @@ namespace LccHotfix
         {
             if (AudioExist(audio))
             {
-                AudioClip clip = audios[audio] as AudioClip;
+                AudioClip clip = voices[audio] as AudioClip;
                 return clip;
             }
             return null;

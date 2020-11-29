@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEventManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\File\FileUtil.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\AStar\AStarNodeData.cs" />
+    <Compile Include="Assets\Scripts\Module\Core\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Init\Init.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Panel\PanelType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Pool\APool.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\IUIEvent.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\ShowObjectInInspectorAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
+    <Compile Include="Assets\Scripts\Module\Config\User\LanguageType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\EventHandlerAttribute.cs" />
     <Compile Include="Assets\Scripts\Util\DelayDestroy.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Item\ItemType.cs" />
@@ -83,7 +85,9 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Scripts\Util\LongClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\Panel.cs" />
+    <Compile Include="Assets\Scripts\Module\Core\Manager\Video\VideoManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\ObjectBase\AObjectBaseHandler.cs" />
+    <Compile Include="Assets\Scripts\Module\Core\Manager\Timer\TimerManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\SpriteRenderer\SpriteRendererExpand.cs" />
@@ -119,13 +123,16 @@
     <Compile Include="Assets\Scripts\Util\RightClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\View\AViewBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Encoding\EncodingUtil.cs" />
+    <Compile Include="Assets\Scripts\Module\Core\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Asset\AssetType.cs" />
     <Compile Include="Assets\Scripts\Util\DisplayMode.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Pool\TipsWindow\TipsWindowPool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Lcc\LccUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\AEvent.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Expand\Task\TaskExpand.cs" />
     <Compile Include="Assets\Scripts\Util\DoubleClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\LccViewFactory.cs" />
+    <Compile Include="Assets\Scripts\Module\Core\Manager\Voice\VoiceManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\LccView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\ClientNetworkManager.cs" />
@@ -144,14 +151,17 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\Item.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Event\EventType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\Binding\ViewModelBinding.cs" />
+    <Compile Include="Assets\Scripts\Module\Core\Manager\GameEvent\GameEventManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\AConfigTable.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\View\LaunchPanel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetData.cs" />
+    <Compile Include="Assets\Scripts\Module\Core\Manager\Timer\TimerData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\APanelView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\AObjectBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\IItem.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Expand\Task\TaskExpand.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Util\Log\LogUtil.cs" />
+    <Compile Include="Assets\Scripts\Module\Core\Manager\GameEvent\GameEventData.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />

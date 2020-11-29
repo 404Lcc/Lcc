@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace LccModel
 {
@@ -32,7 +31,7 @@ namespace LccModel
             }
             else
             {
-                Debug.Log($"Config不存在{type.Name}");
+                LogUtil.Log($"Config不存在{type.Name}");
                 return default;
             }
         }
@@ -46,7 +45,7 @@ namespace LccModel
             }
             else
             {
-                Debug.Log($"Config不存在{type.Name}");
+                LogUtil.Log($"Config不存在{type.Name}");
                 return default;
             }
         }

@@ -1,4 +1,6 @@
-﻿namespace LccHotfix
+﻿using LccModel;
+
+namespace LccHotfix
 {
     public class UserSetDataInstance
     {

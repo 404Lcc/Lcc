@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace LccHotfix
+namespace LccModel
 {
     public class TimerManager : Singleton<TimerManager>
     {
-        public List<TimerData> timerDataList = new List<TimerData>();
+        public List<TimerData> timerList = new List<TimerData>();
         public int index;
         public override void Update()
         {
             AutomaticExcute();
         }
-        public TimerData TimerStart(float delay, Action complete)
+        public TimerData AddTimer(float delay, Action callback)
         {
-            TimerData timer = new TimerData(timerDataList.Count + 1, complete, Time.time, Time.time + delay);
-            timerDataList.Add(timer);
+            TimerData timer = new TimerData(timerList.Count + 1, callback, Time.time, Time.time + delay);
+            timerList.Add(timer);
             return timer;
         }
         public void Excute(TimerData timer)
@@ -25,7 +25,7 @@ namespace LccHotfix
         }
         public void AutomaticExcute()
         {
-            if (index < timerDataList.Count)
+            if (index < timerList.Count)
             {
                 Excute();
             }
@@ -36,7 +36,7 @@ namespace LccHotfix
         }
         public void Excute()
         {
-            TimerData timer = timerDataList[index];
+            TimerData timer = timerList[index];
             if (timer.id == -1)
             {
                 Next();
@@ -51,9 +51,9 @@ namespace LccHotfix
         public void Next()
         {
             index += 1;
-            if (index >= timerDataList.Count)
+            if (index >= timerList.Count)
             {
-                timerDataList.Clear();
+                timerList.Clear();
                 index = 0;
             }
         }

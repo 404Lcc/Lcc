@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using UnityEngine;
 
 namespace LccModel
 {
@@ -29,7 +28,7 @@ namespace LccModel
             }
             else
             {
-                Debug.Log($"事件不存在{uiEventType}");
+                LogUtil.Log($"事件不存在{uiEventType}");
             }
         }
         public void Publish<T>(string uiEventType, T data)
@@ -41,7 +40,7 @@ namespace LccModel
             }
             else
             {
-                Debug.Log($"事件不存在{uiEventType}");
+                LogUtil.Log($"事件不存在{uiEventType}");
             }
         }
     }
