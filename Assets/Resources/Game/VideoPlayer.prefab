@@ -66,6 +66,7 @@ VideoPlayer:
   m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!82 &7129968204674302516
 AudioSource:
   m_ObjectHideFlags: 0

@@ -49,7 +49,7 @@ namespace LccModel
                     assetData.isKeep = isKeep;
                     assetData.isAssetBundle = isAssetBundle;
 #else
-                    Object asset = AssetDatabase.LoadAssetAtPath<T>(path);
+                    Object asset = AssetDatabase.LoadAssetAtPath<T>($"Assets/Bundles/{path}");
                     assetData.asset = asset;
                     assetData.types = types;
                     assetData.name = name;

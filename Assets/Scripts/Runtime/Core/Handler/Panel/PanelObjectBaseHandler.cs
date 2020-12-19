@@ -29,7 +29,7 @@ namespace LccModel
         {
             Panel panel = new Panel();
             panel.State = PanelState.Close;
-            GameObject gameObject = await CreateGameObjectAsync(type.ToPanelString(), Objects.GUI.transform);
+            GameObject gameObject = await CreateGameObjectAsync(type.ToPanelString(), Objects.Canvas.transform);
             if (gameObject == null) return null;
             panel.Type = type;
             Type classType = Manager.Instance.GetType(type.ToPanelString());

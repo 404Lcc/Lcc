@@ -12,13 +12,13 @@
         {
             for (int i = 0; i < size; i++)
             {
-                TipsWindow tipsWindow = LccViewFactory.CreateView<TipsWindow>(await AssetManager.Instance.InstantiateAssetAsync("TipsWindow", false, false, Objects.GUI.transform, AssetType.Panel, AssetType.Tool));
+                TipsWindow tipsWindow = LccViewFactory.CreateView<TipsWindow>(await AssetManager.Instance.InstantiateAssetAsync("TipsWindow", false, false, Objects.Canvas.transform, AssetType.Panel, AssetType.Tool));
                 Enqueue(tipsWindow);
             }
         }
         public override void Enqueue(TipsWindow item)
         {
-            item.transform.SetParent(Objects.GUI.transform);
+            item.transform.SetParent(Objects.Canvas.transform);
             item.gameObject.SetActive(false);
             poolQueue.Enqueue(item);
         }
@@ -29,7 +29,7 @@
                 InitPool();
             }
             TipsWindow tipsWindow = poolQueue.Dequeue();
-            tipsWindow.transform.SetParent(Objects.GUI.transform);
+            tipsWindow.transform.SetParent(Objects.Canvas.transform);
             tipsWindow.gameObject.SetActive(true);
             return tipsWindow;
         }

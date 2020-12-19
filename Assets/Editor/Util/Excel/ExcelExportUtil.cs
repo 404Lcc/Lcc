@@ -29,6 +29,13 @@ namespace LccEditor
                         streamWriter.WriteLine(SheetToJson(xssfWorkbook.GetSheetAt(0)));
                     }
                 }
+                using (FileStream fileStream = new FileStream($"Assets/Bundles/Config/{Path.GetFileNameWithoutExtension(item)}.txt", FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
+                {
+                    using (StreamWriter streamWriter = new StreamWriter(fileStream))
+                    {
+                        streamWriter.WriteLine(SheetToJson(xssfWorkbook.GetSheetAt(0)));
+                    }
+                }
             }
             AssetDatabase.Refresh();
         }

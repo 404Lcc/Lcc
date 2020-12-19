@@ -16,20 +16,30 @@ namespace LccEditor
         public void OnPreprocessBuild(BuildReport report)
         {
 #if Release
-        if (File.Exists("Assets/Resources/DLL/Unity.Hotfix.dll.bytes"))
-        {
-            File.Delete("Assets/Resources/DLL/Unity.Hotfix.dll.bytes");
-        }
-        if (File.Exists("Assets/Resources/DLL/Unity.Hotfix.pdb.bytes"))
-        {
-            File.Delete("Assets/Resources/DLL/Unity.Hotfix.pdb.bytes");
-        }
-        if (File.Exists("Temp/bin/Release/Unity.Hotfix.dll"))
-        {
-            File.Copy("Temp/bin/Release/Unity.Hotfix.dll", "Assets/Resources/DLL/Unity.Hotfix.dll.bytes", true);
-            FileUtil.SaveAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes", RijndaelUtil.RijndaelEncrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileUtil.GetAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes")));
-            AssetDatabase.Refresh();
-        }
+            if (File.Exists("Assets/Resources/DLL/Unity.Hotfix.dll.bytes"))
+            {
+                File.Delete("Assets/Resources/DLL/Unity.Hotfix.dll.bytes");
+            }
+            if (File.Exists("Assets/Resources/DLL/Unity.Hotfix.pdb.bytes"))
+            {
+                File.Delete("Assets/Resources/DLL/Unity.Hotfix.pdb.bytes");
+            }
+            if (File.Exists("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes"))
+            {
+                File.Delete("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes");
+            }
+            if (File.Exists("Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes"))
+            {
+                File.Delete("Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes");
+            }
+            if (File.Exists("Temp/bin/Release/Unity.Hotfix.dll"))
+            {
+                File.Copy("Temp/bin/Release/Unity.Hotfix.dll", "Assets/Resources/DLL/Unity.Hotfix.dll.bytes", true);
+                File.Copy("Temp/bin/Release/Unity.Hotfix.dll", "Assets/Bundles/DLL/Unity.Hotfix.dll.bytes", true);
+                FileUtil.SaveAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes", RijndaelUtil.RijndaelEncrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileUtil.GetAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes")));
+                FileUtil.SaveAsset("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes", RijndaelUtil.RijndaelEncrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileUtil.GetAsset("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes")));
+                AssetDatabase.Refresh();
+            }
 #endif
             if (File.Exists("Assets/Hotfix/Unity.Hotfix.asmdef"))
             {

@@ -5,18 +5,20 @@ namespace LccModel
 {
     public class Objects
     {
-        private static GameObject _gui;
+        private static Canvas _canvas;
         private static AudioSource _audioSource;
         private static VideoPlayer _videoPlayer;
-        public static GameObject GUI
+        public static Canvas Canvas
         {
             get
             {
-                if (_gui == null)
+                if (_canvas == null)
                 {
-                    _gui = "GUI".GetGameObjectToTag();
+                    GameObject gameObject = "Canvas".GetGameObjectToTag();
+                    if (gameObject == null) return null;
+                    _canvas = gameObject.GetComponent<Canvas>();
                 }
-                return _gui;
+                return _canvas;
             }
         }
         public static AudioSource AudioSource

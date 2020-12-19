@@ -6,7 +6,7 @@ namespace LccEditor
 {
     public class LccEditorWindow : EditorWindow
     {
-        public string[] tags = { "GUI", "ModelManager", "HotfixManager", "AudioSource", "VideoPlayer" };
+        public string[] tags = { "Canvas", "ModelManager", "HotfixManager", "AudioSource", "VideoPlayer" };
         public string[] layers = { };
         public string tag;
         public string layer;

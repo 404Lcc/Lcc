@@ -39,7 +39,7 @@ namespace LccModel
 
             if (parent == null)
             {
-                transform.SetParent(Objects.GUI.transform);
+                transform.SetParent(Objects.Canvas.transform);
             }
             else
             {

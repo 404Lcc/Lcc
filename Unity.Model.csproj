@@ -89,6 +89,7 @@
     <Compile Include="Assets\Scripts\Module\Core\Manager\Video\VideoManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\ObjectBase\AObjectBaseHandler.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Timer\TimerManager.cs" />
+    <Compile Include="Assets\Scripts\Util\LanguageText.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\SpriteRenderer\SpriteRendererExpand.cs" />
@@ -98,7 +99,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\MD5\MD5Util.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\EventManager.cs" />
-    <Compile Include="Assets\Scripts\Module\Core\Pool\Tips\TipsPool.cs" />
+    <Compile Include="Assets\Scripts\Module\Core\Manager\Tips\TipsPool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\Singleton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Manager\Manager.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Tips\TipsManager.cs" />
@@ -127,7 +128,7 @@
     <Compile Include="Assets\Scripts\Module\Core\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Asset\AssetType.cs" />
     <Compile Include="Assets\Scripts\Util\DisplayMode.cs" />
-    <Compile Include="Assets\Scripts\Module\Core\Pool\TipsWindow\TipsWindowPool.cs" />
+    <Compile Include="Assets\Scripts\Module\Core\Manager\TipsWindow\TipsWindowPool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Lcc\LccUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\AEvent.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Task\TaskExpand.cs" />
@@ -162,7 +163,6 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Object\AObjectBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\IItem.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Log\LogUtil.cs" />
-    <Compile Include="Assets\Scripts\Util\LanguageText.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />
@@ -380,16 +380,13 @@
       <HintPath>Assets\Plugins\NPOI\net45\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntim.Mono.Cecil">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.5\Plugins\ILRuntim.Mono.Cecil.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.6\Plugins\ILRuntim.Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Mdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.5\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.6\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.5\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.5\net35\unity-custom\nunit.framework.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.6\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\2020.1.8f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>
