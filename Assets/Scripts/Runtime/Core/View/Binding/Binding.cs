@@ -32,5 +32,9 @@
         {
             ValueChange?.Invoke(oldValue, newValue);
         }
+        public static implicit operator T(Binding<T> value)
+        {
+            return value.Value;
+        }
     }
 }

@@ -4,27 +4,6 @@ namespace LccModel
 {
     public static class PathUtil
     {
-        public static string GetDataPath
-        {
-            get
-            {
-                return $"{Application.dataPath}/";
-            }
-        }
-        public static string GetStreamingAssetsPath
-        {
-            get
-            {
-                return $"{Application.streamingAssetsPath}/";
-            }
-        }
-        public static string GetPersistentDataPath
-        {
-            get
-            {
-                return $"{Application.persistentDataPath}/";
-            }
-        }
         /// <summary>
         /// 获取路径
         /// </summary>
@@ -38,22 +17,31 @@ namespace LccModel
             switch (type)
             {
                 case PathType.DataPath:
-                    path = GetDataPath;
+                    path = Application.dataPath;
                     break;
                 case PathType.StreamingAssetsPath:
-                    path = GetStreamingAssetsPath;
+                    path = Application.streamingAssetsPath;
                     break;
                 case PathType.PersistentDataPath:
-                    path = GetPersistentDataPath;
+                    path = Application.persistentDataPath;
                     break;
             }
             for (int i = 0; i < folders.Length; i++)
             {
-                subPath += $"{folders[i]}/";
-                DirectoryUtil.CreateDirectory(path + subPath);
+                if (i == folders.Length - 1)
+                {
+                    subPath = $"{subPath}{folders[i]}";
+                }
+                else
+                {
+                    subPath = $"{subPath}{folders[i]}/";
+                }
             }
-            if (string.IsNullOrEmpty(subPath)) return path;
-            return path + subPath;
+            if (string.IsNullOrEmpty(subPath))
+            {
+                return DirectoryUtil.GetDirectoryPath(path);
+            }
+            return DirectoryUtil.GetDirectoryPath($"{path}/{subPath}");
         }
     }
 }

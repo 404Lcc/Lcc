@@ -70,7 +70,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Pool\APool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Directory\DirectoryUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Scene\SceneLoadManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\SceneLoad\SceneLoadManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\SocketModel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\ILRuntimeManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\IUIEvent.cs" />
@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\IConfigTable.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Scripts\Util\LongClickButton.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\AssetBundle\AssetBundleData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\Panel.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Video\VideoManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\ObjectBase\AObjectBaseHandler.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Assets\Scripts\Util\RightClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\View\AViewBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Encoding\EncodingUtil.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\AssetBundle\AssetBundleRule.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Asset\AssetType.cs" />
     <Compile Include="Assets\Scripts\Util\DisplayMode.cs" />
@@ -142,6 +144,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\Item\ItemObjectBaseHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEventHandlerAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\AssetBundle\AssetBundleManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\UIEvent\UIEventType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\IConfig.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Vector2\Vector2Expand.cs" />
@@ -160,9 +163,13 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetData.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Timer\TimerData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\APanelView.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\AssetBundle\AssetBundleRuleType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\AObjectBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\IItem.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Log\LogUtil.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\AssetBundle\AssetBundleConfig.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Util\Json\JsonUtil.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Expand\Byte\ByteExpand.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />

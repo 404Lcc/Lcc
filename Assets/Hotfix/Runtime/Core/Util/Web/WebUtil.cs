@@ -52,7 +52,7 @@ namespace LccHotfix
             else
             {
                 byte[] bytes = webRequest.downloadHandler.data;
-                FileUtil.SaveAsset(PathUtil.GetPath(PathType.PersistentDataPath, folders) + name, bytes);
+                FileUtil.SaveAsset($"{PathUtil.GetPath(PathType.PersistentDataPath, folders)}/{name}", bytes);
             }
         }
         public static IEnumerator Download(string url, Action<byte[]> callback)

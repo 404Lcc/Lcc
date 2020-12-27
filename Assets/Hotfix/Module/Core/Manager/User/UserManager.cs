@@ -47,7 +47,7 @@ namespace LccHotfix
             {
                 if (Input.GetKeyDown(KeyCode.C))
                 {
-                    ScreenCapture.CaptureScreenshot(PathUtil.GetPath(PathType.PersistentDataPath, "Res") + "Screenshot.png");
+                    ScreenCapture.CaptureScreenshot($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res")}/Screenshot.png");
                 }
             }
         }

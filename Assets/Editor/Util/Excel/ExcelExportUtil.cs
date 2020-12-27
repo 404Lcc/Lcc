@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEditor;
+using FileUtil = LccModel.FileUtil;
 
 namespace LccEditor
 {
@@ -22,20 +23,8 @@ namespace LccEditor
             {
                 if (Path.GetExtension(item) != ".xlsx") continue;
                 XSSFWorkbook xssfWorkbook = new XSSFWorkbook(item);
-                using (FileStream fileStream = new FileStream($"Assets/Resources/Config/{Path.GetFileNameWithoutExtension(item)}.txt", FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-                {
-                    using (StreamWriter streamWriter = new StreamWriter(fileStream))
-                    {
-                        streamWriter.WriteLine(SheetToJson(xssfWorkbook.GetSheetAt(0)));
-                    }
-                }
-                using (FileStream fileStream = new FileStream($"Assets/Bundles/Config/{Path.GetFileNameWithoutExtension(item)}.txt", FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-                {
-                    using (StreamWriter streamWriter = new StreamWriter(fileStream))
-                    {
-                        streamWriter.WriteLine(SheetToJson(xssfWorkbook.GetSheetAt(0)));
-                    }
-                }
+                FileUtil.SaveAsset($"Assets/Resources/Config/{Path.GetFileNameWithoutExtension(item)}.txt", SheetToJson(xssfWorkbook.GetSheetAt(0)));
+                FileUtil.SaveAsset($"Assets/Bundles/Config/{Path.GetFileNameWithoutExtension(item)}.txt", SheetToJson(xssfWorkbook.GetSheetAt(0)));
             }
             AssetDatabase.Refresh();
         }
@@ -44,21 +33,9 @@ namespace LccEditor
             foreach (string item in Directory.GetFiles("Assets/Excels"))
             {
                 if (Path.GetExtension(item) != ".xlsx") continue;
-                using (FileStream fileStream = new FileStream($"Assets/Scripts/Runtime/Config/ConfigTable/{Path.GetFileNameWithoutExtension(item)}Table.cs", FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-                {
-                    using (StreamWriter streamWriter = new StreamWriter(fileStream))
-                    {
-                        streamWriter.WriteLine(SheetToAConfigTable("namespace LccModel\n", Path.GetFileNameWithoutExtension(item)));
-                    }
-                }
+                FileUtil.SaveAsset($"Assets/Scripts/Runtime/Config/ConfigTable/{Path.GetFileNameWithoutExtension(item)}Table.cs", SheetToAConfigTable("namespace LccModel\n", Path.GetFileNameWithoutExtension(item)));
                 XSSFWorkbook xssfWorkbook = new XSSFWorkbook(item);
-                using (FileStream fileStream = new FileStream($"Assets/Scripts/Runtime/Config/Config/{Path.GetFileNameWithoutExtension(item)}.cs", FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-                {
-                    using (StreamWriter streamWriter = new StreamWriter(fileStream))
-                    {
-                        streamWriter.WriteLine(SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccModel\n", Path.GetFileNameWithoutExtension(item)));
-                    }
-                }
+                FileUtil.SaveAsset($"Assets/Scripts/Runtime/Config/Config/{Path.GetFileNameWithoutExtension(item)}.cs", SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccModel\n", Path.GetFileNameWithoutExtension(item)));
             }
             AssetDatabase.Refresh();
         }
@@ -67,21 +44,9 @@ namespace LccEditor
             foreach (string item in Directory.GetFiles("Assets/Excels"))
             {
                 if (Path.GetExtension(item) != ".xlsx") continue;
-                using (FileStream fileStream = new FileStream($"Assets/Hotfix/Runtime/Config/ConfigTable/{Path.GetFileNameWithoutExtension(item)}Table.cs", FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-                {
-                    using (StreamWriter streamWriter = new StreamWriter(fileStream))
-                    {
-                        streamWriter.WriteLine(SheetToAConfigTable("using LccModel;\n\nnamespace LccHotfix\n", Path.GetFileNameWithoutExtension(item)));
-                    }
-                }
+                FileUtil.SaveAsset($"Assets/Hotfix/Runtime/Config/ConfigTable/{Path.GetFileNameWithoutExtension(item)}Table.cs", SheetToAConfigTable("using LccModel;\n\nnamespace LccHotfix\n", Path.GetFileNameWithoutExtension(item)));
                 XSSFWorkbook xssfWorkbook = new XSSFWorkbook(item);
-                using (FileStream fileStream = new FileStream($"Assets/Hotfix/Runtime/Config/Config/{Path.GetFileNameWithoutExtension(item)}.cs", FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-                {
-                    using (StreamWriter streamWriter = new StreamWriter(fileStream))
-                    {
-                        streamWriter.WriteLine(SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccHotfix\n", Path.GetFileNameWithoutExtension(item)));
-                    }
-                }
+                FileUtil.SaveAsset($"Assets/Hotfix/Runtime/Config/Config/{Path.GetFileNameWithoutExtension(item)}.cs", SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccHotfix\n", Path.GetFileNameWithoutExtension(item)));
             }
             AssetDatabase.Refresh();
         }
@@ -199,11 +164,44 @@ namespace LccEditor
         }
         public static string GetCell(ISheet sheet, int row, int cell)
         {
-            return $"{sheet?.GetRow(row)?.GetCell(cell)}" ?? string.Empty;
+            IRow iRow = sheet?.GetRow(row);
+            if (iRow != null)
+            {
+                return GetCell(iRow, cell);
+            }
+            return string.Empty;
         }
         public static string GetCell(IRow row, int cell)
         {
-            return $"{row?.GetCell(cell)}" ?? string.Empty;
+            ICell iCell = row?.GetCell(cell);
+            if (iCell != null)
+            {
+                return GetCell(iCell);
+            }
+            return string.Empty;
+        }
+        public static string GetCell(ICell cell)
+        {
+            if (cell != null)
+            {
+                if (cell.CellType == CellType.Numeric || (cell.CellType == CellType.Formula && cell.CachedFormulaResultType == CellType.Numeric))
+                {
+                    return cell.NumericCellValue.ToString();
+                }
+                else if (cell.CellType == CellType.String || (cell.CellType == CellType.Formula && cell.CachedFormulaResultType == CellType.String))
+                {
+                    return cell.StringCellValue.ToString();
+                }
+                else if (cell.CellType == CellType.Boolean || (cell.CellType == CellType.Formula && cell.CachedFormulaResultType == CellType.Boolean))
+                {
+                    return cell.BooleanCellValue.ToString();
+                }
+                else
+                {
+                    return cell.ToString();
+                }
+            }
+            return string.Empty;
         }
     }
 }

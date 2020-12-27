@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace LccHotfix
 {
@@ -31,7 +30,7 @@ namespace LccHotfix
         /// <returns></returns>
         public static byte[] RijndaelEncrypt(string key, byte[] valueBytes)
         {
-            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            byte[] keyBytes = key.GetBytes();
             return RijndaelEncrypt(keyBytes, valueBytes);
         }
         /// <summary>
@@ -42,8 +41,8 @@ namespace LccHotfix
         /// <returns></returns>
         public static string RijndaelEncrypt(string key, string value)
         {
-            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
-            byte[] valueBytes = Encoding.UTF8.GetBytes(value);
+            byte[] keyBytes = key.GetBytes();
+            byte[] valueBytes = value.GetBytes();
             byte[] bytes = RijndaelEncrypt(keyBytes, valueBytes);
             return Convert.ToBase64String(bytes, 0, bytes.Length);
         }
@@ -72,7 +71,7 @@ namespace LccHotfix
         /// <returns></returns>
         public static byte[] RijndaelDecrypt(string key, byte[] valueBytes)
         {
-            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            byte[] keyBytes = key.GetBytes();
             return RijndaelDecrypt(keyBytes, valueBytes);
         }
         /// <summary>
@@ -83,10 +82,10 @@ namespace LccHotfix
         /// <returns></returns>
         public static string RijndaelDecrypt(string key, string value)
         {
-            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            byte[] keyBytes = key.GetBytes();
             byte[] valueBytes = Convert.FromBase64String(value);
             byte[] bytes = RijndaelDecrypt(keyBytes, valueBytes);
-            return Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+            return bytes.GetString();
         }
     }
 }

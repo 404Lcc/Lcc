@@ -1,5 +1,4 @@
-﻿using LitJson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +17,7 @@ namespace LccHotfix
         public async void InitConfigTable()
         {
             TextAsset asset = await LccModel.AssetManager.Instance.LoadAssetAsync<TextAsset>(typeof(T).Name, ".txt", false, true, AssetType.Config);
-            foreach (KeyValuePair<string, T> item in JsonMapper.ToObject<Dictionary<string, T>>(asset.text))
+            foreach (KeyValuePair<string, T> item in JsonUtil.ToObject<Dictionary<string, T>>(asset.text))
             {
                 configDict.Add(int.Parse(item.Key), item.Value);
             }

@@ -62,6 +62,7 @@
     <Compile Include="Assets\Editor\MenuItem\ILRuntime\ILRuntimeCLRBindingMenuItem.cs" />
     <Compile Include="Assets\Editor\MenuItem\ILRuntime\ILRuntimeCrossBindingMenuItem.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\RectObjectType.cs" />
+    <Compile Include="Assets\Editor\Util\AssetBundle\AssetBundleUtil.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\ColorObjectType.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectTypeAttribute.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\Vector2IntObjectType.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Assets\Editor\MenuItem\Lcc\LccMenuItem.cs" />
     <Compile Include="Assets\Editor\Model\NewHotfixPanel.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\Vector4ObjectType.cs" />
+    <Compile Include="Assets\Editor\Util\AssetBundle\AssetBundleSetting.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Editor\Unity.Editor.asmdef" />

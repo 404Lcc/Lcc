@@ -39,10 +39,10 @@ namespace LccModel
             string path = string.Empty;
             for (int i = 0; i < types.Length; i++)
             {
-                path += types[i] + "/";
+                path = $"{path}{types[i]}/";
                 if (i == types.Length - 1)
                 {
-                    path += name;
+                    path = $"{path}{name}";
                 }
             }
             return path;

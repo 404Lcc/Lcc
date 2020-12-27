@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Text;
 using UnityEngine;
 
 namespace LccHotfix
 {
     public static class StringExpand
     {
+        public static byte[] GetBytes(this string s)
+        {
+            return Encoding.UTF8.GetBytes(s);
+        }
         public static PanelType ToPanelType(this string name)
         {
             name = name.Substring(0, name.IndexOf("Panel"));

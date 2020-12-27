@@ -32,7 +32,7 @@ namespace LccEditor
                     name += ".apk";
                     break;
             }
-            string locationPathName = PathUtil.GetPath(PathType.PersistentDataPath, "Build") + name;
+            string locationPathName = $"{PathUtil.GetPath(PathType.PersistentDataPath, "Build")}/{name}";
             BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, locationPathName, EditorUserBuildSettings.activeBuildTarget, EditorUserBuildSettings.development ? BuildOptions.Development : BuildOptions.None);
         }
         [MenuItem("Lcc/ILRuntime")]
@@ -185,20 +185,30 @@ namespace LccEditor
         public static void BuildRelease()
         {
 #if Release
-        if (File.Exists("Assets/Resources/Text/Unity.Hotfix.dll.bytes"))
-        {
-            File.Delete("Assets/Resources/Text/Unity.Hotfix.dll.bytes");
-        }
-        if (File.Exists("Assets/Resources/Text/Unity.Hotfix.pdb.bytes"))
-        {
-            File.Delete("Assets/Resources/Text/Unity.Hotfix.pdb.bytes");
-        }
-        if (File.Exists("Temp/bin/Release/Unity.Hotfix.dll"))
-        {
-            File.Copy("Temp/bin/Release/Unity.Hotfix.dll", "Assets/Resources/Text/Unity.Hotfix.dll.bytes", true);
-            GameUtil.SaveAsset("Assets/Resources/Text/Unity.Hotfix.dll.bytes", GameUtil.RijndaelEncrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", GameUtil.GetAsset("Assets/Resources/Text/Unity.Hotfix.dll.bytes")));
-            AssetDatabase.Refresh();
-        }
+            if (File.Exists("Assets/Resources/DLL/Unity.Hotfix.dll.bytes"))
+            {
+                File.Delete("Assets/Resources/DLL/Unity.Hotfix.dll.bytes");
+            }
+            if (File.Exists("Assets/Resources/DLL/Unity.Hotfix.pdb.bytes"))
+            {
+                File.Delete("Assets/Resources/DLL/Unity.Hotfix.pdb.bytes");
+            }
+            if (File.Exists("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes"))
+            {
+                File.Delete("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes");
+            }
+            if (File.Exists("Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes"))
+            {
+                File.Delete("Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes");
+            }
+            if (File.Exists("Temp/bin/Release/Unity.Hotfix.dll"))
+            {
+                File.Copy("Temp/bin/Release/Unity.Hotfix.dll", "Assets/Resources/DLL/Unity.Hotfix.dll.bytes", true);
+                File.Copy("Temp/bin/Release/Unity.Hotfix.dll", "Assets/Bundles/DLL/Unity.Hotfix.dll.bytes", true);
+                FileUtil.SaveAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes", RijndaelUtil.RijndaelEncrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileUtil.GetAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes")));
+                FileUtil.SaveAsset("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes", RijndaelUtil.RijndaelEncrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileUtil.GetAsset("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes")));
+                AssetDatabase.Refresh();
+            }
 #endif
         }
         [MenuItem("Assets/Lcc/Create/Hotfix/Panel")]

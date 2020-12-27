@@ -136,6 +136,8 @@
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\ViewModel\LoginModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\LccViewFactory.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandData.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Util\Json\JsonUtil.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Byte\ByteExpand.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

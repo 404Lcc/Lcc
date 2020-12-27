@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 
 namespace LccHotfix
 {
@@ -14,20 +15,53 @@ namespace LccHotfix
             return Directory.CreateDirectory(path);
         }
         /// <summary>
-        /// 创建文件夹
+        /// 是否存在子文件夹
+        /// </summary>
+        /// <param name="directoryInfo"></param>
+        /// <returns></returns>
+        public static bool SubDirectoryExist(DirectoryInfo directoryInfo)
+        {
+            if (!directoryInfo.Exists) return false;
+            return directoryInfo.GetDirectories() != null;
+        }
+        /// <summary>
+        /// 获取文件夹路径
         /// </summary>
         /// <param name="path"></param>
-        /// <param name="folders"></param>
-        public static void CreateDirectory(string path, params string[] folders)
+        public static string GetDirectoryPath(string path)
         {
+            string[] folders = path.Split('/');
+            path = folders[0];
             CreateDirectory(path);
             string subPath = string.Empty;
-            for (int i = 0; i < folders.Length; i++)
+            for (int i = 1; i < folders.Length; i++)
             {
-                subPath += folders[i];
+                if (string.IsNullOrEmpty(folders[i])) continue;
+                subPath = $"{subPath}{folders[i]}";
                 CreateDirectory($"{path}/{subPath}");
-                subPath += "/";
+                if (i == folders.Length - 1) continue;
+                subPath = $"{subPath}/";
             }
+            return $"{path}/{subPath}";
+        }
+        /// <summary>
+        /// 获取子文件夹
+        /// </summary>
+        /// <param name="directoryInfo"></param>
+        /// <param name="directoryInfoList"></param>
+        /// <returns></returns>
+        public static DirectoryInfo[] GetDirectorys(DirectoryInfo directoryInfo, List<DirectoryInfo> directoryInfoList)
+        {
+            if (directoryInfo == null) return null;
+            if (SubDirectoryExist(directoryInfo))
+            {
+                directoryInfoList.AddRange(directoryInfo.GetDirectories());
+            }
+            foreach (DirectoryInfo item in directoryInfo.GetDirectories())
+            {
+                GetDirectorys(item, directoryInfoList);
+            }
+            return directoryInfoList.ToArray().Length == 0 ? null : directoryInfoList.ToArray();
         }
     }
 }

@@ -18,10 +18,10 @@ namespace LccModel
             string path = string.Empty;
             for (int i = 0; i < types.Length; i++)
             {
-                path += $"{types[i]}/";
+                path = $"{path}{types[i]}/";
                 if (i == types.Length - 1)
                 {
-                    path += name;
+                    path = $"{path}{name}";
                 }
             }
             return path;
@@ -167,15 +167,15 @@ namespace LccModel
         }
         public void UnloadAssets()
         {
-            string all = string.Empty;
+            string assetNames = string.Empty;
             foreach (string item in assetDict.Keys)
             {
                 if (!assetDict[item].isKeep)
                 {
-                    all += $"{item},";
+                    assetNames = $"{assetNames}{item},";
                 }
             }
-            foreach (string item in all.Split(','))
+            foreach (string item in assetNames.Split(','))
             {
                 if (string.IsNullOrEmpty(item)) continue;
                 AssetData assetData = assetDict[item];
