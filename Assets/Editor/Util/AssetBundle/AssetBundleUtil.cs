@@ -11,19 +11,15 @@ namespace LccEditor
 {
     public static class AssetBundleUtil
     {
-        public static Dictionary<string, AssetBundleRule> TagFileRule()
+        public static AssetBundleRule TagFileRule()
         {
-            Dictionary<string, AssetBundleRule> assetBundleRuleDict = new Dictionary<string, AssetBundleRule>();
             string path = AssetDatabase.GetAssetPath(Selection.activeObject);
-            assetBundleRuleDict.Add(path, new AssetBundleRule(path, AssetBundleRuleType.File));
-            return assetBundleRuleDict;
+            return new AssetBundleRule(path, AssetBundleRuleType.File);
         }
-        public static Dictionary<string, AssetBundleRule> TagDirectoryRule()
+        public static AssetBundleRule TagDirectoryRule()
         {
-            Dictionary<string, AssetBundleRule> assetBundleRuleDict = new Dictionary<string, AssetBundleRule>();
             string path = AssetDatabase.GetAssetPath(Selection.activeObject);
-            assetBundleRuleDict.Add(path, new AssetBundleRule(path, AssetBundleRuleType.Directory));
-            return assetBundleRuleDict;
+            return new AssetBundleRule(path, AssetBundleRuleType.Directory);
         }
         public static Dictionary<string, AssetBundleData> BuildAssetBundleData(Dictionary<string, AssetBundleRule> assetBundleRuleDict)
         {
@@ -63,17 +59,16 @@ namespace LccEditor
         }
         public static void BuildAssetBundle(AssetBundleSetting assetBundleSetting)
         {
+            assetBundleSetting.assetBundleRuleTypeDict = new Dictionary<string, AssetBundleRuleType>();
             string path = DirectoryUtil.GetDirectoryPath($"{assetBundleSetting.outputPath}/{GetPlatformForAssetBundle(EditorUserBuildSettings.activeBuildTarget)}");
             foreach (DirectoryInfo item in DirectoryUtil.GetDirectorys(new DirectoryInfo(path), new List<DirectoryInfo>()))
             {
                 item.Delete();
             }
-            AssetDatabase.Refresh();
             foreach (FileInfo item in FileUtil.GetFiles(new DirectoryInfo(path), new List<FileInfo>()))
             {
                 item.Delete();
             }
-            AssetDatabase.Refresh();
             List<AssetBundleBuild> assetBundleBuildList = new List<AssetBundleBuild>();
             foreach (AssetBundleRule item in assetBundleSetting.assetBundleRuleDict.Values)
             {
@@ -109,7 +104,6 @@ namespace LccEditor
                 });
             }
             AssetBundleManifest assetBundleManifest = BuildPipeline.BuildAssetBundles(path, assetBundleBuildList.ToArray(), BuildAssetBundleOptions.None, EditorUserBuildSettings.activeBuildTarget);
-            AssetDatabase.Refresh();
             foreach (AssetBundleData item in assetBundleSetting.assetBundleDataDict.Values)
             {
                 item.assetBundleHash = assetBundleManifest.GetAssetBundleHash(item.assetBundleName).ToString();

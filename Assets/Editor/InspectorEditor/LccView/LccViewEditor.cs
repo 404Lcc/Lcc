@@ -30,8 +30,8 @@ namespace LccEditor
                         break;
                 }
                 string fileName = lccView.className.Split('.')[1];
-                string[] files = Directory.GetFiles($"Assets/{directoryName}", "*.cs", SearchOption.AllDirectories);
-                foreach (string item in files)
+                string[] filePaths = Directory.GetFiles($"Assets/{directoryName}", "*.cs", SearchOption.AllDirectories);
+                foreach (string item in filePaths)
                 {
                     if (item.Substring(item.LastIndexOf(@"\") + 1) == $"{fileName}.cs")
                     {

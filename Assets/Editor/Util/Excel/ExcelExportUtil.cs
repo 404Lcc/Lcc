@@ -16,6 +16,7 @@ namespace LccEditor
             ExportJson();
             ExportToModel();
             ExportToHotfix();
+            AssetDatabase.Refresh();
         }
         public static void ExportJson()
         {
@@ -26,7 +27,6 @@ namespace LccEditor
                 FileUtil.SaveAsset($"Assets/Resources/Config/{Path.GetFileNameWithoutExtension(item)}.txt", SheetToJson(xssfWorkbook.GetSheetAt(0)));
                 FileUtil.SaveAsset($"Assets/Bundles/Config/{Path.GetFileNameWithoutExtension(item)}.txt", SheetToJson(xssfWorkbook.GetSheetAt(0)));
             }
-            AssetDatabase.Refresh();
         }
         public static void ExportToModel()
         {
@@ -37,7 +37,6 @@ namespace LccEditor
                 XSSFWorkbook xssfWorkbook = new XSSFWorkbook(item);
                 FileUtil.SaveAsset($"Assets/Scripts/Runtime/Config/Config/{Path.GetFileNameWithoutExtension(item)}.cs", SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccModel\n", Path.GetFileNameWithoutExtension(item)));
             }
-            AssetDatabase.Refresh();
         }
         public static void ExportToHotfix()
         {
@@ -48,7 +47,6 @@ namespace LccEditor
                 XSSFWorkbook xssfWorkbook = new XSSFWorkbook(item);
                 FileUtil.SaveAsset($"Assets/Hotfix/Runtime/Config/Config/{Path.GetFileNameWithoutExtension(item)}.cs", SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccHotfix\n", Path.GetFileNameWithoutExtension(item)));
             }
-            AssetDatabase.Refresh();
         }
         public static string SheetToJson(ISheet sheet)
         {
@@ -82,8 +80,12 @@ namespace LccEditor
                     if (cell.name == "id")
                     {
                         stringBuilder.Append($"\"{value}\" : {{");
+                        stringBuilder.Append($"\"Id\" : {Convert(cell.type, value)}");
                     }
-                    stringBuilder.Append($"\"{cell.name}\" : {Convert(cell.type, value)}");
+                    else
+                    {
+                        stringBuilder.Append($"\"{cell.name}\" : {Convert(cell.type, value)}");
+                    }
                 }
                 if (i < sheet.LastRowNum)
                 {

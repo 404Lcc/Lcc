@@ -15,7 +15,7 @@ namespace LccModel
             return Directory.CreateDirectory(path);
         }
         /// <summary>
-        /// 是否存在子文件夹
+        /// 子文件夹是否存在
         /// </summary>
         /// <param name="directoryInfo"></param>
         /// <returns></returns>

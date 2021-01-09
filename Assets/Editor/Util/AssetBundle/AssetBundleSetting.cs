@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LccEditor
 {
+    [CreateAssetMenu(fileName = "AssetBundleSetting", menuName = "CreateAssetBundleSetting", order = 1)]
     public class AssetBundleSetting : ScriptableObject
     {
         public int buildId;

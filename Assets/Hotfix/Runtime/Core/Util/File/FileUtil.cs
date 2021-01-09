@@ -6,7 +6,7 @@ namespace LccHotfix
     public static class FileUtil
     {
         /// <summary>
-        /// 是否存在文件
+        /// 文件是否存在
         /// </summary>
         /// <param name="directoryInfo"></param>
         /// <returns></returns>

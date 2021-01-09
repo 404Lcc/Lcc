@@ -24,7 +24,14 @@ namespace LccModel
         }
         public T GetConfig(int id)
         {
-            return configDict[id];
+            if (configDict.ContainsKey(id))
+            {
+                return configDict[id];
+            }
+            else
+            {
+                return default;
+            }
         }
         public Dictionary<int, T> GetConfigs()
         {

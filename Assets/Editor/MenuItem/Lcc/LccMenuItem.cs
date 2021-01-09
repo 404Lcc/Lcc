@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using FileUtil = LccModel.FileUtil;
 
 namespace LccEditor
 {
@@ -26,14 +27,78 @@ namespace LccEditor
             switch (EditorUserBuildSettings.activeBuildTarget)
             {
                 case BuildTarget.StandaloneWindows:
-                    name += ".exe";
+                    name = $"{name}.exe";
                     break;
                 case BuildTarget.Android:
-                    name += ".apk";
+                    name = $"{name}.apk";
                     break;
             }
             string locationPathName = $"{PathUtil.GetPath(PathType.PersistentDataPath, "Build")}/{name}";
             BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, locationPathName, EditorUserBuildSettings.activeBuildTarget, EditorUserBuildSettings.development ? BuildOptions.Development : BuildOptions.None);
+        }
+        [MenuItem("Assets/Lcc/TagFileRule")]
+        public static void TagFileRule()
+        {
+            if (File.Exists("Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset"))
+            {
+                AssetBundleSetting assetBundleSetting = AssetDatabase.LoadAssetAtPath<AssetBundleSetting>("Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset");
+                if (assetBundleSetting.assetBundleRuleDict == null)
+                {
+                    assetBundleSetting.assetBundleRuleDict = new Dictionary<string, AssetBundleRule>();
+                }
+                AssetBundleRule assetBundleRule = AssetBundleUtil.TagFileRule();
+                assetBundleSetting.assetBundleRuleDict.Add(assetBundleRule.path, assetBundleRule);
+                assetBundleSetting.assetBundleDataDict = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleDict);
+            }
+            else
+            {
+                AssetBundleSetting assetBundleSetting = ScriptableObject.CreateInstance<AssetBundleSetting>();
+                assetBundleSetting.assetBundleRuleDict = new Dictionary<string, AssetBundleRule>();
+                AssetBundleRule assetBundleRule = AssetBundleUtil.TagFileRule();
+                assetBundleSetting.assetBundleRuleDict.Add(assetBundleRule.path, assetBundleRule);
+                assetBundleSetting.assetBundleDataDict = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleDict);
+                AssetDatabase.CreateAsset(assetBundleSetting, "Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset");
+                AssetDatabase.Refresh();
+            }
+        }
+        [MenuItem("Assets/Lcc/TagDirectoryRule")]
+        public static void TagDirectoryRule()
+        {
+            if (File.Exists("Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset"))
+            {
+                AssetBundleSetting assetBundleSetting = AssetDatabase.LoadAssetAtPath<AssetBundleSetting>("Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset");
+                if (assetBundleSetting.assetBundleRuleDict == null)
+                {
+                    assetBundleSetting.assetBundleRuleDict = new Dictionary<string, AssetBundleRule>();
+                }
+                AssetBundleRule assetBundleRule = AssetBundleUtil.TagDirectoryRule();
+                assetBundleSetting.assetBundleRuleDict.Add(assetBundleRule.path, assetBundleRule);
+                assetBundleSetting.assetBundleDataDict = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleDict);
+            }
+            else
+            {
+                AssetBundleSetting assetBundleSetting = ScriptableObject.CreateInstance<AssetBundleSetting>();
+                assetBundleSetting.assetBundleRuleDict = new Dictionary<string, AssetBundleRule>();
+                AssetBundleRule assetBundleRule = AssetBundleUtil.TagDirectoryRule();
+                assetBundleSetting.assetBundleRuleDict.Add(assetBundleRule.path, assetBundleRule);
+                assetBundleSetting.assetBundleDataDict = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleDict);
+                AssetDatabase.CreateAsset(assetBundleSetting, "Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset");
+                AssetDatabase.Refresh();
+            }
+        }
+        [MenuItem("Assets/Lcc/BuildAssetBundle")]
+        public static void BuildAssetBundle()
+        {
+            if (File.Exists("Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset"))
+            {
+                AssetBundleSetting assetBundleSetting = AssetDatabase.LoadAssetAtPath<AssetBundleSetting>("Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset");
+                assetBundleSetting.buildId++;
+                if (string.IsNullOrEmpty(assetBundleSetting.outputPath))
+                {
+                    assetBundleSetting.outputPath = "Assets/AssetBundles";
+                }
+                AssetBundleUtil.BuildAssetBundle(assetBundleSetting);
+            }
         }
         [MenuItem("Lcc/ILRuntime")]
         public static void ILRuntime()
@@ -180,36 +245,6 @@ namespace LccEditor
         public static void ExcelExport()
         {
             ExcelExportUtil.ExportAll();
-        }
-        [MenuItem("Assets/Lcc/BuildRelease")]
-        public static void BuildRelease()
-        {
-#if Release
-            if (File.Exists("Assets/Resources/DLL/Unity.Hotfix.dll.bytes"))
-            {
-                File.Delete("Assets/Resources/DLL/Unity.Hotfix.dll.bytes");
-            }
-            if (File.Exists("Assets/Resources/DLL/Unity.Hotfix.pdb.bytes"))
-            {
-                File.Delete("Assets/Resources/DLL/Unity.Hotfix.pdb.bytes");
-            }
-            if (File.Exists("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes"))
-            {
-                File.Delete("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes");
-            }
-            if (File.Exists("Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes"))
-            {
-                File.Delete("Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes");
-            }
-            if (File.Exists("Temp/bin/Release/Unity.Hotfix.dll"))
-            {
-                File.Copy("Temp/bin/Release/Unity.Hotfix.dll", "Assets/Resources/DLL/Unity.Hotfix.dll.bytes", true);
-                File.Copy("Temp/bin/Release/Unity.Hotfix.dll", "Assets/Bundles/DLL/Unity.Hotfix.dll.bytes", true);
-                FileUtil.SaveAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes", RijndaelUtil.RijndaelEncrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileUtil.GetAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes")));
-                FileUtil.SaveAsset("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes", RijndaelUtil.RijndaelEncrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileUtil.GetAsset("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes")));
-                AssetDatabase.Refresh();
-            }
-#endif
         }
         [MenuItem("Assets/Lcc/Create/Hotfix/Panel")]
         public static void CreateHotfixPanel()

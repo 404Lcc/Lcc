@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using FileUtil = LccModel.FileUtil;
 
 namespace LccEditor
 {
@@ -34,10 +35,7 @@ namespace LccEditor
                 {
                     File.Delete($"Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/{_class}Adapter.cs");
                 }
-                using (StreamWriter sw = new StreamWriter($"Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/{_class}Adapter.cs"))
-                {
-                    sw.WriteLine(CrossBindingCodeGenerator.GenerateCrossBindingAdapterCode(type, _namespace));
-                }
+                FileUtil.SaveAsset($"Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/{_class}Adapter.cs", CrossBindingCodeGenerator.GenerateCrossBindingAdapterCode(type, _namespace));
                 AssetDatabase.Refresh();
             }
             GUILayout.EndHorizontal();
