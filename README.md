@@ -10,6 +10,10 @@ Lcc框架
 
 [Lcc](https://github.com/404Lcc/Lcc)是针对Unity开发的轻量级框架，可快速上手开发**Steam**、**安卓**、**IOS**等项目
 
+**Lcc框架交流群**
+
+群号: [679054092](https://jq.qq.com/?_wv=1027&k=KPEIZeok)
+
 **特点**
 
 1. 适配ILRuntime，主工程集与热更程集继承ObjectBase并对原有的生命周期进行拓展
@@ -41,10 +45,6 @@ Lcc框架
 14. 提供数据导出工具，通过Excel快速导出数据表和数据类
 
 15. 自动编译代码
-
-**Lcc框架交流群**
-
-群号: 679054092[点击链接加入群聊【Lcc框架交流群】](https://jq.qq.com/?_wv=1027&k=KPEIZeok)
 
 **热更新**
 
