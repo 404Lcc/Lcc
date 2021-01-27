@@ -17,11 +17,11 @@ namespace LccEditor
             }
             GUILayout.EndHorizontal();
         }
-        [MenuItem("Lcc/UploadEditor")]
+        [MenuItem("Lcc/Upload")]
         public static void ShowUpload()
         {
             UploadEditorWindow upload = GetWindow<UploadEditorWindow>();
-            upload.position = new Rect(0, 0, 600, 600);
+            upload.position = new Rect(Screen.currentResolution.width / 2 - 500, Screen.currentResolution.height / 2 - 250, 1000, 500);
             upload.Show();
         }
     }

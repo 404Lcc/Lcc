@@ -61,7 +61,7 @@ namespace LccHotfix
             {
                 GetDirectorys(item, directoryInfoList);
             }
-            return directoryInfoList.ToArray().Length == 0 ? null : directoryInfoList.ToArray();
+            return directoryInfoList.ToArray();
         }
     }
 }

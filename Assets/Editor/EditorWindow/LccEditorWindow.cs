@@ -108,11 +108,11 @@ namespace LccEditor
                 ShowNotification(new GUIContent(tips));
             }
         }
-        [MenuItem("Lcc/LccEditor")]
+        [MenuItem("Lcc/Lcc")]
         public static void ShowLcc()
         {
             LccEditorWindow lcc = GetWindow<LccEditorWindow>();
-            lcc.position = new Rect(0, 0, 600, 600);
+            lcc.position = new Rect(Screen.currentResolution.width / 2 - 500, Screen.currentResolution.height / 2 - 250, 1000, 500);
             lcc.Show();
         }
         /// <summary>

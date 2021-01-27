@@ -29,6 +29,12 @@ namespace LccHotfix
         }
         public override void Update()
         {
+#if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                ScreenCapture.CaptureScreenshot($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res")}/Screenshot.png");
+            }
+#endif
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (PanelManager.Instance.IsOpenPanel(PanelType.Set))
@@ -41,13 +47,6 @@ namespace LccHotfix
                 }
                 if (!PanelManager.Instance.IsOpenPanel(PanelType.Load))
                 {
-                }
-            }
-            if (Application.platform == RuntimePlatform.WindowsEditor)
-            {
-                if (Input.GetKeyDown(KeyCode.C))
-                {
-                    ScreenCapture.CaptureScreenshot($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res")}/Screenshot.png");
                 }
             }
         }

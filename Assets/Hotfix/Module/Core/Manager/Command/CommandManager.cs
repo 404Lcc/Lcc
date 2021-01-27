@@ -6,7 +6,7 @@ namespace LccHotfix
 {
     public class CommandManager : Singleton<CommandManager>
     {
-        public List<CommandData> commandList = new List<CommandData>();
+        public List<CommandData> commandDataList = new List<CommandData>();
         public int index;
         public CommandType commandType;
         public override void Update()
@@ -21,11 +21,11 @@ namespace LccHotfix
                     break;
             }
         }
-        public void AddCommand(CommandData command)
+        public void AddCommand(CommandData commandData)
         {
-            if (command == null) return;
+            if (commandData == null) return;
             CommandData target;
-            switch (command.dataType)
+            switch (commandData.dataType)
             {
                 default:
                     target = new CommandData();
@@ -34,15 +34,15 @@ namespace LccHotfix
             FieldInfo[] fieldInfos = target.GetType().GetFields();
             foreach (FieldInfo item in fieldInfos)
             {
-                item.SetValue(target, item.GetValue(command));
+                item.SetValue(target, item.GetValue(commandData));
             }
-            commandList.Add(target);
+            commandDataList.Add(target);
         }
-        public void AddCommands(CommandData[] commands)
+        public void AddCommands(CommandData[] commandDatas)
         {
-            if (commands == null) return;
+            if (commandDatas == null) return;
             List<CommandData> targetList = new List<CommandData>();
-            foreach (CommandData item in commands)
+            foreach (CommandData item in commandDatas)
             {
                 CommandData target;
                 switch (item.dataType)
@@ -58,7 +58,7 @@ namespace LccHotfix
                 }
                 targetList.Add(target);
             }
-            commandList.AddRange(targetList.ToArray());
+            commandDataList.AddRange(targetList.ToArray());
         }
         public void SetCommandType(CommandType type)
         {
@@ -66,7 +66,7 @@ namespace LccHotfix
         }
         public void AutomaticExcute()
         {
-            if (index < commandList.Count)
+            if (index < commandDataList.Count)
             {
                 Excute();
                 Next();
@@ -74,7 +74,7 @@ namespace LccHotfix
         }
         public void ManuallyExcute()
         {
-            if (index < commandList.Count)
+            if (index < commandDataList.Count)
             {
                 if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
                 {
@@ -87,9 +87,9 @@ namespace LccHotfix
         {
             set
             {
-                if (index < commandList.Count)
+                if (index < commandDataList.Count)
                 {
-                    commandList[index].isCondition = value;
+                    commandDataList[index].isCondition = value;
                 }
             }
         }
@@ -97,9 +97,9 @@ namespace LccHotfix
         {
             get
             {
-                if (index < commandList.Count)
+                if (index < commandDataList.Count)
                 {
-                    return commandList[index].isCondition;
+                    return commandDataList[index].isCondition;
                 }
                 return true;
             }
@@ -108,9 +108,9 @@ namespace LccHotfix
         {
             set
             {
-                if (index < commandList.Count)
+                if (index < commandDataList.Count)
                 {
-                    commandList[index].isFinish = value;
+                    commandDataList[index].isFinish = value;
                 }
             }
         }
@@ -118,32 +118,32 @@ namespace LccHotfix
         {
             get
             {
-                if (index < commandList.Count)
+                if (index < commandDataList.Count)
                 {
-                    return commandList[index].isFinish;
+                    return commandDataList[index].isFinish;
                 }
                 return true;
             }
         }
         public void Excute()
         {
-            if (commandList[index].isCondition)
+            if (commandDataList[index].isCondition)
             {
-                if (!commandList[index].isExcute)
+                if (!commandDataList[index].isExcute)
                 {
-                    commandList[index].Execute();
-                    commandList[index].isExcute = true;
+                    commandDataList[index].Execute();
+                    commandDataList[index].isExcute = true;
                 }
             }
         }
         public void Next()
         {
-            if (commandList[index].isExcute && commandList[index].isFinish)
+            if (commandDataList[index].isExcute && commandDataList[index].isFinish)
             {
                 index += 1;
-                if (index >= commandList.Count)
+                if (index >= commandDataList.Count)
                 {
-                    commandList.Clear();
+                    commandDataList.Clear();
                     index = 0;
                     commandType = CommandType.Automatic;
                 }
@@ -151,7 +151,7 @@ namespace LccHotfix
         }
         public bool IsFinishAllCommand()
         {
-            if (commandList.Count == 0) return true;
+            if (commandDataList.Count == 0) return true;
             return false;
         }
     }

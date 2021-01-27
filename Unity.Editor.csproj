@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\InspectorEditor\LccView\LccViewEditor.cs" />
+    <Compile Include="Assets\Editor\EditorWindow\FrameworkEditorWindow.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectTypeUtil.cs" />
     <Compile Include="Assets\Editor\EditorWindow\LccEditorWindow.cs" />
     <Compile Include="Assets\Editor\MenuItem\ILRuntime\ILRuntimeCLRBindingMenuItem.cs" />
@@ -74,8 +75,10 @@
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\LongObjectType.cs" />
     <Compile Include="Assets\Editor\EditorWindow\ILRuntimeCrossBindingEditorWindow.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\BoundsObjectType.cs" />
+    <Compile Include="Assets\Editor\Util\Roslyn\RoslynUtil.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\CharObjectType.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\ObjectObjectType.cs" />
+    <Compile Include="Assets\Editor\Util\Roslyn\BuildType.cs" />
     <Compile Include="Assets\Editor\Util\Build\BuildUtil.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\BoolObjectType.cs" />
     <Compile Include="Assets\Editor\Model\NewModelPanel.cs" />
@@ -97,8 +100,6 @@
     <Compile Include="Assets\Editor\MenuItem\Lcc\LccMenuItem.cs" />
     <Compile Include="Assets\Editor\Model\NewHotfixPanel.cs" />
     <Compile Include="Assets\Editor\Util\ObjectType\ObjectType\Vector4ObjectType.cs" />
-    <Compile Include="Assets\Editor\Util\Roslyn\RoslynUtil.cs" />
-    <Compile Include="Assets\Editor\Util\Roslyn\BuildType.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Editor\Unity.Editor.asmdef" />
@@ -315,6 +316,30 @@
     <Reference Include="NPOI.OpenXmlFormats">
       <HintPath>Assets\Plugins\NPOI\net45\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp">
+      <HintPath>Assets\Plugins\Roslyn\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis">
+      <HintPath>Assets\Plugins\Roslyn\Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>Assets\Plugins\Roslyn\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable">
+      <HintPath>Assets\Plugins\Roslyn\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>Assets\Plugins\Roslyn\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata">
+      <HintPath>Assets\Plugins\Roslyn\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Assets\Plugins\Roslyn\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <HintPath>Assets\Plugins\Roslyn\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Sirenix.OdinInspector.Attributes">
       <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll</HintPath>
     </Reference>
@@ -341,30 +366,6 @@
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.6\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Buffers">
-      <HintPath>Assets\Plugins\Roslyn\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Collections.Immutable">
-      <HintPath>Assets\Plugins\Roslyn\System.Collections.Immutable.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Memory">
-      <HintPath>Assets\Plugins\Roslyn\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reflection.Metadata">
-      <HintPath>Assets\Plugins\Roslyn\System.Reflection.Metadata.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>Assets\Plugins\Roslyn\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions">
-      <HintPath>Assets\Plugins\Roslyn\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.CSharp">
-      <HintPath>Assets\Plugins\Roslyn\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis">
-      <HintPath>Assets\Plugins\Roslyn\Microsoft.CodeAnalysis.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>

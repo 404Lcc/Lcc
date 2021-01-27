@@ -32,7 +32,7 @@ namespace LccModel
             {
                 GetFiles(item, fileInfoList);
             }
-            return fileInfoList.ToArray().Length == 0 ? null : fileInfoList.ToArray();
+            return fileInfoList.ToArray();
         }
         /// <summary>
         /// 保存资源

@@ -33,20 +33,17 @@ namespace LccHotfix
             this.isNeedDamping = isNeedDamping;
             this.offset = offset;
             this.target = target;
-            if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
-            {
-                speedX = 200;
-                speedY = 200;
-                isTouch = false;
-                isMouse = true;
-            }
-            else
-            {
-                speedX = 30;
-                speedY = 30;
-                isTouch = true;
-                isMouse = false;
-            }
+#if UNITY_EDITOR
+            speedX = 200;
+            speedY = 200;
+            isTouch = false;
+            isMouse = true;
+#else
+            speedX = 30;
+            speedY = 30;
+            isTouch = true;
+            isMouse = false;
+#endif
         }
         public override void Update()
         {
@@ -105,7 +102,6 @@ namespace LccHotfix
                                 {
                                     ComputeAngle(right);
                                 }
-
                             }
                         }
                         //如果最右边的手指是第二个手指

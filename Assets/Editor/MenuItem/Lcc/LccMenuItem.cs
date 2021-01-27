@@ -24,15 +24,12 @@ namespace LccEditor
                 argList.Add(item);
             }
             string name = $"{PlayerSettings.productName} v{PlayerSettings.bundleVersion}";
-            switch (EditorUserBuildSettings.activeBuildTarget)
-            {
-                case BuildTarget.StandaloneWindows:
-                    name = $"{name}.exe";
-                    break;
-                case BuildTarget.Android:
-                    name = $"{name}.apk";
-                    break;
-            }
+#if UNITY_STANDALONE
+            name = $"{name}.exe";
+#endif
+#if UNITY_ANDROID
+            name = $"{name}.apk";
+#endif
             string locationPathName = $"{PathUtil.GetPath(PathType.PersistentDataPath, "Build")}/{name}";
             BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, locationPathName, EditorUserBuildSettings.activeBuildTarget, EditorUserBuildSettings.development ? BuildOptions.Development : BuildOptions.None);
         }
@@ -42,21 +39,19 @@ namespace LccEditor
             if (File.Exists("Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset"))
             {
                 AssetBundleSetting assetBundleSetting = AssetDatabase.LoadAssetAtPath<AssetBundleSetting>("Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset");
-                if (assetBundleSetting.assetBundleRuleDict == null)
+                if (assetBundleSetting.assetBundleRuleList == null)
                 {
-                    assetBundleSetting.assetBundleRuleDict = new Dictionary<string, AssetBundleRule>();
+                    assetBundleSetting.assetBundleRuleList = new List<AssetBundleRule>();
                 }
-                AssetBundleRule assetBundleRule = AssetBundleUtil.TagFileRule();
-                assetBundleSetting.assetBundleRuleDict.Add(assetBundleRule.path, assetBundleRule);
-                assetBundleSetting.assetBundleDataDict = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleDict);
+                assetBundleSetting.assetBundleRuleList.Add(AssetBundleUtil.TagFileRule());
+                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList);
             }
             else
             {
                 AssetBundleSetting assetBundleSetting = ScriptableObject.CreateInstance<AssetBundleSetting>();
-                assetBundleSetting.assetBundleRuleDict = new Dictionary<string, AssetBundleRule>();
-                AssetBundleRule assetBundleRule = AssetBundleUtil.TagFileRule();
-                assetBundleSetting.assetBundleRuleDict.Add(assetBundleRule.path, assetBundleRule);
-                assetBundleSetting.assetBundleDataDict = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleDict);
+                assetBundleSetting.assetBundleRuleList = new List<AssetBundleRule>();
+                assetBundleSetting.assetBundleRuleList.Add(AssetBundleUtil.TagFileRule());
+                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList);
                 AssetDatabase.CreateAsset(assetBundleSetting, "Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset");
                 AssetDatabase.Refresh();
             }
@@ -67,21 +62,19 @@ namespace LccEditor
             if (File.Exists("Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset"))
             {
                 AssetBundleSetting assetBundleSetting = AssetDatabase.LoadAssetAtPath<AssetBundleSetting>("Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset");
-                if (assetBundleSetting.assetBundleRuleDict == null)
+                if (assetBundleSetting.assetBundleRuleList == null)
                 {
-                    assetBundleSetting.assetBundleRuleDict = new Dictionary<string, AssetBundleRule>();
+                    assetBundleSetting.assetBundleRuleList = new List<AssetBundleRule>();
                 }
-                AssetBundleRule assetBundleRule = AssetBundleUtil.TagDirectoryRule();
-                assetBundleSetting.assetBundleRuleDict.Add(assetBundleRule.path, assetBundleRule);
-                assetBundleSetting.assetBundleDataDict = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleDict);
+                assetBundleSetting.assetBundleRuleList.Add(AssetBundleUtil.TagDirectoryRule());
+                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList);
             }
             else
             {
                 AssetBundleSetting assetBundleSetting = ScriptableObject.CreateInstance<AssetBundleSetting>();
-                assetBundleSetting.assetBundleRuleDict = new Dictionary<string, AssetBundleRule>();
-                AssetBundleRule assetBundleRule = AssetBundleUtil.TagDirectoryRule();
-                assetBundleSetting.assetBundleRuleDict.Add(assetBundleRule.path, assetBundleRule);
-                assetBundleSetting.assetBundleDataDict = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleDict);
+                assetBundleSetting.assetBundleRuleList = new List<AssetBundleRule>();
+                assetBundleSetting.assetBundleRuleList.Add(AssetBundleUtil.TagDirectoryRule());
+                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList);
                 AssetDatabase.CreateAsset(assetBundleSetting, "Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset");
                 AssetDatabase.Refresh();
             }

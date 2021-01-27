@@ -15,6 +15,7 @@ namespace LccModel
             ItemManager.Instance.InitManager(new ItemObjectBaseHandler(false, false, AssetType.Prefab, AssetType.Item));
             //TipsManager.Instance.InitManager(new TipsPool(10));
             //TipsWindowManager.Instance.InitManager(new TipsWindowPool(10));
+            DownloadManager.Instance.InitManager();
 
             UIEventManager.Instance.Publish(UIEventType.Launch);
         }
