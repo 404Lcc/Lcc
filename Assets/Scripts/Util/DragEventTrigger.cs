@@ -4,14 +4,12 @@ using UnityEngine.EventSystems;
 
 namespace LccModel
 {
-    public delegate void PointerHandler(PointerEventData eventData);
-    public delegate void DragHandler(Vector2 delta);
     public class DragEventTrigger : EventTrigger
     {
-        public event PointerHandler Down;
-        public event PointerHandler UP;
+        public event Action<PointerEventData> Down;
+        public event Action<PointerEventData> UP;
         public event Action BeginDrag;
-        public event DragHandler Drag;
+        public event Action<Vector2> Drag;
         public event Action EndDrag;
         public static DragEventTrigger GetDragEventTrigger(GameObject gameObject)
         {

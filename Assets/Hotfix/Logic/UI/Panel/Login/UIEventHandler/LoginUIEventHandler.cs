@@ -5,7 +5,7 @@
     {
         public override void Publish()
         {
-            PanelManager.Instance.OpenPanelAsync(PanelType.Login).Continue();
+            PanelManager.Instance.OpenPanel(PanelType.Login);
         }
     }
 }

@@ -44,7 +44,7 @@ namespace LccModel
                     aStarNodeDatas[x, y] = new AStarNodeData(wall, localPosition, x, y);
                     if (wall)
                     {
-                        //InitWallGrid(await AssetManager.Instance.InstantiateAssetAsync("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, isShowWall);
+                        //InitWallGrid(localPosition, isShowWall);
                     }
                 }
             }
@@ -62,7 +62,7 @@ namespace LccModel
                     aStarNodeDatas[w - x, y] = new AStarNodeData(wall, localPosition, x, y);
                     if (wall)
                     {
-                        //InitWallGrid(await AssetManager.Instance.InstantiateAssetAsync("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, isShowWall);
+                        //InitWallGrid(localPosition, isShowWall);
                     }
                 }
             }
@@ -80,7 +80,7 @@ namespace LccModel
                     aStarNodeDatas[x, h - y] = new AStarNodeData(wall, localPosition, x, y);
                     if (wall)
                     {
-                        //InitWallGrid(await AssetManager.Instance.InstantiateAssetAsync("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, isShowWall);
+                        //InitWallGrid(localPosition, isShowWall);
                     }
                 }
             }
@@ -98,22 +98,22 @@ namespace LccModel
                     aStarNodeDatas[w - x, h - y] = new AStarNodeData(wall, localPosition, x, y);
                     if (wall)
                     {
-                        //InitWallGrid(await AssetManager.Instance.InstantiateAssetAsync("Wall", false, false, this.wall, AssetType.UI, AssetType.Tool), localPosition, isShowWall);
+                        //InitWallGrid(localPosition, isShowWall);
                     }
                 }
             }
         }
-        public GameObject InitWallGrid(GameObject gameObject, Vector3 localPosition, bool isShowWall)
+        public void InitWallGrid(Vector3 localPosition, bool isShowWall)
         {
+            GameObject gameObject = AssetManager.Instance.InstantiateAsset("Wall", false, false, wall, AssetType.Tool);
             gameObject.transform.localPosition = localPosition;
             gameObject.SetActive(isShowWall);
-            return gameObject;
         }
-        public GameObject InitPathGrid(GameObject gameObject, Vector3 localPosition, bool isShowPath)
+        public void InitPathGrid(Vector3 localPosition, bool isShowPath)
         {
+            GameObject gameObject = AssetManager.Instance.InstantiateAsset("Path", false, false, wall, AssetType.Tool);
             gameObject.transform.localPosition = localPosition;
             gameObject.SetActive(isShowPath);
-            return gameObject;
         }
         /// <summary>
         /// 根据坐标获得一个节点
@@ -147,7 +147,7 @@ namespace LccModel
         /// <summary>
         /// 取得周围的节点
         /// </summary>
-        /// <param name="aStarNodeData"></param>
+        /// <param name="data"></param>
         /// <returns></returns>
         public List<AStarNodeData> GetAStarNodeDataAround(AStarNodeData data)
         {
@@ -227,16 +227,16 @@ namespace LccModel
         /// <summary>
         /// 更新路径
         /// </summary>
-        /// <param name="endAStarNodeDataList"></param>
-        public void UpdatePath(List<AStarNodeData> endAStarNodeDataList)
+        /// <param name="datas"></param>
+        public void UpdatePath(AStarNodeData[] datas)
         {
             foreach (Transform item in path)
             {
                 item.SafeDestroy();
             }
-            for (int i = 0; i < endAStarNodeDataList.Count; i++)
+            foreach (AStarNodeData item in datas)
             {
-                //InitWallGrid(await AssetManager.Instance.InstantiateAssetAsync("Path", false, false, path, AssetType.UI, AssetType.Tool), endAStarNodeDataList[i].localPosition, isShowPath);
+                InitPathGrid(item.localPosition, isShowPath);
             }
         }
         /// <summary>
@@ -258,7 +258,7 @@ namespace LccModel
                 }
                 pathList.Reverse();
             }
-            UpdatePath(pathList);
+            UpdatePath(pathList.ToArray());
             return pathList;
         }
         public List<AStarNodeData> AStarFindPath(Vector3 start, Vector3 end)

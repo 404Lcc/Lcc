@@ -54,9 +54,11 @@ namespace LccModel
             {
 #if !UNITY_EDITOR
                 string path = GetAssetPath(name, types);
-                AsyncOperationHandle<SceneInstance> handler = Addressables.LoadSceneAsync($"Assets/Bundles/{path}{suffix}");
-                yield return handler;
-
+                AssetBundleManager.Instance.LoadAsset($"Assets/Bundles/{path}{suffix}");
+                async = SceneManager.LoadSceneAsync($"Assets/Bundles/{path}{suffix}");
+                async.allowSceneActivation = false;
+                //AsyncOperationHandle<SceneInstance> handler = Addressables.LoadSceneAsync($"Assets/Bundles/{path}{suffix}");
+                //yield return handler;
 #else
                 async = SceneManager.LoadSceneAsync(name);
                 async.allowSceneActivation = false;

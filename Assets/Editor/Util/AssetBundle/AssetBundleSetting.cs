@@ -12,6 +12,8 @@ namespace LccEditor
         public int buildId;
         [InfoBox("输出路径")]
         public string outputPath;
+        [InfoBox("是否拷贝到StreamingAssets")]
+        public bool isCopyStreamingAssets;
         [ShowInInspector]
         public List<AssetBundleRule> assetBundleRuleList;
         [ShowInInspector]
@@ -21,6 +23,7 @@ namespace LccEditor
         {
             buildId = 0;
             outputPath = string.Empty;
+            isCopyStreamingAssets = true;
             assetBundleRuleList = null;
             assetBundleDataList = null;
         }

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -17,9 +16,9 @@ namespace LccModel
             }
             return false;
         }
-        public async Task<VideoClip> LoadVideoAsync(string video)
+        public VideoClip LoadVideo(string video)
         {
-            VideoClip clip = await AssetManager.Instance.LoadAssetAsync<VideoClip>(video, ".mp4", false, true, AssetType.Video);
+            VideoClip clip = AssetManager.Instance.LoadAsset<VideoClip>(video, ".mp4", false, true, AssetType.Video);
             videos.Add(video, clip);
             return clip;
         }
@@ -34,7 +33,7 @@ namespace LccModel
                 videos.Remove(video);
             }
         }
-        public async Task<VideoClip> PlayVideoAsync(string video, bool isInside, VideoPlayer player, RawImage image, int width = 1920, int height = 1080)
+        public VideoClip PlayVideo(string video, bool isInside, VideoPlayer player, RawImage image, int width = 1920, int height = 1080)
         {
             player.targetTexture = new RenderTexture(width, height, 0);
             if (VideoExist(video))
@@ -48,7 +47,7 @@ namespace LccModel
             }
             if (isInside)
             {
-                VideoClip clip = await LoadVideoAsync(video);
+                VideoClip clip = LoadVideo(video);
                 player.source = VideoSource.VideoClip;
                 player.clip = clip;
                 image.texture = player.targetTexture;

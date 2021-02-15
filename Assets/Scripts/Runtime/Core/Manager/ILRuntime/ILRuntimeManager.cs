@@ -18,14 +18,14 @@ namespace LccModel
         {
             LoadHotfixAssembly();
         }
-        public async void LoadHotfixAssembly()
+        public void LoadHotfixAssembly()
         {
-            TextAsset dllAsset = await AssetManager.Instance.LoadAssetAsync<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.DLL);
+            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.DLL);
             MemoryStream dll = new MemoryStream(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes));
 #if Release
             appDomain.LoadAssembly(dll, null, new PdbReaderProvider());
 #else
-            TextAsset pdbAsset = await AssetManager.Instance.LoadAssetAsync<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.DLL);
+            TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.DLL);
             MemoryStream pdb = new MemoryStream(pdbAsset.bytes);
             appDomain.LoadAssembly(dll, pdb, new PdbReaderProvider());
 #endif

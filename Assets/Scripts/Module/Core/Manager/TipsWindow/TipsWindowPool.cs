@@ -8,11 +8,11 @@
         public TipsWindowPool(int size) : base(size)
         {
         }
-        public override async void InitPool()
+        public override void InitPool()
         {
             for (int i = 0; i < size; i++)
             {
-                TipsWindow tipsWindow = LccViewFactory.CreateView<TipsWindow>(await AssetManager.Instance.InstantiateAssetAsync("TipsWindow", false, false, Objects.Canvas.transform, AssetType.Panel, AssetType.Tool));
+                TipsWindow tipsWindow = LccViewFactory.CreateView<TipsWindow>(AssetManager.Instance.InstantiateAsset("TipsWindow", false, false, Objects.Canvas.transform, AssetType.Panel, AssetType.Tool));
                 Enqueue(tipsWindow);
             }
         }

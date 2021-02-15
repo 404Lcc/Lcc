@@ -173,7 +173,7 @@ namespace LccModel
             }
             foreach (DownloadFile item in downloadFileList)
             {
-                item.downloadData.progress?.Invoke(item.downloadData, item.currentSize, item.downloadData.size);
+                item.downloadData.ProgressExcute(item.currentSize, item.downloadData.size);
             }
         }
         public void UpdateComplete()
@@ -187,8 +187,8 @@ namespace LccModel
             }
             foreach (DownloadData item in downloadDataList)
             {
-                item.progress?.Invoke(item, item.size, item.size);
-                item.complete?.Invoke(item);
+                item.ProgressExcute(item.size, item.size);
+                item.CompleteExcute();
             }
         }
         public void UpdateError()
@@ -202,7 +202,7 @@ namespace LccModel
             }
             foreach (DownloadFile item in downloadFileList)
             {
-                item.downloadData.error?.Invoke(item.downloadData, item.error);
+                item.downloadData.ErrorExcute(item.error);
             }
         }
     }

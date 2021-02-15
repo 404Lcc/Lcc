@@ -7,17 +7,7 @@ namespace LccModel
 {
     public static class WebUtil
     {
-        /// <summary>
-        /// 上传资源
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="field"></param>
-        /// <param name="bytes"></param>
-        /// <param name="name"></param>
-        /// <param name="mime"></param>
-        /// <param name="callback"></param>
-        /// <returns></returns>
-        public static IEnumerator Upload(string url, string field, byte[] bytes, string name, string mime, Action<bool> callback)
+        public static IEnumerator Upload(string url, string field, byte[] bytes, string name, string mime, Action<bool> complete = null, Action<string> error = null)
         {
             WWWForm form = new WWWForm();
             form.AddBinaryData(field, bytes, name, mime);
@@ -27,20 +17,14 @@ namespace LccModel
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
                 LogUtil.Log(webRequest.error);
+                error?.Invoke(webRequest.error);
             }
             else
             {
-                callback(true);
+                complete?.Invoke(true);
             }
         }
-        /// <summary>
-        /// 下载资源
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="name"></param>
-        /// <param name="folder"></param>
-        /// <returns></returns>
-        public static IEnumerator Download(string url, string name, params string[] folders)
+        public static IEnumerator Download(string url, Action<byte[]> complete = null, Action<string> error = null)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
@@ -48,29 +32,15 @@ namespace LccModel
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
                 LogUtil.Log(webRequest.error);
+                error?.Invoke(webRequest.error);
             }
             else
             {
                 byte[] bytes = webRequest.downloadHandler.data;
-                FileUtil.SaveAsset($"{PathUtil.GetPath(PathType.PersistentDataPath, folders)}/{name}", bytes);
+                complete?.Invoke(bytes);
             }
         }
-        public static IEnumerator Download(string url, Action<byte[]> callback)
-        {
-            url = Uri.EscapeUriString(url);
-            UnityWebRequest webRequest = UnityWebRequest.Get(url);
-            yield return webRequest.SendWebRequest();
-            if (webRequest.isNetworkError || webRequest.isHttpError)
-            {
-                LogUtil.Log(webRequest.error);
-            }
-            else
-            {
-                byte[] bytes = webRequest.downloadHandler.data;
-                callback(bytes);
-            }
-        }
-        public static IEnumerator Download(string url, Action<Texture2D> callback)
+        public static IEnumerator Download(string url, Action<Texture2D> complete = null, Action<string> error = null)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
@@ -80,13 +50,14 @@ namespace LccModel
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
                 LogUtil.Log(webRequest.error);
+                error?.Invoke(webRequest.error);
             }
             else
             {
-                callback(download.texture);
+                complete?.Invoke(download.texture);
             }
         }
-        public static IEnumerator Download(string url, Action<Texture2D, byte[]> callback)
+        public static IEnumerator Download(string url, Action<Texture2D, byte[]> complete = null, Action<string> error = null)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
@@ -96,13 +67,14 @@ namespace LccModel
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
                 LogUtil.Log(webRequest.error);
+                error?.Invoke(webRequest.error);
             }
             else
             {
-                callback(download.texture, download.data);
+                complete?.Invoke(download.texture, download.data);
             }
         }
-        public static IEnumerator Download(string url, AudioType type, Action<AudioClip> callback)
+        public static IEnumerator Download(string url, AudioType type, Action<AudioClip> complete = null, Action<string> error = null)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
@@ -112,13 +84,14 @@ namespace LccModel
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
                 LogUtil.Log(webRequest.error);
+                error?.Invoke(webRequest.error);
             }
             else
             {
-                callback(download.audioClip);
+                complete?.Invoke(download.audioClip);
             }
         }
-        public static IEnumerator Download(string url, AudioType type, Action<AudioClip, byte[]> callback)
+        public static IEnumerator Download(string url, AudioType type, Action<AudioClip, byte[]> complete = null, Action<string> error = null)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
@@ -128,13 +101,14 @@ namespace LccModel
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
                 LogUtil.Log(webRequest.error);
+                error?.Invoke(webRequest.error);
             }
             else
             {
-                callback(download.audioClip, download.data);
+                complete?.Invoke(download.audioClip, download.data);
             }
         }
-        public static IEnumerator Download(string url, Action<AssetBundle> callback)
+        public static IEnumerator Download(string url, Action<AssetBundle> complete = null, Action<string> error = null)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
@@ -144,13 +118,14 @@ namespace LccModel
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
                 LogUtil.Log(webRequest.error);
+                error?.Invoke(webRequest.error);
             }
             else
             {
-                callback(download.assetBundle);
+                complete?.Invoke(download.assetBundle);
             }
         }
-        public static IEnumerator Download(string url, Action<AssetBundle, byte[]> callback)
+        public static IEnumerator Download(string url, Action<AssetBundle, byte[]> complete = null, Action<string> error = null)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
@@ -160,10 +135,11 @@ namespace LccModel
             if (webRequest.isNetworkError || webRequest.isHttpError)
             {
                 LogUtil.Log(webRequest.error);
+                error?.Invoke(webRequest.error);
             }
             else
             {
-                callback(download.assetBundle, download.data);
+                complete?.Invoke(download.assetBundle, download.data);
             }
         }
     }

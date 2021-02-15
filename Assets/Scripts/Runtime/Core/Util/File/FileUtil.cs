@@ -16,6 +16,16 @@ namespace LccModel
             return directoryInfo.GetFiles() != null;
         }
         /// <summary>
+        /// 获取文件大小
+        /// </summary>
+        /// <param name="directoryInfo"></param>
+        /// <returns></returns>
+        public static long GetFileSize(string path)
+        {
+            if (!File.Exists(path)) return -1;
+            return new FileInfo(path).Length;
+        }
+        /// <summary>
         /// 获取所有子文件
         /// </summary>
         /// <param name="directoryInfo"></param>

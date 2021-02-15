@@ -4257,6 +4257,9 @@
     <type fullname="LccModel.LaunchUIEventHandler" preserve="all" />
     <type fullname="LccModel.LaunchPanel" preserve="all" />
     <type fullname="LccModel.LaunchModel" preserve="all" />
+    <type fullname="LccModel.UpdaterUIEventHandler" preserve="all" />
+    <type fullname="LccModel.UpdaterPanel" preserve="all" />
+    <type fullname="LccModel.UpdaterModel" preserve="all" />
     <type fullname="LccModel.LanguageType" preserve="all" />
     <type fullname="LccModel.AStarManager" preserve="all" />
     <type fullname="LccModel.AStarNodeData" preserve="all" />
@@ -4369,8 +4372,6 @@
     <type fullname="LccModel.DisplayMode" preserve="all" />
     <type fullname="LccModel.DoubleClickEvent" preserve="all" />
     <type fullname="LccModel.DoubleClickButton" preserve="all" />
-    <type fullname="LccModel.PointerHandler" preserve="all" />
-    <type fullname="LccModel.DragHandler" preserve="all" />
     <type fullname="LccModel.DragEventTrigger" preserve="all" />
     <type fullname="LccModel.EnterClickEvent" preserve="all" />
     <type fullname="LccModel.ExitClickEvent" preserve="all" />
@@ -4382,48 +4383,22 @@
     <type fullname="LccModel.OpenFileName" preserve="all" />
     <type fullname="LccModel.RightClickEvent" preserve="all" />
     <type fullname="LccModel.RightClickButton" preserve="all" />
-    <type fullname="LccModel.AudioManager+&lt;LoadAudioAsync&gt;d__2" preserve="all" />
     <type fullname="LccModel.AudioManager+&lt;&gt;c__DisplayClass5_0" preserve="all" />
-    <type fullname="LccModel.AudioManager+&lt;PlayAudioAsync&gt;d__5" preserve="all" />
-    <type fullname="LccModel.LanguageManager+&lt;ChangeLanguage&gt;d__1" preserve="all" />
-    <type fullname="LccModel.TipsPool+&lt;InitPool&gt;d__2" preserve="all" />
-    <type fullname="LccModel.TipsWindowPool+&lt;InitPool&gt;d__2" preserve="all" />
-    <type fullname="LccModel.VideoManager+&lt;LoadVideoAsync&gt;d__2" preserve="all" />
-    <type fullname="LccModel.VideoManager+&lt;PlayVideoAsync&gt;d__4" preserve="all" />
-    <type fullname="LccModel.VoiceManager+&lt;LoadAudioAsync&gt;d__2" preserve="all" />
     <type fullname="LccModel.VoiceManager+&lt;&gt;c__DisplayClass5_0" preserve="all" />
-    <type fullname="LccModel.VoiceManager+&lt;PlayAudioAsync&gt;d__5" preserve="all" />
-    <type fullname="LccModel.ImageExpand+&lt;SetSpriteAsync&gt;d__0" preserve="all" />
-    <type fullname="LccModel.SpriteRendererExpand+&lt;SetSpriteAsync&gt;d__0" preserve="all" />
     <type fullname="LccModel.TaskExpand+&lt;Continue&gt;d__0" preserve="all" />
-    <type fullname="LccModel.ItemObjectBaseHandler+&lt;CreateGameObjectAsync&gt;d__1" preserve="all" />
-    <type fullname="LccModel.ItemObjectBaseHandler+&lt;CreateItemAsync&gt;d__2" preserve="all" />
-    <type fullname="LccModel.AObjectBaseHandler+&lt;CreateGameObjectAsync&gt;d__4" preserve="all" />
-    <type fullname="LccModel.PanelObjectBaseHandler+&lt;CreateGameObjectAsync&gt;d__1" preserve="all" />
-    <type fullname="LccModel.PanelObjectBaseHandler+&lt;CreatePanelAsync&gt;d__2" preserve="all" />
     <type fullname="LccModel.AddressablesManager+&lt;CheckForCatalogUpdates&gt;d__0" preserve="all" />
     <type fullname="LccModel.AddressablesManager+&lt;UpdateCatalogs&gt;d__1" preserve="all" />
     <type fullname="LccModel.AddressablesManager+&lt;Update&gt;d__2" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;LoadAssetDataAsync&gt;d__2`1" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;LoadAssetAsync&gt;d__4`1" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__5" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__6`1" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__7" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__8`1" preserve="all" />
-    <type fullname="LccModel.AConfigTable`1+&lt;InitConfigTable&gt;d__3" preserve="all" />
-    <type fullname="LccModel.ILRuntimeManager+&lt;LoadHotfixAssembly&gt;d__3" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;&gt;c__3`1" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;LoadAssetDataAsync&gt;d__3`1" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;LoadAssetAsync&gt;d__6`1" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__8" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__10`1" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__12" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__14`1" preserve="all" />
+    <type fullname="LccModel.AssetBundleManager+&lt;&gt;c__DisplayClass33_0" preserve="all" />
+    <type fullname="LccModel.AssetBundleManager+&lt;CopyAssets&gt;d__33" preserve="all" />
     <type fullname="LccModel.ILRuntimeManager+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.ItemManager+&lt;CreateItemAsync&gt;d__4" preserve="all" />
-    <type fullname="LccModel.MonoManager+&lt;LoadHotfixAssembly&gt;d__3" preserve="all" />
-    <type fullname="LccModel.PanelManager+&lt;CreatePanelAsync&gt;d__4" preserve="all" />
-    <type fullname="LccModel.PanelManager+&lt;OpenPanelAsync&gt;d__5" preserve="all" />
-    <type fullname="LccModel.PanelManager+&lt;OpenPanelsAsync&gt;d__6" preserve="all" />
-    <type fullname="LccModel.PanelManager+&lt;OpenExceptPanelsAsync&gt;d__7" preserve="all" />
-    <type fullname="LccModel.PanelManager+&lt;OpenAllPanelsAsync&gt;d__8" preserve="all" />
-    <type fullname="LccModel.PanelManager+&lt;ClosePanelAsync&gt;d__9" preserve="all" />
-    <type fullname="LccModel.PanelManager+&lt;ClosePanelsAsync&gt;d__10" preserve="all" />
-    <type fullname="LccModel.PanelManager+&lt;CloseExceptPanelsAsync&gt;d__11" preserve="all" />
-    <type fullname="LccModel.PanelManager+&lt;CloseAllPanelsAsync&gt;d__12" preserve="all" />
     <type fullname="LccModel.SceneLoadManager+&lt;LoadScene&gt;d__7" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;Upload&gt;d__0" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;Download&gt;d__1" preserve="all" />
@@ -4433,12 +4408,7 @@
     <type fullname="LccModel.WebUtil+&lt;Download&gt;d__5" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;Download&gt;d__6" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;Download&gt;d__7" preserve="all" />
-    <type fullname="LccModel.WebUtil+&lt;Download&gt;d__8" preserve="all" />
-    <type fullname="LccModel.Binding`1+ValueChangeHandler" preserve="all" />
-    <type fullname="LccModel.ViewModelBinding`1+ViewModelBindingHandler" preserve="all" />
-    <type fullname="LccModel.ViewModelBinding`1+UnViewModelBindingHandler" preserve="all" />
-    <type fullname="LccModel.ViewModelBinding`1+&lt;&gt;c__DisplayClass5_0`1" preserve="all" />
-    <type fullname="LccModel.InitEventHandler+&lt;Publish&gt;d__0" preserve="all" />
+    <type fullname="LccModel.ViewModelBinding`1+&lt;&gt;c__DisplayClass3_0`1" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
   </assembly>
 </linker>

@@ -8,11 +8,11 @@
         public TipsPool(int size) : base(size)
         {
         }
-        public override async void InitPool()
+        public override void InitPool()
         {
             for (int i = 0; i < size; i++)
             {
-                Tips tips = LccViewFactory.CreateView<Tips>(await AssetManager.Instance.InstantiateAssetAsync("Tips", false, false, Objects.Canvas.transform, AssetType.Panel, AssetType.Tool));
+                Tips tips = LccViewFactory.CreateView<Tips>(AssetManager.Instance.InstantiateAsset("Tips", false, false, Objects.Canvas.transform, AssetType.Panel, AssetType.Tool));
                 Enqueue(tips);
             }
         }

@@ -44,14 +44,14 @@ namespace LccEditor
                     assetBundleSetting.assetBundleRuleList = new List<AssetBundleRule>();
                 }
                 assetBundleSetting.assetBundleRuleList.Add(AssetBundleUtil.TagFileRule());
-                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList);
+                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList.ToArray());
             }
             else
             {
                 AssetBundleSetting assetBundleSetting = ScriptableObject.CreateInstance<AssetBundleSetting>();
                 assetBundleSetting.assetBundleRuleList = new List<AssetBundleRule>();
                 assetBundleSetting.assetBundleRuleList.Add(AssetBundleUtil.TagFileRule());
-                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList);
+                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList.ToArray());
                 AssetDatabase.CreateAsset(assetBundleSetting, "Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset");
                 AssetDatabase.Refresh();
             }
@@ -67,14 +67,14 @@ namespace LccEditor
                     assetBundleSetting.assetBundleRuleList = new List<AssetBundleRule>();
                 }
                 assetBundleSetting.assetBundleRuleList.Add(AssetBundleUtil.TagDirectoryRule());
-                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList);
+                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList.ToArray());
             }
             else
             {
                 AssetBundleSetting assetBundleSetting = ScriptableObject.CreateInstance<AssetBundleSetting>();
                 assetBundleSetting.assetBundleRuleList = new List<AssetBundleRule>();
                 assetBundleSetting.assetBundleRuleList.Add(AssetBundleUtil.TagDirectoryRule());
-                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList);
+                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList.ToArray());
                 AssetDatabase.CreateAsset(assetBundleSetting, "Assets/Editor/Util/AssetBundle/AssetBundleSetting.asset");
                 AssetDatabase.Refresh();
             }

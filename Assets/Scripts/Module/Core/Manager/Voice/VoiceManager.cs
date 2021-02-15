@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace LccModel
@@ -16,9 +15,9 @@ namespace LccModel
             }
             return false;
         }
-        public async Task<AudioClip> LoadAudioAsync(string audio)
+        public AudioClip LoadAudio(string audio)
         {
-            AudioClip clip = await AssetManager.Instance.LoadAssetAsync<AudioClip>(audio, ".mp3", false, true, AssetType.Audio);
+            AudioClip clip = AssetManager.Instance.LoadAsset<AudioClip>(audio, ".mp3", false, true, AssetType.Audio);
             voices.Add(audio, clip);
             return clip;
         }
@@ -35,7 +34,7 @@ namespace LccModel
                 voices.Remove(audio);
             }
         }
-        public async Task<AudioClip> PlayAudioAsync(string audio, bool isInside, AudioSource source)
+        public AudioClip PlayAudio(string audio, bool isInside, AudioSource source)
         {
             if (AudioExist(audio))
             {
@@ -46,7 +45,7 @@ namespace LccModel
             }
             if (isInside)
             {
-                AudioClip temp = await LoadAudioAsync(audio);
+                AudioClip temp = LoadAudio(audio);
                 source.clip = temp;
                 source.Play();
                 return temp;

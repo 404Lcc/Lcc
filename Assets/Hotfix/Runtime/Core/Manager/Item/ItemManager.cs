@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace LccHotfix
@@ -22,9 +21,9 @@ namespace LccHotfix
             }
             return false;
         }
-        public async Task<Item> CreateItemAsync(ItemType type, object data, Transform parent)
+        public Item CreateItem(ItemType type, object data, Transform parent)
         {
-            Item item = await handler.CreateItemAsync(type, data, parent);
+            Item item = handler.CreateItem(type, data, parent);
             if (ItemExist(type))
             {
                 ((List<Item>)items[type]).Add(item);

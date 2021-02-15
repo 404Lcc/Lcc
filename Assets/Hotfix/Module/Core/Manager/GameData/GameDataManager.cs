@@ -7,11 +7,12 @@ namespace LccHotfix
 {
     public class GameDataManager : Singleton<GameDataManager>
     {
-        public string key = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        public string key;
         public UserData userData;
         public UserSetData userSetData;
-        public void InitManager()
+        public void InitManager(string key)
         {
+            this.key = key;
             userData = GetUserData();
             userSetData = GetUserSetData();
         }

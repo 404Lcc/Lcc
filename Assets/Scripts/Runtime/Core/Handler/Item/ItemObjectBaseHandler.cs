@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace LccModel
@@ -12,9 +11,9 @@ namespace LccModel
             this.isAssetBundle = isAssetBundle;
             this.types = types;
         }
-        public override async Task<GameObject> CreateGameObjectAsync(string name, Transform parent)
+        public override GameObject CreateGameObject(string name, Transform parent)
         {
-            GameObject gameObject = await base.CreateGameObjectAsync(name, parent);
+            GameObject gameObject = base.CreateGameObject(name, parent);
             RectTransform rect = gameObject.GetComponent<RectTransform>();
             rect.sizeDelta = Vector2.zero;
             rect.anchorMin = Vector2.zero;
@@ -25,10 +24,10 @@ namespace LccModel
             rect.localScale = Vector3.one;
             return gameObject;
         }
-        public async Task<Item> CreateItemAsync(ItemType type, object data, Transform parent)
+        public Item CreateItem(ItemType type, object data, Transform parent)
         {
             Item item = new Item();
-            GameObject gameObject = await CreateGameObjectAsync(type.ToItemString(), parent);
+            GameObject gameObject = CreateGameObject(type.ToItemString(), parent);
             if (gameObject == null) return null;
             item.Type = type;
             Type classType = Manager.Instance.GetType(type.ToItemString());

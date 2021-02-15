@@ -5,17 +5,19 @@ namespace LccModel
     [EventHandler]
     public class InitEventHandler : AEvent<Start>
     {
-        public override async void Publish(Start data)
+        public override void Publish(Start data)
         {
-            Object.DontDestroyOnLoad(await AssetManager.Instance.InstantiateAssetAsync("Canvas", false, false, AssetType.Game));
-            Object.DontDestroyOnLoad(await AssetManager.Instance.InstantiateAssetAsync("AudioSource", false, false, AssetType.Game));
-            Object.DontDestroyOnLoad(await AssetManager.Instance.InstantiateAssetAsync("VideoPlayer", false, false, AssetType.Game));
+            Object.DontDestroyOnLoad(AssetManager.Instance.InstantiateAsset("Canvas", false, false, AssetType.Game));
+            Object.DontDestroyOnLoad(AssetManager.Instance.InstantiateAsset("AudioSource", false, false, AssetType.Game));
+            Object.DontDestroyOnLoad(AssetManager.Instance.InstantiateAsset("VideoPlayer", false, false, AssetType.Game));
+
+            DownloadManager.Instance.InitManager();
+            AssetBundleManager.Instance.InitManager(string.Empty);
 
             PanelManager.Instance.InitManager(new PanelObjectBaseHandler(false, false, AssetType.Prefab, AssetType.Panel));
             ItemManager.Instance.InitManager(new ItemObjectBaseHandler(false, false, AssetType.Prefab, AssetType.Item));
             //TipsManager.Instance.InitManager(new TipsPool(10));
             //TipsWindowManager.Instance.InitManager(new TipsWindowPool(10));
-            DownloadManager.Instance.InitManager();
 
             UIEventManager.Instance.Publish(UIEventType.Launch);
         }

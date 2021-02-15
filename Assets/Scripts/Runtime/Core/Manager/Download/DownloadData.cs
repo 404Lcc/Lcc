@@ -13,11 +13,11 @@ namespace LccModel
         //文件长度
         public long size;
         //进度回调
-        public Action<DownloadData, long, long> progress;
+        public event Action<DownloadData, long, long> Progress;
         //完成回调
-        public Action<DownloadData> complete;
+        public event Action<DownloadData> Complete;
         //错误回调
-        public Action<DownloadData, string> error;
+        public event Action<DownloadData, string> Error;
         public DownloadData()
         {
         }
@@ -26,6 +26,18 @@ namespace LccModel
             this.name = name;
             this.url = url;
             this.path = path;
+        }
+        public void ProgressExcute(long currentSize, long size)
+        {
+            Progress?.Invoke(this, currentSize, size);
+        }
+        public void CompleteExcute()
+        {
+            Complete?.Invoke(this);
+        }
+        public void ErrorExcute(string error)
+        {
+            Error?.Invoke(this, error);
         }
     }
 }

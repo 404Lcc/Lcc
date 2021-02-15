@@ -20,11 +20,11 @@ namespace LccEditor
             string path = AssetDatabase.GetAssetPath(Selection.activeObject);
             return new AssetBundleRule(path, AssetBundleRuleType.Directory);
         }
-        public static List<AssetBundleData> BuildAssetBundleData(List<AssetBundleRule> assetBundleRuleDict)
+        public static List<AssetBundleData> BuildAssetBundleData(AssetBundleRule[] assetBundleRules)
         {
             List<AssetBundleData> assetBundleDataList = new List<AssetBundleData>();
             List<string> assetNameList = new List<string>();
-            foreach (AssetBundleRule item in assetBundleRuleDict)
+            foreach (AssetBundleRule item in assetBundleRules)
             {
                 if (item.assetBundleRuleType == AssetBundleRuleType.File)
                 {
@@ -35,7 +35,7 @@ namespace LccEditor
                     {
                         string assetName = fileInfo.FullName.Substring(fileInfo.FullName.IndexOf("Assets")).Replace("\\", "/");
                         string md5 = MD5Util.ComputeMD5(assetName);
-                        assetBundleDataList.Add(new AssetBundleData($"{md5}.unity3d", string.Empty, uint.MinValue, new string[] { assetName }));
+                        assetBundleDataList.Add(new AssetBundleData($"{md5}.unity3d", string.Empty, uint.MinValue, long.MinValue, new string[] { assetName }));
                     }
                 }
                 if (item.assetBundleRuleType == AssetBundleRuleType.Directory)
@@ -50,7 +50,7 @@ namespace LccEditor
                         }
                         string assetName = directoryInfo.FullName.Substring(directoryInfo.FullName.IndexOf("Assets")).Replace("\\", "/");
                         string md5 = MD5Util.ComputeMD5(assetName);
-                        assetBundleDataList.Add(new AssetBundleData($"{md5}.unity3d", string.Empty, uint.MinValue, assetNameList.ToArray()));
+                        assetBundleDataList.Add(new AssetBundleData($"{md5}.unity3d", string.Empty, uint.MinValue, long.MinValue, assetNameList.ToArray()));
                     }
                 }
             }
@@ -108,25 +108,43 @@ namespace LccEditor
             {
                 item.assetBundleHash = assetBundleManifest.GetAssetBundleHash(item.assetBundleName).ToString();
                 BuildPipeline.GetCRCForAssetBundle($"{path}/{item.assetBundleName}", out item.assetBundleCRC);
+                item.fileSize = FileUtil.GetFileSize($"{path}/{item.assetBundleName}");
                 assetBundleDataDict.Add(Path.GetFileNameWithoutExtension(item.assetBundleName), item);
             }
             AssetBundleConfig assetBundleConfig = new AssetBundleConfig(assetBundleSetting.buildId, assetBundleDataDict, assetBundleRuleTypeDict);
             FileUtil.SaveAsset(path, "AssetBundleConfig.json", JsonUtil.ToJson(assetBundleConfig));
+            if (assetBundleSetting.isCopyStreamingAssets)
+            {
+                string copyPath = DirectoryUtil.GetDirectoryPath(PathUtil.GetPath(PathType.StreamingAssetsPath, "Res", GetPlatformForAssetBundle(EditorUserBuildSettings.activeBuildTarget)));
+                foreach (DirectoryInfo item in DirectoryUtil.GetDirectorys(new DirectoryInfo(copyPath), new List<DirectoryInfo>()))
+                {
+                    item.Delete();
+                }
+                foreach (FileInfo item in FileUtil.GetFiles(new DirectoryInfo(copyPath), new List<FileInfo>()))
+                {
+                    item.Delete();
+                }
+                foreach (FileInfo item in FileUtil.GetFiles(new DirectoryInfo(path), new List<FileInfo>()))
+                {
+                    if (Path.GetExtension(item.Name) == ".meta") continue;
+                    File.Copy(item.FullName, $"{PathUtil.GetPath(PathType.StreamingAssetsPath, "Res", GetPlatformForAssetBundle(EditorUserBuildSettings.activeBuildTarget))}/{item.Name}");
+                }
+            }
             AssetDatabase.Refresh();
         }
         public static string GetPlatformForAssetBundle(BuildTarget target)
         {
             switch (target)
             {
-                case BuildTarget.Android:
-                    return "Android";
-                case BuildTarget.iOS:
-                    return "iOS";
                 case BuildTarget.StandaloneWindows:
                 case BuildTarget.StandaloneWindows64:
                     return "Windows";
                 case BuildTarget.StandaloneOSX:
                     return "OSX";
+                case BuildTarget.Android:
+                    return "Android";
+                case BuildTarget.iOS:
+                    return "IOS";
                 default:
                     return string.Empty;
             }

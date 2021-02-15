@@ -14,9 +14,9 @@ namespace LccHotfix
                 return typeof(T);
             }
         }
-        public async void InitConfigTable()
+        public void InitConfigTable()
         {
-            TextAsset asset = await LccModel.AssetManager.Instance.LoadAssetAsync<TextAsset>(typeof(T).Name, ".txt", false, true, AssetType.Config);
+            TextAsset asset = LccModel.AssetManager.Instance.LoadAsset<TextAsset>(typeof(T).Name, ".txt", false, true, AssetType.Config);
             foreach (KeyValuePair<string, T> item in JsonUtil.ToObject<Dictionary<string, T>>(asset.text))
             {
                 configDict.Add(int.Parse(item.Key), item.Value);

@@ -5,7 +5,7 @@
         public virtual void ClosePanel()
         {
             PanelType type = GetType().Name.ToPanelType();
-            PanelManager.Instance.ClosePanelAsync(type).Continue();
+            PanelManager.Instance.ClosePanel(type);
         }
         public virtual void ClearPanel()
         {

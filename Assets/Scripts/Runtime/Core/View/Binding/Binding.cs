@@ -1,9 +1,11 @@
-﻿namespace LccModel
+﻿using System;
+
+namespace LccModel
 {
     public class Binding<T>
     {
-        public delegate void ValueChangeHandler(T oldValue, T newValue);
-        public event ValueChangeHandler ValueChange;
+        //第一个参数是旧的 第二个参数是新的
+        public event Action<T, T> ValueChange;
         private T _value = default;
         public Binding()
         {

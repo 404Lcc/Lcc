@@ -43,5 +43,23 @@ namespace LccModel
             }
             return DirectoryUtil.GetDirectoryPath($"{path}/{subPath}");
         }
+        public static string GetPlatformForAssetBundle()
+        {
+            switch (Application.platform)
+            {
+                case RuntimePlatform.WindowsPlayer:
+                case RuntimePlatform.WindowsEditor:
+                    return "Windows";
+                case RuntimePlatform.OSXPlayer:
+                case RuntimePlatform.OSXEditor:
+                    return "OSX";
+                case RuntimePlatform.Android:
+                    return "Android";
+                case RuntimePlatform.IPhonePlayer:
+                    return "IOS";
+                default:
+                    return string.Empty;
+            }
+        }
     }
 }

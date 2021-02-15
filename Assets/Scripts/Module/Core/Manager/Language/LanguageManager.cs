@@ -6,9 +6,9 @@ namespace LccModel
     public class LanguageManager : Singleton<LanguageManager>
     {
         public Hashtable languages = new Hashtable();
-        public async void ChangeLanguage(LanguageType type)
+        public void ChangeLanguage(LanguageType type)
         {
-            TextAsset asset = await AssetManager.Instance.LoadAssetAsync<TextAsset>(type.ToString(), ".txt", false, true, AssetType.Config);
+            TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(type.ToString(), ".txt", false, true, AssetType.Config);
             foreach (string item in asset.text.Split('\n'))
             {
                 if (string.IsNullOrEmpty(item))

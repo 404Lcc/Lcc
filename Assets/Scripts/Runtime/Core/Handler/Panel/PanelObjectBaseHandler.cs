@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace LccModel
@@ -12,9 +11,9 @@ namespace LccModel
             this.isAssetBundle = isAssetBundle;
             this.types = types;
         }
-        public override async Task<GameObject> CreateGameObjectAsync(string name, Transform parent)
+        public override GameObject CreateGameObject(string name, Transform parent)
         {
-            GameObject gameObject = await base.CreateGameObjectAsync(name, parent);
+            GameObject gameObject = base.CreateGameObject(name, parent);
             RectTransform rect = gameObject.GetComponent<RectTransform>();
             rect.sizeDelta = Vector2.zero;
             rect.anchorMin = Vector2.zero;
@@ -25,11 +24,11 @@ namespace LccModel
             rect.localScale = Vector3.one;
             return gameObject;
         }
-        public async Task<Panel> CreatePanelAsync(PanelType type, object data)
+        public Panel CreatePanel(PanelType type, object data)
         {
             Panel panel = new Panel();
             panel.State = PanelState.Close;
-            GameObject gameObject = await CreateGameObjectAsync(type.ToPanelString(), Objects.Canvas.transform);
+            GameObject gameObject = CreateGameObject(type.ToPanelString(), Objects.Canvas.transform);
             if (gameObject == null) return null;
             panel.Type = type;
             Type classType = Manager.Instance.GetType(type.ToPanelString());
