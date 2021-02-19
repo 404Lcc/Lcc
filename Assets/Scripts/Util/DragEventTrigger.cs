@@ -8,9 +8,7 @@ namespace LccModel
     {
         public event Action<PointerEventData> Down;
         public event Action<PointerEventData> UP;
-        public event Action BeginDrag;
-        public event Action<Vector2> Drag;
-        public event Action EndDrag;
+        public event Action<PointerEventData> Drag;
         public static DragEventTrigger GetDragEventTrigger(GameObject gameObject)
         {
             if (gameObject == null) return null;
@@ -24,17 +22,9 @@ namespace LccModel
         {
             UP?.Invoke(eventData);
         }
-        public override void OnBeginDrag(PointerEventData eventData)
-        {
-            BeginDrag?.Invoke();
-        }
         public override void OnDrag(PointerEventData eventData)
         {
-            Drag?.Invoke(eventData.delta);
-        }
-        public override void OnEndDrag(PointerEventData eventData)
-        {
-            EndDrag?.Invoke();
+            Drag?.Invoke(eventData);
         }
     }
 }

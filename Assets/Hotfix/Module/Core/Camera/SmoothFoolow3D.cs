@@ -22,8 +22,9 @@ namespace LccHotfix
         public Vector3 offset = new Vector3(0, 1.5f, 0);
 
         public Transform target;
+        public Joystack joystack;
         public Transform lockTarget;
-        public void InitSmoothFoolow(float distance, float damping, float limitYMin, float limitYMax, float proportion, bool isNeedDamping, Vector3 offset, Transform target)
+        public void InitSmoothFoolow(float distance, float damping, float limitYMin, float limitYMax, float proportion, bool isNeedDamping, Vector3 offset, Transform target, Joystack joystack)
         {
             this.distance = distance;
             this.damping = damping;
@@ -33,6 +34,7 @@ namespace LccHotfix
             this.isNeedDamping = isNeedDamping;
             this.offset = offset;
             this.target = target;
+            this.joystack = joystack;
 #if UNITY_EDITOR
             speedX = 200;
             speedY = 200;
@@ -53,7 +55,7 @@ namespace LccHotfix
                 if (Input.touchCount == 1)
                 {
                     //常规操作
-                    if (Joystack.instance.isStandard)
+                    if (joystack.isStandard)
                     {
                         //第一根手指按在摇杆上
                     }
@@ -69,7 +71,7 @@ namespace LccHotfix
                 if (Input.touchCount == 2)
                 {
                     //常规操作
-                    if (Joystack.instance.isStandard)
+                    if (joystack.isStandard)
                     {
                         //找到最右边的手指
                         int right;
@@ -132,7 +134,7 @@ namespace LccHotfix
             {
                 PreventThroughWall();
                 //常规操作
-                if (Joystack.instance.isStandard)
+                if (joystack.isStandard)
                 {
                     //第一根手指按在摇杆上
                 }

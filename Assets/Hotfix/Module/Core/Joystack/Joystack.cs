@@ -6,56 +6,50 @@ namespace LccHotfix
 {
     public class Joystack : AObjectBase
     {
-        public static Joystack instance;
+        //原始坐标
+        public Vector3 origin;
         //最大拖动距离
         public float maxDistance;
         //激活移动的最低距离
         public float activeDistance;
-        public Vector3 origin;
-        public float distance;
+        //当前距离
+        public float currentDistance;
         //标准化移动的距离
         public Vector2 normalDistance;
-        public bool drag;
         public float angle;
         //标准操作
         public bool isStandard;
 
-        public GameObject joystack;
-        public GameObject joystackBG;
-        public void InitJoystack(float maxDistance, float activeDistance, GameObject joystack, GameObject joystackBG)
+        public RectTransform joystack;
+        public RectTransform joystackBG;
+        public void InitJoystack(float maxDistance, float activeDistance, RectTransform joystack, RectTransform joystackBG)
         {
             this.maxDistance = maxDistance;
             this.activeDistance = activeDistance;
             this.joystack = joystack;
             this.joystackBG = joystackBG;
             //设置原点
-            origin = joystack.transform.localPosition;
+            origin = joystack.localPosition;
             DragEventTrigger.GetDragEventTrigger(gameObject).Down += OnDown;
             DragEventTrigger.GetDragEventTrigger(gameObject).UP += OnUp;
-            DragEventTrigger.GetDragEventTrigger(gameObject).BeginDrag += OnBeginDrag;
             DragEventTrigger.GetDragEventTrigger(gameObject).Drag += OnDrag;
-            DragEventTrigger.GetDragEventTrigger(gameObject).EndDrag += OnEndDrag;
-            joystack.SetActive(false);
-            joystackBG.SetActive(false);
-        }
-        public override void Start()
-        {
-            instance = this;
+            joystack.gameObject.SetActive(false);
+            joystackBG.gameObject.SetActive(false);
         }
         public override void Update()
         {
             //根据触摸位置算出来的拖动距离
-            distance = Vector3.Distance(joystack.transform.localPosition, origin);
+            currentDistance = Vector3.Distance(joystack.localPosition, origin);
             //距离大于最大拖动距离
-            if (distance >= maxDistance)
+            if (currentDistance >= maxDistance)
             {
                 //求圆上的一点 (目标点-原点) * 半径 / 原点到目标点的距离
-                joystack.transform.localPosition = origin + (joystack.transform.localPosition - origin) * maxDistance / distance;
+                joystack.localPosition = origin + (joystack.localPosition - origin) * maxDistance / currentDistance;
             }
             //距离大于激活移动的最低距离
-            if (distance >= activeDistance)
+            if (currentDistance >= activeDistance)
             {
-                normalDistance = (joystack.transform.localPosition - origin).normalized;
+                normalDistance = (joystack.localPosition - origin).normalized;
             }
             else
             {
@@ -89,32 +83,20 @@ namespace LccHotfix
                     isStandard = true;
                 }
             }
-            RectTransform rect = (RectTransform)joystackBG.transform;
-            rect.localPosition = eventData.position.ScreenToUGUI((RectTransform)transform);
-            joystack.SetActive(true);
-            joystackBG.SetActive(true);
+            joystack.gameObject.SetActive(true);
+            joystackBG.gameObject.SetActive(true);
+            joystack.localPosition = origin;
+            joystackBG.localPosition = eventData.position.ScreenToUGUI((RectTransform)transform);
         }
         public void OnUp(PointerEventData eventData)
         {
             isStandard = false;
-            joystack.SetActive(false);
-            joystackBG.SetActive(false);
+            joystack.gameObject.SetActive(false);
+            joystackBG.gameObject.SetActive(false);
         }
-        public void OnBeginDrag()
+        public void OnDrag(PointerEventData eventData)
         {
-        }
-        public void OnDrag(Vector2 delta)
-        {
-            if (!drag)
-            {
-                drag = true;
-            }
-            joystack.transform.localPosition += new Vector3(delta.x, delta.y, 0);
-        }
-        public void OnEndDrag()
-        {
-            drag = false;
-            joystack.transform.localPosition = origin;
+            joystack.localPosition = eventData.position.ScreenToUGUI((RectTransform)transform);
         }
     }
 }

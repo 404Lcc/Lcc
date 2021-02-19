@@ -19,9 +19,12 @@ namespace LccModel
             rect.anchorMin = Vector2.zero;
             rect.anchorMax = Vector2.one;
             rect.pivot = new Vector2(0.5f, 0.5f);
-            rect.localPosition = Vector3.zero;
-            rect.localRotation = Quaternion.identity;
-            rect.localScale = Vector3.one;
+            Vector2 anchorMin = Screen.safeArea.position;
+            Vector2 anchorMax = Screen.safeArea.position + Screen.safeArea.size;
+            anchorMin = new Vector2(anchorMin.x / Screen.width, anchorMin.y / Screen.height);
+            anchorMax = new Vector2(anchorMax.x / Screen.width, anchorMax.y / Screen.height);
+            rect.anchorMin = anchorMin;
+            rect.anchorMax = anchorMax;
             return gameObject;
         }
         public Item CreateItem(ItemType type, object data, Transform parent)
