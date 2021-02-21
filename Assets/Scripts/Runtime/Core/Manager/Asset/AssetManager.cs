@@ -38,47 +38,38 @@ namespace LccModel
             else
             {
                 AssetData assetData = new AssetData();
+                Object asset = null;
 #if AssetBundle
                 if (isAssetBundle)
                 {
 #if !UNITY_EDITOR
-                    Object asset = AssetBundleManager.Instance.LoadAsset($"Assets/Bundles/{path}{suffix}").LoadAsset($"Assets/Bundles/{path}{suffix}");
-                    assetData.asset = asset;
-                    assetData.types = types;
-                    assetData.name = name;
-                    assetData.suffix = suffix;
-                    assetData.isKeep = isKeep;
-                    assetData.isAssetBundle = isAssetBundle;
+                    asset = AssetBundleManager.Instance.LoadAsset($"Assets/Bundles/{path}{suffix}").LoadAsset<T>($"Assets/Bundles/{path}{suffix}");
 #else
-                    Object asset = AssetDatabase.LoadAssetAtPath<T>($"Assets/Bundles/{path}{suffix}");
-                    assetData.asset = asset;
-                    assetData.types = types;
-                    assetData.name = name;
-                    assetData.suffix = suffix;
-                    assetData.isKeep = isKeep;
-                    assetData.isAssetBundle = isAssetBundle;
+                    asset = AssetDatabase.LoadAssetAtPath<T>($"Assets/Bundles/{path}{suffix}");
 #endif
                 }
                 else
                 {
-                    Object asset = Resources.Load<T>(path);
-                    assetData.asset = asset;
-                    assetData.types = types;
-                    assetData.name = name;
-                    assetData.suffix = suffix;
-                    assetData.isKeep = isKeep;
-                    assetData.isAssetBundle = isAssetBundle;
+#if !UNITY_EDITOR
+                    asset = Resources.Load<T>(path);
+#else
+                    asset = AssetDatabase.LoadAssetAtPath<T>($"Assets/Resources/{path}{suffix}");
+#endif
                 }
 #else
-                Object asset = Resources.Load<T>(path);
+#if !UNITY_EDITOR
+                asset = Resources.Load<T>(path);
+#else
+                asset = AssetDatabase.LoadAssetAtPath<T>($"Assets/Resources/{path}{suffix}");
+#endif
+#endif
+                if (asset == null) return null;
                 assetData.asset = asset;
                 assetData.types = types;
                 assetData.name = name;
                 assetData.suffix = suffix;
                 assetData.isKeep = isKeep;
                 assetData.isAssetBundle = isAssetBundle;
-#endif
-                if (assetData.asset == null) return null;
                 assetDict.Add(path, assetData);
                 return assetData;
             }
@@ -94,49 +85,40 @@ namespace LccModel
             else
             {
                 AssetData assetData = new AssetData();
+                Object asset = null;
 #if AssetBundle
                 if (isAssetBundle)
                 {
 #if !UNITY_EDITOR
                     AsyncOperationHandle<T> handler = Addressables.LoadAssetAsync<T>($"Assets/Bundles/{path}{suffix}");
                     await handler.Task;
-                    Object asset = handler.Result;
-                    assetData.asset = asset;
-                    assetData.types = types;
-                    assetData.name = name;
-                    assetData.suffix = suffix;
-                    assetData.isKeep = isKeep;
-                    assetData.isAssetBundle = isAssetBundle;
+                    asset = handler.Result;
 #else
-                    Object asset = AssetDatabase.LoadAssetAtPath<T>($"Assets/Bundles/{path}{suffix}");
-                    assetData.asset = asset;
-                    assetData.types = types;
-                    assetData.name = name;
-                    assetData.suffix = suffix;
-                    assetData.isKeep = isKeep;
-                    assetData.isAssetBundle = isAssetBundle;
+                    asset = AssetDatabase.LoadAssetAtPath<T>($"Assets/Bundles/{path}{suffix}");
 #endif
                 }
                 else
                 {
-                    Object asset = Resources.Load<T>(path);
-                    assetData.asset = asset;
-                    assetData.types = types;
-                    assetData.name = name;
-                    assetData.suffix = suffix;
-                    assetData.isKeep = isKeep;
-                    assetData.isAssetBundle = isAssetBundle;
+#if !UNITY_EDITOR
+                    asset = Resources.Load<T>(path);
+#else
+                    asset = AssetDatabase.LoadAssetAtPath<T>($"Assets/Resources/{path}{suffix}");
+#endif
                 }
 #else
-                Object asset = Resources.Load<T>(path);
+#if !UNITY_EDITOR
+                asset = Resources.Load<T>(path);
+#else
+                asset = AssetDatabase.LoadAssetAtPath<T>($"Assets/Resources/{path}{suffix}");
+#endif
+#endif
+                if (asset == null) return null;
                 assetData.asset = asset;
                 assetData.types = types;
                 assetData.name = name;
                 assetData.suffix = suffix;
                 assetData.isKeep = isKeep;
                 assetData.isAssetBundle = isAssetBundle;
-#endif
-                if (assetData.asset == null) return null;
                 assetDict.Add(path, assetData);
                 return assetData;
             }
