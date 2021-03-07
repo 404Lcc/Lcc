@@ -36,7 +36,7 @@ namespace LccHotfix
             joystack.gameObject.SetActive(false);
             joystackBG.gameObject.SetActive(false);
         }
-        public override void Update()
+        public void JoystackDistance()
         {
             //根据触摸位置算出来的拖动距离
             currentDistance = Vector3.Distance(joystack.localPosition, origin);
@@ -85,18 +85,21 @@ namespace LccHotfix
             }
             joystack.gameObject.SetActive(true);
             joystackBG.gameObject.SetActive(true);
-            joystack.localPosition = origin;
             joystackBG.localPosition = eventData.position.ScreenToUGUI((RectTransform)transform);
+            JoystackDistance();
         }
         public void OnUp(PointerEventData eventData)
         {
             isStandard = false;
             joystack.gameObject.SetActive(false);
             joystackBG.gameObject.SetActive(false);
+            joystack.localPosition = origin;
+            JoystackDistance();
         }
         public void OnDrag(PointerEventData eventData)
         {
             joystack.localPosition = eventData.position.ScreenToUGUI((RectTransform)transform);
+            JoystackDistance();
         }
     }
 }

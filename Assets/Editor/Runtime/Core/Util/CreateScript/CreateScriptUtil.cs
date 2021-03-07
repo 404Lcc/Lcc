@@ -1,12 +1,13 @@
-﻿using System.IO;
-using System.Text;
+﻿using LccModel;
+using System.IO;
 using UnityEditor;
 using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
+using FileUtil = LccModel.FileUtil;
 
 namespace LccEditor
 {
-    public class CreateScriptAction : EndNameEditAction
+    public class CreateScriptUtil : EndNameEditAction
     {
         public override void Action(int instanceId, string pathName, string resourceFile)
         {
@@ -19,20 +20,13 @@ namespace LccEditor
         {
             //获取要创建资源的绝对路径
             string fullName = Path.GetFullPath(pathName);
-            //读取本地模版文件
-            StreamReader reader = new StreamReader(resourceFile);
-            string content = reader.ReadToEnd();
-            reader.Close();
             //获取资源的文件名
             string fileName = Path.GetFileNameWithoutExtension(pathName);
-            //替换默认的文件名
-            content = content.Replace(resourceFile.Substring(resourceFile.IndexOf('N'), resourceFile.IndexOf('.') - resourceFile.IndexOf('N')), fileName);
+            //读取本地模版文件 替换默认的文件名
+            string content = FileUtil.GetAsset(resourceFile).GetString().Replace(resourceFile.Substring(resourceFile.IndexOf('N'), resourceFile.IndexOf('.') - resourceFile.IndexOf('N')), fileName);
             //写入新文件
-            StreamWriter writer = new StreamWriter(fullName, false, Encoding.UTF8);
-            writer.Write(content);
-            writer.Close();
+            FileUtil.SaveAsset(fullName, content);
             //刷新本地资源
-            AssetDatabase.ImportAsset(pathName);
             AssetDatabase.Refresh();
             return AssetDatabase.LoadAssetAtPath(pathName, typeof(Object));
         }
