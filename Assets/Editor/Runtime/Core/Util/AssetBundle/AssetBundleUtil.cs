@@ -40,17 +40,21 @@ namespace LccEditor
                 }
                 if (item.assetBundleRuleType == AssetBundleRuleType.Directory)
                 {
-                    DirectoryInfo[] directoryInfos = DirectoryUtil.GetDirectorys(new DirectoryInfo(item.path), new List<DirectoryInfo>() { new DirectoryInfo(item.path) });
+                    DirectoryInfo[] directoryInfos = DirectoryUtil.GetDirectorys(new DirectoryInfo(item.path), new List<DirectoryInfo>());
                     if (directoryInfos.Length == 0) continue;
                     foreach (DirectoryInfo directoryInfo in directoryInfos)
                     {
-                        foreach (FileInfo fileInfo in directoryInfo.GetFiles())
+                        FileInfo[] fileInfos = directoryInfo.GetFiles();
+                        if (fileInfos.Length == 0) continue;
+                        List<FileInfo> fileInfoList = (from fileInfo in fileInfos where !string.IsNullOrEmpty(Path.GetExtension(fileInfo.Name)) && Path.GetExtension(fileInfo.Name) != ".meta" select fileInfo).ToList();
+                        foreach (FileInfo fileInfo in fileInfoList)
                         {
                             assetNameList.Add(fileInfo.FullName.Substring(fileInfo.FullName.IndexOf("Assets")).Replace("\\", "/"));
                         }
                         string assetName = directoryInfo.FullName.Substring(directoryInfo.FullName.IndexOf("Assets")).Replace("\\", "/");
                         string md5 = MD5Util.ComputeMD5(assetName);
                         assetBundleDataList.Add(new AssetBundleData($"{md5}.unity3d", string.Empty, uint.MinValue, long.MinValue, assetNameList.ToArray()));
+                        assetNameList.Clear();
                     }
                 }
             }
@@ -84,11 +88,14 @@ namespace LccEditor
                 }
                 if (item.assetBundleRuleType == AssetBundleRuleType.Directory)
                 {
-                    DirectoryInfo[] directoryInfos = DirectoryUtil.GetDirectorys(new DirectoryInfo(item.path), new List<DirectoryInfo>() { new DirectoryInfo(item.path) });
+                    DirectoryInfo[] directoryInfos = DirectoryUtil.GetDirectorys(new DirectoryInfo(item.path), new List<DirectoryInfo>());
                     if (directoryInfos.Length == 0) continue;
                     foreach (DirectoryInfo directoryInfo in directoryInfos)
                     {
-                        foreach (FileInfo fileInfo in directoryInfo.GetFiles())
+                        FileInfo[] fileInfos = directoryInfo.GetFiles();
+                        if (fileInfos.Length == 0) continue;
+                        List<FileInfo> fileInfoList = (from fileInfo in fileInfos where !string.IsNullOrEmpty(Path.GetExtension(fileInfo.Name)) && Path.GetExtension(fileInfo.Name) != ".meta" select fileInfo).ToList();
+                        foreach (FileInfo fileInfo in fileInfoList)
                         {
                             assetBundleRuleTypeDict.Add(fileInfo.FullName.Substring(fileInfo.FullName.IndexOf("Assets")).Replace("\\", "/"), AssetBundleRuleType.Directory);
                         }
