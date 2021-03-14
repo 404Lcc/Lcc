@@ -28,8 +28,6 @@ namespace LccHotfix
             this.activeDistance = activeDistance;
             this.joystack = joystack;
             this.joystackBG = joystackBG;
-            //设置原点
-            origin = joystack.localPosition;
             DragEventTrigger.GetDragEventTrigger(gameObject).Down += OnDown;
             DragEventTrigger.GetDragEventTrigger(gameObject).UP += OnUp;
             DragEventTrigger.GetDragEventTrigger(gameObject).Drag += OnDrag;
@@ -85,7 +83,9 @@ namespace LccHotfix
             }
             joystack.gameObject.SetActive(true);
             joystackBG.gameObject.SetActive(true);
+            joystack.localPosition = eventData.position.ScreenToUGUI((RectTransform)transform);
             joystackBG.localPosition = eventData.position.ScreenToUGUI((RectTransform)transform);
+            origin = joystack.localPosition;
             JoystackDistance();
         }
         public void OnUp(PointerEventData eventData)
@@ -93,7 +93,6 @@ namespace LccHotfix
             isStandard = false;
             joystack.gameObject.SetActive(false);
             joystackBG.gameObject.SetActive(false);
-            joystack.localPosition = origin;
             JoystackDistance();
         }
         public void OnDrag(PointerEventData eventData)
