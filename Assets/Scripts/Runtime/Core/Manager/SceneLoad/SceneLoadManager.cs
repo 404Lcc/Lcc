@@ -13,26 +13,6 @@ namespace LccModel
         public AsyncOperation async;
         public event Action Callback;
         public int process;
-        public override void Update()
-        {
-            if (async == null) return;
-            if (async.progress < 0.9f)
-            {
-                process = (int)(async.progress * 100);
-            }
-            else
-            {
-                process = 100;
-            }
-            if (async.isDone)
-            {
-                Callback?.Invoke();
-                async.allowSceneActivation = true;
-                async = null;
-                Callback = null;
-                process = 0;
-            }
-        }
         private string GetAssetPath(string name, params string[] types)
         {
             if (types.Length == 0) return name;
@@ -49,6 +29,7 @@ namespace LccModel
         }
         private IEnumerator LoadScene(string name, string suffix, bool isAssetBundle, params string[] types)
         {
+            yield return new WaitForSecondsRealtime(0.1f);
 #if AssetBundle
             if (isAssetBundle)
             {
@@ -58,34 +39,46 @@ namespace LccModel
                 async = SceneManager.LoadSceneAsync($"Assets/Bundles/{path}{suffix}");
                 async.allowSceneActivation = false;
                 //AsyncOperationHandle<SceneInstance> handler = Addressables.LoadSceneAsync($"Assets/Bundles/{path}{suffix}");
-                //yield return handler;
 #else
                 async = SceneManager.LoadSceneAsync(name);
                 async.allowSceneActivation = false;
-                yield return async;
 #endif
             }
             else
             {
                 async = SceneManager.LoadSceneAsync(name);
                 async.allowSceneActivation = false;
-                yield return async;
             }
 #else
             async = SceneManager.LoadSceneAsync(name);
             async.allowSceneActivation = false;
-            yield return async;
 #endif
+            yield return new WaitForSecondsRealtime(0.1f);
+            while (process < (int)(async.progress * 100))
+            {
+                process++;
+                yield return null;
+            }
+            while (process < 100)
+            {
+                process++;
+                yield return null;
+            }
+            async.allowSceneActivation = true;
+            yield return new WaitForSecondsRealtime(0.1f);
+            Callback?.Invoke();
         }
         public void LoadScene(string name, string suffix, bool isAssetBundle, Action callback, params string[] types)
         {
             Callback = callback;
+            process = 0;
             SceneManager.LoadScene(SceneName.Load);
             StartCoroutine(LoadScene(name, suffix, isAssetBundle, types));
         }
         public void LoadScene(string name, bool isAssetBundle, Action callback, params string[] types)
         {
             Callback = callback;
+            process = 0;
             SceneManager.LoadScene(SceneName.Load);
             StartCoroutine(LoadScene(name, ".unity", isAssetBundle, types));
         }
