@@ -4,7 +4,7 @@ namespace LccModel
 {
     public abstract class AViewBase<T> : AObjectBase, IView<T> where T : ViewModelBase
     {
-        public bool isInit;
+        private bool _isInit;
         public ViewModelBinding<T> viewModelBinding = new ViewModelBinding<T>();
         public Binding<T> binding = new Binding<T>();
         public AViewBase()
@@ -19,9 +19,9 @@ namespace LccModel
             }
             set
             {
-                if (!isInit)
+                if (!_isInit)
                 {
-                    isInit = true;
+                    _isInit = true;
                     binding.ValueChange += Binding;
                     InitView(value);
                 }

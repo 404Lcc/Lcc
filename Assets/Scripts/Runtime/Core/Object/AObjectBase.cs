@@ -9,7 +9,19 @@ namespace LccModel
 {
     public abstract class AObjectBase
     {
+        [HideInInspector]
+        public long id;
+        [HideInInspector]
+        public bool isAwake;
+        [HideInInspector]
+        public bool isOnEnable;
+        [HideInInspector]
+        public bool isStart;
+        [HideInInspector]
+        public bool isOnDisable;
+        [HideInInspector]
         public LccView lccView;
+        [HideInInspector]
         public GameObject gameObject;
         public Transform transform
         {
@@ -25,6 +37,7 @@ namespace LccModel
         public void InitObject(GameObject gameObject, object data = null)
         {
             this.gameObject = gameObject;
+            id = IdUtil.Generate();
             AutoReference();
             GameObject childGameObject = new GameObject(GetType().FullName);
             childGameObject.transform.SetParent(gameObject.transform);
@@ -34,19 +47,8 @@ namespace LccModel
             lccView = childGameObject.AddComponent<LccView>();
             lccView.className = GetType().FullName;
             lccView.type = this;
-            lccView.awake += Awake;
-            lccView.onEnable += OnEnable;
-            lccView.start += Start;
-            lccView.fixedUpdate += FixedUpdate;
-            lccView.update += Update;
-            lccView.lateUpdate += LateUpdate;
-            lccView.onDisable += OnDisable;
-            lccView.onDestroy += Destroy;
-            if (gameObject.activeSelf)
-            {
-                Awake();
-            }
             InitData(data);
+            ObjectBaseEventSystem.Instance.Register(this);
         }
         public void AutoReference()
         {
@@ -88,25 +90,8 @@ namespace LccModel
                 AutoReference(transform.GetChild(i), fieldInfoDict);
             }
         }
-        public void Invoke(string methodName, float time)
+        public virtual void InitData(object data)
         {
-            lccView?.Invoke(methodName, time);
-        }
-        public Coroutine StartCoroutine(IEnumerator enumerator)
-        {
-            return lccView?.StartCoroutine(enumerator);
-        }
-        public void StopCoroutine(IEnumerator enumerator)
-        {
-            lccView?.StopCoroutine(enumerator);
-        }
-        public void StopCoroutine(Coroutine coroutine)
-        {
-            lccView?.StopCoroutine(coroutine);
-        }
-        public void StopAllCoroutines()
-        {
-            lccView?.StopAllCoroutines();
         }
         public virtual void Awake()
         {
@@ -132,14 +117,25 @@ namespace LccModel
         public virtual void OnDestroy()
         {
         }
-        private void Destroy()
+        public void Invoke(string methodName, float time)
         {
-            lccView = null;
-            gameObject = null;
-            OnDestroy();
+            lccView?.Invoke(methodName, time);
         }
-        public virtual void InitData(object data)
+        public Coroutine StartCoroutine(IEnumerator enumerator)
         {
+            return lccView?.StartCoroutine(enumerator);
+        }
+        public void StopCoroutine(IEnumerator enumerator)
+        {
+            lccView?.StopCoroutine(enumerator);
+        }
+        public void StopCoroutine(Coroutine coroutine)
+        {
+            lccView?.StopCoroutine(coroutine);
+        }
+        public void StopAllCoroutines()
+        {
+            lccView?.StopAllCoroutines();
         }
     }
 }

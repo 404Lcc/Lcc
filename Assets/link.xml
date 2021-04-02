@@ -4343,6 +4343,7 @@
     <type fullname="LccModel.AObjectBase" preserve="all" />
     <type fullname="LccModel.LccView" preserve="all" />
     <type fullname="LccModel.LccViewFactory" preserve="all" />
+    <type fullname="LccModel.ObjectBaseEventSystem" preserve="all" />
     <type fullname="LccModel.Objects" preserve="all" />
     <type fullname="LccModel.ShowObjectInInspectorAttribute" preserve="all" />
     <type fullname="LccModel.Singleton`1" preserve="all" />
@@ -4356,6 +4357,7 @@
     <type fullname="LccModel.LogUtil" preserve="all" />
     <type fullname="LccModel.MD5Util" preserve="all" />
     <type fullname="LccModel.NetworkUtil" preserve="all" />
+    <type fullname="LccModel.ObjectUtil" preserve="all" />
     <type fullname="LccModel.PathType" preserve="all" />
     <type fullname="LccModel.PathUtil" preserve="all" />
     <type fullname="LccModel.RijndaelUtil" preserve="all" />

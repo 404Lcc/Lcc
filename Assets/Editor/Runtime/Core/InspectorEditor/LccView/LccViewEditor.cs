@@ -14,8 +14,6 @@ namespace LccEditor
             LccView lccView = (LccView)target;
             if (GUILayout.Button(lccView.className))
             {
-                Selection.activeObject = null;
-                EditorGUIUtility.PingObject(Selection.activeObject);
                 string directoryName = string.Empty;
                 switch (Path.GetFileNameWithoutExtension(lccView.type.GetType().Assembly.ManifestModule.Name))
                 {
@@ -29,14 +27,14 @@ namespace LccEditor
                         directoryName = "Hotfix";
                         break;
                 }
-                string fileName = lccView.className.Split('.')[1];
+                string fileName = lccView.type.GetType().Name;
                 string[] filePaths = Directory.GetFiles($"Assets/{directoryName}", "*.cs", SearchOption.AllDirectories);
                 foreach (string item in filePaths)
                 {
                     if (item.Substring(item.LastIndexOf(@"\") + 1) == $"{fileName}.cs")
                     {
-                        Selection.activeObject = AssetDatabase.LoadAssetAtPath<TextAsset>(item);
-                        EditorGUIUtility.PingObject(Selection.activeObject);
+                        EditorGUIUtility.PingObject(AssetDatabase.LoadAssetAtPath<TextAsset>(item));
+                        AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath<Object>(item), 0);
                     }
                 }
             }

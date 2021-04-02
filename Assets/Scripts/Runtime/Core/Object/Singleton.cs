@@ -6,7 +6,7 @@ namespace LccModel
 {
     public class Singleton<T> : AObjectBase where T : AObjectBase
     {
-        private static readonly object lockObject = new object();
+        private static readonly object _lockObject = new object();
         private static T _instance;
         public static T Instance
         {
@@ -14,7 +14,7 @@ namespace LccModel
             {
                 if (_instance == null)
                 {
-                    lock (lockObject)
+                    lock (_lockObject)
                     {
                         _instance = Activator.CreateInstance<T>();
                         GameObject gameObject = new GameObject($"{_instance}");

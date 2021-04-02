@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace LccModel
 {
     public class Init : MonoBehaviour
     {
+        public static event Action OnEventSystemFixedUpdate;
+        public static event Action OnEventSystemUpdate;
+        public static event Action OnEventSystemLateUpdate;
         void Start()
         {
             Manager.Instance.InitManager();
@@ -11,6 +15,23 @@ namespace LccModel
             UIEventManager.Instance.InitManager();
 
             EventManager.Instance.Publish(new Start());
+
+            DontDestroyOnLoad(gameObject);
+        }
+        void FixedUpdate()
+        {
+            ObjectBaseEventSystem.Instance.EventSystemFixedUpdate();
+            OnEventSystemFixedUpdate?.Invoke();
+        }
+        void Update()
+        {
+            ObjectBaseEventSystem.Instance.EventSystemUpdate();
+            OnEventSystemUpdate?.Invoke();
+        }
+        void LateUpdate()
+        {
+            ObjectBaseEventSystem.Instance.EventSystemLateUpdate();
+            OnEventSystemLateUpdate?.Invoke();
         }
     }
 }
