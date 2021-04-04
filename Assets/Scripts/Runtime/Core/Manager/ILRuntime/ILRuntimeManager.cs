@@ -40,11 +40,17 @@ namespace LccModel
 #if DEBUG && (UNITY_EDITOR || UNITY_ANDROID || UNITY_IPHONE)
             appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;
 #endif
+            LccFrameworkRegisterMethodDelegate();
+
             JsonMapper.RegisterILRuntimeCLRRedirection(appDomain);
 
             //CLRBindings.Initialize(appDomain);
-
+            
             typeList = appDomain.LoadedTypes.Values.Select(x => x.ReflectionType).ToList();
+        }
+        public void LccFrameworkRegisterMethodDelegate()
+        {
+            appDomain.DelegateManager.RegisterMethodDelegate<ILRuntime.Runtime.Intepreter.ILTypeInstance, ILRuntime.Runtime.Intepreter.ILTypeInstance>();
         }
         public unsafe void OnHotfixLoaded()
         {

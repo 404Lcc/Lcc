@@ -1,37 +1,17 @@
 ﻿using LccModel;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using FileUtil = LccModel.FileUtil;
 
 namespace LccEditor
 {
     public class LccMenuItem
     {
-        [MenuItem("Lcc/ViewPersistentData")]
-        public static void ViewPersistentData()
+        [MenuItem("Assets/Lcc/ExcelExport")]
+        public static void ExcelExport()
         {
-            EditorUtility.OpenWithDefaultApp(Application.persistentDataPath);
-        }
-        [MenuItem("Lcc/BuildPlayer")]
-        public static void BuildPlayer()
-        {
-            List<string> argList = new List<string>();
-            foreach (string item in Environment.GetCommandLineArgs())
-            {
-                argList.Add(item);
-            }
-            string name = $"{PlayerSettings.productName} v{PlayerSettings.bundleVersion}";
-#if UNITY_STANDALONE
-            name = $"{name}.exe";
-#endif
-#if UNITY_ANDROID
-            name = $"{name}.apk";
-#endif
-            string locationPathName = $"{PathUtil.GetPath(PathType.PersistentDataPath, "Build")}/{name}";
-            BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, locationPathName, EditorUserBuildSettings.activeBuildTarget, EditorUserBuildSettings.development ? BuildOptions.Development : BuildOptions.None);
+            ExcelExportUtil.ExportAll();
         }
         [MenuItem("Assets/Lcc/TagFileRule")]
         public static void TagFileRule()
@@ -92,152 +72,6 @@ namespace LccEditor
                 }
                 AssetBundleUtil.BuildAssetBundle(assetBundleSetting);
             }
-        }
-        [MenuItem("Lcc/ILRuntime")]
-        public static void ILRuntime()
-        {
-            BuildTargetGroup buildTargetGroup;
-#if UNITY_STANDALONE
-            buildTargetGroup = BuildTargetGroup.Standalone;
-#endif
-#if UNITY_ANDROID
-        buildTargetGroup = BuildTargetGroup.Android;
-#endif
-#if UNITY_IOS
-        buildTargetGroup = BuildTargetGroup.iOS;
-#endif
-            string define = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
-            List<string> defineList = new List<string>(define.Split(';'));
-            if (!defineList.Contains("ILRuntime"))
-            {
-                define += ";ILRuntime";
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, define);
-            }
-        }
-        [MenuItem("Lcc/Mono")]
-        public static void Mono()
-        {
-            BuildTargetGroup buildTargetGroup;
-#if UNITY_STANDALONE
-            buildTargetGroup = BuildTargetGroup.Standalone;
-#endif
-#if UNITY_ANDROID
-        buildTargetGroup = BuildTargetGroup.Android;
-#endif
-#if UNITY_IOS
-        buildTargetGroup = BuildTargetGroup.iOS;
-#endif
-            string define = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
-            List<string> defineList = new List<string>(define.Split(';'));
-            if (defineList.Contains("ILRuntime"))
-            {
-                defineList.Remove("ILRuntime");
-                define = string.Empty;
-                foreach (string item in defineList)
-                {
-                    define += $"{item};";
-                }
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, define);
-            }
-        }
-        [MenuItem("Lcc/AssetBundle")]
-        public static void AssetBundle()
-        {
-            BuildTargetGroup buildTargetGroup;
-#if UNITY_STANDALONE
-            buildTargetGroup = BuildTargetGroup.Standalone;
-#endif
-#if UNITY_ANDROID
-        buildTargetGroup = BuildTargetGroup.Android;
-#endif
-#if UNITY_IOS
-        buildTargetGroup = BuildTargetGroup.iOS;
-#endif
-            string define = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
-            List<string> defineList = new List<string>(define.Split(';'));
-            if (!defineList.Contains("AssetBundle"))
-            {
-                define += ";AssetBundle";
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, define);
-            }
-        }
-        [MenuItem("Lcc/Resources")]
-        public static void Resources()
-        {
-            BuildTargetGroup buildTargetGroup;
-#if UNITY_STANDALONE
-            buildTargetGroup = BuildTargetGroup.Standalone;
-#endif
-#if UNITY_ANDROID
-        buildTargetGroup = BuildTargetGroup.Android;
-#endif
-#if UNITY_IOS
-        buildTargetGroup = BuildTargetGroup.iOS;
-#endif
-            string define = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
-            List<string> defineList = new List<string>(define.Split(';'));
-            if (defineList.Contains("AssetBundle"))
-            {
-                defineList.Remove("AssetBundle");
-                define = string.Empty;
-                foreach (string item in defineList)
-                {
-                    define += $"{item};";
-                }
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, define);
-            }
-        }
-        [MenuItem("Lcc/Release")]
-        public static void Release()
-        {
-            BuildTargetGroup buildTargetGroup;
-#if UNITY_STANDALONE
-            buildTargetGroup = BuildTargetGroup.Standalone;
-#endif
-#if UNITY_ANDROID
-        buildTargetGroup = BuildTargetGroup.Android;
-#endif
-#if UNITY_IOS
-        buildTargetGroup = BuildTargetGroup.iOS;
-#endif
-            string define = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
-            List<string> defineList = new List<string>(define.Split(';'));
-            if (!defineList.Contains("Release"))
-            {
-                define += ";Release";
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, define);
-            }
-        }
-        [MenuItem("Lcc/Debug")]
-        public static void Debug()
-        {
-            BuildTargetGroup buildTargetGroup;
-#if UNITY_STANDALONE
-            buildTargetGroup = BuildTargetGroup.Standalone;
-#endif
-#if UNITY_ANDROID
-        buildTargetGroup = BuildTargetGroup.Android;
-#endif
-#if UNITY_IOS
-        buildTargetGroup = BuildTargetGroup.iOS;
-#endif
-            string define = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
-            List<string> defineList = new List<string>(define.Split(';'));
-            if (defineList.Contains("Release"))
-            {
-                defineList.Remove("Release");
-                define = string.Empty;
-                foreach (string item in defineList)
-                {
-                    define += $"{item};";
-                }
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, define);
-            }
-        }
-        [MenuItem("Lcc/ExcelExport")]
-        public static void ExcelExport()
-        {
-            ExcelExportUtil.ExportAll();
         }
         [MenuItem("Assets/Lcc/Create/Hotfix/Panel")]
         public static void CreateHotfixPanel()

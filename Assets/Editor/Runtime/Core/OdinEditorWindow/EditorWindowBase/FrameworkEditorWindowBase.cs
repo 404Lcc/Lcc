@@ -14,7 +14,6 @@ namespace LccEditor
         }
         public FrameworkEditorWindowBase(EditorWindow editorWindow) : base(editorWindow)
         {
-
         }
         [PropertySpace(10)]
         [LabelText("Github"), Button]
