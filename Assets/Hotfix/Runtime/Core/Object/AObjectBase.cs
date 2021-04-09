@@ -46,7 +46,7 @@ namespace LccHotfix
             childGameObject.transform.localRotation = Quaternion.identity;
             childGameObject.transform.localScale = Vector3.one;
             lccView = childGameObject.AddComponent<LccView>();
-            lccView.className = GetType().FullName;
+            lccView.className = GetType().Name;
             lccView.type = this;
             InitData(data);
             ObjectBaseEventSystem.Instance.Register(this);

@@ -27,7 +27,7 @@ namespace LccEditor
                         directoryName = "Hotfix";
                         break;
                 }
-                string fileName = lccView.type.GetType().Name;
+                string fileName = lccView.className;
                 string[] filePaths = Directory.GetFiles($"Assets/{directoryName}", "*.cs", SearchOption.AllDirectories);
                 foreach (string item in filePaths)
                 {
