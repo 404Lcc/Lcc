@@ -1,16 +1,20 @@
-﻿using LccModel;
+﻿using ILRuntime.Reflection;
+using LccModel;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace LccEditor
 {
     public static class ObjectTypeUtil
     {
-        public static Hashtable objectTypes = new Hashtable();
+        public static List<IObjectType> objectList = new List<IObjectType>();
+        public static Hashtable objectObjectTypes = new Hashtable();
+        public static Hashtable listObjectTypes = new Hashtable();
         static ObjectTypeUtil()
         {
             foreach (Type item in typeof(ObjectTypeUtil).Assembly.GetTypes())
@@ -19,41 +23,198 @@ namespace LccEditor
                 if (objectTypeAttributes.Length > 0)
                 {
                     IObjectType iObjectType = (IObjectType)Activator.CreateInstance(item);
-                    objectTypes.Add(objectTypeAttributes[0].type, iObjectType);
+                    objectList.Add(iObjectType);
                 }
             }
         }
-        public static void Draw(object obj)
+        public static void Draw(object obj, int indentLevel)
         {
-            FieldInfo[] fields = obj.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
-            EditorGUILayout.BeginVertical();
-            foreach (FieldInfo item in fields)
+            string assemblyName = string.Empty;
+            switch (Path.GetFileNameWithoutExtension(obj.GetType().Assembly.ManifestModule.Name))
             {
-                if (item.FieldType.IsDefined(typeof(HideInInspector), false))
-                {
-                    continue;
-                }
-                if (item.IsDefined(typeof(HideInInspector), false))
-                {
-                    continue;
-                }
-                if (objectTypes.ContainsKey(item.FieldType))
-                {
-                    ((IObjectType)objectTypes[item.FieldType]).Draw(obj, item);
-                    continue;
-                }
-                if (item.FieldType.IsSubclassOf(typeof(Object)))
-                {
-                    ((IObjectType)objectTypes[typeof(Object)]).Draw(obj, item);
-                    continue;
-                }
-                if (item.IsDefined(typeof(ShowObjectInInspectorAttribute), false))
-                {
-                    ((IObjectType)objectTypes[typeof(object)]).Draw(item.GetValue(obj), item);
-                    continue;
-                }
+                case "Unity.Model":
+                    assemblyName = "Unity.Model";
+                    break;
+                case "Unity.Hotfix":
+                    assemblyName = "Unity.Hotfix";
+                    break;
+                case "ILRuntime":
+                    assemblyName = "Unity.Hotfix";
+                    break;
             }
-            EditorGUILayout.EndVertical();
+            if (assemblyName == "Unity.Model")
+            {
+                FieldInfo[] fieldInfos = obj.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+                EditorGUILayout.BeginVertical();
+                EditorGUI.indentLevel = indentLevel;
+                foreach (FieldInfo item in fieldInfos)
+                {
+                    object value = item.GetValue(obj);
+                    Type type = item.FieldType;
+                    if (item.IsDefined(typeof(HideInInspector), false))
+                    {
+                        continue;
+                    }
+                    if (type.IsDefined(typeof(HideInInspector), false))
+                    {
+                        continue;
+                    }
+                    if (objectObjectTypes.ContainsKey((obj, item)))
+                    {
+                        ObjectObjectType objectObjectType = (ObjectObjectType)objectObjectTypes[(obj, item)];
+                        objectObjectType.Draw(type, item.Name, value, null, indentLevel);
+                        continue;
+                    }
+                    if ((item.IsDefined(typeof(SerializeField), false) || type.IsDefined(typeof(SerializeField), false)) && type.Assembly.ManifestModule.Name == "Unity.Model.dll")
+                    {
+                        ObjectObjectType objectObjectType = new ObjectObjectType();
+                        if (value == null)
+                        {
+                            object instance = Activator.CreateInstance(type);
+                            objectObjectType.Draw(type, item.Name, instance, null, indentLevel);
+                            item.SetValue(obj, instance);
+                        }
+                        else
+                        {
+                            objectObjectType.Draw(type, item.Name, value, null, indentLevel);
+                        }
+                        objectObjectTypes.Add((obj, item), objectObjectType);
+                        continue;
+                    }
+                    if (listObjectTypes.ContainsKey((obj, item)))
+                    {
+                        ListObjectType listObjectType = (ListObjectType)listObjectTypes[(obj, item)];
+                        listObjectType.Draw(type, item.Name, value, null, indentLevel);
+                        continue;
+                    }
+                    if (type.GetInterface("IList") != null)
+                    {
+                        ListObjectType listObjectType = new ListObjectType();
+                        if (value == null)
+                        {
+                            continue;
+                        }
+                        listObjectType.Draw(type, item.Name, value, null, indentLevel);
+                        listObjectTypes.Add((obj, item), listObjectType);
+                        continue;
+                    }
+                    foreach (IObjectType objectTypeItem in objectList)
+                    {
+                        if (!objectTypeItem.IsType(type))
+                        {
+                            continue;
+                        }
+                        string fieldName = item.Name;
+                        if (fieldName.Contains("clrInstance") || fieldName.Contains("Boxed"))
+                        {
+                            continue;
+                        }
+                        if (fieldName.Length > 17 && fieldName.Contains("k__BackingField"))
+                        {
+                            fieldName = fieldName.Substring(1, fieldName.Length - 17);
+                        }
+                        value = objectTypeItem.Draw(type, fieldName, value, null);
+                        item.SetValue(obj, value);
+                    }
+                }
+                EditorGUI.indentLevel = indentLevel;
+                EditorGUILayout.EndVertical();
+            }
+            else
+            {
+                FieldInfo[] fieldInfos = ILRuntimeManager.Instance.appDomain.LoadedTypes[obj.ToString()].ReflectionType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+                EditorGUILayout.BeginVertical();
+                EditorGUI.indentLevel = indentLevel;
+                foreach (FieldInfo item in fieldInfos)
+                {
+                    object value = item.GetValue(obj);
+                    if (item.FieldType is ILRuntimeWrapperType)
+                    {
+                        //基础类型绘制
+                        Type type = ((ILRuntimeWrapperType)item.FieldType).RealType;
+                        if (item.IsDefined(typeof(HideInInspector), false))
+                        {
+                            continue;
+                        }
+                        if (type.IsDefined(typeof(HideInInspector), false))
+                        {
+                            continue;
+                        }
+                        if (listObjectTypes.ContainsKey((obj, item)))
+                        {
+                            ListObjectType listObjectType = (ListObjectType)listObjectTypes[(obj, item)];
+                            listObjectType.Draw(type, item.Name, value, null, indentLevel);
+                            continue;
+                        }
+                        if (type.GetInterface("IList") != null)
+                        {
+                            ListObjectType listObjectType = new ListObjectType();
+                            if (value == null)
+                            {
+                                continue;
+                            }
+                            listObjectType.Draw(type, item.Name, value, null, indentLevel);
+                            listObjectTypes.Add((obj, item), listObjectType);
+                            continue;
+                        }
+                        foreach (IObjectType objectTypeItem in objectList)
+                        {
+                            if (!objectTypeItem.IsType(type))
+                            {
+                                continue;
+                            }
+                            string fieldName = item.Name;
+                            if (fieldName.Contains("clrInstance") || fieldName.Contains("Boxed"))
+                            {
+                                continue;
+                            }
+                            if (fieldName.Length > 17 && fieldName.Contains("k__BackingField"))
+                            {
+                                fieldName = fieldName.Substring(1, fieldName.Length - 17);
+                            }
+                            value = objectTypeItem.Draw(type, fieldName, value, null);
+                            item.SetValue(obj, value);
+                        }
+                    }
+                    else
+                    {
+                        //自定义类型绘制
+                        Type type = item.FieldType;
+                        if (item.IsDefined(typeof(HideInInspector), false))
+                        {
+                            continue;
+                        }
+                        if (type.IsDefined(typeof(HideInInspector), false))
+                        {
+                            continue;
+                        }
+                        if (objectObjectTypes.ContainsKey((obj, item)))
+                        {
+                            ObjectObjectType objectObjectType = (ObjectObjectType)objectObjectTypes[(obj, item)];
+                            objectObjectType.Draw(type, item.Name, value, null, indentLevel);
+                            continue;
+                        }
+                        if ((item.IsDefined(typeof(SerializeField), false) || type.IsDefined(typeof(SerializeField), false)) && type.Assembly.ManifestModule.Name == "ILRuntime.dll")
+                        {
+                            ObjectObjectType objectObjectType = new ObjectObjectType();
+                            if (value == null)
+                            {
+                                object instance = ILRuntimeManager.Instance.appDomain.Instantiate(type.ToString());
+                                objectObjectType.Draw(type, item.Name, instance, null, indentLevel);
+                                item.SetValue(obj, instance);
+                            }
+                            else
+                            {
+                                objectObjectType.Draw(type, item.Name, value, null, indentLevel);
+                            }
+                            objectObjectTypes.Add((obj, item), objectObjectType);
+                            continue;
+                        }
+                    }
+                }
+                EditorGUI.indentLevel = indentLevel;
+                EditorGUILayout.EndVertical();
+            }
         }
     }
 }

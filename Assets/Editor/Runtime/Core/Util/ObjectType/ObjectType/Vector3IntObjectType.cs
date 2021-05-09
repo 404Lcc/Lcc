@@ -1,18 +1,19 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System;
 using UnityEditor;
 using UnityEngine;
 
 namespace LccEditor
 {
-    [ObjectType(typeof(Vector3Int))]
+    [ObjectType]
     public class Vector3IntObjectType : IObjectType
     {
-        public void Draw(object obj, FieldInfo field)
+        public bool IsType(Type type)
         {
-            string name = field.Name.First().ToString().ToUpper() + field.Name.Substring(1);
-            object value = field.GetValue(obj);
-            field.SetValue(obj, EditorGUILayout.Vector3IntField(name, (Vector3Int)value));
+            return type == typeof(Vector3Int);
+        }
+        public object Draw(Type memberType, string memberName, object value, object target)
+        {
+            return EditorGUILayout.Vector3IntField(memberName, (Vector3Int)value);
         }
     }
 }

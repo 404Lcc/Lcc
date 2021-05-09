@@ -38,7 +38,7 @@ namespace LccEditor
                     }
                 }
             }
-            ObjectTypeUtil.Draw(lccView.type);
+            ObjectTypeUtil.Draw(lccView.type, 0);
         }
     }
 }

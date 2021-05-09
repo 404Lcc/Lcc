@@ -1,17 +1,18 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System;
 using UnityEditor;
 
 namespace LccEditor
 {
-    [ObjectType(typeof(long))]
+    [ObjectType]
     public class LongObjectType : IObjectType
     {
-        public void Draw(object obj, FieldInfo field)
+        public bool IsType(Type type)
         {
-            string name = field.Name.First().ToString().ToUpper() + field.Name.Substring(1);
-            object value = field.GetValue(obj);
-            field.SetValue(obj, EditorGUILayout.LongField(name, (long)value));
+            return type == typeof(long);
+        }
+        public object Draw(Type memberType, string memberName, object value, object target)
+        {
+            return EditorGUILayout.LongField(memberName, (long)value);
         }
     }
 }

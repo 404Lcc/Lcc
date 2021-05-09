@@ -4269,6 +4269,7 @@
     <type fullname="LccModel.LanguageManager" preserve="all" />
     <type fullname="LccModel.TimerData" preserve="all" />
     <type fullname="LccModel.TimerManager" preserve="all" />
+    <type fullname="LccModel.TimerType" preserve="all" />
     <type fullname="LccModel.Tips" preserve="all" />
     <type fullname="LccModel.TipsManager" preserve="all" />
     <type fullname="LccModel.TipsPool" preserve="all" />
@@ -4285,6 +4286,15 @@
     <type fullname="LccModel.PanelType" preserve="all" />
     <type fullname="LccModel.SceneName" preserve="all" />
     <type fullname="LccModel.UIEventType" preserve="all" />
+    <type fullname="LccModel.AsyncETTaskCompletedMethodBuilder" preserve="all" />
+    <type fullname="LccModel.AsyncETTaskMethodBuilder" preserve="all" />
+    <type fullname="LccModel.AsyncETTaskMethodBuilder`1" preserve="all" />
+    <type fullname="LccModel.AsyncETVoidMethodBuilder" preserve="all" />
+    <type fullname="LccModel.AwaiterStatus" preserve="all" />
+    <type fullname="LccModel.ETTask" preserve="all" />
+    <type fullname="LccModel.ETTask`1" preserve="all" />
+    <type fullname="LccModel.ETTaskCompleted" preserve="all" />
+    <type fullname="LccModel.ETVoid" preserve="all" />
     <type fullname="LccModel.ByteExpand" preserve="all" />
     <type fullname="LccModel.GameObjectExpand" preserve="all" />
     <type fullname="LccModel.ImageExpand" preserve="all" />
@@ -4345,7 +4355,6 @@
     <type fullname="LccModel.LccViewFactory" preserve="all" />
     <type fullname="LccModel.ObjectBaseEventSystem" preserve="all" />
     <type fullname="LccModel.Objects" preserve="all" />
-    <type fullname="LccModel.ShowObjectInInspectorAttribute" preserve="all" />
     <type fullname="LccModel.Singleton`1" preserve="all" />
     <type fullname="LccModel.APool`1" preserve="all" />
     <type fullname="LccModel.DirectoryUtil" preserve="all" />
@@ -4387,6 +4396,8 @@
     <type fullname="LccModel.RightClickButton" preserve="all" />
     <type fullname="LccModel.AudioManager+&lt;&gt;c__DisplayClass5_0" preserve="all" />
     <type fullname="LccModel.VoiceManager+&lt;&gt;c__DisplayClass5_0" preserve="all" />
+    <type fullname="LccModel.ETTask+&lt;InnerCoroutine&gt;d__14" preserve="all" />
+    <type fullname="LccModel.ETTask`1+&lt;InnerCoroutine&gt;d__15" preserve="all" />
     <type fullname="LccModel.TaskExpand+&lt;Continue&gt;d__0" preserve="all" />
     <type fullname="LccModel.AddressablesManager+&lt;CheckForCatalogUpdates&gt;d__0" preserve="all" />
     <type fullname="LccModel.AddressablesManager+&lt;UpdateCatalogs&gt;d__1" preserve="all" />

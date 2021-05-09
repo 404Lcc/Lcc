@@ -1,17 +1,18 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System;
 using UnityEditor;
 
 namespace LccEditor
 {
-    [ObjectType(typeof(double))]
+    [ObjectType]
     public class DoubleObjectType : IObjectType
     {
-        public void Draw(object obj, FieldInfo field)
+        public bool IsType(Type type)
         {
-            string name = field.Name.First().ToString().ToUpper() + field.Name.Substring(1);
-            object value = field.GetValue(obj);
-            field.SetValue(obj, EditorGUILayout.DoubleField(name, (double)value));
+            return type == typeof(double);
+        }
+        public object Draw(Type memberType, string memberName, object value, object target)
+        {
+            return EditorGUILayout.DoubleField(memberName, (double)value);
         }
     }
 }

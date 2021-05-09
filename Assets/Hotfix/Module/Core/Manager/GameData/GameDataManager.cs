@@ -30,9 +30,10 @@ namespace LccHotfix
             if (UserDataExist(name))
             {
                 string value = RijndaelUtil.RijndaelDecrypt(key, FileUtil.GetAsset($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res")}/{name}.lcc")).GetString();
-                return JsonUtil.ToObject<UserData>(value);
+                userData = JsonUtil.ToObject<UserData>(value);
+                return userData;
             }
-            return new UserData();
+            return userData = userData ?? new UserData();
         }
         public void SaveUserData(string name = "user")
         {
@@ -62,9 +63,10 @@ namespace LccHotfix
             if (UserSetDataExist())
             {
                 string value = RijndaelUtil.RijndaelDecrypt(key, FileUtil.GetAsset($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res")}/UserSet.lcc")).GetString();
-                return JsonUtil.ToObject<UserSetData>(value);
+                userSetData = JsonUtil.ToObject<UserSetData>(value);
+                return userSetData;
             }
-            return new UserSetData(20, 100, CVType.Chinese, LccModel.LanguageType.Chinese, DisplayModeType.FullScreen, ResolutionType.Resolution1920x1080);
+            return userSetData = userSetData ?? new UserSetData(20, 100, CVType.Chinese, LccModel.LanguageType.Chinese, DisplayModeType.FullScreen, ResolutionType.Resolution1920x1080);
         }
         public void SaveUserSetData()
         {

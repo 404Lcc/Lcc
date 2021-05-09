@@ -77,7 +77,6 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\SocketModel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\ILRuntimeManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\IUIEvent.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Object\ShowObjectInInspectorAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
     <Compile Include="Assets\Scripts\Module\Config\User\LanguageType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\EventHandlerAttribute.cs" />
@@ -107,10 +106,12 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\MD5\MD5Util.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Async\Task\ETTaskCompleted.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Tips\TipsPool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\Singleton.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Updater\UIEventHandler\UpdaterUIEventHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Manager\Manager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Async\MethodBuilder\AsyncETTaskMethodBuilder.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Tips\TipsManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\ICenterHandler.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\UIEventHandler\LaunchUIEventHandler.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelState.cs" />
     <Compile Include="Assets\Scripts\Util\Delay.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\IPanel.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Async\MethodBuilder\AsyncETVoidMethodBuilder.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\TipsWindow\TipsWindow.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Network\NetworkUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathUtil.cs" />
@@ -137,6 +139,8 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Encoding\EncodingUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\AssetBundle\AssetBundleRule.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\ObjectBaseEventSystem.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Async\Task\ETVoid.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Async\MethodBuilder\AsyncETTaskCompletedMethodBuilder.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Asset\AssetType.cs" />
     <Compile Include="Assets\Scripts\Util\DisplayMode.cs" />
@@ -150,6 +154,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Download\DownloadData.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Voice\VoiceManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\ViewModel\ViewModelBase.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Async\Task\ETTask.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\LccView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\ClientNetworkManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Id\IdUtil.cs" />
@@ -159,6 +164,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\AssetBundle\AssetBundleManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\UIEvent\UIEventType.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Async\Task\AwaiterStatus.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Byte\ByteExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\IConfig.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Vector2\Vector2Expand.cs" />
@@ -182,6 +188,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Object\AObjectBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\IItem.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Log\LogUtil.cs" />
+    <Compile Include="Assets\Scripts\Module\Core\Manager\Timer\TimerType.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />
@@ -440,14 +447,14 @@
     <Reference Include="Sirenix.Utilities.Editor">
       <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="ILRuntime.Mono.Cecil">
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.7\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
+    </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Mdb">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.7\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.7\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.7\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\2020.1.8f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>

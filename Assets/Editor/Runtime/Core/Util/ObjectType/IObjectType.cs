@@ -1,9 +1,10 @@
-﻿using System.Reflection;
+﻿using System;
 
 namespace LccEditor
 {
     public interface IObjectType
     {
-        void Draw(object obj, FieldInfo field);
+        bool IsType(Type type);
+        object Draw(Type memberType, string memberName, object value, object target);
     }
 }

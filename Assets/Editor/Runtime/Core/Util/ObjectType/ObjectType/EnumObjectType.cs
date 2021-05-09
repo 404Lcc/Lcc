@@ -1,24 +1,24 @@
 ﻿using System;
-using System.Linq;
-using System.Reflection;
 using UnityEditor;
 
 namespace LccEditor
 {
-    [ObjectType(typeof(Enum))]
+    [ObjectType]
     public class EnumObjectType : IObjectType
     {
-        public void Draw(object obj, FieldInfo field)
+        public bool IsType(Type type)
         {
-            string name = field.Name.First().ToString().ToUpper() + field.Name.Substring(1);
-            object value = field.GetValue(obj);
-            if (field.FieldType.IsDefined(typeof(FlagsAttribute), false))
+            return type == typeof(Enum);
+        }
+        public object Draw(Type memberType, string memberName, object value, object target)
+        {
+            if (memberType.IsDefined(typeof(FlagsAttribute), false))
             {
-                field.SetValue(obj, EditorGUILayout.EnumFlagsField(name, (Enum)value));
+                return EditorGUILayout.EnumFlagsField(memberName, (Enum)value);
             }
             else
             {
-                field.SetValue(obj, EditorGUILayout.EnumPopup(name, (Enum)value));
+                return EditorGUILayout.EnumPopup(memberName, (Enum)value);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using ILRuntime.Mono.Cecil.Pdb;
+using ILRuntime.Runtime.Intepreter;
 using LitJson;
 using System;
 using System.Collections.Generic;
@@ -50,7 +51,7 @@ namespace LccModel
         }
         public void LccFrameworkRegisterMethodDelegate()
         {
-            appDomain.DelegateManager.RegisterMethodDelegate<ILRuntime.Runtime.Intepreter.ILTypeInstance, ILRuntime.Runtime.Intepreter.ILTypeInstance>();
+            appDomain.DelegateManager.RegisterMethodDelegate<ILTypeInstance, ILTypeInstance>();
         }
         public unsafe void OnHotfixLoaded()
         {

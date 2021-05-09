@@ -400,14 +400,14 @@
     <Reference Include="Sirenix.Utilities.Editor">
       <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="ILRuntime.Mono.Cecil">
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.7\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
+    </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Mdb">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.7\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.7\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.7\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\2020.1.8f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>

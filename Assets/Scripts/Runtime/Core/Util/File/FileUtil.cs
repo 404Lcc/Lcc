@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace LccModel
 {
@@ -52,7 +53,7 @@ namespace LccModel
         public static void SaveAsset(string path, byte[] bytes)
         {
             DirectoryUtil.GetDirectoryPath(Path.GetDirectoryName(path));
-            using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
+            using (FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write))
             {
                 fileStream.Write(bytes, 0, bytes.Length);
             }
@@ -94,15 +95,14 @@ namespace LccModel
         /// <returns></returns>
         public static byte[] GetAsset(string path)
         {
-            byte[] bytes;
             if (File.Exists(path))
             {
-                using (FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
-                    bytes = new byte[fileStream.Length];
+                    byte[] bytes = new byte[fileStream.Length];
                     fileStream.Read(bytes, 0, bytes.Length);
+                    return bytes;
                 }
-                return bytes;
             }
             return null;
         }

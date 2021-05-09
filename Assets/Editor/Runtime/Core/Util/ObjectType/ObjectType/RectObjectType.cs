@@ -1,18 +1,19 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System;
 using UnityEditor;
 using UnityEngine;
 
 namespace LccEditor
 {
-    [ObjectType(typeof(Rect))]
+    [ObjectType]
     public class RectObjectType : IObjectType
     {
-        public void Draw(object obj, FieldInfo field)
+        public bool IsType(Type type)
         {
-            string name = field.Name.First().ToString().ToUpper() + field.Name.Substring(1);
-            object value = field.GetValue(obj);
-            field.SetValue(obj, EditorGUILayout.RectField(name, (Rect)value));
+            return type == typeof(Rect);
+        }
+        public object Draw(Type memberType, string memberName, object value, object target)
+        {
+            return EditorGUILayout.RectField(memberName, (Rect)value);
         }
     }
 }

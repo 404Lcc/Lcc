@@ -1,18 +1,19 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System;
 using UnityEditor;
 using Object = UnityEngine.Object;
 
 namespace LccEditor
 {
-    [ObjectType(typeof(Object))]
+    [ObjectType]
     public class UnityEngineObjectObjectType : IObjectType
     {
-        public void Draw(object obj, FieldInfo field)
+        public bool IsType(Type type)
         {
-            string name = field.Name.First().ToString().ToUpper() + field.Name.Substring(1);
-            object value = field.GetValue(obj);
-            field.SetValue(obj, EditorGUILayout.ObjectField(name, (Object)value, field.FieldType, true));
+            return type == typeof(Object) || type.IsSubclassOf(typeof(Object));
+        }
+        public object Draw(Type memberType, string memberName, object value, object target)
+        {
+            return EditorGUILayout.ObjectField(memberName, (Object)value, memberType, true);
         }
     }
 }

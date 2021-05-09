@@ -1,18 +1,19 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System;
 using UnityEditor;
 using UnityEngine;
 
 namespace LccEditor
 {
-    [ObjectType(typeof(Vector4))]
+    [ObjectType]
     public class Vector4ObjectType : IObjectType
     {
-        public void Draw(object obj, FieldInfo field)
+        public bool IsType(Type type)
         {
-            string name = field.Name.First().ToString().ToUpper() + field.Name.Substring(1);
-            object value = field.GetValue(obj);
-            field.SetValue(obj, EditorGUILayout.Vector4Field(name, (Vector4)value));
+            return type == typeof(Vector4);
+        }
+        public object Draw(Type memberType, string memberName, object value, object target)
+        {
+            return EditorGUILayout.Vector4Field(memberName, (Vector4)value);
         }
     }
 }

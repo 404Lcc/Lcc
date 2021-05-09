@@ -1,17 +1,18 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System;
 using UnityEditor;
 
 namespace LccEditor
 {
-    [ObjectType(typeof(string))]
+    [ObjectType]
     public class StringObjectType : IObjectType
     {
-        public void Draw(object obj, FieldInfo field)
+        public bool IsType(Type type)
         {
-            string name = field.Name.First().ToString().ToUpper() + field.Name.Substring(1);
-            object value = field.GetValue(obj);
-            field.SetValue(obj, EditorGUILayout.TextField(name, (string)value));
+            return type == typeof(string);
+        }
+        public object Draw(Type memberType, string memberName, object value, object target)
+        {
+            return EditorGUILayout.TextField(memberName, (string)value);
         }
     }
 }
