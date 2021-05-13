@@ -51,10 +51,13 @@ namespace LccEditor
                         {
                             assetNameList.Add(fileInfo.FullName.Substring(fileInfo.FullName.IndexOf("Assets")).Replace("\\", "/"));
                         }
-                        string assetName = directoryInfo.FullName.Substring(directoryInfo.FullName.IndexOf("Assets")).Replace("\\", "/");
-                        string md5 = MD5Util.ComputeMD5(assetName);
-                        assetBundleDataList.Add(new AssetBundleData($"{md5}.unity3d", string.Empty, uint.MinValue, long.MinValue, assetNameList.ToArray()));
-                        assetNameList.Clear();
+                        if (assetNameList.Count > 0)
+                        {
+                            string assetName = directoryInfo.FullName.Substring(directoryInfo.FullName.IndexOf("Assets")).Replace("\\", "/");
+                            string md5 = MD5Util.ComputeMD5(assetName);
+                            assetBundleDataList.Add(new AssetBundleData($"{md5}.unity3d", string.Empty, uint.MinValue, long.MinValue, assetNameList.ToArray()));
+                            assetNameList.Clear();
+                        }
                     }
                 }
             }

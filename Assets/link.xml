@@ -4254,6 +4254,7 @@
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=12" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Model">
+    <type fullname="System.Runtime.CompilerServices.AsyncMethodBuilderAttribute" preserve="all" />
     <type fullname="LccModel.LaunchUIEventHandler" preserve="all" />
     <type fullname="LccModel.LaunchPanel" preserve="all" />
     <type fullname="LccModel.LaunchModel" preserve="all" />
@@ -4333,6 +4334,7 @@
     <type fullname="LccModel.EventHandlerAttribute" preserve="all" />
     <type fullname="LccModel.EventManager" preserve="all" />
     <type fullname="LccModel.IEvent" preserve="all" />
+    <type fullname="LccModel.CoroutineAdapter" preserve="all" />
     <type fullname="LccModel.ILRuntimeManager" preserve="all" />
     <type fullname="LccModel.AItemView`1" preserve="all" />
     <type fullname="LccModel.IItem" preserve="all" />
@@ -4411,6 +4413,7 @@
     <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__14`1" preserve="all" />
     <type fullname="LccModel.AssetBundleManager+&lt;&gt;c__DisplayClass33_0" preserve="all" />
     <type fullname="LccModel.AssetBundleManager+&lt;CopyAssets&gt;d__33" preserve="all" />
+    <type fullname="LccModel.CoroutineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.ILRuntimeManager+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.SceneLoadManager+&lt;LoadScene&gt;d__6" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;Upload&gt;d__0" preserve="all" />

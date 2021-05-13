@@ -212,8 +212,16 @@ namespace LccModel
         }
         public AssetBundle LoadAsset(string assetName)
         {
-            string assetBundleName = $"{MD5Util.ComputeMD5(assetName)}.unity3d";
-            if (assetBundles.ContainsKey(assetName))
+            string assetBundleName;
+            if (localAssetBundleConfig.assetBundleRuleTypeDict[assetName] == AssetBundleRuleType.File)
+            {
+                assetBundleName = $"{MD5Util.ComputeMD5(assetName)}.unity3d";
+            }
+            else
+            {
+                assetBundleName = $"{MD5Util.ComputeMD5(Path.GetDirectoryName(assetName).Replace("\\", "/"))}.unity3d";
+            }
+            if (assetBundles.ContainsKey(assetBundleName))
             {
                 return (AssetBundle)assetBundles[assetBundleName];
             }
@@ -225,7 +233,7 @@ namespace LccModel
                 {
                     assetBundles.Add(item, AssetBundle.LoadFromFile($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{item}"));
                 }
-                assetBundles.Add(assetName, assetBundle);
+                assetBundles.Add(assetBundleName, assetBundle);
                 return assetBundle;
             }
         }

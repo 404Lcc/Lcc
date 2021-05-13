@@ -5,6 +5,7 @@ using LccModel;
 using System.IO;
 using System.Reflection;
 using UnityEditor;
+using FileUtil = LccModel.FileUtil;
 
 namespace LccEditor
 {
@@ -16,11 +17,8 @@ namespace LccEditor
         {
             //用新的分析热更dll调用引用来生成绑定代码
             AppDomain domain = new AppDomain();
-            using (FileStream fs = new FileStream("Assets/Resources/DLL/Unity.Hotfix.dll.bytes", FileMode.Open, FileAccess.Read))
+            using (MemoryStream dll = new MemoryStream(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileUtil.GetAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes"))))
             {
-                byte[] bytes = new byte[fs.ReadByte()];
-                fs.Read(bytes, 0, bytes.Length);
-                MemoryStream dll = new MemoryStream(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", bytes));
                 domain.LoadAssembly(dll);
                 //Crossbind Adapter is needed to generate the correct binding code
                 InitILRuntime(domain);

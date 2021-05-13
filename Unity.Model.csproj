@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\SocketModel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\ILRuntimeManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\IUIEvent.cs" />
+    <Compile Include="Assets\Scripts\Module\Core\Manager\Timer\TimerType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
     <Compile Include="Assets\Scripts\Module\Config\User\LanguageType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\EventHandlerAttribute.cs" />
@@ -188,7 +189,8 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Object\AObjectBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\IItem.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Log\LogUtil.cs" />
-    <Compile Include="Assets\Scripts\Module\Core\Manager\Timer\TimerType.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Async\Task\AsyncMethodBuilderAttribute.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Adapter\CoroutineAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />

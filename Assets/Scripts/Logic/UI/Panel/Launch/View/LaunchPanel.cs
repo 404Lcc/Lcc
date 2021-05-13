@@ -4,20 +4,23 @@
     {
         public override void Start()
         {
-            ConfigManager.Instance.InitManager();
 #if UNITY_EDITOR
 #if ILRuntime
+            ConfigManager.Instance.InitManager();
             ILRuntimeManager.Instance.InitManager();
 #else
+            ConfigManager.Instance.InitManager();
             MonoManager.Instance.InitManager();
 #endif
 #else
 #if AssetBundle
-            PanelManager.Instance.OpenPanel(PanelType.Updater);
+            UIEventManager.Instance.Publish(UIEventType.Updater);
 #else
 #if ILRuntime
+            ConfigManager.Instance.InitManager();
             ILRuntimeManager.Instance.InitManager();
 #else
+            ConfigManager.Instance.InitManager();
             MonoManager.Instance.InitManager();
 #endif
 #endif
