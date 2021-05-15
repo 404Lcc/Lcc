@@ -1,5 +1,4 @@
 ﻿using ILRuntime.Mono.Cecil.Pdb;
-using ILRuntime.Runtime.Intepreter;
 using LitJson;
 using System;
 using System.Collections.Generic;
@@ -22,14 +21,18 @@ namespace LccModel
         public void LoadHotfixAssembly()
         {
             TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.DLL);
-            MemoryStream dll = new MemoryStream(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes));
+            using (MemoryStream dll = new MemoryStream(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes)))
+            {
 #if Release
-            appDomain.LoadAssembly(dll, null, new PdbReaderProvider());
+                appDomain.LoadAssembly(dll, null, new PdbReaderProvider());
 #else
-            TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.DLL);
-            MemoryStream pdb = new MemoryStream(pdbAsset.bytes);
-            appDomain.LoadAssembly(dll, pdb, new PdbReaderProvider());
+                TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.DLL);
+                using (MemoryStream pdb = new MemoryStream(pdbAsset.bytes))
+                {
+                    appDomain.LoadAssembly(dll, pdb, new PdbReaderProvider());
+                }
 #endif
+            }
             InitializeILRuntime();
             OnHotfixLoaded();
         }
@@ -41,17 +44,14 @@ namespace LccModel
 #if DEBUG && (UNITY_EDITOR || UNITY_ANDROID || UNITY_IPHONE)
             appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;
 #endif
-            LccFrameworkRegisterMethodDelegate();
+            ILRuntimeUtil.LccFrameworkRegisterCrossBindingAdaptor(appDomain);
+            ILRuntimeUtil.LccFrameworkRegisterMethodDelegate(appDomain);
 
             JsonMapper.RegisterILRuntimeCLRRedirection(appDomain);
 
-            //CLRBindings.Initialize(appDomain);
-            
+            Type.GetType("ILRuntime.Runtime.Generated.CLRBindings")?.GetMethod("Initialize")?.Invoke(null, new object[] { appDomain });
+
             typeList = appDomain.LoadedTypes.Values.Select(x => x.ReflectionType).ToList();
-        }
-        public void LccFrameworkRegisterMethodDelegate()
-        {
-            appDomain.DelegateManager.RegisterMethodDelegate<ILTypeInstance, ILTypeInstance>();
         }
         public unsafe void OnHotfixLoaded()
         {

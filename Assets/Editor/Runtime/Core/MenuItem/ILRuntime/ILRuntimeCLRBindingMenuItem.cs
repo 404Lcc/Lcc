@@ -16,19 +16,20 @@ namespace LccEditor
         public static void GenerateCLRBindingByAnalysis()
         {
             //用新的分析热更dll调用引用来生成绑定代码
-            AppDomain domain = new AppDomain();
+            AppDomain appDomain = new AppDomain();
             using (MemoryStream dll = new MemoryStream(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileUtil.GetAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes"))))
             {
-                domain.LoadAssembly(dll);
+                appDomain.LoadAssembly(dll);
                 //Crossbind Adapter is needed to generate the correct binding code
-                InitILRuntime(domain);
-                BindingCodeGenerator.GenerateBindingCode(domain, "Assets/Scripts/Runtime/Core/Manager/ILRuntime/Generated");
+                InitILRuntime(appDomain);
+                BindingCodeGenerator.GenerateBindingCode(appDomain, "Assets/Scripts/Runtime/Core/Manager/ILRuntime/Generated");
             }
             AssetDatabase.Refresh();
         }
-        public static void InitILRuntime(AppDomain domain)
+        public static void InitILRuntime(AppDomain appDomain)
         {
             //这里需要注册所有热更DLL中用到的跨域继承Adapter，否则无法正确抓取引用
+            ILRuntimeUtil.LccFrameworkRegisterCrossBindingAdaptor(appDomain);
         }
     }
 }

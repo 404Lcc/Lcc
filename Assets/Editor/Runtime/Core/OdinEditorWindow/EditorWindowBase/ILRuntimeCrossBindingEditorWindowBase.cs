@@ -15,6 +15,9 @@ namespace LccEditor
         [HideLabel, DisplayAsString]
         public string info = "ILRuntime适配器生成工具";
         [PropertySpace(10)]
+        [LabelText("程序集")]
+        public string assets = "Unity.Model";
+        [PropertySpace(10)]
         [LabelText("命名空间")]
         public string namespaceName = "LccModel";
         [PropertySpace(10)]
@@ -30,12 +33,22 @@ namespace LccEditor
         [LabelText("生成适配器"), Button]
         public void BuildILRuntimeCrossBinding()
         {
+            if (string.IsNullOrEmpty(assets))
+            {
+                editorWindow.ShowNotification(new GUIContent("请输入程序集"));
+                return;
+            }
             if (string.IsNullOrEmpty(className))
             {
                 editorWindow.ShowNotification(new GUIContent("请输入脚本名"));
                 return;
             }
-            string path = "Library/ScriptAssemblies/Unity.Model.dll";
+            string path = $"Library/ScriptAssemblies/{assets}.dll";
+            if (!File.Exists(path))
+            {
+                editorWindow.ShowNotification(new GUIContent("程序集路径错误"));
+                return;
+            }
             Type type;
             if (string.IsNullOrEmpty(namespaceName))
             {
@@ -54,7 +67,7 @@ namespace LccEditor
             {
                 File.Delete($"Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/{className}Adapter.cs");
             }
-            FileUtil.SaveAsset($"Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/{className}Adapter.cs", CrossBindingCodeGenerator.GenerateCrossBindingAdapterCode(type, namespaceName ?? "LccModel"));
+            FileUtil.SaveAsset($"Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/{className}Adapter.cs", CrossBindingCodeGenerator.GenerateCrossBindingAdapterCode(type, "LccModel"));
             AssetDatabase.Refresh();
         }
     }
