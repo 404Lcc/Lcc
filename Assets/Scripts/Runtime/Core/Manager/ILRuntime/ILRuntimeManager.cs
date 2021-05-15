@@ -1,5 +1,6 @@
 ﻿using ILRuntime.Mono.Cecil.Pdb;
 using LitJson;
+using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,18 +22,14 @@ namespace LccModel
         public void LoadHotfixAssembly()
         {
             TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.DLL);
-            using (MemoryStream dll = new MemoryStream(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes)))
-            {
+            MemoryStream dll = new MemoryStream(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes));
 #if Release
-                appDomain.LoadAssembly(dll, null, new PdbReaderProvider());
+            appDomain.LoadAssembly(dll, null, new PdbReaderProvider());
 #else
-                TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.DLL);
-                using (MemoryStream pdb = new MemoryStream(pdbAsset.bytes))
-                {
-                    appDomain.LoadAssembly(dll, pdb, new PdbReaderProvider());
-                }
+            TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.DLL);
+            MemoryStream pdb = new MemoryStream(pdbAsset.bytes);
+            appDomain.LoadAssembly(dll, pdb, new PdbReaderProvider());
 #endif
-            }
             InitializeILRuntime();
             OnHotfixLoaded();
         }
@@ -48,6 +45,7 @@ namespace LccModel
             ILRuntimeUtil.LccFrameworkRegisterMethodDelegate(appDomain);
 
             JsonMapper.RegisterILRuntimeCLRRedirection(appDomain);
+            PType.RegisterILRuntimeCLRRedirection(appDomain);
 
             Type.GetType("ILRuntime.Runtime.Generated.CLRBindings")?.GetMethod("Initialize")?.Invoke(null, new object[] { appDomain });
 
