@@ -13,7 +13,7 @@ namespace LccEditor
             AddAEditorWindowBase<HotfixEditorWindowBase>("热更新模式");
             AddAEditorWindowBase<TagEditorWindowBase>("标签工具");
             AddAEditorWindowBase<LayerEditorWindowBase>("层工具");
-            AddAEditorWindowBase<ILRuntimeCrossBindingEditorWindowBase>("ILRuntime适配器生成工具");
+            AddAEditorWindowBase<ILRuntimeEditorWindowBase>("ILRuntime工具");
             return OdinMenuTree;
         }
         [MenuItem("Lcc框架/工具箱")]

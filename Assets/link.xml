@@ -4395,8 +4395,6 @@
     <type fullname="LccModel.VideoManager" preserve="all" />
     <type fullname="LccModel.VoiceManager" preserve="all" />
     <type fullname="LccModel.AssetType" preserve="all" />
-    <type fullname="LccModel.TestConfig" preserve="all" />
-    <type fullname="LccModel.TestConfigTable" preserve="all" />
     <type fullname="LccModel.Start" preserve="all" />
     <type fullname="LccModel.ItemType" preserve="all" />
     <type fullname="LccModel.PanelType" preserve="all" />
@@ -4473,6 +4471,7 @@
     <type fullname="LccModel.LccViewFactory" preserve="all" />
     <type fullname="LccModel.ObjectBaseEventSystem" preserve="all" />
     <type fullname="LccModel.Objects" preserve="all" />
+    <type fullname="LccModel.ProtobufObject" preserve="all" />
     <type fullname="LccModel.Singleton`1" preserve="all" />
     <type fullname="LccModel.APool`1" preserve="all" />
     <type fullname="LccModel.DirectoryUtil" preserve="all" />
@@ -4488,6 +4487,7 @@
     <type fullname="LccModel.ObjectUtil" preserve="all" />
     <type fullname="LccModel.PathType" preserve="all" />
     <type fullname="LccModel.PathUtil" preserve="all" />
+    <type fullname="LccModel.ProtobufUtil" preserve="all" />
     <type fullname="LccModel.RijndaelUtil" preserve="all" />
     <type fullname="LccModel.WebUtil" preserve="all" />
     <type fullname="LccModel.Binding`1" preserve="all" />

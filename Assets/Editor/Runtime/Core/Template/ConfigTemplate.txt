@@ -1,0 +1,62 @@
+﻿using LccModel;
+using ProtoBuf;
+using System;
+using System.Collections.Generic;
+
+namespace (LccModel)
+{
+    [Config]
+    [ProtoContract]
+    public partial class (CustomConfig)Category : ProtobufObject
+    {
+        [ProtoIgnore]
+        public Dictionary<int, (CustomConfig)> dict = new Dictionary<int, (CustomConfig)>();
+        [ProtoMember(1)]
+        public List<(CustomConfig)> list = new List<(CustomConfig)>();
+        public static (CustomConfig)Category Instance
+        {
+            get; set;
+        }
+        public (CustomConfig) Current
+        {
+            get
+            {
+                if (dict == null || dict.Count == 0)
+                {
+                    return null;
+                }
+                return dict.Values.GetEnumerator().Current;
+            }
+        }
+        public (CustomConfig)Category()
+        {
+            Instance = this;
+        }
+        [ProtoAfterDeserialization]
+        public void AfterDeserialization()
+        {
+            foreach ((CustomConfig) item in list)
+            {
+                dict.Add(item.Id, item);
+            }
+        }
+        public bool ConfigExist(int id)
+        {
+            return dict.ContainsKey(id);
+        }
+        public (CustomConfig) Get(int id)
+        {
+            if (!ConfigExist(id))
+            {
+                throw new Exception($"{nameof((CustomConfig))}配置表 Id : {id}不存在");
+            }
+            (CustomConfig) config = dict[id];
+            return config;
+        }
+    }
+    [ProtoContract]
+    public partial class (CustomConfig) : ProtobufObject, IConfig
+    {
+(Propertys)
+    }
+}

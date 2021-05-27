@@ -167,17 +167,18 @@
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.Config.xml" />
-     <None Include="Assets\Plugins\NPOI\net45\NPOI.OpenXmlFormats.dll" />
+     <None Include="Assets\Plugins\NPOI\NPOI.OpenXmlFormats.dll" />
+     <None Include="Assets\Plugins\BouncyCastle\BouncyCastle.Crypto.dll" />
      <None Include="Assets\Plugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Serialization.dll" />
      <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.xml" />
+     <None Include="Assets\Plugins\NPOI\NPOI.OOXML.dll" />
      <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll" />
      <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll" />
      <None Include="Assets\Plugins\Roslyn\Microsoft.CodeAnalysis.dll" />
      <None Include="Assets\Plugins\Roslyn\System.Buffers.dll" />
-     <None Include="Assets\Plugins\NPOI\net45\NPOI.OpenXml4Net.dll" />
      <None Include="Assets\Plugins\Roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
      <None Include="Assets\Plugins\Sirenix\Assemblies\NoEditor\Sirenix.Serialization.dll" />
-     <None Include="Assets\Plugins\NPOI\net45\NPOI.OOXML.dll" />
+     <None Include="Assets\Plugins\SharpZipLib\ICSharpCode.SharpZipLib.dll" />
      <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.xml" />
      <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll" />
      <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.dll" />
@@ -186,14 +187,15 @@
      <None Include="Assets\Plugins\Sirenix\Assemblies\NoEditor\Sirenix.Utilities.dll" />
      <None Include="Assets\Plugins\Roslyn\System.Threading.Tasks.Extensions.dll" />
      <None Include="Assets\Plugins\Sirenix\Readme.txt" />
+     <None Include="Assets\Plugins\NPOI\NPOI.OpenXml4Net.dll" />
      <None Include="Assets\Plugins\Roslyn\System.Reflection.Metadata.dll" />
      <None Include="Assets\Plugins\Roslyn\System.Memory.dll" />
      <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.xml" />
      <None Include="Assets\Plugins\Sirenix\Assemblies\link.xml" />
      <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll" />
-     <None Include="Assets\Plugins\NPOI\net45\NPOI.dll" />
      <None Include="Assets\Plugins\Unity.Plugin.asmdef" />
      <None Include="Assets\Plugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Utilities.dll" />
+     <None Include="Assets\Plugins\NPOI\NPOI.dll" />
      <None Include="Assets\Plugins\Roslyn\System.Collections.Immutable.dll" />
      <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.dll" />
     <Reference Include="UnityEngine">
@@ -397,18 +399,6 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="NPOI">
-      <HintPath>Assets\Plugins\NPOI\net45\NPOI.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OOXML">
-      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OOXML.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OpenXml4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>Assets\Plugins\NPOI\net45\NPOI.OpenXmlFormats.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CodeAnalysis.CSharp">
       <HintPath>Assets\Plugins\Roslyn\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
     </Reference>
@@ -459,6 +449,24 @@
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.7\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>Assets\Plugins\NPOI\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>Assets\Plugins\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>Assets\Plugins\NPOI\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>Assets\Plugins\NPOI\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>Assets\Plugins\BouncyCastle\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>Assets\Plugins\SharpZipLib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\2020.1.8f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>

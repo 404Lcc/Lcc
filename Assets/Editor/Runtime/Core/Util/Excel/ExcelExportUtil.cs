@@ -1,4 +1,5 @@
-﻿using NPOI.SS.UserModel;
+﻿using LccModel;
+using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
@@ -11,135 +12,147 @@ namespace LccEditor
 {
     public static class ExcelExportUtil
     {
+        public const string excelPath = "Assets/Excels";
+        public const string templatePath = "Assets/Editor/Runtime/Core/Template/ConfigTemplate.txt";
+
+        public const string modelClassPath = "Assets/Scripts/Runtime/Config/Config";
+        public const string hotfixClassPath = "Assets/Hotfix/Runtime/Config/Config";
+
+        public const string modelJsonPath = "Assets/Resources/Config";
+        public const string hotfixJsonPath = "Assets/Bundles/Config";
+
+        public const string modelProtobufPath = "Assets/Resources/Config";
+        public const string hotfixProtobufPath = "Assets/Bundles/Config";
+
+        public static string content;
         public static void ExportAll()
         {
-            ExportJson();
-            ExportToModel();
-            ExportToHotfix();
+            content = FileUtil.GetAsset(templatePath).GetString();
+            foreach (string item in Directory.GetFiles(excelPath, "*.xlsx"))
+            {
+                ExportExcelClass(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item), ConfigType.Model);
+                ExportExcelClass(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item), ConfigType.Hotfix);
+                ExportExcelJson(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item), ConfigType.Model);
+                ExportExcelJson(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item), ConfigType.Hotfix);
+            }
             AssetDatabase.Refresh();
+            //ExportExcelProtobuf(ConfigType.Hotfix);
         }
-        public static void ExportJson()
+        #region 导出Class
+        public static void ExportExcelClass(XSSFWorkbook xssfWorkbook, string name, ConfigType configType)
         {
-            foreach (string item in Directory.GetFiles("Assets/Excels"))
-            {
-                if (Path.GetExtension(item) != ".xlsx") continue;
-                XSSFWorkbook xssfWorkbook = new XSSFWorkbook(item);
-                FileUtil.SaveAsset($"Assets/Resources/Config/{Path.GetFileNameWithoutExtension(item)}.txt", SheetToJson(xssfWorkbook.GetSheetAt(0)));
-                FileUtil.SaveAsset($"Assets/Bundles/Config/{Path.GetFileNameWithoutExtension(item)}.txt", SheetToJson(xssfWorkbook.GetSheetAt(0)));
-            }
-        }
-        public static void ExportToModel()
-        {
-            foreach (string item in Directory.GetFiles("Assets/Excels"))
-            {
-                if (Path.GetExtension(item) != ".xlsx") continue;
-                FileUtil.SaveAsset($"Assets/Scripts/Runtime/Config/ConfigTable/{Path.GetFileNameWithoutExtension(item)}Table.cs", SheetToAConfigTable("namespace LccModel\n", Path.GetFileNameWithoutExtension(item)));
-                XSSFWorkbook xssfWorkbook = new XSSFWorkbook(item);
-                FileUtil.SaveAsset($"Assets/Scripts/Runtime/Config/Config/{Path.GetFileNameWithoutExtension(item)}.cs", SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccModel\n", Path.GetFileNameWithoutExtension(item)));
-            }
-        }
-        public static void ExportToHotfix()
-        {
-            foreach (string item in Directory.GetFiles("Assets/Excels"))
-            {
-                if (Path.GetExtension(item) != ".xlsx") continue;
-                FileUtil.SaveAsset($"Assets/Hotfix/Runtime/Config/ConfigTable/{Path.GetFileNameWithoutExtension(item)}Table.cs", SheetToAConfigTable("using LccModel;\n\nnamespace LccHotfix\n", Path.GetFileNameWithoutExtension(item)));
-                XSSFWorkbook xssfWorkbook = new XSSFWorkbook(item);
-                FileUtil.SaveAsset($"Assets/Hotfix/Runtime/Config/Config/{Path.GetFileNameWithoutExtension(item)}.cs", SheetToConfig(xssfWorkbook.GetSheetAt(0), "namespace LccHotfix\n", Path.GetFileNameWithoutExtension(item)));
-            }
-        }
-        public static string SheetToJson(ISheet sheet)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("{\n\t");
-            //第0行格子个数
-            int count = sheet.GetRow(0).LastCellNum;
             List<Cell> cellList = new List<Cell>();
-            for (int i = 0; i < count; i++)
+            HashSet<string> uniqes = new HashSet<string>();
+            for (int i = 0; i < xssfWorkbook.NumberOfSheets; i++)
             {
-                string fieldName = GetCell(sheet, 0, i);
-                string fieldType = GetCell(sheet, 1, i);
-                string fieldDesc = GetCell(sheet, 2, i);
-                cellList.Add(new Cell(fieldName, fieldType, fieldDesc));
+                ExportSheetClass(xssfWorkbook.GetSheetAt(i), cellList, uniqes);
             }
-            //从第三行开始到最后
-            for (int i = 3; i <= sheet.LastRowNum; i++)
+            ExportClass(name, cellList, configType);
+        }
+        public static void ExportSheetClass(ISheet sheet, List<Cell> cellList, HashSet<string> uniqes)
+        {
+            if (sheet.GetRow(1) == null) return;
+            for (int i = 0; i < sheet.GetRow(1).LastCellNum; i++)
             {
-                if (string.IsNullOrEmpty(GetCell(sheet, i, 0))) continue;
-                IRow iRow = sheet.GetRow(i);
-                for (int j = 0; j < count; j++)
+                string fieldName = GetCell(sheet, 1, i);
+                if (string.IsNullOrEmpty(fieldName))
                 {
-                    Cell cell = cellList[j];
-                    if (cell.desc.StartsWith("#")) continue;
-                    string value = GetCell(iRow, j);
-                    if (string.IsNullOrEmpty(value)) continue;
-                    if (j > 0)
-                    {
-                        stringBuilder.Append(", ");
-                    }
-                    if (cell.name == "id")
-                    {
-                        stringBuilder.Append($"\"{value}\" : {{");
-                        stringBuilder.Append($"\"Id\" : {Convert(cell.type, value)}");
-                    }
-                    else
-                    {
-                        stringBuilder.Append($"\"{cell.name}\" : {Convert(cell.type, value)}");
-                    }
+                    continue;
                 }
-                if (i < sheet.LastRowNum)
+                if (!uniqes.Add(fieldName))
                 {
-                    stringBuilder.Append("},\n\t");
+                    continue;
                 }
-                else
-                {
-                    stringBuilder.Append("}\n");
-                }
+                string fieldAttribute = GetCell(sheet, 0, i);
+                string fieldType = GetCell(sheet, 2, i);
+                string fieldDesc = GetCell(sheet, 3, i);
+                cellList.Add(new Cell(fieldAttribute, fieldName, fieldType, fieldDesc));
             }
-            stringBuilder.Append("}");
-            return stringBuilder.ToString();
         }
-        public static string SheetToAConfigTable(string classHead, string configName)
+        public static void ExportClass(string name, List<Cell> cellList, ConfigType configType)
         {
+            string exportPath = $"{DirectoryUtil.GetDirectoryPath(GetClassPath(configType))}/{name}.cs";
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(classHead);
-            stringBuilder.Append("{\n");
-            stringBuilder.Append("\t[Config]\n");
-            stringBuilder.Append($"\tpublic class {configName}Table : AConfigTable<{configName}>\n");
-            stringBuilder.Append("\t{\n");
-            stringBuilder.Append("\t}\n");
-            stringBuilder.Append("}");
-            return stringBuilder.ToString();
-        }
-        public static string SheetToConfig(ISheet sheet, string classHead, string configName)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(classHead);
-            stringBuilder.Append("{\n");
-            stringBuilder.Append($"\tpublic class {configName} : IConfig\n");
-            stringBuilder.Append("\t{\n");
-            stringBuilder.Append("\t\tpublic int Id\n");
-            stringBuilder.Append("\t\t{\n");
-            stringBuilder.Append("\t\t\tget; set;\n");
-            stringBuilder.Append("\t\t}");
-            //第0行格子个数
-            int count = sheet.GetRow(0).LastCellNum;
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < cellList.Count; i++)
             {
-                string fieldName = GetCell(sheet, 0, i);
-                string fieldType = GetCell(sheet, 1, i);
-                string fieldDesc = GetCell(sheet, 2, i);
-                if (string.IsNullOrEmpty(fieldName) || string.IsNullOrEmpty(fieldType) || fieldDesc.StartsWith("#")) continue;
-                if (fieldName == "id") continue;
-                if (i > 0)
+                Cell cell = cellList[i];
+                if (cell.attribute.StartsWith("#"))
+                {
+                    continue;
+                }
+                stringBuilder.Append($"\t\t[ProtoMember({i + 1}, IsRequired = true)]\n");
+                stringBuilder.Append($"\t\tpublic {cell.type} {cell.name} {{ get; set; }}");
+                if (i != cellList.Count - 1)
                 {
                     stringBuilder.Append("\n");
                 }
-                stringBuilder.Append($"\t\tpublic {fieldType} {fieldName};\n");
             }
-            stringBuilder.Append("\t}\n");
-            stringBuilder.Append("}");
-            return stringBuilder.ToString();
+            content = content.Replace("(LccModel)", $"Lcc{configType}").Replace("(CustomConfig)", name).Replace("(Propertys)", stringBuilder.ToString());
+            FileUtil.SaveAsset(exportPath, content);
+        }
+        #endregion
+        #region 导出Json
+        public static void ExportExcelJson(XSSFWorkbook xssfWorkbook, string name, ConfigType configType)
+        {
+            string exportPath = $"{DirectoryUtil.GetDirectoryPath(GetJsonPath(configType))}/{Path.GetFileNameWithoutExtension(name)}.txt";
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("{\n\t\"list\" : [");
+            for (int i = 0; i < xssfWorkbook.NumberOfSheets; i++)
+            {
+                ExportSheetJson(xssfWorkbook.GetSheetAt(i), stringBuilder);
+            }
+            stringBuilder.Append("]\n}");
+            FileUtil.SaveAsset(exportPath, stringBuilder.ToString());
+        }
+        public static void ExportSheetJson(ISheet sheet, StringBuilder stringBuilder)
+        {
+            if (sheet.GetRow(1) == null) return;
+            List<Cell> cellList = new List<Cell>();
+            for (int i = 0; i < sheet.GetRow(1).LastCellNum; i++)
+            {
+                string fieldAttribute = GetCell(sheet, 0, i);
+                if (fieldAttribute.Contains("#"))
+                {
+                    continue;
+                }
+                string fieldName = GetCell(sheet, 1, i);
+                if (string.IsNullOrEmpty(fieldName))
+                {
+                    continue;
+                }
+                string fieldType = GetCell(sheet, 2, i);
+                string fieldDesc = GetCell(sheet, 3, i);
+                cellList.Add(new Cell(fieldAttribute, fieldName, fieldType, fieldDesc));
+            }
+            for (int i = 4; i <= sheet.LastRowNum; i++)
+            {
+                stringBuilder.Append("\n\t\t{");
+                for (int j = 0; j < sheet.GetRow(1).LastCellNum; j++)
+                {
+                    Cell cell = cellList[j];
+                    if (cell.attribute == null)
+                    {
+                        continue;
+                    }
+                    if (cell.attribute.Contains("#"))
+                    {
+                        continue;
+                    }
+                    if (cell.name != "Id")
+                    {
+                        stringBuilder.Append(",");
+                    }
+                    stringBuilder.Append($"\"{cell.name}\" : {Convert(cell.type, GetCell(sheet, i, j))}");
+                }
+                if (i == sheet.LastRowNum)
+                {
+                    stringBuilder.Append("}");
+                }
+                else
+                {
+                    stringBuilder.Append("},\n");
+                }
+            }
         }
         public static string Convert(string type, string value)
         {
@@ -163,6 +176,58 @@ namespace LccEditor
                 default:
                     throw new Exception($"不支持此类型 : {type}");
             }
+        }
+        #endregion
+        #region 导出Protobuf
+        public static void ExportExcelProtobuf(ConfigType configType)
+        {
+            string exportPath = DirectoryUtil.GetDirectoryPath(GetProtobufPath(configType));
+            string classPath = GetClassPath(configType);
+            string jsonPath = GetJsonPath(configType);
+            List<string> protoNameList = new List<string>();
+            foreach (string item in Directory.GetFiles(classPath, "*.cs"))
+            {
+                protoNameList.Add(Path.GetFileNameWithoutExtension(item));
+            }
+            foreach (string item in protoNameList)
+            {
+                string json = FileUtil.GetAsset($"{jsonPath}/{item}.txt").GetString();
+                object obj;
+                if (configType == ConfigType.Model)
+                {
+                    obj = JsonUtil.ToObject(typeof(Manager).Assembly.GetType($"{typeof(Manager).Namespace}.{item}Category"), json);
+                }
+                else
+                {
+                    obj = JsonUtil.ToObject(typeof(LccHotfix.Manager).Assembly.GetType($"{typeof(LccHotfix.Manager).Namespace}.{item}Category"), json);
+                }
+                FileUtil.SaveAsset($"{exportPath}/{item}Category.bytes", ProtobufUtil.Serialize(obj));
+            }
+        }
+        #endregion
+        public static string GetClassPath(ConfigType configType)
+        {
+            if (configType == ConfigType.Model)
+            {
+                return modelClassPath;
+            }
+            return hotfixClassPath;
+        }
+        public static string GetJsonPath(ConfigType configType)
+        {
+            if (configType == ConfigType.Model)
+            {
+                return modelJsonPath;
+            }
+            return hotfixJsonPath;
+        }
+        public static string GetProtobufPath(ConfigType configType)
+        {
+            if (configType == ConfigType.Model)
+            {
+                return modelProtobufPath;
+            }
+            return hotfixProtobufPath;
         }
         public static string GetCell(ISheet sheet, int row, int cell)
         {
