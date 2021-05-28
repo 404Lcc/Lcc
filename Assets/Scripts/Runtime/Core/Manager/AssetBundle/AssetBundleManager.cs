@@ -50,7 +50,7 @@ namespace LccModel
             }
             else
             {
-                StartCoroutine(WebUtil.Download($"{"file:///"}{PathUtil.GetPath(PathType.StreamingAssetsPath, "Res", PathUtil.GetPlatformForAssetBundle())}/AssetBundleConfig.json", InitAssets, UpdateAssets));
+                StartCoroutine(WebUtil.Download($"{(Application.platform == RuntimePlatform.Android ? string.Empty : "file://")}{PathUtil.GetPath(PathType.StreamingAssetsPath, "Res", PathUtil.GetPlatformForAssetBundle())}/AssetBundleConfig.json", InitAssets, UpdateAssets));
             }
         }
         public void InitAssets(byte[] bytes)
@@ -73,7 +73,7 @@ namespace LccModel
         {
             foreach (string item in keys)
             {
-                yield return StartCoroutine(WebUtil.Download($"{"file:///"}{PathUtil.GetPath(PathType.StreamingAssetsPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{item}", (byte[] bytes) =>
+                yield return StartCoroutine(WebUtil.Download($"{(Application.platform == RuntimePlatform.Android ? string.Empty : "file://")}{PathUtil.GetPath(PathType.StreamingAssetsPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{item}", (byte[] bytes) =>
                 {
                     FileUtil.SaveAsset(PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle()), item, bytes);
                     currentCopyCount += 1;

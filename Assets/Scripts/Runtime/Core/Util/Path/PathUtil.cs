@@ -26,9 +26,19 @@ namespace LccModel
                     path = Application.persistentDataPath;
                     break;
             }
-            if (folders.Length == 1 && folders[0].Contains("/"))
+            if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
             {
-                return GetDirectoryPath(path, folders[0]);
+                if (type == PathType.PersistentDataPath && folders.Length == 1 && folders[0].Contains("/"))
+                {
+                    return GetPath(path, folders[0]);
+                }
+            }
+            else
+            {
+                if (folders.Length == 1 && folders[0].Contains("/"))
+                {
+                    return GetPath(path, folders[0]);
+                }
             }
             for (int i = 0; i < folders.Length; i++)
             {
@@ -40,9 +50,19 @@ namespace LccModel
                 {
                     subPath = $"{subPath}{folders[i]}/";
                 }
-                if (!string.IsNullOrEmpty(subPath))
+                if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
                 {
-                    DirectoryUtil.CreateDirectory($"{path}/{subPath}");
+                    if (type == PathType.PersistentDataPath && !string.IsNullOrEmpty(subPath))
+                    {
+                        DirectoryUtil.CreateDirectory($"{path}/{subPath}");
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(subPath))
+                    {
+                        DirectoryUtil.CreateDirectory($"{path}/{subPath}");
+                    }
                 }
             }
             return $"{path}/{subPath}";
@@ -65,7 +85,7 @@ namespace LccModel
                     return string.Empty;
             }
         }
-        public static string GetDirectoryPath(string path, string folder)
+        public static string GetPath(string path, string folder)
         {
             string[] folders = folder.Split('/');
             folder = folders[0];
