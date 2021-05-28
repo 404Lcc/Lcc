@@ -93,7 +93,8 @@ namespace LccModel
             }
             else
             {
-                using (FileStream fileStream = new FileStream(DirectoryUtil.GetDirectoryPath(Path.GetDirectoryName(tempPath)), FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
+                PathUtil.GetPath(PathType.PersistentDataPath, Path.GetDirectoryName(downloadData.path));
+                using (FileStream fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
                 {
                     HttpWebRequest httpWebRequest = null;
                     HttpWebResponse httpWebResponse = null;

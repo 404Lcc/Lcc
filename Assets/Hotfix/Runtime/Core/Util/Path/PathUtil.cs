@@ -26,6 +26,10 @@ namespace LccHotfix
                     path = Application.persistentDataPath;
                     break;
             }
+            if (folders.Length == 1 && folders[0].Contains("/"))
+            {
+                return GetDirectoryPath(path, folders[0]);
+            }
             for (int i = 0; i < folders.Length; i++)
             {
                 if (i == folders.Length - 1)
@@ -36,12 +40,12 @@ namespace LccHotfix
                 {
                     subPath = $"{subPath}{folders[i]}/";
                 }
+                if (!string.IsNullOrEmpty(subPath))
+                {
+                    DirectoryUtil.CreateDirectory($"{path}/{subPath}");
+                }
             }
-            if (string.IsNullOrEmpty(subPath))
-            {
-                return DirectoryUtil.GetDirectoryPath(path);
-            }
-            return DirectoryUtil.GetDirectoryPath($"{path}/{subPath}");
+            return $"{path}/{subPath}";
         }
         public static string GetPlatformForAssetBundle()
         {
@@ -60,6 +64,22 @@ namespace LccHotfix
                 default:
                     return string.Empty;
             }
+        }
+        public static string GetDirectoryPath(string path, string folder)
+        {
+            string[] folders = folder.Split('/');
+            folder = folders[0];
+            DirectoryUtil.CreateDirectory($"{path}/{folder}");
+            string subPath = string.Empty;
+            for (int i = 1; i < folders.Length; i++)
+            {
+                if (string.IsNullOrEmpty(folders[i])) continue;
+                subPath = $"{subPath}{folders[i]}";
+                DirectoryUtil.CreateDirectory($"{path}/{folder}/{subPath}");
+                if (i == folders.Length - 1) continue;
+                subPath = $"{subPath}/";
+            }
+            return $"{path}/{folder}/{subPath}";
         }
     }
 }

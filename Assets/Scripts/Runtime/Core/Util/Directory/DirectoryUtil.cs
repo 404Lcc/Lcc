@@ -28,22 +28,22 @@ namespace LccModel
         /// 获取文件夹路径
         /// </summary>
         /// <param name="path"></param>
-        public static string GetDirectoryPath(string path)
-        {
-            string[] folders = path.Split('/');
-            path = folders[0];
-            CreateDirectory(path);
-            string subPath = string.Empty;
-            for (int i = 1; i < folders.Length; i++)
-            {
-                if (string.IsNullOrEmpty(folders[i])) continue;
-                subPath = $"{subPath}{folders[i]}";
-                CreateDirectory($"{path}/{subPath}");
-                if (i == folders.Length - 1) continue;
-                subPath = $"{subPath}/";
-            }
-            return $"{path}/{subPath}";
-        }
+        //public static string GetDirectoryPath(string path)
+        //{
+        //    string[] folders = path.Split('/');
+        //    path = folders[0];
+        //    CreateDirectory(path);
+        //    string subPath = string.Empty;
+        //    for (int i = 1; i < folders.Length; i++)
+        //    {
+        //        if (string.IsNullOrEmpty(folders[i])) continue;
+        //        subPath = $"{subPath}{folders[i]}";
+        //        CreateDirectory($"{path}/{subPath}");
+        //        if (i == folders.Length - 1) continue;
+        //        subPath = $"{subPath}/";
+        //    }
+        //    return $"{path}/{subPath}";
+        //}
         /// <summary>
         /// 获取子文件夹
         /// </summary>

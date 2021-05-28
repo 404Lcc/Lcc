@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace LccHotfix
 {
@@ -52,7 +51,6 @@ namespace LccHotfix
         /// <param name="bytes"></param>
         public static void SaveAsset(string path, byte[] bytes)
         {
-            DirectoryUtil.GetDirectoryPath(Path.GetDirectoryName(path));
             using (FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write))
             {
                 fileStream.Write(bytes, 0, bytes.Length);

@@ -68,7 +68,7 @@ namespace LccEditor
                 assetBundleSetting.buildId++;
                 if (string.IsNullOrEmpty(assetBundleSetting.outputPath))
                 {
-                    assetBundleSetting.outputPath = "Assets/AssetBundles";
+                    assetBundleSetting.outputPath = "AssetBundles";
                 }
                 AssetBundleUtil.BuildAssetBundle(assetBundleSetting);
             }

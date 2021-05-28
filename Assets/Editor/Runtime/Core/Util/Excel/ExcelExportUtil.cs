@@ -15,14 +15,14 @@ namespace LccEditor
         public const string excelPath = "Assets/Excels";
         public const string templatePath = "Assets/Editor/Runtime/Core/Template/ConfigTemplate.txt";
 
-        public const string modelClassPath = "Assets/Scripts/Runtime/Config/Config";
-        public const string hotfixClassPath = "Assets/Hotfix/Runtime/Config/Config";
+        public const string modelClassPath = "Scripts/Runtime/Config/Config";
+        public const string hotfixClassPath = "Hotfix/Runtime/Config/Config";
 
-        public const string modelJsonPath = "Assets/Resources/Config";
-        public const string hotfixJsonPath = "Assets/Bundles/Config";
+        public const string modelJsonPath = "Resources/Config";
+        public const string hotfixJsonPath = "Bundles/Config";
 
-        public const string modelProtobufPath = "Assets/Resources/Config";
-        public const string hotfixProtobufPath = "Assets/Bundles/Config";
+        public const string modelProtobufPath = "Resources/Config";
+        public const string hotfixProtobufPath = "Bundles/Config";
 
         public static string content;
         public static void ExportAll()
@@ -71,7 +71,7 @@ namespace LccEditor
         }
         public static void ExportClass(string name, List<Cell> cellList, ConfigType configType)
         {
-            string exportPath = $"{DirectoryUtil.GetDirectoryPath(GetClassPath(configType))}/{name}.cs";
+            string exportPath = $"{PathUtil.GetPath(PathType.DataPath, GetClassPath(configType))}/{name}.cs";
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < cellList.Count; i++)
             {
@@ -94,7 +94,7 @@ namespace LccEditor
         #region 导出Json
         public static void ExportExcelJson(XSSFWorkbook xssfWorkbook, string name, ConfigType configType)
         {
-            string exportPath = $"{DirectoryUtil.GetDirectoryPath(GetJsonPath(configType))}/{Path.GetFileNameWithoutExtension(name)}.txt";
+            string exportPath = $"{PathUtil.GetPath(PathType.DataPath, GetJsonPath(configType))}/{Path.GetFileNameWithoutExtension(name)}.txt";
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("{\n\t\"list\" : [");
             for (int i = 0; i < xssfWorkbook.NumberOfSheets; i++)
@@ -181,9 +181,9 @@ namespace LccEditor
         #region 导出Protobuf
         public static void ExportExcelProtobuf(ConfigType configType)
         {
-            string exportPath = DirectoryUtil.GetDirectoryPath(GetProtobufPath(configType));
-            string classPath = GetClassPath(configType);
-            string jsonPath = GetJsonPath(configType);
+            string exportPath = PathUtil.GetPath(PathType.DataPath, GetProtobufPath(configType));
+            string classPath = PathUtil.GetPath(PathType.DataPath, GetClassPath(configType));
+            string jsonPath = PathUtil.GetPath(PathType.DataPath, GetJsonPath(configType));
             List<string> protoNameList = new List<string>();
             foreach (string item in Directory.GetFiles(classPath, "*.cs"))
             {
