@@ -91,21 +91,23 @@ namespace ILRuntime.Runtime.Generated
             System_Collections_Generic_Queue_1_Int64_Binding.Register(app);
             UnityEngine_Behaviour_Binding.Register(app);
             System_IO_Directory_Binding.Register(app);
-            System_Char_Binding.Register(app);
             System_Collections_Generic_List_1_DirectoryInfo_Binding.Register(app);
             System_IO_File_Binding.Register(app);
             System_Collections_Generic_List_1_FileInfo_Binding.Register(app);
-            System_IO_Path_Binding.Register(app);
             System_IO_FileStream_Binding.Register(app);
             System_IO_Stream_Binding.Register(app);
             System_Byte_Binding.Register(app);
             LitJson_JsonMapper_Binding.Register(app);
+            LitJson_JsonReader_Binding.Register(app);
             UnityEngine_Resolution_Binding.Register(app);
             UnityEngine_Debug_Binding.Register(app);
             System_Security_Cryptography_MD5CryptoServiceProvider_Binding.Register(app);
             System_Security_Cryptography_HashAlgorithm_Binding.Register(app);
             System_Text_StringBuilder_Binding.Register(app);
             UnityEngine_Application_Binding.Register(app);
+            System_Char_Binding.Register(app);
+            System_IO_MemoryStream_Binding.Register(app);
+            ProtoBuf_Serializer_Binding.Register(app);
             System_Security_Cryptography_RijndaelManaged_Binding.Register(app);
             System_Security_Cryptography_SymmetricAlgorithm_Binding.Register(app);
             System_Security_Cryptography_ICryptoTransform_Binding.Register(app);
@@ -131,11 +133,6 @@ namespace ILRuntime.Runtime.Generated
             LccModel_SceneLoadManager_Binding.Register(app);
             LccModel_Init_Binding.Register(app);
             System_Threading_Monitor_Binding.Register(app);
-            UnityEngine_TextAsset_Binding.Register(app);
-            System_Collections_Generic_Dictionary_2_String_ILTypeInstance_Binding.Register(app);
-            System_Collections_Generic_Dictionary_2_String_ILTypeInstance_Binding_Enumerator_Binding.Register(app);
-            System_Collections_Generic_KeyValuePair_2_String_ILTypeInstance_Binding.Register(app);
-            System_Collections_Generic_Dictionary_2_Int32_ILTypeInstance_Binding.Register(app);
         }
 
         /// <summary>

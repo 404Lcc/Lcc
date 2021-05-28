@@ -77,13 +77,11 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Download\DownloadState.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Init\Init.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\System_IO_Path_Binding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Panel\PanelType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Pool\APool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\System_Activator_Binding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Directory\DirectoryUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\LccModel_DisplayMode_Binding.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Stri_t2.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\UnityEngine_Rect_Binding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\UnityEngine_Application_Binding.cs" />
@@ -107,7 +105,6 @@
     <Compile Include="Assets\Scripts\Runtime\Config\Item\ItemType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\Panel\PanelObjectBaseHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\IConfigTable.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\System_Collections_Hashtable_Binding.cs" />
     <Compile Include="Assets\Scripts\Util\LongClickButton.cs" />
@@ -192,11 +189,9 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\System_Action_1_Boolean_Binding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Adapter\CoroutineAdapter.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\AItemView.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\UnityEngine_TextAsset_Binding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Rijndael\RijndaelUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\LccModel_Objects_Binding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\String\StringExpand.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\System_Collections_Generic_KeyValuePair_2_St.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\LccModel_Singleton_1_AssetManager_Binding.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\TipsWindow\TipsWindowManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Web\WebUtil.cs" />
@@ -243,7 +238,6 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Async\Task\ETTask.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\LccView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Adapter\IAsyncStateMachineAdapter.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int3.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\ClientNetworkManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\LccModel_ILRuntimeManager_Binding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\System_IO_File_Binding.cs" />
@@ -281,12 +275,10 @@
     <Compile Include="Assets\Scripts\Runtime\Config\Scene\SceneName.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\UnityEngine_Networking_DownloadHandlerAudioC.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\AStar\AStarManager.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Stri_t1.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\Item.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Event\EventType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\Binding\ViewModelBinding.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\GameEvent\GameEventManager.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\AConfigTable.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\UnityEngine_Vector3_Binding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\System_Collections_IEnumerator_Binding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\UnityEngine_UI_Image_Binding.cs" />
@@ -308,6 +300,9 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\System_Action_2_Texture2D_Byte_Array_Binding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\System_Action_1_Byte_Array_Binding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Log\LogUtil.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\LitJson_JsonReader_Binding.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\ProtoBuf_Serializer_Binding.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Generated\System_IO_MemoryStream_Binding.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\Unity.Model.asmdef" />

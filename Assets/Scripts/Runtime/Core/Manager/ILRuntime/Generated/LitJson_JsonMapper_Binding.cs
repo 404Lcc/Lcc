@@ -53,20 +53,6 @@ namespace ILRuntime.Runtime.Generated
                     }
                 }
             }
-            args = new Type[]{typeof(System.Collections.Generic.Dictionary<System.String, ILRuntime.Runtime.Intepreter.ILTypeInstance>)};
-            if (genericMethods.TryGetValue("ToObject", out lst))
-            {
-                foreach(var m in lst)
-                {
-                    if(m.MatchGenericParameters(args, typeof(System.Collections.Generic.Dictionary<System.String, ILRuntime.Runtime.Intepreter.ILTypeInstance>), typeof(System.String)))
-                    {
-                        method = m.MakeGenericMethod(args);
-                        app.RegisterCLRMethodRedirection(method, ToObject_2);
-
-                        break;
-                    }
-                }
-            }
 
 
         }
@@ -100,22 +86,6 @@ namespace ILRuntime.Runtime.Generated
 
 
             var result_of_this_method = LitJson.JsonMapper.ToObject<ILRuntime.Runtime.Intepreter.ILTypeInstance>(@json);
-
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
-        }
-
-        static StackObject* ToObject_2(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
-        {
-            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
-            StackObject* ptr_of_this_method;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 1);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.String @json = (System.String)typeof(System.String).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
-            __intp.Free(ptr_of_this_method);
-
-
-            var result_of_this_method = LitJson.JsonMapper.ToObject<System.Collections.Generic.Dictionary<System.String, ILRuntime.Runtime.Intepreter.ILTypeInstance>>(@json);
 
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }

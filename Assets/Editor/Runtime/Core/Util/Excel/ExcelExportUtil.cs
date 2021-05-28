@@ -25,7 +25,7 @@ namespace LccEditor
         public const string hotfixProtobufPath = "Bundles/Config";
 
         public static string content;
-        public static void ExportAll()
+        public static void ExportClassAndJson()
         {
             content = FileUtil.GetAsset(templatePath).GetString();
             foreach (string item in Directory.GetFiles(excelPath, "*.xlsx"))
@@ -36,7 +36,12 @@ namespace LccEditor
                 ExportExcelJson(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item), ConfigType.Hotfix);
             }
             AssetDatabase.Refresh();
-            //ExportExcelProtobuf(ConfigType.Hotfix);
+        }
+        public static void ExportProtobuf()
+        {
+            ExportExcelProtobuf(ConfigType.Model);
+            ExportExcelProtobuf(ConfigType.Hotfix);
+            AssetDatabase.Refresh();
         }
         #region 导出Class
         public static void ExportExcelClass(XSSFWorkbook xssfWorkbook, string name, ConfigType configType)
@@ -87,7 +92,7 @@ namespace LccEditor
                     stringBuilder.Append("\n");
                 }
             }
-            content = content.Replace("(LccModel)", $"Lcc{configType}").Replace("(CustomConfig)", name).Replace("(Propertys)", stringBuilder.ToString());
+            string content = ExcelExportUtil.content.Replace("(LccModel)", $"Lcc{configType}").Replace("(CustomConfig)", name).Replace("(Propertys)", stringBuilder.ToString());
             FileUtil.SaveAsset(exportPath, content);
         }
         #endregion

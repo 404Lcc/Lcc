@@ -23,7 +23,7 @@ namespace LccEditor
             //获取资源的文件名
             string fileName = Path.GetFileNameWithoutExtension(pathName);
             //读取本地模版文件 替换默认的文件名
-            string content = FileUtil.GetAsset(resourceFile).GetString().Replace(resourceFile.Substring(resourceFile.IndexOf('N'), resourceFile.IndexOf('.') - resourceFile.IndexOf('N')), fileName);
+            string content = FileUtil.GetAsset(resourceFile).GetString().Replace("(Class)", fileName).Replace("(ViewModel)", fileName.Replace("Panel", string.Empty));
             //写入新文件
             FileUtil.SaveAsset(fullName, content);
             //刷新本地资源
@@ -33,7 +33,7 @@ namespace LccEditor
         public static string GetSelectedPath()
         {
             //默认路径为Assets
-            string selectedPath = "Assets";
+            string selectedPath = PathUtil.GetPath(PathType.DataPath);
             //遍历选中的资源以返回路径
             foreach (Object item in Selection.GetFiltered(typeof(Object), SelectionMode.Assets))
             {

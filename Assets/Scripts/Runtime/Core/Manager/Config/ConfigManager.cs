@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
+using UnityEngine;
 
 namespace LccModel
 {
@@ -15,38 +15,10 @@ namespace LccModel
                 ConfigAttribute[] configAttributes = (ConfigAttribute[])item.GetCustomAttributes(typeof(ConfigAttribute), false);
                 if (configAttributes.Length > 0)
                 {
-                    IConfigTable iConfigTable = (IConfigTable)Activator.CreateInstance(item);
-                    iConfigTable.InitConfigTable();
-                    configs.Add(iConfigTable.ConfigType, iConfigTable);
+                    TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(item.Name, ".bytes", false, false, AssetType.Config);
+                    object obj = ProtobufUtil.Deserialize(item, asset.bytes, 0, asset.bytes.Length);
+                    configs.Add(item, obj);
                 }
-            }
-        }
-        public T GetConfig<T>(int id) where T : IConfig
-        {
-            Type type = typeof(T);
-            if (configs.ContainsKey(type))
-            {
-                AConfigTable<T> aConfigTable = (AConfigTable<T>)configs[type];
-                return aConfigTable.GetConfig(id);
-            }
-            else
-            {
-                LogUtil.Log($"Config不存在{type.Name}");
-                return default;
-            }
-        }
-        public Dictionary<int, T> GetConfigs<T>() where T : IConfig
-        {
-            Type type = typeof(T);
-            if (configs.ContainsKey(type))
-            {
-                AConfigTable<T> aConfigTable = (AConfigTable<T>)configs[type];
-                return aConfigTable.GetConfigs();
-            }
-            else
-            {
-                LogUtil.Log($"Config不存在{type.Name}");
-                return default;
             }
         }
     }

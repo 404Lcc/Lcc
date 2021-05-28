@@ -69,8 +69,6 @@
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\EditorWindowBase\ILRuntimeEditorWindowBase.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector2IntObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\UnityEngineObjectObjectType.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\Template\NewModelViewModel.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\Template\NewHotfixViewModel.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\LongObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\MenuTree\AEditorWindowBase.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\BoundsObjectType.cs" />
@@ -83,7 +81,6 @@
     <Compile Include="Assets\Editor\Runtime\Core\Util\Roslyn\BuildType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\Build\BuildUtil.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\BoolObjectType.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\Template\NewModelPanel.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\Excel\Cell.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\AnimationCurveObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\Preprocess\PreprocessUtil.cs" />
@@ -106,13 +103,16 @@
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\EditorWindowBase\TagEditorWindowBase.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\MenuTree\MenuEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\MenuItem\Lcc\LccMenuItem.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\Template\NewHotfixPanel.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\ListObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector4ObjectType.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\Editor\Runtime\Core\Template\ModelPanelTemplate.txt" />
      <None Include="Assets\Editor\Unity.Editor.asmdef" />
      <None Include="Assets\Editor\Runtime\Core\Template\ConfigTemplate.txt" />
+     <None Include="Assets\Editor\Runtime\Core\Template\ModelViewModelTemplate.txt" />
+     <None Include="Assets\Editor\Runtime\Core\Template\HotfixPanelTemplate.txt" />
+     <None Include="Assets\Editor\Runtime\Core\Template\HotfixViewModelTemplate.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\2020.1.8f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

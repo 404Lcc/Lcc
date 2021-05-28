@@ -62,7 +62,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Json\JsonUtil.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\ObjectBaseEventSystem.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\AConfigTable.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\User\UserManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Object\ObjectUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Handler\Panel\PanelObjectBaseHandler.cs" />
@@ -111,7 +110,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\View\View\AViewBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\AObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Item\Item.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\IConfigTable.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Init\EventHandler\InitEventHandler.cs" />
     <Compile Include="Assets\Hotfix\Module\Config\User\DisplayModeType.cs" />

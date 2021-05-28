@@ -1,6 +1,6 @@
 ﻿namespace LccHotfix
 {
-    public class NewHotfixPanel : APanelView<NewHotfixViewModel>
+    public class (Class) : APanelView<(ViewModel)ViewModel>
     {
         public override void Start()
         {
