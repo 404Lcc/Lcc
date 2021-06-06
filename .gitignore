@@ -1,5 +1,6 @@
 .vs
 .vsconfig
+.idea
 Library
 Logs
 obj
