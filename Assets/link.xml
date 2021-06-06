@@ -4268,6 +4268,12 @@
     <type fullname="LccModel.GameEventData" preserve="all" />
     <type fullname="LccModel.GameEventManager" preserve="all" />
     <type fullname="LccModel.LanguageManager" preserve="all" />
+    <type fullname="LccModel.INumericWatcher" preserve="all" />
+    <type fullname="LccModel.Numeric" preserve="all" />
+    <type fullname="LccModel.NumericManager" preserve="all" />
+    <type fullname="LccModel.NumericType" preserve="all" />
+    <type fullname="LccModel.NumericWatcherAttribute" preserve="all" />
+    <type fullname="LccModel.NumericWatcherManager" preserve="all" />
     <type fullname="LccModel.TimerData" preserve="all" />
     <type fullname="LccModel.TimerManager" preserve="all" />
     <type fullname="LccModel.TimerType" preserve="all" />

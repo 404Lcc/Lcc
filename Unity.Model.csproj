@@ -185,6 +185,12 @@
      <Compile Include="Assets\Scripts\Runtime\Core\Object\AObjectBase.cs" />
      <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\IItem.cs" />
      <Compile Include="Assets\Scripts\Runtime\Core\Util\Log\LogUtil.cs" />
+     <Compile Include="Assets\Scripts\Module\Core\Manager\Numeric\NumericType.cs" />
+     <Compile Include="Assets\Scripts\Module\Core\Manager\Numeric\INumericWatcher.cs" />
+     <Compile Include="Assets\Scripts\Module\Core\Manager\Numeric\Numeric.cs" />
+     <Compile Include="Assets\Scripts\Module\Core\Manager\Numeric\NumericManager.cs" />
+     <Compile Include="Assets\Scripts\Module\Core\Manager\Numeric\NumericWatcherAttribute.cs" />
+     <Compile Include="Assets\Scripts\Module\Core\Manager\Numeric\NumericWatcherManager.cs" />
      <None Include="Assets\Scripts\Unity.Model.asmdef" />
  <Reference Include="ILRuntime">
  <HintPath>D:/Unity Project/Lcc/Library/ScriptAssemblies/ILRuntime.dll</HintPath>
