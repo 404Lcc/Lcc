@@ -1,6 +1,6 @@
 ﻿namespace LccHotfix
 {
-    public class UIEvent : IUIEvent
+    public class UIEvent
     {
         public virtual void Publish()
         {

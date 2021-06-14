@@ -78,7 +78,7 @@ namespace LccModel
             long oldValue = numericDict[final];
             long newValue = (long)(((GetKey(bas) + GetKey(add)) * (100 + GetFloat(pct)) / 100f + GetKey(finalAdd)) * (100 + GetFloat(finalPct)) / 100f * 10000);
             numericDict[final] = newValue;
-            EventManager.Instance.Publish(new Numeric(type, oldValue, newValue));
+            NumericEventManager.Instance.Publish(type, newValue);
         }
     }
 }
