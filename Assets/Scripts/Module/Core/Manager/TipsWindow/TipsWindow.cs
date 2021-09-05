@@ -7,7 +7,7 @@ namespace LccModel
 {
     public class TipsWindow : AObjectBase, IEnumerator
     {
-        public int id;
+        public GameObject gameObject;
         public bool state;
         public string title;
         public string info;
@@ -23,6 +23,11 @@ namespace LccModel
         public Text infoText;
         public Text confirmText;
         public Text cancelText;
+        public override void Awake<P1>(P1 p1)
+        {
+            base.Awake(p1);
+            gameObject = p1 as GameObject;
+        }
         public void InitTipsWindow(int id, bool state, string title, string info, string confirm = "确定", string cancel = "取消", Transform parent = null)
         {
             this.id = id;
@@ -39,11 +44,11 @@ namespace LccModel
 
             if (parent == null)
             {
-                transform.SetParent(Objects.Canvas.transform);
+                gameObject.transform.SetParent(Objects.Canvas.transform);
             }
             else
             {
-                transform.SetParent(parent);
+                gameObject.transform.SetParent(parent);
             }
             RectTransform rect = gameObject.GetComponent<RectTransform>();
             rect.sizeDelta = Vector2.zero;
@@ -76,6 +81,15 @@ namespace LccModel
             state = false;
             Callback = null;
             TipsWindowManager.Instance.ClearTipsWindow(id);
+        }
+        public override void Dispose()
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+            base.Dispose();
+            gameObject.SafeDestroy();
         }
     }
 }

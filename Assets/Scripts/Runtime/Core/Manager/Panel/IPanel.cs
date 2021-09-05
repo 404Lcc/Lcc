@@ -1,4 +1,6 @@
-﻿namespace LccModel
+﻿using UnityEngine;
+
+namespace LccModel
 {
     public interface IPanel
     {
@@ -14,7 +16,7 @@
         {
             get; set;
         }
-        bool IsExist
+        GameObject gameObject
         {
             get;
         }

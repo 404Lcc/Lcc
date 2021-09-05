@@ -2971,6 +2971,8 @@
     <type fullname="Unity.Profiling.ProfilerFlowEventType" preserve="all" />
     <type fullname="Unity.Profiling.ProfilerMarkerDataUnit" preserve="all" />
     <type fullname="Unity.Profiling.ProfilerCounterOptions" preserve="all" />
+    <type fullname="Unity.Profiling.ProfilerMarkerWithStringData" preserve="all" />
+    <type fullname="Unity.Profiling.ProfilerMarkerWithStringData+AutoScope" preserve="all" />
     <type fullname="Unity.Profiling.ProfilerRecorderOptions" preserve="all" />
     <type fullname="Unity.Profiling.ProfilerRecorderSample" preserve="all" />
     <type fullname="Unity.Profiling.ProfilerRecorder" preserve="all" />
@@ -4354,6 +4356,7 @@
     <type fullname="LccModel.ETTask`1" preserve="all" />
     <type fullname="LccModel.ETTaskCompleted" preserve="all" />
     <type fullname="LccModel.ETVoid" preserve="all" />
+    <type fullname="LccModel.GameObjectComponent" preserve="all" />
     <type fullname="LccModel.ByteExpand" preserve="all" />
     <type fullname="LccModel.GameObjectExpand" preserve="all" />
     <type fullname="LccModel.ImageExpand" preserve="all" />
@@ -4415,8 +4418,8 @@
     <type fullname="LccModel.UIEventManager" preserve="all" />
     <type fullname="LccModel.AObjectBase" preserve="all" />
     <type fullname="LccModel.LccView" preserve="all" />
-    <type fullname="LccModel.LccViewFactory" preserve="all" />
     <type fullname="LccModel.ObjectBaseEventSystem" preserve="all" />
+    <type fullname="LccModel.ObjectBaseFactory" preserve="all" />
     <type fullname="LccModel.Objects" preserve="all" />
     <type fullname="LccModel.ProtobufObject" preserve="all" />
     <type fullname="LccModel.Singleton`1" preserve="all" />
@@ -4444,8 +4447,6 @@
     <type fullname="LccModel.ViewModelBase" preserve="all" />
     <type fullname="LccModel.InitEventHandler" preserve="all" />
     <type fullname="LccModel.Init" preserve="all" />
-    <type fullname="LccModel.Delay" preserve="all" />
-    <type fullname="LccModel.DelayDestroy" preserve="all" />
     <type fullname="LccModel.DisplayMode" preserve="all" />
     <type fullname="LccModel.DoubleClickEvent" preserve="all" />
     <type fullname="LccModel.DoubleClickButton" preserve="all" />

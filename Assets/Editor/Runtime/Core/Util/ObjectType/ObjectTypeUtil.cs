@@ -29,6 +29,8 @@ namespace LccEditor
         }
         public static void Draw(object obj, int indentLevel)
         {
+            EditorGUILayout.BeginVertical();
+            EditorGUI.indentLevel = indentLevel;
             string assemblyName = string.Empty;
             switch (Path.GetFileNameWithoutExtension(obj.GetType().Assembly.ManifestModule.Name))
             {
@@ -45,8 +47,6 @@ namespace LccEditor
             if (assemblyName == "Unity.Model")
             {
                 FieldInfo[] fieldInfos = obj.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
-                EditorGUILayout.BeginVertical();
-                EditorGUI.indentLevel = indentLevel;
                 foreach (FieldInfo item in fieldInfos)
                 {
                     object value = item.GetValue(obj);
@@ -117,14 +117,11 @@ namespace LccEditor
                         item.SetValue(obj, value);
                     }
                 }
-                EditorGUI.indentLevel = indentLevel;
-                EditorGUILayout.EndVertical();
             }
             else
             {
+#if ILRuntime
                 FieldInfo[] fieldInfos = ILRuntimeManager.Instance.appDomain.LoadedTypes[obj.ToString()].ReflectionType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
-                EditorGUILayout.BeginVertical();
-                EditorGUI.indentLevel = indentLevel;
                 foreach (FieldInfo item in fieldInfos)
                 {
                     object value = item.GetValue(obj);
@@ -212,6 +209,79 @@ namespace LccEditor
                         }
                     }
                 }
+#else
+                FieldInfo[] fieldInfos = obj.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+                foreach (FieldInfo item in fieldInfos)
+                {
+                    object value = item.GetValue(obj);
+                    Type type = item.FieldType;
+                    if (item.IsDefined(typeof(HideInInspector), false))
+                    {
+                        continue;
+                    }
+                    if (type.IsDefined(typeof(HideInInspector), false))
+                    {
+                        continue;
+                    }
+                    if (objectObjectTypes.ContainsKey((obj, item)))
+                    {
+                        ObjectObjectType objectObjectType = (ObjectObjectType)objectObjectTypes[(obj, item)];
+                        objectObjectType.Draw(type, item.Name, value, null, indentLevel);
+                        continue;
+                    }
+                    if ((item.IsDefined(typeof(SerializeField), false) || type.IsDefined(typeof(SerializeField), false)) && type.Assembly.ManifestModule.Name == "Unity.Hotfix.dll")
+                    {
+                        ObjectObjectType objectObjectType = new ObjectObjectType();
+                        if (value == null)
+                        {
+                            object instance = Activator.CreateInstance(type);
+                            objectObjectType.Draw(type, item.Name, instance, null, indentLevel);
+                            item.SetValue(obj, instance);
+                        }
+                        else
+                        {
+                            objectObjectType.Draw(type, item.Name, value, null, indentLevel);
+                        }
+                        objectObjectTypes.Add((obj, item), objectObjectType);
+                        continue;
+                    }
+                    if (listObjectTypes.ContainsKey((obj, item)))
+                    {
+                        ListObjectType listObjectType = (ListObjectType)listObjectTypes[(obj, item)];
+                        listObjectType.Draw(type, item.Name, value, null, indentLevel);
+                        continue;
+                    }
+                    if (type.GetInterface("IList") != null)
+                    {
+                        ListObjectType listObjectType = new ListObjectType();
+                        if (value == null)
+                        {
+                            continue;
+                        }
+                        listObjectType.Draw(type, item.Name, value, null, indentLevel);
+                        listObjectTypes.Add((obj, item), listObjectType);
+                        continue;
+                    }
+                    foreach (IObjectType objectTypeItem in objectList)
+                    {
+                        if (!objectTypeItem.IsType(type))
+                        {
+                            continue;
+                        }
+                        string fieldName = item.Name;
+                        if (fieldName.Contains("clrInstance") || fieldName.Contains("Boxed"))
+                        {
+                            continue;
+                        }
+                        if (fieldName.Length > 17 && fieldName.Contains("k__BackingField"))
+                        {
+                            fieldName = fieldName.Substring(1, fieldName.Length - 17);
+                        }
+                        value = objectTypeItem.Draw(type, fieldName, value, null);
+                        item.SetValue(obj, value);
+                    }
+                }
+#endif
                 EditorGUI.indentLevel = indentLevel;
                 EditorGUILayout.EndVertical();
             }

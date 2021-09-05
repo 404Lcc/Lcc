@@ -1,4 +1,6 @@
-﻿namespace LccModel
+﻿using UnityEngine;
+
+namespace LccModel
 {
     public interface IItem
     {
@@ -9,6 +11,10 @@
         AObjectBase AObjectBase
         {
             get; set;
+        }
+        GameObject gameObject
+        {
+            get;
         }
     }
 }

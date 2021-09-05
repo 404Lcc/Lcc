@@ -1,7 +1,10 @@
-﻿namespace LccModel
+﻿using UnityEngine;
+
+namespace LccModel
 {
-    public class Panel : IPanel
+    public class Panel
     {
+        private GameObject _gameObject;
         public PanelType Type
         {
             get; set;
@@ -14,39 +17,42 @@
         {
             get; set;
         }
-        public bool IsExist
+        public GameObject gameObject
         {
             get
             {
-                if (AObjectBase.gameObject == null)
+                if (_gameObject == null)
                 {
-                    return false;
+                    if (AObjectBase != null)
+                    {
+                        GameObjectComponent gameObjectComponent = AObjectBase.GetComponent<GameObjectComponent>();
+                        _gameObject = gameObjectComponent?.gameObject;
+                    }
                 }
-                return true;
+                return _gameObject;
             }
         }
         public void OpenPanel()
         {
-            if (IsExist)
+            if (!(gameObject != null ? gameObject.activeSelf : false))
             {
                 State = PanelState.Open;
-                AObjectBase.gameObject.SetActive(true);
-            }
-            else
-            {
-                LogUtil.Log($"Panel不存在{Type}");
+                gameObject.SetActive(true);
             }
         }
         public void ClosePanel()
         {
-            if (IsExist)
+            if (!(gameObject != null ? gameObject.activeSelf : false))
             {
                 State = PanelState.Close;
-                AObjectBase.gameObject.SetActive(false);
+                gameObject.SetActive(false);
             }
-            else
+        }
+        public void ClearPanel()
+        {
+            if (AObjectBase != null)
             {
-                LogUtil.Log($"Panel不存在{Type}");
+                AObjectBase.SafeDestroy();
             }
         }
     }

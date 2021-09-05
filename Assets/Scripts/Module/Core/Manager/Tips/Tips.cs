@@ -6,13 +6,18 @@ namespace LccModel
 {
     public class Tips : AObjectBase
     {
-        public int id;
+        public GameObject gameObject;
         public string info;
 
         public Text infoText;
+        public override void Awake<P1>(P1 p1)
+        {
+            base.Awake(p1);
+            gameObject = p1 as GameObject;
+        }
         public override void Update()
         {
-            transform.SetAsLastSibling();
+            gameObject.transform.SetAsLastSibling();
         }
         public void InitTips(int id, string info, Vector2 localPosition, Vector2 offset, float duration, Transform parent = null)
         {
@@ -23,11 +28,11 @@ namespace LccModel
 
             if (parent == null)
             {
-                transform.SetParent(Objects.Canvas.transform);
+                gameObject.transform.SetParent(Objects.Canvas.transform);
             }
             else
             {
-                transform.SetParent(parent);
+                gameObject.transform.SetParent(parent);
             }
             RectTransform rect = gameObject.GetComponent<RectTransform>();
             rect.localPosition = localPosition;
@@ -39,6 +44,15 @@ namespace LccModel
             //{
             //    TipsManager.Instance.ClearTips(id);
             //});
+        }
+        public override void Dispose()
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+            base.Dispose();
+            gameObject.SafeDestroy();
         }
     }
 }

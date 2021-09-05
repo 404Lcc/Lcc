@@ -36,7 +36,6 @@ namespace LccEditor
             if (logConfigList.Count == 0)
             {
                 logConfigList.Add(new LogConfig("Assets/Scripts/Runtime/Core/Util/Log/LogUtil.cs", typeof(LccModel.LogUtil).FullName));
-                logConfigList.Add(new LogConfig("Assets/Hotfix/Runtime/Core/Util/Log/LogUtil.cs", typeof(LccHotfix.LogUtil).FullName));
             }
         }
         public static void InitInstanceId()

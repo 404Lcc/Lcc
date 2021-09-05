@@ -10,7 +10,6 @@ namespace LccModel
         public Hashtable tipsWindows = new Hashtable();
         [Header("TipsWindow对象池")]
         public TipsWindowPool tipsWindowPool;
-        public int tipsWindowId;
         public void InitManager(TipsWindowPool tipsWindowPool)
         {
             this.tipsWindowPool = tipsWindowPool;
@@ -24,7 +23,7 @@ namespace LccModel
             tipsWindows.Add(tipsWindow.id, tipsWindow);
             return tipsWindow;
         }
-        public void ClearTipsWindow(int id)
+        public void ClearTipsWindow(long id)
         {
             TipsWindow tipsWindow = GetTipsWindow(id);
             if (tipsWindow == null) return;
@@ -46,7 +45,7 @@ namespace LccModel
                 tipsWindows.Remove(item);
             }
         }
-        public TipsWindow GetTipsWindow(int id)
+        public TipsWindow GetTipsWindow(long id)
         {
             TipsWindow tipsWindow = (TipsWindow)tipsWindows[id];
             if (tipsWindow == null) return null;

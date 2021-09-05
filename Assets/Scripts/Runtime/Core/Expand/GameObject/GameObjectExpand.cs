@@ -17,11 +17,6 @@ namespace LccModel
             if (childTransform == null) return null;
             return childTransform.gameObject;
         }
-        public static void SafeDestroy(this GameObject gameObject)
-        {
-            if (gameObject == null) return;
-            Object.Destroy(gameObject);
-        }
         public static T GetChildComponent<T>(this GameObject gameObject, params string[] childs) where T : Component
         {
             GameObject childGameObject = gameObject.GetChildGameObject(childs);
@@ -33,6 +28,11 @@ namespace LccModel
             GameObject childGameObject = gameObject.GetChildGameObject(childs);
             if (childGameObject == null) return null;
             return childGameObject.AddComponent<T>();
+        }
+        public static void SafeDestroy(this GameObject gameObject)
+        {
+            if (gameObject == null) return;
+            Object.Destroy(gameObject);
         }
         public static void SafeDestroy<T>(this GameObject gameObject) where T : Component
         {

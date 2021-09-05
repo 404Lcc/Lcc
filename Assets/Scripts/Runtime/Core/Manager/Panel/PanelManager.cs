@@ -175,7 +175,7 @@ namespace LccModel
             if (PanelExist(type))
             {
                 Panel panel = GetPanel(type);
-                panel.AObjectBase.gameObject.SafeDestroy();
+                panel.ClearPanel();
                 panels.Remove(type);
             }
         }

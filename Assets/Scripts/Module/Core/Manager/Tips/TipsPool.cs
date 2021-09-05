@@ -1,4 +1,6 @@
-﻿namespace LccModel
+﻿using UnityEngine;
+
+namespace LccModel
 {
     public class TipsPool : APool<Tips>
     {
@@ -12,13 +14,13 @@
         {
             for (int i = 0; i < size; i++)
             {
-                Tips tips = LccViewFactory.CreateView<Tips>(AssetManager.Instance.InstantiateAsset("Tips", false, false, Objects.Canvas.transform, AssetType.Panel, AssetType.Tool));
+                Tips tips = ObjectBaseFactory.Create<Tips, GameObject>(null, AssetManager.Instance.InstantiateAsset("Tips", false, false, Objects.Canvas.transform, AssetType.Panel, AssetType.Tool));
                 Enqueue(tips);
             }
         }
         public override void Enqueue(Tips item)
         {
-            item.transform.SetParent(Objects.Canvas.transform);
+            item.gameObject.transform.SetParent(Objects.Canvas.transform);
             item.gameObject.SetActive(false);
             poolQueue.Enqueue(item);
         }
@@ -29,7 +31,7 @@
                 InitPool();
             }
             Tips tips = poolQueue.Dequeue();
-            tips.transform.SetParent(Objects.Canvas.transform);
+            tips.gameObject.transform.SetParent(Objects.Canvas.transform);
             tips.gameObject.SetActive(true);
             return tips;
         }

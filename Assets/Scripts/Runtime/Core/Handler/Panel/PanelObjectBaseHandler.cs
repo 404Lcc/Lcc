@@ -27,7 +27,7 @@ namespace LccModel
             rect.anchorMax = anchorMax;
             return gameObject;
         }
-        public Panel CreatePanel(PanelType type, object data)
+        public Panel CreatePanel(PanelType type, params object[] datas)
         {
             Panel panel = new Panel();
             panel.State = PanelState.Close;
@@ -37,7 +37,8 @@ namespace LccModel
             Type classType = Manager.Instance.GetType(type.ToPanelString());
             if (classType != null)
             {
-                panel.AObjectBase = LccViewFactory.CreateView(classType, gameObject, data);
+                panel.AObjectBase = ObjectBaseFactory.Create(classType, null, datas);
+                panel.AObjectBase.AddComponent<GameObjectComponent, GameObject>(gameObject);
             }
             panel.ClosePanel();
             return panel;
