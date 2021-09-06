@@ -37,7 +37,7 @@ namespace LccModel
             Type classType = Manager.Instance.GetType(type.ToPanelString());
             if (classType != null)
             {
-                panel.AObjectBase = ObjectBaseFactory.Create(classType, null, datas);
+                panel.AObjectBase = ObjectBaseFactory.Create(classType, PanelManager.Instance, datas);
                 panel.AObjectBase.AddComponent<GameObjectComponent, GameObject>(gameObject);
             }
             panel.ClosePanel();

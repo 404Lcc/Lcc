@@ -21,9 +21,9 @@ namespace LccModel
             }
             return false;
         }
-        public Item CreateItem(ItemType type, object data, Transform parent)
+        public Item CreateItem(ItemType type, Transform parent, params object[] datas)
         {
-            Item item = handler.CreateItem(type, parent, data);
+            Item item = handler.CreateItem(type, parent, datas);
             if (ItemExist(type))
             {
                 ((List<Item>)items[type]).Add(item);

@@ -1,8 +1,4 @@
-﻿using System;
-using UnityEngine;
-using Object = UnityEngine.Object;
-
-namespace LccHotfix
+﻿namespace LccHotfix
 {
     public class Singleton<T> : AObjectBase where T : AObjectBase
     {
@@ -16,10 +12,7 @@ namespace LccHotfix
                 {
                     lock (_lockObject)
                     {
-                        _instance = Activator.CreateInstance<T>();
-                        GameObject gameObject = new GameObject($"{_instance}");
-                        _instance.InitObject(gameObject);
-                        Object.DontDestroyOnLoad(gameObject);
+                        _instance = ObjectBaseFactory.Create<T>();
                     }
                 }
                 return _instance;

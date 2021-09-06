@@ -21,9 +21,9 @@ namespace LccHotfix
             }
             return false;
         }
-        public Item CreateItem(ItemType type, object data, Transform parent)
+        public Item CreateItem(ItemType type, Transform parent, params object[] datas)
         {
-            Item item = handler.CreateItem(type, data, parent);
+            Item item = handler.CreateItem(type, parent, datas);
             if (ItemExist(type))
             {
                 ((List<Item>)items[type]).Add(item);
@@ -44,7 +44,7 @@ namespace LccHotfix
                 Item[] items = GetItems(type);
                 foreach (Item item in items)
                 {
-                    item.AObjectBase.gameObject.SafeDestroy();
+                    item.AObjectBase.SafeDestroy();
                 }
                 this.items.Remove(type);
             }

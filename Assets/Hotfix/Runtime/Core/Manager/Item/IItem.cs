@@ -1,4 +1,6 @@
-﻿namespace LccHotfix
+﻿using UnityEngine;
+
+namespace LccHotfix
 {
     public interface IItem
     {
@@ -9,6 +11,10 @@
         AObjectBase AObjectBase
         {
             get; set;
+        }
+        GameObject gameObject
+        {
+            get;
         }
     }
 }

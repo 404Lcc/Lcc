@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LccModel;
+using System;
 using UnityEngine;
 
 namespace LccHotfix
@@ -27,17 +28,18 @@ namespace LccHotfix
             rect.anchorMax = anchorMax;
             return gameObject;
         }
-        public Panel CreatePanel(PanelType type, object data)
+        public Panel CreatePanel(PanelType type, params object[] datas)
         {
             Panel panel = new Panel();
             panel.State = PanelState.Close;
-            GameObject gameObject = CreateGameObject(type.ToPanelString(), LccModel.Objects.Canvas.transform);
+            GameObject gameObject = CreateGameObject(type.ToPanelString(), Objects.Canvas.transform);
             if (gameObject == null) return null;
             panel.Type = type;
             Type classType = Manager.Instance.GetType(type.ToPanelString());
             if (classType != null)
             {
-                panel.AObjectBase = LccViewFactory.CreateView(classType, gameObject, data);
+                panel.AObjectBase = ObjectBaseFactory.Create(classType, PanelManager.Instance, datas);
+                panel.AObjectBase.AddComponent<GameObjectComponent, GameObject>(gameObject);
             }
             panel.ClosePanel();
             return panel;

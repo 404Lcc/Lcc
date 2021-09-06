@@ -1,4 +1,6 @@
-﻿namespace LccHotfix
+﻿using UnityEngine;
+
+namespace LccHotfix
 {
     public interface IPanel
     {
@@ -14,7 +16,7 @@
         {
             get; set;
         }
-        bool IsExist
+        GameObject gameObject
         {
             get;
         }

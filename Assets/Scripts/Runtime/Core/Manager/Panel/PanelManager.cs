@@ -29,11 +29,11 @@ namespace LccModel
         /// 创建面板
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="data"></param>
+        /// <param name="datas"></param>
         /// <returns></returns>
-        public Panel CreatePanel(PanelType type, object data = null)
+        public Panel CreatePanel(PanelType type, params object[] datas)
         {
-            Panel panel = handler.CreatePanel(type, data);
+            Panel panel = handler.CreatePanel(type, datas);
             panels.Add(type, panel);
             return panel;
         }
@@ -41,9 +41,9 @@ namespace LccModel
         /// 打开面板
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="data"></param>
+        /// <param name="datas"></param>
         /// <returns></returns>
-        public Panel OpenPanel(PanelType type, object data = null)
+        public Panel OpenPanel(PanelType type, params object[] datas)
         {
             if (PanelExist(type))
             {
@@ -53,7 +53,7 @@ namespace LccModel
             }
             else
             {
-                Panel panel = CreatePanel(type, data);
+                Panel panel = CreatePanel(type, datas);
                 panel.OpenPanel();
                 return panel;
             }
@@ -106,8 +106,9 @@ namespace LccModel
         /// 隐藏面板
         /// </summary>
         /// <param name="type"></param>
+        /// <param name="datas"></param>
         /// <returns></returns>
-        public Panel ClosePanel(PanelType type, object data = null)
+        public Panel ClosePanel(PanelType type, params object[] datas)
         {
             if (PanelExist(type))
             {
@@ -117,7 +118,7 @@ namespace LccModel
             }
             else
             {
-                Panel panel = CreatePanel(type, data);
+                Panel panel = CreatePanel(type, datas);
                 panel.ClosePanel();
                 return panel;
             }

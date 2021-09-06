@@ -36,7 +36,7 @@ namespace LccModel
             Type classType = Manager.Instance.GetType(type.ToItemString());
             if (classType != null)
             {
-                item.AObjectBase = ObjectBaseFactory.Create(classType, null, datas);
+                item.AObjectBase = ObjectBaseFactory.Create(classType, ItemManager.Instance, datas);
                 item.AObjectBase.AddComponent<GameObjectComponent, GameObject>(gameObject);
             }
             return item;
