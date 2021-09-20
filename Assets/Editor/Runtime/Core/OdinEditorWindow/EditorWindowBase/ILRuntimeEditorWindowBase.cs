@@ -40,7 +40,7 @@ namespace LccEditor
             using (MemoryStream dll = new MemoryStream(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileUtil.GetAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes"))))
             {
                 appDomain.LoadAssembly(dll);
-                ILRuntimeUtil.LccFrameworkRegisterCrossBindingAdaptor(appDomain);
+                ILRuntimeHelper.RegisterCrossBindingAdaptor(appDomain);
                 BindingCodeGenerator.GenerateBindingCode(appDomain, "Assets/Scripts/Runtime/Core/Manager/ILRuntime/Generated");
             }
             AssetDatabase.Refresh();

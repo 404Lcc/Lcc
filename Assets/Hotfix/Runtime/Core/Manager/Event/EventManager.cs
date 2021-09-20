@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LccModel;
+using System;
 using System.Collections;
 
 namespace LccHotfix
@@ -11,7 +12,7 @@ namespace LccHotfix
             foreach (Type item in Manager.Instance.types.Values)
             {
                 if (item.IsAbstract) continue;
-                LccModel.EventHandlerAttribute[] eventHandlerAttributes = (LccModel.EventHandlerAttribute[])item.GetCustomAttributes(typeof(LccModel.EventHandlerAttribute), false);
+                EventHandlerAttribute[] eventHandlerAttributes = (EventHandlerAttribute[])item.GetCustomAttributes(typeof(EventHandlerAttribute), false);
                 if (eventHandlerAttributes.Length > 0)
                 {
                     IEvent iEvent = (IEvent)Activator.CreateInstance(item);

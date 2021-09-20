@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LccModel;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -14,7 +15,7 @@ namespace LccHotfix
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Post(url, form);
             yield return webRequest.SendWebRequest();
-            if (webRequest.isNetworkError || webRequest.isHttpError)
+            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
                 LogUtil.Log(webRequest.error);
                 error?.Invoke(webRequest.error);
@@ -29,7 +30,7 @@ namespace LccHotfix
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
             yield return webRequest.SendWebRequest();
-            if (webRequest.isNetworkError || webRequest.isHttpError)
+            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
                 LogUtil.Log(webRequest.error);
                 error?.Invoke(webRequest.error);
@@ -47,7 +48,7 @@ namespace LccHotfix
             DownloadHandlerTexture download = new DownloadHandlerTexture(true);
             webRequest.downloadHandler = download;
             yield return webRequest.SendWebRequest();
-            if (webRequest.isNetworkError || webRequest.isHttpError)
+            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
                 LogUtil.Log(webRequest.error);
                 error?.Invoke(webRequest.error);
@@ -64,7 +65,7 @@ namespace LccHotfix
             DownloadHandlerTexture download = new DownloadHandlerTexture(true);
             webRequest.downloadHandler = download;
             yield return webRequest.SendWebRequest();
-            if (webRequest.isNetworkError || webRequest.isHttpError)
+            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
                 LogUtil.Log(webRequest.error);
                 error?.Invoke(webRequest.error);
@@ -81,7 +82,7 @@ namespace LccHotfix
             DownloadHandlerAudioClip download = new DownloadHandlerAudioClip(webRequest.url, type);
             webRequest.downloadHandler = download;
             yield return webRequest.SendWebRequest();
-            if (webRequest.isNetworkError || webRequest.isHttpError)
+            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
                 LogUtil.Log(webRequest.error);
                 error?.Invoke(webRequest.error);
@@ -98,7 +99,7 @@ namespace LccHotfix
             DownloadHandlerAudioClip download = new DownloadHandlerAudioClip(webRequest.url, type);
             webRequest.downloadHandler = download;
             yield return webRequest.SendWebRequest();
-            if (webRequest.isNetworkError || webRequest.isHttpError)
+            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
                 LogUtil.Log(webRequest.error);
                 error?.Invoke(webRequest.error);
@@ -115,7 +116,7 @@ namespace LccHotfix
             DownloadHandlerAssetBundle download = new DownloadHandlerAssetBundle(webRequest.url, uint.MaxValue);
             webRequest.downloadHandler = download;
             yield return webRequest.SendWebRequest();
-            if (webRequest.isNetworkError || webRequest.isHttpError)
+            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
                 LogUtil.Log(webRequest.error);
                 error?.Invoke(webRequest.error);
@@ -132,7 +133,7 @@ namespace LccHotfix
             DownloadHandlerAssetBundle download = new DownloadHandlerAssetBundle(webRequest.url, uint.MaxValue);
             webRequest.downloadHandler = download;
             yield return webRequest.SendWebRequest();
-            if (webRequest.isNetworkError || webRequest.isHttpError)
+            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
                 LogUtil.Log(webRequest.error);
                 error?.Invoke(webRequest.error);

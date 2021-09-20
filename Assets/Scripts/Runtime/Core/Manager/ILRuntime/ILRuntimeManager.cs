@@ -13,7 +13,7 @@ namespace LccModel
 {
     public class ILRuntimeManager : Singleton<ILRuntimeManager>
     {
-        public AppDomain appDomain = new AppDomain();
+        public AppDomain appdomain = new AppDomain();
         public List<Type> typeList = new List<Type>();
         public void InitManager()
         {
@@ -24,11 +24,11 @@ namespace LccModel
             TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.DLL);
             MemoryStream dll = new MemoryStream(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes));
 #if Release
-            appDomain.LoadAssembly(dll, null, new PdbReaderProvider());
+            appdomain.LoadAssembly(dll, null, new PdbReaderProvider());
 #else
             TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.DLL);
             MemoryStream pdb = new MemoryStream(pdbAsset.bytes);
-            appDomain.LoadAssembly(dll, pdb, new PdbReaderProvider());
+            appdomain.LoadAssembly(dll, pdb, new PdbReaderProvider());
 #endif
             InitializeILRuntime();
             OnHotfixLoaded();
@@ -36,24 +36,26 @@ namespace LccModel
         public unsafe void InitializeILRuntime()
         {
 #if UNITY_EDITOR
-            appDomain.DebugService.StartDebugService(56000);
+            appdomain.DebugService.StartDebugService(56000);
 #endif
 #if DEBUG && (UNITY_EDITOR || UNITY_ANDROID || UNITY_IPHONE)
-            appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;
+            appdomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;
 #endif
-            ILRuntimeUtil.LccFrameworkRegisterCrossBindingAdaptor(appDomain);
-            ILRuntimeUtil.LccFrameworkRegisterMethodDelegate(appDomain);
+            ILRuntimeHelper.RegisterCrossBindingAdaptor(appdomain);
+            ILRuntimeHelper.RegisterCLRMethodRedirction(appdomain);
+            ILRuntimeHelper.RegisterMethodDelegate(appdomain);
+            ILRuntimeHelper.RegisterValueTypeBinderHelper(appdomain);
 
-            JsonMapper.RegisterILRuntimeCLRRedirection(appDomain);
-            PType.RegisterILRuntimeCLRRedirection(appDomain);
+            JsonMapper.RegisterILRuntimeCLRRedirection(appdomain);
+            PType.RegisterILRuntimeCLRRedirection(appdomain);
 
-            Type.GetType("ILRuntime.Runtime.Generated.CLRBindings")?.GetMethod("Initialize")?.Invoke(null, new object[] { appDomain });
+            Type.GetType("ILRuntime.Runtime.Generated.CLRBindings")?.GetMethod("Initialize")?.Invoke(null, new object[] { appdomain });
 
-            typeList = appDomain.LoadedTypes.Values.Select(x => x.ReflectionType).ToList();
+            typeList = appdomain.LoadedTypes.Values.Select(x => x.ReflectionType).ToList();
         }
         public unsafe void OnHotfixLoaded()
         {
-            appDomain.Invoke("LccHotfix.Init", "InitHotfix", null, null);
+            appdomain.Invoke("LccHotfix.Init", "InitHotfix", null, null);
         }
     }
 }

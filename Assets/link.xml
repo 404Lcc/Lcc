@@ -4316,6 +4316,9 @@
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=12" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Model">
+    <type fullname="QuaternionBinder" preserve="all" />
+    <type fullname="Vector2Binder" preserve="all" />
+    <type fullname="Vector3Binder" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.AsyncMethodBuilderAttribute" preserve="all" />
     <type fullname="LccModel.LaunchUIEventHandler" preserve="all" />
     <type fullname="LccModel.LaunchPanel" preserve="all" />
@@ -4395,6 +4398,7 @@
     <type fullname="LccModel.IEvent" preserve="all" />
     <type fullname="LccModel.CoroutineAdapter" preserve="all" />
     <type fullname="LccModel.IAsyncStateMachineAdapter" preserve="all" />
+    <type fullname="LccModel.ILRuntimeHelper" preserve="all" />
     <type fullname="LccModel.ILRuntimeManager" preserve="all" />
     <type fullname="LccModel.AItemView`1" preserve="all" />
     <type fullname="LccModel.IItem" preserve="all" />
@@ -4427,7 +4431,6 @@
     <type fullname="LccModel.DirectoryUtil" preserve="all" />
     <type fullname="LccModel.EncodingUtil" preserve="all" />
     <type fullname="LccModel.FileUtil" preserve="all" />
-    <type fullname="LccModel.ILRuntimeUtil" preserve="all" />
     <type fullname="LccModel.IdUtil" preserve="all" />
     <type fullname="LccModel.JsonUtil" preserve="all" />
     <type fullname="LccModel.LccUtil" preserve="all" />
@@ -4480,6 +4483,7 @@
     <type fullname="LccModel.AssetBundleManager+&lt;CopyAssets&gt;d__33" preserve="all" />
     <type fullname="LccModel.CoroutineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.IAsyncStateMachineAdapter+Adapter" preserve="all" />
+    <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.ILRuntimeManager+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.SceneLoadManager+&lt;LoadScene&gt;d__6" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;Upload&gt;d__0" preserve="all" />

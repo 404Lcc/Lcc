@@ -1,4 +1,7 @@
-﻿namespace LccEditor
+﻿using UnityEditor;
+using UnityEngine;
+
+namespace LccEditor
 {
     public class LogConfig
     {
@@ -12,6 +15,8 @@
         {
             this.path = path;
             this.name = name;
+            Object asset = AssetDatabase.LoadAssetAtPath<Object>(path);
+            instanceId = asset.GetInstanceID();
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using LccModel;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using Object = UnityEngine.Object;
@@ -13,42 +15,28 @@ namespace LccEditor
         [OnOpenAsset]
         public static bool OnOpenAsset(int instanceId, int line)
         {
-            InitLogConfigList();
-            InitInstanceId();
+            if (logConfigList.Count == 0)
+            {
+                logConfigList.Add(new LogConfig("Assets/Scripts/Runtime/Core/Util/Log/LogUtil.cs", typeof(LogUtil).FullName));
+            }
+            string[] datas = GetStackTrace().Split('\n');
             foreach (LogConfig item in logConfigList)
             {
                 if (item.instanceId == instanceId)
                 {
-                    string stackTrace = GetStackTrace();
-                    if (!string.IsNullOrEmpty(stackTrace))
+                    if (IsHotfix(datas, out int index))
                     {
-                        string[] fileNames = stackTrace.Split('\n');
-                        string fileName = GetFileName(fileNames);
-                        AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath<Object>(GetFileName(fileName)), GetFileLine(fileName));
-                        return true;
+                        string path = GetFilePath(datas[index]).Replace(UnityEngine.Application.dataPath.Replace("Assets", string.Empty), string.Empty);
+                        return AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath<Object>(path), GetFileLine(datas[index]));
+                    }
+                    else
+                    {
+                        string path = GetFilePath(datas[index]);
+                        return AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath<Object>(path), GetFileLine(datas[index]));
                     }
                 }
             }
             return false;
-        }
-        public static void InitLogConfigList()
-        {
-            if (logConfigList.Count == 0)
-            {
-                logConfigList.Add(new LogConfig("Assets/Scripts/Runtime/Core/Util/Log/LogUtil.cs", typeof(LccModel.LogUtil).FullName));
-            }
-        }
-        public static void InitInstanceId()
-        {
-            foreach (LogConfig item in logConfigList)
-            {
-                if (item.instanceId > 0)
-                {
-                    return;
-                }
-                Object asset = AssetDatabase.LoadAssetAtPath<Object>(item.path);
-                item.instanceId = asset.GetInstanceID();
-            }
         }
         public static string GetStackTrace()
         {
@@ -65,39 +53,54 @@ namespace LccEditor
             }
             return string.Empty;
         }
-        public static string GetFileName(string[] fileNames)
+        public static bool IsHotfix(string[] datas, out int index)
         {
-            int index = -1;
-            for (int i = fileNames.Length - 1; i > 0; i--)
+            index = -1;
+            for (int i = datas.Length - 1; i > 0; i--)
             {
-                bool isLog = false;
-                foreach (LogConfig item in logConfigList)
-                {
-                    if (fileNames[i].Contains(item.name))
-                    {
-                        isLog = true;
-                        break;
-                    }
-                }
-                if (isLog)
+                Regex regex = new Regex(@"IL_[\s\S]*[\s\S]*[\s\S]*[\s\S]*: call");
+                Match match = regex.Match(datas[i]);
+                if (match.Success)
                 {
                     index = i + 1;
                     break;
                 }
             }
-            return fileNames[index];
+            //不是热更
+            if (index == -1)
+            {
+                for (int i = datas.Length - 1; i > 0; i--)
+                {
+                    bool isLog = false;
+                    foreach (LogConfig item in logConfigList)
+                    {
+                        if (datas[i].Contains(item.name))
+                        {
+                            isLog = true;
+                            break;
+                        }
+                    }
+                    if (isLog)
+                    {
+                        index = i + 1;
+                        break;
+                    }
+                }
+                return false;
+            }
+            return true;
         }
-        public static string GetFileName(string fileName)
+        public static string GetFilePath(string data)
         {
-            int start = fileName.IndexOf("(at ") + 4;
-            int end = fileName.LastIndexOf(':');
-            return fileName.Substring(start, end - start);
+            int start = data.IndexOf("(at ") + 4;
+            int end = data.LastIndexOf(':');
+            return data.Substring(start, end - start);
         }
-        public static int GetFileLine(string fileName)
+        public static int GetFileLine(string data)
         {
-            int start = fileName.LastIndexOf(':') + 1;
-            int end = fileName.LastIndexOf(')');
-            return int.Parse(fileName.Substring(start, end - start));
+            int start = data.LastIndexOf(':') + 1;
+            int end = data.LastIndexOf(')');
+            return int.Parse(data.Substring(start, end - start));
         }
     }
 }

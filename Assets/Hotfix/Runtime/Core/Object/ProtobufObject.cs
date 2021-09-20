@@ -2,10 +2,10 @@
 {
     public class ProtobufObject
     {
-        public ProtobufObject Clone()
+        public T Clone<T>() where T : ProtobufObject
         {
             byte[] bytes = ProtobufUtil.Serialize(this);
-            return ProtobufUtil.Deserialize<ProtobufObject>(bytes, 0, bytes.Length);
+            return ProtobufUtil.Deserialize<T>(bytes, 0, bytes.Length);
         }
     }
 }
