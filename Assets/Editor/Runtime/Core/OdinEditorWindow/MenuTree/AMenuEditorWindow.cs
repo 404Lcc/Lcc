@@ -1,15 +1,15 @@
 ﻿using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using System;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEngine;
 
 namespace LccEditor
 {
     public abstract class AMenuEditorWindow<T> : OdinMenuEditorWindow where T : EditorWindow
     {
-        public OdinMenuTree odinMenuTree;
+        private OdinMenuTree odinMenuTree;
         public AEditorWindowBase current;
         public List<AEditorWindowBase> aEditorWindowBaseList = new List<AEditorWindowBase>();
         public OdinMenuTree OdinMenuTree
@@ -27,9 +27,8 @@ namespace LccEditor
         }
         public static void OpenEditorWindow(string title)
         {
-            EditorWindow editorWindow = GetWindow<T>(title);
-            editorWindow.position = new Rect(Screen.currentResolution.width / 2 - 500, Screen.currentResolution.height / 2 - 250, 1000, 500);
-            editorWindow.Show();
+            EditorWindow editorWindow = GetWindow<T>(title, true);
+            editorWindow.position = GUIHelper.GetEditorWindowRect().AlignCenter(1000, 500);//new Rect(Screen.currentResolution.width / 2 - 500, Screen.currentResolution.height / 2 - 250, 1000, 500);
         }
         protected override OdinMenuTree BuildMenuTree()
         {
@@ -69,6 +68,17 @@ namespace LccEditor
                 OdinMenuTree.Add(path, aEditorWindowBase, icon);
             }
             aEditorWindowBaseList.Add(aEditorWindowBase);
+        }
+        public void SelectAEditorWindowBase<EditorWindowBase>()
+        {
+            foreach (AEditorWindowBase item in aEditorWindowBaseList)
+            {
+                if (item.GetType() == typeof(EditorWindowBase))
+                {
+                    TrySelectMenuItemWithObject(item);
+                    break;
+                }
+            }
         }
         protected override void OnDestroy()
         {
