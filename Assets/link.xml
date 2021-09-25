@@ -4359,6 +4359,7 @@
     <type fullname="LccModel.ETTask`1" preserve="all" />
     <type fullname="LccModel.ETTaskCompleted" preserve="all" />
     <type fullname="LccModel.ETVoid" preserve="all" />
+    <type fullname="LccModel.AssetBundleRequestAwaiter" preserve="all" />
     <type fullname="LccModel.GameObjectComponent" preserve="all" />
     <type fullname="LccModel.ByteExpand" preserve="all" />
     <type fullname="LccModel.GameObjectExpand" preserve="all" />
@@ -4428,6 +4429,7 @@
     <type fullname="LccModel.ProtobufObject" preserve="all" />
     <type fullname="LccModel.Singleton`1" preserve="all" />
     <type fullname="LccModel.APool`1" preserve="all" />
+    <type fullname="LccModel.ActionWrap`1" preserve="all" />
     <type fullname="LccModel.DirectoryUtil" preserve="all" />
     <type fullname="LccModel.EncodingUtil" preserve="all" />
     <type fullname="LccModel.FileUtil" preserve="all" />
