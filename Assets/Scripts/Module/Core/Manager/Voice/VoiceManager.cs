@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace LccModel
@@ -21,9 +20,9 @@ namespace LccModel
             voices.Add(audio, clip);
             return clip;
         }
-        public void LoadAudio(string audio, AudioType type, Action<AudioClip> callback)
+        public async ETTask<AudioClip> LoadAudio(string audio, AudioType type)
         {
-            StartCoroutine(WebUtil.Download(audio, type, callback));
+            return await WebUtil.DownloadAudioClip(audio, type);
         }
         public void RemoveAudio(string audio, AudioSource source)
         {
@@ -34,32 +33,32 @@ namespace LccModel
                 voices.Remove(audio);
             }
         }
-        public AudioClip PlayAudio(string audio, bool isInside, AudioSource source)
+        public async ETTask<AudioClip> PlayAudio(string audio, bool isAsset, AudioSource source)
         {
+            AudioClip clip;
             if (AudioExist(audio))
             {
-                AudioClip clip = GetAudioClip(audio);
+                clip = GetAudioClip(audio);
                 source.clip = clip;
                 source.Play();
                 return clip;
             }
-            if (isInside)
+            if (isAsset)
             {
-                AudioClip temp = LoadAudio(audio);
-                source.clip = temp;
-                source.Play();
-                return temp;
+                clip = LoadAudio(audio);
             }
             else
             {
-                LoadAudio(audio, AudioType.WAV, (AudioClip clip) =>
+                clip = await LoadAudio(audio, AudioType.WAV);
+                if (clip == null)
                 {
-                    voices.Add(audio, clip);
-                    source.clip = clip;
-                    source.Play();
-                });
-                return null;
+                    return null;
+                }
+                voices.Add(audio, clip);
             }
+            source.clip = clip;
+            source.Play();
+            return clip;
         }
         public void PauseAudio(AudioSource source)
         {

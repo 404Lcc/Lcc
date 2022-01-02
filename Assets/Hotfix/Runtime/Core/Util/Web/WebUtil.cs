@@ -1,6 +1,5 @@
 ﻿using LccModel;
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -8,139 +7,104 @@ namespace LccHotfix
 {
     public static class WebUtil
     {
-        public static IEnumerator Upload(string url, string field, byte[] bytes, string name, string mime, Action<bool> complete = null, Action<string> error = null)
+        public static async ETTask<bool> Upload(string url, string field, byte[] bytes, string name, string mime)
         {
             WWWForm form = new WWWForm();
             form.AddBinaryData(field, bytes, name, mime);
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Post(url, form);
-            yield return webRequest.SendWebRequest();
-            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
+            await webRequest.SendWebRequest();
+            if (webRequest.IsError())
             {
                 LogUtil.Log(webRequest.error);
-                error?.Invoke(webRequest.error);
+                return false;
             }
             else
             {
-                complete?.Invoke(true);
+                return true;
             }
         }
-        public static IEnumerator Download(string url, Action<byte[]> complete = null, Action<string> error = null)
+        public static async ETTask<string> DownloadText(string url)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
-            yield return webRequest.SendWebRequest();
-            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
+            await webRequest.SendWebRequest();
+            if (webRequest.IsError())
             {
                 LogUtil.Log(webRequest.error);
-                error?.Invoke(webRequest.error);
+                return null;
+            }
+            else
+            {
+                string text = webRequest.downloadHandler.text;
+                return text;
+            }
+        }
+        public static async ETTask<byte[]> DownloadBytes(string url)
+        {
+            url = Uri.EscapeUriString(url);
+            UnityWebRequest webRequest = UnityWebRequest.Get(url);
+            await webRequest.SendWebRequest();
+            if (webRequest.IsError())
+            {
+                LogUtil.Log(webRequest.error);
+                return null;
             }
             else
             {
                 byte[] bytes = webRequest.downloadHandler.data;
-                complete?.Invoke(bytes);
+                return bytes;
             }
         }
-        public static IEnumerator Download(string url, Action<Texture2D> complete = null, Action<string> error = null)
+        public static async ETTask<Texture2D> DownloadTexture2D(string url)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
             DownloadHandlerTexture download = new DownloadHandlerTexture(true);
             webRequest.downloadHandler = download;
-            yield return webRequest.SendWebRequest();
-            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
+            await webRequest.SendWebRequest();
+            if (webRequest.IsError())
             {
                 LogUtil.Log(webRequest.error);
-                error?.Invoke(webRequest.error);
+                return null;
             }
             else
             {
-                complete?.Invoke(download.texture);
+                return download.texture;
             }
         }
-        public static IEnumerator Download(string url, Action<Texture2D, byte[]> complete = null, Action<string> error = null)
-        {
-            url = Uri.EscapeUriString(url);
-            UnityWebRequest webRequest = UnityWebRequest.Get(url);
-            DownloadHandlerTexture download = new DownloadHandlerTexture(true);
-            webRequest.downloadHandler = download;
-            yield return webRequest.SendWebRequest();
-            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
-            {
-                LogUtil.Log(webRequest.error);
-                error?.Invoke(webRequest.error);
-            }
-            else
-            {
-                complete?.Invoke(download.texture, download.data);
-            }
-        }
-        public static IEnumerator Download(string url, AudioType type, Action<AudioClip> complete = null, Action<string> error = null)
+        public static async ETTask<AudioClip> DownloadAudioClip(string url, AudioType type)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
             DownloadHandlerAudioClip download = new DownloadHandlerAudioClip(webRequest.url, type);
             webRequest.downloadHandler = download;
-            yield return webRequest.SendWebRequest();
-            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
+            await webRequest.SendWebRequest();
+            if (webRequest.IsError())
             {
                 LogUtil.Log(webRequest.error);
-                error?.Invoke(webRequest.error);
+                return null;
             }
             else
             {
-                complete?.Invoke(download.audioClip);
+                return download.audioClip;
             }
         }
-        public static IEnumerator Download(string url, AudioType type, Action<AudioClip, byte[]> complete = null, Action<string> error = null)
-        {
-            url = Uri.EscapeUriString(url);
-            UnityWebRequest webRequest = UnityWebRequest.Get(url);
-            DownloadHandlerAudioClip download = new DownloadHandlerAudioClip(webRequest.url, type);
-            webRequest.downloadHandler = download;
-            yield return webRequest.SendWebRequest();
-            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
-            {
-                LogUtil.Log(webRequest.error);
-                error?.Invoke(webRequest.error);
-            }
-            else
-            {
-                complete?.Invoke(download.audioClip, download.data);
-            }
-        }
-        public static IEnumerator Download(string url, Action<AssetBundle> complete = null, Action<string> error = null)
+        public static async ETTask<AssetBundle> DownloadAssetBundle(string url)
         {
             url = Uri.EscapeUriString(url);
             UnityWebRequest webRequest = UnityWebRequest.Get(url);
             DownloadHandlerAssetBundle download = new DownloadHandlerAssetBundle(webRequest.url, uint.MaxValue);
             webRequest.downloadHandler = download;
-            yield return webRequest.SendWebRequest();
-            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
+            await webRequest.SendWebRequest();
+            if (webRequest.IsError())
             {
                 LogUtil.Log(webRequest.error);
-                error?.Invoke(webRequest.error);
+                return null;
             }
             else
             {
-                complete?.Invoke(download.assetBundle);
-            }
-        }
-        public static IEnumerator Download(string url, Action<AssetBundle, byte[]> complete = null, Action<string> error = null)
-        {
-            url = Uri.EscapeUriString(url);
-            UnityWebRequest webRequest = UnityWebRequest.Get(url);
-            DownloadHandlerAssetBundle download = new DownloadHandlerAssetBundle(webRequest.url, uint.MaxValue);
-            webRequest.downloadHandler = download;
-            yield return webRequest.SendWebRequest();
-            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
-            {
-                LogUtil.Log(webRequest.error);
-                error?.Invoke(webRequest.error);
-            }
-            else
-            {
-                complete?.Invoke(download.assetBundle, download.data);
+                return download.assetBundle;
             }
         }
     }

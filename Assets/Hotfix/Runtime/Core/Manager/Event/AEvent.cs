@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LccModel;
+using System;
 
 namespace LccHotfix
 {
@@ -8,6 +9,6 @@ namespace LccHotfix
         {
             return typeof(T);
         }
-        public abstract void Publish(T data);
+        public abstract ETTask Publish(T data);
     }
 }

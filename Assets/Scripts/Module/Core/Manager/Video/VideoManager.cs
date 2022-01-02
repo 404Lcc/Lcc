@@ -33,7 +33,7 @@ namespace LccModel
                 videos.Remove(video);
             }
         }
-        public VideoClip PlayVideo(string video, bool isInside, VideoPlayer player, RawImage image, int width = 1920, int height = 1080)
+        public VideoClip PlayVideo(string video, bool isAsset, VideoPlayer player, RawImage image, int width = 1920, int height = 1080)
         {
             player.targetTexture = new RenderTexture(width, height, 0);
             if (VideoExist(video))
@@ -45,7 +45,7 @@ namespace LccModel
                 player.Play();
                 return clip;
             }
-            if (isInside)
+            if (isAsset)
             {
                 VideoClip clip = LoadVideo(video);
                 player.source = VideoSource.VideoClip;

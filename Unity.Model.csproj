@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Protobuf\ProtobufUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelState.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Tips\TipsPool.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleRequestAwaiter.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Id\IdUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\ValueTypeBinder\QuaternionBinder.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Helper\RegisterValueTypeBinderHelper.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Object\ObjectBaseFactory.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\ItemType\ItemTypeExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Download\DownloadData.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\UnityWebRequestAsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Scripts\Runtime\Init\Init.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\NumericEvent\NumericEventManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\ObjectBase\AObjectBaseHandler.cs" />
@@ -100,7 +102,9 @@
     <Compile Include="Assets\Scripts\Module\Core\Manager\TipsWindow\TipsWindow.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Object\ObjectUtil.cs" />
     <Compile Include="Assets\Scripts\Util\DisplayMode.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Expand\Awaiter\AwaiterExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Byte\ByteExpand.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Define\LccConst.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetManager.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\TipsWindow\TipsWindowPool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\APanelView.cs" />
@@ -158,7 +162,9 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Async\Task\AsyncMethodBuilderAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\EventManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Async\MethodBuilder\AsyncETTaskMethodBuilder.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Download\DownloadManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Util\Action\ActionWrap.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\ValueTypeBinder\Vector3Binder.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Helper\RegisterCLRMethodRedirctionHelper.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
@@ -187,6 +193,7 @@
     <Compile Include="Assets\Scripts\Util\DoubleClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\AEvent.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\EventHandlerAttribute.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Expand\UnityWebRequest\UnityWebRequestExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Manager\Manager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\NumericEvent\INumericEvent.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Item\AItemView.cs" />
@@ -197,8 +204,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Async\MethodBuilder\AsyncETVoidMethodBuilder.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Timer\TimerType.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleRequestAwaiter.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Util\Action\ActionWrap.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Unity.Model.asmdef" />

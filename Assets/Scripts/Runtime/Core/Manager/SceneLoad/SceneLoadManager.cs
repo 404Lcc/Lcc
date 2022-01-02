@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -11,7 +12,6 @@ namespace LccModel
     public class SceneLoadManager : Singleton<SceneLoadManager>
     {
         public AsyncOperation async;
-        public event Action Callback;
         public int process;
         private string GetAssetPath(string name, params string[] types)
         {
@@ -27,9 +27,8 @@ namespace LccModel
             }
             return path;
         }
-        private IEnumerator LoadScene(string name, string suffix, bool isAssetBundle, params string[] types)
+        private async ETTask LoadScene(string name, string suffix, bool isAssetBundle, params string[] types)
         {
-            yield return new WaitForSecondsRealtime(0.1f);
 #if AssetBundle
             if (isAssetBundle)
             {
@@ -53,34 +52,23 @@ namespace LccModel
             async = SceneManager.LoadSceneAsync(name);
             async.allowSceneActivation = false;
 #endif
-            yield return new WaitForSecondsRealtime(0.1f);
             while (process < (int)(async.progress * 100))
             {
                 process++;
-                yield return null;
+                await Task.Delay(10);
             }
             while (process < 100)
             {
                 process++;
-                yield return null;
+                await Task.Delay(10);
             }
             async.allowSceneActivation = true;
-            yield return new WaitForSecondsRealtime(0.1f);
-            Callback?.Invoke();
         }
-        public void LoadScene(string name, string suffix, bool isAssetBundle, Action callback, params string[] types)
+        public async ETTask LoadScene(string name, bool isAssetBundle, params string[] types)
         {
-            Callback = callback;
             process = 0;
             SceneManager.LoadScene(SceneName.Load);
-            StartCoroutine(LoadScene(name, suffix, isAssetBundle, types));
-        }
-        public void LoadScene(string name, bool isAssetBundle, Action callback, params string[] types)
-        {
-            Callback = callback;
-            process = 0;
-            SceneManager.LoadScene(SceneName.Load);
-            StartCoroutine(LoadScene(name, ".unity", isAssetBundle, types));
+            await LoadScene(name, ".unity", isAssetBundle, types);
         }
     }
 }

@@ -26,19 +26,17 @@ namespace LccModel
                     path = Application.persistentDataPath;
                     break;
             }
-            if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+#if UNITY_EDITOR
+            //编辑器模式下也可以直接创建
+            if (folders.Length == 1 && folders[0].Contains("/"))
             {
-                if (type == PathType.PersistentDataPath && folders.Length == 1 && folders[0].Contains("/"))
-                {
-                    return GetPath(path, folders[0]);
-                }
+                return GetPath(path, folders[0]);
             }
-            else
+#endif
+            //不是编辑器模式 只能在外部空间创建文件夹
+            if (type == PathType.PersistentDataPath && folders.Length == 1 && folders[0].Contains("/"))
             {
-                if (folders.Length == 1 && folders[0].Contains("/"))
-                {
-                    return GetPath(path, folders[0]);
-                }
+                return GetPath(path, folders[0]);
             }
             for (int i = 0; i < folders.Length; i++)
             {
@@ -50,20 +48,19 @@ namespace LccModel
                 {
                     subPath = $"{subPath}{folders[i]}/";
                 }
-                if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+#if UNITY_EDITOR
+                //编辑器模式下也可以直接创建
+                if (!string.IsNullOrEmpty(subPath))
                 {
-                    if (type == PathType.PersistentDataPath && !string.IsNullOrEmpty(subPath))
-                    {
-                        DirectoryUtil.CreateDirectory($"{path}/{subPath}");
-                    }
+                    DirectoryUtil.CreateDirectory($"{path}/{subPath}");
                 }
-                else
+#else
+                //不是编辑器模式 只能在外部空间创建文件夹
+                if (type == PathType.PersistentDataPath && !string.IsNullOrEmpty(subPath))
                 {
-                    if (!string.IsNullOrEmpty(subPath))
-                    {
-                        DirectoryUtil.CreateDirectory($"{path}/{subPath}");
-                    }
+                    DirectoryUtil.CreateDirectory($"{path}/{subPath}");
                 }
+#endif
             }
             return $"{path}/{subPath}";
         }

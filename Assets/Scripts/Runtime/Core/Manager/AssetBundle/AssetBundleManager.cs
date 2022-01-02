@@ -32,7 +32,7 @@ namespace LccModel
             this.url = url;
             isDownload = url == string.Empty ? false : true;
         }
-        public void InitAssets(Action<string> message = null, Action<int, int> copyProgress = null, Action<int, int> downloadProgress = null, Action<int, int> checkProgress = null, Action complete = null, Action<DownloadData, string> error = null)
+        public async ETTask InitAssets(Action<string> message = null, Action<int, int> copyProgress = null, Action<int, int> downloadProgress = null, Action<int, int> checkProgress = null, Action complete = null, Action<DownloadData, string> error = null)
         {
             Message = message;
             CopyProgress = copyProgress;
@@ -45,15 +45,23 @@ namespace LccModel
                 byte[] bytes = FileUtil.GetAsset($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/AssetBundleConfig.json");
                 localAssetBundleConfig = JsonUtil.ToObject<AssetBundleConfig>(bytes.GetString());
                 //更新资源
-                UpdateAssets(string.Empty);
+                UpdateAssets();
                 return;
             }
             else
             {
-                StartCoroutine(WebUtil.Download($"{(Application.platform == RuntimePlatform.Android ? string.Empty : "file://")}{PathUtil.GetPath(PathType.StreamingAssetsPath, "Res", PathUtil.GetPlatformForAssetBundle())}/AssetBundleConfig.json", InitAssets, UpdateAssets));
+                byte[] bytes = await WebUtil.DownloadBytes($"{(Application.platform == RuntimePlatform.Android ? string.Empty : "file://")}{PathUtil.GetPath(PathType.StreamingAssetsPath, "Res", PathUtil.GetPlatformForAssetBundle())}/AssetBundleConfig.json");
+                if (bytes == null)
+                {
+                    UpdateAssets();
+                }
+                else
+                {
+                    await InitAssets(bytes);
+                }
             }
         }
-        public void InitAssets(byte[] bytes)
+        public async ETTask InitAssets(byte[] bytes)
         {
             Message?.Invoke("初始化资源");
             FileUtil.SaveAsset(PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle()), "AssetBundleConfig.json", bytes);
@@ -67,24 +75,25 @@ namespace LccModel
             }
             copyCount = keyList.Count;
             //开始拷贝资源
-            StartCoroutine(CopyAssets(keyList.ToArray()));
+            await CopyAssets(keyList.ToArray());
         }
-        public IEnumerator CopyAssets(string[] keys)
+        public async ETTask CopyAssets(string[] keys)
         {
             foreach (string item in keys)
             {
-                yield return StartCoroutine(WebUtil.Download($"{(Application.platform == RuntimePlatform.Android ? string.Empty : "file://")}{PathUtil.GetPath(PathType.StreamingAssetsPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{item}", (byte[] bytes) =>
+                byte[] bytes = await WebUtil.DownloadBytes($"{(Application.platform == RuntimePlatform.Android ? string.Empty : "file://")}{PathUtil.GetPath(PathType.StreamingAssetsPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{item}");
+                if (bytes != null)
                 {
                     FileUtil.SaveAsset(PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle()), item, bytes);
                     currentCopyCount += 1;
                     Message?.Invoke($"初始化资源 {currentCopyCount} / {copyCount}");
                     CopyProgress?.Invoke(currentCopyCount, copyCount);
-                }));
+                }
             }
             //更新资源
-            UpdateAssets(string.Empty);
+            UpdateAssets();
         }
-        public void UpdateAssets(string error)
+        public void UpdateAssets()
         {
             if (isDownload)
             {

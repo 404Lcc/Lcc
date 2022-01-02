@@ -4359,8 +4359,13 @@
     <type fullname="LccModel.ETTask`1" preserve="all" />
     <type fullname="LccModel.ETTaskCompleted" preserve="all" />
     <type fullname="LccModel.ETVoid" preserve="all" />
+    <type fullname="LccModel.AssetBundleCreateRequestAwaiter" preserve="all" />
     <type fullname="LccModel.AssetBundleRequestAwaiter" preserve="all" />
+    <type fullname="LccModel.AsyncOperationAwaiter" preserve="all" />
+    <type fullname="LccModel.UnityWebRequestAsyncOperationAwaiter" preserve="all" />
     <type fullname="LccModel.GameObjectComponent" preserve="all" />
+    <type fullname="LccModel.LccConst" preserve="all" />
+    <type fullname="LccModel.AwaiterExpand" preserve="all" />
     <type fullname="LccModel.ByteExpand" preserve="all" />
     <type fullname="LccModel.GameObjectExpand" preserve="all" />
     <type fullname="LccModel.ImageExpand" preserve="all" />
@@ -4371,6 +4376,7 @@
     <type fullname="LccModel.StringExpand" preserve="all" />
     <type fullname="LccModel.TaskExpand" preserve="all" />
     <type fullname="LccModel.TransformExpand" preserve="all" />
+    <type fullname="LccModel.UnityWebRequestExpand" preserve="all" />
     <type fullname="LccModel.Vector2Expand" preserve="all" />
     <type fullname="LccModel.ItemObjectBaseHandler" preserve="all" />
     <type fullname="LccModel.AObjectBaseHandler" preserve="all" />
@@ -4466,8 +4472,10 @@
     <type fullname="LccModel.OpenFileName" preserve="all" />
     <type fullname="LccModel.RightClickEvent" preserve="all" />
     <type fullname="LccModel.RightClickButton" preserve="all" />
-    <type fullname="LccModel.AudioManager+&lt;&gt;c__DisplayClass5_0" preserve="all" />
-    <type fullname="LccModel.VoiceManager+&lt;&gt;c__DisplayClass5_0" preserve="all" />
+    <type fullname="LccModel.AudioManager+&lt;LoadAudio&gt;d__3" preserve="all" />
+    <type fullname="LccModel.AudioManager+&lt;PlayAudio&gt;d__5" preserve="all" />
+    <type fullname="LccModel.VoiceManager+&lt;LoadAudio&gt;d__3" preserve="all" />
+    <type fullname="LccModel.VoiceManager+&lt;PlayAudio&gt;d__5" preserve="all" />
     <type fullname="LccModel.ETTask+&lt;InnerCoroutine&gt;d__14" preserve="all" />
     <type fullname="LccModel.ETTask`1+&lt;InnerCoroutine&gt;d__15" preserve="all" />
     <type fullname="LccModel.TaskExpand+&lt;Continue&gt;d__0" preserve="all" />
@@ -4481,21 +4489,21 @@
     <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__10`1" preserve="all" />
     <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__12" preserve="all" />
     <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__14`1" preserve="all" />
-    <type fullname="LccModel.AssetBundleManager+&lt;&gt;c__DisplayClass33_0" preserve="all" />
+    <type fullname="LccModel.AssetBundleManager+&lt;InitAssets&gt;d__31" preserve="all" />
+    <type fullname="LccModel.AssetBundleManager+&lt;InitAssets&gt;d__32" preserve="all" />
     <type fullname="LccModel.AssetBundleManager+&lt;CopyAssets&gt;d__33" preserve="all" />
     <type fullname="LccModel.CoroutineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.IAsyncStateMachineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.ILRuntimeManager+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.SceneLoadManager+&lt;LoadScene&gt;d__6" preserve="all" />
+    <type fullname="LccModel.SceneLoadManager+&lt;LoadScene&gt;d__3" preserve="all" />
+    <type fullname="LccModel.SceneLoadManager+&lt;LoadScene&gt;d__4" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;Upload&gt;d__0" preserve="all" />
-    <type fullname="LccModel.WebUtil+&lt;Download&gt;d__1" preserve="all" />
-    <type fullname="LccModel.WebUtil+&lt;Download&gt;d__2" preserve="all" />
-    <type fullname="LccModel.WebUtil+&lt;Download&gt;d__3" preserve="all" />
-    <type fullname="LccModel.WebUtil+&lt;Download&gt;d__4" preserve="all" />
-    <type fullname="LccModel.WebUtil+&lt;Download&gt;d__5" preserve="all" />
-    <type fullname="LccModel.WebUtil+&lt;Download&gt;d__6" preserve="all" />
-    <type fullname="LccModel.WebUtil+&lt;Download&gt;d__7" preserve="all" />
+    <type fullname="LccModel.WebUtil+&lt;DownloadText&gt;d__1" preserve="all" />
+    <type fullname="LccModel.WebUtil+&lt;DownloadBytes&gt;d__2" preserve="all" />
+    <type fullname="LccModel.WebUtil+&lt;DownloadTexture2D&gt;d__3" preserve="all" />
+    <type fullname="LccModel.WebUtil+&lt;DownloadAudioClip&gt;d__4" preserve="all" />
+    <type fullname="LccModel.WebUtil+&lt;DownloadAssetBundle&gt;d__5" preserve="all" />
     <type fullname="LccModel.ViewModelBinding`1+&lt;&gt;c__DisplayClass3_0`1" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
   </assembly>
