@@ -4505,6 +4505,7 @@
     <type fullname="LccModel.WebUtil+&lt;DownloadAudioClip&gt;d__4" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;DownloadAssetBundle&gt;d__5" preserve="all" />
     <type fullname="LccModel.ViewModelBinding`1+&lt;&gt;c__DisplayClass3_0`1" preserve="all" />
+    <type fullname="LccModel.InitEventHandler+&lt;Publish&gt;d__0" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
   </assembly>
 </linker>

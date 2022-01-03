@@ -5,7 +5,7 @@ namespace LccModel
     [EventHandler]
     public class InitEventHandler : AEvent<Start>
     {
-        public override void Publish(Start data)
+        public override async ETTask Publish(Start data)
         {
             Object.DontDestroyOnLoad(AssetManager.Instance.InstantiateAsset("Canvas", false, false, AssetType.Game));
             Object.DontDestroyOnLoad(AssetManager.Instance.InstantiateAsset("AudioSource", false, false, AssetType.Game));
@@ -20,6 +20,7 @@ namespace LccModel
             //TipsWindowManager.Instance.InitManager(new TipsWindowPool(10));
 
             UIEventManager.Instance.Publish(UIEventType.Launch);
+            await ETTask.ETTaskCompleted;
         }
     }
 }
