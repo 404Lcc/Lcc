@@ -67,7 +67,7 @@ namespace LccEditor
         {
             Dictionary<string, AssetBundleData> assetBundleDataDict = new Dictionary<string, AssetBundleData>();
             Dictionary<string, AssetBundleRuleType> assetBundleRuleTypeDict = new Dictionary<string, AssetBundleRuleType>();
-            string path = PathUtil.GetPath(PathType.DataPath, assetBundleSetting.outputPath, GetPlatformForAssetBundle(EditorUserBuildSettings.activeBuildTarget));
+            string path = PathUtil.GetDataPath(assetBundleSetting.outputPath, GetPlatformForAssetBundle(EditorUserBuildSettings.activeBuildTarget));
             foreach (DirectoryInfo item in DirectoryUtil.GetDirectorys(new DirectoryInfo(path), new List<DirectoryInfo>()))
             {
                 item.Delete();
@@ -125,7 +125,7 @@ namespace LccEditor
             FileUtil.SaveAsset(path, "AssetBundleConfig.json", JsonUtil.ToJson(assetBundleConfig));
             if (assetBundleSetting.isCopyStreamingAssets)
             {
-                string copyPath = PathUtil.GetPath(PathType.StreamingAssetsPath, "Res", GetPlatformForAssetBundle(EditorUserBuildSettings.activeBuildTarget));
+                string copyPath = PathUtil.GetStreamingAssetsPath(LccConst.Res, GetPlatformForAssetBundle(EditorUserBuildSettings.activeBuildTarget));
                 foreach (DirectoryInfo item in DirectoryUtil.GetDirectorys(new DirectoryInfo(copyPath), new List<DirectoryInfo>()))
                 {
                     item.Delete();
@@ -137,7 +137,7 @@ namespace LccEditor
                 foreach (FileInfo item in FileUtil.GetFiles(new DirectoryInfo(path), new List<FileInfo>()))
                 {
                     if (Path.GetExtension(item.Name) == ".meta") continue;
-                    File.Copy(item.FullName, $"{PathUtil.GetPath(PathType.StreamingAssetsPath, "Res", GetPlatformForAssetBundle(EditorUserBuildSettings.activeBuildTarget))}/{item.Name}");
+                    File.Copy(item.FullName, $"{PathUtil.GetStreamingAssetsPath(LccConst.Res, GetPlatformForAssetBundle(EditorUserBuildSettings.activeBuildTarget))}/{item.Name}");
                 }
             }
             AssetDatabase.Refresh();

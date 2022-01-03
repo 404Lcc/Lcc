@@ -9,6 +9,9 @@ namespace LccModel
 {
     public class AssetBundleManager : Singleton<AssetBundleManager>
     {
+        public const string AssetBundleConfig = "AssetBundleConfig.json";
+        public const string ServerAssetBundleConfig = "ServerAssetBundleConfig.json";
+        public const string AssetBundleSuffix = ".unity3d";
         public string url;
         public bool isDownload;
         public int copyCount;
@@ -27,6 +30,20 @@ namespace LccModel
         public event Action Complete;
         public event Action<DownloadData, string> Error;
         public Hashtable assetBundles = new Hashtable();
+        public static string AssetBundleConfigPersistent
+        {
+            get
+            {
+                return $"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{AssetBundleConfig}";
+            }
+        }
+        public static string AssetBundleConfigStreamingAssets
+        {
+            get
+            {
+                return $"{PathUtil.GetStreamingAssetsPathWeb(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{AssetBundleConfig}";
+            }
+        }
         public void InitManager(string url)
         {
             this.url = url;
@@ -40,9 +57,9 @@ namespace LccModel
             CheckProgress = checkProgress;
             Complete = complete;
             Error = error;
-            if (File.Exists($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/AssetBundleConfig.json"))
+            if (File.Exists(AssetBundleConfigPersistent))
             {
-                byte[] bytes = FileUtil.GetAsset($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/AssetBundleConfig.json");
+                byte[] bytes = FileUtil.GetAsset(AssetBundleConfigPersistent);
                 localAssetBundleConfig = JsonUtil.ToObject<AssetBundleConfig>(bytes.GetString());
                 //更新资源
                 UpdateAssets();
@@ -50,7 +67,7 @@ namespace LccModel
             }
             else
             {
-                byte[] bytes = await WebUtil.DownloadBytes($"{(Application.platform == RuntimePlatform.Android ? string.Empty : "file://")}{PathUtil.GetPath(PathType.StreamingAssetsPath, "Res", PathUtil.GetPlatformForAssetBundle())}/AssetBundleConfig.json");
+                byte[] bytes = await WebUtil.DownloadBytes(AssetBundleConfigStreamingAssets);
                 if (bytes == null)
                 {
                     UpdateAssets();
@@ -64,11 +81,11 @@ namespace LccModel
         public async ETTask InitAssets(byte[] bytes)
         {
             Message?.Invoke("初始化资源");
-            FileUtil.SaveAsset(PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle()), "AssetBundleConfig.json", bytes);
+            FileUtil.SaveAsset(AssetBundleConfigPersistent, bytes);
             localAssetBundleConfig = JsonUtil.ToObject<AssetBundleConfig>(bytes.GetString());
             List<string> keyList = new List<string>();
-            keyList.Add(PathUtil.GetPlatformForAssetBundle());
-            keyList.Add($"{PathUtil.GetPlatformForAssetBundle()}.manifest");
+            keyList.Add(PathUtil.PlatformForAssetBundle);
+            keyList.Add($"{PathUtil.PlatformForAssetBundle}.manifest");
             foreach (string item in localAssetBundleConfig.assetBundleDataDict.Keys)
             {
                 keyList.Add($"{item}.unity3d");
@@ -81,10 +98,10 @@ namespace LccModel
         {
             foreach (string item in keys)
             {
-                byte[] bytes = await WebUtil.DownloadBytes($"{(Application.platform == RuntimePlatform.Android ? string.Empty : "file://")}{PathUtil.GetPath(PathType.StreamingAssetsPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{item}");
+                byte[] bytes = await WebUtil.DownloadBytes($"{PathUtil.GetStreamingAssetsPathWeb(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{item}");
                 if (bytes != null)
                 {
-                    FileUtil.SaveAsset(PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle()), item, bytes);
+                    FileUtil.SaveAsset(PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle), item, bytes);
                     currentCopyCount += 1;
                     Message?.Invoke($"初始化资源 {currentCopyCount} / {copyCount}");
                     CopyProgress?.Invoke(currentCopyCount, copyCount);
@@ -97,7 +114,7 @@ namespace LccModel
         {
             if (isDownload)
             {
-                DownloadData downloadData = new DownloadData("ServerAssetBundleConfig", $"{url}/{PathUtil.GetPlatformForAssetBundle()}/AssetBundleConfig.json", $"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/ServerAssetBundleConfig.json");
+                DownloadData downloadData = new DownloadData(ServerAssetBundleConfig, $"{url}/{PathUtil.PlatformForAssetBundle}/{AssetBundleConfig}", $"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{ServerAssetBundleConfig}");
                 downloadData.Complete += UpdateAssets;
                 downloadData.Error += Error;
                 DownloadManager.Instance.DownloadAsync(downloadData);
@@ -110,14 +127,14 @@ namespace LccModel
         public void UpdateAssets(DownloadData downloadData)
         {
             Message?.Invoke("检测资源中");
-            byte[] bytes = FileUtil.GetAsset($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/ServerAssetBundleConfig.json");
+            byte[] bytes = FileUtil.GetAsset($"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{ServerAssetBundleConfig}");
             serverAssetBundleConfig = JsonUtil.ToObject<AssetBundleConfig>(bytes.GetString());
             List<DownloadData> downloadDataList = new List<DownloadData>();
             if (localAssetBundleConfig == null)
             {
                 foreach (string item in serverAssetBundleConfig.assetBundleDataDict.Keys)
                 {
-                    DownloadData data = new DownloadData(item, $"{url}/{PathUtil.GetPlatformForAssetBundle()}/{item}.unity3d", $"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{item}.unity3d");
+                    DownloadData data = new DownloadData(item, $"{url}/{PathUtil.PlatformForAssetBundle}/{item}{AssetBundleSuffix}", $"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{item}{AssetBundleSuffix}");
                     data.Complete += DownloadComplete;
                     data.Error += Error;
                     downloadDataList.Add(data);
@@ -127,16 +144,16 @@ namespace LccModel
             {
                 foreach (string item in ComputeUpdateAssets())
                 {
-                    DownloadData data = new DownloadData(item, $"{url}/{PathUtil.GetPlatformForAssetBundle()}/{item}.unity3d", $"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{item}.unity3d");
+                    DownloadData data = new DownloadData(item, $"{url}/{PathUtil.PlatformForAssetBundle}/{item}{AssetBundleSuffix}", $"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{item}{AssetBundleSuffix}");
                     data.Complete += DownloadComplete;
                     data.Error += Error;
                     downloadDataList.Add(data);
                 }
             }
-            DownloadData data1 = new DownloadData(PathUtil.GetPlatformForAssetBundle(), $"{url}/{PathUtil.GetPlatformForAssetBundle()}/{PathUtil.GetPlatformForAssetBundle()}", $"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{PathUtil.GetPlatformForAssetBundle()}");
+            DownloadData data1 = new DownloadData(PathUtil.PlatformForAssetBundle, $"{url}/{PathUtil.PlatformForAssetBundle}/{PathUtil.PlatformForAssetBundle}", $"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{PathUtil.PlatformForAssetBundle}");
             data1.Complete += DownloadComplete;
             data1.Error += Error;
-            DownloadData data2 = new DownloadData($"{PathUtil.GetPlatformForAssetBundle()}.manifest", $"{url}/{PathUtil.GetPlatformForAssetBundle()}/{PathUtil.GetPlatformForAssetBundle()}.manifest", $"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{PathUtil.GetPlatformForAssetBundle()}.manifest");
+            DownloadData data2 = new DownloadData($"{PathUtil.PlatformForAssetBundle}.manifest", $"{url}/{PathUtil.PlatformForAssetBundle}/{PathUtil.PlatformForAssetBundle}.manifest", $"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{PathUtil.PlatformForAssetBundle}.manifest");
             data2.Complete += DownloadComplete;
             data2.Error += Error;
             downloadDataList.Add(data1);
@@ -181,24 +198,24 @@ namespace LccModel
         public void CheckAssetsComplete()
         {
             Message?.Invoke("检测资源完整性");
-            AssetBundle assetBundle = AssetBundle.LoadFromFile($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{PathUtil.GetPlatformForAssetBundle()}");
+            AssetBundle assetBundle = AssetBundle.LoadFromFile($"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{PathUtil.PlatformForAssetBundle}");
             assetBundleManifest = assetBundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
             assetBundle.Unload(false);
             List<string> assetBundleNameList = new List<string>();
             checkCount = localAssetBundleConfig.assetBundleDataDict.Count;
             foreach (KeyValuePair<string, AssetBundleData> item in localAssetBundleConfig.assetBundleDataDict)
             {
-                if (!File.Exists($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{item.Key}.unity3d"))
+                if (!File.Exists($"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{item.Key}{AssetBundleSuffix}"))
                 {
                     assetBundleNameList.Add(item.Key);
                     continue;
                 }
-                else if (new FileInfo($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{item.Key}.unity3d").Length != item.Value.fileSize)
+                else if (new FileInfo($"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{item.Key}{AssetBundleSuffix}").Length != item.Value.fileSize)
                 {
                     assetBundleNameList.Add(item.Key);
                     continue;
                 }
-                else if (localAssetBundleConfig.assetBundleDataDict[item.Key].assetBundleHash != assetBundleManifest.GetAssetBundleHash($"{item.Key}.unity3d").ToString())
+                else if (localAssetBundleConfig.assetBundleDataDict[item.Key].assetBundleHash != assetBundleManifest.GetAssetBundleHash($"{item.Key}{AssetBundleSuffix}").ToString())
                 {
                     assetBundleNameList.Add(item.Key);
                     continue;
@@ -210,7 +227,7 @@ namespace LccModel
             {
                 if (isDownload)
                 {
-                    File.Move($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/ServerAssetBundleConfig.json", $"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/AssetBundleConfig.json");
+                    File.Move($"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{serverAssetBundleConfig}", $"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{AssetBundleConfig}");
                 }
                 Complete?.Invoke();
             }
@@ -224,11 +241,11 @@ namespace LccModel
             string assetBundleName;
             if (localAssetBundleConfig.assetBundleRuleTypeDict[assetName] == AssetBundleRuleType.File)
             {
-                assetBundleName = $"{MD5Util.ComputeMD5(assetName)}.unity3d";
+                assetBundleName = $"{MD5Util.ComputeMD5(assetName)}{AssetBundleSuffix}";
             }
             else
             {
-                assetBundleName = $"{MD5Util.ComputeMD5(Path.GetDirectoryName(assetName).Replace("\\", "/"))}.unity3d";
+                assetBundleName = $"{MD5Util.ComputeMD5(Path.GetDirectoryName(assetName).Replace("\\", "/"))}{AssetBundleSuffix}";
             }
             if (assetBundles.ContainsKey(assetBundleName))
             {
@@ -236,11 +253,11 @@ namespace LccModel
             }
             else
             {
-                AssetBundle assetBundle = AssetBundle.LoadFromFile($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{assetBundleName}");
+                AssetBundle assetBundle = AssetBundle.LoadFromFile($"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{assetBundleName}");
                 string[] dependencies = assetBundleManifest.GetAllDependencies(assetBundleName);
                 foreach (string item in dependencies)
                 {
-                    assetBundles.Add(item, AssetBundle.LoadFromFile($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res", PathUtil.GetPlatformForAssetBundle())}/{item}"));
+                    assetBundles.Add(item, AssetBundle.LoadFromFile($"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{item}"));
                 }
                 assetBundles.Add(assetBundleName, assetBundle);
                 return assetBundle;
@@ -248,7 +265,7 @@ namespace LccModel
         }
         public void UnloadAsset(string assetName)
         {
-            string assetBundleName = $"{MD5Util.ComputeMD5(assetName)}.unity3d";
+            string assetBundleName = $"{MD5Util.ComputeMD5(assetName)}{AssetBundleSuffix}";
             if (assetBundles.ContainsKey(assetName))
             {
                 AssetBundle assetBundle = (AssetBundle)assetBundles[assetBundleName];

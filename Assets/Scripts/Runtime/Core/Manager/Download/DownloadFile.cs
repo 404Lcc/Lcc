@@ -93,7 +93,6 @@ namespace LccModel
             }
             else
             {
-                PathUtil.GetPath(PathType.PersistentDataPath, Path.GetDirectoryName(downloadData.path));
                 using (FileStream fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
                 {
                     HttpWebRequest httpWebRequest = null;

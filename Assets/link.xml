@@ -4489,9 +4489,9 @@
     <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__10`1" preserve="all" />
     <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__12" preserve="all" />
     <type fullname="LccModel.AssetManager+&lt;InstantiateAssetAsync&gt;d__14`1" preserve="all" />
-    <type fullname="LccModel.AssetBundleManager+&lt;InitAssets&gt;d__31" preserve="all" />
-    <type fullname="LccModel.AssetBundleManager+&lt;InitAssets&gt;d__32" preserve="all" />
-    <type fullname="LccModel.AssetBundleManager+&lt;CopyAssets&gt;d__33" preserve="all" />
+    <type fullname="LccModel.AssetBundleManager+&lt;InitAssets&gt;d__38" preserve="all" />
+    <type fullname="LccModel.AssetBundleManager+&lt;InitAssets&gt;d__39" preserve="all" />
+    <type fullname="LccModel.AssetBundleManager+&lt;CopyAssets&gt;d__40" preserve="all" />
     <type fullname="LccModel.CoroutineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.IAsyncStateMachineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c" preserve="all" />

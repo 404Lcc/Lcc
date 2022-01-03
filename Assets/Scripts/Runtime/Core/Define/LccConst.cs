@@ -1,10 +1,8 @@
 namespace LccModel
 {
-    /// <summary>
-    /// 创建常量
-    /// </summary>
     public class LccConst
     {
+        public const string Res = "Res";
         public const string Version = "Version.json";
     }
 }
