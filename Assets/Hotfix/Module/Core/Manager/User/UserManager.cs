@@ -32,7 +32,7 @@ namespace LccHotfix
 #if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.C))
             {
-                ScreenCapture.CaptureScreenshot($"{PathUtil.GetPath(PathType.PersistentDataPath, "Res")}/Screenshot.png");
+                ScreenCapture.CaptureScreenshot($"{PathUtil.GetPersistentDataPath(LccConst.Res)}/Screenshot.png");
             }
 #endif
             if (Input.GetKeyDown(KeyCode.Escape))
