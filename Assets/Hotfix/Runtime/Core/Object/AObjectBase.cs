@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LccModel;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -7,7 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace LccHotfix
 {
-    public abstract class AObjectBase : IDisposable
+    public abstract class AObjectBase
     {
         private Dictionary<Type, AObjectBase> _componentDict = new Dictionary<Type, AObjectBase>();
         private AObjectBase _parent;

@@ -38,6 +38,7 @@ namespace LccModel
             {
                 item.AObjectBase = ObjectBaseFactory.Create(classType, ItemManager.Instance, datas);
                 item.AObjectBase.AddComponent<GameObjectComponent, GameObject>(gameObject);
+                item.AObjectBase.ShowView(gameObject);
             }
             return item;
         }

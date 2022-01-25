@@ -92,6 +92,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\NumericEvent\NumericEventManager.cs" />
     <Compile Include="Assets\Hotfix\Module\Core\Manager\Command\CommandManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Json\JsonUtil.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Awaiter\AwaiterExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Item\IItem.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Byte\ByteExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\File\FileUtil.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Assets\Hotfix\Module\Core\Joystack\Joystack.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Init\Init.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Object\ObjectUtil.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\UnityWebRequest\UnityWebRequestExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Component\GameObjectComponent.cs" />
     <Compile Include="Assets\Hotfix\Module\Config\Command\CommandDataType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\IConfig.cs" />
@@ -140,8 +142,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Config\Event\EventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\UnityWebRequest\UnityWebRequestExpand.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Awaiter\AwaiterExpand.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Define\LccConst.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

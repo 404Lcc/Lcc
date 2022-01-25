@@ -40,6 +40,7 @@ namespace LccHotfix
             {
                 panel.AObjectBase = ObjectBaseFactory.Create(classType, PanelManager.Instance, datas);
                 panel.AObjectBase.AddComponent<GameObjectComponent, GameObject>(gameObject);
+                panel.AObjectBase.ShowView(gameObject);
             }
             panel.ClosePanel();
             return panel;

@@ -282,9 +282,9 @@ namespace LccEditor
                     }
                 }
 #endif
-                EditorGUI.indentLevel = indentLevel;
-                EditorGUILayout.EndVertical();
             }
+            EditorGUI.indentLevel = indentLevel;
+            EditorGUILayout.EndVertical();
         }
     }
 }

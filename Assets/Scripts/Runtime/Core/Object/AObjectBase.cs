@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 
 namespace LccModel
 {
-    public abstract class AObjectBase : IDisposable
+    public abstract class AObjectBase
     {
         private Dictionary<Type, AObjectBase> _componentDict = new Dictionary<Type, AObjectBase>();
         private AObjectBase _parent;

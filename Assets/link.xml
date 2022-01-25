@@ -4389,6 +4389,9 @@
     <type fullname="LccModel.AssetBundleManager" preserve="all" />
     <type fullname="LccModel.AssetBundleRule" preserve="all" />
     <type fullname="LccModel.AssetBundleRuleType" preserve="all" />
+    <type fullname="LccModel.IRefCounter" preserve="all" />
+    <type fullname="LccModel.AssetBundleObject" preserve="all" />
+    <type fullname="LccModel.AssetBundleLoadManager" preserve="all" />
     <type fullname="LccModel.ClientNetworkManager" preserve="all" />
     <type fullname="LccModel.ICenterHandler" preserve="all" />
     <type fullname="LccModel.SocketModel" preserve="all" />
@@ -4492,6 +4495,7 @@
     <type fullname="LccModel.AssetBundleManager+&lt;InitAssets&gt;d__38" preserve="all" />
     <type fullname="LccModel.AssetBundleManager+&lt;InitAssets&gt;d__39" preserve="all" />
     <type fullname="LccModel.AssetBundleManager+&lt;CopyAssets&gt;d__40" preserve="all" />
+    <type fullname="LccModel.AssetBundleLoadManager+&lt;&gt;c__DisplayClass16_0" preserve="all" />
     <type fullname="LccModel.CoroutineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.IAsyncStateMachineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c" preserve="all" />
