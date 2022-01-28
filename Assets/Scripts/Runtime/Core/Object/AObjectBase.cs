@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LccModel;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -190,8 +191,9 @@ namespace LccModel
                 AutoReference(transform.GetChild(i), fieldInfoDict);
             }
         }
-        public virtual void InitData(params object[] datas)
+        public void AutoReference(GameObject gameObject)
         {
+            AutoReference(gameObject.transform);
         }
         public virtual void Awake()
         {
@@ -209,6 +211,9 @@ namespace LccModel
         {
         }
         public virtual void Start()
+        {
+        }
+        public virtual void InitData(object[] datas)
         {
         }
         public virtual void FixedUpdate()
@@ -230,22 +235,22 @@ namespace LccModel
         public Coroutine StartCoroutine(IEnumerator enumerator)
         {
             //测试写法 后面时间优化
-            return GameObject.FindObjectOfType<Init>().StartCoroutine(enumerator);
+            return null;//GameObject.FindObjectOfType<Init>().StartCoroutine(enumerator);
         }
         public void StopCoroutine(IEnumerator enumerator)
         {
             //测试写法 后面时间优化
-            GameObject.FindObjectOfType<Init>().StartCoroutine(enumerator);
+            //GameObject.FindObjectOfType<Init>().StartCoroutine(enumerator);
         }
         public void StopCoroutine(Coroutine coroutine)
         {
             //测试写法 后面时间优化
-            GameObject.FindObjectOfType<Init>().StopCoroutine(coroutine);
+            //GameObject.FindObjectOfType<Init>().StopCoroutine(coroutine);
         }
         public void StopAllCoroutines()
         {
             //测试写法 后面时间优化
-            GameObject.FindObjectOfType<Init>().StopAllCoroutines();
+            //GameObject.FindObjectOfType<Init>().StopAllCoroutines();
         }
         public virtual void Dispose()
         {

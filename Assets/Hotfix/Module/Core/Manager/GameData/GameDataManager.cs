@@ -1,5 +1,5 @@
-﻿//using DG.Tweening;
-//using DG.Tweening.Core;
+﻿using DG.Tweening;
+using DG.Tweening.Core;
 using System;
 using System.IO;
 
@@ -93,18 +93,18 @@ namespace LccHotfix
                 userSetData = null;
             }
         }
-        //public void SetValue(DOGetter<float> getter, DOSetter<float> setter, int value, int timer, bool isSave, bool isOpenPanel = false, PanelType[] types = null, Action callback = null)
-        //{
-        //    if (isOpenPanel)
-        //    {
-        //    }
-        //    DOTween.To(getter, setter, value, timer).OnComplete(() =>
-        //    {
-        //        callback?.Invoke();
-        //        if (isSave)
-        //        {
-        //        }
-        //    });
-        //}
+        public void SetValue(DOGetter<float> getter, DOSetter<float> setter, int value, int timer, bool isSave, bool isOpenPanel = false, PanelType[] types = null, Action callback = null)
+        {
+            if (isOpenPanel)
+            {
+            }
+            DOTween.To(getter, setter, value, timer).OnComplete(() =>
+            {
+                callback?.Invoke();
+                if (isSave)
+                {
+                }
+            });
+        }
     }
 }

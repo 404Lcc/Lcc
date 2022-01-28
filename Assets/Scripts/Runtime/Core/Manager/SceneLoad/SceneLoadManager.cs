@@ -2,9 +2,6 @@
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
 namespace LccModel
@@ -12,7 +9,8 @@ namespace LccModel
     public class SceneLoadManager : Singleton<SceneLoadManager>
     {
         public AsyncOperation async;
-        public int process;
+        public bool isLoading;
+        private int process;
         private string GetAssetPath(string name, params string[] types)
         {
             if (types.Length == 0) return name;
@@ -37,7 +35,6 @@ namespace LccModel
                 AssetBundleManager.Instance.LoadAsset($"Assets/Bundles/{path}{suffix}");
                 async = SceneManager.LoadSceneAsync($"Assets/Bundles/{path}{suffix}");
                 async.allowSceneActivation = false;
-                //AsyncOperationHandle<SceneInstance> handler = Addressables.LoadSceneAsync($"Assets/Bundles/{path}{suffix}");
 #else
                 async = SceneManager.LoadSceneAsync(name);
                 async.allowSceneActivation = false;
@@ -66,9 +63,23 @@ namespace LccModel
         }
         public async ETTask LoadScene(string name, bool isAssetBundle, params string[] types)
         {
+            isLoading = true;
             process = 0;
             SceneManager.LoadScene(SceneName.Load);
             await LoadScene(name, ".unity", isAssetBundle, types);
+            isLoading = false;
+            process = 0;
+        }
+        public int GetLoadProcess()
+        {
+            if (isLoading)
+            {
+                return process;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

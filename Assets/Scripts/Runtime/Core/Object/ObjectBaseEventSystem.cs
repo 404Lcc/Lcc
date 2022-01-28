@@ -14,7 +14,6 @@ namespace LccModel
             }
         }
         public Hashtable aObjectBases = new Hashtable();
-        public Queue<long> start = new Queue<long>();
         public Queue<long> fixedUpdate = new Queue<long>();
         public Queue<long> fixedUpdateCopy = new Queue<long>();
         public Queue<long> update = new Queue<long>();
@@ -23,7 +22,6 @@ namespace LccModel
         public Queue<long> lateUpdateCopy = new Queue<long>();
         public void EventSystemFixedUpdate()
         {
-            Start();
             FixedUpdate();
         }
         public void EventSystemUpdate()
@@ -37,7 +35,6 @@ namespace LccModel
         public void Register(AObjectBase aObjectBase)
         {
             aObjectBases.Add(aObjectBase.id, aObjectBase);
-            start.Enqueue(aObjectBase.id);
             fixedUpdate.Enqueue(aObjectBase.id);
             update.Enqueue(aObjectBase.id);
             lateUpdate.Enqueue(aObjectBase.id);
@@ -84,16 +81,18 @@ namespace LccModel
                 aObjectBase.Awake(p1, p2, p3, p4);
             }
         }
-        private void Start()
+        public void InitData(AObjectBase aObjectBase, object[] datas)
         {
-            while (start.Count > 0)
+            if (aObjectBases.ContainsKey(aObjectBase.id))
             {
-                long id = start.Dequeue();
-                if (aObjectBases.ContainsKey(id))
-                {
-                    AObjectBase aObjectBase = (AObjectBase)aObjectBases[id];
-                    aObjectBase.Start();
-                }
+                aObjectBase.InitData(datas);
+            }
+        }
+        public void Start(AObjectBase aObjectBase)
+        {
+            if (aObjectBases.ContainsKey(aObjectBase.id))
+            {
+                aObjectBase.Start();
             }
         }
         private void FixedUpdate()

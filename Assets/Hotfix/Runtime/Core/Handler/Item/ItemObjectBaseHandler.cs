@@ -27,7 +27,7 @@ namespace LccHotfix
             rect.anchorMax = anchorMax;
             return gameObject;
         }
-        public Item CreateItem(ItemType type, Transform parent, params object[] datas)
+        public Item CreateItem(ItemType type, Transform parent, object[] datas)
         {
             Item item = new Item();
             GameObject gameObject = CreateGameObject(type.ToItemString(), parent);
@@ -36,9 +36,7 @@ namespace LccHotfix
             Type classType = Manager.Instance.GetType(type.ToItemString());
             if (classType != null)
             {
-                item.AObjectBase = ObjectBaseFactory.Create(classType, ItemManager.Instance, datas);
-                item.AObjectBase.AddComponent<GameObjectComponent, GameObject>(gameObject);
-                item.AObjectBase.ShowView(gameObject);
+                item.AObjectBase = ObjectBaseFactory.Create(classType, ItemManager.Instance, gameObject, datas);
             }
             return item;
         }

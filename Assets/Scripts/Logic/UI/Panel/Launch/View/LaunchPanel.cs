@@ -1,8 +1,20 @@
-﻿namespace LccModel
+﻿using DG.Tweening;
+using UnityEngine;
+
+namespace LccModel
 {
     public class LaunchPanel : APanelView<LaunchModel>
     {
+        public CanvasGroup BG;
         public override void Start()
+        {
+            ShowLaunchAnim();
+        }
+        public void ShowLaunchAnim()
+        {
+            BG.DOFade(0, ViewModel.time).onComplete = OnComplete;
+        }
+        public void OnComplete()
         {
 #if UNITY_EDITOR
 #if ILRuntime

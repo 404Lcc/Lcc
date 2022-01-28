@@ -12,6 +12,7 @@ namespace LccHotfix
             GameDataManager.Instance.InitManager("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             UserManager.Instance.InitManager();
 
+            UIEventManager.Instance.Publish(UIEventType.Load);
             await SceneLoadManager.Instance.LoadScene(SceneName.Login, true, AssetType.Scene);
             UIEventManager.Instance.Publish(UIEventType.Login);
         }

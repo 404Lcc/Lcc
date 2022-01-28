@@ -191,8 +191,9 @@ namespace LccHotfix
                 AutoReference(transform.GetChild(i), fieldInfoDict);
             }
         }
-        public virtual void InitData(params object[] datas)
+        public void AutoReference(GameObject gameObject)
         {
+            AutoReference(gameObject.transform);
         }
         public virtual void Awake()
         {
@@ -210,6 +211,9 @@ namespace LccHotfix
         {
         }
         public virtual void Start()
+        {
+        }
+        public virtual void InitData(object[] datas)
         {
         }
         public virtual void FixedUpdate()

@@ -19,6 +19,11 @@ namespace LccModel
             //TipsManager.Instance.InitManager(new TipsPool(10));
             //TipsWindowManager.Instance.InitManager(new TipsWindowPool(10));
 
+            //步骤
+            //打开开屏界面
+            //如果是ab模式进入检测资源更新界面
+            //初始化主工程并初始化热更层
+            //打开登录界面
             UIEventManager.Instance.Publish(UIEventType.Launch);
             await ETTask.ETTaskCompleted;
         }

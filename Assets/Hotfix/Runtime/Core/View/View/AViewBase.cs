@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace LccHotfix
 {
@@ -27,6 +28,13 @@ namespace LccHotfix
                 }
                 binding.Value = value;
             }
+        }
+        public override void InitData(object[] datas)
+        {
+            GameObject gameObject = (GameObject)datas[0];
+            AddComponent<GameObjectComponent, GameObject>(gameObject);
+            AutoReference(gameObject);
+            ShowView(gameObject);
         }
         public virtual void InitView(T viewModel)
         {
