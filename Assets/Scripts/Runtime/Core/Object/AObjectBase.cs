@@ -45,6 +45,61 @@ namespace LccModel
             }
             return null;
         }
+        public AObjectBase AddComponent(Type type, params object[] datas)
+        {
+            if (_componentDict.ContainsKey(type))
+            {
+                Debug.LogError("Component已存在" + type.FullName);
+                return null;
+            }
+            AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, datas);
+            _componentDict.Add(type, aObjectBase);
+            return aObjectBase;
+        }
+        public AObjectBase AddComponent<P1>(Type type, P1 p1, params object[] datas)
+        {
+            if (_componentDict.ContainsKey(type))
+            {
+                Debug.LogError("Component已存在" + type.FullName);
+                return null;
+            }
+            AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, p1, datas);
+            _componentDict.Add(type, aObjectBase);
+            return aObjectBase;
+        }
+        public AObjectBase AddComponent<P1, P2>(Type type, P1 p1, P2 p2, params object[] datas)
+        {
+            if (_componentDict.ContainsKey(type))
+            {
+                Debug.LogError("Component已存在" + type.FullName);
+                return null;
+            }
+            AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, p1, p2, datas);
+            _componentDict.Add(type, aObjectBase);
+            return aObjectBase;
+        }
+        public AObjectBase AddComponent<P1, P2, P3>(Type type, P1 p1, P2 p2, P3 p3, params object[] datas)
+        {
+            if (_componentDict.ContainsKey(type))
+            {
+                Debug.LogError("Component已存在" + type.FullName);
+                return null;
+            }
+            AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, p1, p2, p3, datas);
+            _componentDict.Add(type, aObjectBase);
+            return aObjectBase;
+        }
+        public AObjectBase AddComponent<P1, P2, P3, P4>(Type type, P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas)
+        {
+            if (_componentDict.ContainsKey(type))
+            {
+                Debug.LogError("Component已存在" + type.FullName);
+                return null;
+            }
+            AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, p1, p2, p3, p4, datas);
+            _componentDict.Add(type, aObjectBase);
+            return aObjectBase;
+        }
         public T AddComponent<T>(params object[] datas) where T : AObjectBase
         {
             Type type = typeof(T);

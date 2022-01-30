@@ -8,6 +8,7 @@ namespace LccModel
         public CanvasGroup BG;
         public override void Start()
         {
+            base.Start();
             ShowLaunchAnim();
         }
         public void ShowLaunchAnim()

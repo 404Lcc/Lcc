@@ -14,7 +14,9 @@ namespace LccModel
         {
             for (int i = 0; i < size; i++)
             {
-                Tips tips = ObjectBaseFactory.Create<Tips, GameObject>(null, AssetManager.Instance.InstantiateAsset("Tips", false, false, Objects.Canvas.transform, AssetType.Panel, AssetType.Tool));
+                GameObject gameObject = AssetManager.Instance.InstantiateAsset("Tips", false, false, Objects.Canvas.transform, AssetType.Panel, AssetType.Tool);
+                GameObjectComponent gameObjectComponent = ObjectBaseFactory.Create<GameObjectComponent, GameObject>(null, gameObject);
+                Tips tips = gameObjectComponent.AddComponent<Tips>();
                 Enqueue(tips);
             }
         }

@@ -4,6 +4,7 @@
     {
         public override void Start()
         {
+            base.Start();
             AssetBundleManager.Instance.InitAssets(Message, CopyProgress, DownloadProgress, CheckProgress, Complete, Error).Coroutine();
         }
         public void Message(string message)

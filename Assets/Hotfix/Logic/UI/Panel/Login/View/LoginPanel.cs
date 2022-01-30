@@ -27,10 +27,11 @@ namespace LccHotfix
         {
             base.InitData(datas);
             LogUtil.Log("InitData第四个执行的函数");
-            LogUtil.Log("调用base增加GameObjectComponent");
         }
         public override void Start()
         {
+            LogUtil.Log("调用base自动赋值字段");
+            base.Start();
             LogUtil.Log("Start第五个执行的函数");
         }
         public override void FixedUpdate()

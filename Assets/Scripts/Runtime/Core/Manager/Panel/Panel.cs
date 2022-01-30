@@ -25,7 +25,7 @@ namespace LccModel
                 {
                     if (AObjectBase != null)
                     {
-                        GameObjectComponent gameObjectComponent = AObjectBase.GetComponent<GameObjectComponent>();
+                        GameObjectComponent gameObjectComponent = AObjectBase.GetParent<GameObjectComponent>();
                         _gameObject = gameObjectComponent?.gameObject;
                     }
                 }
@@ -52,7 +52,7 @@ namespace LccModel
         {
             if (AObjectBase != null)
             {
-                AObjectBase.SafeDestroy();
+                AObjectBase.Parent.SafeDestroy();
             }
         }
     }

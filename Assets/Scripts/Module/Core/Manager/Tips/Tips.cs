@@ -10,10 +10,9 @@ namespace LccModel
         public string info;
 
         public Text infoText;
-        public override void Awake<P1>(P1 p1)
+        public override void Start()
         {
-            base.Awake(p1);
-            gameObject = p1 as GameObject;
+            gameObject = GetParent<GameObjectComponent>().gameObject;
         }
         public override void Update()
         {
@@ -44,15 +43,6 @@ namespace LccModel
             //{
             //    TipsManager.Instance.ClearTips(id);
             //});
-        }
-        public override void Dispose()
-        {
-            if (IsDisposed)
-            {
-                return;
-            }
-            base.Dispose();
-            gameObject.SafeDestroy();
         }
     }
 }

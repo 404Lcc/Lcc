@@ -36,7 +36,9 @@ namespace LccHotfix
             Type classType = Manager.Instance.GetType(type.ToItemString());
             if (classType != null)
             {
-                item.AObjectBase = ObjectBaseFactory.Create(classType, ItemManager.Instance, gameObject, datas);
+                GameObjectComponent gameObjectComponent = ObjectBaseFactory.Create<GameObjectComponent, GameObject>(ItemManager.Instance, gameObject);
+                AObjectBase itemComponent = gameObjectComponent.AddComponent(classType, datas);
+                item.AObjectBase = itemComponent;
             }
             return item;
         }

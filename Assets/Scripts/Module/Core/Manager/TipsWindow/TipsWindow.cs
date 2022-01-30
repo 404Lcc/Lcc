@@ -23,10 +23,9 @@ namespace LccModel
         public Text infoText;
         public Text confirmText;
         public Text cancelText;
-        public override void Awake<P1>(P1 p1)
+        public override void Start()
         {
-            base.Awake(p1);
-            gameObject = p1 as GameObject;
+            gameObject = GetParent<GameObjectComponent>().gameObject;
         }
         public void InitTipsWindow(int id, bool state, string title, string info, string confirm = "确定", string cancel = "取消", Transform parent = null)
         {
@@ -81,15 +80,6 @@ namespace LccModel
             state = false;
             Callback = null;
             TipsWindowManager.Instance.ClearTipsWindow(id);
-        }
-        public override void Dispose()
-        {
-            if (IsDisposed)
-            {
-                return;
-            }
-            base.Dispose();
-            gameObject.SafeDestroy();
         }
     }
 }

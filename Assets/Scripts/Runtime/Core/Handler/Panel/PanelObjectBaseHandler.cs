@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LccModel;
+using System;
 using UnityEngine;
 
 namespace LccModel
@@ -37,7 +38,9 @@ namespace LccModel
             Type classType = Manager.Instance.GetType(type.ToPanelString());
             if (classType != null)
             {
-                panel.AObjectBase = ObjectBaseFactory.Create(classType, PanelManager.Instance, gameObject, datas);
+                GameObjectComponent gameObjectComponent = ObjectBaseFactory.Create<GameObjectComponent, GameObject>(PanelManager.Instance, gameObject);
+                AObjectBase panelComponent = gameObjectComponent.AddComponent(classType, datas);
+                panel.AObjectBase = panelComponent;
             }
             panel.ClosePanel();
             return panel;
