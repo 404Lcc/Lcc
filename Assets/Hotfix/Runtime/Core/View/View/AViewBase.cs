@@ -44,7 +44,7 @@ namespace LccHotfix
             viewModelBinding.UnBind(oldValue);
             viewModelBinding.Bind(newValue);
         }
-        public void Binding<TProperty>(string name, Action<TProperty, TProperty> valueChange)
+        public void Binding<TProperty>(string name, Binding<TProperty>.ValueChangeHandler valueChange)
         {
             viewModelBinding.Add(name, valueChange);
         }

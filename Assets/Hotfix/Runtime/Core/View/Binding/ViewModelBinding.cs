@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 
 namespace LccHotfix
 {
     public class ViewModelBinding<T> where T : ViewModelBase
     {
+        public delegate void ViewModelBindingHandler(T viewModel);
+        public delegate void UnViewModelBindingHandler(T viewModel);
         //绑定ViewModel
-        public List<Action<T>> viewModelBindingList;
+        public List<ViewModelBindingHandler> viewModelBindingList = new List<ViewModelBindingHandler>();
         //解绑ViewModel
-        public List<Action<T>> unViewModelBindingList;
-        public ViewModelBinding()
-        {
-            viewModelBindingList = new List<Action<T>>();
-            unViewModelBindingList = new List<Action<T>>();
-        }
-        public void Add<TProperty>(string name, Action<TProperty, TProperty> valueChange)
+        public List<UnViewModelBindingHandler> unViewModelBindingList = new List<UnViewModelBindingHandler>();
+        public void Add<TProperty>(string name, Binding<TProperty>.ValueChangeHandler valueChange)
         {
             FieldInfo fieldInfo = typeof(T).GetField(name, BindingFlags.Instance | BindingFlags.Public);
             if (fieldInfo == null) return;

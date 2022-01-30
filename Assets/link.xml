@@ -4493,7 +4493,10 @@
     <type fullname="LccModel.WebUtil+&lt;DownloadTexture2D&gt;d__3" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;DownloadAudioClip&gt;d__4" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;DownloadAssetBundle&gt;d__5" preserve="all" />
-    <type fullname="LccModel.ViewModelBinding`1+&lt;&gt;c__DisplayClass3_0`1" preserve="all" />
+    <type fullname="LccModel.Binding`1+ValueChangeHandler" preserve="all" />
+    <type fullname="LccModel.ViewModelBinding`1+ViewModelBindingHandler" preserve="all" />
+    <type fullname="LccModel.ViewModelBinding`1+UnViewModelBindingHandler" preserve="all" />
+    <type fullname="LccModel.ViewModelBinding`1+&lt;&gt;c__DisplayClass4_0`1" preserve="all" />
     <type fullname="LccModel.InitEventHandler+&lt;Publish&gt;d__0" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
   </assembly>
