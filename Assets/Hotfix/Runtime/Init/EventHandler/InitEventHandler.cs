@@ -10,7 +10,7 @@ namespace LccHotfix
             PanelManager.Instance.InitManager(new PanelObjectBaseHandler(false, true, AssetType.Prefab, AssetType.Panel));
             ItemManager.Instance.InitManager(new ItemObjectBaseHandler(false, true, AssetType.Prefab, AssetType.Item));
             GameDataManager.Instance.InitManager("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-            UserManager.Instance.InitManager();
+            //UserManager.Instance.InitManager();
 
             UIEventManager.Instance.Publish(UIEventType.Load);
             await SceneLoadManager.Instance.LoadScene(SceneName.Login, true, AssetType.Scene);

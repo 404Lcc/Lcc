@@ -4485,8 +4485,8 @@
     <type fullname="LccModel.IAsyncStateMachineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.ILRuntimeManager+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.SceneLoadManager+&lt;LoadScene&gt;d__4" preserve="all" />
     <type fullname="LccModel.SceneLoadManager+&lt;LoadScene&gt;d__5" preserve="all" />
+    <type fullname="LccModel.SceneLoadManager+&lt;LoadScene&gt;d__6" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;Upload&gt;d__0" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;DownloadText&gt;d__1" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;DownloadBytes&gt;d__2" preserve="all" />

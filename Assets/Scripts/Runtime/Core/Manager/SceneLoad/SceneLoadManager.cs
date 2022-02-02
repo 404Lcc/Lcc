@@ -10,7 +10,8 @@ namespace LccModel
     {
         public AsyncOperation async;
         public bool isLoading;
-        private int process;
+        private int _process;
+        private int _toProcess;
         private string GetAssetPath(string name, params string[] types)
         {
             if (types.Length == 0) return name;
@@ -27,6 +28,7 @@ namespace LccModel
         }
         private async ETTask LoadScene(string name, string suffix, bool isAssetBundle, params string[] types)
         {
+            _toProcess = 0;
 #if AssetBundle
             if (isAssetBundle)
             {
@@ -49,14 +51,19 @@ namespace LccModel
             async = SceneManager.LoadSceneAsync(name);
             async.allowSceneActivation = false;
 #endif
-            while (process < (int)(async.progress * 100))
+            while (async.progress < 0.9f)
             {
-                process++;
+                _toProcess = (int)(async.progress * 100);
+                while (_process < _toProcess)
+                {
+                    ++_process;
+                }
                 await Task.Delay(10);
             }
-            while (process < 100)
+            _toProcess = 100;
+            while (_process < _toProcess)
             {
-                process++;
+                ++_process;
                 await Task.Delay(10);
             }
             async.allowSceneActivation = true;
@@ -64,17 +71,17 @@ namespace LccModel
         public async ETTask LoadScene(string name, bool isAssetBundle, params string[] types)
         {
             isLoading = true;
-            process = 0;
+            _process = 0;
             SceneManager.LoadScene(SceneName.Load);
             await LoadScene(name, ".unity", isAssetBundle, types);
             isLoading = false;
-            process = 0;
+            _process = 0;
         }
         public int GetLoadProcess()
         {
             if (isLoading)
             {
-                return process;
+                return _process;
             }
             else
             {
