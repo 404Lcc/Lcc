@@ -3157,6 +3157,7 @@
     <type fullname="UnityEngine.FlareLayer" preserve="all" />
     <type fullname="UnityEngine.ReflectionProbe" preserve="all" />
     <type fullname="UnityEngine.ReflectionProbe+ReflectionProbeEvent" preserve="all" />
+    <type fullname="UnityEngine.CloudStreaming" preserve="all" />
     <type fullname="UnityEngine.CrashReport" preserve="all" />
     <type fullname="UnityEngine.DebugLogHandler" preserve="all" />
     <type fullname="UnityEngine.Debug" preserve="all" />
@@ -3506,10 +3507,10 @@
     <type fullname="UnityEngine.PreferBinarySerialization" preserve="all" />
     <type fullname="UnityEngine.ISerializationCallbackReceiver" preserve="all" />
     <type fullname="UnityEngine.ComputeBuffer" preserve="all" />
+    <type fullname="UnityEngine.ComputeShader" preserve="all" />
     <type fullname="UnityEngine.DisableBatchingType" preserve="all" />
     <type fullname="UnityEngine.ShaderVariantCollection" preserve="all" />
     <type fullname="UnityEngine.ShaderVariantCollection+ShaderVariant" preserve="all" />
-    <type fullname="UnityEngine.ComputeShader" preserve="all" />
     <type fullname="UnityEngine.SnapAxis" preserve="all" />
     <type fullname="UnityEngine.SnapAxisFilter" preserve="all" />
     <type fullname="UnityEngine.Snapping" preserve="all" />
@@ -3538,6 +3539,7 @@
     <type fullname="UnityEngine.TouchScreenKeyboard_InternalConstructorHelperArguments" preserve="all" />
     <type fullname="UnityEngine.TouchScreenKeyboard" preserve="all" />
     <type fullname="UnityEngine.TouchScreenKeyboard+Status" preserve="all" />
+    <type fullname="UnityEngine.TouchScreenKeyboard+Android" preserve="all" />
     <type fullname="UnityEngine.TouchScreenKeyboardType" preserve="all" />
     <type fullname="UnityEngine.RuntimeUndo" preserve="all" />
     <type fullname="UnityEngine.UnityEventQueueSystem" preserve="all" />
@@ -3732,6 +3734,7 @@
     <type fullname="UnityEngine.PlayerLoop.EarlyUpdate+ResetFrameStatsAfterPresent" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.EarlyUpdate+UpdateAsyncReadbackManager" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.EarlyUpdate+UpdateTextureStreamingManager" preserve="all" />
+    <type fullname="UnityEngine.PlayerLoop.EarlyUpdate+UpdateAutoStreamer" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.EarlyUpdate+UpdatePreloading" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.EarlyUpdate+RendererNotifyInvisible" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.EarlyUpdate+PlayerCleanupCachedData" preserve="all" />
@@ -3778,6 +3781,7 @@
     <type fullname="UnityEngine.PlayerLoop.Update+DirectorUpdate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.Update+ScriptRunDelayedDynamicFrameRate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.Update+ScriptRunDelayedTasks" preserve="all" />
+    <type fullname="UnityEngine.PlayerLoop.Update+UIWidgetsUpdate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.PreLateUpdate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.PreLateUpdate+Physics2DLateUpdate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.PreLateUpdate+AIUpdatePostScript" preserve="all" />
@@ -3839,6 +3843,8 @@
     <type fullname="UnityEngine.PlayerLoop.PostLateUpdate+PhysicsSkinnedClothBeginUpdate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.PostLateUpdate+PhysicsSkinnedClothFinishUpdate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.PostLateUpdate+TriggerEndOfFrameCallbacks" preserve="all" />
+    <type fullname="UnityEngine.PlayerLoop.PostLateUpdate+UIWidgetsVSync" preserve="all" />
+    <type fullname="UnityEngine.PlayerLoop.PostLateUpdate+UIWidgetsWait" preserve="all" />
     <type fullname="UnityEngine.Networking.PlayerConnection.ConnectionTarget" preserve="all" />
     <type fullname="UnityEngine.Networking.PlayerConnection.IConnectionState" preserve="all" />
     <type fullname="UnityEngine.Networking.PlayerConnection.MessageEventArgs" preserve="all" />
@@ -3895,6 +3901,8 @@
     <type fullname="UnityEngine.Rendering.MeshUpdateFlags" preserve="all" />
     <type fullname="UnityEngine.Rendering.VertexAttributeFormat" preserve="all" />
     <type fullname="UnityEngine.Rendering.VertexAttribute" preserve="all" />
+    <type fullname="UnityEngine.Rendering.ShaderParamType" preserve="all" />
+    <type fullname="UnityEngine.Rendering.ShaderConstantType" preserve="all" />
     <type fullname="UnityEngine.Rendering.OpaqueSortMode" preserve="all" />
     <type fullname="UnityEngine.Rendering.RenderQueue" preserve="all" />
     <type fullname="UnityEngine.Rendering.RenderBufferLoadAction" preserve="all" />
@@ -3947,6 +3955,7 @@
     <type fullname="UnityEngine.Rendering.CommandBufferExecutionFlags" preserve="all" />
     <type fullname="UnityEngine.Rendering.RenderTextureSubElement" preserve="all" />
     <type fullname="UnityEngine.Rendering.RenderingThreadingMode" preserve="all" />
+    <type fullname="UnityEngine.Rendering.CameraLateLatchMatrixType" preserve="all" />
     <type fullname="UnityEngine.Rendering.OpenGLESVersion" preserve="all" />
     <type fullname="UnityEngine.Rendering.SynchronisationStageFlags" preserve="all" />
     <type fullname="UnityEngine.Rendering.GraphicsFenceType" preserve="all" />
@@ -4242,8 +4251,8 @@
     <type fullname="UnityEngine.UI.Dropdown+OptionData" preserve="all" />
     <type fullname="UnityEngine.UI.Dropdown+OptionDataList" preserve="all" />
     <type fullname="UnityEngine.UI.Dropdown+DropdownEvent" preserve="all" />
-    <type fullname="UnityEngine.UI.Dropdown+&lt;&gt;c__DisplayClass63_0" preserve="all" />
-    <type fullname="UnityEngine.UI.Dropdown+&lt;DelayedDestroyDropdownList&gt;d__75" preserve="all" />
+    <type fullname="UnityEngine.UI.Dropdown+&lt;&gt;c__DisplayClass64_0" preserve="all" />
+    <type fullname="UnityEngine.UI.Dropdown+&lt;DelayedDestroyDropdownList&gt;d__76" preserve="all" />
     <type fullname="UnityEngine.UI.GraphicRaycaster+BlockingObjects" preserve="all" />
     <type fullname="UnityEngine.UI.GraphicRaycaster+&lt;&gt;c" preserve="all" />
     <type fullname="UnityEngine.UI.Image+Type" preserve="all" />
@@ -4262,7 +4271,7 @@
     <type fullname="UnityEngine.UI.InputField+OnChangeEvent" preserve="all" />
     <type fullname="UnityEngine.UI.InputField+EditState" preserve="all" />
     <type fullname="UnityEngine.UI.InputField+&lt;CaretBlink&gt;d__165" preserve="all" />
-    <type fullname="UnityEngine.UI.InputField+&lt;MouseDragOutsideRect&gt;d__185" preserve="all" />
+    <type fullname="UnityEngine.UI.InputField+&lt;MouseDragOutsideRect&gt;d__187" preserve="all" />
     <type fullname="UnityEngine.UI.AspectRatioFitter+AspectMode" preserve="all" />
     <type fullname="UnityEngine.UI.CanvasScaler+ScaleMode" preserve="all" />
     <type fullname="UnityEngine.UI.CanvasScaler+ScreenMatchMode" preserve="all" />

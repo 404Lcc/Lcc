@@ -81,18 +81,18 @@ namespace LccHotfix
                 aObjectBase.Awake(p1, p2, p3, p4);
             }
         }
-        public void InitData(AObjectBase aObjectBase, object[] datas)
-        {
-            if (aObjectBases.ContainsKey(aObjectBase.id))
-            {
-                aObjectBase.InitData(datas);
-            }
-        }
         public void Start(AObjectBase aObjectBase)
         {
             if (aObjectBases.ContainsKey(aObjectBase.id))
             {
                 aObjectBase.Start();
+            }
+        }
+        public void InitData(AObjectBase aObjectBase, object[] datas)
+        {
+            if (aObjectBases.ContainsKey(aObjectBase.id))
+            {
+                aObjectBase.InitData(datas);
             }
         }
         private void FixedUpdate()
