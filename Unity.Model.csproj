@@ -54,38 +54,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Serialization.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Demigiant\DOTween\Editor\DOTweenEditor.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\BouncyCastle\BouncyCastle.Crypto.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\System.Collections.Immutable.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\NPOI\NPOI.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\NPOI\NPOI.OpenXml4Net.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Utilities.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\System.Reflection.Metadata.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\System.Memory.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEditor\Sirenix.Utilities.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\System.Buffers.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\NPOI\NPOI.OOXML.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEditor\Sirenix.Serialization.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\SharpZipLib\ICSharpCode.SharpZipLib.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Demigiant\DOTween\DOTween.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\System.Threading.Tasks.Extensions.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\NPOI\NPOI.OpenXmlFormats.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\System.Runtime.CompilerServices.Unsafe.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\AssetBundle\AssetBundleManager.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Timer\TimerManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Init\EventHandler\InitEventHandler.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Async\Task\AwaiterStatus.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Asset\AssetType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\Binding\Binding.cs" />
@@ -95,6 +68,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Numeric\NumericType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\File\FileUtil.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\AStar\AStarNodeData.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Coroutine\CoroutineManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Mono\MonoManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\View\AViewBase.cs" />
@@ -125,6 +99,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Adapter\CoroutineAdapter.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\Binding\ViewModelBinding.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Coroutine\CoroutineHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\ILRuntimeManager.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\View\LaunchPanel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Json\JsonUtil.cs" />
@@ -141,7 +116,6 @@
     <Compile Include="Assets\Scripts\Runtime\Config\Event\EventType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Pool\APool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\Panel\PanelObjectBaseHandler.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Async\Task\ETTask.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Web\WebUtil.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Timer\TimerData.cs" />
@@ -167,7 +141,6 @@
     <Compile Include="Assets\Scripts\Runtime\Config\Panel\PanelType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\GameEvent\GameEventData.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Async\Task\ETTaskCompleted.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Rijndael\RijndaelUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\AssetBundle\AssetBundleRuleType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\Panel.cs" />
@@ -176,6 +149,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\ValueTypeBinder\Vector2Binder.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\UIEventHandler\LaunchUIEventHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\Item\ItemObjectBaseHandler.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Coroutine\CoroutineCompletedHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEventManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Vector2\Vector2Expand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\LccView.cs" />
@@ -187,9 +161,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Image\ImageExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEventHandlerAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Download\DownloadState.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Async\Task\AsyncMethodBuilderAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\EventManager.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Async\MethodBuilder\AsyncETTaskMethodBuilder.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Download\DownloadManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Action\ActionWrap.cs" />
@@ -199,6 +171,7 @@
     <Compile Include="Assets\Scripts\Util\RightClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\ICenterHandler.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Config\Config\TestConfig.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Encoding\EncodingUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Task\TaskExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Log\LogUtil.cs" />
@@ -213,9 +186,7 @@
     <Compile Include="Assets\Scripts\Util\OpenFileName.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\NumericEvent\NumericEventHandlerAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Item\ItemType.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Async\Task\ETVoid.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\Singleton.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Async\MethodBuilder\AsyncETTaskCompletedMethodBuilder.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\SceneLoad\SceneLoadManager.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Util\DoubleClickButton.cs" />
@@ -229,7 +200,6 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\ProtobufObject.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Updater\View\UpdaterPanel.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Async\MethodBuilder\AsyncETVoidMethodBuilder.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Scripts\Module\Core\Manager\Timer\TimerType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
@@ -478,14 +448,44 @@
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.7\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>Assets\3rdPlugins\NPOI\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.7\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>Assets\3rdPlugins\Roslyn\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.OdinInspector.Editor">
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll</HintPath>
     </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.7\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>Assets\3rdPlugins\SharpZipLib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>Assets\3rdPlugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.OdinInspector.Attributes">
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <HintPath>Assets\3rdPlugins\Roslyn\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable">
+      <HintPath>Assets\3rdPlugins\Roslyn\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Assets\3rdPlugins\Roslyn\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Mdb">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis">
+      <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
@@ -493,77 +493,47 @@
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.7\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
     </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTweenEditor">
-      <HintPath>Assets\3rdPlugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween">
-      <HintPath>Assets\3rdPlugins\Demigiant\DOTween\DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Serialization">
-      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Utilities">
-      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Utilities.Editor">
-      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.OdinInspector.Editor">
-      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.OdinInspector.Attributes">
-      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll</HintPath>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>Assets\3rdPlugins\NPOI\NPOI.OOXML.dll</HintPath>
     </Reference>
     <Reference Include="Sirenix.Serialization.Config">
       <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll</HintPath>
     </Reference>
-    <Reference Include="NPOI">
-      <HintPath>Assets\3rdPlugins\NPOI\NPOI.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis">
-      <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions">
-      <HintPath>Assets\3rdPlugins\Roslyn\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Memory">
-      <HintPath>Assets\3rdPlugins\Roslyn\System.Memory.dll</HintPath>
+    <Reference Include="ILRuntime.Mono.Cecil.Pdb">
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.CSharp">
       <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reflection.Metadata">
-      <HintPath>Assets\3rdPlugins\Roslyn\System.Reflection.Metadata.dll</HintPath>
-    </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
       <HintPath>Assets\3rdPlugins\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
-    <Reference Include="System.Collections.Immutable">
-      <HintPath>Assets\3rdPlugins\Roslyn\System.Collections.Immutable.dll</HintPath>
+    <Reference Include="DOTween">
+      <HintPath>Assets\3rdPlugins\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
-    <Reference Include="System.Buffers">
-      <HintPath>Assets\3rdPlugins\Roslyn\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OOXML">
-      <HintPath>Assets\3rdPlugins\NPOI\NPOI.OOXML.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>Assets\3rdPlugins\NPOI\NPOI.OpenXml4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>Assets\3rdPlugins\SharpZipLib\ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="Sirenix.Utilities">
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="BouncyCastle.Crypto">
       <HintPath>Assets\3rdPlugins\BouncyCastle\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>Assets\3rdPlugins\Roslyn\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>Assets\3rdPlugins\Roslyn\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata">
+      <HintPath>Assets\3rdPlugins\Roslyn\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>Assets\3rdPlugins\NPOI\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Serialization">
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Utilities.Editor">
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\2020.3.26f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>

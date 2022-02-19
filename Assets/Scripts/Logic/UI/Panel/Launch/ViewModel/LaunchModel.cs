@@ -2,6 +2,6 @@
 {
     public class LaunchModel : ViewModelBase
     {
-        public Binding<float> time = new Binding<float>(3);
+        public Binding<float> time = new Binding<float>(1);
     }
 }

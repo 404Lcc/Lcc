@@ -1,4 +1,5 @@
 ﻿using LccModel;
+using System;
 
 namespace LccHotfix
 {

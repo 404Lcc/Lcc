@@ -54,150 +54,127 @@
   </PropertyGroup>
   <ItemGroup>
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Serialization.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Demigiant\DOTween\Editor\DOTweenEditor.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\BouncyCastle\BouncyCastle.Crypto.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\System.Collections.Immutable.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\NPOI\NPOI.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\NPOI\NPOI.OpenXml4Net.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Utilities.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\System.Reflection.Metadata.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\System.Memory.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEditor\Sirenix.Utilities.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\System.Buffers.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\NPOI\NPOI.OOXML.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEditor\Sirenix.Serialization.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\SharpZipLib\ICSharpCode.SharpZipLib.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Demigiant\DOTween\DOTween.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\System.Threading.Tasks.Extensions.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\NPOI\NPOI.OpenXmlFormats.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Roslyn\System.Runtime.CompilerServices.Unsafe.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Meta\TypeModel.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\MapDecorator.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\ListDecorator.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\PropertyDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\TypeModel.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\MapDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ListDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\PropertyDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonWriter.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\Lexer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\ArrayDecorator.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\ISerializerProxy.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\GuidSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\BufferPool.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Meta\CallbackSet.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\IProtoSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Meta\TypeFormatEventArgs.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\ImmutableCollectionDecorator.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\Int64Serializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Compiler\CompilerContext.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\SurrogateSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\MemberSpecifiedDecorator.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ProtoIgnoreAttribute.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ArrayDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ISerializerProxy.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\GuidSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\BufferPool.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\CallbackSet.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\IProtoSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\TypeFormatEventArgs.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ImmutableCollectionDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\Int64Serializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializer.cs" />
+    <Compile Include="Assets\3rdPlugins\ETTask\ETCancellationToken.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\CompilerContext.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SurrogateSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\MemberSpecifiedDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoIgnoreAttribute.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonMapper.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\IExtension.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ProtobufPropertyHelper.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\FieldDecorator.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\DefaultValueDecorator.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\DataFormat.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ServiceModel\ProtoBehaviorAttribute.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\SingleSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\StringSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\IProtoTypeSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ImplicitFields.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\ProtoDecoratorBase.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\TagDecorator.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\UInt32Serializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Meta\RuntimeTypeModel.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ProtoConverterAttribute.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ServiceModel\ProtoBehaviorExtensionElement.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\ParseableSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\SByteSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\SubItemSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\WireType.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ProtoContractAttribute.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Helpers.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\CharSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\NullDecorator.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\DiscriminatedUnion.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Google\CodedOutputStream.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ExtensibleUtil.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\KeyValuePairProxy.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\IExtension.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtobufPropertyHelper.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\FieldDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DefaultValueDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\DataFormat.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\ProtoBehaviorAttribute.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SingleSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\StringSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\ETTask\ETTask.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\IProtoTypeSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ImplicitFields.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ProtoDecoratorBase.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TagDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt32Serializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\RuntimeTypeModel.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoConverterAttribute.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\ProtoBehaviorExtensionElement.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ParseableSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SByteSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SubItemSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\ETTask\AsyncETVoidMethodBuilder.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\WireType.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoContractAttribute.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Helpers.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\CharSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\NullDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\DiscriminatedUnion.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ExtensibleUtil.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\KeyValuePairProxy.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonException.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\DateTimeSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Compiler\CompilerDelegates.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\ByteSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\BclHelpers.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\CompiledSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Meta\BasicList.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DateTimeSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\ETTask\IAwaiter.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\CompilerDelegates.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ByteSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\BclHelpers.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\CompiledSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\BasicList.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonData.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\SerializationContext.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\BufferExtension.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\SerializationContext.cs" />
+    <Compile Include="Assets\3rdPlugins\ETTask\AsyncETTaskCompletedMethodBuilder.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\BufferExtension.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonMockWrapper.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\ReflectedUriDecorator.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ServiceModel\ProtoOperationBehavior.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Google\WireFormat.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ServiceModel\XmlProtoSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ProtoException.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Extensible.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ProtoReader.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Meta\ValueMember.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\DecimalSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\BooleanSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\DoubleSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ReflectedUriDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\ProtoOperationBehavior.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\XmlProtoSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoException.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Extensible.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoReader.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\ValueMember.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DecimalSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\ETTask\AsyncETTaskMethodBuilder.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\BooleanSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DoubleSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\SubItemToken.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Meta\SubType.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\SubItemToken.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\SubType.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\ParserToken.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\TypeSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\IExtensible.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TypeSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\IExtensible.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\CallbackAttributes.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\TupleSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\Int16Serializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ProtoMapAttribute.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Meta\MetaType.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Meta\AttributeMap.cs" />
+    <Compile Include="Assets\3rdPlugins\ETTask\ETVoid.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\CallbackAttributes.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TupleSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\Int16Serializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoMapAttribute.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\MetaType.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\AttributeMap.cs" />
+    <Compile Include="Assets\3rdPlugins\ETTask\ETTaskCompleted.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\NetObjectSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\NetObjectSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Google\ProtoPreconditions.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\PrefixStyle.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\PrefixStyle.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\IJsonWrapper.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonReader.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\TimeSpanSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Compiler\Local.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ProtoEnumAttribute.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Google\CodedInputStream.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\GlobalSuppressions.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\PType.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ProtoMemberAttribute.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\NetObjectCache.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ServiceModel\ProtoEndpointBehavior.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ProtoWriter.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\UInt64Serializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\EnumSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TimeSpanSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\Local.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoEnumAttribute.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\GlobalSuppressions.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoMemberAttribute.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\NetObjectCache.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\ProtoEndpointBehavior.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoWriter.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt64Serializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\EnumSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Google\ByteArray.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\Int32Serializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\SystemTypeSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\ProtoIncludeAttribute.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\UriDecorator.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Google\InvalidProtocolBufferException.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\BlobSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Meta\ProtoSyntax.cs" />
-    <Compile Include="Assets\3rdPlugins\Protobuf\protobuf-net\Serializers\UInt16Serializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\Int32Serializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SystemTypeSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoIncludeAttribute.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UriDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\BlobSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\PType.cs" />
+    <Compile Include="Assets\3rdPlugins\ETTask\ETTaskHelper.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\ProtoSyntax.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt16Serializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.xml" />
@@ -479,14 +456,44 @@
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.7\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>Assets\3rdPlugins\NPOI\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.7\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>Assets\3rdPlugins\Roslyn\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.OdinInspector.Editor">
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll</HintPath>
     </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.7\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>Assets\3rdPlugins\SharpZipLib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>Assets\3rdPlugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.OdinInspector.Attributes">
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <HintPath>Assets\3rdPlugins\Roslyn\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable">
+      <HintPath>Assets\3rdPlugins\Roslyn\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Assets\3rdPlugins\Roslyn\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Mdb">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis">
+      <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
@@ -494,77 +501,47 @@
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.7\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
     </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTweenEditor">
-      <HintPath>Assets\3rdPlugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween">
-      <HintPath>Assets\3rdPlugins\Demigiant\DOTween\DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Serialization">
-      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Utilities">
-      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Utilities.Editor">
-      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.OdinInspector.Editor">
-      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.OdinInspector.Attributes">
-      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll</HintPath>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>Assets\3rdPlugins\NPOI\NPOI.OOXML.dll</HintPath>
     </Reference>
     <Reference Include="Sirenix.Serialization.Config">
       <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll</HintPath>
     </Reference>
-    <Reference Include="NPOI">
-      <HintPath>Assets\3rdPlugins\NPOI\NPOI.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis">
-      <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions">
-      <HintPath>Assets\3rdPlugins\Roslyn\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Memory">
-      <HintPath>Assets\3rdPlugins\Roslyn\System.Memory.dll</HintPath>
+    <Reference Include="ILRuntime.Mono.Cecil.Pdb">
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.CSharp">
       <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reflection.Metadata">
-      <HintPath>Assets\3rdPlugins\Roslyn\System.Reflection.Metadata.dll</HintPath>
-    </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
       <HintPath>Assets\3rdPlugins\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
-    <Reference Include="System.Collections.Immutable">
-      <HintPath>Assets\3rdPlugins\Roslyn\System.Collections.Immutable.dll</HintPath>
+    <Reference Include="DOTween">
+      <HintPath>Assets\3rdPlugins\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
-    <Reference Include="System.Buffers">
-      <HintPath>Assets\3rdPlugins\Roslyn\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OOXML">
-      <HintPath>Assets\3rdPlugins\NPOI\NPOI.OOXML.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>Assets\3rdPlugins\NPOI\NPOI.OpenXml4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>Assets\3rdPlugins\SharpZipLib\ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="Sirenix.Utilities">
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="BouncyCastle.Crypto">
       <HintPath>Assets\3rdPlugins\BouncyCastle\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>Assets\3rdPlugins\Roslyn\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>Assets\3rdPlugins\Roslyn\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata">
+      <HintPath>Assets\3rdPlugins\Roslyn\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>Assets\3rdPlugins\NPOI\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Serialization">
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Utilities.Editor">
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\2020.3.26f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>

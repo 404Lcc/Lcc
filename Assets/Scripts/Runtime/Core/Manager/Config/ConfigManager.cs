@@ -16,7 +16,8 @@ namespace LccModel
                 if (configAttributes.Length > 0)
                 {
                     TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(item.Name, ".bytes", false, false, AssetType.Config);
-                    object obj = ProtobufUtil.Deserialize(item, asset.bytes, 0, asset.bytes.Length);
+                    ProtobufObject obj = (ProtobufObject)ProtobufUtil.Deserialize(item, asset.bytes, 0, asset.bytes.Length);
+                    obj.AfterDeserialization();
                     configs.Add(item, obj);
                 }
             }

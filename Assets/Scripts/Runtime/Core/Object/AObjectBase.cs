@@ -49,7 +49,7 @@ namespace LccModel
         {
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.LogError("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, datas);
@@ -60,7 +60,7 @@ namespace LccModel
         {
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.LogError("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, p1, datas);
@@ -71,7 +71,7 @@ namespace LccModel
         {
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.LogError("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, p1, p2, datas);
@@ -82,7 +82,7 @@ namespace LccModel
         {
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.LogError("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, p1, p2, p3, datas);
@@ -93,7 +93,7 @@ namespace LccModel
         {
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.LogError("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, p1, p2, p3, p4, datas);
@@ -105,7 +105,7 @@ namespace LccModel
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.LogError("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = ObjectBaseFactory.Create<T>(this, datas);
@@ -117,7 +117,7 @@ namespace LccModel
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.LogError("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = ObjectBaseFactory.Create<T, P1>(this, p1, datas);
@@ -129,7 +129,7 @@ namespace LccModel
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.LogError("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = ObjectBaseFactory.Create<T, P1, P2>(this, p1, p2, datas);
@@ -141,7 +141,7 @@ namespace LccModel
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.LogError("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = ObjectBaseFactory.Create<T, P1, P2, P3>(this, p1, p2, p3, datas);
@@ -153,7 +153,7 @@ namespace LccModel
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.LogError("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = ObjectBaseFactory.Create<T, P1, P2, P3, P4>(this, p1, p2, p3, p4, datas);
@@ -283,29 +283,21 @@ namespace LccModel
         public virtual void OnDestroy()
         {
         }
-        public void Invoke(string methodName, float time)
+        public void Invoke(string methodName, object[] objs)
         {
-            //测试写法 后面时间优化
+            //TODO
         }
-        public Coroutine StartCoroutine(IEnumerator enumerator)
+        public CoroutineHandler StartCoroutine(IEnumerator enumerator)
         {
-            //测试写法 后面时间优化
-            return null;//GameObject.FindObjectOfType<Init>().StartCoroutine(enumerator);
+            return CoroutineManager.Instance.StartCoroutine(enumerator);
         }
-        public void StopCoroutine(IEnumerator enumerator)
+        public void StopCoroutine(CoroutineHandler handler)
         {
-            //测试写法 后面时间优化
-            //GameObject.FindObjectOfType<Init>().StartCoroutine(enumerator);
-        }
-        public void StopCoroutine(Coroutine coroutine)
-        {
-            //测试写法 后面时间优化
-            //GameObject.FindObjectOfType<Init>().StopCoroutine(coroutine);
+            handler.Stop();
         }
         public void StopAllCoroutines()
         {
-            //测试写法 后面时间优化
-            //GameObject.FindObjectOfType<Init>().StopAllCoroutines();
+            CoroutineManager.Instance.StopAllCoroutines();
         }
         public virtual void Dispose()
         {

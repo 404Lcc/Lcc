@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace LccModel
@@ -14,7 +15,7 @@ namespace LccModel
             EventManager.Instance.InitManager();
             UIEventManager.Instance.InitManager();
 
-            EventManager.Instance.Publish(new Start());
+            EventManager.Instance.Publish(new Start()).Coroutine();
 
             DontDestroyOnLoad(gameObject);
         }

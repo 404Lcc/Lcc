@@ -4328,7 +4328,6 @@
     <type fullname="QuaternionBinder" preserve="all" />
     <type fullname="Vector2Binder" preserve="all" />
     <type fullname="Vector3Binder" preserve="all" />
-    <type fullname="System.Runtime.CompilerServices.AsyncMethodBuilderAttribute" preserve="all" />
     <type fullname="LccModel.LaunchUIEventHandler" preserve="all" />
     <type fullname="LccModel.LaunchPanel" preserve="all" />
     <type fullname="LccModel.LaunchModel" preserve="all" />
@@ -4354,20 +4353,13 @@
     <type fullname="LccModel.VideoManager" preserve="all" />
     <type fullname="LccModel.VoiceManager" preserve="all" />
     <type fullname="LccModel.AssetType" preserve="all" />
+    <type fullname="LccModel.TestConfigCategory" preserve="all" />
+    <type fullname="LccModel.TestConfig" preserve="all" />
     <type fullname="LccModel.Start" preserve="all" />
     <type fullname="LccModel.ItemType" preserve="all" />
     <type fullname="LccModel.PanelType" preserve="all" />
     <type fullname="LccModel.SceneName" preserve="all" />
     <type fullname="LccModel.UIEventType" preserve="all" />
-    <type fullname="LccModel.AsyncETTaskCompletedMethodBuilder" preserve="all" />
-    <type fullname="LccModel.AsyncETTaskMethodBuilder" preserve="all" />
-    <type fullname="LccModel.AsyncETTaskMethodBuilder`1" preserve="all" />
-    <type fullname="LccModel.AsyncETVoidMethodBuilder" preserve="all" />
-    <type fullname="LccModel.AwaiterStatus" preserve="all" />
-    <type fullname="LccModel.ETTask" preserve="all" />
-    <type fullname="LccModel.ETTask`1" preserve="all" />
-    <type fullname="LccModel.ETTaskCompleted" preserve="all" />
-    <type fullname="LccModel.ETVoid" preserve="all" />
     <type fullname="LccModel.AssetBundleCreateRequestAwaiter" preserve="all" />
     <type fullname="LccModel.AssetBundleRequestAwaiter" preserve="all" />
     <type fullname="LccModel.AsyncOperationAwaiter" preserve="all" />
@@ -4403,6 +4395,9 @@
     <type fullname="LccModel.ConfigAttribute" preserve="all" />
     <type fullname="LccModel.ConfigManager" preserve="all" />
     <type fullname="LccModel.IConfig" preserve="all" />
+    <type fullname="LccModel.CoroutineCompletedHandler" preserve="all" />
+    <type fullname="LccModel.CoroutineHandler" preserve="all" />
+    <type fullname="LccModel.CoroutineManager" preserve="all" />
     <type fullname="LccModel.DownloadData" preserve="all" />
     <type fullname="LccModel.DownloadFile" preserve="all" />
     <type fullname="LccModel.DownloadManager" preserve="all" />
@@ -4484,12 +4479,12 @@
     <type fullname="LccModel.AudioManager+&lt;PlayAudio&gt;d__5" preserve="all" />
     <type fullname="LccModel.VoiceManager+&lt;LoadAudio&gt;d__3" preserve="all" />
     <type fullname="LccModel.VoiceManager+&lt;PlayAudio&gt;d__5" preserve="all" />
-    <type fullname="LccModel.ETTask+&lt;InnerCoroutine&gt;d__14" preserve="all" />
-    <type fullname="LccModel.ETTask`1+&lt;InnerCoroutine&gt;d__15" preserve="all" />
     <type fullname="LccModel.TaskExpand+&lt;Continue&gt;d__0" preserve="all" />
     <type fullname="LccModel.AssetBundleManager+&lt;InitAssets&gt;d__38" preserve="all" />
     <type fullname="LccModel.AssetBundleManager+&lt;InitAssets&gt;d__39" preserve="all" />
     <type fullname="LccModel.AssetBundleManager+&lt;CopyAssets&gt;d__40" preserve="all" />
+    <type fullname="LccModel.CoroutineHandler+&lt;CallWrapper&gt;d__26" preserve="all" />
+    <type fullname="LccModel.EventManager+&lt;Publish&gt;d__2`1" preserve="all" />
     <type fullname="LccModel.CoroutineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.IAsyncStateMachineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c" preserve="all" />

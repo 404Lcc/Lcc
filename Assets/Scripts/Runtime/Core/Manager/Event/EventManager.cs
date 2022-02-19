@@ -19,13 +19,20 @@ namespace LccModel
                 }
             }
         }
-        public void Publish<T>(T data)
+        public async ETTask Publish<T>(T data)
         {
             Type type = typeof(T);
             if (events.ContainsKey(type))
             {
                 AEvent<T> aEvent = (AEvent<T>)events[type];
-                aEvent.Publish(data);
+                try
+                {
+                    await aEvent.Publish(data);
+                }
+                catch (Exception e)
+                {
+                    LogUtil.LogError(e.ToString());
+                }
             }
             else
             {

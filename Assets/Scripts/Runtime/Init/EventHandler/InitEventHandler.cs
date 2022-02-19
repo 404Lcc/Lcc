@@ -25,7 +25,7 @@ namespace LccModel
             //初始化主工程并初始化热更层
             //打开登录界面
             UIEventManager.Instance.Publish(UIEventType.Launch);
-            await ETTask.ETTaskCompleted;
+            await ETTask.CompletedTask;
         }
     }
 }

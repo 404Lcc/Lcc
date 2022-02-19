@@ -32,8 +32,7 @@ namespace (LccModel)
         {
             Instance = this;
         }
-        [ProtoAfterDeserialization]
-        public void AfterDeserialization()
+        public override void AfterDeserialization()
         {
             foreach ((CustomConfig) item in list)
             {
