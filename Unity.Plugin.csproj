@@ -54,14 +54,24 @@
   </PropertyGroup>
   <ItemGroup>
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Serialization.dll" />
+    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Demigiant\DOTween\Editor\DOTweenEditor.dll" />
+    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll" />
+    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Utilities.dll" />
+    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll" />
+    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEditor\Sirenix.Utilities.dll" />
+    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll" />
+    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.dll" />
+    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEditor\Sirenix.Serialization.dll" />
+    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Demigiant\DOTween\DOTween.dll" />
+    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.dll" />
+    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Meta\TypeModel.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\MapDecorator.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\ListDecorator.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\PropertyDecorator.cs" />
-    <Compile Include="Assets\Plugins\LitJson\JsonWriter.cs" />
-    <Compile Include="Assets\Plugins\LitJson\Lexer.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\ArrayDecorator.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\ISerializerProxy.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\GuidSerializer.cs" />
@@ -76,7 +86,6 @@
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\SurrogateSerializer.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\MemberSpecifiedDecorator.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\ProtoIgnoreAttribute.cs" />
-    <Compile Include="Assets\Plugins\LitJson\JsonMapper.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\IExtension.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\ProtobufPropertyHelper.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\FieldDecorator.cs" />
@@ -105,18 +114,14 @@
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Google\CodedOutputStream.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\ExtensibleUtil.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\KeyValuePairProxy.cs" />
-    <Compile Include="Assets\Plugins\LitJson\JsonException.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\DateTimeSerializer.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Compiler\CompilerDelegates.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\ByteSerializer.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\BclHelpers.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\CompiledSerializer.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Meta\BasicList.cs" />
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
-    <Compile Include="Assets\Plugins\LitJson\JsonData.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\SerializationContext.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\BufferExtension.cs" />
-    <Compile Include="Assets\Plugins\LitJson\JsonMockWrapper.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\ReflectedUriDecorator.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\ServiceModel\ProtoOperationBehavior.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Google\WireFormat.cs" />
@@ -128,28 +133,19 @@
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\DecimalSerializer.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\BooleanSerializer.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\DoubleSerializer.cs" />
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\SubItemToken.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Meta\SubType.cs" />
-    <Compile Include="Assets\Plugins\LitJson\ParserToken.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\TypeSerializer.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\IExtensible.cs" />
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\CallbackAttributes.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\TupleSerializer.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\Int16Serializer.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\ProtoMapAttribute.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Meta\MetaType.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Meta\AttributeMap.cs" />
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\NetObjectSerializer.cs" />
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Google\ProtoPreconditions.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\PrefixStyle.cs" />
-    <Compile Include="Assets\Plugins\LitJson\IJsonWrapper.cs" />
-    <Compile Include="Assets\Plugins\LitJson\JsonReader.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\TimeSpanSerializer.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Compiler\Local.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\ProtoEnumAttribute.cs" />
@@ -162,7 +158,6 @@
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\ProtoWriter.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\UInt64Serializer.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\EnumSerializer.cs" />
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Google\ByteArray.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\Int32Serializer.cs" />
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\SystemTypeSerializer.cs" />
@@ -174,43 +169,21 @@
     <Compile Include="Assets\Plugins\Protobuf\protobuf-net\Serializers\UInt16Serializer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.Config.xml" />
     <None Include="Assets\Plugins\NPOI\NPOI.OpenXmlFormats.dll" />
     <None Include="Assets\Plugins\BouncyCastle\BouncyCastle.Crypto.dll" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Serialization.dll" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.xml" />
     <None Include="Assets\Plugins\NPOI\NPOI.OOXML.dll" />
-    <None Include="Assets\Plugins\Demigiant\DOTween\DOTween.XML" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll" />
     <None Include="Assets\Plugins\Roslyn\Microsoft.CodeAnalysis.dll" />
     <None Include="Assets\Plugins\Roslyn\System.Buffers.dll" />
-    <None Include="Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll" />
     <None Include="Assets\Plugins\Roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\NoEditor\Sirenix.Serialization.dll" />
     <None Include="Assets\Plugins\SharpZipLib\ICSharpCode.SharpZipLib.dll" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.xml" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.dll" />
-    <None Include="Assets\Plugins\Demigiant\DOTween\DOTween.dll" />
     <None Include="Assets\Plugins\Roslyn\System.Runtime.CompilerServices.Unsafe.dll" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.xml" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\NoEditor\Sirenix.Utilities.dll" />
     <None Include="Assets\Plugins\Roslyn\System.Threading.Tasks.Extensions.dll" />
-    <None Include="Assets\Plugins\Sirenix\Readme.txt" />
     <None Include="Assets\Plugins\NPOI\NPOI.OpenXml4Net.dll" />
     <None Include="Assets\Plugins\Roslyn\System.Reflection.Metadata.dll" />
     <None Include="Assets\Plugins\Roslyn\System.Memory.dll" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.xml" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\link.xml" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll" />
-    <None Include="Assets\Plugins\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\Plugins\Unity.Plugin.asmdef" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Utilities.dll" />
     <None Include="Assets\Plugins\NPOI\NPOI.dll" />
-    <None Include="Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.XML" />
     <None Include="Assets\Plugins\Roslyn\System.Collections.Immutable.dll" />
-    <None Include="Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.dll" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -462,20 +435,11 @@
     <Reference Include="System.Memory">
       <HintPath>Assets\Plugins\Roslyn\System.Memory.dll</HintPath>
     </Reference>
-    <Reference Include="Sirenix.OdinInspector.Editor">
-      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.7\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>Assets\Plugins\SharpZipLib\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTweenEditor">
-      <HintPath>Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.OdinInspector.Attributes">
-      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions">
       <HintPath>Assets\Plugins\Roslyn\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -501,9 +465,6 @@
     <Reference Include="NPOI.OOXML">
       <HintPath>Assets\Plugins\NPOI\NPOI.OOXML.dll</HintPath>
     </Reference>
-    <Reference Include="Sirenix.Serialization.Config">
-      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll</HintPath>
-    </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
       <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
@@ -512,12 +473,6 @@
     </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
       <HintPath>Assets\Plugins\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween">
-      <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Utilities">
-      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="BouncyCastle.Crypto">
       <HintPath>Assets\Plugins\BouncyCastle\BouncyCastle.Crypto.dll</HintPath>
@@ -534,11 +489,29 @@
     <Reference Include="NPOI">
       <HintPath>Assets\Plugins\NPOI\NPOI.dll</HintPath>
     </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>Assets\3rdPlugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets\3rdPlugins\Demigiant\DOTween\DOTween.dll</HintPath>
+    </Reference>
     <Reference Include="Sirenix.Serialization">
-      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.dll</HintPath>
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Utilities">
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="Sirenix.Utilities.Editor">
-      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.OdinInspector.Editor">
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.OdinInspector.Attributes">
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Serialization.Config">
+      <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\2020.3.26f1c1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>
