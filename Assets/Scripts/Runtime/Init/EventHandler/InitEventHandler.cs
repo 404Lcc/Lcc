@@ -15,9 +15,8 @@ namespace LccModel
             AssetBundleManager.Instance.InitManager(string.Empty);
 
             PanelManager.Instance.InitManager(new PanelObjectBaseHandler(false, false, AssetType.Prefab, AssetType.Panel));
-            ItemManager.Instance.InitManager(new ItemObjectBaseHandler(false, false, AssetType.Prefab, AssetType.Item));
-            //TipsManager.Instance.InitManager(new TipsPool(10));
-            //TipsWindowManager.Instance.InitManager(new TipsWindowPool(10));
+            TipsManager.Instance.InitManager(new TipsPool(10));
+            TipsWindowManager.Instance.InitManager(new TipsWindowPool(10));
 
             //步骤
             //打开开屏界面
