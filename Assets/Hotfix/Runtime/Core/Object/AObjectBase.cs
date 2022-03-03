@@ -10,10 +10,13 @@ namespace LccHotfix
 {
     public abstract class AObjectBase
     {
-        private Dictionary<Type, AObjectBase> _componentDict = new Dictionary<Type, AObjectBase>();
-        private AObjectBase _parent;
         [HideInInspector]
         public long id;
+        private AObjectBase _parent;
+        private bool _isComponent;
+        private Dictionary<long, AObjectBase> _childrenDict = new Dictionary<long, AObjectBase>();
+        private Dictionary<Type, AObjectBase> _componentDict = new Dictionary<Type, AObjectBase>();
+
         public bool IsDisposed => id == 0;
         public AObjectBase Parent
         {
@@ -21,19 +24,163 @@ namespace LccHotfix
             {
                 return _parent;
             }
+        }
+        private AObjectBase EntityParent
+        {
             set
             {
                 if (value == null)
                 {
-                    _parent = this;
                     return;
                 }
                 _parent = value;
+                _isComponent = false;
+                _parent.InternalAddChildren(this);
+            }
+        }
+        private AObjectBase ComponentParent
+        {
+            set
+            {
+                if (value == null)
+                {
+                    return;
+                }
+                _parent = value;
+                _isComponent = true;
+                _parent.InternalAddComponent(this);
             }
         }
         public T GetParent<T>() where T : AObjectBase
         {
             return (T)Parent;
+        }
+
+        #region 实体
+        public T GetChildren<T>(long id) where T : AObjectBase
+        {
+            if (_childrenDict.ContainsKey(id))
+            {
+                AObjectBase aObjectBase = _childrenDict[id];
+                return (T)aObjectBase;
+            }
+            return null;
+        }
+        public AObjectBase AddChildren(AObjectBase aObjectBase)
+        {
+            aObjectBase.EntityParent = this;
+            return aObjectBase;
+        }
+        public AObjectBase AddChildren(Type type, params object[] datas)
+        {
+            AObjectBase aObjectBase = Create(type);
+            aObjectBase.EntityParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
+        public AObjectBase AddChildren<P1>(Type type, P1 p1, params object[] datas)
+        {
+            AObjectBase aObjectBase = Create(type);
+            aObjectBase.EntityParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
+        public AObjectBase AddChildren<P1, P2>(Type type, P1 p1, P2 p2, params object[] datas)
+        {
+            AObjectBase aObjectBase = Create(type);
+            aObjectBase.EntityParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1, p2);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
+        public AObjectBase AddChildren<P1, P2, P3>(Type type, P1 p1, P2 p2, P3 p3, params object[] datas)
+        {
+            AObjectBase aObjectBase = Create(type);
+            aObjectBase.EntityParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
+        public AObjectBase AddChildren<P1, P2, P3, P4>(Type type, P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas)
+        {
+            AObjectBase aObjectBase = Create(type);
+            aObjectBase.EntityParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
+        public T AddChildren<T>(params object[] datas) where T : AObjectBase
+        {
+            T aObjectBase = Create<T>();
+            aObjectBase.EntityParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
+        public T AddChildren<T, P1>(P1 p1, params object[] datas) where T : AObjectBase
+        {
+            T aObjectBase = Create<T>();
+            aObjectBase.EntityParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
+        public T AddChildren<T, P1, P2>(P1 p1, P2 p2, params object[] datas) where T : AObjectBase
+        {
+            T aObjectBase = Create<T>();
+            aObjectBase.EntityParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1, p2);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
+        public T AddChildren<T, P1, P2, P3>(P1 p1, P2 p2, P3 p3, params object[] datas) where T : AObjectBase
+        {
+            T aObjectBase = Create<T>();
+            aObjectBase.EntityParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
+        public T AddChildren<T, P1, P2, P3, P4>(P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas) where T : AObjectBase
+        {
+            T aObjectBase = Create<T>();
+            aObjectBase.EntityParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
+        #endregion
+        #region 组件
+        public AObjectBase GetComponent(Type type)
+        {
+            if (_componentDict.ContainsKey(type))
+            {
+                AObjectBase aObjectBase = _componentDict[type];
+                return aObjectBase;
+            }
+            return null;
         }
         public T GetComponent<T>() where T : AObjectBase
         {
@@ -45,59 +192,84 @@ namespace LccHotfix
             }
             return null;
         }
+        public AObjectBase AddComponent(AObjectBase aObjectBase)
+        {
+            aObjectBase.ComponentParent = this;
+            return aObjectBase;
+        }
         public AObjectBase AddComponent(Type type, params object[] datas)
         {
             if (_componentDict.ContainsKey(type))
             {
-                LogUtil.LogError("Component已存在" + type.FullName);
+                Debug.LogError("Component已存在" + type.FullName);
                 return null;
             }
-            AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, datas);
-            _componentDict.Add(type, aObjectBase);
+            AObjectBase aObjectBase = Create(type);
+            aObjectBase.ComponentParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
             return aObjectBase;
         }
         public AObjectBase AddComponent<P1>(Type type, P1 p1, params object[] datas)
         {
             if (_componentDict.ContainsKey(type))
             {
-                LogUtil.LogError("Component已存在" + type.FullName);
+                Debug.LogError("Component已存在" + type.FullName);
                 return null;
             }
-            AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, p1, datas);
-            _componentDict.Add(type, aObjectBase);
+            AObjectBase aObjectBase = Create(type);
+            aObjectBase.ComponentParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
             return aObjectBase;
         }
         public AObjectBase AddComponent<P1, P2>(Type type, P1 p1, P2 p2, params object[] datas)
         {
             if (_componentDict.ContainsKey(type))
             {
-                LogUtil.LogError("Component已存在" + type.FullName);
+                Debug.LogError("Component已存在" + type.FullName);
                 return null;
             }
-            AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, p1, p2, datas);
-            _componentDict.Add(type, aObjectBase);
+            AObjectBase aObjectBase = Create(type);
+            aObjectBase.ComponentParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1, p2);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
             return aObjectBase;
         }
         public AObjectBase AddComponent<P1, P2, P3>(Type type, P1 p1, P2 p2, P3 p3, params object[] datas)
         {
             if (_componentDict.ContainsKey(type))
             {
-                LogUtil.LogError("Component已存在" + type.FullName);
+                Debug.LogError("Component已存在" + type.FullName);
                 return null;
             }
-            AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, p1, p2, p3, datas);
-            _componentDict.Add(type, aObjectBase);
+            AObjectBase aObjectBase = Create(type);
+            aObjectBase.ComponentParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
             return aObjectBase;
         }
         public AObjectBase AddComponent<P1, P2, P3, P4>(Type type, P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas)
         {
             if (_componentDict.ContainsKey(type))
             {
-                LogUtil.LogError("Component已存在" + type.FullName);
+                Debug.LogError("Component已存在" + type.FullName);
                 return null;
             }
-            AObjectBase aObjectBase = ObjectBaseFactory.Create(type, this, p1, p2, p3, p4, datas);
-            _componentDict.Add(type, aObjectBase);
+            AObjectBase aObjectBase = Create(type);
+            aObjectBase.ComponentParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
             return aObjectBase;
         }
         public T AddComponent<T>(params object[] datas) where T : AObjectBase
@@ -105,11 +277,15 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                LogUtil.LogError("Component已存在" + type.FullName);
+                Debug.LogError("Component已存在" + type.FullName);
                 return null;
             }
-            T aObjectBase = ObjectBaseFactory.Create<T>(this, datas);
-            _componentDict.Add(typeof(T), aObjectBase);
+            T aObjectBase = Create<T>();
+            aObjectBase.ComponentParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
             return aObjectBase;
         }
         public T AddComponent<T, P1>(P1 p1, params object[] datas) where T : AObjectBase
@@ -117,11 +293,15 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                LogUtil.LogError("Component已存在" + type.FullName);
+                Debug.LogError("Component已存在" + type.FullName);
                 return null;
             }
-            T aObjectBase = ObjectBaseFactory.Create<T, P1>(this, p1, datas);
-            _componentDict.Add(typeof(T), aObjectBase);
+            T aObjectBase = Create<T>();
+            aObjectBase.ComponentParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
             return aObjectBase;
         }
         public T AddComponent<T, P1, P2>(P1 p1, P2 p2, params object[] datas) where T : AObjectBase
@@ -129,11 +309,15 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                LogUtil.LogError("Component已存在" + type.FullName);
+                Debug.LogError("Component已存在" + type.FullName);
                 return null;
             }
-            T aObjectBase = ObjectBaseFactory.Create<T, P1, P2>(this, p1, p2, datas);
-            _componentDict.Add(typeof(T), aObjectBase);
+            T aObjectBase = Create<T>();
+            aObjectBase.ComponentParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1, p2);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
             return aObjectBase;
         }
         public T AddComponent<T, P1, P2, P3>(P1 p1, P2 p2, P3 p3, params object[] datas) where T : AObjectBase
@@ -141,11 +325,15 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                LogUtil.LogError("Component已存在" + type.FullName);
+                Debug.LogError("Component已存在" + type.FullName);
                 return null;
             }
-            T aObjectBase = ObjectBaseFactory.Create<T, P1, P2, P3>(this, p1, p2, p3, datas);
-            _componentDict.Add(typeof(T), aObjectBase);
+            T aObjectBase = Create<T>();
+            aObjectBase.ComponentParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
             return aObjectBase;
         }
         public T AddComponent<T, P1, P2, P3, P4>(P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas) where T : AObjectBase
@@ -153,11 +341,15 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                LogUtil.LogError("Component已存在" + type.FullName);
+                Debug.LogError("Component已存在" + type.FullName);
                 return null;
             }
-            T aObjectBase = ObjectBaseFactory.Create<T, P1, P2, P3, P4>(this, p1, p2, p3, p4, datas);
-            _componentDict.Add(typeof(T), aObjectBase);
+            T aObjectBase = Create<T>();
+            aObjectBase.ComponentParent = this;
+            ObjectBaseEventSystem.Instance.Register(aObjectBase);
+            ObjectBaseEventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
+            ObjectBaseEventSystem.Instance.Start(aObjectBase);
+            ObjectBaseEventSystem.Instance.InitData(aObjectBase, datas);
             return aObjectBase;
         }
         public void RemoveComponent(AObjectBase aObjectBase)
@@ -166,16 +358,28 @@ namespace LccHotfix
             {
                 return;
             }
-            if (_componentDict == null)
+            Type type = aObjectBase.GetType();
+            AObjectBase temp = GetComponent(type);
+            if (temp == null)
             {
                 return;
             }
-            Type type = aObjectBase.GetType();
-            if (_componentDict.ContainsKey(type))
+            InternalRemoveComponent(temp);
+            temp.Dispose();
+        }
+        public void RemoveComponent(Type type)
+        {
+            if (IsDisposed)
             {
-                _componentDict[type].Dispose();
-                _componentDict.Remove(type);
+                return;
             }
+            AObjectBase temp = GetComponent(type);
+            if (temp == null)
+            {
+                return;
+            }
+            InternalRemoveComponent(temp);
+            temp.Dispose();
         }
         public void RemoveComponent<T>() where T : AObjectBase
         {
@@ -183,17 +387,16 @@ namespace LccHotfix
             {
                 return;
             }
-            if (_componentDict == null)
+            T temp = GetComponent<T>();
+            if (temp == null)
             {
                 return;
             }
-            Type type = typeof(T);
-            if (_componentDict.ContainsKey(type))
-            {
-                _componentDict[type].Dispose();
-                _componentDict.Remove(type);
-            }
+            InternalRemoveComponent(temp);
+            temp.Dispose();
         }
+        #endregion
+        #region 显示
         public void ShowView(GameObject gameObject, GameObject parent = null)
         {
 #if View
@@ -206,6 +409,8 @@ namespace LccHotfix
                 gameObject.transform.SetParent(parent.transform);
             }
         }
+        #endregion
+        #region 自动引用
         public void AutoReference(Transform transform)
         {
             Dictionary<string, FieldInfo> fieldInfoDict = new Dictionary<string, FieldInfo>();
@@ -250,6 +455,8 @@ namespace LccHotfix
         {
             AutoReference(gameObject.transform);
         }
+        #endregion
+        #region 生命周期
         public virtual void Awake()
         {
         }
@@ -283,22 +490,37 @@ namespace LccHotfix
         public virtual void OnDestroy()
         {
         }
+        #endregion
+        #region Invoke
         public void Invoke(string methodName, object[] objs)
         {
-            //TODO
+            MethodInfo method = GetType().GetMethod(methodName);
+            method.Invoke(this, objs);
         }
+        #endregion
+        #region 协程
         public CoroutineHandler StartCoroutine(IEnumerator enumerator)
         {
-            return CoroutineManager.Instance.StartCoroutine(enumerator);
+            return CoroutineManager.Instance.StartCoroutineTask(enumerator);
         }
         public void StopCoroutine(CoroutineHandler handler)
         {
             handler.Stop();
         }
+        public void PauseCoroutine(CoroutineHandler handler)
+        {
+            handler.Pause();
+        }
+        public void ResumeCoroutine(CoroutineHandler handler)
+        {
+            handler.Resume();
+        }
         public void StopAllCoroutines()
         {
-            CoroutineManager.Instance.StopAllCoroutines();
+            CoroutineManager.Instance.StopAllCoroutineTask();
         }
+        #endregion
+        #region 销毁
         public virtual void Dispose()
         {
             if (IsDisposed)
@@ -307,6 +529,16 @@ namespace LccHotfix
             }
             ObjectBaseEventSystem.Instance.Remove(this);
             id = 0;
+            if (_childrenDict.Count > 0)
+            {
+                foreach (AObjectBase item in _childrenDict.Values)
+                {
+                    item.Dispose();
+                }
+                _childrenDict.Clear();
+            }
+
+
             if (_componentDict.Count > 0)
             {
                 foreach (AObjectBase item in _componentDict.Values)
@@ -314,13 +546,56 @@ namespace LccHotfix
                     item.Dispose();
                 }
                 _componentDict.Clear();
-                _componentDict = null;
             }
+
+
             OnDestroy();
+
+
             if (Parent != null && !Parent.IsDisposed)
             {
-                Parent.RemoveComponent(this);
+                if (_isComponent)
+                {
+                    Parent.InternalRemoveComponent(this);
+                }
+                else
+                {
+                    Parent.InternalRemoveChildren(this);
+                }
             }
         }
+        #endregion
+        #region 内部方法
+        private void InternalAddChildren(AObjectBase aObjectBase)
+        {
+            _childrenDict.Add(aObjectBase.id, aObjectBase);
+        }
+        private void InternalAddComponent(AObjectBase aObjectBase)
+        {
+            _componentDict.Add(aObjectBase.GetType(), aObjectBase);
+        }
+        private void InternalRemoveChildren(AObjectBase aObjectBase)
+        {
+            _childrenDict.Remove(aObjectBase.id);
+        }
+        private void InternalRemoveComponent(AObjectBase aObjectBase)
+        {
+            _componentDict.Remove(aObjectBase.GetType());
+        }
+        #endregion
+        #region 创建
+        public static AObjectBase Create(Type type)
+        {
+            AObjectBase aObjectBase = (AObjectBase)Activator.CreateInstance(type);
+            aObjectBase.id = IdUtil.Generate();
+            return aObjectBase;
+        }
+        public static T Create<T>() where T : AObjectBase
+        {
+            T aObjectBase = Activator.CreateInstance<T>();
+            aObjectBase.id = IdUtil.Generate();
+            return aObjectBase;
+        }
+        #endregion
     }
 }

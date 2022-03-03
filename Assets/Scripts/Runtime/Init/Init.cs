@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace LccModel
@@ -9,6 +8,7 @@ namespace LccModel
         public static event Action OnEventSystemFixedUpdate;
         public static event Action OnEventSystemUpdate;
         public static event Action OnEventSystemLateUpdate;
+        public static event Action OnEventSystemQuit;
         void Start()
         {
             Manager.Instance.InitManager();
@@ -33,6 +33,11 @@ namespace LccModel
         {
             ObjectBaseEventSystem.Instance.EventSystemLateUpdate();
             OnEventSystemLateUpdate?.Invoke();
+        }
+        void OnApplicationQuit()
+        {
+            OnEventSystemQuit?.Invoke();
+            GameEntity.Instance.Dispose();
         }
     }
 }

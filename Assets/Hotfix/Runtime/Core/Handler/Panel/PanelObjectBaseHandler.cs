@@ -38,8 +38,8 @@ namespace LccHotfix
             Type classType = Manager.Instance.GetType(type.ToPanelString());
             if (classType != null)
             {
-                GameObjectComponent gameObjectComponent = ObjectBaseFactory.Create<GameObjectComponent, GameObject>(PanelManager.Instance, gameObject);
-                AObjectBase panelComponent = gameObjectComponent.AddComponent(classType, datas);
+                GameObjectEntity gameObjectEntity = PanelManager.Instance.AddChildren<GameObjectEntity, GameObject>(gameObject);
+                AObjectBase panelComponent = gameObjectEntity.AddComponent(classType, datas);
                 panel.AObjectBase = panelComponent;
             }
             panel.ClosePanel();

@@ -30,7 +30,7 @@ namespace LccHotfix
         public override void Start()
         {
             base.Start();
-            gameObject = GetParent<GameObjectComponent>().gameObject;
+            gameObject = GetParent<GameObjectEntity>().gameObject;
         }
         public override void InitData(object[] datas)
         {

@@ -13,6 +13,7 @@ namespace LccHotfix
                 LccModelInit.OnEventSystemFixedUpdate += ObjectBaseEventSystem.Instance.EventSystemFixedUpdate;
                 LccModelInit.OnEventSystemUpdate += ObjectBaseEventSystem.Instance.EventSystemUpdate;
                 LccModelInit.OnEventSystemLateUpdate += ObjectBaseEventSystem.Instance.EventSystemLateUpdate;
+                LccModelInit.OnEventSystemQuit += OnApplicationQuit;
 
                 Manager.Instance.InitManager();
                 EventManager.Instance.InitManager();
@@ -25,6 +26,10 @@ namespace LccHotfix
             {
                 LogUtil.LogError(e.ToString());
             }
+        }
+        private static void OnApplicationQuit()
+        {
+            GameEntity.Instance.Dispose();
         }
     }
 }

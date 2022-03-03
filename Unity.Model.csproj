@@ -85,7 +85,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Helper\RegisterMethodDelegateHelper.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Adapter\IAsyncStateMachineAdapter.cs" />
     <Compile Include="Assets\Scripts\Util\DragEventTrigger.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Object\ObjectBaseFactory.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Object\EntityFactory.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Download\DownloadData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\UnityWebRequestAsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Scripts\Runtime\Init\Init.cs" />
@@ -94,7 +94,7 @@
     <Compile Include="Assets\Scripts\Logic\Manager\AStar\AStarManager.cs" />
     <Compile Include="Assets\Scripts\Util\LongClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Helper\RegisterCrossBindingAdaptorHelper.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\GameObject\GameObjectComponent.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\GameObject\GameObjectEntity.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Adapter\CoroutineAdapter.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\Binding\ViewModelBinding.cs" />
@@ -134,8 +134,8 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Download\DownloadFile.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Voice\VoiceManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Language\LanguageManager.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEvent.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelType.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEvent.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\GameEvent\GameEventData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Rijndael\RijndaelUtil.cs" />
@@ -196,6 +196,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Timer\TimerType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Init\GameEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Unity.Model.asmdef" />

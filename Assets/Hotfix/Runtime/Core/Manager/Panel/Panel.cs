@@ -25,8 +25,8 @@ namespace LccHotfix
                 {
                     if (AObjectBase != null)
                     {
-                        GameObjectComponent gameObjectComponent = AObjectBase.GetParent<GameObjectComponent>();
-                        _gameObject = gameObjectComponent?.gameObject;
+                        GameObjectEntity gameObjectEntity = AObjectBase.GetParent<GameObjectEntity>();
+                        _gameObject = gameObjectEntity?.gameObject;
                     }
                 }
                 return _gameObject;

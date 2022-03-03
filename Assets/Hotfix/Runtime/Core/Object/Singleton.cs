@@ -12,7 +12,7 @@
                 {
                     lock (_lockObject)
                     {
-                        _instance = ObjectBaseFactory.Create<T>();
+                        _instance = GameEntity.Instance.AddChildren<T>();
                     }
                 }
                 return _instance;

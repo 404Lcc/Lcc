@@ -13,7 +13,7 @@ namespace LccModel
         public Text infoText;
         public override void Start()
         {
-            gameObject = GetParent<GameObjectComponent>().gameObject;
+            gameObject = GetParent<GameObjectEntity>().gameObject;
             AutoReference(gameObject);
             ShowView(gameObject);
         }
@@ -21,9 +21,8 @@ namespace LccModel
         {
             gameObject.transform.SetAsLastSibling();
         }
-        public void InitTips(int id, string info, Vector2 localPosition, Vector2 offset, float duration, Transform parent = null)
+        public void InitTips(string info, Vector2 localPosition, Vector2 offset, float duration, Transform parent = null)
         {
-            this.id = id;
             this.info = info;
 
             infoText.text = info;
@@ -44,7 +43,7 @@ namespace LccModel
             Vector3 target = new Vector3(localPosition.x + offset.x, localPosition.y + offset.y, 0);
             DOTween.To(() => rect.localPosition, x => rect.localPosition = x, target, duration).SetEase(Ease.OutCubic).OnComplete(() =>
             {
-                TipsManager.Instance.ClearTips(id);
+                TipsManager.Instance.ClearTips(Parent.id);
             });
         }
     }

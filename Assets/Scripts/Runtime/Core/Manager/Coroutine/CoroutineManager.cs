@@ -6,7 +6,7 @@ namespace LccModel
     public class CoroutineManager : Singleton<CoroutineManager>
     {
         private List<CoroutineHandler> _runList = new List<CoroutineHandler>();
-        public new CoroutineHandler StartCoroutine(IEnumerator enumerator)
+        public CoroutineHandler StartCoroutineTask(IEnumerator enumerator)
         {
             CoroutineHandler handler = new CoroutineHandler(enumerator, Remove);
             handler.Start();
@@ -17,7 +17,7 @@ namespace LccModel
         {
             _runList.Remove(handler);
         }
-        public new void StopAllCoroutines()
+        public void StopAllCoroutineTask()
         {
             foreach (var item in _runList)
             {

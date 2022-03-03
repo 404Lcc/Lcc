@@ -25,8 +25,8 @@ namespace LccModel
                 {
                     if (AObjectBase != null)
                     {
-                        GameObjectComponent gameObjectComponent = AObjectBase.GetParent<GameObjectComponent>();
-                        _gameObject = gameObjectComponent?.gameObject;
+                        GameObjectEntity GameObjectEntity = AObjectBase.GetParent<GameObjectEntity>();
+                        _gameObject = GameObjectEntity?.gameObject;
                     }
                 }
                 return _gameObject;

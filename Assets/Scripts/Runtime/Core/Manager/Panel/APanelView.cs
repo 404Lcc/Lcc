@@ -7,7 +7,7 @@ namespace LccModel
         public GameObject gameObject;
         public override void Start()
         {
-            gameObject = GetParent<GameObjectComponent>().gameObject;
+            gameObject = GetParent<GameObjectEntity>().gameObject;
             AutoReference(gameObject);
             ShowView(gameObject);
         }

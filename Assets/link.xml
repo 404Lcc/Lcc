@@ -4371,7 +4371,7 @@
     <type fullname="LccModel.TransformExpand" preserve="all" />
     <type fullname="LccModel.UnityWebRequestExpand" preserve="all" />
     <type fullname="LccModel.Vector2Expand" preserve="all" />
-    <type fullname="LccModel.GameObjectComponent" preserve="all" />
+    <type fullname="LccModel.GameObjectEntity" preserve="all" />
     <type fullname="LccModel.AObjectBaseHandler" preserve="all" />
     <type fullname="LccModel.PanelObjectBaseHandler" preserve="all" />
     <type fullname="LccModel.AssetData" preserve="all" />
@@ -4424,9 +4424,9 @@
     <type fullname="LccModel.UIEventManager" preserve="all" />
     <type fullname="LccModel.UIEventType" preserve="all" />
     <type fullname="LccModel.AObjectBase" preserve="all" />
+    <type fullname="LccModel.EntityFactory" preserve="all" />
     <type fullname="LccModel.LccView" preserve="all" />
     <type fullname="LccModel.ObjectBaseEventSystem" preserve="all" />
-    <type fullname="LccModel.ObjectBaseFactory" preserve="all" />
     <type fullname="LccModel.Objects" preserve="all" />
     <type fullname="LccModel.ProtobufObject" preserve="all" />
     <type fullname="LccModel.Singleton`1" preserve="all" />
@@ -4453,6 +4453,7 @@
     <type fullname="LccModel.IView`1" preserve="all" />
     <type fullname="LccModel.ViewModelBase" preserve="all" />
     <type fullname="LccModel.InitEventHandler" preserve="all" />
+    <type fullname="LccModel.GameEntity" preserve="all" />
     <type fullname="LccModel.Init" preserve="all" />
     <type fullname="LccModel.DisplayMode" preserve="all" />
     <type fullname="LccModel.DoubleClickEvent" preserve="all" />

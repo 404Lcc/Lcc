@@ -17,7 +17,7 @@ namespace LccHotfix
         public Transform target;
         public override void Start()
         {
-            gameObject = GetParent<GameObjectComponent>().gameObject;
+            gameObject = GetParent<GameObjectEntity>().gameObject;
         }
         public override void InitData(object[] datas)
         {

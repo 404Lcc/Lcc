@@ -12,7 +12,7 @@ namespace LccHotfix
         private bool _isNeedMove;
         public override void Start()
         {
-            gameObject = GetParent<GameObjectComponent>().gameObject;
+            gameObject = GetParent<GameObjectEntity>().gameObject;
         }
         public override void Update()
         {

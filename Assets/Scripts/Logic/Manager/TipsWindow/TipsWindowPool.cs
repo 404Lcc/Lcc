@@ -15,8 +15,8 @@ namespace LccModel
             for (int i = 0; i < size; i++)
             {
                 GameObject gameObject = AssetManager.Instance.InstantiateAsset("TipsWindow", false, false, Objects.Canvas.transform, AssetType.Tool);
-                GameObjectComponent gameObjectComponent = ObjectBaseFactory.Create<GameObjectComponent, GameObject>(null, gameObject);
-                TipsWindow tipsWindow = gameObjectComponent.AddComponent<TipsWindow>();
+                GameObjectEntity GameObjectEntity = TipsWindowManager.Instance.AddChildren<GameObjectEntity, GameObject>(gameObject);
+                TipsWindow tipsWindow = GameObjectEntity.AddComponent<TipsWindow>();
                 Enqueue(tipsWindow);
             }
         }

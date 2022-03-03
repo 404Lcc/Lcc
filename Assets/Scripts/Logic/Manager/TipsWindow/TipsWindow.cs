@@ -24,16 +24,15 @@ namespace LccModel
         public Image ad;
         public override void Start()
         {
-            gameObject = GetParent<GameObjectComponent>().gameObject;
+            gameObject = GetParent<GameObjectEntity>().gameObject;
             AutoReference(gameObject);
             ShowView(gameObject);
 
             confirmBtn.onClick.AddListener(OnConfirm);
             cancelBtn.onClick.AddListener(OnCancel);
         }
-        public void InitTipsWindow(int id, string title, string info, Action<bool> callback, string confirm, string cancel, Transform parent = null)
+        public void InitTipsWindow(string title, string info, Action<bool> callback, string confirm, string cancel, Transform parent = null)
         {
-            this.id = id;
             this.title = title;
             this.info = info;
             this.Callback = callback;
@@ -76,7 +75,7 @@ namespace LccModel
         public void OnHideTipsWindow()
         {
             Callback = null;
-            TipsWindowManager.Instance.ClearTipsWindow(id);
+            TipsWindowManager.Instance.ClearTipsWindow(Parent.id);
         }
     }
 }
