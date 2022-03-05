@@ -18,7 +18,7 @@ namespace LccModel
         //准备队列
         public Queue<DownloadFile> readyQueue = new Queue<DownloadFile>();
         //运行
-        public Hashtable runnings = new Hashtable();
+        public Dictionary<Thread, DownloadFile> runningDict = new Dictionary<Thread, DownloadFile>();
         //完成列表
         public List<DownloadData> completeList = new List<DownloadData>();
         //错误列表
@@ -65,7 +65,7 @@ namespace LccModel
             {
                 readyQueue.Enqueue(downloadFile);
             }
-            if (runnings.Count >= taskCount) return;
+            if (runningDict.Count >= taskCount) return;
             Task task = Task.Run(DownloadTask);
             task.Start();
         }
@@ -80,7 +80,7 @@ namespace LccModel
         {
             lock (lockObject)
             {
-                runnings.Add(Thread.CurrentThread, null);
+                runningDict.Add(Thread.CurrentThread, null);
             }
             while (true)
             {
@@ -90,7 +90,7 @@ namespace LccModel
                     if (readyQueue.Count > 0)
                     {
                         downloadFile = readyQueue.Dequeue();
-                        runnings[Thread.CurrentThread] = downloadFile;
+                        runningDict[Thread.CurrentThread] = downloadFile;
                     }
                 }
                 if (downloadFile == null) break;
@@ -100,7 +100,7 @@ namespace LccModel
                     lock (lockObject)
                     {
                         completeList.Add(downloadFile.downloadData);
-                        runnings[Thread.CurrentThread] = null;
+                        runningDict[Thread.CurrentThread] = null;
                     }
                 }
                 else if (downloadFile.state == DownloadState.Error)
@@ -126,31 +126,31 @@ namespace LccModel
         }
         public void UpdateTask()
         {
-            if (readyQueue.Count == 0 && runnings.Count == 0) return;
+            if (readyQueue.Count == 0 && runningDict.Count == 0) return;
             lock (lockObject)
             {
                 List<Thread> threadList = new List<Thread>();
-                foreach (DictionaryEntry item in runnings)
+                foreach (KeyValuePair<Thread, DownloadFile> item in runningDict)
                 {
                     //卡死线程
-                    if (!((Thread)item.Key).IsAlive)
+                    if (!item.Key.IsAlive)
                     {
                         if (item.Value != null)
                         {
-                            readyQueue.Enqueue((DownloadFile)item.Value);
+                            readyQueue.Enqueue(item.Value);
                         }
-                        threadList.Add((Thread)item.Key);
+                        threadList.Add(item.Key);
                     }
                 }
                 foreach (Thread item in threadList)
                 {
                     item.Abort();
-                    runnings.Remove(item);
+                    runningDict.Remove(item);
                 }
             }
             if (NetworkUtil.CheckNetwork())
             {
-                if (runnings.Count < taskCount && readyQueue.Count > 0)
+                if (runningDict.Count < taskCount && readyQueue.Count > 0)
                 {
                     Task task = Task.Run(DownloadTask);
                     task.Start();
@@ -159,11 +159,11 @@ namespace LccModel
         }
         public void UpdateProgress()
         {
-            if (runnings.Count == 0) return;
+            if (runningDict.Count == 0) return;
             List<DownloadFile> downloadFileList = new List<DownloadFile>();
             lock (lockObject)
             {
-                foreach (DownloadFile item in runnings.Values)
+                foreach (DownloadFile item in runningDict.Values)
                 {
                     if (item != null)
                     {
