@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LccModel
 {
-    public class GameEventManager : Singleton<GameEventManager>
+    public class GameEventManager : Singleton<GameEventManager>, IUpdate
     {
         public List<GameEventData> gameEventList = new List<GameEventData>();
         public int index;

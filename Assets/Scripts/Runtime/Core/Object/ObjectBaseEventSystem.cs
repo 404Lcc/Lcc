@@ -34,9 +34,18 @@ namespace LccModel
         public void Register(AObjectBase aObjectBase)
         {
             aObjectBaseDict.Add(aObjectBase.id, aObjectBase);
-            fixedUpdate.Enqueue(aObjectBase.id);
-            update.Enqueue(aObjectBase.id);
-            lateUpdate.Enqueue(aObjectBase.id);
+            if (aObjectBase is IFixedUpdate)
+            {
+                fixedUpdate.Enqueue(aObjectBase.id);
+            }
+            if (aObjectBase is IUpdate)
+            {
+                update.Enqueue(aObjectBase.id);
+            }
+            if (aObjectBase is ILateUpdate)
+            {
+                lateUpdate.Enqueue(aObjectBase.id);
+            }
         }
         public void Remove(AObjectBase aObjectBase)
         {

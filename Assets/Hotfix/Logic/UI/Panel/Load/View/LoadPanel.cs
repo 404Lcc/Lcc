@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace LccHotfix
 {
-    public class LoadPanel : APanelView<LoadModel>
+    public class LoadPanel : APanelView<LoadModel>, IUpdate
     {
         public Slider loadProcess;
         public override void InitView(LoadModel viewModel)

@@ -2,7 +2,7 @@
 
 namespace LccHotfix
 {
-    public class LoginPanel : APanelView<LoginModel>
+    public class LoginPanel : APanelView<LoginModel>, IFixedUpdate, IUpdate, ILateUpdate
     {
         public override void InitView(LoginModel viewModel)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class CommandManager : Singleton<CommandManager>
+    public class CommandManager : Singleton<CommandManager>, IUpdate
     {
         public List<CommandData> commandDataList = new List<CommandData>();
         public int index;

@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace LccModel
 {
-    public class DownloadManager : Singleton<DownloadManager>
+    public class DownloadManager : Singleton<DownloadManager>, IUpdate
     {
         public object lockObject = new object();
         //最大任务数

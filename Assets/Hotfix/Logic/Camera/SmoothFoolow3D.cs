@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace LccHotfix
 {
-    public class SmoothFoolow3D : AObjectBase
+    public class SmoothFoolow3D : AObjectBase, IUpdate, ILateUpdate
     {
         public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
 

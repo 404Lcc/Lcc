@@ -4425,6 +4425,9 @@
     <type fullname="LccModel.UIEventType" preserve="all" />
     <type fullname="LccModel.AObjectBase" preserve="all" />
     <type fullname="LccModel.EntityFactory" preserve="all" />
+    <type fullname="LccModel.IFixedUpdate" preserve="all" />
+    <type fullname="LccModel.ILateUpdate" preserve="all" />
+    <type fullname="LccModel.IUpdate" preserve="all" />
     <type fullname="LccModel.LccView" preserve="all" />
     <type fullname="LccModel.ObjectBaseEventSystem" preserve="all" />
     <type fullname="LccModel.Objects" preserve="all" />

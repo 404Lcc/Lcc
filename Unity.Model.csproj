@@ -197,6 +197,9 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Timer\TimerType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Object\IUpdate.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Object\IFixedUpdate.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Object\ILateUpdate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Unity.Model.asmdef" />

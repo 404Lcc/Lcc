@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class CameraController : AObjectBase
+    public class CameraController : AObjectBase, IUpdate
     {
         public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
 

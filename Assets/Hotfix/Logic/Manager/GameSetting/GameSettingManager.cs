@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class GameSettingManager : Singleton<GameSettingManager>
+    public class GameSettingManager : Singleton<GameSettingManager>, IUpdate
     {
         public void InitManager()
         {

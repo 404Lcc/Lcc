@@ -93,6 +93,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\MD5\MD5Util.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\Binding\Binding.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\NumericEvent\NumericEventManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\NumericEvent\NumericEventHandlerAttribute.cs" />
     <Compile Include="Assets\Hotfix\Logic\Manager\Command\CommandManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Json\JsonUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Awaiter\AwaiterExpand.cs" />
@@ -143,7 +144,9 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\NumericEvent\NumericEventHandlerAttribute.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Object\ILateUpdate.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Object\IUpdate.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Object\IFixedUpdate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace LccModel
 {
-    public class Tips : AObjectBase
+    public class Tips : AObjectBase, IUpdate
     {
         public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
 
