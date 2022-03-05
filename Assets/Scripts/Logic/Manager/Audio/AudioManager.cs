@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace LccModel
 {
     public class AudioManager : Singleton<AudioManager>
     {
-        public Hashtable audios = new Hashtable();
+        public Dictionary<string, AudioClip> audioDict = new Dictionary<string, AudioClip>();
         public bool AudioExist(string audio)
         {
-            if (audios.ContainsKey(audio))
+            if (audioDict.ContainsKey(audio))
             {
                 return true;
             }
@@ -18,7 +17,7 @@ namespace LccModel
         public AudioClip LoadAudio(string audio)
         {
             AudioClip clip = AssetManager.Instance.LoadAsset<AudioClip>(audio, ".mp3", false, true, AssetType.Audio);
-            audios.Add(audio, clip);
+            audioDict.Add(audio, clip);
             return clip;
         }
         public async ETTask<AudioClip> LoadAudio(string audio, AudioType type)
@@ -31,7 +30,7 @@ namespace LccModel
             {
                 source.clip = null;
                 source.Stop();
-                audios.Remove(audio);
+                audioDict.Remove(audio);
             }
         }
         public async ETTask<AudioClip> PlayAudio(string audio, bool isAsset, AudioSource source)
@@ -55,7 +54,7 @@ namespace LccModel
                 {
                     return null;
                 }
-                audios.Add(audio, clip);
+                audioDict.Add(audio, clip);
             }
             source.clip = clip;
             source.Play();
@@ -76,7 +75,7 @@ namespace LccModel
         {
             if (AudioExist(audio))
             {
-                AudioClip clip = audios[audio] as AudioClip;
+                AudioClip clip = audioDict[audio];
                 return clip;
             }
             return null;

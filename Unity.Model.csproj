@@ -143,6 +143,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\Panel.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Updater\UIEventHandler\UpdaterUIEventHandler.cs" />
     <Compile Include="Assets\Scripts\Util\LanguageText.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Init\GameEntity.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\ValueTypeBinder\Vector2Binder.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\UIEventHandler\LaunchUIEventHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Coroutine\CoroutineCompletedHandler.cs" />
@@ -196,7 +197,6 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Timer\TimerType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Init\GameEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Unity.Model.asmdef" />

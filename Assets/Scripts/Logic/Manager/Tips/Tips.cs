@@ -6,14 +6,13 @@ namespace LccModel
 {
     public class Tips : AObjectBase
     {
-        public GameObject gameObject;
+        public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
 
         public string info;
 
         public Text infoText;
         public override void Start()
         {
-            gameObject = GetParent<GameObjectEntity>().gameObject;
             AutoReference(gameObject);
             ShowView(gameObject);
         }

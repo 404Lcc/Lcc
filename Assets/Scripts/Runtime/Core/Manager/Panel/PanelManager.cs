@@ -6,7 +6,7 @@ namespace LccModel
 {
     public class PanelManager : Singleton<PanelManager>
     {
-        public Hashtable panels = new Hashtable();
+        public Dictionary<PanelType, Panel> panelDict = new Dictionary<PanelType, Panel>();
         public PanelObjectBaseHandler handler;
         public void InitManager(PanelObjectBaseHandler handler)
         {
@@ -19,7 +19,7 @@ namespace LccModel
         /// <returns></returns>
         public bool PanelExist(PanelType type)
         {
-            if (panels.ContainsKey(type))
+            if (panelDict.ContainsKey(type))
             {
                 return true;
             }
@@ -34,7 +34,7 @@ namespace LccModel
         public Panel CreatePanel(PanelType type, params object[] datas)
         {
             Panel panel = handler.CreatePanel(type, datas);
-            panels.Add(type, panel);
+            panelDict.Add(type, panel);
             return panel;
         }
         /// <summary>
@@ -177,7 +177,7 @@ namespace LccModel
             {
                 Panel panel = GetPanel(type);
                 panel.ClearPanel();
-                panels.Remove(type);
+                panelDict.Remove(type);
             }
         }
         /// <summary>
@@ -225,7 +225,7 @@ namespace LccModel
         public int ClearOpenPanels()
         {
             int number = 0;
-            IDictionaryEnumerator enumerator = panels.GetEnumerator();
+            IDictionaryEnumerator enumerator = panelDict.GetEnumerator();
             while (enumerator.MoveNext())
             {
                 Panel panel = (Panel)enumerator.Value;
@@ -246,7 +246,7 @@ namespace LccModel
         {
             if (PanelExist(type))
             {
-                Panel panel = (Panel)panels[type];
+                Panel panel = panelDict[type];
                 return panel;
             }
             return null;
@@ -261,7 +261,7 @@ namespace LccModel
         {
             if (PanelExist(type))
             {
-                Panel panel = (Panel)panels[type];
+                Panel panel = panelDict[type];
                 return (T)panel.AObjectBase;
             }
             return null;

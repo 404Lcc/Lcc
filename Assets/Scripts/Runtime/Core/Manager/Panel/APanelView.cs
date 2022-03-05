@@ -4,10 +4,9 @@ namespace LccModel
 {
     public abstract class APanelView<T> : AViewBase<T> where T : ViewModelBase
     {
-        public GameObject gameObject;
+        public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
         public override void Start()
         {
-            gameObject = GetParent<GameObjectEntity>().gameObject;
             AutoReference(gameObject);
             ShowView(gameObject);
         }

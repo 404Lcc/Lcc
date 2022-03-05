@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -7,10 +7,10 @@ namespace LccModel
 {
     public class VideoManager : Singleton<VideoManager>
     {
-        public Hashtable videos = new Hashtable();
+        public Dictionary<string, VideoClip> videoDict = new Dictionary<string, VideoClip>();
         public bool VideoExist(string video)
         {
-            if (videos.ContainsKey(video))
+            if (videoDict.ContainsKey(video))
             {
                 return true;
             }
@@ -19,7 +19,7 @@ namespace LccModel
         public VideoClip LoadVideo(string video)
         {
             VideoClip clip = AssetManager.Instance.LoadAsset<VideoClip>(video, ".mp4", false, true, AssetType.Video);
-            videos.Add(video, clip);
+            videoDict.Add(video, clip);
             return clip;
         }
         public void RemoveVideo(string video, VideoPlayer player)
@@ -30,7 +30,7 @@ namespace LccModel
                 player.clip = null;
                 player.url = string.Empty;
                 player.Stop();
-                videos.Remove(video);
+                videoDict.Remove(video);
             }
         }
         public VideoClip PlayVideo(string video, bool isAsset, VideoPlayer player, RawImage image, int width = 1920, int height = 1080)
@@ -81,7 +81,7 @@ namespace LccModel
         {
             if (VideoExist(video))
             {
-                VideoClip clip = videos[video] as VideoClip;
+                VideoClip clip = videoDict[video];
                 return clip;
             }
             return null;

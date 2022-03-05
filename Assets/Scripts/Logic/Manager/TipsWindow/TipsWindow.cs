@@ -6,7 +6,7 @@ namespace LccModel
 {
     public class TipsWindow : AObjectBase
     {
-        public GameObject gameObject;
+        public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
 
         public string title;
         public string info;
@@ -24,7 +24,6 @@ namespace LccModel
         public Image ad;
         public override void Start()
         {
-            gameObject = GetParent<GameObjectEntity>().gameObject;
             AutoReference(gameObject);
             ShowView(gameObject);
 

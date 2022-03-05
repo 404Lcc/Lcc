@@ -1,11 +1,11 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace LccModel
 {
     public class LanguageManager : Singleton<LanguageManager>
     {
-        public Hashtable languages = new Hashtable();
+        public Dictionary<string, string> languageDict = new Dictionary<string, string>();
         public void ChangeLanguage(LanguageType type)
         {
             TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(type.ToString(), ".txt", false, true, AssetType.Config);
@@ -16,14 +16,14 @@ namespace LccModel
                     continue;
                 }
                 string[] KeyValue = item.Split('=');
-                if (languages.ContainsKey(KeyValue[0])) return;
-                languages.Add(KeyValue[0], KeyValue[1]);
+                if (languageDict.ContainsKey(KeyValue[0])) return;
+                languageDict.Add(KeyValue[0], KeyValue[1]);
             }
         }
         public string GetValue(string key)
         {
-            if (!languages.ContainsKey(key)) return string.Empty;
-            string value = (string)languages[key];
+            if (!languageDict.ContainsKey(key)) return string.Empty;
+            string value = languageDict[key];
             return value;
         }
     }

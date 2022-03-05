@@ -1,7 +1,6 @@
 ﻿using ILRuntime.Reflection;
 using LccModel;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -13,8 +12,8 @@ namespace LccEditor
     public static class ObjectTypeUtil
     {
         public static List<IObjectType> objectList = new List<IObjectType>();
-        public static Hashtable objectObjectTypes = new Hashtable();
-        public static Hashtable listObjectTypes = new Hashtable();
+        public static Dictionary<(object, FieldInfo), ObjectObjectType> objectObjectTypeDict = new Dictionary<(object, FieldInfo), ObjectObjectType>();
+        public static Dictionary<(object, FieldInfo), ListObjectType> listObjectTypeDict = new Dictionary<(object, FieldInfo), ListObjectType>();
         static ObjectTypeUtil()
         {
             foreach (Type item in typeof(ObjectTypeUtil).Assembly.GetTypes())
@@ -59,9 +58,9 @@ namespace LccEditor
                     {
                         continue;
                     }
-                    if (objectObjectTypes.ContainsKey((obj, item)))
+                    if (objectObjectTypeDict.ContainsKey((obj, item)))
                     {
-                        ObjectObjectType objectObjectType = (ObjectObjectType)objectObjectTypes[(obj, item)];
+                        ObjectObjectType objectObjectType = objectObjectTypeDict[(obj, item)];
                         objectObjectType.Draw(type, item.Name, value, null, indentLevel);
                         continue;
                     }
@@ -78,12 +77,12 @@ namespace LccEditor
                         {
                             objectObjectType.Draw(type, item.Name, value, null, indentLevel);
                         }
-                        objectObjectTypes.Add((obj, item), objectObjectType);
+                        objectObjectTypeDict.Add((obj, item), objectObjectType);
                         continue;
                     }
-                    if (listObjectTypes.ContainsKey((obj, item)))
+                    if (listObjectTypeDict.ContainsKey((obj, item)))
                     {
-                        ListObjectType listObjectType = (ListObjectType)listObjectTypes[(obj, item)];
+                        ListObjectType listObjectType = listObjectTypeDict[(obj, item)];
                         listObjectType.Draw(type, item.Name, value, null, indentLevel);
                         continue;
                     }
@@ -95,7 +94,7 @@ namespace LccEditor
                             continue;
                         }
                         listObjectType.Draw(type, item.Name, value, null, indentLevel);
-                        listObjectTypes.Add((obj, item), listObjectType);
+                        listObjectTypeDict.Add((obj, item), listObjectType);
                         continue;
                     }
                     foreach (IObjectType objectTypeItem in objectList)
@@ -137,9 +136,9 @@ namespace LccEditor
                         {
                             continue;
                         }
-                        if (listObjectTypes.ContainsKey((obj, item)))
+                        if (listObjectTypeDict.ContainsKey((obj, item)))
                         {
-                            ListObjectType listObjectType = (ListObjectType)listObjectTypes[(obj, item)];
+                            ListObjectType listObjectType = (ListObjectType)listObjectTypeDict[(obj, item)];
                             listObjectType.Draw(type, item.Name, value, null, indentLevel);
                             continue;
                         }
@@ -151,7 +150,7 @@ namespace LccEditor
                                 continue;
                             }
                             listObjectType.Draw(type, item.Name, value, null, indentLevel);
-                            listObjectTypes.Add((obj, item), listObjectType);
+                            listObjectTypeDict.Add((obj, item), listObjectType);
                             continue;
                         }
                         foreach (IObjectType objectTypeItem in objectList)
@@ -185,9 +184,9 @@ namespace LccEditor
                         {
                             continue;
                         }
-                        if (objectObjectTypes.ContainsKey((obj, item)))
+                        if (objectObjectTypeDict.ContainsKey((obj, item)))
                         {
-                            ObjectObjectType objectObjectType = (ObjectObjectType)objectObjectTypes[(obj, item)];
+                            ObjectObjectType objectObjectType = objectObjectTypeDict[(obj, item)];
                             objectObjectType.Draw(type, item.Name, value, null, indentLevel);
                             continue;
                         }
@@ -204,7 +203,7 @@ namespace LccEditor
                             {
                                 objectObjectType.Draw(type, item.Name, value, null, indentLevel);
                             }
-                            objectObjectTypes.Add((obj, item), objectObjectType);
+                            objectObjectTypeDict.Add((obj, item), objectObjectType);
                             continue;
                         }
                     }
@@ -223,9 +222,9 @@ namespace LccEditor
                     {
                         continue;
                     }
-                    if (objectObjectTypes.ContainsKey((obj, item)))
+                    if (objectObjectTypeDict.ContainsKey((obj, item)))
                     {
-                        ObjectObjectType objectObjectType = (ObjectObjectType)objectObjectTypes[(obj, item)];
+                        ObjectObjectType objectObjectType = objectObjectTypeDict[(obj, item)];
                         objectObjectType.Draw(type, item.Name, value, null, indentLevel);
                         continue;
                     }
@@ -242,12 +241,12 @@ namespace LccEditor
                         {
                             objectObjectType.Draw(type, item.Name, value, null, indentLevel);
                         }
-                        objectObjectTypes.Add((obj, item), objectObjectType);
+                        objectObjectTypeDict.Add((obj, item), objectObjectType);
                         continue;
                     }
-                    if (listObjectTypes.ContainsKey((obj, item)))
+                    if (listObjectTypeDict.ContainsKey((obj, item)))
                     {
-                        ListObjectType listObjectType = (ListObjectType)listObjectTypes[(obj, item)];
+                        ListObjectType listObjectType = listObjectTypeDict[(obj, item)];
                         listObjectType.Draw(type, item.Name, value, null, indentLevel);
                         continue;
                     }
@@ -259,7 +258,7 @@ namespace LccEditor
                             continue;
                         }
                         listObjectType.Draw(type, item.Name, value, null, indentLevel);
-                        listObjectTypes.Add((obj, item), listObjectType);
+                        listObjectTypeDict.Add((obj, item), listObjectType);
                         continue;
                     }
                     foreach (IObjectType objectTypeItem in objectList)

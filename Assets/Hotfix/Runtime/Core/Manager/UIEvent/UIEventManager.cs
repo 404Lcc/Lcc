@@ -1,30 +1,30 @@
 ﻿using LccModel;
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace LccHotfix
 {
     public class UIEventManager : Singleton<UIEventManager>
     {
-        public Hashtable uiEvents = new Hashtable();
+        public Dictionary<string, UIEvent> uiEventDict = new Dictionary<string, UIEvent>();
         public void InitManager()
         {
-            foreach (Type item in Manager.Instance.types.Values)
+            foreach (Type item in Manager.Instance.typeDict.Values)
             {
                 if (item.IsAbstract) continue;
                 UIEventHandlerAttribute[] uiEventHandlerAttributes = (UIEventHandlerAttribute[])item.GetCustomAttributes(typeof(UIEventHandlerAttribute), false);
                 if (uiEventHandlerAttributes.Length > 0)
                 {
                     UIEvent uiEvent = (UIEvent)Activator.CreateInstance(item);
-                    uiEvents.Add(uiEventHandlerAttributes[0].uiEventType, uiEvent);
+                    uiEventDict.Add(uiEventHandlerAttributes[0].uiEventType, uiEvent);
                 }
             }
         }
         public void Publish(string uiEventType)
         {
-            if (uiEvents.ContainsKey(uiEventType))
+            if (uiEventDict.ContainsKey(uiEventType))
             {
-                UIEvent uiEvent = (UIEvent)uiEvents[uiEventType];
+                UIEvent uiEvent = uiEventDict[uiEventType];
                 uiEvent.Publish();
             }
             else
@@ -34,9 +34,9 @@ namespace LccHotfix
         }
         public void Publish<T>(string uiEventType, T data)
         {
-            if (uiEvents.ContainsKey(uiEventType))
+            if (uiEventDict.ContainsKey(uiEventType))
             {
-                UIEvent uiEvent = (UIEvent)uiEvents[uiEventType];
+                UIEvent uiEvent = uiEventDict[uiEventType];
                 uiEvent.Publish(data);
             }
             else

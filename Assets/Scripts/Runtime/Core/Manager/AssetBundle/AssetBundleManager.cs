@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,7 +28,7 @@ namespace LccModel
         public event Action<int, int> CheckProgress;
         public event Action Complete;
         public event Action<DownloadData, string> Error;
-        public Hashtable assetBundles = new Hashtable();
+        public Dictionary<string, AssetBundle> assetBundleDict = new Dictionary<string, AssetBundle>();
         public static string AssetBundleConfigPersistent
         {
             get
@@ -247,9 +246,9 @@ namespace LccModel
             {
                 assetBundleName = $"{MD5Util.ComputeMD5(Path.GetDirectoryName(assetName).Replace("\\", "/"))}{AssetBundleSuffix}";
             }
-            if (assetBundles.ContainsKey(assetBundleName))
+            if (assetBundleDict.ContainsKey(assetBundleName))
             {
-                return (AssetBundle)assetBundles[assetBundleName];
+                return assetBundleDict[assetBundleName];
             }
             else
             {
@@ -257,20 +256,20 @@ namespace LccModel
                 string[] dependencies = assetBundleManifest.GetAllDependencies(assetBundleName);
                 foreach (string item in dependencies)
                 {
-                    assetBundles.Add(item, AssetBundle.LoadFromFile($"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{item}"));
+                    assetBundleDict.Add(item, AssetBundle.LoadFromFile($"{PathUtil.GetPersistentDataPath(LccConst.Res, PathUtil.PlatformForAssetBundle)}/{item}"));
                 }
-                assetBundles.Add(assetBundleName, assetBundle);
+                assetBundleDict.Add(assetBundleName, assetBundle);
                 return assetBundle;
             }
         }
         public void UnloadAsset(string assetName)
         {
             string assetBundleName = $"{MD5Util.ComputeMD5(assetName)}{AssetBundleSuffix}";
-            if (assetBundles.ContainsKey(assetName))
+            if (assetBundleDict.ContainsKey(assetName))
             {
-                AssetBundle assetBundle = (AssetBundle)assetBundles[assetBundleName];
+                AssetBundle assetBundle = assetBundleDict[assetBundleName];
                 assetBundle.Unload(true);
-                assetBundles.Remove(assetBundle);
+                assetBundleDict.Remove(assetBundleName);
             }
         }
     }

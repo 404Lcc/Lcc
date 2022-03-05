@@ -5,7 +5,7 @@ namespace LccHotfix
 {
     public class SmoothFoolow3D : AObjectBase
     {
-        public GameObject gameObject;
+        public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
 
         public float distance = 3;
         public float damping = 45;
@@ -26,10 +26,6 @@ namespace LccHotfix
         public Transform target;
         public Joystick joystick;
         public Transform lockTarget;
-        public override void Start()
-        {
-            gameObject = GetParent<GameObjectEntity>().gameObject;
-        }
         public override void InitData(object[] datas)
         {
             distance = (float)datas[0];

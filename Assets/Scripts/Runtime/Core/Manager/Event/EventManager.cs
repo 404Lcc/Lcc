@@ -1,30 +1,30 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace LccModel
 {
     public class EventManager : Singleton<EventManager>
     {
-        public Hashtable events = new Hashtable();
+        public Dictionary<Type, IEvent> eventDict = new Dictionary<Type, IEvent>();
         public void InitManager()
         {
-            foreach (Type item in Manager.Instance.types.Values)
+            foreach (Type item in Manager.Instance.typeDict.Values)
             {
                 if (item.IsAbstract) continue;
                 EventHandlerAttribute[] eventHandlerAttributes = (EventHandlerAttribute[])item.GetCustomAttributes(typeof(EventHandlerAttribute), false);
                 if (eventHandlerAttributes.Length > 0)
                 {
                     IEvent iEvent = (IEvent)Activator.CreateInstance(item);
-                    events.Add(iEvent.EventType(), iEvent);
+                    eventDict.Add(iEvent.EventType(), iEvent);
                 }
             }
         }
         public async ETTask Publish<T>(T data)
         {
             Type type = typeof(T);
-            if (events.ContainsKey(type))
+            if (eventDict.ContainsKey(type))
             {
-                AEvent<T> aEvent = (AEvent<T>)events[type];
+                AEvent<T> aEvent = (AEvent<T>)eventDict[type];
                 try
                 {
                     await aEvent.Publish(data);

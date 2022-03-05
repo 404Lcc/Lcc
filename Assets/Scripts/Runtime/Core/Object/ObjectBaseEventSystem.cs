@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace LccModel
 {
@@ -13,7 +12,7 @@ namespace LccModel
                 return _instance ?? (_instance = new ObjectBaseEventSystem());
             }
         }
-        public Hashtable aObjectBases = new Hashtable();
+        public Dictionary<long, AObjectBase> aObjectBaseDict = new Dictionary<long, AObjectBase>();
         public Queue<long> fixedUpdate = new Queue<long>();
         public Queue<long> fixedUpdateCopy = new Queue<long>();
         public Queue<long> update = new Queue<long>();
@@ -34,63 +33,63 @@ namespace LccModel
         }
         public void Register(AObjectBase aObjectBase)
         {
-            aObjectBases.Add(aObjectBase.id, aObjectBase);
+            aObjectBaseDict.Add(aObjectBase.id, aObjectBase);
             fixedUpdate.Enqueue(aObjectBase.id);
             update.Enqueue(aObjectBase.id);
             lateUpdate.Enqueue(aObjectBase.id);
         }
         public void Remove(AObjectBase aObjectBase)
         {
-            if (aObjectBases.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
             {
-                aObjectBases.Remove(aObjectBase.id);
+                aObjectBaseDict.Remove(aObjectBase.id);
             }
         }
         public void Awake(AObjectBase aObjectBase)
         {
-            if (aObjectBases.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
             {
                 aObjectBase.Awake();
             }
         }
         public void Awake<P1>(AObjectBase aObjectBase, P1 p1)
         {
-            if (aObjectBases.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
             {
                 aObjectBase.Awake(p1);
             }
         }
         public void Awake<P1, P2>(AObjectBase aObjectBase, P1 p1, P2 p2)
         {
-            if (aObjectBases.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
             {
                 aObjectBase.Awake(p1, p2);
             }
         }
         public void Awake<P1, P2, P3>(AObjectBase aObjectBase, P1 p1, P2 p2, P3 p3)
         {
-            if (aObjectBases.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
             {
                 aObjectBase.Awake(p1, p2, p3);
             }
         }
         public void Awake<P1, P2, P3, P4>(AObjectBase aObjectBase, P1 p1, P2 p2, P3 p3, P4 p4)
         {
-            if (aObjectBases.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
             {
                 aObjectBase.Awake(p1, p2, p3, p4);
             }
         }
         public void Start(AObjectBase aObjectBase)
         {
-            if (aObjectBases.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
             {
                 aObjectBase.Start();
             }
         }
         public void InitData(AObjectBase aObjectBase, object[] datas)
         {
-            if (aObjectBases.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
             {
                 aObjectBase.InitData(datas);
             }
@@ -100,9 +99,9 @@ namespace LccModel
             while (fixedUpdate.Count > 0)
             {
                 long id = fixedUpdate.Dequeue();
-                if (aObjectBases.ContainsKey(id))
+                if (aObjectBaseDict.ContainsKey(id))
                 {
-                    AObjectBase aObjectBase = (AObjectBase)aObjectBases[id];
+                    AObjectBase aObjectBase = (AObjectBase)aObjectBaseDict[id];
                     aObjectBase.FixedUpdate();
                     fixedUpdateCopy.Enqueue(id);
                 }
@@ -114,9 +113,9 @@ namespace LccModel
             while (update.Count > 0)
             {
                 long id = update.Dequeue();
-                if (aObjectBases.ContainsKey(id))
+                if (aObjectBaseDict.ContainsKey(id))
                 {
-                    AObjectBase aObjectBase = (AObjectBase)aObjectBases[id];
+                    AObjectBase aObjectBase = (AObjectBase)aObjectBaseDict[id];
                     aObjectBase.Update();
                     updateCopy.Enqueue(id);
                 }
@@ -128,9 +127,9 @@ namespace LccModel
             while (lateUpdate.Count > 0)
             {
                 long id = lateUpdate.Dequeue();
-                if (aObjectBases.ContainsKey(id))
+                if (aObjectBaseDict.ContainsKey(id))
                 {
-                    AObjectBase aObjectBase = (AObjectBase)aObjectBases[id];
+                    AObjectBase aObjectBase = (AObjectBase)aObjectBaseDict[id];
                     aObjectBase.LateUpdate();
                     lateUpdateCopy.Enqueue(id);
                 }

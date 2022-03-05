@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LccHotfix
 {
     public class Manager : Singleton<Manager>
     {
-        public Hashtable types = new Hashtable();
+        public Dictionary<string, Type> typeDict = new Dictionary<string, Type>();
         public void InitManager()
         {
             if (LccModel.MonoManager.Instance.typeList.Count != 0)
             {
                 foreach (Type item in LccModel.MonoManager.Instance.typeList)
                 {
-                    if (!types.ContainsKey(item.Name))
+                    if (!typeDict.ContainsKey(item.Name))
                     {
-                        types.Add(item.Name, item);
+                        typeDict.Add(item.Name, item);
                     }
                 }
             }
@@ -22,20 +23,20 @@ namespace LccHotfix
             {
                 foreach (Type item in LccModel.ILRuntimeManager.Instance.typeList)
                 {
-                    if (!types.ContainsKey(item.Name))
+                    if (!typeDict.ContainsKey(item.Name))
                     {
-                        types.Add(item.Name, item);
+                        typeDict.Add(item.Name, item);
                     }
                 }
             }
         }
         public Type GetType(string name)
         {
-            return (Type)types[name];
+            return typeDict[name];
         }
         public Type[] GetTypes()
         {
-            return (Type[])types.Values;
+            return typeDict.Values.ToArray();
         }
     }
 }

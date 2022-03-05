@@ -98,6 +98,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Awaiter\AwaiterExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Byte\ByteExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\File\FileUtil.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Init\GameEntity.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Load\ViewModel\LoadModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\PanelType\PanelTypeExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneLoad\SceneName.cs" />
@@ -142,7 +143,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Init\GameEntity.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\NumericEvent\NumericEventHandlerAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

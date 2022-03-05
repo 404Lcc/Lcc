@@ -4,7 +4,7 @@ namespace LccHotfix
 {
     public class SmoothFoolow2D : AObjectBase
     {
-        public GameObject gameObject;
+        public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
 
         public int smooth = 1;
         public bool isFollow = true;
@@ -15,10 +15,6 @@ namespace LccHotfix
         public Vector2 half;
 
         public Transform target;
-        public override void Start()
-        {
-            gameObject = GetParent<GameObjectEntity>().gameObject;
-        }
         public override void InitData(object[] datas)
         {
             smooth = (int)datas[0];

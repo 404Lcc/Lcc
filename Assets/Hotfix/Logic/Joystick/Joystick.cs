@@ -7,7 +7,7 @@ namespace LccHotfix
 {
     public class Joystick : AObjectBase
     {
-        public GameObject gameObject;
+        public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
 
         //原始坐标
         public Vector3 origin;
@@ -27,11 +27,6 @@ namespace LccHotfix
         public RectTransform joystickBG;
 
         public Action<Vector2, float> dragHandler;
-        public override void Start()
-        {
-            base.Start();
-            gameObject = GetParent<GameObjectEntity>().gameObject;
-        }
         public override void InitData(object[] datas)
         {
             base.InitData(datas);

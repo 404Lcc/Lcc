@@ -1,16 +1,16 @@
 ﻿using LccModel;
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LccHotfix
 {
     public class ConfigManager : Singleton<ConfigManager>
     {
-        public Hashtable configs = new Hashtable();
+        public Dictionary<Type, ProtobufObject> configDict = new Dictionary<Type, ProtobufObject>();
         public void InitManager()
         {
-            foreach (Type item in Manager.Instance.types.Values)
+            foreach (Type item in Manager.Instance.typeDict.Values)
             {
                 if (item.IsAbstract) continue;
                 ConfigAttribute[] configAttributes = (ConfigAttribute[])item.GetCustomAttributes(typeof(ConfigAttribute), false);
@@ -19,7 +19,7 @@ namespace LccHotfix
                     TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(item.Name, ".bytes", false, true, AssetType.Config);
                     ProtobufObject obj = (ProtobufObject)ProtobufUtil.Deserialize(item, asset.bytes, 0, asset.bytes.Length);
                     obj.AfterDeserialization();
-                    configs.Add(item, obj);
+                    configDict.Add(item, obj);
                 }
             }
         }

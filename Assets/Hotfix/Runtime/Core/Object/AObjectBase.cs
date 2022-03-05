@@ -527,6 +527,21 @@ namespace LccHotfix
             {
                 return;
             }
+
+
+            if (Parent != null && !Parent.IsDisposed)
+            {
+                if (_isComponent)
+                {
+                    Parent.InternalRemoveComponent(this);
+                }
+                else
+                {
+                    Parent.InternalRemoveChildren(this);
+                }
+            }
+
+
             ObjectBaseEventSystem.Instance.Remove(this);
             id = 0;
             if (_childrenDict.Count > 0)
@@ -552,17 +567,7 @@ namespace LccHotfix
             OnDestroy();
 
 
-            if (Parent != null && !Parent.IsDisposed)
-            {
-                if (_isComponent)
-                {
-                    Parent.InternalRemoveComponent(this);
-                }
-                else
-                {
-                    Parent.InternalRemoveChildren(this);
-                }
-            }
+
         }
         #endregion
         #region 内部方法

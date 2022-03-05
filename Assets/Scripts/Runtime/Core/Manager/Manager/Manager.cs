@@ -1,28 +1,29 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LccModel
 {
     public class Manager : Singleton<Manager>
     {
-        public Hashtable types = new Hashtable();
+        public Dictionary<string, Type> typeDict = new Dictionary<string, Type>();
         public void InitManager()
         {
             foreach (Type item in GetType().Assembly.GetTypes())
             {
-                if (!types.ContainsKey(item.Name))
+                if (!typeDict.ContainsKey(item.Name))
                 {
-                    types.Add(item.Name, item);
+                    typeDict.Add(item.Name, item);
                 }
             }
         }
         public Type GetType(string name)
         {
-            return (Type)types[name];
+            return typeDict[name];
         }
         public Type[] GetTypes()
         {
-            return (Type[])types.Values;
+            return typeDict.Values.ToArray();
         }
     }
 }

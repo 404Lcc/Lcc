@@ -4,16 +4,12 @@ namespace LccHotfix
 {
     public class CameraController : AObjectBase
     {
-        public GameObject gameObject;
+        public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
 
         private Vector2 _first;
         private Vector2 _second;
         private Vector3 vector;
         private bool _isNeedMove;
-        public override void Start()
-        {
-            gameObject = GetParent<GameObjectEntity>().gameObject;
-        }
         public override void Update()
         {
             if (Input.GetMouseButtonDown(0))
