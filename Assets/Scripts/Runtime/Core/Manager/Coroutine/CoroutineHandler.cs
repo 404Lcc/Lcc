@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine.Events;
+using Object = UnityEngine.Object;
 
 namespace LccModel
 {
@@ -46,7 +47,7 @@ namespace LccModel
                 return;
             }
             Running = true;
-            CoroutineManager.Instance.StartCoroutine(CallWrapper());
+            Object.FindObjectOfType<Init>().StartCoroutine(CallWrapper());
         }
         public void Stop()
         {
@@ -66,12 +67,12 @@ namespace LccModel
         {
             remove?.Invoke(this);
             OnCompleted?.Invoke(Stopped);
-            this.OnCompleted.RemoveAllListeners();
-            this.Coroutine = null;
+            OnCompleted.RemoveAllListeners();
+            Coroutine = null;
         }
         public CoroutineHandler OnComplete(UnityAction<bool> action)
         {
-            this.OnCompleted.AddListener(action);
+            OnCompleted.AddListener(action);
             return this;
         }
         private IEnumerator CallWrapper()

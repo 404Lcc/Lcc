@@ -24,5 +24,10 @@ namespace LccModel
                 item.Stop();
             }
         }
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            StopAllCoroutineTask();
+        }
     }
 }
