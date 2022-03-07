@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\SpriteRenderer\SpriteRendererExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\AObjectBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\PanelType\PanelTypeExpand.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Object\IFixedUpdate.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Numeric\NumericType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\File\FileUtil.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\AStar\AStarNodeData.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Assets\Scripts\Util\LongClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Helper\RegisterCrossBindingAdaptorHelper.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\GameObject\GameObjectEntity.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Object\ILateUpdate.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\Adapter\CoroutineAdapter.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\Binding\ViewModelBinding.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="Assets\Scripts\Logic\Manager\TipsWindow\TipsWindowPool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\APanelView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\SocketModel.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Object\IUpdate.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\EventType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Pool\APool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\Panel\PanelObjectBaseHandler.cs" />
@@ -197,9 +200,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Timer\TimerType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Object\IUpdate.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Object\IFixedUpdate.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Object\ILateUpdate.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Expand\Vector3\Vector3Expand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Unity.Model.asmdef" />

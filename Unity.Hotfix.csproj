@@ -68,6 +68,7 @@
     <Compile Include="Assets\Hotfix\Logic\Manager\GameSetting\GameSettingManager.cs" />
     <Compile Include="Assets\Hotfix\Logic\Manager\GameData\DisplayModeType.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Load\View\LoadPanel.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Object\IUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\Logic\Manager\GameData\GameDataManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\IEvent.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Directory\DirectoryUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Pool\APool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\SpriteRenderer\SpriteRendererExpand.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Object\ILateUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Rijndael\RijndaelUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Path\PathType.cs" />
@@ -108,7 +110,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\AEvent.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Vector2\Vector2Expand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\View\IView.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\ViewModel\LoginModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\NumericEvent\INumericEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Numeric\NumericManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\Panel.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Object\IFixedUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Task\TaskExpand.cs" />
     <Compile Include="Assets\Hotfix\Logic\Manager\Command\CommandType.cs" />
     <Compile Include="Assets\Hotfix\Logic\Camera\SmoothFoolow2D.cs" />
@@ -144,9 +146,8 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Object\ILateUpdate.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Object\IUpdate.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Object\IFixedUpdate.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Vector2\Vector2Expand.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Vector3\Vector3Expand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

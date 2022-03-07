@@ -4371,6 +4371,7 @@
     <type fullname="LccModel.TransformExpand" preserve="all" />
     <type fullname="LccModel.UnityWebRequestExpand" preserve="all" />
     <type fullname="LccModel.Vector2Expand" preserve="all" />
+    <type fullname="LccModel.Vector3Expand" preserve="all" />
     <type fullname="LccModel.GameObjectEntity" preserve="all" />
     <type fullname="LccModel.AObjectBaseHandler" preserve="all" />
     <type fullname="LccModel.PanelObjectBaseHandler" preserve="all" />
