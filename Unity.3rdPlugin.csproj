@@ -175,6 +175,7 @@
     <Compile Include="Assets\3rdPlugins\ETTask\ETTaskHelper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\ProtoSyntax.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt16Serializer.cs" />
+    <Compile Include="Assets\3rdPlugins\ETTask\AsyncMethodBuilderAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.xml" />
