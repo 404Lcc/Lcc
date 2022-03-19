@@ -172,6 +172,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\ICenterHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Config\TestConfig.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Expand\Vector3\Vector3Expand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Encoding\EncodingUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Task\TaskExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Log\LogUtil.cs" />
@@ -200,7 +201,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Timer\TimerType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Expand\Vector3\Vector3Expand.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Unity.Model.asmdef" />

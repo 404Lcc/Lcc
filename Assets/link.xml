@@ -4383,6 +4383,7 @@
     <type fullname="LccModel.AssetBundleManager" preserve="all" />
     <type fullname="LccModel.AssetBundleRule" preserve="all" />
     <type fullname="LccModel.AssetBundleRuleType" preserve="all" />
+    <type fullname="LccModel.BridgeManager" preserve="all" />
     <type fullname="LccModel.ClientNetworkManager" preserve="all" />
     <type fullname="LccModel.ICenterHandler" preserve="all" />
     <type fullname="LccModel.SocketModel" preserve="all" />
