@@ -14,43 +14,11 @@ namespace LccEditor
         }
         public void OnPreprocessBuild(BuildReport report)
         {
-            if (File.Exists("Assets/Hotfix/Unity.Hotfix.asmdef"))
-            {
-                File.Move("Assets/Hotfix/Unity.Hotfix.asmdef", "Assets/Hotfix/Unity.Hotfix.asmdef~");
-                LogUtil.Log("卸载Hotfix");
-                AssetDatabase.Refresh();
-            }
-            else
-            {
-                if (File.Exists("Assets/Hotfix/Unity.Hotfix.asmdef~"))
-                {
-                    LogUtil.Log("卸载Hotfix");
-                }
-                else
-                {
-                    LogUtil.Log("Hotfix丢失");
-                }
-            }
+            
         }
         public void OnPostprocessBuild(BuildReport report)
         {
-            if (File.Exists("Assets/Hotfix/Unity.Hotfix.asmdef~"))
-            {
-                File.Move("Assets/Hotfix/Unity.Hotfix.asmdef~", "Assets/Hotfix/Unity.Hotfix.asmdef");
-                LogUtil.Log("安装Hotfix");
-                AssetDatabase.Refresh();
-            }
-            else
-            {
-                if (File.Exists("Assets/Hotfix/Unity.Hotfix.asmdef"))
-                {
-                    LogUtil.Log("安装Hotfix");
-                }
-                else
-                {
-                    LogUtil.Log("Hotfix丢失");
-                }
-            }
+            
         }
     }
 }
