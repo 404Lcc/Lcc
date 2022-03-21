@@ -5,7 +5,7 @@ namespace LccModel
 {
     public class NumericEventManager : Singleton<NumericEventManager>
     {
-        public Dictionary<NumericType, List<INumericEvent>> numericEventDict = new Dictionary<NumericType, List<INumericEvent>>();
+        public Dictionary<int, List<INumericEvent>> numericEventDict = new Dictionary<int, List<INumericEvent>>();
         public void InitManager()
         {
             foreach (Type item in Manager.Instance.typeDict.Values)
@@ -23,7 +23,7 @@ namespace LccModel
                 }
             }
         }
-        public void Publish(NumericType type, long value)
+        public void Publish(int type, long value)
         {
             if (numericEventDict.ContainsKey(type))
             {

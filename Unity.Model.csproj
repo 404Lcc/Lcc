@@ -66,7 +66,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Object\AObjectBase.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\PanelType\PanelTypeExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\IFixedUpdate.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Numeric\NumericType.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Numeric\NumericType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\File\FileUtil.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\AStar\AStarNodeData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Coroutine\CoroutineManager.cs" />
@@ -155,7 +155,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Object\LccView.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\ViewModel\LaunchModel.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Video\VideoManager.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Numeric\NumericManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Numeric\NumericEntity.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\GameEvent\GameEventManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\IConfig.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Image\ImageExpand.cs" />
@@ -199,9 +199,9 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Object\ProtobufObject.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Updater\View\UpdaterPanel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Timer\TimerType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Unity.Model.asmdef" />

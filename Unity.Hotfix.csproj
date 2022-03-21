@@ -57,10 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Hotfix\Runtime\Core\Handler\ObjectBase\AObjectBaseHandler.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Numeric\NumericType.cs" />
     <Compile Include="Assets\Hotfix\Logic\Camera\SmoothFoolow3D.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\String\StringExpand.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Vector3\Vector3Expand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Id\IdUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Path\PathUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Image\ImageExpand.cs" />
@@ -77,6 +77,7 @@
     <Compile Include="Assets\Hotfix\Logic\Manager\GameData\ResolutionType.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Load\UIEventHandler\LoadUIEventHandler.cs" />
     <Compile Include="Assets\Hotfix\Logic\Manager\GameData\UserData.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Vector2\Vector2Expand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\APanelView.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Manager\Manager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEvent.cs" />
@@ -94,8 +95,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\ProtobufObject.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\MD5\MD5Util.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\Binding\Binding.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\NumericEvent\NumericEventManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\NumericEvent\NumericEventHandlerAttribute.cs" />
     <Compile Include="Assets\Hotfix\Logic\Manager\Command\CommandManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Json\JsonUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Awaiter\AwaiterExpand.cs" />
@@ -122,8 +121,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\GameObject\GameObjectEntity.cs" />
     <Compile Include="Assets\Hotfix\Logic\Manager\Command\CommandDataType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\IConfig.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\NumericEvent\INumericEvent.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Numeric\NumericManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\Panel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\IFixedUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Task\TaskExpand.cs" />
@@ -146,8 +143,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Vector2\Vector2Expand.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Vector3\Vector3Expand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

@@ -4408,8 +4408,6 @@
     <type fullname="LccModel.ILRuntimeManager" preserve="all" />
     <type fullname="LccModel.Manager" preserve="all" />
     <type fullname="LccModel.MonoManager" preserve="all" />
-    <type fullname="LccModel.NumericManager" preserve="all" />
-    <type fullname="LccModel.NumericType" preserve="all" />
     <type fullname="LccModel.INumericEvent" preserve="all" />
     <type fullname="LccModel.NumericEventHandlerAttribute" preserve="all" />
     <type fullname="LccModel.NumericEventManager" preserve="all" />
@@ -4425,6 +4423,8 @@
     <type fullname="LccModel.UIEventHandlerAttribute" preserve="all" />
     <type fullname="LccModel.UIEventManager" preserve="all" />
     <type fullname="LccModel.UIEventType" preserve="all" />
+    <type fullname="LccModel.NumericEntity" preserve="all" />
+    <type fullname="LccModel.NumericType" preserve="all" />
     <type fullname="LccModel.AObjectBase" preserve="all" />
     <type fullname="LccModel.EntityFactory" preserve="all" />
     <type fullname="LccModel.IFixedUpdate" preserve="all" />

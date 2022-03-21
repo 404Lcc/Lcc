@@ -4,8 +4,8 @@ namespace LccModel
 {
     public class NumericEventHandlerAttribute : Attribute
     {
-        public NumericType numericType;
-        public NumericEventHandlerAttribute(NumericType numericType)
+        public int numericType;
+        public NumericEventHandlerAttribute(int numericType)
         {
             this.numericType = numericType;
         }
