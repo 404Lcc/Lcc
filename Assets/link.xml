@@ -4375,14 +4375,10 @@
     <type fullname="LccModel.GameObjectEntity" preserve="all" />
     <type fullname="LccModel.AObjectBaseHandler" preserve="all" />
     <type fullname="LccModel.PanelObjectBaseHandler" preserve="all" />
-    <type fullname="LccModel.AssetData" preserve="all" />
     <type fullname="LccModel.AssetManager" preserve="all" />
+    <type fullname="LccModel.AssetSuffix" preserve="all" />
     <type fullname="LccModel.AssetType" preserve="all" />
-    <type fullname="LccModel.AssetBundleConfig" preserve="all" />
-    <type fullname="LccModel.AssetBundleData" preserve="all" />
     <type fullname="LccModel.AssetBundleManager" preserve="all" />
-    <type fullname="LccModel.AssetBundleRule" preserve="all" />
-    <type fullname="LccModel.AssetBundleRuleType" preserve="all" />
     <type fullname="LccModel.BridgeManager" preserve="all" />
     <type fullname="LccModel.ClientNetworkManager" preserve="all" />
     <type fullname="LccModel.ICenterHandler" preserve="all" />
@@ -4480,17 +4476,15 @@
     <type fullname="LccModel.VoiceManager+&lt;LoadAudio&gt;d__3" preserve="all" />
     <type fullname="LccModel.VoiceManager+&lt;PlayAudio&gt;d__5" preserve="all" />
     <type fullname="LccModel.TaskExpand+&lt;Continue&gt;d__0" preserve="all" />
-    <type fullname="LccModel.AssetBundleManager+&lt;InitAssets&gt;d__38" preserve="all" />
-    <type fullname="LccModel.AssetBundleManager+&lt;InitAssets&gt;d__39" preserve="all" />
-    <type fullname="LccModel.AssetBundleManager+&lt;CopyAssets&gt;d__40" preserve="all" />
+    <type fullname="LccModel.AssetBundleManager+&lt;InitManager&gt;d__2" preserve="all" />
     <type fullname="LccModel.CoroutineHandler+&lt;CallWrapper&gt;d__26" preserve="all" />
     <type fullname="LccModel.EventManager+&lt;Publish&gt;d__2`1" preserve="all" />
     <type fullname="LccModel.CoroutineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.IAsyncStateMachineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.ILRuntimeManager+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.SceneLoadManager+&lt;LoadScene&gt;d__5" preserve="all" />
-    <type fullname="LccModel.SceneLoadManager+&lt;LoadScene&gt;d__6" preserve="all" />
+    <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__5" preserve="all" />
+    <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__6" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;Upload&gt;d__0" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;DownloadText&gt;d__1" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;DownloadBytes&gt;d__2" preserve="all" />

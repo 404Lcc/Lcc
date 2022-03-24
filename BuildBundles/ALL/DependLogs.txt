@@ -1,0 +1,2 @@
+<Assets/Textures/logo.png|all_assets_textures_logo_png.bundle>
+

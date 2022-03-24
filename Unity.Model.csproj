@@ -118,16 +118,13 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\EventType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Pool\APool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\Panel\PanelObjectBaseHandler.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Web\WebUtil.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Timer\TimerData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Directory\DirectoryUtil.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\TipsWindow\TipsWindowManager.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\AssetBundle\AssetBundleData.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Updater\ViewModel\UpdaterModel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\MD5\MD5Util.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEventType.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\AssetBundle\AssetBundleRule.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Network\NetworkUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\IPanel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\Objects.cs" />
@@ -142,7 +139,6 @@
     <Compile Include="Assets\Scripts\Runtime\Core\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\GameEvent\GameEventData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Rijndael\RijndaelUtil.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\AssetBundle\AssetBundleRuleType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\Panel.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Updater\UIEventHandler\UpdaterUIEventHandler.cs" />
     <Compile Include="Assets\Scripts\Util\LanguageText.cs" />
@@ -177,7 +173,6 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Task\TaskExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Log\LogUtil.cs" />
     <Compile Include="Assets\Scripts\Util\EnterClickButton.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\AssetBundle\AssetBundleConfig.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\SceneLoad\SceneName.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\String\StringExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\ObjectBaseEventSystem.cs" />
@@ -202,6 +197,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Timer\TimerType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetSuffix.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Unity.Model.asmdef" />

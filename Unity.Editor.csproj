@@ -68,13 +68,11 @@
     <Compile Include="Assets\Editor\Runtime\Core\InspectorEditor\LccView\LccViewEditor.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\IObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\Roslyn\BuildType.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\Util\AssetBundle\AssetBundleUtil.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\EnumObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectTypeAttribute.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\EditorWindowBase\LayerEditorWindowBase.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector3IntObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector3ObjectType.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\Util\AssetBundle\AssetBundleSetting.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\MenuTree\AEditorWindowBase.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\Link\LinkUtil.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\ObjectObjectType.cs" />
@@ -105,6 +103,12 @@
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\AnimationCurveObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\Excel\ConfigType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\EditorWindowBase\GeneralEditorWindowBase.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetLoadTable.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\DevelopSceneChange.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetsLoadSetting.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BuildAssets.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BundleMasterInterface\BundleMasterWindow.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BuildAssetsTools.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Editor\Runtime\Core\Template\ModelPanelTemplate.txt" />

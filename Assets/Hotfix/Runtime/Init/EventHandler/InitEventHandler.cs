@@ -1,4 +1,5 @@
-﻿using LccModel;
+﻿using ET;
+using LccModel;
 using System;
 
 namespace LccHotfix
@@ -8,12 +9,12 @@ namespace LccHotfix
     {
         public override async ETTask Publish(Start data)
         {
-            PanelManager.Instance.InitManager(new PanelObjectBaseHandler(false, true, AssetType.Prefab, AssetType.Panel));
+            PanelManager.Instance.InitManager(new PanelObjectBaseHandler(AssetType.Prefab, AssetType.Panel));
             GameDataManager.Instance.InitManager("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             GameSettingManager.Instance.InitManager();
 
             UIEventManager.Instance.Publish(UIEventType.Load);
-            await SceneLoadManager.Instance.LoadScene(SceneName.Login, true, AssetType.Scene);
+            await SceneLoadManager.Instance.LoadSceneAsync(SceneName.Login, AssetType.Scene);
             UIEventManager.Instance.Publish(UIEventType.Login);
         }
     }

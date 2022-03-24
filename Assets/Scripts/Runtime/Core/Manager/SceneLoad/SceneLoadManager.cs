@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BM;
+using ET;
+using System;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -12,7 +14,7 @@ namespace LccModel
         public bool isLoading;
         private int _process;
         private int _toProcess;
-        private string GetAssetPath(string name, params string[] types)
+        private string GetAssetPath(string name, string suffix, params string[] types)
         {
             if (types.Length == 0) return name;
             string path = string.Empty;
@@ -24,33 +26,15 @@ namespace LccModel
                     path = $"{path}{name}";
                 }
             }
-            return path;
+            return $"Assets/Bundles/{path}{suffix}";
         }
-        private async ETTask LoadScene(string name, string suffix, bool isAssetBundle, params string[] types)
+        private async ETTask LoadSceneAsync(string name, string suffix, params string[] types)
         {
             _toProcess = 0;
-#if AssetBundle
-            if (isAssetBundle)
-            {
-#if !UNITY_EDITOR
-                string path = GetAssetPath(name, types);
-                AssetBundleManager.Instance.LoadAsset($"Assets/Bundles/{path}{suffix}");
-                async = SceneManager.LoadSceneAsync($"Assets/Bundles/{path}{suffix}");
-                async.allowSceneActivation = false;
-#else
-                async = SceneManager.LoadSceneAsync(name);
-                async.allowSceneActivation = false;
-#endif
-            }
-            else
-            {
-                async = SceneManager.LoadSceneAsync(name);
-                async.allowSceneActivation = false;
-            }
-#else
-            async = SceneManager.LoadSceneAsync(name);
+            string path = GetAssetPath(name, suffix, types);
+            await AssetComponent.LoadSceneAsync(path);
+            async = SceneManager.LoadSceneAsync(path);
             async.allowSceneActivation = false;
-#endif
             while (async.progress < 0.9f)
             {
                 _toProcess = (int)(async.progress * 100);
@@ -68,12 +52,12 @@ namespace LccModel
             }
             async.allowSceneActivation = true;
         }
-        public async ETTask LoadScene(string name, bool isAssetBundle, params string[] types)
+        public async ETTask LoadSceneAsync(string name, params string[] types)
         {
             isLoading = true;
             _process = 0;
             SceneManager.LoadScene(SceneName.Load);
-            await LoadScene(name, ".unity", isAssetBundle, types);
+            await LoadSceneAsync(name, AssetSuffix.Unity, types);
             isLoading = false;
             _process = 0;
         }

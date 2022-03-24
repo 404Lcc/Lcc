@@ -2,30 +2,33 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-[AsyncMethodBuilder(typeof(AsyncETTaskCompletedMethodBuilder))]
-public struct ETTaskCompleted : ICriticalNotifyCompletion
+namespace ET
 {
-    [DebuggerHidden]
-    public ETTaskCompleted GetAwaiter()
+    [AsyncMethodBuilder(typeof (AsyncETTaskCompletedMethodBuilder))]
+    public struct ETTaskCompleted: ICriticalNotifyCompletion
     {
-        return this;
-    }
+        [DebuggerHidden]
+        public ETTaskCompleted GetAwaiter()
+        {
+            return this;
+        }
 
-    [DebuggerHidden]
-    public bool IsCompleted => true;
+        [DebuggerHidden]
+        public bool IsCompleted => true;
 
-    [DebuggerHidden]
-    public void GetResult()
-    {
-    }
+        [DebuggerHidden]
+        public void GetResult()
+        {
+        }
 
-    [DebuggerHidden]
-    public void OnCompleted(Action continuation)
-    {
-    }
+        [DebuggerHidden]
+        public void OnCompleted(Action continuation)
+        {
+        }
 
-    [DebuggerHidden]
-    public void UnsafeOnCompleted(Action continuation)
-    {
+        [DebuggerHidden]
+        public void UnsafeOnCompleted(Action continuation)
+        {
+        }
     }
 }

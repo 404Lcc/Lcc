@@ -1,0 +1,12 @@
+<Assets/Bundles/Config/TestConfig.txt|all_assets_bundles_config_testconfig_txt.bundle>
+<Assets/Bundles/Config/TestConfigCategory.bytes|all_assets_bundles_config_testconfigcategory_bytes.bundle>
+<Assets/Bundles/DLL/Unity.Hotfix.dll.bytes|all_assets_bundles_dll_unity_hotfix_dll_bytes.bundle>
+<Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes|all_assets_bundles_dll_unity_hotfix_pdb_bytes.bundle>
+<Assets/Bundles/Prefab/Panel/LaunchPanel.prefab|all_assets_bundles_prefab_panel_launchpanel_prefab.bundle|Assets/Textures/logo.png>
+<Assets/Bundles/Prefab/Panel/LoadPanel.prefab|all_assets_bundles_prefab_panel_loadpanel_prefab.bundle|Assets/Textures/logo.png>
+<Assets/Bundles/Prefab/Panel/LoginPanel.prefab|all_assets_bundles_prefab_panel_loginpanel_prefab.bundle|Assets/Textures/logo.png>
+<Assets/Bundles/Prefab/Panel/UpdaterPanel.prefab|all_assets_bundles_prefab_panel_updaterpanel_prefab.bundle>
+<Assets/Bundles/Scene/Login.unity|all_assets_bundles_scene_login_unity.bundle>
+<Assets/Bundles/Tool/Tips.prefab|all_assets_bundles_tool_tips_prefab.bundle>
+<Assets/Bundles/Tool/TipsWindow.prefab|all_assets_bundles_tool_tipswindow_prefab.bundle>
+

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ET;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LccModel
@@ -16,7 +17,7 @@ namespace LccModel
         }
         public AudioClip LoadAudio(string audio)
         {
-            AudioClip clip = AssetManager.Instance.LoadAsset<AudioClip>(audio, ".mp3", false, true, AssetType.Audio);
+            AudioClip clip = AssetManager.Instance.LoadAsset<AudioClip>(audio, AssetSuffix.Mp3, AssetType.Audio);
             voiceDict.Add(audio, clip);
             return clip;
         }

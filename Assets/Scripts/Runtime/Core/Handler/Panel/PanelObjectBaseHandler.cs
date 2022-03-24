@@ -6,10 +6,8 @@ namespace LccModel
 {
     public class PanelObjectBaseHandler : AObjectBaseHandler
     {
-        public PanelObjectBaseHandler(bool isKeep, bool isAssetBundle, params string[] types) : base(isKeep, isAssetBundle, types)
+        public PanelObjectBaseHandler(params string[] types) : base(types)
         {
-            this.isKeep = isKeep;
-            this.isAssetBundle = isAssetBundle;
             this.types = types;
         }
         public override GameObject CreateGameObject(string name, Transform parent)

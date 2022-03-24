@@ -8,7 +8,7 @@ namespace LccModel
         public Dictionary<string, string> languageDict = new Dictionary<string, string>();
         public void ChangeLanguage(LanguageType type)
         {
-            TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(type.ToString(), ".txt", false, true, AssetType.Config);
+            TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(type.ToString(), AssetSuffix.Txt, AssetType.Config);
             foreach (string item in asset.text.Split('\n'))
             {
                 if (string.IsNullOrEmpty(item))

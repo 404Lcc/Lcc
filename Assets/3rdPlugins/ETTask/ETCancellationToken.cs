@@ -1,50 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class ETCancellationToken
+namespace ET
 {
-    private HashSet<Action> actions = new HashSet<Action>();
-
-    public void Add(Action callback)
+    public class ETCancellationToken
     {
-        // 如果action是null，绝对不能添加,要抛异常，说明有协程泄漏
-        this.actions.Add(callback);
-    }
+        private HashSet<Action> actions = new HashSet<Action>();
 
-    public void Remove(Action callback)
-    {
-        this.actions?.Remove(callback);
-    }
-
-    public bool IsCancel()
-    {
-        return this.actions == null;
-    }
-
-    public void Cancel()
-    {
-        if (this.actions == null)
+        public void Add(Action callback)
         {
-            return;
+            // 如果action是null，绝对不能添加,要抛异常，说明有协程泄漏
+            this.actions.Add(callback);
+        }
+        
+        public void Remove(Action callback)
+        {
+            this.actions?.Remove(callback);
         }
 
-        this.Invoke();
-    }
-
-    private void Invoke()
-    {
-        HashSet<Action> runActions = this.actions;
-        this.actions = null;
-        try
+        public bool IsCancel()
         {
-            foreach (Action action in runActions)
+            return this.actions == null;
+        }
+
+        public void Cancel()
+        {
+            if (this.actions == null)
             {
-                action.Invoke();
+                return;
             }
+
+            this.Invoke();
         }
-        catch (Exception e)
+
+        private void Invoke()
         {
-            ETTask.ExceptionHandler.Invoke(e);
+            HashSet<Action> runActions = this.actions;
+            this.actions = null;
+            try
+            {
+                foreach (Action action in runActions)
+                {
+                    action.Invoke();
+                }
+            }
+            catch (Exception e)
+            {
+                ETTask.ExceptionHandler.Invoke(e);
+            }
         }
     }
 }

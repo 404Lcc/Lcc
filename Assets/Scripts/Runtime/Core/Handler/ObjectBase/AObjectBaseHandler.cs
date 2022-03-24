@@ -4,18 +4,14 @@ namespace LccModel
 {
     public abstract class AObjectBaseHandler
     {
-        public bool isKeep;
-        public bool isAssetBundle;
         public string[] types;
-        public AObjectBaseHandler(bool isKeep, bool isAssetBundle, params string[] types)
+        public AObjectBaseHandler(params string[] types)
         {
-            this.isKeep = isKeep;
-            this.isAssetBundle = isAssetBundle;
             this.types = types;
         }
         public virtual GameObject CreateGameObject(string name, Transform parent)
         {
-            GameObject gameObject = AssetManager.Instance.InstantiateAsset(name, false, isAssetBundle, types);
+            GameObject gameObject = AssetManager.Instance.InstantiateAsset(name, types);
             if (gameObject == null) return null;
             gameObject.name = name;
             gameObject.transform.SetParent(parent);

@@ -105,13 +105,13 @@ namespace LccModel
         }
         public void InitWallGrid(Vector3 localPosition, bool isShowWall)
         {
-            GameObject gameObject = AssetManager.Instance.InstantiateAsset("Wall", false, false, wall, AssetType.Tool);
+            GameObject gameObject = AssetManager.Instance.InstantiateAsset("Wall", wall, AssetType.Tool);
             gameObject.transform.localPosition = localPosition;
             gameObject.SetActive(isShowWall);
         }
         public void InitPathGrid(Vector3 localPosition, bool isShowPath)
         {
-            GameObject gameObject = AssetManager.Instance.InstantiateAsset("Path", false, false, wall, AssetType.Tool);
+            GameObject gameObject = AssetManager.Instance.InstantiateAsset("Path", wall, AssetType.Tool);
             gameObject.transform.localPosition = localPosition;
             gameObject.SetActive(isShowPath);
         }

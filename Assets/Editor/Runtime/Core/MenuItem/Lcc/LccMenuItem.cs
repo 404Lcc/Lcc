@@ -18,66 +18,6 @@ namespace LccEditor
         {
             ExcelExportUtil.ExportProtobuf();
         }
-        [MenuItem("Assets/工具箱/按文件规则标记资源", false, 20)]
-        public static void TagFileRule()
-        {
-            if (File.Exists("Assets/Editor/Runtime/Core/Util/AssetBundle/AssetBundleSetting.asset"))
-            {
-                AssetBundleSetting assetBundleSetting = AssetDatabase.LoadAssetAtPath<AssetBundleSetting>("Assets/Editor/Runtime/Core/Util/AssetBundle/AssetBundleSetting.asset");
-                if (assetBundleSetting.assetBundleRuleList == null)
-                {
-                    assetBundleSetting.assetBundleRuleList = new List<AssetBundleRule>();
-                }
-                assetBundleSetting.assetBundleRuleList.Add(AssetBundleUtil.TagFileRule());
-                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList.ToArray());
-            }
-            else
-            {
-                AssetBundleSetting assetBundleSetting = ScriptableObject.CreateInstance<AssetBundleSetting>();
-                assetBundleSetting.assetBundleRuleList = new List<AssetBundleRule>();
-                assetBundleSetting.assetBundleRuleList.Add(AssetBundleUtil.TagFileRule());
-                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList.ToArray());
-                AssetDatabase.CreateAsset(assetBundleSetting, "Assets/Editor/Runtime/Core/Util/AssetBundle/AssetBundleSetting.asset");
-                AssetDatabase.Refresh();
-            }
-        }
-        [MenuItem("Assets/工具箱/按文件夹规则标记资源", false, 21)]
-        public static void TagDirectoryRule()
-        {
-            if (File.Exists("Assets/Editor/Runtime/Core/Util/AssetBundle/AssetBundleSetting.asset"))
-            {
-                AssetBundleSetting assetBundleSetting = AssetDatabase.LoadAssetAtPath<AssetBundleSetting>("Assets/Editor/Runtime/Core/Util/AssetBundle/AssetBundleSetting.asset");
-                if (assetBundleSetting.assetBundleRuleList == null)
-                {
-                    assetBundleSetting.assetBundleRuleList = new List<AssetBundleRule>();
-                }
-                assetBundleSetting.assetBundleRuleList.Add(AssetBundleUtil.TagDirectoryRule());
-                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList.ToArray());
-            }
-            else
-            {
-                AssetBundleSetting assetBundleSetting = ScriptableObject.CreateInstance<AssetBundleSetting>();
-                assetBundleSetting.assetBundleRuleList = new List<AssetBundleRule>();
-                assetBundleSetting.assetBundleRuleList.Add(AssetBundleUtil.TagDirectoryRule());
-                assetBundleSetting.assetBundleDataList = AssetBundleUtil.BuildAssetBundleData(assetBundleSetting.assetBundleRuleList.ToArray());
-                AssetDatabase.CreateAsset(assetBundleSetting, "Assets/Editor/Runtime/Core/Util/AssetBundle/AssetBundleSetting.asset");
-                AssetDatabase.Refresh();
-            }
-        }
-        [MenuItem("Assets/工具箱/构建AssetBundle包", false, 22)]
-        public static void BuildAssetBundle()
-        {
-            if (File.Exists("Assets/Editor/Runtime/Core/Util/AssetBundle/AssetBundleSetting.asset"))
-            {
-                AssetBundleSetting assetBundleSetting = AssetDatabase.LoadAssetAtPath<AssetBundleSetting>("Assets/Editor/Runtime/Core/Util/AssetBundle/AssetBundleSetting.asset");
-                assetBundleSetting.buildId++;
-                if (string.IsNullOrEmpty(assetBundleSetting.outputPath))
-                {
-                    assetBundleSetting.outputPath = "AssetBundles";
-                }
-                AssetBundleUtil.BuildAssetBundle(assetBundleSetting);
-            }
-        }
         [MenuItem("Assets/工具箱/热更Panel", false, 31)]
         public static void CreateHotfixPanel()
         {

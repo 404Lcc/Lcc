@@ -18,7 +18,7 @@ namespace LccModel
         }
         public VideoClip LoadVideo(string video)
         {
-            VideoClip clip = AssetManager.Instance.LoadAsset<VideoClip>(video, ".mp4", false, true, AssetType.Video);
+            VideoClip clip = AssetManager.Instance.LoadAsset<VideoClip>(video, AssetSuffix.Mp4, AssetType.Video);
             videoDict.Add(video, clip);
             return clip;
         }

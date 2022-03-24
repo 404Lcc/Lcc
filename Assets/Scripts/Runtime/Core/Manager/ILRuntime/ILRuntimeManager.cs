@@ -21,12 +21,12 @@ namespace LccModel
         }
         public void LoadHotfixAssembly()
         {
-            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.dll", ".bytes", false, true, AssetType.DLL);
+            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.dll", AssetSuffix.Bytes, AssetType.DLL);
             MemoryStream dll = new MemoryStream(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes));
 #if Release
             appdomain.LoadAssembly(dll, null, new PdbReaderProvider());
 #else
-            TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.pdb", ".bytes", false, true, AssetType.DLL);
+            TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>("Unity.Hotfix.pdb", AssetSuffix.Bytes, AssetType.DLL);
             MemoryStream pdb = new MemoryStream(pdbAsset.bytes);
             appdomain.LoadAssembly(dll, pdb, new PdbReaderProvider());
 #endif
