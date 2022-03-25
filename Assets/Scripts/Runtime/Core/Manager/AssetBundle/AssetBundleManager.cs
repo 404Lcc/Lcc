@@ -19,7 +19,9 @@ namespace LccModel
                 Debug.LogError("需要更新, 大小: " + updateBundleDataInfo.NeedUpdateSize);
                 await AssetComponent.DownLoadUpdate(updateBundleDataInfo);
             }
+            await LoadingPanel.Instance.UpdateLoadingPercent(0, 50);
             await AssetComponent.Initialize(AssetComponentConfig.DefaultBundlePackageName);
+            await LoadingPanel.Instance.UpdateLoadingPercent(51, 75);
         }
     }
 }

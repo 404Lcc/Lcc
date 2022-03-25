@@ -122,7 +122,7 @@
     <Compile Include="Assets\Scripts\Logic\Manager\Timer\TimerData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Directory\DirectoryUtil.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\TipsWindow\TipsWindowManager.cs" />
-    <Compile Include="Assets\Scripts\Logic\UI\Panel\Updater\ViewModel\UpdaterModel.cs" />
+    <Compile Include="Assets\Scripts\Logic\UI\Panel\Loading\ViewModel\LoadingModel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\MD5\MD5Util.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEventType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Network\NetworkUtil.cs" />
@@ -140,11 +140,9 @@
     <Compile Include="Assets\Scripts\Logic\Manager\GameEvent\GameEventData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Rijndael\RijndaelUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\Panel.cs" />
-    <Compile Include="Assets\Scripts\Logic\UI\Panel\Updater\UIEventHandler\UpdaterUIEventHandler.cs" />
     <Compile Include="Assets\Scripts\Util\LanguageText.cs" />
     <Compile Include="Assets\Scripts\Runtime\Init\GameEntity.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\ValueTypeBinder\Vector2Binder.cs" />
-    <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\UIEventHandler\LaunchUIEventHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Coroutine\CoroutineCompletedHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEventManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Vector2\Vector2Expand.cs" />
@@ -168,6 +166,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\ICenterHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Config\TestConfig.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetSuffix.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Vector3\Vector3Expand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Encoding\EncodingUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Task\TaskExpand.cs" />
@@ -192,12 +191,11 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Lcc\LccUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\ProtobufObject.cs" />
-    <Compile Include="Assets\Scripts\Logic\UI\Panel\Updater\View\UpdaterPanel.cs" />
+    <Compile Include="Assets\Scripts\Logic\UI\Panel\Loading\View\LoadingPanel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Timer\TimerType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetSuffix.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Unity.Model.asmdef" />

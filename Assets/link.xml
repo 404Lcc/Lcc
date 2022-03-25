@@ -4346,12 +4346,10 @@
     <type fullname="LccModel.TipsWindowPool" preserve="all" />
     <type fullname="LccModel.VideoManager" preserve="all" />
     <type fullname="LccModel.VoiceManager" preserve="all" />
-    <type fullname="LccModel.LaunchUIEventHandler" preserve="all" />
     <type fullname="LccModel.LaunchPanel" preserve="all" />
     <type fullname="LccModel.LaunchModel" preserve="all" />
-    <type fullname="LccModel.UpdaterUIEventHandler" preserve="all" />
-    <type fullname="LccModel.UpdaterPanel" preserve="all" />
-    <type fullname="LccModel.UpdaterModel" preserve="all" />
+    <type fullname="LccModel.LoadingPanel" preserve="all" />
+    <type fullname="LccModel.LoadingModel" preserve="all" />
     <type fullname="LccModel.TestConfigCategory" preserve="all" />
     <type fullname="LccModel.TestConfig" preserve="all" />
     <type fullname="LccModel.AssetBundleCreateRequestAwaiter" preserve="all" />
@@ -4475,6 +4473,8 @@
     <type fullname="LccModel.Tips+&lt;&gt;c__DisplayClass6_0" preserve="all" />
     <type fullname="LccModel.VoiceManager+&lt;LoadAudio&gt;d__3" preserve="all" />
     <type fullname="LccModel.VoiceManager+&lt;PlayAudio&gt;d__5" preserve="all" />
+    <type fullname="LccModel.LaunchPanel+&lt;ShowLaunchAnim&gt;d__7" preserve="all" />
+    <type fullname="LccModel.LoadingPanel+&lt;UpdateLoadingPercent&gt;d__11" preserve="all" />
     <type fullname="LccModel.TaskExpand+&lt;Continue&gt;d__0" preserve="all" />
     <type fullname="LccModel.AssetBundleManager+&lt;InitManager&gt;d__2" preserve="all" />
     <type fullname="LccModel.CoroutineHandler+&lt;CallWrapper&gt;d__26" preserve="all" />

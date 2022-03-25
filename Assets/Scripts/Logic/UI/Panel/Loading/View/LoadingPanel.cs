@@ -1,27 +1,34 @@
-﻿using DG.Tweening;
-using ET;
+﻿using ET;
 using System.IO;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LccModel
 {
-    public class LaunchPanel : APanelView<LaunchModel>
+    public class LoadingPanel : APanelView<LoadingModel>
     {
-        private static LaunchPanel _instance;
+        private static LoadingPanel _instance;
         private ETTask _tcs;
-        public static LaunchPanel Instance
+
+        private float _currentPercent;
+        private float _targetPercent;
+        private float _updateRate;
+
+        public Slider progress;
+        public Text progressText;
+        public static LoadingPanel Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    GameObjectEntity gameObjectEntity = GameEntity.Instance.AddChildren<GameObjectEntity, GameObject>(CreateGameObject("Prefab/Panel/LaunchPanel"));
-                    _instance = gameObjectEntity.AddComponent<LaunchPanel>();
+                    GameObjectEntity gameObjectEntity = GameEntity.Instance.AddChildren<GameObjectEntity, GameObject>(CreateGameObject("Prefab/Panel/LoadingPanel"));
+                    _instance = gameObjectEntity.AddComponent<LoadingPanel>();
                 }
                 return _instance;
             }
         }
-        public CanvasGroup BG;
         public static GameObject CreateGameObject(string path)
         {
             GameObject gameObject = Instantiate(path);
@@ -45,20 +52,35 @@ namespace LccModel
             gameObject.name = Path.GetFileNameWithoutExtension(path);
             return gameObject;
         }
-        public async ETTask ShowLaunchAnim()
+        public async ETTask UpdateLoadingPercent(int from, int to, float rate = 1)
         {
             if (_tcs == null)
             {
                 _tcs = ETTask.Create();
-                BG.DOFade(0, ViewModel.time).onComplete = OnComplete;
             }
-            await _tcs;
-        }
-        public void OnComplete()
-        {
-            _instance = null;
-            Object.Destroy(gameObject);
+            gameObject.SetActive(true);
+            _updateRate = rate;
+            _targetPercent = to;
+            _currentPercent = Mathf.Clamp(_currentPercent, from, to);
+
+            progress.value = _currentPercent * 0.01f;
+            progressText.text = (int)_currentPercent + "%";
+            while (_currentPercent < _targetPercent)
+            {
+                await Task.Delay((int)(1 / 60f * 1000));
+                _currentPercent += _updateRate;
+                _currentPercent = Mathf.Clamp(_currentPercent, 0, 100);
+
+                progress.value = _currentPercent * 0.01f;
+                progressText.text = (int)_currentPercent + "%";
+            }
             _tcs.SetResult();
+            await _tcs;
+            _tcs = null;
+        }
+        public override void ClosePanel()
+        {
+            gameObject.SetActive(false);
             _tcs = null;
         }
     }
