@@ -7,7 +7,7 @@ namespace LccModel
 {
     public class GameDataManager : Singleton<GameDataManager>
     {
-        public const string Suffix = ".lcc";
+        private const string Res = "Res";
         private string _key;
         private UserData _userData;
         private UserSetData _userSetData;
@@ -19,7 +19,7 @@ namespace LccModel
         }
         public bool UserDataExist(string name = "user")
         {
-            FileInfo fileInfo = new FileInfo($"{PathUtil.GetPersistentDataPath(LccConst.Res)}/{name}{Suffix}");
+            FileInfo fileInfo = new FileInfo($"{PathUtil.GetPersistentDataPath(Res)}/{name}{AssetSuffix.Lcc}");
             if (fileInfo.Exists)
             {
                 return true;
@@ -31,7 +31,7 @@ namespace LccModel
             if (_userData != null) return _userData;
             if (UserDataExist(name))
             {
-                string value = RijndaelUtil.RijndaelDecrypt(_key, FileUtil.GetAsset($"{PathUtil.GetPersistentDataPath(LccConst.Res)}/{name}{Suffix}").GetString());
+                string value = RijndaelUtil.RijndaelDecrypt(_key, FileUtil.GetAsset($"{PathUtil.GetPersistentDataPath(Res)}/{name}{AssetSuffix.Lcc}").GetString());
                 _userData = JsonUtil.ToObject<UserData>(value);
                 return _userData;
             }
@@ -40,20 +40,20 @@ namespace LccModel
         public void SaveUserData(string name = "user")
         {
             string value = RijndaelUtil.RijndaelEncrypt(_key, JsonUtil.ToJson(_userData));
-            FileUtil.SaveAsset($"{PathUtil.GetPersistentDataPath(LccConst.Res)}/{name}{Suffix}", value);
+            FileUtil.SaveAsset($"{PathUtil.GetPersistentDataPath(Res)}/{name}{AssetSuffix.Lcc}", value);
         }
         public void DeleteUserData(string name = "user")
         {
             if (UserDataExist(name))
             {
-                FileInfo fileInfo = new FileInfo($"{PathUtil.GetPersistentDataPath(LccConst.Res)}/{name}{Suffix}");
+                FileInfo fileInfo = new FileInfo($"{PathUtil.GetPersistentDataPath(Res)}/{name}{AssetSuffix.Lcc}");
                 fileInfo.Delete();
                 _userData = null;
             }
         }
         public bool UserSetDataExist()
         {
-            FileInfo fileInfo = new FileInfo($"{PathUtil.GetPersistentDataPath(LccConst.Res)}/UserSet{Suffix}");
+            FileInfo fileInfo = new FileInfo($"{PathUtil.GetPersistentDataPath(Res)}/UserSet{AssetSuffix.Lcc}");
             if (fileInfo.Exists)
             {
                 return true;
@@ -65,7 +65,7 @@ namespace LccModel
             if (_userSetData != null) return _userSetData;
             if (UserSetDataExist())
             {
-                string value = RijndaelUtil.RijndaelDecrypt(_key, FileUtil.GetAsset($"{PathUtil.GetPersistentDataPath(LccConst.Res)}/UserSet{Suffix}").GetString());
+                string value = RijndaelUtil.RijndaelDecrypt(_key, FileUtil.GetAsset($"{PathUtil.GetPersistentDataPath(Res)}/UserSet{AssetSuffix.Lcc}").GetString());
                 _userSetData = JsonUtil.ToObject<UserSetData>(value);
                 return _userSetData;
             }
@@ -74,20 +74,20 @@ namespace LccModel
         public void SaveUserSetData()
         {
             string value = RijndaelUtil.RijndaelEncrypt(_key, JsonUtil.ToJson(_userSetData));
-            FileUtil.SaveAsset($"{PathUtil.GetPersistentDataPath(LccConst.Res)}/UserSet{Suffix}", value);
+            FileUtil.SaveAsset($"{PathUtil.GetPersistentDataPath(Res)}/UserSet{AssetSuffix.Lcc}", value);
         }
         public void DeleteUserSetData()
         {
             if (UserSetDataExist())
             {
-                FileInfo fileInfo = new FileInfo($"{PathUtil.GetPersistentDataPath(LccConst.Res)}/UserSet{Suffix}");
+                FileInfo fileInfo = new FileInfo($"{PathUtil.GetPersistentDataPath(Res)}/UserSet{AssetSuffix.Lcc}");
                 fileInfo.Delete();
                 _userSetData = null;
             }
         }
         public void DeleteAll()
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(PathUtil.GetPersistentDataPath(LccConst.Res));
+            DirectoryInfo directoryInfo = new DirectoryInfo(PathUtil.GetPersistentDataPath(Res));
             if (directoryInfo.Exists)
             {
                 directoryInfo.Delete();

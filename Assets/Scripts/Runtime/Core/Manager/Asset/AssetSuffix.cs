@@ -9,5 +9,6 @@
         public const string Png = ".png";
         public const string Prefab = ".prefab";
         public const string Unity = ".unity";
+        public const string Lcc = ".lcc";
     }
 }

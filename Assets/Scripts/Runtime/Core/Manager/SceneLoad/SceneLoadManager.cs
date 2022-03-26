@@ -39,13 +39,13 @@ namespace LccModel
                 {
                     _process++;
                 }
-                await Task.Delay((int)(1 / 60f * 1000));
+                await TimerManager.Instance.WaitFrameAsync(1);
             }
             _toProcess = 100;
             while (_process < _toProcess)
             {
                 _process++;
-                await Task.Delay((int)(1 / 60f * 1000));
+                await TimerManager.Instance.WaitFrameAsync(1);
             }
             _async.allowSceneActivation = true;
         }

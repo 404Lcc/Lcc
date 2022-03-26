@@ -63,14 +63,14 @@ namespace LccModel
             progressText.text = (int)_currentPercent + "%";
             while (_currentPercent < _targetPercent)
             {
-                await Task.Delay((int)(1 / 60f * 1000));
+                await TimerManager.Instance.WaitFrameAsync(1);
                 _currentPercent += _updateRate;
                 _currentPercent = Mathf.Clamp(_currentPercent, 0, 100);
 
                 progress.value = _currentPercent * 0.01f;
                 progressText.text = (int)_currentPercent + "%";
             }
-            await Task.Delay((int)(1 / 60f * 1000));
+            await TimerManager.Instance.WaitFrameAsync(1);
         }
         public override void ClosePanel()
         {

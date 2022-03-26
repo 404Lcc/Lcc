@@ -113,7 +113,6 @@
     <Compile Include="Assets\Scripts\Util\DisplayMode.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Awaiter\AwaiterExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Byte\ByteExpand.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Define\LccConst.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\TipsWindow\TipsWindowPool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\APanelView.cs" />
@@ -198,6 +197,10 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Timer\TimerManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Timer\TimerData.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Timer\TimerType.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Util\Time\TimeUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Unity.Model.asmdef" />

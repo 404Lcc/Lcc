@@ -34,7 +34,7 @@ namespace LccModel
 #if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.C))
             {
-                ScreenCapture.CaptureScreenshot($"{PathUtil.GetPersistentDataPath(LccConst.Res)}/Screenshot.png");
+                ScreenCapture.CaptureScreenshot($"{PathUtil.GetPersistentDataPath("Screenshot")}{AssetSuffix.Png}");
             }
 #endif
         }

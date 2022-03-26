@@ -84,7 +84,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Asset\AssetType.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\UIEventHandler\LoginUIEventHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\View\AViewBase.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Define\LccConst.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\ProtobufObject.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\MD5\MD5Util.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\Binding\Binding.cs" />
