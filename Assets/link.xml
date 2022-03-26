@@ -4331,13 +4331,8 @@
     <type fullname="LccModel.AStarManager" preserve="all" />
     <type fullname="LccModel.AStarNodeData" preserve="all" />
     <type fullname="LccModel.AudioManager" preserve="all" />
-    <type fullname="LccModel.GameEventData" preserve="all" />
-    <type fullname="LccModel.GameEventManager" preserve="all" />
     <type fullname="LccModel.LanguageManager" preserve="all" />
     <type fullname="LccModel.LanguageType" preserve="all" />
-    <type fullname="LccModel.TimerData" preserve="all" />
-    <type fullname="LccModel.TimerManager" preserve="all" />
-    <type fullname="LccModel.TimerType" preserve="all" />
     <type fullname="LccModel.Tips" preserve="all" />
     <type fullname="LccModel.TipsManager" preserve="all" />
     <type fullname="LccModel.TipsPool" preserve="all" />
@@ -4396,6 +4391,13 @@
     <type fullname="LccModel.EventManager" preserve="all" />
     <type fullname="LccModel.Start" preserve="all" />
     <type fullname="LccModel.IEvent" preserve="all" />
+    <type fullname="LccModel.CVType" preserve="all" />
+    <type fullname="LccModel.DisplayModeType" preserve="all" />
+    <type fullname="LccModel.GameDataManager" preserve="all" />
+    <type fullname="LccModel.ResolutionType" preserve="all" />
+    <type fullname="LccModel.UserData" preserve="all" />
+    <type fullname="LccModel.UserSetData" preserve="all" />
+    <type fullname="LccModel.GameSettingManager" preserve="all" />
     <type fullname="LccModel.CoroutineAdapter" preserve="all" />
     <type fullname="LccModel.IAsyncStateMachineAdapter" preserve="all" />
     <type fullname="LccModel.ILRuntimeHelper" preserve="all" />
@@ -4473,12 +4475,13 @@
     <type fullname="LccModel.Tips+&lt;&gt;c__DisplayClass6_0" preserve="all" />
     <type fullname="LccModel.VoiceManager+&lt;LoadAudio&gt;d__3" preserve="all" />
     <type fullname="LccModel.VoiceManager+&lt;PlayAudio&gt;d__5" preserve="all" />
-    <type fullname="LccModel.LaunchPanel+&lt;ShowLaunchAnim&gt;d__7" preserve="all" />
-    <type fullname="LccModel.LoadingPanel+&lt;UpdateLoadingPercent&gt;d__11" preserve="all" />
+    <type fullname="LccModel.LaunchPanel+&lt;ShowLaunch&gt;d__7" preserve="all" />
+    <type fullname="LccModel.LoadingPanel+&lt;UpdateLoadingPercent&gt;d__10" preserve="all" />
     <type fullname="LccModel.TaskExpand+&lt;Continue&gt;d__0" preserve="all" />
     <type fullname="LccModel.AssetBundleManager+&lt;InitManager&gt;d__2" preserve="all" />
     <type fullname="LccModel.CoroutineHandler+&lt;CallWrapper&gt;d__26" preserve="all" />
     <type fullname="LccModel.EventManager+&lt;Publish&gt;d__2`1" preserve="all" />
+    <type fullname="LccModel.GameDataManager+&lt;&gt;c__DisplayClass14_0" preserve="all" />
     <type fullname="LccModel.CoroutineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.IAsyncStateMachineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c" preserve="all" />

@@ -9,13 +9,29 @@ namespace LccHotfix
     {
         public override async ETTask Publish(Start data)
         {
-            PanelManager.Instance.InitManager(new PanelObjectBaseHandler(AssetType.Prefab, AssetType.Panel));
-            GameDataManager.Instance.InitManager("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-            GameSettingManager.Instance.InitManager();
+            ConfigManager.Instance.InitManager();
 
-            UIEventManager.Instance.Publish(UIEventType.Load);
+            PanelManager.Instance.InitManager(new PanelObjectBaseHandler(AssetType.Prefab, AssetType.Panel));
+
+
+
+
+
+            await LoadingPanel.Instance.UpdateLoadingPercent(51, 60);
             await SceneLoadManager.Instance.LoadSceneAsync(SceneName.Login, AssetType.Scene);
+            await LoadingPanel.Instance.UpdateLoadingPercent(61, 70);
+
+
+     
+
+            await LoadingPanel.Instance.UpdateLoadingPercent(71, 100);
+
+
+
             UIEventManager.Instance.Publish(UIEventType.Login);
+
+            LoadingPanel.Instance.ClosePanel();
+
         }
     }
 }

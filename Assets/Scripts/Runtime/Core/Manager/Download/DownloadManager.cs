@@ -20,7 +20,7 @@ namespace LccModel
         //运行
         public Dictionary<Thread, DownloadFile> runningDict = new Dictionary<Thread, DownloadFile>();
         //完成列表
-        public List<DownloadData> completeList = new List<DownloadData>();
+        public List<DownloadData> completedList = new List<DownloadData>();
         //错误列表
         public List<DownloadFile> errorList = new List<DownloadFile>();
         public void InitManager()
@@ -32,7 +32,7 @@ namespace LccModel
         {
             UpdateTask();
             UpdateProgress();
-            UpdateComplete();
+            UpdateCompleted();
             UpdateError();
         }
         public bool ServerCertificateValidationCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
@@ -95,11 +95,11 @@ namespace LccModel
                 }
                 if (downloadFile == null) break;
                 downloadFile.Download();
-                if (downloadFile.state == DownloadState.Complete)
+                if (downloadFile.state == DownloadState.Completed)
                 {
                     lock (lockObject)
                     {
-                        completeList.Add(downloadFile.downloadData);
+                        completedList.Add(downloadFile.downloadData);
                         runningDict[Thread.CurrentThread] = null;
                     }
                 }
@@ -176,19 +176,19 @@ namespace LccModel
                 item.downloadData.ProgressExcute(item.currentSize, item.downloadData.size);
             }
         }
-        public void UpdateComplete()
+        public void UpdateCompleted()
         {
-            if (completeList.Count == 0) return;
+            if (completedList.Count == 0) return;
             List<DownloadData> downloadDataList = new List<DownloadData>();
             lock (lockObject)
             {
-                downloadDataList.AddRange(completeList.ToArray());
-                completeList.Clear();
+                downloadDataList.AddRange(completedList.ToArray());
+                completedList.Clear();
             }
             foreach (DownloadData item in downloadDataList)
             {
                 item.ProgressExcute(item.size, item.size);
-                item.CompleteExcute();
+                item.CompletedExcute();
             }
         }
         public void UpdateError()

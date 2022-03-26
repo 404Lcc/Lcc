@@ -13,15 +13,17 @@ namespace LccModel
         {
             AssetComponentConfig.DefaultBundlePackageName = DefaultBundlePackageName;
             _updatePackageBundle.Add(AssetComponentConfig.DefaultBundlePackageName, false);
+            await LoadingPanel.Instance.UpdateLoadingPercent(0, 10);
             UpdateBundleDataInfo updateBundleDataInfo = await AssetComponent.CheckAllBundlePackageUpdate(_updatePackageBundle);
+            await LoadingPanel.Instance.UpdateLoadingPercent(11, 20);
             if (updateBundleDataInfo.NeedUpdate)
             {
                 Debug.LogError("需要更新, 大小: " + updateBundleDataInfo.NeedUpdateSize);
                 await AssetComponent.DownLoadUpdate(updateBundleDataInfo);
             }
-            await LoadingPanel.Instance.UpdateLoadingPercent(0, 50);
+            await LoadingPanel.Instance.UpdateLoadingPercent(21, 30);
             await AssetComponent.Initialize(AssetComponentConfig.DefaultBundlePackageName);
-            await LoadingPanel.Instance.UpdateLoadingPercent(51, 75);
+            await LoadingPanel.Instance.UpdateLoadingPercent(31, 40);
         }
     }
 }

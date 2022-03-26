@@ -28,7 +28,7 @@ namespace LccModel
             if (!ReadSize()) return;
             state = DownloadState.Downloading;
             if (!Downloading()) return;
-            state = DownloadState.Complete;
+            state = DownloadState.Completed;
         }
         public bool ReadSize()
         {

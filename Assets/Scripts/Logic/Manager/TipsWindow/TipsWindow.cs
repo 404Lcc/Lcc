@@ -12,7 +12,7 @@ namespace LccModel
         public string info;
         public string confirm;
         public string cancel;
-        public event Action<bool> Callback;
+        public Action<bool> completed;
 
         public Text titleText;
         public Text infoText;
@@ -30,11 +30,11 @@ namespace LccModel
             confirmBtn.onClick.AddListener(OnConfirm);
             cancelBtn.onClick.AddListener(OnCancel);
         }
-        public void InitTipsWindow(string title, string info, Action<bool> callback, string confirm, string cancel, Transform parent = null)
+        public void InitTipsWindow(string title, string info, Action<bool> completed, string confirm, string cancel, Transform parent = null)
         {
             this.title = title;
             this.info = info;
-            this.Callback = callback;
+            this.completed = completed;
             this.confirm = confirm;
             this.cancel = cancel;
 
@@ -63,17 +63,17 @@ namespace LccModel
         }
         public void OnConfirm()
         {
-            Callback?.Invoke(true);
+            completed?.Invoke(true);
             OnHideTipsWindow();
         }
         public void OnCancel()
         {
-            Callback?.Invoke(false);
+            completed?.Invoke(false);
             OnHideTipsWindow();
         }
         public void OnHideTipsWindow()
         {
-            Callback = null;
+            completed = null;
             TipsWindowManager.Instance.ClearTipsWindow(Parent.id);
         }
     }

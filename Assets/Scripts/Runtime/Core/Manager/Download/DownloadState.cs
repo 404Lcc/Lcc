@@ -5,7 +5,7 @@
         None,
         Ready,
         Downloading,
-        Complete,
+        Completed,
         Error,
     }
 }

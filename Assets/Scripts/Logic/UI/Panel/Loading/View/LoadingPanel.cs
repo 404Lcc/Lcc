@@ -9,7 +9,6 @@ namespace LccModel
     public class LoadingPanel : APanelView<LoadingModel>
     {
         private static LoadingPanel _instance;
-        private ETTask _tcs;
 
         private float _currentPercent;
         private float _targetPercent;
@@ -54,11 +53,8 @@ namespace LccModel
         }
         public async ETTask UpdateLoadingPercent(int from, int to, float rate = 1)
         {
-            if (_tcs == null)
-            {
-                _tcs = ETTask.Create();
-            }
             gameObject.SetActive(true);
+            gameObject.transform.SetAsLastSibling();
             _updateRate = rate;
             _targetPercent = to;
             _currentPercent = Mathf.Clamp(_currentPercent, from, to);
@@ -74,14 +70,11 @@ namespace LccModel
                 progress.value = _currentPercent * 0.01f;
                 progressText.text = (int)_currentPercent + "%";
             }
-            _tcs.SetResult();
-            await _tcs;
-            _tcs = null;
+            await Task.Delay((int)(1 / 60f * 1000));
         }
         public override void ClosePanel()
         {
             gameObject.SetActive(false);
-            _tcs = null;
         }
     }
 }

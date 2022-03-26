@@ -8,7 +8,7 @@ namespace LccModel
     public class CoroutineHandler
     {
         public Action<CoroutineHandler> remove;
-        public CoroutineCompletedHandler OnCompleted = new CoroutineCompletedHandler();
+        public CoroutineCompletedHandler completed = new CoroutineCompletedHandler();
         public IEnumerator Coroutine
         {
             get; private set;
@@ -66,13 +66,13 @@ namespace LccModel
         private void Finish()
         {
             remove?.Invoke(this);
-            OnCompleted?.Invoke(Stopped);
-            OnCompleted.RemoveAllListeners();
+            completed?.Invoke(Stopped);
+            completed.RemoveAllListeners();
             Coroutine = null;
         }
-        public CoroutineHandler OnComplete(UnityAction<bool> action)
+        public CoroutineHandler OnCompleted(UnityAction<bool> action)
         {
-            OnCompleted.AddListener(action);
+            completed.AddListener(action);
             return this;
         }
         private IEnumerator CallWrapper()

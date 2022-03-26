@@ -63,7 +63,6 @@
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector4ObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector2ObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\DoubleObjectType.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\EditorWindowBase\AssetEditorWindowBase.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\CharObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetLoadTable.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BundleMasterInterface\BundleMasterWindow.cs" />

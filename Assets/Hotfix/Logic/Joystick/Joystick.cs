@@ -117,5 +117,13 @@ namespace LccHotfix
             JoystackDistance();
             dragHandler?.Invoke(normalDistance, angle);
         }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            DragEventTrigger.GetDragEventTrigger(gameObject).Down -= OnDown;
+            DragEventTrigger.GetDragEventTrigger(gameObject).UP -= OnUP;
+            DragEventTrigger.GetDragEventTrigger(gameObject).Drag -= OnDrag;
+        }
     }
 }

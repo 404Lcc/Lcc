@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 733472323
+CRC: 2412893354
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 582bec939d99691bc24f026a4192af3c
+    Hash: a5da0157561b3bb01dd8c532eecafe21
   TypeTreeHash:
     serializedVersion: 2
     Hash: 067dbb6ff506cefdbf21be00613e5b3d
@@ -42,5 +42,4 @@ SerializeReferenceClassIdentifiers:
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
 - Assets/Bundles/Prefab/Panel/LoginPanel.prefab
-Dependencies:
-- D:/Unity Project/Lcc/BuildBundles/ALL/all_assets_textures_logo_png.bundle
+Dependencies: []

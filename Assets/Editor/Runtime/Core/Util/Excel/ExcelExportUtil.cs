@@ -12,28 +12,26 @@ namespace LccEditor
 {
     public static class ExcelExportUtil
     {
-        public const string excelPath = "Assets/Excels";
-        public const string templatePath = "Assets/Editor/Runtime/Core/Template/ConfigTemplate.txt";
+        public const string ExcelPath = "Assets/Excels";
+        public const string TemplatePath = "Assets/Editor/Runtime/Core/Template/ConfigTemplate.txt";
 
-        public const string modelClassPath = "Scripts/Runtime/Config/Config";
-        public const string hotfixClassPath = "Hotfix/Runtime/Config/Config";
+        public const string ModelClassPath = "Scripts/Runtime/Config/Config";
+        public const string HotfixClassPath = "Hotfix/Runtime/Config/Config";
 
-        public const string modelJsonPath = "Resources/Config";
-        public const string hotfixJsonPath = "Bundles/Config";
+        public const string JsonPath = "Bundles/Config";
 
-        public const string modelProtobufPath = "Resources/Config";
-        public const string hotfixProtobufPath = "Bundles/Config";
+        public const string ProtobufPath = "Bundles/Config";
 
         public static string content;
         public static void ExportClassAndJson()
         {
-            content = FileUtil.GetAsset(templatePath).GetString();
-            foreach (string item in Directory.GetFiles(excelPath, "*.xlsx"))
+            content = FileUtil.GetAsset(TemplatePath).GetString();
+            foreach (string item in Directory.GetFiles(ExcelPath, "*.xlsx"))
             {
                 ExportExcelClass(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item), ConfigType.Model);
                 ExportExcelClass(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item), ConfigType.Hotfix);
-                ExportExcelJson(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item), ConfigType.Model);
-                ExportExcelJson(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item), ConfigType.Hotfix);
+                ExportExcelJson(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item));
+                ExportExcelJson(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item));
             }
             AssetDatabase.Refresh();
         }
@@ -97,9 +95,9 @@ namespace LccEditor
         }
         #endregion
         #region 导出Json
-        public static void ExportExcelJson(XSSFWorkbook xssfWorkbook, string name, ConfigType configType)
+        public static void ExportExcelJson(XSSFWorkbook xssfWorkbook, string name)
         {
-            string exportPath = $"{PathUtil.GetDataPath(GetJsonPath(configType))}/{Path.GetFileNameWithoutExtension(name)}.txt";
+            string exportPath = $"{PathUtil.GetDataPath(GetJsonPath())}/{Path.GetFileNameWithoutExtension(name)}.txt";
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("{\n\t\"list\" : [");
             for (int i = 0; i < xssfWorkbook.NumberOfSheets; i++)
@@ -186,9 +184,9 @@ namespace LccEditor
         #region 导出Protobuf
         public static void ExportExcelProtobuf(ConfigType configType)
         {
-            string exportPath = PathUtil.GetDataPath(GetProtobufPath(configType));
+            string exportPath = PathUtil.GetDataPath(GetProtobufPath());
             string classPath = PathUtil.GetDataPath(GetClassPath(configType));
-            string jsonPath = PathUtil.GetDataPath(GetJsonPath(configType));
+            string jsonPath = PathUtil.GetDataPath(GetJsonPath());
             List<string> protoNameList = new List<string>();
             foreach (string item in Directory.GetFiles(classPath, "*.cs"))
             {
@@ -214,25 +212,17 @@ namespace LccEditor
         {
             if (configType == ConfigType.Model)
             {
-                return modelClassPath;
+                return ModelClassPath;
             }
-            return hotfixClassPath;
+            return HotfixClassPath;
         }
-        public static string GetJsonPath(ConfigType configType)
+        public static string GetJsonPath()
         {
-            if (configType == ConfigType.Model)
-            {
-                return modelJsonPath;
-            }
-            return hotfixJsonPath;
+            return JsonPath;
         }
-        public static string GetProtobufPath(ConfigType configType)
+        public static string GetProtobufPath()
         {
-            if (configType == ConfigType.Model)
-            {
-                return modelProtobufPath;
-            }
-            return hotfixProtobufPath;
+            return ProtobufPath;
         }
         public static string GetCell(ISheet sheet, int row, int cell)
         {

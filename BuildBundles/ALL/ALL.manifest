@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 908626819
+CRC: 1241152527
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -15,29 +15,14 @@ AssetBundleManifest:
       Name: all_assets_bundles_dll_unity_hotfix_pdb_bytes.bundle
       Dependencies: {}
     Info_4:
-      Name: all_assets_bundles_prefab_panel_launchpanel_prefab.bundle
-      Dependencies:
-        Dependency_0: all_assets_textures_logo_png.bundle
-    Info_5:
-      Name: all_assets_bundles_prefab_panel_loadpanel_prefab.bundle
-      Dependencies:
-        Dependency_0: all_assets_textures_logo_png.bundle
-    Info_6:
       Name: all_assets_bundles_prefab_panel_loginpanel_prefab.bundle
-      Dependencies:
-        Dependency_0: all_assets_textures_logo_png.bundle
-    Info_7:
-      Name: all_assets_bundles_prefab_panel_updaterpanel_prefab.bundle
       Dependencies: {}
-    Info_8:
+    Info_5:
       Name: all_assets_bundles_scene_login_unity.bundle
       Dependencies: {}
-    Info_9:
+    Info_6:
       Name: all_assets_bundles_tool_tips_prefab.bundle
       Dependencies: {}
-    Info_10:
+    Info_7:
       Name: all_assets_bundles_tool_tipswindow_prefab.bundle
-      Dependencies: {}
-    Info_11:
-      Name: all_assets_textures_logo_png.bundle
       Dependencies: {}

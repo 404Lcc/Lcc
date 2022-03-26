@@ -2,7 +2,5 @@
 {
     public enum PanelType
     {
-        Launch,
-        Updater,
     }
 }

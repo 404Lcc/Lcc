@@ -57,14 +57,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\AssetBundle\AssetBundleManager.cs" />
-    <Compile Include="Assets\Scripts\Logic\Manager\Timer\TimerManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Init\EventHandler\InitEventHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\Binding\Binding.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\SpriteRenderer\SpriteRendererExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\AObjectBase.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\GameSetting\GameSettingManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\PanelType\PanelTypeExpand.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\GameData\DisplayModeType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\IFixedUpdate.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Numeric\NumericType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\File\FileUtil.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Coroutine\CoroutineManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Mono\MonoManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Transform\TransformExpand.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\GameData\GameDataManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\View\AViewBase.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Tips\TipsManager.cs" />
     <Compile Include="Assets\Scripts\Util\LocalDialog.cs" />
@@ -79,6 +81,8 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Protobuf\ProtobufUtil.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Tips\TipsPool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelState.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\GameData\ResolutionType.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\GameData\UserData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleRequestAwaiter.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Id\IdUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\ValueTypeBinder\QuaternionBinder.cs" />
@@ -119,7 +123,6 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Pool\APool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Handler\Panel\PanelObjectBaseHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Web\WebUtil.cs" />
-    <Compile Include="Assets\Scripts\Logic\Manager\Timer\TimerData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Directory\DirectoryUtil.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\TipsWindow\TipsWindowManager.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Loading\ViewModel\LoadingModel.cs" />
@@ -137,7 +140,6 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\PanelType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEvent.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\ViewModel\ViewModelBase.cs" />
-    <Compile Include="Assets\Scripts\Logic\Manager\GameEvent\GameEventData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Rijndael\RijndaelUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\Panel.cs" />
     <Compile Include="Assets\Scripts\Util\LanguageText.cs" />
@@ -150,7 +152,6 @@
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\ViewModel\LaunchModel.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Video\VideoManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Numeric\NumericEntity.cs" />
-    <Compile Include="Assets\Scripts\Logic\Manager\GameEvent\GameEventManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\IConfig.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Image\ImageExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\UIEvent\UIEventHandlerAttribute.cs" />
@@ -187,14 +188,15 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\EventHandlerAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\UnityWebRequest\UnityWebRequestExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Manager\Manager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\GameData\CVType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\NumericEvent\INumericEvent.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Lcc\LccUtil.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\ProtobufObject.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\GameData\UserSetData.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Loading\View\LoadingPanel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
-    <Compile Include="Assets\Scripts\Logic\Manager\Timer\TimerType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
   </ItemGroup>
   <ItemGroup>

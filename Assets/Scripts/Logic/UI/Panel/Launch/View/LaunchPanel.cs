@@ -9,6 +9,8 @@ namespace LccModel
     {
         private static LaunchPanel _instance;
         private ETTask _tcs;
+
+        public CanvasGroup bg;
         public static LaunchPanel Instance
         {
             get
@@ -21,7 +23,6 @@ namespace LccModel
                 return _instance;
             }
         }
-        public CanvasGroup BG;
         public static GameObject CreateGameObject(string path)
         {
             GameObject gameObject = Instantiate(path);
@@ -45,21 +46,21 @@ namespace LccModel
             gameObject.name = Path.GetFileNameWithoutExtension(path);
             return gameObject;
         }
-        public async ETTask ShowLaunchAnim()
+        public async ETTask ShowLaunch()
         {
             if (_tcs == null)
             {
                 _tcs = ETTask.Create();
-                BG.DOFade(0, ViewModel.time).onComplete = OnComplete;
+                bg.DOFade(0, ViewModel.time).onComplete = OnComplete;
             }
             await _tcs;
-        }
-        public void OnComplete()
-        {
             _instance = null;
             Object.Destroy(gameObject);
-            _tcs.SetResult();
             _tcs = null;
+        }
+        private void OnComplete()
+        {
+            _tcs.SetResult();
         }
     }
 }

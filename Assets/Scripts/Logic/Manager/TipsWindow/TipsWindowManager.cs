@@ -13,10 +13,10 @@ namespace LccModel
             tipsWindowPool.InitPool();
         }
 
-        public TipsWindow CreateTipsWindow(string title, string info, Action<bool> callback, string confirm = "确定", string cancel = "取消", Transform parent = null)
+        public TipsWindow CreateTipsWindow(string title, string info, Action<bool> completed, string confirm = "确定", string cancel = "取消", Transform parent = null)
         {
             TipsWindow tipsWindow = tipsWindowPool.Dequeue();
-            tipsWindow.InitTipsWindow(title, info, callback, confirm, cancel, parent);
+            tipsWindow.InitTipsWindow(title, info, completed, confirm, cancel, parent);
             return tipsWindow;
         }
         public void ClearTipsWindow(long id)
