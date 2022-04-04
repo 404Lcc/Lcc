@@ -4,6 +4,7 @@ using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using UnityEditor;
 using FileUtil = LccModel.FileUtil;
@@ -22,57 +23,82 @@ namespace LccEditor
 
         public const string ProtobufPath = "Bundles/Config";
 
-        public static string content;
-        public static void ExportClassAndJson()
+        public const string Hotfix = "Hotfix";
+
+        private static string _content;
+        public static string Content
         {
-            content = FileUtil.GetAsset(TemplatePath).GetString();
-            foreach (string item in Directory.GetFiles(ExcelPath, "*.xlsx"))
+            get
             {
-                ExportExcelClass(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item), ConfigType.Model);
-                ExportExcelClass(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item), ConfigType.Hotfix);
-                ExportExcelJson(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item));
-                ExportExcelJson(new XSSFWorkbook(item), Path.GetFileNameWithoutExtension(item));
+                if (string.IsNullOrEmpty(_content))
+                {
+                    _content = FileUtil.GetAsset(TemplatePath).GetString();
+                }
+                return _content;
             }
+        }
+        public static void ExportScriptALL()
+        {
+            ExportScriptSelect(Directory.GetFiles(ExcelPath, "*.xlsx").ToList());
+        }
+        public static void ExportDataALL()
+        {
+            ExportDataSelect(Directory.GetFiles(ExcelPath, "*.xlsx").ToList());
+        }
+
+        public static void ExportScriptSelect(List<string> pathList)
+        {
+            float index = 0;
+            foreach (string item in pathList)
+            {
+                index++;
+                string name = Path.GetFileNameWithoutExtension(item);
+                string suffix = Path.GetExtension(item);
+                if (suffix != ".xlsx") return;
+                if (name.StartsWith("~")) return;
+                EditorUtility.DisplayProgressBar("导表结构", $"正在导出{name}表", index / pathList.Count);
+                XSSFWorkbook sheets = new XSSFWorkbook(File.Open(item, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
+                List<Cell> cellList = GetCells(sheets);
+                if (item.Contains(Hotfix))
+                {
+                    ExportClass(name, cellList, ConfigType.Hotfix);
+                }
+                else
+                {
+                    ExportClass(name, cellList, ConfigType.Model);
+                }
+            }
+            EditorUtility.ClearProgressBar();
             AssetDatabase.Refresh();
         }
-        public static void ExportProtobuf()
+        public static void ExportDataSelect(List<string> pathList)
         {
-            ExportExcelProtobuf(ConfigType.Model);
-            ExportExcelProtobuf(ConfigType.Hotfix);
+            float index = 0;
+            foreach (string item in pathList)
+            {
+                index++;
+                string name = Path.GetFileNameWithoutExtension(item);
+                string suffix = Path.GetExtension(item);
+                if (suffix != ".xlsx") return;
+                if (name.StartsWith("~")) return;
+                EditorUtility.DisplayProgressBar("导表结构", $"正在导出{name}表", index / pathList.Count);
+                XSSFWorkbook sheets = new XSSFWorkbook(File.Open(item, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
+                List<Cell> cellList = GetCells(sheets);
+                ExportJson(sheets, name, cellList);
+                if (item.Contains(Hotfix))
+                {
+                    ExportProtobuf(name, ConfigType.Hotfix);
+                }
+                else
+                {
+                    ExportProtobuf(name, ConfigType.Model);
+                }
+            }
+            EditorUtility.ClearProgressBar();
             AssetDatabase.Refresh();
         }
         #region 导出Class
-        public static void ExportExcelClass(XSSFWorkbook xssfWorkbook, string name, ConfigType configType)
-        {
-            List<Cell> cellList = new List<Cell>();
-            HashSet<string> uniqes = new HashSet<string>();
-            for (int i = 0; i < xssfWorkbook.NumberOfSheets; i++)
-            {
-                ExportSheetClass(xssfWorkbook.GetSheetAt(i), cellList, uniqes);
-            }
-            ExportClass(name, cellList, configType);
-        }
-        public static void ExportSheetClass(ISheet sheet, List<Cell> cellList, HashSet<string> uniqes)
-        {
-            if (sheet.GetRow(1) == null) return;
-            for (int i = 0; i < sheet.GetRow(1).LastCellNum; i++)
-            {
-                string fieldName = GetCell(sheet, 1, i);
-                if (string.IsNullOrEmpty(fieldName))
-                {
-                    continue;
-                }
-                if (!uniqes.Add(fieldName))
-                {
-                    continue;
-                }
-                string fieldAttribute = GetCell(sheet, 0, i);
-                string fieldType = GetCell(sheet, 2, i);
-                string fieldDesc = GetCell(sheet, 3, i);
-                cellList.Add(new Cell(fieldAttribute, fieldName, fieldType, fieldDesc));
-            }
-        }
-        public static void ExportClass(string name, List<Cell> cellList, ConfigType configType)
+        private static void ExportClass(string name, List<Cell> cellList, ConfigType configType)
         {
             string exportPath = $"{PathUtil.GetDataPath(GetClassPath(configType))}/{name}.cs";
             StringBuilder stringBuilder = new StringBuilder();
@@ -90,53 +116,35 @@ namespace LccEditor
                     stringBuilder.Append("\n");
                 }
             }
-            string content = ExcelExportUtil.content.Replace("(LccModel)", $"Lcc{configType}").Replace("(CustomConfig)", name).Replace("(Propertys)", stringBuilder.ToString());
+            string content = Content.Replace("(LccModel)", $"Lcc{configType}").Replace("(CustomConfig)", name).Replace("(Propertys)", stringBuilder.ToString());
             FileUtil.SaveAsset(exportPath, content);
         }
         #endregion
+
+
+
         #region 导出Json
-        public static void ExportExcelJson(XSSFWorkbook xssfWorkbook, string name)
+        private static void ExportJson(XSSFWorkbook xssfWorkbook, string name, List<Cell> cellList)
         {
             string exportPath = $"{PathUtil.GetDataPath(GetJsonPath())}/{Path.GetFileNameWithoutExtension(name)}.txt";
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("{\n\t\"list\" : [");
             for (int i = 0; i < xssfWorkbook.NumberOfSheets; i++)
             {
-                ExportSheetJson(xssfWorkbook.GetSheetAt(i), stringBuilder);
+                ExportJson(xssfWorkbook.GetSheetAt(i), cellList, stringBuilder);
             }
             stringBuilder.Append("]\n}");
             FileUtil.SaveAsset(exportPath, stringBuilder.ToString());
         }
-        public static void ExportSheetJson(ISheet sheet, StringBuilder stringBuilder)
+        private static void ExportJson(ISheet sheet, List<Cell> cellList, StringBuilder stringBuilder)
         {
             if (sheet.GetRow(1) == null) return;
-            List<Cell> cellList = new List<Cell>();
-            for (int i = 0; i < sheet.GetRow(1).LastCellNum; i++)
-            {
-                string fieldAttribute = GetCell(sheet, 0, i);
-                if (fieldAttribute.Contains("#"))
-                {
-                    continue;
-                }
-                string fieldName = GetCell(sheet, 1, i);
-                if (string.IsNullOrEmpty(fieldName))
-                {
-                    continue;
-                }
-                string fieldType = GetCell(sheet, 2, i);
-                string fieldDesc = GetCell(sheet, 3, i);
-                cellList.Add(new Cell(fieldAttribute, fieldName, fieldType, fieldDesc));
-            }
             for (int i = 4; i <= sheet.LastRowNum; i++)
             {
                 stringBuilder.Append("\n\t\t{");
-                for (int j = 0; j < sheet.GetRow(1).LastCellNum; j++)
+                for (int j = 0; j < cellList.Count; j++)
                 {
                     Cell cell = cellList[j];
-                    if (cell.attribute == null)
-                    {
-                        continue;
-                    }
                     if (cell.attribute.Contains("#"))
                     {
                         continue;
@@ -157,58 +165,64 @@ namespace LccEditor
                 }
             }
         }
-        public static string Convert(string type, string value)
-        {
-            switch (type)
-            {
-                case "int[]":
-                case "int32[]":
-                case "long[]":
-                    return $"[{value}]";
-                case "string[]":
-                    return $"[{value}]";
-                case "int":
-                case "int32":
-                case "int64":
-                case "long":
-                case "float":
-                case "double":
-                    return value;
-                case "string":
-                    return $"\"{value}\"";
-                default:
-                    throw new Exception($"不支持此类型 : {type}");
-            }
-        }
         #endregion
+
+
+
         #region 导出Protobuf
-        public static void ExportExcelProtobuf(ConfigType configType)
+        private static void ExportProtobuf(string name, ConfigType configType)
         {
             string exportPath = PathUtil.GetDataPath(GetProtobufPath());
-            string classPath = PathUtil.GetDataPath(GetClassPath(configType));
             string jsonPath = PathUtil.GetDataPath(GetJsonPath());
-            List<string> protoNameList = new List<string>();
-            foreach (string item in Directory.GetFiles(classPath, "*.cs"))
+
+            string json = FileUtil.GetAsset($"{jsonPath}/{name}.txt").GetString();
+            object obj;
+            if (configType == ConfigType.Model)
             {
-                protoNameList.Add(Path.GetFileNameWithoutExtension(item));
+                obj = JsonUtil.ToObject(typeof(Manager).Assembly.GetType($"{typeof(Manager).Namespace}.{name}Category"), json);
             }
-            foreach (string item in protoNameList)
+            else
             {
-                string json = FileUtil.GetAsset($"{jsonPath}/{item}.txt").GetString();
-                object obj;
-                if (configType == ConfigType.Model)
-                {
-                    obj = JsonUtil.ToObject(typeof(Manager).Assembly.GetType($"{typeof(Manager).Namespace}.{item}Category"), json);
-                }
-                else
-                {
-                    obj = JsonUtil.ToObject(typeof(LccHotfix.Manager).Assembly.GetType($"{typeof(LccHotfix.Manager).Namespace}.{item}Category"), json);
-                }
-                FileUtil.SaveAsset($"{exportPath}/{item}Category.bytes", ProtobufUtil.Serialize(obj));
+                obj = JsonUtil.ToObject(typeof(LccHotfix.Manager).Assembly.GetType($"{typeof(LccHotfix.Manager).Namespace}.{name}Category"), json);
             }
+            FileUtil.SaveAsset($"{exportPath}/{name}Category.bytes", ProtobufUtil.Serialize(obj));
         }
         #endregion
-        public static string GetClassPath(ConfigType configType)
+
+
+
+        private static List<Cell> GetCells(XSSFWorkbook xssfWorkbook)
+        {
+            List<Cell> cellList = new List<Cell>();
+            HashSet<string> list = new HashSet<string>();
+            for (int i = 0; i < xssfWorkbook.NumberOfSheets; i++)
+            {
+                GetCells(xssfWorkbook.GetSheetAt(i), cellList, list);
+            }
+            return cellList;
+        }
+        private static void GetCells(ISheet sheet, List<Cell> cellList, HashSet<string> list)
+        {
+            if (sheet.GetRow(1) == null) return;
+            for (int i = 0; i < sheet.GetRow(1).LastCellNum; i++)
+            {
+                string fieldName = GetCell(sheet, 1, i);
+                if (string.IsNullOrEmpty(fieldName))
+                {
+                    continue;
+                }
+                if (!list.Add(fieldName))
+                {
+                    continue;
+                }
+                string fieldAttribute = GetCell(sheet, 0, i);
+                string fieldType = GetCell(sheet, 2, i);
+                string fieldDesc = GetCell(sheet, 3, i);
+                cellList.Add(new Cell(fieldAttribute, fieldName, fieldType, fieldDesc));
+            }
+        }
+
+        private static string GetClassPath(ConfigType configType)
         {
             if (configType == ConfigType.Model)
             {
@@ -216,15 +230,18 @@ namespace LccEditor
             }
             return HotfixClassPath;
         }
-        public static string GetJsonPath()
+        private static string GetJsonPath()
         {
             return JsonPath;
         }
-        public static string GetProtobufPath()
+        private static string GetProtobufPath()
         {
             return ProtobufPath;
         }
-        public static string GetCell(ISheet sheet, int row, int cell)
+
+
+
+        private static string GetCell(ISheet sheet, int row, int cell)
         {
             IRow iRow = sheet?.GetRow(row);
             if (iRow != null)
@@ -233,7 +250,7 @@ namespace LccEditor
             }
             return string.Empty;
         }
-        public static string GetCell(IRow row, int cell)
+        private static string GetCell(IRow row, int cell)
         {
             ICell iCell = row?.GetCell(cell);
             if (iCell != null)
@@ -242,7 +259,7 @@ namespace LccEditor
             }
             return string.Empty;
         }
-        public static string GetCell(ICell cell)
+        private static string GetCell(ICell cell)
         {
             if (cell != null)
             {
@@ -264,6 +281,40 @@ namespace LccEditor
                 }
             }
             return string.Empty;
+        }
+
+        private static string Convert(string type, string value)
+        {
+            switch (type)
+            {
+                case "int[]":
+                case "int32[]":
+                case "long[]":
+                    return string.IsNullOrEmpty(value) ? "[]" : $"[{value}]";
+                case "string[]":
+                    StringBuilder stringBuilder = new StringBuilder();
+                    string[] all = value.Trim().Split(',');
+                    for (int i = 0; i < all.Length; i++)
+                    {
+                        stringBuilder.Append($"\"{all[i]}\"");
+                        if (i != all.Length - 1)
+                        {
+                            stringBuilder.Append(",");
+                        }
+                    }
+                    return string.IsNullOrEmpty(value) ? "[]" : $"[{stringBuilder}]";
+                case "int":
+                case "int32":
+                case "int64":
+                case "long":
+                case "float":
+                case "double":
+                    return string.IsNullOrEmpty(value) ? "0" : value;
+                case "string":
+                    return $"\"{value}\"";
+                default:
+                    throw new Exception($"不支持此类型 : {type}");
+            }
         }
     }
 }

@@ -108,6 +108,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ILRuntime\ILRuntimeManager.cs" />
     <Compile Include="Assets\Scripts\Logic\UI\Panel\Launch\View\LaunchPanel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Json\JsonUtil.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Util\Time\TimeUtil.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\TipsWindow\TipsWindow.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Object\ObjectUtil.cs" />
     <Compile Include="Assets\Scripts\Util\DisplayMode.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Assets\Scripts\Logic\Manager\TipsWindow\TipsWindowPool.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\APanelView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\SocketModel.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Timer\TimerType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\IUpdate.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\EventType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Pool\APool.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Panel\IPanel.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Object\Objects.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\Tips\Tips.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Timer\TimerData.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\View\View\IView.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Event\IEvent.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Download\DownloadFile.cs" />
@@ -164,6 +167,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
     <Compile Include="Assets\Scripts\Util\RightClickButton.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Timer\TimerManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\ClientNetwork\ICenterHandler.cs" />
     <Compile Include="Assets\Scripts\Runtime\Config\Config\TestConfig.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Asset\AssetSuffix.cs" />
@@ -197,10 +201,6 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Timer\TimerManager.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Timer\TimerData.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Timer\TimerType.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Util\Time\TimeUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Unity.Model.asmdef" />

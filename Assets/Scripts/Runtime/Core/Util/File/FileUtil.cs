@@ -51,7 +51,11 @@ namespace LccModel
         /// <param name="bytes"></param>
         public static void SaveAsset(string path, byte[] bytes)
         {
-            using (FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write))
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+            using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
                 fileStream.Write(bytes, 0, bytes.Length);
             }

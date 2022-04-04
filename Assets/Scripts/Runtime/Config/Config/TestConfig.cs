@@ -58,5 +58,11 @@ namespace LccModel
     {
 		[ProtoMember(1, IsRequired = true)]
 		public int Id { get; set; }
+		[ProtoMember(2, IsRequired = true)]
+		public int test { get; set; }
+		[ProtoMember(3, IsRequired = true)]
+		public int[] test1 { get; set; }
+		[ProtoMember(4, IsRequired = true)]
+		public string[] test2 { get; set; }
     }
 }
