@@ -20,6 +20,7 @@ namespace LccModel
                 }
                 numericDict[type] = value;
                 Update(type);
+                NumericEventManager.Instance.Publish(type, oldValue, value);
             }
         }
         private long GetKey(int key)
@@ -63,10 +64,9 @@ namespace LccModel
             int pct = final * 10 + 3;
             int finalAdd = final * 10 + 4;
             int finalPct = final * 10 + 5;
-            long oldValue = numericDict[final];
+
             long newValue = (long)(((GetKey(bas) + GetKey(add)) * (100 + GetFloat(pct)) / 100f + GetKey(finalAdd)) * (100 + GetFloat(finalPct)) / 100f);
-            numericDict[final] = newValue;
-            NumericEventManager.Instance.Publish(type, newValue);
+            this[final] = newValue;
         }
     }
 }

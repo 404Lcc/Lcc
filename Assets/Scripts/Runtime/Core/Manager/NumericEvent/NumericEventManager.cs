@@ -23,14 +23,14 @@ namespace LccModel
                 }
             }
         }
-        public void Publish(int type, long value)
+        public void Publish(int type, long oldValue, long newValue)
         {
             if (numericEventDict.ContainsKey(type))
             {
                 List<INumericEvent> list = numericEventDict[type];
                 foreach (INumericEvent item in list)
                 {
-                    item.Publish(value);
+                    item.Publish(oldValue, newValue);
                 }
             }
             else

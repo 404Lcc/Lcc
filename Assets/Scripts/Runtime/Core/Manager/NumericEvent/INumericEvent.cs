@@ -2,6 +2,6 @@
 {
     public interface INumericEvent
     {
-        void Publish(long value);
+        void Publish(long oldValue, long newValue);
     }
 }
