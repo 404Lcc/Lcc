@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "unity": "2020.3",
   "license": "MIT",
-  "description": "Lcc框架是针对Unity开发的轻量级框架，可快速上手开发Steam、安卓、IOS等项目",
+  "description": "The Lcc framework is a lightweight framework developed for Unity and can be used to develop Steam, Android, IOS and other projects quickly",
   "keywords": [
     "Unity",
     "ILRuntime"
