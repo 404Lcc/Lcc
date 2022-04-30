@@ -1,0 +1,20 @@
+{
+  "name": "com.lcc.lccframework",
+  "displayName": "Lcc",
+  "version": "1.0.0",
+  "unity": "2020.3",
+  "license": "MIT",
+  "description": "Lcc框架是针对Unity开发的轻量级框架，可快速上手开发Steam、安卓、IOS等项目",
+  "keywords": [
+    "Unity",
+    "ILRuntime"
+  ],
+  "author": {
+    "name": "404",
+    "email": "1097304582@qq.com",
+    "url": "https://github.com/404Lccxy"
+  },
+  "dependencies": {
+    "com.ourpalm.ilruntime": "2.0.2"
+  }
+}
