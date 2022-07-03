@@ -70,7 +70,7 @@
     <Compile Include="Assets\Scripts\Runtime\Core\Numeric\NumericType.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Util\File\FileUtil.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\AStar\AStarNodeData.cs" />
-    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Coroutine\CoroutineManager.cs" />
+    <Compile Include="Assets\Scripts\Runtime\Core\Manager\Coroutine\CoroutineObject.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\Mono\MonoManager.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Scripts\Runtime\Core\Manager\GameData\GameDataManager.cs" />
@@ -433,6 +433,9 @@
     </Reference>
     <Reference Include="UnityEditor.Graphs">
       <HintPath>C:\Program Files\2020.3.26f1c1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WebGL.Extensions">
+      <HintPath>C:\Program Files\2020.3.26f1c1\Editor\Data\PlaybackEngines\WebGLSupport\UnityEditor.WebGL.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Android.Extensions">
       <HintPath>C:\Program Files\2020.3.26f1c1\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>

@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 using Object = UnityEngine.Object;
 
 namespace LccModel
 {
-    public class CoroutineHandler
+    public class CoroutineHandler : CustomYieldInstruction
     {
         public Action<CoroutineHandler> remove;
         public CoroutineCompletedHandler completed = new CoroutineCompletedHandler();
@@ -25,6 +26,9 @@ namespace LccModel
         {
             get; private set;
         }
+
+        public override bool keepWaiting => Running;
+
         public CoroutineHandler()
         {
         }

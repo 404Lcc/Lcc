@@ -499,9 +499,10 @@ namespace LccModel
         }
         #endregion
         #region 协程
+        private CoroutineObject _coroutineObject = new CoroutineObject();
         public CoroutineHandler StartCoroutine(IEnumerator enumerator)
         {
-            return CoroutineManager.Instance.StartCoroutineTask(enumerator);
+            return _coroutineObject.StartCoroutine(enumerator);
         }
         public void StopCoroutine(CoroutineHandler handler)
         {
@@ -517,7 +518,7 @@ namespace LccModel
         }
         public void StopAllCoroutines()
         {
-            CoroutineManager.Instance.StopAllCoroutineTask();
+            _coroutineObject.StopAllCoroutines();
         }
         #endregion
         #region 销毁
@@ -556,6 +557,7 @@ namespace LccModel
                 }
                 _componentDict.Clear();
             }
+            StopAllCoroutines();
             OnDestroy();
         }
         #endregion
