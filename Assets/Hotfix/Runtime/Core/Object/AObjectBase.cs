@@ -51,6 +51,28 @@ namespace LccHotfix
                 _parent.InternalAddComponent(this);
             }
         }
+        public Dictionary<long, AObjectBase> Children
+        {
+            get
+            {
+                if (_childrenDict == null)
+                {
+                    _childrenDict = new Dictionary<long, AObjectBase>();
+                }
+                return _childrenDict;
+            }
+        }
+        public Dictionary<Type, AObjectBase> Components
+        {
+            get
+            {
+                if (_componentDict == null)
+                {
+                    _componentDict = new Dictionary<Type, AObjectBase>();
+                }
+                return _componentDict;
+            }
+        }
         public T GetParent<T>() where T : AObjectBase
         {
             return (T)Parent;
@@ -528,17 +550,6 @@ namespace LccHotfix
             {
                 return;
             }
-            if (Parent != null && !Parent.IsDisposed)
-            {
-                if (_isComponent)
-                {
-                    Parent.InternalRemoveComponent(this);
-                }
-                else
-                {
-                    Parent.InternalRemoveChildren(this);
-                }
-            }
             ObjectBaseEventSystem.Instance.Remove(this);
             id = 0;
             if (_childrenDict.Count > 0)
@@ -557,8 +568,19 @@ namespace LccHotfix
                 }
                 _componentDict.Clear();
             }
-            StopAllCoroutines();
             OnDestroy();
+            if (Parent != null && !Parent.IsDisposed)
+            {
+                if (_isComponent)
+                {
+                    Parent.InternalRemoveComponent(this);
+                }
+                else
+                {
+                    Parent.InternalRemoveChildren(this);
+                }
+            }
+            StopAllCoroutines();
         }
         #endregion
         #region 内部方法

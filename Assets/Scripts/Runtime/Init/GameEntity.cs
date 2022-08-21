@@ -14,5 +14,10 @@ namespace LccModel
                 return _instance;
             }
         }
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            _instance = null;
+        }
     }
 }

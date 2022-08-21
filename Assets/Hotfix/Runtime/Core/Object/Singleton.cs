@@ -2,26 +2,19 @@
 {
     public class Singleton<T> : AObjectBase where T : AObjectBase
     {
-        private static readonly object _lockObject = new object();
-        private static T _instance;
         public static T Instance
         {
             get
             {
-                if (_instance == null)
+                if (GameEntity.Instance.Components.TryGetValue(typeof(T), out AObjectBase instance))
                 {
-                    lock (_lockObject)
-                    {
-                        _instance = GameEntity.Instance.AddChildren<T>();
-                    }
+                    return (T)instance;
                 }
-                return _instance;
+                else
+                {
+                    return GameEntity.Instance.AddComponent<T>();
+                }
             }
-        }
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
-            _instance = null;
         }
     }
 }
