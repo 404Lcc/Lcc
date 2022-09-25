@@ -17,7 +17,7 @@ namespace LccModel
             {
                 return;
             }
-            long timeNow = TimeUtil.ServerTime();
+            long timeNow = TimeManager.Instance.ServerNow();
 
             if (timeNow < _minTime)
             {
@@ -82,7 +82,7 @@ namespace LccModel
                         Action action = (Action)timerData.obj;
                         action?.Invoke();
 
-                        AddTimer(TimeUtil.ServerTime() + timerData.time, timerData);
+                        AddTimer(TimeManager.Instance.ServerNow() + timerData.time, timerData);
                         break;
                     }
             }
@@ -97,7 +97,7 @@ namespace LccModel
             {
                 return true;
             }
-            time = TimeUtil.ServerTime() + time;
+            time = TimeManager.Instance.ServerNow() + time;
 
             ETTask<bool> tcs = ETTask<bool>.Create(true);
 
@@ -140,7 +140,7 @@ namespace LccModel
             }
 
             TimerData timerData = AddChildren<TimerData>(TimerType.RepeatedTimer, time, action);
-            AddTimer(TimeUtil.ServerTime() + time, timerData);
+            AddTimer(TimeManager.Instance.ServerNow() + time, timerData);
         }
 
 
@@ -151,7 +151,7 @@ namespace LccModel
             {
                 return;
             }
-            time = TimeUtil.ServerTime() + time;
+            time = TimeManager.Instance.ServerNow() + time;
 
             TimerData timer = AddChildren<TimerData>(TimerType.OnceTimer, time, action);
             AddTimer(time, timer);

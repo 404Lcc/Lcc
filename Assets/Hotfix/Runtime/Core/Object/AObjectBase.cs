@@ -11,13 +11,16 @@ namespace LccHotfix
     public abstract class AObjectBase
     {
         [HideInInspector]
-        public long id;
+        public long Id { get; set; }
+        [HideInInspector]
+        public long InstanceId { get; protected set; }
         private AObjectBase _parent;
+        private AObjectBase _domain;
         private bool _isComponent;
         private Dictionary<long, AObjectBase> _childrenDict = new Dictionary<long, AObjectBase>();
         private Dictionary<Type, AObjectBase> _componentDict = new Dictionary<Type, AObjectBase>();
 
-        public bool IsDisposed => id == 0;
+        public bool IsDisposed => InstanceId == 0;
         public AObjectBase Parent
         {
             get
@@ -49,6 +52,56 @@ namespace LccHotfix
                 _parent = value;
                 _isComponent = true;
                 _parent.InternalAddComponent(this);
+            }
+        }
+        public AObjectBase Domain
+        {
+            get
+            {
+                return _domain;
+            }
+            private set
+            {
+                if (value == null)
+                {
+                    throw new Exception($"domain cant set null: {this.GetType().Name}");
+                }
+
+                if (this._domain == value)
+                {
+                    return;
+                }
+
+                AObjectBase preDomain = this._domain;
+                this._domain = value;
+
+                if (preDomain == null)
+                {
+                    this.InstanceId = IdUtil.Generate();
+
+                }
+
+                // 递归设置孩子的Domain
+                if (this._childrenDict != null)
+                {
+
+                    foreach (var item in _childrenDict.Values)
+                    {
+                        item.Domain = this._domain;
+                    }
+
+                }
+
+                if (this._componentDict != null)
+                {
+                    foreach (var item in _componentDict.Values)
+                    {
+                        item.Domain = this._domain;
+                    }
+
+
+                }
+
             }
         }
         public Dictionary<long, AObjectBase> Children
@@ -551,7 +604,7 @@ namespace LccHotfix
                 return;
             }
             ObjectBaseEventSystem.Instance.Remove(this);
-            id = 0;
+            InstanceId = 0;
             if (_childrenDict.Count > 0)
             {
                 foreach (AObjectBase item in _childrenDict.Values)
@@ -586,7 +639,7 @@ namespace LccHotfix
         #region 内部方法
         private void InternalAddChildren(AObjectBase aObjectBase)
         {
-            _childrenDict.Add(aObjectBase.id, aObjectBase);
+            _childrenDict.Add(aObjectBase.InstanceId, aObjectBase);
         }
         private void InternalAddComponent(AObjectBase aObjectBase)
         {
@@ -594,7 +647,7 @@ namespace LccHotfix
         }
         private void InternalRemoveChildren(AObjectBase aObjectBase)
         {
-            _childrenDict.Remove(aObjectBase.id);
+            _childrenDict.Remove(aObjectBase.InstanceId);
         }
         private void InternalRemoveComponent(AObjectBase aObjectBase)
         {
@@ -605,13 +658,13 @@ namespace LccHotfix
         public static AObjectBase Create(Type type)
         {
             AObjectBase aObjectBase = (AObjectBase)Activator.CreateInstance(type);
-            aObjectBase.id = IdUtil.Generate();
+            aObjectBase.InstanceId = IdUtil.Generate();
             return aObjectBase;
         }
         public static T Create<T>() where T : AObjectBase
         {
             T aObjectBase = Activator.CreateInstance<T>();
-            aObjectBase.id = IdUtil.Generate();
+            aObjectBase.InstanceId = IdUtil.Generate();
             return aObjectBase;
         }
         #endregion

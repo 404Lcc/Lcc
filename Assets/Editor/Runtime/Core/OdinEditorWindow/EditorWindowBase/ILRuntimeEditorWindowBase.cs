@@ -37,7 +37,7 @@ namespace LccEditor
         public void BuildCLRBinding()
         {
             AppDomain appDomain = new AppDomain();
-            using (MemoryStream dll = new MemoryStream(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileUtil.GetAsset("Assets/Resources/DLL/Unity.Hotfix.dll.bytes"))))
+            using (MemoryStream dll = new MemoryStream(RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileUtil.GetAsset("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes"))))
             {
                 appDomain.LoadAssembly(dll);
                 ILRuntimeHelper.RegisterCrossBindingAdaptor(appDomain);
