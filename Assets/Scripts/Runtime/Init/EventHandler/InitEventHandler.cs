@@ -9,10 +9,6 @@ namespace LccModel
     {
         public override async ETTask Publish(Start data)
         {
-            Object.DontDestroyOnLoad(Instantiate("Game/Canvas"));
-            Object.DontDestroyOnLoad(Instantiate("Game/AudioSource"));
-            Object.DontDestroyOnLoad(Instantiate("Game/VideoPlayer"));
-
             await LaunchPanel.Instance.ShowLaunch();
 
 
@@ -40,13 +36,6 @@ namespace LccModel
 #else
             MonoManager.Instance.InitManager();
 #endif
-        }
-        public GameObject Instantiate(string path)
-        {
-            GameObject asset = Resources.Load<GameObject>(path);
-            GameObject gameObject = Object.Instantiate(asset);
-            gameObject.name = Path.GetFileNameWithoutExtension(path);
-            return gameObject;
         }
     }
 }

@@ -102,7 +102,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\AEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\View\IView.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\ViewModel\LoginModel.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
     <Compile Include="Assets\Hotfix\Logic\Joystick\Joystick.cs" />
@@ -422,13 +421,13 @@
       <HintPath>Assets\3rdPlugins\Roslyn\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Mdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.1.0\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis">
       <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.1.0\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.1\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -440,7 +439,7 @@
       <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.1.0\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.CSharp">
       <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.CSharp.dll</HintPath>

@@ -28,7 +28,7 @@ namespace LccModel
 
             if (parent == null)
             {
-                gameObject.transform.SetParent(Objects.Canvas.transform);
+                gameObject.transform.SetParent(GlobalManager.Instance.OtherRoot);
             }
             else
             {

@@ -13,7 +13,7 @@ namespace LccHotfix
             foreach (Type item in Manager.Instance.typeDict.Values)
             {
                 if (item.IsAbstract) continue;
-                EventHandlerAttribute[] eventHandlerAttributes = (EventHandlerAttribute[])item.GetCustomAttributes(typeof(EventHandlerAttribute), false);
+                object[] eventHandlerAttributes = item.GetCustomAttributes(typeof(EventHandlerAttribute), false);
                 if (eventHandlerAttributes.Length > 0)
                 {
                     IEvent iEvent = (IEvent)Activator.CreateInstance(item);

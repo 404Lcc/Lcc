@@ -60,8 +60,6 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\MapDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ListDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\PropertyDecorator.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\JsonWriter.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\Lexer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ArrayDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ISerializerProxy.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\GuidSerializer.cs" />
@@ -79,7 +77,6 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SurrogateSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\MemberSpecifiedDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoIgnoreAttribute.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\JsonMapper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\IExtension.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtobufPropertyHelper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\FieldDecorator.cs" />
@@ -119,7 +116,6 @@
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\HandlerIdHelper.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\DeleteHelper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\KeyValuePairProxy.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\JsonException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DateTimeSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\ETTask\IAwaiter.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\CompilerDelegates.cs" />
@@ -129,7 +125,6 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\BasicList.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\LoadHandlerBase.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\JsonData.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\AssetComponentUpdate.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\SerializationContext.cs" />
     <Compile Include="Assets\3rdPlugins\ETTask\AsyncETTaskCompletedMethodBuilder.cs" />
@@ -138,7 +133,6 @@
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\LoadSceneHandler.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\BundleRuntimeInfo.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\BundleMasterRuntimeConfig.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\JsonMockWrapper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ReflectedUriDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\ProtoOperationBehavior.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\XmlProtoSerializer.cs" />
@@ -155,7 +149,6 @@
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\SubItemToken.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\SubType.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\ParserToken.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TypeSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\IExtensible.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
@@ -175,8 +168,6 @@
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\PrefixStyle.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Base\LoadBaseRuntimeLoad.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\IJsonWrapper.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\JsonReader.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\VerifyHelper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TimeSpanSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\Local.cs" />
@@ -199,6 +190,15 @@
     <Compile Include="Assets\3rdPlugins\ETTask\ETTaskHelper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\ProtoSyntax.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt16Serializer.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\JsonWriter.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\JsonException.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\IJsonWrapper.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\JsonData.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\JsonMapper.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\JsonMockWrapper.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\Lexer.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\ParserToken.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\JsonReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.xml" />
@@ -520,13 +520,13 @@
       <HintPath>Assets\3rdPlugins\Roslyn\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Mdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.1.0\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis">
       <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.1.0\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.1\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -538,7 +538,7 @@
       <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll</HintPath>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.2\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.1.0\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.CSharp">
       <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.CSharp.dll</HintPath>

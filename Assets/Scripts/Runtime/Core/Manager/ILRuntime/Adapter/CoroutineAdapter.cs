@@ -1,118 +1,161 @@
-﻿using ILRuntime.CLR.Method;
-using ILRuntime.Runtime.Enviorment;
-using ILRuntime.Runtime.Intepreter;
+﻿using UnityEngine;
+using System.Collections.Generic;
+using ILRuntime.Other;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using AppDomain = ILRuntime.Runtime.Enviorment.AppDomain;
+using ILRuntime.Runtime.Enviorment;
+using ILRuntime.Runtime.Intepreter;
+using ILRuntime.CLR.Method;
 
-namespace LccModel
+
+public class CoroutineAdapter : CrossBindingAdaptor
 {
-    public class CoroutineAdapter : CrossBindingAdaptor
+    public override Type BaseCLRType
     {
-        public override Type BaseCLRType
+        get
+        {
+            return null;
+        }
+    }
+
+    public override Type[] BaseCLRTypes
+    {
+        get
+        {
+            //跨域继承只能有1个Adapter，因此应该尽量避免一个类同时实现多个外部接口，对于coroutine来说是IEnumerator<object>,IEnumerator和IDisposable，
+            //ILRuntime虽然支持，但是一定要小心这种用法，使用不当很容易造成不可预期的问题
+            //日常开发如果需要实现多个DLL外部接口，请在Unity这边先做一个基类实现那些个接口，然后继承那个基类
+            return new Type[] { typeof(IEnumerator<object>), typeof(IEnumerator), typeof(IDisposable) };
+        }
+    }
+
+    public override Type AdaptorType
+    {
+        get
+        {
+            return typeof(Adaptor);
+        }
+    }
+
+    public override object CreateCLRInstance(ILRuntime.Runtime.Enviorment.AppDomain appdomain, ILTypeInstance instance)
+    {
+        return new Adaptor(appdomain, instance);
+    }
+    //Coroutine生成的类实现了IEnumerator<System.Object>, IEnumerator, IDisposable,所以都要实现，这个可以通过reflector之类的IL反编译软件得知
+    internal class Adaptor : IEnumerator<System.Object>, IEnumerator, IDisposable, CrossBindingAdaptorType
+    {
+        ILTypeInstance instance;
+        ILRuntime.Runtime.Enviorment.AppDomain appdomain;
+
+        public Adaptor()
+        {
+
+        }
+
+        public Adaptor(ILRuntime.Runtime.Enviorment.AppDomain appdomain, ILTypeInstance instance)
+        {
+            this.appdomain = appdomain;
+            this.instance = instance;
+        }
+
+        public ILTypeInstance ILInstance { get { return instance; } }
+
+        IMethod mCurrentMethod;
+        bool mCurrentMethodGot;
+        public object Current
         {
             get
             {
-                return null;
-            }
-        }
-        public override Type[] BaseCLRTypes
-        {
-            get
-            {
-                //跨域继承只能有1个Adapter，因此应该尽量避免一个类同时实现多个外部接口，对于coroutine来说是IEnumerator<object>,IEnumerator和IDisposable
-                //ILRuntime虽然支持，但是一定要小心这种用法，使用不当很容易造成不可预期的问题
-                //日常开发如果需要实现多个DLL外部接口，请在Unity这边先做一个基类实现那些个接口，然后继承那个基类
-                return new Type[] { typeof(IEnumerator<object>), typeof(IEnumerator), typeof(IDisposable) };
-            }
-        }
-        public override Type AdaptorType
-        {
-            get
-            {
-                return typeof(Adapter);
-            }
-        }
-        public override object CreateCLRInstance(AppDomain appDomain, ILTypeInstance instance)
-        {
-            return new Adapter(appDomain, instance);
-        }
-        public class Adapter : CrossBindingAdaptorType
-        {
-            private AppDomain _appDomain;
-            private ILTypeInstance _instance;
-            private IMethod _currentMethod;
-            private IMethod _disposeMethod;
-            private IMethod _moveNextMethod;
-            private IMethod _resetMethod;
-            public ILTypeInstance ILInstance
-            {
-                get
+                if (!mCurrentMethodGot)
                 {
-                    return _instance;
-                }
-            }
-            public Adapter()
-            {
-            }
-            public Adapter(AppDomain appDomain, ILTypeInstance instance)
-            {
-                _appDomain = appDomain;
-                _instance = instance;
-            }
-            public object Current
-            {
-                get
-                {
-                    if (_currentMethod == null)
+                    mCurrentMethod = instance.Type.GetMethod("get_Current", 0);
+                    if (mCurrentMethod == null)
                     {
-                        _currentMethod = _instance.Type.GetMethod("get_Current", 0);
-                        if (_currentMethod == null)
-                        {
-                            _currentMethod = _instance.Type.GetMethod("System.Collections.IEnumerator.get_Current", 0);
-                        }
+                        //这里写System.Collections.IEnumerator.get_Current而不是直接get_Current是因为coroutine生成的类是显式实现这个接口的，通过Reflector等反编译软件可得知
+                        //为了兼容其他只实现了单一Current属性的，所以上面先直接取了get_Current
+                        mCurrentMethod = instance.Type.GetMethod("System.Collections.IEnumerator.get_Current", 0);
                     }
-                    return _appDomain.Invoke(_currentMethod, _instance, null);
+                    mCurrentMethodGot = true;
                 }
-            }
-            public void Dispose()
-            {
-                if (_disposeMethod == null)
+
+                if (mCurrentMethod != null)
                 {
-                    _disposeMethod = _instance.Type.GetMethod("Dispose", 0);
-                    if (_disposeMethod == null)
-                    {
-                        _disposeMethod = _instance.Type.GetMethod("System.IDisposable.Dispose", 0);
-                    }
+                    var res = appdomain.Invoke(mCurrentMethod, instance, null);
+                    return res;
                 }
-                _appDomain.Invoke(_disposeMethod, _instance, null);
-            }
-            public bool MoveNext()
-            {
-                if (_moveNextMethod == null)
+                else
                 {
-                    _moveNextMethod = _instance.Type.GetMethod("MoveNext", 0);
+                    return null;
                 }
-                return (bool)_appDomain.Invoke(_moveNextMethod, _instance, null);
             }
-            public void Reset()
+        }
+
+        IMethod mDisposeMethod;
+        bool mDisposeMethodGot;
+        public void Dispose()
+        {
+            if (!mDisposeMethodGot)
             {
-                if (_resetMethod == null)
+                mDisposeMethod = instance.Type.GetMethod("Dispose", 0);
+                if (mDisposeMethod == null)
                 {
-                    _resetMethod = _instance.Type.GetMethod("Reset", 0);
+                    mDisposeMethod = instance.Type.GetMethod("System.IDisposable.Dispose", 0);
                 }
-                _appDomain.Invoke(_resetMethod, _instance, null);
+                mDisposeMethodGot = true;
             }
-            public override string ToString()
+
+            if (mDisposeMethod != null)
             {
-                IMethod method = _instance.Type.GetVirtualMethod(_appDomain.ObjectType.GetMethod("ToString", 0));
-                if (method == null || method is ILMethod)
-                {
-                    return _instance.ToString();
-                }
-                return _instance.Type.FullName;
+                appdomain.Invoke(mDisposeMethod, instance, null);
             }
+        }
+
+        IMethod mMoveNextMethod;
+        bool mMoveNextMethodGot;
+        public bool MoveNext()
+        {
+            if (!mMoveNextMethodGot)
+            {
+                mMoveNextMethod = instance.Type.GetMethod("MoveNext", 0);
+                mMoveNextMethodGot = true;
+            }
+
+            if (mMoveNextMethod != null)
+            {
+                return (bool)appdomain.Invoke(mMoveNextMethod, instance, null);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        IMethod mResetMethod;
+        bool mResetMethodGot;
+        public void Reset()
+        {
+            if (!mResetMethodGot)
+            {
+                mResetMethod = instance.Type.GetMethod("Reset", 0);
+                mResetMethodGot = true;
+            }
+
+            if (mResetMethod != null)
+            {
+                appdomain.Invoke(mResetMethod, instance, null);
+            }
+        }
+
+        public override string ToString()
+        {
+            IMethod m = appdomain.ObjectType.GetMethod("ToString", 0);
+            m = instance.Type.GetVirtualMethod(m);
+            if (m == null || m is ILMethod)
+            {
+                return instance.ToString();
+            }
+            else
+                return instance.Type.FullName;
         }
     }
 }

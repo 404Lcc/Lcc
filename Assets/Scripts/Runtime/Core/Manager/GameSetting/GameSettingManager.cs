@@ -7,7 +7,7 @@ namespace LccModel
     {
         public void InitManager()
         {
-            AudioManager.Instance.SetVolume(GameDataManager.Instance.GetUserSetData().audio, Objects.AudioSource);
+            AudioManager.Instance.SetVolume(GameDataManager.Instance.GetUserSetData().audio, GlobalManager.Instance.AudioSource);
             if (Application.platform == RuntimePlatform.WindowsPlayer)
             {
                 string name = Enum.GetName(typeof(ResolutionType), GameDataManager.Instance.GetUserSetData().resolutionType).Substring(10);

@@ -14,7 +14,7 @@ namespace LccModel
         {
             for (int i = 0; i < size; i++)
             {
-                GameObject gameObject = AssetManager.Instance.InstantiateAsset("TipsWindow", Objects.Canvas.transform, AssetType.Tool);
+                GameObject gameObject = AssetManager.Instance.InstantiateAsset("TipsWindow", GlobalManager.Instance.PoolRoot, AssetType.Tool);
                 GameObjectEntity GameObjectEntity = TipsWindowManager.Instance.AddChildren<GameObjectEntity, GameObject>(gameObject);
                 TipsWindow tipsWindow = GameObjectEntity.AddComponent<TipsWindow>();
                 Enqueue(tipsWindow);
@@ -22,7 +22,7 @@ namespace LccModel
         }
         public override void Enqueue(TipsWindow item)
         {
-            item.gameObject.transform.SetParent(Objects.Canvas.transform);
+            item.gameObject.transform.SetParent(GlobalManager.Instance.PoolRoot);
             item.gameObject.SetActive(false);
             poolQueue.Enqueue(item);
         }

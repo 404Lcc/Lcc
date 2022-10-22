@@ -42,7 +42,7 @@ namespace LccModel
         public static GameObject Instantiate(string path)
         {
             GameObject asset = Resources.Load<GameObject>(path);
-            GameObject gameObject = Object.Instantiate(asset, Objects.Canvas.transform);
+            GameObject gameObject = Object.Instantiate(asset, GlobalManager.Instance.NormalRoot);
             gameObject.name = Path.GetFileNameWithoutExtension(path);
             return gameObject;
         }

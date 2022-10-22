@@ -4507,6 +4507,7 @@
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=12" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Model">
+    <type fullname="CoroutineAdapter" preserve="all" />
     <type fullname="QuaternionBinder" preserve="all" />
     <type fullname="Vector2Binder" preserve="all" />
     <type fullname="Vector3Binder" preserve="all" />
@@ -4563,6 +4564,12 @@
     <type fullname="LccModel.CoroutineCompletedHandler" preserve="all" />
     <type fullname="LccModel.CoroutineHandler" preserve="all" />
     <type fullname="LccModel.CoroutineObject" preserve="all" />
+    <type fullname="LccModel.CoroutineLockType" preserve="all" />
+    <type fullname="LccModel.CoroutineLock" preserve="all" />
+    <type fullname="LccModel.CoroutineLockQueue" preserve="all" />
+    <type fullname="LccModel.WaitCoroutineLock" preserve="all" />
+    <type fullname="LccModel.CoroutineLockQueueType" preserve="all" />
+    <type fullname="LccModel.CoroutineLockManager" preserve="all" />
     <type fullname="LccModel.DownloadData" preserve="all" />
     <type fullname="LccModel.DownloadFile" preserve="all" />
     <type fullname="LccModel.DownloadManager" preserve="all" />
@@ -4579,7 +4586,7 @@
     <type fullname="LccModel.UserData" preserve="all" />
     <type fullname="LccModel.UserSetData" preserve="all" />
     <type fullname="LccModel.GameSettingManager" preserve="all" />
-    <type fullname="LccModel.CoroutineAdapter" preserve="all" />
+    <type fullname="LccModel.GlobalManager" preserve="all" />
     <type fullname="LccModel.IAsyncStateMachineAdapter" preserve="all" />
     <type fullname="LccModel.ILRuntimeHelper" preserve="all" />
     <type fullname="LccModel.ILRuntimeManager" preserve="all" />
@@ -4612,7 +4619,6 @@
     <type fullname="LccModel.IUpdate" preserve="all" />
     <type fullname="LccModel.LccView" preserve="all" />
     <type fullname="LccModel.ObjectBaseEventSystem" preserve="all" />
-    <type fullname="LccModel.Objects" preserve="all" />
     <type fullname="LccModel.ProtobufObject" preserve="all" />
     <type fullname="LccModel.Singleton`1" preserve="all" />
     <type fullname="LccModel.APool`1" preserve="all" />
@@ -4654,6 +4660,7 @@
     <type fullname="LccModel.OpenFileName" preserve="all" />
     <type fullname="LccModel.RightClickEvent" preserve="all" />
     <type fullname="LccModel.RightClickButton" preserve="all" />
+    <type fullname="CoroutineAdapter+Adaptor" preserve="all" />
     <type fullname="LccModel.AudioManager+&lt;LoadAudio&gt;d__3" preserve="all" />
     <type fullname="LccModel.AudioManager+&lt;PlayAudio&gt;d__5" preserve="all" />
     <type fullname="LccModel.Tips+&lt;&gt;c__DisplayClass6_0" preserve="all" />
@@ -4664,9 +4671,13 @@
     <type fullname="LccModel.TaskExpand+&lt;Continue&gt;d__0" preserve="all" />
     <type fullname="LccModel.AssetBundleManager+&lt;InitManager&gt;d__2" preserve="all" />
     <type fullname="LccModel.CoroutineHandler+&lt;CallWrapper&gt;d__28" preserve="all" />
+    <type fullname="LccModel.CoroutineLockQueue+&lt;&gt;c__DisplayClass7_0" preserve="all" />
+    <type fullname="LccModel.CoroutineLockQueue+&lt;Wait&gt;d__7" preserve="all" />
+    <type fullname="LccModel.WaitCoroutineLock+&lt;Wait&gt;d__5" preserve="all" />
+    <type fullname="LccModel.CoroutineLockQueueType+&lt;Wait&gt;d__6" preserve="all" />
+    <type fullname="LccModel.CoroutineLockManager+&lt;Wait&gt;d__3" preserve="all" />
     <type fullname="LccModel.EventManager+&lt;Publish&gt;d__2`1" preserve="all" />
     <type fullname="LccModel.GameDataManager+&lt;&gt;c__DisplayClass14_0" preserve="all" />
-    <type fullname="LccModel.CoroutineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.IAsyncStateMachineAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.ILRuntimeManager+&lt;&gt;c" preserve="all" />

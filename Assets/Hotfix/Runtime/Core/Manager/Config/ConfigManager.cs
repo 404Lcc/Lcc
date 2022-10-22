@@ -13,7 +13,7 @@ namespace LccHotfix
             foreach (Type item in Manager.Instance.typeDict.Values)
             {
                 if (item.IsAbstract) continue;
-                ConfigAttribute[] configAttributes = (ConfigAttribute[])item.GetCustomAttributes(typeof(ConfigAttribute), false);
+                object[] configAttributes = item.GetCustomAttributes(typeof(ConfigAttribute), false);
                 if (configAttributes.Length > 0)
                 {
                     TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(item.Name, AssetSuffix.Bytes, AssetType.Config);

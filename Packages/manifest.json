@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.ourpalm.ilruntime": "2.0.2",
+    "com.ourpalm.ilruntime": "2.1.0",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.collab-proxy": "1.17.1",
     "com.unity.ide.rider": "3.0.15",

@@ -30,7 +30,7 @@ namespace LccHotfix
         {
             Panel panel = new Panel();
             panel.State = PanelState.Close;
-            GameObject gameObject = CreateGameObject(type.ToPanelString(), Objects.Canvas.transform);
+            GameObject gameObject = CreateGameObject(type.ToPanelString(), GlobalManager.Instance.NormalRoot);
             if (gameObject == null) return null;
             panel.Type = type;
             Type classType = Manager.Instance.GetType(type.ToPanelString());

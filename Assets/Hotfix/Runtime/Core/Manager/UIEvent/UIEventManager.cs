@@ -12,11 +12,11 @@ namespace LccHotfix
             foreach (Type item in Manager.Instance.typeDict.Values)
             {
                 if (item.IsAbstract) continue;
-                UIEventHandlerAttribute[] uiEventHandlerAttributes = (UIEventHandlerAttribute[])item.GetCustomAttributes(typeof(UIEventHandlerAttribute), false);
+                object[] uiEventHandlerAttributes = item.GetCustomAttributes(typeof(UIEventHandlerAttribute), false);
                 if (uiEventHandlerAttributes.Length > 0)
                 {
                     UIEvent uiEvent = (UIEvent)Activator.CreateInstance(item);
-                    uiEventDict.Add(uiEventHandlerAttributes[0].uiEventType, uiEvent);
+                    uiEventDict.Add(((UIEventHandlerAttribute)uiEventHandlerAttributes[0]).uiEventType, uiEvent);
                 }
             }
         }
