@@ -11,8 +11,7 @@ namespace LccHotfix
         {
             ConfigManager.Instance.InitManager();
 
-            PanelManager.Instance.InitManager(new PanelObjectBaseHandler(AssetType.Prefab, AssetType.Panel));
-
+      
 
 
 

@@ -2,6 +2,7 @@
 {
     public enum PanelType
     {
+        None,
         Set,
         Quit,
         Login,

@@ -7,7 +7,7 @@ namespace LccHotfix
     {
         public override void Publish()
         {
-            PanelManager.Instance.OpenPanel(PanelType.Login);
+            PanelManager.Instance.ShowWindow(PanelType.Login);
         }
     }
 }

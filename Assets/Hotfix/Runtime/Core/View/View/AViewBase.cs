@@ -2,7 +2,7 @@
 
 namespace LccHotfix
 {
-    public abstract class AViewBase<T> : AObjectBase, IView<T> where T : ViewModelBase
+    public abstract class AViewBase<T> : IView<T> where T : ViewModelBase
     {
         private bool _isInit;
         public ViewModelBinding<T> viewModelBinding = new ViewModelBinding<T>();
@@ -27,9 +27,6 @@ namespace LccHotfix
                 }
                 binding.Value = value;
             }
-        }
-        public override void InitData(object[] datas)
-        {
         }
         public virtual void InitView(T viewModel)
         {
