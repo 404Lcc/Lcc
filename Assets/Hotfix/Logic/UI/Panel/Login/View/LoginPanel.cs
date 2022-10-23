@@ -21,6 +21,40 @@ namespace LccHotfix
         }
 
 
+        public override void OnInitData(Panel panel)
+        {
+            LogUtil.Log("OnInitData第三个执行的函数");
+            panel.data.type = UIType.Normal;
+        }
+
+        public override void OnInitComponent(Panel panel)
+        {
+            LogUtil.Log("OnInitComponent第四个执行的函数");
+
+        }
+        public override void OnRegisterUIEvent(Panel panel)
+        {
+            LogUtil.Log("OnRegisterUIEvent第五个执行的函数");
+        }
+
+
+        public override void OnShow(Panel panel, AObjectBase contextData = null)
+        {
+            LogUtil.Log("OnShow第六个执行的函数");
+
+ 
+        }
+
+        public override void OnHide(Panel panel)
+        {
+            LogUtil.Log("OnHide");
+        }
+
+        public override void BeforeUnload(Panel panel)
+        {
+            LogUtil.Log("BeforeUnload");
+        }
+
 
     }
 }

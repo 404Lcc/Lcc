@@ -1,288 +1,504 @@
-﻿using System;
-using System.Collections;
+﻿using BM;
+using ET;
+using LccModel;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace LccHotfix
 {
     public class PanelManager : Singleton<PanelManager>
     {
-        public Dictionary<PanelType, Panel> panelDict = new Dictionary<PanelType, Panel>();
-        public PanelObjectBaseHandler handler;
-        public void InitManager(PanelObjectBaseHandler handler)
+        private readonly string _suff = AssetSuffix.Prefab;
+        private readonly string[] _types = new string[] { AssetType.Prefab, AssetType.Panel };
+
+
+
+        public bool isPopStackWndStatus;
+
+
+        public Dictionary<int, Panel> allPanelDict = new Dictionary<int, Panel>();
+        public Dictionary<int, Panel> panelVisibleDict = new Dictionary<int, Panel>();
+    
+
+
+
+        public Queue<PanelType> panelTypeQueue = new Queue<PanelType>();
+
+        public List<PanelType> panelTypeCachedList = new List<PanelType>();
+
+
+
+
+
+
+        public Dictionary<int, string> typeToNameDict = new Dictionary<int, string>();//type 名字
+        public Dictionary<string, int> nameToTypeDict = new Dictionary<string, int>();//名字 type
+
+
+        public override void InitData(object[] datas)
         {
-            this.handler = handler;
-        }
-        /// <summary>
-        /// 面板是否存在
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public bool PanelExist(PanelType type)
-        {
-            if (panelDict.ContainsKey(type))
+            base.InitData(datas);
+
+            isPopStackWndStatus = false;
+
+
+            allPanelDict.Clear();
+            panelVisibleDict.Clear();
+            panelTypeQueue.Clear();
+            panelTypeCachedList.Clear();
+            typeToNameDict.Clear();
+            nameToTypeDict.Clear();
+
+            foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
-                return true;
+                string name = item.ToPanelString();
+                typeToNameDict.Add((int)item, name);
+                nameToTypeDict.Add(name, (int)item);
             }
-            return false;
         }
-        /// <summary>
-        /// 创建面板
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="datas"></param>
-        /// <returns></returns>
-        public Panel CreatePanel(PanelType type, params object[] datas)
+
+
+
+
+
+        public bool IsPanelVisible(PanelType type)
         {
-            Panel panel = handler.CreatePanel(type, datas);
-            panelDict.Add(type, panel);
+            return panelVisibleDict.ContainsKey((int)type);
+        }
+
+
+
+        public PanelType GetPanelByGeneric<T>() where T : IPanelHandler
+        {
+            if (nameToTypeDict.TryGetValue(typeof(T).Name, out int type))
+            {
+                return (PanelType)type;
+            }
+
+            return PanelType.None;
+        }
+        private Panel GetPanel(PanelType type)
+        {
+            if (allPanelDict.ContainsKey((int)type))
+            {
+                return allPanelDict[(int)type];
+            }
+            return null;
+        }
+        public T GetPanel<T>(bool isNeedShowState = false) where T : IPanelHandler
+        {
+            PanelType type = GetPanelByGeneric<T>();
+            Panel panel = GetPanel(type);
+            if (panel == null)
+            {
+                return default;
+            }
+            if (!panel.IsLoad)
+            {
+                return default;
+            }
+            if (isNeedShowState)
+            {
+                if (!IsPanelVisible(type))
+                {
+                    return default;
+                }
+            }
+            return (T)panel.logic;
+        }
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+        public void ShowStackPanel<T>() where T : IPanelHandler
+        {
+            PanelType type = GetPanelByGeneric<T>();
+            ShowStackPanel(type);
+        }
+
+
+
+
+        public void ShowStackPanel(PanelType type)
+        {
+            panelTypeQueue.Enqueue(type);
+
+            if (isPopStackWndStatus)
+            {
+                return;
+            }
+            isPopStackWndStatus = true;
+            PopStackPanel();
+        }
+        private void PopNextStackPanel(PanelType type)
+        {
+            Panel panel = GetPanel(type);
+            if (panel != null && !panel.IsDisposed && isPopStackWndStatus && panel.IsInStackQueue)
+            {
+                panel.IsInStackQueue = false;
+                PopStackPanel();
+            }
+        }
+        private void PopStackPanel()
+        {
+            if (panelTypeQueue.Count > 0)
+            {
+                PanelType type = panelTypeQueue.Dequeue();
+                ShowPanel(type);
+                Panel panel = GetPanel(type);
+                panel.IsInStackQueue = true;
+            }
+            else
+            {
+                isPopStackWndStatus = false;
+            }
+        }
+
+
+
+
+
+
+
+
+
+        public void ShowPanel(PanelType type, ShowPanelData data = null)
+        {
+            Panel panel = LoadPanel(type);
+            if (panel != null)
+            {
+                InternalShowPanel(panel, type, data);
+            }
+        }
+        public void ShowPanel<T>(ShowPanelData data = null) where T : IPanelHandler
+        {
+            PanelType type = GetPanelByGeneric<T>();
+            ShowPanel(type, data);
+        }
+        public async ETTask ShowPanelAsync(PanelType type, ShowPanelData data = null)
+        {
+            Panel panel = await LoadPanelAsync(type);
+            if (panel != null)
+            {
+                InternalShowPanel(panel, type, data);
+            }
+        }
+        public async ETTask ShowPanelAsync<T>(ShowPanelData data = null) where T : IPanelHandler
+        {
+            PanelType type = GetPanelByGeneric<T>();
+            await ShowPanelAsync(type, data);
+        }
+        private void InternalShowPanel(Panel panel, PanelType type, ShowPanelData data = null)
+        {
+            AObjectBase contextData = data == null ? null : data.contextData;
+            panel.GameObject.SetActive(true);
+            panel.logic.OnShow(panel, contextData);
+
+            panelVisibleDict[(int)type] = panel;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private Panel LoadPanel(PanelType type)
+        {
+            Panel panel = GetPanel(type);
+            if (panel == null)
+            {
+                panel = AddChildren<Panel>();
+                panel.Type = type;
+                InternalLoadPanel(panel);
+            }
+
+            if (!panel.IsLoad)
+            {
+                InternalLoadPanel(panel);
+            }
             return panel;
         }
-        /// <summary>
-        /// 打开面板
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="datas"></param>
-        /// <returns></returns>
-        public Panel OpenPanel(PanelType type, params object[] datas)
+        private void InternalLoadPanel(Panel panel)
         {
-            if (PanelExist(type))
+            if (!typeToNameDict.TryGetValue((int)panel.Type, out string name))
             {
+                return;
+            }
+            GameObject go = AssetManager.Instance.LoadAsset<GameObject>(name, _suff, _types);
+            panel.GameObject = UnityEngine.Object.Instantiate(go);
+            panel.GameObject.name = go.name;
+
+            panel.logic.OnInitData(panel);
+
+            panel.SetRoot(GetRoot(panel.data.type));
+            panel.Transform.SetAsLastSibling();
+
+            panel.logic.OnInitComponent(panel);
+            panel.logic.OnRegisterUIEvent(panel);
+
+            allPanelDict[(int)panel.Type] = panel;
+        }
+        private async ETTask<Panel> LoadPanelAsync(PanelType type)
+        {
+            CoroutineLock coroutineLock = null;
+            try
+            {
+                coroutineLock = await CoroutineLockManager.Instance.Wait(CoroutineLockType.LoadUI, (int)type);
                 Panel panel = GetPanel(type);
-                panel.OpenPanel();
-                return panel;
-            }
-            else
-            {
-                Panel panel = CreatePanel(type, datas);
-                panel.OpenPanel();
-                return panel;
-            }
-        }
-        /// <summary>
-        /// 打开面板
-        /// </summary>
-        /// <param name="types"></param>
-        /// <returns></returns>
-        public Panel[] OpenPanels(PanelType[] types)
-        {
-            List<Panel> panelList = new List<Panel>();
-            foreach (PanelType item in types)
-            {
-                panelList.Add(OpenPanel(item));
-            }
-            return panelList.ToArray();
-        }
-        /// <summary>
-        /// 打开剩下所有面板
-        /// </summary>
-        /// <param name="types"></param>
-        /// <returns></returns>
-        public Panel[] OpenExceptPanels(PanelType[] types)
-        {
-            List<Panel> panelList = new List<Panel>();
-            List<PanelType> typeList = new List<PanelType>(types);
-            foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
-            {
-                if (!typeList.Contains(item))
+                if (panel == null)
                 {
-                    panelList.Add(OpenPanel(item));
+                    if (typeToNameDict.ContainsKey((int)type))
+                    {
+                        panel = AddChildren<Panel>();
+                        panel.Type = type;
+                        await InternalLoadPanelAsync(panel);
+                    }
+                }
+
+                if (!panel.IsLoad)
+                {
+                    await InternalLoadPanelAsync(panel);
+                }
+                return panel;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                coroutineLock?.Dispose();
+            }
+        }
+        private async ETTask InternalLoadPanelAsync(Panel panel)
+        {
+            if (!typeToNameDict.TryGetValue((int)panel.Type, out string name))
+            {
+                return;
+            }
+            LoadHandler handler = await AssetManager.Instance.LoadAssetAsync<GameObject>(name, _suff, _types);
+            GameObject go = (GameObject)handler.Asset;
+            panel.GameObject = UnityEngine.Object.Instantiate(go);
+            panel.GameObject.name = go.name;
+
+            panel.logic.OnInitData(panel);
+
+            panel?.SetRoot(GetRoot(panel.data.type));
+            panel.Transform.SetAsLastSibling();
+
+            panel.logic.OnInitComponent(panel);
+            panel.logic.OnRegisterUIEvent(panel);
+
+            allPanelDict[(int)panel.Type] = panel;
+        }
+
+
+
+
+
+
+
+
+        public void HidePanel(PanelType type)
+        {
+            if (!panelVisibleDict.ContainsKey((int)type))
+            {
+                return;
+            }
+
+            Panel panel = panelVisibleDict[(int)type];
+            if (panel == null || panel.IsDisposed)
+            {
+                return;
+            }
+
+            panel.GameObject.SetActive(false);
+            panel.logic.OnHide(panel);
+
+            panelVisibleDict.Remove((int)type);
+
+            PopNextStackPanel(type);
+        }
+        public void HidePanel<T>() where T : IPanelHandler
+        {
+            PanelType type = GetPanelByGeneric<T>();
+            HidePanel(type);
+        }
+        public void HideAllShownPanel(bool includeFixed = false)
+        {
+            isPopStackWndStatus = false;
+            panelTypeCachedList.Clear();
+            foreach (KeyValuePair<int, Panel> item in panelVisibleDict)
+            {
+                if (item.Value.data.type == UIType.Fixed && !includeFixed)
+                {
+                    continue;
+                }
+                if (item.Value.IsDisposed)
+                {
+                    continue;
+                }
+
+                panelTypeCachedList.Add((PanelType)item.Key);
+                item.Value.GameObject.SetActive(false);
+                item.Value.logic.OnHide(item.Value);
+            }
+            if (panelTypeCachedList.Count > 0)
+            {
+                for (int i = 0; i < panelTypeCachedList.Count; i++)
+                {
+                    panelVisibleDict.Remove((int)panelTypeCachedList[i]);
                 }
             }
-            return panelList.ToArray();
+            panelTypeQueue.Clear();
         }
-        /// <summary>
-        /// 打开全部面板
-        /// </summary>
-        public Panel[] OpenAllPanels()
+
+
+
+
+
+
+
+
+
+
+
+        public void ClosePanel(PanelType type)
         {
-            List<Panel> panelList = new List<Panel>();
-            foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
+            if (!panelVisibleDict.ContainsKey((int)type))
             {
-                panelList.Add(OpenPanel(item));
+                return;
             }
-            return panelList.ToArray();
+            HidePanel(type);
+            UnPanel(type);
+
         }
-        /// <summary>
-        /// 隐藏面板
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="datas"></param>
-        /// <returns></returns>
-        public Panel ClosePanel(PanelType type, params object[] datas)
+        public void ClosePanel<T>() where T : IPanelHandler
         {
-            if (PanelExist(type))
-            {
-                Panel panel = GetPanel(type);
-                panel.ClosePanel();
-                return panel;
-            }
-            else
-            {
-                Panel panel = CreatePanel(type, datas);
-                panel.ClosePanel();
-                return panel;
-            }
+            PanelType type = GetPanelByGeneric<T>();
+            ClosePanel(type);
         }
-        /// <summary>
-        /// 隐藏面板
-        /// </summary>
-        /// <param name="types"></param>
-        /// <returns></returns>
-        public Panel[] ClosePanels(PanelType[] types)
+        public void CloseAllPanel()
         {
-            List<Panel> panelList = new List<Panel>();
-            foreach (PanelType item in types)
+            isPopStackWndStatus = false;
+            if (allPanelDict == null)
             {
-                panelList.Add(ClosePanel(item));
+                return;
             }
-            return panelList.ToArray();
-        }
-        /// <summary>
-        /// 隐藏剩下所有面板
-        /// </summary>
-        /// <param name="types"></param>
-        /// <returns></returns>
-        public Panel[] CloseExceptPanels(PanelType[] types)
-        {
-            List<Panel> panelList = new List<Panel>();
-            List<PanelType> typeList = new List<PanelType>(types);
-            foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
+            foreach (KeyValuePair<int, Panel> item in allPanelDict)
             {
-                if (!typeList.Contains(item))
+                Panel panel = item.Value;
+                if (panel == null || panel.IsDisposed)
                 {
-                    panelList.Add(ClosePanel(item));
+                    continue;
                 }
+                HidePanel(panel.Type);
+                UnPanel(panel.Type, false);
+                panel?.Dispose();
             }
-            return panelList.ToArray();
+            allPanelDict.Clear();
+            panelVisibleDict.Clear();
+            panelTypeQueue.Clear();
+            panelTypeCachedList.Clear();
         }
-        /// <summary>
-        /// 隐藏全部面板
-        /// </summary>
-        public Panel[] CloseAllPanels()
+
+
+
+
+
+
+        public void UnPanel<T>() where T : IPanelHandler
         {
-            List<Panel> panelList = new List<Panel>();
-            foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
+            PanelType type = GetPanelByGeneric<T>();
+            UnPanel(type);
+        }
+
+
+        public void UnPanel(PanelType type, bool isDispose = true)
+        {
+            Panel panel = GetPanel(type);
+            if (panel == null)
             {
-                panelList.Add(ClosePanel(item));
+                return;
             }
-            return panelList.ToArray();
-        }
-        /// <summary>
-        /// 删除面板
-        /// </summary>
-        /// <param name="type"></param>
-        public void ClearPanel(PanelType type)
-        {
-            if (PanelExist(type))
+            panel.logic.BeforeUnload(panel);
+            if (panel.IsLoad)
             {
-                Panel panel = GetPanel(type);
-                panel.ClearPanel();
-                panelDict.Remove(type);
+                AssetManager.Instance.UnLoadAsset(panel.GameObject.name, _suff, _types);
+
+                UnityEngine.Object.Destroy(panel.GameObject);
+                panel.GameObject = null;
             }
-        }
-        /// <summary>
-        /// 删除面板
-        /// </summary>
-        /// <param name="types"></param>
-        /// <returns></returns>
-        public void ClearPanels(PanelType[] types)
-        {
-            foreach (PanelType item in types)
+            if (isDispose)
             {
-                ClearPanel(item);
-            }
-        }
-        /// <summary>
-        /// 删除剩下所有面板
-        /// </summary>
-        /// <param name="types"></param>
-        /// <returns></returns>
-        public void ClearExceptPanels(PanelType[] types)
-        {
-            List<PanelType> typeList = new List<PanelType>(types);
-            foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
-            {
-                if (!typeList.Contains(item))
-                {
-                    ClearPanel(item);
-                }
+                allPanelDict.Remove((int)type);
+                panelVisibleDict.Remove((int)type);
+                panel.Dispose();
             }
         }
-        /// <summary>
-        /// 删除全部面板
-        /// </summary>
-        public void ClearAllPanels()
+
+
+
+
+
+
+
+        private Transform GetRoot(UIType type)
         {
-            foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
+            if (type == UIType.Normal)
             {
-                ClearPanel(item);
+                return GlobalManager.Instance.NormalRoot;
             }
-        }
-        /// <summary>
-        /// 删除全部打开的面板
-        /// </summary>
-        /// <returns></returns>
-        public int ClearOpenPanels()
-        {
-            int number = 0;
-            IDictionaryEnumerator enumerator = panelDict.GetEnumerator();
-            while (enumerator.MoveNext())
+            else if (type == UIType.Fixed)
             {
-                Panel panel = (Panel)enumerator.Value;
-                if (panel.State == PanelState.Open)
-                {
-                    ClearPanel(panel.Type);
-                    number++;
-                }
+                return GlobalManager.Instance.FixedRoot;
             }
-            return number;
-        }
-        /// <summary>
-        /// 获取面板
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public Panel GetPanel(PanelType type)
-        {
-            if (PanelExist(type))
+            else if (type == UIType.Popup)
             {
-                Panel panel = panelDict[type];
-                return panel;
+                return GlobalManager.Instance.PopupRoot;
             }
+            else if (type == UIType.Other)
+            {
+                return GlobalManager.Instance.OtherRoot;
+            }
+
+
             return null;
         }
-        /// <summary>
-        /// 获取面板
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public T GetPanel<T>(PanelType type) where T : AObjectBase
+
+
+
+
+
+
+
+        public override void OnDestroy()
         {
-            if (PanelExist(type))
-            {
-                Panel panel = panelDict[type];
-                return (T)panel.AObjectBase;
-            }
-            return null;
-        }
-        /// <summary>
-        /// 面板是否打开
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public bool IsOpenPanel(PanelType type)
-        {
-            if (PanelExist(type))
-            {
-                Panel panel = GetPanel(type);
-                if (panel.State == PanelState.Open)
-                {
-                    return true;
-                }
-                return false;
-            }
-            return false;
+            base.OnDestroy();
+
+            typeToNameDict.Clear();
+            nameToTypeDict.Clear();
+
+            CloseAllPanel();
         }
     }
 }
