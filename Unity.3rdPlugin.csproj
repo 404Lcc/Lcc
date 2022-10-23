@@ -73,6 +73,7 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\Int64Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\ETTask\ETCancellationToken.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\JsonMapper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\CompilerContext.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SurrogateSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\MemberSpecifiedDecorator.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\AssetComponentConfig.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\HandlerIdHelper.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\DeleteHelper.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\JsonException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\KeyValuePairProxy.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DateTimeSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\ETTask\IAwaiter.cs" />
@@ -125,9 +127,11 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\BasicList.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\LoadHandlerBase.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\JsonData.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\AssetComponentUpdate.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\SerializationContext.cs" />
     <Compile Include="Assets\3rdPlugins\ETTask\AsyncETTaskCompletedMethodBuilder.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\Lexer.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Base\LoadFile.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\BufferExtension.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\LoadSceneHandler.cs" />
@@ -147,6 +151,7 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\BooleanSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DoubleSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\JsonMockWrapper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\SubItemToken.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\SubType.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TypeSerializer.cs" />
@@ -168,6 +173,8 @@
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\PrefixStyle.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Base\LoadBaseRuntimeLoad.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\ParserToken.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\JsonWriter.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\VerifyHelper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TimeSpanSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\Local.cs" />
@@ -175,6 +182,7 @@
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\AssetLogHelper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\GlobalSuppressions.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoMemberAttribute.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\IJsonWrapper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\NetObjectCache.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\ProtoEndpointBehavior.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoWriter.cs" />
@@ -187,18 +195,10 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UriDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\BlobSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\PType.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\JsonReader.cs" />
     <Compile Include="Assets\3rdPlugins\ETTask\ETTaskHelper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\ProtoSyntax.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt16Serializer.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\JsonWriter.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\JsonException.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\IJsonWrapper.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\JsonData.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\JsonMapper.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\JsonMockWrapper.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\Lexer.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\ParserToken.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\JsonReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.xml" />

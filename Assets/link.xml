@@ -4601,6 +4601,8 @@
     <type fullname="LccModel.PanelManager" preserve="all" />
     <type fullname="LccModel.PanelState" preserve="all" />
     <type fullname="LccModel.PanelType" preserve="all" />
+    <type fullname="LccModel.RedDot" preserve="all" />
+    <type fullname="LccModel.RedDotManager" preserve="all" />
     <type fullname="LccModel.SceneLoadManager" preserve="all" />
     <type fullname="LccModel.SceneName" preserve="all" />
     <type fullname="LccModel.TimeManager" preserve="all" />
@@ -4669,6 +4671,7 @@
     <type fullname="LccModel.LaunchPanel+&lt;ShowLaunch&gt;d__7" preserve="all" />
     <type fullname="LccModel.LoadingPanel+&lt;UpdateLoadingPercent&gt;d__10" preserve="all" />
     <type fullname="LccModel.TaskExpand+&lt;Continue&gt;d__0" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;LoadAssetAsync&gt;d__2`1" preserve="all" />
     <type fullname="LccModel.AssetBundleManager+&lt;InitManager&gt;d__2" preserve="all" />
     <type fullname="LccModel.CoroutineHandler+&lt;CallWrapper&gt;d__28" preserve="all" />
     <type fullname="LccModel.CoroutineLockQueue+&lt;&gt;c__DisplayClass7_0" preserve="all" />

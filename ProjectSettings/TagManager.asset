@@ -3,12 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Canvas
-  - ModelManager
-  - HotfixManager
-  - AudioSource
-  - VideoPlayer
+  tags: []
   layers:
   - Default
   - TransparentFX
