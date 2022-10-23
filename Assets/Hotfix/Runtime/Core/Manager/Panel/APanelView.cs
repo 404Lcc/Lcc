@@ -1,24 +1,29 @@
-﻿using UnityEngine;
-
-namespace LccHotfix
+﻿namespace LccHotfix
 {
-    public abstract class APanelView<T> : AViewBase<T> where T : ViewModelBase
+    public abstract class APanelView<T> : AViewBase<T>, IPanelHandler where T : ViewModelBase
     {
-        public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
-        public override void Start()
+        public void BeforeUnload(Panel uiBaseWindow)
         {
-            AutoReference(gameObject);
-            ShowView(gameObject);
         }
-        public virtual void ClosePanel()
+
+        public void OnHideWindow(Panel uiBaseWindow)
         {
-            PanelType type = GetType().Name.ToPanelType();
-            PanelManager.Instance.ClosePanel(type);
         }
-        public virtual void ClearPanel()
+
+        public void OnInitComponent(Panel uiBaseWindow)
         {
-            PanelType type = GetType().Name.ToPanelType();
-            PanelManager.Instance.ClearPanel(type);
+        }
+
+        public void OnInitWindowCoreData(Panel uiBaseWindow)
+        {
+        }
+
+        public void OnRegisterUIEvent(Panel uiBaseWindow)
+        {
+        }
+
+        public void OnShowWindow(Panel uiBaseWindow, AObjectBase contextData = null)
+        {
         }
     }
 }
