@@ -51,7 +51,7 @@ namespace LccHotfix
         /// <param name="panel"></param>
         void BeforeUnload(Panel panel);
     }
-    public class ShowPanelData : AObjectBase
+    public class PanelContextData : AObjectBase
     {
         public AObjectBase contextData;
     }
@@ -65,7 +65,13 @@ namespace LccHotfix
         private PanelType _type;
 
         public PanelData data;
-        public IPanelHandler logic;
+        public IPanelHandler Logic 
+        {
+            get
+            {
+                return PanelManager.Instance.GetLogic(Type);
+            }
+        }
         public GameObject GameObject
         {
             get
@@ -75,27 +81,6 @@ namespace LccHotfix
             set
             {
                 _gameObject = value;
-                if (Type != PanelType.None)
-                {
-                    string name = Type.ToPanelString();
-                    Type type = Manager.Instance.GetType(name);
-                    if (type != null)
-                    {
-                        object ui = Activator.CreateInstance(type);
-                        if (ui is IPanelHandler logic)
-                        {
-                            this.logic = logic;
-                        }
-                        else
-                        {
-                            LogUtil.LogError($"{name} 未继承IPanelHandler");
-                        }
-                    }
-                    else
-                    {
-                        LogUtil.LogError($"UI逻辑未找到 {name}");
-                    }
-                }
             }
         }
         public bool IsLoad
@@ -127,17 +112,13 @@ namespace LccHotfix
                 return null;
             }
         }
-        public bool IsInStackQueue
-        {
-            get;
-            set;
-        }
+
         public override void InitData(object[] datas)
         {
             base.InitData(datas);
 
             data = AddChildren<PanelData>();
-            IsInStackQueue = false;
+
         }
 
 
@@ -166,7 +147,7 @@ namespace LccHotfix
 
      
             Type = PanelType.None;
-            IsInStackQueue = false;
+ 
             if (data != null && !data.IsDisposed)
             {
                 data.Dispose();

@@ -35,7 +35,7 @@ namespace LccHotfix
         public Dictionary<int, string> typeToNameDict = new Dictionary<int, string>();//type 名字
         public Dictionary<string, int> nameToTypeDict = new Dictionary<string, int>();//名字 type
 
-
+        public Dictionary<int, IPanelHandler> typeToLogicDict = new Dictionary<int, IPanelHandler>();
         public override void InitData(object[] datas)
         {
             base.InitData(datas);
@@ -55,11 +55,37 @@ namespace LccHotfix
                 string name = item.ToPanelString();
                 typeToNameDict.Add((int)item, name);
                 nameToTypeDict.Add(name, (int)item);
+
+
+                Type type = Manager.Instance.GetType(name);
+                if (type != null)
+                {
+                    object ui = Activator.CreateInstance(type);
+                    if (ui is IPanelHandler logic)
+                    {
+                        typeToLogicDict[(int)item] = logic;
+                    }
+                    else
+                    {
+                        LogUtil.LogError($"{name} 未继承IPanelHandler");
+                    }
+                }
+                else
+                {
+                    LogUtil.LogError($"UI逻辑未找到 {name}");
+                }
             }
         }
 
 
-
+        public IPanelHandler GetLogic(PanelType type)
+        {
+            if (typeToLogicDict.ContainsKey((int)type))
+            {
+                return typeToLogicDict[(int)type];
+            }
+            return null;
+        }
 
 
         public bool IsPanelVisible(PanelType type)
@@ -105,7 +131,7 @@ namespace LccHotfix
                     return default;
                 }
             }
-            return (T)panel.logic;
+            return (T)panel.Logic;
         }
 
 
@@ -145,9 +171,8 @@ namespace LccHotfix
         private void PopNextStackPanel(PanelType type)
         {
             Panel panel = GetPanel(type);
-            if (panel != null && !panel.IsDisposed && isPopStackWndStatus && panel.IsInStackQueue)
+            if (panel != null && !panel.IsDisposed && isPopStackWndStatus)
             {
-                panel.IsInStackQueue = false;
                 PopStackPanel();
             }
         }
@@ -158,7 +183,6 @@ namespace LccHotfix
                 PanelType type = panelTypeQueue.Dequeue();
                 ShowPanel(type);
                 Panel panel = GetPanel(type);
-                panel.IsInStackQueue = true;
             }
             else
             {
@@ -174,7 +198,7 @@ namespace LccHotfix
 
 
 
-        public void ShowPanel(PanelType type, ShowPanelData data = null)
+        public void ShowPanel(PanelType type, PanelContextData data = null)
         {
             Panel panel = LoadPanel(type);
             if (panel != null)
@@ -182,12 +206,12 @@ namespace LccHotfix
                 InternalShowPanel(panel, type, data);
             }
         }
-        public void ShowPanel<T>(ShowPanelData data = null) where T : IPanelHandler
+        public void ShowPanel<T>(PanelContextData data = null) where T : IPanelHandler
         {
             PanelType type = GetPanelByGeneric<T>();
             ShowPanel(type, data);
         }
-        public async ETTask ShowPanelAsync(PanelType type, ShowPanelData data = null)
+        public async ETTask ShowPanelAsync(PanelType type, PanelContextData data = null)
         {
             Panel panel = await LoadPanelAsync(type);
             if (panel != null)
@@ -195,18 +219,20 @@ namespace LccHotfix
                 InternalShowPanel(panel, type, data);
             }
         }
-        public async ETTask ShowPanelAsync<T>(ShowPanelData data = null) where T : IPanelHandler
+        public async ETTask ShowPanelAsync<T>(PanelContextData data = null) where T : IPanelHandler
         {
             PanelType type = GetPanelByGeneric<T>();
             await ShowPanelAsync(type, data);
         }
-        private void InternalShowPanel(Panel panel, PanelType type, ShowPanelData data = null)
+        private void InternalShowPanel(Panel panel, PanelType type, PanelContextData data = null)
         {
             AObjectBase contextData = data == null ? null : data.contextData;
             panel.GameObject.SetActive(true);
-            panel.logic.OnShow(panel, contextData);
 
+            panel.Logic.OnShow(panel, contextData);
             panelVisibleDict[(int)type] = panel;
+
+     
         }
 
 
@@ -247,13 +273,13 @@ namespace LccHotfix
             panel.GameObject = UnityEngine.Object.Instantiate(go);
             panel.GameObject.name = go.name;
 
-            panel.logic.OnInitData(panel);
+            panel.Logic.OnInitData(panel);
 
             panel.SetRoot(GetRoot(panel.data.type));
             panel.Transform.SetAsLastSibling();
 
-            panel.logic.OnInitComponent(panel);
-            panel.logic.OnRegisterUIEvent(panel);
+            panel.Logic.OnInitComponent(panel);
+            panel.Logic.OnRegisterUIEvent(panel);
 
             allPanelDict[(int)panel.Type] = panel;
         }
@@ -266,12 +292,9 @@ namespace LccHotfix
                 Panel panel = GetPanel(type);
                 if (panel == null)
                 {
-                    if (typeToNameDict.ContainsKey((int)type))
-                    {
-                        panel = AddChildren<Panel>();
-                        panel.Type = type;
-                        await InternalLoadPanelAsync(panel);
-                    }
+                    panel = AddChildren<Panel>();
+                    panel.Type = type;
+                    await InternalLoadPanelAsync(panel);
                 }
 
                 if (!panel.IsLoad)
@@ -300,13 +323,13 @@ namespace LccHotfix
             panel.GameObject = UnityEngine.Object.Instantiate(go);
             panel.GameObject.name = go.name;
 
-            panel.logic.OnInitData(panel);
+            panel.Logic.OnInitData(panel);
 
-            panel?.SetRoot(GetRoot(panel.data.type));
+            panel.SetRoot(GetRoot(panel.data.type));
             panel.Transform.SetAsLastSibling();
 
-            panel.logic.OnInitComponent(panel);
-            panel.logic.OnRegisterUIEvent(panel);
+            panel.Logic.OnInitComponent(panel);
+            panel.Logic.OnRegisterUIEvent(panel);
 
             allPanelDict[(int)panel.Type] = panel;
         }
@@ -332,9 +355,11 @@ namespace LccHotfix
             }
 
             panel.GameObject.SetActive(false);
-            panel.logic.OnHide(panel);
 
+            panel.Logic.OnHide(panel);
             panelVisibleDict.Remove((int)type);
+
+          
 
             PopNextStackPanel(type);
         }
@@ -360,7 +385,7 @@ namespace LccHotfix
 
                 panelTypeCachedList.Add((PanelType)item.Key);
                 item.Value.GameObject.SetActive(false);
-                item.Value.logic.OnHide(item.Value);
+                item.Value.Logic.OnHide(item.Value);
             }
             if (panelTypeCachedList.Count > 0)
             {
@@ -413,7 +438,7 @@ namespace LccHotfix
                 }
                 HidePanel(panel.Type);
                 UnPanel(panel.Type, false);
-                panel?.Dispose();
+                panel.Dispose();
             }
             allPanelDict.Clear();
             panelVisibleDict.Clear();
@@ -440,7 +465,7 @@ namespace LccHotfix
             {
                 return;
             }
-            panel.logic.BeforeUnload(panel);
+            panel.Logic.BeforeUnload(panel);
             if (panel.IsLoad)
             {
                 AssetManager.Instance.UnLoadAsset(panel.GameObject.name, _suff, _types);

@@ -32,7 +32,11 @@ namespace LccHotfix
         }
         public Type GetType(string name)
         {
-            return typeDict[name];
+            if (typeDict.ContainsKey(name))
+            {
+                return typeDict[name];
+            }
+            return null;
         }
         public Type[] GetTypes()
         {
