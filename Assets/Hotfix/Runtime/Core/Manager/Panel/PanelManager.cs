@@ -103,7 +103,7 @@ namespace LccHotfix
             }
             return null;
         }
-        public T GetPanel<T>(bool isNeedShowState = false) where T : IPanelHandler
+        public T GetPanelLogic<T>(bool isNeedShowState = false) where T : IPanelHandler
         {
             PanelType type = GetPanelByGeneric<T>();
             Panel panel = GetPanel(type);
