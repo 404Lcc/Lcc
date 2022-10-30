@@ -14,7 +14,6 @@ namespace LccModel
         public Transform NormalRoot { get; set; }//0
         public Transform FixedRoot { get; set; }//10
         public Transform PopupRoot { get; set; }//20
-        public Transform OtherRoot { get; set; }//30
 
 
 
@@ -39,7 +38,6 @@ namespace LccModel
             NormalRoot = GameObject.Find("Global/UIRoot/NormalRoot").transform;
             FixedRoot = GameObject.Find("Global/UIRoot/FixedRoot").transform;
             PopupRoot = GameObject.Find("Global/UIRoot/PopUpRoot").transform;
-            OtherRoot = GameObject.Find("Global/UIRoot/OtherRoot").transform;
 
 
 

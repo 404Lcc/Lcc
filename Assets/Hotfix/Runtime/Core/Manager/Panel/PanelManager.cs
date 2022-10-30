@@ -3,6 +3,7 @@ using ET;
 using LccModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace LccHotfix
@@ -14,18 +15,14 @@ namespace LccHotfix
 
 
 
-        public bool isPopStackWndStatus;
-
 
         public Dictionary<int, Panel> allPanelDict = new Dictionary<int, Panel>();
-        public Dictionary<int, Panel> panelVisibleDict = new Dictionary<int, Panel>();
-    
+        public Dictionary<int, Panel> shownPanelDict = new Dictionary<int, Panel>();
 
 
+        protected Stack<NavigationData> backSequence = new Stack<NavigationData>();
 
-        public Queue<PanelType> panelTypeQueue = new Queue<PanelType>();
 
-        public List<PanelType> panelTypeCachedList = new List<PanelType>();
 
 
 
@@ -36,19 +33,24 @@ namespace LccHotfix
         public Dictionary<string, int> nameToTypeDict = new Dictionary<string, int>();//名字 type
 
         public Dictionary<int, IPanelHandler> typeToLogicDict = new Dictionary<int, IPanelHandler>();
+
+
+
+
+
+
+        public Panel curNavigation = null;
+        public Panel lastNavigation = null;
+
+        public List<PanelType> cachedList = new List<PanelType>();
+
+        public PanelCompare compare = new PanelCompare();
+
+
         public override void InitData(object[] datas)
         {
             base.InitData(datas);
 
-            isPopStackWndStatus = false;
-
-
-            allPanelDict.Clear();
-            panelVisibleDict.Clear();
-            panelTypeQueue.Clear();
-            panelTypeCachedList.Clear();
-            typeToNameDict.Clear();
-            nameToTypeDict.Clear();
 
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
@@ -90,7 +92,7 @@ namespace LccHotfix
 
         public bool IsPanelVisible(PanelType type)
         {
-            return panelVisibleDict.ContainsKey((int)type);
+            return shownPanelDict.ContainsKey((int)type);
         }
 
 
@@ -135,7 +137,6 @@ namespace LccHotfix
         }
 
 
- 
 
 
 
@@ -148,57 +149,10 @@ namespace LccHotfix
 
 
 
-        public void ShowStackPanel<T>() where T : IPanelHandler
-        {
-            PanelType type = GetPanelByGeneric<T>();
-            ShowStackPanel(type);
-        }
 
 
 
-
-        public void ShowStackPanel(PanelType type)
-        {
-            panelTypeQueue.Enqueue(type);
-
-            if (isPopStackWndStatus)
-            {
-                return;
-            }
-            isPopStackWndStatus = true;
-            PopStackPanel();
-        }
-        private void PopNextStackPanel(PanelType type)
-        {
-            Panel panel = GetPanel(type);
-            if (panel != null && !panel.IsDisposed && isPopStackWndStatus)
-            {
-                PopStackPanel();
-            }
-        }
-        private void PopStackPanel()
-        {
-            if (panelTypeQueue.Count > 0)
-            {
-                PanelType type = panelTypeQueue.Dequeue();
-                ShowPanel(type);
-                Panel panel = GetPanel(type);
-            }
-            else
-            {
-                isPopStackWndStatus = false;
-            }
-        }
-
-
-
-
-
-
-
-
-
-        public void ShowPanel(PanelType type, PanelContextData data = null)
+        public void ShowPanel(PanelType type, ShowPanelData data = null)
         {
             Panel panel = LoadPanel(type);
             if (panel != null)
@@ -206,12 +160,12 @@ namespace LccHotfix
                 InternalShowPanel(panel, type, data);
             }
         }
-        public void ShowPanel<T>(PanelContextData data = null) where T : IPanelHandler
+        public void ShowPanel<T>(ShowPanelData data = null) where T : IPanelHandler
         {
             PanelType type = GetPanelByGeneric<T>();
             ShowPanel(type, data);
         }
-        public async ETTask ShowPanelAsync(PanelType type, PanelContextData data = null)
+        public async ETTask ShowPanelAsync(PanelType type, ShowPanelData data = null)
         {
             Panel panel = await LoadPanelAsync(type);
             if (panel != null)
@@ -219,20 +173,23 @@ namespace LccHotfix
                 InternalShowPanel(panel, type, data);
             }
         }
-        public async ETTask ShowPanelAsync<T>(PanelContextData data = null) where T : IPanelHandler
+        public async ETTask ShowPanelAsync<T>(ShowPanelData data = null) where T : IPanelHandler
         {
             PanelType type = GetPanelByGeneric<T>();
             await ShowPanelAsync(type, data);
         }
-        private void InternalShowPanel(Panel panel, PanelType type, PanelContextData data = null)
+        private void InternalShowPanel(Panel panel, PanelType type, ShowPanelData data = null)
         {
             AObjectBase contextData = data == null ? null : data.contextData;
-            panel.GameObject.SetActive(true);
-
+            panel.IsShown = true;
             panel.Logic.OnShow(panel, contextData);
-            panelVisibleDict[(int)type] = panel;
+            shownPanelDict[(int)type] = panel;
 
-     
+            if (panel.data.navigationMode == UINavigationMode.NormalNavigation)
+            {
+                lastNavigation = curNavigation;
+                curNavigation = panel;
+            }
         }
 
 
@@ -247,7 +204,7 @@ namespace LccHotfix
 
 
 
-        private Panel LoadPanel(PanelType type)
+        private Panel LoadPanel(PanelType type, ShowPanelData showData = null)
         {
             Panel panel = GetPanel(type);
             if (panel == null)
@@ -261,6 +218,18 @@ namespace LccHotfix
             {
                 InternalLoadPanel(panel);
             }
+
+            if (showData != null && showData.forceReset)
+            {
+                panel.Logic.OnReset(panel);
+            }
+
+            if (showData == null || (showData != null && showData.executeNavigationLogic))
+            {
+                ExecuteNavigationLogic(panel, showData);
+            }
+
+
             return panel;
         }
         private void InternalLoadPanel(Panel panel)
@@ -282,8 +251,11 @@ namespace LccHotfix
             panel.Logic.OnRegisterUIEvent(panel);
 
             allPanelDict[(int)panel.Type] = panel;
+
+
+
         }
-        private async ETTask<Panel> LoadPanelAsync(PanelType type)
+        private async ETTask<Panel> LoadPanelAsync(PanelType type, ShowPanelData showData = null)
         {
             CoroutineLock coroutineLock = null;
             try
@@ -294,13 +266,25 @@ namespace LccHotfix
                 {
                     panel = AddChildren<Panel>();
                     panel.Type = type;
-                    await InternalLoadPanelAsync(panel);
+                    await InternalLoadPanelAsync(panel, showData);
                 }
 
                 if (!panel.IsLoad)
                 {
-                    await InternalLoadPanelAsync(panel);
+                    await InternalLoadPanelAsync(panel, showData);
                 }
+
+                if (showData != null && showData.forceReset)
+                {
+                    panel.Logic.OnReset(panel);
+                }
+
+                if (showData == null || (showData != null && showData.executeNavigationLogic))
+                {
+                    ExecuteNavigationLogic(panel, showData);
+                }
+
+
                 return panel;
             }
             catch (Exception e)
@@ -312,7 +296,7 @@ namespace LccHotfix
                 coroutineLock?.Dispose();
             }
         }
-        private async ETTask InternalLoadPanelAsync(Panel panel)
+        private async ETTask InternalLoadPanelAsync(Panel panel, ShowPanelData showData = null)
         {
             if (!typeToNameDict.TryGetValue((int)panel.Type, out string name))
             {
@@ -343,25 +327,24 @@ namespace LccHotfix
 
         public void HidePanel(PanelType type)
         {
-            if (!panelVisibleDict.ContainsKey((int)type))
+            if (!IsPanelVisible(type))
             {
                 return;
             }
 
-            Panel panel = panelVisibleDict[(int)type];
+            Panel panel = shownPanelDict[(int)type];
             if (panel == null || panel.IsDisposed)
             {
                 return;
             }
 
-            panel.GameObject.SetActive(false);
-
+            panel.IsShown = false;
             panel.Logic.OnHide(panel);
-            panelVisibleDict.Remove((int)type);
+            shownPanelDict.Remove((int)type);
 
-          
 
-            PopNextStackPanel(type);
+
+
         }
         public void HidePanel<T>() where T : IPanelHandler
         {
@@ -370,9 +353,8 @@ namespace LccHotfix
         }
         public void HideAllShownPanel(bool includeFixed = false)
         {
-            isPopStackWndStatus = false;
-            panelTypeCachedList.Clear();
-            foreach (KeyValuePair<int, Panel> item in panelVisibleDict)
+            cachedList.Clear();
+            foreach (KeyValuePair<int, Panel> item in shownPanelDict)
             {
                 if (item.Value.data.type == UIType.Fixed && !includeFixed)
                 {
@@ -383,19 +365,250 @@ namespace LccHotfix
                     continue;
                 }
 
-                panelTypeCachedList.Add((PanelType)item.Key);
-                item.Value.GameObject.SetActive(false);
+                cachedList.Add((PanelType)item.Key);
+                item.Value.IsShown = false;
                 item.Value.Logic.OnHide(item.Value);
             }
-            if (panelTypeCachedList.Count > 0)
+            if (cachedList.Count > 0)
             {
-                for (int i = 0; i < panelTypeCachedList.Count; i++)
+                for (int i = 0; i < cachedList.Count; i++)
                 {
-                    panelVisibleDict.Remove((int)panelTypeCachedList[i]);
+                    shownPanelDict.Remove((int)cachedList[i]);
                 }
             }
-            panelTypeQueue.Clear();
+
         }
+
+
+
+        /// <summary>
+        ///当返回导航时检查当前窗口的返回逻辑
+        ///如果为true，则执行返回逻辑
+        ///如果为false，立即输入RealReturnWindow()逻辑
+        /// </summary>
+        /// <returns></returns>
+        public bool PopupNavigationPanel()
+        {
+            if (curNavigation != null)
+            {
+                bool needReturn = curNavigation.Logic.IsReturn(curNavigation);
+                if (needReturn) return false;
+            }
+            return RealPopupNavigationPanel();
+        }
+
+
+
+
+        private bool RealPopupNavigationPanel()
+        {
+            if (backSequence.Count == 0)
+            {
+                if (curNavigation == null) return false;
+                if (curNavigation.Logic.IsReturn(curNavigation)) return true;
+
+
+                PanelType prePanelType = curNavigation.PreType;
+                if (prePanelType != PanelType.None)
+                {
+                    HidePanel(curNavigation.Type);
+                    ShowPanelData showData = new ShowPanelData();
+                    showData.executeNavigationLogic = false;
+                    ShowPanel(prePanelType, showData);
+                }
+                return false;
+            }
+            NavigationData backData = backSequence.Peek();
+            if (backData != null)
+            {
+                int cur = GetCurrentShownPanel();
+                if (cur != (int)backData.hideTarget.Type)
+                {
+
+                    return false;
+                }
+
+                if (backData.hideTarget.Logic.IsReturn(backData.hideTarget))
+                {
+                    return true;
+                }
+
+                PanelType hideType = backData.hideTarget.Type;
+                if (!IsPanelVisible(hideType))
+                {
+                    ExectuteBackSeqData(backData);
+                }
+                else
+                {
+                    HidePanel(hideType);
+                    ExectuteBackSeqData(backData);
+                }
+            }
+            return true;
+        }
+        private void ExectuteBackSeqData(NavigationData nd)
+        {
+            if (backSequence.Count > 0)
+            {
+                backSequence.Pop();
+            }
+            if (nd.backShowTargets == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < nd.backShowTargets.Count; i++)
+            {
+                PanelType backType = nd.backShowTargets[i];
+                ShowPanelForNavigation(backType);
+                if (i == nd.backShowTargets.Count - 1)
+                {
+                    Panel panel = GetPanel(backType);
+                    if (panel.data.navigationMode == UINavigationMode.NormalNavigation)
+                    {
+                        lastNavigation = curNavigation;
+                        curNavigation = panel;
+
+                    }
+                }
+            }
+        }
+        private void ShowPanelForNavigation(PanelType type)
+        {
+
+            if (IsPanelVisible(type))
+                return;
+
+            var panel = GetPanel(type);
+            panel.IsShown = true;
+            panel.Logic.OnShow(panel);
+            shownPanelDict[(int)panel.Type] = panel;
+
+
+
+
+        }
+        public void ClearBackSequence()
+        {
+            if (backSequence != null)
+            {
+                backSequence.Clear();
+            }
+        }
+
+
+
+        private int GetCurrentShownPanel()
+        {
+            List<Panel> listWnds = shownPanelDict.Values.ToList();
+            listWnds.Sort(compare);
+            for (int i = listWnds.Count - 1; i >= 0; i--)
+            {
+                if (listWnds[i].data.type != UIType.Fixed)
+                {
+                    return (int)listWnds[i].Type;
+                }
+            }
+            return (int)PanelType.None;
+        }
+
+        private void ExecuteNavigationLogic(Panel panel, ShowPanelData showData)
+        {
+            PanelData data = panel.data;
+            if (panel.RefreshBackSeqData)
+            {
+                RefreshBackSequenceData(panel, showData);
+            }
+            else if (data.showMode == UIShowMode.HideOther)
+            {
+                HideAllShownPanel();
+            }
+
+
+            if (panel.data.forceClearNavigation || (showData != null && showData.forceClearBackSeqData))
+            {
+                ClearBackSequence();
+            }
+            else
+            {
+                if (showData != null && showData.checkNavigation)
+                {
+                    CheckBackSequenceData(panel);
+                }
+            }
+        }
+        private void RefreshBackSequenceData(Panel panel, ShowPanelData showData)
+        {
+            PanelData data = panel.data;
+            bool dealBackSequence = true;
+            if (shownPanelDict.Count > 0 && dealBackSequence)
+            {
+                List<PanelType> removedKey = new List<PanelType>();
+                List<Panel> sortedHiddenPanels = new List<Panel>();
+
+                NavigationData backData = new NavigationData();
+                foreach (KeyValuePair<int, Panel> item in shownPanelDict)
+                {
+                    if (data.showMode != UIShowMode.DoNothing)
+                    {
+                        if (item.Value.data.type == UIType.Fixed) continue;
+                        removedKey.Add((PanelType)item.Key);
+                        item.Value.IsShown = false;
+
+                    }
+
+                    if (item.Value.data.type != UIType.Fixed)
+                    {
+                        sortedHiddenPanels.Add(item.Value);
+                    }
+                }
+
+                if (removedKey != null)
+                {
+                    for (int i = 0; i < removedKey.Count; i++)
+                    {
+                        shownPanelDict.Remove((int)removedKey[i]);
+                    }
+                }
+
+                if (data.navigationMode == UINavigationMode.NormalNavigation && (showData == null || (!showData.ignoreAddNavigationData)))
+                {
+                    sortedHiddenPanels.Sort(this.compare);
+                    List<PanelType> navHiddenPanels = new List<PanelType>();
+                    for (int i = 0; i < sortedHiddenPanels.Count; i++)
+                    {
+                        PanelType pushPanelType = sortedHiddenPanels[i].Type;
+                        navHiddenPanels.Add(pushPanelType);
+                    }
+                    backData.hideTarget = panel;
+                    backData.backShowTargets = navHiddenPanels;
+                    backSequence.Push(backData);
+                }
+            }
+        }
+        private void CheckBackSequenceData(Panel panel)
+        {
+            if (panel.RefreshBackSeqData)
+            {
+                if (backSequence.Count > 0)
+                {
+                    NavigationData backData = backSequence.Peek();
+                    if (backData.hideTarget != null)
+                    {
+                        if (backData.hideTarget.Type != panel.Type)
+                        {
+                            ClearBackSequence();
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+
+
+
 
 
 
@@ -409,12 +622,27 @@ namespace LccHotfix
 
         public void ClosePanel(PanelType type)
         {
-            if (!panelVisibleDict.ContainsKey((int)type))
+            if (!IsPanelVisible(type))
             {
                 return;
             }
+
+
+            Panel panel = shownPanelDict[(int)type];
+            if (backSequence.Count > 0)
+            {
+                NavigationData seqData = backSequence.Peek();
+                if (seqData != null && seqData.hideTarget == panel)
+                {
+                    PopupNavigationPanel();
+                    return;
+                }
+            }
+
+
+
             HidePanel(type);
-            UnPanel(type);
+
 
         }
         public void ClosePanel<T>() where T : IPanelHandler
@@ -422,9 +650,8 @@ namespace LccHotfix
             PanelType type = GetPanelByGeneric<T>();
             ClosePanel(type);
         }
-        public void CloseAllPanel()
+        public void ClearAllPanel()
         {
-            isPopStackWndStatus = false;
             if (allPanelDict == null)
             {
                 return;
@@ -436,14 +663,14 @@ namespace LccHotfix
                 {
                     continue;
                 }
-                HidePanel(panel.Type);
+
                 UnPanel(panel.Type, false);
                 panel.Dispose();
             }
             allPanelDict.Clear();
-            panelVisibleDict.Clear();
-            panelTypeQueue.Clear();
-            panelTypeCachedList.Clear();
+            shownPanelDict.Clear();
+            backSequence.Clear();
+
         }
 
 
@@ -465,7 +692,7 @@ namespace LccHotfix
             {
                 return;
             }
-            panel.Logic.BeforeUnload(panel);
+            panel.Logic.OnBeforeUnload(panel);
             if (panel.IsLoad)
             {
                 AssetManager.Instance.UnLoadAsset(panel.GameObject.name, _suff, _types);
@@ -476,7 +703,7 @@ namespace LccHotfix
             if (isDispose)
             {
                 allPanelDict.Remove((int)type);
-                panelVisibleDict.Remove((int)type);
+                shownPanelDict.Remove((int)type);
                 panel.Dispose();
             }
         }
@@ -501,10 +728,7 @@ namespace LccHotfix
             {
                 return GlobalManager.Instance.PopupRoot;
             }
-            else if (type == UIType.Other)
-            {
-                return GlobalManager.Instance.OtherRoot;
-            }
+
 
 
             return null;
@@ -523,7 +747,7 @@ namespace LccHotfix
             typeToNameDict.Clear();
             nameToTypeDict.Clear();
 
-            CloseAllPanel();
+            ClearAllPanel();
         }
     }
 }

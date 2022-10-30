@@ -45,7 +45,7 @@ namespace LccModel
 
             if (parent == null)
             {
-                gameObject.transform.SetParent(GlobalManager.Instance.OtherRoot);
+                gameObject.transform.SetParent(GlobalManager.Instance.PopupRoot);
             }
             else
             {

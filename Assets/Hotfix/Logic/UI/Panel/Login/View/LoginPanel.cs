@@ -1,9 +1,11 @@
 ﻿using LccModel;
+using UnityEngine.UI;
 
 namespace LccHotfix
 {
     public class LoginPanel : APanelView<LoginModel>
     {
+        public Button testBtn;
         public override void InitView(LoginModel viewModel)
         {
             LogUtil.Log("InitView第一个执行的函数");
@@ -23,8 +25,11 @@ namespace LccHotfix
 
         public override void OnInitData(Panel panel)
         {
+            base.OnInitData(panel);
             LogUtil.Log("OnInitData第三个执行的函数");
             panel.data.type = UIType.Normal;
+
+            panel.data.showMode = UIShowMode.HideOther;
         }
 
         public override void OnInitComponent(Panel panel)
@@ -35,6 +40,8 @@ namespace LccHotfix
         public override void OnRegisterUIEvent(Panel panel)
         {
             LogUtil.Log("OnRegisterUIEvent第五个执行的函数");
+
+            testBtn.onClick.AddListener(OnTest);
         }
 
 
@@ -50,11 +57,14 @@ namespace LccHotfix
             LogUtil.Log("OnHide");
         }
 
-        public override void BeforeUnload(Panel panel)
+        public override void OnBeforeUnload(Panel panel)
         {
             LogUtil.Log("BeforeUnload");
         }
 
-
+        public void OnTest() 
+        {
+            PanelManager.Instance.ShowPanel(PanelType.Main);
+        }
     }
 }

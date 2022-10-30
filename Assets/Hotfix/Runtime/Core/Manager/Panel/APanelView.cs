@@ -73,15 +73,17 @@ namespace LccHotfix
         public virtual void OnHide(Panel panel)
         {
         }
-        public virtual void BeforeUnload(Panel panel)
+        public virtual void OnBeforeUnload(Panel panel)
         {
         }
 
-     
+        public virtual void OnReset(Panel panel)
+        {
+        }
 
-    
-
-
-  
+        public virtual bool IsReturn(Panel panel)
+        {
+            return false;
+        }
     }
 }
