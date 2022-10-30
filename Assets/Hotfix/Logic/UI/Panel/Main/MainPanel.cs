@@ -9,7 +9,9 @@
         {
             base.OnInitData(panel);
 
+            panel.data.type = UIType.Normal;
             panel.data.showMode = UIShowMode.HideOther;
+            panel.data.navigationMode = UINavigationMode.NormalNavigation;
         }
     }
 }

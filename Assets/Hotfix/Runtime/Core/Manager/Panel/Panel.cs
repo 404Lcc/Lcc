@@ -4,26 +4,21 @@ using Object = UnityEngine.Object;
 
 namespace LccHotfix
 {
-    public enum UINavigationMode
-    {
-        IgnoreNavigation,
-        NormalNavigation,
-    }
-    public enum UIShowMode
-    {
-        //DoNothing,     // Really do nothing
-        //HideOther,    
-        //NeedBack,      // 打开界面不关闭其他界面
-        //NoNeedBack,    // 打开界面关闭其他界面，不加入导航队列
-
-        DoNothing,
-        HideOther,//打开界面关闭其他界面
-    }
     public enum UIType
     {
         Normal,//普通界面
         Fixed,//固定界面
         Popup,//弹出界面
+    }
+    public enum UIShowMode
+    {
+        Normal,//什么都不做
+        HideOther,//打开当前界面关闭其他界面
+    }
+    public enum UINavigationMode
+    {
+        IgnoreNavigation,//忽略导航
+        NormalNavigation,
     }
     public interface IPanelHandler
     {
@@ -83,7 +78,7 @@ namespace LccHotfix
         public bool forceReset;
 
         //强制清除导航数据
-        public bool forceClearBackSeqData;
+        public bool forceClearBackSequenceData;
 
         public AObjectBase contextData;
 
@@ -107,8 +102,8 @@ namespace LccHotfix
     {
         public bool forceClearNavigation = false;
         public UIType type = UIType.Normal;
-        public UIShowMode showMode = UIShowMode.DoNothing;
-        public UINavigationMode navigationMode = UINavigationMode.NormalNavigation;
+        public UIShowMode showMode = UIShowMode.Normal;
+        public UINavigationMode navigationMode = UINavigationMode.IgnoreNavigation;
     }
     public class PanelCompare : IComparer<Panel>
     {
@@ -119,7 +114,6 @@ namespace LccHotfix
     }
     public class Panel : AObjectBase
     {
-
         private PanelType _type;
         private PanelType _preType;
         private bool _isLock;
@@ -131,7 +125,7 @@ namespace LccHotfix
         {
             get
             {
-                return PanelManager.Instance.GetLogic(Type);
+                return PanelManager.Instance.GetPanelLogic(Type);
             }
         }
         public GameObject GameObject

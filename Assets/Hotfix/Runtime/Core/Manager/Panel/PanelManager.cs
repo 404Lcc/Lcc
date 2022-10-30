@@ -13,31 +13,15 @@ namespace LccHotfix
         private readonly string _suff = AssetSuffix.Prefab;
         private readonly string[] _types = new string[] { AssetType.Prefab, AssetType.Panel };
 
-
-
-
         public Dictionary<int, Panel> allPanelDict = new Dictionary<int, Panel>();
         public Dictionary<int, Panel> shownPanelDict = new Dictionary<int, Panel>();
 
-
-        protected Stack<NavigationData> backSequence = new Stack<NavigationData>();
-
-
-
-
-
-
-
+        public Stack<NavigationData> backSequence = new Stack<NavigationData>();
 
         public Dictionary<int, string> typeToNameDict = new Dictionary<int, string>();//type 名字
         public Dictionary<string, int> nameToTypeDict = new Dictionary<string, int>();//名字 type
 
         public Dictionary<int, IPanelHandler> typeToLogicDict = new Dictionary<int, IPanelHandler>();
-
-
-
-
-
 
         public Panel curNavigation = null;
         public Panel lastNavigation = null;
@@ -79,25 +63,30 @@ namespace LccHotfix
             }
         }
 
-
-        public IPanelHandler GetLogic(PanelType type)
+        private Transform GetRoot(UIType type)
         {
-            if (typeToLogicDict.ContainsKey((int)type))
+            if (type == UIType.Normal)
             {
-                return typeToLogicDict[(int)type];
+                return GlobalManager.Instance.NormalRoot;
             }
+            else if (type == UIType.Fixed)
+            {
+                return GlobalManager.Instance.FixedRoot;
+            }
+            else if (type == UIType.Popup)
+            {
+                return GlobalManager.Instance.PopupRoot;
+            }
+
+
+
             return null;
         }
-
-
         public bool IsPanelVisible(PanelType type)
         {
             return shownPanelDict.ContainsKey((int)type);
         }
-
-
-
-        public PanelType GetPanelByGeneric<T>() where T : IPanelHandler
+        private PanelType GetPanelByGeneric<T>() where T : IPanelHandler
         {
             if (nameToTypeDict.TryGetValue(typeof(T).Name, out int type))
             {
@@ -135,52 +124,55 @@ namespace LccHotfix
             }
             return (T)panel.Logic;
         }
+        public IPanelHandler GetPanelLogic(PanelType type)
+        {
+            if (typeToLogicDict.ContainsKey((int)type))
+            {
+                return typeToLogicDict[(int)type];
+            }
+            return null;
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public void ShowPanel(PanelType type, ShowPanelData data = null)
+        public void ShowPanel(PanelType type, ShowPanelData showData = null)
         {
             Panel panel = LoadPanel(type);
             if (panel != null)
             {
-                InternalShowPanel(panel, type, data);
+                InternalShowPanel(panel, type, showData);
             }
         }
-        public void ShowPanel<T>(ShowPanelData data = null) where T : IPanelHandler
+        public void ShowPanel<T>(ShowPanelData showData = null) where T : IPanelHandler
         {
             PanelType type = GetPanelByGeneric<T>();
-            ShowPanel(type, data);
+            ShowPanel(type, showData);
         }
-        public async ETTask ShowPanelAsync(PanelType type, ShowPanelData data = null)
+        public async ETTask ShowPanelAsync(PanelType type, ShowPanelData showData = null)
         {
             Panel panel = await LoadPanelAsync(type);
             if (panel != null)
             {
-                InternalShowPanel(panel, type, data);
+                InternalShowPanel(panel, type, showData);
             }
         }
-        public async ETTask ShowPanelAsync<T>(ShowPanelData data = null) where T : IPanelHandler
+        public async ETTask ShowPanelAsync<T>(ShowPanelData showData = null) where T : IPanelHandler
         {
             PanelType type = GetPanelByGeneric<T>();
-            await ShowPanelAsync(type, data);
+            await ShowPanelAsync(type, showData);
         }
-        private void InternalShowPanel(Panel panel, PanelType type, ShowPanelData data = null)
+        private void InternalShowPanel(Panel panel, PanelType type, ShowPanelData showData = null)
         {
-            AObjectBase contextData = data == null ? null : data.contextData;
+            if (showData != null && showData.forceReset)
+            {
+                panel.Logic.OnReset(panel);
+            }
+
+            if (showData == null || (showData != null && showData.executeNavigationLogic))
+            {
+                ExecuteNavigationLogic(panel, showData);
+            }
+
+
+            AObjectBase contextData = showData == null ? null : showData.contextData;
             panel.IsShown = true;
             panel.Logic.OnShow(panel, contextData);
             shownPanelDict[(int)type] = panel;
@@ -194,17 +186,7 @@ namespace LccHotfix
 
 
 
-
-
-
-
-
-
-
-
-
-
-        private Panel LoadPanel(PanelType type, ShowPanelData showData = null)
+        private Panel LoadPanel(PanelType type)
         {
             Panel panel = GetPanel(type);
             if (panel == null)
@@ -219,15 +201,6 @@ namespace LccHotfix
                 InternalLoadPanel(panel);
             }
 
-            if (showData != null && showData.forceReset)
-            {
-                panel.Logic.OnReset(panel);
-            }
-
-            if (showData == null || (showData != null && showData.executeNavigationLogic))
-            {
-                ExecuteNavigationLogic(panel, showData);
-            }
 
 
             return panel;
@@ -255,7 +228,7 @@ namespace LccHotfix
 
 
         }
-        private async ETTask<Panel> LoadPanelAsync(PanelType type, ShowPanelData showData = null)
+        private async ETTask<Panel> LoadPanelAsync(PanelType type)
         {
             CoroutineLock coroutineLock = null;
             try
@@ -266,23 +239,15 @@ namespace LccHotfix
                 {
                     panel = AddChildren<Panel>();
                     panel.Type = type;
-                    await InternalLoadPanelAsync(panel, showData);
+                    await InternalLoadPanelAsync(panel);
                 }
 
                 if (!panel.IsLoad)
                 {
-                    await InternalLoadPanelAsync(panel, showData);
+                    await InternalLoadPanelAsync(panel);
                 }
 
-                if (showData != null && showData.forceReset)
-                {
-                    panel.Logic.OnReset(panel);
-                }
-
-                if (showData == null || (showData != null && showData.executeNavigationLogic))
-                {
-                    ExecuteNavigationLogic(panel, showData);
-                }
+  
 
 
                 return panel;
@@ -296,7 +261,7 @@ namespace LccHotfix
                 coroutineLock?.Dispose();
             }
         }
-        private async ETTask InternalLoadPanelAsync(Panel panel, ShowPanelData showData = null)
+        private async ETTask InternalLoadPanelAsync(Panel panel)
         {
             if (!typeToNameDict.TryGetValue((int)panel.Type, out string name))
             {
@@ -319,32 +284,20 @@ namespace LccHotfix
         }
 
 
-
-
-
-
-
-
         public void HidePanel(PanelType type)
         {
             if (!IsPanelVisible(type))
             {
                 return;
             }
-
             Panel panel = shownPanelDict[(int)type];
             if (panel == null || panel.IsDisposed)
             {
                 return;
             }
-
             panel.IsShown = false;
             panel.Logic.OnHide(panel);
             shownPanelDict.Remove((int)type);
-
-
-
-
         }
         public void HidePanel<T>() where T : IPanelHandler
         {
@@ -396,10 +349,6 @@ namespace LccHotfix
             }
             return RealPopupNavigationPanel();
         }
-
-
-
-
         private bool RealPopupNavigationPanel()
         {
             if (backSequence.Count == 0)
@@ -495,9 +444,6 @@ namespace LccHotfix
                 backSequence.Clear();
             }
         }
-
-
-
         private int GetCurrentShownPanel()
         {
             List<Panel> listWnds = shownPanelDict.Values.ToList();
@@ -511,7 +457,6 @@ namespace LccHotfix
             }
             return (int)PanelType.None;
         }
-
         private void ExecuteNavigationLogic(Panel panel, ShowPanelData showData)
         {
             PanelData data = panel.data;
@@ -525,7 +470,7 @@ namespace LccHotfix
             }
 
 
-            if (panel.data.forceClearNavigation || (showData != null && showData.forceClearBackSeqData))
+            if (panel.data.forceClearNavigation || (showData != null && showData.forceClearBackSequenceData))
             {
                 ClearBackSequence();
             }
@@ -549,7 +494,7 @@ namespace LccHotfix
                 NavigationData backData = new NavigationData();
                 foreach (KeyValuePair<int, Panel> item in shownPanelDict)
                 {
-                    if (data.showMode != UIShowMode.DoNothing)
+                    if (data.showMode != UIShowMode.Normal)
                     {
                         if (item.Value.data.type == UIType.Fixed) continue;
                         removedKey.Add((PanelType)item.Key);
@@ -606,28 +551,12 @@ namespace LccHotfix
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public void ClosePanel(PanelType type)
         {
             if (!IsPanelVisible(type))
             {
                 return;
             }
-
-
             Panel panel = shownPanelDict[(int)type];
             if (backSequence.Count > 0)
             {
@@ -638,12 +567,7 @@ namespace LccHotfix
                     return;
                 }
             }
-
-
-
             HidePanel(type);
-
-
         }
         public void ClosePanel<T>() where T : IPanelHandler
         {
@@ -674,17 +598,11 @@ namespace LccHotfix
         }
 
 
-
-
-
-
         public void UnPanel<T>() where T : IPanelHandler
         {
             PanelType type = GetPanelByGeneric<T>();
             UnPanel(type);
         }
-
-
         public void UnPanel(PanelType type, bool isDispose = true)
         {
             Panel panel = GetPanel(type);
@@ -707,38 +625,6 @@ namespace LccHotfix
                 panel.Dispose();
             }
         }
-
-
-
-
-
-
-
-        private Transform GetRoot(UIType type)
-        {
-            if (type == UIType.Normal)
-            {
-                return GlobalManager.Instance.NormalRoot;
-            }
-            else if (type == UIType.Fixed)
-            {
-                return GlobalManager.Instance.FixedRoot;
-            }
-            else if (type == UIType.Popup)
-            {
-                return GlobalManager.Instance.PopupRoot;
-            }
-
-
-
-            return null;
-        }
-
-
-
-
-
-
 
         public override void OnDestroy()
         {

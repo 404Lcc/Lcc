@@ -27,9 +27,10 @@ namespace LccHotfix
         {
             base.OnInitData(panel);
             LogUtil.Log("OnInitData第三个执行的函数");
-            panel.data.type = UIType.Normal;
 
+            panel.data.type = UIType.Normal;
             panel.data.showMode = UIShowMode.HideOther;
+            panel.data.navigationMode = UINavigationMode.IgnoreNavigation;
         }
 
         public override void OnInitComponent(Panel panel)

@@ -13,7 +13,7 @@ namespace LccHotfix
             base.OnInitData(panel);
 
             panel.data.type = UIType.Fixed;
-            panel.data.showMode = UIShowMode.DoNothing;
+            panel.data.showMode = UIShowMode.Normal;
             panel.data.navigationMode = UINavigationMode.IgnoreNavigation;
         }
         public override void OnRegisterUIEvent(Panel panel)
