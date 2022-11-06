@@ -8,5 +8,6 @@
         Quit,
         Login,
         Main,
+        Game,
     }
 }

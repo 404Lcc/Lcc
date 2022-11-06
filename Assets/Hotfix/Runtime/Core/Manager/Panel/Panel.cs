@@ -95,8 +95,8 @@ namespace LccHotfix
     }
     public class NavigationData
     {
-        public Panel hideTarget;
-        public List<PanelType> backShowTargets;
+        public Panel hideTarget;//当前界面
+        public List<PanelType> backShowTargets;//当前界面所有显示的界面
     }
     public class PanelData : AObjectBase
     {
@@ -109,11 +109,18 @@ namespace LccHotfix
     {
         public int Compare(Panel left, Panel right)
         {
+            //返回值1，则left > right
+            //返回值0，则left = right
+            //返回值-1，则left < right
             return left.Depth - right.Depth;
         }
     }
     public class Panel : AObjectBase
     {
+        private const int NormalDepth = 1000;
+        private const int FixedDepth = 2000;
+        private const int PopupDepth = 3000;
+
         private PanelType _type;
         private PanelType _preType;
         private bool _isLock;
@@ -162,7 +169,22 @@ namespace LccHotfix
                 GameObject.SetActive(value);
             }
         }
-        public int Depth => Transform.GetSiblingIndex();
+        public int Depth
+        {
+            get
+            {
+                switch (data.type)
+                {
+                    case UIType.Normal:
+                        return NormalDepth + Transform.GetSiblingIndex();
+                    case UIType.Fixed:
+                        return FixedDepth + Transform.GetSiblingIndex();
+                    case UIType.Popup:
+                        return PopupDepth + Transform.GetSiblingIndex();
+                }
+                return -1;
+            }
+        }
         public PanelType Type
         {
             get
@@ -185,7 +207,6 @@ namespace LccHotfix
                 _preType = value;
             }
         }
-        public bool RefreshBackSeqData => data.navigationMode == UINavigationMode.NormalNavigation;
 
 
         public Transform Transform

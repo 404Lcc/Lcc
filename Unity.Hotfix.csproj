@@ -130,6 +130,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
+    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Game\GamePanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

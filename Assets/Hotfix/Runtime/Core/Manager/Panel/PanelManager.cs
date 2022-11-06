@@ -11,25 +11,24 @@ namespace LccHotfix
     public class PanelManager : Singleton<PanelManager>
     {
         private readonly string _suff = AssetSuffix.Prefab;
-        private readonly string[] _types = new string[] { AssetType.Prefab, AssetType.Panel };
+        private readonly string[] _types = new string[] { AssetType.Prefab, AssetType.Panel };//资源类型
 
-        public Dictionary<int, Panel> allPanelDict = new Dictionary<int, Panel>();
-        public Dictionary<int, Panel> shownPanelDict = new Dictionary<int, Panel>();
+        public Dictionary<int, Panel> allPanelDict = new Dictionary<int, Panel>();//已加载的界面
+        public Dictionary<int, Panel> shownPanelDict = new Dictionary<int, Panel>();//打开的界面
 
-        public Stack<NavigationData> backSequence = new Stack<NavigationData>();
+        public Stack<NavigationData> backSequence = new Stack<NavigationData>();//导航堆栈
 
         public Dictionary<int, string> typeToNameDict = new Dictionary<int, string>();//type 名字
         public Dictionary<string, int> nameToTypeDict = new Dictionary<string, int>();//名字 type
 
-        public Dictionary<int, IPanelHandler> typeToLogicDict = new Dictionary<int, IPanelHandler>();
+        public Dictionary<int, IPanelHandler> typeToLogicDict = new Dictionary<int, IPanelHandler>();//逻辑
 
-        public Panel curNavigation = null;
-        public Panel lastNavigation = null;
+        public Panel curNavigation;//当前导航
+        public Panel lastNavigation;//上一个导航
 
-        public List<PanelType> cachedList = new List<PanelType>();
+        public List<PanelType> cachedList = new List<PanelType>();//换成列表
 
         public PanelCompare compare = new PanelCompare();
-
 
         public override void InitData(object[] datas)
         {
@@ -63,6 +62,11 @@ namespace LccHotfix
             }
         }
 
+        /// <summary>
+        /// 根据类型获取根节点
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private Transform GetRoot(UIType type)
         {
             if (type == UIType.Normal)
@@ -82,10 +86,33 @@ namespace LccHotfix
 
             return null;
         }
+        /// <summary>
+        /// 判断界面是否打开
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public bool IsPanelVisible(PanelType type)
         {
             return shownPanelDict.ContainsKey((int)type);
         }
+        /// <summary>
+        /// 根据类型获取界面对象
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private Panel GetPanel(PanelType type)
+        {
+            if (allPanelDict.ContainsKey((int)type))
+            {
+                return allPanelDict[(int)type];
+            }
+            return null;
+        }
+        /// <summary>
+        /// 根据泛型获取界面类型
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         private PanelType GetPanelByGeneric<T>() where T : IPanelHandler
         {
             if (nameToTypeDict.TryGetValue(typeof(T).Name, out int type))
@@ -95,35 +122,11 @@ namespace LccHotfix
 
             return PanelType.None;
         }
-        private Panel GetPanel(PanelType type)
-        {
-            if (allPanelDict.ContainsKey((int)type))
-            {
-                return allPanelDict[(int)type];
-            }
-            return null;
-        }
-        public T GetPanelLogic<T>(bool isNeedShowState = false) where T : IPanelHandler
-        {
-            PanelType type = GetPanelByGeneric<T>();
-            Panel panel = GetPanel(type);
-            if (panel == null)
-            {
-                return default;
-            }
-            if (!panel.IsLoad)
-            {
-                return default;
-            }
-            if (isNeedShowState)
-            {
-                if (!IsPanelVisible(type))
-                {
-                    return default;
-                }
-            }
-            return (T)panel.Logic;
-        }
+        /// <summary>
+        /// 根据类型获取逻辑对象
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public IPanelHandler GetPanelLogic(PanelType type)
         {
             if (typeToLogicDict.ContainsKey((int)type))
@@ -133,6 +136,11 @@ namespace LccHotfix
             return null;
         }
 
+        /// <summary>
+        /// 打开界面
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="showData"></param>
         public void ShowPanel(PanelType type, ShowPanelData showData = null)
         {
             Panel panel = LoadPanel(type);
@@ -141,11 +149,22 @@ namespace LccHotfix
                 InternalShowPanel(panel, type, showData);
             }
         }
+        /// <summary>
+        /// 打开界面
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="showData"></param>
         public void ShowPanel<T>(ShowPanelData showData = null) where T : IPanelHandler
         {
             PanelType type = GetPanelByGeneric<T>();
             ShowPanel(type, showData);
         }
+        /// <summary>
+        /// 打开界面
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="showData"></param>
+        /// <returns></returns>
         public async ETTask ShowPanelAsync(PanelType type, ShowPanelData showData = null)
         {
             Panel panel = await LoadPanelAsync(type);
@@ -154,6 +173,12 @@ namespace LccHotfix
                 InternalShowPanel(panel, type, showData);
             }
         }
+        /// <summary>
+        /// 打开界面
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="showData"></param>
+        /// <returns></returns>
         public async ETTask ShowPanelAsync<T>(ShowPanelData showData = null) where T : IPanelHandler
         {
             PanelType type = GetPanelByGeneric<T>();
@@ -163,11 +188,13 @@ namespace LccHotfix
         {
             if (showData != null && showData.forceReset)
             {
+                //强制重置界面
                 panel.Logic.OnReset(panel);
             }
-
+            //默认执行导航逻辑
             if (showData == null || (showData != null && showData.executeNavigationLogic))
             {
+                //执行导航逻辑
                 ExecuteNavigationLogic(panel, showData);
             }
 
@@ -179,13 +206,18 @@ namespace LccHotfix
 
             if (panel.data.navigationMode == UINavigationMode.NormalNavigation)
             {
+                //刷新导航
                 lastNavigation = curNavigation;
                 curNavigation = panel;
             }
         }
 
 
-
+        /// <summary>
+        /// 加载界面
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private Panel LoadPanel(PanelType type)
         {
             Panel panel = GetPanel(type);
@@ -200,8 +232,6 @@ namespace LccHotfix
             {
                 InternalLoadPanel(panel);
             }
-
-
 
             return panel;
         }
@@ -224,10 +254,12 @@ namespace LccHotfix
             panel.Logic.OnRegisterUIEvent(panel);
 
             allPanelDict[(int)panel.Type] = panel;
-
-
-
         }
+        /// <summary>
+        /// 异步加载界面
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private async ETTask<Panel> LoadPanelAsync(PanelType type)
         {
             CoroutineLock coroutineLock = null;
@@ -246,10 +278,6 @@ namespace LccHotfix
                 {
                     await InternalLoadPanelAsync(panel);
                 }
-
-  
-
-
                 return panel;
             }
             catch (Exception e)
@@ -284,6 +312,10 @@ namespace LccHotfix
         }
 
 
+        /// <summary>
+        /// 隐藏界面
+        /// </summary>
+        /// <param name="type"></param>
         public void HidePanel(PanelType type)
         {
             if (!IsPanelVisible(type))
@@ -299,11 +331,19 @@ namespace LccHotfix
             panel.Logic.OnHide(panel);
             shownPanelDict.Remove((int)type);
         }
+        /// <summary>
+        /// 根据泛型隐藏界面
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
         public void HidePanel<T>() where T : IPanelHandler
         {
             PanelType type = GetPanelByGeneric<T>();
             HidePanel(type);
         }
+        /// <summary>
+        /// 隐藏全部打开的界面
+        /// </summary>
+        /// <param name="includeFixed">忽略固定界面</param>
         public void HideAllShownPanel(bool includeFixed = false)
         {
             cachedList.Clear();
@@ -335,9 +375,7 @@ namespace LccHotfix
 
 
         /// <summary>
-        ///当返回导航时检查当前窗口的返回逻辑
-        ///如果为true，则执行返回逻辑
-        ///如果为false，立即输入RealReturnWindow()逻辑
+        /// 弹出导航面板
         /// </summary>
         /// <returns></returns>
         public bool PopupNavigationPanel()
@@ -345,12 +383,20 @@ namespace LccHotfix
             if (curNavigation != null)
             {
                 bool needReturn = curNavigation.Logic.IsReturn(curNavigation);
-                if (needReturn) return false;
+                if (needReturn)
+                {
+                    return false;
+                }
             }
-            return RealPopupNavigationPanel();
+            return InternalPopupNavigationPanel();
         }
-        private bool RealPopupNavigationPanel()
+        /// <summary>
+        /// 弹出导航面板
+        /// </summary>
+        /// <returns></returns>
+        private bool InternalPopupNavigationPanel()
         {
+            //没用导航数据
             if (backSequence.Count == 0)
             {
                 if (curNavigation == null) return false;
@@ -360,20 +406,27 @@ namespace LccHotfix
                 PanelType prePanelType = curNavigation.PreType;
                 if (prePanelType != PanelType.None)
                 {
+                    //隐藏当前导航界面
                     HidePanel(curNavigation.Type);
+
+
+                    //打开上一个导航界面
                     ShowPanelData showData = new ShowPanelData();
+                    //没有导航数据所以不走导航
                     showData.executeNavigationLogic = false;
                     ShowPanel(prePanelType, showData);
                 }
                 return false;
             }
+            //拿到导航数据栈顶
             NavigationData backData = backSequence.Peek();
             if (backData != null)
             {
+                //获取当前界面
                 int cur = GetCurrentShownPanel();
+                //栈顶界面和当前层级最高的界面不相同直接return
                 if (cur != (int)backData.hideTarget.Type)
                 {
-
                     return false;
                 }
 
@@ -383,38 +436,41 @@ namespace LccHotfix
                 }
 
                 PanelType hideType = backData.hideTarget.Type;
-                if (!IsPanelVisible(hideType))
-                {
-                    ExectuteBackSeqData(backData);
-                }
-                else
+                //隐藏目标界面
+                if (IsPanelVisible(hideType))
                 {
                     HidePanel(hideType);
-                    ExectuteBackSeqData(backData);
                 }
+                //执行回退逻辑
+                ExectuteFallback(backData);
             }
             return true;
         }
-        private void ExectuteBackSeqData(NavigationData nd)
+        /// <summary>
+        /// 执行回退逻辑
+        /// </summary>
+        /// <param name="data"></param>
+        private void ExectuteFallback(NavigationData data)
         {
             if (backSequence.Count > 0)
             {
                 backSequence.Pop();
             }
-            if (nd.backShowTargets == null)
-            {
-                return;
-            }
+            if (data.backShowTargets == null) return;
 
-            for (int i = 0; i < nd.backShowTargets.Count; i++)
+            //回退的时候把上一层打开的界面都打开
+            for (int i = 0; i < data.backShowTargets.Count; i++)
             {
-                PanelType backType = nd.backShowTargets[i];
+                PanelType backType = data.backShowTargets[i];
+
+                //打开回退需要打开的界面
                 ShowPanelForNavigation(backType);
-                if (i == nd.backShowTargets.Count - 1)
+                if (i == data.backShowTargets.Count - 1)
                 {
                     Panel panel = GetPanel(backType);
                     if (panel.data.navigationMode == UINavigationMode.NormalNavigation)
                     {
+                        //刷新导航
                         lastNavigation = curNavigation;
                         curNavigation = panel;
 
@@ -422,21 +478,149 @@ namespace LccHotfix
                 }
             }
         }
+        /// <summary>
+        /// 根据导航数据打开界面
+        /// </summary>
+        /// <param name="type"></param>
         private void ShowPanelForNavigation(PanelType type)
         {
-
-            if (IsPanelVisible(type))
-                return;
-
-            var panel = GetPanel(type);
+            if (IsPanelVisible(type)) return;
+            Panel panel = GetPanel(type);
             panel.IsShown = true;
             panel.Logic.OnShow(panel);
             shownPanelDict[(int)panel.Type] = panel;
-
-
-
-
         }
+        /// <summary>
+        /// 获取当前层级最高的界面，一般来说就是当前打开的界面
+        /// </summary>
+        /// <returns></returns>
+        private int GetCurrentShownPanel()
+        {
+            List<Panel> list = shownPanelDict.Values.ToList();
+            list.Sort(compare);
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                if (list[i].data.type != UIType.Fixed)
+                {
+                    return (int)list[i].Type;
+                }
+            }
+            return (int)PanelType.None;
+        }
+        /// <summary>
+        /// 执行导航逻辑
+        /// </summary>
+        /// <param name="panel"></param>
+        /// <param name="showData"></param>
+        private void ExecuteNavigationLogic(Panel panel, ShowPanelData showData)
+        {
+            //如果界面是导航类型的就刷新导航数据
+            if (panel.data.navigationMode == UINavigationMode.NormalNavigation)
+            {
+                RefreshBackSequenceData(panel, showData);
+            }
+            else if (panel.data.showMode == UIShowMode.HideOther)
+            {
+                //关闭其他打开的界面
+                HideAllShownPanel();
+            }
+
+
+            if (panel.data.forceClearNavigation || (showData != null && showData.forceClearBackSequenceData))
+            {
+                //强制清理导航数据
+                ClearBackSequence();
+            }
+            else
+            {
+                if (panel.data.navigationMode == UINavigationMode.NormalNavigation)
+                {
+                    if (showData != null && showData.checkNavigation)
+                    {
+                        //强制检测导航数据
+                        CheckBackSequenceData(panel);
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// 刷新导航数据
+        /// </summary>
+        /// <param name="panel"></param>
+        /// <param name="showData"></param>
+        private void RefreshBackSequenceData(Panel panel, ShowPanelData showData)
+        {
+            if (shownPanelDict.Count > 0)
+            {
+                List<PanelType> removedList = new List<PanelType>();
+                List<Panel> tempList = new List<Panel>();
+
+                NavigationData navigationData = new NavigationData();
+
+
+                foreach (KeyValuePair<int, Panel> item in shownPanelDict)
+                {
+                    //忽略打开的固定界面
+                    if (item.Value.data.type == UIType.Fixed) continue;
+                    //如果当前界面是 打开当前界面关闭其他界面 的类型
+                    if (panel.data.showMode == UIShowMode.HideOther)
+                    {
+                        //隐藏
+                        removedList.Add((PanelType)item.Key);
+                        item.Value.IsShown = false;
+                        item.Value.Logic.OnHide(item.Value);
+                    }
+                    //记录当前打开的所有界面
+                    tempList.Add(item.Value);
+                }
+
+                if (removedList != null)
+                {
+                    for (int i = 0; i < removedList.Count; i++)
+                    {
+                        shownPanelDict.Remove((int)removedList[i]);
+                    }
+                }
+
+                if (panel.data.navigationMode == UINavigationMode.NormalNavigation && (showData == null || (!showData.ignoreAddNavigationData)))
+                {
+                    tempList.Sort(compare);
+
+                    List<PanelType> hiddenPanelList = new List<PanelType>();
+                    for (int i = 0; i < tempList.Count; i++)
+                    {
+                        PanelType item = tempList[i].Type;
+                        hiddenPanelList.Add(item);
+                    }
+                    navigationData.hideTarget = panel;//当前界面
+                    navigationData.backShowTargets = hiddenPanelList;//当前打开的界面
+                    backSequence.Push(navigationData);
+                }
+            }
+        }
+        /// <summary>
+        /// 检测导航数据
+        /// </summary>
+        /// <param name="panel"></param>
+        private void CheckBackSequenceData(Panel panel)
+        {
+            if (backSequence.Count > 0)
+            {
+                NavigationData backData = backSequence.Peek();
+                if (backData.hideTarget != null)
+                {
+                    //导航数据不匹配直接中断导航
+                    if (backData.hideTarget.Type != panel.Type)
+                    {
+                        ClearBackSequence();
+                    }
+                }
+
+            }
+        }
+        /// <summary>
+        /// 清除导航数据
+        /// </summary>
         public void ClearBackSequence()
         {
             if (backSequence != null)
@@ -444,113 +628,14 @@ namespace LccHotfix
                 backSequence.Clear();
             }
         }
-        private int GetCurrentShownPanel()
-        {
-            List<Panel> listWnds = shownPanelDict.Values.ToList();
-            listWnds.Sort(compare);
-            for (int i = listWnds.Count - 1; i >= 0; i--)
-            {
-                if (listWnds[i].data.type != UIType.Fixed)
-                {
-                    return (int)listWnds[i].Type;
-                }
-            }
-            return (int)PanelType.None;
-        }
-        private void ExecuteNavigationLogic(Panel panel, ShowPanelData showData)
-        {
-            PanelData data = panel.data;
-            if (panel.RefreshBackSeqData)
-            {
-                RefreshBackSequenceData(panel, showData);
-            }
-            else if (data.showMode == UIShowMode.HideOther)
-            {
-                HideAllShownPanel();
-            }
 
 
-            if (panel.data.forceClearNavigation || (showData != null && showData.forceClearBackSequenceData))
-            {
-                ClearBackSequence();
-            }
-            else
-            {
-                if (showData != null && showData.checkNavigation)
-                {
-                    CheckBackSequenceData(panel);
-                }
-            }
-        }
-        private void RefreshBackSequenceData(Panel panel, ShowPanelData showData)
-        {
-            PanelData data = panel.data;
-            bool dealBackSequence = true;
-            if (shownPanelDict.Count > 0 && dealBackSequence)
-            {
-                List<PanelType> removedKey = new List<PanelType>();
-                List<Panel> sortedHiddenPanels = new List<Panel>();
-
-                NavigationData backData = new NavigationData();
-                foreach (KeyValuePair<int, Panel> item in shownPanelDict)
-                {
-                    if (data.showMode != UIShowMode.Normal)
-                    {
-                        if (item.Value.data.type == UIType.Fixed) continue;
-                        removedKey.Add((PanelType)item.Key);
-                        item.Value.IsShown = false;
-
-                    }
-
-                    if (item.Value.data.type != UIType.Fixed)
-                    {
-                        sortedHiddenPanels.Add(item.Value);
-                    }
-                }
-
-                if (removedKey != null)
-                {
-                    for (int i = 0; i < removedKey.Count; i++)
-                    {
-                        shownPanelDict.Remove((int)removedKey[i]);
-                    }
-                }
-
-                if (data.navigationMode == UINavigationMode.NormalNavigation && (showData == null || (!showData.ignoreAddNavigationData)))
-                {
-                    sortedHiddenPanels.Sort(this.compare);
-                    List<PanelType> navHiddenPanels = new List<PanelType>();
-                    for (int i = 0; i < sortedHiddenPanels.Count; i++)
-                    {
-                        PanelType pushPanelType = sortedHiddenPanels[i].Type;
-                        navHiddenPanels.Add(pushPanelType);
-                    }
-                    backData.hideTarget = panel;
-                    backData.backShowTargets = navHiddenPanels;
-                    backSequence.Push(backData);
-                }
-            }
-        }
-        private void CheckBackSequenceData(Panel panel)
-        {
-            if (panel.RefreshBackSeqData)
-            {
-                if (backSequence.Count > 0)
-                {
-                    NavigationData backData = backSequence.Peek();
-                    if (backData.hideTarget != null)
-                    {
-                        if (backData.hideTarget.Type != panel.Type)
-                        {
-                            ClearBackSequence();
-                        }
-                    }
-
-                }
-            }
-        }
 
 
+        /// <summary>
+        /// 关闭界面
+        /// </summary>
+        /// <param name="type"></param>
         public void ClosePanel(PanelType type)
         {
             if (!IsPanelVisible(type))
@@ -560,8 +645,9 @@ namespace LccHotfix
             Panel panel = shownPanelDict[(int)type];
             if (backSequence.Count > 0)
             {
-                NavigationData seqData = backSequence.Peek();
-                if (seqData != null && seqData.hideTarget == panel)
+                NavigationData navigationData = backSequence.Peek();
+                //如果栈顶是要关闭的界面 执行弹出面板
+                if (navigationData != null && navigationData.hideTarget == panel)
                 {
                     PopupNavigationPanel();
                     return;
@@ -569,17 +655,64 @@ namespace LccHotfix
             }
             HidePanel(type);
         }
+        /// <summary>
+        /// 根据泛型关闭界面
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
         public void ClosePanel<T>() where T : IPanelHandler
         {
             PanelType type = GetPanelByGeneric<T>();
             ClosePanel(type);
         }
-        public void ClearAllPanel()
+
+
+        /// <summary>
+        /// 卸载界面
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="isDispose"></param>
+        private void UnPanel(PanelType type, bool isDispose = true)
         {
-            if (allPanelDict == null)
+            Panel panel = GetPanel(type);
+            if (panel == null)
             {
                 return;
             }
+            panel.Logic.OnBeforeUnload(panel);
+            if (panel.IsLoad)
+            {
+                AssetManager.Instance.UnLoadAsset(panel.GameObject.name, _suff, _types);
+
+                UnityEngine.Object.Destroy(panel.GameObject);
+                panel.GameObject = null;
+            }
+            //todo
+            if (curNavigation == panel)
+            {
+                curNavigation = null;
+            }
+            if (isDispose)
+            {
+                allPanelDict.Remove((int)type);
+                shownPanelDict.Remove((int)type);
+                panel.Dispose();
+            }
+        }
+        /// <summary>
+        /// 根据泛型卸载界面
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        private void UnPanel<T>() where T : IPanelHandler
+        {
+            PanelType type = GetPanelByGeneric<T>();
+            UnPanel(type);
+        }
+        /// <summary>
+        /// 卸载全部界面
+        /// </summary>
+        private void UnAllPanel()
+        {
+            if (allPanelDict == null) return;
             foreach (KeyValuePair<int, Panel> item in allPanelDict)
             {
                 Panel panel = item.Value;
@@ -595,36 +728,10 @@ namespace LccHotfix
             shownPanelDict.Clear();
             backSequence.Clear();
 
+            curNavigation = null;
+            lastNavigation = null;
         }
 
-
-        public void UnPanel<T>() where T : IPanelHandler
-        {
-            PanelType type = GetPanelByGeneric<T>();
-            UnPanel(type);
-        }
-        public void UnPanel(PanelType type, bool isDispose = true)
-        {
-            Panel panel = GetPanel(type);
-            if (panel == null)
-            {
-                return;
-            }
-            panel.Logic.OnBeforeUnload(panel);
-            if (panel.IsLoad)
-            {
-                AssetManager.Instance.UnLoadAsset(panel.GameObject.name, _suff, _types);
-
-                UnityEngine.Object.Destroy(panel.GameObject);
-                panel.GameObject = null;
-            }
-            if (isDispose)
-            {
-                allPanelDict.Remove((int)type);
-                shownPanelDict.Remove((int)type);
-                panel.Dispose();
-            }
-        }
 
         public override void OnDestroy()
         {
@@ -632,8 +739,11 @@ namespace LccHotfix
 
             typeToNameDict.Clear();
             nameToTypeDict.Clear();
+            typeToLogicDict.Clear();
 
-            ClearAllPanel();
+            UnAllPanel();
+
+
         }
     }
 }
