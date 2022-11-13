@@ -9,6 +9,9 @@ namespace LccHotfix
     {
         public override async ETTask Publish(Start data)
         {
+
+            SceneStateManager.Instance.InitManager();
+
             ConfigManager.Instance.InitManager();
 
       

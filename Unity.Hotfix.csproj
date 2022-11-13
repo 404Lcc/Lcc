@@ -129,6 +129,11 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\ISceneState.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneState.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\StatePipeline.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
