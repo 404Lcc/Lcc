@@ -82,7 +82,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Rijndael\RijndaelUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Path\PathType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Asset\AssetType.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\UIEventHandler\LoginUIEventHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\View\AViewBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\ProtobufObject.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\MD5\MD5Util.cs" />
@@ -102,8 +101,8 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\AEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\View\IView.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\ViewModel\LoginModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEventType.cs" />
+    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Game\GamePanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
     <Compile Include="Assets\Hotfix\Logic\Joystick\Joystick.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Init\Init.cs" />
@@ -124,13 +123,12 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\AObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\Binding\ViewModelBinding.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\ObjectBaseEventSystem.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\View\LoginPanel.cs" />
+    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\LoginPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Init\EventHandler\InitEventHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Util\Protobuf\ProtobufUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Game\GamePanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
@@ -861,6 +859,9 @@
     </Reference>
     <Reference Include="ILRuntime">
       <HintPath>Library\ScriptAssemblies\ILRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>

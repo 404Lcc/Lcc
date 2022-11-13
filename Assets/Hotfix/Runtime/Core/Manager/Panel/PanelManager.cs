@@ -582,6 +582,7 @@ namespace LccHotfix
                     }
                 }
 
+                //增加导航数据
                 if (panel.data.navigationMode == UINavigationMode.NormalNavigation && (showData == null || (!showData.ignoreAddNavigationData)))
                 {
                     tempList.Sort(compare);

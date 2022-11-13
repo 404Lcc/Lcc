@@ -13,5 +13,13 @@
             panel.data.showMode = UIShowMode.HideOther;
             panel.data.navigationMode = UINavigationMode.NormalNavigation;
         }
+
+
+
+        public override void OnShow(Panel panel, AObjectBase contextData = null)
+        {
+            base.OnShow(panel, contextData);
+            ShowTopPanel(TopType.CloseBtn, "Game");
+        }
     }
 }

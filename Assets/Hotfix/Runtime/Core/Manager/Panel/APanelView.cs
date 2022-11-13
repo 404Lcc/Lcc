@@ -55,9 +55,19 @@ namespace LccHotfix
         }
         #endregion
 
+        public virtual void ShowTopPanel(TopType topType, string title)
+        {
+            ViewModel.topData.topType = topType;
+            ViewModel.topData.title = title;
+            //刷新Top
+            PanelManager.Instance.ShowPanel(PanelType.Top, new ShowPanelData(false, false, ViewModel.topData, false, false, false));
+        }
+
 
         public virtual void OnInitData(Panel panel)
         {
+            ViewModel.selfPanel = panel;
+            ViewModel.InitTopData();
             AutoReference(panel.GameObject);
         }
         public virtual void OnInitComponent(Panel panel)

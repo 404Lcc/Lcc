@@ -91,7 +91,27 @@ namespace LccHotfix
         //强制忽略添加导航数据
         public bool ignoreAddNavigationData;
 
-
+        public ShowPanelData()
+        {
+        }
+        /// <summary>
+        /// 构造
+        /// </summary>
+        /// <param name="forceReset">强制重置窗口</param>
+        /// <param name="forceClearBackSequenceData">强制清除导航数据</param>
+        /// <param name="contextData">上下文</param>
+        /// <param name="executeNavigationLogic">执行导航逻辑，默认true</param>
+        /// <param name="checkNavigation">检查导航</param>
+        /// <param name="ignoreAddNavigationData">强制忽略添加导航数据</param>
+        public ShowPanelData(bool forceReset, bool forceClearBackSequenceData, AObjectBase contextData, bool executeNavigationLogic, bool checkNavigation, bool ignoreAddNavigationData)
+        {
+            this.forceReset = forceReset;
+            this.forceClearBackSequenceData = forceClearBackSequenceData;
+            this.contextData = contextData;
+            this.executeNavigationLogic = executeNavigationLogic;
+            this.checkNavigation = checkNavigation;
+            this.ignoreAddNavigationData = ignoreAddNavigationData;
+        }
     }
     public class NavigationData
     {

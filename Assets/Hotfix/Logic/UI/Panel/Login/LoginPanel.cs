@@ -3,6 +3,17 @@ using UnityEngine.UI;
 
 namespace LccHotfix
 {
+    [UIEventHandler(UIEventType.Login)]
+    public class LoginUIEventHandler : UIEvent
+    {
+        public override void Publish()
+        {
+            PanelManager.Instance.ShowPanel(PanelType.Login);
+        }
+    }
+    public class LoginModel : ViewModelBase
+    {
+    }
     public class LoginPanel : APanelView<LoginModel>
     {
         public Button testBtn;
@@ -48,6 +59,7 @@ namespace LccHotfix
 
         public override void OnShow(Panel panel, AObjectBase contextData = null)
         {
+            base.OnShow(panel, contextData);
             LogUtil.Log("OnShow第六个执行的函数");
 
  
@@ -63,9 +75,11 @@ namespace LccHotfix
             LogUtil.Log("BeforeUnload");
         }
 
-        public void OnTest() 
+        public void OnTest()
         {
-            PanelManager.Instance.ShowPanel(PanelType.Main);
+            //忽略增加main的导航数据
+            //清除已经存在的导航数据，中断操作
+            PanelManager.Instance.ShowPanel(PanelType.Main, new ShowPanelData(false, true, null, true, false, true));
         }
     }
 }
