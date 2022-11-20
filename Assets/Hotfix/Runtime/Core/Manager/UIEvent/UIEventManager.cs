@@ -1,6 +1,7 @@
 ﻿using LccModel;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace LccHotfix
 {
@@ -9,14 +10,13 @@ namespace LccHotfix
         public Dictionary<string, UIEvent> uiEventDict = new Dictionary<string, UIEvent>();
         public void InitManager()
         {
-            foreach (Type item in Manager.Instance.typeDict.Values)
+            foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(UIEventHandlerAttribute)))
             {
-                if (item.IsAbstract) continue;
-                object[] uiEventHandlerAttributes = item.GetCustomAttributes(typeof(UIEventHandlerAttribute), false);
-                if (uiEventHandlerAttributes.Length > 0)
+                object[] atts = item.GetCustomAttributes(typeof(UIEventHandlerAttribute), false);
+                if (atts != null && atts.Length > 0)
                 {
                     UIEvent uiEvent = (UIEvent)Activator.CreateInstance(item);
-                    uiEventDict.Add(((UIEventHandlerAttribute)uiEventHandlerAttributes[0]).uiEventType, uiEvent);
+                    uiEventDict.Add(((UIEventHandlerAttribute)atts[0]).uiEventType, uiEvent);
                 }
             }
         }

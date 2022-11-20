@@ -10,17 +10,12 @@ namespace LccHotfix
         public Dictionary<Type, ProtobufObject> configDict = new Dictionary<Type, ProtobufObject>();
         public void InitManager()
         {
-            foreach (Type item in Manager.Instance.typeDict.Values)
+            foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(ConfigAttribute)))
             {
-                if (item.IsAbstract) continue;
-                object[] configAttributes = item.GetCustomAttributes(typeof(ConfigAttribute), false);
-                if (configAttributes.Length > 0)
-                {
-                    TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(item.Name, AssetSuffix.Bytes, AssetType.Config);
-                    ProtobufObject obj = (ProtobufObject)ProtobufUtil.Deserialize(item, asset.bytes, 0, asset.bytes.Length);
-                    obj.AfterDeserialization();
-                    configDict.Add(item, obj);
-                }
+                TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(item.Name, AssetSuffix.Bytes, AssetType.Config);
+                ProtobufObject obj = (ProtobufObject)ProtobufUtil.Deserialize(item, asset.bytes, 0, asset.bytes.Length);
+                obj.AfterDeserialization();
+                configDict.Add(item, obj);
             }
         }
     }

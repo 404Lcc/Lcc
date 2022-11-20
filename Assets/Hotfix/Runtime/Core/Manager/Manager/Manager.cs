@@ -1,46 +1,112 @@
-﻿using System;
+﻿using LccModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using static UnityEditor.Progress;
 
 namespace LccHotfix
 {
+    public class BaseAttribute : Attribute
+    {
+    }
     public class Manager : Singleton<Manager>
     {
-        public Dictionary<string, Type> typeDict = new Dictionary<string, Type>();
+        private Dictionary<string, Type> _typeDict = new Dictionary<string, Type>();
+        private Dictionary<Type, List<Type>> _attDict = new Dictionary<Type, List<Type>>();
         public void InitManager()
         {
-            if (LccModel.MonoManager.Instance.typeList.Count != 0)
+            List<Type> list = null;
+            _typeDict.Clear();
+            _attDict.Clear();
+            if (MonoManager.Instance.typeList.Count > 0)
             {
-                foreach (Type item in LccModel.MonoManager.Instance.typeList)
+                list = MonoManager.Instance.typeList;
+            }
+            else if (ILRuntimeManager.Instance.typeList.Count > 0)
+            {
+                list = ILRuntimeManager.Instance.typeList;
+            }
+
+            List<Type> baseAttributeTypeList = GetBaseAttributes(list);
+            foreach (Type baseAttributeType in baseAttributeTypeList)
+            {
+                foreach (Type type in list)
                 {
-                    if (!typeDict.ContainsKey(item.Name))
+                    if (type.IsAbstract)
                     {
-                        typeDict.Add(item.Name, item);
+                        continue;
+                    }
+
+                    object[] objects = type.GetCustomAttributes(baseAttributeType, true);
+                    if (objects.Length == 0)
+                    {
+                        continue;
+                    }
+                    if (_attDict.TryGetValue(baseAttributeType, out var types))
+                    {
+                        types.Add(type);
+                    }
+                    else
+                    {
+                        types = new List<Type>();
+                        types.Add(type);
+                        _attDict.Add(baseAttributeType, types);
                     }
                 }
             }
-            else
+
+
+            foreach (Type item in list)
             {
-                foreach (Type item in LccModel.ILRuntimeManager.Instance.typeList)
+                if (!_typeDict.ContainsKey(item.Name))
                 {
-                    if (!typeDict.ContainsKey(item.Name))
-                    {
-                        typeDict.Add(item.Name, item);
-                    }
+                    _typeDict.Add(item.Name, item);
                 }
             }
         }
-        public Type GetType(string name)
+        public Type GetTypeByName(string name)
         {
-            if (typeDict.ContainsKey(name))
+            if (_typeDict.ContainsKey(name))
             {
-                return typeDict[name];
+                return _typeDict[name];
             }
             return null;
         }
         public Type[] GetTypes()
         {
-            return typeDict.Values.ToArray();
+            return _typeDict.Values.ToArray();
+        }
+
+        public List<Type> GetTypesByAttribute(Type type)
+        {
+            if (_attDict.TryGetValue(type, out var list))
+            {
+                return list;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+        private List<Type> GetBaseAttributes(List<Type> typeList)
+        {
+            List<Type> attributeTypeList = new List<Type>();
+            foreach (Type type in typeList)
+            {
+                if (type.IsAbstract)
+                {
+                    continue;
+                }
+
+                if (type.IsSubclassOf(typeof(BaseAttribute)))
+                {
+                    attributeTypeList.Add(type);
+                }
+            }
+            return attributeTypeList;
         }
     }
 }

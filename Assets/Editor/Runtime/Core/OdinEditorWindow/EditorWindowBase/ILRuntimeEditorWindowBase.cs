@@ -1,5 +1,6 @@
 ﻿using ILRuntime.Runtime.CLRBinding;
 using ILRuntime.Runtime.Enviorment;
+using ILRuntime.Runtime.Intepreter;
 using LccModel;
 using Sirenix.OdinInspector;
 using System;
@@ -18,8 +19,8 @@ namespace LccEditor
         [HideLabel, DisplayAsString]
         public string info = "ILRuntime工具";
         [PropertySpace(10)]
-        [LabelText("程序集")]
-        public string assets = "Unity.Model";
+        [LabelText("程序集名")]
+        public string assemblieName = "Unity.Model";
         [PropertySpace(10)]
         [LabelText("命名空间")]
         public string namespaceName = "LccModel";
@@ -49,7 +50,7 @@ namespace LccEditor
         [LabelText("生成适配器"), Button]
         public void BuildCrossBinding()
         {
-            if (string.IsNullOrEmpty(assets))
+            if (string.IsNullOrEmpty(assemblieName))
             {
                 editorWindow.ShowNotification(new GUIContent("请输入程序集"));
                 return;
@@ -59,20 +60,28 @@ namespace LccEditor
                 editorWindow.ShowNotification(new GUIContent("请输入脚本名"));
                 return;
             }
-            string path = $"Library/ScriptAssemblies/{assets}.dll";
-            if (!File.Exists(path))
+
+            Assembly assembly = null;
+            foreach (var item in System.AppDomain.CurrentDomain.GetAssemblies())
             {
-                editorWindow.ShowNotification(new GUIContent("程序集路径错误"));
+                if (item.GetName().Name == assemblieName)
+                {
+                    assembly = item;
+                }
+            }
+            if (assembly == null)
+            {
+                editorWindow.ShowNotification(new GUIContent("没有这个程序集"));
                 return;
             }
             Type type;
             if (string.IsNullOrEmpty(namespaceName))
             {
-                type = Assembly.LoadFile(path).GetType(className);
+                type = assembly.GetType(className);
             }
             else
             {
-                type = Assembly.LoadFile(path).GetType($"{namespaceName}.{className}");
+                type = assembly.GetType($"{namespaceName}.{className}");
             }
             if (type == null)
             {

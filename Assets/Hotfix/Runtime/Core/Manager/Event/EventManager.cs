@@ -10,15 +10,10 @@ namespace LccHotfix
         public Dictionary<Type, IEvent> eventDict = new Dictionary<Type, IEvent>();
         public void InitManager()
         {
-            foreach (Type item in Manager.Instance.typeDict.Values)
+            foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(EventHandlerAttribute)))
             {
-                if (item.IsAbstract) continue;
-                object[] eventHandlerAttributes = item.GetCustomAttributes(typeof(EventHandlerAttribute), false);
-                if (eventHandlerAttributes.Length > 0)
-                {
-                    IEvent iEvent = (IEvent)Activator.CreateInstance(item);
-                    eventDict.Add(iEvent.EventType(), iEvent);
-                }
+                IEvent iEvent = (IEvent)Activator.CreateInstance(item);
+                eventDict.Add(iEvent.EventType(), iEvent);
             }
         }
         public async ETTask Publish<T>(T data)

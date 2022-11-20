@@ -1,6 +1,8 @@
+using LccModel;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEngine;
 
 namespace LccHotfix
 {
@@ -18,58 +20,47 @@ namespace LccHotfix
 
         private Dictionary<string, SceneState> _sceneStateDict = new Dictionary<string, SceneState>();
 
-
-
-
-
         public void InitManager()
         {
-            foreach (Type item in Manager.Instance.typeDict.Values)
+            foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(SceneStateAttribute)))
             {
-                if (item.IsAbstract) continue;
-                object[] att = item.GetCustomAttributes(typeof(SceneStateAttribute), false);
-                if (att.Length > 0)
+                object[] atts = item.GetCustomAttributes(typeof(SceneStateAttribute), false);
+                if (atts != null && atts.Length > 0)
                 {
-                    SceneStateAttribute sceneStateAttribute = (SceneStateAttribute)att[0];
-
+                    SceneStateAttribute sceneStateAttribute = (SceneStateAttribute)atts[0];
 
                     SceneState sceneState = (SceneState)Activator.CreateInstance(item);
                     sceneState.sceneName = sceneStateAttribute.sceneName;
-
-                    List<string> paramList = sceneStateAttribute.paramList;
-
-                    if (paramList.Count % 2 == 0)
-                    {
-                        for (int i = 1; i < paramList.Count + 1; i++)
-                        {
-                            if (i % 2 == 1)
-                            {
-                                string sceneName = paramList[i - 1];
-                                sceneStateAttribute.targetNameList.Add(sceneName);
-                            }
-                            else if (i % 2 == 0)
-                            {
-                                string methodName = paramList[i - 1];
-                                MethodInfo method = item.GetMethod(methodName);
-                                sceneStateAttribute.conditionList.Add((Func<bool>)method.CreateDelegate(typeof(Func<bool>), sceneState));
-                            }
-                        }
-                    }
-
-
-                    for (int i = 0; i < sceneStateAttribute.targetNameList.Count; i++)
-                    {
-                        StatePipeline statePipeline = new StatePipeline(sceneStateAttribute.targetNameList[i], sceneStateAttribute.conditionList[i]);
-                        sceneState.AddPipeline(statePipeline);
-                    }
-
 
                     _sceneStateDict.Add(sceneStateAttribute.sceneName, sceneState);
                 }
             }
 
-            _current = _sceneStateDict[SceneStateName.Login];
-            _current.OnEnter();
+            foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(StatePipelineAttribute)))
+            {
+                object[] atts = item.GetCustomAttributes(typeof(StatePipelineAttribute), false);
+                if (atts != null && atts.Length > 0)
+                {
+                    StatePipelineAttribute statePipelineAttribute = (StatePipelineAttribute)atts[0];
+
+                    StatePipeline sceneState = (StatePipeline)Activator.CreateInstance(item, statePipelineAttribute.sceneName, statePipelineAttribute.target);
+
+                    if (_sceneStateDict.ContainsKey(statePipelineAttribute.sceneName))
+                    {
+                        _sceneStateDict[statePipelineAttribute.sceneName].AddPipeline(sceneState);
+                    }
+                    else
+                    {
+                        LogUtil.LogError("增加事件失败 " + statePipelineAttribute.sceneName + "不存在");
+                    }
+                }
+            }
+
+            if (_sceneStateDict.ContainsKey(SceneStateName.Login))
+            {
+                _current = _sceneStateDict[SceneStateName.Login];
+                _current.OnEnter();
+            }
         }
 
 

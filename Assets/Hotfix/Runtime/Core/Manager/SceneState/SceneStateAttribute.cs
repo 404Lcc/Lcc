@@ -1,21 +1,26 @@
 using System;
-using System.Collections.Generic;
-using System.Reflection;
 
 namespace LccHotfix
 {
-    public class SceneStateAttribute : Attribute
+    public class StatePipelineAttribute : BaseAttribute
     {
         public string sceneName;
 
-        public List<string> paramList = new List<string>();
+        public string target;
 
-        public List<string> targetNameList = new List<string>();
-        public List<Func<bool>> conditionList = new List<Func<bool>>();
-        public SceneStateAttribute(string sceneName, params string[] paramList)
+        public StatePipelineAttribute(string sceneName, string target)
         {
             this.sceneName = sceneName;
-            this.paramList.AddRange(paramList);
+            this.target = target;
+
+        }
+    }
+    public class SceneStateAttribute : BaseAttribute
+    {
+        public string sceneName;
+        public SceneStateAttribute(string sceneName)
+        {
+            this.sceneName = sceneName;
         }
     }
 }

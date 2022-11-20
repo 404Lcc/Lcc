@@ -1,16 +1,15 @@
-using System;
-
 namespace LccHotfix
 {
-    public class StatePipeline
+    public abstract class StatePipeline
     {
+        public string sceneName;
         public string target;
-        public Func<bool> condition;
 
-        public StatePipeline(string target, Func<bool> condition)
+        public StatePipeline(string sceneName, string target)
         {
+            this.sceneName = sceneName;
             this.target = target;
-            this.condition = condition;
         }
+        public abstract bool CheckState();
     }
 }
