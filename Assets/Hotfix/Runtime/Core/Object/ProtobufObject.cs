@@ -1,4 +1,6 @@
-﻿namespace LccHotfix
+﻿using LccModel;
+
+namespace LccHotfix
 {
     public class ProtobufObject
     {
@@ -8,7 +10,7 @@
         public T Clone<T>() where T : ProtobufObject
         {
             byte[] bytes = ProtobufUtil.Serialize(this);
-            return ProtobufUtil.Deserialize<T>(bytes, 0, bytes.Length);
+            return (T)ProtobufUtil.Deserialize(typeof(T), bytes, 0, bytes.Length);
         }
     }
 }

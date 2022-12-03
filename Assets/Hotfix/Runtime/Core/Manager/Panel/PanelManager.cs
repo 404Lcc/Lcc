@@ -8,8 +8,11 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class PanelManager : Singleton<PanelManager>
+    public class PanelManager : AObjectBase
     {
+        public static PanelManager Instance { get; set; }
+
+
         private readonly string _suff = AssetSuffix.Prefab;
         private readonly string[] _types = new string[] { AssetType.Prefab, AssetType.Panel };//资源类型
 
@@ -29,10 +32,12 @@ namespace LccHotfix
         public List<PanelType> cachedList = new List<PanelType>();//换成列表
 
         public PanelCompare compare = new PanelCompare();
-
-        public override void InitData(object[] datas)
+        public override void Awake()
         {
-            base.InitData(datas);
+            base.Awake();
+
+
+            Instance = this;
 
 
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
@@ -60,7 +65,23 @@ namespace LccHotfix
                     LogUtil.LogError($"UI逻辑未找到 {name}");
                 }
             }
+
         }
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            Instance = null;
+
+            typeToNameDict.Clear();
+            nameToTypeDict.Clear();
+            typeToLogicDict.Clear();
+
+            UnAllPanel();
+
+
+        }
+
 
         /// <summary>
         /// 根据类型获取根节点
@@ -241,8 +262,8 @@ namespace LccHotfix
             {
                 return;
             }
-            GameObject go = AssetManager.Instance.LoadAsset<GameObject>(name, _suff, _types);
-            panel.GameObject = UnityEngine.Object.Instantiate(go);
+            GameObject go = AssetManager.Instance.InstantiateAsset(name, _types);
+            panel.GameObject = CreateUIGameObject(go);
             panel.GameObject.name = go.name;
 
             panel.Logic.OnInitData(panel);
@@ -297,7 +318,7 @@ namespace LccHotfix
             }
             LoadHandler handler = await AssetManager.Instance.LoadAssetAsync<GameObject>(name, _suff, _types);
             GameObject go = (GameObject)handler.Asset;
-            panel.GameObject = UnityEngine.Object.Instantiate(go);
+            panel.GameObject = CreateUIGameObject(go);
             panel.GameObject.name = go.name;
 
             panel.Logic.OnInitData(panel);
@@ -309,6 +330,23 @@ namespace LccHotfix
             panel.Logic.OnRegisterUIEvent(panel);
 
             allPanelDict[(int)panel.Type] = panel;
+        }
+
+
+        private GameObject CreateUIGameObject(GameObject gameObject)
+        {
+            RectTransform rect = gameObject.GetComponent<RectTransform>();
+            rect.sizeDelta = Vector2.zero;
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.pivot = new Vector2(0.5f, 0.5f);
+            Vector2 anchorMin = Screen.safeArea.position;
+            Vector2 anchorMax = Screen.safeArea.position + Screen.safeArea.size;
+            anchorMin = new Vector2(anchorMin.x / Screen.width, anchorMin.y / Screen.height);
+            anchorMax = new Vector2(anchorMax.x / Screen.width, anchorMax.y / Screen.height);
+            rect.anchorMin = anchorMin;
+            rect.anchorMax = anchorMax;
+            return gameObject;
         }
 
 
@@ -734,17 +772,6 @@ namespace LccHotfix
         }
 
 
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
 
-            typeToNameDict.Clear();
-            nameToTypeDict.Clear();
-            typeToLogicDict.Clear();
-
-            UnAllPanel();
-
-
-        }
     }
 }

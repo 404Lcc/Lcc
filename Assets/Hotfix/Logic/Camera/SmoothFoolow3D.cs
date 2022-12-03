@@ -49,7 +49,7 @@ namespace LccHotfix
             isMouse = false;
 #endif
         }
-        public override void Update()
+        public void Update()
         {
             if (isTouch)
             {
@@ -90,7 +90,7 @@ namespace LccHotfix
                         //第二根手指第一次触摸屏幕时 判断最右边手指是否在UI上
                         if (Input.GetTouch(1).phase == TouchPhase.Began)
                         {
-                            isTouchRightUI = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(right).fingerId);
+                            isTouchRightUI = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject(Input.GetTouch(right).fingerId);
                         }
                         //如果最右边的手指是第一个手指
                         if (right == 0)
@@ -150,7 +150,7 @@ namespace LccHotfix
                 }
             }
         }
-        public override void LateUpdate()
+        public void LateUpdate()
         {
             if (target != null)
             {

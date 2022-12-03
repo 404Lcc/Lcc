@@ -8,6 +8,8 @@ namespace LccHotfix
 {
     public abstract class APanelView<T> : AViewBase<T>, IPanelHandler where T : ViewModelBase
     {
+        public GameObject GameObject => ViewModel.selfPanel.GameObject;
+
         #region 自动引用
         public void AutoReference(Transform transform)
         {
@@ -63,6 +65,10 @@ namespace LccHotfix
             PanelManager.Instance.ShowPanel(PanelType.Top, new ShowPanelData(false, false, ViewModel.topData, false, false, false));
         }
 
+        public virtual void OnHidePanel()
+        {
+            PanelManager.Instance.HidePanel(ViewModel.selfPanel.Type);
+        }
 
         public virtual void OnInitData(Panel panel)
         {

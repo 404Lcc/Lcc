@@ -5,17 +5,32 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public class EventManager : Singleton<EventManager>
+    public class EventManager : AObjectBase
     {
+        public static EventManager Instance { get; set; }
+
         public Dictionary<Type, IEvent> eventDict = new Dictionary<Type, IEvent>();
-        public void InitManager()
+
+        public override void Awake()
         {
+            base.Awake();
+
+            Instance = this;
             foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(EventHandlerAttribute)))
             {
                 IEvent iEvent = (IEvent)Activator.CreateInstance(item);
                 eventDict.Add(iEvent.EventType(), iEvent);
             }
         }
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            eventDict.Clear();
+
+            Instance = null;
+        }
+
         public async ETTask Publish<T>(T data)
         {
             Type type = typeof(T);

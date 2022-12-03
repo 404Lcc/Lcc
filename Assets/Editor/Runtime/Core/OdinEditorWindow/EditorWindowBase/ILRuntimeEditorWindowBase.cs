@@ -42,7 +42,7 @@ namespace LccEditor
             {
                 appDomain.LoadAssembly(dll);
                 ILRuntimeHelper.RegisterCrossBindingAdaptor(appDomain);
-                BindingCodeGenerator.GenerateBindingCode(appDomain, "Assets/Scripts/Runtime/Core/Manager/ILRuntime/Generated");
+                BindingCodeGenerator.GenerateBindingCode(appDomain, "Assets/Framework/Runtime/Core/Manager/ILRuntime/Generated");
             }
             AssetDatabase.Refresh();
         }
@@ -88,11 +88,11 @@ namespace LccEditor
                 editorWindow.ShowNotification(new GUIContent("没有此脚本"));
                 return;
             }
-            if (File.Exists($"Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/{className}Adapter.cs"))
+            if (File.Exists($"Assets/Framework/Runtime/Core/Manager/ILRuntime/Adapter/{className}Adapter.cs"))
             {
-                File.Delete($"Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/{className}Adapter.cs");
+                File.Delete($"Assets/Framework/Runtime/Core/Manager/ILRuntime/Adapter/{className}Adapter.cs");
             }
-            FileUtil.SaveAsset($"Assets/Scripts/Runtime/Core/Manager/ILRuntime/Adapter/{className}Adapter.cs", CrossBindingCodeGenerator.GenerateCrossBindingAdapterCode(type, "LccModel"));
+            FileUtil.SaveAsset($"Assets/Framework/Runtime/Core/Manager/ILRuntime/Adapter/{className}Adapter.cs", CrossBindingCodeGenerator.GenerateCrossBindingAdapterCode(type, "LccModel"));
             AssetDatabase.Refresh();
         }
     }

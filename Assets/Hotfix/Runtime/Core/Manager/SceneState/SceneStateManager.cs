@@ -1,27 +1,26 @@
 using LccModel;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using UnityEngine;
 
 namespace LccHotfix
 {
-    public class SceneStateName
+    public class SceneStateManager : AObjectBase, IUpdate
     {
-        public const string None = "";
-        public const string Login = "Login";
-        public const string Main = "Main";
-    }
-    public class SceneStateManager : Singleton<SceneStateManager>, IUpdate
-    {
+        public static SceneStateManager Instance { get; set; }
+
         private bool _forceStop;
         private SceneState _current;
         private SceneState _last;
 
         private Dictionary<string, SceneState> _sceneStateDict = new Dictionary<string, SceneState>();
-
-        public void InitManager()
+        public override void Awake()
         {
+            base.Awake();
+
+
+            Instance = this;
+
+            _forceStop = false;
             foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(SceneStateAttribute)))
             {
                 object[] atts = item.GetCustomAttributes(typeof(SceneStateAttribute), false);
@@ -61,6 +60,16 @@ namespace LccHotfix
                 _current = _sceneStateDict[SceneStateName.Login];
                 _current.OnEnter();
             }
+
+        }
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            Instance = null;
+
+            _forceStop = true;
+            _sceneStateDict.Clear();
         }
 
 
@@ -77,10 +86,8 @@ namespace LccHotfix
         }
 
 
-        public override void Update()
+        public void Update()
         {
-            base.Update();
-
             if (_current == null) return;
             if (_forceStop) return;
 

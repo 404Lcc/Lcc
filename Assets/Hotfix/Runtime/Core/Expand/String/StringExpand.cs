@@ -10,11 +10,6 @@ namespace LccHotfix
         {
             return Encoding.UTF8.GetBytes(s);
         }
-        public static PanelType ToPanelType(this string name)
-        {
-            name = name.Substring(0, name.IndexOf("Panel"));
-            return (PanelType)Enum.Parse(typeof(PanelType), name);
-        }
         public static GameObject GetGameObjectToName(this string name)
         {
             return GameObject.Find(name);

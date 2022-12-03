@@ -26,12 +26,12 @@ namespace LccHotfix
             max = (Vector3)datas[4];
             target = (Transform)datas[5];
         }
-        public override void Update()
+        public void Update()
         {
             half.x = Camera.main.orthographicSize * Screen.width / Screen.height;
             half.y = Camera.main.orthographicSize;
         }
-        public override void LateUpdate()
+        public void LateUpdate()
         {
             if (isFollow)
             {

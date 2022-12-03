@@ -2,7 +2,7 @@
 
 namespace LccHotfix
 {
-    public class ConfigAttribute : BaseAttribute
+    public class ConfigAttribute : AttributeBase
     {
     }
 }

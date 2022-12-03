@@ -1,15 +1,22 @@
 ﻿using LccModel;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace LccHotfix
 {
-    public class ConfigManager : Singleton<ConfigManager>
+    public class ConfigManager : AObjectBase
     {
+        public static ConfigManager Instance { get; set; }
         public Dictionary<Type, ProtobufObject> configDict = new Dictionary<Type, ProtobufObject>();
-        public void InitManager()
+
+
+        public override void Awake()
         {
+            base.Awake();
+
+            Instance = this;
             foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(ConfigAttribute)))
             {
                 TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(item.Name, AssetSuffix.Bytes, AssetType.Config);
@@ -18,5 +25,14 @@ namespace LccHotfix
                 configDict.Add(item, obj);
             }
         }
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            configDict.Clear();
+            
+            Instance = null;
+        }
+
     }
 }

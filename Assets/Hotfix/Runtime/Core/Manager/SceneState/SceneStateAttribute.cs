@@ -2,7 +2,7 @@ using System;
 
 namespace LccHotfix
 {
-    public class StatePipelineAttribute : BaseAttribute
+    public class StatePipelineAttribute : AttributeBase
     {
         public string sceneName;
 
@@ -15,7 +15,7 @@ namespace LccHotfix
 
         }
     }
-    public class SceneStateAttribute : BaseAttribute
+    public class SceneStateAttribute : AttributeBase
     {
         public string sceneName;
         public SceneStateAttribute(string sceneName)

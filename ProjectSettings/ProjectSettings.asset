@@ -649,7 +649,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     Android: ODIN_INSPECTOR;ODIN_INSPECTOR_3;AssetBundle;ILRuntime
-    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;View
+    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;View;ILRuntime
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

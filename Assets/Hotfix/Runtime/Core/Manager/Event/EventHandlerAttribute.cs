@@ -2,7 +2,7 @@
 
 namespace LccHotfix
 {
-    public class EventHandlerAttribute : BaseAttribute
+    public class EventHandlerAttribute : AttributeBase
     {
     }
 }

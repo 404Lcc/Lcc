@@ -2,31 +2,25 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace LccHotfix
 {
-    public class BaseAttribute : Attribute
+    public class Manager : AObjectBase
     {
-    }
-    public class Manager : Singleton<Manager>
-    {
+        public static Manager Instance { get; set; }
         private Dictionary<string, Type> _typeDict = new Dictionary<string, Type>();
         private Dictionary<Type, List<Type>> _attDict = new Dictionary<Type, List<Type>>();
-        public void InitManager()
+
+        public override void Awake()
         {
-            List<Type> list = null;
+            base.Awake();
+
+
+            Instance = this;
+
+            List<Type> list = Loader.Instance.GetHotfixTypeALL();
             _typeDict.Clear();
             _attDict.Clear();
-            if (MonoManager.Instance.typeList.Count > 0)
-            {
-                list = MonoManager.Instance.typeList;
-            }
-            else if (ILRuntimeManager.Instance.typeList.Count > 0)
-            {
-                list = ILRuntimeManager.Instance.typeList;
-            }
 
             List<Type> baseAttributeTypeList = GetBaseAttributes(list);
             foreach (Type baseAttributeType in baseAttributeTypeList)
@@ -65,6 +59,13 @@ namespace LccHotfix
                 }
             }
         }
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            Instance = null;
+        }
+
         public Type GetTypeByName(string name)
         {
             if (_typeDict.ContainsKey(name))
@@ -101,7 +102,7 @@ namespace LccHotfix
                     continue;
                 }
 
-                if (type.IsSubclassOf(typeof(BaseAttribute)))
+                if (type.IsSubclassOf(typeof(AttributeBase)))
                 {
                     attributeTypeList.Add(type);
                 }

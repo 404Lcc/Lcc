@@ -2,7 +2,7 @@
 
 namespace LccHotfix
 {
-    public class UIEventHandlerAttribute : BaseAttribute
+    public class UIEventHandlerAttribute : AttributeBase
     {
         public string uiEventType;
         public UIEventHandlerAttribute(string uiEventType)

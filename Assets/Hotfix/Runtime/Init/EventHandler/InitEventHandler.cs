@@ -11,11 +11,7 @@ namespace LccHotfix
         {
 
 
-
-            ConfigManager.Instance.InitManager();
-
-      
-
+            PanelManager.Instance.ShowPanel(PanelType.Loading);
 
 
 
@@ -32,7 +28,7 @@ namespace LccHotfix
 
             UIEventManager.Instance.Publish(UIEventType.Login);
 
-            LoadingPanel.Instance.ClosePanel();
+            LoadingPanel.Instance.OnHidePanel();
 
         }
     }

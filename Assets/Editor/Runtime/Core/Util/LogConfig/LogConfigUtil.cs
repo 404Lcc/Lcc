@@ -17,7 +17,7 @@ namespace LccEditor
         {
             if (logConfigList.Count == 0)
             {
-                logConfigList.Add(new LogConfig("Assets/Scripts/Runtime/Core/Util/Log/LogUtil.cs", typeof(LogUtil).FullName));
+                logConfigList.Add(new LogConfig("Assets/Framework/Runtime/Util/Log/LogUtil.cs", typeof(LogUtil).FullName));
             }
             string[] datas = GetStackTrace().Split('\n');
             foreach (LogConfig item in logConfigList)

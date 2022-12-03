@@ -5,11 +5,16 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class UIEventManager : Singleton<UIEventManager>
+    public class UIEventManager : AObjectBase
     {
+        public static UIEventManager Instance { get; set; }
+
         public Dictionary<string, UIEvent> uiEventDict = new Dictionary<string, UIEvent>();
-        public void InitManager()
+
+        public override void Awake()
         {
+            base.Awake();
+
             foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(UIEventHandlerAttribute)))
             {
                 object[] atts = item.GetCustomAttributes(typeof(UIEventHandlerAttribute), false);
@@ -19,7 +24,19 @@ namespace LccHotfix
                     uiEventDict.Add(((UIEventHandlerAttribute)atts[0]).uiEventType, uiEvent);
                 }
             }
+
+            Instance = this;
         }
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            uiEventDict.Clear();
+
+            Instance = null;
+        }
+
+
         public void Publish(string uiEventType)
         {
             if (uiEventDict.ContainsKey(uiEventType))

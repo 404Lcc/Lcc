@@ -18,7 +18,7 @@ namespace LccEditor
                 switch (Path.GetFileNameWithoutExtension(lccView.type.GetType().Assembly.ManifestModule.Name))
                 {
                     case "Unity.Model":
-                        directoryName = "Scripts";
+                        directoryName = "Framework";
                         break;
                     case "Unity.Hotfix":
                         directoryName = "Hotfix";

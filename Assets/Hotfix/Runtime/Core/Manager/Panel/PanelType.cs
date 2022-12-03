@@ -4,8 +4,7 @@
     {
         None,
         Top,
-        Set,
-        Quit,
+        Loading,
         Login,
         Main,
         Game,

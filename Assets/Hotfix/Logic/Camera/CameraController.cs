@@ -10,7 +10,7 @@ namespace LccHotfix
         private Vector2 _second;
         private Vector3 vector;
         private bool _isNeedMove;
-        public override void Update()
+        public void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {

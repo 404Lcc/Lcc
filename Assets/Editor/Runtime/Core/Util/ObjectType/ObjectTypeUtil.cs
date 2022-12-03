@@ -120,7 +120,7 @@ namespace LccEditor
             else
             {
 #if ILRuntime
-                FieldInfo[] fieldInfos = ILRuntimeManager.Instance.appdomain.LoadedTypes[obj.ToString()].ReflectionType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+                FieldInfo[] fieldInfos = Loader.Instance.appDomain.LoadedTypes[obj.ToString()].ReflectionType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
                 foreach (FieldInfo item in fieldInfos)
                 {
                     object value = item.GetValue(obj);
@@ -195,7 +195,7 @@ namespace LccEditor
                             ObjectObjectType objectObjectType = new ObjectObjectType();
                             if (value == null)
                             {
-                                object instance = ILRuntimeManager.Instance.appdomain.Instantiate(type.ToString());
+                                object instance = Loader.Instance.appDomain.Instantiate(type.ToString());
                                 objectObjectType.Draw(type, item.Name, instance, null, indentLevel);
                                 item.SetValue(obj, instance);
                             }
