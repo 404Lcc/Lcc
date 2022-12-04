@@ -4638,8 +4638,8 @@
     <type fullname="LccModel.CoroutineLockQueue+&lt;Wait&gt;d__7" preserve="all" />
     <type fullname="LccModel.CoroutineLockQueueType+&lt;Wait&gt;d__6" preserve="all" />
     <type fullname="LccModel.WaitCoroutineLock+&lt;Wait&gt;d__5" preserve="all" />
-    <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__11" preserve="all" />
-    <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__12" preserve="all" />
+    <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__9" preserve="all" />
+    <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__10" preserve="all" />
     <type fullname="LccModel.TimerManager+&lt;&gt;c__DisplayClass12_0" preserve="all" />
     <type fullname="LccModel.TimerManager+&lt;WaitAsync&gt;d__12" preserve="all" />
     <type fullname="LccModel.TimerManager+&lt;WaitFrameAsync&gt;d__13" preserve="all" />

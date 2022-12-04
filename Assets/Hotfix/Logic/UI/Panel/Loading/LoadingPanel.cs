@@ -13,7 +13,7 @@ namespace LccHotfix
     }
     public class LoadingPanel : APanelView<LoadingModel>
     {
-        public static LoadingPanel Instance;
+        public static LoadingPanel Instance { get; set; }
 
         public Slider progress;
         public Text progressText;
@@ -34,8 +34,6 @@ namespace LccHotfix
 
         public async ETTask UpdateLoadingPercent(int from, int to, float rate = 1)
         {
-            GameObject.SetActive(true);
-
             ViewModel.updateRate = rate;
             ViewModel.targetPercent = to;
             ViewModel.currentPercent = Mathf.Clamp(ViewModel.currentPercent, from, to);
@@ -44,16 +42,13 @@ namespace LccHotfix
             progressText.text = (int)ViewModel.currentPercent + "%";
             while (ViewModel.currentPercent < ViewModel.targetPercent)
             {
-                await TimerManager.Instance.WaitFrameAsync(1);
                 ViewModel.currentPercent += ViewModel.updateRate;
                 ViewModel.currentPercent = Mathf.Clamp(ViewModel.currentPercent, 0, 100);
 
                 progress.value = ViewModel.currentPercent * 0.01f;
                 progressText.text = (int)ViewModel.currentPercent + "%";
+                await TimerManager.Instance.WaitFrameAsync(1);
             }
-            await TimerManager.Instance.WaitFrameAsync(1);
-
-            GameObject.SetActive(false);
         }
     }
 }

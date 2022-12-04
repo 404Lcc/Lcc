@@ -37,7 +37,6 @@ namespace LccModel
             Game.Scene.AddComponent<TimerManager>();
             Game.Scene.AddComponent<UpdateManager>();
 
-
             await UpdateManager.Instance.StartUpdate();
 
 
@@ -53,6 +52,7 @@ namespace LccModel
         {
             Loader.Instance.Update?.Invoke();
             Game.Update();
+            Game.FrameFinishUpdate();
         }
         void LateUpdate()
         {

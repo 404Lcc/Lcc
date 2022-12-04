@@ -1,3 +1,4 @@
+using ET;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,11 +10,11 @@ namespace LccHotfix
         private List<StatePipeline> _pipelineList = new List<StatePipeline>();
 
 
-        public virtual void OnEnter()
+        public virtual async ETTask OnEnter()
         {
         }
 
-        public virtual void OnExit()
+        public virtual async ETTask OnExit()
         {
         }
 

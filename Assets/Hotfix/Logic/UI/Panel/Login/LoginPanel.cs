@@ -13,6 +13,7 @@ namespace LccHotfix
     }
     public class LoginModel : ViewModelBase
     {
+        public bool isEnterMain;
     }
     public class LoginPanel : APanelView<LoginModel>
     {
@@ -53,7 +54,7 @@ namespace LccHotfix
         {
             LogUtil.Log("OnRegisterUIEvent第五个执行的函数");
 
-            testBtn.onClick.AddListener(OnTest);
+            testBtn.onClick.AddListener(OnEnterMain);
         }
 
 
@@ -75,11 +76,11 @@ namespace LccHotfix
             LogUtil.Log("BeforeUnload");
         }
 
-        public void OnTest()
+        public void OnEnterMain()
         {
-            //忽略增加main的导航数据
-            //清除已经存在的导航数据，中断操作
-            PanelManager.Instance.ShowPanel(PanelType.Main, new ShowPanelData(false, true, null, true, false, true));
+            ViewModel.isEnterMain = true;
+
+
         }
     }
 }

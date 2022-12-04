@@ -55,11 +55,7 @@ namespace LccHotfix
                 }
             }
 
-            if (_sceneStateDict.ContainsKey(SceneStateName.Login))
-            {
-                _current = _sceneStateDict[SceneStateName.Login];
-                _current.OnEnter();
-            }
+
 
         }
         public override void OnDestroy()
@@ -72,7 +68,18 @@ namespace LccHotfix
             _sceneStateDict.Clear();
         }
 
-
+        public void SetDefaultState(string name)
+        {
+            if (_current != null)
+            {
+                throw new Exception("已经有状态在运行了！");
+            }
+            if (_sceneStateDict.ContainsKey(name))
+            {
+                _current = _sceneStateDict[name];
+                _current.OnEnter().Coroutine();
+            }
+        }
 
         public SceneState GetState(string name)
         {
@@ -101,8 +108,8 @@ namespace LccHotfix
 
 
 
-                _last.OnExit();
-                _current.OnEnter();
+                _last.OnExit().Coroutine();
+                _current.OnEnter().Coroutine();
             }
             else
             {

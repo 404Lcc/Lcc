@@ -1,9 +1,11 @@
+using ET;
+
 namespace LccHotfix
 {
     public interface ISceneState
     {
-        public void OnEnter();
+        public ETTask OnEnter();
+        public ETTask OnExit();
         public void Tick();
-        public void OnExit();
     }
 }
