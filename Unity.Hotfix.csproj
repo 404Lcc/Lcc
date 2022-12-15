@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Hotfix\Logic\Camera\SmoothFoolow3D.cs" />
+    <Compile Include="Assets\Hotfix\Logic\SceneState\MainSceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\SceneState\SceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\String\StringExpand.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Main\MainPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Base\AObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\Panel\PanelType.cs" />
+    <Compile Include="Assets\Hotfix\Logic\StatePipeline\EnterMain.cs" />
     <Compile Include="Assets\Hotfix\Runtime\GlobalConfig\AssetType\AssetType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\View\AViewBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\ProtobufObject.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\UnityWebRequest\UnityWebRequestExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\SceneState\ISceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\GameObjectEntity.cs" />
+    <Compile Include="Assets\Hotfix\Logic\StatePipeline\EnterLogin.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\Config\ConfigAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\Command\CommandDataType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\Config\IConfig.cs" />
@@ -134,6 +137,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\Audio\AudioManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\View\Binding\ViewModelBinding.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Base\IUpdate.cs" />
+    <Compile Include="Assets\Hotfix\Logic\SceneState\LoginSceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\Archive\CVType.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\LoginPanel.cs" />
     <Compile Include="Assets\Hotfix\Logic\EventHandler\InitEventHandler.cs" />
@@ -143,10 +147,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\Event\EventHandlerAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\Panel\PanelManager.cs" />
-    <Compile Include="Assets\Hotfix\Logic\SceneState\LoginSceneState.cs" />
-    <Compile Include="Assets\Hotfix\Logic\SceneState\MainSceneState.cs" />
-    <Compile Include="Assets\Hotfix\Logic\StatePipeline\EnterMain.cs" />
-    <Compile Include="Assets\Hotfix\Logic\StatePipeline\EnterLogin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
@@ -175,9 +175,6 @@
     </Reference>
     <Reference Include="UnityEngine.AudioModule">
       <HintPath>C:\Program Files\2021.3.8f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.AudioModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.AutoStreamingModule">
-      <HintPath>C:\Program Files\2021.3.8f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.AutoStreamingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ClothModule">
       <HintPath>C:\Program Files\2021.3.8f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.ClothModule.dll</HintPath>
@@ -229,9 +226,6 @@
     </Reference>
     <Reference Include="UnityEngine.LocalizationModule">
       <HintPath>C:\Program Files\2021.3.8f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.LocalizationModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.NVIDIAModule">
-      <HintPath>C:\Program Files\2021.3.8f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.NVIDIAModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
       <HintPath>C:\Program Files\2021.3.8f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.ParticleSystemModule.dll</HintPath>
@@ -491,8 +485,11 @@
     <Reference Include="Sirenix.Utilities.Editor">
       <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
+    <Reference Include="LZ4">
+      <HintPath>Library\PackageCache\com.focus-creative-games.hybridclr_unity@00f94335c3\Plugins\LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="dnlib">
+      <HintPath>Library\PackageCache\com.focus-creative-games.hybridclr_unity@00f94335c3\Plugins\dnlib.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>C:\Program Files\2021.3.8f1c1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
@@ -886,12 +883,6 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TestRunner">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.TestRunner">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
