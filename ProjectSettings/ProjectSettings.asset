@@ -648,7 +648,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Android: ODIN_INSPECTOR;ODIN_INSPECTOR_3;AssetBundle;ILRuntime
+    Android: ODIN_INSPECTOR;ODIN_INSPECTOR_3;AssetBundle;ILRuntime;ODIN_INSPECTOR_3_1
     Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;View
   additionalCompilerArguments: {}
   platformArchitecture: {}
