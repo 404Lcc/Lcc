@@ -11,7 +11,6 @@ using System.Threading;
 using ILRuntime.Mono.Cecil.Pdb;
 using ILRuntime.Runtime;
 using HybridCLR;
-using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace LccModel
 {

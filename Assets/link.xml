@@ -4448,8 +4448,8 @@
     <type fullname="UnityEngine.UI.InputField+EndEditEvent" preserve="all" />
     <type fullname="UnityEngine.UI.InputField+OnChangeEvent" preserve="all" />
     <type fullname="UnityEngine.UI.InputField+EditState" preserve="all" />
-    <type fullname="UnityEngine.UI.InputField+&lt;CaretBlink&gt;d__174" preserve="all" />
-    <type fullname="UnityEngine.UI.InputField+&lt;MouseDragOutsideRect&gt;d__196" preserve="all" />
+    <type fullname="UnityEngine.UI.InputField+&lt;CaretBlink&gt;d__176" preserve="all" />
+    <type fullname="UnityEngine.UI.InputField+&lt;MouseDragOutsideRect&gt;d__198" preserve="all" />
     <type fullname="UnityEngine.UI.AspectRatioFitter+AspectMode" preserve="all" />
     <type fullname="UnityEngine.UI.CanvasScaler+ScaleMode" preserve="all" />
     <type fullname="UnityEngine.UI.CanvasScaler+ScreenMatchMode" preserve="all" />

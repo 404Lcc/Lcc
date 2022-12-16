@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hotfixMode: 1
   isRelease: 1
+  aotMetaAssemblyNameList:
+  - mscorlib.dll
+  - System.dll
+  - System.Core.dll
+  hotfix: Unity.Hotfix
