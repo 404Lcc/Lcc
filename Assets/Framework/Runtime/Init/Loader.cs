@@ -10,6 +10,8 @@ using ProtoBuf;
 using System.Threading;
 using ILRuntime.Mono.Cecil.Pdb;
 using ILRuntime.Runtime;
+using HybridCLR;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace LccModel
 {
@@ -46,7 +48,7 @@ namespace LccModel
         }
 
 
-        public void Start(HotfixMode hotfixMode)
+        public void Start(GlobalConfig config)
         {
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (Assembly ass in assemblies)
@@ -56,11 +58,11 @@ namespace LccModel
                     _monoTypeDict[type.FullName] = type;
                 }
             }
-            switch (hotfixMode)
+            switch (config.hotfixMode)
             {
                 case HotfixMode.Mono:
                     {
-                        (byte[], byte[]) hotfix = Load();
+                        (byte[], byte[]) hotfix = Load(config);
 
                         byte[] dllBytes = hotfix.Item1;
                         byte[] pdbBytes = hotfix.Item2;
@@ -81,7 +83,7 @@ namespace LccModel
                     }
                 case HotfixMode.ILRuntime:
                     {
-                        (byte[], byte[]) hotfix = Load();
+                        (byte[], byte[]) hotfix = Load(config);
 
                         byte[] dllBytes = hotfix.Item1;
                         byte[] pdbBytes = hotfix.Item2;
@@ -136,16 +138,56 @@ namespace LccModel
                         start.Run();
                         break;
                     }
+                case HotfixMode.HybridCLR:
+                    {
+                        (byte[], byte[]) hotfix = Load(config);
+
+                        byte[] dllBytes = hotfix.Item1;
+                        byte[] pdbBytes = hotfix.Item2;
+
+                        // 为aot assembly加载原始metadata， 这个代码放aot或者热更新都行。
+                        // 一旦加载后，如果AOT泛型函数对应native实现不存在，则自动替换为解释模式执行
+                        // 注意，补充元数据是给AOT dll补充元数据，而不是给热更新dll补充元数据。
+                        // 热更新dll不缺元数据，不需要补充，如果调用LoadMetadataForAOTAssembly会返回错误
+
+                        HomologousImageMode mode = HomologousImageMode.Consistent;
+                        foreach (var item in config.aotMetaAssemblyNameList)
+                        {
+                            // 加载assembly对应的dll，会自动为它hook。一旦aot泛型函数的native函数不存在，用解释器版本代码
+                            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>(out LoadHandler dllHandler, item, AssetSuffix.Bytes, AssetType.DLL);
+                            LoadImageErrorCode errorCode = RuntimeApi.LoadMetadataForAOTAssembly(dllAsset.bytes, mode);
+                            if (dllHandler != null)
+                            {
+                                dllHandler.UnLoad();
+                            }
+                        }
+
+
+
+#if Release
+                        assembly = Assembly.Load(dllBytes);
+#else
+                        assembly = Assembly.Load(dllBytes, pdbBytes);
+#endif
+
+                        foreach (Type type in assembly.GetTypes())
+                        {
+                            _hotfixTypeDict[type.FullName] = type;
+                        }
+                        AStaticMethod start = new MonoStaticMethod(assembly, "LccHotfix.Init", "Start");
+                        start.Run();
+                        break;
+                    }
             }
         }
 
-        private (byte[], byte[]) Load()
+        private (byte[], byte[]) Load(GlobalConfig config)
         {
             byte[] dllBytes = null;
             byte[] pdbBytes = null;
 
 
-            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>(out LoadHandler dllHandler, "Unity.Hotfix.dll", AssetSuffix.Bytes, AssetType.DLL);
+            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>(out LoadHandler dllHandler, $"{config.hotfix}.dll", AssetSuffix.Bytes, AssetType.DLL);
             dllBytes = RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes);
 
             if (dllHandler != null)
@@ -154,7 +196,7 @@ namespace LccModel
             }
 
 #if !Release
-            TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>(out LoadHandler pdbHandler, "Unity.Hotfix.pdb", AssetSuffix.Bytes, AssetType.DLL);
+            TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>(out LoadHandler pdbHandler, $"{config.hotfix}.pdb", AssetSuffix.Bytes, AssetType.DLL);
             pdbBytes = pdbAsset.bytes;
 
             if (pdbHandler != null)
@@ -163,9 +205,9 @@ namespace LccModel
             }
 #endif
             return (dllBytes, pdbBytes);
-
         }
-        public void Dispose()
+
+        protected override void Dispose()
         {
             appDomain?.Dispose();
         }

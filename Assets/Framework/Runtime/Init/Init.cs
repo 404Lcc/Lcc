@@ -40,7 +40,7 @@ namespace LccModel
             await UpdateManager.Instance.StartUpdate();
 
 
-            Loader.Instance.Start(globalConfig.hotfixMode);
+            Loader.Instance.Start(globalConfig);
 
         }
         void FixedUpdate()
