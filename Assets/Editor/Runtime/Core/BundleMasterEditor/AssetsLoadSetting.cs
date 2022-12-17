@@ -7,7 +7,7 @@ namespace BM
     /// <summary>
     /// 用于配置单个Bundle包的构建信息
     /// </summary>
-    public class AssetsLoadSetting : ScriptableObject
+    public class AssetsLoadSetting : AssetsSetting
     {
         [Header("分包名字")]
         [Tooltip("当前分包的包名(建议英文)")] public string BuildName;
@@ -33,6 +33,10 @@ namespace BM
         [Header("资源路径")]
         [Tooltip("需要打包的资源所在的路径(不需要包含依赖, 只包括需要主动加载的资源)")]
         public List<string> AssetPath = new List<string>();
+        
+        [Header("一组资源路径")]
+        [Tooltip("资源颗粒控制")]
+        public List<string> AssetGroupPaths = new List<string>();
         
         [Header("场景资源")]
         [Tooltip("需要通过Bundle加载的场景")]

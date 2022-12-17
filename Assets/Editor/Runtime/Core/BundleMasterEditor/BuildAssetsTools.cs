@@ -44,6 +44,27 @@ namespace BM
                 }
             }
         }
+
+        /// <summary>
+        /// 获取一个文件目录下的所有资源以及路径
+        /// </summary>
+        public static void GetOriginsPath(string originPath, HashSet<string> files, HashSet<string> dirs)
+        {
+            DirectoryInfo buildBundlePath = new DirectoryInfo(originPath);
+            FileSystemInfo[] fileSystemInfos = buildBundlePath.GetFileSystemInfos();
+            foreach (FileSystemInfo fileSystemInfo in fileSystemInfos)
+            {
+                if (fileSystemInfo is DirectoryInfo)
+                {
+                    dirs.Add(fileSystemInfo.FullName);
+                    GetOriginsPath(fileSystemInfo.FullName, files, dirs);
+                }
+                else
+                {
+                    files.Add(fileSystemInfo.FullName);
+                }
+            }
+        }
         
         /// <summary>
         /// 创建加密的AssetBundle
@@ -71,6 +92,10 @@ namespace BM
         /// </summary>
         public static bool CantLoadType(string fileFullName)
         {
+            if (!CantLoadFile(fileFullName))
+            {
+                return false;
+            }
             string suffix = Path.GetExtension(fileFullName);
             switch (suffix)
             {
@@ -85,6 +110,26 @@ namespace BM
                 case ".boo":
                     return false;
             }
+            return true;
+        }
+
+        /// <summary>
+        /// 不能加载的文件
+        /// </summary>
+        public static bool CantLoadFile(string fillPathOrName)
+        {
+            if (fillPathOrName.Contains("LightingData.asset"))
+            {
+                return false;
+            }
+            // if (fillPathOrName.Contains("Lightmap-"))
+            // {
+            //     return false;
+            // }
+            // if (fillPathOrName.Contains("ReflectionProbe-"))
+            // {
+            //     return false;
+            // }
             return true;
         }
         
@@ -102,6 +147,30 @@ namespace BM
                     return true;
             }
             return false;
+        }
+        
+        public static bool IsGroupAsset(string fileFullName, AssetsLoadSetting assetsLoadSetting)
+        {
+            foreach (string assetGroupPath in assetsLoadSetting.AssetGroupPaths)
+            {
+                if (fileFullName.Contains(assetGroupPath))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        public static string GetGroupAssetPath(string fileFullName, AssetsLoadSetting assetsLoadSetting)
+        {
+            foreach (string assetGroupPath in assetsLoadSetting.AssetGroupPaths)
+            {
+                if (fileFullName.Contains(assetGroupPath))
+                {
+                    return assetGroupPath;
+                }
+            }
+            return null;
         }
 
         /// <summary>

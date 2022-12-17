@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace BM
 {
@@ -243,25 +242,6 @@ namespace BM
             foreach (var loadBase in PreUnLoadPool)
             {
                 TrueUnLoadPool.Add(loadBase.Key, loadBase.Value);
-            }
-        }
-
-
-        /// <summary>
-        /// 计时
-        /// </summary>
-        private static float _timer = 0;
-        
-        /// <summary>
-        /// 卸载周期计时循环
-        /// </summary>
-        public static void Update()
-        {
-            _timer += Time.deltaTime;
-            if (_timer >= _unLoadCirculateTime)
-            {
-                _timer = 0;
-                AutoAddToTrueUnLoadPool();
             }
         }
 

@@ -109,6 +109,11 @@
     <Compile Include="Assets\Editor\Runtime\Core\Util\Excel\ConfigType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BuildAssetsTools.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\EditorWindowBase\GeneralEditorWindowBase.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetsSetting.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetsOriginSetting.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BundleMasterInterface\BundleMasterMainWindow.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BundleMasterInterface\BundleMasterOriginLoadWindow.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BundleMasterInterface\BundleMasterAssetsLoadWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Editor\Runtime\Core\Template\ModelPanelTemplate.txt" />

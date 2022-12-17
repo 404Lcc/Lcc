@@ -54,16 +54,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Serialization.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Utilities.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEditor\Sirenix.Utilities.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\NoEditor\Sirenix.Serialization.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.dll" />
-    <Analyzer Include="D:\Unity Project\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\TypeModel.cs" />
@@ -209,6 +199,12 @@
     <Compile Include="Assets\3rdPlugins\ETTask\ETTaskHelper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\ProtoSyntax.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt16Serializer.cs" />
+    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\AssetComponentCheck.cs" />
+    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Base\LoadGroup.cs" />
+    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\GroupAssetHelper.cs" />
+    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\ValueHelper.cs" />
+    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\TimeAwaitHelper.cs" />
+    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\AssetComponentLife.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdPlugins\NPOI\NPOI.OpenXmlFormats.dll" />
