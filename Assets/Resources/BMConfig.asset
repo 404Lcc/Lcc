@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: BMConfig
   m_EditorClassIdentifier: 
   AssetLoadMode: 0
-  BundleServerUrl: 
   MaxDownLoadCount: 8
   ReDownLoadCount: 3
