@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3395353624
+CRC: 1042351732
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2b2b4fa3eddb693d9f1e9836463ee67c
+    Hash: 385d4eed4c4a394318e3b164a0faae99
   TypeTreeHash:
     serializedVersion: 2
-    Hash: a574d06976c1cb6dcfb093fcb8710154
+    Hash: a944e47f0efe050fc0935a26968754d3
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -15,17 +15,15 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 28
   Script: {instanceID: 0}
-- Class: 48
-  Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 115
-  Script: {instanceID: 0}
-- Class: 128
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
@@ -36,23 +34,23 @@ ClassTypes:
 - Class: 225
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers:
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.VertexGradient
 - AssemblyName: UnityEngine.CoreModule
   ClassName: UnityEngine.Events.PersistentCallGroup
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.AnimationTriggers
 - AssemblyName: UnityEngine.UI
-  ClassName: UnityEngine.UI.ColorBlock
+  ClassName: UnityEngine.UI.Button/ButtonClickedEvent
 - AssemblyName: UnityEngine.UI
-  ClassName: UnityEngine.UI.FontData
+  ClassName: UnityEngine.UI.ColorBlock
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.Navigation
 - AssemblyName: UnityEngine.UI
-  ClassName: UnityEngine.UI.Slider/SliderEvent
-- AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.SpriteState
 Assets:
-- Assets/Bundles/Prefab/Panel/LoadPanel.prefab
+- Assets/Bundles/Prefab/Panel/TopPanel.prefab
 Dependencies:
-- D:/Unity Project/Lcc/BuildBundles/ALL/all_assets_textures_logo_png.bundle
+- D:/Unity Project/Lcc/BuildBundles/ALL/all_assets_textmesh_pro_resources_fonts_&_materials_liberationsans_sdf_asset.bundle

@@ -1,19 +1,23 @@
 ManifestFileVersion: 0
-CRC: 2586343656
+CRC: 1196080469
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 30f8c6f3f7418a26c202e3ee3bd31dc1
+    Hash: 5e309d1338bb3483550448c4969c90e2
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 12da798fbf3a6c0c342cc56cb1a6efdf
+    Hash: f1f3281e9c74f90bf058e8461320afcb
 HashAppended: 0
 ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
 - Class: 28
   Script: {instanceID: 0}
-- Class: 213
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 128
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Textures/logo.png
+- Assets/TextMesh Pro/Fonts/LiberationSans.ttf
 Dependencies: []

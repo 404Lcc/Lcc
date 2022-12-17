@@ -1,29 +1,19 @@
 ManifestFileVersion: 0
-CRC: 900916316
+CRC: 2788944991
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5863b4a7d5dbbbd33101c0d06b59c776
+    Hash: a9f271eb2e44c04072df8c9ff1bd1467
   TypeTreeHash:
     serializedVersion: 2
-    Hash: db89f99be063349178ca67eccf84b15c
+    Hash: df5a11d353a631b1c36d2e0778899dfb
 HashAppended: 0
 ClassTypes:
-- Class: 1
-  Script: {instanceID: 0}
-- Class: 4
-  Script: {instanceID: 0}
-- Class: 20
-  Script: {instanceID: 0}
 - Class: 21
   Script: {instanceID: 0}
 - Class: 28
   Script: {instanceID: 0}
 - Class: 48
-  Script: {instanceID: 0}
-- Class: 81
-  Script: {instanceID: 0}
-- Class: 89
   Script: {instanceID: 0}
 - Class: 104
   Script: {instanceID: 0}
@@ -33,5 +23,5 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Resources/Scene/Login.unity
+- Assets/Bundles/Scene/Main.unity
 Dependencies: []

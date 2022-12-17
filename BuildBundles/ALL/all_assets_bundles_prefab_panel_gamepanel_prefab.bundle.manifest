@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 683177820
+CRC: 1608746684
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 23af723826d91c09acf5f430fdafa23e
+    Hash: c15f326f844a8c125820c6afad0cd46a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 4fc30ac01b959edf1c4fd253b7f1b7da
+    Hash: a944e47f0efe050fc0935a26968754d3
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -15,17 +15,17 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 28
   Script: {instanceID: 0}
-- Class: 48
-  Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 115
   Script: {instanceID: 0}
-- Class: 128
+- Class: 213
   Script: {instanceID: 0}
 - Class: 222
   Script: {instanceID: 0}
@@ -34,6 +34,8 @@ ClassTypes:
 - Class: 225
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers:
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.VertexGradient
 - AssemblyName: UnityEngine.CoreModule
   ClassName: UnityEngine.Events.PersistentCallGroup
 - AssemblyName: UnityEngine.UI
@@ -43,13 +45,12 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.ColorBlock
 - AssemblyName: UnityEngine.UI
-  ClassName: UnityEngine.UI.FontData
-- AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.Navigation
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.SpriteState
 Assets:
-- Assets/Bundles/Tool/TipsWindow.prefab
-Dependencies: []
+- Assets/Bundles/Prefab/Panel/GamePanel.prefab
+Dependencies:
+- D:/Unity Project/Lcc/BuildBundles/ALL/all_assets_textmesh_pro_resources_fonts_&_materials_liberationsans_sdf_asset.bundle

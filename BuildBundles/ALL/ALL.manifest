@@ -1,28 +1,64 @@
 ManifestFileVersion: 0
-CRC: 1241152527
+CRC: 1929591519
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: all_assets_bundles_config_testconfig_txt.bundle
+      Name: shader_all
       Dependencies: {}
     Info_1:
-      Name: all_assets_bundles_config_testconfigcategory_bytes.bundle
+      Name: all_assets_bundles_config_testconfig_txt.bundle
       Dependencies: {}
     Info_2:
-      Name: all_assets_bundles_dll_unity_hotfix_dll_bytes.bundle
+      Name: all_assets_bundles_config_testconfigcategory_bytes.bundle
       Dependencies: {}
     Info_3:
-      Name: all_assets_bundles_dll_unity_hotfix_pdb_bytes.bundle
+      Name: all_assets_bundles_dll_unity_hotfix_dll_bytes.bundle
       Dependencies: {}
     Info_4:
-      Name: all_assets_bundles_prefab_panel_loginpanel_prefab.bundle
+      Name: all_assets_bundles_dll_unity_hotfix_pdb_bytes.bundle
       Dependencies: {}
     Info_5:
-      Name: all_assets_bundles_scene_login_unity.bundle
-      Dependencies: {}
+      Name: all_assets_bundles_prefab_panel_gamepanel_prefab.bundle
+      Dependencies:
+        Dependency_0: all_assets_textmesh_pro_resources_fonts_&_materials_liberationsans_sdf_asset.bundle
     Info_6:
-      Name: all_assets_bundles_tool_tips_prefab.bundle
+      Name: all_assets_bundles_prefab_panel_loadingpanel_prefab.bundle
       Dependencies: {}
     Info_7:
+      Name: all_assets_bundles_prefab_panel_loginpanel_prefab.bundle
+      Dependencies:
+        Dependency_0: all_assets_textmesh_pro_resources_fonts_&_materials_liberationsans_sdf_asset.bundle
+    Info_8:
+      Name: all_assets_bundles_prefab_panel_mainpanel_prefab.bundle
+      Dependencies:
+        Dependency_0: all_assets_textmesh_pro_resources_fonts_&_materials_liberationsans_sdf_asset.bundle
+    Info_9:
+      Name: all_assets_bundles_prefab_panel_toppanel_prefab.bundle
+      Dependencies:
+        Dependency_0: all_assets_textmesh_pro_resources_fonts_&_materials_liberationsans_sdf_asset.bundle
+    Info_10:
+      Name: all_assets_bundles_scene_login_unity.bundle
+      Dependencies: {}
+    Info_11:
+      Name: all_assets_bundles_scene_main_unity.bundle
+      Dependencies: {}
+    Info_12:
+      Name: all_assets_bundles_tool_tips_prefab.bundle
+      Dependencies: {}
+    Info_13:
       Name: all_assets_bundles_tool_tipswindow_prefab.bundle
+      Dependencies: {}
+    Info_14:
+      Name: all_assets_textmesh_pro_resources_fonts_&_materials_liberationsans_sdf_-_fallback_asset.bundle
+      Dependencies:
+        Dependency_0: shader_all
+        Dependency_1: all_assets_textmesh_pro_fonts_liberationsans_ttf.bundle
+    Info_15:
+      Name: all_assets_textmesh_pro_resources_fonts_&_materials_liberationsans_sdf_asset.bundle
+      Dependencies:
+        Dependency_0: shader_all
+        Dependency_1: all_assets_textmesh_pro_resources_fonts_&_materials_liberationsans_sdf_-_fallback_asset.bundle
+        Dependency_2: all_assets_textmesh_pro_fonts_liberationsans_ttf.bundle
+    Info_16:
+      Name: all_assets_textmesh_pro_fonts_liberationsans_ttf.bundle
       Dependencies: {}

@@ -1,1 +1,4 @@
+<Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset|all_assets_textmesh_pro_resources_fonts_&_materials_liberationsans_sdf_-_fallback_asset.bundle>
+<Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset|all_assets_textmesh_pro_resources_fonts_&_materials_liberationsans_sdf_asset.bundle>
+<Assets/TextMesh Pro/Fonts/LiberationSans.ttf|all_assets_textmesh_pro_fonts_liberationsans_ttf.bundle>
 

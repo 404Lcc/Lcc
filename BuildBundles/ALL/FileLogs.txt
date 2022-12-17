@@ -2,8 +2,13 @@
 <Assets/Bundles/Config/TestConfigCategory.bytes|all_assets_bundles_config_testconfigcategory_bytes.bundle>
 <Assets/Bundles/DLL/Unity.Hotfix.dll.bytes|all_assets_bundles_dll_unity_hotfix_dll_bytes.bundle>
 <Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes|all_assets_bundles_dll_unity_hotfix_pdb_bytes.bundle>
-<Assets/Bundles/Prefab/Panel/LoginPanel.prefab|all_assets_bundles_prefab_panel_loginpanel_prefab.bundle>
+<Assets/Bundles/Prefab/Panel/GamePanel.prefab|all_assets_bundles_prefab_panel_gamepanel_prefab.bundle|Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset|Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset|Assets/TextMesh Pro/Fonts/LiberationSans.ttf>
+<Assets/Bundles/Prefab/Panel/LoadingPanel.prefab|all_assets_bundles_prefab_panel_loadingpanel_prefab.bundle>
+<Assets/Bundles/Prefab/Panel/LoginPanel.prefab|all_assets_bundles_prefab_panel_loginpanel_prefab.bundle|Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset|Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset|Assets/TextMesh Pro/Fonts/LiberationSans.ttf>
+<Assets/Bundles/Prefab/Panel/MainPanel.prefab|all_assets_bundles_prefab_panel_mainpanel_prefab.bundle|Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset|Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset|Assets/TextMesh Pro/Fonts/LiberationSans.ttf>
+<Assets/Bundles/Prefab/Panel/TopPanel.prefab|all_assets_bundles_prefab_panel_toppanel_prefab.bundle|Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset|Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset|Assets/TextMesh Pro/Fonts/LiberationSans.ttf>
 <Assets/Bundles/Scene/Login.unity|all_assets_bundles_scene_login_unity.bundle>
+<Assets/Bundles/Scene/Main.unity|all_assets_bundles_scene_main_unity.bundle>
 <Assets/Bundles/Tool/Tips.prefab|all_assets_bundles_tool_tips_prefab.bundle>
 <Assets/Bundles/Tool/TipsWindow.prefab|all_assets_bundles_tool_tipswindow_prefab.bundle>
 
