@@ -46,7 +46,7 @@ namespace LccHotfix
             }
             else
             {
-                LogUtil.Log($"事件不存在{uiEventType}");
+                LogUtil.Debug($"事件不存在{uiEventType}");
             }
         }
         public void Publish<T>(string uiEventType, T data)
@@ -58,7 +58,7 @@ namespace LccHotfix
             }
             else
             {
-                LogUtil.Log($"事件不存在{uiEventType}");
+                LogUtil.Debug($"事件不存在{uiEventType}");
             }
         }
     }

@@ -4518,7 +4518,6 @@
     <type fullname="LccModel.CoroutineCompletedHandler" preserve="all" />
     <type fullname="LccModel.CoroutineHandler" preserve="all" />
     <type fullname="LccModel.CoroutineObject" preserve="all" />
-    <type fullname="LccModel.EventSystem" preserve="all" />
     <type fullname="LccModel.AwaiterExpand" preserve="all" />
     <type fullname="LccModel.ByteExpand" preserve="all" />
     <type fullname="LccModel.GameObjectExpand" preserve="all" />
@@ -4560,11 +4559,17 @@
     <type fullname="LccModel.RedDotManager" preserve="all" />
     <type fullname="LccModel.SceneLoadManager" preserve="all" />
     <type fullname="LccModel.SceneName" preserve="all" />
-    <type fullname="LccModel.TimeManager" preserve="all" />
-    <type fullname="LccModel.TimerData" preserve="all" />
-    <type fullname="LccModel.TimerManager" preserve="all" />
-    <type fullname="LccModel.TimerType" preserve="all" />
     <type fullname="LccModel.UpdateManager" preserve="all" />
+    <type fullname="LccModel.EventSystem" preserve="all" />
+    <type fullname="LccModel.ILog" preserve="all" />
+    <type fullname="LccModel.Logger" preserve="all" />
+    <type fullname="LccModel.UnityLogger" preserve="all" />
+    <type fullname="LccModel.MainThreadSynchronizationContext" preserve="all" />
+    <type fullname="LccModel.ThreadSynchronizationContext" preserve="all" />
+    <type fullname="LccModel.Time" preserve="all" />
+    <type fullname="LccModel.Timer" preserve="all" />
+    <type fullname="LccModel.TimerData" preserve="all" />
+    <type fullname="LccModel.TimerType" preserve="all" />
     <type fullname="LccModel.AStarMap" preserve="all" />
     <type fullname="LccModel.AStarNodeData" preserve="all" />
     <type fullname="LccModel.AObjectBase" preserve="all" />
@@ -4580,6 +4585,7 @@
     <type fullname="LccModel.Pool`1" preserve="all" />
     <type fullname="LccModel.ProtobufObject" preserve="all" />
     <type fullname="LccModel.Root" preserve="all" />
+    <type fullname="LccModel.SceneFactory" preserve="all" />
     <type fullname="LccModel.Scene" preserve="all" />
     <type fullname="LccModel.ISingleton" preserve="all" />
     <type fullname="LccModel.ISingletonLateUpdate" preserve="all" />
@@ -4589,7 +4595,6 @@
     <type fullname="LccModel.AStaticMethod" preserve="all" />
     <type fullname="LccModel.ILStaticMethod" preserve="all" />
     <type fullname="LccModel.MonoStaticMethod" preserve="all" />
-    <type fullname="LccModel.ThreadSynchronizationContext" preserve="all" />
     <type fullname="LccModel.HotfixMode" preserve="all" />
     <type fullname="LccModel.GlobalConfig" preserve="all" />
     <type fullname="LccModel.Init" preserve="all" />
@@ -4640,12 +4645,15 @@
     <type fullname="LccModel.WaitCoroutineLock+&lt;Wait&gt;d__5" preserve="all" />
     <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__9" preserve="all" />
     <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__10" preserve="all" />
-    <type fullname="LccModel.TimerManager+&lt;&gt;c__DisplayClass12_0" preserve="all" />
-    <type fullname="LccModel.TimerManager+&lt;WaitAsync&gt;d__12" preserve="all" />
-    <type fullname="LccModel.TimerManager+&lt;WaitFrameAsync&gt;d__13" preserve="all" />
     <type fullname="LccModel.UpdateManager+&lt;StartUpdate&gt;d__7" preserve="all" />
+    <type fullname="LccModel.MainThreadSynchronizationContext+&lt;&gt;c__DisplayClass3_0" preserve="all" />
+    <type fullname="LccModel.ThreadSynchronizationContext+&lt;&gt;c__DisplayClass3_0" preserve="all" />
+    <type fullname="LccModel.Timer+&lt;&gt;c__DisplayClass16_0" preserve="all" />
+    <type fullname="LccModel.Timer+&lt;WaitTillAsync&gt;d__16" preserve="all" />
+    <type fullname="LccModel.Timer+&lt;&gt;c__DisplayClass17_0" preserve="all" />
+    <type fullname="LccModel.Timer+&lt;WaitAsync&gt;d__17" preserve="all" />
+    <type fullname="LccModel.Timer+&lt;WaitFrameAsync&gt;d__18" preserve="all" />
     <type fullname="LccModel.Game+&lt;WaitFrameFinish&gt;d__10" preserve="all" />
-    <type fullname="LccModel.ThreadSynchronizationContext+&lt;&gt;c__DisplayClass8_0" preserve="all" />
     <type fullname="LccModel.Init+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.Init+&lt;Start&gt;d__1" preserve="all" />
     <type fullname="LccModel.Loader+&lt;&gt;c" preserve="all" />

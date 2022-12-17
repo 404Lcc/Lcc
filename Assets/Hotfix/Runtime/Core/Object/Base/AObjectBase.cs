@@ -11,13 +11,16 @@ namespace LccHotfix
     public abstract class AObjectBase
     {
         [HideInInspector]
-        public long id;
-        private AObjectBase _parent;
+        public long Id { get; set; }
+        [HideInInspector]
+        public long InstanceId { get; protected set; }
+        protected AObjectBase _parent;
+        protected AObjectBase _domain;
         private bool _isComponent;
         private Dictionary<long, AObjectBase> _childrenDict = new Dictionary<long, AObjectBase>();
         private Dictionary<Type, AObjectBase> _componentDict = new Dictionary<Type, AObjectBase>();
 
-        public bool IsDisposed => id == 0;
+        public bool IsDisposed => InstanceId == 0;
         public AObjectBase Parent
         {
             get
@@ -33,9 +36,28 @@ namespace LccHotfix
                 {
                     return;
                 }
+                if (value == this)
+                {
+                    return;
+                }
+                //严格限制parent必须要有domain,也就是说parent必须在数据树上面
+                if (value.Domain == null)
+                {
+                    return;
+                }
+                if (this._parent != null) // 之前有parent
+                {
+                    // parent相同，不设置
+                    if (this._parent == value)
+                    {
+                        return;
+                    }
+                    this._parent.InternalRemoveChildren(this);
+                }
                 _parent = value;
                 _isComponent = false;
                 _parent.InternalAddChildren(this);
+                this.Domain = this._parent._domain;
             }
         }
         private AObjectBase ComponentParent
@@ -46,20 +68,90 @@ namespace LccHotfix
                 {
                     return;
                 }
+                if (value == this)
+                {
+                    return;
+                }
+                //严格限制parent必须要有domain,也就是说parent必须在数据树上面
+                if (value.Domain == null)
+                {
+                    return;
+                }
+                if (this._parent != null) // 之前有parent
+                {
+                    // parent相同，不设置
+                    if (this._parent == value)
+                    {
+                        return;
+                    }
+                    this._parent.InternalRemoveComponent(this);
+                }
                 _parent = value;
                 _isComponent = true;
                 _parent.InternalAddComponent(this);
+                this.Domain = this._parent._domain;
+            }
+        }
+        public AObjectBase Domain
+        {
+            get
+            {
+                return _domain;
+            }
+            private set
+            {
+                if (value == null)
+                {
+                    return;
+                }
+
+                if (this._domain == value)
+                {
+                    return;
+                }
+
+                AObjectBase preDomain = this._domain;
+                this._domain = value;
+
+                if (preDomain == null)
+                {
+                    this.InstanceId = IdUtil.GenerateInstanceId();
+
+                    EventSystem.Instance.Register(this);
+                }
+
+                // 递归设置孩子的Domain
+                if (this._childrenDict != null)
+                {
+
+                    foreach (var item in _childrenDict.Values)
+                    {
+                        item.Domain = this._domain;
+                    }
+
+                }
+
+                if (this._componentDict != null)
+                {
+                    foreach (var item in _componentDict.Values)
+                    {
+                        item.Domain = this._domain;
+                    }
+
+
+                }
+
             }
         }
         public Dictionary<long, AObjectBase> Children
         {
             get
             {
-                if (_childrenDict == null)
+                if (this._childrenDict == null)
                 {
-                    _childrenDict = new Dictionary<long, AObjectBase>();
+                    this._childrenDict = new Dictionary<long, AObjectBase>();
                 }
-                return _childrenDict;
+                return this._childrenDict;
             }
         }
         public Dictionary<Type, AObjectBase> Components
@@ -77,7 +169,6 @@ namespace LccHotfix
         {
             return (T)Parent;
         }
-
         #region 实体
         public T GetChildren<T>(long id) where T : AObjectBase
         {
@@ -88,6 +179,14 @@ namespace LccHotfix
             }
             return null;
         }
+        public void RemoveChildren<T>(long id) where T : AObjectBase
+        {
+            if (_childrenDict.TryGetValue(id, out AObjectBase aObjectBase))
+            {
+                InternalRemoveChildren(aObjectBase);
+                aObjectBase.Dispose();
+            }
+        }
         public AObjectBase AddChildren(AObjectBase aObjectBase)
         {
             aObjectBase.EntityParent = this;
@@ -96,8 +195,8 @@ namespace LccHotfix
         public AObjectBase AddChildren(Type type, params object[] datas)
         {
             AObjectBase aObjectBase = Create(type);
+            aObjectBase.Id = IdUtil.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Register(aObjectBase);
             EventSystem.Instance.Awake(aObjectBase);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -106,8 +205,8 @@ namespace LccHotfix
         public AObjectBase AddChildren<P1>(Type type, P1 p1, params object[] datas)
         {
             AObjectBase aObjectBase = Create(type);
+            aObjectBase.Id = IdUtil.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Register(aObjectBase);
             EventSystem.Instance.Awake(aObjectBase, p1);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -116,8 +215,8 @@ namespace LccHotfix
         public AObjectBase AddChildren<P1, P2>(Type type, P1 p1, P2 p2, params object[] datas)
         {
             AObjectBase aObjectBase = Create(type);
+            aObjectBase.Id = IdUtil.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Register(aObjectBase);
             EventSystem.Instance.Awake(aObjectBase, p1, p2);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -126,8 +225,8 @@ namespace LccHotfix
         public AObjectBase AddChildren<P1, P2, P3>(Type type, P1 p1, P2 p2, P3 p3, params object[] datas)
         {
             AObjectBase aObjectBase = Create(type);
+            aObjectBase.Id = IdUtil.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Register(aObjectBase);
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -136,8 +235,8 @@ namespace LccHotfix
         public AObjectBase AddChildren<P1, P2, P3, P4>(Type type, P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas)
         {
             AObjectBase aObjectBase = Create(type);
+            aObjectBase.Id = IdUtil.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Register(aObjectBase);
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -146,8 +245,8 @@ namespace LccHotfix
         public T AddChildren<T>(params object[] datas) where T : AObjectBase
         {
             T aObjectBase = Create<T>();
+            aObjectBase.Id = IdUtil.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Register(aObjectBase);
             EventSystem.Instance.Awake(aObjectBase);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -156,8 +255,8 @@ namespace LccHotfix
         public T AddChildren<T, P1>(P1 p1, params object[] datas) where T : AObjectBase
         {
             T aObjectBase = Create<T>();
+            aObjectBase.Id = IdUtil.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Register(aObjectBase);
             EventSystem.Instance.Awake(aObjectBase, p1);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -166,8 +265,8 @@ namespace LccHotfix
         public T AddChildren<T, P1, P2>(P1 p1, P2 p2, params object[] datas) where T : AObjectBase
         {
             T aObjectBase = Create<T>();
+            aObjectBase.Id = IdUtil.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Register(aObjectBase);
             EventSystem.Instance.Awake(aObjectBase, p1, p2);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -176,8 +275,8 @@ namespace LccHotfix
         public T AddChildren<T, P1, P2, P3>(P1 p1, P2 p2, P3 p3, params object[] datas) where T : AObjectBase
         {
             T aObjectBase = Create<T>();
+            aObjectBase.Id = IdUtil.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Register(aObjectBase);
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -186,8 +285,8 @@ namespace LccHotfix
         public T AddChildren<T, P1, P2, P3, P4>(P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas) where T : AObjectBase
         {
             T aObjectBase = Create<T>();
+            aObjectBase.Id = IdUtil.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Register(aObjectBase);
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -223,12 +322,23 @@ namespace LccHotfix
         {
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.Error("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = Create(type);
+            aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            EventSystem.Instance.Register(aObjectBase);
+            #region 自动索引
+            if (this is GameObjectEntity entity)
+            {
+                if (entity.gameObject != null)
+                {
+                    aObjectBase.AutoReference(entity.gameObject);
+                    aObjectBase.ShowView(entity.gameObject);
+                }
+            }
+            #endregion
+
             EventSystem.Instance.Awake(aObjectBase);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -238,12 +348,23 @@ namespace LccHotfix
         {
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.Error("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = Create(type);
+            aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            EventSystem.Instance.Register(aObjectBase);
+            #region 自动索引
+            if (this is GameObjectEntity entity)
+            {
+                if (entity.gameObject != null)
+                {
+                    aObjectBase.AutoReference(entity.gameObject);
+                    aObjectBase.ShowView(entity.gameObject);
+                }
+            }
+            #endregion
+
             EventSystem.Instance.Awake(aObjectBase, p1);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -253,12 +374,23 @@ namespace LccHotfix
         {
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.Error("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = Create(type);
+            aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            EventSystem.Instance.Register(aObjectBase);
+            #region 自动索引
+            if (this is GameObjectEntity entity)
+            {
+                if (entity.gameObject != null)
+                {
+                    aObjectBase.AutoReference(entity.gameObject);
+                    aObjectBase.ShowView(entity.gameObject);
+                }
+            }
+            #endregion
+
             EventSystem.Instance.Awake(aObjectBase, p1, p2);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -268,12 +400,23 @@ namespace LccHotfix
         {
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.Error("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = Create(type);
+            aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            EventSystem.Instance.Register(aObjectBase);
+            #region 自动索引
+            if (this is GameObjectEntity entity)
+            {
+                if (entity.gameObject != null)
+                {
+                    aObjectBase.AutoReference(entity.gameObject);
+                    aObjectBase.ShowView(entity.gameObject);
+                }
+            }
+            #endregion
+
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -283,12 +426,23 @@ namespace LccHotfix
         {
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.Error("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = Create(type);
+            aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            EventSystem.Instance.Register(aObjectBase);
+            #region 自动索引
+            if (this is GameObjectEntity entity)
+            {
+                if (entity.gameObject != null)
+                {
+                    aObjectBase.AutoReference(entity.gameObject);
+                    aObjectBase.ShowView(entity.gameObject);
+                }
+            }
+            #endregion
+
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -299,12 +453,23 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.Error("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = Create<T>();
+            aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            EventSystem.Instance.Register(aObjectBase);
+            #region 自动索引
+            if (this is GameObjectEntity entity)
+            {
+                if (entity.gameObject != null)
+                {
+                    aObjectBase.AutoReference(entity.gameObject);
+                    aObjectBase.ShowView(entity.gameObject);
+                }
+            }
+            #endregion
+
             EventSystem.Instance.Awake(aObjectBase);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -315,12 +480,23 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.Error("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = Create<T>();
+            aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            EventSystem.Instance.Register(aObjectBase);
+            #region 自动索引
+            if (this is GameObjectEntity entity)
+            {
+                if (entity.gameObject != null)
+                {
+                    aObjectBase.AutoReference(entity.gameObject);
+                    aObjectBase.ShowView(entity.gameObject);
+                }
+            }
+            #endregion
+
             EventSystem.Instance.Awake(aObjectBase, p1);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -331,12 +507,23 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.Error("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = Create<T>();
+            aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            EventSystem.Instance.Register(aObjectBase);
+            #region 自动索引
+            if (this is GameObjectEntity entity)
+            {
+                if (entity.gameObject != null)
+                {
+                    aObjectBase.AutoReference(entity.gameObject);
+                    aObjectBase.ShowView(entity.gameObject);
+                }
+            }
+            #endregion
+
             EventSystem.Instance.Awake(aObjectBase, p1, p2);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -347,12 +534,23 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.Error("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = Create<T>();
+            aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            EventSystem.Instance.Register(aObjectBase);
+            #region 自动索引
+            if (this is GameObjectEntity entity)
+            {
+                if (entity.gameObject != null)
+                {
+                    aObjectBase.AutoReference(entity.gameObject);
+                    aObjectBase.ShowView(entity.gameObject);
+                }
+            }
+            #endregion
+
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -363,12 +561,23 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                Debug.LogError("Component已存在" + type.FullName);
+                LogUtil.Error("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = Create<T>();
+            aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            EventSystem.Instance.Register(aObjectBase);
+            #region 自动索引
+            if (this is GameObjectEntity entity)
+            {
+                if (entity.gameObject != null)
+                {
+                    aObjectBase.AutoReference(entity.gameObject);
+                    aObjectBase.ShowView(entity.gameObject);
+                }
+            }
+            #endregion
+
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
@@ -383,6 +592,10 @@ namespace LccHotfix
             Type type = aObjectBase.GetType();
             AObjectBase temp = GetComponent(type);
             if (temp == null)
+            {
+                return;
+            }
+            if (temp.InstanceId != aObjectBase.InstanceId)
             {
                 return;
             }
@@ -419,21 +632,20 @@ namespace LccHotfix
         }
         #endregion
         #region 显示
-        public void ShowView(GameObject gameObject, GameObject parent = null)
+        private void ShowView(GameObject gameObject, GameObject parent = null)
         {
-#if View
             LccView view = gameObject.AddComponent<LccView>();
             view.className = GetType().Name;
             view.type = this;
-#endif
+
             if (parent != null)
             {
                 gameObject.transform.SetParent(parent.transform);
             }
         }
         #endregion
-        #region 自动引用
-        public void AutoReference(Transform transform)
+        #region 自动索引
+        private void AutoReference(Transform transform)
         {
             Dictionary<string, FieldInfo> fieldInfoDict = new Dictionary<string, FieldInfo>();
             FieldInfo[] fieldInfos = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
@@ -445,12 +657,13 @@ namespace LccHotfix
                     fieldInfoDict[item.Name.ToLower()] = item;
                 }
             }
+
             if (fieldInfoDict.Count > 0)
             {
                 AutoReference(transform, fieldInfoDict);
             }
         }
-        public void AutoReference(Transform transform, Dictionary<string, FieldInfo> fieldInfoDict)
+        private void AutoReference(Transform transform, Dictionary<string, FieldInfo> fieldInfoDict)
         {
             string name = transform.name.ToLower();
             if (fieldInfoDict.ContainsKey(name))
@@ -468,12 +681,31 @@ namespace LccHotfix
                     fieldInfoDict[name].SetValue(this, transform.GetComponent(fieldInfoDict[name].FieldType));
                 }
             }
-            for (int i = 0; i < transform.childCount; i++)
+
+
+            Transform[] childrens = transform.GetComponentsInChildren<Transform>(true);
+
+            foreach (Transform item in childrens)
             {
-                AutoReference(transform.GetChild(i), fieldInfoDict);
+                string itemName = item.name.ToLower();
+                if (fieldInfoDict.ContainsKey(itemName))
+                {
+                    if (fieldInfoDict[itemName].FieldType.Equals(typeof(GameObject)))
+                    {
+                        fieldInfoDict[itemName].SetValue(this, item.gameObject);
+                    }
+                    else if (fieldInfoDict[itemName].FieldType.Equals(typeof(Transform)))
+                    {
+                        fieldInfoDict[itemName].SetValue(this, item);
+                    }
+                    else
+                    {
+                        fieldInfoDict[itemName].SetValue(this, item.GetComponent(fieldInfoDict[itemName].FieldType));
+                    }
+                }
             }
         }
-        public void AutoReference(GameObject gameObject)
+        private void AutoReference(GameObject gameObject)
         {
             AutoReference(gameObject.transform);
         }
@@ -505,34 +737,67 @@ namespace LccHotfix
         }
         #endregion
         #region Invoke
-        public void Invoke(string methodName, object[] objs)
+        public void Invoke(string methodName, object[] objs = null)
         {
-            MethodInfo method = GetType().GetMethod(methodName);
-            method.Invoke(this, objs);
+            //TODO
+            var m = GetType().GetMethod(methodName);
+            m.Invoke(this, objs);
         }
         #endregion
         #region 协程
-        private CoroutineObject _coroutineObject = new CoroutineObject();
+
+        private CoroutineObject _coroutineObject;
+        public CoroutineObject CoroutineObject
+        {
+            get
+            {
+                if (_coroutineObject == null)
+                {
+                    _coroutineObject = new CoroutineObject();
+                }
+                return _coroutineObject;
+            }
+        }
+
+        /// <summary>
+        /// 开启协程
+        /// </summary>
+        /// <param name="enumerator"></param>
+        /// <returns></returns>
         public CoroutineHandler StartCoroutine(IEnumerator enumerator)
         {
-            return _coroutineObject.StartCoroutine(enumerator);
+            return CoroutineObject.StartCoroutine(enumerator);
         }
+
+        /// <summary>
+        /// 停止协程
+        /// </summary>
+        /// <param name="handler"></param>
         public void StopCoroutine(CoroutineHandler handler)
         {
-            handler.Stop();
+            CoroutineObject.StopCoroutine(handler);
         }
+        /// <summary>
+        /// 恢复协程
+        /// </summary>
+        /// <param name="handler"></param>
         public void PauseCoroutine(CoroutineHandler handler)
         {
-            handler.Pause();
+            CoroutineObject.PauseCoroutine(handler);
         }
+        /// <summary>
+        /// 暂停协程
+        /// </summary>
+        /// <param name="handler"></param>
         public void ResumeCoroutine(CoroutineHandler handler)
         {
-            handler.Resume();
+            CoroutineObject.ResumeCoroutine(handler);
         }
         public void StopAllCoroutines()
         {
-            _coroutineObject.StopAllCoroutines();
+            CoroutineObject.StopAllCoroutines();
         }
+
         #endregion
         #region 销毁
         public virtual void Dispose()
@@ -541,8 +806,15 @@ namespace LccHotfix
             {
                 return;
             }
+
+
             EventSystem.Instance.Remove(this);
-            id = 0;
+            InstanceId = 0;
+
+
+
+
+
             if (_childrenDict.Count > 0)
             {
                 foreach (AObjectBase item in _childrenDict.Values)
@@ -551,6 +823,8 @@ namespace LccHotfix
                 }
                 _childrenDict.Clear();
             }
+
+
             if (_componentDict.Count > 0)
             {
                 foreach (AObjectBase item in _componentDict.Values)
@@ -559,7 +833,13 @@ namespace LccHotfix
                 }
                 _componentDict.Clear();
             }
+
+
             OnDestroy();
+
+            _domain = null;
+
+
             if (Parent != null && !Parent.IsDisposed)
             {
                 if (_isComponent)
@@ -571,13 +851,18 @@ namespace LccHotfix
                     Parent.InternalRemoveChildren(this);
                 }
             }
+
+            _parent = null;
+
             StopAllCoroutines();
+
+
         }
         #endregion
         #region 内部方法
         private void InternalAddChildren(AObjectBase aObjectBase)
         {
-            _childrenDict.Add(aObjectBase.id, aObjectBase);
+            _childrenDict.Add(aObjectBase.Id, aObjectBase);
         }
         private void InternalAddComponent(AObjectBase aObjectBase)
         {
@@ -585,7 +870,7 @@ namespace LccHotfix
         }
         private void InternalRemoveChildren(AObjectBase aObjectBase)
         {
-            _childrenDict.Remove(aObjectBase.id);
+            _childrenDict.Remove(aObjectBase.Id);
         }
         private void InternalRemoveComponent(AObjectBase aObjectBase)
         {
@@ -596,13 +881,11 @@ namespace LccHotfix
         public static AObjectBase Create(Type type)
         {
             AObjectBase aObjectBase = (AObjectBase)Activator.CreateInstance(type);
-            aObjectBase.id = IdUtil.Generate();
             return aObjectBase;
         }
         public static T Create<T>() where T : AObjectBase
         {
             T aObjectBase = Activator.CreateInstance<T>();
-            aObjectBase.id = IdUtil.Generate();
             return aObjectBase;
         }
         #endregion

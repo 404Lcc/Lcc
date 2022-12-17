@@ -16,7 +16,7 @@ namespace LccModel
             await webRequest.SendWebRequest();
             if (webRequest.IsError())
             {
-                LogUtil.Log(webRequest.error);
+                LogUtil.Debug(webRequest.error);
                 return false;
             }
             else
@@ -31,7 +31,7 @@ namespace LccModel
             await webRequest.SendWebRequest();
             if (webRequest.IsError())
             {
-                LogUtil.Log(webRequest.error);
+                LogUtil.Debug(webRequest.error);
                 return null;
             }
             else
@@ -47,7 +47,7 @@ namespace LccModel
             await webRequest.SendWebRequest();
             if (webRequest.IsError())
             {
-                LogUtil.Log(webRequest.error);
+                LogUtil.Debug(webRequest.error);
                 return null;
             }
             else
@@ -65,7 +65,7 @@ namespace LccModel
             await webRequest.SendWebRequest();
             if (webRequest.IsError())
             {
-                LogUtil.Log(webRequest.error);
+                LogUtil.Debug(webRequest.error);
                 return null;
             }
             else
@@ -82,7 +82,7 @@ namespace LccModel
             await webRequest.SendWebRequest();
             if (webRequest.IsError())
             {
-                LogUtil.Log(webRequest.error);
+                LogUtil.Debug(webRequest.error);
                 return null;
             }
             else
@@ -99,7 +99,7 @@ namespace LccModel
             await webRequest.SendWebRequest();
             if (webRequest.IsError())
             {
-                LogUtil.Log(webRequest.error);
+                LogUtil.Debug(webRequest.error);
                 return null;
             }
             else

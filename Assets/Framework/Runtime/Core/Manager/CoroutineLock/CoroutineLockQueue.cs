@@ -40,8 +40,8 @@ namespace LccModel
             queue.Enqueue(waitCoroutineLock);
             if (time > 0)
             {
-                long tillTime = TimeManager.Instance.ClientFrameTime() + time;
-                TimerManager.Instance.OnceTimer(tillTime, () =>
+                long tillTime = Time.Instance.ClientFrameTime() + time;
+                Timer.Instance.NewOnceTimer(tillTime, () =>
                 {
                     if (waitCoroutineLock.IsDisposed())
                     {

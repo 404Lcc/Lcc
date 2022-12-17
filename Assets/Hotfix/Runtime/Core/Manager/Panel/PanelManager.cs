@@ -57,12 +57,12 @@ namespace LccHotfix
                     }
                     else
                     {
-                        LogUtil.LogError($"{name} 未继承IPanelHandler");
+                        LogUtil.Error($"{name} 未继承IPanelHandler");
                     }
                 }
                 else
                 {
-                    LogUtil.LogError($"UI逻辑未找到 {name}");
+                    LogUtil.Error($"UI逻辑未找到 {name}");
                 }
             }
 

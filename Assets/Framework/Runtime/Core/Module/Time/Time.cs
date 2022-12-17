@@ -2,9 +2,8 @@ using System;
 
 namespace LccModel
 {
-    public class TimeManager : AObjectBase, IUpdate
+    public class Time : Singleton<Time>, ISingletonUpdate
     {
-        public static TimeManager Instance { get; set; }
         private int timeZone;
 
 
@@ -28,34 +27,26 @@ namespace LccModel
                 dt = dt1970.AddHours(TimeZone);
             }
         }
-        public override void Awake()
+        public override void Register()
         {
-            base.Awake();
+            base.Register();
 
-
-
-            Instance = this;
+            this.dt1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            this.dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            this.FrameTime = this.ClientNow();
         }
-        public override void OnDestroy()
+
+        protected override void Dispose()
         {
-            base.OnDestroy();
+            base.Dispose();
 
             timeZone = 0;
             dt1970 = default;
             dt = default;
             ServerMinusClientTime = 0;
             FrameTime = 0;
-
-            Instance = null;
         }
 
-        public override void InitData(object[] datas)
-        {
-            base.InitData(datas);
-            this.dt1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            this.dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            this.FrameTime = this.ClientNow();
-        }
 
         public void Update()
         {

@@ -60,12 +60,14 @@
     <Compile Include="Assets\Editor\Runtime\Core\Util\Roslyn\RoslynUtil.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\BoundsObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector2IntObjectType.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BundleMasterInterface\BundleMasterOriginLoadWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector4ObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector2ObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\DoubleObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\CharObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetLoadTable.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BundleMasterInterface\BundleMasterWindow.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\Util\FrameworkTreeWindow\FrameworkTreeWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BuildAssets.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\InspectorEditor\LccView\LccViewEditor.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\DevelopSceneChange.cs" />
@@ -76,8 +78,12 @@
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\EditorWindowBase\LayerEditorWindowBase.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector3IntObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetsLoadSetting.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetsSetting.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetsOriginSetting.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BundleMasterInterface\BundleMasterMainWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector3ObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\MenuTree\AEditorWindowBase.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BundleMasterInterface\BundleMasterAssetsLoadWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\Link\LinkUtil.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\ObjectObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\FilterHotfixAssemblie\FilterHotfixAssemblie.cs" />
@@ -109,11 +115,6 @@
     <Compile Include="Assets\Editor\Runtime\Core\Util\Excel\ConfigType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BuildAssetsTools.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\EditorWindowBase\GeneralEditorWindowBase.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetsSetting.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetsOriginSetting.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BundleMasterInterface\BundleMasterMainWindow.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BundleMasterInterface\BundleMasterOriginLoadWindow.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BundleMasterInterface\BundleMasterAssetsLoadWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Editor\Runtime\Core\Template\ModelPanelTemplate.txt" />

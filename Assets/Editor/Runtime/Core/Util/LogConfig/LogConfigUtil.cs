@@ -17,7 +17,7 @@ namespace LccEditor
         {
             if (logConfigList.Count == 0)
             {
-                logConfigList.Add(new LogConfig("Assets/Framework/Runtime/Util/Log/LogUtil.cs", typeof(LogUtil).FullName));
+                logConfigList.Add(new LogConfig("Assets/Framework/Runtime/Core/Module/Logger/UnityLogger.cs", typeof(UnityLogger).FullName));
             }
             string[] datas = GetStackTrace().Split('\n');
             foreach (LogConfig item in logConfigList)
@@ -62,7 +62,7 @@ namespace LccEditor
                 Match match = regex.Match(datas[i]);
                 if (match.Success)
                 {
-                    index = i + 1;
+                    index = i + 3;
                     break;
                 }
             }
@@ -82,7 +82,7 @@ namespace LccEditor
                     }
                     if (isLog)
                     {
-                        index = i + 1;
+                        index = i + 3;
                         break;
                     }
                 }

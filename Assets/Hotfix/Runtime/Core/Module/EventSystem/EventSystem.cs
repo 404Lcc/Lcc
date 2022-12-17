@@ -14,72 +14,72 @@ namespace LccHotfix
         public Queue<long> lateUpdateCopy = new Queue<long>();
         public void Register(AObjectBase aObjectBase)
         {
-            aObjectBaseDict.Add(aObjectBase.id, aObjectBase);
+            aObjectBaseDict.Add(aObjectBase.InstanceId, aObjectBase);
             if (aObjectBase is IFixedUpdate)
             {
-                fixedUpdate.Enqueue(aObjectBase.id);
+                fixedUpdate.Enqueue(aObjectBase.InstanceId);
             }
             if (aObjectBase is IUpdate)
             {
-                update.Enqueue(aObjectBase.id);
+                update.Enqueue(aObjectBase.InstanceId);
             }
             if (aObjectBase is ILateUpdate)
             {
-                lateUpdate.Enqueue(aObjectBase.id);
+                lateUpdate.Enqueue(aObjectBase.InstanceId);
             }
         }
         public void Remove(AObjectBase aObjectBase)
         {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
             {
-                aObjectBaseDict.Remove(aObjectBase.id);
+                aObjectBaseDict.Remove(aObjectBase.InstanceId);
             }
         }
         public void Awake(AObjectBase aObjectBase)
         {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
             {
                 aObjectBase.Awake();
             }
         }
         public void Awake<P1>(AObjectBase aObjectBase, P1 p1)
         {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
             {
                 aObjectBase.Awake(p1);
             }
         }
         public void Awake<P1, P2>(AObjectBase aObjectBase, P1 p1, P2 p2)
         {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
             {
                 aObjectBase.Awake(p1, p2);
             }
         }
         public void Awake<P1, P2, P3>(AObjectBase aObjectBase, P1 p1, P2 p2, P3 p3)
         {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
             {
                 aObjectBase.Awake(p1, p2, p3);
             }
         }
         public void Awake<P1, P2, P3, P4>(AObjectBase aObjectBase, P1 p1, P2 p2, P3 p3, P4 p4)
         {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
             {
                 aObjectBase.Awake(p1, p2, p3, p4);
             }
         }
         public void Start(AObjectBase aObjectBase)
         {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
             {
                 aObjectBase.Start();
             }
         }
         public void InitData(AObjectBase aObjectBase, object[] datas)
         {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.id))
+            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
             {
                 aObjectBase.InitData(datas);
             }

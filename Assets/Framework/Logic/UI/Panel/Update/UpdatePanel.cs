@@ -43,7 +43,7 @@ namespace LccModel
 
                 progress.value = currentPercent * 0.01f;
                 progressText.text = (int)currentPercent + "%";
-                await TimerManager.Instance.WaitFrameAsync(1);
+                await Timer.Instance.WaitFrameAsync();
             }
         }
 

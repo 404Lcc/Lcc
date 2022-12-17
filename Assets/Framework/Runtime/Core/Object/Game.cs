@@ -92,7 +92,7 @@ namespace LccModel
                 }
                 catch (Exception e)
                 {
-                    LogUtil.LogError(e);
+                    LogUtil.Error(e);
                 }
             }
         }
@@ -122,7 +122,7 @@ namespace LccModel
                 }
                 catch (Exception e)
                 {
-                    LogUtil.LogError(e);
+                    LogUtil.Error(e);
                 }
             }
         }
@@ -151,7 +151,7 @@ namespace LccModel
                 }
                 catch (Exception e)
                 {
-                    LogUtil.LogError(e);
+                    LogUtil.Error(e);
                 }
             }
         }

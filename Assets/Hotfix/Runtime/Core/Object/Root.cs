@@ -5,7 +5,7 @@ namespace LccHotfix
         public Scene Scene;
         public Root()
         {
-            Scene = AObjectBase.Create<Scene>();
+            Scene = SceneFactory.CreateScene("Scene");
         }
         protected override void Dispose()
         {

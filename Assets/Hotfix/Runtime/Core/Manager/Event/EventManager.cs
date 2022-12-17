@@ -43,12 +43,12 @@ namespace LccHotfix
                 }
                 catch (Exception e)
                 {
-                    LogUtil.LogError(e.ToString());
+                    LogUtil.Error(e.ToString());
                 }
             }
             else
             {
-                LogUtil.Log($"事件不存在{type.Name}");
+                LogUtil.Debug($"事件不存在{type.Name}");
             }
         }
     }

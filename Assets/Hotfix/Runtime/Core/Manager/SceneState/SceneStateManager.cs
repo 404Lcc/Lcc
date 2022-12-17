@@ -50,7 +50,7 @@ namespace LccHotfix
                     }
                     else
                     {
-                        LogUtil.LogError("增加事件失败 " + statePipelineAttribute.sceneName + "不存在");
+                        LogUtil.Error("增加事件失败 " + statePipelineAttribute.sceneName + "不存在");
                     }
                 }
             }

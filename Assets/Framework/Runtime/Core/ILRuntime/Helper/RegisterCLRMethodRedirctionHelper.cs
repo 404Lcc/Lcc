@@ -39,7 +39,7 @@ namespace LccModel
             var stacktrace = __domain.DebugService.GetStackTrace(__intp);
 
             //我们在输出信息后面加上DLL堆栈
-            LogUtil.Log(message + "\n" + stacktrace);
+            LogUtil.Debug(message + "\n" + stacktrace);
 
             return __ret;
         }
@@ -52,7 +52,7 @@ namespace LccModel
             object message = typeof(object).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
             __intp.Free(ptr_of_this_method);
             var stacktrace = __domain.DebugService.GetStackTrace(__intp);
-            LogUtil.LogWarning(message + "\n" + stacktrace);
+            LogUtil.Warning(message + "\n" + stacktrace);
             return __ret;
         }
         public unsafe static StackObject* LogError(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -64,7 +64,7 @@ namespace LccModel
             object message = typeof(object).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
             __intp.Free(ptr_of_this_method);
             var stacktrace = __domain.DebugService.GetStackTrace(__intp);
-            LogUtil.LogError(message + "\n" + stacktrace);
+            LogUtil.Error(message + "\n" + stacktrace);
             return __ret;
         }
     }

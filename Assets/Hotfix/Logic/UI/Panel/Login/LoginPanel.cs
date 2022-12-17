@@ -20,8 +20,8 @@ namespace LccHotfix
         public Button testBtn;
         public override void InitView(LoginModel viewModel)
         {
-            LogUtil.Log("InitView第一个执行的函数");
-            LogUtil.Log("负责给viewModel的字段绑定");
+            LogUtil.Debug("InitView第一个执行的函数");
+            LogUtil.Debug("负责给viewModel的字段绑定");
             //参考
             //Binding<bool>(nameof(viewModel.isLoading), IsLoading);
             //public void IsLoading(bool oldValue, bool newValue)
@@ -30,15 +30,15 @@ namespace LccHotfix
         }
         public override void Binding(LoginModel oldValue, LoginModel newValue)
         {
-            LogUtil.Log("Binding第二个执行的函数");
-            LogUtil.Log("LoginModel第一次初始化时会触发，LoginModel绑定切换的时候会调用");
+            LogUtil.Debug("Binding第二个执行的函数");
+            LogUtil.Debug("LoginModel第一次初始化时会触发，LoginModel绑定切换的时候会调用");
         }
 
 
         public override void OnInitData(Panel panel)
         {
             base.OnInitData(panel);
-            LogUtil.Log("OnInitData第三个执行的函数");
+            LogUtil.Debug("OnInitData第三个执行的函数");
 
             panel.data.type = UIType.Normal;
             panel.data.showMode = UIShowMode.HideOther;
@@ -47,12 +47,12 @@ namespace LccHotfix
 
         public override void OnInitComponent(Panel panel)
         {
-            LogUtil.Log("OnInitComponent第四个执行的函数");
+            LogUtil.Debug("OnInitComponent第四个执行的函数");
 
         }
         public override void OnRegisterUIEvent(Panel panel)
         {
-            LogUtil.Log("OnRegisterUIEvent第五个执行的函数");
+            LogUtil.Debug("OnRegisterUIEvent第五个执行的函数");
 
             testBtn.onClick.AddListener(OnEnterMain);
         }
@@ -61,19 +61,19 @@ namespace LccHotfix
         public override void OnShow(Panel panel, AObjectBase contextData = null)
         {
             base.OnShow(panel, contextData);
-            LogUtil.Log("OnShow第六个执行的函数");
+            LogUtil.Debug("OnShow第六个执行的函数");
 
  
         }
 
         public override void OnHide(Panel panel)
         {
-            LogUtil.Log("OnHide");
+            LogUtil.Debug("OnHide");
         }
 
         public override void OnBeforeUnload(Panel panel)
         {
-            LogUtil.Log("BeforeUnload");
+            LogUtil.Debug("BeforeUnload");
         }
 
         public void OnEnterMain()

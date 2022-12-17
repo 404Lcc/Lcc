@@ -39,7 +39,7 @@ namespace LccEditor
             }
             else
             {
-                LogUtil.Log("Hotfix丢失");
+                LogUtil.Debug("Hotfix丢失");
             }
         }
     }

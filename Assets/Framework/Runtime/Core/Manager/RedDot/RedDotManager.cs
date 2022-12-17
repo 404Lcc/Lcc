@@ -49,24 +49,24 @@ namespace LccModel
         {
             if (!string.IsNullOrEmpty(parent) && !parentDict.ContainsKey(parent))
             {
-                LogUtil.LogWarning("父节点是新节点：" + parent);
+                LogUtil.Warning("父节点是新节点：" + parent);
             }
 
 
 
             if (string.IsNullOrEmpty(target))
             {
-                LogUtil.LogError($"目标不能为空");
+                LogUtil.Error($"目标不能为空");
                 return;
             }
             if (string.IsNullOrEmpty(parent))
             {
-                LogUtil.LogError($"父节点不能为空");
+                LogUtil.Error($"父节点不能为空");
                 return;
             }
             if (childToParentDict.ContainsKey(target))
             {
-                LogUtil.LogError($"{target} 已存在");
+                LogUtil.Error($"{target} 已存在");
                 return;
             }
 
@@ -136,7 +136,7 @@ namespace LccModel
 
             if (!IsLeafNode(target))
             {
-                LogUtil.LogError("不能删除父节点");
+                LogUtil.Error("不能删除父节点");
                 return;
             }
 
@@ -180,7 +180,7 @@ namespace LccModel
         {
             if (!nodeCountDict.TryGetValue(target, out int nodeCount))
             {
-                LogUtil.LogError($"节点不存在 {target} 不能增加");
+                LogUtil.Error($"节点不存在 {target} 不能增加");
                 return;
             }
 
@@ -227,7 +227,7 @@ namespace LccModel
 
             if (!IsLeafNode(target))
             {
-                LogUtil.LogError("不能显示父节点 " + target);
+                LogUtil.Error("不能显示父节点 " + target);
                 return false;
             }
 
@@ -243,7 +243,7 @@ namespace LccModel
         {
             if (!IsLeafNode(target))
             {
-                LogUtil.LogError("不能隐藏父节点 " + target);
+                LogUtil.Error("不能隐藏父节点 " + target);
                 return false;
             }
 
@@ -259,7 +259,7 @@ namespace LccModel
         {
             if (!IsLeafNode(target))
             {
-                LogUtil.LogError("不能刷新父节点");
+                LogUtil.Error("不能刷新父节点");
                 return;
             }
 
@@ -310,13 +310,13 @@ namespace LccModel
         {
             if (!nodeCountDict.ContainsKey(target))
             {
-                LogUtil.LogError($"{target} 节点不存在");
+                LogUtil.Error($"{target} 节点不存在");
                 return;
             }
 
             if (!IsLeafNode(target))
             {
-                LogUtil.LogError($"{target} 不能是父节点");
+                LogUtil.Error($"{target} 不能是父节点");
                 return;
             }
             //提高计数
@@ -324,14 +324,14 @@ namespace LccModel
             {
                 if (nodeCountDict[target] == 1)
                 {
-                    LogUtil.LogError($"{target} 节点计数已经是1了");
+                    LogUtil.Error($"{target} 节点计数已经是1了");
                     return;
                 }
 
                 nodeCountDict[target] += 1;
                 if (nodeCountDict[target] != 1)
                 {
-                    LogUtil.LogError($"{target} 节点计数错误 RetainCount = {nodeCountDict[target]}");
+                    LogUtil.Error($"{target} 节点计数错误 RetainCount = {nodeCountDict[target]}");
                     return;
                 }
             }
@@ -339,7 +339,7 @@ namespace LccModel
             {
                 if (nodeCountDict[target] != 1)
                 {
-                    LogUtil.LogError($"{target} 节点是不显示状态 RetainCount = {nodeCountDict[target]}");
+                    LogUtil.Error($"{target} 节点是不显示状态 RetainCount = {nodeCountDict[target]}");
                     return;
                 }
                 nodeCountDict[target] += -1;
@@ -349,7 +349,7 @@ namespace LccModel
             int curr = nodeCountDict[target];
             if (curr < 0 || curr > 1)
             {
-                LogUtil.LogError("红点计数错误，红点逻辑有问题");
+                LogUtil.Error("红点计数错误，红点逻辑有问题");
                 return;
             }
             //显示红点

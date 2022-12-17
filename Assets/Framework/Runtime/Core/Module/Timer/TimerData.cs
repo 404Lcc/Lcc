@@ -1,17 +1,23 @@
 namespace LccModel
 {
-    public class TimerData : AObjectBase
+    public class TimerData
     {
+        public long id;
         public TimerType timerType;
+        public long startTime;
         public long time;
+        public int type;
         public object obj;
-        public override void InitData(object[] datas)
+        public static TimerData Create(long id, TimerType timerType, long startTime, long time, int type, object obj)
         {
-            base.InitData(datas);
-
-            timerType = (TimerType)datas[0];
-            time = (long)datas[1];
-            obj = datas[2];
+            TimerData data = new TimerData();
+            data.id = id;
+            data.timerType = timerType;
+            data.startTime = startTime;
+            data.obj = obj;
+            data.time = time;
+            data.type = type;
+            return data;
         }
     }
 }

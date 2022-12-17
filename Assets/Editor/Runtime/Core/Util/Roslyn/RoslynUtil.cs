@@ -98,14 +98,14 @@ namespace LccEditor
             }
             if (result.Success)
             {
-                LogUtil.Log("编译成功");
+                LogUtil.Debug("编译成功");
             }
             else
             {
                 List<Diagnostic> failureList = (from diagnostic in result.Diagnostics where diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error select diagnostic).ToList();
                 foreach (Diagnostic item in failureList)
                 {
-                    LogUtil.Log(item.ToString());
+                    LogUtil.Debug(item.ToString());
                 }
             }
             return result.Success;

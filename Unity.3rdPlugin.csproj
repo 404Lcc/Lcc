@@ -63,6 +63,7 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ArrayDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ISerializerProxy.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\GuidSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Base\LoadGroup.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\BufferPool.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Base\WebLoadProgress.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\CallbackSet.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Base\LoadFile.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\BufferExtension.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\LoadSceneHandler.cs" />
+    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\ValueHelper.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\BundleRuntimeInfo.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\BundleMasterRuntimeConfig.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ReflectedUriDecorator.cs" />
@@ -154,12 +156,14 @@
     <Compile Include="Assets\3rdPlugins\LitJson\JsonMockWrapper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\SubItemToken.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\SubType.cs" />
+    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\AssetComponentCheck.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TypeSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\IExtensible.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\AssetComponent.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
+    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\AssetComponentLife.cs" />
     <Compile Include="Assets\3rdPlugins\ETTask\ETVoid.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\CallbackAttributes.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TupleSerializer.cs" />
@@ -173,6 +177,7 @@
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\PrefixStyle.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Base\LoadBaseRuntimeLoad.cs" />
+    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\TimeAwaitHelper.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\ParserToken.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonWriter.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\VerifyHelper.cs" />
@@ -195,16 +200,11 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UriDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\BlobSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\PType.cs" />
+    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\GroupAssetHelper.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonReader.cs" />
     <Compile Include="Assets\3rdPlugins\ETTask\ETTaskHelper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\ProtoSyntax.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt16Serializer.cs" />
-    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\AssetComponentCheck.cs" />
-    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Base\LoadGroup.cs" />
-    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\GroupAssetHelper.cs" />
-    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\ValueHelper.cs" />
-    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\TimeAwaitHelper.cs" />
-    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\AssetComponentLife.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdPlugins\NPOI\NPOI.OpenXmlFormats.dll" />

@@ -1,6 +1,5 @@
 ﻿using ET;
 using System;
-using System.Threading;
 using UnityEngine;
 
 namespace LccModel
@@ -10,15 +9,19 @@ namespace LccModel
         public GlobalConfig globalConfig;
         async ETTask Start()
         {
+            DontDestroyOnLoad(gameObject);
+
             globalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
             AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
             {
-                LogUtil.LogError(e.ExceptionObject.ToString());
+                LogUtil.Error(e.ExceptionObject.ToString());
             };
 
-            SynchronizationContext.SetSynchronizationContext(ThreadSynchronizationContext.Instance);
-            DontDestroyOnLoad(gameObject);
+            Game.AddSingleton<Logger>().ILog = new UnityLogger();
 
+            Game.AddSingleton<MainThreadSynchronizationContext>();
+            Game.AddSingleton<Time>();
+            Game.AddSingleton<Timer>();
             Game.AddSingleton<EventSystem>();
             Game.AddSingleton<Root>();
             Game.AddSingleton<Loader>();
@@ -33,8 +36,6 @@ namespace LccModel
             Game.Scene.AddComponent<NumericEventManager>();
             Game.Scene.AddComponent<RedDotManager>();
             Game.Scene.AddComponent<SceneLoadManager>();
-            Game.Scene.AddComponent<TimeManager>();
-            Game.Scene.AddComponent<TimerManager>();
             Game.Scene.AddComponent<UpdateManager>();
 
             await UpdateManager.Instance.StartUpdate();

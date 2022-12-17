@@ -47,7 +47,7 @@ namespace LccHotfix
 
                 progress.value = ViewModel.currentPercent * 0.01f;
                 progressText.text = (int)ViewModel.currentPercent + "%";
-                await TimerManager.Instance.WaitFrameAsync(1);
+                await Timer.Instance.WaitFrameAsync();
             }
         }
     }

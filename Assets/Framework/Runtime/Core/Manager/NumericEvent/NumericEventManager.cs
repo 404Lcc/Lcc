@@ -50,7 +50,7 @@ namespace LccModel
             }
             else
             {
-                LogUtil.Log($"事件不存在{type}");
+                LogUtil.Debug($"事件不存在{type}");
             }
         }
     }
