@@ -17,7 +17,7 @@ namespace LccModel
                 LogUtil.Error(e.ExceptionObject.ToString());
             };
 
-            Game.AddSingleton<Logger>().ILog = new UnityLogger();
+            Game.AddSingleton<Logger>();
 
             Game.AddSingleton<MainThreadSynchronizationContext>();
             Game.AddSingleton<Time>();

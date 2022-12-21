@@ -20,15 +20,7 @@ namespace LccModel
     }
     public class Logger : Singleton<Logger>
     {
-        private ILog iLog;
-
-        public ILog ILog
-        {
-            set
-            {
-                iLog = value;
-            }
-        }
+        public ILog ILog { get; set; } = new UnityLogger();
 
         private const int TraceLevel = 1;
         private const int DebugLevel = 2;
@@ -40,59 +32,58 @@ namespace LccModel
             return true;
         }
 
-        public void Trace(string msg)
+        public void Trace(string message)
         {
             if (!CheckLogLevel(DebugLevel))
             {
                 return;
             }
             StackTrace st = new StackTrace(2, true);
-            this.iLog.Trace($"{msg}\n{st}");
+            ILog.Trace($"{message}\n{st}");
         }
 
-        public void Debug(string msg)
+        public void Debug(string message)
         {
             if (!CheckLogLevel(DebugLevel))
             {
                 return;
             }
-            this.iLog.Debug(msg);
+            ILog.Debug(message);
         }
 
-        public void Info(string msg)
+        public void Info(string message)
         {
             if (!CheckLogLevel(InfoLevel))
             {
                 return;
             }
-            this.iLog.Info(msg);
+            ILog.Info(message);
         }
         
-        public void Warning(string msg)
+        public void Warning(string message)
         {
             if (!CheckLogLevel(WarningLevel))
             {
                 return;
             }
 
-            this.iLog.Warning(msg);
+            ILog.Warning(message);
         }
 
-        public void Error(string msg)
+        public void Error(string message)
         {
             StackTrace st = new StackTrace(2, true);
-            this.iLog.Error($"{msg}\n{st}");
+            ILog.Error($"{message}\n{st}");
         }
 
         public void Error(Exception e)
         {
             if (e.Data.Contains("StackTrace"))
             {
-                this.iLog.Error($"{e.Data["StackTrace"]}\n{e}");
+                ILog.Error($"{e.Data["StackTrace"]}\n{e}");
                 return;
             }
-            string str = e.ToString();
-            this.iLog.Error(str);
+            ILog.Error(e.ToString());
         }
 
 
@@ -110,7 +101,7 @@ namespace LccModel
                 return;
             }
             StackTrace st = new StackTrace(2, true);
-            this.iLog.Trace($"{string.Format(message, args)}\n{st}");
+            ILog.Trace($"{string.Format(message, args)}\n{st}");
         }
 
         public void Debug(string message, params object[] args)
@@ -119,7 +110,7 @@ namespace LccModel
             {
                 return;
             }
-            this.iLog.Debug(string.Format(message, args));
+            ILog.Debug(string.Format(message, args));
 
         }
 
@@ -130,7 +121,7 @@ namespace LccModel
             {
                 return;
             }
-            this.iLog.Info(string.Format(message, args));
+            ILog.Info(string.Format(message, args));
         }
 
         public void Warning(string message, params object[] args)
@@ -139,15 +130,14 @@ namespace LccModel
             {
                 return;
             }
-            this.iLog.Warning(string.Format(message, args));
+            ILog.Warning(string.Format(message, args));
         }
 
 
         public void Error(string message, params object[] args)
         {
             StackTrace st = new StackTrace(2, true);
-            string s = string.Format(message, args) + '\n' + st;
-            this.iLog.Error(s);
+            ILog.Error($"{string.Format(message, args)}\n{st}");
         }
     }
 }
