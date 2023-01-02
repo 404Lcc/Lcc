@@ -7,25 +7,25 @@ using UnityEngine;
 
 namespace LccEditor
 {
-    public class GeneralEditorWindowBase : AEditorWindowBase
+    public class GeneralEditorWindow : AEditorWindowBase
     {
         [PropertySpace(10)]
         [HideLabel, DisplayAsString]
         public string info = "通用功能";
-        public GeneralEditorWindowBase()
+        public GeneralEditorWindow()
         {
         }
-        public GeneralEditorWindowBase(EditorWindow editorWindow) : base(editorWindow)
+        public GeneralEditorWindow(EditorWindow editorWindow) : base(editorWindow)
         {
         }
         [PropertySpace(10)]
-        [LabelText("打开PersistentData路径"), Button]
+        [LabelText("打开PersistentData路径"), Button(ButtonSizes.Gigantic)]
         public void OpenPersistentDataPath()
         {
             EditorUtility.OpenWithDefaultApp(Application.persistentDataPath);
         }
         [PropertySpace(10)]
-        [LabelText("生成PC/Android/IOS文件"), Button]
+        [LabelText("生成PC/Android/IOS文件"), Button(ButtonSizes.Gigantic)]
         public void BuildPlayer()
         {
             List<string> argList = new List<string>();

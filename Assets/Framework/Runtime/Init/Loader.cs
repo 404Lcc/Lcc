@@ -66,11 +66,14 @@ namespace LccModel
                         byte[] dllBytes = hotfix.Item1;
                         byte[] pdbBytes = hotfix.Item2;
 
-#if Release
-                        assembly = Assembly.Load(dllBytes);
-#else
-                        assembly = Assembly.Load(dllBytes, pdbBytes);
-#endif
+                        if (config.isRelease)
+                        {
+                            assembly = Assembly.Load(dllBytes);
+                        }
+                        else
+                        {
+                            assembly = Assembly.Load(dllBytes, pdbBytes);
+                        }
 
                         foreach (Type type in assembly.GetTypes())
                         {
@@ -96,20 +99,17 @@ namespace LccModel
                         appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;
 #endif
 
-#if Release
-                        using (MemoryStream dllStream = new MemoryStream(dllBytes))
+                        if (config.isRelease)
                         {
+                            MemoryStream dllStream = new MemoryStream(dllBytes);
                             appDomain.LoadAssembly(dllStream, null, new PdbReaderProvider());
                         }
-#else
-                        using (MemoryStream dllStream = new MemoryStream(dllBytes))
+                        else
                         {
-                            using (MemoryStream pdbStream = new MemoryStream(pdbBytes))
-                            {
-                                appDomain.LoadAssembly(dllStream, pdbStream, new PdbReaderProvider());
-                            }
+                            MemoryStream dllStream = new MemoryStream(dllBytes);
+                            MemoryStream pdbStream = new MemoryStream(pdbBytes);
+                            appDomain.LoadAssembly(dllStream, pdbStream, new PdbReaderProvider());
                         }
-#endif
 
 
 
@@ -154,6 +154,11 @@ namespace LccModel
                         {
                             // 加载assembly对应的dll，会自动为它hook。一旦aot泛型函数的native函数不存在，用解释器版本代码
                             TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>(out LoadHandler dllHandler, item, AssetSuffix.Bytes, AssetType.DLL);
+                            if (dllAsset == null)
+                            {
+                                LogUtil.Error("AOT资源没找到" + item);
+                                return;
+                            }
                             LoadImageErrorCode errorCode = RuntimeApi.LoadMetadataForAOTAssembly(dllAsset.bytes, mode);
                             if (dllHandler != null)
                             {
@@ -162,12 +167,15 @@ namespace LccModel
                         }
 
 
+                        if (config.isRelease)
+                        {
+                            assembly = Assembly.Load(dllBytes);
+                        }
+                        else
+                        {
+                            assembly = Assembly.Load(dllBytes, pdbBytes);
+                        }
 
-#if Release
-                        assembly = Assembly.Load(dllBytes);
-#else
-                        assembly = Assembly.Load(dllBytes, pdbBytes);
-#endif
 
                         foreach (Type type in assembly.GetTypes())
                         {
@@ -194,15 +202,17 @@ namespace LccModel
                 dllHandler.UnLoad();
             }
 
-#if !Release
-            TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>(out LoadHandler pdbHandler, $"{config.hotfix}.pdb", AssetSuffix.Bytes, AssetType.DLL);
-            pdbBytes = pdbAsset.bytes;
-
-            if (pdbHandler != null)
+            if (!config.isRelease)
             {
-                pdbHandler.UnLoad();
+                TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>(out LoadHandler pdbHandler, $"{config.hotfix}.pdb", AssetSuffix.Bytes, AssetType.DLL);
+                pdbBytes = pdbAsset.bytes;
+
+                if (pdbHandler != null)
+                {
+                    pdbHandler.UnLoad();
+                }
             }
-#endif
+
             return (dllBytes, pdbBytes);
         }
 

@@ -13,7 +13,7 @@ using FileUtil = LccModel.FileUtil;
 
 namespace LccEditor
 {
-    public class ILRuntimeEditorWindowBase : AEditorWindowBase
+    public class ILRuntimeEditorWindow : AEditorWindowBase
     {
         [PropertySpace(10)]
         [HideLabel, DisplayAsString]
@@ -27,14 +27,14 @@ namespace LccEditor
         [PropertySpace(10)]
         [LabelText("类名")]
         public string className;
-        public ILRuntimeEditorWindowBase()
+        public ILRuntimeEditorWindow()
         {
         }
-        public ILRuntimeEditorWindowBase(EditorWindow editorWindow) : base(editorWindow)
+        public ILRuntimeEditorWindow(EditorWindow editorWindow) : base(editorWindow)
         {
         }
         [PropertySpace(10)]
-        [LabelText("生成CLR绑定代码"), Button]
+        [LabelText("生成CLR绑定代码"), Button(ButtonSizes.Gigantic)]
         public void BuildCLRBinding()
         {
             AppDomain appDomain = new AppDomain();
@@ -47,17 +47,17 @@ namespace LccEditor
             AssetDatabase.Refresh();
         }
         [PropertySpace(10)]
-        [LabelText("生成适配器"), Button]
+        [LabelText("生成适配器"), Button(ButtonSizes.Gigantic)]
         public void BuildCrossBinding()
         {
             if (string.IsNullOrEmpty(assemblieName))
             {
-                editorWindow.ShowNotification(new GUIContent("请输入程序集"));
+                EditorWindow.ShowNotification(new GUIContent("请输入程序集"));
                 return;
             }
             if (string.IsNullOrEmpty(className))
             {
-                editorWindow.ShowNotification(new GUIContent("请输入脚本名"));
+                EditorWindow.ShowNotification(new GUIContent("请输入脚本名"));
                 return;
             }
 
@@ -71,7 +71,7 @@ namespace LccEditor
             }
             if (assembly == null)
             {
-                editorWindow.ShowNotification(new GUIContent("没有这个程序集"));
+                EditorWindow.ShowNotification(new GUIContent("没有这个程序集"));
                 return;
             }
             Type type;
@@ -85,7 +85,7 @@ namespace LccEditor
             }
             if (type == null)
             {
-                editorWindow.ShowNotification(new GUIContent("没有此脚本"));
+                EditorWindow.ShowNotification(new GUIContent("没有此脚本"));
                 return;
             }
             if (File.Exists($"Assets/Framework/Runtime/Core/Manager/ILRuntime/Adapter/{className}Adapter.cs"))

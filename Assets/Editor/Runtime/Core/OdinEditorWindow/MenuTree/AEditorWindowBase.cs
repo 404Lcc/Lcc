@@ -1,18 +1,17 @@
-﻿using Sirenix.OdinInspector;
-using UnityEditor;
+﻿using UnityEditor;
 
 namespace LccEditor
 {
     public abstract class AEditorWindowBase
     {
-        [HideInEditorMode]
-        public EditorWindow editorWindow;
+        private EditorWindow _editorWindow;
+        public EditorWindow EditorWindow => _editorWindow;
         public AEditorWindowBase()
         {
         }
         public AEditorWindowBase(EditorWindow editorWindow)
         {
-            this.editorWindow = editorWindow;
+            this._editorWindow = editorWindow;
         }
         public virtual void OnEnable()
         {

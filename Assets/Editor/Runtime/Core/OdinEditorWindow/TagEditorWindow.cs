@@ -5,83 +5,88 @@ using UnityEngine;
 
 namespace LccEditor
 {
-    public class LayerEditorWindowBase : AEditorWindowBase
+    public class TagEditorWindow : AEditorWindowBase
     {
         [PropertySpace(10)]
         [HideLabel, DisplayAsString]
-        public string info = "层工具";
+        public string info = "标签工具";
         [PropertySpace(10)]
-        [LabelText("层名")]
-        public string layerName;
-        public LayerEditorWindowBase()
+        [LabelText("标签名")]
+        public string tagName;
+        public TagEditorWindow()
         {
         }
-        public LayerEditorWindowBase(EditorWindow editorWindow) : base(editorWindow)
+        public TagEditorWindow(EditorWindow editorWindow) : base(editorWindow)
         {
         }
         [PropertySpace(10)]
-        [LabelText("增加层"), Button]
-        public void AddLayer()
+        [LabelText("增加标签"), Button(ButtonSizes.Gigantic)]
+        public void AddTag()
         {
-            if (string.IsNullOrEmpty(layerName))
+            if (string.IsNullOrEmpty(tagName))
             {
-                editorWindow.ShowNotification(new GUIContent("请输入层名"));
+                EditorWindow.ShowNotification(new GUIContent("请输入标签名"));
                 return;
             }
-            bool success = AddLayer(layerName);
+            bool success = AddTag(tagName);
             if (success)
             {
-                editorWindow.ShowNotification(new GUIContent("Layer增加成功"));
+                EditorWindow.ShowNotification(new GUIContent("Tag增加成功"));
             }
             else
             {
-                editorWindow.ShowNotification(new GUIContent("Layer增加失败"));
+                EditorWindow.ShowNotification(new GUIContent("Tag增加失败"));
             }
         }
         [PropertySpace(10)]
-        [LabelText("移除层"), Button]
-        public void RemoveLayer()
+        [LabelText("移除标签"), Button(ButtonSizes.Gigantic)]
+        public void RemoveTag()
         {
-            if (string.IsNullOrEmpty(layerName))
+            if (string.IsNullOrEmpty(tagName))
             {
-                editorWindow.ShowNotification(new GUIContent("请输入层名"));
+                EditorWindow.ShowNotification(new GUIContent("请输入标签名"));
                 return;
             }
-            bool success = RemoveLayer(layerName);
+            bool success = RemoveTag(tagName);
             if (success)
             {
-                editorWindow.ShowNotification(new GUIContent("Layer移除成功"));
+                EditorWindow.ShowNotification(new GUIContent("Tag移除成功"));
             }
             else
             {
-                editorWindow.ShowNotification(new GUIContent("Layer移除失败"));
+                EditorWindow.ShowNotification(new GUIContent("Tag移除失败"));
             }
         }
-        public bool LayerExist(string layer)
+        public bool TagExist(string tag)
         {
-            foreach (string item in InternalEditorUtility.layers)
+            foreach (string item in InternalEditorUtility.tags)
             {
-                if (layer == item) return true;
+                if (tag == item) return true;
             }
             return false;
         }
-        public bool AddLayer(string layer)
+        public bool AddTag(string tag)
         {
-            if (!LayerExist(layer))
+            if (!TagExist(tag))
             {
                 SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
+                //获取tagmanager所有列表信息
                 SerializedProperty serializedProperty = tagManager.GetIterator();
+                //判断向后是否还有信息,如果没有则返回false
                 while (serializedProperty.NextVisible(true))
                 {
-                    if (serializedProperty.name == "layers")
+                    if (serializedProperty.name == "tags")
                     {
-                        //层默认是32个,只能从第8个开始写入自己的层
-                        for (int i = 8; i < serializedProperty.arraySize; i++)
+                        for (int i = 0; i < serializedProperty.arraySize; i++)
                         {
+                            //获取信息
                             SerializedProperty data = serializedProperty.GetArrayElementAtIndex(i);
+                            //如果为空,则可以填写自己的层名称
                             if (string.IsNullOrEmpty(data.stringValue))
                             {
-                                data.stringValue = layer;
+                                //设置名字
+                                data.stringValue = tag;
+                                //保存修改的属性
                                 tagManager.ApplyModifiedProperties();
                                 return true;
                             }
@@ -92,23 +97,26 @@ namespace LccEditor
             }
             return false;
         }
-        public bool RemoveLayer(string layer)
+        public bool RemoveTag(string tag)
         {
-            if (!LayerExist(layer))
+            if (TagExist(tag))
             {
                 SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
+                //获取tagmanager所有列表信息
                 SerializedProperty serializedProperty = tagManager.GetIterator();
+                //判断向后是否还有信息,如果没有则返回false
                 while (serializedProperty.NextVisible(true))
                 {
-                    if (serializedProperty.name == "layers")
+                    if (serializedProperty.name == "tags")
                     {
-                        //层默认是32个,只能从第8个开始写入自己的层
-                        for (int i = 8; i < serializedProperty.arraySize; i++)
+                        for (int i = 0; i < serializedProperty.arraySize; i++)
                         {
+                            //获取信息
                             SerializedProperty data = serializedProperty.GetArrayElementAtIndex(i);
-                            if (data.stringValue == layer)
+                            if (data.stringValue == tag)
                             {
                                 data.stringValue = string.Empty;
+                                //保存修改的属性
                                 tagManager.ApplyModifiedProperties();
                                 return true;
                             }

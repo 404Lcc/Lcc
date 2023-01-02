@@ -29,7 +29,7 @@ namespace LccEditor
             List<string> dllFilePathList = new List<string>();
             //项目本身cs文件
             List<string> csFilePathList = ReadCSPROJ(csprojName, ref defineList, ref dllFilePathList);
-            List<Microsoft.CodeAnalysis.SyntaxTree> csFileList = new List<Microsoft.CodeAnalysis.SyntaxTree>();
+            List<SyntaxTree> csFileList = new List<SyntaxTree>();
             List<MetadataReference> dllFileList = new List<MetadataReference>();
             CSharpParseOptions parseOptions;
             //宏是否开启
@@ -56,7 +56,7 @@ namespace LccEditor
             {
                 if (File.Exists(item))
                 {
-                    Microsoft.CodeAnalysis.SyntaxTree cs = CSharpSyntaxTree.ParseText(FileUtil.GetAsset(item).GetString(), parseOptions, item, Encoding.UTF8);
+                    SyntaxTree cs = CSharpSyntaxTree.ParseText(FileUtil.GetAsset(item).GetString(), parseOptions, item, Encoding.UTF8);
                     if (cs == null)
                     {
                         continue;
@@ -105,7 +105,7 @@ namespace LccEditor
                 List<Diagnostic> failureList = (from diagnostic in result.Diagnostics where diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error select diagnostic).ToList();
                 foreach (Diagnostic item in failureList)
                 {
-                    LogUtil.Debug(item.ToString());
+                    LogUtil.Error(item.ToString());
                 }
             }
             return result.Success;

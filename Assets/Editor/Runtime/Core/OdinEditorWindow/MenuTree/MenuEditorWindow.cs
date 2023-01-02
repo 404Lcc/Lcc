@@ -6,12 +6,12 @@ namespace LccEditor
     {
         protected override void OnEnable()
         {
-            AddAEditorWindowBase<FrameworkEditorWindowBase>("框架介绍");
-            AddAEditorWindowBase<GeneralEditorWindowBase>("通用功能");
-            AddAEditorWindowBase<HotfixEditorWindowBase>("热更新模式");
-            AddAEditorWindowBase<TagEditorWindowBase>("标签工具");
-            AddAEditorWindowBase<LayerEditorWindowBase>("层工具");
-            AddAEditorWindowBase<ILRuntimeEditorWindowBase>("ILRuntime工具");
+            AddAEditorWindowBase<FrameworkEditorWindow>("框架介绍");
+            AddAEditorWindowBase<GeneralEditorWindow>("通用功能");
+            AddAEditorWindowBase<HotfixEditorWindow>("热更新模式");
+            AddAEditorWindowBase<TagEditorWindow>("标签工具");
+            AddAEditorWindowBase<LayerEditorWindow>("层工具");
+            AddAEditorWindowBase<ILRuntimeEditorWindow>("ILRuntime工具");
         }
         [MenuItem("Lcc框架/工具箱")]
         public static void ShowFramework()

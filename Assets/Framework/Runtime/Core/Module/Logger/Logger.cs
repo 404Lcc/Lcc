@@ -10,13 +10,6 @@ namespace LccModel
         void Info(string message);
         void Warning(string message);
         void Error(string message);
-
-
-        void Trace(string message, params object[] args);
-        void Debug(string message, params object[] args);
-        void Info(string message, params object[] args);
-        void Warning(string message, params object[] args);
-        void Error(string message, params object[] args);
     }
     public class Logger : Singleton<Logger>
     {

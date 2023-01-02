@@ -80,19 +80,17 @@ namespace LccHotfix
                     continue;
                 }
 
-                if (singleton is not ISingletonFixedUpdate fixedUpdate)
+                if (singleton is ISingletonFixedUpdate fixedUpdate)
                 {
-                    continue;
-                }
-
-                fixedUpdates.Enqueue(singleton);
-                try
-                {
-                    fixedUpdate.FixedUpdate();
-                }
-                catch (Exception e)
-                {
-                    LogUtil.Error(e);
+                    fixedUpdates.Enqueue(singleton);
+                    try
+                    {
+                        fixedUpdate.FixedUpdate();
+                    }
+                    catch (Exception e)
+                    {
+                        LogUtil.Error(e);
+                    }
                 }
             }
         }
@@ -110,19 +108,17 @@ namespace LccHotfix
                     continue;
                 }
 
-                if (singleton is not ISingletonUpdate update)
+                if (singleton is ISingletonUpdate update)
                 {
-                    continue;
-                }
-
-                updates.Enqueue(singleton);
-                try
-                {
-                    update.Update();
-                }
-                catch (Exception e)
-                {
-                    LogUtil.Error(e);
+                    updates.Enqueue(singleton);
+                    try
+                    {
+                        update.Update();
+                    }
+                    catch (Exception e)
+                    {
+                        LogUtil.Error(e);
+                    }
                 }
             }
         }
@@ -139,19 +135,17 @@ namespace LccHotfix
                     continue;
                 }
 
-                if (singleton is not ISingletonLateUpdate lateUpdate)
+                if (singleton is ISingletonLateUpdate lateUpdate)
                 {
-                    continue;
-                }
-
-                lateUpdates.Enqueue(singleton);
-                try
-                {
-                    lateUpdate.LateUpdate();
-                }
-                catch (Exception e)
-                {
-                    LogUtil.Error(e);
+                    lateUpdates.Enqueue(singleton);
+                    try
+                    {
+                        lateUpdate.LateUpdate();
+                    }
+                    catch (Exception e)
+                    {
+                        LogUtil.Error(e);
+                    }
                 }
             }
         }

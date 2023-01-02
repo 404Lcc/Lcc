@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d5b7b43d96b9241b0b85180d7ade92, type: 3}
   m_Name: GlobalConfig
   m_EditorClassIdentifier: 
-  hotfixMode: 1
+  hotfixMode: 2
   isRelease: 1
   aotMetaAssemblyNameList:
   - mscorlib.dll

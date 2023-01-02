@@ -4510,6 +4510,7 @@
     <type fullname="QuaternionBinder" preserve="all" />
     <type fullname="Vector2Binder" preserve="all" />
     <type fullname="Vector3Binder" preserve="all" />
+    <type fullname="ScreenAdaptationUtil" preserve="all" />
     <type fullname="LccModel.UpdatePanel" preserve="all" />
     <type fullname="LccModel.AssetBundleCreateRequestAwaiter" preserve="all" />
     <type fullname="LccModel.AssetBundleRequestAwaiter" preserve="all" />
