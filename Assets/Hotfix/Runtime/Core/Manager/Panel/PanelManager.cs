@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LccHotfix
 {
@@ -12,6 +13,7 @@ namespace LccHotfix
     {
         public static PanelManager Instance { get; set; }
 
+        public const int DepthMultiply = 100;
 
         private readonly string _suff = AssetSuffix.Prefab;
         private readonly string[] _types = new string[] { AssetType.Prefab, AssetType.Panel };//资源类型
@@ -107,6 +109,7 @@ namespace LccHotfix
 
             return null;
         }
+
         /// <summary>
         /// 判断界面是否打开
         /// </summary>
@@ -221,7 +224,9 @@ namespace LccHotfix
 
 
             AObjectBase contextData = showData == null ? null : showData.contextData;
+            panel.Depth = GetCurrentPanelMaxDepth(panel.data.type);
             panel.IsShown = true;
+            panel.SetRoot(GetRoot(panel.data.type));
             panel.Logic.OnShow(panel, contextData);
             shownPanelDict[(int)type] = panel;
 
@@ -264,14 +269,12 @@ namespace LccHotfix
             }
             GameObject go = AssetManager.Instance.InstantiateAsset(name, _types);
             panel.GameObject = CreateUIGameObject(go);
+            panel.Canvas = panel.GameObject.GetComponent<Canvas>();
             panel.GameObject.name = go.name;
 
-            panel.Logic.OnInitData(panel);
-
-            panel.SetRoot(GetRoot(panel.data.type));
-            panel.Transform.SetAsLastSibling();
 
             panel.Logic.OnInitComponent(panel);
+            panel.Logic.OnInitData(panel);
             panel.Logic.OnRegisterUIEvent(panel);
 
             allPanelDict[(int)panel.Type] = panel;
@@ -319,14 +322,12 @@ namespace LccHotfix
             LoadHandler handler = await AssetManager.Instance.LoadAssetAsync<GameObject>(name, _suff, _types);
             GameObject go = (GameObject)handler.Asset;
             panel.GameObject = CreateUIGameObject(go);
+            panel.Canvas = panel.GameObject.GetComponent<Canvas>();
             panel.GameObject.name = go.name;
 
-            panel.Logic.OnInitData(panel);
-
-            panel.SetRoot(GetRoot(panel.data.type));
-            panel.Transform.SetAsLastSibling();
 
             panel.Logic.OnInitComponent(panel);
+            panel.Logic.OnInitData(panel);
             panel.Logic.OnRegisterUIEvent(panel);
 
             allPanelDict[(int)panel.Type] = panel;
@@ -335,6 +336,8 @@ namespace LccHotfix
 
         private GameObject CreateUIGameObject(GameObject gameObject)
         {
+            gameObject.AddComponent<Canvas>();
+            gameObject.AddComponent<GraphicRaycaster>();
             RectTransform rect = gameObject.GetComponent<RectTransform>();
             rect.sizeDelta = Vector2.zero;
             rect.anchorMin = Vector2.zero;
@@ -348,6 +351,8 @@ namespace LccHotfix
             rect.anchorMax = anchorMax;
             return gameObject;
         }
+
+
 
 
         /// <summary>
@@ -366,6 +371,7 @@ namespace LccHotfix
                 return;
             }
             panel.IsShown = false;
+            panel.SetRoot(GlobalManager.Instance.RemoveRoot);
             panel.Logic.OnHide(panel);
             shownPanelDict.Remove((int)type);
         }
@@ -398,6 +404,7 @@ namespace LccHotfix
 
                 cachedList.Add((PanelType)item.Key);
                 item.Value.IsShown = false;
+                item.Value.SetRoot(GlobalManager.Instance.RemoveRoot);
                 item.Value.Logic.OnHide(item.Value);
             }
             if (cachedList.Count > 0)
@@ -524,7 +531,9 @@ namespace LccHotfix
         {
             if (IsPanelVisible(type)) return;
             Panel panel = GetPanel(type);
+            panel.Depth = GetCurrentPanelMaxDepth(panel.data.type);
             panel.IsShown = true;
+            panel.SetRoot(GetRoot(panel.data.type));
             panel.Logic.OnShow(panel);
             shownPanelDict[(int)panel.Type] = panel;
         }
@@ -544,6 +553,25 @@ namespace LccHotfix
                 }
             }
             return (int)PanelType.None;
+        }
+
+        /// <summary>
+        /// 获取当前类型最高层级
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private int GetCurrentPanelMaxDepth(UIType type)
+        {
+            int temp = 0;
+            List<Panel> list = shownPanelDict.Values.ToList();
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                if (list[i].data.type == type)
+                {
+                    temp++;
+                }
+            }
+            return temp * DepthMultiply;
         }
         /// <summary>
         /// 执行导航逻辑
@@ -606,6 +634,7 @@ namespace LccHotfix
                         //隐藏
                         removedList.Add((PanelType)item.Key);
                         item.Value.IsShown = false;
+                        item.Value.SetRoot(GlobalManager.Instance.RemoveRoot);
                         item.Value.Logic.OnHide(item.Value);
                     }
                     //记录当前打开的所有界面

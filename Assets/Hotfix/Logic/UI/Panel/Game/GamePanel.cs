@@ -3,8 +3,13 @@
     public class GameModel : ViewModelBase
     {
     }
-    public class GamePanel : APanelView<GameModel>
+    public class GamePanel : UIPanel<GameModel>
     {
+        public override void OnInitComponent(Panel panel)
+        {
+            base.OnInitComponent(panel);
+
+        }
         public override void OnInitData(Panel panel)
         {
             base.OnInitData(panel);

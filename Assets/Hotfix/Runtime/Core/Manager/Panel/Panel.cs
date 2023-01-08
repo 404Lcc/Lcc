@@ -20,58 +20,6 @@ namespace LccHotfix
         IgnoreNavigation,//忽略导航
         NormalNavigation,
     }
-    public interface IPanelHandler
-    {
-        /// <summary>
-        /// 初始化数据
-        /// </summary>
-        /// <param name="panel"></param>
-        void OnInitData(Panel panel);
-
-        /// <summary>
-        /// 初始化业务逻辑
-        /// </summary>
-        /// <param name="panel"></param>
-        void OnInitComponent(Panel panel);
-
-        /// <summary>
-        /// 注册UI业务逻辑事件
-        /// </summary>
-        /// <param name="panel"></param>
-        void OnRegisterUIEvent(Panel panel);
-
-        /// <summary>
-        /// 显示UI界面
-        /// </summary>
-        /// <param name="panel"></param>
-        /// <param name="contextData"></param>
-        void OnShow(Panel panel, AObjectBase contextData = null);
-
-        /// <summary>
-        /// 隐藏UI界面
-        /// </summary>
-        /// <param name="panel"></param>
-        void OnHide(Panel panel);
-
-        /// <summary>
-        /// 重置界面
-        /// </summary>
-        /// <param name="panel"></param>
-        void OnReset(Panel panel);
-
-        /// <summary>
-        /// 销毁界面之前
-        /// </summary>
-        /// <param name="panel"></param>
-        void OnBeforeUnload(Panel panel);
-
-        /// <summary>
-        /// 判断是否返回
-        /// </summary>
-        /// <param name="panel"></param>
-        /// <returns></returns>
-        bool IsReturn(Panel panel);
-    }
     public class ShowPanelData
     {
         //强制重置窗口
@@ -145,7 +93,10 @@ namespace LccHotfix
         private PanelType _preType;
         private bool _isLock;
 
+        private int _depth;
+
         private GameObject _gameObject;
+        private Canvas _canvas;
 
         public PanelData data;
         public IPanelHandler Logic
@@ -164,6 +115,29 @@ namespace LccHotfix
             set
             {
                 _gameObject = value;
+            }
+        }
+        public Transform Transform
+        {
+            get
+            {
+                if (GameObject != null)
+                {
+                    return GameObject.transform;
+                }
+                return null;
+            }
+        }
+
+        public Canvas Canvas
+        {
+            get
+            {
+                return _canvas;
+            }
+            set
+            {
+                _canvas = value;
             }
         }
         public bool IsLoad => GameObject != null;
@@ -193,16 +167,23 @@ namespace LccHotfix
         {
             get
             {
+                return _depth;
+            }
+            set
+            {
                 switch (data.type)
                 {
                     case UIType.Normal:
-                        return NormalDepth + Transform.GetSiblingIndex();
+                        _depth = NormalDepth + value;
+                        break;
                     case UIType.Fixed:
-                        return FixedDepth + Transform.GetSiblingIndex();
+                        _depth = FixedDepth + value;
+                        break;
                     case UIType.Popup:
-                        return PopupDepth + Transform.GetSiblingIndex();
+                        _depth = PopupDepth + value;
+                        break;
                 }
-                return -1;
+                Canvas.sortingOrder = _depth;
             }
         }
         public PanelType Type
@@ -229,18 +210,6 @@ namespace LccHotfix
         }
 
 
-        public Transform Transform
-        {
-            get
-            {
-                if (GameObject != null)
-                {
-                    return GameObject.transform;
-                }
-                return null;
-            }
-        }
-
         public override void InitData(object[] datas)
         {
             base.InitData(datas);
@@ -262,6 +231,7 @@ namespace LccHotfix
             }
             Transform.SetParent(root, false);
             Transform.transform.localScale = Vector3.one;
+            Canvas.overrideSorting = true;
         }
 
 

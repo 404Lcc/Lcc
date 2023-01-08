@@ -30,11 +30,16 @@ namespace LccHotfix
         public TopType TopType => topData.topType;
         public string Title => topData.title;
     }
-    public class TopPanel : APanelView<TopModel>
+    public class TopPanel : UIPanel<TopModel>
     {
         public Button closeBtn;
         public TMP_Text titleText;
         public GameObject gold;
+        public override void OnInitComponent(Panel panel)
+        {
+            base.OnInitComponent(panel);
+
+        }
         public override void OnInitData(Panel panel)
         {
             base.OnInitData(panel);
@@ -46,7 +51,7 @@ namespace LccHotfix
 
         public override void OnShow(Panel panel, AObjectBase contextData = null)
         {
-
+            base.OnShow(panel, contextData);
             if (contextData is TopData top)
             {
                 ViewModel.topData.curPanel = top.curPanel;

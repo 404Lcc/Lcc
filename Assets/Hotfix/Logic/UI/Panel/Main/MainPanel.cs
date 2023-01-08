@@ -6,9 +6,14 @@ namespace LccHotfix
     public class MainModel : ViewModelBase
     {
     }
-    public class MainPanel : APanelView<MainModel>
+    public class MainPanel : UIPanel<MainModel>
     {
         public Button testBtn;
+        public override void OnInitComponent(Panel panel)
+        {
+            base.OnInitComponent(panel);
+
+        }
         public override void OnInitData(Panel panel)
         {
             base.OnInitData(panel);

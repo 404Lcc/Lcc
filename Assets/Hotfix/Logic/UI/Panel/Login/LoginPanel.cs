@@ -15,7 +15,7 @@ namespace LccHotfix
     {
         public bool isEnterMain;
     }
-    public class LoginPanel : APanelView<LoginModel>
+    public class LoginPanel : UIPanel<LoginModel>
     {
         public Button testBtn;
         public override void InitView(LoginModel viewModel)
@@ -34,22 +34,22 @@ namespace LccHotfix
             LogUtil.Debug("LoginModel第一次初始化时会触发，LoginModel绑定切换的时候会调用");
         }
 
+        public override void OnInitComponent(Panel panel)
+        {
+            base.OnInitComponent(panel);
+            LogUtil.Debug("OnInitComponent第三个执行的函数");
 
+        }
         public override void OnInitData(Panel panel)
         {
             base.OnInitData(panel);
-            LogUtil.Debug("OnInitData第三个执行的函数");
+            LogUtil.Debug("OnInitData第四个执行的函数");
 
             panel.data.type = UIType.Normal;
             panel.data.showMode = UIShowMode.HideOther;
             panel.data.navigationMode = UINavigationMode.IgnoreNavigation;
         }
 
-        public override void OnInitComponent(Panel panel)
-        {
-            LogUtil.Debug("OnInitComponent第四个执行的函数");
-
-        }
         public override void OnRegisterUIEvent(Panel panel)
         {
             LogUtil.Debug("OnRegisterUIEvent第五个执行的函数");

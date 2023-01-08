@@ -11,7 +11,7 @@ namespace LccHotfix
         public float targetPercent;
         public float updateRate;
     }
-    public class LoadingPanel : APanelView<LoadingModel>
+    public class LoadingPanel : UIPanel<LoadingModel>
     {
         public static LoadingPanel Instance { get; set; }
 

@@ -118,6 +118,7 @@
     <Compile Include="Assets\Framework\Runtime\Util\Network\NetworkUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Timer\TimerData.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Download\DownloadFile.cs" />
+    <Compile Include="Assets\Framework\Runtime\Util\ScreenAdaptation\ScreenAdaptationUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Adapter\IComparerAdapter.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\CoroutineLockQueueType.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Rijndael\RijndaelUtil.cs" />
@@ -173,7 +174,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\Module\Logger\UnityLogger.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
-    <Compile Include="Assets\Framework\Runtime\Util\ScreenAdaptation\ScreenAdaptationUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />

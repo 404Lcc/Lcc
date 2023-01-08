@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 
 namespace LccHotfix
 {
-    public abstract class AViewBase<T> : IView<T> where T : ViewModelBase
+    public abstract class UIBinding<T> : UIComponent, IView<T> where T : ViewModelBase
     {
         private bool _isInit;
         public ViewModelBinding<T> viewModelBinding = new ViewModelBinding<T>();
         public Binding<T> binding = new Binding<T>();
-        public AViewBase()
+        public UIBinding()
         {
             ViewModel = Activator.CreateInstance<T>();
         }

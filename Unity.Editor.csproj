@@ -67,6 +67,7 @@
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\CharObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetLoadTable.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BundleMasterInterface\BundleMasterWindow.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\FrameworkEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\FrameworkTreeWindow\FrameworkTreeWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BuildAssets.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\InspectorEditor\LccView\LccViewEditor.cs" />
@@ -76,9 +77,12 @@
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\EnumObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectTypeAttribute.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector3IntObjectType.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\HotfixEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetsLoadSetting.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetsSetting.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\Util\EditorDefine\EditorDefine.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\AssetsOriginSetting.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\GeneralEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BundleMasterInterface\BundleMasterMainWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector3ObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\MenuTree\AEditorWindowBase.cs" />
@@ -92,6 +96,7 @@
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\UnityEngineObjectObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\CreateScript\CreateScriptUtil.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\LongObjectType.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\TagEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\MenuItem\Lcc\LccMenuItem.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectTypeUtil.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\IntObjectType.cs" />
@@ -107,15 +112,10 @@
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\StringObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\ListObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\AnimationCurveObjectType.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\LayerEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\Excel\ConfigType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BuildAssetsTools.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\Util\EditorDefine\EditorDefine.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\GeneralEditorWindow.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\LayerEditorWindow.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\HotfixEditorWindow.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\TagEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\ILRuntimeEditorWindow.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\FrameworkEditorWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Editor\Runtime\Core\Template\ModelPanelTemplate.txt" />

@@ -15,6 +15,7 @@ namespace LccHotfix
         public Transform NormalRoot { get; set; }//0
         public Transform FixedRoot { get; set; }//10
         public Transform PopupRoot { get; set; }//20
+        public Transform RemoveRoot { get; set; }//10
 
 
 
@@ -37,6 +38,7 @@ namespace LccHotfix
             NormalRoot = GameObject.Find("Global/UIRoot/NormalRoot").transform;
             FixedRoot = GameObject.Find("Global/UIRoot/FixedRoot").transform;
             PopupRoot = GameObject.Find("Global/UIRoot/PopUpRoot").transform;
+            RemoveRoot = GameObject.Find("Global/UIRoot/RemoveRoot").transform;
 
 
             UnitRoot = GameObject.Find("Global/UnitRoot").transform;
