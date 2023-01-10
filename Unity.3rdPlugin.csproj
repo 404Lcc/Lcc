@@ -80,8 +80,8 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\MemberSpecifiedDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoIgnoreAttribute.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\IExtension.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtobufPropertyHelper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\FieldDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtobufPropertyHelper.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Base\LoadDepend.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DefaultValueDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\DataFormat.cs" />
