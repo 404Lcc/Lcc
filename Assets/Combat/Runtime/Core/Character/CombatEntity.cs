@@ -28,7 +28,8 @@ namespace LccModel
         public CureActionAbility CureAbility { get; private set; }
         #endregion
 
-
+        /// ÐÐÎª½ûÖÆ
+        public ActionControlType ActionControlType { get; set; }
 
         public override void Awake()
         {
@@ -37,6 +38,7 @@ namespace LccModel
             AddComponent<AttributeComponent>();
             AddComponent<ActionPointComponent>();
             AddComponent<ConditionComponent>();
+            AddComponent<StatusComponent>();
 
 
 
@@ -79,6 +81,16 @@ namespace LccModel
         {
             var attack = AttachAbility<AttackAbility>(null);
             return attack;
+        }
+
+        public StatusAbility AttachStatus(object configObject)
+        {
+            return GetComponent<StatusComponent>().AttachStatus(configObject);
+        }
+
+        public void OnStatusRemove(StatusAbility statusAbility)
+        {
+            GetComponent<StatusComponent>().OnStatusRemove(statusAbility);
         }
 
 

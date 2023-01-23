@@ -63,6 +63,7 @@
     <Compile Include="Assets\Combat\Runtime\Core\Action\Actions\DamageAction.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\Effect\EffectCureComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\ActionControlType.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Status\StatusAbility.cs" />
     <Compile Include="Assets\Combat\Util\GameTimer.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\AbilityEffect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\AbilityEffectComponent.cs" />
@@ -71,9 +72,11 @@
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\AttributeConfigObject.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ExpressionHelper.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Attack\AttackExecution.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\EffectTrigger\EffectIntervalTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Entity.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Effect\Effect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Condition\ConditionEntity.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\EffectTrigger\EffectConditionTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Action\IActionExecution.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Action\Actions\EffectAssignAction.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Effect\DamageEffect.cs" />
@@ -81,6 +84,7 @@
     <Compile Include="Assets\Combat\Runtime\Core\Attack\AttackAbility.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\ConditionType.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\AddSkillEffetTargetType.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\StatusConfigObject.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\DamageType.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\EventComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Action\Actions\AttackAction.cs" />
@@ -89,6 +93,7 @@
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\EffectTriggerType.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\CombatEntity.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Action\Actions\Components\ActionComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Character\Components\StatusComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\Effect\EffectAttributeModifyComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Ability\IAbilityEntity.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\ModifyType.cs" />
@@ -106,6 +111,8 @@
     <Compile Include="Assets\Combat\Runtime\Core\Ability\AbilityLevelComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Attribute\HealthPoint.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Attribute\FloatNumeric.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Status\StatusExecution.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Effect\AddStatusEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Combat\Unity.Combat.asmdef" />

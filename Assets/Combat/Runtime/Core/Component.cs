@@ -1,3 +1,5 @@
+using System;
+
 namespace LccModel
 {
     public class Component : AObjectBase
@@ -67,5 +69,46 @@ namespace LccModel
             Enable = DefaultEnable;
 
         }
+
+        #region ÊÂ¼þ
+        public T Publish<T>(T TEvent) where T : class
+        {
+            var eventComponent = GetComponent<EventComponent>();
+            if (eventComponent == null)
+            {
+                return TEvent;
+            }
+            eventComponent.Publish(TEvent);
+            return TEvent;
+        }
+        public SubscribeSubject Subscribe<T>(Action<T> action) where T : class
+        {
+            var eventComponent = GetComponent<EventComponent>();
+            if (eventComponent == null)
+            {
+                eventComponent = AddComponent<EventComponent>();
+            }
+            return eventComponent.Subscribe(action);
+        }
+
+        public SubscribeSubject Subscribe<T>(Action<T> action, Entity disposeWith) where T : class
+        {
+            var eventComponent = GetComponent<EventComponent>();
+            if (eventComponent == null)
+            {
+                eventComponent = AddComponent<EventComponent>();
+            }
+            return eventComponent.Subscribe(action).DisposeWith(disposeWith);
+        }
+
+        public void UnSubscribe<T>(Action<T> action) where T : class
+        {
+            var eventComponent = GetComponent<EventComponent>();
+            if (eventComponent != null)
+            {
+                eventComponent.UnSubscribe(action);
+            }
+        }
+        #endregion
     }
 }

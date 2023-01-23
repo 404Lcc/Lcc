@@ -17,12 +17,12 @@
 
         public override void OnEnable()
         {
-            //Parent.Parent.Parent.GetComponent<StatusComponent>().OnStatusesChanged(Entity.GetParent<StatusAbility>());
+            Parent.Parent.Parent.GetComponent<StatusComponent>().OnStatusesChanged(Parent.GetParent<StatusAbility>());
         }
 
         public override void OnDisable()
         {
-            //Parent.Parent.Parent.GetComponent<StatusComponent>().OnStatusesChanged(Entity.GetParent<StatusAbility>());
+            Parent.Parent.Parent.GetComponent<StatusComponent>().OnStatusesChanged(Parent.GetParent<StatusAbility>());
         }
     }
 }

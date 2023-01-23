@@ -44,7 +44,7 @@ namespace LccModel
         public AddSkillEffetTargetType AddSkillEffectTargetType;
 
         [HorizontalGroup("Enabled/Hor")]
-        [ToggleGroup("Enabled"), HideIf("HideTriggerType", true), HideLabel]
+        [ToggleGroup("Enabled"), HideIf("HideEffectTriggerType", true), HideLabel]
         public EffectTriggerType EffectTriggerType;
 
         [HorizontalGroup("Enabled/Hor")]
@@ -62,8 +62,8 @@ namespace LccModel
         [ToggleGroup("Enabled"), HideIf("IsSkillEffect", true), LabelText("条件参数 x="), ShowIf("EffectTriggerType", EffectTriggerType.Condition)]
         public string ConditionParam;
 
-        [ToggleGroup("Enabled"), LabelText("触发概率")]
-        public string TriggerProbability = "100%";
+        //[ToggleGroup("Enabled"), LabelText("触发概率")]
+        //public string TriggerProbability = "100%";
 
         //Effect是直接效果，效果修饰是基于直接效果的辅助效果
         [ShowIf("@this.Decorators != null && this.Decorators.Count > 0")]
@@ -76,7 +76,7 @@ namespace LccModel
         [HideLabel, OnValueChanged("AddEffect"), ValueDropdown("EffectTypeSelect"), PropertyOrder(101)]
         public string EffectTypeName = EffectTypeNameDefine;
 
-        public bool HideTriggerType
+        public bool HideEffectTriggerType
         {
             get
             {
