@@ -59,10 +59,10 @@
         {
             PreProcess();
 
-            //if (Target.CurrentHealth.IsFull() == false)
-            //{
-            //    Target.ReceiveCure(this);
-            //}
+            if (Target.CurrentHealth.IsFull() == false)
+            {
+                Target.ReceiveCure(this);
+            }
 
             PostProcess();
 

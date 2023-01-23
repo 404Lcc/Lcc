@@ -29,8 +29,6 @@ namespace LccModel
         [ToggleGroup("Enabled"), LabelText("持续时间"), SuffixLabel("毫秒", true)]
         public uint Duration;
 
-        //[ToggleGroup("Enabled"), LabelText("参数")]
-        //public string ParamValue;
 
         [HideReferenceObjectPicker]
         [ToggleGroup("Enabled")]

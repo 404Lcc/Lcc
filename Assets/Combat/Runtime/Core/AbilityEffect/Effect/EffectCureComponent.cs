@@ -38,7 +38,6 @@ namespace LccModel
 
         private void OnAssignEffect(Entity entity)
         {
-            //Log.Debug($"EffectCureComponent OnAssignEffect");
             var effectAssignAction = entity as EffectAssignAction;
             if (GetParent<AbilityEffect>().OwnerEntity.CureAbility.TryMakeAction(out var action))
             {

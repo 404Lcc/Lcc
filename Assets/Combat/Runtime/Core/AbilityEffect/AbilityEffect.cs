@@ -27,37 +27,79 @@
 
             this.EffectConfig = p1 as Effect;
 
-            /// 行动禁制
-            if (this.EffectConfig is ActionControlEffect) AddComponent<EffectActionControlComponent>();
-            /// 属性修饰
-            if (this.EffectConfig is AttributeModifyEffect) AddComponent<EffectAttributeModifyComponent>();
+            // 行动禁制
+            if (this.EffectConfig is ActionControlEffect)
+            {
+                AddComponent<EffectActionControlComponent>();
+            }
+            // 施加状态效果
+            if (this.EffectConfig is AddStatusEffect)
+            {
+                AddComponent<EffectAddStatusComponent>();
+            }
+            // 属性修饰效果
+            if (this.EffectConfig is AttributeModifyEffect) 
+            {
+                AddComponent<EffectAttributeModifyComponent>();
+            }
+            // 清除所有状态效果
+            if (this.EffectConfig is ClearAllStatusEffect) 
+            {
+            }
+            // 治疗效果
+            if (this.EffectConfig is CureEffect)
+            {
+                AddComponent<EffectCureComponent>();
+            }
+            // 自定义效果
+            if (this.EffectConfig is CustomEffect)
+            {
+                AddComponent<EffectCustomComponent>();
+            }
+            // 伤害效果
+            if (this.EffectConfig is DamageEffect)
+            {
+                AddComponent<EffectDamageComponent>();
+            }
+            // 清除状态效果
+            if (this.EffectConfig is RemoveStatusEffect)
+            {
+            }
+   
+      
+        
 
-            /// 伤害效果
-            if (this.EffectConfig is DamageEffect) AddComponent<EffectDamageComponent>();
-            /// 治疗效果
-            if (this.EffectConfig is CureEffect) AddComponent<EffectCureComponent>();
-            ///// 施加状态效果
-            //if (this.EffectConfig is AddStatusEffect) AddComponent<EffectAddStatusComponent>();
-            ///// 自定义效果
-            //if (this.EffectConfig is CustomEffect) AddComponent<EffectCustomComponent>();
-            /// 效果修饰
+
+            // 效果修饰
             AddComponent<EffectDecoratosComponent>();
 
-            //var triggable = !(this.EffectConfig is ActionControlEffect) && !(this.EffectConfig is AttributeModifyEffect);
-            //if (triggable)
-            //{
-            //    /// 立即触发
-            //    if (EffectConfig.EffectTriggerType == EffectTriggerType.Instant) TryAssignEffectToParent();
-            //    /// 行动点触发
-            //    var isAction = EffectConfig.EffectTriggerType == EffectTriggerType.Action;
-            //    if (isAction) AddComponent<EffectActionTriggerComponent>();
-            //    /// 间隔触发
-            //    var isInterval = EffectConfig.EffectTriggerType == EffectTriggerType.Interval && !string.IsNullOrEmpty(EffectConfig.Interval);
-            //    if (isInterval) AddComponent<EffectIntervalTriggerComponent>();
-            //    /// 条件触发
-            //    var isCondition = EffectConfig.EffectTriggerType == EffectTriggerType.Condition && !string.IsNullOrEmpty(EffectConfig.ConditionParam);
-            //    if (isCondition) AddComponent<EffectConditionTriggerComponent>();
-            //}
+            var triggable = !(this.EffectConfig is ActionControlEffect) && !(this.EffectConfig is AttributeModifyEffect);
+            if (triggable)
+            {
+                // 立即触发
+                if (EffectConfig.EffectTriggerType == EffectTriggerType.Instant)
+                {
+                    TryAssignEffectToParent();
+                }
+                // 行动点触发
+                var isAction = EffectConfig.EffectTriggerType == EffectTriggerType.Action;
+                if (isAction) 
+                {
+                    AddComponent<EffectActionTriggerComponent>();
+                }
+                // 间隔触发
+                var isInterval = EffectConfig.EffectTriggerType == EffectTriggerType.Interval && !string.IsNullOrEmpty(EffectConfig.Interval);
+                if (isInterval) 
+                {
+                    AddComponent<EffectIntervalTriggerComponent>();
+                }
+                // 条件触发
+                var isCondition = EffectConfig.EffectTriggerType == EffectTriggerType.Condition && !string.IsNullOrEmpty(EffectConfig.ConditionParam);
+                if (isCondition) 
+                {
+                    AddComponent<EffectConditionTriggerComponent>();
+                }
+            }
         }
 
 

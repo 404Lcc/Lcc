@@ -67,7 +67,7 @@ namespace LccModel
             NumericEntity numericEntity = Parent.AddChildren<NumericEntity>();
             var numeric = Parent.AddChildren<FloatNumeric, NumericEntity, int>(numericEntity, 1);
             numeric.SetBase(baseValue);
-            attributeDict.Add(nameof(attributeType), numeric);
+            attributeDict.Add(attributeType.ToString(), numeric);
             return numeric;
         }
 

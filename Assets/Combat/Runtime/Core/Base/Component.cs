@@ -73,41 +73,17 @@ namespace LccModel
         #region ÊÂ¼þ
         public T Publish<T>(T TEvent) where T : class
         {
-            var eventComponent = GetComponent<EventComponent>();
-            if (eventComponent == null)
-            {
-                return TEvent;
-            }
-            eventComponent.Publish(TEvent);
+            ((Entity)Parent).Publish(TEvent);
             return TEvent;
         }
-        public SubscribeSubject Subscribe<T>(Action<T> action) where T : class
+        public void Subscribe<T>(Action<T> action) where T : class
         {
-            var eventComponent = GetComponent<EventComponent>();
-            if (eventComponent == null)
-            {
-                eventComponent = AddComponent<EventComponent>();
-            }
-            return eventComponent.Subscribe(action);
-        }
-
-        public SubscribeSubject Subscribe<T>(Action<T> action, Entity disposeWith) where T : class
-        {
-            var eventComponent = GetComponent<EventComponent>();
-            if (eventComponent == null)
-            {
-                eventComponent = AddComponent<EventComponent>();
-            }
-            return eventComponent.Subscribe(action).DisposeWith(disposeWith);
+            ((Entity)Parent).Subscribe(action);
         }
 
         public void UnSubscribe<T>(Action<T> action) where T : class
         {
-            var eventComponent = GetComponent<EventComponent>();
-            if (eventComponent != null)
-            {
-                eventComponent.UnSubscribe(action);
-            }
+            ((Entity)Parent).UnSubscribe(action);
         }
         #endregion
     }

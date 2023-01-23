@@ -21,7 +21,7 @@ namespace LccModel
         public static bool DebugLog { get; set; } = false;
 
 
-        public T Publish<T>(T TEvent) where T : class
+        public new T Publish<T>(T TEvent) where T : class
         {
             if (TypeEvent2ActionLists.TryGetValue(typeof(T), out var actionList))
             {
@@ -34,7 +34,7 @@ namespace LccModel
             return TEvent;
         }
 
-        public SubscribeSubject Subscribe<T>(Action<T> action) where T : class
+        public new SubscribeSubject Subscribe<T>(Action<T> action) where T : class
         {
             var type = typeof(T);
             if (!TypeEvent2ActionLists.TryGetValue(type, out var actionList))
@@ -48,7 +48,7 @@ namespace LccModel
             return subscribeSubject;
         }
 
-        public void UnSubscribe<T>(Action<T> action) where T : class
+        public new void UnSubscribe<T>(Action<T> action) where T : class
         {
             if (TypeEvent2ActionLists.TryGetValue(typeof(T), out var actionList))
             {

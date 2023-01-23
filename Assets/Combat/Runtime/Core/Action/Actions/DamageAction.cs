@@ -2,6 +2,10 @@
 
 namespace LccModel
 {
+    public class EntityDeadEvent
+    {
+        public CombatEntity DeadEntity;
+    }
     public class DamageActionAbility : Entity, IActionAbility
     {
         public CombatEntity OwnerEntity { get { return GetParent<CombatEntity>(); } set { } }
@@ -10,7 +14,7 @@ namespace LccModel
 
         public override void Awake()
         {
-            //AddComponent<DamageBloodSuckComponent>();
+            AddComponent<DamageBloodSuckComponent>();
         }
 
         public bool TryMakeAction(out DamageAction action)
@@ -118,16 +122,19 @@ namespace LccModel
         {
             PreProcess();
 
-            //Target.ReceiveDamage(this);
+            Target.ReceiveDamage(this);
 
             PostProcess();
 
-            //if (Target.CheckDead())
-            //{
-            //    var deadEvent = new EntityDeadEvent() { DeadEntity = Target };
-            //    Target.Publish(deadEvent);
-            //    CombatContext.Instance.Publish(deadEvent);
-            //}
+            if (Target.CheckDead())
+            {
+                var deadEvent = new EntityDeadEvent()
+                {
+                    DeadEntity = Target
+                };
+                Target.Publish(deadEvent);
+                //CombatContext.Instance.Publish(deadEvent);
+            }
 
             FinishAction();
         }

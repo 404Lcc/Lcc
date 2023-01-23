@@ -68,7 +68,7 @@ namespace LccModel
 
             parentEntity.ActionControlType = tempActionControl;
             var moveForbid = parentEntity.ActionControlType.HasFlag(ActionControlType.MoveForbid);
-            //parentEntity.GetComponent<MotionComponent>().Enable = !moveForbid;
+            parentEntity.GetComponent<MotionComponent>().Enable = !moveForbid;
         }
 	}
 }
