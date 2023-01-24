@@ -1,10 +1,15 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LccModel
 {
     public class CombatEntity : Entity, IPosition
     {
+        public GameObject HeroObject { get; set; }
+        public Transform ModelTrans { get; set; }
+
+
         public HealthPoint CurrentHealth { get; private set; }
 
         #region 自身能力
@@ -23,7 +28,8 @@ namespace LccModel
         //施法普攻行动能力
         public AttackActionAbility SpellAttackAbility { get; private set; }
         public AttackBlockActionAbility AttackBlockAbility { get; set; }
-
+        //施法技能行动能力
+        public SpellActionAbility SpellAbility { get; private set; }
 
 
         //伤害行动能力
@@ -49,6 +55,10 @@ namespace LccModel
         /// 行为禁制
         public ActionControlType ActionControlType { get; set; }
 
+
+        public Dictionary<string, SkillAbility> NameSkills { get; set; } = new Dictionary<string, SkillAbility>();
+        public Dictionary<int, SkillAbility> IdSkills { get; set; } = new Dictionary<int, SkillAbility>();
+
         public override void Awake()
         {
             base.Awake();
@@ -57,8 +67,8 @@ namespace LccModel
             AddComponent<ActionPointComponent>();
             AddComponent<ConditionComponent>();
             AddComponent<StatusComponent>();
-
-
+            AddComponent<SkillComponent>();
+            AddComponent<SpellComponent>();
             AddComponent<MotionComponent>();
             
 
@@ -73,6 +83,7 @@ namespace LccModel
             EffectAssignAbility = AttachAction<EffectAssignAbility>();
             SpellAttackAbility = AttachAction<AttackActionAbility>();
             AttackBlockAbility = AttachAction<AttackBlockActionAbility>();
+            SpellAbility = AttachAction<SpellActionAbility>();
 
             DamageAbility = AttachAction<DamageActionAbility>();
             CureAbility = AttachAction<CureActionAbility>();
@@ -150,6 +161,15 @@ namespace LccModel
         }
         #endregion
 
+        #region 技能
+        public SkillAbility AttachSkill(object configObject)
+        {
+            var skill = AttachAbility<SkillAbility>(configObject);
+            NameSkills.Add(skill.SkillConfig.Name, skill);
+            IdSkills.Add(skill.SkillConfig.Id, skill);
+            return skill;
+        }
+        #endregion
 
         #region 行动点事件
         public void ListenActionPoint(ActionPointType actionPointType, Action<Entity> action)

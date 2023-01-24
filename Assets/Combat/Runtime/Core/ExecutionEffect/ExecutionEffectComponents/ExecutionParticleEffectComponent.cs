@@ -22,15 +22,11 @@ namespace LccModel
 
         public void OnTriggerStart(Entity entity)
         {
-            //Log.Debug("ExecutionAnimationComponent OnTriggerExecutionEffect");
-            //Entity.GetParent<SkillExecution>().OwnerEntity.Publish(AnimationClip);
             ParticleEffectObj = GameObject.Instantiate(ParticleEffectPrefab, Parent.GetParent<SkillExecution>().OwnerEntity.Position, Parent.GetParent<SkillExecution>().OwnerEntity.Rotation);
         }
 
         public void OnTriggerEnd(Entity entity)
         {
-            //Log.Debug("ExecutionAnimationComponent OnTriggerExecutionEffect");
-            //Entity.GetParent<SkillExecution>().OwnerEntity.Publish(AnimationClip);
             GameObject.Destroy(ParticleEffectObj);
         }
     }

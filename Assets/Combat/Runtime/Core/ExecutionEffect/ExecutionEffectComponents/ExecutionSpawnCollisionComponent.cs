@@ -22,7 +22,7 @@ namespace LccModel
         public void OnTriggerExecutionEffect(Entity entity)
         {
 #if !NOT_UNITY
-            //Parent.GetParent<SkillExecution>().SpawnCollisionItem(GetParent<ExecutionEffect>().ExecutionEffectConfig);
+            Parent.GetParent<SkillExecution>().SpawnCollisionItem(GetParent<ExecutionEffect>().ExecutionEffectConfig);
 #endif
         }
 
