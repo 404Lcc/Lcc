@@ -56,7 +56,6 @@ namespace LccModel
         //前置处理
         private void PreProcess()
         {
-            //Creator.Get<MotionComponent>().Enable = false;
             Creator.TriggerActionPoint(ActionPointType.PreSpell, this);
         }
 
