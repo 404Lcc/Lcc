@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace LccModel
 {
-    public class CombatEntity : Entity
+    public class CombatEntity : Entity, IPosition
     {
         public HealthPoint CurrentHealth { get; private set; }
 
@@ -37,6 +37,11 @@ namespace LccModel
 
 
         #endregion
+
+        //执行中的执行体
+        public SkillExecution SpellingExecution { get; set; }
+
+
 
         public Vector3 Position { get; set; }
         public Quaternion Rotation { get; set; }

@@ -65,9 +65,13 @@
             if (this.EffectConfig is RemoveStatusEffect)
             {
             }
-   
-      
-        
+            // 吸血效果
+            if (this.EffectConfig is DamageBloodSuckEffect)
+            {
+                AddComponent<EffectDamageBloodSuckComponent>();
+            }
+
+
 
 
             // 效果修饰
@@ -173,23 +177,23 @@
             }
         }
 
-        ///// <summary>
-        ///// 尝试将效果赋给目标实体
-        ///// </summary>
-        ///// <param name="targetEntity"></param>
-        ///// <param name="abilityItem"></param>
-        //public void TryAssignEffectToTargetWithAbilityItem(CombatEntity targetEntity, AbilityItem abilityItem)
-        //{
-        //    if (OwnerEntity.EffectAssignAbility.TryMakeAction(out var action))
-        //    {
-        //        //Log.Debug($"AbilityEffect ApplyEffectTo {targetEntity} {EffectConfig}");
-        //        action.Target = targetEntity;
-        //        action.SourceAbility = OwnerAbility;
-        //        action.AbilityEffect = this;
-        //        action.AbilityItem = abilityItem;
-        //        action.ApplyEffectAssign();
-        //    }
-        //}
+        /// <summary>
+        /// 尝试将效果赋给目标实体
+        /// </summary>
+        /// <param name="targetEntity"></param>
+        /// <param name="abilityItem"></param>
+        public void TryAssignEffectToTargetWithAbilityItem(CombatEntity targetEntity, AbilityItem abilityItem)
+        {
+            if (OwnerEntity.EffectAssignAbility.TryMakeAction(out var action))
+            {
+                //Log.Debug($"AbilityEffect ApplyEffectTo {targetEntity} {EffectConfig}");
+                action.Target = targetEntity;
+                action.SourceAbility = OwnerAbility;
+                action.AbilityEffect = this;
+                action.AbilityItem = abilityItem;
+                action.ApplyEffectAssign();
+            }
+        }
 
         /// <summary>
         /// 尝试将效果赋给目标行动

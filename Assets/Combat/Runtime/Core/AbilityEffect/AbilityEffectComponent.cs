@@ -79,17 +79,17 @@ namespace LccModel
             }
         }
 
-        ///// <summary>   尝试将所有效果赋给目标   </summary>
-        //public void TryAssignAllEffectsToTargetWithAbilityItem(CombatEntity targetEntity, AbilityItem abilityItem)
-        //{
-        //    if (AbilityEffects.Count > 0)
-        //    {
-        //        foreach (var abilityEffect in AbilityEffects)
-        //        {
-        //            abilityEffect.TryAssignEffectToTargetWithAbilityItem(targetEntity, abilityItem);
-        //        }
-        //    }
-        //}
+        /// <summary>   尝试将所有效果赋给目标   </summary>
+        public void TryAssignAllEffectsToTargetWithAbilityItem(CombatEntity targetEntity, AbilityItem abilityItem)
+        {
+            if (AbilityEffects.Count > 0)
+            {
+                foreach (var abilityEffect in AbilityEffects)
+                {
+                    abilityEffect.TryAssignEffectToTargetWithAbilityItem(targetEntity, abilityItem);
+                }
+            }
+        }
 
         public void TryAssignEffectByIndex(CombatEntity targetEntity, int index)
         {

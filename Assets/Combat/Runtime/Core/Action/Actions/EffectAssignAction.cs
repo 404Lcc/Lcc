@@ -32,7 +32,7 @@ namespace LccModel
         /// 目标行动
         public IActionExecution TargetAction { get; set; }
         public AbilityEffect AbilityEffect { get; set; }
-        //public AbilityItem AbilityItem { get; set; }
+        public AbilityItem AbilityItem { get; set; }
         public Effect EffectConfig => AbilityEffect.EffectConfig;
         /// 行动能力
         public Entity ActionAbility { get; set; }

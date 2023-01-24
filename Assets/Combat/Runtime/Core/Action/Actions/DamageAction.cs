@@ -12,10 +12,6 @@ namespace LccModel
         public bool Enable { get; set; }
 
 
-        public override void Awake()
-        {
-            AddComponent<DamageBloodSuckComponent>();
-        }
 
         public bool TryMakeAction(out DamageAction action)
         {
@@ -101,15 +97,15 @@ namespace LccModel
                 DamageValue = SourceAssignAction.AbilityEffect.GetComponent<EffectDamageComponent>().GetDamageValue();
             }
 
-            //var executionDamageReduceWithTargetCountComponent = SourceAssignAction.AbilityEffect.GetComponent<EffectDamageReduceWithTargetCountComponent>();
-            //if (executionDamageReduceWithTargetCountComponent != null)
-            //{
-            //    if (SourceAssignAction.AbilityItem.TryGet(out AbilityItemTargetCounterComponent targetCounterComponent))
-            //    {
-            //        var damagePercent = executionDamageReduceWithTargetCountComponent.GetDamagePercent(targetCounterComponent.TargetCounter);
-            //        DamageValue = Mathf.CeilToInt(DamageValue * damagePercent);
-            //    }
-            //}
+            var executionDamageReduceWithTargetCountComponent = SourceAssignAction.AbilityEffect.GetComponent<EffectDamageReduceWithTargetCountComponent>();
+            if (executionDamageReduceWithTargetCountComponent != null)
+            {
+                if (SourceAssignAction.AbilityItem.TryGetComponent(out AbilityItemTargetCounterComponent targetCounterComponent))
+                {
+                    var damagePercent = executionDamageReduceWithTargetCountComponent.GetDamagePercent(targetCounterComponent.TargetCounter);
+                    DamageValue = Mathf.CeilToInt(DamageValue * damagePercent);
+                }
+            }
 
             //触发 造成伤害前 行动点
             Creator.TriggerActionPoint(ActionPointType.PreCauseDamage, this);

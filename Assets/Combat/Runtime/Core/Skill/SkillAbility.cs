@@ -20,7 +20,7 @@ namespace LccModel
             //Name = SkillConfig.Name;
             AddComponent<AbilityEffectComponent>(SkillConfig.Effects);
 #if !SERVER
-            //Awake_Client();
+            LoadExecution();
 #endif
             if (SkillConfig.SkillSpellType == SkillSpellType.Passive)
             {
@@ -40,7 +40,6 @@ namespace LccModel
 
         public void ActivateAbility()
         {
-            //base.ActivateAbility();
             FireEvent(nameof(ActivateAbility));
             //子状态效果
             if (SkillConfig.EnableChildrenStatuses)
@@ -74,16 +73,11 @@ namespace LccModel
 
         public Entity CreateExecution()
         {
-            return null;
-            //var execution = OwnerEntity.AddChildren<SkillExecution>(this);
-            //execution.ExecutionObject = ExecutionObject;
-            //execution.LoadExecutionEffects();
-            //this.FireEvent(nameof(CreateExecution), execution);
-            //if (ExecutionObject != null)
-            //{
-            //    execution.AddComponent<UpdateComponent>();
-            //}
-            //return execution;
+            var execution = OwnerEntity.AddChildren<SkillExecution>(this);
+            execution.ExecutionObject = ExecutionObject;
+            execution.LoadExecutionEffects();
+            this.FireEvent(nameof(CreateExecution), execution);
+            return execution;
         }
     }
 }
