@@ -18,7 +18,7 @@ namespace LccModel
 
             SkillConfig = p1 as SkillConfigObject;
             //Name = SkillConfig.Name;
-            AddComponent<AbilityEffectComponent>(SkillConfig.Effects);
+            AddComponent<AbilityEffectComponent, List<Effect>>(SkillConfig.Effects);
 #if !SERVER
             LoadExecution();
 #endif
@@ -73,7 +73,7 @@ namespace LccModel
 
         public Entity CreateExecution()
         {
-            var execution = OwnerEntity.AddChildren<SkillExecution>(this);
+            var execution = OwnerEntity.AddChildren<SkillExecution, SkillAbility>(this);
             execution.ExecutionObject = ExecutionObject;
             execution.LoadExecutionEffects();
             this.FireEvent(nameof(CreateExecution), execution);

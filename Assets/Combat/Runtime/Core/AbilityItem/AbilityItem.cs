@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static UnityEditor.Progress;
 
 namespace LccModel
 {
@@ -94,14 +95,14 @@ namespace LccModel
 
         public void OnTriggerNewExecution(ActionEventData ActionEventData)
         {
-
-            ExecutionObject executionObject = null;// AssetUtils.Load<ExecutionObject>(ActionEventData.NewExecution);
+        
+            ExecutionObject executionObject = AssetManager.Instance.LoadAsset<ExecutionObject>(out var handler, ActionEventData.NewExecution, AssetSuffix.Asset, AssetType.Execution);
             if (executionObject == null)
             {
                 return;
             }
             var sourceExecution = AbilityExecution as SkillExecution;
-            var execution = sourceExecution.OwnerEntity.AddChildren<SkillExecution>(sourceExecution.SkillAbility);
+            var execution = sourceExecution.OwnerEntity.AddChildren<SkillExecution, SkillAbility>(sourceExecution.SkillAbility);
             execution.ExecutionObject = executionObject;
             execution.InputPoint = Position;
             execution.LoadExecutionEffects();

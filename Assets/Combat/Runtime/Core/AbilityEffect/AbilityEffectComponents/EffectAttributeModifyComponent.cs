@@ -19,7 +19,7 @@
             var attributeModifyEffect = AttributeModifyEffect;
             var numericValue = ModifyValueFormula;
             numericValue = numericValue.Replace("%", "");
-            var expression = ExpressionHelper.ExpressionParser.EvaluateExpression(numericValue);
+            var expression = ExpressionHelper.TryEvaluate(numericValue);
             var value = (float)expression.Value;
 
             var attributeType = attributeModifyEffect.AttributeType.ToString();

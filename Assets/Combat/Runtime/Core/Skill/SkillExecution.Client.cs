@@ -40,7 +40,7 @@ namespace LccModel
 
         public void BeginExecute()
         {
-            GetParent<CombatEntity>().SpellingExecution = this;
+            GetParent<CombatEntity>().SpellingSkillExecution = this;
             if (SkillAbility != null)
             {
                 SkillAbility.Spelling = true;
@@ -53,7 +53,7 @@ namespace LccModel
 
         public void EndExecute()
         {
-            GetParent<CombatEntity>().SpellingExecution = null;
+            GetParent<CombatEntity>().SpellingSkillExecution = null;
             if (SkillAbility != null)
             {
                 SkillAbility.Spelling = false;
@@ -63,13 +63,15 @@ namespace LccModel
 
         }
 
-        /// <summary>   技能碰撞体生成事件   </summary>
+        /// <summary>
+        /// 技能碰撞体生成事件
+        /// </summary>
+        /// <param name="clipData"></param>
         public void SpawnCollisionItem(ExecuteClipData clipData)
         {
-            //Log.Debug($"SkillExecution SpawnCollisionItem {clipData.StartTime} {clipData.Duration}");
-
+            //在当前战斗上下文创建创生体
             var abilityItem = Root.Instance.Scene.AddChildren<AbilityItem, SkillExecution>(this); //Entity.Create<AbilityItem>(this);
-            abilityItem.AddComponent<AbilityItemCollisionExecuteComponent>(clipData);
+            abilityItem.AddComponent<AbilityItemCollisionExecuteComponent, ExecuteClipData>(clipData);
 
             if (clipData.CollisionExecuteData.MoveType == CollisionMoveType.PathFly) PathFlyProcess(abilityItem);
             if (clipData.CollisionExecuteData.MoveType == CollisionMoveType.SelectedDirectionPathFly) PathFlyProcess(abilityItem);
@@ -81,7 +83,10 @@ namespace LccModel
             CreateAbilityItemProxyObj(abilityItem);
         }
 
-        /// <summary>   目标飞行碰撞体     </summary>
+        /// <summary>
+        /// 目标飞行碰撞体
+        /// </summary>
+        /// <param name="abilityItem"></param>
         private void TargetFlyProcess(AbilityItem abilityItem)
         {
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().ExecuteClipData;
@@ -90,7 +95,10 @@ namespace LccModel
             abilityItem.AddComponent<MoveWithDotweenComponent>().DoMoveToWithTime(InputTarget, clipData.Duration);
         }
 
-        /// <summary>   前向飞行碰撞体     </summary>
+        /// <summary>
+        /// 前向飞行碰撞体
+        /// </summary>
+        /// <param name="abilityItem"></param>
         private void ForwardFlyProcess(AbilityItem abilityItem)
         {
             abilityItem.Position = OwnerEntity.Position;
@@ -103,10 +111,13 @@ namespace LccModel
             });
         }
 
-        /// <summary>   路径飞行     </summary>
+        /// <summary>
+        /// 路径飞行
+        /// </summary>
+        /// <param name="abilityItem"></param>
         private void PathFlyProcess(AbilityItem abilityItem)
         {
-            //abilityItem.Position = OwnerEntity.Position;
+            abilityItem.Position = OwnerEntity.Position;
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().ExecuteClipData;
             var tempPoints = clipData.CollisionExecuteData.GetCtrlPoints();
 
@@ -122,27 +133,37 @@ namespace LccModel
             moveComp.RotateAgree = a;
             moveComp.Speed = clipData.Duration / 10;
             moveComp.DOMove();
-            abilityItem.AddComponent<LifeTimeComponent>(clipData.Duration);
+            abilityItem.AddComponent<LifeTimeComponent, float>(clipData.Duration);
         }
 
-        /// <summary>   固定位置碰撞体     </summary>
+        /// <summary>
+        /// 固定位置碰撞体
+        /// </summary>
+        /// <param name="abilityItem"></param>
         private void FixedPositionProcess(AbilityItem abilityItem)
         {
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().ExecuteClipData;
             abilityItem.Position = InputPoint;
-            abilityItem.AddComponent<LifeTimeComponent>(clipData.Duration);
+            abilityItem.AddComponent<LifeTimeComponent, float>(clipData.Duration);
         }
 
-        /// <summary>   固定方向碰撞体     </summary>
+        /// <summary>
+        /// 固定方向碰撞体
+        /// </summary>
+        /// <param name="abilityItem"></param>
         private void FixedDirectionProcess(AbilityItem abilityItem)
         {
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().ExecuteClipData;
             abilityItem.Position = OwnerEntity.Position;
             abilityItem.Rotation = OwnerEntity.Rotation;
-            abilityItem.AddComponent<LifeTimeComponent>(clipData.Duration);
+            abilityItem.AddComponent<LifeTimeComponent, float>(clipData.Duration);
         }
 
-        /// <summary>   创建技能碰撞体     </summary>
+        /// <summary>
+        /// 创建技能碰撞体
+        /// </summary>
+        /// <param name="abilityItem"></param>
+        /// <returns></returns>
         public GameObject CreateAbilityItemProxyObj(AbilityItem abilityItem)
         {
             var proxyObj = new GameObject("AbilityItemProxy");

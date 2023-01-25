@@ -29,7 +29,7 @@ namespace LccModel
             // 逻辑触发
             if (StatusConfig.Effects.Count > 0)
             {
-                AddComponent<AbilityEffectComponent>(StatusConfig.Effects);
+                AddComponent<AbilityEffectComponent, List<Effect>>(StatusConfig.Effects);
             }
         }
 

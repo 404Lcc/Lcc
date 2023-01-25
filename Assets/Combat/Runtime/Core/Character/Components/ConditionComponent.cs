@@ -18,7 +18,7 @@ namespace LccModel
                 case ConditionType.WhenInTimeNoDamage:
                     var time = (float)paramObj;
                     var condition = Parent.AddChildren<ConditionEntity>();
-                    var comp = condition.AddComponent<ConditionWhenInTimeNoDamageComponent>(time);
+                    var comp = condition.AddComponent<ConditionWhenInTimeNoDamageComponent, float>(time);
                     Conditions.Add(action, condition);
                     comp.StartListen(action);
                     break;

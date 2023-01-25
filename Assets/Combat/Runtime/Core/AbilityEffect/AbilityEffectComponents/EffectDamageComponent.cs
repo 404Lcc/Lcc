@@ -22,7 +22,7 @@ namespace LccModel
 
         private int ParseDamage()
         {
-            var expression = ExpressionHelper.ExpressionParser.EvaluateExpression(DamageValueFormula);
+            var expression = ExpressionHelper.TryEvaluate(DamageValueFormula);
             if (expression.Parameters.ContainsKey("自身攻击力"))
             {
                 expression.Parameters["自身攻击力"].Value = GetParent<AbilityEffect>().OwnerEntity.GetComponent<AttributeComponent>().Attack.Value;
@@ -33,7 +33,7 @@ namespace LccModel
         private void OnAssignEffect(Entity entity)
         {
             var effectAssignAction = entity as EffectAssignAction;
-            if (GetParent<AbilityEffect>().OwnerEntity.DamageAbility.TryMakeAction(out var damageAction))
+            if (GetParent<AbilityEffect>().OwnerEntity.DamageActionAbility.TryMakeAction(out var damageAction))
             {
                 effectAssignAction.FillDatasToAction(damageAction);
                 damageAction.DamageSource = DamageSource.Skill;

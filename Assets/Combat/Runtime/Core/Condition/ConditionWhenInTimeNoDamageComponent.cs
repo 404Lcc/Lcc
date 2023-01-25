@@ -11,7 +11,7 @@ namespace LccModel
         {
             base.Awake(p1);
 
-            var time = (int)(object)p1;
+            float time = (float)(object)p1;
             NoDamageTimer = new GameTimer(time);
             Parent.GetParent<CombatEntity>().ListenActionPoint(ActionPointType.PostReceiveDamage, WhenReceiveDamage);
         }

@@ -1,6 +1,6 @@
 namespace LccModel
 {
-    public class EffectAssignAbility : Entity, IActionAbility
+    public class EffectAssignActionAbility : Entity, IActionAbility
     {
         public CombatEntity OwnerEntity { get { return GetParent<CombatEntity>(); } set { } }
         public bool Enable { get; set; }

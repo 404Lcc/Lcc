@@ -10,5 +10,6 @@
         public const string Prefab = ".prefab";
         public const string Unity = ".unity";
         public const string Lcc = ".lcc";
+        public const string Asset = ".asset";
     }
 }

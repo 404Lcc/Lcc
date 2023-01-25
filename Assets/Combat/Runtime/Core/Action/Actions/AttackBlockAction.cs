@@ -44,7 +44,7 @@
                 if (TryMakeAction(out var attackBlockAction))
                 {
                     attackBlockAction.ActionAbility = this;
-                    attackBlockAction.AttackExecution = (action as AttackAction).AttackExecution;
+                    attackBlockAction.AttackExecution = (action as SpellAttackAction).AttackExecution;
                     attackBlockAction.ApplyBlock();
                 }
             }

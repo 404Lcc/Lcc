@@ -24,7 +24,7 @@ namespace LccModel
             {
                 if (customEffect.CustomEffectType == "强体")
                 {
-                    var probabilityTriggerComponent = GetParent<AbilityEffect>().OwnerEntity.AttackBlockAbility.AddComponent<AbilityProbabilityTriggerComponent>();
+                    var probabilityTriggerComponent = GetParent<AbilityEffect>().OwnerEntity.AttackBlockActionAbility.AddComponent<AbilityProbabilityTriggerComponent>();
                     var param = customEffect.Params.First().Value;
                     probabilityTriggerComponent.Probability = (int)(float.Parse(param.Replace("%", "")) * 100);
                 }

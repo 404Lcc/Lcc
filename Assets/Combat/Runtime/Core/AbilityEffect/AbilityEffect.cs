@@ -167,7 +167,7 @@
         /// <param name="targetEntity"></param>
         public void TryAssignEffectTo(CombatEntity targetEntity)
         {
-            if (OwnerEntity.EffectAssignAbility.TryMakeAction(out var action))
+            if (OwnerEntity.EffectAssignActionAbility.TryMakeAction(out var action))
             {
                 //Log.Debug($"AbilityEffect TryAssignEffectTo {targetEntity} {EffectConfig}");
                 action.Target = targetEntity;
@@ -184,7 +184,7 @@
         /// <param name="abilityItem"></param>
         public void TryAssignEffectToTargetWithAbilityItem(CombatEntity targetEntity, AbilityItem abilityItem)
         {
-            if (OwnerEntity.EffectAssignAbility.TryMakeAction(out var action))
+            if (OwnerEntity.EffectAssignActionAbility.TryMakeAction(out var action))
             {
                 //Log.Debug($"AbilityEffect ApplyEffectTo {targetEntity} {EffectConfig}");
                 action.Target = targetEntity;
@@ -201,7 +201,7 @@
         /// <param name="action"></param>
         public void TryTriggerEffectToAction(IActionExecution action)
         {
-            if (OwnerEntity.EffectAssignAbility.TryMakeAction(out var assignAction))
+            if (OwnerEntity.EffectAssignActionAbility.TryMakeAction(out var assignAction))
             {
                 assignAction.SourceAbility = OwnerAbility;
                 assignAction.AbilityEffect = this;

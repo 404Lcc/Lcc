@@ -16,7 +16,7 @@
             var damageAction = action as DamageAction;
             var value = damageAction.DamageValue * 0.2f;
             var combatEntity = Parent.GetParent<CombatEntity>();
-            if (combatEntity.CureAbility.TryMakeAction(out var cureAction))
+            if (combatEntity.CureActionAbility.TryMakeAction(out var cureAction))
             {
                 cureAction.Creator = combatEntity;
                 cureAction.Target = combatEntity;

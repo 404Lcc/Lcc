@@ -28,7 +28,7 @@ namespace LccModel
 
         private int ParseValue()
         {
-            var expression = ExpressionHelper.ExpressionParser.EvaluateExpression(CureValueProperty);
+            var expression = ExpressionHelper.TryEvaluate(CureValueProperty);
             if (expression.Parameters.ContainsKey("生命值上限"))
             {
                 expression.Parameters["生命值上限"].Value = GetParent<AbilityEffect>().OwnerEntity.GetComponent<AttributeComponent>().HealthPoint.Value;
@@ -39,7 +39,7 @@ namespace LccModel
         private void OnAssignEffect(Entity entity)
         {
             var effectAssignAction = entity as EffectAssignAction;
-            if (GetParent<AbilityEffect>().OwnerEntity.CureAbility.TryMakeAction(out var action))
+            if (GetParent<AbilityEffect>().OwnerEntity.CureActionAbility.TryMakeAction(out var action))
             {
                 effectAssignAction.FillDatasToAction(action);
                 action.ApplyCure();

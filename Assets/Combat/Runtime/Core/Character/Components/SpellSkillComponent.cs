@@ -8,36 +8,17 @@ namespace LccModel
     /// <summary>
     /// 技能施法组件
     /// </summary>
-    public class SpellComponent : Component
+    public class SpellSkillComponent : Component
     {
         private CombatEntity CombatEntity => GetParent<CombatEntity>();
         public override bool DefaultEnable { get; set; } = true;
-        public Dictionary<int, ExecutionObject> ExecutionObjects = new Dictionary<int, ExecutionObject>();
 
-
-        public override void Awake()
-        {
-
-        }
-
-        public void LoadExecutionObjects()
-        {
-            foreach (var item in CombatEntity.IdSkills)
-            {
-                ExecutionObject executionObj = null;//AssetUtils.Load<ExecutionObject>($"Execution_{item.Key}");
-                if (executionObj != null)
-                {
-                    ExecutionObjects.Add(item.Key, executionObj);
-                }
-            }
-        }
 
         public void SpellWithTarget(SkillAbility spellSkill, CombatEntity targetEntity)
         {
-            if (CombatEntity.SpellingExecution != null)
-                return;
+            if (CombatEntity.SpellingSkillExecution != null) return;
 
-            if (CombatEntity.SpellAbility.TryMakeAction(out var spellAction))
+            if (CombatEntity.SpellSkillActionAbility.TryMakeAction(out var spellAction))
             {
                 spellAction.SkillAbility = spellSkill;
                 spellAction.InputTarget = targetEntity;
@@ -50,10 +31,9 @@ namespace LccModel
 
         public void SpellWithPoint(SkillAbility spellSkill, Vector3 point)
         {
-            if (CombatEntity.SpellingExecution != null)
-                return;
+            if (CombatEntity.SpellingSkillExecution != null) return;
 
-            if (CombatEntity.SpellAbility.TryMakeAction(out var spellAction))
+            if (CombatEntity.SpellSkillActionAbility.TryMakeAction(out var spellAction))
             {
                 spellAction.SkillAbility = spellSkill;
                 spellAction.InputPoint = point;

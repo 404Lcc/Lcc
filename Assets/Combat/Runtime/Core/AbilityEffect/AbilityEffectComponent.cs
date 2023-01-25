@@ -23,7 +23,7 @@ namespace LccModel
             var effects = p1 as List<Effect>;
             foreach (var item in effects)
             {
-                var abilityEffect = Parent.AddChildren<AbilityEffect>(item);
+                var abilityEffect = Parent.AddChildren<AbilityEffect, Effect>(item);
                 AddEffect(abilityEffect);
 
                 if (abilityEffect.EffectConfig is DamageEffect)

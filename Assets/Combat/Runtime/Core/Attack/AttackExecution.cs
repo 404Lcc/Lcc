@@ -5,7 +5,7 @@
     /// </summary>
     public class AttackExecution : Entity, IAbilityExecution, IUpdate
     {
-        public AttackAction AttackAction { get; set; }
+        public SpellAttackAction AttackAction { get; set; }
         public Entity AbilityEntity { get; set; }
         public CombatEntity OwnerEntity { get; set; }
 
@@ -32,6 +32,7 @@
 
         public void BeginExecute()
         {
+            GetParent<CombatEntity>().SpellingAttackExecution = this;
         }
 
         /// <summary>
@@ -64,6 +65,7 @@
 
         public void EndExecute()
         {
+            GetParent<CombatEntity>().SpellingAttackExecution = null;
             AttackAction.FinishAction();
             AttackAction = null;
             Dispose();

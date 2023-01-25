@@ -22,7 +22,7 @@ namespace LccModel
             damageEffect.DamageType = DamageType.Physic;
             damageEffect.DamageValueFormula = $"自身攻击力";
             effects.Add(damageEffect);
-            AddComponent<AbilityEffectComponent>(effects);
+            AddComponent<AbilityEffectComponent, List<Effect>>(effects);
 
         }
 

@@ -2,13 +2,13 @@
 
 namespace LccModel
 {
-    public class AttackActionAbility : Entity, IActionAbility
+    public class SpellAttackActionAbility : Entity, IActionAbility
     {
         public CombatEntity OwnerEntity { get { return GetParent<CombatEntity>(); } set { } }
         public bool Enable { get; set; }
 
 
-        public bool TryMakeAction(out AttackAction action)
+        public bool TryMakeAction(out SpellAttackAction action)
         {
             if (Enable == false)
             {
@@ -16,7 +16,7 @@ namespace LccModel
             }
             else
             {
-                action = OwnerEntity.AddChildren<AttackAction>();
+                action = OwnerEntity.AddChildren<SpellAttackAction>();
                 action.ActionAbility = this;
                 action.Creator = OwnerEntity;
             }
@@ -27,7 +27,7 @@ namespace LccModel
     /// <summary>
     /// 普攻行动
     /// </summary>
-    public class AttackAction : Entity, IActionExecution
+    public class SpellAttackAction : Entity, IActionExecution
     {
         /// 行动能力
         public Entity ActionAbility { get; set; }

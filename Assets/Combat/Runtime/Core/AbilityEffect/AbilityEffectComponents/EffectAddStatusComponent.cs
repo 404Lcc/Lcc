@@ -28,7 +28,7 @@
         {
    
             var effectAssignAction = entity as EffectAssignAction;
-            if (GetParent<AbilityEffect>().OwnerEntity.AddStatusAbility.TryMakeAction(out var action))
+            if (GetParent<AbilityEffect>().OwnerEntity.AddStatusActionAbility.TryMakeAction(out var action))
             {
                 effectAssignAction.FillDatasToAction(action);
                 action.SourceAbility = effectAssignAction.SourceAbility;

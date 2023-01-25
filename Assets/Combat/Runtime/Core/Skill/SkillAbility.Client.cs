@@ -1,4 +1,6 @@
-﻿namespace LccModel
+﻿using static UnityEditor.Sprites.Packer;
+
+namespace LccModel
 {
     /// <summary>
     /// 
@@ -12,8 +14,7 @@
 
         public void LoadExecution()
         {
-            ExecutionObject = null;
-            //ExecutionObject = AssetUtils.Load<ExecutionObject>($"Execution_{SkillConfig.Id}");
+            ExecutionObject = AssetManager.Instance.LoadAsset<ExecutionObject>(out var handler, $"Execution_{SkillConfig.Id}", AssetSuffix.Asset, AssetType.Execution);
             if (ExecutionObject == null)
             {
                 return;
