@@ -64,6 +64,15 @@ namespace LccModel
         [LabelText("承受普攻效果后")]
         PostReceiveAttackEffect = 1 << 22,
 
+        [LabelText("赋给物品前")]
+        PreGiveItem = 1 << 23,
+        [LabelText("赋给物品后")]
+        PostGiveItem = 1 << 24,
+        [LabelText("承受物品前")]
+        PreReceiveItem = 1 << 25,
+        [LabelText("承受物品后")]
+        PostReceiveItem = 1 << 26,
+
         Max,
     }
 

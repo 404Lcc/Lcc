@@ -161,6 +161,10 @@
     <Compile Include="Assets\Combat\Runtime\Core\Character\Components\SkillComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityItem\AbilityItemCollisionExecuteComponent.cs" />
     <Compile Include="Assets\Combat\Test.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Character\Components\SpellItemComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\ItemConfigObject.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Item\ItemAbility.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Action\Actions\SpellItemAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Combat\Unity.Combat.asmdef" />

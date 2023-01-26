@@ -63,6 +63,16 @@ namespace LccModel
             return AbilityEffects[index];
         }
 
+        public void TryAssignAllEffectsToTarget(CombatEntity targetEntity)
+        {
+            if (AbilityEffects.Count > 0)
+            {
+                foreach (var abilityEffect in AbilityEffects)
+                {
+                    abilityEffect.TryAssignEffectTo(targetEntity);
+                }
+            }
+        }
         /// <summary>
         /// 尝试将所有效果赋给目标
         /// </summary>
@@ -79,7 +89,11 @@ namespace LccModel
             }
         }
 
-        /// <summary>   尝试将所有效果赋给目标   </summary>
+        /// <summary>
+        /// 尝试将所有效果赋给目标
+        /// </summary>
+        /// <param name="targetEntity"></param>
+        /// <param name="abilityItem"></param>
         public void TryAssignAllEffectsToTargetWithAbilityItem(CombatEntity targetEntity, AbilityItem abilityItem)
         {
             if (AbilityEffects.Count > 0)

@@ -34,6 +34,7 @@ namespace LccModel
         public AttackBlockActionAbility AttackBlockActionAbility { get; set; } //普攻格挡能力
         public SpellSkillActionAbility SpellSkillActionAbility { get; private set; } //施法技能行动能力
 
+        public SpellItemActionAbility SpellItemActionAbility { get; private set; }  //使用物品行动能力
 
 
         public DamageActionAbility DamageActionAbility { get; private set; }  //伤害行动能力
@@ -89,6 +90,8 @@ namespace LccModel
             SpellAttackActionAbility = AttachAction<SpellAttackActionAbility>();
             AttackBlockActionAbility = AttachAction<AttackBlockActionAbility>();
             SpellSkillActionAbility = AttachAction<SpellSkillActionAbility>();
+
+            SpellItemActionAbility = AttachAction<SpellItemActionAbility>();
 
             DamageActionAbility = AttachAction<DamageActionAbility>();
             CureActionAbility = AttachAction<CureActionAbility>();
@@ -173,6 +176,14 @@ namespace LccModel
             NameSkills.Add(skill.SkillConfig.Name, skill);
             IdSkills.Add(skill.SkillConfig.Id, skill);
             return skill;
+        }
+        #endregion
+
+        #region Item
+        public ItemAbility AttachItem(object configObject)
+        {
+            var item = AttachAbility<ItemAbility>(configObject);
+            return item;
         }
         #endregion
 
