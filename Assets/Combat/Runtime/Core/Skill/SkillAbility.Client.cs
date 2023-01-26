@@ -1,13 +1,11 @@
-﻿using static UnityEditor.Sprites.Packer;
-
-namespace LccModel
+﻿namespace LccModel
 {
     /// <summary>
     /// 
     /// </summary>
     public partial class SkillAbility
     {
-        public SkillExecutionData SkillExecutionData { get; set; }
+        //public SkillExecutionData SkillExecutionData { get; set; }
         public ExecutionObject ExecutionObject { get; set; }
 
 

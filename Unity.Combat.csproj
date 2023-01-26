@@ -80,6 +80,7 @@
     <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\AbilityEffectComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\Components\ConditionComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Effect\CustomEffect.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\CombatContext.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\IPosition.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Skill\SkillExecution.Client.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\SkillConfigObject.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Assets\Combat\Runtime\Core\Mono\AbilityItemProxyObj.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\DamageType.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Base\EventComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Base\ExpressionParser\ExpressionParser.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Action\Actions\SpellAttackAction.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ExecutionEffect\ExecutionEffectComponents\ExecutionAssignToTargetComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\Components\ActionPointComponent.cs" />
@@ -122,6 +124,7 @@
     <Compile Include="Assets\Combat\Runtime\Core\Skill\LifeTimeComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\SkillSpellType.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\CombatEntity.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Character\Components\SpellAttackComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityItem\AbilityItemBezierMoveComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Action\ActionComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\Components\StatusComponent.cs" />
@@ -157,9 +160,6 @@
     <Compile Include="Assets\Combat\Runtime\Core\Status\Components\StatusLifeTimeComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\Components\SkillComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityItem\AbilityItemCollisionExecuteComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\CombatContext.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Base\ExpressionParser\ExpressionParser.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Character\Components\SpellAttackComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Combat\Unity.Combat.asmdef" />

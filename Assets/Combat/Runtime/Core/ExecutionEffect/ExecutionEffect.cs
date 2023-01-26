@@ -40,6 +40,8 @@ namespace LccModel
                     AddComponent<ExecutionTriggerNewExecutionComponent>().ActionEventData = spawnItemEffect;
                 }
             }
+
+
             //生成碰撞体效果，碰撞体再触发应用能力效果
             if (clipType == ExecuteClipType.CollisionExecute)
             {
@@ -85,7 +87,10 @@ namespace LccModel
 
         public void TriggerEffect()
         {
-            this.Publish(new ExecuteEffectEvent() { ExecutionEffect = this });
+            this.Publish(new ExecuteEffectEvent()
+            {
+                ExecutionEffect = this
+            });
             this.FireEvent(nameof(TriggerEffect));
         }
 

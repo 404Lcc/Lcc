@@ -16,7 +16,7 @@
     public partial class AbilityEffect : Entity
     {
         public bool Enable { get; set; }
-        public Entity OwnerAbility => (Entity)Parent;
+        public Entity OwnerAbility => (Entity)Parent; //AbilityEffect是挂在能力上的
         public CombatEntity OwnerEntity => (OwnerAbility as IAbilityEntity).OwnerEntity;
         public Effect EffectConfig { get; set; }
         public EffectSourceType EffectSourceType { get; set; }

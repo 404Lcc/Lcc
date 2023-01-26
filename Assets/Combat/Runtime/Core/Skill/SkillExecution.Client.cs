@@ -164,7 +164,7 @@ namespace LccModel
         /// </summary>
         /// <param name="abilityItem"></param>
         /// <returns></returns>
-        public GameObject CreateAbilityItemProxyObj(AbilityItem abilityItem)
+        private GameObject CreateAbilityItemProxyObj(AbilityItem abilityItem)
         {
             var proxyObj = new GameObject("AbilityItemProxy");
             proxyObj.transform.position = abilityItem.Position;

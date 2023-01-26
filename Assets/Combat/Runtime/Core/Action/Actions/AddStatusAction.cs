@@ -75,7 +75,7 @@ namespace LccModel
             Status.OwnerEntity = Creator;
             Status.GetComponent<AbilityLevelComponent>().Level = SourceAbility.GetComponent<AbilityLevelComponent>().Level;
             Status.Duration = (int)AddStatusEffect.Duration;
-            //Log.Debug($"ApplyEffectAssign AddStatusEffect {Status}");
+    
 
             Status.ProcessInputKVParams(AddStatusEffect.Params);
 

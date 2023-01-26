@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace LccModel
 {
@@ -18,8 +17,8 @@ namespace LccModel
         public override void Awake<P1>(P1 p1)
         {
             base.Awake(p1);
-
-            AbilityExecution = p1 as IAbilityExecution;
+       
+            AbilityExecution = p1 as IAbilityExecution;     //技能执行体
             if (AbilityEntity == null)
             {
                 return;
@@ -46,7 +45,7 @@ namespace LccModel
         {
             Dispose();
         }
-
+        //靠代理触发
         public void OnCollision(CombatEntity otherCombatEntity)
         {
             if (TargetEntity != null)
@@ -93,7 +92,7 @@ namespace LccModel
             }
         }
 
-        public void OnTriggerNewExecution(ActionEventData ActionEventData)
+        private void OnTriggerNewExecution(ActionEventData ActionEventData)
         {
         
             ExecutionObject executionObject = AssetManager.Instance.LoadAsset<ExecutionObject>(out var handler, ActionEventData.NewExecution, AssetSuffix.Asset, AssetType.Execution);

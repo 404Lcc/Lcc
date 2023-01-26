@@ -31,7 +31,7 @@ namespace LccModel
         public AddStatusActionAbility AddStatusActionAbility { get; private set; }  //施加状态行动能力
 
         public SpellAttackActionAbility SpellAttackActionAbility { get; private set; }//施法普攻行动能力
-        public AttackBlockActionAbility AttackBlockActionAbility { get; set; }
+        public AttackBlockActionAbility AttackBlockActionAbility { get; set; } //普攻格挡能力
         public SpellSkillActionAbility SpellSkillActionAbility { get; private set; } //施法技能行动能力
 
 
