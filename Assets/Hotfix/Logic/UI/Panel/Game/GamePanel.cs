@@ -1,4 +1,6 @@
-﻿namespace LccHotfix
+﻿using LccModel;
+
+namespace LccHotfix
 {
     public class GameModel : ViewModelBase
     {
@@ -25,6 +27,9 @@
         {
             base.OnShow(panel, contextData);
             ShowTopPanel(TopType.CloseBtn, "Game");
+
+
+            LccModel.Game.Scene.AddChildren<Test>();
         }
     }
 }

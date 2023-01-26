@@ -160,6 +160,7 @@
     <Compile Include="Assets\Combat\Runtime\Core\Status\Components\StatusLifeTimeComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\Components\SkillComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityItem\AbilityItemCollisionExecuteComponent.cs" />
+    <Compile Include="Assets\Combat\Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Combat\Unity.Combat.asmdef" />

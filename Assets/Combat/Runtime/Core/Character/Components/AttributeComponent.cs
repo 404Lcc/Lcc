@@ -57,15 +57,15 @@ namespace LccModel
             AddNumeric(AttributeType.HealthPointMax, 1000);
             AddNumeric(AttributeType.HealthPoint, 1000);
             AddNumeric(AttributeType.MoveSpeed, 1);
-            AddNumeric(AttributeType.Attack, 1000);
-            AddNumeric(AttributeType.Defense, 300);
+            AddNumeric(AttributeType.Attack, 40);
+            AddNumeric(AttributeType.Defense, 30);
             AddNumeric(AttributeType.CriticalProbability, 0.5f);
             AddNumeric(AttributeType.CauseDamage, 1);
         }
         public FloatNumeric AddNumeric(AttributeType attributeType, float baseValue)
         {
             NumericEntity numericEntity = Parent.AddChildren<NumericEntity>();
-            var numeric = Parent.AddChildren<FloatNumeric, NumericEntity, int>(numericEntity, 1);
+            var numeric = Parent.AddChildren<FloatNumeric, NumericEntity, int>(numericEntity, (int)attributeType);
             numeric.SetBase(baseValue);
             attributeDict.Add(attributeType.ToString(), numeric);
             return numeric;

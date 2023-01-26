@@ -11,7 +11,7 @@
         public float PctAdd => _numericEntity.GetFloat(_type * 10 + 3);
         public float FinalAdd => _numericEntity.GetFloat(_type * 10 + 4);
         public float FinalPctAdd => _numericEntity.GetFloat(_type * 10 + 5);
-        public float Value => _numericEntity.GetFloat(_type * 10);
+        public float Value => _numericEntity.GetFloat(_type);
 
         public override void Awake<P1, P2>(P1 p1, P2 p2)
         {
