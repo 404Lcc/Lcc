@@ -74,6 +74,7 @@ namespace LccModel
 
             AddComponent<SpellAttackComponent>();
             AddComponent<SpellSkillComponent>();
+            AddComponent<SpellItemComponent>();
 
 
             CurrentHealth = AddChildren<HealthPoint>();

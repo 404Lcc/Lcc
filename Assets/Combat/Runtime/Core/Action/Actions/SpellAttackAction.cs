@@ -52,27 +52,19 @@ namespace LccModel
             Target.TriggerActionPoint(ActionPointType.PreReceiveAttack, this);
         }
 
-        public async ETTask ApplyAttackAwait()
+        public void ApplyAttack()
         {
             PreProcess();
 
-            await Timer.Instance.WaitAsync(1000);
-
-            ApplyAttack();
-
-            await Timer.Instance.WaitAsync(300);
+            AttackExecution = Creator.AttackAbility.CreateExecution() as AttackExecution;
+            AttackExecution.AttackAction = this;
+            AttackExecution.BeginExecute();
 
             PostProcess();
 
             FinishAction();
         }
 
-        public void ApplyAttack()
-        {
-            AttackExecution = Creator.AttackAbility.CreateExecution() as AttackExecution;
-            AttackExecution.AttackAction = this;
-            AttackExecution.BeginExecute();
-        }
 
         //后置处理
         private void PostProcess()

@@ -69,11 +69,13 @@
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\ActionControlType.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Status\StatusAbility.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Effect\AddStatusEffect.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Item\ItemAbility.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Effect\ClearAllStatusEffect.cs" />
     <Compile Include="Assets\Combat\Util\GameTimer.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\Components\SpellSkillComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\AbilityEffect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityItem\AbilityItemTargetCounterComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Action\Actions\SpellItemAction.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\AbilityEffectComponents\EffectDamageBloodSuckComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Skill\SkillAbility.Client.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ExecutionEffect\ExecutionEffectComponent.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="Assets\Combat\Runtime\Core\CombatContext.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\IPosition.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Skill\SkillExecution.Client.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\ItemConfigObject.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\SkillConfigObject.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\AbilityEffectComponents\EffectActionControlComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\AttributeConfigObject.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="Assets\Combat\Runtime\Core\Attack\AttackExecution.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\AbilityEffectTriggerComponents\EffectIntervalTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Base\Entity.cs" />
+    <Compile Include="Assets\Combat\Test.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Effect\Effect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ExecutionEffect\ExecutionEffectComponents\ExecutionSpawnCollisionComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\SkillAffectTargetType.cs" />
@@ -160,11 +164,7 @@
     <Compile Include="Assets\Combat\Runtime\Core\Status\Components\StatusLifeTimeComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\Components\SkillComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityItem\AbilityItemCollisionExecuteComponent.cs" />
-    <Compile Include="Assets\Combat\Test.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\Components\SpellItemComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\ItemConfigObject.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Item\ItemAbility.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Action\Actions\SpellItemAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Combat\Unity.Combat.asmdef" />

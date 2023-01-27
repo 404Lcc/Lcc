@@ -88,9 +88,8 @@ namespace LccModel
 
                 var effect = Activator.CreateInstance(effectType) as Effect;
                 effect.Enabled = true;
-                effect.IsSkillEffect = true;
+                effect.IsItemEffect = true;
                 Effects.Add(effect);
-
                 EffectTypeName = "(添加效果)";
             }
         }

@@ -35,6 +35,9 @@ namespace LccModel
         public bool IsExecutionEffect;
 
         [HideInInspector]
+        public bool IsItemEffect;
+
+        [HideInInspector]
         public virtual string Label => "Effect";
 
         [ToggleGroup("Enabled", "$Label")]
@@ -82,7 +85,7 @@ namespace LccModel
             {
                 if (this is ActionControlEffect) return true;
                 if (this is AttributeModifyEffect) return true;
-                return IsSkillEffect;
+                return IsSkillEffect || IsItemEffect;
             }
         }
 
