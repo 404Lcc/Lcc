@@ -150,7 +150,7 @@ namespace LccModel
             {
                 string guid = guids[0];
                 string assetPath = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
-                var so = UnityEditor.AssetDatabase.LoadAssetAtPath<SkillConfigObject>(assetPath);
+                var so = UnityEditor.AssetDatabase.LoadAssetAtPath<ItemConfigObject>(assetPath);
                 if (so != this)
                 {
                     return;
