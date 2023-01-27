@@ -5,27 +5,17 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using Sirenix.OdinInspector;
-#if !NOT_UNITY
-#if UNITY_EDITOR
-using Sirenix.Utilities.Editor;
-#endif
-#endif
 
 namespace LccModel
 {
     [CreateAssetMenu(fileName = "道具配置", menuName = "技能|状态/道具配置")]
     [LabelText("道具配置")]
-    public class ItemConfigObject
-#if !NOT_UNITY
-        : SerializedScriptableObject
-#endif
+    public class ItemConfigObject : SerializedScriptableObject
     {
         [LabelText("道具ID"), DelayedProperty]
         public int Id;
         [LabelText("道具名称"), DelayedProperty]
         public string Name = "道具1";
-
-
 
         [LabelText("冷却时间"), SuffixLabel("毫秒", true)]
         public uint ColdTime;
@@ -41,11 +31,10 @@ namespace LccModel
             ChildrenStatuses.Add(new ChildStatus());
         }
 
-#if !NOT_UNITY
 
         [TextArea, LabelText("道具描述")]
         public string ItemDescription;
-#endif
+
 
         [OnInspectorGUI("BeginBox", append: false)]
         [LabelText("效果列表"), Space(30)]
@@ -96,20 +85,6 @@ namespace LccModel
 
 #if UNITY_EDITOR
 
-        [OnInspectorGUI("BeginBox", append: false)]
-        [SerializeField, LabelText("自动重命名")]
-        public bool AutoRename { get { return StatusConfigObject.AutoRenameStatic; } set { StatusConfigObject.AutoRenameStatic = value; } }
-
-        private void OnEnable()
-        {
-            StatusConfigObject.AutoRenameStatic = UnityEditor.EditorPrefs.GetBool("AutoRename", true);
-        }
-
-        private void OnDisable()
-        {
-            UnityEditor.EditorPrefs.SetBool("AutoRename", StatusConfigObject.AutoRenameStatic);
-        }
-
         private void DrawSpace()
         {
             GUILayout.Space(20);
@@ -118,7 +93,7 @@ namespace LccModel
         private void BeginBox()
         {
 
-            SirenixEditorGUI.DrawThickHorizontalSeparator();
+            Sirenix.Utilities.Editor.SirenixEditorGUI.DrawThickHorizontalSeparator();
             GUILayout.Space(10);
   
         }
@@ -130,39 +105,28 @@ namespace LccModel
 
         }
 
+        #region 自动命名
         [OnInspectorGUI]
         private void OnInspectorGUI()
         {
-            if (!AutoRename)
+            if (UnityEditor.Selection.assetGUIDs.Length == 1)
             {
-                return;
-            }
-
-            RenameFile();
-        }
-
-        [Button("重命名配置文件"), HideIf("AutoRename")]
-        private void RenameFile()
-        {
-            string[] guids = UnityEditor.Selection.assetGUIDs;
-            int i = guids.Length;
-            if (i == 1)
-            {
-                string guid = guids[0];
+                string guid = UnityEditor.Selection.assetGUIDs[0];
                 string assetPath = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
-                var so = UnityEditor.AssetDatabase.LoadAssetAtPath<ItemConfigObject>(assetPath);
-                if (so != this)
+                var config = UnityEditor.AssetDatabase.LoadAssetAtPath<ItemConfigObject>(assetPath);
+                if (config != this)
                 {
                     return;
                 }
-                var fileName = Path.GetFileName(assetPath);
-                var newName = $"Item_{this.Id}_{this.Name}";
-                if (!fileName.StartsWith(newName))
+                var oldName = Path.GetFileNameWithoutExtension(assetPath);
+                var newName = $"Item_{this.Id}";
+                if (oldName != newName)
                 {
                     UnityEditor.AssetDatabase.RenameAsset(assetPath, newName);
                 }
             }
         }
+        #endregion
 #endif
     }
 }

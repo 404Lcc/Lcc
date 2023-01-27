@@ -8,17 +8,6 @@ using Sirenix.OdinInspector;
 
 namespace LccModel
 {
-    public class ChildStatus
-    {
-        [LabelText("状态效果")]
-        public StatusConfigObject StatusConfigObject;
-
-        //public ET.StatusConfig StatusConfig { get; set; }
-
-        [LabelText("参数列表"), HideReferenceObjectPicker]
-        public Dictionary<string, string> Params = new Dictionary<string, string>();
-    }
-
     public enum StatusType
     {
         [LabelText("Buff(增益)")]
@@ -28,19 +17,24 @@ namespace LccModel
         [LabelText("其他")]
         Other,
     }
+    public class ChildStatus
+    {
+        [LabelText("状态效果")]
+        public StatusConfigObject StatusConfigObject;
+
+        [LabelText("参数列表"), HideReferenceObjectPicker]
+        public Dictionary<string, string> Params = new Dictionary<string, string>();
+    }
 
 
     [CreateAssetMenu(fileName = "状态配置", menuName = "技能|状态/状态配置")]
-    public class StatusConfigObject
-#if !NOT_UNITY
-        : SerializedScriptableObject
-#endif
+    public class StatusConfigObject : SerializedScriptableObject
     {
-        [LabelText(StatusIdLabel), DelayedProperty]
-        public string ID = "Status1";
-        [LabelText(StatusNameLabel), DelayedProperty]
+        [LabelText("状态ID"), DelayedProperty]
+        public string Id = "Status1";
+        [LabelText("状态名称"), DelayedProperty]
         public string Name = "状态1";
-        [LabelText(StatusTypeLabel)]
+        [LabelText("状态类型")]
         public StatusType StatusType;
         [HideInInspector]
         public uint Duration;
@@ -105,35 +99,23 @@ namespace LccModel
             }
         }
 
-#if !NOT_UNITY
+
         [LabelText("状态特效")]
-        [OnInspectorGUI("BeginBox", append:false)]
+        [OnInspectorGUI("BeginBox", append: false)]
         public GameObject ParticleEffect;
 
         public GameObject GetParticleEffect() => ParticleEffect;
 
         [LabelText("状态音效")]
-        [OnInspectorGUI("EndBox", append:true)]
+        [OnInspectorGUI("EndBox", append: true)]
         public AudioClip Audio;
 
         [TextArea, LabelText("状态描述")]
         public string StatusDescription;
-#endif
-        
+
+
 #if UNITY_EDITOR
-        [SerializeField, LabelText("自动重命名")]
-        public bool AutoRename { get { return AutoRenameStatic; } set { AutoRenameStatic = value; } }
-        public static bool AutoRenameStatic = true;
 
-        private void OnEnable()
-        {
-            AutoRenameStatic = UnityEditor.EditorPrefs.GetBool("AutoRename", true);
-        }
-
-        private void OnDisable()
-        {
-            UnityEditor.EditorPrefs.SetBool("AutoRename", AutoRenameStatic);
-        }
 
         private void DrawSpace()
         {
@@ -156,53 +138,28 @@ namespace LccModel
             GUILayout.Space(10);
         }
 
-
+        #region 自动命名
         [OnInspectorGUI]
         private void OnInspectorGUI()
         {
-
-            if (!AutoRename)
+            if (UnityEditor.Selection.assetGUIDs.Length == 1)
             {
-                return;
-            }
-
-            RenameFile();
-        }
-
-        [Button("重命名配置文件"), HideIf("AutoRename")]
-        private void RenameFile()
-        {
-            string[] guids = UnityEditor.Selection.assetGUIDs;
-            int i = guids.Length;
-            if (i == 1)
-            {
-                string guid = guids[0];
+                string guid = UnityEditor.Selection.assetGUIDs[0];
                 string assetPath = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
-                var so = UnityEditor.AssetDatabase.LoadAssetAtPath<StatusConfigObject>(assetPath);
-                if (so != this)
+                var config = UnityEditor.AssetDatabase.LoadAssetAtPath<StatusConfigObject>(assetPath);
+                if (config != this)
                 {
                     return;
                 }
-                var fileName = Path.GetFileNameWithoutExtension(assetPath);
-                var newName = $"Status_{this.ID}";
-                if (fileName != newName)
+                var oldName = Path.GetFileNameWithoutExtension(assetPath);
+                var newName = $"Status_{this.Id}";
+                if (oldName != newName)
                 {
-
                     UnityEditor.AssetDatabase.RenameAsset(assetPath, newName);
                 }
             }
         }
-#endif
-
-
-#if EGamePlay_EN
-        private const string StatusIdLabel = "StatusID";
-        private const string StatusNameLabel = "Name";
-        private const string StatusTypeLabel = "Type";
-#else
-        private const string StatusIdLabel = "状态ID";
-        private const string StatusNameLabel = "状态名称";
-        private const string StatusTypeLabel = "状态类型";
+        #endregion
 #endif
     }
 }

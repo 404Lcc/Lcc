@@ -18,21 +18,21 @@ namespace LccModel
         public StatusAbility AttachStatus(object configObject)
         {
             var status = CombatEntity.AttachAbility<StatusAbility>(configObject);
-            if (!TypeIdStatuses.ContainsKey(status.StatusConfig.ID))
+            if (!TypeIdStatuses.ContainsKey(status.StatusConfig.Id))
             {
-                TypeIdStatuses.Add(status.StatusConfig.ID, new List<StatusAbility>());
+                TypeIdStatuses.Add(status.StatusConfig.Id, new List<StatusAbility>());
             }
-            TypeIdStatuses[status.StatusConfig.ID].Add(status);
+            TypeIdStatuses[status.StatusConfig.Id].Add(status);
             Statuses.Add(status);
             return status;
         }
 
         public void OnStatusRemove(StatusAbility statusAbility)
         {
-            TypeIdStatuses[statusAbility.StatusConfig.ID].Remove(statusAbility);
-            if (TypeIdStatuses[statusAbility.StatusConfig.ID].Count == 0)
+            TypeIdStatuses[statusAbility.StatusConfig.Id].Remove(statusAbility);
+            if (TypeIdStatuses[statusAbility.StatusConfig.Id].Count == 0)
             {
-                TypeIdStatuses.Remove(statusAbility.StatusConfig.ID);
+                TypeIdStatuses.Remove(statusAbility.StatusConfig.Id);
             }
             Statuses.Remove(statusAbility);
             this.Publish(new RemoveStatusEvent() 

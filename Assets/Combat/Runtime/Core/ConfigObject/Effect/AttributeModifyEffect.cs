@@ -2,6 +2,12 @@
 
 namespace LccModel
 {
+    [LabelText("修饰类型")]
+    public enum ModifyType
+    {
+        Add = 0,
+        PercentAdd = 1,
+    }
     [Effect("属性修饰", 2)]
     public class AttributeModifyEffect : Effect
     {

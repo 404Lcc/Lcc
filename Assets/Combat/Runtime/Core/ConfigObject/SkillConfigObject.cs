@@ -5,20 +5,42 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using Sirenix.OdinInspector;
-#if !NOT_UNITY
-#if UNITY_EDITOR
-using Sirenix.Utilities.Editor;
-#endif
-#endif
 
 namespace LccModel
 {
+    [LabelText("效果应用目标选择方式")]
+    public enum SkillTargetSelectType
+    {
+        [LabelText("手动指定")]
+        PlayerSelect,
+        [LabelText("碰撞检测")]
+        CollisionSelect,
+
+        [LabelText("条件指定")]
+        ConditionSelect,
+        [LabelText("自定义")]
+        Custom,
+    }
+    [LabelText("技能类型")]
+    public enum SkillSpellType
+    {
+        [LabelText("主动技能")]
+        Initiative,
+        [LabelText("被动技能")]
+        Passive,
+    }
+    [LabelText("技能作用对象")]
+    public enum SkillAffectTargetType
+    {
+        [LabelText("自身")]
+        Self = 0,
+        [LabelText("己方")]
+        SelfTeam = 1,
+        [LabelText("敌方")]
+        EnemyTeam = 2,
+    }
     [CreateAssetMenu(fileName = "技能配置", menuName = "技能|状态/技能配置")]
-    [LabelText("技能配置")]
-    public class SkillConfigObject
-#if !NOT_UNITY
-        : SerializedScriptableObject
-#endif
+    public class SkillConfigObject : SerializedScriptableObject
     {
         [LabelText("技能ID"), DelayedProperty]
         public int Id;
@@ -37,7 +59,7 @@ namespace LccModel
 
         [LabelText("附加状态效果")]
         public bool EnableChildrenStatuses;
- 
+
         [HideReferenceObjectPicker]
         [LabelText("附加状态效果列表"), ShowIf("EnableChildrenStatuses"), ListDrawerSettings(DraggableItems = false, ShowItemCount = false, CustomAddFunction = "AddChildStatus")]
         public List<ChildStatus> ChildrenStatuses = new List<ChildStatus>();
@@ -46,11 +68,10 @@ namespace LccModel
             ChildrenStatuses.Add(new ChildStatus());
         }
 
-#if !NOT_UNITY
 
         [TextArea, LabelText("技能描述")]
         public string SkillDescription;
-#endif
+
 
         [OnInspectorGUI("BeginBox", append: false)]
         [LabelText("效果列表"), Space(30)]
@@ -102,20 +123,6 @@ namespace LccModel
 
 #if UNITY_EDITOR
 
-        [OnInspectorGUI("BeginBox", append: false)]
-        [SerializeField, LabelText("自动重命名")]
-        public bool AutoRename { get { return StatusConfigObject.AutoRenameStatic; } set { StatusConfigObject.AutoRenameStatic = value; } }
-
-        private void OnEnable()
-        {
-            StatusConfigObject.AutoRenameStatic = UnityEditor.EditorPrefs.GetBool("AutoRename", true);
-        }
-
-        private void OnDisable()
-        {
-            UnityEditor.EditorPrefs.SetBool("AutoRename", StatusConfigObject.AutoRenameStatic);
-        }
-
         private void DrawSpace()
         {
             GUILayout.Space(20);
@@ -124,71 +131,40 @@ namespace LccModel
         private void BeginBox()
         {
 
-            SirenixEditorGUI.DrawThickHorizontalSeparator();
+            Sirenix.Utilities.Editor.SirenixEditorGUI.DrawThickHorizontalSeparator();
             GUILayout.Space(10);
-  
+
         }
 
         private void EndBox()
         {
-   
+
             GUILayout.Space(30);
 
         }
 
+        #region 自动命名
         [OnInspectorGUI]
         private void OnInspectorGUI()
         {
-            if (!AutoRename)
+            if (UnityEditor.Selection.assetGUIDs.Length == 1)
             {
-                return;
-            }
-
-            RenameFile();
-        }
-
-        [Button("重命名配置文件"), HideIf("AutoRename")]
-        private void RenameFile()
-        {
-            string[] guids = UnityEditor.Selection.assetGUIDs;
-            int i = guids.Length;
-            if (i == 1)
-            {
-                string guid = guids[0];
+                string guid = UnityEditor.Selection.assetGUIDs[0];
                 string assetPath = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
-                var so = UnityEditor.AssetDatabase.LoadAssetAtPath<SkillConfigObject>(assetPath);
-                if (so != this)
+                var config = UnityEditor.AssetDatabase.LoadAssetAtPath<SkillConfigObject>(assetPath);
+                if (config != this)
                 {
                     return;
                 }
-                var fileName = Path.GetFileName(assetPath);
-                var newName = $"Skill_{this.Id}_{this.Name}";
-                if (!fileName.StartsWith(newName))
+                var oldName = Path.GetFileNameWithoutExtension(assetPath);
+                var newName = $"Skill_{this.Id}";
+                if (oldName != newName)
                 {
                     UnityEditor.AssetDatabase.RenameAsset(assetPath, newName);
                 }
             }
         }
+        #endregion
 #endif
-    }
-
-    [LabelText("护盾类型")]
-    public enum ShieldType
-    {
-        [LabelText("普通护盾")]
-        Shield,
-        [LabelText("物理护盾")]
-        PhysicShield,
-        [LabelText("魔法护盾")]
-        MagicShield,
-        [LabelText("技能护盾")]
-        SkillShield,
-    }
-
-    [LabelText("标记类型")]
-    public enum TagType
-    {
-        [LabelText("能量标记")]
-        Power,
     }
 }

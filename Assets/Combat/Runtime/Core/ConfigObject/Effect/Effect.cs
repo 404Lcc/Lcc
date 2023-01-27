@@ -7,6 +7,44 @@ using System.Reflection;
 
 namespace LccModel
 {
+    [LabelText("触发类型")]
+    public enum EffectTriggerType
+    {
+        [LabelText("（空）")]
+        None = 0,
+        [LabelText("立即触发")]
+        Instant = 1,
+        [LabelText("条件触发")]
+        Condition = 2,
+        [LabelText("行动点触发")]
+        Action = 3,
+        [LabelText("间隔触发")]
+        Interval = 4,
+        [LabelText("在行动点且满足条件")]
+        ActionCondition = 5,
+    }
+    [LabelText("触发条件")]
+    public enum ConditionType
+    {
+        [LabelText("自定义条件")]
+        CustomCondition = 0,
+        [LabelText("当生命值低于x")]
+        WhenHPLower = 1,
+        [LabelText("当生命值低于百分比x")]
+        WhenHPPctLower = 2,
+        [LabelText("当x秒内没有受伤")]
+        WhenInTimeNoDamage = 3,
+    }
+    [LabelText("作用对象")]
+    public enum AddSkillEffetTargetType
+    {
+        [LabelText("技能目标")]
+        SkillTarget = 0,
+        [LabelText("自身")]
+        Self = 1,
+        [LabelText("其他")]
+        Other = 2,
+    }
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public class EffectAttribute : Attribute
     {
@@ -65,8 +103,7 @@ namespace LccModel
         [ToggleGroup("Enabled"), HideIf("IsSkillEffect", true), LabelText("条件参数 x="), ShowIf("EffectTriggerType", EffectTriggerType.Condition)]
         public string ConditionParam;
 
-        //[ToggleGroup("Enabled"), LabelText("触发概率")]
-        //public string TriggerProbability = "100%";
+
 
         //Effect是直接效果，效果修饰是基于直接效果的辅助效果
         [ShowIf("@this.Decorators != null && this.Decorators.Count > 0")]

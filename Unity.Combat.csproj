@@ -66,7 +66,6 @@
     <Compile Include="Assets\Combat\Runtime\Core\Action\Actions\SpellSkillAction.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\AbilityEffectComponents\EffectCureComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Skill\SkillExecution.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\ActionControlType.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Status\StatusAbility.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Effect\AddStatusEffect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Item\ItemAbility.cs" />
@@ -88,7 +87,6 @@
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\ItemConfigObject.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\SkillConfigObject.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\AbilityEffectComponents\EffectActionControlComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\AttributeConfigObject.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Base\ExpressionHelper.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Attack\AttackExecution.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\AbilityEffectTriggerComponents\EffectIntervalTriggerComponent.cs" />
@@ -96,8 +94,6 @@
     <Compile Include="Assets\Combat\Test.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Effect\Effect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ExecutionEffect\ExecutionEffectComponents\ExecutionSpawnCollisionComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\SkillAffectTargetType.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\SkillTargetSelectType.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ExecutionEffect\ExecutionEffect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Condition\ConditionEntity.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\AbilityEffectTriggerComponents\EffectConditionTriggerComponent.cs" />
@@ -112,21 +108,16 @@
     <Compile Include="Assets\Combat\Runtime\Core\Attack\AttackAbility.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityItem\AbilityItem.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Status\StatusExecution.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\ConditionType.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\AddSkillEffetTargetType.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\StatusConfigObject.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Mono\AbilityItemProxyObj.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\DamageType.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Base\EventComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Base\ExpressionParser\ExpressionParser.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Action\Actions\SpellAttackAction.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ExecutionEffect\ExecutionEffectComponents\ExecutionAssignToTargetComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\Components\ActionPointComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Action\Components\AbilityProbabilityTriggerComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\EffectTriggerType.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Skill\ExecutionLinkEditor\CtrlPoint.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Skill\LifeTimeComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\SkillSpellType.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\CombatEntity.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\Components\SpellAttackComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityItem\AbilityItemBezierMoveComponent.cs" />
@@ -136,7 +127,6 @@
     <Compile Include="Assets\Combat\Runtime\Core\Skill\ExecutionTimeline\ExecutionEventEmitter.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\AbilityEffect\AbilityEffectTriggerComponents\EffectActionTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Ability\IAbilityEntity.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\Type\ModifyType.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\Components\MotionComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Condition\ConditionWhenInTimeNoDamageComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\ConfigObject\EffectDecorator\EffectDecorator.cs" />

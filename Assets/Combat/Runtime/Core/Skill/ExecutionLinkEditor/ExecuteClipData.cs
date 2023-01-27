@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using Sirenix.OdinInspector;
 
 namespace LccModel
@@ -19,7 +17,7 @@ namespace LccModel
         public string Name
         {
             get { return name; }
-            set { name = value; /*AssetDatabase.ForceReserializeAssets(new string[] { AssetDatabase.GetAssetPath(this) }); AssetDatabase.SaveAssets(); AssetDatabase.Refresh();*/ }
+            set { name = value; }
         }
 
         public ExecuteClipType ExecuteClipType;
@@ -91,15 +89,6 @@ namespace LccModel
         [LabelText("新执行体")]
         public string NewExecution;
     }
-
-    //[LabelText("执行类型")]
-    //public enum ExecuteType
-    //{
-    //    [LabelText("抛出事件")]
-    //    FireOutEvent = 0,
-    //    [LabelText("持续执行")]
-    //    ContinuousExecute = 1,
-    //}
 
     [LabelText("碰撞体执行类型")]
     public enum CollisionExecuteType

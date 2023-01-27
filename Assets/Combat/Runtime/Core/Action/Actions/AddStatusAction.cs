@@ -61,9 +61,9 @@ namespace LccModel
 
             if (canStack == false)
             {
-                if (Target.HasStatus(statusConfig.ID))
+                if (Target.HasStatus(statusConfig.Id))
                 {
-                    var status = Target.GetStatus(statusConfig.ID);
+                    var status = Target.GetStatus(statusConfig.Id);
                     var statusLifeTimer = status.GetComponent<StatusLifeTimeComponent>().LifeTimer;
                     statusLifeTimer.MaxTime = AddStatusEffect.Duration / 1000f;
                     statusLifeTimer.Reset();
