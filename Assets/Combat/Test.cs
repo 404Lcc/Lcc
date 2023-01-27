@@ -13,7 +13,7 @@ namespace LccModel
             combatEntity2 = AddChildren<CombatEntity>();
             combatEntity1.GetComponent<SpellAttackComponent>().SpellAttackWithTarget(combatEntity2);
 
-            
+
 
 
             var item = combatEntity1.AttachItem(UnityEngine.Resources.Load<ItemConfigObject>("Item_1_µÀ¾ß1"));

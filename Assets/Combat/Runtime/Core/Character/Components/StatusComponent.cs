@@ -9,7 +9,7 @@ namespace LccModel
         public long StatusId { get; set; }
     }
     public class StatusComponent : Component
-	{
+    {
         public CombatEntity CombatEntity => GetParent<CombatEntity>();
         public List<StatusAbility> Statuses { get; set; } = new List<StatusAbility>();
         public Dictionary<string, List<StatusAbility>> TypeIdStatuses { get; set; } = new Dictionary<string, List<StatusAbility>>();
@@ -35,7 +35,7 @@ namespace LccModel
                 TypeIdStatuses.Remove(statusAbility.StatusConfig.Id);
             }
             Statuses.Remove(statusAbility);
-            this.Publish(new RemoveStatusEvent() 
+            this.Publish(new RemoveStatusEvent()
             {
                 CombatEntity = CombatEntity,
                 Status = statusAbility,
@@ -70,5 +70,5 @@ namespace LccModel
             var moveForbid = parentEntity.ActionControlType.HasFlag(ActionControlType.MoveForbid);
             parentEntity.GetComponent<MotionComponent>().Enable = !moveForbid;
         }
-	}
+    }
 }

@@ -20,7 +20,7 @@ namespace LccModel
 
             AddComponent<AbilityEffectComponent, List<Effect>>(ItemConfig.Effects);
         }
-        
+
         public void TryActivateAbility()
         {
             this.ActivateAbility();

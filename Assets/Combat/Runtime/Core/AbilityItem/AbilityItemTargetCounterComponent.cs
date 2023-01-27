@@ -1,6 +1,4 @@
-﻿
-
-namespace LccModel
+﻿namespace LccModel
 {
     /// <summary>
     /// 

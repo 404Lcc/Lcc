@@ -1,12 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace LccModel
+﻿namespace LccModel
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class SkillComponent : Component
-	{
+    {
 
-	}
+    }
 }

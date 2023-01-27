@@ -38,7 +38,7 @@ namespace LccModel
         {
             ActivateAbility();
         }
-        
+
         public void ActivateAbility()
         {
             Enable = true;

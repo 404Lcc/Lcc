@@ -27,7 +27,7 @@ namespace LccModel
                 TryActivateAbility();
             }
         }
-        
+
         public void TryActivateAbility()
         {
             this.ActivateAbility();

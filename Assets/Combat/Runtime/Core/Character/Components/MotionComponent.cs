@@ -74,7 +74,7 @@ namespace LccModel
         {
             IdleTimer.Reset();
         }
-    
+
         private float VectorAngle(Vector2 from, Vector2 to)
         {
             var angle = 0f;

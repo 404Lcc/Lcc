@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using UnityEngine;
-using DG.Tweening;
+﻿using UnityEngine;
 using System;
 
 namespace LccModel
@@ -27,7 +23,7 @@ namespace LccModel
         {
             AddComponent<ExecutionEffectComponent>();
         }
-        public void Update() 
+        public void Update()
         {
             var nowSeconds = (double)(Time.Instance.ClientNow() - OriginTime) / 1000;
 

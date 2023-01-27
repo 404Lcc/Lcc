@@ -10,7 +10,6 @@ namespace LccModel
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log($"OnTriggerEnterCallback OnTriggerEnter {other.name}");
             OnTriggerEnterCallbackAction?.Invoke(other);
         }
     }

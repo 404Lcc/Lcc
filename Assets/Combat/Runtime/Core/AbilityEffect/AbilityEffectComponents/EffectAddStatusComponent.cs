@@ -26,7 +26,7 @@
 
         private void OnAssignEffect(Entity entity)
         {
-   
+
             var effectAssignAction = entity as EffectAssignAction;
             if (GetParent<AbilityEffect>().OwnerEntity.AddStatusActionAbility.TryMakeAction(out var action))
             {

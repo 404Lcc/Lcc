@@ -1,5 +1,4 @@
-﻿
-namespace LccModel
+﻿namespace LccModel
 {
     public sealed class ConditionEntity : Entity
     {

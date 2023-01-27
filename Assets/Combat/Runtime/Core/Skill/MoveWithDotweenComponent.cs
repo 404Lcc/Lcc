@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using UnityEngine;
-using ET;
+﻿using UnityEngine;
 using DG.Tweening;
 
 namespace LccModel
@@ -48,7 +44,7 @@ namespace LccModel
         public MoveWithDotweenComponent DoMoveTo(Vector3 destination, float duration)
         {
             Destination = destination;
-            DOTween.To(()=> { return PositionEntity.Position; }, (x) => PositionEntity.Position = x, Destination, duration).SetEase(Ease.Linear).OnComplete(OnMoveFinish);
+            DOTween.To(() => { return PositionEntity.Position; }, (x) => PositionEntity.Position = x, Destination, duration).SetEase(Ease.Linear).OnComplete(OnMoveFinish);
             return this;
         }
 

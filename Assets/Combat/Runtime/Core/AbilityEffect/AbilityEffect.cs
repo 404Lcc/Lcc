@@ -38,12 +38,12 @@
                 AddComponent<EffectAddStatusComponent>();
             }
             // 属性修饰效果
-            if (this.EffectConfig is AttributeModifyEffect) 
+            if (this.EffectConfig is AttributeModifyEffect)
             {
                 AddComponent<EffectAttributeModifyComponent>();
             }
             // 清除所有状态效果
-            if (this.EffectConfig is ClearAllStatusEffect) 
+            if (this.EffectConfig is ClearAllStatusEffect)
             {
             }
             // 治疗效果
@@ -87,19 +87,19 @@
                 }
                 // 行动点触发
                 var isAction = EffectConfig.EffectTriggerType == EffectTriggerType.Action;
-                if (isAction) 
+                if (isAction)
                 {
                     AddComponent<EffectActionTriggerComponent>();
                 }
                 // 间隔触发
                 var isInterval = EffectConfig.EffectTriggerType == EffectTriggerType.Interval && !string.IsNullOrEmpty(EffectConfig.Interval);
-                if (isInterval) 
+                if (isInterval)
                 {
                     AddComponent<EffectIntervalTriggerComponent>();
                 }
                 // 条件触发
                 var isCondition = EffectConfig.EffectTriggerType == EffectTriggerType.Condition && !string.IsNullOrEmpty(EffectConfig.ConditionParam);
-                if (isCondition) 
+                if (isCondition)
                 {
                     AddComponent<EffectConditionTriggerComponent>();
                 }

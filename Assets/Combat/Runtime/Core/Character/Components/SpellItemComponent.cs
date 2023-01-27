@@ -14,7 +14,7 @@
                 spellAction.Target = targetEntity;
                 spellAction.UseItem();
             }
-            
+
         }
     }
 }

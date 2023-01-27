@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Timeline;
 
 namespace LccModel
 {
-//    public class SkillExecutionData
-//    {
-//#if !NOT_UNITY
-//        public GameObject SkillExecutionAsset { get; set; }
-//        public TimelineAsset TimelineAsset { get; set; }
-//        public ExecutionObject ExecutionObject { get; set; }
-//#endif
-//        public float SkillExecuteTime { get; set; }
-//        public List<Effect> ExecutionEffects { get; set; } = new List<Effect>();
-//    }
+    //    public class SkillExecutionData
+    //    {
+    //#if !NOT_UNITY
+    //        public GameObject SkillExecutionAsset { get; set; }
+    //        public TimelineAsset TimelineAsset { get; set; }
+    //        public ExecutionObject ExecutionObject { get; set; }
+    //#endif
+    //        public float SkillExecuteTime { get; set; }
+    //        public List<Effect> ExecutionEffects { get; set; } = new List<Effect>();
+    //    }
 
     /// <summary>
     /// 技能执行体，执行体就是控制角色表现和技能表现的，包括角色动作、移动、变身等表现的，以及技能生成碰撞体等表现

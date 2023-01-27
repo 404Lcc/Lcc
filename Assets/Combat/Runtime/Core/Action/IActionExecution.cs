@@ -33,7 +33,6 @@ namespace LccModel
         /// 目标对象
         public CombatEntity Target { get; set; }
 
-
         public void FinishAction();
     }
 }

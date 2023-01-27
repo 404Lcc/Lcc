@@ -22,7 +22,7 @@ namespace LccModel
 
         [LabelText("附加状态效果")]
         public bool EnableChildrenStatuses;
- 
+
         [HideReferenceObjectPicker]
         [LabelText("附加状态效果列表"), ShowIf("EnableChildrenStatuses"), ListDrawerSettings(DraggableItems = false, ShowItemCount = false, CustomAddFunction = "AddChildStatus")]
         public List<ChildStatus> ChildrenStatuses = new List<ChildStatus>();
@@ -95,12 +95,12 @@ namespace LccModel
 
             Sirenix.Utilities.Editor.SirenixEditorGUI.DrawThickHorizontalSeparator();
             GUILayout.Space(10);
-  
+
         }
 
         private void EndBox()
         {
-   
+
             GUILayout.Space(30);
 
         }

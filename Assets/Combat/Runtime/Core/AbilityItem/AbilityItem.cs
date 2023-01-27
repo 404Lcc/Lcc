@@ -17,7 +17,7 @@ namespace LccModel
         public override void Awake<P1>(P1 p1)
         {
             base.Awake(p1);
-       
+
             AbilityExecution = p1 as IAbilityExecution;     //技能执行体
             if (AbilityEntity == null)
             {
@@ -94,7 +94,7 @@ namespace LccModel
 
         private void OnTriggerNewExecution(ActionEventData ActionEventData)
         {
-        
+
             ExecutionObject executionObject = AssetManager.Instance.LoadAsset<ExecutionObject>(out var handler, ActionEventData.NewExecution, AssetSuffix.Asset, AssetType.Execution);
             if (executionObject == null)
             {
