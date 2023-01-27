@@ -116,7 +116,6 @@
     <Compile Include="Assets\Combat\Runtime\Core\ExecutionEffect\ExecutionEffectComponents\ExecutionAssignToTargetComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\Components\ActionPointComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Action\Components\AbilityProbabilityTriggerComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Skill\ExecutionLinkEditor\CtrlPoint.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Skill\LifeTimeComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\CombatEntity.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Character\Components\SpellAttackComponent.cs" />
