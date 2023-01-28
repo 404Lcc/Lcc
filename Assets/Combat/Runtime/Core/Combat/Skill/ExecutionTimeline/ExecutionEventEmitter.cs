@@ -101,7 +101,7 @@ public class ExecutionEventEmitterInspector : OdinEditor
                 signalAsset = AssetDatabase.LoadAssetAtPath<SignalAsset>(AssetDatabase.GUIDToAssetPath(item));
                 if (signalAsset != null) break;
             }
-            //var signalAsset = AssetDatabase.LoadAssetAtPath<SignalAsset>("Assets/EGPsExamples/TimelineScene/效果1.signal");
+
             emitter.asset = signalAsset;
             serializedObject.ApplyModifiedProperties();
         }
@@ -109,17 +109,9 @@ public class ExecutionEventEmitterInspector : OdinEditor
 
     public override void OnInspectorGUI()
     {
-        //EditorGUILayout.Space(20);
-        //base.OnInspectorGUI();
 
         serializedObject.Update();
 
-        //var editorType = typeof(Editor);
-        //editorType.InvokeMember("DoDrawDefaultInspector",
-        //    System.Reflection.BindingFlags.InvokeMethod | System.Reflection.BindingFlags.Static 
-        //     | System.Reflection.BindingFlags.NonPublic, null, null, 
-        //    new object[] {serializedObject});
-        //return;
 
         var emitter = target as ExecutionEventEmitter;
         emitter.time = EditorGUILayout.FloatField("Time", (float)emitter.time);
@@ -137,7 +129,7 @@ public class ExecutionEventEmitterInspector : OdinEditor
                 || emitter.ColliderType == CollisionMoveType.ForwardFly
                 )
             {
-                //emitter.ColliderShape = (ColliderShape)SirenixEditorFields.EnumDropdown("碰撞体形状", emitter.ColliderShape);
+
                 emitter.ExistTime = EditorGUILayout.FloatField("存活时间", emitter.ExistTime);
             }
             emitter.EffectApplyType = (EffectApplyType)EditorGUILayout.EnumPopup("应用效果", emitter.EffectApplyType);

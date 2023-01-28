@@ -1,13 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace LccModel
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class ExecutionAnimationComponent : Component
     {
         public AnimationClip AnimationClip { get; set; }
@@ -20,7 +14,6 @@ namespace LccModel
 
         public void OnTriggerExecutionEffect(Entity entity)
         {
-            //Log.Debug("ExecutionAnimationComponent OnTriggerExecutionEffect");
             Parent.GetParent<SkillExecution>().OwnerEntity.Publish(AnimationClip);
         }
     }

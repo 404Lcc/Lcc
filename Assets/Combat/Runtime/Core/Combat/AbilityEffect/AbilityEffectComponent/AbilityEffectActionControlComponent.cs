@@ -1,9 +1,6 @@
 ﻿namespace LccModel
 {
-    /// <summary>
-    /// 行动禁制效果组件
-    /// </summary>
-    public class EffectActionControlComponent : Component
+    public class AbilityEffectActionControlComponent : Component
     {
         public override bool DefaultEnable => false;
         public ActionControlEffect ActionControlEffect { get; set; }

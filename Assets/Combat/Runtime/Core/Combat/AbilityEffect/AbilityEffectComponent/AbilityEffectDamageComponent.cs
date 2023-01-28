@@ -2,7 +2,7 @@
 
 namespace LccModel
 {
-    public class EffectDamageComponent : Component
+    public class AbilityEffectDamageComponent : Component
     {
         public DamageEffect DamageEffect { get; set; }
         public string DamageValueFormula { get; set; }

@@ -55,7 +55,6 @@
 
             if (BeBlocked)
             {
-                //Log.Debug("被格挡了");
             }
             else
             {

@@ -1,9 +1,7 @@
 ﻿namespace LccModel
 {
-    public class EffectDecoratosComponent : Component
+    public class AbilityEffectDecoratosComponent : Component
     {
-
-
         public override void Awake()
         {
             if (GetParent<AbilityEffect>().EffectConfig.Decorators != null)
@@ -12,7 +10,7 @@
                 {
                     if (effectDecorator is DamageReduceWithTargetCountDecorator reduceWithTargetCountDecorator)
                     {
-                        Parent.AddComponent<EffectDamageReduceWithTargetCountComponent>();
+                        Parent.AddComponent<AbilityEffectDamageReduceWithTargetCountComponent>();
                     }
                 }
             }

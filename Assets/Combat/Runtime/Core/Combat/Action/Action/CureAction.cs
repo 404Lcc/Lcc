@@ -27,17 +27,18 @@
     /// </summary>
     public class CureAction : Entity, IActionExecution
     {
-        public CureEffect CureEffect => SourceAssignAction.AbilityEffect.EffectConfig as CureEffect;
-        /// 治疗数值
+        // 治疗数值
         public int CureValue { get; set; }
 
-        /// 行动能力
+
+
+        // 行动能力
         public Entity ActionAbility { get; set; }
-        /// 效果赋给行动源
+        // 效果赋给行动源
         public EffectAssignAction SourceAssignAction { get; set; }
-        /// 行动实体
+        // 行动实体
         public CombatEntity Creator { get; set; }
-        /// 目标对象
+        // 目标对象
         public CombatEntity Target { get; set; }
 
 
@@ -51,7 +52,7 @@
         {
             if (SourceAssignAction != null && SourceAssignAction.AbilityEffect != null)
             {
-                CureValue = SourceAssignAction.AbilityEffect.GetComponent<EffectCureComponent>().GetCureValue();
+                CureValue = SourceAssignAction.AbilityEffect.GetComponent<AbilityEffectCureComponent>().GetCureValue();
             }
         }
 

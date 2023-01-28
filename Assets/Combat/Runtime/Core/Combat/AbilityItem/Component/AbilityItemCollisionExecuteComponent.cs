@@ -1,9 +1,5 @@
-﻿
-namespace LccModel
+﻿namespace LccModel
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class AbilityItemCollisionExecuteComponent : Component
     {
         public ExecuteClipData ExecuteClipData { get; private set; }

@@ -5,10 +5,7 @@ using UnityEngine;
 
 namespace LccModel
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class EffectCureComponent : Component
+    public class AbilityEffectCureComponent : Component
     {
         public CureEffect CureEffect { get; set; }
         public string CureValueProperty { get; set; }

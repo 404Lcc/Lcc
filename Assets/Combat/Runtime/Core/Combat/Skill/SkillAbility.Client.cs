@@ -1,14 +1,8 @@
 ﻿namespace LccModel
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public partial class SkillAbility
     {
-        //public SkillExecutionData SkillExecutionData { get; set; }
         public ExecutionObject ExecutionObject { get; set; }
-
-
 
         public void LoadExecution()
         {

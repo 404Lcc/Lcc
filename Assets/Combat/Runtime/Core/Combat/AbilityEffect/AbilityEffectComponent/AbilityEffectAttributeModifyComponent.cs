@@ -1,6 +1,6 @@
 ﻿namespace LccModel
 {
-    public class EffectAttributeModifyComponent : Component
+    public class AbilityEffectAttributeModifyComponent : Component
     {
         public override bool DefaultEnable => false;
         public AttributeModifyEffect AttributeModifyEffect { get; set; }

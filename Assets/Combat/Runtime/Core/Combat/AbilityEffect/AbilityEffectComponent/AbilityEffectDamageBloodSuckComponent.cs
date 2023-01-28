@@ -5,10 +5,7 @@ using UnityEngine;
 
 namespace LccModel
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class EffectDamageBloodSuckComponent : Component
+    public class AbilityEffectDamageBloodSuckComponent : Component
     {
         public override bool DefaultEnable => false;
 

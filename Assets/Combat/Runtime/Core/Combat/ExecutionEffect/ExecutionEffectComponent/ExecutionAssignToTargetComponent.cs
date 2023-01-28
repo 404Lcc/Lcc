@@ -16,7 +16,6 @@
 
         public void OnTriggerExecuteEffect(ExecuteEffectEvent evnt)
         {
-#if !NOT_UNITY
             var ParentExecution = Parent.GetParent<SkillExecution>();
 
             if (ParentExecution.InputTarget != null)
@@ -30,7 +29,6 @@
                     ParentExecution.AbilityEntity.GetComponent<AbilityEffectComponent>().TryAssignEffectByIndex(ParentExecution.InputTarget, (int)EffectApplyType - 1);
                 }
             }
-#endif
         }
     }
 }

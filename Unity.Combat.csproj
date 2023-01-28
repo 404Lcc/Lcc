@@ -64,7 +64,6 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\Action\CureAction.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\Action\DamageAction.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\Action\SpellSkillAction.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\EffectCureComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Skill\SkillExecution.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Status\StatusAbility.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\Effect\AddStatusEffect.cs" />
@@ -75,7 +74,6 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityItem\Component\AbilityItemTargetCounterComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\Action\SpellItemAction.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\EffectDamageBloodSuckComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Skill\SkillAbility.Client.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ExecutionEffect\Component\ExecutionEffectComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\Component\AbilityEffectComponent.cs" />
@@ -86,23 +84,20 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Skill\SkillExecution.Client.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\ItemConfigObject.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\SkillConfigObject.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\EffectActionControlComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Util\ExpressionHelper.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Attack\AttackExecution.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\EffectIntervalTriggerComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\AbilityEffectIntervalTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Object\Entity.cs" />
     <Compile Include="Assets\Combat\Test.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\Effect\Effect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionSpawnCollisionComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ExecutionEffect\ExecutionEffect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Condition\ConditionEntity.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\EffectConditionTriggerComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\AbilityEffectConditionTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\IActionExecution.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionAnimationComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\Action\EffectAssignAction.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\EffectAddStatusComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\Effect\DamageEffect.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\EffectDamageReduceWithTargetCountComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Skill\SkillAbility.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\Action\AddStatusAction.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Attack\AttackAbility.cs" />
@@ -122,9 +117,8 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityItem\Component\AbilityItemBezierMoveComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\Component\ActionComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\StatusComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\EffectAttributeModifyComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Skill\ExecutionTimeline\ExecutionEventEmitter.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\EffectActionTriggerComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\AbilityEffectActionTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Ability\IAbilityEntity.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\MotionComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Condition\Component\ConditionWhenInTimeNoDamageComponent.cs" />
@@ -134,12 +128,9 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectTriggerComponent\ExecutionTimeTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\Effect\AttributeModifyEffect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Skill\ExecutionLinkEditor\ExecutionObject.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\EffectDecoratosComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\EffectDamageComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Util\RandomHelper.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\EffectDecorator\DamageReduceWithTargetCountDecorator.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Ability\IAbilityExecution.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\EffectCustomComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Mono\OnTriggerEnterCallback.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionParticleEffectComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\Effect\DamageBloodSuckEffect.cs" />
@@ -154,6 +145,15 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\SkillComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityItem\Component\AbilityItemCollisionExecuteComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\SpellItemComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageBloodSuckComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAttributeModifyComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageReduceWithTargetCountComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectActionControlComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectCureComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDecoratosComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectCustomComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Combat\Unity.Combat.asmdef" />

@@ -30,17 +30,17 @@
             // 行动禁制
             if (this.EffectConfig is ActionControlEffect)
             {
-                AddComponent<EffectActionControlComponent>();
+                AddComponent<AbilityEffectActionControlComponent>();
             }
             // 施加状态效果
             if (this.EffectConfig is AddStatusEffect)
             {
-                AddComponent<EffectAddStatusComponent>();
+                AddComponent<AbilityEffectAddStatusComponent>();
             }
             // 属性修饰效果
             if (this.EffectConfig is AttributeModifyEffect)
             {
-                AddComponent<EffectAttributeModifyComponent>();
+                AddComponent<AbilityEffectAttributeModifyComponent>();
             }
             // 清除所有状态效果
             if (this.EffectConfig is ClearAllStatusEffect)
@@ -49,17 +49,17 @@
             // 治疗效果
             if (this.EffectConfig is CureEffect)
             {
-                AddComponent<EffectCureComponent>();
+                AddComponent<AbilityEffectCureComponent>();
             }
             // 自定义效果
             if (this.EffectConfig is CustomEffect)
             {
-                AddComponent<EffectCustomComponent>();
+                AddComponent<AbilityEffectCustomComponent>();
             }
             // 伤害效果
             if (this.EffectConfig is DamageEffect)
             {
-                AddComponent<EffectDamageComponent>();
+                AddComponent<AbilityEffectDamageComponent>();
             }
             // 清除状态效果
             if (this.EffectConfig is RemoveStatusEffect)
@@ -68,14 +68,14 @@
             // 吸血效果
             if (this.EffectConfig is DamageBloodSuckEffect)
             {
-                AddComponent<EffectDamageBloodSuckComponent>();
+                AddComponent<AbilityEffectDamageBloodSuckComponent>();
             }
 
 
 
 
             // 效果修饰
-            AddComponent<EffectDecoratosComponent>();
+            AddComponent<AbilityEffectDecoratosComponent>();
 
             var triggable = !(this.EffectConfig is ActionControlEffect) && !(this.EffectConfig is AttributeModifyEffect);
             if (triggable)
@@ -89,19 +89,19 @@
                 var isAction = EffectConfig.EffectTriggerType == EffectTriggerType.Action;
                 if (isAction)
                 {
-                    AddComponent<EffectActionTriggerComponent>();
+                    AddComponent<AbilityEffectActionTriggerComponent>();
                 }
                 // 间隔触发
                 var isInterval = EffectConfig.EffectTriggerType == EffectTriggerType.Interval && !string.IsNullOrEmpty(EffectConfig.Interval);
                 if (isInterval)
                 {
-                    AddComponent<EffectIntervalTriggerComponent>();
+                    AddComponent<AbilityEffectIntervalTriggerComponent>();
                 }
                 // 条件触发
                 var isCondition = EffectConfig.EffectTriggerType == EffectTriggerType.Condition && !string.IsNullOrEmpty(EffectConfig.ConditionParam);
                 if (isCondition)
                 {
-                    AddComponent<EffectConditionTriggerComponent>();
+                    AddComponent<AbilityEffectConditionTriggerComponent>();
                 }
             }
         }
@@ -169,7 +169,6 @@
         {
             if (OwnerEntity.EffectAssignActionAbility.TryMakeAction(out var action))
             {
-                //Log.Debug($"AbilityEffect TryAssignEffectTo {targetEntity} {EffectConfig}");
                 action.Target = targetEntity;
                 action.SourceAbility = OwnerAbility;
                 action.AbilityEffect = this;
@@ -186,7 +185,6 @@
         {
             if (OwnerEntity.EffectAssignActionAbility.TryMakeAction(out var action))
             {
-                //Log.Debug($"AbilityEffect ApplyEffectTo {targetEntity} {EffectConfig}");
                 action.Target = targetEntity;
                 action.SourceAbility = OwnerAbility;
                 action.AbilityEffect = this;

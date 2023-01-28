@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 namespace LccModel
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class ExecutionEffectComponent : Component
     {
         public List<ExecutionEffect> ExecutionEffects { get; private set; } = new List<ExecutionEffect>();

@@ -58,7 +58,7 @@ namespace LccModel
                     }
                     foreach (var effect in status.GetComponent<AbilityEffectComponent>().AbilityEffects)
                     {
-                        if (effect.Enable && effect.TryGetComponent(out EffectActionControlComponent actionControlComponent))
+                        if (effect.Enable && effect.TryGetComponent(out AbilityEffectActionControlComponent actionControlComponent))
                         {
                             tempActionControl = tempActionControl | actionControlComponent.ActionControlEffect.ActionControlType;
                         }

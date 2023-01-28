@@ -2,9 +2,6 @@
 
 namespace LccModel
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class AbilityEffectComponent : Component
     {
         public override bool DefaultEnable { get; set; } = false;

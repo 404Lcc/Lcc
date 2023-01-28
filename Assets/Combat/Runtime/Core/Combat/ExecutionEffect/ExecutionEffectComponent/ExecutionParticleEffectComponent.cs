@@ -1,13 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace LccModel
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class ExecutionParticleEffectComponent : Component
     {
         public GameObject ParticleEffectPrefab { get; set; }

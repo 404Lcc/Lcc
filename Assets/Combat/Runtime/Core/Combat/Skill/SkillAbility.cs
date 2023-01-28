@@ -19,9 +19,9 @@ namespace LccModel
             SkillConfig = p1 as SkillConfigObject;
             //Name = SkillConfig.Name;
             AddComponent<AbilityEffectComponent, List<Effect>>(SkillConfig.Effects);
-#if !SERVER
+
             LoadExecution();
-#endif
+
             if (SkillConfig.SkillSpellType == SkillSpellType.Passive)
             {
                 TryActivateAbility();

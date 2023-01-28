@@ -1,10 +1,5 @@
-﻿using UnityEngine;
-
-namespace LccModel
+﻿namespace LccModel
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class ExecutionTriggerNewExecutionComponent : Component
     {
         public ActionEventData ActionEventData { get; set; }

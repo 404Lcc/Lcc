@@ -3,7 +3,7 @@
     /// <summary>
     /// 间隔触发组件
     /// </summary>
-    public class EffectIntervalTriggerComponent : Component, IUpdate
+    public class AbilityEffectIntervalTriggerComponent : Component, IUpdate
     {
         public override bool DefaultEnable { get; set; } = false;
         public string IntervalValue { get; set; }

@@ -5,10 +5,7 @@ using UnityEngine;
 
 namespace LccModel
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class EffectCustomComponent : Component
+    public class AbilityEffectCustomComponent : Component
     {
         public override bool DefaultEnable => false;
 

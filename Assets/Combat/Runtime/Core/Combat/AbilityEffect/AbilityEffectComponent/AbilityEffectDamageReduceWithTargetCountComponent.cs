@@ -2,7 +2,7 @@
 
 namespace LccModel
 {
-    public class EffectDamageReduceWithTargetCountComponent : Component
+    public class AbilityEffectDamageReduceWithTargetCountComponent : Component
     {
         public float ReducePercent { get; set; }
         public float MinPercent { get; set; }

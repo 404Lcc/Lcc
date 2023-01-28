@@ -3,7 +3,7 @@
     /// <summary>
     /// 条件触发组件
     /// </summary>
-    public class EffectConditionTriggerComponent : Component
+    public class AbilityEffectConditionTriggerComponent : Component
     {
         public override bool DefaultEnable { get; set; } = false;
         public string ConditionParamValue { get; set; }

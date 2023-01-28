@@ -40,7 +40,7 @@ namespace LccModel
         }
 
 
-        /// 结束单元体
+        // 结束单元体
         public void DestroyItem()
         {
             Dispose();

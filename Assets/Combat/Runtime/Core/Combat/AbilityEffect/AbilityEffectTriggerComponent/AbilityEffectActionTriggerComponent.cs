@@ -3,7 +3,7 @@
     /// <summary>
     /// 行动点触发组件
     /// </summary>
-    public class EffectActionTriggerComponent : Component
+    public class AbilityEffectActionTriggerComponent : Component
     {
         public override bool DefaultEnable { get; set; } = false;
 

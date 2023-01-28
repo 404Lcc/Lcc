@@ -1,13 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
-namespace LccModel
+﻿namespace LccModel
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class ExecutionSpawnCollisionComponent : Component
     {
         public CollisionExecuteData CollisionExecuteData { get; set; }
@@ -21,9 +13,7 @@ namespace LccModel
 
         public void OnTriggerExecutionEffect(Entity entity)
         {
-#if !NOT_UNITY
             Parent.GetParent<SkillExecution>().SpawnCollisionItem(GetParent<ExecutionEffect>().ExecutionEffectConfig);
-#endif
         }
 
         public void OnTriggerEnd(Entity entity)

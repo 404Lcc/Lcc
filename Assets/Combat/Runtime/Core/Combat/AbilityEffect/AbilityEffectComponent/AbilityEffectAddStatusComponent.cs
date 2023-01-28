@@ -1,9 +1,6 @@
 ﻿namespace LccModel
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class EffectAddStatusComponent : Component
+    public class AbilityEffectAddStatusComponent : Component
     {
         public AddStatusEffect AddStatusEffect { get; set; }
         public uint Duration { get; set; }
