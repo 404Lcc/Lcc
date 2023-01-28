@@ -11,7 +11,7 @@ namespace LccModel
     public class SpellSkillComponent : Component
     {
         private CombatEntity CombatEntity => GetParent<CombatEntity>();
-        public override bool DefaultEnable { get; set; } = true;
+        public override bool DefaultEnable => true;
 
 
         public void SpellWithTarget(SkillAbility spellSkill, CombatEntity targetEntity)

@@ -5,7 +5,7 @@
     /// </summary>
     public class AbilityEffectConditionTriggerComponent : Component
     {
-        public override bool DefaultEnable { get; set; } = false;
+        public override bool DefaultEnable => false;
         public string ConditionParamValue { get; set; }
 
 

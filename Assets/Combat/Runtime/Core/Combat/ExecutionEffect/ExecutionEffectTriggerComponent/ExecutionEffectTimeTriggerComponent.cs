@@ -5,7 +5,7 @@
     /// </summary>
     public class ExecutionEffectTimeTriggerComponent : Component, IUpdate
     {
-        public override bool DefaultEnable { get; set; } = false;
+        public override bool DefaultEnable => false;
         public float StartTime { get; set; }
         public float EndTime { get; set; }
         public string TimeValueExpression { get; set; }

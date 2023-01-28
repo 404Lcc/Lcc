@@ -4,7 +4,7 @@ namespace LccModel
 {
     public class Component : AObjectBase
     {
-        public virtual bool DefaultEnable { get; set; } = true;
+        public virtual bool DefaultEnable => true;
         private bool enable = false;
         public bool Enable
         {

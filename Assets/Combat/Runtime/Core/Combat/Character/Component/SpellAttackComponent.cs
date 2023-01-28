@@ -3,7 +3,7 @@
     public class SpellAttackComponent : Component
     {
         private CombatEntity CombatEntity => GetParent<CombatEntity>();
-        public override bool DefaultEnable { get; set; } = true;
+        public override bool DefaultEnable => true;
 
 
         public void SpellAttackWithTarget(CombatEntity targetEntity)

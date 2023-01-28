@@ -5,7 +5,7 @@
     /// </summary>
     public class ExecutionEffectAssignToTargetComponent : Component
     {
-        public override bool DefaultEnable { get; set; } = false;
+        public override bool DefaultEnable => false;
         public EffectApplyType EffectApplyType { get; set; }
 
 

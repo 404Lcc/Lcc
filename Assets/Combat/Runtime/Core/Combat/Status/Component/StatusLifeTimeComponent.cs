@@ -5,7 +5,7 @@
     /// </summary>
     public class StatusLifeTimeComponent : Component, IUpdate
     {
-        public override bool DefaultEnable { get; set; } = true;
+        public override bool DefaultEnable => true;
         public GameTimer LifeTimer { get; set; }
 
 

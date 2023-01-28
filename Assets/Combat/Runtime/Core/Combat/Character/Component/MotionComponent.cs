@@ -7,7 +7,7 @@ namespace LccModel
     /// </summary>
     public sealed class MotionComponent : Component, IUpdate
     {
-        public override bool DefaultEnable { get; set; } = true;
+        public override bool DefaultEnable => true;
         public Vector3 Position { get => GetParent<CombatEntity>().Position; set => GetParent<CombatEntity>().Position = value; }
         public Quaternion Rotation { get => GetParent<CombatEntity>().Rotation; set => GetParent<CombatEntity>().Rotation = value; }
         public bool CanMove { get; set; }

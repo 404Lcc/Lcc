@@ -14,7 +14,7 @@ namespace LccModel
 
     public sealed class EventComponent : Component
     {
-        public override bool DefaultEnable { get; set; } = false;
+        public override bool DefaultEnable => false;
         private Dictionary<Type, List<object>> TypeEvent2ActionLists = new Dictionary<Type, List<object>>();
         private Dictionary<string, Entity> TypeEvent2EntityLists = new Dictionary<string, Entity>();
         private Dictionary<string, List<object>> FireEvent2ActionLists = new Dictionary<string, List<object>>();

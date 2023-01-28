@@ -4,7 +4,7 @@ namespace LccModel
 {
     public class AbilityEffectComponent : Component
     {
-        public override bool DefaultEnable { get; set; } = false;
+        public override bool DefaultEnable => false;
         public List<AbilityEffect> AbilityEffects { get; private set; } = new List<AbilityEffect>();
         public AbilityEffect DamageAbilityEffect { get; set; }
         public AbilityEffect CureAbilityEffect { get; set; }

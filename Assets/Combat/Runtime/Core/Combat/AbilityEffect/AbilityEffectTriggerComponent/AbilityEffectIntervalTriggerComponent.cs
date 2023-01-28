@@ -5,7 +5,7 @@
     /// </summary>
     public class AbilityEffectIntervalTriggerComponent : Component, IUpdate
     {
-        public override bool DefaultEnable { get; set; } = false;
+        public override bool DefaultEnable => false;
         public string IntervalValue { get; set; }
         public GameTimer IntervalTimer { get; set; }
 
