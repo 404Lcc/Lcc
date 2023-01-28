@@ -116,7 +116,7 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionAssignToTargetComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\ActionPointComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\ActionComponent\AbilityProbabilityTriggerComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityItem\Component\LifeTimeComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityItem\Component\AbilityItemLifeTimeComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\CombatEntity.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\SpellAttackComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityItem\Component\AbilityItemBezierMoveComponent.cs" />
@@ -130,7 +130,7 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Condition\Component\ConditionWhenInTimeNoDamageComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\EffectDecorator\EffectDecorator.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\ActionComponent\DamageBloodSuckComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityItem\Component\MoveWithDotweenComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityItem\Component\AbilityItemMoveWithDotweenComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectTriggerComponent\ExecutionTimeTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\Effect\AttributeModifyEffect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Skill\ExecutionLinkEditor\ExecutionObject.cs" />

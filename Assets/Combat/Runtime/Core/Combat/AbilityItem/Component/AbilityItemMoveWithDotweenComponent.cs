@@ -15,7 +15,7 @@ namespace LccModel
         Duration,
     }
 
-    public class MoveWithDotweenComponent : Component, IUpdate
+    public class AbilityItemMoveWithDotweenComponent : Component, IUpdate
     {
         public SpeedType SpeedType { get; set; }
         public float Speed { get; set; }
@@ -41,7 +41,7 @@ namespace LccModel
             }
         }
 
-        public MoveWithDotweenComponent DoMoveTo(Vector3 destination, float duration)
+        public AbilityItemMoveWithDotweenComponent DoMoveTo(Vector3 destination, float duration)
         {
             Destination = destination;
             DOTween.To(() => { return PositionEntity.Position; }, (x) => PositionEntity.Position = x, Destination, duration).SetEase(Ease.Linear).OnComplete(OnMoveFinish);

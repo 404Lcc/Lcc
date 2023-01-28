@@ -1,9 +1,6 @@
 ﻿namespace LccModel
 {
-    /// <summary>
-    /// 生命周期组件
-    /// </summary>
-    public class LifeTimeComponent : Component, IUpdate
+    public class AbilityItemLifeTimeComponent : Component, IUpdate
     {
         public override bool DefaultEnable { get; set; } = true;
         public GameTimer LifeTimer { get; set; }

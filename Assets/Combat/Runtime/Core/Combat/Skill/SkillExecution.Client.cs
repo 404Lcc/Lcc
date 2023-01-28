@@ -88,7 +88,7 @@ namespace LccModel
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().ExecuteClipData;
             abilityItem.TargetEntity = InputTarget;
             abilityItem.Position = OwnerEntity.Position;
-            abilityItem.AddComponent<MoveWithDotweenComponent>().DoMoveToWithTime(InputTarget, clipData.Duration);
+            abilityItem.AddComponent<AbilityItemMoveWithDotweenComponent>().DoMoveToWithTime(InputTarget, clipData.Duration);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace LccModel
             var x = Mathf.Sin(Mathf.Deg2Rad * InputDirection);
             var z = Mathf.Cos(Mathf.Deg2Rad * InputDirection);
             var destination = abilityItem.Position + new Vector3(x, 0, z) * 30;
-            abilityItem.AddComponent<MoveWithDotweenComponent>().DoMoveTo(destination, 1f).OnMoveFinish(() =>
+            abilityItem.AddComponent<AbilityItemMoveWithDotweenComponent>().DoMoveTo(destination, 1f).OnMoveFinish(() =>
             {
                 abilityItem.Dispose();
             });
@@ -129,7 +129,7 @@ namespace LccModel
             moveComp.RotateAgree = a;
             moveComp.Speed = clipData.Duration / 10;
             moveComp.DOMove();
-            abilityItem.AddComponent<LifeTimeComponent, float>(clipData.Duration);
+            abilityItem.AddComponent<AbilityItemLifeTimeComponent, float>(clipData.Duration);
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace LccModel
         {
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().ExecuteClipData;
             abilityItem.Position = InputPoint;
-            abilityItem.AddComponent<LifeTimeComponent, float>(clipData.Duration);
+            abilityItem.AddComponent<AbilityItemLifeTimeComponent, float>(clipData.Duration);
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace LccModel
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().ExecuteClipData;
             abilityItem.Position = OwnerEntity.Position;
             abilityItem.Rotation = OwnerEntity.Rotation;
-            abilityItem.AddComponent<LifeTimeComponent, float>(clipData.Duration);
+            abilityItem.AddComponent<AbilityItemLifeTimeComponent, float>(clipData.Duration);
         }
 
         /// <summary>
