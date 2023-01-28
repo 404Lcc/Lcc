@@ -1,6 +1,6 @@
 ﻿namespace LccModel
 {
-    public class ExecutionSpawnCollisionComponent : Component
+    public class ExecutionEffectSpawnCollisionComponent : Component
     {
         public CollisionExecuteData CollisionExecuteData { get; set; }
 

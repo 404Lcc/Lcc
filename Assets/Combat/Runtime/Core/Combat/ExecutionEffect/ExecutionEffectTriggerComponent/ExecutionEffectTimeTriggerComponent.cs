@@ -3,7 +3,7 @@
     /// <summary>
     /// 时间触发组件
     /// </summary>
-    public class ExecutionTimeTriggerComponent : Component, IUpdate
+    public class ExecutionEffectTimeTriggerComponent : Component, IUpdate
     {
         public override bool DefaultEnable { get; set; } = false;
         public float StartTime { get; set; }

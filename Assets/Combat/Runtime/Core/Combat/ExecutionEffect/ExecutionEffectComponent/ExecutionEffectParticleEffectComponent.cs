@@ -2,7 +2,7 @@
 
 namespace LccModel
 {
-    public class ExecutionParticleEffectComponent : Component
+    public class ExecutionEffectParticleEffectComponent : Component
     {
         public GameObject ParticleEffectPrefab { get; set; }
         public GameObject ParticleEffectObj { get; set; }

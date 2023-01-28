@@ -1,6 +1,6 @@
 ﻿namespace LccModel
 {
-    public class ExecutionTriggerNewExecutionComponent : Component
+    public class ExecutionEffectTriggerNewExecutionComponent : Component
     {
         public ActionEventData ActionEventData { get; set; }
 

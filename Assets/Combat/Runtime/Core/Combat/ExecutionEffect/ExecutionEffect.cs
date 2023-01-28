@@ -32,12 +32,12 @@ namespace LccModel
                 //应用效果给目标效果
                 if (spawnItemEffect.ActionEventType == FireEventType.AssignEffect)
                 {
-                    AddComponent<ExecutionAssignToTargetComponent>().EffectApplyType = spawnItemEffect.EffectApply;
+                    AddComponent<ExecutionEffectAssignToTargetComponent>().EffectApplyType = spawnItemEffect.EffectApply;
                 }
                 //触发新的执行体效果
                 if (spawnItemEffect.ActionEventType == FireEventType.TriggerNewExecution)
                 {
-                    AddComponent<ExecutionTriggerNewExecutionComponent>().ActionEventData = spawnItemEffect;
+                    AddComponent<ExecutionEffectTriggerNewExecutionComponent>().ActionEventData = spawnItemEffect;
                 }
             }
 
@@ -46,36 +46,36 @@ namespace LccModel
             if (clipType == ExecuteClipType.CollisionExecute)
             {
                 var spawnItemEffect = ExecutionEffectConfig.CollisionExecuteData;
-                AddComponent<ExecutionSpawnCollisionComponent>().CollisionExecuteData = spawnItemEffect;
+                AddComponent<ExecutionEffectSpawnCollisionComponent>().CollisionExecuteData = spawnItemEffect;
             }
             //播放动作效果
             if (clipType == ExecuteClipType.Animation)
             {
                 var animationEffect = ExecutionEffectConfig.AnimationData;
-                AddComponent<ExecutionAnimationComponent>().AnimationClip = animationEffect.AnimationClip;
+                AddComponent<ExecutionEffectAnimationComponent>().AnimationClip = animationEffect.AnimationClip;
             }
             //播放特效效果
             if (clipType == ExecuteClipType.ParticleEffect)
             {
                 var animationEffect = ExecutionEffectConfig.ParticleEffectData;
-                AddComponent<ExecutionParticleEffectComponent>().ParticleEffectPrefab = animationEffect.ParticleEffect;
+                AddComponent<ExecutionEffectParticleEffectComponent>().ParticleEffectPrefab = animationEffect.ParticleEffect;
             }
 
             //时间到触发执行效果
             if (clipType == ExecuteClipType.ActionEvent)
             {
-                AddComponent<ExecutionTimeTriggerComponent>().StartTime = ExecutionEffectConfig.StartTime;
+                AddComponent<ExecutionEffectTimeTriggerComponent>().StartTime = ExecutionEffectConfig.StartTime;
             }
             else if (ExecutionEffectConfig.Duration > 0)
             {
-                AddComponent<ExecutionTimeTriggerComponent>().StartTime = ExecutionEffectConfig.StartTime;
-                GetComponent<ExecutionTimeTriggerComponent>().EndTime = ExecutionEffectConfig.EndTime;
+                AddComponent<ExecutionEffectTimeTriggerComponent>().StartTime = ExecutionEffectConfig.StartTime;
+                GetComponent<ExecutionEffectTimeTriggerComponent>().EndTime = ExecutionEffectConfig.EndTime;
             }
         }
 
         public void BeginExecute()
         {
-            if (!TryGetComponent(out ExecutionTimeTriggerComponent timeTriggerComponent))
+            if (!TryGetComponent(out ExecutionEffectTimeTriggerComponent timeTriggerComponent))
             {
                 TriggerEffect();
             }

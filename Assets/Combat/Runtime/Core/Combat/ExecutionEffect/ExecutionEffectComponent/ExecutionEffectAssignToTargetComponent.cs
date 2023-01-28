@@ -3,7 +3,7 @@
     /// <summary>
     /// 执行体应用目标效果组件
     /// </summary>
-    public class ExecutionAssignToTargetComponent : Component
+    public class ExecutionEffectAssignToTargetComponent : Component
     {
         public override bool DefaultEnable { get; set; } = false;
         public EffectApplyType EffectApplyType { get; set; }

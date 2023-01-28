@@ -2,7 +2,7 @@
 
 namespace LccModel
 {
-    public class ExecutionAnimationComponent : Component
+    public class ExecutionEffectAnimationComponent : Component
     {
         public AnimationClip AnimationClip { get; set; }
 
