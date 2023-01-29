@@ -52,12 +52,10 @@ namespace LccModel
                 }
             }
         }
-        public void DeactivateAbility()
-        {
-            Enable = false;
-        }
         public void EndAbility()
         {
+            Enable = false;
+
             if (skillConfig.EnableChildStatus)
             {
                 foreach (var item in _statusList)

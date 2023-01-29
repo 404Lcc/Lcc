@@ -8,7 +8,7 @@
 
         public override void Awake()
         {
-            var lifeTime = GetParent<StatusAbility>().GetDuration() / 1000f;
+            var lifeTime = GetParent<StatusAbility>().duration / 1000f;
             lifeTimer = new GameTimer(lifeTime);
         }
 

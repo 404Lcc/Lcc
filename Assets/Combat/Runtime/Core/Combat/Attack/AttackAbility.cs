@@ -25,19 +25,18 @@ namespace LccModel
 
         }
 
-        public void DeactivateAbility()
-        {
-        }
-
-        public void EndAbility()
-        {
-        }
-
 
         public void ActivateAbility()
         {
-
+            Enable = true;
         }
+        public void EndAbility()
+        {
+            Enable = false;
+        }
+
+
+
 
         public Entity CreateExecution()
         {

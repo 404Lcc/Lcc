@@ -20,8 +20,6 @@
         // 激活能力
         public void ActivateAbility();
 
-        // 禁用能力
-        public void DeactivateAbility();
 
         // 结束能力
         public void EndAbility();

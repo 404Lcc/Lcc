@@ -50,15 +50,13 @@ namespace LccModel
 
             GetComponent<AbilityEffectComponent>().Enable = true;
         }
-        public void DeactivateAbility()
-        {
-            Enable = false;
-        }
 
 
         public void EndAbility()
         {
-            // 子状态效果
+            Enable = false;
+
+
             if (statusConfig.EnableChildStatus)
             {
                 foreach (var item in _statusList)
@@ -81,20 +79,10 @@ namespace LccModel
             Dispose();
         }
 
-        public int GetDuration()
-        {
-            return duration;
-        }
+
         public Entity CreateExecution()
         {
             return null;
-        }
-
-
-
-        public override void OnDestroy()
-        {
-            DeactivateAbility();
         }
 
 
