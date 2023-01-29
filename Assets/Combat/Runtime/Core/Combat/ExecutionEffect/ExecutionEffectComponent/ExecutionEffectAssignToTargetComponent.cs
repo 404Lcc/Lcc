@@ -11,10 +11,10 @@
 
         public override void Awake()
         {
-            ((Entity)Parent).Subscribe<ExecuteEffectEvent>(OnTriggerExecuteEffect);
+            ((Entity)Parent).Subscribe<ExecutionEffect>(OnTriggerExecuteEffect);
         }
 
-        public void OnTriggerExecuteEffect(ExecuteEffectEvent evnt)
+        public void OnTriggerExecuteEffect(ExecutionEffect executionEffect)
         {
             var ParentExecution = Parent.GetParent<SkillExecution>();
 

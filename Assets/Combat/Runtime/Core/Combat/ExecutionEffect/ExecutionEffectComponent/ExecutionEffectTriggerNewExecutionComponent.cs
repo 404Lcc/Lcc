@@ -7,10 +7,10 @@
 
         public override void Awake()
         {
-            ((Entity)Parent).Subscribe<ExecuteEffectEvent>(OnTriggerExecutionEffect);
+            ((Entity)Parent).Subscribe<ExecutionEffect>(OnTriggerExecutionEffect);
         }
 
-        public void OnTriggerExecutionEffect(ExecuteEffectEvent evnt)
+        public void OnTriggerExecutionEffect(ExecutionEffect executionEffect)
         {
             ExecutionConfigObject executionObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handler, actionEventData.NewExecution, AssetSuffix.Asset, AssetType.Execution);
             if (executionObject == null)
