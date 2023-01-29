@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 namespace LccModel
@@ -11,9 +12,21 @@ namespace LccModel
         public string Id;
         public float TotalTime;
 
-        [ReadOnly, Space(10)]
-        public List<ExecuteClipData> ExecuteClipList = new List<ExecuteClipData>();
-
+        [Space(10)]
+        [ListDrawerSettings(DraggableItems = false, ShowItemCount = false, CustomAddFunction = "AddExecuteClipData")]
+        public List<ExecuteClipData> ExecuteClipDataList = new List<ExecuteClipData>();
+        private void AddExecuteClipData()
+        {
+            var obj = CreateInstance<ExecuteClipData>();
+            obj.name = "ExecuteClipData";
+            obj.ExecuteClipType = ExecuteClipType.CollisionExecute;
+            obj.CollisionExecuteData = new CollisionExecuteData();
+            obj.GetClipTime().EndTime = 0.1f;
+            ExecuteClipDataList.Add(obj);
+            AssetDatabase.AddObjectToAsset(obj, this);
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssetIfDirty(this);
+        }
 #if UNITY_EDITOR
 
 

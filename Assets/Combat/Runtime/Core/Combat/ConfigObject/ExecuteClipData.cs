@@ -128,7 +128,6 @@ namespace LccModel
         public float EndTime;
 
         [ShowInInspector]
-        [DelayedProperty]
         [PropertyOrder(-1)]
         public string Name
         {
