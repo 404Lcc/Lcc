@@ -118,7 +118,6 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\StatusComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectTriggerComponent\ExecutionEffectTimeTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\ExecutionTimeline\ExecutionEventEmitter.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\AbilityEffectActionTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Ability\IAbilityEntity.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\MotionComponent.cs" />
