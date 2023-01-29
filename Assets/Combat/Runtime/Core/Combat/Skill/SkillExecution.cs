@@ -14,9 +14,9 @@ namespace LccModel
 
 
 
-        public SkillAbility skillAbility;
+        public SkillAbility SkillAbility => (SkillAbility)AbilityEntity;
 
-        public ExecutionObject executionObject;
+        public ExecutionConfigObject executionConfigObject;
         public List<CombatEntity> inputSkillTargetList = new List<CombatEntity>();
         public CombatEntity inputTarget;
         public Vector3 inputPoint;
@@ -30,11 +30,8 @@ namespace LccModel
         public override void Awake<P1>(P1 p1)
         {
             base.Awake(p1);
-
-
             AbilityEntity = p1 as SkillAbility;
 
-            skillAbility = p1 as SkillAbility;
             originTime = Time.Instance.ClientNow();
         }
 
@@ -47,7 +44,7 @@ namespace LccModel
         {
             var nowSeconds = (double)(Time.Instance.ClientNow() - originTime) / 1000;
 
-            if (nowSeconds >= executionObject.TotalTime)
+            if (nowSeconds >= executionConfigObject.TotalTime)
             {
                 EndExecute();
             }
@@ -57,9 +54,9 @@ namespace LccModel
         public void BeginExecute()
         {
             GetParent<CombatEntity>().spellingSkillExecution = this;
-            if (skillAbility != null)
+            if (SkillAbility != null)
             {
-                skillAbility.spelling = true;
+                SkillAbility.spelling = true;
             }
 
             GetComponent<ExecutionEffectComponent>().BeginExecute();
@@ -70,9 +67,9 @@ namespace LccModel
         public void EndExecute()
         {
             GetParent<CombatEntity>().spellingSkillExecution = null;
-            if (skillAbility != null)
+            if (SkillAbility != null)
             {
-                skillAbility.spelling = false;
+                SkillAbility.spelling = false;
             }
             inputSkillTargetList.Clear();
             Dispose();
@@ -210,7 +207,6 @@ namespace LccModel
 
             if (clipData.ObjAsset != null)
             {
-                //abilityItem.Name = clipData.ObjAsset.name;
                 var effectObj = GameObject.Instantiate(clipData.ObjAsset, proxyObj.transform);
                 effectObj.transform.localPosition = Vector3.zero;
                 effectObj.transform.localRotation = Quaternion.identity;

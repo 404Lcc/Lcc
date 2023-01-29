@@ -11,7 +11,7 @@
     public partial class ExecutionEffect : Entity
     {
         public ExecuteClipData executeClipData;
-        public SkillExecution ParentExecution => GetParent<SkillExecution>();
+        public SkillExecution Execution => GetParent<SkillExecution>();
 
         public override void Awake<P1>(P1 p1)
         {
@@ -19,7 +19,6 @@
 
 
             executeClipData = p1 as ExecuteClipData;
-            //Name = ExecutionEffectConfig.GetType().Name;
 
             var clipType = executeClipData.ExecuteClipType;
             if (clipType == ExecuteClipType.ActionEvent)

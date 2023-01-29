@@ -6,7 +6,7 @@ using UnityEngine;
 namespace LccModel
 {
     [CreateAssetMenu(fileName = "Execution", menuName = "¼¼ÄÜ|×´Ì¬/Execution")]
-    public class ExecutionObject : ScriptableObject
+    public class ExecutionConfigObject : ScriptableObject
     {
         public string Id;
         public float TotalTime;
@@ -25,7 +25,7 @@ namespace LccModel
             {
                 string guid = UnityEditor.Selection.assetGUIDs[0];
                 string assetPath = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
-                var config = UnityEditor.AssetDatabase.LoadAssetAtPath<ExecutionObject>(assetPath);
+                var config = UnityEditor.AssetDatabase.LoadAssetAtPath<ExecutionConfigObject>(assetPath);
                 if (config != this)
                 {
                     return;

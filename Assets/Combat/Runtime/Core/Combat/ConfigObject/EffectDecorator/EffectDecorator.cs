@@ -5,7 +5,7 @@ using UnityEngine;
 namespace LccModel
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    sealed class EffectDecorateAttribute : Attribute
+    public class EffectDecorateAttribute : Attribute
     {
         private string _label;
         private int _order;

@@ -10,7 +10,7 @@ namespace LccModel
 
 
         public SkillConfigObject skillConfig;
-        public ExecutionObject executionObject;
+        public ExecutionConfigObject executionObject;
         public bool spelling;
 
         private List<StatusAbility> _statusList { get; set; } = new List<StatusAbility>();
@@ -20,10 +20,9 @@ namespace LccModel
             base.Awake(p1);
 
             skillConfig = p1 as SkillConfigObject;
-            //Name = SkillConfig.Name;
             AddComponent<AbilityEffectComponent, List<Effect>>(skillConfig.EffectList);
 
-            executionObject = AssetManager.Instance.LoadAsset<ExecutionObject>(out var handler, $"Execution_{skillConfig.Id}", AssetSuffix.Asset, AssetType.Execution);
+            executionObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handler, $"Execution_{skillConfig.Id}", AssetSuffix.Asset, AssetType.Execution);
 
             if (skillConfig.SkillSpellType == SkillSpellType.Passive)
             {
@@ -75,7 +74,7 @@ namespace LccModel
         public Entity CreateExecution()
         {
             var execution = OwnerEntity.AddChildren<SkillExecution, SkillAbility>(this);
-            execution.executionObject = executionObject;
+            execution.executionConfigObject = executionObject;
             execution.LoadExecutionEffect();
             this.FireEvent(nameof(CreateExecution), execution);
             return execution;

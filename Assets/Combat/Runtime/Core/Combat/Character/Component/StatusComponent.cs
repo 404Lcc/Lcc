@@ -2,13 +2,6 @@
 
 namespace LccModel
 {
-    public class RemoveStatusEvent
-    {
-        public CombatEntity combatEntity;
-        public StatusAbility status;
-        public long statusId;
-    }
-
     public class StatusComponent : Component
     {
         public CombatEntity CombatEntity => GetParent<CombatEntity>();
@@ -38,14 +31,6 @@ namespace LccModel
                 statusDict.Remove(statusAbility.statusConfig.Id);
             }
             statusList.Remove(statusAbility);
-
-
-            this.Publish(new RemoveStatusEvent()
-            {
-                combatEntity = CombatEntity,
-                status = statusAbility,
-                statusId = statusAbility.Id
-            });
         }
 
         public void OnStatusesChanged(StatusAbility statusAbility)

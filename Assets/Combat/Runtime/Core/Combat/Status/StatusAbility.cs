@@ -22,8 +22,6 @@ namespace LccModel
             base.Awake(p1);
 
             statusConfig = p1 as StatusConfigObject;
-            //Name = StatusConfig.ID;
-
             // 逻辑触发
             if (statusConfig.EffectList.Count > 0)
             {

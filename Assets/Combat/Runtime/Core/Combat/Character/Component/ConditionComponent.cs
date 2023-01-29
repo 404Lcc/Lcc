@@ -3,7 +3,7 @@ using System;
 
 namespace LccModel
 {
-    public sealed class ConditionComponent : Component
+    public class ConditionComponent : Component
     {
         private Dictionary<long, ConditionEntity> _conditionDict = new Dictionary<long, ConditionEntity>();
 

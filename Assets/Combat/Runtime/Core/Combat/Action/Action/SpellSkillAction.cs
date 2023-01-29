@@ -62,7 +62,6 @@ namespace LccModel
         {
             PreProcess();
             skillExecution = skillAbility.CreateExecution() as SkillExecution;
-            //SkillExecution.Name = SkillAbility.Name;
             if (inputSkillTargetList.Count > 0)
             {
                 skillExecution.inputSkillTargetList.AddRange(inputSkillTargetList);

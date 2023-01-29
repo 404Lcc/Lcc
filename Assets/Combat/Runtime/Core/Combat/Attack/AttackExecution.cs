@@ -7,8 +7,8 @@
 
 
         public SpellAttackAction attackAction;
-        private bool beBlocked;//是否被格挡
-        private bool hasTriggerDamage;//是否触发了伤害
+        private bool beBlocked;
+        private bool hasTriggerDamage;
 
 
         public void Update()

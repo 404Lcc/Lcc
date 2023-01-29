@@ -9,11 +9,11 @@ namespace LccModel
 
         public override void Awake()
         {
-            if (GetParent<SkillExecution>().executionObject == null)
+            if (GetParent<SkillExecution>().executionConfigObject == null)
             {
                 return;
             }
-            foreach (var effect in GetParent<SkillExecution>().executionObject.ExecuteClipList)
+            foreach (var effect in GetParent<SkillExecution>().executionConfigObject.ExecuteClipList)
             {
                 var executionEffect = Parent.AddChildren<ExecutionEffect, ExecuteClipData>(effect);
                 AddEffect(executionEffect);

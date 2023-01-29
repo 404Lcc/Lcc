@@ -7,7 +7,7 @@ namespace LccModel
     {
     }
 
-    public sealed class EventComponent : Component
+    public class EventComponent : Component
     {
         public override bool DefaultEnable => false;
 

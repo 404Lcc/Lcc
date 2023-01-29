@@ -96,14 +96,14 @@ namespace LccModel
 
         private void OnTriggerNewExecution(ActionEventData actionEventData)
         {
-            ExecutionObject executionObject = AssetManager.Instance.LoadAsset<ExecutionObject>(out var handler, actionEventData.NewExecution, AssetSuffix.Asset, AssetType.Execution);
+            ExecutionConfigObject executionObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handler, actionEventData.NewExecution, AssetSuffix.Asset, AssetType.Execution);
             if (executionObject == null)
             {
                 return;
             }
             var sourceExecution = abilityExecution as SkillExecution;
-            var execution = sourceExecution.OwnerEntity.AddChildren<SkillExecution, SkillAbility>(sourceExecution.skillAbility);
-            execution.executionObject = executionObject;
+            var execution = sourceExecution.OwnerEntity.AddChildren<SkillExecution, SkillAbility>(sourceExecution.SkillAbility);
+            execution.executionConfigObject = executionObject;
             execution.inputPoint = Position;
             execution.LoadExecutionEffect();
             execution.BeginExecute();

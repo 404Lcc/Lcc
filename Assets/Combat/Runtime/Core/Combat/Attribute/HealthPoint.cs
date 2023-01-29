@@ -1,6 +1,6 @@
 ﻿namespace LccModel
 {
-    public sealed class HealthPoint : Entity
+    public class HealthPoint : Entity
     {
         public FloatNumeric current;
         public FloatNumeric max;

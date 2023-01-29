@@ -2,10 +2,7 @@
 
 namespace LccModel
 {
-    /// <summary>
-    /// 运动组件，在这里管理战斗实体的移动、跳跃、击飞等运动功能
-    /// </summary>
-    public sealed class MotionComponent : Component, IUpdate
+    public class MotionComponent : Component, IUpdate
     {
         public override bool DefaultEnable => true;
 

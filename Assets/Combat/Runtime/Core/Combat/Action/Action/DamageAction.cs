@@ -2,10 +2,6 @@
 
 namespace LccModel
 {
-    public class EntityDeadEvent
-    {
-        public CombatEntity DeadEntity;
-    }
     public class DamageActionAbility : Entity, IActionAbility
     {
         public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
@@ -123,12 +119,6 @@ namespace LccModel
 
             if (Target.CheckDead())
             {
-                var deadEvent = new EntityDeadEvent()
-                {
-                    DeadEntity = Target
-                };
-                Target.Publish(deadEvent);
-                //CombatContext.Instance.Publish(deadEvent);
             }
 
             FinishAction();
