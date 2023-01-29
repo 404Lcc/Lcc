@@ -82,7 +82,7 @@ namespace LccModel
             status.ProcessInputKVParams(addStatusEffect.ParamsDict);
 
             status.AddComponent<StatusLifeTimeComponent>();
-            status.TryActivateAbility();
+            status.ActivateAbility();
 
             PostProcess();
 

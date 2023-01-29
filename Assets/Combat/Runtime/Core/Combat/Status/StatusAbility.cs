@@ -22,19 +22,17 @@ namespace LccModel
             base.Awake(p1);
 
             statusConfig = p1 as StatusConfigObject;
-            // 逻辑触发
+
             if (statusConfig.EffectList.Count > 0)
             {
                 AddComponent<AbilityEffectComponent, List<Effect>>(statusConfig.EffectList);
             }
         }
 
-        // 激活
+
         public void ActivateAbility()
         {
-            FireEvent(nameof(ActivateAbility), this);
-
-            // 子状态效果
+            Enable = true;
             if (statusConfig.EnableChildStatus)
             {
                 foreach (var childStatusData in statusConfig.StatusList)
@@ -44,16 +42,20 @@ namespace LccModel
                     status.isChildStatus = true;
                     status.childStatusData = childStatusData;
                     status.ProcessInputKVParams(childStatusData.ParamsDict);
-                    status.TryActivateAbility();
+                    status.ActivateAbility();
                     _statusList.Add(status);
                 }
             }
 
-            Enable = true;
+
             GetComponent<AbilityEffectComponent>().Enable = true;
         }
+        public void DeactivateAbility()
+        {
+            Enable = false;
+        }
 
-        // 结束
+
         public void EndAbility()
         {
             // 子状态效果
@@ -88,20 +90,14 @@ namespace LccModel
             return null;
         }
 
-        public void TryActivateAbility()
-        {
-            this.ActivateAbility();
-        }
+
 
         public override void OnDestroy()
         {
             DeactivateAbility();
         }
 
-        public void DeactivateAbility()
-        {
-            Enable = false;
-        }
+
 
         public void ProcessInputKVParams(Dictionary<string, string> Params)
         {

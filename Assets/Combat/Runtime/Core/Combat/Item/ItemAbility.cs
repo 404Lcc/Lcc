@@ -21,19 +21,11 @@ namespace LccModel
             AddComponent<AbilityEffectComponent, List<Effect>>(itemConfig.EffectList);
         }
 
-        public void TryActivateAbility()
-        {
-            ActivateAbility();
-        }
-
-        public void DeactivateAbility()
-        {
-            Enable = false;
-        }
 
         public void ActivateAbility()
         {
-            FireEvent(nameof(ActivateAbility));
+            Enable = true;
+
             if (itemConfig.EnableChildStatus)
             {
                 foreach (var item in itemConfig.StatusList)
@@ -43,12 +35,18 @@ namespace LccModel
                     status.isChildStatus = true;
                     status.childStatusData = item;
                     status.ProcessInputKVParams(item.ParamsDict);
-                    status.TryActivateAbility();
+                    status.ActivateAbility();
                     _statusList.Add(status);
                 }
             }
 
         }
+        public void DeactivateAbility()
+        {
+            Enable = false;
+        }
+
+
 
         public void EndAbility()
         {

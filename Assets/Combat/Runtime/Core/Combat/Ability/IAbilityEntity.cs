@@ -17,9 +17,6 @@
         }
 
 
-        // 尝试激活能力
-        public void TryActivateAbility();
-
         // 激活能力
         public void ActivateAbility();
 

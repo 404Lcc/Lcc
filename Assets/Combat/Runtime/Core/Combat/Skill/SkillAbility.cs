@@ -13,7 +13,7 @@ namespace LccModel
         public ExecutionConfigObject executionObject;
         public bool spelling;
 
-        private List<StatusAbility> _statusList { get; set; } = new List<StatusAbility>();
+        private List<StatusAbility> _statusList = new List<StatusAbility>();
 
         public override void Awake<P1>(P1 p1)
         {
@@ -26,23 +26,18 @@ namespace LccModel
 
             if (skillConfig.SkillSpellType == SkillSpellType.Passive)
             {
-                TryActivateAbility();
+                ActivateAbility();
             }
         }
 
-        public void TryActivateAbility()
-        {
-            this.ActivateAbility();
-        }
 
-        public void DeactivateAbility()
-        {
-            Enable = false;
-        }
+
+
 
         public void ActivateAbility()
         {
-            FireEvent(nameof(ActivateAbility));
+            Enable = true;
+
             if (skillConfig.EnableChildStatus)
             {
                 foreach (var item in skillConfig.StatusList)
@@ -52,12 +47,15 @@ namespace LccModel
                     status.isChildStatus = true;
                     status.childStatusData = item;
                     status.ProcessInputKVParams(item.ParamsDict);
-                    status.TryActivateAbility();
+                    status.ActivateAbility();
                     _statusList.Add(status);
                 }
             }
         }
-
+        public void DeactivateAbility()
+        {
+            Enable = false;
+        }
         public void EndAbility()
         {
             if (skillConfig.EnableChildStatus)

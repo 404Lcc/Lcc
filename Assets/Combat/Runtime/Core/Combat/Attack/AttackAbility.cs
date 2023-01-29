@@ -33,14 +33,10 @@ namespace LccModel
         {
         }
 
-        public void TryActivateAbility()
-        {
-            ActivateAbility();
-        }
 
         public void ActivateAbility()
         {
-            Enable = true;
+
         }
 
         public Entity CreateExecution()
