@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 
 namespace LccModel
 {
+    [LabelText("状态类型")]
     public enum StatusType
     {
         [LabelText("Buff(增益)")]
@@ -23,44 +24,43 @@ namespace LccModel
         public StatusConfigObject StatusConfigObject;
 
         [LabelText("参数列表"), HideReferenceObjectPicker]
-        public Dictionary<string, string> Params = new Dictionary<string, string>();
+        public Dictionary<string, string> ParamsDict = new Dictionary<string, string>();
     }
 
 
     [CreateAssetMenu(fileName = "状态配置", menuName = "技能|状态/状态配置")]
     public class StatusConfigObject : SerializedScriptableObject
     {
-        [LabelText("状态ID"), DelayedProperty]
-        public string Id = "Status1";
-        [LabelText("状态名称"), DelayedProperty]
+        [LabelText("状态Id")]
+        public int Id;
+        [LabelText("状态名称")]
         public string Name = "状态1";
-        [LabelText("状态类型")]
         public StatusType StatusType;
         [HideInInspector]
         public uint Duration;
-        [LabelText("是否在状态栏显示"), UnityEngine.Serialization.FormerlySerializedAs("ShowInStatusIconList")]
-        public bool ShowInStatusSlots;
+        [LabelText("是否在状态栏显示")]
+        public bool ShowInStatusSlot;
         [LabelText("能否叠加")]
         public bool CanStack;
         [LabelText("最高叠加层数"), ShowIf("CanStack"), Range(0, 99)]
         public int MaxStack = 0;
 
         [LabelText("子状态效果")]
-        public bool EnableChildrenStatuses;
+        public bool EnableChildStatus;
         [OnInspectorGUI("DrawSpace", append: true)]
         [HideReferenceObjectPicker]
-        [LabelText("子状态效果列表"), ShowIf("EnableChildrenStatuses"), ListDrawerSettings(DraggableItems = false, ShowItemCount = false, CustomAddFunction = "AddChildStatus")]
-        public List<ChildStatus> ChildrenStatuses = new List<ChildStatus>();
+        [LabelText("子状态效果列表"), ShowIf("EnableChildStatus"), ListDrawerSettings(DraggableItems = false, ShowItemCount = false, CustomAddFunction = "AddChildStatus")]
+        public List<ChildStatus> StatusList = new List<ChildStatus>();
 
         private void AddChildStatus()
         {
-            ChildrenStatuses.Add(new ChildStatus());
+            StatusList.Add(new ChildStatus());
         }
 
         [LabelText("效果列表"), Space(30)]
         [ListDrawerSettings(Expanded = true, DraggableItems = false, ShowItemCount = false, HideAddButton = true)]
         [HideReferenceObjectPicker]
-        public List<Effect> Effects = new List<Effect>();
+        public List<Effect> EffectList = new List<Effect>();
 
 
         [HorizontalGroup(PaddingLeft = 40, PaddingRight = 40)]
@@ -94,7 +94,7 @@ namespace LccModel
                 var effect = Activator.CreateInstance(effectType) as Effect;
                 effect.Enabled = true;
 
-                Effects.Add(effect);
+                EffectList.Add(effect);
                 EffectTypeName = "(添加效果)";
             }
         }

@@ -5,7 +5,7 @@ namespace LccModel
     public class AttackAbility : Entity, IAbilityEntity
     {
         public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
-        public CombatEntity ParentEntity { get => GetParent<CombatEntity>(); }
+        public CombatEntity ParentEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
 
 
@@ -16,7 +16,6 @@ namespace LccModel
             var effects = new List<Effect>();
             var damageEffect = new DamageEffect();
             damageEffect.Enabled = true;
-            damageEffect.AddSkillEffectTargetType = AddSkillEffetTargetType.SkillTarget;
             damageEffect.EffectTriggerType = EffectTriggerType.Condition;
             damageEffect.CanCrit = true;
             damageEffect.DamageType = DamageType.Physic;

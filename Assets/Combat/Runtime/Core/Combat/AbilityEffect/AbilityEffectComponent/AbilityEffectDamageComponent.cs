@@ -4,14 +4,14 @@ namespace LccModel
 {
     public class AbilityEffectDamageComponent : Component
     {
-        public DamageEffect DamageEffect { get; set; }
-        public string DamageValueFormula { get; set; }
+        public DamageEffect damageEffect;
+        public string damageValueFormula;
 
 
         public override void Awake()
         {
-            DamageEffect = GetParent<AbilityEffect>().EffectConfig as DamageEffect;
-            DamageValueFormula = DamageEffect.DamageValueFormula;
+            damageEffect = GetParent<AbilityEffect>().effectConfig as DamageEffect;
+            damageValueFormula = damageEffect.DamageValueFormula;
             ((Entity)Parent).OnEvent(nameof(AbilityEffect.StartAssignEffect), OnAssignEffect);
         }
 
@@ -22,7 +22,7 @@ namespace LccModel
 
         private int ParseDamage()
         {
-            var expression = ExpressionHelper.TryEvaluate(DamageValueFormula);
+            var expression = ExpressionHelper.TryEvaluate(damageValueFormula);
             if (expression.Parameters.ContainsKey("自身攻击力"))
             {
                 expression.Parameters["自身攻击力"].Value = GetParent<AbilityEffect>().OwnerEntity.GetComponent<AttributeComponent>().Attack.Value;
@@ -33,10 +33,10 @@ namespace LccModel
         private void OnAssignEffect(Entity entity)
         {
             var effectAssignAction = entity as EffectAssignAction;
-            if (GetParent<AbilityEffect>().OwnerEntity.DamageActionAbility.TryMakeAction(out var damageAction))
+            if (GetParent<AbilityEffect>().OwnerEntity.damageActionAbility.TryMakeAction(out var damageAction))
             {
                 effectAssignAction.FillDatasToAction(damageAction);
-                damageAction.DamageSource = DamageSource.Skill;
+                damageAction.damageSource = DamageSource.Skill;
                 damageAction.ApplyDamage();
             }
         }

@@ -2,27 +2,30 @@
 
 namespace LccModel
 {
-    public partial class SkillAbility : Entity, IAbilityEntity
+    public class SkillAbility : Entity, IAbilityEntity
     {
         public CombatEntity OwnerEntity { get { return GetParent<CombatEntity>(); } set { } }
-        public CombatEntity ParentEntity { get => GetParent<CombatEntity>(); }
+        public CombatEntity ParentEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
-        public SkillConfigObject SkillConfig { get; set; }
-        public bool Spelling { get; set; }
-        public GameTimer CooldownTimer { get; } = new GameTimer(1f);
-        private List<StatusAbility> ChildrenStatuses { get; set; } = new List<StatusAbility>();
+
+
+        public SkillConfigObject skillConfig;
+        public ExecutionObject executionObject;
+        public bool spelling;
+
+        private List<StatusAbility> _statusList { get; set; } = new List<StatusAbility>();
 
         public override void Awake<P1>(P1 p1)
         {
             base.Awake(p1);
 
-            SkillConfig = p1 as SkillConfigObject;
+            skillConfig = p1 as SkillConfigObject;
             //Name = SkillConfig.Name;
-            AddComponent<AbilityEffectComponent, List<Effect>>(SkillConfig.Effects);
+            AddComponent<AbilityEffectComponent, List<Effect>>(skillConfig.EffectList);
 
-            LoadExecution();
+            executionObject = AssetManager.Instance.LoadAsset<ExecutionObject>(out var handler, $"Execution_{skillConfig.Id}", AssetSuffix.Asset, AssetType.Execution);
 
-            if (SkillConfig.SkillSpellType == SkillSpellType.Passive)
+            if (skillConfig.SkillSpellType == SkillSpellType.Passive)
             {
                 TryActivateAbility();
             }
@@ -41,32 +44,30 @@ namespace LccModel
         public void ActivateAbility()
         {
             FireEvent(nameof(ActivateAbility));
-            //子状态效果
-            if (SkillConfig.EnableChildrenStatuses)
+            if (skillConfig.EnableChildStatus)
             {
-                foreach (var item in SkillConfig.ChildrenStatuses)
+                foreach (var item in skillConfig.StatusList)
                 {
                     var status = OwnerEntity.AttachStatus(item.StatusConfigObject);
                     status.OwnerEntity = OwnerEntity;
-                    status.IsChildStatus = true;
-                    status.ChildStatusData = item;
-                    status.ProcessInputKVParams(item.Params);
+                    status.isChildStatus = true;
+                    status.childStatusData = item;
+                    status.ProcessInputKVParams(item.ParamsDict);
                     status.TryActivateAbility();
-                    ChildrenStatuses.Add(status);
+                    _statusList.Add(status);
                 }
             }
         }
 
         public void EndAbility()
         {
-            //子状态效果
-            if (SkillConfig.EnableChildrenStatuses)
+            if (skillConfig.EnableChildStatus)
             {
-                foreach (var item in ChildrenStatuses)
+                foreach (var item in _statusList)
                 {
                     item.EndAbility();
                 }
-                ChildrenStatuses.Clear();
+                _statusList.Clear();
             }
             Dispose();
         }
@@ -74,8 +75,8 @@ namespace LccModel
         public Entity CreateExecution()
         {
             var execution = OwnerEntity.AddChildren<SkillExecution, SkillAbility>(this);
-            execution.ExecutionObject = ExecutionObject;
-            execution.LoadExecutionEffects();
+            execution.executionObject = executionObject;
+            execution.LoadExecutionEffect();
             this.FireEvent(nameof(CreateExecution), execution);
             return execution;
         }

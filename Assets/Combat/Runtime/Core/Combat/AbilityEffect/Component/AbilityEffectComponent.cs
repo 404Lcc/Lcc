@@ -5,9 +5,10 @@ namespace LccModel
     public class AbilityEffectComponent : Component
     {
         public override bool DefaultEnable => false;
-        public List<AbilityEffect> AbilityEffects { get; private set; } = new List<AbilityEffect>();
-        public AbilityEffect DamageAbilityEffect { get; set; }
-        public AbilityEffect CureAbilityEffect { get; set; }
+
+        public List<AbilityEffect> abilityEffectList = new List<AbilityEffect>();
+        public AbilityEffect damageAbilityEffect;
+        public AbilityEffect cureAbilityEffect;
 
         public override void Awake<P1>(P1 p1)
         {
@@ -23,20 +24,20 @@ namespace LccModel
                 var abilityEffect = Parent.AddChildren<AbilityEffect, Effect>(item);
                 AddEffect(abilityEffect);
 
-                if (abilityEffect.EffectConfig is DamageEffect)
+                if (abilityEffect.effectConfig is DamageEffect)
                 {
-                    DamageAbilityEffect = abilityEffect;
+                    damageAbilityEffect = abilityEffect;
                 }
-                if (abilityEffect.EffectConfig is CureEffect)
+                if (abilityEffect.effectConfig is CureEffect)
                 {
-                    CureAbilityEffect = abilityEffect;
+                    cureAbilityEffect = abilityEffect;
                 }
             }
         }
 
         public override void OnEnable()
         {
-            foreach (var item in AbilityEffects)
+            foreach (var item in abilityEffectList)
             {
                 item.EnableEffect();
             }
@@ -44,7 +45,7 @@ namespace LccModel
 
         public override void OnDisable()
         {
-            foreach (var item in AbilityEffects)
+            foreach (var item in abilityEffectList)
             {
                 item.DisableEffect();
             }
@@ -52,59 +53,61 @@ namespace LccModel
 
         public void AddEffect(AbilityEffect abilityEffect)
         {
-            AbilityEffects.Add(abilityEffect);
+            abilityEffectList.Add(abilityEffect);
         }
 
         public AbilityEffect GetEffect(int index = 0)
         {
-            return AbilityEffects[index];
+            return abilityEffectList[index];
         }
 
-        public void TryAssignAllEffectsToTarget(CombatEntity targetEntity)
+        public void TryAssignAllEffectToTarget(CombatEntity targetEntity)
         {
-            if (AbilityEffects.Count > 0)
+            if (abilityEffectList.Count > 0)
             {
-                foreach (var abilityEffect in AbilityEffects)
+                foreach (var abilityEffect in abilityEffectList)
                 {
-                    abilityEffect.TryAssignEffectTo(targetEntity);
-                }
-            }
-        }
-        /// <summary>
-        /// 尝试将所有效果赋给目标
-        /// </summary>
-        /// <param name="targetEntity"></param>
-        /// <param name="execution"></param>
-        public void TryAssignAllEffectsToTargetWithExecution(CombatEntity targetEntity, IAbilityExecution execution)
-        {
-            if (AbilityEffects.Count > 0)
-            {
-                foreach (var abilityEffect in AbilityEffects)
-                {
-                    abilityEffect.TryAssignEffectTo(targetEntity);
+                    abilityEffect.TryAssignEffectToTarget(targetEntity);
                 }
             }
         }
 
-        /// <summary>
-        /// 尝试将所有效果赋给目标
-        /// </summary>
-        /// <param name="targetEntity"></param>
-        /// <param name="abilityItem"></param>
-        public void TryAssignAllEffectsToTargetWithAbilityItem(CombatEntity targetEntity, AbilityItem abilityItem)
+        public void TryAssignAllEffectToTarget(CombatEntity targetEntity, IActionExecution actionExecution)
         {
-            if (AbilityEffects.Count > 0)
+            if (abilityEffectList.Count > 0)
             {
-                foreach (var abilityEffect in AbilityEffects)
+                foreach (var abilityEffect in abilityEffectList)
                 {
-                    abilityEffect.TryAssignEffectToTargetWithAbilityItem(targetEntity, abilityItem);
+                    abilityEffect.TryAssignEffectToTarget(targetEntity, actionExecution);
+                }
+            }
+        }
+        public void TryAssignAllEffectToTarget(CombatEntity targetEntity, IAbilityExecution abilityExecution)
+        {
+            if (abilityEffectList.Count > 0)
+            {
+                foreach (var abilityEffect in abilityEffectList)
+                {
+                    abilityEffect.TryAssignEffectToTarget(targetEntity, abilityExecution);
                 }
             }
         }
 
-        public void TryAssignEffectByIndex(CombatEntity targetEntity, int index)
+
+        public void TryAssignAllEffectToTarget(CombatEntity targetEntity, AbilityItem abilityItem)
         {
-            AbilityEffects[index].TryAssignEffectTo(targetEntity);
+            if (abilityEffectList.Count > 0)
+            {
+                foreach (var abilityEffect in abilityEffectList)
+                {
+                    abilityEffect.TryAssignEffectToTarget(targetEntity, abilityItem);
+                }
+            }
+        }
+
+        public void TryAssignEffectToTargetByIndex(CombatEntity targetEntity, int index)
+        {
+            abilityEffectList[index].TryAssignEffectToTarget(targetEntity);
         }
     }
 }

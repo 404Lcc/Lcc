@@ -3,13 +3,12 @@
     public class AbilityEffectActionControlComponent : Component
     {
         public override bool DefaultEnable => false;
-        public ActionControlEffect ActionControlEffect { get; set; }
-        public ActionControlType ActionControlType { get; set; }
+        public ActionControlEffect actionControlEffect;
 
 
         public override void Awake()
         {
-            ActionControlEffect = GetParent<AbilityEffect>().EffectConfig as ActionControlEffect;
+            actionControlEffect = GetParent<AbilityEffect>().effectConfig as ActionControlEffect;
         }
 
         public override void OnEnable()

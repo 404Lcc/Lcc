@@ -6,29 +6,29 @@
     public class AbilityEffectIntervalTriggerComponent : Component, IUpdate
     {
         public override bool DefaultEnable => false;
-        public string IntervalValue { get; set; }
-        public GameTimer IntervalTimer { get; set; }
+        public string intervalValueFormula;
+        public GameTimer intervalTimer;
 
 
         public void Update()
         {
-            if (IntervalTimer != null)
+            if (intervalTimer != null)
             {
-                IntervalTimer.UpdateAsRepeat(UnityEngine.Time.deltaTime, GetParent<AbilityEffect>().TryAssignEffectToParent);
+                intervalTimer.UpdateAsRepeat(UnityEngine.Time.deltaTime, GetParent<AbilityEffect>().TryAssignEffectToOwner);
             }
         }
 
         public override void OnEnable()
         {
-            var intervalExpression = IntervalValue;
+            var intervalExpression = intervalValueFormula;
             var expression = ExpressionHelper.TryEvaluate(intervalExpression);
             if (expression.Parameters.ContainsKey("技能等级"))
             {
-                expression.Parameters["技能等级"].Value = GetParent<AbilityEffect>().GetParent<StatusAbility>().GetComponent<AbilityLevelComponent>().Level;
+                expression.Parameters["技能等级"].Value = GetParent<AbilityEffect>().GetParent<StatusAbility>().GetComponent<AbilityLevelComponent>().level;
             }
 
             var interval = (int)expression.Value / 1000f;
-            IntervalTimer = new GameTimer(interval);
+            intervalTimer = new GameTimer(interval);
         }
     }
 }

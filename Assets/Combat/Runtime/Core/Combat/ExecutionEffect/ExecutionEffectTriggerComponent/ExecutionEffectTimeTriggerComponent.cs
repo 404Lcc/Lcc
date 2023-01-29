@@ -1,51 +1,49 @@
 ﻿namespace LccModel
 {
-    /// <summary>
-    /// 时间触发组件
-    /// </summary>
     public class ExecutionEffectTimeTriggerComponent : Component, IUpdate
     {
         public override bool DefaultEnable => false;
-        public float StartTime { get; set; }
-        public float EndTime { get; set; }
-        public string TimeValueExpression { get; set; }
-        public GameTimer StartTimer { get; set; }
-        public GameTimer EndTimer { get; set; }
+
+        public float startTime;
+        public float endTime;
+        public string timeValueExpression;
+        public GameTimer startTimer;
+        public GameTimer endTimer;
 
 
         public void Update()
         {
-            if (StartTimer != null && StartTimer.IsFinished == false)
+            if (startTimer != null && startTimer.IsFinished == false)
             {
-                StartTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, GetParent<ExecutionEffect>().TriggerEffect);
+                startTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, GetParent<ExecutionEffect>().TriggerEffect);
             }
-            if (EndTimer != null && EndTimer.IsFinished == false)
+            if (endTimer != null && endTimer.IsFinished == false)
             {
-                EndTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, GetParent<ExecutionEffect>().EndEffect);
+                endTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, GetParent<ExecutionEffect>().EndEffect);
             }
         }
 
         public override void OnEnable()
         {
 
-            if (!string.IsNullOrEmpty(TimeValueExpression))
+            if (!string.IsNullOrEmpty(timeValueExpression))
             {
-                var expression = ExpressionHelper.TryEvaluate(TimeValueExpression);
-                StartTime = (int)expression.Value / 1000f;
-                StartTimer = new GameTimer(StartTime);
+                var expression = ExpressionHelper.TryEvaluate(timeValueExpression);
+                startTime = (int)expression.Value / 1000f;
+                startTimer = new GameTimer(startTime);
             }
-            else if (StartTime > 0)
+            else if (startTime > 0)
             {
-                StartTimer = new GameTimer(StartTime);
+                startTimer = new GameTimer(startTime);
             }
             else
             {
                 GetParent<ExecutionEffect>().TriggerEffect();
             }
 
-            if (EndTime > 0)
+            if (endTime > 0)
             {
-                EndTimer = new GameTimer(EndTime);
+                endTimer = new GameTimer(endTime);
             }
         }
     }

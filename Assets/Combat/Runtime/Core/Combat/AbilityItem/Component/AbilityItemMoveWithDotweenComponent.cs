@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DG.Tweening;
+using System;
 
 namespace LccModel
 {
@@ -17,66 +18,66 @@ namespace LccModel
 
     public class AbilityItemMoveWithDotweenComponent : Component, IUpdate
     {
-        public SpeedType SpeedType { get; set; }
-        public float Speed { get; set; }
-        public float Duration { get; set; }
-        public IPosition PositionEntity { get; set; }
-        public IPosition TargetPositionEntity { get; set; }
-        public Vector3 Destination { get; set; }
-        public Tweener MoveTweener { get; set; }
-        private System.Action MoveFinishAction { get; set; }
+        public SpeedType speedType;
+        public float speed;
+        public float duration;
+        public IPosition positionEntity;
+        public IPosition targetPositionEntity;
+        public Vector3 destination;
+        public Tweener moveTweener;
+        private Action moveFinishAction;
 
 
         public override void Awake()
         {
-            PositionEntity = (IPosition)Parent;
+            positionEntity = (IPosition)Parent;
         }
 
         public void Update()
         {
-            if (TargetPositionEntity != null)
+            if (targetPositionEntity != null)
             {
-                if (SpeedType == SpeedType.Speed) DoMoveToWithSpeed(TargetPositionEntity, Speed);
-                if (SpeedType == SpeedType.Duration) DoMoveToWithTime(TargetPositionEntity, Duration);
+                if (speedType == SpeedType.Speed) DoMoveToWithSpeed(targetPositionEntity, speed);
+                if (speedType == SpeedType.Duration) DoMoveToWithTime(targetPositionEntity, duration);
             }
         }
 
         public AbilityItemMoveWithDotweenComponent DoMoveTo(Vector3 destination, float duration)
         {
-            Destination = destination;
-            DOTween.To(() => { return PositionEntity.Position; }, (x) => PositionEntity.Position = x, Destination, duration).SetEase(Ease.Linear).OnComplete(OnMoveFinish);
+            this.destination = destination;
+            DOTween.To(() => { return positionEntity.Position; }, (x) => positionEntity.Position = x, destination, duration).SetEase(Ease.Linear).OnComplete(OnMoveFinish);
             return this;
         }
 
         public void DoMoveToWithSpeed(IPosition targetPositionEntity, float speed = 1f)
         {
-            Speed = speed;
-            SpeedType = SpeedType.Speed;
-            TargetPositionEntity = targetPositionEntity;
-            MoveTweener?.Kill();
-            var dist = Vector3.Distance(PositionEntity.Position, TargetPositionEntity.Position);
+            this.speed = speed;
+            speedType = SpeedType.Speed;
+            this.targetPositionEntity = targetPositionEntity;
+            moveTweener?.Kill();
+            var dist = Vector3.Distance(positionEntity.Position, this.targetPositionEntity.Position);
             var duration = dist / speed;
-            MoveTweener = DOTween.To(() => { return PositionEntity.Position; }, (x) => PositionEntity.Position = x, TargetPositionEntity.Position, duration);
+            moveTweener = DOTween.To(() => { return positionEntity.Position; }, (x) => positionEntity.Position = x, this.targetPositionEntity.Position, duration);
         }
 
         public void DoMoveToWithTime(IPosition targetPositionEntity, float time = 1f)
         {
-            Duration = time;
-            SpeedType = SpeedType.Duration;
-            TargetPositionEntity = targetPositionEntity;
-            MoveTweener?.Kill();
-            MoveTweener = DOTween.To(() => { return PositionEntity.Position; }, (x) => PositionEntity.Position = x, TargetPositionEntity.Position, time);
+            duration = time;
+            speedType = SpeedType.Duration;
+            this.targetPositionEntity = targetPositionEntity;
+            moveTweener?.Kill();
+            moveTweener = DOTween.To(() => { return positionEntity.Position; }, (x) => positionEntity.Position = x, this.targetPositionEntity.Position, time);
         }
 
 
-        public void OnMoveFinish(System.Action action)
+        public void OnMoveFinish(Action action)
         {
-            MoveFinishAction = action;
+            moveFinishAction = action;
         }
 
         private void OnMoveFinish()
         {
-            MoveFinishAction?.Invoke();
+            moveFinishAction?.Invoke();
         }
     }
 }

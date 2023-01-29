@@ -2,7 +2,7 @@ namespace LccModel
 {
     public class EffectAssignActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity { get { return GetParent<CombatEntity>(); } set { } }
+        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
         public bool Enable { get; set; }
 
 
@@ -27,14 +27,14 @@ namespace LccModel
     /// </summary>
     public class EffectAssignAction : Entity, IActionExecution
     {
-        public AbilityEffect AbilityEffect { get; set; }
+        public AbilityEffect abilityEffect;
 
-        // 创建这个效果赋给行动的源能力
-        public Entity SourceAbility { get; set; }
-        // 目标行动
-        public IActionExecution TargetAction { get; set; }
-        public AbilityItem AbilityItem { get; set; }
+        // 释放这个赋予效果行动 的 能力（Skill能力 Status能力 Item能力 Attack能力）
+        public Entity sourceAbility;
 
+        public IActionExecution actionExecution;
+        public IAbilityExecution abilityExecution;
+        public AbilityItem abilityItem;
 
         // 行动能力
         public Entity ActionAbility { get; set; }
@@ -56,7 +56,7 @@ namespace LccModel
         {
             PreProcess();
 
-            AbilityEffect.StartAssignEffect(this);
+            abilityEffect.StartAssignEffect(this);
 
             PostProcess();
 

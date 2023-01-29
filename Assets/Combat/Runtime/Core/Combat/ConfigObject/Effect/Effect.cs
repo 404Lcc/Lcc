@@ -35,16 +35,6 @@ namespace LccModel
         [LabelText("当x秒内没有受伤")]
         WhenInTimeNoDamage = 3,
     }
-    [LabelText("作用对象")]
-    public enum AddSkillEffetTargetType
-    {
-        [LabelText("技能目标")]
-        SkillTarget = 0,
-        [LabelText("自身")]
-        Self = 1,
-        [LabelText("其他")]
-        Other = 2,
-    }
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public class EffectAttribute : Attribute
     {
@@ -81,9 +71,6 @@ namespace LccModel
         [ToggleGroup("Enabled", "$Label")]
         public bool Enabled;
 
-        [ToggleGroup("Enabled"), ShowIf("IsSkillEffect", true)]
-        public AddSkillEffetTargetType AddSkillEffectTargetType;
-
         [HorizontalGroup("Enabled/Hor")]
         [ToggleGroup("Enabled"), HideIf("HideEffectTriggerType", true), HideLabel]
         public EffectTriggerType EffectTriggerType;
@@ -101,15 +88,15 @@ namespace LccModel
         public string Interval;
 
         [ToggleGroup("Enabled"), HideIf("IsSkillEffect", true), LabelText("条件参数 x="), ShowIf("EffectTriggerType", EffectTriggerType.Condition)]
-        public string ConditionParam;
+        public string ConditionParams;
 
 
 
         //Effect是直接效果，效果修饰是基于直接效果的辅助效果
-        [ShowIf("@this.Decorators != null && this.Decorators.Count > 0")]
+        [ShowIf("@this.DecoratorList != null && this.DecoratorList.Count > 0")]
         [ToggleGroup("Enabled"), LabelText("效果修饰"), PropertyOrder(100)]
         [HideReferenceObjectPicker, ListDrawerSettings(DraggableItems = false)]
-        public List<EffectDecorator> Decorators = new List<EffectDecorator>();
+        public List<EffectDecorator> DecoratorList = new List<EffectDecorator>();
 
         [ToggleGroup("Enabled")]
         [HorizontalGroup("Enabled/Hor2", PaddingLeft = 20, PaddingRight = 20)]
@@ -122,6 +109,8 @@ namespace LccModel
             {
                 if (this is ActionControlEffect) return true;
                 if (this is AttributeModifyEffect) return true;
+                if (this is DamageBloodSuckEffect) return true;
+                if (this is CustomEffect) return true;
                 return IsSkillEffect || IsItemEffect;
             }
         }
@@ -154,8 +143,8 @@ namespace LccModel
                 {
                     var effect = Activator.CreateInstance(effectType) as EffectDecorator;
                     effect.Enabled = true;
-                    if (Decorators == null) Decorators = new List<EffectDecorator>();
-                    Decorators.Add(effect);
+                    if (DecoratorList == null) DecoratorList = new List<EffectDecorator>();
+                    DecoratorList.Add(effect);
                 }
 
                 EffectTypeName = EffectTypeNameDefine;

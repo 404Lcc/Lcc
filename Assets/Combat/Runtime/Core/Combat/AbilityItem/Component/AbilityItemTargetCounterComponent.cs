@@ -2,6 +2,6 @@
 {
     public class AbilityItemTargetCounterComponent : Component
     {
-        public int TargetCounter { get; set; }
+        public int targetCounter;
     }
 }

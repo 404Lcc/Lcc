@@ -2,7 +2,7 @@
 {
     public class SpellAttackActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity { get { return GetParent<CombatEntity>(); } set { } }
+        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
         public bool Enable { get; set; }
 
 
@@ -27,7 +27,7 @@
     /// </summary>
     public class SpellAttackAction : Entity, IActionExecution
     {
-        public AttackExecution AttackExecution { get; set; }
+        public AttackExecution attackExecution;
 
         // 行动能力
         public Entity ActionAbility { get; set; }
@@ -55,9 +55,9 @@
         {
             PreProcess();
 
-            AttackExecution = Creator.AttackAbility.CreateExecution() as AttackExecution;
-            AttackExecution.AttackAction = this;
-            AttackExecution.BeginExecute();
+            attackExecution = Creator.attackAbility.CreateExecution() as AttackExecution;
+            attackExecution.attackAction = this;
+            attackExecution.BeginExecute();
 
             PostProcess();
 

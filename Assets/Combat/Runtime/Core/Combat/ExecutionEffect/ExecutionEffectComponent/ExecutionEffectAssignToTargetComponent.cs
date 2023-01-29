@@ -6,7 +6,7 @@
     public class ExecutionEffectAssignToTargetComponent : Component
     {
         public override bool DefaultEnable => false;
-        public EffectApplyType EffectApplyType { get; set; }
+        public EffectApplyType effectApplyType;
 
 
         public override void Awake()
@@ -18,15 +18,15 @@
         {
             var ParentExecution = Parent.GetParent<SkillExecution>();
 
-            if (ParentExecution.InputTarget != null)
+            if (ParentExecution.inputTarget != null)
             {
-                if (EffectApplyType == EffectApplyType.AllEffects)
+                if (effectApplyType == EffectApplyType.AllEffects)
                 {
-                    ParentExecution.AbilityEntity.GetComponent<AbilityEffectComponent>().TryAssignAllEffectsToTargetWithExecution(ParentExecution.InputTarget, ParentExecution);
+                    ParentExecution.AbilityEntity.GetComponent<AbilityEffectComponent>().TryAssignAllEffectToTarget(ParentExecution.inputTarget, ParentExecution);
                 }
                 else
                 {
-                    ParentExecution.AbilityEntity.GetComponent<AbilityEffectComponent>().TryAssignEffectByIndex(ParentExecution.InputTarget, (int)EffectApplyType - 1);
+                    ParentExecution.AbilityEntity.GetComponent<AbilityEffectComponent>().TryAssignEffectToTargetByIndex(ParentExecution.inputTarget, (int)effectApplyType - 1);
                 }
             }
         }

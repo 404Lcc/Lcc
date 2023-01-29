@@ -8,19 +8,6 @@ using Sirenix.OdinInspector;
 
 namespace LccModel
 {
-    [LabelText("效果应用目标选择方式")]
-    public enum SkillTargetSelectType
-    {
-        [LabelText("手动指定")]
-        PlayerSelect,
-        [LabelText("碰撞检测")]
-        CollisionSelect,
-
-        [LabelText("条件指定")]
-        ConditionSelect,
-        [LabelText("自定义")]
-        Custom,
-    }
     [LabelText("技能类型")]
     public enum SkillSpellType
     {
@@ -42,15 +29,13 @@ namespace LccModel
     [CreateAssetMenu(fileName = "技能配置", menuName = "技能|状态/技能配置")]
     public class SkillConfigObject : SerializedScriptableObject
     {
-        [LabelText("技能ID"), DelayedProperty]
+        [LabelText("技能Id")]
         public int Id;
-        [LabelText("技能名称"), DelayedProperty]
+        [LabelText("技能名称")]
         public string Name = "技能1";
         public SkillSpellType SkillSpellType;
-        [LabelText("技能作用对象"), ShowIf("SkillSpellType", SkillSpellType.Initiative)]
+        [ShowIf("SkillSpellType", SkillSpellType.Initiative)]
         public SkillAffectTargetType AffectTargetType;
-        [LabelText("技能目标检测方式"), ShowIf("SkillSpellType", SkillSpellType.Initiative)]
-        public SkillTargetSelectType TargetSelectType;
 
 
 
@@ -58,14 +43,14 @@ namespace LccModel
         public uint ColdTime;
 
         [LabelText("附加状态效果")]
-        public bool EnableChildrenStatuses;
+        public bool EnableChildStatus;
 
         [HideReferenceObjectPicker]
-        [LabelText("附加状态效果列表"), ShowIf("EnableChildrenStatuses"), ListDrawerSettings(DraggableItems = false, ShowItemCount = false, CustomAddFunction = "AddChildStatus")]
-        public List<ChildStatus> ChildrenStatuses = new List<ChildStatus>();
+        [LabelText("附加状态效果列表"), ShowIf("EnableChildStatus"), ListDrawerSettings(DraggableItems = false, ShowItemCount = false, CustomAddFunction = "AddChildStatus")]
+        public List<ChildStatus> StatusList = new List<ChildStatus>();
         private void AddChildStatus()
         {
-            ChildrenStatuses.Add(new ChildStatus());
+            StatusList.Add(new ChildStatus());
         }
 
 
@@ -77,7 +62,7 @@ namespace LccModel
         [LabelText("效果列表"), Space(30)]
         [ListDrawerSettings(Expanded = true, DraggableItems = false, ShowItemCount = false, HideAddButton = true)]
         [HideReferenceObjectPicker]
-        public List<Effect> Effects = new List<Effect>();
+        public List<Effect> EffectList = new List<Effect>();
 
 
 
@@ -115,7 +100,7 @@ namespace LccModel
                 var effect = Activator.CreateInstance(effectType) as Effect;
                 effect.Enabled = true;
                 effect.IsSkillEffect = true;
-                Effects.Add(effect);
+                EffectList.Add(effect);
 
                 EffectTypeName = "(添加效果)";
             }

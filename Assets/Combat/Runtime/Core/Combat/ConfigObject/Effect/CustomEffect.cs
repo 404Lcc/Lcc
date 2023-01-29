@@ -12,6 +12,6 @@ namespace LccModel
         public string CustomEffectType;
 
         [ToggleGroup("Enabled"), LabelText("参数列表")]
-        public Dictionary<string, string> Params = new Dictionary<string, string>();
+        public Dictionary<string, string> ParamsDict = new Dictionary<string, string>();
     }
 }

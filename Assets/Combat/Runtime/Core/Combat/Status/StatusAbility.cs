@@ -7,25 +7,27 @@ namespace LccModel
         public CombatEntity OwnerEntity { get; set; }
         public CombatEntity ParentEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
-        public StatusConfigObject StatusConfig { get; set; }
 
-        public bool IsChildStatus { get; set; }
-        public int Duration { get; set; }
-        public ChildStatus ChildStatusData { get; set; }
-        private List<StatusAbility> ChildrenStatuses { get; set; } = new List<StatusAbility>();
+
+        public StatusConfigObject statusConfig;
+
+        public bool isChildStatus;
+        public int duration;
+        public ChildStatus childStatusData;
+        private List<StatusAbility> _statusList = new List<StatusAbility>();
 
 
         public override void Awake<P1>(P1 p1)
         {
             base.Awake(p1);
 
-            StatusConfig = p1 as StatusConfigObject;
+            statusConfig = p1 as StatusConfigObject;
             //Name = StatusConfig.ID;
 
             // 逻辑触发
-            if (StatusConfig.Effects.Count > 0)
+            if (statusConfig.EffectList.Count > 0)
             {
-                AddComponent<AbilityEffectComponent, List<Effect>>(StatusConfig.Effects);
+                AddComponent<AbilityEffectComponent, List<Effect>>(statusConfig.EffectList);
             }
         }
 
@@ -35,17 +37,17 @@ namespace LccModel
             FireEvent(nameof(ActivateAbility), this);
 
             // 子状态效果
-            if (StatusConfig.EnableChildrenStatuses)
+            if (statusConfig.EnableChildStatus)
             {
-                foreach (var childStatusData in StatusConfig.ChildrenStatuses)
+                foreach (var childStatusData in statusConfig.StatusList)
                 {
                     var status = ParentEntity.AttachStatus(childStatusData.StatusConfigObject);
                     status.OwnerEntity = OwnerEntity;
-                    status.IsChildStatus = true;
-                    status.ChildStatusData = childStatusData;
-                    status.ProcessInputKVParams(childStatusData.Params);
+                    status.isChildStatus = true;
+                    status.childStatusData = childStatusData;
+                    status.ProcessInputKVParams(childStatusData.ParamsDict);
                     status.TryActivateAbility();
-                    ChildrenStatuses.Add(status);
+                    _statusList.Add(status);
                 }
             }
 
@@ -57,16 +59,16 @@ namespace LccModel
         public void EndAbility()
         {
             // 子状态效果
-            if (StatusConfig.EnableChildrenStatuses)
+            if (statusConfig.EnableChildStatus)
             {
-                foreach (var item in ChildrenStatuses)
+                foreach (var item in _statusList)
                 {
                     item.EndAbility();
                 }
-                ChildrenStatuses.Clear();
+                _statusList.Clear();
             }
 
-            foreach (var effect in StatusConfig.Effects)
+            foreach (var effect in statusConfig.EffectList)
             {
                 if (!effect.Enabled)
                 {
@@ -81,7 +83,7 @@ namespace LccModel
 
         public int GetDuration()
         {
-            return Duration;
+            return duration;
         }
         public Entity CreateExecution()
         {
@@ -105,30 +107,30 @@ namespace LccModel
 
         public void ProcessInputKVParams(Dictionary<string, string> Params)
         {
-            foreach (var abilityEffect in GetComponent<AbilityEffectComponent>().AbilityEffects)
+            foreach (var abilityEffect in GetComponent<AbilityEffectComponent>().abilityEffectList)
             {
-                var effect = abilityEffect.EffectConfig;
+                var effect = abilityEffect.effectConfig;
 
                 if (abilityEffect.TryGetComponent(out AbilityEffectIntervalTriggerComponent intervalTriggerComponent))
                 {
-                    intervalTriggerComponent.IntervalValue = ProcessReplaceKV(effect.Interval, Params);
+                    intervalTriggerComponent.intervalValueFormula = ProcessReplaceKV(effect.Interval, Params);
                 }
                 if (abilityEffect.TryGetComponent(out AbilityEffectConditionTriggerComponent conditionTriggerComponent))
                 {
-                    conditionTriggerComponent.ConditionParamValue = ProcessReplaceKV(effect.ConditionParam, Params);
+                    conditionTriggerComponent.conditionValueFormula = ProcessReplaceKV(effect.ConditionParams, Params);
                 }
 
                 if (effect is AttributeModifyEffect attributeModify && abilityEffect.TryGetComponent(out AbilityEffectAttributeModifyComponent attributeModifyComponent))
                 {
-                    attributeModifyComponent.ModifyValueFormula = ProcessReplaceKV(attributeModify.NumericValue, Params);
+                    attributeModifyComponent.numericValueFormula = ProcessReplaceKV(attributeModify.NumericValueFormula, Params);
                 }
                 if (effect is DamageEffect damage && abilityEffect.TryGetComponent(out AbilityEffectDamageComponent damageComponent))
                 {
-                    damageComponent.DamageValueFormula = ProcessReplaceKV(damage.DamageValueFormula, Params);
+                    damageComponent.damageValueFormula = ProcessReplaceKV(damage.DamageValueFormula, Params);
                 }
                 if (effect is CureEffect cure && abilityEffect.TryGetComponent(out AbilityEffectCureComponent cureComponent))
                 {
-                    cureComponent.CureValueProperty = ProcessReplaceKV(cure.CureValueFormula, Params);
+                    cureComponent.cureValueFormula = ProcessReplaceKV(cure.CureValueFormula, Params);
                 }
             }
         }

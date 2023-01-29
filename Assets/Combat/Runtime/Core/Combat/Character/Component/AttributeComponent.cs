@@ -36,16 +36,16 @@ namespace LccModel
     }
     public class AttributeComponent : Component
     {
-        private readonly Dictionary<string, FloatNumeric> attributeDict = new Dictionary<string, FloatNumeric>();
-        public FloatNumeric MoveSpeed => attributeDict[nameof(AttributeType.MoveSpeed)];//移动速度
-        public FloatNumeric HealthPoint => attributeDict[nameof(AttributeType.HealthPoint)]; //当前生命值
-        public FloatNumeric HealthPointMax => attributeDict[nameof(AttributeType.HealthPointMax)]; //生命值上限
-        public FloatNumeric Attack => attributeDict[nameof(AttributeType.Attack)];//攻击力
-        public FloatNumeric Defense => attributeDict[nameof(AttributeType.Defense)];//防御力（护甲）
-        public FloatNumeric AbilityPower => attributeDict[nameof(AttributeType.AbilityPower)];//法术强度
-        public FloatNumeric SpellResistance => attributeDict[nameof(AttributeType.SpellResistance)];//魔法抗性
-        public FloatNumeric CriticalProbability => attributeDict[nameof(AttributeType.CriticalProbability)];//暴击概率
-        public FloatNumeric CauseDamage => attributeDict[nameof(AttributeType.CauseDamage)]; //暴击概率
+        private readonly Dictionary<string, FloatNumeric> _attributeDict = new Dictionary<string, FloatNumeric>();
+        public FloatNumeric MoveSpeed => _attributeDict[nameof(AttributeType.MoveSpeed)];//移动速度
+        public FloatNumeric HealthPoint => _attributeDict[nameof(AttributeType.HealthPoint)]; //当前生命值
+        public FloatNumeric HealthPointMax => _attributeDict[nameof(AttributeType.HealthPointMax)]; //生命值上限
+        public FloatNumeric Attack => _attributeDict[nameof(AttributeType.Attack)];//攻击力
+        public FloatNumeric Defense => _attributeDict[nameof(AttributeType.Defense)];//防御力（护甲）
+        public FloatNumeric AbilityPower => _attributeDict[nameof(AttributeType.AbilityPower)];//法术强度
+        public FloatNumeric SpellResistance => _attributeDict[nameof(AttributeType.SpellResistance)];//魔法抗性
+        public FloatNumeric CriticalProbability => _attributeDict[nameof(AttributeType.CriticalProbability)];//暴击概率
+        public FloatNumeric CauseDamage => _attributeDict[nameof(AttributeType.CauseDamage)]; //暴击概率
 
 
 
@@ -66,13 +66,13 @@ namespace LccModel
             NumericEntity numericEntity = Parent.AddChildren<NumericEntity>();
             var numeric = Parent.AddChildren<FloatNumeric, NumericEntity, int>(numericEntity, (int)attributeType);
             numeric.SetBase(baseValue);
-            attributeDict.Add(attributeType.ToString(), numeric);
+            _attributeDict.Add(attributeType.ToString(), numeric);
             return numeric;
         }
 
         public FloatNumeric GetNumeric(string attributeName)
         {
-            return attributeDict[attributeName];
+            return _attributeDict[attributeName];
         }
     }
 }

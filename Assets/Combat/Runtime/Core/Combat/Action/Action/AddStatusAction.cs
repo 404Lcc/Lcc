@@ -2,7 +2,7 @@ namespace LccModel
 {
     public class AddStatusActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity { get { return GetParent<CombatEntity>(); } set { } }
+        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
         public bool Enable { get; set; }
 
 
@@ -27,9 +27,9 @@ namespace LccModel
     /// </summary>
     public class AddStatusAction : Entity, IActionExecution
     {
-        public Entity SourceAbility { get; set; }
-        public AddStatusEffect AddStatusEffect => SourceAssignAction.AbilityEffect.EffectConfig as AddStatusEffect;
-        public StatusAbility Status { get; set; }
+        public Entity sourceAbility;
+        public AddStatusEffect addStatusEffect;
+        public StatusAbility status;
 
         // 行动能力
         public Entity ActionAbility { get; set; }
@@ -56,7 +56,9 @@ namespace LccModel
         {
             PreProcess();
 
-            var statusConfig = AddStatusEffect.AddStatus;
+            addStatusEffect = SourceAssignAction.abilityEffect.effectConfig as AddStatusEffect;
+
+            var statusConfig = addStatusEffect.StatusConfigObject;
             var canStack = statusConfig.CanStack;
 
             if (canStack == false)
@@ -64,23 +66,23 @@ namespace LccModel
                 if (Target.HasStatus(statusConfig.Id))
                 {
                     var status = Target.GetStatus(statusConfig.Id);
-                    var statusLifeTimer = status.GetComponent<StatusLifeTimeComponent>().LifeTimer;
-                    statusLifeTimer.MaxTime = AddStatusEffect.Duration / 1000f;
+                    var statusLifeTimer = status.GetComponent<StatusLifeTimeComponent>().lifeTimer;
+                    statusLifeTimer.MaxTime = addStatusEffect.Duration / 1000f;
                     statusLifeTimer.Reset();
                     return;
                 }
             }
 
-            Status = Target.AttachStatus(statusConfig);
-            Status.OwnerEntity = Creator;
-            Status.GetComponent<AbilityLevelComponent>().Level = SourceAbility.GetComponent<AbilityLevelComponent>().Level;
-            Status.Duration = (int)AddStatusEffect.Duration;
+            status = Target.AttachStatus(statusConfig);
+            status.OwnerEntity = Creator;
+            status.GetComponent<AbilityLevelComponent>().level = sourceAbility.GetComponent<AbilityLevelComponent>().level;
+            status.duration = (int)addStatusEffect.Duration;
 
 
-            Status.ProcessInputKVParams(AddStatusEffect.Params);
+            status.ProcessInputKVParams(addStatusEffect.ParamsDict);
 
-            Status.AddComponent<StatusLifeTimeComponent>();
-            Status.TryActivateAbility();
+            status.AddComponent<StatusLifeTimeComponent>();
+            status.TryActivateAbility();
 
             PostProcess();
 

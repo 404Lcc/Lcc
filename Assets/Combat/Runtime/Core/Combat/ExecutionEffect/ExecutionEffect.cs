@@ -1,12 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace LccModel
+﻿namespace LccModel
 {
     public class ExecuteEffectEvent
     {
-        public ExecutionEffect ExecutionEffect;
+        public ExecutionEffect executionEffect;
     }
 
     /// <summary>
@@ -14,7 +10,7 @@ namespace LccModel
     /// </summary>
     public partial class ExecutionEffect : Entity
     {
-        public ExecuteClipData ExecutionEffectConfig { get; set; }
+        public ExecuteClipData executeClipData;
         public SkillExecution ParentExecution => GetParent<SkillExecution>();
 
         public override void Awake<P1>(P1 p1)
@@ -22,22 +18,22 @@ namespace LccModel
             base.Awake(p1);
 
 
-            ExecutionEffectConfig = p1 as ExecuteClipData;
+            executeClipData = p1 as ExecuteClipData;
             //Name = ExecutionEffectConfig.GetType().Name;
 
-            var clipType = ExecutionEffectConfig.ExecuteClipType;
+            var clipType = executeClipData.ExecuteClipType;
             if (clipType == ExecuteClipType.ActionEvent)
             {
-                var spawnItemEffect = ExecutionEffectConfig.ActionEventData;
+                var spawnItemEffect = executeClipData.ActionEventData;
                 //应用效果给目标效果
                 if (spawnItemEffect.ActionEventType == FireEventType.AssignEffect)
                 {
-                    AddComponent<ExecutionEffectAssignToTargetComponent>().EffectApplyType = spawnItemEffect.EffectApply;
+                    AddComponent<ExecutionEffectAssignToTargetComponent>().effectApplyType = spawnItemEffect.EffectApply;
                 }
                 //触发新的执行体效果
                 if (spawnItemEffect.ActionEventType == FireEventType.TriggerNewExecution)
                 {
-                    AddComponent<ExecutionEffectTriggerNewExecutionComponent>().ActionEventData = spawnItemEffect;
+                    AddComponent<ExecutionEffectTriggerNewExecutionComponent>().actionEventData = spawnItemEffect;
                 }
             }
 
@@ -45,31 +41,31 @@ namespace LccModel
             //生成碰撞体效果，碰撞体再触发应用能力效果
             if (clipType == ExecuteClipType.CollisionExecute)
             {
-                var spawnItemEffect = ExecutionEffectConfig.CollisionExecuteData;
-                AddComponent<ExecutionEffectSpawnCollisionComponent>().CollisionExecuteData = spawnItemEffect;
+                var spawnItemEffect = executeClipData.CollisionExecuteData;
+                AddComponent<ExecutionEffectSpawnCollisionComponent>().collisionExecuteData = spawnItemEffect;
             }
             //播放动作效果
             if (clipType == ExecuteClipType.Animation)
             {
-                var animationEffect = ExecutionEffectConfig.AnimationData;
-                AddComponent<ExecutionEffectAnimationComponent>().AnimationClip = animationEffect.AnimationClip;
+                var animationEffect = executeClipData.AnimationData;
+                AddComponent<ExecutionEffectAnimationComponent>().animationClip = animationEffect.AnimationClip;
             }
             //播放特效效果
             if (clipType == ExecuteClipType.ParticleEffect)
             {
-                var animationEffect = ExecutionEffectConfig.ParticleEffectData;
-                AddComponent<ExecutionEffectParticleEffectComponent>().ParticleEffectPrefab = animationEffect.ParticleEffect;
+                var animationEffect = executeClipData.ParticleEffectData;
+                AddComponent<ExecutionEffectParticleEffectComponent>().particleEffectPrefab = animationEffect.ParticleEffect;
             }
 
             //时间到触发执行效果
             if (clipType == ExecuteClipType.ActionEvent)
             {
-                AddComponent<ExecutionEffectTimeTriggerComponent>().StartTime = ExecutionEffectConfig.StartTime;
+                AddComponent<ExecutionEffectTimeTriggerComponent>().startTime = executeClipData.StartTime;
             }
-            else if (ExecutionEffectConfig.Duration > 0)
+            else if (executeClipData.Duration > 0)
             {
-                AddComponent<ExecutionEffectTimeTriggerComponent>().StartTime = ExecutionEffectConfig.StartTime;
-                GetComponent<ExecutionEffectTimeTriggerComponent>().EndTime = ExecutionEffectConfig.EndTime;
+                AddComponent<ExecutionEffectTimeTriggerComponent>().startTime = executeClipData.StartTime;
+                GetComponent<ExecutionEffectTimeTriggerComponent>().endTime = executeClipData.EndTime;
             }
         }
 
@@ -89,7 +85,7 @@ namespace LccModel
         {
             this.Publish(new ExecuteEffectEvent()
             {
-                ExecutionEffect = this
+                executionEffect = this
             });
             this.FireEvent(nameof(TriggerEffect));
         }

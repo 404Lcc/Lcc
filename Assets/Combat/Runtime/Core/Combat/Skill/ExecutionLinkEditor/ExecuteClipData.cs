@@ -12,7 +12,7 @@ namespace LccModel
         bezierCorner,
     }
 
-    [System.Serializable]
+    [Serializable]
     public class CtrlPoint
     {
         public BezierPointType type;
@@ -179,7 +179,7 @@ namespace LccModel
 
         [Space(10)]
         public CollisionMoveType MoveType;
-        [DelayedProperty]
+
         public GameObject ObjAsset;
 
         [ShowIf("ShowSpeed")]

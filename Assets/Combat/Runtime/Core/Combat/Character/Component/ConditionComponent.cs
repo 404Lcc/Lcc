@@ -3,24 +3,21 @@ using System;
 
 namespace LccModel
 {
-    /// <summary>
-    /// 条件管理组件，在这里管理一个战斗实体所有条件达成事件的添加监听、移除监听、触发流程
-    /// </summary>
     public sealed class ConditionComponent : Component
     {
-        private Dictionary<Action, ConditionEntity> Conditions { get; set; } = new Dictionary<Action, ConditionEntity>();
+        private Dictionary<long, ConditionEntity> _conditionDict = new Dictionary<long, ConditionEntity>();
 
 
-        public void AddListener(ConditionType conditionType, Action action, object paramObj = null)
+        public void AddListener(ConditionType type, Action action, object obj = null)
         {
-            switch (conditionType)
+            switch (type)
             {
                 case ConditionType.WhenInTimeNoDamage:
-                    var time = (float)paramObj;
+                    var time = float.Parse((string)obj);
                     var condition = Parent.AddChildren<ConditionEntity>();
-                    var comp = condition.AddComponent<ConditionWhenInTimeNoDamageComponent, float>(time);
-                    Conditions.Add(action, condition);
-                    comp.StartListen(action);
+                    var temp = condition.AddComponent<ConditionWhenInTimeNoDamageComponent, float>(time);
+                    temp.StartListen(action);
+                    _conditionDict.Add(action.GetHashCode(), condition);
                     break;
                 case ConditionType.WhenHPLower:
                     break;
@@ -31,12 +28,12 @@ namespace LccModel
             }
         }
 
-        public void RemoveListener(ConditionType conditionType, Action action)
+        public void RemoveListener(ConditionType type, Action action)
         {
-            if (Conditions.ContainsKey(action))
+            if (_conditionDict.ContainsKey(action.GetHashCode()))
             {
-                Conditions[action].Dispose();
-                Conditions.Remove(action);
+                _conditionDict[action.GetHashCode()].Dispose();
+                _conditionDict.Remove(action.GetHashCode());
             }
         }
     }

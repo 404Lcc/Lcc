@@ -5,12 +5,12 @@ namespace LccModel
 {
     public class OnTriggerEnterCallback : MonoBehaviour
     {
-        public Action<Collider> OnTriggerEnterCallbackAction;
+        public Action<Collider> triggerEnterAction;
 
 
         private void OnTriggerEnter(Collider other)
         {
-            OnTriggerEnterCallbackAction?.Invoke(other);
+            triggerEnterAction?.Invoke(other);
         }
     }
 }

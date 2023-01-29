@@ -10,13 +10,21 @@
 
         public override void OnEnable()
         {
-            var actionPointType = GetParent<AbilityEffect>().EffectConfig.ActionPointType;
+            var actionPointType = GetParent<AbilityEffect>().effectConfig.ActionPointType;
             GetParent<AbilityEffect>().GetParent<StatusAbility>().OwnerEntity.ListenActionPoint(actionPointType, OnActionPointTrigger);
         }
 
         private void OnActionPointTrigger(Entity combatAction)
         {
-            GetParent<AbilityEffect>().TryTriggerEffect();
+            GetParent<AbilityEffect>().TryAssignEffectToOwner();
+        }
+
+        public override void OnDisable()
+        {
+            base.OnDisable();
+
+            var actionPointType = GetParent<AbilityEffect>().effectConfig.ActionPointType;
+            GetParent<AbilityEffect>().GetParent<StatusAbility>().OwnerEntity.UnListenActionPoint(actionPointType, OnActionPointTrigger);
         }
     }
 }

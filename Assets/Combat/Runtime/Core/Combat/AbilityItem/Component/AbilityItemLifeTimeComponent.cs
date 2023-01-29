@@ -3,20 +3,22 @@
     public class AbilityItemLifeTimeComponent : Component, IUpdate
     {
         public override bool DefaultEnable => true;
-        public GameTimer LifeTimer { get; set; }
+
+
+        public GameTimer lifeTimer;
 
         public override void Awake<P1>(P1 p1)
         {
             base.Awake(p1);
 
-            LifeTimer = new GameTimer((float)(object)p1);
+            lifeTimer = new GameTimer((float)(object)p1);
         }
 
         public void Update()
         {
-            if (LifeTimer.IsRunning)
+            if (lifeTimer.IsRunning)
             {
-                LifeTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, DestroyEntity);
+                lifeTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, DestroyEntity);
             }
         }
 

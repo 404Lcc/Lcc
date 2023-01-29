@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4b74c267e78aec449e8861e1dcb4c36, type: 3}
-  m_Name: "Item_1_\u9053\u51771"
+  m_Script: {fileID: 11500000, guid: 5fa68c14a93353447b8f06e1cb13662c, type: 3}
+  m_Name: Status_1
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,7 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: ChildrenStatuses
+    - Name: StatusList
       Entry: 7
       Data: 0|System.Collections.Generic.List`1[[LccModel.ChildStatus, Unity.Combat]],
         mscorlib
@@ -52,29 +52,26 @@ MonoBehaviour:
       Data: false
     - Name: IsItemEffect
       Entry: 5
-      Data: true
+      Data: false
     - Name: Enabled
       Entry: 5
       Data: true
-    - Name: AddSkillEffectTargetType
-      Entry: 3
-      Data: 0
     - Name: EffectTriggerType
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: ConditionType
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: ActionPointType
       Entry: 3
       Data: 0
     - Name: Interval
-      Entry: 6
-      Data: 
-    - Name: ConditionParam
-      Entry: 6
-      Data: 
-    - Name: Decorators
+      Entry: 1
+      Data: 5000
+    - Name: ConditionParams
+      Entry: 1
+      Data: "\u6761\u4EF6"
+    - Name: DecoratorList
       Entry: 7
       Data: 3|System.Collections.Generic.List`1[[LccModel.EffectDecorator, Unity.Combat]],
         mscorlib
@@ -92,7 +89,7 @@ MonoBehaviour:
       Data: "(\u6DFB\u52A0\u6548\u679C\u4FEE\u9970)"
     - Name: CureValueFormula
       Entry: 1
-      Data: 10
+      Data: "\u6062\u590D\u91CF"
     - Name: 
       Entry: 8
       Data: 
@@ -103,8 +100,14 @@ MonoBehaviour:
       Entry: 8
       Data: 
   Id: 1
-  Name: "\u9053\u51771"
-  ColdTime: 0
-  EnableChildrenStatuses: 0
-  ItemDescription: 
+  Name: "\u72B6\u60012"
+  StatusType: 0
+  Duration: 0
+  ShowInStatusSlot: 0
+  CanStack: 0
+  MaxStack: 0
+  EnableChildStatus: 0
   EffectTypeName: "(\u6DFB\u52A0\u6548\u679C)"
+  ParticleEffect: {fileID: 0}
+  Audio: {fileID: 0}
+  StatusDescription: 

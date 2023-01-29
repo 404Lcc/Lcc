@@ -20,7 +20,7 @@ namespace LccModel
         [ToggleGroup("Enabled")]
         public DamageType DamageType;
 
-        [ToggleGroup("Enabled"), LabelText("伤害取值")]
+        [ToggleGroup("Enabled"), LabelText("取值")]
         public string DamageValueFormula;
 
         [ToggleGroup("Enabled"), LabelText("能否暴击")]

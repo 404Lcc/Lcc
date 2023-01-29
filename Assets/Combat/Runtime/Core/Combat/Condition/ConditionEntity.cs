@@ -1,6 +1,6 @@
 ﻿namespace LccModel
 {
-    public sealed class ConditionEntity : Entity
+    public class ConditionEntity : Entity
     {
 
     }

@@ -2,7 +2,7 @@
 {
     public class ExecutionEffectSpawnCollisionComponent : Component
     {
-        public CollisionExecuteData CollisionExecuteData { get; set; }
+        public CollisionExecuteData collisionExecuteData;
 
 
         public override void Awake()
@@ -13,7 +13,7 @@
 
         public void OnTriggerExecutionEffect(Entity entity)
         {
-            Parent.GetParent<SkillExecution>().SpawnCollisionItem(GetParent<ExecutionEffect>().ExecutionEffectConfig);
+            Parent.GetParent<SkillExecution>().SpawnCollisionItem(GetParent<ExecutionEffect>().executeClipData);
         }
 
         public void OnTriggerEnd(Entity entity)

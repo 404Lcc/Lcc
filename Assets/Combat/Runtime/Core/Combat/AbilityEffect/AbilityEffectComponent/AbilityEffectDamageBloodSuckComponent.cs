@@ -13,14 +13,14 @@ namespace LccModel
         public override void OnEnable()
         {
             base.OnEnable();
-            GetParent<AbilityEffect>().OwnerEntity.DamageActionAbility.AddComponent<DamageBloodSuckComponent>();
+            GetParent<AbilityEffect>().OwnerEntity.damageActionAbility.AddComponent<DamageBloodSuckComponent>();
 
         }
         public override void OnDisable()
         {
             base.OnDisable();
 
-            if (GetParent<AbilityEffect>().OwnerEntity.DamageActionAbility.TryGetComponent<DamageBloodSuckComponent>(out var damageBloodSuckComponent))
+            if (GetParent<AbilityEffect>().OwnerEntity.damageActionAbility.TryGetComponent<DamageBloodSuckComponent>(out var damageBloodSuckComponent))
             {
                 damageBloodSuckComponent.Dispose();
             }

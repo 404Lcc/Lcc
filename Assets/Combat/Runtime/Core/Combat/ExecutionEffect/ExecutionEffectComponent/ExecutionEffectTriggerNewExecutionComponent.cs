@@ -2,7 +2,7 @@
 {
     public class ExecutionEffectTriggerNewExecutionComponent : Component
     {
-        public ActionEventData ActionEventData { get; set; }
+        public ActionEventData actionEventData;
 
 
         public override void Awake()
@@ -12,17 +12,17 @@
 
         public void OnTriggerExecutionEffect(ExecuteEffectEvent evnt)
         {
-            ExecutionObject executionObject = AssetManager.Instance.LoadAsset<ExecutionObject>(out var handler, ActionEventData.NewExecution, AssetSuffix.Asset, AssetType.Execution);
+            ExecutionObject executionObject = AssetManager.Instance.LoadAsset<ExecutionObject>(out var handler, actionEventData.NewExecution, AssetSuffix.Asset, AssetType.Execution);
             if (executionObject == null)
             {
                 return;
             }
             var sourceExecution = Parent.GetParent<SkillExecution>();
-            var execution = sourceExecution.OwnerEntity.AddChildren<SkillExecution, SkillAbility>(sourceExecution.SkillAbility);
-            execution.ExecutionObject = executionObject;
-            execution.InputTarget = sourceExecution.InputTarget;
-            execution.InputPoint = sourceExecution.InputPoint;
-            execution.LoadExecutionEffects();
+            var execution = sourceExecution.OwnerEntity.AddChildren<SkillExecution, SkillAbility>(sourceExecution.skillAbility);
+            execution.executionObject = executionObject;
+            execution.inputTarget = sourceExecution.inputTarget;
+            execution.inputPoint = sourceExecution.inputPoint;
+            execution.LoadExecutionEffect();
             execution.BeginExecute();
         }
     }

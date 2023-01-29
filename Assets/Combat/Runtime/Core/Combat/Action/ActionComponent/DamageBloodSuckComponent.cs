@@ -10,17 +10,23 @@
             var combatEntity = Parent.GetParent<CombatEntity>();
             combatEntity.ListenActionPoint(ActionPointType.PostCauseDamage, OnCauseDamage);
         }
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
 
+            var combatEntity = Parent.GetParent<CombatEntity>();
+            combatEntity.UnListenActionPoint(ActionPointType.PostCauseDamage, OnCauseDamage);
+        }
         private void OnCauseDamage(Entity action)
         {
             var damageAction = action as DamageAction;
-            var value = damageAction.DamageValue * 0.2f;
+            var value = damageAction.damageValue * 0.2f;
             var combatEntity = Parent.GetParent<CombatEntity>();
-            if (combatEntity.CureActionAbility.TryMakeAction(out var cureAction))
+            if (combatEntity.cureActionAbility.TryMakeAction(out var cureAction))
             {
                 cureAction.Creator = combatEntity;
                 cureAction.Target = combatEntity;
-                cureAction.CureValue = (int)value;
+                cureAction.cureValue = (int)value;
                 cureAction.SourceAssignAction = null;
                 cureAction.ApplyCure();
             }

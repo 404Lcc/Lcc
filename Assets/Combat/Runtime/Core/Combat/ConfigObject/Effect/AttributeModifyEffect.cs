@@ -16,8 +16,8 @@ namespace LccModel
         [ToggleGroup("Enabled")]
         public AttributeType AttributeType;
 
-        [ToggleGroup("Enabled"), LabelText("数值参数")]
-        public string NumericValue;
+        [ToggleGroup("Enabled"), LabelText("取值")]
+        public string NumericValueFormula;
 
         [ToggleGroup("Enabled")]
         public ModifyType ModifyType;

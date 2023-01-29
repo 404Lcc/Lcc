@@ -76,67 +76,61 @@ namespace LccModel
         Max,
     }
 
-    /// <summary>
-    /// 行动点，一次战斗行动<see cref="IActionExecution"/>会触发战斗实体一系列的行动点<see cref="ActionPoint"/>
-    /// </summary>
-    public sealed class ActionPoint
+    public class ActionPoint
     {
-        public List<Action<Entity>> Listeners { get; set; } = new List<Action<Entity>>();
+        private List<Action<Entity>> _listenerList = new List<Action<Entity>>();
 
 
         public void AddListener(Action<Entity> action)
         {
-            Listeners.Add(action);
+            _listenerList.Add(action);
         }
 
         public void RemoveListener(Action<Entity> action)
         {
-            Listeners.Remove(action);
+            _listenerList.Remove(action);
         }
 
-        public void TriggerAllActions(Entity actionExecution)
+        public void TriggerActionPoint(Entity actionExecution)
         {
-            if (Listeners.Count == 0)
+            if (_listenerList.Count == 0)
             {
                 return;
             }
-            for (int i = Listeners.Count - 1; i >= 0; i--)
+            for (int i = _listenerList.Count - 1; i >= 0; i--)
             {
-                var item = Listeners[i];
+                var item = _listenerList[i];
                 item.Invoke(actionExecution);
             }
         }
     }
 
 
-    /// <summary>
-    /// 行动点管理器，在这里管理一个战斗实体所有行动点的添加监听、移除监听、触发流程
-    /// </summary>
-    public sealed class ActionPointComponent : Component
+    public class ActionPointComponent : Component
     {
-        private Dictionary<ActionPointType, ActionPoint> ActionPoints { get; set; } = new Dictionary<ActionPointType, ActionPoint>();
+        private Dictionary<ActionPointType, ActionPoint> _actionPointDict = new Dictionary<ActionPointType, ActionPoint>();
 
 
         public void AddListener(ActionPointType actionPointType, Action<Entity> action)
         {
-            if (!ActionPoints.ContainsKey(actionPointType))
+            if (!_actionPointDict.ContainsKey(actionPointType))
             {
-                ActionPoints.Add(actionPointType, new ActionPoint());
+                _actionPointDict.Add(actionPointType, new ActionPoint());
             }
-            ActionPoints[actionPointType].AddListener(action);
+            _actionPointDict[actionPointType].AddListener(action);
         }
 
         public void RemoveListener(ActionPointType actionPointType, Action<Entity> action)
         {
-            if (ActionPoints.ContainsKey(actionPointType))
+            if (_actionPointDict.ContainsKey(actionPointType))
             {
-                ActionPoints[actionPointType].RemoveListener(action);
+                _actionPointDict[actionPointType].RemoveListener(action);
             }
         }
 
         public ActionPoint GetActionPoint(ActionPointType actionPointType)
         {
-            if (ActionPoints.TryGetValue(actionPointType, out var actionPoint))
+            if (_actionPointDict.TryGetValue(actionPointType, out var actionPoint))
             {
                 return actionPoint;
             }
@@ -145,9 +139,9 @@ namespace LccModel
 
         public void TriggerActionPoint(ActionPointType actionPointType, Entity actionExecution)
         {
-            if (ActionPoints.TryGetValue(actionPointType, out var actionPoint))
+            if (_actionPointDict.TryGetValue(actionPointType, out var actionPoint))
             {
-                actionPoint.TriggerAllActions(actionExecution);
+                actionPoint.TriggerActionPoint(actionExecution);
             }
         }
     }

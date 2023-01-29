@@ -2,9 +2,19 @@
 {
     public interface IAbilityEntity
     {
-        public CombatEntity OwnerEntity { get; set; }
-        public CombatEntity ParentEntity { get; }
-        public bool Enable { get; set; }
+        public CombatEntity OwnerEntity
+        {
+            get;
+            set;
+        }
+        public CombatEntity ParentEntity
+        {
+            get;
+        }
+        public bool Enable
+        {
+            get; set;
+        }
 
 
         // 尝试激活能力

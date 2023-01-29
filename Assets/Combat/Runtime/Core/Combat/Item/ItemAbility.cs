@@ -4,26 +4,26 @@ namespace LccModel
 {
     public partial class ItemAbility : Entity, IAbilityEntity
     {
-        public CombatEntity OwnerEntity { get { return GetParent<CombatEntity>(); } set { } }
-        public CombatEntity ParentEntity { get => GetParent<CombatEntity>(); }
+        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
+        public CombatEntity ParentEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
-        public ItemConfigObject ItemConfig { get; set; }
 
 
-        private List<StatusAbility> ChildrenStatuses { get; set; } = new List<StatusAbility>();
+        public ItemConfigObject itemConfig;
+        private List<StatusAbility> _statusList = new List<StatusAbility>();
 
         public override void Awake<P1>(P1 p1)
         {
             base.Awake(p1);
 
-            ItemConfig = p1 as ItemConfigObject;
+            itemConfig = p1 as ItemConfigObject;
 
-            AddComponent<AbilityEffectComponent, List<Effect>>(ItemConfig.Effects);
+            AddComponent<AbilityEffectComponent, List<Effect>>(itemConfig.EffectList);
         }
 
         public void TryActivateAbility()
         {
-            this.ActivateAbility();
+            ActivateAbility();
         }
 
         public void DeactivateAbility()
@@ -34,18 +34,17 @@ namespace LccModel
         public void ActivateAbility()
         {
             FireEvent(nameof(ActivateAbility));
-            //子状态效果
-            if (ItemConfig.EnableChildrenStatuses)
+            if (itemConfig.EnableChildStatus)
             {
-                foreach (var item in ItemConfig.ChildrenStatuses)
+                foreach (var item in itemConfig.StatusList)
                 {
                     var status = OwnerEntity.AttachStatus(item.StatusConfigObject);
                     status.OwnerEntity = OwnerEntity;
-                    status.IsChildStatus = true;
-                    status.ChildStatusData = item;
-                    status.ProcessInputKVParams(item.Params);
+                    status.isChildStatus = true;
+                    status.childStatusData = item;
+                    status.ProcessInputKVParams(item.ParamsDict);
                     status.TryActivateAbility();
-                    ChildrenStatuses.Add(status);
+                    _statusList.Add(status);
                 }
             }
 
@@ -53,14 +52,13 @@ namespace LccModel
 
         public void EndAbility()
         {
-            //子状态效果
-            if (ItemConfig.EnableChildrenStatuses)
+            if (itemConfig.EnableChildStatus)
             {
-                foreach (var item in ChildrenStatuses)
+                foreach (var item in _statusList)
                 {
                     item.EndAbility();
                 }
-                ChildrenStatuses.Clear();
+                _statusList.Clear();
             }
             Dispose();
         }

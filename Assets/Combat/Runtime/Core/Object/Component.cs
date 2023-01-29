@@ -71,10 +71,10 @@ namespace LccModel
         }
 
         #region ÊÂ¼þ
-        public T Publish<T>(T TEvent) where T : class
+        public T Publish<T>(T t) where T : class
         {
-            ((Entity)Parent).Publish(TEvent);
-            return TEvent;
+            ((Entity)Parent).Publish(t);
+            return t;
         }
         public void Subscribe<T>(Action<T> action) where T : class
         {

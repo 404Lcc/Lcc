@@ -4,9 +4,9 @@
     {
         public override void Awake()
         {
-            if (GetParent<AbilityEffect>().EffectConfig.Decorators != null)
+            if (GetParent<AbilityEffect>().effectConfig.DecoratorList != null)
             {
-                foreach (var effectDecorator in GetParent<AbilityEffect>().EffectConfig.Decorators)
+                foreach (var effectDecorator in GetParent<AbilityEffect>().effectConfig.DecoratorList)
                 {
                     if (effectDecorator is DamageReduceWithTargetCountDecorator reduceWithTargetCountDecorator)
                     {

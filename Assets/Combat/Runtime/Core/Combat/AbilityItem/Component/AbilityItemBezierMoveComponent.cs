@@ -6,63 +6,62 @@ namespace LccModel
 {
     public class AbilityItemBezierMoveComponent : Component
     {
-        public IPosition PositionEntity { get; set; }
-        public Vector3 OriginPosition { get; set; }
-        public float RotateAgree { get; set; }
-        public List<CtrlPoint> ctrlPoints { get; set; }
-        public float Duration { get; set; }
-        public float Speed { get; set; } = 0.05f;
-        float SegmentCount = 20;
-        float Progress;
+        public IPosition positionEntity;
+        public Vector3 originPosition;
+        public float rotateAgree;
+        public List<CtrlPoint> ctrlPointList;
+        public float duration;
+        public float speed  = 0.05f;
+        float progress;
 
 
         public void DOMove()
         {
-            Progress = 0.1f;
-            var endValue = Evaluate(Progress);
-            var startPos = PositionEntity.Position;
-            DOTween.To(() => startPos, (x) => PositionEntity.Position = x, endValue, Speed).SetEase(Ease.Linear).OnComplete(DOMoveNext);
+            progress = 0.1f;
+            var endValue = Evaluate(progress);
+            var startPos = positionEntity.Position;
+            DOTween.To(() => startPos, (x) => positionEntity.Position = x, endValue, speed).SetEase(Ease.Linear).OnComplete(DOMoveNext);
         }
 
         private void DOMoveNext()
         {
-            if (Progress >= 1f)
+            if (progress >= 1f)
             {
                 return;
             }
-            Progress += 0.1f;
-            Progress = Mathf.Min(1f, Progress);
-            var endValue = Evaluate(Progress);
-            var startPos = PositionEntity.Position;
-            DOTween.To(() => startPos, (x) => PositionEntity.Position = x, endValue, Speed).SetEase(Ease.Linear).OnComplete(DOMoveNext);
+            progress += 0.1f;
+            progress = Mathf.Min(1f, progress);
+            var endValue = Evaluate(progress);
+            var startPos = positionEntity.Position;
+            DOTween.To(() => startPos, (x) => positionEntity.Position = x, endValue, speed).SetEase(Ease.Linear).OnComplete(DOMoveNext);
         }
 
         public Vector3 Evaluate(float t, int derivativeOrder = 0)
         {
-            if (ctrlPoints.Count == 0) return PositionEntity.Position;
-            if (ctrlPoints.Count == 1) return ctrlPoints[0].position;
+            if (ctrlPointList.Count == 0) return positionEntity.Position;
+            if (ctrlPointList.Count == 1) return ctrlPointList[0].position;
 
             t = Mathf.Clamp(t, 0, 1f);
-            t = t * ctrlPoints.Count;
+            t = t * ctrlPointList.Count;
             int segment_index = (int)t;
 
-            if (segment_index + 1 >= ctrlPoints.Count)
+            if (segment_index + 1 >= ctrlPointList.Count)
             {
-                var v = ctrlPoints[segment_index].position;
-                var a = RotateAgree;
+                var v = ctrlPointList[segment_index].position;
+                var a = rotateAgree;
                 var x = v.x;
                 var y = v.z;
                 var x1 = x * Mathf.Cos(a) - y * Mathf.Sin(a);
                 var y1 = -(y * Mathf.Cos(a) + x * Mathf.Sin(a));
 
-                v = OriginPosition + new Vector3(x1, v.y, y1);
+                v = originPosition + new Vector3(x1, v.y, y1);
                 return v;
             }
             Vector3[] p = new Vector3[4];
-            p[0] = ctrlPoints[segment_index].position;
-            p[1] = ctrlPoints[segment_index].OutTangent + p[0];
-            p[3] = ctrlPoints[segment_index + 1].position;
-            p[2] = ctrlPoints[segment_index + 1].InTangent + p[3];
+            p[0] = ctrlPointList[segment_index].position;
+            p[1] = ctrlPointList[segment_index].OutTangent + p[0];
+            p[3] = ctrlPointList[segment_index + 1].position;
+            p[2] = ctrlPointList[segment_index + 1].InTangent + p[3];
 
             t = t - segment_index;
             float u = 1 - t;
@@ -72,13 +71,13 @@ namespace LccModel
             {
                 var v = p[0] * u * u * u + 3 * p[1] * u * u * t + 3 * p[2] * u * t * t + p[3] * t * t * t;
 
-                var a = RotateAgree;
+                var a = rotateAgree;
                 var x = v.x;
                 var y = v.z;
                 var x1 = x * Mathf.Cos(a) - y * Mathf.Sin(a);
                 var y1 = -(y * Mathf.Cos(a) + x * Mathf.Sin(a));
 
-                v = OriginPosition + new Vector3(x1, v.y, y1);
+                v = originPosition + new Vector3(x1, v.y, y1);
                 return v;
             }
             return Vector3.zero;

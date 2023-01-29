@@ -8,7 +8,7 @@ namespace LccModel
     }
     public class DamageActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity { get { return GetParent<CombatEntity>(); } set { } }
+        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
         public bool Enable { get; set; }
 
 
@@ -34,14 +34,14 @@ namespace LccModel
     /// </summary>
     public class DamageAction : Entity, IActionExecution
     {
-        public DamageEffect DamageEffect => SourceAssignAction.AbilityEffect.EffectConfig as DamageEffect;
+        public DamageEffect damageEffect;
         // 伤害来源
-        public DamageSource DamageSource { get; set; }
+        public DamageSource damageSource;
 
-        // 伤害数值
-        public int DamageValue { get; set; }
-        // 是否是暴击
-        public bool IsCritical { get; set; }
+
+        public int damageValue;
+
+        public bool isCritical;
 
 
         // 行动能力
@@ -62,45 +62,47 @@ namespace LccModel
         // 前置处理
         private void PreProcess()
         {
-            if (DamageSource == DamageSource.Attack)
+            damageEffect = SourceAssignAction.abilityEffect.effectConfig as DamageEffect;
+
+            if (damageSource == DamageSource.Attack)
             {
-                IsCritical = (RandomHelper.RandomRate() / 100f) < Creator.GetComponent<AttributeComponent>().CriticalProbability.Value;
-                DamageValue = Mathf.CeilToInt(Mathf.Max(1, Creator.GetComponent<AttributeComponent>().Attack.Value - Target.GetComponent<AttributeComponent>().Defense.Value));
-                if (IsCritical)
+                isCritical = (RandomUtil.RandomRate() / 100f) < Creator.GetComponent<AttributeComponent>().CriticalProbability.Value;
+                damageValue = Mathf.CeilToInt(Mathf.Max(1, Creator.GetComponent<AttributeComponent>().Attack.Value - Target.GetComponent<AttributeComponent>().Defense.Value));
+                if (isCritical)
                 {
-                    DamageValue = Mathf.CeilToInt(DamageValue * 1.5f);
+                    damageValue = Mathf.CeilToInt(damageValue * 1.5f);
                 }
             }
 
-            if (DamageSource == DamageSource.Skill)
+            if (damageSource == DamageSource.Skill)
             {
-                if (DamageEffect.CanCrit)
+                if (damageEffect.CanCrit)
                 {
-                    IsCritical = (RandomHelper.RandomRate() / 100f) < Creator.GetComponent<AttributeComponent>().CriticalProbability.Value;
+                    isCritical = (RandomUtil.RandomRate() / 100f) < Creator.GetComponent<AttributeComponent>().CriticalProbability.Value;
                 }
-                DamageValue = SourceAssignAction.AbilityEffect.GetComponent<AbilityEffectDamageComponent>().GetDamageValue();
-                if (IsCritical)
+                damageValue = SourceAssignAction.abilityEffect.GetComponent<AbilityEffectDamageComponent>().GetDamageValue();
+                if (isCritical)
                 {
-                    DamageValue = Mathf.CeilToInt(DamageValue * 1.5f);
+                    damageValue = Mathf.CeilToInt(damageValue * 1.5f);
                 }
             }
 
-            if (DamageSource == DamageSource.Buff)
+            if (damageSource == DamageSource.Buff)
             {
-                if (DamageEffect.CanCrit)
+                if (damageEffect.CanCrit)
                 {
-                    IsCritical = (RandomHelper.RandomRate() / 100f) < Creator.GetComponent<AttributeComponent>().CriticalProbability.Value;
+                    isCritical = (RandomUtil.RandomRate() / 100f) < Creator.GetComponent<AttributeComponent>().CriticalProbability.Value;
                 }
-                DamageValue = SourceAssignAction.AbilityEffect.GetComponent<AbilityEffectDamageComponent>().GetDamageValue();
+                damageValue = SourceAssignAction.abilityEffect.GetComponent<AbilityEffectDamageComponent>().GetDamageValue();
             }
 
-            var executionDamageReduceWithTargetCountComponent = SourceAssignAction.AbilityEffect.GetComponent<AbilityEffectDamageReduceWithTargetCountComponent>();
+            var executionDamageReduceWithTargetCountComponent = SourceAssignAction.abilityEffect.GetComponent<AbilityEffectDamageReduceWithTargetCountComponent>();
             if (executionDamageReduceWithTargetCountComponent != null)
             {
-                if (SourceAssignAction.AbilityItem.TryGetComponent(out AbilityItemTargetCounterComponent targetCounterComponent))
+                if (SourceAssignAction.abilityItem.TryGetComponent(out AbilityItemTargetCounterComponent targetCounterComponent))
                 {
-                    var damagePercent = executionDamageReduceWithTargetCountComponent.GetDamagePercent(targetCounterComponent.TargetCounter);
-                    DamageValue = Mathf.CeilToInt(DamageValue * damagePercent);
+                    var damagePercent = executionDamageReduceWithTargetCountComponent.GetDamagePercent(targetCounterComponent.targetCounter);
+                    damageValue = Mathf.CeilToInt(damageValue * damagePercent);
                 }
             }
 

@@ -1,21 +1,19 @@
 ﻿namespace LccModel
 {
-    /// <summary>
-    /// 普攻执行体
-    /// </summary>
     public class AttackExecution : Entity, IAbilityExecution, IUpdate
     {
-        public SpellAttackAction AttackAction { get; set; }
         public Entity AbilityEntity { get; set; }
-        public CombatEntity OwnerEntity { get; set; }
+        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
 
-        private bool BeBlocked;//是否被格挡
-        private bool HasTriggerDamage;//是否触发了伤害
+
+        public SpellAttackAction attackAction;
+        private bool beBlocked;//是否被格挡
+        private bool hasTriggerDamage;//是否触发了伤害
 
 
         public void Update()
         {
-            if (!HasTriggerDamage)
+            if (!hasTriggerDamage)
             {
                 TryTriggerAttackEffect();
             }
@@ -27,12 +25,12 @@
 
         public void SetBlocked()
         {
-            BeBlocked = true;
+            beBlocked = true;
         }
 
         public void BeginExecute()
         {
-            GetParent<CombatEntity>().SpellingAttackExecution = this;
+            GetParent<CombatEntity>().spellingAttackExecution = this;
         }
 
         /// <summary>
@@ -40,8 +38,8 @@
         /// </summary>
         private void PreProcess()
         {
-            AttackAction.Creator.TriggerActionPoint(ActionPointType.PreGiveAttackEffect, AttackAction);
-            AttackAction.Target.TriggerActionPoint(ActionPointType.PreReceiveAttackEffect, AttackAction);
+            attackAction.Creator.TriggerActionPoint(ActionPointType.PreGiveAttackEffect, attackAction);
+            attackAction.Target.TriggerActionPoint(ActionPointType.PreReceiveAttackEffect, attackAction);
         }
 
         /// <summary>
@@ -49,24 +47,24 @@
         /// </summary>
         private void TryTriggerAttackEffect()
         {
-            HasTriggerDamage = true;
+            hasTriggerDamage = true;
 
             PreProcess();
 
-            if (BeBlocked)
+            if (beBlocked)
             {
             }
             else
             {
-                AbilityEntity.GetComponent<AbilityEffectComponent>().TryAssignAllEffectsToTargetWithExecution(AttackAction.Target, this);
+                AbilityEntity.GetComponent<AbilityEffectComponent>().TryAssignAllEffectToTarget(attackAction.Target, this);
             }
         }
 
         public void EndExecute()
         {
-            GetParent<CombatEntity>().SpellingAttackExecution = null;
-            AttackAction.FinishAction();
-            AttackAction = null;
+            GetParent<CombatEntity>().spellingAttackExecution = null;
+            attackAction.FinishAction();
+            attackAction = null;
             Dispose();
         }
     }

@@ -1,25 +1,19 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace LccModel
 {
     public class CombatEntity : Entity, IPosition
     {
-        public GameObject HeroObject { get; set; }
-        public Transform ModelTrans { get; set; }
 
+        public HealthPoint currentHealth;
 
-        public HealthPoint CurrentHealth { get; private set; }
-
-        public ActionControlType ActionControlType { get; set; } // 行为禁制
+        public ActionControlType actionControlType; // 行为禁制
         #region 自身能力
 
-        public AttackAbility AttackAbility { get; set; }  //普攻能力
+        public AttackAbility attackAbility; //普攻能力
 
 
-        public Dictionary<string, SkillAbility> NameSkills { get; set; } = new Dictionary<string, SkillAbility>();  //技能能力
-        public Dictionary<int, SkillAbility> IdSkills { get; set; } = new Dictionary<int, SkillAbility>();   //技能能力
 
         #endregion
 
@@ -27,18 +21,18 @@ namespace LccModel
 
         #region 行动能力
 
-        public EffectAssignActionAbility EffectAssignActionAbility { get; private set; }//效果赋给行动能力
-        public AddStatusActionAbility AddStatusActionAbility { get; private set; }  //施加状态行动能力
+        public EffectAssignActionAbility effectAssignActionAbility;//效果赋给行动能力
+        public AddStatusActionAbility addStatusActionAbility;  //施加状态行动能力
 
-        public SpellAttackActionAbility SpellAttackActionAbility { get; private set; }//施法普攻行动能力
-        public AttackBlockActionAbility AttackBlockActionAbility { get; set; } //普攻格挡能力
-        public SpellSkillActionAbility SpellSkillActionAbility { get; private set; } //施法技能行动能力
+        public SpellAttackActionAbility spellAttackActionAbility;//施法普攻行动能力
+        public AttackBlockActionAbility attackBlockActionAbility; //普攻格挡能力
+        public SpellSkillActionAbility spellSkillActionAbility; //施法技能行动能力
 
-        public SpellItemActionAbility SpellItemActionAbility { get; private set; }  //使用物品行动能力
+        public SpellItemActionAbility spellItemActionAbility;  //使用物品行动能力
 
 
-        public DamageActionAbility DamageActionAbility { get; private set; }  //伤害行动能力
-        public CureActionAbility CureActionAbility { get; private set; }  //治疗行动能力
+        public DamageActionAbility damageActionAbility;  //伤害行动能力
+        public CureActionAbility cureActionAbility;  //治疗行动能力
 
 
 
@@ -47,8 +41,8 @@ namespace LccModel
 
         #endregion
 
-        public AttackExecution SpellingAttackExecution { get; set; }  //执行中的攻击执行体
-        public SkillExecution SpellingSkillExecution { get; set; }  //执行中的技能执行体
+        public AttackExecution spellingAttackExecution; //执行中的攻击执行体
+        public SkillExecution spellingSkillExecution; //执行中的技能执行体
 
 
 
@@ -77,25 +71,25 @@ namespace LccModel
             AddComponent<SpellItemComponent>();
 
 
-            CurrentHealth = AddChildren<HealthPoint>();
-            CurrentHealth.current = GetComponent<AttributeComponent>().HealthPoint;
-            CurrentHealth.max = GetComponent<AttributeComponent>().HealthPointMax;
-            CurrentHealth.Reset();
+            currentHealth = AddChildren<HealthPoint>();
+            currentHealth.current = GetComponent<AttributeComponent>().HealthPoint;
+            currentHealth.max = GetComponent<AttributeComponent>().HealthPointMax;
+            currentHealth.Reset();
 
 
-            AttackAbility = AttachAttack();
+            attackAbility = AttachAttack();
 
-            EffectAssignActionAbility = AttachAction<EffectAssignActionAbility>();
-            AddStatusActionAbility = AttachAction<AddStatusActionAbility>();
+            effectAssignActionAbility = AttachAction<EffectAssignActionAbility>();
+            addStatusActionAbility = AttachAction<AddStatusActionAbility>();
 
-            SpellAttackActionAbility = AttachAction<SpellAttackActionAbility>();
-            AttackBlockActionAbility = AttachAction<AttackBlockActionAbility>();
-            SpellSkillActionAbility = AttachAction<SpellSkillActionAbility>();
+            spellAttackActionAbility = AttachAction<SpellAttackActionAbility>();
+            attackBlockActionAbility = AttachAction<AttackBlockActionAbility>();
+            spellSkillActionAbility = AttachAction<SpellSkillActionAbility>();
 
-            SpellItemActionAbility = AttachAction<SpellItemActionAbility>();
+            spellItemActionAbility = AttachAction<SpellItemActionAbility>();
 
-            DamageActionAbility = AttachAction<DamageActionAbility>();
-            CureActionAbility = AttachAction<CureActionAbility>();
+            damageActionAbility = AttachAction<DamageActionAbility>();
+            cureActionAbility = AttachAction<CureActionAbility>();
 
 
 
@@ -104,21 +98,21 @@ namespace LccModel
 
         #region 接口
 
-        public void ReceiveDamage(IActionExecution combatAction)
+        public void ReceiveDamage(IActionExecution actionExecution)
         {
-            var damageAction = combatAction as DamageAction;
-            CurrentHealth.Minus(damageAction.DamageValue);
+            var damageAction = actionExecution as DamageAction;
+            currentHealth.Minus(damageAction.damageValue);
         }
 
-        public void ReceiveCure(IActionExecution combatAction)
+        public void ReceiveCure(IActionExecution actionExecution)
         {
-            var cureAction = combatAction as CureAction;
-            CurrentHealth.Add(cureAction.CureValue);
+            var cureAction = actionExecution as CureAction;
+            currentHealth.Add(cureAction.cureValue);
         }
 
         public bool CheckDead()
         {
-            return CurrentHealth.Value <= 0;
+            return currentHealth.Value <= 0;
         }
         #endregion
 
@@ -159,14 +153,14 @@ namespace LccModel
         {
             GetComponent<StatusComponent>().OnStatusRemove(statusAbility);
         }
-        public bool HasStatus(string statusTypeId)
+        public bool HasStatus(int statusId)
         {
-            return GetComponent<StatusComponent>().TypeIdStatuses.ContainsKey(statusTypeId);
+            return GetComponent<StatusComponent>().statusDict.ContainsKey(statusId);
         }
 
-        public StatusAbility GetStatus(string statusTypeId)
+        public StatusAbility GetStatus(int statusId)
         {
-            return GetComponent<StatusComponent>().TypeIdStatuses[statusTypeId][0];
+            return GetComponent<StatusComponent>().statusDict[statusId][0];
         }
         #endregion
 
@@ -174,8 +168,6 @@ namespace LccModel
         public SkillAbility AttachSkill(object configObject)
         {
             var skill = AttachAbility<SkillAbility>(configObject);
-            NameSkills.Add(skill.SkillConfig.Name, skill);
-            IdSkills.Add(skill.SkillConfig.Id, skill);
             return skill;
         }
         #endregion
@@ -189,31 +181,31 @@ namespace LccModel
         #endregion
 
         #region 行动点事件
-        public void ListenActionPoint(ActionPointType actionPointType, Action<Entity> action)
+        public void ListenActionPoint(ActionPointType type, Action<Entity> action)
         {
-            GetComponent<ActionPointComponent>().AddListener(actionPointType, action);
+            GetComponent<ActionPointComponent>().AddListener(type, action);
         }
 
-        public void UnListenActionPoint(ActionPointType actionPointType, Action<Entity> action)
+        public void UnListenActionPoint(ActionPointType type, Action<Entity> action)
         {
-            GetComponent<ActionPointComponent>().RemoveListener(actionPointType, action);
+            GetComponent<ActionPointComponent>().RemoveListener(type, action);
         }
 
-        public void TriggerActionPoint(ActionPointType actionPointType, Entity action)
+        public void TriggerActionPoint(ActionPointType type, Entity action)
         {
-            GetComponent<ActionPointComponent>().TriggerActionPoint(actionPointType, action);
+            GetComponent<ActionPointComponent>().TriggerActionPoint(type, action);
         }
         #endregion
 
         #region 条件事件
-        public void ListenerCondition(ConditionType conditionType, Action action, object paramObj = null)
+        public void ListenerCondition(ConditionType type, Action action, object obj = null)
         {
-            GetComponent<ConditionComponent>().AddListener(conditionType, action, paramObj);
+            GetComponent<ConditionComponent>().AddListener(type, action, obj);
         }
 
-        public void UnListenCondition(ConditionType conditionType, Action action)
+        public void UnListenCondition(ConditionType type, Action action)
         {
-            GetComponent<ConditionComponent>().RemoveListener(conditionType, action);
+            GetComponent<ConditionComponent>().RemoveListener(type, action);
         }
         #endregion
     }

@@ -9,9 +9,9 @@ namespace LccModel
         {
             get
             {
-                if (this.RemoveStatus != null)
+                if (this.StatusConfigObject != null)
                 {
-                    return $"移除 [ {this.RemoveStatus.Name} ] 状态效果";
+                    return $"移除 [ {this.StatusConfigObject.Name} ] 状态效果";
                 }
                 return "移除状态效果";
             }
@@ -19,6 +19,6 @@ namespace LccModel
 
         [ToggleGroup("Enabled")]
         [LabelText("状态配置")]
-        public StatusConfigObject RemoveStatus;
+        public StatusConfigObject StatusConfigObject;
     }
 }

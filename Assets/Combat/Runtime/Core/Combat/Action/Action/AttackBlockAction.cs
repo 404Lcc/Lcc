@@ -2,7 +2,7 @@
 {
     public class AttackBlockActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity { get { return GetParent<CombatEntity>(); } set { } }
+        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
         public bool Enable { get; set; }
 
 
@@ -10,7 +10,12 @@
         {
             OwnerEntity.ListenActionPoint(ActionPointType.PreReceiveAttackEffect, TryBlock);
         }
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
 
+            OwnerEntity.UnListenActionPoint(ActionPointType.PreReceiveAttackEffect, TryBlock);
+        }
         public bool TryMakeAction(out AttackBlockAction action)
         {
             if (Enable == false)
@@ -30,8 +35,8 @@
         {
             if (TryGetComponent(out AbilityProbabilityTriggerComponent probabilityTriggerComponent))
             {
-                var r = RandomHelper.RandomNumber(0, 10000);
-                return r < probabilityTriggerComponent.Probability;
+                var r = RandomUtil.RandomNumber(0, 10000);
+                return r < probabilityTriggerComponent.probability;
             }
             return false;
         }
@@ -43,7 +48,7 @@
                 if (TryMakeAction(out var attackBlockAction))
                 {
                     attackBlockAction.ActionAbility = this;
-                    attackBlockAction.AttackExecution = (action as SpellAttackAction).AttackExecution;
+                    attackBlockAction.attackExecution = (action as SpellAttackAction).attackExecution;
                     attackBlockAction.ApplyBlock();
                 }
             }
@@ -55,7 +60,7 @@
     /// </summary>
     public class AttackBlockAction : Entity, IActionExecution
     {
-        public AttackExecution AttackExecution { get; set; }
+        public AttackExecution attackExecution;
 
         // 行动能力
         public Entity ActionAbility { get; set; }
@@ -83,7 +88,7 @@
         {
             PreProcess();
 
-            AttackExecution.SetBlocked();
+            attackExecution.SetBlocked();
 
             PostProcess();
 

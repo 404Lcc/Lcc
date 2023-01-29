@@ -4,16 +4,16 @@ namespace LccModel
 {
     public class ExecutionEffectComponent : Component
     {
-        public List<ExecutionEffect> ExecutionEffects { get; private set; } = new List<ExecutionEffect>();
+        public List<ExecutionEffect> executionEffectList = new List<ExecutionEffect>();
 
 
         public override void Awake()
         {
-            if (GetParent<SkillExecution>().ExecutionObject == null)
+            if (GetParent<SkillExecution>().executionObject == null)
             {
                 return;
             }
-            foreach (var effect in GetParent<SkillExecution>().ExecutionObject.ExecuteClips)
+            foreach (var effect in GetParent<SkillExecution>().executionObject.ExecuteClipList)
             {
                 var executionEffect = Parent.AddChildren<ExecutionEffect, ExecuteClipData>(effect);
                 AddEffect(executionEffect);
@@ -22,12 +22,12 @@ namespace LccModel
 
         public void AddEffect(ExecutionEffect executionEffect)
         {
-            ExecutionEffects.Add(executionEffect);
+            executionEffectList.Add(executionEffect);
         }
 
         public void BeginExecute()
         {
-            foreach (var item in ExecutionEffects)
+            foreach (var item in executionEffectList)
             {
                 item.BeginExecute();
             }

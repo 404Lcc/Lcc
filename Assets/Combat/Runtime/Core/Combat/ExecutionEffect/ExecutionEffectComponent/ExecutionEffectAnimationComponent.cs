@@ -4,7 +4,7 @@ namespace LccModel
 {
     public class ExecutionEffectAnimationComponent : Component
     {
-        public AnimationClip AnimationClip { get; set; }
+        public AnimationClip animationClip;
 
 
         public override void Awake()
@@ -14,7 +14,7 @@ namespace LccModel
 
         public void OnTriggerExecutionEffect(Entity entity)
         {
-            Parent.GetParent<SkillExecution>().OwnerEntity.Publish(AnimationClip);
+            Parent.GetParent<SkillExecution>().OwnerEntity.Publish(animationClip);
         }
     }
 }

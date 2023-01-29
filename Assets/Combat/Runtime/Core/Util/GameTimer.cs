@@ -10,9 +10,7 @@ namespace LccModel
 
         public bool IsFinished => _time >= _maxTime;
         public bool IsRunning => _time < _maxTime;
-
         public float Time => _time;
-
         public float MaxTime
         {
             get => _maxTime;

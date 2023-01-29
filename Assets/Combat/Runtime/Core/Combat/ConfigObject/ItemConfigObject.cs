@@ -9,26 +9,25 @@ using Sirenix.OdinInspector;
 namespace LccModel
 {
     [CreateAssetMenu(fileName = "道具配置", menuName = "技能|状态/道具配置")]
-    [LabelText("道具配置")]
     public class ItemConfigObject : SerializedScriptableObject
     {
-        [LabelText("道具ID"), DelayedProperty]
+        [LabelText("道具Id")]
         public int Id;
-        [LabelText("道具名称"), DelayedProperty]
+        [LabelText("道具名称")]
         public string Name = "道具1";
 
         [LabelText("冷却时间"), SuffixLabel("毫秒", true)]
         public uint ColdTime;
 
         [LabelText("附加状态效果")]
-        public bool EnableChildrenStatuses;
+        public bool EnableChildStatus;
 
         [HideReferenceObjectPicker]
-        [LabelText("附加状态效果列表"), ShowIf("EnableChildrenStatuses"), ListDrawerSettings(DraggableItems = false, ShowItemCount = false, CustomAddFunction = "AddChildStatus")]
-        public List<ChildStatus> ChildrenStatuses = new List<ChildStatus>();
+        [LabelText("附加状态效果列表"), ShowIf("EnableChildStatus"), ListDrawerSettings(DraggableItems = false, ShowItemCount = false, CustomAddFunction = "AddChildStatus")]
+        public List<ChildStatus> StatusList = new List<ChildStatus>();
         private void AddChildStatus()
         {
-            ChildrenStatuses.Add(new ChildStatus());
+            StatusList.Add(new ChildStatus());
         }
 
 
@@ -40,7 +39,7 @@ namespace LccModel
         [LabelText("效果列表"), Space(30)]
         [ListDrawerSettings(Expanded = true, DraggableItems = false, ShowItemCount = false, HideAddButton = true)]
         [HideReferenceObjectPicker]
-        public List<Effect> Effects = new List<Effect>();
+        public List<Effect> EffectList = new List<Effect>();
 
 
 
@@ -78,7 +77,7 @@ namespace LccModel
                 var effect = Activator.CreateInstance(effectType) as Effect;
                 effect.Enabled = true;
                 effect.IsItemEffect = true;
-                Effects.Add(effect);
+                EffectList.Add(effect);
                 EffectTypeName = "(添加效果)";
             }
         }

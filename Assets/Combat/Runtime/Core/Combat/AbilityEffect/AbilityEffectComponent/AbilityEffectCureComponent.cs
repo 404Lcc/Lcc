@@ -1,20 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace LccModel
 {
     public class AbilityEffectCureComponent : Component
     {
-        public CureEffect CureEffect { get; set; }
-        public string CureValueProperty { get; set; }
+        public CureEffect cureEffect;
+        public string cureValueFormula;
 
 
         public override void Awake()
         {
-            CureEffect = GetParent<AbilityEffect>().EffectConfig as CureEffect;
-            CureValueProperty = CureEffect.CureValueFormula;
+            cureEffect = GetParent<AbilityEffect>().effectConfig as CureEffect;
+            cureValueFormula = cureEffect.CureValueFormula;
             ((Entity)Parent).OnEvent(nameof(AbilityEffect.StartAssignEffect), OnAssignEffect);
         }
 
@@ -25,7 +22,7 @@ namespace LccModel
 
         private int ParseValue()
         {
-            var expression = ExpressionHelper.TryEvaluate(CureValueProperty);
+            var expression = ExpressionHelper.TryEvaluate(cureValueFormula);
             if (expression.Parameters.ContainsKey("生命值上限"))
             {
                 expression.Parameters["生命值上限"].Value = GetParent<AbilityEffect>().OwnerEntity.GetComponent<AttributeComponent>().HealthPoint.Value;
@@ -36,7 +33,7 @@ namespace LccModel
         private void OnAssignEffect(Entity entity)
         {
             var effectAssignAction = entity as EffectAssignAction;
-            if (GetParent<AbilityEffect>().OwnerEntity.CureActionAbility.TryMakeAction(out var action))
+            if (GetParent<AbilityEffect>().OwnerEntity.cureActionAbility.TryMakeAction(out var action))
             {
                 effectAssignAction.FillDatasToAction(action);
                 action.ApplyCure();

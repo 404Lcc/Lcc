@@ -5,15 +5,15 @@ namespace LccModel
     public class Entity : AObjectBase
     {
         #region ÊÂ¼þ
-        public T Publish<T>(T TEvent) where T : class
+        public T Publish<T>(T t) where T : class
         {
             var eventComponent = GetComponent<EventComponent>();
             if (eventComponent == null)
             {
-                return TEvent;
+                return t;
             }
-            eventComponent.Publish(TEvent);
-            return TEvent;
+            eventComponent.Publish(t);
+            return t;
         }
         public SubscribeSubject Subscribe<T>(Action<T> action) where T : class
         {
@@ -25,16 +25,6 @@ namespace LccModel
             return eventComponent.Subscribe(action);
         }
 
-        public SubscribeSubject Subscribe<T>(Action<T> action, Entity disposeWith) where T : class
-        {
-            var eventComponent = GetComponent<EventComponent>();
-            if (eventComponent == null)
-            {
-                eventComponent = AddComponent<EventComponent>();
-            }
-            return eventComponent.Subscribe(action).DisposeWith(disposeWith);
-        }
-
         public void UnSubscribe<T>(Action<T> action) where T : class
         {
             var eventComponent = GetComponent<EventComponent>();
@@ -44,45 +34,45 @@ namespace LccModel
             }
         }
 
-        public void FireEvent(string eventType)
+        public void FireEvent(string type)
         {
-            FireEvent(eventType, this);
+            FireEvent(type, this);
         }
 
-        public void FireEvent(string eventType, Entity entity)
+        public void FireEvent(string type, Entity entity)
         {
             var eventComponent = GetComponent<EventComponent>();
             if (eventComponent != null)
             {
-                eventComponent.FireEvent(eventType, entity);
+                eventComponent.FireEvent(type, entity);
             }
         }
 
-        public void OnEvent(string eventType, Action<Entity> action)
+        public void OnEvent(string type, Action<Entity> action)
         {
             var eventComponent = GetComponent<EventComponent>();
             if (eventComponent == null)
             {
                 eventComponent = AddComponent<EventComponent>();
             }
-            eventComponent.OnEvent(eventType, action);
+            eventComponent.OnEvent(type, action);
         }
 
-        public void OffEvent(string eventType, Action<Entity> action)
+        public void OffEvent(string type, Action<Entity> action)
         {
             var eventComponent = GetComponent<EventComponent>();
             if (eventComponent != null)
             {
-                eventComponent.OffEvent(eventType, action);
+                eventComponent.OffEvent(type, action);
             }
         }
         #endregion
 
         public bool TryGetComponent<T>(out T component) where T : Component
         {
-            if (Components.TryGetValue(typeof(T), out var c))
+            if (Components.TryGetValue(typeof(T), out var temp))
             {
-                component = c as T;
+                component = temp as T;
                 return true;
             }
             component = null;

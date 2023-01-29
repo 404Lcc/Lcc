@@ -8,12 +8,11 @@ namespace LccModel
     [CreateAssetMenu(fileName = "Execution", menuName = "¼¼ÄÜ|×´Ì¬/Execution")]
     public class ExecutionObject : ScriptableObject
     {
-        [DelayedProperty]
         public string Id;
         public float TotalTime;
 
         [ReadOnly, Space(10)]
-        public List<ExecuteClipData> ExecuteClips = new List<ExecuteClipData>();
+        public List<ExecuteClipData> ExecuteClipList = new List<ExecuteClipData>();
 
 #if UNITY_EDITOR
 

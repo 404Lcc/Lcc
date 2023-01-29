@@ -2,7 +2,7 @@
 {
     public class CureActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity { get { return GetParent<CombatEntity>(); } set { } }
+        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
         public bool Enable { get; set; }
 
 
@@ -28,7 +28,7 @@
     public class CureAction : Entity, IActionExecution
     {
         // 治疗数值
-        public int CureValue { get; set; }
+        public int cureValue;
 
 
 
@@ -50,9 +50,9 @@
         //前置处理
         private void PreProcess()
         {
-            if (SourceAssignAction != null && SourceAssignAction.AbilityEffect != null)
+            if (SourceAssignAction != null && SourceAssignAction.abilityEffect != null)
             {
-                CureValue = SourceAssignAction.AbilityEffect.GetComponent<AbilityEffectCureComponent>().GetCureValue();
+                cureValue = SourceAssignAction.abilityEffect.GetComponent<AbilityEffectCureComponent>().GetCureValue();
             }
         }
 
@@ -60,7 +60,7 @@
         {
             PreProcess();
 
-            if (Target.CurrentHealth.IsFull() == false)
+            if (Target.currentHealth.IsFull() == false)
             {
                 Target.ReceiveCure(this);
             }

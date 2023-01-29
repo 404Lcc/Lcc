@@ -7,8 +7,7 @@ namespace LccModel
     {
         public override string Label => "治疗英雄";
 
-        [ToggleGroup("Enabled"), LabelText("治疗取值")]
+        [ToggleGroup("Enabled"), LabelText("取值")]
         public string CureValueFormula;
-        public string CureValueProperty { get; set; }
     }
 }

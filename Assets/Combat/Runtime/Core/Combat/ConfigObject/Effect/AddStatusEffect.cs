@@ -12,9 +12,9 @@ namespace LccModel
         {
             get
             {
-                if (this.AddStatus != null)
+                if (this.StatusConfigObject != null)
                 {
-                    return $"施加 [ {this.AddStatus.Name} ] 状态效果";
+                    return $"施加 [ {this.StatusConfigObject.Name} ] 状态效果";
                 }
                 return "施加状态效果";
             }
@@ -22,7 +22,7 @@ namespace LccModel
 
         [ToggleGroup("Enabled")]
         [LabelText("状态配置")]
-        public StatusConfigObject AddStatus;
+        public StatusConfigObject StatusConfigObject;
 
         //public ET.StatusConfig AddStatusConfig { get; set; }
 
@@ -33,6 +33,6 @@ namespace LccModel
         [HideReferenceObjectPicker]
         [ToggleGroup("Enabled")]
         [LabelText("参数列表")]
-        public Dictionary<string, string> Params = new Dictionary<string, string>();
+        public Dictionary<string, string> ParamsDict = new Dictionary<string, string>();
     }
 }

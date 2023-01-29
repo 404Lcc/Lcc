@@ -1,4 +1,6 @@
-﻿namespace LccModel
+﻿using NPOI.SS.UserModel;
+
+namespace LccModel
 {
     /// <summary>
     /// 条件触发组件
@@ -6,19 +8,27 @@
     public class AbilityEffectConditionTriggerComponent : Component
     {
         public override bool DefaultEnable => false;
-        public string ConditionParamValue { get; set; }
+        public string conditionValueFormula;
 
 
         public override void OnEnable()
         {
-            var conditionType = GetParent<AbilityEffect>().EffectConfig.ConditionType;
-            var conditionParam = ConditionParamValue;
+            var conditionType = GetParent<AbilityEffect>().effectConfig.ConditionType;
+            var conditionParam = conditionValueFormula;
             Parent.GetParent<StatusAbility>().OwnerEntity.ListenerCondition(conditionType, OnConditionTrigger, conditionParam);
         }
 
         private void OnConditionTrigger()
         {
-            GetParent<AbilityEffect>().TryAssignEffectToOwner();
+            this.GetParent<AbilityEffect>().TryAssignEffectToOwner();
+        }
+
+        public override void OnDisable()
+        {
+            base.OnDisable();
+
+            var conditionType = GetParent<AbilityEffect>().effectConfig.ConditionType;
+            Parent.GetParent<StatusAbility>().OwnerEntity.UnListenCondition(conditionType, OnConditionTrigger);
         }
     }
 }

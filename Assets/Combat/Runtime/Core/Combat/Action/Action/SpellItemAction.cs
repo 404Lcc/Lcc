@@ -2,7 +2,7 @@
 {
     public class SpellItemActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity { get { return GetParent<CombatEntity>(); } set { } }
+        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
         public bool Enable { get; set; }
 
 
@@ -25,7 +25,7 @@
 
     public class SpellItemAction : Entity, IActionExecution
     {
-        public ItemAbility ItemAbility { get; set; }
+        public ItemAbility itemAbility;
 
         // 行动能力
         public Entity ActionAbility { get; set; }
@@ -54,7 +54,7 @@
             PreProcess();
 
 
-            ItemAbility.GetComponent<AbilityEffectComponent>().TryAssignAllEffectsToTarget(Target);
+            itemAbility.GetComponent<AbilityEffectComponent>().TryAssignAllEffectToTarget(Target);
 
 
             PostProcess();

@@ -5,7 +5,7 @@ namespace LccModel
 {
     public class SpellSkillActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity { get { return GetParent<CombatEntity>(); } set { } }
+        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
         public bool Enable { get; set; }
 
 
@@ -30,12 +30,12 @@ namespace LccModel
     /// </summary>
     public class SpellSkillAction : Entity, IActionExecution, IUpdate
     {
-        public SkillAbility SkillAbility { get; set; }
-        public SkillExecution SkillExecution { get; set; }
-        public List<CombatEntity> SkillTargets { get; set; } = new List<CombatEntity>();
-        public CombatEntity InputTarget { get; set; }
-        public Vector3 InputPoint { get; set; }
-        public float InputDirection { get; set; }
+        public SkillAbility skillAbility;
+        public SkillExecution skillExecution;
+        public List<CombatEntity> inputSkillTargetList = new List<CombatEntity>();
+        public CombatEntity inputTarget;
+        public Vector3 inputPoint;
+        public float inputDirection;
 
         // 行动能力
         public Entity ActionAbility { get; set; }
@@ -61,24 +61,24 @@ namespace LccModel
         public void SpellSkill(bool actionOccupy = true)
         {
             PreProcess();
-            SkillExecution = SkillAbility.CreateExecution() as SkillExecution;
+            skillExecution = skillAbility.CreateExecution() as SkillExecution;
             //SkillExecution.Name = SkillAbility.Name;
-            if (SkillTargets.Count > 0)
+            if (inputSkillTargetList.Count > 0)
             {
-                SkillExecution.SkillTargets.AddRange(SkillTargets);
+                skillExecution.inputSkillTargetList.AddRange(inputSkillTargetList);
             }
-            SkillExecution.ActionOccupy = actionOccupy;
-            SkillExecution.InputTarget = InputTarget;
-            SkillExecution.InputPoint = InputPoint;
-            SkillExecution.InputDirection = InputDirection;
-            SkillExecution.BeginExecute();
+            skillExecution.actionOccupy = actionOccupy;
+            skillExecution.inputTarget = inputTarget;
+            skillExecution.inputPoint = inputPoint;
+            skillExecution.inputDirection = inputDirection;
+            skillExecution.BeginExecute();
         }
 
         public void Update()
         {
-            if (SkillExecution != null)
+            if (skillExecution != null)
             {
-                if (SkillExecution.IsDisposed)
+                if (skillExecution.IsDisposed)
                 {
                     PostProcess();
                     FinishAction();

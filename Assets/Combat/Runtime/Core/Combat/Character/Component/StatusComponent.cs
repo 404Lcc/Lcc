@@ -4,42 +4,47 @@ namespace LccModel
 {
     public class RemoveStatusEvent
     {
-        public CombatEntity CombatEntity { get; set; }
-        public StatusAbility Status { get; set; }
-        public long StatusId { get; set; }
+        public CombatEntity combatEntity;
+        public StatusAbility status;
+        public long statusId;
     }
+
     public class StatusComponent : Component
     {
         public CombatEntity CombatEntity => GetParent<CombatEntity>();
-        public List<StatusAbility> Statuses { get; set; } = new List<StatusAbility>();
-        public Dictionary<string, List<StatusAbility>> TypeIdStatuses { get; set; } = new Dictionary<string, List<StatusAbility>>();
+
+
+        public List<StatusAbility> statusList = new List<StatusAbility>();
+        public Dictionary<int, List<StatusAbility>> statusDict = new Dictionary<int, List<StatusAbility>>();
 
 
         public StatusAbility AttachStatus(object configObject)
         {
             var status = CombatEntity.AttachAbility<StatusAbility>(configObject);
-            if (!TypeIdStatuses.ContainsKey(status.StatusConfig.Id))
+            if (!statusDict.ContainsKey(status.statusConfig.Id))
             {
-                TypeIdStatuses.Add(status.StatusConfig.Id, new List<StatusAbility>());
+                statusDict.Add(status.statusConfig.Id, new List<StatusAbility>());
             }
-            TypeIdStatuses[status.StatusConfig.Id].Add(status);
-            Statuses.Add(status);
+            statusDict[status.statusConfig.Id].Add(status);
+            statusList.Add(status);
             return status;
         }
 
         public void OnStatusRemove(StatusAbility statusAbility)
         {
-            TypeIdStatuses[statusAbility.StatusConfig.Id].Remove(statusAbility);
-            if (TypeIdStatuses[statusAbility.StatusConfig.Id].Count == 0)
+            statusDict[statusAbility.statusConfig.Id].Remove(statusAbility);
+            if (statusDict[statusAbility.statusConfig.Id].Count == 0)
             {
-                TypeIdStatuses.Remove(statusAbility.StatusConfig.Id);
+                statusDict.Remove(statusAbility.statusConfig.Id);
             }
-            Statuses.Remove(statusAbility);
+            statusList.Remove(statusAbility);
+
+
             this.Publish(new RemoveStatusEvent()
             {
-                CombatEntity = CombatEntity,
-                Status = statusAbility,
-                StatusId = statusAbility.Id
+                combatEntity = CombatEntity,
+                status = statusAbility,
+                statusId = statusAbility.Id
             });
         }
 
@@ -56,18 +61,18 @@ namespace LccModel
                     {
                         continue;
                     }
-                    foreach (var effect in status.GetComponent<AbilityEffectComponent>().AbilityEffects)
+                    foreach (var effect in status.GetComponent<AbilityEffectComponent>().abilityEffectList)
                     {
-                        if (effect.Enable && effect.TryGetComponent(out AbilityEffectActionControlComponent actionControlComponent))
+                        if (effect.enable && effect.TryGetComponent(out AbilityEffectActionControlComponent actionControlComponent))
                         {
-                            tempActionControl = tempActionControl | actionControlComponent.ActionControlEffect.ActionControlType;
+                            tempActionControl = tempActionControl | actionControlComponent.actionControlEffect.ActionControlType;
                         }
                     }
                 }
             }
 
-            parentEntity.ActionControlType = tempActionControl;
-            var moveForbid = parentEntity.ActionControlType.HasFlag(ActionControlType.MoveForbid);
+            parentEntity.actionControlType = tempActionControl;
+            var moveForbid = parentEntity.actionControlType.HasFlag(ActionControlType.MoveForbid);
             parentEntity.GetComponent<MotionComponent>().Enable = !moveForbid;
         }
     }

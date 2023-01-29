@@ -2,6 +2,6 @@
 {
     public class AbilityLevelComponent : Component
     {
-        public int Level { get; set; } = 1;
+        public int level;
     }
 }
