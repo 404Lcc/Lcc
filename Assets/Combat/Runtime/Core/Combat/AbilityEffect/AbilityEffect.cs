@@ -1,4 +1,6 @@
-﻿namespace LccModel
+﻿using System.Collections.Generic;
+
+namespace LccModel
 {
     public partial class AbilityEffect : Entity
     {
@@ -82,6 +84,47 @@
             }
         }
 
+        public void ParseParams()
+        {
+            if (OwnerAbility is StatusAbility status)
+            {
+                if (TryGetComponent(out AbilityEffectIntervalTriggerComponent intervalTriggerComponent))
+                {
+                    intervalTriggerComponent.intervalValueFormula = ParseParams(effectConfig.Interval, status.paramsDict);
+                }
+                if (TryGetComponent(out AbilityEffectConditionTriggerComponent conditionTriggerComponent))
+                {
+                    conditionTriggerComponent.conditionValueFormula = ParseParams(effectConfig.ConditionParams, status.paramsDict);
+                }
+                if (effectConfig is AttributeModifyEffect attributeModify && TryGetComponent(out AbilityEffectAttributeModifyComponent attributeModifyComponent))
+                {
+                    attributeModifyComponent.numericValueFormula = ParseParams(attributeModify.NumericValueFormula, status.paramsDict);
+                }
+
+
+
+                if (effectConfig is DamageEffect damage && TryGetComponent(out AbilityEffectDamageComponent damageComponent))
+                {
+                    damageComponent.damageValueFormula = ParseParams(damage.DamageValueFormula, status.paramsDict);
+                }
+                if (effectConfig is CureEffect cure && TryGetComponent(out AbilityEffectCureComponent cureComponent))
+                {
+                    cureComponent.cureValueFormula = ParseParams(cure.CureValueFormula, status.paramsDict);
+                }
+
+            }
+        }
+        private string ParseParams(string originValue, Dictionary<string, string> paramsDict)
+        {
+            foreach (var aInputKVItem in paramsDict)
+            {
+                if (!string.IsNullOrEmpty(originValue))
+                {
+                    originValue = originValue.Replace(aInputKVItem.Key, aInputKVItem.Value);
+                }
+            }
+            return originValue;
+        }
 
 
 

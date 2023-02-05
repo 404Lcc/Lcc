@@ -9,11 +9,13 @@
 
         public override void Awake()
         {
-            attributeModifyEffect = GetParent<AbilityEffect>().effectConfig as AttributeModifyEffect;
+            GetParent<AbilityEffect>().ParseParams();
+            var numericValue = numericValueFormula;
 
+            attributeModifyEffect = GetParent<AbilityEffect>().effectConfig as AttributeModifyEffect;
             var parentEntity = Parent.GetParent<StatusAbility>().GetParent<CombatEntity>();
 
-            var numericValue = this.numericValueFormula;
+   
             numericValue = numericValue.Replace("%", "");
             var expression = ExpressionHelper.TryEvaluate(numericValue);
             var value = (float)expression.Value;

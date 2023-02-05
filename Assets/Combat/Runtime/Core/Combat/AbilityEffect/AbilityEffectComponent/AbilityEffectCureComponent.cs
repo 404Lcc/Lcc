@@ -10,8 +10,13 @@ namespace LccModel
 
         public override void Awake()
         {
+
             cureEffect = GetParent<AbilityEffect>().effectConfig as CureEffect;
             cureValueFormula = cureEffect.CureValueFormula;
+
+
+            GetParent<AbilityEffect>().ParseParams();
+
             ((Entity)Parent).OnEvent(nameof(AbilityEffect.StartAssignEffect), OnAssignEffect);
         }
 

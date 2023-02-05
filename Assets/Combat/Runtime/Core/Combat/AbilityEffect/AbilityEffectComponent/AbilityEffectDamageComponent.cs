@@ -12,6 +12,10 @@ namespace LccModel
         {
             damageEffect = GetParent<AbilityEffect>().effectConfig as DamageEffect;
             damageValueFormula = damageEffect.DamageValueFormula;
+
+
+            GetParent<AbilityEffect>().ParseParams();
+
             ((Entity)Parent).OnEvent(nameof(AbilityEffect.StartAssignEffect), OnAssignEffect);
         }
 

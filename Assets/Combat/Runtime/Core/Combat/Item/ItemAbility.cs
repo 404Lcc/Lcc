@@ -34,7 +34,7 @@ namespace LccModel
                     status.OwnerEntity = OwnerEntity;
                     status.isChildStatus = true;
                     status.childStatusData = item;
-                    status.ProcessInputKVParams(item.ParamsDict);
+                    status.SetParams(item.ParamsDict);
                     status.ActivateAbility();
                     _statusList.Add(status);
                 }

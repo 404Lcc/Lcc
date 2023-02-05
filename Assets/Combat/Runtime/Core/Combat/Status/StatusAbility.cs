@@ -11,6 +11,8 @@ namespace LccModel
 
         public StatusConfigObject statusConfig;
 
+        public Dictionary<string, string> paramsDict;
+
         public bool isChildStatus;
         public int duration;
         public ChildStatus childStatusData;
@@ -29,7 +31,10 @@ namespace LccModel
             }
         }
 
-
+        public void SetParams(Dictionary<string, string> paramsDict)
+        {
+            this.paramsDict = paramsDict;
+        }
         public void ActivateAbility()
         {
             Enable = true;
@@ -42,7 +47,7 @@ namespace LccModel
                     status.OwnerEntity = OwnerEntity;
                     status.isChildStatus = true;
                     status.childStatusData = childStatusData;
-                    status.ProcessInputKVParams(childStatusData.ParamsDict);
+                    status.SetParams(childStatusData.ParamsDict);
                     status.ActivateAbility();
                     _statusList.Add(status);
                 }
@@ -79,50 +84,6 @@ namespace LccModel
         public Entity CreateExecution()
         {
             return null;
-        }
-
-
-
-        public void ProcessInputKVParams(Dictionary<string, string> Params)
-        {
-            foreach (var abilityEffect in GetComponent<AbilityEffectComponent>().abilityEffectList)
-            {
-                var effect = abilityEffect.effectConfig;
-
-                if (abilityEffect.TryGetComponent(out AbilityEffectIntervalTriggerComponent intervalTriggerComponent))
-                {
-                    intervalTriggerComponent.intervalValueFormula = ProcessReplaceKV(effect.Interval, Params);
-                }
-                if (abilityEffect.TryGetComponent(out AbilityEffectConditionTriggerComponent conditionTriggerComponent))
-                {
-                    conditionTriggerComponent.conditionValueFormula = ProcessReplaceKV(effect.ConditionParams, Params);
-                }
-
-                if (effect is AttributeModifyEffect attributeModify && abilityEffect.TryGetComponent(out AbilityEffectAttributeModifyComponent attributeModifyComponent))
-                {
-                    attributeModifyComponent.numericValueFormula = ProcessReplaceKV(attributeModify.NumericValueFormula, Params);
-                }
-                if (effect is DamageEffect damage && abilityEffect.TryGetComponent(out AbilityEffectDamageComponent damageComponent))
-                {
-                    damageComponent.damageValueFormula = ProcessReplaceKV(damage.DamageValueFormula, Params);
-                }
-                if (effect is CureEffect cure && abilityEffect.TryGetComponent(out AbilityEffectCureComponent cureComponent))
-                {
-                    cureComponent.cureValueFormula = ProcessReplaceKV(cure.CureValueFormula, Params);
-                }
-            }
-        }
-
-        private string ProcessReplaceKV(string originValue, Dictionary<string, string> Params)
-        {
-            foreach (var aInputKVItem in Params)
-            {
-                if (!string.IsNullOrEmpty(originValue))
-                {
-                    originValue = originValue.Replace(aInputKVItem.Key, aInputKVItem.Value);
-                }
-            }
-            return originValue;
         }
     }
 }

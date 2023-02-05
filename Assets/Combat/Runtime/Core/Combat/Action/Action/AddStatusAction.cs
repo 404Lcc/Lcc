@@ -79,7 +79,7 @@ namespace LccModel
             status.duration = (int)addStatusEffect.Duration;
 
 
-            status.ProcessInputKVParams(addStatusEffect.ParamsDict);
+            status.SetParams(addStatusEffect.ParamsDict);
 
             status.AddComponent<StatusLifeTimeComponent>();
             status.ActivateAbility();

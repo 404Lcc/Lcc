@@ -14,7 +14,11 @@
         {
             base.Awake();
 
+            GetParent<AbilityEffect>().ParseParams();
+
             var intervalExpression = intervalValueFormula;
+
+
             var expression = ExpressionHelper.TryEvaluate(intervalExpression);
             if (expression.Parameters.ContainsKey("技能等级"))
             {

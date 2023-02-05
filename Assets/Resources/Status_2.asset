@@ -40,6 +40,43 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 2|LccModel.DamageEffect, Unity.Combat
+    - Name: IsSkillEffect
+      Entry: 5
+      Data: false
+    - Name: IsExecutionEffect
+      Entry: 5
+      Data: false
+    - Name: IsItemEffect
+      Entry: 5
+      Data: false
+    - Name: Enabled
+      Entry: 5
+      Data: true
+    - Name: EffectTriggerType
+      Entry: 3
+      Data: 4
+    - Name: ConditionType
+      Entry: 3
+      Data: 0
+    - Name: ActionPointType
+      Entry: 3
+      Data: 0
+    - Name: Interval
+      Entry: 1
+      Data: "\u95F4\u9694"
+    - Name: ConditionParams
+      Entry: 6
+      Data: 
+    - Name: DecoratorList
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[LccModel.EffectDecorator, Unity.Combat]],
+        mscorlib
+    - Name: 
+      Entry: 12
       Data: 0
     - Name: 
       Entry: 13
@@ -47,8 +84,29 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: EffectTypeName
+      Entry: 1
+      Data: "(\u6DFB\u52A0\u6548\u679C\u4FEE\u9970)"
+    - Name: DamageType
+      Entry: 3
+      Data: 0
+    - Name: DamageValueFormula
+      Entry: 1
+      Data: "\u4F24\u5BB3"
+    - Name: CanCrit
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   Id: 2
-  Name: "\u72B6\u60012"
+  Name: "\u4F24\u5BB3"
   StatusType: 0
   Duration: 0
   ShowInStatusSlot: 0

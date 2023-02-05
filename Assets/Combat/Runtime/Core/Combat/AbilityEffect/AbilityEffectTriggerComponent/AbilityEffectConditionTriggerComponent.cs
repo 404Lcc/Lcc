@@ -13,8 +13,12 @@
         {
             base.Awake();
 
-            var conditionType = GetParent<AbilityEffect>().effectConfig.ConditionType;
+            GetParent<AbilityEffect>().ParseParams();
             var conditionParam = conditionValueFormula;
+
+
+
+            var conditionType = GetParent<AbilityEffect>().effectConfig.ConditionType;
             Parent.GetParent<StatusAbility>().OwnerEntity.ListenerCondition(conditionType, OnConditionTrigger, conditionParam);
         }
         public override void OnDestroy()
