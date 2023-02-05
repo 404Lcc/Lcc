@@ -4,29 +4,29 @@
     {
         public AttributeModifyEffect attributeModifyEffect;
         public string numericValueFormula;
+        public AttributeType attributeType;
+
         public float value;
+
 
 
         public override void Awake()
         {
             attributeModifyEffect = GetParent<AbilityEffect>().effectConfig as AttributeModifyEffect;
             numericValueFormula = attributeModifyEffect.NumericValueFormula;
-
-
+            attributeType = attributeModifyEffect.AttributeType;
 
             CombatEntity parentEntity = Parent.GetParent<StatusAbility>().GetParent<CombatEntity>();
-
-
             value = ExpressionUtil.Evaluate<float>(numericValueFormula, GetParent<AbilityEffect>().GetParamsDict());
 
-            var attributeType = attributeModifyEffect.AttributeType.ToString();
+
             if (attributeModifyEffect.ModifyType == ModifyType.Add)
             {
-                parentEntity.GetComponent<AttributeComponent>().GetNumeric(attributeType).AddFinalAddModifier(value);
+                parentEntity.GetComponent<AttributeComponent>().GetNumeric(attributeType.ToString()).AddFinalAddModifier(value);
             }
             if (attributeModifyEffect.ModifyType == ModifyType.PercentAdd)
             {
-                parentEntity.GetComponent<AttributeComponent>().GetNumeric(attributeType).AddFinalPctAddModifier(value);
+                parentEntity.GetComponent<AttributeComponent>().GetNumeric(attributeType.ToString()).AddFinalPctAddModifier(value);
             }
 
         }

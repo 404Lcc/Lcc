@@ -35,8 +35,6 @@ namespace LccModel
 
         public void OnStatusesChanged(StatusAbility statusAbility)
         {
-            var parentEntity = CombatEntity;
-
             var tempActionControl = ActionControlType.None;
             foreach (var item in CombatEntity.Children.Values)
             {
@@ -48,7 +46,7 @@ namespace LccModel
                     }
                     foreach (var effect in status.GetComponent<AbilityEffectComponent>().abilityEffectList)
                     {
-                        if (effect.enable && effect.TryGetComponent(out AbilityEffectActionControlComponent actionControlComponent))
+                        if (effect.TryGetComponent(out AbilityEffectActionControlComponent actionControlComponent))
                         {
                             tempActionControl = tempActionControl | actionControlComponent.actionControlEffect.ActionControlType;
                         }
@@ -56,9 +54,9 @@ namespace LccModel
                 }
             }
 
-            parentEntity.actionControlType = tempActionControl;
-            var moveForbid = parentEntity.actionControlType.HasFlag(ActionControlType.MoveForbid);
-            parentEntity.GetComponent<MotionComponent>().SetEnable(!moveForbid);
+            CombatEntity.actionControlType = tempActionControl;
+            var moveForbid = CombatEntity.actionControlType.HasFlag(ActionControlType.MoveForbid);
+            CombatEntity.GetComponent<MotionComponent>().SetEnable(!moveForbid);
         }
     }
 }

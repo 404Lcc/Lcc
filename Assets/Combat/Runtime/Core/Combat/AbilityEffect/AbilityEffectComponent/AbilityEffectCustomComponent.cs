@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using System.Linq;
 
 namespace LccModel
 {
     public class AbilityEffectCustomComponent : Component
     {
+        public CustomEffect customEffect;
 
         public override void Awake()
         {
             base.Awake();
 
-            CustomEffect customEffect = (CustomEffect)GetParent<AbilityEffect>().effectConfig;
+            customEffect = (CustomEffect)GetParent<AbilityEffect>().effectConfig;
+
             if (customEffect.CustomEffectType == "强体")
             {
                 var probabilityTriggerComponent = GetParent<AbilityEffect>().OwnerEntity.attackBlockActionAbility.AddComponent<AbilityProbabilityTriggerComponent>();

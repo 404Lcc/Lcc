@@ -108,7 +108,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 7
       Data: 
@@ -117,19 +117,7 @@ MonoBehaviour:
       Data: "\u95F4\u9694"
     - Name: $v
       Entry: 1
-      Data: 1000
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: "\u6CBB\u7597"
-    - Name: $v
-      Entry: 1
-      Data: 50
+      Data: 6000
     - Name: 
       Entry: 8
       Data: 

@@ -20,11 +20,6 @@ namespace LccModel
 
         public int GetCureValue()
         {
-            return ParseValue();
-        }
-
-        private int ParseValue()
-        {
             return Mathf.CeilToInt(ExpressionUtil.Evaluate<float>(cureValueFormula, GetParent<AbilityEffect>().GetParamsDict()));
         }
 

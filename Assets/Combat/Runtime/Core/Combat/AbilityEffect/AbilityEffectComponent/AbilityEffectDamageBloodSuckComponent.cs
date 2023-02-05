@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
-namespace LccModel
+﻿namespace LccModel
 {
     public class AbilityEffectDamageBloodSuckComponent : Component
     {

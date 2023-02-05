@@ -4,7 +4,6 @@ namespace LccModel
 {
     public partial class AbilityEffect : Entity
     {
-        public bool enable;
         public Effect effectConfig;
 
         public Entity OwnerAbility => (Entity)Parent; //AbilityEffect是挂在能力上的
