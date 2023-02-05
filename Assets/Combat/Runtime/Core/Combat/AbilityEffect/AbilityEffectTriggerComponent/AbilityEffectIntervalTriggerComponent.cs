@@ -5,21 +5,15 @@
     /// </summary>
     public class AbilityEffectIntervalTriggerComponent : Component, IUpdate
     {
-        public override bool DefaultEnable => false;
+
         public string intervalValueFormula;
         public GameTimer intervalTimer;
 
 
-        public void Update()
+        public override void Awake()
         {
-            if (intervalTimer != null)
-            {
-                intervalTimer.UpdateAsRepeat(UnityEngine.Time.deltaTime, GetParent<AbilityEffect>().TryAssignEffectToOwner);
-            }
-        }
+            base.Awake();
 
-        public override void OnEnable()
-        {
             var intervalExpression = intervalValueFormula;
             var expression = ExpressionHelper.TryEvaluate(intervalExpression);
             if (expression.Parameters.ContainsKey("技能等级"))
@@ -29,6 +23,14 @@
 
             var interval = (int)expression.Value / 1000f;
             intervalTimer = new GameTimer(interval);
+        }
+
+        public void Update()
+        {
+            if (intervalTimer != null)
+            {
+                intervalTimer.UpdateAsRepeat(UnityEngine.Time.deltaTime, GetParent<AbilityEffect>().TryAssignEffectToOwner);
+            }
         }
     }
 }

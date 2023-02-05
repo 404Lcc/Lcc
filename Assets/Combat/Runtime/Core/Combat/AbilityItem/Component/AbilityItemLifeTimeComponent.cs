@@ -2,9 +2,6 @@
 {
     public class AbilityItemLifeTimeComponent : Component, IUpdate
     {
-        public override bool DefaultEnable => true;
-
-
         public GameTimer lifeTimer;
 
         public override void Awake<P1>(P1 p1)

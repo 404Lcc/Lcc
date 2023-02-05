@@ -7,23 +7,21 @@ namespace LccModel
 {
     public class AbilityEffectDamageBloodSuckComponent : Component
     {
-        public override bool DefaultEnable => false;
 
-
-        public override void OnEnable()
+        public override void Awake()
         {
-            base.OnEnable();
+            base.Awake();
             GetParent<AbilityEffect>().OwnerEntity.damageActionAbility.AddComponent<DamageBloodSuckComponent>();
-
         }
-        public override void OnDisable()
+        public override void OnDestroy()
         {
-            base.OnDisable();
-
+            base.OnDestroy();
             if (GetParent<AbilityEffect>().OwnerEntity.damageActionAbility.TryGetComponent<DamageBloodSuckComponent>(out var damageBloodSuckComponent))
             {
                 damageBloodSuckComponent.Dispose();
             }
+
         }
+
     }
 }

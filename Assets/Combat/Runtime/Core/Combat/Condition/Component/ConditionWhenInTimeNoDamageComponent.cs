@@ -4,7 +4,6 @@ namespace LccModel
 {
     public class ConditionWhenInTimeNoDamageComponent : Component, IUpdate
     {
-        public override bool DefaultEnable => false;
 
         private GameTimer noDamageTimer;
 
@@ -27,7 +26,6 @@ namespace LccModel
         public void StartListen(Action whenNoDamageInTimeCallback)
         {
             noDamageTimer.OnFinish(whenNoDamageInTimeCallback);
-            Enable = true;
         }
 
         public void Update()

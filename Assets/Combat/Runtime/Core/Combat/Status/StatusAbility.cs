@@ -33,6 +33,7 @@ namespace LccModel
         public void ActivateAbility()
         {
             Enable = true;
+            GetComponent<AbilityEffectComponent>().EnableEffect();
             if (statusConfig.EnableChildStatus)
             {
                 foreach (var childStatusData in statusConfig.StatusList)
@@ -46,17 +47,12 @@ namespace LccModel
                     _statusList.Add(status);
                 }
             }
-
-
-            GetComponent<AbilityEffectComponent>().Enable = true;
         }
 
 
         public void EndAbility()
         {
             Enable = false;
-
-
             if (statusConfig.EnableChildStatus)
             {
                 foreach (var item in _statusList)

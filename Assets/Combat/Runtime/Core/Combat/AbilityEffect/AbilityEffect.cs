@@ -15,51 +15,47 @@
 
             this.effectConfig = p1 as Effect;
 
-
-            if (this.effectConfig is ActionControlEffect)
-            {
-                AddComponent<AbilityEffectActionControlComponent>();
-            }
-
             if (this.effectConfig is AddStatusEffect)
             {
                 AddComponent<AbilityEffectAddStatusComponent>();
             }
 
-            if (this.effectConfig is AttributeModifyEffect)
-            {
-                AddComponent<AbilityEffectAttributeModifyComponent>();
-            }
-
             if (this.effectConfig is ClearAllStatusEffect)
             {
             }
-
             if (this.effectConfig is CureEffect)
             {
                 AddComponent<AbilityEffectCureComponent>();
-            }
-
-            if (this.effectConfig is CustomEffect)
-            {
-                AddComponent<AbilityEffectCustomComponent>();
             }
 
             if (this.effectConfig is DamageEffect)
             {
                 AddComponent<AbilityEffectDamageComponent>();
             }
-
             if (this.effectConfig is RemoveStatusEffect)
             {
             }
+            AddComponent<AbilityEffectDecoratosComponent>();
+        }
 
+        public void EnableEffect()
+        {
+            if (this.effectConfig is ActionControlEffect)
+            {
+                AddComponent<AbilityEffectActionControlComponent>();
+            }
+            if (this.effectConfig is AttributeModifyEffect)
+            {
+                AddComponent<AbilityEffectAttributeModifyComponent>();
+            }
+            if (this.effectConfig is CustomEffect)
+            {
+                AddComponent<AbilityEffectCustomComponent>();
+            }
             if (this.effectConfig is DamageBloodSuckEffect)
             {
                 AddComponent<AbilityEffectDamageBloodSuckComponent>();
             }
-
-            AddComponent<AbilityEffectDecoratosComponent>();
 
             var triggable = !(effectConfig is ActionControlEffect) && !(effectConfig is AttributeModifyEffect);
             if (triggable)
@@ -87,28 +83,6 @@
         }
 
 
-        public override void OnDestroy()
-        {
-            DisableEffect();
-        }
-
-        public void EnableEffect()
-        {
-            enable = true;
-            foreach (var item in Components.Values)
-            {
-                ((Component)item).Enable = true;
-            }
-        }
-
-        public void DisableEffect()
-        {
-            enable = false;
-            foreach (var item in Components.Values)
-            {
-                ((Component)item).Enable = false;
-            }
-        }
 
 
         public void TryTriggerEffect()

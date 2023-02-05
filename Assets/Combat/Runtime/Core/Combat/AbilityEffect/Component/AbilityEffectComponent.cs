@@ -4,8 +4,6 @@ namespace LccModel
 {
     public class AbilityEffectComponent : Component
     {
-        public override bool DefaultEnable => false;
-
         public List<AbilityEffect> abilityEffectList = new List<AbilityEffect>();
         public AbilityEffect damageAbilityEffect;
         public AbilityEffect cureAbilityEffect;
@@ -34,20 +32,11 @@ namespace LccModel
                 }
             }
         }
-
-        public override void OnEnable()
+        public void EnableEffect()
         {
             foreach (var item in abilityEffectList)
             {
                 item.EnableEffect();
-            }
-        }
-
-        public override void OnDisable()
-        {
-            foreach (var item in abilityEffectList)
-            {
-                item.DisableEffect();
             }
         }
 

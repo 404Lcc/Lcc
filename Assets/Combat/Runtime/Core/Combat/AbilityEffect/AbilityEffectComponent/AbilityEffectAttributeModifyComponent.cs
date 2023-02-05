@@ -2,7 +2,6 @@
 {
     public class AbilityEffectAttributeModifyComponent : Component
     {
-        public override bool DefaultEnable => false;
         public AttributeModifyEffect attributeModifyEffect;
         public string numericValueFormula;
         public float value;
@@ -11,12 +10,9 @@
         public override void Awake()
         {
             attributeModifyEffect = GetParent<AbilityEffect>().effectConfig as AttributeModifyEffect;
-        }
 
-        public override void OnEnable()
-        {
             var parentEntity = Parent.GetParent<StatusAbility>().GetParent<CombatEntity>();
-            var attributeModifyEffect = this.attributeModifyEffect;
+
             var numericValue = this.numericValueFormula;
             numericValue = numericValue.Replace("%", "");
             var expression = ExpressionHelper.TryEvaluate(numericValue);
@@ -34,8 +30,10 @@
             this.value = value;
         }
 
-        public override void OnDisable()
+        public override void OnDestroy()
         {
+            base.OnDestroy();
+
             var parentEntity = Parent.GetParent<StatusAbility>().GetParent<CombatEntity>();
             var attributeType = attributeModifyEffect.AttributeType.ToString();
             if (attributeModifyEffect.ModifyType == ModifyType.Add)

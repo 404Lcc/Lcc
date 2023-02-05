@@ -4,9 +4,6 @@ namespace LccModel
 {
     public class MotionComponent : Component, IUpdate
     {
-        public override bool DefaultEnable => true;
-
-
         public Vector3 Position { get => GetParent<CombatEntity>().Position; set => GetParent<CombatEntity>().Position = value; }
         public Quaternion Rotation { get => GetParent<CombatEntity>().Rotation; set => GetParent<CombatEntity>().Rotation = value; }
 
@@ -17,6 +14,10 @@ namespace LccModel
         public Vector3 moveVector;
         private Vector3 originPos;
 
+        public void SetEnable(bool enable)
+        {
+
+        }
 
         public void Update()
         {

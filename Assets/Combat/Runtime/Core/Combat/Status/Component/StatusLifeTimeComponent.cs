@@ -2,7 +2,6 @@
 {
     public class StatusLifeTimeComponent : Component, IUpdate
     {
-        public override bool DefaultEnable => true;
 
         public GameTimer lifeTimer;
 

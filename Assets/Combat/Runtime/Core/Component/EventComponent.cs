@@ -9,8 +9,6 @@ namespace LccModel
 
     public class EventComponent : Component
     {
-        public override bool DefaultEnable => false;
-
         private Dictionary<Type, List<object>> actionDict = new Dictionary<Type, List<object>>();
         private Dictionary<int, Entity> entityDict = new Dictionary<int, Entity>();
         private Dictionary<string, List<object>> fireActionDict = new Dictionary<string, List<object>>();

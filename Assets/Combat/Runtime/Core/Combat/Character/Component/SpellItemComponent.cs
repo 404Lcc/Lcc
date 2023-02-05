@@ -2,7 +2,6 @@
 {
     public class SpellItemComponent : Component
     {
-        public override bool DefaultEnable => true;
         public CombatEntity CombatEntity => GetParent<CombatEntity>();
 
         public void SpellItemWithTarget(ItemAbility itemAbility, CombatEntity targetEntity)

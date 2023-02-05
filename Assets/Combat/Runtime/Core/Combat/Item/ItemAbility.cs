@@ -42,8 +42,6 @@ namespace LccModel
 
         }
 
-
-
         public void EndAbility()
         {
             Enable = false;

@@ -5,13 +5,21 @@
     /// </summary>
     public class AbilityEffectActionTriggerComponent : Component
     {
-        public override bool DefaultEnable => false;
 
-
-        public override void OnEnable()
+        public override void Awake()
         {
+            base.Awake();
             var actionPointType = GetParent<AbilityEffect>().effectConfig.ActionPointType;
             GetParent<AbilityEffect>().GetParent<StatusAbility>().OwnerEntity.ListenActionPoint(actionPointType, OnActionPointTrigger);
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+
+            var actionPointType = GetParent<AbilityEffect>().effectConfig.ActionPointType;
+            GetParent<AbilityEffect>().GetParent<StatusAbility>().OwnerEntity.UnListenActionPoint(actionPointType, OnActionPointTrigger);
         }
 
         private void OnActionPointTrigger(Entity combatAction)
@@ -19,12 +27,6 @@
             GetParent<AbilityEffect>().TryAssignEffectToOwner();
         }
 
-        public override void OnDisable()
-        {
-            base.OnDisable();
 
-            var actionPointType = GetParent<AbilityEffect>().effectConfig.ActionPointType;
-            GetParent<AbilityEffect>().GetParent<StatusAbility>().OwnerEntity.UnListenActionPoint(actionPointType, OnActionPointTrigger);
-        }
     }
 }

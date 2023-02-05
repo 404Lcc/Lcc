@@ -2,7 +2,6 @@
 {
     public class ExecutionEffectAssignToTargetComponent : Component
     {
-        public override bool DefaultEnable => false;
         public EffectApplyType effectApplyType;
 
 

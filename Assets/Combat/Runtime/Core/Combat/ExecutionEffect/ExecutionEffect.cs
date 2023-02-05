@@ -48,7 +48,12 @@
                 AddComponent<ExecutionEffectParticleEffectComponent>().particleEffectPrefab = animationEffect.ParticleEffect;
             }
 
-            //时间到触发执行效果
+
+        }
+
+        public void BeginExecute()
+        {
+            var clipType = executeClipData.ExecuteClipType;
             if (clipType == ExecuteClipType.ActionEvent)
             {
                 AddComponent<ExecutionEffectTimeTriggerComponent>().startTime = executeClipData.StartTime;
@@ -58,17 +63,10 @@
                 AddComponent<ExecutionEffectTimeTriggerComponent>().startTime = executeClipData.StartTime;
                 GetComponent<ExecutionEffectTimeTriggerComponent>().endTime = executeClipData.EndTime;
             }
-        }
 
-        public void BeginExecute()
-        {
             if (!TryGetComponent(out ExecutionEffectTimeTriggerComponent timeTriggerComponent))
             {
                 TriggerEffect();
-            }
-            foreach (var item in Components.Values)
-            {
-                ((Component)item).Enable = true;
             }
         }
 
