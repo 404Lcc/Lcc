@@ -25,7 +25,7 @@ namespace LccModel
 
         private int ParseValue()
         {
-            return Mathf.CeilToInt(ExpressionHelper.Evaluate<float>(cureValueFormula, GetParent<AbilityEffect>().GetParamsDict()));
+            return Mathf.CeilToInt(ExpressionUtil.Evaluate<float>(cureValueFormula, GetParent<AbilityEffect>().GetParamsDict()));
         }
 
         private void OnAssignEffect(Entity entity)

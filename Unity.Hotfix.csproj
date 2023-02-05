@@ -412,9 +412,6 @@
     <Reference Include="System.Collections.Immutable">
       <HintPath>Assets\3rdPlugins\Roslyn\System.Collections.Immutable.dll</HintPath>
     </Reference>
-    <Reference Include="GameDevWare.Dynamic.Expressions">
-      <HintPath>Assets\3rdPlugins\GameDevWare.Dynamic.Expressions\GameDevWare.Dynamic.Expressions.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CodeAnalysis">
       <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.dll</HintPath>
     </Reference>

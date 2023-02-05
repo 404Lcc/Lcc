@@ -17,7 +17,7 @@
             CombatEntity parentEntity = Parent.GetParent<StatusAbility>().GetParent<CombatEntity>();
 
 
-            value = ExpressionHelper.Evaluate<float>(numericValueFormula, GetParent<AbilityEffect>().GetParamsDict());
+            value = ExpressionUtil.Evaluate<float>(numericValueFormula, GetParent<AbilityEffect>().GetParamsDict());
 
             var attributeType = attributeModifyEffect.AttributeType.ToString();
             if (attributeModifyEffect.ModifyType == ModifyType.Add)

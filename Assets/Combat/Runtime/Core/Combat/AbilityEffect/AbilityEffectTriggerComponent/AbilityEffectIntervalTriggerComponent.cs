@@ -19,7 +19,7 @@
             intervalValueFormula = effect.Interval;
 
 
-            var interval = ExpressionHelper.Evaluate<int>(intervalValueFormula, GetParent<AbilityEffect>().GetParamsDict()) / 1000f;
+            var interval = ExpressionUtil.Evaluate<int>(intervalValueFormula, GetParent<AbilityEffect>().GetParamsDict()) / 1000f;
             intervalTimer = new GameTimer(interval);
         }
 

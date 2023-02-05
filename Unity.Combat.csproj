@@ -83,7 +83,7 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageBloodSuckComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\ItemConfigObject.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\SkillConfigObject.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Util\ExpressionHelper.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Util\ExpressionUtil.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Attack\AttackExecution.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\AbilityEffectIntervalTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Object\Entity.cs" />
@@ -106,7 +106,6 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Mono\AbilityItemProxy.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageReduceWithTargetCountComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Component\EventComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Util\ExpressionParser.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\Action\SpellAttackAction.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\ActionPointComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\ActionComponent\AbilityProbabilityTriggerComponent.cs" />
@@ -410,9 +409,6 @@
     </Reference>
     <Reference Include="System.Collections.Immutable">
       <HintPath>Assets\3rdPlugins\Roslyn\System.Collections.Immutable.dll</HintPath>
-    </Reference>
-    <Reference Include="GameDevWare.Dynamic.Expressions">
-      <HintPath>Assets\3rdPlugins\GameDevWare.Dynamic.Expressions\GameDevWare.Dynamic.Expressions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis">
       <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.dll</HintPath>
