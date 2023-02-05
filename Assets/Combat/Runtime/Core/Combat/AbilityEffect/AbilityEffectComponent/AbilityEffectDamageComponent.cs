@@ -13,9 +13,6 @@ namespace LccModel
             damageEffect = GetParent<AbilityEffect>().effectConfig as DamageEffect;
             damageValueFormula = damageEffect.DamageValueFormula;
 
-
-            GetParent<AbilityEffect>().ParseParams();
-
             ((Entity)Parent).OnEvent(nameof(AbilityEffect.StartAssignEffect), OnAssignEffect);
         }
 
@@ -26,12 +23,7 @@ namespace LccModel
 
         private int ParseDamage()
         {
-            var expression = ExpressionHelper.TryEvaluate(damageValueFormula);
-            if (expression.Parameters.ContainsKey("自身攻击力"))
-            {
-                expression.Parameters["自身攻击力"].Value = GetParent<AbilityEffect>().OwnerEntity.GetComponent<AttributeComponent>().Attack.Value;
-            }
-            return Mathf.CeilToInt((float)expression.Value);
+            return Mathf.CeilToInt(ExpressionHelper.Evaluate<float>(damageValueFormula, GetParent<AbilityEffect>().GetParamsDict()));
         }
 
         private void OnAssignEffect(Entity entity)

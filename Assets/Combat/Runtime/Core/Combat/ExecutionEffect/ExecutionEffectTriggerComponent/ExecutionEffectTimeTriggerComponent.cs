@@ -14,8 +14,7 @@
 
             if (!string.IsNullOrEmpty(timeValueExpression))
             {
-                var expression = ExpressionHelper.TryEvaluate(timeValueExpression);
-                startTime = (int)expression.Value / 1000f;
+                startTime = ExpressionHelper.Evaluate<int>(timeValueExpression) / 1000f;
                 startTimer = new GameTimer(startTime);
             }
             else if (startTime > 0)

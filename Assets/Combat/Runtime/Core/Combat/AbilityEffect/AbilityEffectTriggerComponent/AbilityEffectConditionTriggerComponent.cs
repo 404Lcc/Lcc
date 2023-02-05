@@ -1,11 +1,13 @@
-﻿namespace LccModel
+﻿using System.Collections.Generic;
+
+namespace LccModel
 {
     /// <summary>
     /// 条件触发组件
     /// </summary>
     public class AbilityEffectConditionTriggerComponent : Component
     {
-
+        public Effect effect;
         public string conditionValueFormula;
 
 
@@ -13,13 +15,15 @@
         {
             base.Awake();
 
-            GetParent<AbilityEffect>().ParseParams();
-            var conditionParam = conditionValueFormula;
 
+            effect = GetParent<AbilityEffect>().effectConfig;
+            conditionValueFormula = effect.ConditionParams;
 
+            var paramsDict = GetParent<AbilityEffect>().GetParamsDict();
+            conditionValueFormula = ParseParams(conditionValueFormula, paramsDict);
 
             var conditionType = GetParent<AbilityEffect>().effectConfig.ConditionType;
-            Parent.GetParent<StatusAbility>().OwnerEntity.ListenerCondition(conditionType, OnConditionTrigger, conditionParam);
+            Parent.GetParent<StatusAbility>().OwnerEntity.ListenerCondition(conditionType, OnConditionTrigger, conditionValueFormula);
         }
         public override void OnDestroy()
         {
@@ -33,6 +37,16 @@
             this.GetParent<AbilityEffect>().TryAssignEffectToOwner();
         }
 
-
+        private string ParseParams(string origin, Dictionary<string, string> paramsDict)
+        {
+            foreach (var item in paramsDict)
+            {
+                if (!string.IsNullOrEmpty(origin))
+                {
+                    origin = origin.Replace(item.Key, item.Value);
+                }
+            }
+            return origin;
+        }
     }
 }

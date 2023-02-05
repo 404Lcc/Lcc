@@ -84,46 +84,23 @@ namespace LccModel
             }
         }
 
-        public void ParseParams()
+        public Dictionary<string, string> GetParamsDict()
         {
+            Dictionary<string, string> temp;
             if (OwnerAbility is StatusAbility status)
             {
-                if (TryGetComponent(out AbilityEffectIntervalTriggerComponent intervalTriggerComponent))
-                {
-                    intervalTriggerComponent.intervalValueFormula = ParseParams(effectConfig.Interval, status.paramsDict);
-                }
-                if (TryGetComponent(out AbilityEffectConditionTriggerComponent conditionTriggerComponent))
-                {
-                    conditionTriggerComponent.conditionValueFormula = ParseParams(effectConfig.ConditionParams, status.paramsDict);
-                }
-                if (effectConfig is AttributeModifyEffect attributeModify && TryGetComponent(out AbilityEffectAttributeModifyComponent attributeModifyComponent))
-                {
-                    attributeModifyComponent.numericValueFormula = ParseParams(attributeModify.NumericValueFormula, status.paramsDict);
-                }
-
-
-
-                if (effectConfig is DamageEffect damage && TryGetComponent(out AbilityEffectDamageComponent damageComponent))
-                {
-                    damageComponent.damageValueFormula = ParseParams(damage.DamageValueFormula, status.paramsDict);
-                }
-                if (effectConfig is CureEffect cure && TryGetComponent(out AbilityEffectCureComponent cureComponent))
-                {
-                    cureComponent.cureValueFormula = ParseParams(cure.CureValueFormula, status.paramsDict);
-                }
-
+                temp = status.paramsDict;
+                temp.Add("自身生命值", OwnerEntity.GetComponent<AttributeComponent>().HealthPoint.Value.ToString());
+                temp.Add("自身攻击力", OwnerEntity.GetComponent<AttributeComponent>().Attack.Value.ToString());
+                return temp;
             }
-        }
-        private string ParseParams(string originValue, Dictionary<string, string> paramsDict)
-        {
-            foreach (var aInputKVItem in paramsDict)
+            else
             {
-                if (!string.IsNullOrEmpty(originValue))
-                {
-                    originValue = originValue.Replace(aInputKVItem.Key, aInputKVItem.Value);
-                }
+                temp = new Dictionary<string, string>();
+                temp.Add("自身生命值", OwnerEntity.GetComponent<AttributeComponent>().HealthPoint.Value.ToString());
+                temp.Add("自身攻击力", OwnerEntity.GetComponent<AttributeComponent>().Attack.Value.ToString());
             }
-            return originValue;
+            return temp;
         }
 
 

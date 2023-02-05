@@ -1,23 +1,16 @@
-using B83.ExpressionParser;
+using System.Collections.Generic;
 
 namespace LccModel
 {
     public static class ExpressionHelper
     {
-        public static ExpressionParser ExpressionParser { get; set; } = new ExpressionParser();
-
-
-        public static Expression TryEvaluate(string expressionStr)
+        public static T Evaluate<T>(string expression, Dictionary<string, string> dict)
         {
-            Expression expression = null;
-            try
-            {
-                expression = ExpressionParser.EvaluateExpression(expressionStr);
-            }
-            catch
-            {
-            }
-            return expression;
+            return default;
+        }
+        public static T Evaluate<T>(string expression)
+        {
+            return default;
         }
     }
 }

@@ -15,8 +15,6 @@ namespace LccModel
             cureValueFormula = cureEffect.CureValueFormula;
 
 
-            GetParent<AbilityEffect>().ParseParams();
-
             ((Entity)Parent).OnEvent(nameof(AbilityEffect.StartAssignEffect), OnAssignEffect);
         }
 
@@ -27,12 +25,7 @@ namespace LccModel
 
         private int ParseValue()
         {
-            var expression = ExpressionHelper.TryEvaluate(cureValueFormula);
-            if (expression.Parameters.ContainsKey("生命值上限"))
-            {
-                expression.Parameters["生命值上限"].Value = GetParent<AbilityEffect>().OwnerEntity.GetComponent<AttributeComponent>().HealthPoint.Value;
-            }
-            return Mathf.CeilToInt((float)expression.Value);
+            return Mathf.CeilToInt(ExpressionHelper.Evaluate<float>(cureValueFormula, GetParent<AbilityEffect>().GetParamsDict()));
         }
 
         private void OnAssignEffect(Entity entity)

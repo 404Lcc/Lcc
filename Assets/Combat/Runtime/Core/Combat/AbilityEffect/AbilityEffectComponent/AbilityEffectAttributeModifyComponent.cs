@@ -9,16 +9,15 @@
 
         public override void Awake()
         {
-            GetParent<AbilityEffect>().ParseParams();
-            var numericValue = numericValueFormula;
-
             attributeModifyEffect = GetParent<AbilityEffect>().effectConfig as AttributeModifyEffect;
-            var parentEntity = Parent.GetParent<StatusAbility>().GetParent<CombatEntity>();
+            numericValueFormula = attributeModifyEffect.NumericValueFormula;
 
-   
-            numericValue = numericValue.Replace("%", "");
-            var expression = ExpressionHelper.TryEvaluate(numericValue);
-            var value = (float)expression.Value;
+
+
+            CombatEntity parentEntity = Parent.GetParent<StatusAbility>().GetParent<CombatEntity>();
+
+
+            value = ExpressionHelper.Evaluate<float>(numericValueFormula, GetParent<AbilityEffect>().GetParamsDict());
 
             var attributeType = attributeModifyEffect.AttributeType.ToString();
             if (attributeModifyEffect.ModifyType == ModifyType.Add)
@@ -29,7 +28,7 @@
             {
                 parentEntity.GetComponent<AttributeComponent>().GetNumeric(attributeType).AddFinalPctAddModifier(value);
             }
-            this.value = value;
+
         }
 
         public override void OnDestroy()

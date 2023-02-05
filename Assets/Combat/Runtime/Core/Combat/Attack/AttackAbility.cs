@@ -19,7 +19,7 @@ namespace LccModel
             damageEffect.EffectTriggerType = EffectTriggerType.Condition;
             damageEffect.CanCrit = true;
             damageEffect.DamageType = DamageType.Physic;
-            damageEffect.DamageValueFormula = $"自身攻击力";
+            damageEffect.DamageValueFormula = "自身攻击力";
             effects.Add(damageEffect);
             AddComponent<AbilityEffectComponent, List<Effect>>(effects);
 
