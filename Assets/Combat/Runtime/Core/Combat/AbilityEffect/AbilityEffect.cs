@@ -90,8 +90,6 @@ namespace LccModel
             if (OwnerAbility is StatusAbility status)
             {
                 temp = status.paramsDict;
-                temp.Add("自身生命值", OwnerEntity.GetComponent<AttributeComponent>().HealthPoint.Value.ToString());
-                temp.Add("自身攻击力", OwnerEntity.GetComponent<AttributeComponent>().Attack.Value.ToString());
                 return temp;
             }
             else

@@ -1,3 +1,4 @@
+using DynamicExpresso;
 using System.Collections.Generic;
 
 namespace LccModel
@@ -6,11 +7,18 @@ namespace LccModel
     {
         public static T Evaluate<T>(string expression, Dictionary<string, string> dict)
         {
-            return default;
+            Interpreter interpreter = new Interpreter();
+            foreach (var item in dict)
+            {
+                var value = float.Parse(item.Value);
+                interpreter.SetVariable(item.Key, value);
+            }
+            return interpreter.Eval<T>(expression);
         }
         public static T Evaluate<T>(string expression)
         {
-            return default;
+            Interpreter interpreter = new Interpreter();
+            return interpreter.Eval<T>(expression);
         }
     }
 }

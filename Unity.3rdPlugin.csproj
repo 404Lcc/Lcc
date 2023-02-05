@@ -205,12 +205,36 @@
     <Compile Include="Assets\3rdPlugins\ETTask\ETTaskHelper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\ProtoSyntax.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt16Serializer.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Exceptions\NoApplicableMethodException.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Identifier.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Parsing\TokenId.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Parsing\ParserConstants.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\ReferenceType.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Exceptions\UnknownIdentifierException.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Exceptions\DuplicateParameterException.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Detector.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Exceptions\ParseException.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Parsing\ParserSettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Parsing\Token.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\InterpreterOptions.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Reflection\ReflectionExtensions.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\IdentifiersInfo.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\ParserArguments.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Parameter.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Parsing\ParseSignatures.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Lambda.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Interpreter.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Exceptions\DynamicExpressoException.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\LanguageConstants.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Parsing\Parser.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Parsing\ErrorMessages.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Properties\AssemblyInfo.cs" />
+    <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Exceptions\ExceptionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdPlugins\NPOI\NPOI.OpenXmlFormats.dll" />
     <None Include="Assets\3rdPlugins\BouncyCastle\BouncyCastle.Crypto.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Serialization.dll" />
-    <None Include="Assets\3rdPlugins\GameDevWare.Dynamic.Expressions\GameDevWare.Dynamic.Expressions.xml" />
     <None Include="Assets\3rdPlugins\NPOI\NPOI.OOXML.dll" />
     <None Include="Assets\3rdPlugins\Demigiant\DOTween\DOTween.XML" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.xml" />
@@ -225,7 +249,6 @@
     <None Include="Assets\3rdPlugins\SharpZipLib\ICSharpCode.SharpZipLib.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.xml" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll" />
-    <None Include="Assets\3rdPlugins\GameDevWare.Dynamic.Expressions\GameDevWare.Dynamic.Expressions.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.xml" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.dll" />
     <None Include="Assets\3rdPlugins\Demigiant\DOTween\DOTween.dll" />
@@ -235,7 +258,6 @@
     <None Include="Assets\3rdPlugins\Unity.3rdPlugin.asmdef" />
     <None Include="Assets\3rdPlugins\Sirenix\Readme.txt" />
     <None Include="Assets\3rdPlugins\NPOI\NPOI.OpenXml4Net.dll" />
-    <None Include="Assets\3rdPlugins\GameDevWare.Dynamic.Expressions\link.xml" />
     <None Include="Assets\3rdPlugins\Roslyn\System.Reflection.Metadata.dll" />
     <None Include="Assets\3rdPlugins\Roslyn\System.Memory.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\link.xml" />
@@ -505,9 +527,6 @@
     </Reference>
     <Reference Include="System.Collections.Immutable">
       <HintPath>Assets\3rdPlugins\Roslyn\System.Collections.Immutable.dll</HintPath>
-    </Reference>
-    <Reference Include="GameDevWare.Dynamic.Expressions">
-      <HintPath>Assets\3rdPlugins\GameDevWare.Dynamic.Expressions\GameDevWare.Dynamic.Expressions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis">
       <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.dll</HintPath>

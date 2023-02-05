@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace LccModel
 {
@@ -33,7 +35,17 @@ namespace LccModel
 
         public void SetParams(Dictionary<string, string> paramsDict)
         {
-            this.paramsDict = paramsDict;
+            this.paramsDict = (Dictionary<string, string>)Clone(paramsDict);
+            this.paramsDict.Add("自身生命值", OwnerEntity.GetComponent<AttributeComponent>().HealthPoint.Value.ToString());
+            this.paramsDict.Add("自身攻击力", OwnerEntity.GetComponent<AttributeComponent>().Attack.Value.ToString());
+        }
+        public object Clone(object obj)
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(memoryStream, obj);
+            memoryStream.Position = 0;
+            return formatter.Deserialize(memoryStream);
         }
         public void ActivateAbility()
         {
