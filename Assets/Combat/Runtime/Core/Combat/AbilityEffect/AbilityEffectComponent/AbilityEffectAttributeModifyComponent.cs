@@ -4,8 +4,8 @@
     {
         public override bool DefaultEnable => false;
         public AttributeModifyEffect attributeModifyEffect;
-        public float value;
         public string numericValueFormula;
+        public float value;
 
 
         public override void Awake()

@@ -17,7 +17,7 @@ namespace LccModel
         {
             base.Awake(p1);
 
-            abilityExecution = p1 as IAbilityExecution;     //技能执行体
+            abilityExecution = p1 as IAbilityExecution;//技能执行体
 
             abilityEntity = abilityExecution.AbilityEntity;
 

@@ -1,13 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace LccModel
 {
-    /// <summary>
-    /// 技能施法组件
-    /// </summary>
     public class SpellSkillComponent : Component
     {
         public override bool DefaultEnable => true;

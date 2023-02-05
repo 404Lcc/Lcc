@@ -16,6 +16,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 211b851955cba4b45aa2da28f932ff8b, type: 2}
     - {fileID: 11400000, guid: 95593e1279321d94e9fc4932326463e4, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -189,7 +190,7 @@ MonoBehaviour:
       Data: "(\u6DFB\u52A0\u6548\u679C\u4FEE\u9970)"
     - Name: StatusConfigObject
       Entry: 10
-      Data: 0
+      Data: 1
     - Name: Duration
       Entry: 3
       Data: 10000

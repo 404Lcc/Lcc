@@ -34,65 +34,13 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: Effects
+    - Name: EffectList
       Entry: 7
       Data: 1|System.Collections.Generic.List`1[[LccModel.Effect, Unity.Combat]],
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 2|LccModel.CureEffect, Unity.Combat
-    - Name: IsSkillEffect
-      Entry: 5
-      Data: false
-    - Name: IsExecutionEffect
-      Entry: 5
-      Data: false
-    - Name: IsItemEffect
-      Entry: 5
-      Data: false
-    - Name: Enabled
-      Entry: 5
-      Data: true
-    - Name: EffectTriggerType
-      Entry: 3
-      Data: 2
-    - Name: ConditionType
-      Entry: 3
-      Data: 3
-    - Name: ActionPointType
-      Entry: 3
       Data: 0
-    - Name: Interval
-      Entry: 1
-      Data: 5000
-    - Name: ConditionParams
-      Entry: 1
-      Data: "\u6761\u4EF6"
-    - Name: DecoratorList
-      Entry: 7
-      Data: 3|System.Collections.Generic.List`1[[LccModel.EffectDecorator, Unity.Combat]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: EffectTypeName
-      Entry: 1
-      Data: "(\u6DFB\u52A0\u6548\u679C\u4FEE\u9970)"
-    - Name: CureValueFormula
-      Entry: 1
-      Data: "\u6062\u590D\u91CF"
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -100,7 +48,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   Id: 2
-  Name: "\u72B6\u60011"
+  Name: "\u72B6\u60012"
   StatusType: 0
   Duration: 0
   ShowInStatusSlot: 0

@@ -1,6 +1,4 @@
-﻿using NPOI.SS.UserModel;
-
-namespace LccModel
+﻿namespace LccModel
 {
     /// <summary>
     /// 条件触发组件

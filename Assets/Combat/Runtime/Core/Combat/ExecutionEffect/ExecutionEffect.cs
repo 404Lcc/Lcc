@@ -1,8 +1,5 @@
 ﻿namespace LccModel
 {
-    /// <summary>
-    /// 执行体效果，针对于技能执行体的效果，如播放动作、生成碰撞体、位移等这些和技能表现相关的效果
-    /// </summary>
     public partial class ExecutionEffect : Entity
     {
         public ExecuteClipData executeClipData;

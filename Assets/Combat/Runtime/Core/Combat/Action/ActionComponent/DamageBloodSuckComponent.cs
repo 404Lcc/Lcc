@@ -1,8 +1,5 @@
 ﻿namespace LccModel
 {
-    /// <summary>
-    /// 伤害吸血组件
-    /// </summary>
     public class DamageBloodSuckComponent : Component
     {
         public override void Awake()

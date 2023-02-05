@@ -2,9 +2,6 @@
 
 namespace LccModel
 {
-    /// <summary>
-    /// 状态能力执行体
-    /// </summary>
     public abstract class StatusExecution : Entity, IAbilityExecution
     {
         public Entity AbilityEntity { get; set; }

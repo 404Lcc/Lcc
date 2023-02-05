@@ -1,8 +1,5 @@
 ﻿namespace LccModel
 {
-    /// <summary>
-    /// 能力效果，如伤害、治疗、施加状态等这些和技能数值、状态相关的效果
-    /// </summary>
     public partial class AbilityEffect : Entity
     {
         public bool enable;
@@ -62,33 +59,25 @@
                 AddComponent<AbilityEffectDamageBloodSuckComponent>();
             }
 
-
-
-
-            // 效果修饰
             AddComponent<AbilityEffectDecoratosComponent>();
 
-            var triggable = !(this.effectConfig is ActionControlEffect) && !(this.effectConfig is AttributeModifyEffect);
+            var triggable = !(effectConfig is ActionControlEffect) && !(effectConfig is AttributeModifyEffect);
             if (triggable)
             {
-                // 立即触发
                 if (effectConfig.EffectTriggerType == EffectTriggerType.Instant)
                 {
                     TryAssignEffectToOwner();
                 }
-                // 行动点触发
                 var isAction = effectConfig.EffectTriggerType == EffectTriggerType.Action;
                 if (isAction)
                 {
                     AddComponent<AbilityEffectActionTriggerComponent>();
                 }
-                // 间隔触发
                 var isInterval = effectConfig.EffectTriggerType == EffectTriggerType.Interval && !string.IsNullOrEmpty(effectConfig.Interval);
                 if (isInterval)
                 {
                     AddComponent<AbilityEffectIntervalTriggerComponent>();
                 }
-                // 条件触发
                 var isCondition = effectConfig.EffectTriggerType == EffectTriggerType.Condition && !string.IsNullOrEmpty(effectConfig.ConditionParams);
                 if (isCondition)
                 {

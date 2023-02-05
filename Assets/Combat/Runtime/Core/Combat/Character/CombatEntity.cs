@@ -22,17 +22,17 @@ namespace LccModel
         #region 行动能力
 
         public EffectAssignActionAbility effectAssignActionAbility;//效果赋给行动能力
-        public AddStatusActionAbility addStatusActionAbility;  //施加状态行动能力
+        public AddStatusActionAbility addStatusActionAbility;//施加状态行动能力
 
         public SpellAttackActionAbility spellAttackActionAbility;//施法普攻行动能力
-        public AttackBlockActionAbility attackBlockActionAbility; //普攻格挡能力
-        public SpellSkillActionAbility spellSkillActionAbility; //施法技能行动能力
+        public AttackBlockActionAbility attackBlockActionAbility;//普攻格挡能力
+        public SpellSkillActionAbility spellSkillActionAbility;//施法技能行动能力
 
-        public SpellItemActionAbility spellItemActionAbility;  //使用物品行动能力
+        public SpellItemActionAbility spellItemActionAbility;//使用物品行动能力
 
 
-        public DamageActionAbility damageActionAbility;  //伤害行动能力
-        public CureActionAbility cureActionAbility;  //治疗行动能力
+        public DamageActionAbility damageActionAbility;//伤害行动能力
+        public CureActionAbility cureActionAbility;//治疗行动能力
 
 
 

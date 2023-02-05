@@ -16,15 +16,8 @@
             get; set;
         }
 
-
-        // 激活能力
         public void ActivateAbility();
-
-
-        // 结束能力
         public void EndAbility();
-
-        // 创建能力执行体
         public Entity CreateExecution();
     }
 }

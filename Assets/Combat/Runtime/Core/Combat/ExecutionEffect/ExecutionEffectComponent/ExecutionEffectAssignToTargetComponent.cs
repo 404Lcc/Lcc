@@ -1,8 +1,5 @@
 ﻿namespace LccModel
 {
-    /// <summary>
-    /// 执行体应用目标效果组件
-    /// </summary>
     public class ExecutionEffectAssignToTargetComponent : Component
     {
         public override bool DefaultEnable => false;

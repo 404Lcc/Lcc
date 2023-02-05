@@ -28,8 +28,6 @@ namespace LccModel
             AssetDatabase.SaveAssetIfDirty(this);
         }
 #if UNITY_EDITOR
-
-
         #region ×Ô¶¯ÃüÃû
         [OnInspectorGUI]
         private void OnInspectorGUI()

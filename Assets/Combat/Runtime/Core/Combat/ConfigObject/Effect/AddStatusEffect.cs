@@ -24,7 +24,6 @@ namespace LccModel
         [LabelText("状态配置")]
         public StatusConfigObject StatusConfigObject;
 
-        //public ET.StatusConfig AddStatusConfig { get; set; }
 
         [ToggleGroup("Enabled"), LabelText("持续时间"), SuffixLabel("毫秒", true)]
         public uint Duration;

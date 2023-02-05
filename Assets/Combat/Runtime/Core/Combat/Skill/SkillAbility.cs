@@ -24,10 +24,10 @@ namespace LccModel
 
             executionObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handler, $"Execution_{skillConfig.Id}", AssetSuffix.Asset, AssetType.Execution);
 
-            if (skillConfig.SkillSpellType == SkillSpellType.Passive)
-            {
-                ActivateAbility();
-            }
+            //if (skillConfig.SkillSpellType == SkillSpellType.Passive)
+            //{
+            //    ActivateAbility();
+            //}
         }
 
 
