@@ -2,29 +2,21 @@
 
 namespace LccModel
 {
-    /// <summary>
-    /// 条件触发组件
-    /// </summary>
     public class AbilityEffectConditionTriggerComponent : Component
     {
-        public Effect effect;
-        public string conditionValueFormula;
-        public ConditionType conditionType;
+        public Effect Effect => GetParent<AbilityEffect>().effect;
+        public string ConditionValueFormula => ParseParams(Effect.ConditionParams, GetParent<AbilityEffect>().GetParamsDict());
+        public ConditionType ConditionType => Effect.ConditionType;
 
+        public CombatEntity OwnerEntity => GetParent<AbilityEffect>().GetParent<StatusAbility>().OwnerEntity;
 
         public override void Awake()
         {
-            base.Awake();
-
-            effect = GetParent<AbilityEffect>().effectConfig;
-            conditionValueFormula = ParseParams(effect.ConditionParams, GetParent<AbilityEffect>().GetParamsDict());
-            conditionType = GetParent<AbilityEffect>().effectConfig.ConditionType;
-            Parent.GetParent<StatusAbility>().OwnerEntity.ListenerCondition(conditionType, OnConditionTrigger, conditionValueFormula);
+            OwnerEntity.ListenerCondition(ConditionType, OnConditionTrigger, ConditionValueFormula);
         }
         public override void OnDestroy()
         {
-            base.OnDestroy();
-            Parent.GetParent<StatusAbility>().OwnerEntity.UnListenCondition(conditionType, OnConditionTrigger);
+            OwnerEntity.UnListenCondition(ConditionType, OnConditionTrigger);
         }
 
         private void OnConditionTrigger()

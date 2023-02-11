@@ -19,7 +19,7 @@
             }
             else
             {
-                this.EndExecute();
+                EndExecute();
             }
         }
 
@@ -30,21 +30,17 @@
 
         public void BeginExecute()
         {
-            GetParent<CombatEntity>().spellingAttackExecution = this;
+            OwnerEntity.spellingAttackExecution = this;
         }
 
-        /// <summary>
-        /// 前置处理
-        /// </summary>
+
         private void PreProcess()
         {
             attackAction.Creator.TriggerActionPoint(ActionPointType.PreGiveAttackEffect, attackAction);
             attackAction.Target.TriggerActionPoint(ActionPointType.PreReceiveAttackEffect, attackAction);
         }
 
-        /// <summary>
-        /// 尝试触发普攻效果
-        /// </summary>
+
         private void TryTriggerAttackEffect()
         {
             hasTriggerDamage = true;
@@ -62,7 +58,7 @@
 
         public void EndExecute()
         {
-            GetParent<CombatEntity>().spellingAttackExecution = null;
+            OwnerEntity.spellingAttackExecution = null;
             attackAction.FinishAction();
             attackAction = null;
             Dispose();

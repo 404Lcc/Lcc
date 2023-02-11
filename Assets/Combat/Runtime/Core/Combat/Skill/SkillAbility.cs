@@ -9,8 +9,8 @@ namespace LccModel
         public bool Enable { get; set; }
 
 
-        public SkillConfigObject skillConfig;
-        public ExecutionConfigObject executionObject;
+        public SkillConfigObject skillConfigObject;
+        public ExecutionConfigObject executionConfigObject;
         public bool spelling;
 
         private List<StatusAbility> _statusList = new List<StatusAbility>();
@@ -19,15 +19,11 @@ namespace LccModel
         {
             base.Awake(p1);
 
-            skillConfig = p1 as SkillConfigObject;
-            AddComponent<AbilityEffectComponent, List<Effect>>(skillConfig.EffectList);
+            skillConfigObject = p1 as SkillConfigObject;
+            AddComponent<AbilityEffectComponent, List<Effect>>(skillConfigObject.EffectList);
 
-            executionObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handler, $"Execution_{skillConfig.Id}", AssetSuffix.Asset, AssetType.Execution);
+            executionConfigObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handler, $"Execution_{skillConfigObject.Id}", AssetSuffix.Asset, AssetType.Execution);
 
-            //if (skillConfig.SkillSpellType == SkillSpellType.Passive)
-            //{
-            //    ActivateAbility();
-            //}
         }
 
 
@@ -38,9 +34,9 @@ namespace LccModel
         {
             Enable = true;
 
-            if (skillConfig.EnableChildStatus)
+            if (skillConfigObject.EnableChildStatus)
             {
-                foreach (var item in skillConfig.StatusList)
+                foreach (var item in skillConfigObject.StatusList)
                 {
                     var status = OwnerEntity.AttachStatus(item.StatusConfigObject);
                     status.OwnerEntity = OwnerEntity;
@@ -56,7 +52,7 @@ namespace LccModel
         {
             Enable = false;
 
-            if (skillConfig.EnableChildStatus)
+            if (skillConfigObject.EnableChildStatus)
             {
                 foreach (var item in _statusList)
                 {
@@ -70,9 +66,9 @@ namespace LccModel
         public Entity CreateExecution()
         {
             var execution = OwnerEntity.AddChildren<SkillExecution, SkillAbility>(this);
-            execution.executionConfigObject = executionObject;
+            execution.executionConfigObject = executionConfigObject;
             execution.LoadExecutionEffect();
-            this.FireEvent(nameof(CreateExecution), execution);
+            FireEvent(nameof(CreateExecution), execution);
             return execution;
         }
     }

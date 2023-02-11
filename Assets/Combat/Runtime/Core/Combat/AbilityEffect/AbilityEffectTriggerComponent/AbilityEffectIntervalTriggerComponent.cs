@@ -1,12 +1,9 @@
 ﻿namespace LccModel
 {
-    /// <summary>
-    /// 间隔触发组件
-    /// </summary>
     public class AbilityEffectIntervalTriggerComponent : Component, IUpdate
     {
-        public Effect effect;
-        public string intervalValueFormula;
+        public Effect Effect => GetParent<AbilityEffect>().effect;
+        public string intervalValueFormula => Effect.Interval;
 
         public GameTimer intervalTimer;
 
@@ -15,11 +12,7 @@
         {
             base.Awake();
 
-            effect = GetParent<AbilityEffect>().effectConfig;
-            intervalValueFormula = effect.Interval;
-
-
-            var interval = ExpressionUtil.Evaluate<int>(intervalValueFormula, GetParent<AbilityEffect>().GetParamsDict()) / 1000f;
+            float interval = ExpressionUtil.Evaluate<int>(intervalValueFormula, GetParent<AbilityEffect>().GetParamsDict()) / 1000f;
             intervalTimer = new GameTimer(interval);
         }
 

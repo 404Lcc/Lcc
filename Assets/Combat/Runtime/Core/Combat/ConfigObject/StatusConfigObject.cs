@@ -91,7 +91,7 @@ namespace LccModel
                     .Where(x => x.GetCustomAttribute<EffectAttribute>() != null)
                     .Where(x => x.GetCustomAttribute<EffectAttribute>().EffectType == EffectTypeName)
                     .FirstOrDefault();
-                var effect = Activator.CreateInstance(effectType) as Effect;
+                Effect effect = (Effect)Activator.CreateInstance(effectType);
                 effect.Enabled = true;
 
                 EffectList.Add(effect);

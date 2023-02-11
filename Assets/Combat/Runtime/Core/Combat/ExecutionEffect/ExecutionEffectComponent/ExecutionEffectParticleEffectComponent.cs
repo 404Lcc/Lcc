@@ -4,6 +4,8 @@ namespace LccModel
 {
     public class ExecutionEffectParticleEffectComponent : Component
     {
+        public CombatEntity OwnerEntity => Parent.GetParent<SkillExecution>().OwnerEntity;
+
         public GameObject particleEffectPrefab;
         public GameObject particleEffect;
 
@@ -16,7 +18,7 @@ namespace LccModel
 
         public void OnTriggerStart(Entity entity)
         {
-            particleEffect = GameObject.Instantiate(particleEffectPrefab, Parent.GetParent<SkillExecution>().OwnerEntity.Position, Parent.GetParent<SkillExecution>().OwnerEntity.Rotation);
+            particleEffect = GameObject.Instantiate(particleEffectPrefab, OwnerEntity.Position, OwnerEntity.Rotation);
         }
 
         public void OnTriggerEnd(Entity entity)

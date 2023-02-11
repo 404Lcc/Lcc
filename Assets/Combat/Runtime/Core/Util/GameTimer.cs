@@ -21,7 +21,7 @@ namespace LccModel
         {
             if (maxTime <= 0)
             {
-                throw new Exception($"_maxTime can not be 0 or negative");
+                throw new Exception("MaxTime <= 0");
             }
             _maxTime = maxTime;
             _time = 0f;
@@ -66,7 +66,7 @@ namespace LccModel
         {
             if (delta > _maxTime)
             {
-                throw new Exception($"_maxTime too small, delta:{delta} > _maxTime:{_maxTime}");
+                throw new Exception("delta > MaxTime");
             }
             _time += delta;
             if (onRepeat != _onFinish)

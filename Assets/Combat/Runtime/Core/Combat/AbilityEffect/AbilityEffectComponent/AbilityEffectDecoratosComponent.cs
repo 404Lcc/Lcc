@@ -2,13 +2,14 @@
 {
     public class AbilityEffectDecoratosComponent : Component
     {
+        public Effect Effect => GetParent<AbilityEffect>().effect;
         public override void Awake()
         {
-            if (GetParent<AbilityEffect>().effectConfig.DecoratorList != null)
+            if (Effect.DecoratorList != null)
             {
-                foreach (var effectDecorator in GetParent<AbilityEffect>().effectConfig.DecoratorList)
+                foreach (var item in Effect.DecoratorList)
                 {
-                    if (effectDecorator is DamageReduceWithTargetCountDecorator reduceWithTargetCountDecorator)
+                    if (item is DamageReduceWithTargetCountDecorator)
                     {
                         Parent.AddComponent<AbilityEffectDamageReduceWithTargetCountComponent>();
                     }

@@ -2,6 +2,10 @@
 {
     public interface IAbilityEntity
     {
+        public bool Enable
+        {
+            get; set;
+        }
         public CombatEntity OwnerEntity
         {
             get;
@@ -10,10 +14,6 @@
         public CombatEntity ParentEntity
         {
             get;
-        }
-        public bool Enable
-        {
-            get; set;
         }
 
         public void ActivateAbility();

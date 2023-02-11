@@ -5,7 +5,7 @@ namespace LccModel
 {
     public class SpellSkillActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
 
 
@@ -25,9 +25,6 @@ namespace LccModel
         }
     }
 
-    /// <summary>
-    /// 施法行动
-    /// </summary>
     public class SpellSkillAction : Entity, IActionExecution, IUpdate
     {
         public SkillAbility skillAbility;
@@ -37,13 +34,10 @@ namespace LccModel
         public Vector3 inputPoint;
         public float inputDirection;
 
-        // 行动能力
+
         public Entity ActionAbility { get; set; }
-        // 效果赋给行动源
         public EffectAssignAction SourceAssignAction { get; set; }
-        // 行动实体
         public CombatEntity Creator { get; set; }
-        // 目标对象
         public CombatEntity Target { get; set; }
 
 
@@ -52,7 +46,6 @@ namespace LccModel
             Dispose();
         }
 
-        //前置处理
         private void PreProcess()
         {
             Creator.TriggerActionPoint(ActionPointType.PreSpell, this);
@@ -61,7 +54,7 @@ namespace LccModel
         public void SpellSkill(bool actionOccupy = true)
         {
             PreProcess();
-            skillExecution = skillAbility.CreateExecution() as SkillExecution;
+            skillExecution = (SkillExecution)skillAbility.CreateExecution();
             if (inputSkillTargetList.Count > 0)
             {
                 skillExecution.inputSkillTargetList.AddRange(inputSkillTargetList);
@@ -85,7 +78,6 @@ namespace LccModel
             }
         }
 
-        //后置处理
         private void PostProcess()
         {
             Creator.TriggerActionPoint(ActionPointType.PostSpell, this);

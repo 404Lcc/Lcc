@@ -2,7 +2,7 @@
 {
     public class CureActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
 
 
@@ -22,23 +22,13 @@
         }
     }
 
-    /// <summary>
-    /// 治疗行动
-    /// </summary>
     public class CureAction : Entity, IActionExecution
     {
-        // 治疗数值
         public int cureValue;
 
-
-
-        // 行动能力
         public Entity ActionAbility { get; set; }
-        // 效果赋给行动源
         public EffectAssignAction SourceAssignAction { get; set; }
-        // 行动实体
         public CombatEntity Creator { get; set; }
-        // 目标对象
         public CombatEntity Target { get; set; }
 
 
@@ -47,7 +37,6 @@
             Dispose();
         }
 
-        //前置处理
         private void PreProcess()
         {
             if (SourceAssignAction != null && SourceAssignAction.abilityEffect != null)
@@ -60,7 +49,7 @@
         {
             PreProcess();
 
-            if (Target.currentHealth.IsFull() == false)
+            if (!Target.currentHealth.IsFull())
             {
                 Target.ReceiveCure(this);
             }
@@ -70,7 +59,6 @@
             FinishAction();
         }
 
-        //后置处理
         private void PostProcess()
         {
             Creator.TriggerActionPoint(ActionPointType.PostGiveCure, this);

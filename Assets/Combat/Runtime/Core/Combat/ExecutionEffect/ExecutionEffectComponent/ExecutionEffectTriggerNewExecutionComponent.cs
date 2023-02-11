@@ -17,11 +17,12 @@
             {
                 return;
             }
-            var sourceExecution = Parent.GetParent<SkillExecution>();
-            var execution = sourceExecution.OwnerEntity.AddChildren<SkillExecution, SkillAbility>(sourceExecution.SkillAbility);
+            SkillExecution parentExecution = Parent.GetParent<SkillExecution>();
+
+            SkillExecution execution = parentExecution.OwnerEntity.AddChildren<SkillExecution, SkillAbility>(parentExecution.SkillAbility);
             execution.executionConfigObject = executionObject;
-            execution.inputTarget = sourceExecution.inputTarget;
-            execution.inputPoint = sourceExecution.inputPoint;
+            execution.inputTarget = parentExecution.inputTarget;
+            execution.inputPoint = parentExecution.inputPoint;
             execution.LoadExecutionEffect();
             execution.BeginExecute();
         }

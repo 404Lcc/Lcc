@@ -4,79 +4,84 @@ namespace LccModel
 {
     public partial class AbilityEffect : Entity
     {
-        public Effect effectConfig;
+        public Effect effect;
 
         public Entity OwnerAbility => (Entity)Parent; //AbilityEffect是挂在能力上的
-        public CombatEntity OwnerEntity => (OwnerAbility as IAbilityEntity).OwnerEntity;
+        public CombatEntity OwnerEntity => ((IAbilityEntity)OwnerAbility).OwnerEntity;
+        public CombatEntity ParentEntity => ((IAbilityEntity) OwnerAbility).ParentEntity;
 
 
         public override void Awake<P1>(P1 p1)
         {
             base.Awake(p1);
 
-            this.effectConfig = p1 as Effect;
+            effect = p1 as Effect;
 
-            if (this.effectConfig is AddStatusEffect)
+            if (effect is AddStatusEffect)
             {
                 AddComponent<AbilityEffectAddStatusComponent>();
             }
 
-            if (this.effectConfig is ClearAllStatusEffect)
+            if (effect is ClearAllStatusEffect)
             {
+
             }
-            if (this.effectConfig is CureEffect)
+
+            if (effect is CureEffect)
             {
                 AddComponent<AbilityEffectCureComponent>();
             }
 
-            if (this.effectConfig is DamageEffect)
+            if (effect is DamageEffect)
             {
                 AddComponent<AbilityEffectDamageComponent>();
             }
-            if (this.effectConfig is RemoveStatusEffect)
+
+            if (effect is RemoveStatusEffect)
             {
+
             }
+
             AddComponent<AbilityEffectDecoratosComponent>();
         }
 
         public void EnableEffect()
         {
-            if (this.effectConfig is ActionControlEffect)
+            if (effect is ActionControlEffect)
             {
                 AddComponent<AbilityEffectActionControlComponent>();
             }
-            if (this.effectConfig is AttributeModifyEffect)
+            if (effect is AttributeModifyEffect)
             {
                 AddComponent<AbilityEffectAttributeModifyComponent>();
             }
-            if (this.effectConfig is CustomEffect)
+            if (effect is CustomEffect)
             {
                 AddComponent<AbilityEffectCustomComponent>();
             }
-            if (this.effectConfig is DamageBloodSuckEffect)
+            if (effect is DamageBloodSuckEffect)
             {
                 AddComponent<AbilityEffectDamageBloodSuckComponent>();
             }
 
-            var triggable = !(effectConfig is ActionControlEffect) && !(effectConfig is AttributeModifyEffect);
-            if (triggable)
+            if (effect is not ActionControlEffect && effect is not AttributeModifyEffect)
             {
-                if (effectConfig.EffectTriggerType == EffectTriggerType.Instant)
+                if (effect.EffectTriggerType == EffectTriggerType.Instant)
                 {
                     TryAssignEffectToOwner();
                 }
-                var isAction = effectConfig.EffectTriggerType == EffectTriggerType.Action;
-                if (isAction)
+
+                if (effect.EffectTriggerType == EffectTriggerType.Action)
                 {
                     AddComponent<AbilityEffectActionTriggerComponent>();
                 }
-                var isInterval = effectConfig.EffectTriggerType == EffectTriggerType.Interval && !string.IsNullOrEmpty(effectConfig.Interval);
-                if (isInterval)
+
+                if (effect.EffectTriggerType == EffectTriggerType.Interval && !string.IsNullOrEmpty(effect.Interval))
                 {
                     AddComponent<AbilityEffectIntervalTriggerComponent>();
                 }
-                var isCondition = effectConfig.EffectTriggerType == EffectTriggerType.Condition && !string.IsNullOrEmpty(effectConfig.ConditionParams);
-                if (isCondition)
+
+                if (effect.EffectTriggerType == EffectTriggerType.Condition && !string.IsNullOrEmpty(effect.ConditionParams))
                 {
                     AddComponent<AbilityEffectConditionTriggerComponent>();
                 }
@@ -100,28 +105,15 @@ namespace LccModel
             return temp;
         }
 
-
-
-        public void TryTriggerEffect()
-        {
-            this.FireEvent(nameof(TryTriggerEffect));
-        }
-
-
-
-
-
         public void TryAssignEffectToOwner()
         {
-            TryAssignEffectToTarget((OwnerAbility as IAbilityEntity).OwnerEntity);
+            TryAssignEffectToTarget(OwnerEntity);
         }
-
 
         public void TryAssignEffectToParent()
         {
-            TryAssignEffectToTarget((OwnerAbility as IAbilityEntity).ParentEntity);
+            TryAssignEffectToTarget(ParentEntity);
         }
-
 
         public void TryAssignEffectToTarget(CombatEntity targetEntity)
         {
@@ -170,11 +162,9 @@ namespace LccModel
             }
         }
 
-
-
-        public void StartAssignEffect(EffectAssignAction effectAssignAction)
+        public void StartAssignEffect(EffectAssignAction action)
         {
-            this.FireEvent(nameof(StartAssignEffect), effectAssignAction);
+            FireEvent(nameof(StartAssignEffect), action);
         }
     }
 }

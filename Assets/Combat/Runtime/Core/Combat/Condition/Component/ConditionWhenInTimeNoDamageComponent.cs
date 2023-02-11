@@ -4,7 +4,6 @@ namespace LccModel
 {
     public class ConditionWhenInTimeNoDamageComponent : Component, IUpdate
     {
-
         private GameTimer noDamageTimer;
 
         public override void Awake<P1>(P1 p1)

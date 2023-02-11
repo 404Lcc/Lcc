@@ -2,7 +2,7 @@ namespace LccModel
 {
     public class AddStatusActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
 
 
@@ -22,31 +22,21 @@ namespace LccModel
         }
     }
 
-    /// <summary>
-    /// 施加状态行动
-    /// </summary>
     public class AddStatusAction : Entity, IActionExecution
     {
         public Entity sourceAbility;
-        public AddStatusEffect addStatusEffect;
-        public StatusAbility status;
 
-        // 行动能力
         public Entity ActionAbility { get; set; }
-        // 效果赋给行动源
         public EffectAssignAction SourceAssignAction { get; set; }
-        // 行动实体
         public CombatEntity Creator { get; set; }
-        // 目标对象
         public CombatEntity Target { get; set; }
-
 
         public void FinishAction()
         {
             Dispose();
         }
 
-        //前置处理
+
         private void PreProcess()
         {
 
@@ -56,16 +46,15 @@ namespace LccModel
         {
             PreProcess();
 
-            addStatusEffect = SourceAssignAction.abilityEffect.effectConfig as AddStatusEffect;
+            AddStatusEffect addStatusEffect = (AddStatusEffect)SourceAssignAction.abilityEffect.effect;
+            StatusConfigObject statusConfigObject = addStatusEffect.StatusConfigObject;
+            StatusAbility status = null;
 
-            var statusConfig = addStatusEffect.StatusConfigObject;
-            var canStack = statusConfig.CanStack;
-
-            if (canStack == false)
+            if (!statusConfigObject.CanStack)
             {
-                if (Target.HasStatus(statusConfig.Id))
+                if (Target.HasStatus(statusConfigObject.Id))
                 {
-                    var status = Target.GetStatus(statusConfig.Id);
+                    status = Target.GetStatus(statusConfigObject.Id);
                     var statusLifeTimer = status.GetComponent<StatusLifeTimeComponent>().lifeTimer;
                     statusLifeTimer.MaxTime = addStatusEffect.Duration / 1000f;
                     statusLifeTimer.Reset();
@@ -73,7 +62,7 @@ namespace LccModel
                 }
             }
 
-            status = Target.AttachStatus(statusConfig);
+            status = Target.AttachStatus(statusConfigObject);
             status.OwnerEntity = Creator;
             status.GetComponent<AbilityLevelComponent>().level = sourceAbility.GetComponent<AbilityLevelComponent>().level;
             status.duration = (int)addStatusEffect.Duration;
@@ -89,7 +78,7 @@ namespace LccModel
             FinishAction();
         }
 
-        //后置处理
+
         private void PostProcess()
         {
             Creator.TriggerActionPoint(ActionPointType.PostGiveStatus, this);

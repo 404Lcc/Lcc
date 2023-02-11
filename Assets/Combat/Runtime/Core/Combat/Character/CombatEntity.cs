@@ -8,10 +8,9 @@ namespace LccModel
 
         public HealthPoint currentHealth;
 
-        public ActionControlType actionControlType; //行为禁制
+        public ActionControlType actionControlType;//行为禁制
         #region 自身能力
-
-        public AttackAbility attackAbility; //普攻能力
+        public AttackAbility attackAbility;//普攻能力
 
 
 

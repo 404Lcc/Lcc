@@ -2,7 +2,7 @@
 {
     public class AttackBlockActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
 
 
@@ -33,10 +33,9 @@
 
         private bool IsAbilityEffectTrigger()
         {
-            if (TryGetComponent(out AbilityProbabilityTriggerComponent probabilityTriggerComponent))
+            if (TryGetComponent(out AbilityProbabilityTriggerComponent component))
             {
-                var r = RandomUtil.RandomNumber(0, 10000);
-                return r < probabilityTriggerComponent.probability;
+                return RandomUtil.RandomNumber(0, 10000) < component.probability;
             }
             return false;
         }
@@ -48,37 +47,27 @@
                 if (TryMakeAction(out var attackBlockAction))
                 {
                     attackBlockAction.ActionAbility = this;
-                    attackBlockAction.attackExecution = (action as SpellAttackAction).attackExecution;
+                    attackBlockAction.attackExecution = ((SpellAttackAction)action).attackExecution;
                     attackBlockAction.ApplyBlock();
                 }
             }
         }
     }
 
-    /// <summary>
-    /// 格挡行动
-    /// </summary>
     public class AttackBlockAction : Entity, IActionExecution
     {
         public AttackExecution attackExecution;
 
-        // 行动能力
         public Entity ActionAbility { get; set; }
-        // 效果赋给行动源
         public EffectAssignAction SourceAssignAction { get; set; }
-        // 行动实体
         public CombatEntity Creator { get; set; }
-        // 目标对象
         public CombatEntity Target { get; set; }
-
-
 
         public void FinishAction()
         {
             Dispose();
         }
 
-        //前置处理
         private void PreProcess()
         {
 
@@ -95,7 +84,6 @@
             FinishAction();
         }
 
-        //后置处理
         private void PostProcess()
         {
         }

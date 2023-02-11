@@ -2,27 +2,24 @@
 {
     public class DamageBloodSuckComponent : Component
     {
+        public CombatEntity OwnerEntity => Parent.GetParent<CombatEntity>();
         public override void Awake()
         {
-            var combatEntity = Parent.GetParent<CombatEntity>();
-            combatEntity.ListenActionPoint(ActionPointType.PostCauseDamage, OnCauseDamage);
+            OwnerEntity.ListenActionPoint(ActionPointType.PostCauseDamage, OnCauseDamage);
         }
         public override void OnDestroy()
         {
-            base.OnDestroy();
-
-            var combatEntity = Parent.GetParent<CombatEntity>();
-            combatEntity.UnListenActionPoint(ActionPointType.PostCauseDamage, OnCauseDamage);
+            OwnerEntity.UnListenActionPoint(ActionPointType.PostCauseDamage, OnCauseDamage);
         }
         private void OnCauseDamage(Entity action)
         {
-            var damageAction = action as DamageAction;
-            var value = damageAction.damageValue * 0.2f;
-            var combatEntity = Parent.GetParent<CombatEntity>();
-            if (combatEntity.cureActionAbility.TryMakeAction(out var cureAction))
+            DamageAction damageAction = (DamageAction)action;
+            float value = damageAction.damageValue * 0.2f;
+
+            if (OwnerEntity.cureActionAbility.TryMakeAction(out var cureAction))
             {
-                cureAction.Creator = combatEntity;
-                cureAction.Target = combatEntity;
+                cureAction.Creator = OwnerEntity;
+                cureAction.Target = OwnerEntity;
                 cureAction.cureValue = (int)value;
                 cureAction.SourceAssignAction = null;
                 cureAction.ApplyCure();

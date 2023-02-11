@@ -9,43 +9,36 @@
         {
             base.Awake(p1);
 
-
             executeClipData = p1 as ExecuteClipData;
 
-            var clipType = executeClipData.ExecuteClipType;
+            ExecuteClipType clipType = executeClipData.ExecuteClipType;
             if (clipType == ExecuteClipType.ActionEvent)
             {
-                var spawnItemEffect = executeClipData.ActionEventData;
-                //应用效果给目标效果
-                if (spawnItemEffect.ActionEventType == FireEventType.AssignEffect)
+                if (executeClipData.ActionEventData.ActionEventType == FireEventType.AssignEffect)
                 {
-                    AddComponent<ExecutionEffectAssignToTargetComponent>().effectApplyType = spawnItemEffect.EffectApply;
+                    AddComponent<ExecutionEffectAssignToTargetComponent>().effectApplyType = executeClipData.ActionEventData.EffectApply;
                 }
-                //触发新的执行体效果
-                if (spawnItemEffect.ActionEventType == FireEventType.TriggerNewExecution)
+
+                if (executeClipData.ActionEventData.ActionEventType == FireEventType.TriggerNewExecution)
                 {
-                    AddComponent<ExecutionEffectTriggerNewExecutionComponent>().actionEventData = spawnItemEffect;
+                    AddComponent<ExecutionEffectTriggerNewExecutionComponent>().actionEventData = executeClipData.ActionEventData;
                 }
             }
 
 
-            //生成碰撞体效果，碰撞体再触发应用能力效果
             if (clipType == ExecuteClipType.CollisionExecute)
             {
-                var spawnItemEffect = executeClipData.CollisionExecuteData;
-                AddComponent<ExecutionEffectSpawnCollisionComponent>().collisionExecuteData = spawnItemEffect;
+                AddComponent<ExecutionEffectSpawnCollisionComponent>().collisionExecuteData = executeClipData.CollisionExecuteData;
             }
-            //播放动作效果
+
             if (clipType == ExecuteClipType.Animation)
             {
-                var animationEffect = executeClipData.AnimationData;
-                AddComponent<ExecutionEffectAnimationComponent>().animationClip = animationEffect.AnimationClip;
+                AddComponent<ExecutionEffectAnimationComponent>().animationClip = executeClipData.AnimationData.AnimationClip;
             }
-            //播放特效效果
+
             if (clipType == ExecuteClipType.ParticleEffect)
             {
-                var animationEffect = executeClipData.ParticleEffectData;
-                AddComponent<ExecutionEffectParticleEffectComponent>().particleEffectPrefab = animationEffect.ParticleEffect;
+                AddComponent<ExecutionEffectParticleEffectComponent>().particleEffectPrefab = executeClipData.ParticleEffectData.ParticleEffect;
             }
 
 
@@ -53,7 +46,7 @@
 
         public void BeginExecute()
         {
-            var clipType = executeClipData.ExecuteClipType;
+            ExecuteClipType clipType = executeClipData.ExecuteClipType;
             if (clipType == ExecuteClipType.ActionEvent)
             {
                 AddComponent<ExecutionEffectTimeTriggerComponent>().startTime = executeClipData.StartTime;
@@ -64,7 +57,7 @@
                 GetComponent<ExecutionEffectTimeTriggerComponent>().endTime = executeClipData.EndTime;
             }
 
-            if (!TryGetComponent(out ExecutionEffectTimeTriggerComponent timeTriggerComponent))
+            if (GetComponent<ExecutionEffectTimeTriggerComponent>() == null)
             {
                 TriggerEffect();
             }
@@ -72,13 +65,13 @@
 
         public void TriggerEffect()
         {
-            this.Publish(this);
-            this.FireEvent(nameof(TriggerEffect));
+            Publish(this);
+            FireEvent(nameof(TriggerEffect));
         }
 
         public void EndEffect()
         {
-            this.FireEvent(nameof(EndEffect));
+            FireEvent(nameof(EndEffect));
         }
     }
 }

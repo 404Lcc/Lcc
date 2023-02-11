@@ -38,14 +38,14 @@ namespace LccModel
     {
         private readonly Dictionary<string, FloatNumeric> _attributeDict = new Dictionary<string, FloatNumeric>();
         public FloatNumeric MoveSpeed => _attributeDict[nameof(AttributeType.MoveSpeed)];//移动速度
-        public FloatNumeric HealthPoint => _attributeDict[nameof(AttributeType.HealthPoint)]; //当前生命值
-        public FloatNumeric HealthPointMax => _attributeDict[nameof(AttributeType.HealthPointMax)]; //生命值上限
+        public FloatNumeric HealthPoint => _attributeDict[nameof(AttributeType.HealthPoint)];//当前生命值
+        public FloatNumeric HealthPointMax => _attributeDict[nameof(AttributeType.HealthPointMax)];//生命值上限
         public FloatNumeric Attack => _attributeDict[nameof(AttributeType.Attack)];//攻击力
-        public FloatNumeric Defense => _attributeDict[nameof(AttributeType.Defense)];//防御力（护甲）
+        public FloatNumeric Defense => _attributeDict[nameof(AttributeType.Defense)];//防御力
         public FloatNumeric AbilityPower => _attributeDict[nameof(AttributeType.AbilityPower)];//法术强度
         public FloatNumeric SpellResistance => _attributeDict[nameof(AttributeType.SpellResistance)];//魔法抗性
         public FloatNumeric CriticalProbability => _attributeDict[nameof(AttributeType.CriticalProbability)];//暴击概率
-        public FloatNumeric CauseDamage => _attributeDict[nameof(AttributeType.CauseDamage)]; //暴击概率
+        public FloatNumeric CauseDamage => _attributeDict[nameof(AttributeType.CauseDamage)];//暴击概率
 
 
 

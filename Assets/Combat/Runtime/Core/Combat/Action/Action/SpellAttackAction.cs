@@ -2,7 +2,7 @@
 {
     public class SpellAttackActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
 
 
@@ -22,20 +22,13 @@
         }
     }
 
-    /// <summary>
-    /// 普攻行动
-    /// </summary>
     public class SpellAttackAction : Entity, IActionExecution
     {
         public AttackExecution attackExecution;
 
-        // 行动能力
         public Entity ActionAbility { get; set; }
-        // 效果赋给行动源
         public EffectAssignAction SourceAssignAction { get; set; }
-        // 行动实体
         public CombatEntity Creator { get; set; }
-        // 目标对象
         public CombatEntity Target { get; set; }
 
 
@@ -44,7 +37,6 @@
             Dispose();
         }
 
-        //前置处理
         private void PreProcess()
         {
             Creator.TriggerActionPoint(ActionPointType.PreGiveAttack, this);
@@ -55,7 +47,7 @@
         {
             PreProcess();
 
-            attackExecution = Creator.attackAbility.CreateExecution() as AttackExecution;
+            attackExecution = (AttackExecution)Creator.attackAbility.CreateExecution();
             attackExecution.attackAction = this;
             attackExecution.BeginExecute();
 
@@ -64,8 +56,6 @@
             FinishAction();
         }
 
-
-        //后置处理
         private void PostProcess()
         {
             Creator.TriggerActionPoint(ActionPointType.PostGiveAttack, this);

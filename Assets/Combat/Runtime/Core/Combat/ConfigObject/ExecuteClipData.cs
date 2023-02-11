@@ -5,6 +5,43 @@ using Sirenix.OdinInspector;
 
 namespace LccModel
 {
+    public enum ExecuteClipType
+    {
+        CollisionExecute = 0,
+        ActionEvent = 1,
+        Animation = 2,
+        Audio = 3,
+        ParticleEffect = 4,
+    }
+
+    [LabelText("执行体目标传入类型")]
+    public enum ExecutionTargetInputType
+    {
+        [LabelText("None")]
+        None = 0,
+        [LabelText("传入目标实体")]
+        Target = 1,
+        [LabelText("传入目标点")]
+        Point = 2,
+    }
+
+    [LabelText("事件类型")]
+    public enum FireEventType
+    {
+        [LabelText("触发赋给效果")]
+        AssignEffect = 0,
+        [LabelText("触发新执行体")]
+        TriggerNewExecution = 1,
+    }
+
+    [LabelText("碰撞体执行类型")]
+    public enum CollisionExecuteType
+    {
+        [LabelText("脱手执行")]
+        OutOfHand = 0,
+        [LabelText("执手执行")]
+        InHand = 1,
+    }
     [LabelText("碰撞体形状")]
     public enum CollisionShape
     {
@@ -121,78 +158,6 @@ namespace LccModel
             }
         }
     }
-    public class ExecuteClipData : ScriptableObject
-    {
-        public float TotalTime { get; set; }
-        public float StartTime;
-        public float EndTime;
-
-        [ShowInInspector]
-        [PropertyOrder(-1)]
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        public ExecuteClipType ExecuteClipType;
-
-        [Space(10)]
-        [ShowIf("ExecuteClipType", ExecuteClipType.ActionEvent)]
-        public ActionEventData ActionEventData;
-
-        [Space(10)]
-        [ShowIf("ExecuteClipType", ExecuteClipType.CollisionExecute)]
-        public CollisionExecuteData CollisionExecuteData;
-
-        [Space(10)]
-        [ShowIf("ExecuteClipType", ExecuteClipType.Animation)]
-        public AnimationData AnimationData;
-
-        [Space(10)]
-        [ShowIf("ExecuteClipType", ExecuteClipType.Audio)]
-        public AudioData AudioData;
-
-        [Space(10)]
-        [ShowIf("ExecuteClipType", ExecuteClipType.ParticleEffect)]
-        public ParticleEffectData ParticleEffectData;
-
-        public float Duration { get => (EndTime - StartTime); }
-
-        public ExecuteClipData GetClipTime()
-        {
-            return this;
-        }
-    }
-
-    public enum ExecuteClipType
-    {
-        CollisionExecute = 0,
-        ActionEvent = 1,
-        Animation = 2,
-        Audio = 3,
-        ParticleEffect = 4,
-    }
-
-    [LabelText("执行体目标传入类型")]
-    public enum ExecutionTargetInputType
-    {
-        [LabelText("None")]
-        None = 0,
-        [LabelText("传入目标实体")]
-        Target = 1,
-        [LabelText("传入目标点")]
-        Point = 2,
-    }
-
-    [LabelText("事件类型")]
-    public enum FireEventType
-    {
-        [LabelText("触发赋给效果")]
-        AssignEffect = 0,
-        [LabelText("触发新执行体")]
-        TriggerNewExecution = 1,
-    }
 
     [Serializable]
     public class ActionEventData
@@ -204,16 +169,6 @@ namespace LccModel
         [LabelText("新执行体")]
         public string NewExecution;
     }
-
-    [LabelText("碰撞体执行类型")]
-    public enum CollisionExecuteType
-    {
-        [LabelText("脱手执行")]
-        OutOfHand = 0,
-        [LabelText("执手执行")]
-        InHand = 1,
-    }
-
     [Serializable]
     public class CollisionExecuteData
     {
@@ -255,6 +210,50 @@ namespace LccModel
                 list.Add(newPoint);
             }
             return list;
+        }
+    }
+
+    public class ExecuteClipData : ScriptableObject
+    {
+        public float TotalTime { get; set; }
+        public float StartTime;
+        public float EndTime;
+
+        [ShowInInspector]
+        [PropertyOrder(-1)]
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public ExecuteClipType ExecuteClipType;
+
+        [Space(10)]
+        [ShowIf("ExecuteClipType", ExecuteClipType.ActionEvent)]
+        public ActionEventData ActionEventData;
+
+        [Space(10)]
+        [ShowIf("ExecuteClipType", ExecuteClipType.CollisionExecute)]
+        public CollisionExecuteData CollisionExecuteData;
+
+        [Space(10)]
+        [ShowIf("ExecuteClipType", ExecuteClipType.Animation)]
+        public AnimationData AnimationData;
+
+        [Space(10)]
+        [ShowIf("ExecuteClipType", ExecuteClipType.Audio)]
+        public AudioData AudioData;
+
+        [Space(10)]
+        [ShowIf("ExecuteClipType", ExecuteClipType.ParticleEffect)]
+        public ParticleEffectData ParticleEffectData;
+
+        public float Duration { get => (EndTime - StartTime); }
+
+        public ExecuteClipData GetClipTime()
+        {
+            return this;
         }
     }
 

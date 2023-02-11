@@ -28,9 +28,9 @@ namespace LccModel
             var abilityEffects = abilityEntity.GetComponent<AbilityEffectComponent>().abilityEffectList;
             foreach (var abilityEffect in abilityEffects)
             {
-                if (abilityEffect.effectConfig.DecoratorList != null)
+                if (abilityEffect.effect.DecoratorList != null)
                 {
-                    foreach (var effectDecorator in abilityEffect.effectConfig.DecoratorList)
+                    foreach (var effectDecorator in abilityEffect.effect.DecoratorList)
                     {
                         if (effectDecorator is DamageReduceWithTargetCountDecorator reduceWithTargetCountDecorator)
                         {
@@ -42,7 +42,6 @@ namespace LccModel
         }
 
 
-        // 结束单元体
         public void DestroyItem()
         {
             Dispose();

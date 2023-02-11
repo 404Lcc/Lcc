@@ -91,8 +91,6 @@ namespace LccModel
         public string ConditionParams;
 
 
-
-        //Effect是直接效果，效果修饰是基于直接效果的辅助效果
         [ShowIf("@this.DecoratorList != null && this.DecoratorList.Count > 0")]
         [ToggleGroup("Enabled"), LabelText("效果修饰"), PropertyOrder(100)]
         [HideReferenceObjectPicker, ListDrawerSettings(DraggableItems = false)]
@@ -132,7 +130,7 @@ namespace LccModel
         {
             if (EffectTypeName != EffectTypeNameDefine)
             {
-                var effectType = typeof(EffectDecorator).Assembly.GetTypes()
+                Type effectType = typeof(EffectDecorator).Assembly.GetTypes()
                     .Where(x => !x.IsAbstract)
                     .Where(x => typeof(EffectDecorator).IsAssignableFrom(x))
                     .Where(x => x.GetCustomAttribute<EffectDecorateAttribute>() != null)
@@ -143,7 +141,10 @@ namespace LccModel
                 {
                     var effect = Activator.CreateInstance(effectType) as EffectDecorator;
                     effect.Enabled = true;
-                    if (DecoratorList == null) DecoratorList = new List<EffectDecorator>();
+                    if (DecoratorList == null)
+                    {
+                        DecoratorList = new List<EffectDecorator>();
+                    }
                     DecoratorList.Add(effect);
                 }
 

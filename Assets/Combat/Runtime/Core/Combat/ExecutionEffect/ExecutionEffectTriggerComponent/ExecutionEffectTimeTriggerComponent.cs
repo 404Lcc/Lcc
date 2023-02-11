@@ -10,8 +10,6 @@
 
         public override void Awake()
         {
-            base.Awake();
-
             if (!string.IsNullOrEmpty(timeValueExpression))
             {
                 startTime = ExpressionUtil.Evaluate<int>(timeValueExpression) / 1000f;

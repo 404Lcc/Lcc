@@ -2,7 +2,7 @@
 {
     public class SpellItemActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
 
 
@@ -27,13 +27,9 @@
     {
         public ItemAbility itemAbility;
 
-        // 行动能力
         public Entity ActionAbility { get; set; }
-        // 效果赋给行动源
         public EffectAssignAction SourceAssignAction { get; set; }
-        // 行动实体
         public CombatEntity Creator { get; set; }
-        // 目标对象
         public CombatEntity Target { get; set; }
 
 
@@ -42,7 +38,6 @@
             Dispose();
         }
 
-        //前置处理
         private void PreProcess()
         {
             Creator.TriggerActionPoint(ActionPointType.PreGiveItem, this);
@@ -62,7 +57,6 @@
             FinishAction();
         }
 
-        //后置处理
         private void PostProcess()
         {
             Creator.TriggerActionPoint(ActionPointType.PostGiveItem, this);

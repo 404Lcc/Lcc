@@ -9,16 +9,16 @@ namespace LccModel
         public bool Enable { get; set; }
 
 
-        public ItemConfigObject itemConfig;
+        public ItemConfigObject itemConfigObject;
         private List<StatusAbility> _statusList = new List<StatusAbility>();
 
         public override void Awake<P1>(P1 p1)
         {
             base.Awake(p1);
 
-            itemConfig = p1 as ItemConfigObject;
+            itemConfigObject = p1 as ItemConfigObject;
 
-            AddComponent<AbilityEffectComponent, List<Effect>>(itemConfig.EffectList);
+            AddComponent<AbilityEffectComponent, List<Effect>>(itemConfigObject.EffectList);
         }
 
 
@@ -26,9 +26,9 @@ namespace LccModel
         {
             Enable = true;
 
-            if (itemConfig.EnableChildStatus)
+            if (itemConfigObject.EnableChildStatus)
             {
-                foreach (var item in itemConfig.StatusList)
+                foreach (var item in itemConfigObject.StatusList)
                 {
                     var status = OwnerEntity.AttachStatus(item.StatusConfigObject);
                     status.OwnerEntity = OwnerEntity;
@@ -46,7 +46,7 @@ namespace LccModel
         {
             Enable = false;
 
-            if (itemConfig.EnableChildStatus)
+            if (itemConfigObject.EnableChildStatus)
             {
                 foreach (var item in _statusList)
                 {

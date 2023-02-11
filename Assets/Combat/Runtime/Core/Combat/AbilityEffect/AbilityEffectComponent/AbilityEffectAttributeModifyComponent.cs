@@ -2,9 +2,11 @@
 {
     public class AbilityEffectAttributeModifyComponent : Component
     {
-        public AttributeModifyEffect attributeModifyEffect;
-        public string numericValueFormula;
-        public AttributeType attributeType;
+        public AttributeModifyEffect AttributeModifyEffect => (AttributeModifyEffect)GetParent<AbilityEffect>().effect;
+        public string NumericValueFormula => AttributeModifyEffect.NumericValueFormula;
+        public AttributeType AttributeType => AttributeModifyEffect.AttributeType;
+
+        public CombatEntity ParentEntity => Parent.GetParent<StatusAbility>().ParentEntity;
 
         public float value;
 
@@ -12,38 +14,28 @@
 
         public override void Awake()
         {
-            attributeModifyEffect = GetParent<AbilityEffect>().effectConfig as AttributeModifyEffect;
-            numericValueFormula = attributeModifyEffect.NumericValueFormula;
-            attributeType = attributeModifyEffect.AttributeType;
+            value = ExpressionUtil.Evaluate<float>(NumericValueFormula, GetParent<AbilityEffect>().GetParamsDict());
 
-            CombatEntity parentEntity = Parent.GetParent<StatusAbility>().GetParent<CombatEntity>();
-            value = ExpressionUtil.Evaluate<float>(numericValueFormula, GetParent<AbilityEffect>().GetParamsDict());
-
-
-            if (attributeModifyEffect.ModifyType == ModifyType.Add)
+            if (AttributeModifyEffect.ModifyType == ModifyType.Add)
             {
-                parentEntity.GetComponent<AttributeComponent>().GetNumeric(attributeType.ToString()).AddFinalAddModifier(value);
+                ParentEntity.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).AddFinalAddModifier(value);
             }
-            if (attributeModifyEffect.ModifyType == ModifyType.PercentAdd)
+            if (AttributeModifyEffect.ModifyType == ModifyType.PercentAdd)
             {
-                parentEntity.GetComponent<AttributeComponent>().GetNumeric(attributeType.ToString()).AddFinalPctAddModifier(value);
+                ParentEntity.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).AddFinalPctAddModifier(value);
             }
 
         }
 
         public override void OnDestroy()
         {
-            base.OnDestroy();
-
-            var parentEntity = Parent.GetParent<StatusAbility>().GetParent<CombatEntity>();
-            var attributeType = attributeModifyEffect.AttributeType.ToString();
-            if (attributeModifyEffect.ModifyType == ModifyType.Add)
+            if (AttributeModifyEffect.ModifyType == ModifyType.Add)
             {
-                parentEntity.GetComponent<AttributeComponent>().GetNumeric(attributeType).RemoveFinalAddModifier(value);
+                ParentEntity.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).RemoveFinalAddModifier(value);
             }
-            if (attributeModifyEffect.ModifyType == ModifyType.PercentAdd)
+            if (AttributeModifyEffect.ModifyType == ModifyType.PercentAdd)
             {
-                parentEntity.GetComponent<AttributeComponent>().GetNumeric(attributeType).RemoveFinalPctAddModifier(value);
+                ParentEntity.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).RemoveFinalPctAddModifier(value);
             }
         }
     }

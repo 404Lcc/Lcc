@@ -48,7 +48,7 @@ namespace LccModel
                     {
                         if (effect.TryGetComponent(out AbilityEffectActionControlComponent actionControlComponent))
                         {
-                            tempActionControl = tempActionControl | actionControlComponent.actionControlEffect.ActionControlType;
+                            tempActionControl = tempActionControl | actionControlComponent.ActionControlEffect.ActionControlType;
                         }
                     }
                 }

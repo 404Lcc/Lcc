@@ -12,17 +12,17 @@
 
         public void OnTriggerExecuteEffect(ExecutionEffect executionEffect)
         {
-            var ParentExecution = Parent.GetParent<SkillExecution>();
+            SkillExecution parentExecution = Parent.GetParent<SkillExecution>();
 
-            if (ParentExecution.inputTarget != null)
+            if (parentExecution.inputTarget != null)
             {
                 if (effectApplyType == EffectApplyType.AllEffects)
                 {
-                    ParentExecution.AbilityEntity.GetComponent<AbilityEffectComponent>().TryAssignAllEffectToTarget(ParentExecution.inputTarget, ParentExecution);
+                    parentExecution.AbilityEntity.GetComponent<AbilityEffectComponent>().TryAssignAllEffectToTarget(parentExecution.inputTarget, parentExecution);
                 }
                 else
                 {
-                    ParentExecution.AbilityEntity.GetComponent<AbilityEffectComponent>().TryAssignEffectToTargetByIndex(ParentExecution.inputTarget, (int)effectApplyType - 1);
+                    parentExecution.AbilityEntity.GetComponent<AbilityEffectComponent>().TryAssignEffectToTargetByIndex(parentExecution.inputTarget, (int)effectApplyType - 1);
                 }
             }
         }

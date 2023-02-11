@@ -4,7 +4,7 @@ namespace LccModel
 {
     public class AbilityEffectDamageReduceWithTargetCountComponent : Component
     {
-        public DamageEffect damageEffect;
+        public DamageEffect DamageEffect => (DamageEffect)GetParent<AbilityEffect>().effect;
 
         public float reducePercent;
         public float minPercent;
@@ -12,21 +12,19 @@ namespace LccModel
 
         public override void Awake()
         {
-            damageEffect = (Parent as AbilityEffect).effectConfig as DamageEffect;
-
-            foreach (var item in damageEffect.DecoratorList)
+            foreach (var item in DamageEffect.DecoratorList)
             {
-                if (item is DamageReduceWithTargetCountDecorator reduceWithTargetCountDecorator)
+                if (item is DamageReduceWithTargetCountDecorator decorator)
                 {
-                    reducePercent = reduceWithTargetCountDecorator.ReducePercent / 100;
-                    minPercent = reduceWithTargetCountDecorator.MinPercent / 100;
+                    reducePercent = decorator.ReducePercent / 100;
+                    minPercent = decorator.MinPercent / 100;
                 }
             }
         }
 
-        public float GetDamagePercent(int TargetCounter)
+        public float GetDamagePercent(int targetCounter)
         {
-            return Mathf.Max(minPercent, 1 - reducePercent * TargetCounter);
+            return Mathf.Max(minPercent, 1 - reducePercent * targetCounter);
         }
     }
 }

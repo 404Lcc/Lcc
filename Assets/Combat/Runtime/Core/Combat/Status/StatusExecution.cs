@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace LccModel
+﻿namespace LccModel
 {
     public abstract class StatusExecution : Entity, IAbilityExecution
     {

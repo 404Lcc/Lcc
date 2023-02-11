@@ -15,7 +15,7 @@ namespace LccModel
             }
             foreach (var effect in GetParent<SkillExecution>().executionConfigObject.ExecuteClipDataList)
             {
-                var executionEffect = Parent.AddChildren<ExecutionEffect, ExecuteClipData>(effect);
+                ExecutionEffect executionEffect = Parent.AddChildren<ExecutionEffect, ExecuteClipData>(effect);
                 AddEffect(executionEffect);
             }
         }

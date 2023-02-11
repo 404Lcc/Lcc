@@ -1,28 +1,23 @@
 ﻿namespace LccModel
 {
-    /// <summary>
-    /// 行动点触发组件
-    /// </summary>
     public class AbilityEffectActionTriggerComponent : Component
     {
-        public Effect effect;
-        public ActionPointType actionPointType;
+        public Effect Effect => GetParent<AbilityEffect>().effect;
+        public ActionPointType ActionPointType => Effect.ActionPointType;
+
+        public CombatEntity OwnerEntity => GetParent<AbilityEffect>().GetParent<StatusAbility>().OwnerEntity;
+
         public override void Awake()
         {
-            base.Awake();
-            effect = GetParent<AbilityEffect>().effectConfig;
-            actionPointType = effect.ActionPointType;
-
-            GetParent<AbilityEffect>().GetParent<StatusAbility>().OwnerEntity.ListenActionPoint(actionPointType, OnActionPointTrigger);
+            OwnerEntity.ListenActionPoint(ActionPointType, OnActionPointTrigger);
         }
 
         public override void OnDestroy()
         {
-            base.OnDestroy();
-            GetParent<AbilityEffect>().GetParent<StatusAbility>().OwnerEntity.UnListenActionPoint(actionPointType, OnActionPointTrigger);
+            OwnerEntity.UnListenActionPoint(ActionPointType, OnActionPointTrigger);
         }
 
-        private void OnActionPointTrigger(Entity combatAction)
+        private void OnActionPointTrigger(Entity action)
         {
             GetParent<AbilityEffect>().TryAssignEffectToOwner();
         }

@@ -20,7 +20,7 @@ namespace LccModel
         public float inputDirection;
         public long originTime;
 
-        // 行为占用
+
         public bool actionOccupy = true;
 
 
@@ -73,10 +73,7 @@ namespace LccModel
 
         }
 
-        /// <summary>
-        /// 技能碰撞体生成事件
-        /// </summary>
-        /// <param name="clipData"></param>
+
         public void SpawnCollisionItem(ExecuteClipData clipData)
         {
             //在当前战斗上下文创建创生体

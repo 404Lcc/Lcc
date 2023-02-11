@@ -4,29 +4,25 @@ namespace LccModel
 {
     public class AbilityEffectCureComponent : Component
     {
-        public CureEffect cureEffect;
-        public string cureValueFormula;
+        public CureEffect CureEffect => (CureEffect)GetParent<AbilityEffect>().effect;
+        public string CureValueFormula => CureEffect.CureValueFormula;
+        public CombatEntity OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
 
 
         public override void Awake()
         {
-
-            cureEffect = GetParent<AbilityEffect>().effectConfig as CureEffect;
-            cureValueFormula = cureEffect.CureValueFormula;
-
-
             ((Entity)Parent).OnEvent(nameof(AbilityEffect.StartAssignEffect), OnAssignEffect);
         }
 
         public int GetCureValue()
         {
-            return Mathf.CeilToInt(ExpressionUtil.Evaluate<float>(cureValueFormula, GetParent<AbilityEffect>().GetParamsDict()));
+            return Mathf.CeilToInt(ExpressionUtil.Evaluate<float>(CureValueFormula, GetParent<AbilityEffect>().GetParamsDict()));
         }
 
         private void OnAssignEffect(Entity entity)
         {
-            var effectAssignAction = entity as EffectAssignAction;
-            if (GetParent<AbilityEffect>().OwnerEntity.cureActionAbility.TryMakeAction(out var action))
+            EffectAssignAction effectAssignAction = (EffectAssignAction)entity;
+            if (OwnerEntity.cureActionAbility.TryMakeAction(out var action))
             {
                 effectAssignAction.FillDatasToAction(action);
                 action.ApplyCure();

@@ -20,9 +20,6 @@ namespace LccModel
         public int Order => _order;
     }
 
-    /// <summary>
-    /// Ğ§¹ûĞŞÊÎ
-    /// </summary>
     [Serializable]
     public abstract class EffectDecorator
     {

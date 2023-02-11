@@ -4,6 +4,7 @@ namespace LccModel
 {
     public class ExecutionEffectAnimationComponent : Component
     {
+        public CombatEntity OwnerEntity => Parent.GetParent<SkillExecution>().OwnerEntity;
         public AnimationClip animationClip;
 
 
@@ -14,7 +15,7 @@ namespace LccModel
 
         public void OnTriggerExecutionEffect(Entity entity)
         {
-            Parent.GetParent<SkillExecution>().OwnerEntity.Publish(animationClip);
+            OwnerEntity.Publish(animationClip);
         }
     }
 }

@@ -16,17 +16,17 @@ namespace LccModel
             {
                 return;
             }
-            var effects = p1 as List<Effect>;
-            foreach (var item in effects)
+            var effectList = p1 as List<Effect>;
+            foreach (Effect item in effectList)
             {
-                var abilityEffect = Parent.AddChildren<AbilityEffect, Effect>(item);
+                AbilityEffect abilityEffect = Parent.AddChildren<AbilityEffect, Effect>(item);
                 AddEffect(abilityEffect);
 
-                if (abilityEffect.effectConfig is DamageEffect)
+                if (abilityEffect.effect is DamageEffect)
                 {
                     damageAbilityEffect = abilityEffect;
                 }
-                if (abilityEffect.effectConfig is CureEffect)
+                if (abilityEffect.effect is CureEffect)
                 {
                     cureAbilityEffect = abilityEffect;
                 }
@@ -39,17 +39,14 @@ namespace LccModel
                 item.EnableEffect();
             }
         }
-
         public void AddEffect(AbilityEffect abilityEffect)
         {
             abilityEffectList.Add(abilityEffect);
         }
-
         public AbilityEffect GetEffect(int index = 0)
         {
             return abilityEffectList[index];
         }
-
         public void TryAssignAllEffectToTarget(CombatEntity targetEntity)
         {
             if (abilityEffectList.Count > 0)
@@ -60,7 +57,6 @@ namespace LccModel
                 }
             }
         }
-
         public void TryAssignAllEffectToTarget(CombatEntity targetEntity, IActionExecution actionExecution)
         {
             if (abilityEffectList.Count > 0)
@@ -81,8 +77,6 @@ namespace LccModel
                 }
             }
         }
-
-
         public void TryAssignAllEffectToTarget(CombatEntity targetEntity, AbilityItem abilityItem)
         {
             if (abilityEffectList.Count > 0)
@@ -93,7 +87,6 @@ namespace LccModel
                 }
             }
         }
-
         public void TryAssignEffectToTargetByIndex(CombatEntity targetEntity, int index)
         {
             abilityEffectList[index].TryAssignEffectToTarget(targetEntity);

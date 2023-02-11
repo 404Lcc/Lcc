@@ -13,15 +13,17 @@ namespace LccModel
         {
             base.Awake(p1);
 
-            var effects = new List<Effect>();
-            var damageEffect = new DamageEffect();
+            List<Effect> effectList = new List<Effect>();
+
+            DamageEffect damageEffect = new DamageEffect();
             damageEffect.Enabled = true;
             damageEffect.EffectTriggerType = EffectTriggerType.Condition;
             damageEffect.CanCrit = true;
             damageEffect.DamageType = DamageType.Physic;
             damageEffect.DamageValueFormula = "自身攻击力";
-            effects.Add(damageEffect);
-            AddComponent<AbilityEffectComponent, List<Effect>>(effects);
+            effectList.Add(damageEffect);
+
+            AddComponent<AbilityEffectComponent, List<Effect>>(effectList);
 
         }
 
