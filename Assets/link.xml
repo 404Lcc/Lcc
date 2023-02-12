@@ -4603,6 +4603,7 @@
     <type fullname="LccModel.ActionWrap`1" preserve="all" />
     <type fullname="LccModel.DirectoryUtil" preserve="all" />
     <type fullname="LccModel.EncodingUtil" preserve="all" />
+    <type fullname="LccModel.ExpressionUtil" preserve="all" />
     <type fullname="LccModel.FileUtil" preserve="all" />
     <type fullname="LccModel.IdUtil" preserve="all" />
     <type fullname="LccModel.JsonUtil" preserve="all" />
@@ -4613,6 +4614,7 @@
     <type fullname="LccModel.PathType" preserve="all" />
     <type fullname="LccModel.PathUtil" preserve="all" />
     <type fullname="LccModel.ProtobufUtil" preserve="all" />
+    <type fullname="LccModel.RandomUtil" preserve="all" />
     <type fullname="LccModel.ResolutionUtil" preserve="all" />
     <type fullname="LccModel.RijndaelUtil" preserve="all" />
     <type fullname="LccModel.WebUtil" preserve="all" />

@@ -104,6 +104,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Awaiter\AwaiterExpand.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Byte\ByteExpand.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Asset\AssetManager.cs" />
+    <Compile Include="Assets\Framework\Runtime\Util\Expression\ExpressionUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\ClientNetwork\SocketModel.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Adapter\CoroutineAdapter.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Timer\TimerType.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Singleton\Singleton.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Vector3\Vector3Expand.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Encoding\EncodingUtil.cs" />
+    <Compile Include="Assets\Framework\Runtime\Util\Random\RandomUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Task\TaskExpand.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Log\LogUtil.cs" />
     <Compile Include="Assets\Framework\Util\EnterClickButton.cs" />
