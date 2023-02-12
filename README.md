@@ -125,3 +125,5 @@ LoadSceneManager.Instance.LoadScene(SceneName.Login, true, null, AssetType.Scene
 - [ET](https://github.com/egametang/ET)
 
 - [uMVVM](https://github.com/MEyes/uMVVM)
+
+- [EGamePlay](https://github.com/m969/EGamePlay)
