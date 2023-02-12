@@ -88,14 +88,6 @@ namespace LccModel
         Other = 100,
     }
 
-    [LabelText("执行体事件类型")]
-    public enum ExecutionEventType
-    {
-        [LabelText("触发应用效果")]
-        TriggerApplyEffect,
-        [LabelText("生成碰撞体")]
-        TriggerSpawnCollider,
-    }
     public enum BezierPointType
     {
         corner,

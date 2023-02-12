@@ -75,12 +75,12 @@ namespace LccModel
                     AddComponent<AbilityEffectActionTriggerComponent>();
                 }
 
-                if (effect.EffectTriggerType == EffectTriggerType.Interval && !string.IsNullOrEmpty(effect.Interval))
+                if (effect.EffectTriggerType == EffectTriggerType.Interval && !string.IsNullOrEmpty(effect.IntervalValueFormula))
                 {
                     AddComponent<AbilityEffectIntervalTriggerComponent>();
                 }
 
-                if (effect.EffectTriggerType == EffectTriggerType.Condition && !string.IsNullOrEmpty(effect.ConditionParams))
+                if (effect.EffectTriggerType == EffectTriggerType.Condition && !string.IsNullOrEmpty(effect.ConditionValueFormula))
                 {
                     AddComponent<AbilityEffectConditionTriggerComponent>();
                 }

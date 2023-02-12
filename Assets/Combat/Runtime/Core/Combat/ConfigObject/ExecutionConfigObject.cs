@@ -11,6 +11,7 @@ namespace LccModel
     {
         public string Id;
         public float TotalTime;
+        public ExecutionTargetInputType TargetInputType;
 
         [Space(10)]
         [ListDrawerSettings(DraggableItems = false, ShowItemCount = false, CustomAddFunction = "AddExecuteClipData")]

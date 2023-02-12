@@ -3,7 +3,7 @@
     public class AbilityEffectIntervalTriggerComponent : Component, IUpdate
     {
         public Effect Effect => GetParent<AbilityEffect>().effect;
-        public string intervalValueFormula => Effect.Interval;
+        public string IntervalValueFormula => Effect.IntervalValueFormula;
 
         public GameTimer intervalTimer;
 
@@ -12,7 +12,7 @@
         {
             base.Awake();
 
-            float interval = ExpressionUtil.Evaluate<int>(intervalValueFormula, GetParent<AbilityEffect>().GetParamsDict()) / 1000f;
+            float interval = ExpressionUtil.Evaluate<int>(IntervalValueFormula, GetParent<AbilityEffect>().GetParamsDict()) / 1000f;
             intervalTimer = new GameTimer(interval);
         }
 

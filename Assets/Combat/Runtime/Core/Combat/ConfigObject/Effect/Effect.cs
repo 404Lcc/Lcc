@@ -85,10 +85,10 @@ namespace LccModel
 
         [HorizontalGroup("Enabled/Hor")]
         [ToggleGroup("Enabled"), HideIf("IsSkillEffect", true), ShowIf("EffectTriggerType", EffectTriggerType.Interval), SuffixLabel("毫秒", true), HideLabel]
-        public string Interval;
+        public string IntervalValueFormula;
 
         [ToggleGroup("Enabled"), HideIf("IsSkillEffect", true), LabelText("条件参数 x="), ShowIf("EffectTriggerType", EffectTriggerType.Condition)]
-        public string ConditionParams;
+        public string ConditionValueFormula;
 
 
         [ShowIf("@this.DecoratorList != null && this.DecoratorList.Count > 0")]

@@ -2,8 +2,9 @@
 {
     public class SpellItemActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
+
 
 
         public bool TryMakeAction(out SpellItemAction action)

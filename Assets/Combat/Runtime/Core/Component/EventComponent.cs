@@ -3,15 +3,10 @@ using System.Collections.Generic;
 
 namespace LccModel
 {
-    public class SubscribeSubject : Entity
-    {
-    }
-
     public class EventComponent : Component
     {
-        private Dictionary<Type, List<object>> actionDict = new Dictionary<Type, List<object>>();
-        private Dictionary<int, Entity> entityDict = new Dictionary<int, Entity>();
-        private Dictionary<string, List<object>> fireActionDict = new Dictionary<string, List<object>>();
+        private readonly Dictionary<Type, List<object>> actionDict = new Dictionary<Type, List<object>>();
+        private readonly Dictionary<string, List<object>> fireActionDict = new Dictionary<string, List<object>>();
 
 
         public new T Publish<T>(T TEvent) where T : class
@@ -26,7 +21,7 @@ namespace LccModel
             return TEvent;
         }
 
-        public new SubscribeSubject Subscribe<T>(Action<T> action) where T : class
+        public new void Subscribe<T>(Action<T> action) where T : class
         {
             var type = typeof(T);
             if (!actionDict.TryGetValue(type, out var list))
@@ -35,20 +30,13 @@ namespace LccModel
                 actionDict.Add(type, list);
             }
             list.Add(action);
-            SubscribeSubject subscribeSubject = Parent.AddChildren<SubscribeSubject>(action);
-            entityDict.Add(action.GetHashCode(), subscribeSubject);
-            return subscribeSubject;
         }
 
         public new void UnSubscribe<T>(Action<T> action) where T : class
         {
-            if (actionDict.TryGetValue(typeof(T), out var actionList))
+            if (actionDict.TryGetValue(typeof(T), out var list))
             {
-                actionList.Remove(action);
-            }
-            if (entityDict.TryGetValue(action.GetHashCode(), out var entity))
-            {
-                entity.Dispose();
+                list.Remove(action);
             }
         }
 

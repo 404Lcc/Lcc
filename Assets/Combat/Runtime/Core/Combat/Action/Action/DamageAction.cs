@@ -10,8 +10,9 @@ namespace LccModel
     }
     public class DamageActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
+
 
 
 

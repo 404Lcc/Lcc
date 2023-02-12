@@ -4,9 +4,10 @@ namespace LccModel
 {
     public class SkillAbility : Entity, IAbilityEntity
     {
+        public bool Enable { get; set; }
         public CombatEntity OwnerEntity => GetParent<CombatEntity>();
 
-        public bool Enable { get; set; }
+
 
 
         public SkillConfigObject skillConfigObject;

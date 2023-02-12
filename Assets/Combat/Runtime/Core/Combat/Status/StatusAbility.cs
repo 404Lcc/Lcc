@@ -6,10 +6,11 @@ namespace LccModel
 {
     public partial class StatusAbility : Entity, IAbilityEntity
     {
+        public bool Enable { get; set; }
         public CombatEntity OwnerEntity => GetParent<CombatEntity>();
         public CombatEntity CreatorEntity;
 
-        public bool Enable { get; set; }
+
 
 
         public StatusConfigObject statusConfig;

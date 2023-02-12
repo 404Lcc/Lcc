@@ -5,7 +5,7 @@ namespace LccModel
     public class AbilityEffectConditionTriggerComponent : Component
     {
         public Effect Effect => GetParent<AbilityEffect>().effect;
-        public string ConditionValueFormula => ParseParams(Effect.ConditionParams, GetParent<AbilityEffect>().GetParamsDict());
+        public string ConditionValueFormula => ParseParams(Effect.ConditionValueFormula, GetParent<AbilityEffect>().GetParamsDict());
         public ConditionType ConditionType => Effect.ConditionType;
 
         public CombatEntity OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;

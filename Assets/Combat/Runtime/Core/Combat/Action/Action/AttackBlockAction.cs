@@ -2,8 +2,9 @@
 {
     public class AttackBlockActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
+
 
 
         public override void Awake()

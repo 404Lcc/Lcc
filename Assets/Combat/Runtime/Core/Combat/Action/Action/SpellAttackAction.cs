@@ -2,8 +2,9 @@
 {
     public class SpellAttackActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
+
 
 
         public bool TryMakeAction(out SpellAttackAction action)

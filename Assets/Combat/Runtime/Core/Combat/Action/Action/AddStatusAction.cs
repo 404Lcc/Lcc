@@ -2,8 +2,9 @@ namespace LccModel
 {
     public class AddStatusActionAbility : Entity, IActionAbility
     {
-        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
         public bool Enable { get; set; }
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
+
 
 
         public bool TryMakeAction(out AddStatusAction action)

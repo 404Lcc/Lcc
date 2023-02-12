@@ -4,9 +4,10 @@ namespace LccModel
 {
     public class AttackAbility : Entity, IAbilityEntity
     {
+        public bool Enable { get; set; }
         public CombatEntity OwnerEntity => GetParent<CombatEntity>();
 
-        public bool Enable { get; set; }
+
 
 
         public override void Awake<P1>(P1 p1)
