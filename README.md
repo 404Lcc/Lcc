@@ -106,6 +106,8 @@ PanelManager.Instance.OpenPanel(PanelType.Launch);
 LoadSceneManager.Instance.LoadScene(SceneName.Login, true, null, AssetType.Scene);
 ```
 
+<img src="Image/1.png" width="60%">
+
 ## 开发环境
 
 - Unity2020
