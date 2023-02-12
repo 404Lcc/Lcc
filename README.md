@@ -24,17 +24,6 @@ Lcc框架
 12. 自动编译代码
 13. 提供战斗框架
 
-**热更新**
-1. Lua方案[XLua](https://github.com/Tencent/xLua)
-2. C#方案[ILRuntime](https://github.com/Ourpalm/ILRuntime)
-3. C#方案[Hybridclr](https://github.com/focus-creative-games/hybridclr)
-
-**ILRuntime热更新注意项**
-1. 组件缓存
-2. for代替foreach
-3. 适配器可通过编辑器工具生成基础模板，大部分时候不用自己编写
-4. 打包之前一定要生成CLR绑定代码，否则会被IL2CPP裁剪
-
 **提供功能**
 1. UI层级管理
 2. 场景状态管理
@@ -53,8 +42,25 @@ Lcc框架
 ## 战斗流程图
 <img src="Image/2.png" width="100%">
 
+## 热更新方案
+1. [Lua]热更方案(https://github.com/Tencent/xLua)
+2. [ILRuntime]热更方案(https://github.com/Ourpalm/ILRuntime)
+3. [Hybridclr]热更方案(https://github.com/focus-creative-games/hybridclr)
+
+## ILRuntime热更新注意项
+1. 组件缓存
+2. for代替foreach
+3. 适配器可通过编辑器工具生成基础模板，大部分时候不用自己编写
+4. 打包之前一定要生成CLR绑定代码，否则会被IL2CPP裁剪
+
+## 其他战斗框架
+1. [EGamePlay](https://github.com/m969/EGamePlay)
+2. [AbilitySystem](https://github.com/weichx/AbilitySystem)
+3. [SkillSystem](https://github.com/dongweiPeng/SkillSystem)
+4. [SkillEngine](https://github.com/mry-ship/SkillEngine)
+
 ## 开发环境
-- Unity2020
+- Unity2021.3.8
 
 ## 贡献成员
 - [404Lccxy](https://github.com/404Lccxy)
@@ -66,4 +72,6 @@ Lcc框架
 - [BDFramework](https://github.com/yimengfan/BDFramework.Core)
 - [ET](https://github.com/egametang/ET)
 - [uMVVM](https://github.com/MEyes/uMVVM)
+- [DynamicExpresso](https://github.com/dynamicexpresso/DynamicExpresso)
 - [EGamePlay](https://github.com/m969/EGamePlay)
+- [BundleMaster](https://github.com/mister91jiao/BundleMaster)
