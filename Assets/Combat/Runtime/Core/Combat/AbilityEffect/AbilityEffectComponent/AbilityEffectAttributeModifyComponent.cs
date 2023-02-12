@@ -6,7 +6,7 @@
         public string NumericValueFormula => AttributeModifyEffect.NumericValueFormula;
         public AttributeType AttributeType => AttributeModifyEffect.AttributeType;
 
-        public CombatEntity ParentEntity => Parent.GetParent<StatusAbility>().ParentEntity;
+        public CombatEntity OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
 
         public float value;
 
@@ -18,11 +18,11 @@
 
             if (AttributeModifyEffect.ModifyType == ModifyType.Add)
             {
-                ParentEntity.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).AddFinalAddModifier(value);
+                OwnerEntity.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).AddFinalAddModifier(value);
             }
             if (AttributeModifyEffect.ModifyType == ModifyType.PercentAdd)
             {
-                ParentEntity.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).AddFinalPctAddModifier(value);
+                OwnerEntity.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).AddFinalPctAddModifier(value);
             }
 
         }
@@ -31,11 +31,11 @@
         {
             if (AttributeModifyEffect.ModifyType == ModifyType.Add)
             {
-                ParentEntity.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).RemoveFinalAddModifier(value);
+                OwnerEntity.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).RemoveFinalAddModifier(value);
             }
             if (AttributeModifyEffect.ModifyType == ModifyType.PercentAdd)
             {
-                ParentEntity.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).RemoveFinalPctAddModifier(value);
+                OwnerEntity.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).RemoveFinalPctAddModifier(value);
             }
         }
     }

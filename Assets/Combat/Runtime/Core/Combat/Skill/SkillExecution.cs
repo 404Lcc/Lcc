@@ -7,7 +7,7 @@ namespace LccModel
     public class SkillExecution : Entity, IAbilityExecution, IUpdate
     {
         public Entity AbilityEntity { get; set; }
-        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
 
 
 

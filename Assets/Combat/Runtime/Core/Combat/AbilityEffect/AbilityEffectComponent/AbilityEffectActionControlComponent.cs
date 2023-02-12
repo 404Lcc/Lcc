@@ -3,16 +3,17 @@
     public class AbilityEffectActionControlComponent : Component
     {
         public ActionControlEffect ActionControlEffect => (ActionControlEffect)GetParent<AbilityEffect>().effect;
-
+        public CombatEntity OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
+        public StatusAbility OwnerAbility => (StatusAbility)GetParent<AbilityEffect>().OwnerAbility;
 
         public override void Awake()
         {
-            Parent.Parent.Parent.GetComponent<StatusComponent>().OnStatusesChanged(Parent.GetParent<StatusAbility>());
+            OwnerEntity.GetComponent<StatusComponent>().OnStatusesChanged(OwnerAbility);
         }
 
         public override void OnDestroy()
         {
-            Parent.Parent.Parent.GetComponent<StatusComponent>().OnStatusesChanged(Parent.GetParent<StatusAbility>());
+            OwnerEntity.GetComponent<StatusComponent>().OnStatusesChanged(OwnerAbility);
         }
     }
 }

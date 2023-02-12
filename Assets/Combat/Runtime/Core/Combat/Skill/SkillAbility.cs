@@ -4,8 +4,8 @@ namespace LccModel
 {
     public class SkillAbility : Entity, IAbilityEntity
     {
-        public CombatEntity OwnerEntity { get { return GetParent<CombatEntity>(); } set { } }
-        public CombatEntity ParentEntity => GetParent<CombatEntity>();
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
+
         public bool Enable { get; set; }
 
 
@@ -39,7 +39,7 @@ namespace LccModel
                 foreach (var item in skillConfigObject.StatusList)
                 {
                     var status = OwnerEntity.AttachStatus(item.StatusConfigObject);
-                    status.OwnerEntity = OwnerEntity;
+                    status.CreatorEntity = OwnerEntity;
                     status.isChildStatus = true;
                     status.childStatusData = item;
                     status.SetParams(item.ParamsDict);

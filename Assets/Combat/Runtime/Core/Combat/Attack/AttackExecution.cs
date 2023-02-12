@@ -3,7 +3,7 @@
     public class AttackExecution : Entity, IAbilityExecution, IUpdate
     {
         public Entity AbilityEntity { get; set; }
-        public CombatEntity OwnerEntity { get => GetParent<CombatEntity>(); set { } }
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
 
 
         public SpellAttackAction attackAction;

@@ -8,9 +8,8 @@ namespace LccModel
 
         public Entity OwnerAbility => (Entity)Parent; //AbilityEffect是挂在能力上的
         public CombatEntity OwnerEntity => ((IAbilityEntity)OwnerAbility).OwnerEntity;
-        public CombatEntity ParentEntity => ((IAbilityEntity) OwnerAbility).ParentEntity;
-
-
+        
+        
         public override void Awake<P1>(P1 p1)
         {
             base.Awake(p1);
@@ -108,11 +107,6 @@ namespace LccModel
         public void TryAssignEffectToOwner()
         {
             TryAssignEffectToTarget(OwnerEntity);
-        }
-
-        public void TryAssignEffectToParent()
-        {
-            TryAssignEffectToTarget(ParentEntity);
         }
 
         public void TryAssignEffectToTarget(CombatEntity targetEntity)

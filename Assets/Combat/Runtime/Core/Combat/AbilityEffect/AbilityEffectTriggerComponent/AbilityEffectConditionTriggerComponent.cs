@@ -8,7 +8,7 @@ namespace LccModel
         public string ConditionValueFormula => ParseParams(Effect.ConditionParams, GetParent<AbilityEffect>().GetParamsDict());
         public ConditionType ConditionType => Effect.ConditionType;
 
-        public CombatEntity OwnerEntity => GetParent<AbilityEffect>().GetParent<StatusAbility>().OwnerEntity;
+        public CombatEntity OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
 
         public override void Awake()
         {

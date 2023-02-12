@@ -63,7 +63,7 @@ namespace LccModel
             }
 
             status = Target.AttachStatus(statusConfigObject);
-            status.OwnerEntity = Creator;
+            status.CreatorEntity = Creator;
             status.GetComponent<AbilityLevelComponent>().level = sourceAbility.GetComponent<AbilityLevelComponent>().level;
             status.duration = (int)addStatusEffect.Duration;
 

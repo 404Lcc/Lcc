@@ -6,8 +6,9 @@ namespace LccModel
 {
     public partial class StatusAbility : Entity, IAbilityEntity
     {
-        public CombatEntity OwnerEntity { get; set; }
-        public CombatEntity ParentEntity => GetParent<CombatEntity>();
+        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
+        public CombatEntity CreatorEntity;
+
         public bool Enable { get; set; }
 
 
@@ -55,8 +56,8 @@ namespace LccModel
             {
                 foreach (var childStatusData in statusConfig.StatusList)
                 {
-                    var status = ParentEntity.AttachStatus(childStatusData.StatusConfigObject);
-                    status.OwnerEntity = OwnerEntity;
+                    var status = OwnerEntity.AttachStatus(childStatusData.StatusConfigObject);
+                    status.CreatorEntity = CreatorEntity;
                     status.isChildStatus = true;
                     status.childStatusData = childStatusData;
                     status.SetParams(childStatusData.ParamsDict);
@@ -87,7 +88,7 @@ namespace LccModel
                 }
             }
 
-            ParentEntity.OnStatusRemove(this);
+            OwnerEntity.OnStatusRemove(this);
 
             Dispose();
         }
