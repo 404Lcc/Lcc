@@ -8,7 +8,6 @@ namespace LccModel
         public Entity abilityEntity;
 
         public EffectApplyType effectApplyType;
-        public CombatEntity targetEntity;
 
         public Vector3 Position { get; set; }
         public Quaternion Rotation { get; set; }
@@ -42,21 +41,9 @@ namespace LccModel
         }
 
 
-        public void DestroyItem()
-        {
-            Dispose();
-        }
         //靠代理触发
         public void OnCollision(CombatEntity otherCombatEntity)
         {
-            if (targetEntity != null)
-            {
-                if (otherCombatEntity != targetEntity)
-                {
-                    return;
-                }
-            }
-
             var collisionExecuteData = GetComponent<AbilityItemCollisionExecuteComponent>().CollisionExecuteData;
 
             if (abilityEntity != null)
@@ -87,10 +74,7 @@ namespace LccModel
                 targetCounterComponent.targetCounter++;
             }
 
-            if (targetEntity != null)
-            {
-                DestroyItem();
-            }
+            Dispose();
         }
 
         private void OnTriggerNewExecution(ActionEventData actionEventData)

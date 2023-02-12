@@ -58,18 +58,16 @@ namespace LccModel
     [LabelText("碰撞体执行类型")]
     public enum CollisionMoveType
     {
-        [LabelText("可选位置碰撞体")]
-        SelectedPosition,
-        [LabelText("可选朝向碰撞体")]
-        SelectedDirection,
-        [LabelText("目标飞行碰撞体")]
+        [LabelText("固定位置")]
+        FixedPosition,
+        [LabelText("固定方向")]
+        FixedDirection,
+        [LabelText("目标飞行")]
         TargetFly,
-        [LabelText("朝向飞行碰撞体")]
+        [LabelText("朝向飞行")]
         ForwardFly,
-        [LabelText("路径飞行碰撞体")]
+        [LabelText("路径飞行")]
         PathFly,
-        [LabelText("可选朝向路径飞行")]
-        SelectedDirectionPathFly,
     }
 
     [LabelText("应用效果")]
@@ -96,7 +94,7 @@ namespace LccModel
     }
 
     [Serializable]
-    public class CtrlPoint
+    public class PathPoint
     {
         public BezierPointType type;
         public Vector3 position;
@@ -182,19 +180,16 @@ namespace LccModel
 
         public GameObject ObjAsset;
 
-        [ShowIf("ShowSpeed")]
-        public float Speed = 1;
-        public bool ShowSpeed { get => MoveType != CollisionMoveType.SelectedPosition && MoveType != CollisionMoveType.SelectedDirection; }
-        public bool ShowPoints { get => MoveType == CollisionMoveType.PathFly || MoveType == CollisionMoveType.SelectedDirectionPathFly; }
-        [ShowIf("ShowPoints")]
-        public List<CtrlPoint> Points;
 
-        public List<CtrlPoint> GetCtrlPoints()
+        [ShowIf("MoveType", CollisionMoveType.PathFly)]
+        public List<PathPoint> PointList;
+
+        public List<PathPoint> GetPointList()
         {
-            var list = new List<CtrlPoint>();
-            foreach (var item in Points)
+            var list = new List<PathPoint>();
+            foreach (var item in PointList)
             {
-                var newPoint = new CtrlPoint();
+                var newPoint = new PathPoint();
                 newPoint.position = item.position;
                 newPoint.type = item.type;
                 newPoint.InTangent = item.InTangent;

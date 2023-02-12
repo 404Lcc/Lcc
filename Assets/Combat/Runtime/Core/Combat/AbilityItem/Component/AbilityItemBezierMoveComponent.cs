@@ -9,7 +9,7 @@ namespace LccModel
         public IPosition positionEntity;
         public Vector3 originPosition;
         public float rotateAgree;
-        public List<CtrlPoint> ctrlPointList;
+        public List<PathPoint> pointList;
         public float duration;
         public float speed  = 0.05f;
         float progress;
@@ -38,16 +38,16 @@ namespace LccModel
 
         public Vector3 Evaluate(float t, int derivativeOrder = 0)
         {
-            if (ctrlPointList.Count == 0) return positionEntity.Position;
-            if (ctrlPointList.Count == 1) return ctrlPointList[0].position;
+            if (pointList.Count == 0) return positionEntity.Position;
+            if (pointList.Count == 1) return pointList[0].position;
 
             t = Mathf.Clamp(t, 0, 1f);
-            t = t * ctrlPointList.Count;
+            t = t * pointList.Count;
             int segment_index = (int)t;
 
-            if (segment_index + 1 >= ctrlPointList.Count)
+            if (segment_index + 1 >= pointList.Count)
             {
-                var v = ctrlPointList[segment_index].position;
+                var v = pointList[segment_index].position;
                 var a = rotateAgree;
                 var x = v.x;
                 var y = v.z;
@@ -58,10 +58,10 @@ namespace LccModel
                 return v;
             }
             Vector3[] p = new Vector3[4];
-            p[0] = ctrlPointList[segment_index].position;
-            p[1] = ctrlPointList[segment_index].OutTangent + p[0];
-            p[3] = ctrlPointList[segment_index + 1].position;
-            p[2] = ctrlPointList[segment_index + 1].InTangent + p[3];
+            p[0] = pointList[segment_index].position;
+            p[1] = pointList[segment_index].OutTangent + p[0];
+            p[3] = pointList[segment_index + 1].position;
+            p[2] = pointList[segment_index + 1].InTangent + p[3];
 
             t = t - segment_index;
             float u = 1 - t;
