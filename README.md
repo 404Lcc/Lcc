@@ -43,9 +43,9 @@ Lcc框架
 <img src="Image/2.png" width="100%">
 
 ## 热更新方案
-1. [Lua]热更方案(https://github.com/Tencent/xLua)
-2. [ILRuntime]热更方案(https://github.com/Ourpalm/ILRuntime)
-3. [Hybridclr]热更方案(https://github.com/focus-creative-games/hybridclr)
+1. [Lua](https://github.com/Tencent/xLua)热更方案
+2. [ILRuntime](https://github.com/Ourpalm/ILRuntime)热更方案
+3. [Hybridclr](https://github.com/focus-creative-games/hybridclr)热更方案
 
 ## ILRuntime热更新注意项
 1. 组件缓存
@@ -58,6 +58,9 @@ Lcc框架
 2. [AbilitySystem](https://github.com/weichx/AbilitySystem)
 3. [SkillSystem](https://github.com/dongweiPeng/SkillSystem)
 4. [SkillEngine](https://github.com/mry-ship/SkillEngine)
+
+## 收费插件
+1. [Odin Inspector](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041)
 
 ## 开发环境
 - Unity2021.3.8
