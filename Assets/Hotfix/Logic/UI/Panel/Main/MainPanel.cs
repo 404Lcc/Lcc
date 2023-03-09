@@ -1,10 +1,10 @@
-﻿using LccModel;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 
 namespace LccHotfix
 {
     public class MainModel : ViewModelBase
     {
+        public bool isEnterGame;
     }
     public class MainPanel : UIPanel<MainModel>
     {
@@ -34,7 +34,7 @@ namespace LccHotfix
 
         public void OnTest()
         {
-            PanelManager.Instance.ShowPanel(PanelType.Game);
+            ViewModel.isEnterGame = true;
         }
     }
 }

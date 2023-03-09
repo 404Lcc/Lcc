@@ -63,7 +63,7 @@ namespace LccHotfix
             base.OnShow(panel, contextData);
             LogUtil.Debug("OnShow第六个执行的函数");
 
- 
+            UpdatePanel.Instance.Hide();
         }
 
         public override void OnHide(Panel panel)

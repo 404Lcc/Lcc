@@ -1,7 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
 
 namespace LccModel
@@ -24,9 +23,11 @@ namespace LccModel
             obj.CollisionExecuteData = new CollisionExecuteData();
             obj.GetClipTime().EndTime = 0.1f;
             ExecuteClipDataList.Add(obj);
-            AssetDatabase.AddObjectToAsset(obj, this);
-            EditorUtility.SetDirty(this);
-            AssetDatabase.SaveAssetIfDirty(this);
+#if UNITY_EDITOR
+            UnityEditor.AssetDatabase.AddObjectToAsset(obj, this);
+            UnityEditor.EditorUtility.SetDirty(this);
+            UnityEditor.AssetDatabase.SaveAssetIfDirty(this);
+#endif
         }
 #if UNITY_EDITOR
         #region ×Ô¶¯ÃüÃû

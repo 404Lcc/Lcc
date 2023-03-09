@@ -4,6 +4,9 @@
     <type fullname="System.Runtime.CompilerServices.IsUnmanagedAttribute" preserve="all" />
     <type fullname="Interop" preserve="all" />
     <type fullname="Interop+Kernel32" preserve="all" />
+    <type fullname="Interop+Kernel32+WIN32_FIND_DATA" preserve="all" />
+    <type fullname="Interop+Kernel32+WIN32_FIND_DATA+&lt;_cFileName&gt;e__FixedBuffer" preserve="all" />
+    <type fullname="Interop+Kernel32+WIN32_FIND_DATA+&lt;_cAlternateFileName&gt;e__FixedBuffer" preserve="all" />
     <type fullname="Interop+Kernel32+REG_TZI_FORMAT" preserve="all" />
     <type fullname="Interop+Kernel32+SYSTEMTIME" preserve="all" />
     <type fullname="Interop+Kernel32+TIME_DYNAMIC_ZONE_INFORMATION" preserve="all" />
@@ -25,9 +28,6 @@
     <type fullname="Interop+Kernel32+SECURITY_ATTRIBUTES" preserve="all" />
     <type fullname="Interop+Kernel32+FILE_BASIC_INFO" preserve="all" />
     <type fullname="Interop+Kernel32+WIN32_FILE_ATTRIBUTE_DATA" preserve="all" />
-    <type fullname="Interop+Kernel32+WIN32_FIND_DATA" preserve="all" />
-    <type fullname="Interop+Kernel32+WIN32_FIND_DATA+&lt;_cFileName&gt;e__FixedBuffer" preserve="all" />
-    <type fullname="Interop+Kernel32+WIN32_FIND_DATA+&lt;_cAlternateFileName&gt;e__FixedBuffer" preserve="all" />
     <type fullname="Interop+BCrypt" preserve="all" />
     <type fullname="Interop+BCrypt+NTSTATUS" preserve="all" />
     <type fullname="Interop+User32" preserve="all" />
@@ -2815,6 +2815,7 @@
     <type fullname="System.Buffers.Text.NumberBuffer" preserve="all" />
     <type fullname="System.IO.DriveInfoInternal" preserve="all" />
     <type fullname="System.IO.DisableMediaInsertionPrompt" preserve="all" />
+    <type fullname="System.IO.FileSystem" preserve="all" />
     <type fullname="System.IO.DirectoryNotFoundException" preserve="all" />
     <type fullname="System.IO.EndOfStreamException" preserve="all" />
     <type fullname="System.IO.Error" preserve="all" />
@@ -2871,7 +2872,6 @@
     <type fullname="System.IO.File+&lt;InternalWriteAllLinesAsync&gt;d__80" preserve="all" />
     <type fullname="System.IO.File+&lt;InternalWriteAllTextAsync&gt;d__81" preserve="all" />
     <type fullname="System.IO.FileInfo" preserve="all" />
-    <type fullname="System.IO.FileSystem" preserve="all" />
     <type fullname="System.IO.FileSystemInfo" preserve="all" />
     <type fullname="System.IO.Iterator`1" preserve="all" />
     <type fullname="System.IO.MatchCasing" preserve="all" />
@@ -3165,6 +3165,7 @@
     <type fullname="Unity.Collections.NativeMatchesParallelForLengthAttribute" preserve="all" />
     <type fullname="Unity.Collections.NativeDisableParallelForRestrictionAttribute" preserve="all" />
     <type fullname="Unity.Collections.Allocator" preserve="all" />
+    <type fullname="Unity.Collections.LeakCategory" preserve="all" />
     <type fullname="Unity.Collections.NativeLeakDetectionMode" preserve="all" />
     <type fullname="Unity.Collections.NativeLeakDetection" preserve="all" />
     <type fullname="Unity.Collections.NativeArrayOptions" preserve="all" />
@@ -3180,6 +3181,7 @@
     <type fullname="Unity.Collections.NativeSlice`1" preserve="all" />
     <type fullname="Unity.Collections.NativeSlice`1+Enumerator" preserve="all" />
     <type fullname="Unity.Collections.NativeSliceDebugView`1" preserve="all" />
+    <type fullname="Unity.Collections.LowLevel.Unsafe.BurstLike" preserve="all" />
     <type fullname="Unity.Collections.LowLevel.Unsafe.NativeContainerAttribute" preserve="all" />
     <type fullname="Unity.Collections.LowLevel.Unsafe.NativeContainerIsReadOnlyAttribute" preserve="all" />
     <type fullname="Unity.Collections.LowLevel.Unsafe.NativeContainerIsAtomicWriteOnlyAttribute" preserve="all" />
@@ -3202,6 +3204,7 @@
     <type fullname="Unity.Collections.LowLevel.Unsafe.UnsafeUtility+IsUnmanagedCache`1" preserve="all" />
     <type fullname="Unity.Collections.LowLevel.Unsafe.UnsafeUtility+IsValidNativeContainerElementTypeCache`1" preserve="all" />
     <type fullname="Unity.Collections.LowLevel.Unsafe.UnsafeUtility+AlignOfHelper`1" preserve="all" />
+    <type fullname="Unity.Burst.BurstAuthorizedExternalMethodAttribute" preserve="all" />
     <type fullname="Unity.Burst.BurstDiscardAttribute" preserve="all" />
     <type fullname="Unity.Burst.LowLevel.BurstCompilerService" preserve="all" />
     <type fullname="Unity.Burst.LowLevel.BurstCompilerService+ExtractCompilerFlags" preserve="all" />
@@ -3288,6 +3291,7 @@
     <type fullname="UnityEngine.FlareLayer" preserve="all" />
     <type fullname="UnityEngine.ReflectionProbe" preserve="all" />
     <type fullname="UnityEngine.ReflectionProbe+ReflectionProbeEvent" preserve="all" />
+    <type fullname="UnityEngine.CloudStreaming" preserve="all" />
     <type fullname="UnityEngine.CrashReport" preserve="all" />
     <type fullname="UnityEngine.DebugLogHandler" preserve="all" />
     <type fullname="UnityEngine.Debug" preserve="all" />
@@ -3633,6 +3637,8 @@
     <type fullname="UnityEngine.UnhandledExceptionHandler+&lt;&gt;c" preserve="all" />
     <type fullname="UnityEngine.UnityAPICompatibilityVersionAttribute" preserve="all" />
     <type fullname="UnityEngine.HideFlags" preserve="all" />
+    <type fullname="UnityEngine.FindObjectsSortMode" preserve="all" />
+    <type fullname="UnityEngine.FindObjectsInactive" preserve="all" />
     <type fullname="UnityEngine.Object" preserve="all" />
     <type fullname="UnityEngine.UnitySynchronizationContext" preserve="all" />
     <type fullname="UnityEngine.UnitySynchronizationContext+WorkRequest" preserve="all" />
@@ -3931,6 +3937,7 @@
     <type fullname="UnityEngine.PlayerLoop.Update+DirectorUpdate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.Update+ScriptRunDelayedDynamicFrameRate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.Update+ScriptRunDelayedTasks" preserve="all" />
+    <type fullname="UnityEngine.PlayerLoop.Update+UIWidgetsUpdate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.PreLateUpdate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.PreLateUpdate+Physics2DLateUpdate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.PreLateUpdate+AIUpdatePostScript" preserve="all" />
@@ -3993,6 +4000,8 @@
     <type fullname="UnityEngine.PlayerLoop.PostLateUpdate+PhysicsSkinnedClothBeginUpdate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.PostLateUpdate+PhysicsSkinnedClothFinishUpdate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.PostLateUpdate+TriggerEndOfFrameCallbacks" preserve="all" />
+    <type fullname="UnityEngine.PlayerLoop.PostLateUpdate+UIWidgetsVSync" preserve="all" />
+    <type fullname="UnityEngine.PlayerLoop.PostLateUpdate+UIWidgetsWait" preserve="all" />
     <type fullname="UnityEngine.Pool.CollectionPool`2" preserve="all" />
     <type fullname="UnityEngine.Pool.CollectionPool`2+&lt;&gt;c" preserve="all" />
     <type fullname="UnityEngine.Pool.ListPool`1" preserve="all" />

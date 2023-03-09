@@ -5,5 +5,6 @@ namespace LccHotfix
         public const string None = "";
         public const string Login = "Login";
         public const string Main = "Main";
+        public const string Game = "Game";
     }
 }

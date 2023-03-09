@@ -44,6 +44,7 @@ namespace LccHotfix
 
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
+                if (item == PanelType.None) continue;
                 string name = item.ToPanelString();
                 typeToNameDict.Add((int)item, name);
                 nameToTypeDict.Add(name, (int)item);
