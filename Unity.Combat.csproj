@@ -79,7 +79,6 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\ConditionComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\Effect\CustomEffect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\CombatContext.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\IPosition.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageBloodSuckComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\ItemConfigObject.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\SkillConfigObject.cs" />
@@ -148,6 +147,10 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityItem\Component\AbilityItemCollisionExecuteComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\SpellItemComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\TransformComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\JoystickComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\AnimationComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Component\EventType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Combat\Unity.Combat.asmdef" />

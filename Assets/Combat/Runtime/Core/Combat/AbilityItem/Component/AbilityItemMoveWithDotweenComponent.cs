@@ -4,12 +4,6 @@ using System;
 
 namespace LccModel
 {
-    public enum MoveType
-    {
-        TargetMove,
-        PathMove,
-    }
-
     public enum SpeedType
     {
         Speed,
@@ -21,8 +15,9 @@ namespace LccModel
         public SpeedType speedType;
         public float speed;
         public float duration;
-        public IPosition positionEntity;
-        public IPosition targetPositionEntity;
+        public TransformComponent transformComponent;
+        public TransformComponent targetTransformComponent;
+
         public Vector3 destination;
         public Tweener moveTweener;
         private Action moveFinishAction;
@@ -30,43 +25,49 @@ namespace LccModel
 
         public override void Awake()
         {
-            positionEntity = (IPosition)Parent;
+            transformComponent = Parent.GetComponent<TransformComponent>();
         }
 
         public void Update()
         {
-            if (targetPositionEntity != null)
+            if (targetTransformComponent != null)
             {
-                if (speedType == SpeedType.Speed) DoMoveToWithSpeed(targetPositionEntity, speed);
-                if (speedType == SpeedType.Duration) DoMoveToWithTime(targetPositionEntity, duration);
+                if (speedType == SpeedType.Speed)
+                {
+                    DoMoveToWithSpeed(targetTransformComponent, speed);
+                }
+                if (speedType == SpeedType.Duration)
+                {
+                    DoMoveToWithTime(targetTransformComponent, duration);
+                }
             }
         }
 
         public AbilityItemMoveWithDotweenComponent DoMoveTo(Vector3 destination, float duration)
         {
             this.destination = destination;
-            DOTween.To(() => { return positionEntity.Position; }, (x) => positionEntity.Position = x, destination, duration).SetEase(Ease.Linear).OnComplete(OnMoveFinish);
+            DOTween.To(() => { return transformComponent.position; }, (x) => transformComponent.position = x, destination, duration).SetEase(Ease.Linear).OnComplete(OnMoveFinish);
             return this;
         }
 
-        public void DoMoveToWithSpeed(IPosition targetPositionEntity, float speed = 1f)
+        public void DoMoveToWithSpeed(TransformComponent target, float speed = 1f)
         {
             this.speed = speed;
             speedType = SpeedType.Speed;
-            this.targetPositionEntity = targetPositionEntity;
+            this.targetTransformComponent = target;
             moveTweener?.Kill();
-            var dist = Vector3.Distance(positionEntity.Position, this.targetPositionEntity.Position);
+            var dist = Vector3.Distance(transformComponent.position, targetTransformComponent.position);
             var duration = dist / speed;
-            moveTweener = DOTween.To(() => { return positionEntity.Position; }, (x) => positionEntity.Position = x, this.targetPositionEntity.Position, duration);
+            moveTweener = DOTween.To(() => { return transformComponent.position; }, (x) => transformComponent.position = x, targetTransformComponent.position, duration);
         }
 
-        public void DoMoveToWithTime(IPosition targetPositionEntity, float time = 1f)
+        public void DoMoveToWithTime(TransformComponent target, float time = 1f)
         {
             duration = time;
             speedType = SpeedType.Duration;
-            this.targetPositionEntity = targetPositionEntity;
+            this.targetTransformComponent = target;
             moveTweener?.Kill();
-            moveTweener = DOTween.To(() => { return positionEntity.Position; }, (x) => positionEntity.Position = x, this.targetPositionEntity.Position, time);
+            moveTweener = DOTween.To(() => { return transformComponent.position; }, (x) => transformComponent.position = x, targetTransformComponent.position, time);
         }
 
 

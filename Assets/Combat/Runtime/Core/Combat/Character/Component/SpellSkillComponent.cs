@@ -9,13 +9,13 @@ namespace LccModel
         public void SpellWithTarget(SkillAbility spellSkill, CombatEntity targetEntity)
         {
             if (CombatEntity.spellingSkillExecution != null) return;
-            spellSkill.OwnerEntity.Rotation = Quaternion.LookRotation(targetEntity.Position - spellSkill.OwnerEntity.Position);
+            spellSkill.OwnerEntity.TransformComponent.rotation = Quaternion.LookRotation(targetEntity.TransformComponent.position - spellSkill.OwnerEntity.TransformComponent.position);
             if (CombatEntity.spellSkillActionAbility.TryMakeAction(out var spellAction))
             {
                 spellAction.skillAbility = spellSkill;
                 spellAction.inputTarget = targetEntity;
-                spellAction.inputPoint = targetEntity.Position;
-                spellAction.inputDirection = spellSkill.OwnerEntity.Rotation.eulerAngles.y;
+                spellAction.inputPoint = targetEntity.TransformComponent.position;
+                spellAction.inputDirection = spellSkill.OwnerEntity.TransformComponent.rotation.eulerAngles.y;
                 spellAction.SpellSkill();
             }
         }
@@ -23,12 +23,12 @@ namespace LccModel
         public void SpellWithPoint(SkillAbility spellSkill, Vector3 point)
         {
             if (CombatEntity.spellingSkillExecution != null) return;
-            spellSkill.OwnerEntity.Rotation = Quaternion.LookRotation(point - spellSkill.OwnerEntity.Position);
+            spellSkill.OwnerEntity.TransformComponent.rotation = Quaternion.LookRotation(point - spellSkill.OwnerEntity.TransformComponent.position);
             if (CombatEntity.spellSkillActionAbility.TryMakeAction(out var spellAction))
             {
                 spellAction.skillAbility = spellSkill;
                 spellAction.inputPoint = point;
-                spellAction.inputDirection = spellSkill.OwnerEntity.Rotation.eulerAngles.y;
+                spellAction.inputDirection = spellSkill.OwnerEntity.TransformComponent.rotation.eulerAngles.y;
                 spellAction.SpellSkill();
             }
         }

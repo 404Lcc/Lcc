@@ -16,7 +16,7 @@ namespace LccModel
                     GameObject.Destroy(gameObject);
                     return;
                 }
-                transform.position = abilityItem.Position;
+                transform.position = abilityItem.TransformComponent.position;
             }
         }
     }

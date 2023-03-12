@@ -1,20 +1,19 @@
-﻿using UnityEngine;
-
-namespace LccModel
+﻿namespace LccModel
 {
-    public class AbilityItem : Entity, IPosition
+    public class AbilityItem : Entity
     {
         public IAbilityExecution abilityExecution;
         public Entity abilityEntity;
 
         public EffectApplyType effectApplyType;
 
-        public Vector3 Position { get; set; }
-        public Quaternion Rotation { get; set; }
+        public TransformComponent TransformComponent => GetComponent<TransformComponent>();
 
         public override void Awake<P1>(P1 p1)
         {
             base.Awake(p1);
+
+            AddComponent<TransformComponent>();
 
             abilityExecution = p1 as IAbilityExecution;//技能执行体
 
@@ -87,7 +86,7 @@ namespace LccModel
             var sourceExecution = abilityExecution as SkillExecution;
             var execution = sourceExecution.OwnerEntity.AddChildren<SkillExecution, SkillAbility>(sourceExecution.SkillAbility);
             execution.executionConfigObject = executionObject;
-            execution.inputPoint = Position;
+            execution.inputPoint = TransformComponent.position;
             execution.LoadExecutionEffect();
             execution.BeginExecute();
         }

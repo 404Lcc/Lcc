@@ -107,17 +107,17 @@ namespace LccModel
 
         private void TargetFlyItem(AbilityItem abilityItem)
         {
-            abilityItem.Position = OwnerEntity.Position;
+            abilityItem.TransformComponent.position = OwnerEntity.TransformComponent.position;
             ExecuteClipData clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().executeClipData;
-            abilityItem.AddComponent<AbilityItemMoveWithDotweenComponent>().DoMoveToWithTime(inputTarget, clipData.Duration);
+            abilityItem.AddComponent<AbilityItemMoveWithDotweenComponent>().DoMoveToWithTime(inputTarget.TransformComponent, clipData.Duration);
         }
 
         private void ForwardFlyItem(AbilityItem abilityItem)
         {
-            abilityItem.Position = OwnerEntity.Position;
+            abilityItem.TransformComponent.position = OwnerEntity.TransformComponent.position;
             var x = Mathf.Sin(Mathf.Deg2Rad * inputDirection);
             var z = Mathf.Cos(Mathf.Deg2Rad * inputDirection);
-            var destination = abilityItem.Position + new Vector3(x, 0, z) * 30;
+            var destination = abilityItem.TransformComponent.position + new Vector3(x, 0, z) * 30;
             abilityItem.AddComponent<AbilityItemMoveWithDotweenComponent>().DoMoveTo(destination, 1f).OnMoveFinish(() =>
             {
                 abilityItem.Dispose();
@@ -126,17 +126,17 @@ namespace LccModel
 
         private void PathFlyItem(AbilityItem abilityItem)
         {
-            abilityItem.Position = OwnerEntity.Position;
+            abilityItem.TransformComponent.position = OwnerEntity.TransformComponent.position;
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().executeClipData;
             var pointList = clipData.CollisionExecuteData.GetPointList();
 
-            var angle = OwnerEntity.Rotation.eulerAngles.y - 90;
+            var angle = OwnerEntity.TransformComponent.rotation.eulerAngles.y - 90;
 
-            abilityItem.Position = pointList[0].position;
+            abilityItem.TransformComponent.position = pointList[0].position;
             var moveComp = abilityItem.AddComponent<AbilityItemBezierMoveComponent>();
-            moveComp.positionEntity = abilityItem;
+            moveComp.abilityItem = abilityItem;
             moveComp.pointList = pointList;
-            moveComp.originPosition = OwnerEntity.Position;
+            moveComp.originPosition = OwnerEntity.TransformComponent.position;
             moveComp.rotateAgree = angle * MathF.PI / 180;
             moveComp.speed = clipData.Duration / 10;
             moveComp.DOMove();
@@ -146,7 +146,7 @@ namespace LccModel
         private void FixedPositionItem(AbilityItem abilityItem)
         {
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().executeClipData;
-            abilityItem.Position = inputPoint;
+            abilityItem.TransformComponent.position = inputPoint;
             abilityItem.AddComponent<AbilityItemLifeTimeComponent, float>(clipData.Duration);
         }
 
@@ -154,8 +154,8 @@ namespace LccModel
         private void FixedDirectionItem(AbilityItem abilityItem)
         {
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().executeClipData;
-            abilityItem.Position = OwnerEntity.Position;
-            abilityItem.Rotation = OwnerEntity.Rotation;
+            abilityItem.TransformComponent.position = OwnerEntity.TransformComponent.position;
+            abilityItem.TransformComponent.rotation = OwnerEntity.TransformComponent.rotation;
             abilityItem.AddComponent<AbilityItemLifeTimeComponent, float>(clipData.Duration);
         }
 
@@ -163,8 +163,8 @@ namespace LccModel
         private GameObject CreateAbilityItemProxy(AbilityItem abilityItem)
         {
             var proxyObj = new GameObject("AbilityItemProxy");
-            proxyObj.transform.position = abilityItem.Position;
-            proxyObj.transform.rotation = abilityItem.Rotation;
+            proxyObj.transform.position = abilityItem.TransformComponent.position;
+            proxyObj.transform.rotation = abilityItem.TransformComponent.rotation;
             proxyObj.AddComponent<AbilityItemProxy>().abilityItem = abilityItem;
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().CollisionExecuteData;
 

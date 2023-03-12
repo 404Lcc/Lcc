@@ -176,6 +176,11 @@
     <Compile Include="Assets\Framework\Runtime\Core\Module\Logger\UnityLogger.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\EventType.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\AEvent.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\EventManager.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\EventHandlerAttribute.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\IEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />

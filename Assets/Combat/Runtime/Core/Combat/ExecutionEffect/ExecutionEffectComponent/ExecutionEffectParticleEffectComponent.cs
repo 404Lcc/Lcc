@@ -18,7 +18,7 @@ namespace LccModel
 
         public void OnTriggerStart(Entity entity)
         {
-            particleEffect = GameObject.Instantiate(particleEffectPrefab, OwnerEntity.Position, OwnerEntity.Rotation);
+            particleEffect = GameObject.Instantiate(particleEffectPrefab, OwnerEntity.TransformComponent.position, OwnerEntity.TransformComponent.rotation);
         }
 
         public void OnTriggerEnd(Entity entity)

@@ -6,7 +6,7 @@ namespace LccModel
 {
     public class AbilityItemBezierMoveComponent : Component
     {
-        public IPosition positionEntity;
+        public AbilityItem abilityItem;
         public Vector3 originPosition;
         public float rotateAgree;
         public List<PathPoint> pointList;
@@ -19,8 +19,8 @@ namespace LccModel
         {
             progress = 0.1f;
             var endValue = Evaluate(progress);
-            var startPos = positionEntity.Position;
-            DOTween.To(() => startPos, (x) => positionEntity.Position = x, endValue, speed).SetEase(Ease.Linear).OnComplete(DOMoveNext);
+            var startPos = abilityItem.TransformComponent.position;
+            DOTween.To(() => startPos, (x) => abilityItem.TransformComponent.position = x, endValue, speed).SetEase(Ease.Linear).OnComplete(DOMoveNext);
         }
 
         private void DOMoveNext()
@@ -32,13 +32,13 @@ namespace LccModel
             progress += 0.1f;
             progress = Mathf.Min(1f, progress);
             var endValue = Evaluate(progress);
-            var startPos = positionEntity.Position;
-            DOTween.To(() => startPos, (x) => positionEntity.Position = x, endValue, speed).SetEase(Ease.Linear).OnComplete(DOMoveNext);
+            var startPos = abilityItem.TransformComponent.position;
+            DOTween.To(() => startPos, (x) => abilityItem.TransformComponent.position = x, endValue, speed).SetEase(Ease.Linear).OnComplete(DOMoveNext);
         }
 
         public Vector3 Evaluate(float t, int derivativeOrder = 0)
         {
-            if (pointList.Count == 0) return positionEntity.Position;
+            if (pointList.Count == 0) return abilityItem.TransformComponent.position;
             if (pointList.Count == 1) return pointList[0].position;
 
             t = Mathf.Clamp(t, 0, 1f);

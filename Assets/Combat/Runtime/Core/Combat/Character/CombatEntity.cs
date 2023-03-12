@@ -1,9 +1,8 @@
 using System;
-using UnityEngine;
 
 namespace LccModel
 {
-    public class CombatEntity : Entity, IPosition
+    public class CombatEntity : Entity
     {
 
         public HealthPoint currentHealth;
@@ -45,17 +44,18 @@ namespace LccModel
 
 
 
-        public Vector3 Position { get; set; }
-        public Quaternion Rotation { get; set; }
-
-
-
+        public TransformComponent TransformComponent => GetComponent<TransformComponent>();
+        public AnimationComponent AnimationComponent => GetComponent<AnimationComponent>();
+        public AttributeComponent AttributeComponent => GetComponent<AttributeComponent>();
 
 
 
         public override void Awake()
         {
             base.Awake();
+
+            AddComponent<TransformComponent>();
+            AddComponent<AnimationComponent>();
 
             AddComponent<AttributeComponent>();
             AddComponent<ActionPointComponent>();
@@ -69,6 +69,7 @@ namespace LccModel
             AddComponent<SpellSkillComponent>();
             AddComponent<SpellItemComponent>();
 
+            AddComponent<JoystickComponent>();
 
             currentHealth = AddChildren<HealthPoint>();
             currentHealth.current = GetComponent<AttributeComponent>().HealthPoint;
