@@ -6,7 +6,7 @@ namespace LccModel
     {
         public CureEffect CureEffect => (CureEffect)GetParent<AbilityEffect>().effect;
         public string CureValueFormula => CureEffect.CureValueFormula;
-        public Combat OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
+        public Combat Owner => GetParent<AbilityEffect>().Owner;
 
 
 
@@ -18,7 +18,7 @@ namespace LccModel
 
         public void OnAssignEffect(EffectAssignAction effectAssignAction)
         {
-            if (OwnerEntity.cureActionAbility.TryMakeAction(out var action))
+            if (Owner.cureActionAbility.TryMakeAction(out var action))
             {
                 effectAssignAction.FillDatasToAction(action);
                 action.ApplyCure();

@@ -5,7 +5,7 @@ namespace LccModel
     public class SkillAbility : Entity, IAbility
     {
         public bool Enable { get; set; }
-        public Combat OwnerEntity => GetParent<Combat>();
+        public Combat Owner => GetParent<Combat>();
 
 
 
@@ -39,8 +39,8 @@ namespace LccModel
             {
                 foreach (var item in skillConfigObject.StatusList)
                 {
-                    var status = OwnerEntity.AttachStatus(item.StatusConfigObject);
-                    status.CreatorEntity = OwnerEntity;
+                    var status = Owner.AttachStatus(item.StatusConfigObject);
+                    status.Creator = Owner;
                     status.isChildStatus = true;
                     status.childStatusData = item;
                     status.SetParams(item.ParamsDict);
@@ -66,7 +66,7 @@ namespace LccModel
 
         public Entity CreateExecution()
         {
-            var execution = OwnerEntity.AddChildren<SkillExecution, SkillAbility>(this);
+            var execution = Owner.AddChildren<SkillExecution, SkillAbility>(this);
             execution.executionConfigObject = executionConfigObject;
             execution.LoadExecutionEffect();
             return execution;

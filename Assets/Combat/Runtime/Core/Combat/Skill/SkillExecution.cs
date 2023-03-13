@@ -6,12 +6,12 @@ namespace LccModel
 {
     public class SkillExecution : Entity, IAbilityExecution, IUpdate
     {
-        public Entity AbilityEntity { get; set; }
-        public Combat OwnerEntity => GetParent<Combat>();
+        public Entity Ability { get; set; }
+        public Combat Owner => GetParent<Combat>();
 
 
 
-        public SkillAbility SkillAbility => (SkillAbility)AbilityEntity;
+        public SkillAbility SkillAbility => (SkillAbility)Ability;
 
         public ExecutionConfigObject executionConfigObject;
         public List<Combat> inputSkillTargetList = new List<Combat>();
@@ -27,7 +27,7 @@ namespace LccModel
         public override void Awake<P1>(P1 p1)
         {
             base.Awake(p1);
-            AbilityEntity = p1 as SkillAbility;
+            Ability = p1 as SkillAbility;
 
             originTime = Time.Instance.ClientNow();
         }
@@ -103,14 +103,14 @@ namespace LccModel
 
         private void TargetFlyItem(AbilityItem abilityItem)
         {
-            abilityItem.TransformComponent.position = OwnerEntity.TransformComponent.position;
+            abilityItem.TransformComponent.position = Owner.TransformComponent.position;
             ExecuteClipData clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().executeClipData;
             abilityItem.AddComponent<AbilityItemMoveWithDotweenComponent>().DoMoveToWithTime(inputTarget.TransformComponent, clipData.Duration);
         }
 
         private void ForwardFlyItem(AbilityItem abilityItem)
         {
-            abilityItem.TransformComponent.position = OwnerEntity.TransformComponent.position;
+            abilityItem.TransformComponent.position = Owner.TransformComponent.position;
             var x = Mathf.Sin(Mathf.Deg2Rad * inputDirection);
             var z = Mathf.Cos(Mathf.Deg2Rad * inputDirection);
             var destination = abilityItem.TransformComponent.position + new Vector3(x, 0, z) * 30;
@@ -122,17 +122,17 @@ namespace LccModel
 
         private void PathFlyItem(AbilityItem abilityItem)
         {
-            abilityItem.TransformComponent.position = OwnerEntity.TransformComponent.position;
+            abilityItem.TransformComponent.position = Owner.TransformComponent.position;
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().executeClipData;
             var pointList = clipData.CollisionExecuteData.GetPointList();
 
-            var angle = OwnerEntity.TransformComponent.rotation.eulerAngles.y - 90;
+            var angle = Owner.TransformComponent.rotation.eulerAngles.y - 90;
 
             abilityItem.TransformComponent.position = pointList[0].position;
             var moveComp = abilityItem.AddComponent<AbilityItemBezierMoveComponent>();
             moveComp.abilityItem = abilityItem;
             moveComp.pointList = pointList;
-            moveComp.originPosition = OwnerEntity.TransformComponent.position;
+            moveComp.originPosition = Owner.TransformComponent.position;
             moveComp.rotateAgree = angle * MathF.PI / 180;
             moveComp.speed = clipData.Duration / 10;
             moveComp.DOMove();
@@ -150,8 +150,8 @@ namespace LccModel
         private void FixedDirectionItem(AbilityItem abilityItem)
         {
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().executeClipData;
-            abilityItem.TransformComponent.position = OwnerEntity.TransformComponent.position;
-            abilityItem.TransformComponent.rotation = OwnerEntity.TransformComponent.rotation;
+            abilityItem.TransformComponent.position = Owner.TransformComponent.position;
+            abilityItem.TransformComponent.rotation = Owner.TransformComponent.rotation;
             abilityItem.AddComponent<AbilityItemLifeTimeComponent, float>(clipData.Duration);
         }
 

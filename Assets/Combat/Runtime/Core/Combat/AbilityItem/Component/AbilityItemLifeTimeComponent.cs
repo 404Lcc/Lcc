@@ -15,11 +15,11 @@
         {
             if (lifeTimer.IsRunning)
             {
-                lifeTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, DestroyEntity);
+                lifeTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, Destroy);
             }
         }
 
-        private void DestroyEntity()
+        private void Destroy()
         {
             Parent.Dispose();
         }

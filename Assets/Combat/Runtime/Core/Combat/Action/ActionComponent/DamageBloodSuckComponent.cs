@@ -2,24 +2,24 @@
 {
     public class DamageBloodSuckComponent : Component
     {
-        public Combat OwnerEntity => Parent.GetParent<Combat>();
+        public Combat Owner => Parent.GetParent<Combat>();
         public override void Awake()
         {
-            OwnerEntity.ListenActionPoint(ActionPointType.PostCauseDamage, OnCauseDamage);
+            Owner.ListenActionPoint(ActionPointType.PostCauseDamage, OnCauseDamage);
         }
         public override void OnDestroy()
         {
-            OwnerEntity.UnListenActionPoint(ActionPointType.PostCauseDamage, OnCauseDamage);
+            Owner.UnListenActionPoint(ActionPointType.PostCauseDamage, OnCauseDamage);
         }
         private void OnCauseDamage(Entity action)
         {
             DamageAction damageAction = (DamageAction)action;
             float value = damageAction.damageValue * 0.2f;
 
-            if (OwnerEntity.cureActionAbility.TryMakeAction(out var cureAction))
+            if (Owner.cureActionAbility.TryMakeAction(out var cureAction))
             {
-                cureAction.Creator = OwnerEntity;
-                cureAction.Target = OwnerEntity;
+                cureAction.Creator = Owner;
+                cureAction.Target = Owner;
                 cureAction.cureValue = (int)value;
                 cureAction.SourceAssignAction = null;
                 cureAction.ApplyCure();

@@ -4,7 +4,7 @@ namespace LccModel
 {
     public class StatusComponent : Component
     {
-        public Combat CombatEntity => GetParent<Combat>();
+        public Combat Combat => GetParent<Combat>();
 
 
         public List<StatusAbility> statusList = new List<StatusAbility>();
@@ -13,7 +13,7 @@ namespace LccModel
 
         public StatusAbility AttachStatus(object configObject)
         {
-            var status = CombatEntity.AttachAbility<StatusAbility>(configObject);
+            var status = Combat.AttachAbility<StatusAbility>(configObject);
             if (!statusDict.ContainsKey(status.statusConfig.Id))
             {
                 statusDict.Add(status.statusConfig.Id, new List<StatusAbility>());
@@ -36,7 +36,7 @@ namespace LccModel
         public void OnStatusesChanged(StatusAbility statusAbility)
         {
             var tempActionControl = ActionControlType.None;
-            foreach (var item in CombatEntity.Children.Values)
+            foreach (var item in Combat.Children.Values)
             {
                 if (item is StatusAbility status)
                 {
@@ -56,9 +56,9 @@ namespace LccModel
                 }
             }
 
-            CombatEntity.actionControlType = tempActionControl;
-            var moveForbid = CombatEntity.actionControlType.HasFlag(ActionControlType.MoveForbid);
-            CombatEntity.GetComponent<MotionComponent>().SetEnable(!moveForbid);
+            Combat.actionControlType = tempActionControl;
+            var moveForbid = Combat.actionControlType.HasFlag(ActionControlType.MoveForbid);
+            Combat.GetComponent<MotionComponent>().SetEnable(!moveForbid);
         }
     }
 }

@@ -3,6 +3,6 @@
     public interface IActionAbility
     {
         public bool Enable { get; set; }
-        public Combat OwnerEntity { get; }
+        public Combat Owner { get; }
     }
 }

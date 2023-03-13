@@ -47,49 +47,49 @@ namespace LccModel
         {
             return abilityEffectList[index];
         }
-        public void TryAssignAllEffectToTarget(Combat targetEntity)
+        public void TryAssignAllEffectToTarget(Combat target)
         {
             if (abilityEffectList.Count > 0)
             {
                 foreach (var abilityEffect in abilityEffectList)
                 {
-                    abilityEffect.TryAssignEffectToTarget(targetEntity);
+                    abilityEffect.TryAssignEffectToTarget(target);
                 }
             }
         }
-        public void TryAssignAllEffectToTarget(Combat targetEntity, IActionExecution actionExecution)
+        public void TryAssignAllEffectToTarget(Combat target, IActionExecution actionExecution)
         {
             if (abilityEffectList.Count > 0)
             {
                 foreach (var abilityEffect in abilityEffectList)
                 {
-                    abilityEffect.TryAssignEffectToTarget(targetEntity, actionExecution);
+                    abilityEffect.TryAssignEffectToTarget(target, actionExecution);
                 }
             }
         }
-        public void TryAssignAllEffectToTarget(Combat targetEntity, IAbilityExecution abilityExecution)
+        public void TryAssignAllEffectToTarget(Combat target, IAbilityExecution abilityExecution)
         {
             if (abilityEffectList.Count > 0)
             {
                 foreach (var abilityEffect in abilityEffectList)
                 {
-                    abilityEffect.TryAssignEffectToTarget(targetEntity, abilityExecution);
+                    abilityEffect.TryAssignEffectToTarget(target, abilityExecution);
                 }
             }
         }
-        public void TryAssignAllEffectToTarget(Combat targetEntity, AbilityItem abilityItem)
+        public void TryAssignAllEffectToTarget(Combat target, AbilityItem abilityItem)
         {
             if (abilityEffectList.Count > 0)
             {
                 foreach (var abilityEffect in abilityEffectList)
                 {
-                    abilityEffect.TryAssignEffectToTarget(targetEntity, abilityItem);
+                    abilityEffect.TryAssignEffectToTarget(target, abilityItem);
                 }
             }
         }
-        public void TryAssignEffectToTargetByIndex(Combat targetEntity, int index)
+        public void TryAssignEffectToTargetByIndex(Combat target, int index)
         {
-            abilityEffectList[index].TryAssignEffectToTarget(targetEntity);
+            abilityEffectList[index].TryAssignEffectToTarget(target);
         }
     }
 }

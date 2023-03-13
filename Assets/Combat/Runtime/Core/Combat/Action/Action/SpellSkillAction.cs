@@ -6,7 +6,7 @@ namespace LccModel
     public class SpellSkillActionAbility : Entity, IActionAbility
     {
         public bool Enable { get; set; }
-        public Combat OwnerEntity => GetParent<Combat>();
+        public Combat Owner => GetParent<Combat>();
 
 
 
@@ -18,9 +18,9 @@ namespace LccModel
             }
             else
             {
-                action = OwnerEntity.AddChildren<SpellSkillAction>();
+                action = Owner.AddChildren<SpellSkillAction>();
                 action.ActionAbility = this;
-                action.Creator = OwnerEntity;
+                action.Creator = Owner;
             }
             return Enable;
         }

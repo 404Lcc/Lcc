@@ -2,11 +2,11 @@
 {
     public class AbilityEffectAddStatusComponent : Component
     {
-        public Combat OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
+        public Combat Owner => GetParent<AbilityEffect>().Owner;
 
         public void OnAssignEffect(EffectAssignAction effectAssignAction)
         {
-            if (OwnerEntity.addStatusActionAbility.TryMakeAction(out var action))
+            if (Owner.addStatusActionAbility.TryMakeAction(out var action))
             {
                 effectAssignAction.FillDatasToAction(action);
                 action.sourceAbility = effectAssignAction.sourceAbility;

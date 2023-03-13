@@ -2,24 +2,24 @@
 
 namespace LccModel
 {
-    public class SyncCreateCombatEntity
+    public class SyncCreateCombat
     {
         public long id;
-        public SyncCreateCombatEntity()
+        public SyncCreateCombat()
         {
         }
-        public SyncCreateCombatEntity(long id)
+        public SyncCreateCombat(long id)
         {
             this.id = id;
         }
     }
-    public class SyncDeleteCombatEntity
+    public class SyncDeleteCombat
     {
         public long id;
-        public SyncDeleteCombatEntity()
+        public SyncDeleteCombat()
         {
         }
-        public SyncDeleteCombatEntity(long id)
+        public SyncDeleteCombat(long id)
         {
             this.id = id;
         }

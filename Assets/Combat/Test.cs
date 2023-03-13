@@ -4,42 +4,42 @@ namespace LccModel
 {
     public class Test : AObjectBase
     {
-        public Combat combatEntity1;
-        public Combat combatEntity2;
+        public Combat combat1;
+        public Combat combat2;
         public override async void InitData(object[] datas)
         {
             base.InitData(datas);
 
 
-            combatEntity1 = AddChildren<Combat>();
-            combatEntity2 = AddChildren<Combat>();
-            combatEntity1.GetComponent<SpellAttackComponent>().SpellAttackWithTarget(combatEntity2);
+            combat1 = AddChildren<Combat>();
+            combat2 = AddChildren<Combat>();
+            combat1.GetComponent<SpellAttackComponent>().SpellAttackWithTarget(combat2);
 
 
 
 
-            var item = combatEntity1.AttachItem(UnityEngine.Resources.Load<ItemConfigObject>("Item_1"));
+            var item = combat1.AttachItem(UnityEngine.Resources.Load<ItemConfigObject>("Item_1"));
             //释放普攻有执行体，执行体会在下一帧执行所以需要等待下一帧使用道具
             await Timer.Instance.WaitAsync(1000);
-            combatEntity1.GetComponent<SpellItemComponent>().SpellItemWithTarget(item, combatEntity2);
+            combat1.GetComponent<SpellItemComponent>().SpellItemWithTarget(item, combat2);
 
-            combatEntity1.ListenActionPoint(ActionPointType.PostReceiveDamage, (e) =>
+            combat1.ListenActionPoint(ActionPointType.PostReceiveDamage, (e) =>
             {
                 var damageAction = e as DamageAction;
                 LogUtil.Debug("战斗1 收到伤害" + damageAction.damageValue);
             });
-            combatEntity2.ListenActionPoint(ActionPointType.PostReceiveDamage, (e) =>
+            combat2.ListenActionPoint(ActionPointType.PostReceiveDamage, (e) =>
             {
                 var damageAction = e as DamageAction;
                 LogUtil.Debug("战斗2 收到伤害" + damageAction.damageValue);
             });
 
-            combatEntity1.ListenActionPoint(ActionPointType.PostReceiveCure, (e) =>
+            combat1.ListenActionPoint(ActionPointType.PostReceiveCure, (e) =>
             {
                 var damageAction = e as CureAction;
                 LogUtil.Debug("战斗1 收到治疗" + damageAction.cureValue);
             });
-            combatEntity2.ListenActionPoint(ActionPointType.PostReceiveCure, (e) =>
+            combat2.ListenActionPoint(ActionPointType.PostReceiveCure, (e) =>
             {
                 var damageAction = e as CureAction;
                 LogUtil.Debug("战斗2 收到治疗" + damageAction.cureValue);

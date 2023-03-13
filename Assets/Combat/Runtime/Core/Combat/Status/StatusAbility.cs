@@ -7,8 +7,8 @@ namespace LccModel
     public partial class StatusAbility : Entity, IAbility
     {
         public bool Enable { get; set; }
-        public Combat OwnerEntity => GetParent<Combat>();
-        public Combat CreatorEntity;
+        public Combat Owner => GetParent<Combat>();
+        public Combat Creator;
 
 
 
@@ -38,8 +38,8 @@ namespace LccModel
         public void SetParams(Dictionary<string, string> paramsDict)
         {
             this.paramsDict = (Dictionary<string, string>)Clone(paramsDict);
-            this.paramsDict.Add("自身生命值", OwnerEntity.GetComponent<AttributeComponent>().HealthPoint.Value.ToString());
-            this.paramsDict.Add("自身攻击力", OwnerEntity.GetComponent<AttributeComponent>().Attack.Value.ToString());
+            this.paramsDict.Add("自身生命值", Owner.GetComponent<AttributeComponent>().HealthPoint.Value.ToString());
+            this.paramsDict.Add("自身攻击力", Owner.GetComponent<AttributeComponent>().Attack.Value.ToString());
         }
         public object Clone(object obj)
         {
@@ -57,8 +57,8 @@ namespace LccModel
             {
                 foreach (var childStatusData in statusConfig.StatusList)
                 {
-                    var status = OwnerEntity.AttachStatus(childStatusData.StatusConfigObject);
-                    status.CreatorEntity = CreatorEntity;
+                    var status = Owner.AttachStatus(childStatusData.StatusConfigObject);
+                    status.Creator = Creator;
                     status.isChildStatus = true;
                     status.childStatusData = childStatusData;
                     status.SetParams(childStatusData.ParamsDict);
@@ -89,7 +89,7 @@ namespace LccModel
                 }
             }
 
-            OwnerEntity.OnStatusRemove(this);
+            Owner.OnStatusRemove(this);
 
             Dispose();
         }

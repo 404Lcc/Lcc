@@ -7,7 +7,7 @@ namespace LccModel
         public DamageEffect DamageEffect => GetParent<AbilityEffect>().effect as DamageEffect;
         public string DamageValueFormula => DamageEffect.DamageValueFormula;
 
-        public Combat OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
+        public Combat Owner => GetParent<AbilityEffect>().Owner;
 
 
 
@@ -18,7 +18,7 @@ namespace LccModel
 
         public void OnAssignEffect(EffectAssignAction effectAssignAction)
         {
-            if (OwnerEntity.damageActionAbility.TryMakeAction(out var damageAction))
+            if (Owner.damageActionAbility.TryMakeAction(out var damageAction))
             {
                 effectAssignAction.FillDatasToAction(damageAction);
                 damageAction.damageSource = DamageSource.Skill;

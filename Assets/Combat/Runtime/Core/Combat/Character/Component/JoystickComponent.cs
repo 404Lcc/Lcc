@@ -5,10 +5,10 @@ namespace LccModel
 {
     public class JoystickComponent : Component, IFixedUpdate
     {
-        public Combat CombatEntity => GetParent<Combat>();
-        public TransformComponent TransformComponent => CombatEntity.TransformComponent;
-        public AnimationComponent AnimationComponent => CombatEntity.AnimationComponent;
-        public float speed => CombatEntity.AttributeComponent.MoveSpeed.Value;
+        public Combat Combat => GetParent<Combat>();
+        public TransformComponent TransformComponent => Combat.TransformComponent;
+        public AnimationComponent AnimationComponent => Combat.AnimationComponent;
+        public float speed => Combat.AttributeComponent.MoveSpeed.Value;
         public Vector2 normalDistance;
         public void FixedUpdate()
         {

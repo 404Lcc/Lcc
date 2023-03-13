@@ -4,31 +4,31 @@ namespace LccModel
 {
     public class SpellSkillComponent : Component
     {
-        public Combat CombatEntity => GetParent<Combat>();
+        public Combat Combat => GetParent<Combat>();
 
-        public void SpellWithTarget(SkillAbility spellSkill, Combat targetEntity)
+        public void SpellWithTarget(SkillAbility spellSkill, Combat target)
         {
-            if (CombatEntity.spellingSkillExecution != null) return;
-            spellSkill.OwnerEntity.TransformComponent.rotation = Quaternion.LookRotation(targetEntity.TransformComponent.position - spellSkill.OwnerEntity.TransformComponent.position);
-            if (CombatEntity.spellSkillActionAbility.TryMakeAction(out var spellAction))
+            if (Combat.spellingSkillExecution != null) return;
+            spellSkill.Owner.TransformComponent.rotation = Quaternion.LookRotation(target.TransformComponent.position - spellSkill.Owner.TransformComponent.position);
+            if (Combat.spellSkillActionAbility.TryMakeAction(out var spellAction))
             {
                 spellAction.skillAbility = spellSkill;
-                spellAction.inputTarget = targetEntity;
-                spellAction.inputPoint = targetEntity.TransformComponent.position;
-                spellAction.inputDirection = spellSkill.OwnerEntity.TransformComponent.rotation.eulerAngles.y;
+                spellAction.inputTarget = target;
+                spellAction.inputPoint = target.TransformComponent.position;
+                spellAction.inputDirection = spellSkill.Owner.TransformComponent.rotation.eulerAngles.y;
                 spellAction.SpellSkill();
             }
         }
 
         public void SpellWithPoint(SkillAbility spellSkill, Vector3 point)
         {
-            if (CombatEntity.spellingSkillExecution != null) return;
-            spellSkill.OwnerEntity.TransformComponent.rotation = Quaternion.LookRotation(point - spellSkill.OwnerEntity.TransformComponent.position);
-            if (CombatEntity.spellSkillActionAbility.TryMakeAction(out var spellAction))
+            if (Combat.spellingSkillExecution != null) return;
+            spellSkill.Owner.TransformComponent.rotation = Quaternion.LookRotation(point - spellSkill.Owner.TransformComponent.position);
+            if (Combat.spellSkillActionAbility.TryMakeAction(out var spellAction))
             {
                 spellAction.skillAbility = spellSkill;
                 spellAction.inputPoint = point;
-                spellAction.inputDirection = spellSkill.OwnerEntity.TransformComponent.rotation.eulerAngles.y;
+                spellAction.inputDirection = spellSkill.Owner.TransformComponent.rotation.eulerAngles.y;
                 spellAction.SpellSkill();
             }
         }

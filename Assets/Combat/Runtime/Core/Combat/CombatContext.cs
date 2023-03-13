@@ -6,7 +6,7 @@ namespace LccModel
     {
         public static CombatContext Instance { get; set; }
 
-        public Dictionary<long, Combat> combatEntityDict = new Dictionary<long, Combat>();
+        public Dictionary<long, Combat> combatDict = new Dictionary<long, Combat>();
         public Dictionary<long, AbilityItem> abilityItemDict = new Dictionary<long, AbilityItem>();
         public override void Awake()
         {
@@ -14,27 +14,27 @@ namespace LccModel
 
             Instance = this;
         }
-        public Combat AddCombatEntity()
+        public Combat AddCombat()
         {
-            var combatEntity = AddChildren<Combat>();
-            if (!combatEntityDict.ContainsKey(combatEntity.InstanceId))
+            var combat = AddChildren<Combat>();
+            if (!combatDict.ContainsKey(combat.InstanceId))
             {
-                combatEntityDict.Add(combatEntity.InstanceId, combatEntity);
+                combatDict.Add(combat.InstanceId, combat);
             }
-            return combatEntity;
+            return combat;
         }
-        public void RemoveCombatEntity(Combat combatEntity)
+        public void RemoveCombat(Combat combat)
         {
-            if (combatEntityDict.ContainsKey(combatEntity.InstanceId))
+            if (combatDict.ContainsKey(combat.InstanceId))
             {
-                combatEntityDict.Remove(combatEntity.InstanceId);
+                combatDict.Remove(combat.InstanceId);
             }
         }
-        public Combat GetCombatEntity(long instanceId)
+        public Combat GetCombat(long instanceId)
         {
-            if (combatEntityDict.TryGetValue(instanceId, out var combatEntity))
+            if (combatDict.TryGetValue(instanceId, out var combat))
             {
-                return combatEntity;
+                return combat;
             }
             return null;
         }

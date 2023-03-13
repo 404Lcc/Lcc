@@ -3,7 +3,7 @@ namespace LccModel
     public class AddStatusActionAbility : Entity, IActionAbility
     {
         public bool Enable { get; set; }
-        public Combat OwnerEntity => GetParent<Combat>();
+        public Combat Owner => GetParent<Combat>();
 
 
 
@@ -15,9 +15,9 @@ namespace LccModel
             }
             else
             {
-                action = OwnerEntity.AddChildren<AddStatusAction>();
+                action = Owner.AddChildren<AddStatusAction>();
                 action.ActionAbility = this;
-                action.Creator = OwnerEntity;
+                action.Creator = Owner;
             }
             return Enable;
         }
@@ -64,7 +64,7 @@ namespace LccModel
             }
 
             status = Target.AttachStatus(statusConfigObject);
-            status.CreatorEntity = Creator;
+            status.Creator = Creator;
             status.GetComponent<AbilityLevelComponent>().level = sourceAbility.GetComponent<AbilityLevelComponent>().level;
             status.duration = (int)addStatusEffect.Duration;
 

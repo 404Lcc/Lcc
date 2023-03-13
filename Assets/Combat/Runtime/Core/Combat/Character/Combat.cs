@@ -54,7 +54,7 @@ namespace LccModel
         {
             base.Awake();
 
-            EventManager.Instance.Publish(new SyncCreateCombatEntity(InstanceId)).Coroutine();
+            EventManager.Instance.Publish(new SyncCreateCombat(InstanceId)).Coroutine();
 
             AddComponent<TransformComponent>();
             AddComponent<AnimationComponent>();
@@ -101,7 +101,7 @@ namespace LccModel
         {
             base.OnDestroy();
 
-            EventManager.Instance.Publish(new SyncDeleteCombatEntity(InstanceId)).Coroutine();
+            EventManager.Instance.Publish(new SyncDeleteCombat(InstanceId)).Coroutine();
         }
         #region ½Ó¿Ú
 

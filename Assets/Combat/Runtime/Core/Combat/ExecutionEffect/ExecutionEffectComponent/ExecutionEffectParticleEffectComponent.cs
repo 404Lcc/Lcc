@@ -2,17 +2,17 @@
 {
     public class ExecutionEffectParticleEffectComponent : Component
     {
-        public Combat OwnerEntity => Parent.GetParent<SkillExecution>().OwnerEntity;
+        public Combat Owner => Parent.GetParent<SkillExecution>().Owner;
 
 
         public void OnTriggerExecutionEffect(ExecutionEffect executionEffect)
         {
-            EventManager.Instance.Publish(new SyncParticleEffect(OwnerEntity.InstanceId, executionEffect.executeClipData.ParticleEffectData.ParticleEffectName, OwnerEntity.TransformComponent.position, OwnerEntity.TransformComponent.rotation)).Coroutine();
+            EventManager.Instance.Publish(new SyncParticleEffect(Owner.InstanceId, executionEffect.executeClipData.ParticleEffectData.ParticleEffectName, Owner.TransformComponent.position, Owner.TransformComponent.rotation)).Coroutine();
         }
 
         public void OnTriggerExecutionEffectEnd(ExecutionEffect executionEffect)
         {
-            EventManager.Instance.Publish(new SyncDeleteParticleEffect(OwnerEntity.InstanceId, executionEffect.executeClipData.ParticleEffectData.ParticleEffectName)).Coroutine();
+            EventManager.Instance.Publish(new SyncDeleteParticleEffect(Owner.InstanceId, executionEffect.executeClipData.ParticleEffectData.ParticleEffectName)).Coroutine();
         }
     }
 }

@@ -2,15 +2,15 @@
 {
     public class SpellAttackComponent : Component
     {
-        public Combat CombatEntity => GetParent<Combat>();
+        public Combat Combat => GetParent<Combat>();
 
-        public void SpellAttackWithTarget(Combat targetEntity)
+        public void SpellAttackWithTarget(Combat target)
         {
-            if (CombatEntity.spellingAttackExecution != null) return;
+            if (Combat.spellingAttackExecution != null) return;
 
-            if (CombatEntity.spellAttackActionAbility.TryMakeAction(out var action))
+            if (Combat.spellAttackActionAbility.TryMakeAction(out var action))
             {
-                action.Target = targetEntity;
+                action.Target = target;
                 action.ApplyAttack();
             }
         }

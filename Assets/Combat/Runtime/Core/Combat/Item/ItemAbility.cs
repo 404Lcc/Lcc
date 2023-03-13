@@ -5,7 +5,7 @@ namespace LccModel
     public partial class ItemAbility : Entity, IAbility
     {
         public bool Enable { get; set; }
-        public Combat OwnerEntity => GetParent<Combat>();
+        public Combat Owner => GetParent<Combat>();
 
 
 
@@ -31,8 +31,8 @@ namespace LccModel
             {
                 foreach (var item in itemConfigObject.StatusList)
                 {
-                    var status = OwnerEntity.AttachStatus(item.StatusConfigObject);
-                    status.CreatorEntity = OwnerEntity;
+                    var status = Owner.AttachStatus(item.StatusConfigObject);
+                    status.Creator = Owner;
                     status.isChildStatus = true;
                     status.childStatusData = item;
                     status.SetParams(item.ParamsDict);

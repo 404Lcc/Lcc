@@ -10,11 +10,11 @@
             {
                 if (executionEffect.executeClipData.ActionEventData.EffectApply == EffectApplyType.AllEffects)
                 {
-                    parentExecution.AbilityEntity.GetComponent<AbilityEffectComponent>().TryAssignAllEffectToTarget(parentExecution.inputTarget, parentExecution);
+                    parentExecution.Ability.GetComponent<AbilityEffectComponent>().TryAssignAllEffectToTarget(parentExecution.inputTarget, parentExecution);
                 }
                 else
                 {
-                    parentExecution.AbilityEntity.GetComponent<AbilityEffectComponent>().TryAssignEffectToTargetByIndex(parentExecution.inputTarget, (int)executionEffect.executeClipData.ActionEventData.EffectApply - 1);
+                    parentExecution.Ability.GetComponent<AbilityEffectComponent>().TryAssignEffectToTargetByIndex(parentExecution.inputTarget, (int)executionEffect.executeClipData.ActionEventData.EffectApply - 1);
                 }
             }
         }

@@ -3,7 +3,7 @@
     public class SpellAttackActionAbility : Entity, IActionAbility
     {
         public bool Enable { get; set; }
-        public Combat OwnerEntity => GetParent<Combat>();
+        public Combat Owner => GetParent<Combat>();
 
 
 
@@ -15,9 +15,9 @@
             }
             else
             {
-                action = OwnerEntity.AddChildren<SpellAttackAction>();
+                action = Owner.AddChildren<SpellAttackAction>();
                 action.ActionAbility = this;
-                action.Creator = OwnerEntity;
+                action.Creator = Owner;
             }
             return Enable;
         }

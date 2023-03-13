@@ -2,17 +2,17 @@
 {
     public class AbilityEffectDamageBloodSuckComponent : Component
     {
-        public Combat OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
+        public Combat Owner => GetParent<AbilityEffect>().Owner;
         public override void Awake()
         {
             base.Awake();
-            OwnerEntity.damageActionAbility.AddComponent<DamageBloodSuckComponent>();
+            Owner.damageActionAbility.AddComponent<DamageBloodSuckComponent>();
         }
         public override void OnDestroy()
         {
             base.OnDestroy();
 
-            var component = OwnerEntity.damageActionAbility.GetComponent<DamageBloodSuckComponent>();
+            var component = Owner.damageActionAbility.GetComponent<DamageBloodSuckComponent>();
             if (component != null)
             {
                 component.Dispose();

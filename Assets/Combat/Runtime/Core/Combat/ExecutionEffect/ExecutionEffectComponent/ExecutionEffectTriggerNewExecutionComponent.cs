@@ -16,7 +16,7 @@
             }
             SkillExecution parentExecution = Parent.GetParent<SkillExecution>();
 
-            SkillExecution execution = parentExecution.OwnerEntity.AddChildren<SkillExecution, SkillAbility>(parentExecution.SkillAbility);
+            SkillExecution execution = parentExecution.Owner.AddChildren<SkillExecution, SkillAbility>(parentExecution.SkillAbility);
             execution.executionConfigObject = executionObject;
             execution.inputTarget = parentExecution.inputTarget;
             execution.inputPoint = parentExecution.inputPoint;

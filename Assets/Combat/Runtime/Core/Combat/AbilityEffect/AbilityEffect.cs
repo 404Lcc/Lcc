@@ -8,7 +8,7 @@ namespace LccModel
         public Effect effect;
 
         public Entity OwnerAbility => (Entity)Parent; //AbilityEffect是挂在能力上的
-        public Combat OwnerEntity => ((IAbility)OwnerAbility).OwnerEntity;
+        public Combat Owner => ((IAbility)OwnerAbility).Owner;
         
         
         public override void Awake<P1>(P1 p1)
@@ -99,33 +99,33 @@ namespace LccModel
             else
             {
                 temp = new Dictionary<string, string>();
-                temp.Add("自身生命值", OwnerEntity.GetComponent<AttributeComponent>().HealthPoint.Value.ToString());
-                temp.Add("自身攻击力", OwnerEntity.GetComponent<AttributeComponent>().Attack.Value.ToString());
+                temp.Add("自身生命值", Owner.GetComponent<AttributeComponent>().HealthPoint.Value.ToString());
+                temp.Add("自身攻击力", Owner.GetComponent<AttributeComponent>().Attack.Value.ToString());
             }
             return temp;
         }
 
         public void TryAssignEffectToOwner()
         {
-            TryAssignEffectToTarget(OwnerEntity);
+            TryAssignEffectToTarget(Owner);
         }
 
-        public void TryAssignEffectToTarget(Combat targetEntity)
+        public void TryAssignEffectToTarget(Combat target)
         {
-            if (OwnerEntity.effectAssignActionAbility.TryMakeAction(out var action))
+            if (Owner.effectAssignActionAbility.TryMakeAction(out var action))
             {
-                action.Target = targetEntity;
+                action.Target = target;
                 action.sourceAbility = OwnerAbility;
                 action.abilityEffect = this;
                 action.ApplyEffectAssign();
             }
         }
 
-        public void TryAssignEffectToTarget(Combat targetEntity, IActionExecution actionExecution)
+        public void TryAssignEffectToTarget(Combat target, IActionExecution actionExecution)
         {
-            if (OwnerEntity.effectAssignActionAbility.TryMakeAction(out var action))
+            if (Owner.effectAssignActionAbility.TryMakeAction(out var action))
             {
-                action.Target = targetEntity;
+                action.Target = target;
                 action.sourceAbility = OwnerAbility;
                 action.abilityEffect = this;
                 action.actionExecution = actionExecution;
@@ -133,11 +133,11 @@ namespace LccModel
             }
         }
 
-        public void TryAssignEffectToTarget(Combat targetEntity, IAbilityExecution abilityExecution)
+        public void TryAssignEffectToTarget(Combat target, IAbilityExecution abilityExecution)
         {
-            if (OwnerEntity.effectAssignActionAbility.TryMakeAction(out var action))
+            if (Owner.effectAssignActionAbility.TryMakeAction(out var action))
             {
-                action.Target = targetEntity;
+                action.Target = target;
                 action.sourceAbility = OwnerAbility;
                 action.abilityEffect = this;
                 action.abilityExecution = abilityExecution;
@@ -145,11 +145,11 @@ namespace LccModel
             }
         }
 
-        public void TryAssignEffectToTarget(Combat targetEntity, AbilityItem abilityItem)
+        public void TryAssignEffectToTarget(Combat target, AbilityItem abilityItem)
         {
-            if (OwnerEntity.effectAssignActionAbility.TryMakeAction(out var action))
+            if (Owner.effectAssignActionAbility.TryMakeAction(out var action))
             {
-                action.Target = targetEntity;
+                action.Target = target;
                 action.sourceAbility = OwnerAbility;
                 action.abilityEffect = this;
                 action.abilityItem = abilityItem;

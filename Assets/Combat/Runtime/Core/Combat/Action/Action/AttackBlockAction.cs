@@ -3,19 +3,19 @@
     public class AttackBlockActionAbility : Entity, IActionAbility
     {
         public bool Enable { get; set; }
-        public Combat OwnerEntity => GetParent<Combat>();
+        public Combat Owner => GetParent<Combat>();
 
 
 
         public override void Awake()
         {
-            OwnerEntity.ListenActionPoint(ActionPointType.PreReceiveAttackEffect, TryBlock);
+            Owner.ListenActionPoint(ActionPointType.PreReceiveAttackEffect, TryBlock);
         }
         public override void OnDestroy()
         {
             base.OnDestroy();
 
-            OwnerEntity.UnListenActionPoint(ActionPointType.PreReceiveAttackEffect, TryBlock);
+            Owner.UnListenActionPoint(ActionPointType.PreReceiveAttackEffect, TryBlock);
         }
         public bool TryMakeAction(out AttackBlockAction action)
         {
@@ -25,9 +25,9 @@
             }
             else
             {
-                action = OwnerEntity.AddChildren<AttackBlockAction>();
+                action = Owner.AddChildren<AttackBlockAction>();
                 action.ActionAbility = this;
-                action.Creator = OwnerEntity;
+                action.Creator = Owner;
             }
             return Enable;
         }

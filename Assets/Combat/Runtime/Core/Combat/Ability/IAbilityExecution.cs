@@ -2,8 +2,8 @@
 {
     public interface IAbilityExecution
     {
-        public Entity AbilityEntity { get; set; }
-        public Combat OwnerEntity { get; }
+        public Entity Ability { get; set; }
+        public Combat Owner { get; }
 
         public void BeginExecute();
         public void EndExecute();

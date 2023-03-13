@@ -8,15 +8,15 @@ namespace LccModel
         public string ConditionValueFormula => ParseParams(Effect.ConditionValueFormula, GetParent<AbilityEffect>().GetParamsDict());
         public ConditionType ConditionType => Effect.ConditionType;
 
-        public Combat OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
+        public Combat Owner => GetParent<AbilityEffect>().Owner;
 
         public override void Awake()
         {
-            OwnerEntity.ListenerCondition(ConditionType, OnConditionTrigger, ConditionValueFormula);
+            Owner.ListenerCondition(ConditionType, OnConditionTrigger, ConditionValueFormula);
         }
         public override void OnDestroy()
         {
-            OwnerEntity.UnListenCondition(ConditionType, OnConditionTrigger);
+            Owner.UnListenCondition(ConditionType, OnConditionTrigger);
         }
 
         private void OnConditionTrigger()

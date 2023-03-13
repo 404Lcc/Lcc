@@ -2,8 +2,8 @@
 {
     public class AttackExecution : Entity, IAbilityExecution, IUpdate
     {
-        public Entity AbilityEntity { get; set; }
-        public Combat OwnerEntity => GetParent<Combat>();
+        public Entity Ability { get; set; }
+        public Combat Owner => GetParent<Combat>();
 
 
         public SpellAttackAction attackAction;
@@ -30,7 +30,7 @@
 
         public void BeginExecute()
         {
-            OwnerEntity.spellingAttackExecution = this;
+            Owner.spellingAttackExecution = this;
         }
 
 
@@ -52,13 +52,13 @@
             }
             else
             {
-                AbilityEntity.GetComponent<AbilityEffectComponent>().TryAssignAllEffectToTarget(attackAction.Target, this);
+                Ability.GetComponent<AbilityEffectComponent>().TryAssignAllEffectToTarget(attackAction.Target, this);
             }
         }
 
         public void EndExecute()
         {
-            OwnerEntity.spellingAttackExecution = null;
+            Owner.spellingAttackExecution = null;
             attackAction.FinishAction();
             attackAction = null;
             Dispose();

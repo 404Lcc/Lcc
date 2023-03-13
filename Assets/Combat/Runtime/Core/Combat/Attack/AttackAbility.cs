@@ -5,7 +5,7 @@ namespace LccModel
     public class AttackAbility : Entity, IAbility
     {
         public bool Enable { get; set; }
-        public Combat OwnerEntity => GetParent<Combat>();
+        public Combat Owner => GetParent<Combat>();
 
 
 
@@ -43,8 +43,8 @@ namespace LccModel
 
         public Entity CreateExecution()
         {
-            var execution = OwnerEntity.AddChildren<AttackExecution>(this);
-            execution.AbilityEntity = this;
+            var execution = Owner.AddChildren<AttackExecution>(this);
+            execution.Ability = this;
             return execution;
         }
     }

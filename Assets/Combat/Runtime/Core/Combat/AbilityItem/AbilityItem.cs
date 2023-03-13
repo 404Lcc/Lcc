@@ -3,7 +3,7 @@
     public class AbilityItem : Entity
     {
         public IAbilityExecution abilityExecution;
-        public Entity abilityEntity;
+        public Entity ability;
 
         public EffectApplyType effectApplyType;
 
@@ -22,13 +22,13 @@
 
             abilityExecution = p1 as IAbilityExecution;//技能执行体
 
-            abilityEntity = abilityExecution.AbilityEntity;
+            ability = abilityExecution.Ability;
 
-            if (abilityEntity == null)
+            if (ability == null)
             {
                 return;
             }
-            var abilityEffects = abilityEntity.GetComponent<AbilityEffectComponent>().abilityEffectList;
+            var abilityEffects = ability.GetComponent<AbilityEffectComponent>().abilityEffectList;
             foreach (var abilityEffect in abilityEffects)
             {
                 if (abilityEffect.effect.DecoratorList != null)
@@ -51,21 +51,21 @@
         }
 
         //靠代理触发
-        public void OnCollision(Combat otherCombatEntity)
+        public void OnCollision(Combat combat)
         {
             var collisionExecuteData = GetComponent<AbilityItemCollisionExecuteComponent>().CollisionExecuteData;
 
-            if (abilityEntity != null)
+            if (ability != null)
             {
                 if (collisionExecuteData.ActionData.ActionEventType == FireEventType.AssignEffect)
                 {
                     if (effectApplyType == EffectApplyType.AllEffects)
                     {
-                        abilityEntity.GetComponent<AbilityEffectComponent>().TryAssignAllEffectToTarget(otherCombatEntity, this);
+                        ability.GetComponent<AbilityEffectComponent>().TryAssignAllEffectToTarget(combat, this);
                     }
                     else
                     {
-                        abilityEntity.GetComponent<AbilityEffectComponent>().TryAssignEffectToTargetByIndex(otherCombatEntity, (int)effectApplyType - 1);
+                        ability.GetComponent<AbilityEffectComponent>().TryAssignEffectToTargetByIndex(combat, (int)effectApplyType - 1);
                     }
                 }
             }
@@ -95,7 +95,7 @@
                 return;
             }
             var sourceExecution = abilityExecution as SkillExecution;
-            var execution = sourceExecution.OwnerEntity.AddChildren<SkillExecution, SkillAbility>(sourceExecution.SkillAbility);
+            var execution = sourceExecution.Owner.AddChildren<SkillExecution, SkillAbility>(sourceExecution.SkillAbility);
             execution.executionConfigObject = executionObject;
             execution.inputPoint = TransformComponent.position;
             execution.LoadExecutionEffect();
