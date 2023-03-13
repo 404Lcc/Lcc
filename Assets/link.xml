@@ -4575,6 +4575,7 @@
     <type fullname="LccModel.SceneLoadManager" preserve="all" />
     <type fullname="LccModel.SceneName" preserve="all" />
     <type fullname="LccModel.UpdateManager" preserve="all" />
+    <type fullname="LccModel.AABB2DComponent" preserve="all" />
     <type fullname="LccModel.EventSystem" preserve="all" />
     <type fullname="LccModel.ILog" preserve="all" />
     <type fullname="LccModel.Logger" preserve="all" />
@@ -4593,7 +4594,7 @@
     <type fullname="LccModel.ILateUpdate" preserve="all" />
     <type fullname="LccModel.IUpdate" preserve="all" />
     <type fullname="LccModel.Game" preserve="all" />
-    <type fullname="LccModel.GameObjectEntity" preserve="all" />
+    <type fullname="LccModel.GameObjectComponent" preserve="all" />
     <type fullname="LccModel.LccView" preserve="all" />
     <type fullname="LccModel.NumericEntity" preserve="all" />
     <type fullname="LccModel.NumericType" preserve="all" />

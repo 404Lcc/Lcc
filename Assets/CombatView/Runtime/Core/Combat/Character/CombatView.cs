@@ -6,8 +6,8 @@ namespace LccModel
 {
     public class CombatView : Entity
     {
-        public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
-        public Transform transform => gameObject.transform;
+        public GameObject GameObject => GetComponent<GameObjectComponent>().gameObject;
+        public Transform Transform => GameObject.transform;
 
         public TransformViewComponent TransformViewComponent => GetComponent<TransformViewComponent>();
         public AnimationViewComponent AnimationViewComponent => GetComponent<AnimationViewComponent>();

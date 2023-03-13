@@ -7,7 +7,7 @@ namespace LccHotfix
 {
     public class Joystick : AObjectBase
     {
-        public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
+        public GameObject gameObject => GetComponent<GameObjectComponent>().gameObject;
 
         //原始坐标
         public Vector3 origin;

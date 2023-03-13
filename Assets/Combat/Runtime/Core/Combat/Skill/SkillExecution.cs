@@ -96,9 +96,6 @@ namespace LccModel
             {
                 PathFlyItem(abilityItem);
             }
-
-
-            //CreateAbilityItemProxy(abilityItem);
         }
 
         private void TargetFlyItem(AbilityItem abilityItem)

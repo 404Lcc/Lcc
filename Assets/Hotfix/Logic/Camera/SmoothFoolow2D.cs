@@ -4,7 +4,7 @@ namespace LccHotfix
 {
     public class SmoothFoolow2D : AObjectBase, IUpdate, ILateUpdate
     {
-        public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
+        public GameObject gameObject => GetComponent<GameObjectComponent>().gameObject;
 
         public int smooth = 1;
         public bool isFollow = true;

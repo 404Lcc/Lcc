@@ -4,7 +4,7 @@ namespace LccHotfix
 {
     public class CameraController : AObjectBase, IUpdate
     {
-        public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
+        public GameObject gameObject => GetComponent<GameObjectComponent>().gameObject;
 
         private Vector2 _first;
         private Vector2 _second;

@@ -42,9 +42,9 @@ namespace LccHotfix
             Object.Destroy(component);
         }
 
-        public static GameObjectEntity ConvertEntity(this GameObject gameObject, AObjectBase parent)
+        public static GameObjectComponent ConvertComponent(this GameObject gameObject, AObjectBase parent)
         {
-            return parent.AddChildren<GameObjectEntity, GameObject>(gameObject);
+            return parent.AddComponent<GameObjectComponent, GameObject>(gameObject);
         }
     }
 }

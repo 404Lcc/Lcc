@@ -4,15 +4,15 @@ namespace LccModel
 {
     public class TransformViewComponent : Component
     {
-        public CombatView entity => GetParent<CombatView>();
-        public Transform transform => entity.gameObject.transform;
+        public CombatView CombatView => GetParent<CombatView>();
+        public Transform Transform => CombatView.GameObject.transform;
 
 
         public void SyncTransform(Vector3 position, Quaternion rotation, Vector3 localScale)
         {
-            transform.position = position;
-            transform.rotation = rotation;
-            transform.localScale = localScale;
+            Transform.position = position;
+            Transform.rotation = rotation;
+            Transform.localScale = localScale;
         }
     }
 }

@@ -92,7 +92,7 @@
     <Compile Include="Assets\Framework\Util\LongClickButton.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Helper\RegisterCrossBindingAdaptorHelper.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Base\AttributeBase.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Object\GameObjectEntity.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Object\GameObjectComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Base\ILateUpdate.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Coroutine\CoroutineHandler.cs" />
     <Compile Include="Assets\Framework\Logic\UI\Panel\Update\UpdatePanel.cs" />
@@ -181,6 +181,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Module\Logger\UnityLogger.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Math\AABB2DComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />

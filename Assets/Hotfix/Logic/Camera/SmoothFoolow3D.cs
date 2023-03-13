@@ -5,7 +5,7 @@ namespace LccHotfix
 {
     public class SmoothFoolow3D : AObjectBase, IUpdate, ILateUpdate
     {
-        public GameObject gameObject => GetParent<GameObjectEntity>().gameObject;
+        public GameObject gameObject => GetComponent<GameObjectComponent>().gameObject;
 
         public float distance = 3;
         public float damping = 45;

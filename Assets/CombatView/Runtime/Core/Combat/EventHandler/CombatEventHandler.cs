@@ -3,14 +3,66 @@ using ET;
 namespace LccModel
 {
     [EventHandler]
+    public class SyncCreateCombatEventHandler : AEvent<SyncCreateCombat>
+    {
+        public override async ETTask Publish(SyncCreateCombat data)
+        {
+            CombatView combatView = CombatViewContext.Instance.GetCombatView(data.id);
+            if (combatView == null)
+            {
+                CombatViewContext.Instance.AddCombatView(data.id);
+            }
+            await ETTask.CompletedTask;
+        }
+    }
+    [EventHandler]
+    public class SyncDeleteCombatEventHandler : AEvent<SyncDeleteCombat>
+    {
+        public override async ETTask Publish(SyncDeleteCombat data)
+        {
+            CombatViewContext.Instance.RemoveCombatView(data.id);
+            await ETTask.CompletedTask;
+        }
+    }
+    [EventHandler]
+    public class SyncCreateAbilityItemEventHandler : AEvent<SyncCreateAbilityItem>
+    {
+        public override async ETTask Publish(SyncCreateAbilityItem data)
+        {
+            AbilityItemView abilityItemView = CombatViewContext.Instance.GetAbilityItemView(data.id);
+            if (abilityItemView == null)
+            {
+                CombatViewContext.Instance.AddAbilityItemView(data.id);
+            }
+            await ETTask.CompletedTask;
+        }
+    }
+    [EventHandler]
+    public class SyncDeleteAbilityItemEventHandler : AEvent<SyncDeleteAbilityItem>
+    {
+        public override async ETTask Publish(SyncDeleteAbilityItem data)
+        {
+            CombatViewContext.Instance.RemoveAbilityItemView(data.id);
+            await ETTask.CompletedTask;
+        }
+    }
+
+
+
+    [EventHandler]
     public class SyncTransformEventHandler : AEvent<SyncTransform>
     {
         public override async ETTask Publish(SyncTransform data)
         {
-            CombatView entity = null;
-            if (entity != null)
+            CombatView combatView = CombatViewContext.Instance.GetCombatView(data.id);
+            if (combatView != null)
             {
-                entity.TransformViewComponent.SyncTransform(data.position, data.rotation, data.localScale);
+                combatView.TransformViewComponent.SyncTransform(data.position, data.rotation, data.localScale);
+            }
+            AbilityItemView abilityItemView = CombatViewContext.Instance.GetAbilityItemView(data.id);
+            if (abilityItemView != null)
+            {
+                abilityItemView.TransformViewComponent.SyncTransform(data.position, data.rotation, data.localScale);
             }
             await ETTask.CompletedTask;
         }
@@ -20,10 +72,10 @@ namespace LccModel
     {
         public override async ETTask Publish(SyncAnimation data)
         {
-            CombatView entity = null;
-            if (entity != null)
+            CombatView combatView = CombatViewContext.Instance.GetCombatView(data.id);
+            if (combatView != null)
             {
-                entity.AnimationViewComponent.PlayAnimation(data.type, data.speed, data.isLoop);
+                combatView.AnimationViewComponent.PlayAnimation(data.type, data.speed, data.isLoop);
             }
             await ETTask.CompletedTask;
         }

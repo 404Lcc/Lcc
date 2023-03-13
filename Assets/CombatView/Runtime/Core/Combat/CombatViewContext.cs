@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace LccModel
 {
@@ -6,8 +7,6 @@ namespace LccModel
     {
         public static CombatViewContext Instance { get; set; }
 
-        public Dictionary<long, CombatView> combatViewDict = new Dictionary<long, CombatView>();
-        public Dictionary<long, AbilityItemView> abilityItemViewDict = new Dictionary<long, AbilityItemView>();
         public override void Awake()
         {
             base.Awake();
@@ -16,25 +15,22 @@ namespace LccModel
         }
         public CombatView AddCombatView(long instanceId)
         {
-            var combatView = AddChildrenWithId<CombatView>(instanceId);
-            if (!combatViewDict.ContainsKey(combatView.Id))
-            {
-                combatViewDict.Add(combatView.Id, combatView);
-            }
+            CombatView combatView = AddChildrenWithId<CombatView>(instanceId);
+            combatView.AddComponent<GameObjectComponent, GameObject>(null);
             return combatView;
         }
         public void RemoveCombatView(long instanceId)
         {
-            if (combatViewDict.ContainsKey(instanceId))
+            if (Children.ContainsKey(instanceId))
             {
-                combatViewDict.Remove(instanceId);
+                GetChildren<CombatView>(instanceId).Dispose();
             }
         }
         public CombatView GetCombatView(long instanceId)
         {
-            if (combatViewDict.TryGetValue(instanceId, out var combatView))
+            if (Children.ContainsKey(instanceId))
             {
-                return combatView;
+                return GetChildren<CombatView>(instanceId);
             }
             return null;
         }
@@ -42,25 +38,21 @@ namespace LccModel
         public AbilityItemView AddAbilityItemView(long instanceId)
         {
             AbilityItemView abilityItemView = AddChildrenWithId<AbilityItemView>(instanceId);
-
-            if (!abilityItemViewDict.ContainsKey(abilityItemView.Id))
-            {
-                abilityItemViewDict.Add(abilityItemView.Id, abilityItemView);
-            }
+            abilityItemView.AddComponent<GameObjectComponent, GameObject>(null);
             return abilityItemView;
         }
         public void RemoveAbilityItemView(long instanceId)
         {
-            if (abilityItemViewDict.ContainsKey(instanceId))
+            if (Children.ContainsKey(instanceId))
             {
-                abilityItemViewDict.Remove(instanceId);
+                GetChildren<AbilityItemView>(instanceId).Dispose();
             }
         }
         public AbilityItemView GetAbilityItemView(long instanceId)
         {
-            if (abilityItemViewDict.TryGetValue(instanceId, out var abilityItemView))
+            if (Children.ContainsKey(instanceId))
             {
-                return abilityItemView;
+                return GetChildren<AbilityItemView>(instanceId);
             }
             return null;
         }

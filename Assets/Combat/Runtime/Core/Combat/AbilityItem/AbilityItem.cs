@@ -13,12 +13,12 @@
         {
             base.Awake(p1, p2);
 
-
+            var clipData = p2 as ExecuteClipData;
             EventManager.Instance.Publish(new SyncCreateAbilityItem(InstanceId)).Coroutine();
 
             AddComponent<TransformComponent>();
 
-            AddComponent<AbilityItemCollisionExecuteComponent, ExecuteClipData>(p2 as ExecuteClipData);
+            AddComponent<AbilityItemCollisionExecuteComponent, ExecuteClipData>(clipData);
 
             abilityExecution = p1 as IAbilityExecution;//技能执行体
 

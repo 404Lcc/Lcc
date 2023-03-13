@@ -378,20 +378,20 @@ namespace LccModel
             AObjectBase aObjectBase = Create(type);
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            #region 自动索引
-            if (this is GameObjectEntity entity)
-            {
-                if (entity.gameObject != null)
-                {
-                    aObjectBase.AutoReference(entity.gameObject);
-                    aObjectBase.ShowView(entity.gameObject);
-                }
-            }
-            #endregion
 
             EventSystem.Instance.Awake(aObjectBase);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
+            #region 自动索引
+            if (aObjectBase is GameObjectComponent component)
+            {
+                if (component.gameObject != null)
+                {
+                    AutoReference(component.gameObject);
+                    ShowView(component.gameObject);
+                }
+            }
+            #endregion
             return aObjectBase;
         }
         public AObjectBase AddComponent<P1>(Type type, P1 p1, params object[] datas)
@@ -404,20 +404,20 @@ namespace LccModel
             AObjectBase aObjectBase = Create(type);
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            #region 自动索引
-            if (this is GameObjectEntity entity)
-            {
-                if (entity.gameObject != null)
-                {
-                    aObjectBase.AutoReference(entity.gameObject);
-                    aObjectBase.ShowView(entity.gameObject);
-                }
-            }
-            #endregion
 
             EventSystem.Instance.Awake(aObjectBase, p1);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
+            #region 自动索引
+            if (aObjectBase is GameObjectComponent component)
+            {
+                if (component.gameObject != null)
+                {
+                    AutoReference(component.gameObject);
+                    ShowView(component.gameObject);
+                }
+            }
+            #endregion
             return aObjectBase;
         }
         public AObjectBase AddComponent<P1, P2>(Type type, P1 p1, P2 p2, params object[] datas)
@@ -430,20 +430,20 @@ namespace LccModel
             AObjectBase aObjectBase = Create(type);
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            #region 自动索引
-            if (this is GameObjectEntity entity)
-            {
-                if (entity.gameObject != null)
-                {
-                    aObjectBase.AutoReference(entity.gameObject);
-                    aObjectBase.ShowView(entity.gameObject);
-                }
-            }
-            #endregion
 
             EventSystem.Instance.Awake(aObjectBase, p1, p2);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
+            #region 自动索引
+            if (aObjectBase is GameObjectComponent component)
+            {
+                if (component.gameObject != null)
+                {
+                    AutoReference(component.gameObject);
+                    ShowView(component.gameObject);
+                }
+            }
+            #endregion
             return aObjectBase;
         }
         public AObjectBase AddComponent<P1, P2, P3>(Type type, P1 p1, P2 p2, P3 p3, params object[] datas)
@@ -456,20 +456,20 @@ namespace LccModel
             AObjectBase aObjectBase = Create(type);
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            #region 自动索引
-            if (this is GameObjectEntity entity)
-            {
-                if (entity.gameObject != null)
-                {
-                    aObjectBase.AutoReference(entity.gameObject);
-                    aObjectBase.ShowView(entity.gameObject);
-                }
-            }
-            #endregion
 
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
+            #region 自动索引
+            if (aObjectBase is GameObjectComponent component)
+            {
+                if (component.gameObject != null)
+                {
+                    AutoReference(component.gameObject);
+                    ShowView(component.gameObject);
+                }
+            }
+            #endregion
             return aObjectBase;
         }
         public AObjectBase AddComponent<P1, P2, P3, P4>(Type type, P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas)
@@ -482,20 +482,20 @@ namespace LccModel
             AObjectBase aObjectBase = Create(type);
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            #region 自动索引
-            if (this is GameObjectEntity entity)
-            {
-                if (entity.gameObject != null)
-                {
-                    aObjectBase.AutoReference(entity.gameObject);
-                    aObjectBase.ShowView(entity.gameObject);
-                }
-            }
-            #endregion
 
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
+            #region 自动索引
+            if (aObjectBase is GameObjectComponent component)
+            {
+                if (component.gameObject != null)
+                {
+                    AutoReference(component.gameObject);
+                    ShowView(component.gameObject);
+                }
+            }
+            #endregion
             return aObjectBase;
         }
         public T AddComponent<T>(params object[] datas) where T : AObjectBase
@@ -509,20 +509,20 @@ namespace LccModel
             T aObjectBase = Create<T>();
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            #region 自动索引
-            if (this is GameObjectEntity entity)
-            {
-                if (entity.gameObject != null)
-                {
-                    aObjectBase.AutoReference(entity.gameObject);
-                    aObjectBase.ShowView(entity.gameObject);
-                }
-            }
-            #endregion
 
             EventSystem.Instance.Awake(aObjectBase);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
+            #region 自动索引
+            if (aObjectBase is GameObjectComponent component)
+            {
+                if (component.gameObject != null)
+                {
+                    AutoReference(component.gameObject);
+                    ShowView(component.gameObject);
+                }
+            }
+            #endregion
             return aObjectBase;
         }
         public T AddComponent<T, P1>(P1 p1, params object[] datas) where T : AObjectBase
@@ -536,20 +536,20 @@ namespace LccModel
             T aObjectBase = Create<T>();
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            #region 自动索引
-            if (this is GameObjectEntity entity)
-            {
-                if (entity.gameObject != null)
-                {
-                    aObjectBase.AutoReference(entity.gameObject);
-                    aObjectBase.ShowView(entity.gameObject);
-                }
-            }
-            #endregion
 
             EventSystem.Instance.Awake(aObjectBase, p1);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
+            #region 自动索引
+            if (aObjectBase is GameObjectComponent component)
+            {
+                if (component.gameObject != null)
+                {
+                    AutoReference(component.gameObject);
+                    ShowView(component.gameObject);
+                }
+            }
+            #endregion
             return aObjectBase;
         }
         public T AddComponent<T, P1, P2>(P1 p1, P2 p2, params object[] datas) where T : AObjectBase
@@ -563,20 +563,20 @@ namespace LccModel
             T aObjectBase = Create<T>();
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            #region 自动索引
-            if (this is GameObjectEntity entity)
-            {
-                if (entity.gameObject != null)
-                {
-                    aObjectBase.AutoReference(entity.gameObject);
-                    aObjectBase.ShowView(entity.gameObject);
-                }
-            }
-            #endregion
 
             EventSystem.Instance.Awake(aObjectBase, p1, p2);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
+            #region 自动索引
+            if (aObjectBase is GameObjectComponent component)
+            {
+                if (component.gameObject != null)
+                {
+                    AutoReference(component.gameObject);
+                    ShowView(component.gameObject);
+                }
+            }
+            #endregion
             return aObjectBase;
         }
         public T AddComponent<T, P1, P2, P3>(P1 p1, P2 p2, P3 p3, params object[] datas) where T : AObjectBase
@@ -590,20 +590,20 @@ namespace LccModel
             T aObjectBase = Create<T>();
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            #region 自动索引
-            if (this is GameObjectEntity entity)
-            {
-                if (entity.gameObject != null)
-                {
-                    aObjectBase.AutoReference(entity.gameObject);
-                    aObjectBase.ShowView(entity.gameObject);
-                }
-            }
-            #endregion
 
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
+            #region 自动索引
+            if (aObjectBase is GameObjectComponent component)
+            {
+                if (component.gameObject != null)
+                {
+                    AutoReference(component.gameObject);
+                    ShowView(component.gameObject);
+                }
+            }
+            #endregion
             return aObjectBase;
         }
         public T AddComponent<T, P1, P2, P3, P4>(P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas) where T : AObjectBase
@@ -617,20 +617,20 @@ namespace LccModel
             T aObjectBase = Create<T>();
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
-            #region 自动索引
-            if (this is GameObjectEntity entity)
-            {
-                if (entity.gameObject != null)
-                {
-                    aObjectBase.AutoReference(entity.gameObject);
-                    aObjectBase.ShowView(entity.gameObject);
-                }
-            }
-            #endregion
 
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
             EventSystem.Instance.Start(aObjectBase);
             EventSystem.Instance.InitData(aObjectBase, datas);
+            #region 自动索引
+            if (aObjectBase is GameObjectComponent component)
+            {
+                if (component.gameObject != null)
+                {
+                    AutoReference(component.gameObject);
+                    ShowView(component.gameObject);
+                }
+            }
+            #endregion
             return aObjectBase;
         }
         public void RemoveComponent(AObjectBase aObjectBase)

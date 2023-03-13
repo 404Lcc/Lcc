@@ -120,7 +120,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\UnityWebRequest\UnityWebRequestExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\ISceneState.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Object\GameObjectEntity.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Object\GameObjectComponent.cs" />
     <Compile Include="Assets\Hotfix\Logic\StatePipeline\EnterLogin.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Command\CommandDataType.cs" />

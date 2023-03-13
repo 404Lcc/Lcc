@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace LccModel
 {
@@ -16,7 +17,9 @@ namespace LccModel
         }
         public Combat AddCombat()
         {
-            var combat = AddChildren<Combat>();
+            Combat combat = AddChildren<Combat>();
+            combat.AddComponent<AABB2DComponent, Vector2, Vector2>(new Vector2(-1, -1), new Vector2(1, 1));
+
             if (!combatDict.ContainsKey(combat.InstanceId))
             {
                 combatDict.Add(combat.InstanceId, combat);
@@ -27,7 +30,9 @@ namespace LccModel
         {
             if (combatDict.ContainsKey(combat.InstanceId))
             {
-                combatDict.Remove(combat.InstanceId);
+                var instanceId = combat.InstanceId;
+                combatDict[combat.InstanceId].Dispose();
+                combatDict.Remove(instanceId);
             }
         }
         public Combat GetCombat(long instanceId)
@@ -42,7 +47,7 @@ namespace LccModel
         public AbilityItem AddAbilityItem(SkillExecution skillExecution, ExecuteClipData data)
         {
             AbilityItem abilityItem = AddChildren<AbilityItem, SkillExecution, ExecuteClipData>(skillExecution, data);
-
+            abilityItem.AddComponent<AABB2DComponent, Vector2, Vector2>(new Vector2(-1, -1), new Vector2(1, 1));
 
             if (!abilityItemDict.ContainsKey(abilityItem.InstanceId))
             {
@@ -54,7 +59,9 @@ namespace LccModel
         {
             if (abilityItemDict.ContainsKey(abilityItem.InstanceId))
             {
-                abilityItemDict.Remove(abilityItem.InstanceId);
+                var instanceId = abilityItem.InstanceId;
+                abilityItemDict[abilityItem.InstanceId].Dispose();
+                abilityItemDict.Remove(instanceId);
             }
         }
         public AbilityItem GetAbilityItem(long instanceId)

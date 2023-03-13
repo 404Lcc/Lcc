@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LccModel
 {
-    public class GameObjectEntity : AObjectBase
+    public class GameObjectComponent : AObjectBase
     {
         public GameObject gameObject;
         public override void Awake<P1>(P1 p1)
