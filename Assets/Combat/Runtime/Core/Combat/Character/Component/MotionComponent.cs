@@ -2,7 +2,7 @@
 {
     public class MotionComponent : Component
     {
-        public TransformComponent TransformComponent => GetParent<CombatEntity>().GetComponent<TransformComponent>();
+        public TransformComponent TransformComponent => GetParent<Combat>().GetComponent<TransformComponent>();
 
         public void SetEnable(bool enable)
         {

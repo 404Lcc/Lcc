@@ -4,18 +4,13 @@ namespace LccModel
 {
     public class ExecutionEffectAnimationComponent : Component
     {
-        public CombatEntity OwnerEntity => Parent.GetParent<SkillExecution>().OwnerEntity;
-        public AnimationClip animationClip;
+        public Combat OwnerEntity => Parent.GetParent<SkillExecution>().OwnerEntity;
 
 
-        public override void Awake()
+
+        public void OnTriggerExecutionEffect(ExecutionEffect executionEffect)
         {
-            ((Entity)Parent).OnEvent(nameof(ExecutionEffect.TriggerEffect), OnTriggerExecutionEffect);
-        }
-
-        public void OnTriggerExecutionEffect(Entity entity)
-        {
-            OwnerEntity.Publish(animationClip);
+            executionEffect.Execution.OwnerEntity.AnimationComponent.PlayAnimation(executionEffect.executeClipData.AnimationData.AnimationType);
         }
     }
 }

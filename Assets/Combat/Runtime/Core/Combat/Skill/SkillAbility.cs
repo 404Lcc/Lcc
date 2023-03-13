@@ -2,10 +2,10 @@
 
 namespace LccModel
 {
-    public class SkillAbility : Entity, IAbilityEntity
+    public class SkillAbility : Entity, IAbility
     {
         public bool Enable { get; set; }
-        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
+        public Combat OwnerEntity => GetParent<Combat>();
 
 
 
@@ -69,7 +69,6 @@ namespace LccModel
             var execution = OwnerEntity.AddChildren<SkillExecution, SkillAbility>(this);
             execution.executionConfigObject = executionConfigObject;
             execution.LoadExecutionEffect();
-            FireEvent(nameof(CreateExecution), execution);
             return execution;
         }
     }

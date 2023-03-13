@@ -1,9 +1,9 @@
 ﻿namespace LccModel
 {
-    public interface IAbilityEntity
+    public interface IAbility
     {
         public bool Enable { get; set; }
-        public CombatEntity OwnerEntity { get; }
+        public Combat OwnerEntity { get; }
 
         public void ActivateAbility();
         public void EndAbility();

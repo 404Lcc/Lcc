@@ -1,0 +1,18 @@
+{
+    "name": "Unity.CombatView",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d2dfdc239b7dc0e44a6241cc44b9ea47",
+        "GUID:0d1ae7fff56963548a2a2a16dab3c5c6",
+        "GUID:89fdb54e773827b40b9127329bdaed75"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

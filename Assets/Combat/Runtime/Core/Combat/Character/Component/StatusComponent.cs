@@ -4,7 +4,7 @@ namespace LccModel
 {
     public class StatusComponent : Component
     {
-        public CombatEntity CombatEntity => GetParent<CombatEntity>();
+        public Combat CombatEntity => GetParent<Combat>();
 
 
         public List<StatusAbility> statusList = new List<StatusAbility>();
@@ -46,10 +46,12 @@ namespace LccModel
                     }
                     foreach (var effect in status.GetComponent<AbilityEffectComponent>().abilityEffectList)
                     {
-                        if (effect.TryGetComponent(out AbilityEffectActionControlComponent actionControlComponent))
+                        var actionControlComponent = effect.GetComponent<AbilityEffectActionControlComponent>();
+                        if (actionControlComponent != null)
                         {
                             tempActionControl = tempActionControl | actionControlComponent.ActionControlEffect.ActionControlType;
                         }
+
                     }
                 }
             }

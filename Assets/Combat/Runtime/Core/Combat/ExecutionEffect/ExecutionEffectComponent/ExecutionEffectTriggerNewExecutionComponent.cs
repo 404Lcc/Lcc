@@ -5,14 +5,11 @@
         public ActionEventData actionEventData;
 
 
-        public override void Awake()
-        {
-            ((Entity)Parent).Subscribe<ExecutionEffect>(OnTriggerExecutionEffect);
-        }
+
 
         public void OnTriggerExecutionEffect(ExecutionEffect executionEffect)
         {
-            ExecutionConfigObject executionObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handler, actionEventData.NewExecution, AssetSuffix.Asset, AssetType.Execution);
+            ExecutionConfigObject executionObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handler, executionEffect.executeClipData.ActionEventData.NewExecution, AssetSuffix.Asset, AssetType.Execution);
             if (executionObject == null)
             {
                 return;

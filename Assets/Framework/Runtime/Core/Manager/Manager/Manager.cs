@@ -86,7 +86,7 @@ namespace LccModel
             }
             else
             {
-                return null;
+                return new List<Type>();
             }
         }
 

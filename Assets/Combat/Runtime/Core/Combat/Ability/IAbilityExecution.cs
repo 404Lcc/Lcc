@@ -3,7 +3,7 @@
     public interface IAbilityExecution
     {
         public Entity AbilityEntity { get; set; }
-        public CombatEntity OwnerEntity { get; }
+        public Combat OwnerEntity { get; }
 
         public void BeginExecute();
         public void EndExecute();

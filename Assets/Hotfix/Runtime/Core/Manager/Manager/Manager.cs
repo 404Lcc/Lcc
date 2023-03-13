@@ -87,7 +87,7 @@ namespace LccHotfix
             }
             else
             {
-                return null;
+                return new List<Type>();
             }
         }
 

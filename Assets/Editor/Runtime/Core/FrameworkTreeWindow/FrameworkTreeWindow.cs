@@ -33,7 +33,6 @@ namespace LccEditor
     public class FrameworkTreeView : TreeView
     {
         private FrameworkTreeViewItem root;
-        private int id;
 
         public Dictionary<int, AObjectBase> dict = new Dictionary<int, AObjectBase>();
         private Dictionary<AObjectBase, int> historyID = new();
@@ -47,7 +46,6 @@ namespace LccEditor
         {
             if (Application.isPlaying && Game.Scene != null)
             {
-                id = 0;
                 root = PreOrder(Game.Scene);
                 root.depth = -1;
                 SetupDepthsFromParentsAndChildren(root);
@@ -73,8 +71,7 @@ namespace LccEditor
 
             if (!historyID.TryGetValue(root, out int itemID))
             {
-                id++;
-                itemID = id;
+                itemID = (int)root.InstanceId;
 
                 historyID[root] = itemID;
             }

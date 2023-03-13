@@ -88,9 +88,9 @@ namespace LccModel
 
     public enum BezierPointType
     {
-        corner,
-        smooth,
-        bezierCorner,
+        Corner,
+        Smooth,
+        BezierCorner,
     }
 
     [Serializable]
@@ -107,13 +107,13 @@ namespace LccModel
         {
             get
             {
-                if (type == BezierPointType.corner) return Vector3.zero;
+                if (type == BezierPointType.Corner) return Vector3.zero;
                 else return inTangent;
             }
             set
             {
-                if (type != BezierPointType.corner) inTangent = value;
-                if (value.sqrMagnitude > 0.001 && type == BezierPointType.smooth)
+                if (type != BezierPointType.Corner) inTangent = value;
+                if (value.sqrMagnitude > 0.001 && type == BezierPointType.Smooth)
                 {
                     outTangent = value.normalized * (-1) * outTangent.magnitude;
                 }
@@ -124,8 +124,8 @@ namespace LccModel
         {
             get
             {
-                if (type == BezierPointType.corner) return Vector3.zero;
-                if (type == BezierPointType.smooth)
+                if (type == BezierPointType.Corner) return Vector3.zero;
+                if (type == BezierPointType.Smooth)
                 {
                     if (inTangent.sqrMagnitude > 0.001)
                     {
@@ -136,7 +136,7 @@ namespace LccModel
             }
             set
             {
-                if (type == BezierPointType.smooth)
+                if (type == BezierPointType.Smooth)
                 {
                     if (value.sqrMagnitude > 0.001)
                     {
@@ -144,7 +144,7 @@ namespace LccModel
                     }
                     outTangent = value;
                 }
-                if (type == BezierPointType.bezierCorner) outTangent = value;
+                if (type == BezierPointType.BezierCorner) outTangent = value;
             }
         }
     }
@@ -178,7 +178,7 @@ namespace LccModel
         [Space(10)]
         public CollisionMoveType MoveType;
 
-        public GameObject ObjAsset;
+        public string AssetName;
 
 
         [ShowIf("MoveType", CollisionMoveType.PathFly)]
@@ -247,18 +247,18 @@ namespace LccModel
     [Serializable]
     public class ParticleEffectData
     {
-        public GameObject ParticleEffect;
+        public string ParticleEffectName;
     }
 
     [Serializable]
     public class AnimationData
     {
-        public AnimationClip AnimationClip;
+        public AnimationType AnimationType;
     }
 
     [Serializable]
     public class AudioData
     {
-        public AudioClip AudioClip;
+        public string AudioClipName;
     }
 }

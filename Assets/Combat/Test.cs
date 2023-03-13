@@ -4,15 +4,15 @@ namespace LccModel
 {
     public class Test : AObjectBase
     {
-        public CombatEntity combatEntity1;
-        public CombatEntity combatEntity2;
+        public Combat combatEntity1;
+        public Combat combatEntity2;
         public override async void InitData(object[] datas)
         {
             base.InitData(datas);
 
 
-            combatEntity1 = AddChildren<CombatEntity>();
-            combatEntity2 = AddChildren<CombatEntity>();
+            combatEntity1 = AddChildren<Combat>();
+            combatEntity2 = AddChildren<Combat>();
             combatEntity1.GetComponent<SpellAttackComponent>().SpellAttackWithTarget(combatEntity2);
 
 

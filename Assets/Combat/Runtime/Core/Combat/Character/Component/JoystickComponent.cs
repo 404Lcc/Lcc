@@ -5,7 +5,7 @@ namespace LccModel
 {
     public class JoystickComponent : Component, IFixedUpdate
     {
-        public CombatEntity CombatEntity => GetParent<CombatEntity>();
+        public Combat CombatEntity => GetParent<Combat>();
         public TransformComponent TransformComponent => CombatEntity.TransformComponent;
         public AnimationComponent AnimationComponent => CombatEntity.AnimationComponent;
         public float speed => CombatEntity.AttributeComponent.MoveSpeed.Value;

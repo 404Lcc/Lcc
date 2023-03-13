@@ -2,9 +2,9 @@
 {
     public class SpellItemComponent : Component
     {
-        public CombatEntity CombatEntity => GetParent<CombatEntity>();
+        public Combat CombatEntity => GetParent<Combat>();
 
-        public void SpellItemWithTarget(ItemAbility itemAbility, CombatEntity targetEntity)
+        public void SpellItemWithTarget(ItemAbility itemAbility, Combat targetEntity)
         {
             if (CombatEntity.spellItemActionAbility.TryMakeAction(out var spellAction))
             {

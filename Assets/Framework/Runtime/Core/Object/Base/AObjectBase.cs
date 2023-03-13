@@ -292,6 +292,56 @@ namespace LccModel
             EventSystem.Instance.InitData(aObjectBase, datas);
             return aObjectBase;
         }
+        public T AddChildrenWithId<T>(long id, params object[] datas) where T : AObjectBase
+        {
+            T aObjectBase = Create<T>();
+            aObjectBase.Id = id;
+            aObjectBase.EntityParent = this;
+            EventSystem.Instance.Awake(aObjectBase);
+            EventSystem.Instance.Start(aObjectBase);
+            EventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
+        public T AddChildrenWithId<T, P1>(long id, P1 p1, params object[] datas) where T : AObjectBase
+        {
+            T aObjectBase = Create<T>();
+            aObjectBase.Id = id;
+            aObjectBase.EntityParent = this;
+            EventSystem.Instance.Awake(aObjectBase, p1);
+            EventSystem.Instance.Start(aObjectBase);
+            EventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
+        public T AddChildrenWithId<T, P1, P2>(long id, P1 p1, P2 p2, params object[] datas) where T : AObjectBase
+        {
+            T aObjectBase = Create<T>();
+            aObjectBase.Id = id;
+            aObjectBase.EntityParent = this;
+            EventSystem.Instance.Awake(aObjectBase, p1, p2);
+            EventSystem.Instance.Start(aObjectBase);
+            EventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
+        public T AddChildrenWithId<T, P1, P2, P3>(long id, P1 p1, P2 p2, P3 p3, params object[] datas) where T : AObjectBase
+        {
+            T aObjectBase = Create<T>();
+            aObjectBase.Id = id;
+            aObjectBase.EntityParent = this;
+            EventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
+            EventSystem.Instance.Start(aObjectBase);
+            EventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
+        public T AddChildrenWithId<T, P1, P2, P3, P4>(long id, P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas) where T : AObjectBase
+        {
+            T aObjectBase = Create<T>();
+            aObjectBase.Id = id;
+            aObjectBase.EntityParent = this;
+            EventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
+            EventSystem.Instance.Start(aObjectBase);
+            EventSystem.Instance.InitData(aObjectBase, datas);
+            return aObjectBase;
+        }
         #endregion
         #region 组件
         public AObjectBase GetComponent(Type type)

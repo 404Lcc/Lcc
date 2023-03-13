@@ -9,11 +9,16 @@
 
         public TransformComponent TransformComponent => GetComponent<TransformComponent>();
 
-        public override void Awake<P1>(P1 p1)
+        public override void Awake<P1, P2>(P1 p1, P2 p2)
         {
-            base.Awake(p1);
+            base.Awake(p1, p2);
+
+
+            EventManager.Instance.Publish(new SyncCreateAbilityItem(InstanceId)).Coroutine();
 
             AddComponent<TransformComponent>();
+
+            AddComponent<AbilityItemCollisionExecuteComponent, ExecuteClipData>(p2 as ExecuteClipData);
 
             abilityExecution = p1 as IAbilityExecution;//技能执行体
 
@@ -38,10 +43,15 @@
                 }
             }
         }
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
 
+            EventManager.Instance.Publish(new SyncDeleteAbilityItem(InstanceId)).Coroutine();
+        }
 
         //靠代理触发
-        public void OnCollision(CombatEntity otherCombatEntity)
+        public void OnCollision(Combat otherCombatEntity)
         {
             var collisionExecuteData = GetComponent<AbilityItemCollisionExecuteComponent>().CollisionExecuteData;
 
@@ -68,7 +78,8 @@
                 }
             }
 
-            if (TryGetComponent(out AbilityItemTargetCounterComponent targetCounterComponent))
+            var targetCounterComponent = GetComponent<AbilityItemTargetCounterComponent>();
+            if (targetCounterComponent != null)
             {
                 targetCounterComponent.targetCounter++;
             }

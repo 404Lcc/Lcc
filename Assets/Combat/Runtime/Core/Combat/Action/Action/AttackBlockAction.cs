@@ -3,7 +3,7 @@
     public class AttackBlockActionAbility : Entity, IActionAbility
     {
         public bool Enable { get; set; }
-        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
+        public Combat OwnerEntity => GetParent<Combat>();
 
 
 
@@ -34,10 +34,12 @@
 
         private bool IsAbilityEffectTrigger()
         {
-            if (TryGetComponent(out AbilityProbabilityTriggerComponent component))
+            var component = GetComponent<AbilityProbabilityTriggerComponent>();
+            if (component != null)
             {
                 return RandomUtil.RandomNumber(0, 10000) < component.probability;
             }
+
             return false;
         }
 
@@ -61,8 +63,8 @@
 
         public Entity ActionAbility { get; set; }
         public EffectAssignAction SourceAssignAction { get; set; }
-        public CombatEntity Creator { get; set; }
-        public CombatEntity Target { get; set; }
+        public Combat Creator { get; set; }
+        public Combat Target { get; set; }
 
         public void FinishAction()
         {

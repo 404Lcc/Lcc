@@ -2,9 +2,9 @@
 {
     public class SpellAttackComponent : Component
     {
-        public CombatEntity CombatEntity => GetParent<CombatEntity>();
+        public Combat CombatEntity => GetParent<Combat>();
 
-        public void SpellAttackWithTarget(CombatEntity targetEntity)
+        public void SpellAttackWithTarget(Combat targetEntity)
         {
             if (CombatEntity.spellingAttackExecution != null) return;
 

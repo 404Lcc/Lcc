@@ -79,6 +79,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\ValueTypeBinder\QuaternionBinder.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Helper\RegisterValueTypeBinderHelper.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Helper\RegisterMethodDelegateHelper.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\AEvent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Adapter\IAsyncStateMachineAdapter.cs" />
     <Compile Include="Assets\Framework\Util\DragEventTrigger.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Singleton\ISingleton.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Module\Timer\TimerData.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Download\DownloadFile.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\ScreenAdaptation\ScreenAdaptationUtil.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\IEvent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Adapter\IComparerAdapter.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\CoroutineLockQueueType.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Rijndael\RijndaelUtil.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Asset\AssetSuffix.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Scene.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Singleton\Singleton.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\EventType.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Vector3\Vector3Expand.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Encoding\EncodingUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Random\RandomUtil.cs" />
@@ -162,9 +165,11 @@
     <Compile Include="Assets\Framework\Runtime\Util\Path\PathUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\RedDot\RedDot.cs" />
     <Compile Include="Assets\Framework\Util\OpenFileName.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\EventHandlerAttribute.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\NumericEvent\NumericEventHandlerAttribute.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\SceneLoad\SceneLoadManager.cs" />
     <Compile Include="Assets\Framework\Util\DoubleClickButton.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\EventManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\UnityWebRequest\UnityWebRequestExpand.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Manager\Manager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\NumericEvent\INumericEvent.cs" />
@@ -176,11 +181,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\Module\Logger\UnityLogger.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\EventType.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\AEvent.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\EventManager.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\EventHandlerAttribute.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\IEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />

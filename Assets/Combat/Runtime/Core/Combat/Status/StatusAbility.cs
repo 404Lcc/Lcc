@@ -4,11 +4,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace LccModel
 {
-    public partial class StatusAbility : Entity, IAbilityEntity
+    public partial class StatusAbility : Entity, IAbility
     {
         public bool Enable { get; set; }
-        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
-        public CombatEntity CreatorEntity;
+        public Combat OwnerEntity => GetParent<Combat>();
+        public Combat CreatorEntity;
 
 
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LccModel
 {
@@ -7,7 +8,7 @@ namespace LccModel
         public Effect effect;
 
         public Entity OwnerAbility => (Entity)Parent; //AbilityEffect是挂在能力上的
-        public CombatEntity OwnerEntity => ((IAbilityEntity)OwnerAbility).OwnerEntity;
+        public Combat OwnerEntity => ((IAbility)OwnerAbility).OwnerEntity;
         
         
         public override void Awake<P1>(P1 p1)
@@ -109,7 +110,7 @@ namespace LccModel
             TryAssignEffectToTarget(OwnerEntity);
         }
 
-        public void TryAssignEffectToTarget(CombatEntity targetEntity)
+        public void TryAssignEffectToTarget(Combat targetEntity)
         {
             if (OwnerEntity.effectAssignActionAbility.TryMakeAction(out var action))
             {
@@ -120,7 +121,7 @@ namespace LccModel
             }
         }
 
-        public void TryAssignEffectToTarget(CombatEntity targetEntity, IActionExecution actionExecution)
+        public void TryAssignEffectToTarget(Combat targetEntity, IActionExecution actionExecution)
         {
             if (OwnerEntity.effectAssignActionAbility.TryMakeAction(out var action))
             {
@@ -132,7 +133,7 @@ namespace LccModel
             }
         }
 
-        public void TryAssignEffectToTarget(CombatEntity targetEntity, IAbilityExecution abilityExecution)
+        public void TryAssignEffectToTarget(Combat targetEntity, IAbilityExecution abilityExecution)
         {
             if (OwnerEntity.effectAssignActionAbility.TryMakeAction(out var action))
             {
@@ -144,7 +145,7 @@ namespace LccModel
             }
         }
 
-        public void TryAssignEffectToTarget(CombatEntity targetEntity, AbilityItem abilityItem)
+        public void TryAssignEffectToTarget(Combat targetEntity, AbilityItem abilityItem)
         {
             if (OwnerEntity.effectAssignActionAbility.TryMakeAction(out var action))
             {
@@ -158,7 +159,30 @@ namespace LccModel
 
         public void StartAssignEffect(EffectAssignAction action)
         {
-            FireEvent(nameof(StartAssignEffect), action);
+            if (effect is AddStatusEffect)
+            {
+                GetComponent<AbilityEffectAddStatusComponent>().OnAssignEffect(action);
+            }
+
+            if (effect is ClearAllStatusEffect)
+            {
+
+            }
+
+            if (effect is CureEffect)
+            {
+                GetComponent<AbilityEffectCureComponent>().OnAssignEffect(action);
+            }
+
+            if (effect is DamageEffect)
+            {
+                GetComponent<AbilityEffectDamageComponent>().OnAssignEffect(action);
+            }
+
+            if (effect is RemoveStatusEffect)
+            {
+
+            }
         }
     }
 }

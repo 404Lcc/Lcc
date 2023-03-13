@@ -2,7 +2,7 @@ using System;
 
 namespace LccModel
 {
-    public class CombatEntity : Entity
+    public class Combat : Entity
     {
 
         public HealthPoint currentHealth;
@@ -54,6 +54,8 @@ namespace LccModel
         {
             base.Awake();
 
+            EventManager.Instance.Publish(new SyncCreateCombatEntity(InstanceId)).Coroutine();
+
             AddComponent<TransformComponent>();
             AddComponent<AnimationComponent>();
 
@@ -95,7 +97,12 @@ namespace LccModel
 
 
         }
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
 
+            EventManager.Instance.Publish(new SyncDeleteCombatEntity(InstanceId)).Coroutine();
+        }
         #region 接口
 
         public void ReceiveDamage(IActionExecution actionExecution)
@@ -117,7 +124,7 @@ namespace LccModel
         #endregion
 
         #region 能力
-        public T AttachAbility<T>(object configObject) where T : Entity, IAbilityEntity
+        public T AttachAbility<T>(object configObject) where T : Entity, IAbility
         {
             var ability = AddChildren<T, object>(configObject);
             ability.AddComponent<AbilityLevelComponent>();

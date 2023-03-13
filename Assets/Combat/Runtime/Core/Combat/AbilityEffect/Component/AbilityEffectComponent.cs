@@ -47,7 +47,7 @@ namespace LccModel
         {
             return abilityEffectList[index];
         }
-        public void TryAssignAllEffectToTarget(CombatEntity targetEntity)
+        public void TryAssignAllEffectToTarget(Combat targetEntity)
         {
             if (abilityEffectList.Count > 0)
             {
@@ -57,7 +57,7 @@ namespace LccModel
                 }
             }
         }
-        public void TryAssignAllEffectToTarget(CombatEntity targetEntity, IActionExecution actionExecution)
+        public void TryAssignAllEffectToTarget(Combat targetEntity, IActionExecution actionExecution)
         {
             if (abilityEffectList.Count > 0)
             {
@@ -67,7 +67,7 @@ namespace LccModel
                 }
             }
         }
-        public void TryAssignAllEffectToTarget(CombatEntity targetEntity, IAbilityExecution abilityExecution)
+        public void TryAssignAllEffectToTarget(Combat targetEntity, IAbilityExecution abilityExecution)
         {
             if (abilityEffectList.Count > 0)
             {
@@ -77,7 +77,7 @@ namespace LccModel
                 }
             }
         }
-        public void TryAssignAllEffectToTarget(CombatEntity targetEntity, AbilityItem abilityItem)
+        public void TryAssignAllEffectToTarget(Combat targetEntity, AbilityItem abilityItem)
         {
             if (abilityEffectList.Count > 0)
             {
@@ -87,7 +87,7 @@ namespace LccModel
                 }
             }
         }
-        public void TryAssignEffectToTargetByIndex(CombatEntity targetEntity, int index)
+        public void TryAssignEffectToTargetByIndex(Combat targetEntity, int index)
         {
             abilityEffectList[index].TryAssignEffectToTarget(targetEntity);
         }

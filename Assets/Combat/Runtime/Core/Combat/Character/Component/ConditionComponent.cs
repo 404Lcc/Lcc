@@ -5,7 +5,7 @@ namespace LccModel
 {
     public class ConditionComponent : Component
     {
-        private Dictionary<long, ConditionEntity> _conditionDict = new Dictionary<long, ConditionEntity>();
+        private Dictionary<long, Condition> _conditionDict = new Dictionary<long, Condition>();
 
 
         public void AddListener(ConditionType type, Action action, object obj = null)
@@ -14,7 +14,7 @@ namespace LccModel
             {
                 case ConditionType.WhenInTimeNoDamage:
                     var time = float.Parse((string)obj);
-                    var condition = Parent.AddChildren<ConditionEntity>();
+                    var condition = Parent.AddChildren<Condition>();
                     var temp = condition.AddComponent<ConditionWhenInTimeNoDamageComponent, float>(time);
                     temp.StartListen(action);
                     _conditionDict.Add(action.GetHashCode(), condition);

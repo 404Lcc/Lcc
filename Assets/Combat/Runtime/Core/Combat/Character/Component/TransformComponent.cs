@@ -90,7 +90,7 @@ namespace LccModel
 
         private void SyncTransform()
         {
-            EventManager.Instance.Publish(new SyncTransform(GetParent<CombatEntity>().InstanceId, _position, _rotation, _localScale)).Coroutine();
+            EventManager.Instance.Publish(new SyncTransform(GetParent<Combat>().InstanceId, _position, _rotation, _localScale)).Coroutine();
         }
     }
 }

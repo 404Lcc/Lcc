@@ -6,7 +6,7 @@ namespace LccModel
     public class SpellSkillActionAbility : Entity, IActionAbility
     {
         public bool Enable { get; set; }
-        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
+        public Combat OwnerEntity => GetParent<Combat>();
 
 
 
@@ -30,16 +30,16 @@ namespace LccModel
     {
         public SkillAbility skillAbility;
         public SkillExecution skillExecution;
-        public List<CombatEntity> inputSkillTargetList = new List<CombatEntity>();
-        public CombatEntity inputTarget;
+        public List<Combat> inputSkillTargetList = new List<Combat>();
+        public Combat inputTarget;
         public Vector3 inputPoint;
         public float inputDirection;
 
 
         public Entity ActionAbility { get; set; }
         public EffectAssignAction SourceAssignAction { get; set; }
-        public CombatEntity Creator { get; set; }
-        public CombatEntity Target { get; set; }
+        public Combat Creator { get; set; }
+        public Combat Target { get; set; }
 
 
         public void FinishAction()

@@ -1,4 +1,6 @@
-﻿namespace LccModel
+﻿using System;
+
+namespace LccModel
 {
     public partial class ExecutionEffect : Entity
     {
@@ -16,29 +18,29 @@
             {
                 if (executeClipData.ActionEventData.ActionEventType == FireEventType.AssignEffect)
                 {
-                    AddComponent<ExecutionEffectAssignToTargetComponent>().effectApplyType = executeClipData.ActionEventData.EffectApply;
+                    AddComponent<ExecutionEffectAssignToTargetComponent>();
                 }
 
                 if (executeClipData.ActionEventData.ActionEventType == FireEventType.TriggerNewExecution)
                 {
-                    AddComponent<ExecutionEffectTriggerNewExecutionComponent>().actionEventData = executeClipData.ActionEventData;
+                    AddComponent<ExecutionEffectTriggerNewExecutionComponent>();
                 }
             }
 
 
             if (clipType == ExecuteClipType.CollisionExecute)
             {
-                AddComponent<ExecutionEffectSpawnCollisionComponent>().collisionExecuteData = executeClipData.CollisionExecuteData;
+                AddComponent<ExecutionEffectSpawnCollisionComponent>();
             }
 
             if (clipType == ExecuteClipType.Animation)
             {
-                AddComponent<ExecutionEffectAnimationComponent>().animationClip = executeClipData.AnimationData.AnimationClip;
+                AddComponent<ExecutionEffectAnimationComponent>();
             }
 
             if (clipType == ExecuteClipType.ParticleEffect)
             {
-                AddComponent<ExecutionEffectParticleEffectComponent>().particleEffectPrefab = executeClipData.ParticleEffectData.ParticleEffect;
+                AddComponent<ExecutionEffectParticleEffectComponent>();
             }
 
 
@@ -59,19 +61,74 @@
 
             if (GetComponent<ExecutionEffectTimeTriggerComponent>() == null)
             {
-                TriggerEffect();
+                StartTriggerEffect();
             }
         }
 
-        public void TriggerEffect()
+        public void StartTriggerEffect()
         {
-            Publish(this);
-            FireEvent(nameof(TriggerEffect));
+            ExecuteClipType clipType = executeClipData.ExecuteClipType;
+            if (clipType == ExecuteClipType.ActionEvent)
+            {
+                if (executeClipData.ActionEventData.ActionEventType == FireEventType.AssignEffect)
+                {
+                    GetComponent<ExecutionEffectAssignToTargetComponent>().OnTriggerExecutionEffect(this);
+                }
+
+                if (executeClipData.ActionEventData.ActionEventType == FireEventType.TriggerNewExecution)
+                {
+                    GetComponent<ExecutionEffectTriggerNewExecutionComponent>().OnTriggerExecutionEffect(this);
+                }
+            }
+
+
+            if (clipType == ExecuteClipType.CollisionExecute)
+            {
+                GetComponent<ExecutionEffectSpawnCollisionComponent>().OnTriggerExecutionEffect(this);
+            }
+
+            if (clipType == ExecuteClipType.Animation)
+            {
+                GetComponent<ExecutionEffectAnimationComponent>().OnTriggerExecutionEffect(this);
+            }
+
+            if (clipType == ExecuteClipType.ParticleEffect)
+            {
+                GetComponent<ExecutionEffectParticleEffectComponent>().OnTriggerExecutionEffect(this);
+            }
         }
 
         public void EndEffect()
         {
-            FireEvent(nameof(EndEffect));
+            ExecuteClipType clipType = executeClipData.ExecuteClipType;
+            if (clipType == ExecuteClipType.ActionEvent)
+            {
+                if (executeClipData.ActionEventData.ActionEventType == FireEventType.AssignEffect)
+                {
+
+                }
+
+                if (executeClipData.ActionEventData.ActionEventType == FireEventType.TriggerNewExecution)
+                {
+
+                }
+            }
+
+
+            if (clipType == ExecuteClipType.CollisionExecute)
+            {
+        
+            }
+
+            if (clipType == ExecuteClipType.Animation)
+            {
+         
+            }
+
+            if (clipType == ExecuteClipType.ParticleEffect)
+            {
+                GetComponent<ExecutionEffectParticleEffectComponent>().OnTriggerExecutionEffectEnd(this);
+            }
         }
     }
 }

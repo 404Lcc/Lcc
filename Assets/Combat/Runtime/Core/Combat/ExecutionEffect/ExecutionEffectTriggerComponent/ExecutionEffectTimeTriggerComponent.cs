@@ -21,7 +21,7 @@
             }
             else
             {
-                GetParent<ExecutionEffect>().TriggerEffect();
+                GetParent<ExecutionEffect>().StartTriggerEffect();
             }
 
             if (endTime > 0)
@@ -34,7 +34,7 @@
         {
             if (startTimer != null && startTimer.IsFinished == false)
             {
-                startTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, GetParent<ExecutionEffect>().TriggerEffect);
+                startTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, GetParent<ExecutionEffect>().StartTriggerEffect);
             }
             if (endTimer != null && endTimer.IsFinished == false)
             {

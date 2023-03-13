@@ -5,7 +5,7 @@
         public Effect Effect => GetParent<AbilityEffect>().effect;
         public ActionPointType ActionPointType => Effect.ActionPointType;
 
-        public CombatEntity OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
+        public Combat OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
 
         public override void Awake()
         {

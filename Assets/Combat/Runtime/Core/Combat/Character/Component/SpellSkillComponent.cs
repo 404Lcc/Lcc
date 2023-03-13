@@ -4,9 +4,9 @@ namespace LccModel
 {
     public class SpellSkillComponent : Component
     {
-        public CombatEntity CombatEntity => GetParent<CombatEntity>();
+        public Combat CombatEntity => GetParent<Combat>();
 
-        public void SpellWithTarget(SkillAbility spellSkill, CombatEntity targetEntity)
+        public void SpellWithTarget(SkillAbility spellSkill, Combat targetEntity)
         {
             if (CombatEntity.spellingSkillExecution != null) return;
             spellSkill.OwnerEntity.TransformComponent.rotation = Quaternion.LookRotation(targetEntity.TransformComponent.position - spellSkill.OwnerEntity.TransformComponent.position);

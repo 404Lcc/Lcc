@@ -102,13 +102,12 @@ namespace LccModel
 
         [LabelText("状态特效")]
         [OnInspectorGUI("BeginBox", append: false)]
-        public GameObject ParticleEffect;
+        public string ParticleEffectName;
 
-        public GameObject GetParticleEffect() => ParticleEffect;
 
         [LabelText("状态音效")]
         [OnInspectorGUI("EndBox", append: true)]
-        public AudioClip Audio;
+        public string AudioClipName;
 
         [TextArea, LabelText("状态描述")]
         public string StatusDescription;

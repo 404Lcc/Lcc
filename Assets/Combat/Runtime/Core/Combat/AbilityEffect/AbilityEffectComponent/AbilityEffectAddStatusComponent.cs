@@ -2,15 +2,10 @@
 {
     public class AbilityEffectAddStatusComponent : Component
     {
-        public CombatEntity OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
-        public override void Awake()
-        {
-            ((Entity)Parent).OnEvent(nameof(AbilityEffect.StartAssignEffect), OnAssignEffect);
-        }
+        public Combat OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
 
-        private void OnAssignEffect(Entity entity)
+        public void OnAssignEffect(EffectAssignAction effectAssignAction)
         {
-            EffectAssignAction effectAssignAction = (EffectAssignAction)entity;
             if (OwnerEntity.addStatusActionAbility.TryMakeAction(out var action))
             {
                 effectAssignAction.FillDatasToAction(action);

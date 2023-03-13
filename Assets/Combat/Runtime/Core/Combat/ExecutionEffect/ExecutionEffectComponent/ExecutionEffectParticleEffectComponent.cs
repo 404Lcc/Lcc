@@ -1,29 +1,18 @@
-﻿using UnityEngine;
-
-namespace LccModel
+﻿namespace LccModel
 {
     public class ExecutionEffectParticleEffectComponent : Component
     {
-        public CombatEntity OwnerEntity => Parent.GetParent<SkillExecution>().OwnerEntity;
-
-        public GameObject particleEffectPrefab;
-        public GameObject particleEffect;
+        public Combat OwnerEntity => Parent.GetParent<SkillExecution>().OwnerEntity;
 
 
-        public override void Awake()
+        public void OnTriggerExecutionEffect(ExecutionEffect executionEffect)
         {
-            ((Entity)Parent).OnEvent(nameof(ExecutionEffect.TriggerEffect), OnTriggerStart);
-            ((Entity)Parent).OnEvent(nameof(ExecutionEffect.EndEffect), OnTriggerEnd);
+            EventManager.Instance.Publish(new SyncParticleEffect(OwnerEntity.InstanceId, executionEffect.executeClipData.ParticleEffectData.ParticleEffectName, OwnerEntity.TransformComponent.position, OwnerEntity.TransformComponent.rotation)).Coroutine();
         }
 
-        public void OnTriggerStart(Entity entity)
+        public void OnTriggerExecutionEffectEnd(ExecutionEffect executionEffect)
         {
-            particleEffect = GameObject.Instantiate(particleEffectPrefab, OwnerEntity.TransformComponent.position, OwnerEntity.TransformComponent.rotation);
-        }
-
-        public void OnTriggerEnd(Entity entity)
-        {
-            GameObject.Destroy(particleEffect);
+            EventManager.Instance.Publish(new SyncDeleteParticleEffect(OwnerEntity.InstanceId, executionEffect.executeClipData.ParticleEffectData.ParticleEffectName)).Coroutine();
         }
     }
 }

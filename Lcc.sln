@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.3rdPlugin", "Unity.3r
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Combat", "Unity.Combat.csproj", "{851245F3-9EDB-471B-CFC7-69E5338159B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.CombatView", "Unity.CombatView.csproj", "{2FAE37F6-4F15-9B53-9276-F72D7B13B0A1}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Editor", "Unity.Editor.csproj", "{08A34834-D4C3-53DD-6264-CCC1F0737645}"
 EndProject
 Global
@@ -33,6 +35,10 @@ Global
 		{851245F3-9EDB-471B-CFC7-69E5338159B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{851245F3-9EDB-471B-CFC7-69E5338159B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{851245F3-9EDB-471B-CFC7-69E5338159B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FAE37F6-4F15-9B53-9276-F72D7B13B0A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FAE37F6-4F15-9B53-9276-F72D7B13B0A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FAE37F6-4F15-9B53-9276-F72D7B13B0A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FAE37F6-4F15-9B53-9276-F72D7B13B0A1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{08A34834-D4C3-53DD-6264-CCC1F0737645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{08A34834-D4C3-53DD-6264-CCC1F0737645}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08A34834-D4C3-53DD-6264-CCC1F0737645}.Release|Any CPU.ActiveCfg = Release|Any CPU

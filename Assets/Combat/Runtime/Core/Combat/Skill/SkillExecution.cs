@@ -7,15 +7,15 @@ namespace LccModel
     public class SkillExecution : Entity, IAbilityExecution, IUpdate
     {
         public Entity AbilityEntity { get; set; }
-        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
+        public Combat OwnerEntity => GetParent<Combat>();
 
 
 
         public SkillAbility SkillAbility => (SkillAbility)AbilityEntity;
 
         public ExecutionConfigObject executionConfigObject;
-        public List<CombatEntity> inputSkillTargetList = new List<CombatEntity>();
-        public CombatEntity inputTarget;
+        public List<Combat> inputSkillTargetList = new List<Combat>();
+        public Combat inputTarget;
         public Vector3 inputPoint;
         public float inputDirection;
         public long originTime;
@@ -50,20 +50,18 @@ namespace LccModel
 
         public void BeginExecute()
         {
-            GetParent<CombatEntity>().spellingSkillExecution = this;
+            GetParent<Combat>().spellingSkillExecution = this;
             if (SkillAbility != null)
             {
                 SkillAbility.spelling = true;
             }
 
             GetComponent<ExecutionEffectComponent>().BeginExecute();
-
-            FireEvent(nameof(BeginExecute));
         }
 
         public void EndExecute()
         {
-            GetParent<CombatEntity>().spellingSkillExecution = null;
+            GetParent<Combat>().spellingSkillExecution = null;
             if (SkillAbility != null)
             {
                 SkillAbility.spelling = false;
@@ -76,9 +74,7 @@ namespace LccModel
 
         public void SpawnCollisionItem(ExecuteClipData clipData)
         {
-            //在当前战斗上下文创建创生体 todo
-            var abilityItem = Root.Instance.Scene.AddChildren<AbilityItem, SkillExecution>(this);
-            abilityItem.AddComponent<AbilityItemCollisionExecuteComponent, ExecuteClipData>(clipData);
+            var abilityItem = CombatContext.Instance.AddAbilityItem(this, clipData);
 
             if (clipData.CollisionExecuteData.MoveType == CollisionMoveType.FixedPosition)
             {
@@ -102,7 +98,7 @@ namespace LccModel
             }
 
 
-            CreateAbilityItemProxy(abilityItem);
+            //CreateAbilityItemProxy(abilityItem);
         }
 
         private void TargetFlyItem(AbilityItem abilityItem)
@@ -159,42 +155,41 @@ namespace LccModel
             abilityItem.AddComponent<AbilityItemLifeTimeComponent, float>(clipData.Duration);
         }
 
+        //private GameObject CreateAbilityItemProxy(AbilityItem abilityItem)
+        //{
+        //    var proxyObj = new GameObject("AbilityItemProxy");
+        //    proxyObj.transform.position = abilityItem.TransformComponent.position;
+        //    proxyObj.transform.rotation = abilityItem.TransformComponent.rotation;
+        //    proxyObj.AddComponent<AbilityItemProxy>().abilityItem = abilityItem;
+        //    var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().CollisionExecuteData;
 
-        private GameObject CreateAbilityItemProxy(AbilityItem abilityItem)
-        {
-            var proxyObj = new GameObject("AbilityItemProxy");
-            proxyObj.transform.position = abilityItem.TransformComponent.position;
-            proxyObj.transform.rotation = abilityItem.TransformComponent.rotation;
-            proxyObj.AddComponent<AbilityItemProxy>().abilityItem = abilityItem;
-            var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().CollisionExecuteData;
+        //    if (clipData.Shape == CollisionShape.Sphere)
+        //    {
+        //        proxyObj.AddComponent<SphereCollider>().enabled = false;
+        //        proxyObj.GetComponent<SphereCollider>().radius = clipData.Radius;
+        //    }
+        //    if (clipData.Shape == CollisionShape.Box)
+        //    {
+        //        proxyObj.AddComponent<BoxCollider>().enabled = false;
+        //        proxyObj.GetComponent<BoxCollider>().center = clipData.Center;
+        //        proxyObj.GetComponent<BoxCollider>().size = clipData.Size;
+        //    }
 
-            if (clipData.Shape == CollisionShape.Sphere)
-            {
-                proxyObj.AddComponent<SphereCollider>().enabled = false;
-                proxyObj.GetComponent<SphereCollider>().radius = clipData.Radius;
-            }
-            if (clipData.Shape == CollisionShape.Box)
-            {
-                proxyObj.AddComponent<BoxCollider>().enabled = false;
-                proxyObj.GetComponent<BoxCollider>().center = clipData.Center;
-                proxyObj.GetComponent<BoxCollider>().size = clipData.Size;
-            }
+        //    proxyObj.AddComponent<OnTriggerEnterCallback>().triggerEnterAction = (other) =>
+        //    {
 
-            proxyObj.AddComponent<OnTriggerEnterCallback>().triggerEnterAction = (other) =>
-            {
+        //    };
 
-            };
+        //    proxyObj.GetComponent<Collider>().enabled = true;
 
-            proxyObj.GetComponent<Collider>().enabled = true;
+        //    if (clipData.AssetName != null)
+        //    {
+        //        var effectObj = GameObject.Instantiate(clipData.AssetName, proxyObj.transform);
+        //        effectObj.transform.localPosition = Vector3.zero;
+        //        effectObj.transform.localRotation = Quaternion.identity;
+        //    }
 
-            if (clipData.ObjAsset != null)
-            {
-                var effectObj = GameObject.Instantiate(clipData.ObjAsset, proxyObj.transform);
-                effectObj.transform.localPosition = Vector3.zero;
-                effectObj.transform.localRotation = Quaternion.identity;
-            }
-
-            return proxyObj;
-        }
+        //    return proxyObj;
+        //}
     }
 }

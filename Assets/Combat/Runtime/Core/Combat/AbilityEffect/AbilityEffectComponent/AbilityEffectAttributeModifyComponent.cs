@@ -6,7 +6,7 @@
         public string NumericValueFormula => AttributeModifyEffect.NumericValueFormula;
         public AttributeType AttributeType => AttributeModifyEffect.AttributeType;
 
-        public CombatEntity OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
+        public Combat OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
 
         public float value;
 

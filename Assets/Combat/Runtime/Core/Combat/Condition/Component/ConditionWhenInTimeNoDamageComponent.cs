@@ -12,14 +12,14 @@ namespace LccModel
 
             float time = (float)(object)p1;
             noDamageTimer = new GameTimer(time);
-            Parent.GetParent<CombatEntity>().ListenActionPoint(ActionPointType.PostReceiveDamage, WhenReceiveDamage);
+            Parent.GetParent<Combat>().ListenActionPoint(ActionPointType.PostReceiveDamage, WhenReceiveDamage);
         }
 
         public override void OnDestroy()
         {
             base.OnDestroy();
 
-            Parent.GetParent<CombatEntity>().UnListenActionPoint(ActionPointType.PostReceiveDamage, WhenReceiveDamage);
+            Parent.GetParent<Combat>().UnListenActionPoint(ActionPointType.PostReceiveDamage, WhenReceiveDamage);
         }
 
         public void StartListen(Action whenNoDamageInTimeCallback)

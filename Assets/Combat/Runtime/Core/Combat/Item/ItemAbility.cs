@@ -2,10 +2,10 @@
 
 namespace LccModel
 {
-    public partial class ItemAbility : Entity, IAbilityEntity
+    public partial class ItemAbility : Entity, IAbility
     {
         public bool Enable { get; set; }
-        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
+        public Combat OwnerEntity => GetParent<Combat>();
 
 
 

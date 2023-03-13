@@ -89,7 +89,8 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\Effect\Effect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ExecutionEffect\ExecutionEffect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionEffectParticleEffectComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\Condition\ConditionEntity.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\Condition\Condition.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\JoystickComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\AbilityEffectConditionTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectActionControlComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\IActionExecution.cs" />
@@ -103,12 +104,12 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\StatusConfigObject.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Mono\AbilityItemProxy.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageReduceWithTargetCountComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Component\EventComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\TransformComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\Action\SpellAttackAction.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\ActionPointComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\ActionComponent\AbilityProbabilityTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityItem\Component\AbilityItemLifeTimeComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\CombatEntity.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Combat.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\SpellAttackComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityItem\Component\AbilityItemBezierMoveComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\Component\ActionComponent.cs" />
@@ -116,9 +117,10 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectTriggerComponent\ExecutionEffectTimeTriggerComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\AbilityEffectActionTriggerComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\Ability\IAbilityEntity.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\Ability\IAbility.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\MotionComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Condition\Component\ConditionWhenInTimeNoDamageComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\EventType.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\EffectDecorator\EffectDecorator.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\ActionComponent\DamageBloodSuckComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityItem\Component\AbilityItemMoveWithDotweenComponent.cs" />
@@ -143,14 +145,11 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\SkillComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionEffectAssignToTargetComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAttributeModifyComponent.cs" />
+    <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\AnimationComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDecoratosComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityItem\Component\AbilityItemCollisionExecuteComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\SpellItemComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\TransformComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\JoystickComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\AnimationComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Component\EventType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Combat\Unity.Combat.asmdef" />
@@ -869,9 +868,6 @@
     </Reference>
     <Reference Include="System.Xml.XPath.XDocument">
       <HintPath>C:\Program Files\2021.3.20f1c1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>

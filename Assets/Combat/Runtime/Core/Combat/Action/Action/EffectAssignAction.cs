@@ -3,7 +3,7 @@ namespace LccModel
     public class EffectAssignActionAbility : Entity, IActionAbility
     {
         public bool Enable { get; set; }
-        public CombatEntity OwnerEntity => GetParent<CombatEntity>();
+        public Combat OwnerEntity => GetParent<Combat>();
 
 
 
@@ -37,8 +37,8 @@ namespace LccModel
 
         public Entity ActionAbility { get; set; }
         public EffectAssignAction SourceAssignAction { get; set; }
-        public CombatEntity Creator { get; set; }
-        public CombatEntity Target { get; set; }
+        public Combat Creator { get; set; }
+        public Combat Target { get; set; }
 
 
         private void PreProcess()

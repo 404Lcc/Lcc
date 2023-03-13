@@ -5,7 +5,7 @@ namespace LccModel
     public class AbilityEffectCustomComponent : Component
     {
         public CustomEffect CustomEffect => (CustomEffect)GetParent<AbilityEffect>().effect;
-        public CombatEntity OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
+        public Combat OwnerEntity => GetParent<AbilityEffect>().OwnerEntity;
 
         public override void Awake()
         {
@@ -18,7 +18,8 @@ namespace LccModel
         }
         public override void OnDestroy()
         {
-            if (OwnerEntity.attackBlockActionAbility.TryGetComponent<AbilityProbabilityTriggerComponent>(out var component))
+            var component = OwnerEntity.attackBlockActionAbility.GetComponent<AbilityProbabilityTriggerComponent>();
+            if (component != null)
             {
                 component.Dispose();
             }

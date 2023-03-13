@@ -2,7 +2,7 @@
 {
     public class DamageBloodSuckComponent : Component
     {
-        public CombatEntity OwnerEntity => Parent.GetParent<CombatEntity>();
+        public Combat OwnerEntity => Parent.GetParent<Combat>();
         public override void Awake()
         {
             OwnerEntity.ListenActionPoint(ActionPointType.PostCauseDamage, OnCauseDamage);
