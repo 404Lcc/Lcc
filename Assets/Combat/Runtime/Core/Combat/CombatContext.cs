@@ -18,7 +18,6 @@ namespace LccModel
         public Combat AddCombat()
         {
             Combat combat = AddChildren<Combat>();
-            combat.AddComponent<AABB2DComponent, Vector2, Vector2>(new Vector2(-1, -1), new Vector2(1, 1));
 
             if (!combatDict.ContainsKey(combat.InstanceId))
             {
@@ -47,7 +46,6 @@ namespace LccModel
         public AbilityItem AddAbilityItem(SkillExecution skillExecution, ExecuteClipData data)
         {
             AbilityItem abilityItem = AddChildren<AbilityItem, SkillExecution, ExecuteClipData>(skillExecution, data);
-            abilityItem.AddComponent<AABB2DComponent, Vector2, Vector2>(new Vector2(-1, -1), new Vector2(1, 1));
 
             if (!abilityItemDict.ContainsKey(abilityItem.InstanceId))
             {

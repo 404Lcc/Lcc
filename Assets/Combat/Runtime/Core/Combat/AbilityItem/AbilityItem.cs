@@ -1,6 +1,8 @@
-﻿namespace LccModel
+﻿using UnityEngine;
+
+namespace LccModel
 {
-    public class AbilityItem : Entity
+    public class AbilityItem : Entity, IUpdate
     {
         public IAbilityExecution abilityExecution;
         public Entity ability;
@@ -8,6 +10,7 @@
         public EffectApplyType effectApplyType;
 
         public TransformComponent TransformComponent => GetComponent<TransformComponent>();
+        public AABB2DComponent AABB2DComponent => GetComponent<AABB2DComponent>();
 
         public override void Awake<P1, P2>(P1 p1, P2 p2)
         {
@@ -19,6 +22,8 @@
             AddComponent<TransformComponent>();
 
             AddComponent<AbilityItemCollisionExecuteComponent, ExecuteClipData>(clipData);
+
+            AddComponent<AABB2DComponent, Vector2, Vector2>(new Vector2(-1, -1), new Vector2(1, 1));
 
             abilityExecution = p1 as IAbilityExecution;//技能执行体
 
@@ -49,8 +54,18 @@
 
             EventManager.Instance.Publish(new SyncDeleteAbilityItem(InstanceId)).Coroutine();
         }
+        public void Update()
+        {
+            foreach (var item in CombatContext.Instance.combatDict.Values)
+            {
+                if (AABB2DComponent.Intersects(item.AABB2DComponent))
+                {
+                    OnCollision(item);
+                }
+            }
+        }
 
-        //靠代理触发
+
         public void OnCollision(Combat combat)
         {
             var collisionExecuteData = GetComponent<AbilityItemCollisionExecuteComponent>().CollisionExecuteData;

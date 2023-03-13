@@ -151,42 +151,5 @@ namespace LccModel
             abilityItem.TransformComponent.rotation = Owner.TransformComponent.rotation;
             abilityItem.AddComponent<AbilityItemLifeTimeComponent, float>(clipData.Duration);
         }
-
-        //private GameObject CreateAbilityItemProxy(AbilityItem abilityItem)
-        //{
-        //    var proxyObj = new GameObject("AbilityItemProxy");
-        //    proxyObj.transform.position = abilityItem.TransformComponent.position;
-        //    proxyObj.transform.rotation = abilityItem.TransformComponent.rotation;
-        //    proxyObj.AddComponent<AbilityItemProxy>().abilityItem = abilityItem;
-        //    var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().CollisionExecuteData;
-
-        //    if (clipData.Shape == CollisionShape.Sphere)
-        //    {
-        //        proxyObj.AddComponent<SphereCollider>().enabled = false;
-        //        proxyObj.GetComponent<SphereCollider>().radius = clipData.Radius;
-        //    }
-        //    if (clipData.Shape == CollisionShape.Box)
-        //    {
-        //        proxyObj.AddComponent<BoxCollider>().enabled = false;
-        //        proxyObj.GetComponent<BoxCollider>().center = clipData.Center;
-        //        proxyObj.GetComponent<BoxCollider>().size = clipData.Size;
-        //    }
-
-        //    proxyObj.AddComponent<OnTriggerEnterCallback>().triggerEnterAction = (other) =>
-        //    {
-
-        //    };
-
-        //    proxyObj.GetComponent<Collider>().enabled = true;
-
-        //    if (clipData.AssetName != null)
-        //    {
-        //        var effectObj = GameObject.Instantiate(clipData.AssetName, proxyObj.transform);
-        //        effectObj.transform.localPosition = Vector3.zero;
-        //        effectObj.transform.localRotation = Quaternion.identity;
-        //    }
-
-        //    return proxyObj;
-        //}
     }
 }

@@ -102,7 +102,6 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityItem\AbilityItem.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Status\StatusExecution.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\StatusConfigObject.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\Mono\AbilityItemProxy.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageReduceWithTargetCountComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Character\Component\TransformComponent.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Action\Action\SpellAttackAction.cs" />
@@ -132,7 +131,6 @@
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\EffectDecorator\DamageReduceWithTargetCountDecorator.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\Ability\IAbilityExecution.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectCureComponent.cs" />
-    <Compile Include="Assets\Combat\Runtime\Core\Combat\Mono\OnTriggerEnterCallback.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\Effect\DamageBloodSuckEffect.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Object\Component.cs" />
     <Compile Include="Assets\Combat\Runtime\Core\Combat\ConfigObject\Effect\ActionControlEffect.cs" />

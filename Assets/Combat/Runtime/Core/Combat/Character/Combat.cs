@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace LccModel
 {
@@ -47,7 +48,7 @@ namespace LccModel
         public TransformComponent TransformComponent => GetComponent<TransformComponent>();
         public AnimationComponent AnimationComponent => GetComponent<AnimationComponent>();
         public AttributeComponent AttributeComponent => GetComponent<AttributeComponent>();
-
+        public AABB2DComponent AABB2DComponent => GetComponent<AABB2DComponent>();
 
 
         public override void Awake()
@@ -58,6 +59,7 @@ namespace LccModel
 
             AddComponent<TransformComponent>();
             AddComponent<AnimationComponent>();
+            AddComponent<AABB2DComponent, Vector2, Vector2>(new Vector2(-1, -1), new Vector2(1, 1));
 
             AddComponent<AttributeComponent>();
             AddComponent<ActionPointComponent>();
