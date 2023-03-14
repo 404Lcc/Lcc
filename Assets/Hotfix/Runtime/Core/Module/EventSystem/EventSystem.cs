@@ -1,10 +1,17 @@
 ﻿using LccModel;
+using System;
 using System.Collections.Generic;
 
 namespace LccHotfix
 {
     public class EventSystem : Singleton<EventSystem>, ISingletonFixedUpdate, ISingletonUpdate, ISingletonLateUpdate
     {
+        private readonly Dictionary<string, Type> allTypeDict = new Dictionary<string, Type>();
+
+        private readonly UnOrderMultiMapSet<Type, Type> attributeTypeDict = new UnOrderMultiMapSet<Type, Type>();
+
+        private readonly Dictionary<Type, List<EventData>> allEventDataDict = new Dictionary<Type, List<EventData>>();
+
         public Dictionary<long, AObjectBase> aObjectBaseDict = new Dictionary<long, AObjectBase>();
         public Queue<long> fixedUpdate = new Queue<long>();
         public Queue<long> fixedUpdateCopy = new Queue<long>();
@@ -12,6 +19,78 @@ namespace LccHotfix
         public Queue<long> updateCopy = new Queue<long>();
         public Queue<long> lateUpdate = new Queue<long>();
         public Queue<long> lateUpdateCopy = new Queue<long>();
+
+        public void InitType(Dictionary<string, Type> dict)
+        {
+            allTypeDict.Clear();
+            attributeTypeDict.Clear();
+
+            foreach ((string fullName, Type type) in dict)
+            {
+                allTypeDict[fullName] = type;
+
+                if (type.IsAbstract)
+                {
+                    continue;
+                }
+
+                object[] objects = type.GetCustomAttributes(typeof(AttributeBase), true);
+                if (objects.Length == 0)
+                {
+                    continue;
+                }
+                foreach (object item in objects)
+                {
+                    Type attributeType = item.GetType();
+                    attributeTypeDict.Add(attributeType, type);
+                }
+            }
+
+
+            allEventDataDict.Clear();
+            foreach (Type type in attributeTypeDict[typeof(EventAttribute)])
+            {
+                IEvent iEvent = (IEvent)Activator.CreateInstance(type);
+                if (iEvent == null)
+                {
+                    throw new Exception($"类型不匹配 {type.Name}");
+                }
+
+                object[] eventAttributes = type.GetCustomAttributes(typeof(EventAttribute), false);
+                foreach (object item in eventAttributes)
+                {
+                    Type eventType = iEvent.Type;
+                    EventData eventData = new EventData(iEvent);
+                    if (!allEventDataDict.ContainsKey(eventType))
+                    {
+                        allEventDataDict.Add(eventType, new List<EventData>());
+                    }
+                    allEventDataDict[eventType].Add(eventData);
+                }
+
+            }
+        }
+
+        public HashSet<Type> GetTypesByAttribute(Type attributeType)
+        {
+            if (!attributeTypeDict.ContainsKey(attributeType))
+            {
+                return new HashSet<Type>();
+            }
+
+            return attributeTypeDict[attributeType];
+        }
+
+        public Type GetTypeByName(string typeName)
+        {
+            return allTypeDict[typeName];
+        }
+
+        public Dictionary<string, Type> GetTypeDict()
+        {
+            return allTypeDict;
+        }
+
         public void Register(AObjectBase aObjectBase)
         {
             aObjectBaseDict.Add(aObjectBase.InstanceId, aObjectBase);
@@ -134,6 +213,29 @@ namespace LccHotfix
                 }
             }
             ObjectUtil.Swap(ref lateUpdate, ref lateUpdateCopy);
+        }
+
+
+        public void Publish<T>(T data)
+        {
+            Type type = typeof(T);
+            if (allEventDataDict.TryGetValue(type, out List<EventData> eventDataList))
+            {
+                foreach (EventData item in eventDataList)
+                {
+                    if (!(item.IEvent is AEvent<T> aEvent))
+                    {
+                        LogUtil.Debug($"事件类型不匹配 {item.IEvent.GetType().Name}");
+                        continue;
+                    }
+
+                    aEvent.Handle(data).Coroutine();
+                }
+            }
+            else
+            {
+                LogUtil.Debug($"事件不存在，事件数据类型 {type.Name}");
+            }
         }
     }
 }

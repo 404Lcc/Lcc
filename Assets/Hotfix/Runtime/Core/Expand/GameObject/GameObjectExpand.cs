@@ -17,13 +17,13 @@ namespace LccHotfix
             if (childTransform == null) return null;
             return childTransform.gameObject;
         }
-        public static T GetChildComponent<T>(this GameObject gameObject, params string[] childs) where T : Component
+        public static T GetChildComponent<T>(this GameObject gameObject, params string[] childs) where T : UnityEngine.Component
         {
             GameObject childGameObject = gameObject.GetChildGameObject(childs);
             if (childGameObject == null) return null;
             return childGameObject.GetComponent<T>();
         }
-        public static T AddChildComponent<T>(this GameObject gameObject, params string[] childs) where T : Component
+        public static T AddChildComponent<T>(this GameObject gameObject, params string[] childs) where T : UnityEngine.Component
         {
             GameObject childGameObject = gameObject.GetChildGameObject(childs);
             if (childGameObject == null) return null;
@@ -34,7 +34,7 @@ namespace LccHotfix
             if (gameObject == null) return;
             Object.Destroy(gameObject);
         }
-        public static void SafeDestroy<T>(this GameObject gameObject) where T : Component
+        public static void SafeDestroy<T>(this GameObject gameObject) where T : UnityEngine.Component
         {
             if (gameObject == null) return;
             T component = gameObject.GetComponent<T>();

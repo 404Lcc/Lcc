@@ -39,6 +39,9 @@ namespace LccModel
             Game.Scene.AddComponent<SceneLoadManager>();
             Game.Scene.AddComponent<UpdateManager>();
 
+            Game.Scene.AddComponent<CombatContext>();
+
+
             await UpdateManager.Instance.StartUpdate();
 
 

@@ -6,10 +6,25 @@ namespace LccHotfix
 {
     public abstract class AEvent<T> : IEvent
     {
-        public Type EventType()
+        public Type Type
         {
-            return typeof(T);
+            get
+            {
+                return typeof(T);
+            }
         }
-        public abstract ETTask Publish(T data);
+        protected abstract ETTask Run(T data);
+
+        public async ETTask Handle(T data)
+        {
+            try
+            {
+                await Run(data);
+            }
+            catch (Exception e)
+            {
+                LogUtil.Error(e);
+            }
+        }
     }
 }

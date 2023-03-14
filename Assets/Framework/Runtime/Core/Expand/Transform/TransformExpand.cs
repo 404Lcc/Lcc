@@ -22,19 +22,19 @@ namespace LccModel
             if (transform == null) return;
             Object.Destroy(transform.gameObject);
         }
-        public static T GetChildComponent<T>(this Transform transform, params string[] childs) where T : Component
+        public static T GetChildComponent<T>(this Transform transform, params string[] childs) where T : UnityEngine.Component
         {
             GameObject childGameObject = transform.GetChildGameObject(childs);
             if (childGameObject == null) return null;
             return childGameObject.GetComponent<T>();
         }
-        public static T AddChildComponent<T>(this Transform transform, params string[] childs) where T : Component
+        public static T AddChildComponent<T>(this Transform transform, params string[] childs) where T : UnityEngine.Component
         {
             GameObject childGameObject = transform.GetChildGameObject(childs);
             if (childGameObject == null) return null;
             return childGameObject.AddComponent<T>();
         }
-        public static void SafeDestroy<T>(this Transform transform) where T : Component
+        public static void SafeDestroy<T>(this Transform transform) where T : UnityEngine.Component
         {
             if (transform == null) return;
             T component = transform.GetComponent<T>();

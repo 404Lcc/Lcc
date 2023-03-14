@@ -26,24 +26,10 @@ namespace LccModel
 
         public Assembly assembly;
         public ILRuntime.Runtime.Enviorment.AppDomain appDomain;
-        public Type GetMonoType(string fullName)
-        {
-            _monoTypeDict.TryGetValue(fullName, out Type type);
-            return type;
-        }
 
-        public Type GetHotfixType(string fullName)
+        public Dictionary<string, Type> GetHotfixTypeDict()
         {
-            _hotfixTypeDict.TryGetValue(fullName, out Type type);
-            return type;
-        }
-        public List<Type> GetMonoTypeALL()
-        {
-            return _monoTypeDict.Values.ToList();
-        }
-        public List<Type> GetHotfixTypeALL()
-        {
-            return _hotfixTypeDict.Values.ToList();
+            return _hotfixTypeDict;
         }
 
 
@@ -57,6 +43,8 @@ namespace LccModel
                     _monoTypeDict[type.FullName] = type;
                 }
             }
+            EventSystem.Instance.InitType(_monoTypeDict);
+
             switch (config.hotfixMode)
             {
                 case HotfixMode.Mono:

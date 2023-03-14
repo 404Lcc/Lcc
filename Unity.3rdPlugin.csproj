@@ -196,8 +196,8 @@
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Parsing\Parser.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\NetObjectSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\PrefixStyle.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Base\LoadBaseRuntimeLoad.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\PrefixStyle.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Helper\TimeAwaitHelper.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\ParserToken.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonWriter.cs" />
@@ -215,8 +215,8 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\ProtoEndpointBehavior.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoWriter.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt64Serializer.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\EnumSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\EnumSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\Int32Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SystemTypeSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoIncludeAttribute.cs" />

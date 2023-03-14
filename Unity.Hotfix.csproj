@@ -69,8 +69,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\EventSystem.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\MVVM\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\ArchiveManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\IEvent.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Game.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\ResolutionType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\UserData.cs" />
@@ -107,7 +105,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\ISingleton.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Config\TestConfig.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Transform\TransformExpand.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\AEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Global\GlobalManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Video\VideoManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\MVVM\View\View\IView.cs" />
@@ -149,11 +146,15 @@
     <Compile Include="Assets\Hotfix\Logic\SceneState\GameSceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\UserSetData.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Loading\LoadingPanel.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventHandlerAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\UIBinding.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventData.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\IEvent.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventAttribute.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\AEvent.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Event\EventType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
@@ -894,10 +895,6 @@
     <ProjectReference Include="Unity.Model.csproj">
       <Project>{57D111B4-22B4-6CA1-C350-5090EBF41DC0}</Project>
       <Name>Unity.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Combat.csproj">
-      <Project>{851245F3-9EDB-471B-CFC7-69E5338159B8}</Project>
-      <Name>Unity.Combat</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

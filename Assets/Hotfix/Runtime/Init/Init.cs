@@ -12,7 +12,7 @@ namespace LccHotfix
             Loader.Instance.OnApplicationQuit += OnApplicationQuit;
 
 
-            Game.AddSingleton<EventSystem>();
+            Game.AddSingleton<EventSystem>().InitType(Loader.Instance.GetHotfixTypeDict());
             Game.AddSingleton<Root>();
 
 
@@ -31,7 +31,7 @@ namespace LccHotfix
             Game.Scene.AddComponent<UIEventManager>();
             Game.Scene.AddComponent<VideoManager>();
 
-            EventManager.Instance.Publish(new Start()).Coroutine();
+            EventManager.Instance.Publish(new Start());
         }
         private static void FixedUpdate()
         {

@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace LccModel
 {
     public class Manager : AObjectBase
     {
         public static Manager Instance { get; set; }
-        private Dictionary<string, Type> _typeDict = new Dictionary<string, Type>();
-        private Dictionary<Type, List<Type>> _attDict = new Dictionary<Type, List<Type>>();
-
         public override void Awake()
         {
             base.Awake();
@@ -17,46 +13,6 @@ namespace LccModel
 
             Instance = this;
 
-            List<Type> list = Loader.Instance.GetMonoTypeALL();
-            _typeDict.Clear();
-            _attDict.Clear();
-
-            List<Type> baseAttributeTypeList = GetBaseAttributes(list);
-            foreach (Type baseAttributeType in baseAttributeTypeList)
-            {
-                foreach (Type type in list)
-                {
-                    if (type.IsAbstract)
-                    {
-                        continue;
-                    }
-
-                    object[] objects = type.GetCustomAttributes(baseAttributeType, true);
-                    if (objects.Length == 0)
-                    {
-                        continue;
-                    }
-                    if (_attDict.TryGetValue(baseAttributeType, out var types))
-                    {
-                        types.Add(type);
-                    }
-                    else
-                    {
-                        types = new List<Type>();
-                        types.Add(type);
-                        _attDict.Add(baseAttributeType, types);
-                    }
-                }
-            }
-
-
-            foreach (Type item in list)
-            {
-                if (!_typeDict.ContainsKey(item.Name))
-                {
-                    _typeDict.Add(item.Name, item);
-                }
-            }
         }
         public override void OnDestroy()
         {
@@ -65,48 +21,19 @@ namespace LccModel
             Instance = null;
         }
 
-        public Type GetTypeByName(string name)
+
+
+        public HashSet<Type> GetTypesByAttribute(Type attributeType)
         {
-            if (_typeDict.ContainsKey(name))
-            {
-                return _typeDict[name];
-            }
-            return null;
+            return EventSystem.Instance.GetTypesByAttribute(attributeType);
         }
-        public Type[] GetTypes()
+        public Type GetTypeByName(string typeName)
         {
-            return _typeDict.Values.ToArray();
+            return EventSystem.Instance.GetTypeByName(typeName);
         }
-
-        public List<Type> GetTypesByAttribute(Type type)
+        public Dictionary<string, Type> GetTypeDict()
         {
-            if (_attDict.TryGetValue(type, out var list))
-            {
-                return list;
-            }
-            else
-            {
-                return new List<Type>();
-            }
-        }
-
-
-        private List<Type> GetBaseAttributes(List<Type> typeList)
-        {
-            List<Type> attributeTypeList = new List<Type>();
-            foreach (Type type in typeList)
-            {
-                if (type.IsAbstract)
-                {
-                    continue;
-                }
-
-                if (type.IsSubclassOf(typeof(AttributeBase)))
-                {
-                    attributeTypeList.Add(type);
-                }
-            }
-            return attributeTypeList;
+            return EventSystem.Instance.GetTypeDict();
         }
     }
 }

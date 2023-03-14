@@ -4,6 +4,6 @@ namespace LccModel
 {
     public interface IEvent
     {
-        Type EventType();
+        Type Type { get; }
     }
 }

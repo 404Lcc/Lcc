@@ -4,10 +4,10 @@ using System;
 
 namespace LccHotfix
 {
-    [EventHandler]
+    [Event]
     public class InitEventHandler : AEvent<Start>
     {
-        public override async ETTask Publish(Start data)
+        protected override async ETTask Run(Start data)
         {
 
             //这里可以初始化

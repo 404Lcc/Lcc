@@ -12,9 +12,8 @@ namespace LccModel
         {
             base.Awake();
 
-            foreach (Type item in Manager.Instance.GetTypes())
+            foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(NumericEventHandlerAttribute)))
             {
-                if (item.IsAbstract) continue;
                 NumericEventHandlerAttribute[] numericEventHandlerAttributes = (NumericEventHandlerAttribute[])item.GetCustomAttributes(typeof(NumericEventHandlerAttribute), false);
                 foreach (NumericEventHandlerAttribute numericEventHandlerAttributeItem in numericEventHandlerAttributes)
                 {

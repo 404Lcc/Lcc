@@ -56,17 +56,17 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CombatView\Runtime\Core\Combat\Character\Component\TransformViewComponent.cs" />
-    <Compile Include="Assets\CombatView\Runtime\Core\Combat\Character\Component\EffectViewComponent.cs" />
-    <Compile Include="Assets\CombatView\Runtime\Core\Combat\Character\Component\AnimationViewComponent.cs" />
-    <Compile Include="Assets\CombatView\Runtime\Core\Combat\Character\CombatView.cs" />
-    <Compile Include="Assets\CombatView\Runtime\Core\Combat\Character\Component\SkinViewComponent.cs" />
-    <Compile Include="Assets\CombatView\Runtime\Core\Combat\EventHandler\CombatEventHandler.cs" />
-    <Compile Include="Assets\CombatView\Runtime\Core\Combat\CombatViewContext.cs" />
-    <Compile Include="Assets\CombatView\Runtime\Core\Combat\AbilityItem\AbilityItemView.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\TransformViewComponent.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\EffectViewComponent.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\AnimationViewComponent.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\CombatView.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\SkinViewComponent.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\EventHandler\CombatEventHandler.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\CombatViewContext.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\AbilityItem\AbilityItemView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\CombatView\Unity.CombatView.asmdef" />
+    <None Include="Assets\Framework\Combat\CombatView\Unity.CombatView.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -791,9 +791,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.Combat.csproj">
-      <Project>{851245F3-9EDB-471B-CFC7-69E5338159B8}</Project>
-      <Name>Unity.Combat</Name>
+    <ProjectReference Include="Unity.CombatLogic.csproj">
+      <Project>{65BE2011-AB3D-0828-5C61-206990D4A5B4}</Project>
+      <Name>Unity.CombatLogic</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Model.csproj">
       <Project>{57D111B4-22B4-6CA1-C350-5090EBF41DC0}</Project>
