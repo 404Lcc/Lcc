@@ -40,7 +40,7 @@ namespace LccModel
             Game.Scene.AddComponent<UpdateManager>();
 
             Game.Scene.AddComponent<CombatContext>();
-
+            Game.Scene.AddComponent<CombatViewContext>();
 
             await UpdateManager.Instance.StartUpdate();
 
