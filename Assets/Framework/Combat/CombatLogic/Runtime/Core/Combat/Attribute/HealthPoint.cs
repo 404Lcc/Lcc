@@ -2,30 +2,36 @@
 {
     public class HealthPoint : Entity
     {
-        public FloatNumeric current;
-        public FloatNumeric max;
-        public int Value => (int)current.Value;
-        public int MaxValue => (int)max.Value;
+        public FloatNumeric Current => Parent.GetComponent<AttributeComponent>().HealthPoint;
+        public FloatNumeric Max => Parent.GetComponent<AttributeComponent>().HealthPointMax;
+        public int Value => (int)Current.Value;
+        public int MaxValue => (int)Max.Value;
 
 
+        public override void Awake()
+        {
+            base.Awake();
+            Reset();
+
+        }
         public void Reset()
         {
-            current.SetBase(MaxValue);
+            Current.BaseValue = MaxValue;
         }
 
         public void SetMaxValue(int value)
         {
-            max.SetBase(value);
+            Max.BaseValue = value;
         }
 
         public void Minus(int value)
         {
-            current.MinusBase(value);
+            Current.BaseValue -= value;
         }
 
         public void Add(int value)
         {
-            current.AddBase(value);
+            Current.BaseValue += value;
         }
 
         public float Percent()

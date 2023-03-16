@@ -4654,15 +4654,19 @@
     <type fullname="LccModel.SyncAnimation" preserve="all" />
     <type fullname="LccModel.SyncParticleEffect" preserve="all" />
     <type fullname="LccModel.SyncDeleteParticleEffect" preserve="all" />
-    <type fullname="LccModel.SyncDead" preserve="all" />
     <type fullname="LccModel.SyncDamage" preserve="all" />
     <type fullname="LccModel.SyncCure" preserve="all" />
+    <type fullname="LccModel.SyncAttribute" preserve="all" />
+    <type fullname="LccModel.SyncModifyAttribute" preserve="all" />
     <type fullname="LccModel.Component" preserve="all" />
     <type fullname="LccModel.Entity" preserve="all" />
     <type fullname="LccModel.GameTimer" preserve="all" />
     <type fullname="LccModel.AbilityItemView" preserve="all" />
+    <type fullname="LccModel.FloatNumericView" preserve="all" />
+    <type fullname="LccModel.HealthPointView" preserve="all" />
     <type fullname="LccModel.CombatView" preserve="all" />
     <type fullname="LccModel.AnimationViewComponent" preserve="all" />
+    <type fullname="LccModel.AttributeViewComponent" preserve="all" />
     <type fullname="LccModel.EffectViewComponent" preserve="all" />
     <type fullname="LccModel.SkinViewComponent" preserve="all" />
     <type fullname="LccModel.TransformViewComponent" preserve="all" />
@@ -4673,9 +4677,12 @@
     <type fullname="LccModel.SyncDeleteAbilityItemEventHandler" preserve="all" />
     <type fullname="LccModel.SyncTransformEventHandler" preserve="all" />
     <type fullname="LccModel.SyncAnimationEventHandler" preserve="all" />
-    <type fullname="LccModel.SyncDeadEventHandler" preserve="all" />
+    <type fullname="LccModel.SyncParticleEffectEventHandler" preserve="all" />
+    <type fullname="LccModel.SyncDeleteParticleEffectEventHandler" preserve="all" />
     <type fullname="LccModel.SyncDamageEventHandler" preserve="all" />
     <type fullname="LccModel.SyncCureEventHandler" preserve="all" />
+    <type fullname="LccModel.SyncAttributeEventHandler" preserve="all" />
+    <type fullname="LccModel.SyncModifyAttributeEventHandler" preserve="all" />
     <type fullname="LccModel.UpdatePanel" preserve="all" />
     <type fullname="LccModel.AssetBundleCreateRequestAwaiter" preserve="all" />
     <type fullname="LccModel.AssetBundleRequestAwaiter" preserve="all" />
@@ -4717,12 +4724,6 @@
     <type fullname="LccModel.DownloadFile" preserve="all" />
     <type fullname="LccModel.DownloadManager" preserve="all" />
     <type fullname="LccModel.DownloadState" preserve="all" />
-    <type fullname="LccModel.AEvent`1" preserve="all" />
-    <type fullname="LccModel.EventAttribute" preserve="all" />
-    <type fullname="LccModel.EventData" preserve="all" />
-    <type fullname="LccModel.EventManager" preserve="all" />
-    <type fullname="LccModel.Start" preserve="all" />
-    <type fullname="LccModel.IEvent" preserve="all" />
     <type fullname="LccModel.Manager" preserve="all" />
     <type fullname="LccModel.INumericEvent" preserve="all" />
     <type fullname="LccModel.NumericEventHandlerAttribute" preserve="all" />
@@ -4733,6 +4734,11 @@
     <type fullname="LccModel.SceneName" preserve="all" />
     <type fullname="LccModel.UpdateManager" preserve="all" />
     <type fullname="LccModel.AABB2DComponent" preserve="all" />
+    <type fullname="LccModel.AEvent`1" preserve="all" />
+    <type fullname="LccModel.EventAttribute" preserve="all" />
+    <type fullname="LccModel.EventData" preserve="all" />
+    <type fullname="LccModel.Start" preserve="all" />
+    <type fullname="LccModel.IEvent" preserve="all" />
     <type fullname="LccModel.EventSystem" preserve="all" />
     <type fullname="LccModel.ILog" preserve="all" />
     <type fullname="LccModel.Logger" preserve="all" />
@@ -4819,9 +4825,12 @@
     <type fullname="LccModel.SyncDeleteAbilityItemEventHandler+&lt;Run&gt;d__0" preserve="all" />
     <type fullname="LccModel.SyncTransformEventHandler+&lt;Run&gt;d__0" preserve="all" />
     <type fullname="LccModel.SyncAnimationEventHandler+&lt;Run&gt;d__0" preserve="all" />
-    <type fullname="LccModel.SyncDeadEventHandler+&lt;Run&gt;d__0" preserve="all" />
+    <type fullname="LccModel.SyncParticleEffectEventHandler+&lt;Run&gt;d__0" preserve="all" />
+    <type fullname="LccModel.SyncDeleteParticleEffectEventHandler+&lt;Run&gt;d__0" preserve="all" />
     <type fullname="LccModel.SyncDamageEventHandler+&lt;Run&gt;d__0" preserve="all" />
     <type fullname="LccModel.SyncCureEventHandler+&lt;Run&gt;d__0" preserve="all" />
+    <type fullname="LccModel.SyncAttributeEventHandler+&lt;Run&gt;d__0" preserve="all" />
+    <type fullname="LccModel.SyncModifyAttributeEventHandler+&lt;Run&gt;d__0" preserve="all" />
     <type fullname="LccModel.UpdatePanel+&lt;UpdateLoadingPercent&gt;d__8" preserve="all" />
     <type fullname="LccModel.CoroutineHandler+&lt;CallWrapper&gt;d__28" preserve="all" />
     <type fullname="LccModel.TaskExpand+&lt;Continue&gt;d__0" preserve="all" />
@@ -4836,10 +4845,10 @@
     <type fullname="LccModel.CoroutineLockQueue+&lt;Wait&gt;d__7" preserve="all" />
     <type fullname="LccModel.CoroutineLockQueueType+&lt;Wait&gt;d__6" preserve="all" />
     <type fullname="LccModel.WaitCoroutineLock+&lt;Wait&gt;d__5" preserve="all" />
-    <type fullname="LccModel.AEvent`1+&lt;Handle&gt;d__3" preserve="all" />
     <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__9" preserve="all" />
     <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__10" preserve="all" />
     <type fullname="LccModel.UpdateManager+&lt;StartUpdate&gt;d__7" preserve="all" />
+    <type fullname="LccModel.AEvent`1+&lt;Handle&gt;d__3" preserve="all" />
     <type fullname="LccModel.MainThreadSynchronizationContext+&lt;&gt;c__DisplayClass3_0" preserve="all" />
     <type fullname="LccModel.ThreadSynchronizationContext+&lt;&gt;c__DisplayClass3_0" preserve="all" />
     <type fullname="LccModel.Timer+&lt;&gt;c__DisplayClass16_0" preserve="all" />

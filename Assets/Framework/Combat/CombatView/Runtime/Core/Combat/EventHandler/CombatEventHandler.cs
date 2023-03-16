@@ -49,6 +49,8 @@ namespace LccModel
 
 
 
+
+
     [Event]
     public class SyncTransformEventHandler : AEvent<SyncTransform>
     {
@@ -59,6 +61,8 @@ namespace LccModel
             {
                 combatView.TransformViewComponent.SyncTransform(data.position, data.rotation, data.localScale);
             }
+
+
             AbilityItemView abilityItemView = CombatViewContext.Instance.GetAbilityItemView(data.id);
             if (abilityItemView != null)
             {
@@ -81,20 +85,41 @@ namespace LccModel
         }
     }
 
+
+
+
     [Event]
-    public class SyncDeadEventHandler : AEvent<SyncDead>
+    public class SyncParticleEffectEventHandler : AEvent<SyncParticleEffect>
     {
-        protected override async ETTask Run(SyncDead data)
+        protected override async ETTask Run(SyncParticleEffect data)
+        {
+            await ETTask.CompletedTask;
+        }
+    }
+    [Event]
+    public class SyncDeleteParticleEffectEventHandler : AEvent<SyncDeleteParticleEffect>
+    {
+        protected override async ETTask Run(SyncDeleteParticleEffect data)
         {
 
             await ETTask.CompletedTask;
         }
     }
+
+
+
+
     [Event]
     public class SyncDamageEventHandler : AEvent<SyncDamage>
     {
         protected override async ETTask Run(SyncDamage data)
         {
+            CombatView combatView = CombatViewContext.Instance.GetCombatView(data.id);
+            if (combatView != null)
+            {
+                LogUtil.Debug(data.id + "受到伤害" + data.damage);
+                LogUtil.Debug(data.id + "剩余血量" + combatView.AttributeViewComponent.HealthPoint.Value);
+            }
 
             await ETTask.CompletedTask;
         }
@@ -104,7 +129,42 @@ namespace LccModel
     {
         protected override async ETTask Run(SyncCure data)
         {
+            CombatView combatView = CombatViewContext.Instance.GetCombatView(data.id);
+            if (combatView != null)
+            {
+                LogUtil.Debug(data.id + "受到治疗" + data.cure);
+                LogUtil.Debug(data.id + "剩余血量" + combatView.AttributeViewComponent.HealthPoint.Value);
+            }
 
+            await ETTask.CompletedTask;
+        }
+    }
+
+
+
+    [Event]
+    public class SyncAttributeEventHandler : AEvent<SyncAttribute>
+    {
+        protected override async ETTask Run(SyncAttribute data)
+        {
+            CombatView combatView = CombatViewContext.Instance.GetCombatView(data.id);
+            if (combatView != null)
+            {
+                combatView.AttributeViewComponent.AddNumeric(data.attributeType);
+            }
+            await ETTask.CompletedTask;
+        }
+    }
+    [Event]
+    public class SyncModifyAttributeEventHandler : AEvent<SyncModifyAttribute>
+    {
+        protected override async ETTask Run(SyncModifyAttribute data)
+        {
+            CombatView combatView = CombatViewContext.Instance.GetCombatView(data.id);
+            if (combatView != null)
+            {
+                combatView.AttributeViewComponent.GetNumeric((AttributeType)data.type).ModifyAttribute(data.temp, data.value);
+            }
             await ETTask.CompletedTask;
         }
     }

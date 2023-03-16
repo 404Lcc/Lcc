@@ -17,7 +17,7 @@ namespace LccModel
             base.Awake(p1, p2);
 
             var clipData = p2 as ExecuteClipData;
-            EventManager.Instance.Publish(new SyncCreateAbilityItem(InstanceId));
+            EventSystem.Instance.Publish(new SyncCreateAbilityItem(InstanceId));
 
             AddComponent<TransformComponent>();
 
@@ -52,7 +52,7 @@ namespace LccModel
         {
             base.OnDestroy();
 
-            EventManager.Instance.Publish(new SyncDeleteAbilityItem(InstanceId));
+            EventSystem.Instance.Publish(new SyncDeleteAbilityItem(InstanceId));
         }
         public void Update()
         {

@@ -29,7 +29,6 @@ namespace LccModel
             Game.Scene.AddComponent<Manager>();
 
             Game.Scene.AddComponent<AssetManager>();
-            Game.Scene.AddComponent<EventManager>();
             Game.Scene.AddComponent<BridgeManager>();
             Game.Scene.AddComponent<ClientNetworkManager>();
             Game.Scene.AddComponent<CoroutineLockManager>();

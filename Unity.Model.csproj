@@ -101,7 +101,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Helper\RegisterMethodDelegateHelper.cs" />
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\EffectViewComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Math\AABB2DComponent.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\AEvent.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Module\EventSystem\Event\AEvent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Adapter\IAsyncStateMachineAdapter.cs" />
     <Compile Include="Assets\Framework\Util\DragEventTrigger.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Singleton\ISingleton.cs" />
@@ -167,7 +167,7 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Skill\SkillAbility.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Download\DownloadFile.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\ScreenAdaptation\ScreenAdaptationUtil.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\IEvent.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Module\EventSystem\Event\IEvent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Action\Action\AddStatusAction.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Attack\AttackAbility.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityItem\AbilityItem.cs" />
@@ -229,7 +229,7 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionEffectTriggerNewExecutionComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Scene.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Singleton\Singleton.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\EventType.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Module\EventSystem\Event\EventType.cs" />
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\AbilityItem\AbilityItemView.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Vector3\Vector3Expand.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Encoding\EncodingUtil.cs" />
@@ -250,7 +250,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\RedDot\RedDot.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\DamageBloodSuckEffect.cs" />
     <Compile Include="Assets\Framework\Util\OpenFileName.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\EventAttribute.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Module\EventSystem\Event\EventAttribute.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\NumericEvent\NumericEventHandlerAttribute.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Object\Component.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\ActionControlEffect.cs" />
@@ -260,12 +260,12 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\SceneLoad\SceneLoadManager.cs" />
     <Compile Include="Assets\Framework\Util\DoubleClickButton.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\UnOrderMultiMap.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\EventManager.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Attribute\FloatNumeric.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionEffectAnimationComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Status\Component\StatusLifeTimeComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\SkillComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\UnityWebRequest\UnityWebRequestExpand.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Module\EventSystem\Event\EventData.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionEffectAssignToTargetComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAttributeModifyComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Manager\Manager.cs" />
@@ -283,7 +283,9 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\Event\EventData.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\AttributeViewComponent.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Attribute\FloatNumericView.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Attribute\HealthPointView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />

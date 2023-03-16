@@ -116,6 +116,7 @@ namespace LccModel
 
             if (Target.CheckDead())
             {
+                Target.Dead();
             }
 
             FinishAction();

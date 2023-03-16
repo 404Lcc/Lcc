@@ -55,7 +55,7 @@ namespace LccModel
         {
             base.Awake();
 
-            EventManager.Instance.Publish(new SyncCreateCombat(InstanceId));
+            EventSystem.Instance.Publish(new SyncCreateCombat(InstanceId));
 
             AddComponent<TransformComponent>();
             AddComponent<AnimationComponent>();
@@ -76,9 +76,6 @@ namespace LccModel
             AddComponent<JoystickComponent>();
 
             currentHealth = AddChildren<HealthPoint>();
-            currentHealth.current = GetComponent<AttributeComponent>().HealthPoint;
-            currentHealth.max = GetComponent<AttributeComponent>().HealthPointMax;
-            currentHealth.Reset();
 
 
             attackAbility = AttachAttack();
@@ -96,14 +93,23 @@ namespace LccModel
             cureActionAbility = AttachAction<CureActionAbility>();
 
 
+            ListenActionPoint(ActionPointType.PostReceiveDamage, (e) =>
+            {
+                var damageAction = e as DamageAction;
+                EventSystem.Instance.Publish(new SyncDamage(InstanceId, damageAction.damageValue));
+            });
 
+            ListenActionPoint(ActionPointType.PostReceiveCure, (e) =>
+            {
+                var damageAction = e as CureAction;
+                EventSystem.Instance.Publish(new SyncCure(InstanceId, damageAction.cureValue));
+            });
 
         }
-        public override void OnDestroy()
+        public void Dead()
         {
-            base.OnDestroy();
-
-            EventManager.Instance.Publish(new SyncDeleteCombat(InstanceId));
+            EventSystem.Instance.Publish(new SyncDeleteCombat(InstanceId));
+            Dispose();
         }
         #region ½Ó¿Ú
 

@@ -25,7 +25,7 @@ namespace LccModel
             if (currentType == type) return;
             currentType = type;
             bool isLoop = currentType == AnimationType.Run || currentType == AnimationType.Idle || currentType == AnimationType.Walk ? true : false;
-            EventManager.Instance.Publish(new SyncAnimation(GetParent<Combat>().InstanceId, type, speed, isLoop));
+            EventSystem.Instance.Publish(new SyncAnimation(GetParent<Combat>().InstanceId, type, speed, isLoop));
         }
     }
 }

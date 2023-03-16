@@ -11,7 +11,12 @@ namespace LccModel
 
         public TransformViewComponent TransformViewComponent => GetComponent<TransformViewComponent>();
         public AnimationViewComponent AnimationViewComponent => GetComponent<AnimationViewComponent>();
+        public AttributeViewComponent AttributeViewComponent => GetComponent<AttributeViewComponent>();
+
+
         public SkinViewComponent SkinViewComponent => GetComponent<SkinViewComponent>();
+
+
 
         public override void Awake()
         {
@@ -20,7 +25,15 @@ namespace LccModel
 
             AddComponent<TransformViewComponent>();
             AddComponent<AnimationViewComponent>();
+
+
+            AddComponent<AttributeViewComponent>();
+
+
             AddComponent<SkinViewComponent>();
+
+
+            AddChildren<HealthPointView>();
         }
     }
 }

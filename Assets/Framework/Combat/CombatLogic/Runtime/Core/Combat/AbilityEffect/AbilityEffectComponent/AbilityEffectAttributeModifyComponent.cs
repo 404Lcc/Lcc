@@ -18,11 +18,11 @@
 
             if (AttributeModifyEffect.ModifyType == ModifyType.Add)
             {
-                Owner.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).AddFinalAddModifier(value);
+                Owner.GetComponent<AttributeComponent>().GetNumeric(AttributeType).FinalAdd += value;
             }
             if (AttributeModifyEffect.ModifyType == ModifyType.PercentAdd)
             {
-                Owner.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).AddFinalPctAddModifier(value);
+                Owner.GetComponent<AttributeComponent>().GetNumeric(AttributeType).FinalPctAdd += value;
             }
 
         }
@@ -31,11 +31,11 @@
         {
             if (AttributeModifyEffect.ModifyType == ModifyType.Add)
             {
-                Owner.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).RemoveFinalAddModifier(value);
+                Owner.GetComponent<AttributeComponent>().GetNumeric(AttributeType).FinalAdd -= value;
             }
             if (AttributeModifyEffect.ModifyType == ModifyType.PercentAdd)
             {
-                Owner.GetComponent<AttributeComponent>().GetNumeric(AttributeType.ToString()).RemoveFinalPctAddModifier(value);
+                Owner.GetComponent<AttributeComponent>().GetNumeric(AttributeType).FinalPctAdd -= value;
             }
         }
     }

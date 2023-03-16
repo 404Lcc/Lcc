@@ -22,7 +22,6 @@ namespace LccHotfix
             Game.Scene.AddComponent<AudioManager>();
             Game.Scene.AddComponent<CommandManager>();
             Game.Scene.AddComponent<ConfigManager>();
-            Game.Scene.AddComponent<EventManager>();
             Game.Scene.AddComponent<GameSettingManager>();
             Game.Scene.AddComponent<GlobalManager>();
             Game.Scene.AddComponent<LanguageManager>();
@@ -31,7 +30,7 @@ namespace LccHotfix
             Game.Scene.AddComponent<UIEventManager>();
             Game.Scene.AddComponent<VideoManager>();
 
-            EventManager.Instance.Publish(new Start());
+            EventSystem.Instance.Publish(new Start());
         }
         private static void FixedUpdate()
         {

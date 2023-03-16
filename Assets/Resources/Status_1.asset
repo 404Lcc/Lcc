@@ -23,7 +23,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: StatusList
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[LccModel.ChildStatus, Unity.Combat]],
+      Data: 0|System.Collections.Generic.List`1[[LccModel.ChildStatus, Unity.Model]],
         mscorlib
     - Name: 
       Entry: 12
@@ -36,14 +36,14 @@ MonoBehaviour:
       Data: 
     - Name: EffectList
       Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[LccModel.Effect, Unity.Combat]],
+      Data: 1|System.Collections.Generic.List`1[[LccModel.Effect, Unity.Model]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 2|LccModel.CureEffect, Unity.Combat
+      Data: 2|LccModel.CureEffect, Unity.Model
     - Name: IsSkillEffect
       Entry: 5
       Data: false
@@ -65,15 +65,15 @@ MonoBehaviour:
     - Name: ActionPointType
       Entry: 3
       Data: 0
-    - Name: Interval
+    - Name: IntervalValueFormula
       Entry: 1
       Data: "\u95F4\u9694"
-    - Name: ConditionParams
+    - Name: ConditionValueFormula
       Entry: 6
       Data: 
     - Name: DecoratorList
       Entry: 7
-      Data: 3|System.Collections.Generic.List`1[[LccModel.EffectDecorator, Unity.Combat]],
+      Data: 3|System.Collections.Generic.List`1[[LccModel.EffectDecorator, Unity.Model]],
         mscorlib
     - Name: 
       Entry: 12
@@ -108,6 +108,6 @@ MonoBehaviour:
   MaxStack: 0
   EnableChildStatus: 0
   EffectTypeName: "(\u6DFB\u52A0\u6548\u679C)"
-  ParticleEffect: {fileID: 0}
-  Audio: {fileID: 0}
+  ParticleEffectName: 
+  AudioClipName: 
   StatusDescription: 

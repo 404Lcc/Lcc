@@ -83,6 +83,13 @@ namespace LccModel
             this.isLoop = isLoop;
         }
     }
+
+
+
+
+
+
+
     public class SyncParticleEffect
     {
         public long id;
@@ -113,17 +120,9 @@ namespace LccModel
             this.name = name;
         }
     }
-    public class SyncDead
-    {
-        public long id;
-        public SyncDead()
-        {
-        }
-        public SyncDead(long id)
-        {
-            this.id = id;
-        }
-    }
+
+
+
     public class SyncDamage
     {
         public long id;
@@ -148,6 +147,40 @@ namespace LccModel
         {
             this.id = id;
             this.cure = cure;
+        }
+    }
+
+
+
+
+    public class SyncAttribute
+    {
+        public long id;
+        public AttributeType attributeType;
+        public SyncAttribute()
+        {
+        }
+        public SyncAttribute(long id, AttributeType attributeType)
+        {
+            this.id = id;
+            this.attributeType = attributeType;
+        }
+    }
+    public class SyncModifyAttribute
+    {
+        public long id;
+        public int type;
+        public int temp;
+        public float value;
+        public SyncModifyAttribute()
+        {
+        }
+        public SyncModifyAttribute(long id, int type, int temp, float value)
+        {
+            this.id = id;
+            this.type = type;
+            this.temp = temp;
+            this.value = value;
         }
     }
 }
