@@ -7,8 +7,6 @@ namespace LccHotfix
 {
     public class Joystick : AObjectBase
     {
-        public GameObject gameObject => GetComponent<GameObjectComponent>().gameObject;
-
         //原始坐标
         public Vector3 origin;
         //最大拖动距离
@@ -23,7 +21,8 @@ namespace LccHotfix
         //标准操作
         public bool isStandard;
 
-        public RectTransform joystick;
+        public GameObject joystick;
+        public RectTransform joystickCenter;
         public RectTransform joystickBG;
 
         public Action<Vector2, float> dragHandler;
@@ -33,13 +32,14 @@ namespace LccHotfix
 
             maxDistance = (float)datas[0];
             activeDistance = (float)datas[1];
-            joystick = (RectTransform)datas[2];
-            joystickBG = (RectTransform)datas[3];
+            joystick = (GameObject)datas[2];
+            joystickCenter = (RectTransform)joystick.transform.GetChild(1);
+            joystickBG = (RectTransform)joystick.transform.GetChild(0);
 
-            DragEventTrigger.GetDragEventTrigger(gameObject).Down += OnDown;
-            DragEventTrigger.GetDragEventTrigger(gameObject).UP += OnUP;
-            DragEventTrigger.GetDragEventTrigger(gameObject).Drag += OnDrag;
-            joystick.gameObject.SetActive(false);
+            DragEventTrigger.GetDragEventTrigger(joystick).Down += OnDown;
+            DragEventTrigger.GetDragEventTrigger(joystick).UP += OnUP;
+            DragEventTrigger.GetDragEventTrigger(joystick).Drag += OnDrag;
+            joystickCenter.gameObject.SetActive(false);
             joystickBG.gameObject.SetActive(false);
         }
         public void Bind(Action<Vector2, float> dragHandler)
@@ -49,17 +49,17 @@ namespace LccHotfix
         public void JoystackDistance()
         {
             //根据触摸位置算出来的拖动距离
-            currentDistance = Vector3.Distance(joystick.localPosition, origin);
+            currentDistance = Vector3.Distance(joystickCenter.localPosition, origin);
             //距离大于最大拖动距离
             if (currentDistance >= maxDistance)
             {
                 //求圆上的一点 (目标点-原点) * 半径 / 原点到目标点的距离
-                joystick.localPosition = origin + (joystick.localPosition - origin) * maxDistance / currentDistance;
+                joystickCenter.localPosition = origin + (joystickCenter.localPosition - origin) * maxDistance / currentDistance;
             }
             //距离大于激活移动的最低距离
             if (currentDistance >= activeDistance)
             {
-                normalDistance = (joystick.localPosition - origin).normalized;
+                normalDistance = (joystickCenter.localPosition - origin).normalized;
             }
             else
             {
@@ -93,18 +93,18 @@ namespace LccHotfix
                     isStandard = true;
                 }
             }
-            joystick.gameObject.SetActive(true);
+            joystickCenter.gameObject.SetActive(true);
             joystickBG.gameObject.SetActive(true);
-            joystick.localPosition = eventData.position.ScreenToUGUI((RectTransform)gameObject.transform);
-            joystickBG.localPosition = eventData.position.ScreenToUGUI((RectTransform)gameObject.transform);
-            origin = joystick.localPosition;
+            joystickCenter.localPosition = eventData.position.ScreenToUGUI((RectTransform)joystick.transform);
+            joystickBG.localPosition = eventData.position.ScreenToUGUI((RectTransform)joystick.transform);
+            origin = joystickCenter.localPosition;
             JoystackDistance();
             dragHandler?.Invoke(normalDistance, angle);
         }
         public void OnUP(PointerEventData eventData)
         {
             isStandard = false;
-            joystick.gameObject.SetActive(false);
+            joystickCenter.gameObject.SetActive(false);
             joystickBG.gameObject.SetActive(false);
             JoystackDistance();
             normalDistance = Vector2.zero;
@@ -113,7 +113,7 @@ namespace LccHotfix
         }
         public void OnDrag(PointerEventData eventData)
         {
-            joystick.localPosition = eventData.position.ScreenToUGUI((RectTransform)gameObject.transform);
+            joystickCenter.localPosition = eventData.position.ScreenToUGUI((RectTransform)joystick.transform);
             JoystackDistance();
             dragHandler?.Invoke(normalDistance, angle);
         }
@@ -121,9 +121,9 @@ namespace LccHotfix
         public override void OnDestroy()
         {
             base.OnDestroy();
-            DragEventTrigger.GetDragEventTrigger(gameObject).Down -= OnDown;
-            DragEventTrigger.GetDragEventTrigger(gameObject).UP -= OnUP;
-            DragEventTrigger.GetDragEventTrigger(gameObject).Drag -= OnDrag;
+            DragEventTrigger.GetDragEventTrigger(joystick).Down -= OnDown;
+            DragEventTrigger.GetDragEventTrigger(joystick).UP -= OnUP;
+            DragEventTrigger.GetDragEventTrigger(joystick).Drag -= OnDrag;
         }
     }
 }

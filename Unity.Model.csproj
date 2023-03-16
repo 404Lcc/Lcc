@@ -72,6 +72,7 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Action\Action\SpellSkillAction.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Logger\Logger.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Skill\SkillExecution.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\AttributeViewComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Base\IFixedUpdate.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Status\StatusAbility.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Numeric\NumericType.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Attack\AttackAbility.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityItem\AbilityItem.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Status\StatusExecution.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Attribute\HealthPointView.cs" />
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\SkinViewComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\StatusConfigObject.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageReduceWithTargetCountComponent.cs" />
@@ -207,6 +209,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Download\DownloadManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Action\ActionWrap.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Attribute\FloatNumericView.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Condition\Component\ConditionWhenInTimeNoDamageComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\ValueTypeBinder\Vector3Binder.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Helper\RegisterCLRMethodRedirctionHelper.cs" />
@@ -283,9 +286,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\AttributeViewComponent.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Attribute\FloatNumericView.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Attribute\HealthPointView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />

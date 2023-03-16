@@ -5,8 +5,6 @@ namespace LccHotfix
 {
     public class SmoothFoolow3D : AObjectBase, IUpdate, ILateUpdate
     {
-        public GameObject gameObject => GetComponent<GameObjectComponent>().gameObject;
-
         public float distance = 3;
         public float damping = 45;
         public float limitYMin = -10;
@@ -24,8 +22,12 @@ namespace LccHotfix
         public Vector3 offset = new Vector3(0, 1.5f, 0);
 
         public Transform target;
+        public Camera camera;
         public Joystick joystick;
+
         public Transform lockTarget;
+
+
         public override void InitData(object[] datas)
         {
             distance = (float)datas[0];
@@ -36,7 +38,9 @@ namespace LccHotfix
             isNeedDamping = (bool)datas[5];
             offset = (Vector3)datas[3];
             target = (Transform)datas[4];
-            joystick = (Joystick)datas[5];
+            camera = (Camera)datas[5];
+            joystick = (Joystick)datas[6];
+
 #if UNITY_EDITOR
             speedX = 200;
             speedY = 200;
@@ -168,13 +172,13 @@ namespace LccHotfix
                 Vector3 localPosition = localRotation * new Vector3(0, 0, -distance * proportion) + target.localPosition + offset;
                 if (isNeedDamping)
                 {
-                    gameObject.transform.localRotation = Quaternion.Lerp(gameObject.transform.localRotation, localRotation, Time.deltaTime * damping);
-                    gameObject.transform.localPosition = Vector3.Lerp(gameObject.transform.localPosition, localPosition, Time.deltaTime * damping);
+                    camera.gameObject.transform.localRotation = Quaternion.Lerp(camera.gameObject.transform.localRotation, localRotation, Time.deltaTime * damping);
+                    camera.gameObject.transform.localPosition = Vector3.Lerp(camera.gameObject.transform.localPosition, localPosition, Time.deltaTime * damping);
                 }
                 else
                 {
-                    gameObject.transform.localRotation = localRotation;
-                    gameObject.transform.localPosition = localPosition;
+                    camera.gameObject.transform.localRotation = localRotation;
+                    camera.gameObject.transform.localPosition = localPosition;
                 }
             }
         }
@@ -228,7 +232,7 @@ namespace LccHotfix
         private void PreventThroughWall()
         {
             //从目标点到相机
-            Vector3 direction = (gameObject.transform.localPosition - target.localPosition).normalized;
+            Vector3 direction = (camera.gameObject.transform.localPosition - target.localPosition).normalized;
             Ray ray = new Ray(target.localPosition, direction);
             if (Physics.Raycast(ray, out RaycastHit hit, distance, LayerMask.GetMask("Wall")))
             {

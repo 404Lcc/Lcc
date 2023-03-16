@@ -4,12 +4,18 @@ namespace LccHotfix
 {
     public class CameraController : AObjectBase, IUpdate
     {
-        public GameObject gameObject => GetComponent<GameObjectComponent>().gameObject;
-
         private Vector2 _first;
         private Vector2 _second;
         private Vector3 vector;
         private bool _isNeedMove;
+
+        public Camera camera;
+        public override void InitData(object[] datas)
+        {
+            base.InitData(datas);
+
+            camera = (Camera)datas[0];
+        }
         public void Update()
         {
             if (Input.GetMouseButtonDown(0))
@@ -31,11 +37,11 @@ namespace LccHotfix
             }
             if (_isNeedMove)
             {
-                float x = gameObject.transform.position.x;
-                float y = gameObject.transform.position.y;
+                float x = camera.gameObject.transform.position.x;
+                float y = camera.gameObject.transform.position.y;
                 x -= vector.x;
                 y -= vector.y;
-                gameObject.transform.position = new Vector3(x, y, gameObject.transform.position.z);
+                camera.gameObject.transform.position = new Vector3(x, y, camera.gameObject.transform.position.z);
             }
         }
     }
