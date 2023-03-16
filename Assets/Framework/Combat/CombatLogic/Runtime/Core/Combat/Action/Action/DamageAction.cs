@@ -57,7 +57,8 @@ namespace LccModel
             if (damageSource == DamageSource.Attack)
             {
                 isCritical = (RandomUtil.RandomRate() / 100f) < Creator.GetComponent<AttributeComponent>().CriticalProbability.Value;
-                damageValue = Mathf.CeilToInt(Mathf.Max(1, Creator.GetComponent<AttributeComponent>().Attack.Value - Target.GetComponent<AttributeComponent>().Defense.Value));
+                damageValue = (int)Creator.GetComponent<AttributeComponent>().Attack.Value;
+                damageValue = Mathf.CeilToInt(Mathf.Max(1, damageValue - Target.GetComponent<AttributeComponent>().Defense.Value));
                 if (isCritical)
                 {
                     damageValue = Mathf.CeilToInt(damageValue * 1.5f);
@@ -71,6 +72,7 @@ namespace LccModel
                     isCritical = (RandomUtil.RandomRate() / 100f) < Creator.GetComponent<AttributeComponent>().CriticalProbability.Value;
                 }
                 damageValue = SourceAssignAction.abilityEffect.GetComponent<AbilityEffectDamageComponent>().GetDamageValue();
+                damageValue = Mathf.CeilToInt(Mathf.Max(1, damageValue - Target.GetComponent<AttributeComponent>().Defense.Value));
                 if (isCritical)
                 {
                     damageValue = Mathf.CeilToInt(damageValue * 1.5f);
@@ -84,6 +86,7 @@ namespace LccModel
                     isCritical = (RandomUtil.RandomRate() / 100f) < Creator.GetComponent<AttributeComponent>().CriticalProbability.Value;
                 }
                 damageValue = SourceAssignAction.abilityEffect.GetComponent<AbilityEffectDamageComponent>().GetDamageValue();
+                damageValue = Mathf.CeilToInt(Mathf.Max(1, damageValue - Target.GetComponent<AttributeComponent>().Defense.Value));
                 if (isCritical)
                 {
                     damageValue = Mathf.CeilToInt(damageValue * 1.5f);
