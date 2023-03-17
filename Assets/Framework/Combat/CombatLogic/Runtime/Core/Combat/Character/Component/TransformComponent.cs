@@ -43,6 +43,14 @@ namespace LccModel
                 SyncTransform();
             }
         }
+        public override void Awake()
+        {
+            base.Awake();
+
+            position = Vector3.zero;
+            rotation = Quaternion.identity;
+            localScale = Vector3.one;
+        }
         public void Translate(Vector3 translation)
         {
             position += translation;
