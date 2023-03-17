@@ -29,8 +29,8 @@ namespace LccHotfix
         }
         public void Update()
         {
-            half.x = Camera.main.orthographicSize * Screen.width / Screen.height;
-            half.y = Camera.main.orthographicSize;
+            half.x = camera.orthographicSize * Screen.width / Screen.height;
+            half.y = camera.orthographicSize;
         }
         public void LateUpdate()
         {

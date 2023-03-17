@@ -16,14 +16,14 @@ namespace LccHotfix
 
             await SceneLoadManager.Instance.LoadSceneAsync(SceneName.Game, AssetType.Scene);
 
+            var combat1 = CombatContext.Instance.AddCombat(1);
+            var combat2 = CombatContext.Instance.AddCombat(2, TagType.Enemy);
+
+
+
             //忽略增加main的导航数据
             //清除已经存在的导航数据，中断操作
             PanelManager.Instance.ShowPanel(PanelType.Game, new ShowPanelData(false, true, null, true, false, true));
-
-
-
-            var combat1 = CombatContext.Instance.AddCombat();
-            var combat2 = CombatContext.Instance.AddCombat();
 
 
             //释放普攻

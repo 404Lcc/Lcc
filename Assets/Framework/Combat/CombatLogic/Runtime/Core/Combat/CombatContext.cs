@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace LccModel
 {
@@ -14,9 +15,10 @@ namespace LccModel
 
             Instance = this;
         }
-        public Combat AddCombat()
+        public Combat AddCombat(long id, TagType type = TagType.Player)
         {
-            Combat combat = AddChildren<Combat>();
+            Combat combat = AddChildrenWithId<Combat>(id);
+            combat.AddComponent<TagComponent, TagType>(type);
 
             if (!combatDict.ContainsKey(combat.InstanceId))
             {
@@ -24,16 +26,16 @@ namespace LccModel
             }
             return combat;
         }
-        public void RemoveCombat(Combat combat)
+        public void RemoveCombat(long instanceId)
         {
-            if (combatDict.ContainsKey(combat.InstanceId))
+            Combat combat = GetCombatByInstanceId(instanceId);
+            if (combat != null)
             {
-                var instanceId = combat.InstanceId;
-                combatDict[combat.InstanceId].Dispose();
+                combat.Dispose();
                 combatDict.Remove(instanceId);
             }
         }
-        public Combat GetCombat(long instanceId)
+        public Combat GetCombatByInstanceId(long instanceId)
         {
             if (combatDict.TryGetValue(instanceId, out var combat))
             {
@@ -41,6 +43,30 @@ namespace LccModel
             }
             return null;
         }
+        public Combat GetCombatById(long id)
+        {
+            var aObjectBase = GetChildren<AObjectBase>(id);
+            if (aObjectBase is Combat combat)
+            {
+                return combat;
+            }
+            return null;
+        }
+        public List<Combat> GetCombatListByTag(TagType type)
+        {
+            List<Combat> list = new List<Combat>();
+            foreach (var item in combatDict.Values)
+            {
+                if (item.TagComponent.tagType == type)
+                {
+                    list.Add(item);
+                }
+            }
+            return list;
+        }
+
+
+
 
         public AbilityItem AddAbilityItem(SkillExecution skillExecution, ExecuteClipData data)
         {
@@ -52,12 +78,12 @@ namespace LccModel
             }
             return abilityItem;
         }
-        public void RemoveAbilityItem(AbilityItem abilityItem)
+        public void RemoveAbilityItem(long instanceId)
         {
-            if (abilityItemDict.ContainsKey(abilityItem.InstanceId))
+            AbilityItem abilityItem = GetAbilityItem(instanceId);
+            if (abilityItem != null)
             {
-                var instanceId = abilityItem.InstanceId;
-                abilityItemDict[abilityItem.InstanceId].Dispose();
+                abilityItem.Dispose();
                 abilityItemDict.Remove(instanceId);
             }
         }

@@ -21,16 +21,21 @@ namespace LccModel
         }
         public void RemoveCombatView(long instanceId)
         {
-            if (Children.ContainsKey(instanceId))
+            CombatView combatView = GetCombatView(instanceId);
+            if (combatView != null)
             {
-                GetChildren<CombatView>(instanceId).Dispose();
+                combatView.Dispose();
             }
         }
         public CombatView GetCombatView(long instanceId)
         {
             if (Children.ContainsKey(instanceId))
             {
-                return GetChildren<CombatView>(instanceId);
+                var aObjectBase = GetChildren<AObjectBase>(instanceId);
+                if (aObjectBase is CombatView combatView)
+                {
+                    return combatView;
+                }
             }
             return null;
         }
@@ -43,16 +48,21 @@ namespace LccModel
         }
         public void RemoveAbilityItemView(long instanceId)
         {
-            if (Children.ContainsKey(instanceId))
+            AbilityItemView abilityItemView = GetAbilityItemView(instanceId);
+            if (abilityItemView != null)
             {
-                GetChildren<AbilityItemView>(instanceId).Dispose();
+                abilityItemView.Dispose();
             }
         }
         public AbilityItemView GetAbilityItemView(long instanceId)
         {
             if (Children.ContainsKey(instanceId))
             {
-                return GetChildren<AbilityItemView>(instanceId);
+                var aObjectBase = GetChildren<AObjectBase>(instanceId);
+                if (aObjectBase is AbilityItemView abilityItemView)
+                {
+                    return abilityItemView;
+                }
             }
             return null;
         }

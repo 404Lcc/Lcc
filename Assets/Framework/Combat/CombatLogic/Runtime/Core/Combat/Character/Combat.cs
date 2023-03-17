@@ -50,6 +50,7 @@ namespace LccModel
         public AttributeComponent AttributeComponent => GetComponent<AttributeComponent>();
         public AABB2DComponent AABB2DComponent => GetComponent<AABB2DComponent>();
 
+        public TagComponent TagComponent => GetComponent<TagComponent>();
 
         public override void Awake()
         {
@@ -109,7 +110,7 @@ namespace LccModel
         public void Dead()
         {
             EventSystem.Instance.Publish(new SyncDeleteCombat(InstanceId));
-            Dispose();
+            CombatContext.Instance.RemoveCombat(InstanceId);
         }
         #region ½Ó¿Ú
 

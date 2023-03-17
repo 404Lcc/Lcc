@@ -48,12 +48,7 @@ namespace LccModel
                 }
             }
         }
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
 
-            EventSystem.Instance.Publish(new SyncDeleteAbilityItem(InstanceId));
-        }
         public void Update()
         {
             foreach (var item in CombatContext.Instance.combatDict.Values)
@@ -99,7 +94,9 @@ namespace LccModel
                 targetCounterComponent.targetCounter++;
             }
 
-            Dispose();
+            EventSystem.Instance.Publish(new SyncDeleteAbilityItem(InstanceId));
+
+            CombatContext.Instance.RemoveAbilityItem(InstanceId);
         }
 
         private void OnTriggerNewExecution(ActionEventData actionEventData)

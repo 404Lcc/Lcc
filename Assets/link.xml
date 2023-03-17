@@ -4586,6 +4586,8 @@
     <type fullname="LccModel.SpellItemComponent" preserve="all" />
     <type fullname="LccModel.SpellSkillComponent" preserve="all" />
     <type fullname="LccModel.StatusComponent" preserve="all" />
+    <type fullname="LccModel.TagType" preserve="all" />
+    <type fullname="LccModel.TagComponent" preserve="all" />
     <type fullname="LccModel.TransformComponent" preserve="all" />
     <type fullname="LccModel.CombatContext" preserve="all" />
     <type fullname="LccModel.ConditionWhenInTimeNoDamageComponent" preserve="all" />

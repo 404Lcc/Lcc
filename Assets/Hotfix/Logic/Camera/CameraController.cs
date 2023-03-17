@@ -25,8 +25,8 @@ namespace LccHotfix
             if (Input.GetMouseButton(0))
             {
                 _second = Input.mousePosition;
-                Vector3 first = Camera.main.ScreenToWorldPoint(new Vector3(_first.x, _first.y, 0));
-                Vector3 second = Camera.main.ScreenToWorldPoint(new Vector3(_second.x, _second.y, 0));
+                Vector3 first = camera.ScreenToWorldPoint(new Vector3(_first.x, _first.y, 0));
+                Vector3 second = camera.ScreenToWorldPoint(new Vector3(_second.x, _second.y, 0));
                 vector = second - first;
                 _first = _second;
                 _isNeedMove = true;
