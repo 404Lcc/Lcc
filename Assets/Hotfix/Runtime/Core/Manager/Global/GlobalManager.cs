@@ -8,7 +8,8 @@ namespace LccHotfix
         public static GlobalManager Instance { get; set; }
         public Transform Global { get; set; }
 
-
+        public Camera MainCamera { get; set; }
+        public Camera UICamera { get; set; }
 
 
         public Transform UIRoot { get; set; }
@@ -33,6 +34,9 @@ namespace LccHotfix
             Instance = this;
 
             Global = GameObject.Find("Global").transform;
+
+            MainCamera = GameObject.Find("Global/MainCamera").GetComponent<Camera>();
+            UICamera = GameObject.Find("Global/UICamera").GetComponent<Camera>();
 
             UIRoot = GameObject.Find("Global/UIRoot").transform;
             NormalRoot = GameObject.Find("Global/UIRoot/NormalRoot").transform;

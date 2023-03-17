@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using LccModel;
+using UnityEngine;
 
 namespace LccHotfix
 {
@@ -12,7 +13,7 @@ namespace LccHotfix
         public Vector3 max;
         public Vector2 half;
 
-        public Transform target;
+        public TransformComponent target;
         public Camera camera;
         public override void InitData(object[] datas)
         {
@@ -23,7 +24,7 @@ namespace LccHotfix
             min = (Vector3)datas[3];
             //边界右上角
             max = (Vector3)datas[4];
-            target = (Transform)datas[5];
+            target = (TransformComponent)datas[5];
             camera = (Camera)datas[6];
         }
         public void Update()
@@ -35,21 +36,21 @@ namespace LccHotfix
         {
             if (isFollow)
             {
-                Vector3 localPosition = camera.gameObject.transform.localPosition;
-                if (Mathf.Abs(localPosition.x - target.localPosition.x) > margin.x)
+                Vector3 position = camera.gameObject.transform.position;
+                if (Mathf.Abs(position.x - target.position.x) > margin.x)
                 {
-                    localPosition.x = Mathf.Lerp(localPosition.x, target.localPosition.x, smooth * Time.deltaTime);
+                    position.x = Mathf.Lerp(position.x, target.position.x, smooth * UnityEngine.Time.deltaTime);
                 }
-                if (Mathf.Abs(localPosition.y - target.localPosition.y) > margin.y)
+                if (Mathf.Abs(position.y - target.position.y) > margin.y)
                 {
-                    localPosition.y = Mathf.Lerp(localPosition.y, target.localPosition.y, smooth * Time.deltaTime);
+                    position.y = Mathf.Lerp(position.y, target.position.y, smooth * UnityEngine.Time.deltaTime);
                 }
-                localPosition.x = Mathf.Clamp(localPosition.x, min.x + half.x, max.x - half.x);
-                localPosition.y = Mathf.Clamp(localPosition.y, min.y + half.y, max.y - half.y);
-                camera.gameObject.transform.localPosition = localPosition;
+                position.x = Mathf.Clamp(position.x, min.x + half.x, max.x - half.x);
+                position.y = Mathf.Clamp(position.y, min.y + half.y, max.y - half.y);
+                camera.gameObject.transform.position = position;
             }
         }
-        public void ChangeTarget(Transform target)
+        public void ChangeTarget(TransformComponent target)
         {
             this.target = target;
         }

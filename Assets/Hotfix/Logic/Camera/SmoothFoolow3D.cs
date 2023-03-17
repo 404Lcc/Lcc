@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using LccModel;
+using UnityEngine;
 
 namespace LccHotfix
 {
@@ -21,11 +21,11 @@ namespace LccHotfix
         public bool isTouchRightUI;
         public Vector3 offset = new Vector3(0, 1.5f, 0);
 
-        public Transform target;
+        public TransformComponent target;
         public Camera camera;
         public Joystick joystick;
 
-        public Transform lockTarget;
+        public TransformComponent lockTarget;
 
 
         public override void InitData(object[] datas)
@@ -37,7 +37,7 @@ namespace LccHotfix
             proportion = (float)datas[4];
             isNeedDamping = (bool)datas[5];
             offset = (Vector3)datas[3];
-            target = (Transform)datas[4];
+            target = (TransformComponent)datas[4];
             camera = (Camera)datas[5];
             joystick = (Joystick)datas[6];
 
@@ -161,7 +161,7 @@ namespace LccHotfix
                 Quaternion localRotation;
                 if (lockTarget != null)
                 {
-                    localRotation = Quaternion.LookRotation((lockTarget.localPosition - target.localPosition).normalized);
+                    localRotation = Quaternion.LookRotation((lockTarget.position - target.position).normalized);
                     angleY = localRotation.eulerAngles.x;
                     angleX = localRotation.eulerAngles.y;
                 }
@@ -169,26 +169,26 @@ namespace LccHotfix
                 {
                     localRotation = Quaternion.Euler(angleY, angleX, 0);
                 }
-                Vector3 localPosition = localRotation * new Vector3(0, 0, -distance * proportion) + target.localPosition + offset;
+                Vector3 position = localRotation * new Vector3(0, 0, -distance * proportion) + target.position + offset;
                 if (isNeedDamping)
                 {
-                    camera.gameObject.transform.localRotation = Quaternion.Lerp(camera.gameObject.transform.localRotation, localRotation, Time.deltaTime * damping);
-                    camera.gameObject.transform.localPosition = Vector3.Lerp(camera.gameObject.transform.localPosition, localPosition, Time.deltaTime * damping);
+                    camera.gameObject.transform.localRotation = Quaternion.Lerp(camera.gameObject.transform.localRotation, localRotation, UnityEngine.Time.deltaTime * damping);
+                    camera.gameObject.transform.position = Vector3.Lerp(camera.gameObject.transform.position, position, UnityEngine.Time.deltaTime * damping);
                 }
                 else
                 {
                     camera.gameObject.transform.localRotation = localRotation;
-                    camera.gameObject.transform.localPosition = localPosition;
+                    camera.gameObject.transform.position = position;
                 }
             }
         }
 
 
-        public void SetTarget(Transform target)
+        public void SetTarget(TransformComponent target)
         {
             this.target = target;
         }
-        public void SetLockTarget(Transform lockTarget)
+        public void SetLockTarget(TransformComponent lockTarget)
         {
             this.lockTarget = lockTarget;
         }
@@ -232,15 +232,15 @@ namespace LccHotfix
         private void PreventThroughWall()
         {
             //从目标点到相机
-            Vector3 direction = (camera.gameObject.transform.localPosition - target.localPosition).normalized;
-            Ray ray = new Ray(target.localPosition, direction);
+            Vector3 direction = (camera.gameObject.transform.position - target.position).normalized;
+            Ray ray = new Ray(target.position, direction);
             if (Physics.Raycast(ray, out RaycastHit hit, distance, LayerMask.GetMask("Wall")))
             {
                 if (hit.collider != null)
                 {
                     if (hit.collider.tag == "Wall")
                     {
-                        proportion = Mathf.Min(1, Vector3.Distance(hit.point, target.localPosition) / distance);
+                        proportion = Mathf.Min(1, Vector3.Distance(hit.point, target.position) / distance);
                     }
                     else
                     {
