@@ -20,6 +20,24 @@ namespace LccHotfix
         public Queue<long> lateUpdate = new Queue<long>();
         public Queue<long> lateUpdateCopy = new Queue<long>();
 
+        private List<Type> GetAttributeBase(Dictionary<string, Type> typeDict)
+        {
+            List<Type> list = new List<Type>();
+            foreach (Type type in typeDict.Values)
+            {
+                if (type.IsAbstract)
+                {
+                    continue;
+                }
+
+                if (type.IsSubclassOf(typeof(AttributeBase)))
+                {
+                    list.Add(type);
+                }
+            }
+
+            return list;
+        }
         public void InitType(Dictionary<string, Type> dict)
         {
             allTypeDict.Clear();
@@ -28,21 +46,26 @@ namespace LccHotfix
             foreach ((string fullName, Type type) in dict)
             {
                 allTypeDict[fullName] = type;
+            }
+            foreach (Type attributeBase in GetAttributeBase(allTypeDict))
+            {
+                foreach (Type type in allTypeDict.Values)
+                {
+                    if (type.IsAbstract)
+                    {
+                        continue;
+                    }
 
-                if (type.IsAbstract)
-                {
-                    continue;
-                }
-
-                object[] objects = type.GetCustomAttributes(typeof(AttributeBase), true);
-                if (objects.Length == 0)
-                {
-                    continue;
-                }
-                foreach (object item in objects)
-                {
-                    Type attributeType = item.GetType();
-                    attributeTypeDict.Add(attributeType, type);
+                    object[] objects = type.GetCustomAttributes(attributeBase, false);
+                    if (objects.Length == 0)
+                    {
+                        continue;
+                    }
+                    foreach (object item in objects)
+                    {
+                        Type attributeType = item.GetType();
+                        attributeTypeDict.Add(attributeType, type);
+                    }
                 }
             }
 

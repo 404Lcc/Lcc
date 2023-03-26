@@ -30,7 +30,8 @@ namespace LccModel
     {
         public SkillAbility skillAbility;
         public SkillExecution skillExecution;
-        public List<Combat> inputSkillTargetList = new List<Combat>();
+
+
         public Combat inputTarget;
         public Vector3 inputPoint;
         public float inputDirection;
@@ -56,12 +57,10 @@ namespace LccModel
         {
             PreProcess();
             skillExecution = (SkillExecution)skillAbility.CreateExecution();
-            if (inputSkillTargetList.Count > 0)
-            {
-                skillExecution.inputSkillTargetList.AddRange(inputSkillTargetList);
-            }
+
+
             skillExecution.actionOccupy = actionOccupy;
-            skillExecution.inputTarget = inputTarget;
+            skillExecution.targetList.Add(inputTarget);
             skillExecution.inputPoint = inputPoint;
             skillExecution.inputDirection = inputDirection;
             skillExecution.BeginExecute();

@@ -6,15 +6,21 @@
         {
             SkillExecution parentExecution = Parent.GetParent<SkillExecution>();
 
-            if (parentExecution.inputTarget != null)
+            if (parentExecution.targetList.Count > 0)
             {
                 if (executionEffect.executeClipData.ActionEventData.EffectApply == EffectApplyType.AllEffects)
                 {
-                    parentExecution.Ability.GetComponent<AbilityEffectComponent>().TryAssignAllEffectToTarget(parentExecution.inputTarget, parentExecution);
+                    foreach (var item in parentExecution.targetList)
+                    {
+                        parentExecution.Ability.GetComponent<AbilityEffectComponent>().TryAssignAllEffectToTarget(item, parentExecution);
+                    }
                 }
                 else
                 {
-                    parentExecution.Ability.GetComponent<AbilityEffectComponent>().TryAssignEffectToTargetByIndex(parentExecution.inputTarget, (int)executionEffect.executeClipData.ActionEventData.EffectApply - 1);
+                    foreach (var item in parentExecution.targetList)
+                    {
+                        parentExecution.Ability.GetComponent<AbilityEffectComponent>().TryAssignEffectToTargetByIndex(item, (int)executionEffect.executeClipData.ActionEventData.EffectApply - 1);
+                    }
                 }
             }
         }

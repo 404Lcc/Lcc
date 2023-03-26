@@ -14,8 +14,9 @@ namespace LccModel
         public SkillAbility SkillAbility => (SkillAbility)Ability;
 
         public ExecutionConfigObject executionConfigObject;
-        public List<Combat> inputSkillTargetList = new List<Combat>();
-        public Combat inputTarget;
+
+        public List<Combat> targetList = new List<Combat>();
+
         public Vector3 inputPoint;
         public float inputDirection;
         public long originTime;
@@ -61,12 +62,13 @@ namespace LccModel
 
         public void EndExecute()
         {
+            targetList.Clear();
+
             GetParent<Combat>().spellingSkillExecution = null;
             if (SkillAbility != null)
             {
                 SkillAbility.spelling = false;
             }
-            inputSkillTargetList.Clear();
             Dispose();
 
         }
@@ -102,7 +104,7 @@ namespace LccModel
         {
             abilityItem.TransformComponent.position = Owner.TransformComponent.position;
             ExecuteClipData clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().executeClipData;
-            abilityItem.AddComponent<AbilityItemMoveWithDotweenComponent>().DoMoveToWithTime(inputTarget.TransformComponent, clipData.Duration);
+            abilityItem.AddComponent<AbilityItemMoveWithDotweenComponent>().DoMoveToWithTime(targetList[0].TransformComponent, clipData.Duration);
         }
 
         private void ForwardFlyItem(AbilityItem abilityItem)

@@ -6,6 +6,16 @@ namespace LccModel
     {
         public Combat Combat => GetParent<Combat>();
 
+        public void Spell(SkillAbility spellSkill)
+        {
+            if (Combat.spellingSkillExecution != null) return;
+            if (Combat.spellSkillActionAbility.TryMakeAction(out var spellAction))
+            {
+                spellAction.skillAbility = spellSkill;
+                spellAction.SpellSkill();
+            }
+        }
+
         public void SpellWithTarget(SkillAbility spellSkill, Combat target)
         {
             if (Combat.spellingSkillExecution != null) return;
@@ -14,7 +24,6 @@ namespace LccModel
             {
                 spellAction.skillAbility = spellSkill;
                 spellAction.inputTarget = target;
-                spellAction.inputPoint = target.TransformComponent.position;
                 spellAction.inputDirection = spellSkill.Owner.TransformComponent.rotation.eulerAngles.y;
                 spellAction.SpellSkill();
             }

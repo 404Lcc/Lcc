@@ -16,6 +16,7 @@ namespace LccModel
                     ((Action)act)();
                 });
             });
+            appdomain.DelegateManager.RegisterMethodDelegate<UnityEngine.EventSystems.PointerEventData>();
         }
     }
 }

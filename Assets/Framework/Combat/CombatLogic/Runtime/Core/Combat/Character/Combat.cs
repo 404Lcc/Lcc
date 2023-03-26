@@ -9,12 +9,7 @@ namespace LccModel
         public HealthPoint currentHealth;
 
         public ActionControlType actionControlType;//行为禁制
-        #region 自身能力
-        public AttackAbility attackAbility;//普攻能力
 
-
-
-        #endregion
 
 
 
@@ -23,8 +18,7 @@ namespace LccModel
         public EffectAssignActionAbility effectAssignActionAbility;//效果赋给行动能力
         public AddStatusActionAbility addStatusActionAbility;//施加状态行动能力
 
-        public SpellAttackActionAbility spellAttackActionAbility;//施法普攻行动能力
-        public AttackBlockActionAbility attackBlockActionAbility;//普攻格挡能力
+
         public SpellSkillActionAbility spellSkillActionAbility;//施法技能行动能力
 
         public SpellItemActionAbility spellItemActionAbility;//使用物品行动能力
@@ -40,7 +34,7 @@ namespace LccModel
 
         #endregion
 
-        public AttackExecution spellingAttackExecution; //执行中的攻击执行体
+
         public SkillExecution spellingSkillExecution; //执行中的技能执行体
 
 
@@ -70,7 +64,7 @@ namespace LccModel
 
             AddComponent<StatusComponent>();
 
-            AddComponent<SpellAttackComponent>();
+
             AddComponent<SpellSkillComponent>();
             AddComponent<SpellItemComponent>();
 
@@ -78,14 +72,10 @@ namespace LccModel
 
             currentHealth = AddChildren<HealthPoint>();
 
-
-            attackAbility = AttachAttack();
-
             effectAssignActionAbility = AttachAction<EffectAssignActionAbility>();
             addStatusActionAbility = AttachAction<AddStatusActionAbility>();
 
-            spellAttackActionAbility = AttachAction<SpellAttackActionAbility>();
-            attackBlockActionAbility = AttachAction<AttackBlockActionAbility>();
+
             spellSkillActionAbility = AttachAction<SpellSkillActionAbility>();
 
             spellItemActionAbility = AttachAction<SpellItemActionAbility>();
@@ -151,13 +141,7 @@ namespace LccModel
         }
         #endregion
 
-        #region 普攻
-        public AttackAbility AttachAttack()
-        {
-            var attack = AttachAbility<AttackAbility>(null);
-            return attack;
-        }
-        #endregion
+
 
         #region 状态（buff）
         public StatusAbility AttachStatus(object configObject)

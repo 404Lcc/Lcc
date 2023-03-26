@@ -26,9 +26,6 @@ namespace LccHotfix
             PanelManager.Instance.ShowPanel(PanelType.Game, new ShowPanelData(false, true, null, true, false, true));
 
 
-            // Õ∑≈∆’π•
-            combat1.GetComponent<SpellAttackComponent>().SpellAttackWithTarget(combat2);
-
 
 
 

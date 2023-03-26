@@ -28,10 +28,12 @@ namespace LccModel
     [LabelText("事件类型")]
     public enum FireEventType
     {
+        [LabelText("触发筛选敌人")]
+        FiltrationTarget = 0,
         [LabelText("触发赋给效果")]
-        AssignEffect = 0,
+        AssignEffect = 1,
         [LabelText("触发新执行体")]
-        TriggerNewExecution = 1,
+        TriggerNewExecution = 2,
     }
 
     [LabelText("碰撞体执行类型")]

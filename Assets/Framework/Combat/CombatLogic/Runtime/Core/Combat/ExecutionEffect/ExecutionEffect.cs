@@ -16,6 +16,11 @@ namespace LccModel
             ExecuteClipType clipType = executeClipData.ExecuteClipType;
             if (clipType == ExecuteClipType.ActionEvent)
             {
+                if (executeClipData.ActionEventData.ActionEventType == FireEventType.FiltrationTarget)
+                {
+                    AddComponent<ExecutionEffectFiltrationTargetComponent>();
+                }
+
                 if (executeClipData.ActionEventData.ActionEventType == FireEventType.AssignEffect)
                 {
                     AddComponent<ExecutionEffectAssignToTargetComponent>();
@@ -70,6 +75,11 @@ namespace LccModel
             ExecuteClipType clipType = executeClipData.ExecuteClipType;
             if (clipType == ExecuteClipType.ActionEvent)
             {
+                if (executeClipData.ActionEventData.ActionEventType == FireEventType.FiltrationTarget)
+                {
+                    GetComponent<ExecutionEffectFiltrationTargetComponent>().OnTriggerExecutionEffect(this);
+                }
+
                 if (executeClipData.ActionEventData.ActionEventType == FireEventType.AssignEffect)
                 {
                     GetComponent<ExecutionEffectAssignToTargetComponent>().OnTriggerExecutionEffect(this);
@@ -103,6 +113,9 @@ namespace LccModel
             ExecuteClipType clipType = executeClipData.ExecuteClipType;
             if (clipType == ExecuteClipType.ActionEvent)
             {
+                if (executeClipData.ActionEventData.ActionEventType == FireEventType.FiltrationTarget)
+                {
+                }
                 if (executeClipData.ActionEventData.ActionEventType == FireEventType.AssignEffect)
                 {
 

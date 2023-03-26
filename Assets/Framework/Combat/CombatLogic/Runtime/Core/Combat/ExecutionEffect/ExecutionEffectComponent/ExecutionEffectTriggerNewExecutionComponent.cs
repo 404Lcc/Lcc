@@ -18,8 +18,8 @@
 
             SkillExecution execution = parentExecution.Owner.AddChildren<SkillExecution, SkillAbility>(parentExecution.SkillAbility);
             execution.executionConfigObject = executionObject;
-            execution.inputTarget = parentExecution.inputTarget;
             execution.inputPoint = parentExecution.inputPoint;
+            execution.inputDirection = parentExecution.inputDirection;
             execution.LoadExecutionEffect();
             execution.BeginExecute();
         }

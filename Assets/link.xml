@@ -4528,7 +4528,6 @@
     <type fullname="LccModel.AbilityEffectAddStatusComponent" preserve="all" />
     <type fullname="LccModel.AbilityEffectAttributeModifyComponent" preserve="all" />
     <type fullname="LccModel.AbilityEffectCureComponent" preserve="all" />
-    <type fullname="LccModel.AbilityEffectCustomComponent" preserve="all" />
     <type fullname="LccModel.AbilityEffectDamageBloodSuckComponent" preserve="all" />
     <type fullname="LccModel.AbilityEffectDamageComponent" preserve="all" />
     <type fullname="LccModel.AbilityEffectDamageReduceWithTargetCountComponent" preserve="all" />
@@ -4546,8 +4545,6 @@
     <type fullname="LccModel.AbilityItemTargetCounterComponent" preserve="all" />
     <type fullname="LccModel.AddStatusActionAbility" preserve="all" />
     <type fullname="LccModel.AddStatusAction" preserve="all" />
-    <type fullname="LccModel.AttackBlockActionAbility" preserve="all" />
-    <type fullname="LccModel.AttackBlockAction" preserve="all" />
     <type fullname="LccModel.CureActionAbility" preserve="all" />
     <type fullname="LccModel.CureAction" preserve="all" />
     <type fullname="LccModel.DamageSource" preserve="all" />
@@ -4555,19 +4552,14 @@
     <type fullname="LccModel.DamageAction" preserve="all" />
     <type fullname="LccModel.EffectAssignActionAbility" preserve="all" />
     <type fullname="LccModel.EffectAssignAction" preserve="all" />
-    <type fullname="LccModel.SpellAttackActionAbility" preserve="all" />
-    <type fullname="LccModel.SpellAttackAction" preserve="all" />
     <type fullname="LccModel.SpellItemActionAbility" preserve="all" />
     <type fullname="LccModel.SpellItemAction" preserve="all" />
     <type fullname="LccModel.SpellSkillActionAbility" preserve="all" />
     <type fullname="LccModel.SpellSkillAction" preserve="all" />
-    <type fullname="LccModel.AbilityProbabilityTriggerComponent" preserve="all" />
     <type fullname="LccModel.DamageBloodSuckComponent" preserve="all" />
     <type fullname="LccModel.ActionComponent" preserve="all" />
     <type fullname="LccModel.IActionAbility" preserve="all" />
     <type fullname="LccModel.IActionExecution" preserve="all" />
-    <type fullname="LccModel.AttackAbility" preserve="all" />
-    <type fullname="LccModel.AttackExecution" preserve="all" />
     <type fullname="LccModel.FloatNumeric" preserve="all" />
     <type fullname="LccModel.HealthPoint" preserve="all" />
     <type fullname="LccModel.Combat" preserve="all" />
@@ -4582,7 +4574,6 @@
     <type fullname="LccModel.JoystickComponent" preserve="all" />
     <type fullname="LccModel.MotionComponent" preserve="all" />
     <type fullname="LccModel.SkillComponent" preserve="all" />
-    <type fullname="LccModel.SpellAttackComponent" preserve="all" />
     <type fullname="LccModel.SpellItemComponent" preserve="all" />
     <type fullname="LccModel.SpellSkillComponent" preserve="all" />
     <type fullname="LccModel.StatusComponent" preserve="all" />
@@ -4638,6 +4629,7 @@
     <type fullname="LccModel.ExecutionEffect" preserve="all" />
     <type fullname="LccModel.ExecutionEffectAnimationComponent" preserve="all" />
     <type fullname="LccModel.ExecutionEffectAssignToTargetComponent" preserve="all" />
+    <type fullname="LccModel.ExecutionEffectFiltrationTargetComponent" preserve="all" />
     <type fullname="LccModel.ExecutionEffectParticleEffectComponent" preserve="all" />
     <type fullname="LccModel.ExecutionEffectSpawnCollisionComponent" preserve="all" />
     <type fullname="LccModel.ExecutionEffectTriggerNewExecutionComponent" preserve="all" />
@@ -4820,7 +4812,7 @@
     <type fullname="LccModel.ItemConfigObject+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.SkillConfigObject+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.StatusConfigObject+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.SkillExecution+&lt;&gt;c__DisplayClass22_0" preserve="all" />
+    <type fullname="LccModel.SkillExecution+&lt;&gt;c__DisplayClass21_0" preserve="all" />
     <type fullname="LccModel.SyncCreateCombatEventHandler+&lt;Run&gt;d__0" preserve="all" />
     <type fullname="LccModel.SyncDeleteCombatEventHandler+&lt;Run&gt;d__0" preserve="all" />
     <type fullname="LccModel.SyncCreateAbilityItemEventHandler+&lt;Run&gt;d__0" preserve="all" />

@@ -57,7 +57,7 @@ namespace LccModel
             }
             if (effect is CustomEffect)
             {
-                AddComponent<AbilityEffectCustomComponent>();
+
             }
             if (effect is DamageBloodSuckEffect)
             {
