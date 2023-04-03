@@ -14,9 +14,8 @@ namespace LccModel
         }
         public CombatView AddCombatView(long instanceId)
         {
-            GameObject gameObject = AssetManager.Instance.InstantiateAsset("1", AssetType.Prefab, AssetType.Character);
             CombatView combatView = AddChildrenWithId<CombatView>(instanceId);
-            combatView.AddComponent<GameObjectComponent, GameObject>(gameObject);
+            combatView.AddComponent<GameObjectComponent, GameObject>(new GameObject(instanceId.ToString()));
             return combatView;
         }
         public void RemoveCombatView(long instanceId)
