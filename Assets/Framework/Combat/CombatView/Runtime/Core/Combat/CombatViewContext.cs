@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace LccModel
 {
@@ -15,8 +14,9 @@ namespace LccModel
         }
         public CombatView AddCombatView(long instanceId)
         {
+            GameObject gameObject = AssetManager.Instance.InstantiateAsset("1", AssetType.Prefab, AssetType.Character);
             CombatView combatView = AddChildrenWithId<CombatView>(instanceId);
-            combatView.AddComponent<GameObjectComponent, GameObject>(new GameObject(instanceId.ToString()));
+            combatView.AddComponent<GameObjectComponent, GameObject>(gameObject);
             return combatView;
         }
         public void RemoveCombatView(long instanceId)

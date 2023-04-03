@@ -8,13 +8,26 @@ namespace LccModel
     [CreateAssetMenu(fileName = "Execution", menuName = "¼¼ÄÜ|×´Ì¬/Execution")]
     public class ExecutionConfigObject : ScriptableObject
     {
-        public string Id;
-        public float TotalTime;
+        public int Id;
         public ExecutionTargetInputType TargetInputType;
 
         [Space(10)]
         [ListDrawerSettings(DraggableItems = false, ShowItemCount = false, CustomAddFunction = "AddExecuteClipData")]
         public List<ExecuteClipData> ExecuteClipDataList = new List<ExecuteClipData>();
+
+        public float TotalTime
+        {
+            get
+            {
+                float temp = 0;
+                foreach (var item in ExecuteClipDataList)
+                {
+                    temp += item.Duration;
+                }
+                return temp;
+            }
+        }
+
         private void AddExecuteClipData()
         {
             var obj = CreateInstance<ExecuteClipData>();

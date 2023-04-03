@@ -281,6 +281,17 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\ItemComponent.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\FiltrationTarget\FiltrationTarget.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\IdleState.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\WalkState.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\ExecutionComponent.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AFSMState.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AttackState.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AIComponet.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\ReturnState.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\ChaseState.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\FSMStateType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />

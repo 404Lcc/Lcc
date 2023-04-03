@@ -101,12 +101,14 @@ namespace LccModel
 
         private void OnTriggerNewExecution(ActionEventData actionEventData)
         {
-            ExecutionConfigObject executionObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handler, actionEventData.NewExecution, AssetSuffix.Asset, AssetType.Execution);
+            var sourceExecution = abilityExecution as SkillExecution;
+            ExecutionConfigObject executionObject = sourceExecution.Owner.AttachExecution(actionEventData.NewExecutionId);
             if (executionObject == null)
             {
                 return;
             }
-            var sourceExecution = abilityExecution as SkillExecution;
+
+
             var execution = sourceExecution.Owner.AddChildren<SkillExecution, SkillAbility>(sourceExecution.SkillAbility);
             execution.executionConfigObject = executionObject;
             execution.inputPoint = TransformComponent.position;

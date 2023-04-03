@@ -2,10 +2,7 @@
 {
     public class ExecutionEffectSpawnCollisionComponent : Component
     {
-        public CollisionExecuteData collisionExecuteData;
-
-
-
+        public Combat Owner => Parent.GetParent<SkillExecution>().Owner;
         public void OnTriggerExecutionEffect(ExecutionEffect executionEffect)
         {
             Parent.GetParent<SkillExecution>().SpawnCollisionItem(executionEffect.executeClipData);

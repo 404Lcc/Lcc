@@ -8,12 +8,12 @@
 
         public override void Awake()
         {
-            Owner.GetComponent<StatusComponent>().OnStatusesChanged(OwnerAbility);
+            Owner.OnStatusesChanged(OwnerAbility);
         }
 
         public override void OnDestroy()
         {
-            Owner.GetComponent<StatusComponent>().OnStatusesChanged(OwnerAbility);
+            Owner.OnStatusesChanged(OwnerAbility);
         }
     }
 }

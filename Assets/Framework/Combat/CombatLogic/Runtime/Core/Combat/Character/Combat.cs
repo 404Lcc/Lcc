@@ -63,7 +63,9 @@ namespace LccModel
             AddComponent<MotionComponent>();
 
             AddComponent<StatusComponent>();
-
+            AddComponent<SkillComponent>();
+            AddComponent<ExecutionComponent>();
+            AddComponent<ItemComponent>();
 
             AddComponent<SpellSkillComponent>();
             AddComponent<SpellItemComponent>();
@@ -144,9 +146,13 @@ namespace LccModel
 
 
         #region 状态（buff）
-        public StatusAbility AttachStatus(object configObject)
+        public StatusAbility AttachStatus(int statusId)
         {
-            return GetComponent<StatusComponent>().AttachStatus(configObject);
+            return GetComponent<StatusComponent>().AttachStatus(statusId);
+        }
+        public StatusAbility GetStatus(int statusId, int index = 0)
+        {
+            return GetComponent<StatusComponent>().GetStatus(statusId, index);
         }
 
         public void OnStatusRemove(StatusAbility statusAbility)
@@ -155,28 +161,46 @@ namespace LccModel
         }
         public bool HasStatus(int statusId)
         {
-            return GetComponent<StatusComponent>().statusDict.ContainsKey(statusId);
+            return GetComponent<StatusComponent>().HasStatus(statusId);
         }
 
-        public StatusAbility GetStatus(int statusId)
+        public void OnStatusesChanged(StatusAbility statusAbility)
         {
-            return GetComponent<StatusComponent>().statusDict[statusId][0];
+            GetComponent<StatusComponent>().OnStatusesChanged(statusAbility);
         }
+        
         #endregion
 
         #region 技能
-        public SkillAbility AttachSkill(object configObject)
+        public SkillAbility AttachSkill(int skillId)
         {
-            var skill = AttachAbility<SkillAbility>(configObject);
-            return skill;
+            return GetComponent<SkillComponent>().AttachSkill(skillId);
+        }
+        public SkillAbility GetSkill(int skillId)
+        {
+            return GetComponent<SkillComponent>().GetSkill(skillId);
+        }
+        #endregion
+
+        #region 执行体
+        public ExecutionConfigObject AttachExecution(int executionId)
+        {
+            return GetComponent<ExecutionComponent>().AttachExecution(executionId);
+        }
+        public ExecutionConfigObject GetExecution(int executionId)
+        {
+            return GetComponent<ExecutionComponent>().GetExecution(executionId);
         }
         #endregion
 
         #region Item
-        public ItemAbility AttachItem(object configObject)
+        public ItemAbility AttachItem(int itemId)
         {
-            var item = AttachAbility<ItemAbility>(configObject);
-            return item;
+            return GetComponent<ItemComponent>().AttachItem(itemId);
+        }
+        public ItemAbility GetItem(int itemId)
+        {
+            return GetComponent<ItemComponent>().GetItem(itemId);
         }
         #endregion
 

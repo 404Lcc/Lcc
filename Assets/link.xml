@@ -4566,11 +4566,21 @@
     <type fullname="LccModel.ActionPointType" preserve="all" />
     <type fullname="LccModel.ActionPoint" preserve="all" />
     <type fullname="LccModel.ActionPointComponent" preserve="all" />
+    <type fullname="LccModel.AFSMState" preserve="all" />
+    <type fullname="LccModel.AIComponent" preserve="all" />
+    <type fullname="LccModel.AttackState" preserve="all" />
+    <type fullname="LccModel.ChaseState" preserve="all" />
+    <type fullname="LccModel.FSMStateType" preserve="all" />
+    <type fullname="LccModel.IdleState" preserve="all" />
+    <type fullname="LccModel.ReturnState" preserve="all" />
+    <type fullname="LccModel.WalkState" preserve="all" />
     <type fullname="LccModel.AnimationType" preserve="all" />
     <type fullname="LccModel.AnimationComponent" preserve="all" />
     <type fullname="LccModel.AttributeType" preserve="all" />
     <type fullname="LccModel.AttributeComponent" preserve="all" />
     <type fullname="LccModel.ConditionComponent" preserve="all" />
+    <type fullname="LccModel.ExecutionComponent" preserve="all" />
+    <type fullname="LccModel.ItemComponent" preserve="all" />
     <type fullname="LccModel.JoystickComponent" preserve="all" />
     <type fullname="LccModel.MotionComponent" preserve="all" />
     <type fullname="LccModel.SkillComponent" preserve="all" />
@@ -4634,6 +4644,7 @@
     <type fullname="LccModel.ExecutionEffectSpawnCollisionComponent" preserve="all" />
     <type fullname="LccModel.ExecutionEffectTriggerNewExecutionComponent" preserve="all" />
     <type fullname="LccModel.ExecutionEffectTimeTriggerComponent" preserve="all" />
+    <type fullname="LccModel.FiltrationTarget" preserve="all" />
     <type fullname="LccModel.ItemAbility" preserve="all" />
     <type fullname="LccModel.SkillAbility" preserve="all" />
     <type fullname="LccModel.SkillExecution" preserve="all" />

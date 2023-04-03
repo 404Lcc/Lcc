@@ -57,7 +57,7 @@ namespace LccModel
             {
                 foreach (var childStatusData in statusConfig.StatusList)
                 {
-                    var status = Owner.AttachStatus(childStatusData.StatusConfigObject);
+                    var status = Owner.AttachStatus(childStatusData.StatusConfigObject.Id);
                     status.Creator = Creator;
                     status.isChildStatus = true;
                     status.childStatusData = childStatusData;

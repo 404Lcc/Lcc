@@ -155,11 +155,24 @@ namespace LccModel
     public class ActionEventData
     {
         public FireEventType ActionEventType;
+
+
         [ShowIf("ActionEventType", FireEventType.AssignEffect)]
         public EffectApplyType EffectApply;
+
+
         [ShowIf("ActionEventType", FireEventType.TriggerNewExecution)]
         [LabelText("新执行体")]
-        public string NewExecution;
+        public int NewExecutionId;
+
+
+        [ShowIf("ActionEventType", FireEventType.FiltrationTarget)]
+        [LabelText("帅选目标距离")]
+        public float Distance;
+
+        [ShowIf("ActionEventType", FireEventType.FiltrationTarget)]
+        [LabelText("筛选目标类型")]
+        public TagType TagType;
     }
     [Serializable]
     public class CollisionExecuteData
@@ -204,7 +217,6 @@ namespace LccModel
 
     public class ExecuteClipData : ScriptableObject
     {
-        public float TotalTime { get; set; }
         public float StartTime;
         public float EndTime;
 
@@ -238,7 +250,7 @@ namespace LccModel
         [ShowIf("ExecuteClipType", ExecuteClipType.ParticleEffect)]
         public ParticleEffectData ParticleEffectData;
 
-        public float Duration { get => (EndTime - StartTime); }
+        public float Duration => EndTime - StartTime;
 
         public ExecuteClipData GetClipTime()
         {

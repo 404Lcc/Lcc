@@ -22,7 +22,7 @@ namespace LccModel
             this.normalDistance = normalDistance;
             if (normalDistance != Vector2.zero)
             {
-                AnimationComponent.PlayAnimation(AnimationType.Run);
+                AnimationComponent.PlayAnimation(AnimationType.Walk);
             }
             else
             {

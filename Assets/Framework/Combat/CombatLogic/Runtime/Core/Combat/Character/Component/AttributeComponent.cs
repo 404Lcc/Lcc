@@ -55,7 +55,7 @@ namespace LccModel
 
             AddNumeric(AttributeType.HealthPointMax, 1000);
             AddNumeric(AttributeType.HealthPoint, 1000);
-            AddNumeric(AttributeType.MoveSpeed, 1);
+            AddNumeric(AttributeType.MoveSpeed, 3);
             AddNumeric(AttributeType.Attack, 40);
             AddNumeric(AttributeType.Defense, 30);
             AddNumeric(AttributeType.CriticalProbability, 0.5f);

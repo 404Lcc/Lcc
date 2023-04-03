@@ -23,7 +23,7 @@ namespace LccModel
             skillConfigObject = p1 as SkillConfigObject;
             AddComponent<AbilityEffectComponent, List<Effect>>(skillConfigObject.EffectList);
 
-            executionConfigObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handler, $"Execution_{skillConfigObject.Id}", AssetSuffix.Asset, AssetType.Execution);
+            executionConfigObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handler, $"Execution_{skillConfigObject.Id}", AssetSuffix.Asset, AssetType.SkillConfig, AssetType.Execution);
 
         }
 
@@ -39,7 +39,7 @@ namespace LccModel
             {
                 foreach (var item in skillConfigObject.StatusList)
                 {
-                    var status = Owner.AttachStatus(item.StatusConfigObject);
+                    var status = Owner.AttachStatus(item.StatusConfigObject.Id);
                     status.Creator = Owner;
                     status.isChildStatus = true;
                     status.childStatusData = item;

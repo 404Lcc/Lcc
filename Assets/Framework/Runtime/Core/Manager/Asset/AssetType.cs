@@ -13,10 +13,16 @@
         public const string Prefab = "Prefab";
         public const string Scene = "Scene";
         public const string Tool = "Tool";
-        public const string Execution = "Execution";//战斗执行体
+        public const string SkillConfig = "SkillConfig";
         //子文件夹
         public const string Panel = "Panel";
+
+        public const string Execution = "Execution";
+        public const string Item = "Item";
+        public const string Skill = "Skill";
+        public const string Status = "Status";
+
+        public const string Character = "Character";
         public const string Effect = "Effect";
-        
     }
 }

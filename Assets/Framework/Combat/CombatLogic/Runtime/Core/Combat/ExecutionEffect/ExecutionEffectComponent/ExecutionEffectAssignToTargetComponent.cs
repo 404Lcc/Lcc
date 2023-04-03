@@ -2,6 +2,7 @@
 {
     public class ExecutionEffectAssignToTargetComponent : Component
     {
+        public Combat Owner => Parent.GetParent<SkillExecution>().Owner;
         public void OnTriggerExecutionEffect(ExecutionEffect executionEffect)
         {
             SkillExecution parentExecution = Parent.GetParent<SkillExecution>();

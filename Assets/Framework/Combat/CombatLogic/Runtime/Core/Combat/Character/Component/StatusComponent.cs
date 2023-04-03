@@ -11,9 +11,15 @@ namespace LccModel
         public Dictionary<int, List<StatusAbility>> statusDict = new Dictionary<int, List<StatusAbility>>();
 
 
-        public StatusAbility AttachStatus(object configObject)
+        public StatusAbility AttachStatus(int statusId)
         {
-            var status = Combat.AttachAbility<StatusAbility>(configObject);
+            StatusConfigObject statusConfigObject = AssetManager.Instance.LoadAsset<StatusConfigObject>(out var handler, $"Status_{statusId}", AssetSuffix.Asset, AssetType.SkillConfig, AssetType.Status);
+            if (statusConfigObject == null)
+            {
+                return null;
+            }
+
+            var status = Combat.AttachAbility<StatusAbility>(statusConfigObject);
             if (!statusDict.ContainsKey(status.statusConfig.Id))
             {
                 statusDict.Add(status.statusConfig.Id, new List<StatusAbility>());
@@ -21,6 +27,15 @@ namespace LccModel
             statusDict[status.statusConfig.Id].Add(status);
             statusList.Add(status);
             return status;
+        }
+
+        public StatusAbility GetStatus(int statusId, int index = 0)
+        {
+            if (HasStatus(statusId))
+            {
+                return statusDict[statusId][index];
+            }
+            return null;
         }
 
         public void OnStatusRemove(StatusAbility statusAbility)
@@ -32,6 +47,14 @@ namespace LccModel
             }
             statusList.Remove(statusAbility);
         }
+
+        public bool HasStatus(int statusId)
+        {
+            return statusDict.ContainsKey(statusId);
+        }
+
+
+
 
         public void OnStatusesChanged(StatusAbility statusAbility)
         {

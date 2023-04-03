@@ -2,14 +2,10 @@
 {
     public class ExecutionEffectTriggerNewExecutionComponent : Component
     {
-        public ActionEventData actionEventData;
-
-
-
-
+        public Combat Owner => Parent.GetParent<SkillExecution>().Owner;
         public void OnTriggerExecutionEffect(ExecutionEffect executionEffect)
         {
-            ExecutionConfigObject executionObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handler, executionEffect.executeClipData.ActionEventData.NewExecution, AssetSuffix.Asset, AssetType.Execution);
+            ExecutionConfigObject executionObject = Owner.AttachExecution(executionEffect.executeClipData.ActionEventData.NewExecutionId);
             if (executionObject == null)
             {
                 return;

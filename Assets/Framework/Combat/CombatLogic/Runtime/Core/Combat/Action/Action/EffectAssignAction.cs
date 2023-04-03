@@ -66,7 +66,10 @@ namespace LccModel
         private void PostProcess()
         {
             Creator.TriggerActionPoint(ActionPointType.AssignEffect, this);
-            Target.TriggerActionPoint(ActionPointType.ReceiveEffect, this);
+            if (!Target.IsDisposed)
+            {
+                Target.TriggerActionPoint(ActionPointType.ReceiveEffect, this);
+            }
         }
 
         public void FinishAction()
