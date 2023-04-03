@@ -60,7 +60,10 @@ namespace LccModel
 
 
             skillExecution.actionOccupy = actionOccupy;
-            skillExecution.targetList.Add(inputTarget);
+            if (inputTarget != null)
+            {
+                skillExecution.targetList.Add(inputTarget);
+            }
             skillExecution.inputPoint = inputPoint;
             skillExecution.inputDirection = inputDirection;
             skillExecution.BeginExecute();
