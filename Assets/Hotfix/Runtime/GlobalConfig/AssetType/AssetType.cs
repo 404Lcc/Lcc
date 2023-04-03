@@ -15,6 +15,7 @@
         public const string Tool = "Tool";
         //子文件夹
         public const string Panel = "Panel";
-        public const string Effect = "Effect";
+
+        public const string GridMap = "GridMap";
     }
 }
