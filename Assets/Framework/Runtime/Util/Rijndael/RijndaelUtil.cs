@@ -85,7 +85,7 @@ namespace LccModel
             byte[] keyBytes = key.GetBytes();
             byte[] valueBytes = Convert.FromBase64String(value);
             byte[] bytes = RijndaelDecrypt(keyBytes, valueBytes);
-            return bytes.GetString();
+            return bytes.Utf8ToStr();
         }
     }
 }

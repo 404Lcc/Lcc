@@ -32,7 +32,7 @@ namespace LccEditor
             {
                 if (string.IsNullOrEmpty(_content))
                 {
-                    _content = FileUtil.GetAsset(TemplatePath).GetString();
+                    _content = FileUtil.GetAsset(TemplatePath).Utf8ToStr();
                 }
                 return _content;
             }
@@ -175,7 +175,7 @@ namespace LccEditor
             string exportPath = PathUtil.GetDataPath(GetProtobufPath());
             string jsonPath = PathUtil.GetDataPath(GetJsonPath());
 
-            string json = FileUtil.GetAsset($"{jsonPath}/{name}.txt").GetString();
+            string json = FileUtil.GetAsset($"{jsonPath}/{name}.txt").Utf8ToStr();
             object obj;
             if (configType == ConfigType.Model)
             {

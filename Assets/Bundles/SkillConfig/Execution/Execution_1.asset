@@ -31,13 +31,13 @@ MonoBehaviour:
   m_Name: ExecuteClipData
   m_EditorClassIdentifier: 
   StartTime: 0
-  EndTime: 0.1
-  ExecuteClipType: 0
+  EndTime: 0
+  ExecuteClipType: 1
   ActionEventData:
     ActionEventType: 0
     EffectApply: 0
     NewExecutionId: 0
-    Distance: 0
+    Distance: 2
     TagType: 0
   CollisionExecuteData:
     ExecuteType: 0
@@ -73,8 +73,8 @@ MonoBehaviour:
   m_Name: ExecuteClipData
   m_EditorClassIdentifier: 
   StartTime: 0
-  EndTime: 0.1
-  ExecuteClipType: 0
+  EndTime: 0
+  ExecuteClipType: 2
   ActionEventData:
     ActionEventType: 0
     EffectApply: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
     AssetName: 
     PointList: []
   AnimationData:
-    AnimationType: 0
+    AnimationType: 2
   AudioData:
     AudioClipName: 
   ParticleEffectData:
@@ -115,10 +115,10 @@ MonoBehaviour:
   m_Name: ExecuteClipData
   m_EditorClassIdentifier: 
   StartTime: 0
-  EndTime: 0.1
-  ExecuteClipType: 0
+  EndTime: 0
+  ExecuteClipType: 1
   ActionEventData:
-    ActionEventType: 0
+    ActionEventType: 1
     EffectApply: 0
     NewExecutionId: 0
     Distance: 0

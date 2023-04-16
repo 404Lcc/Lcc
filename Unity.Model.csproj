@@ -72,6 +72,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Module\Logger\Logger.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Skill\SkillExecution.cs" />
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\AttributeViewComponent.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\ItemComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Base\IFixedUpdate.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Status\StatusAbility.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Numeric\NumericType.cs" />
@@ -86,7 +87,6 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Object\GameTimer.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\SpellSkillComponent.cs" />
     <Compile Include="Assets\Framework\Util\LocalDialog.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\ClientNetwork\ClientNetworkManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Protobuf\ProtobufUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\MainThreadSynchronizationContext\ThreadSynchronizationContext.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffect.cs" />
@@ -134,9 +134,9 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\CoroutineLockQueue.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Awaiter\AwaiterExpand.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Byte\ByteExpand.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\FSMStateType.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Asset\AssetManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Expression\ExpressionUtil.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\ClientNetwork\SocketModel.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Adapter\CoroutineAdapter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\AbilityEffectIntervalTriggerComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Object\Entity.cs" />
@@ -157,6 +157,7 @@
     <Compile Include="Assets\Framework\Runtime\Util\MD5\MD5Util.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Singleton\ISingletonFixedUpdate.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectActionControlComponent.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\ExecutionComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Action\IActionExecution.cs" />
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\CombatView.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Network\NetworkUtil.cs" />
@@ -165,6 +166,8 @@
     <Compile Include="Assets\Framework\Runtime\Core\Module\Timer\TimerData.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Skill\SkillAbility.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Download\DownloadFile.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\WalkState.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\IdleState.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\ScreenAdaptation\ScreenAdaptationUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\EventSystem\Event\IEvent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Action\Action\AddStatusAction.cs" />
@@ -218,11 +221,11 @@
     <Compile Include="Assets\Framework\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityItem\Component\AbilityItemMoveWithDotweenComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Timer\Timer.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\ClientNetwork\ICenterHandler.cs" />
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\EventHandler\CombatEventHandler.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionEffectSpawnCollisionComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\AttributeModifyEffect.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\ExecutionConfigObject.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\FiltrationTarget\FiltrationTarget.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Asset\AssetSuffix.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionEffectTriggerNewExecutionComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Scene.cs" />
@@ -230,7 +233,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\Module\EventSystem\Event\EventType.cs" />
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\AbilityItem\AbilityItemView.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Vector3\Vector3Expand.cs" />
-    <Compile Include="Assets\Framework\Runtime\Util\Encoding\EncodingUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Random\RandomUtil.cs" />
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\CombatViewContext.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Task\TaskExpand.cs" />
@@ -251,6 +253,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Module\EventSystem\Event\EventAttribute.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\NumericEvent\NumericEventHandlerAttribute.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Object\Component.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\ReturnState.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\ActionControlEffect.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Ability\Component\AbilityLevelComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\ExecuteClipData.cs" />
@@ -266,6 +269,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Module\EventSystem\Event\EventData.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionEffectAssignToTargetComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAttributeModifyComponent.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AIComponet.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Manager\Manager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\NumericEvent\INumericEvent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AnimationComponent.cs" />
@@ -273,25 +277,19 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityItem\Component\AbilityItemCollisionExecuteComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Resolution\ResolutionUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\ProtobufObject.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\ChaseState.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\CoroutineLock.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\SpellItemComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Path\PathType.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\WaitCoroutineLock.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Logger\UnityLogger.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AFSMState.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AttackState.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\ItemComponent.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\FiltrationTarget\FiltrationTarget.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\IdleState.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\WalkState.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\ExecutionComponent.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AFSMState.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AttackState.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AIComponet.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\ReturnState.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\ChaseState.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\FSMStateType.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Object\DoubleMap.cs" />
+    <Compile Include="Assets\Framework\Runtime\Util\SerializeUtil\SerializeUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />

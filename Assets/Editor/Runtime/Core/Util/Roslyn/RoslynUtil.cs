@@ -56,7 +56,7 @@ namespace LccEditor
             {
                 if (File.Exists(item))
                 {
-                    SyntaxTree cs = CSharpSyntaxTree.ParseText(FileUtil.GetAsset(item).GetString(), parseOptions, item, Encoding.UTF8);
+                    SyntaxTree cs = CSharpSyntaxTree.ParseText(FileUtil.GetAsset(item).Utf8ToStr(), parseOptions, item, Encoding.UTF8);
                     if (cs == null)
                     {
                         continue;

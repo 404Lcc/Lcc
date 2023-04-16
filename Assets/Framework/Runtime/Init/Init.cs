@@ -30,7 +30,6 @@ namespace LccModel
 
             Game.Scene.AddComponent<AssetManager>();
             Game.Scene.AddComponent<BridgeManager>();
-            Game.Scene.AddComponent<ClientNetworkManager>();
             Game.Scene.AddComponent<CoroutineLockManager>();
             Game.Scene.AddComponent<DownloadManager>();
             Game.Scene.AddComponent<NumericEventManager>();

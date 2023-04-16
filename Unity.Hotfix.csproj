@@ -154,6 +154,17 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\UIBinding.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\NetServices.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\ErrorCore.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\AService.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\PacketParser.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\TChannel.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\TService.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\RpcException.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\MessageAttribute.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\Circularbuffer.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\AChannel.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Util\MessageSerialize\MessageSerializeUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

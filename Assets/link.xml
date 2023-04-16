@@ -4716,9 +4716,6 @@
     <type fullname="LccModel.AssetSuffix" preserve="all" />
     <type fullname="LccModel.AssetType" preserve="all" />
     <type fullname="LccModel.BridgeManager" preserve="all" />
-    <type fullname="LccModel.ClientNetworkManager" preserve="all" />
-    <type fullname="LccModel.ICenterHandler" preserve="all" />
-    <type fullname="LccModel.SocketModel" preserve="all" />
     <type fullname="LccModel.CoroutineLock" preserve="all" />
     <type fullname="LccModel.CoroutineLockManager" preserve="all" />
     <type fullname="LccModel.CoroutineLockQueue" preserve="all" />
@@ -4761,6 +4758,7 @@
     <type fullname="LccModel.IFixedUpdate" preserve="all" />
     <type fullname="LccModel.ILateUpdate" preserve="all" />
     <type fullname="LccModel.IUpdate" preserve="all" />
+    <type fullname="LccModel.DoubleMap`2" preserve="all" />
     <type fullname="LccModel.Game" preserve="all" />
     <type fullname="LccModel.GameObjectComponent" preserve="all" />
     <type fullname="LccModel.LccView" preserve="all" />
@@ -4787,7 +4785,6 @@
     <type fullname="LccModel.Loader" preserve="all" />
     <type fullname="LccModel.ActionWrap`1" preserve="all" />
     <type fullname="LccModel.DirectoryUtil" preserve="all" />
-    <type fullname="LccModel.EncodingUtil" preserve="all" />
     <type fullname="LccModel.ExpressionUtil" preserve="all" />
     <type fullname="LccModel.FileUtil" preserve="all" />
     <type fullname="LccModel.IdUtil" preserve="all" />
@@ -4802,6 +4799,7 @@
     <type fullname="LccModel.RandomUtil" preserve="all" />
     <type fullname="LccModel.ResolutionUtil" preserve="all" />
     <type fullname="LccModel.RijndaelUtil" preserve="all" />
+    <type fullname="LccModel.SerializeUtil" preserve="all" />
     <type fullname="LccModel.WebUtil" preserve="all" />
     <type fullname="LccModel.DisplayMode" preserve="all" />
     <type fullname="LccModel.DoubleClickEvent" preserve="all" />

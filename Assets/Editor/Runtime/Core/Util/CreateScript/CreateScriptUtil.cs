@@ -23,7 +23,7 @@ namespace LccEditor
             //获取资源的文件名
             string fileName = Path.GetFileNameWithoutExtension(pathName);
             //读取本地模版文件 替换默认的文件名
-            string content = FileUtil.GetAsset(resourceFile).GetString().Replace("(Class)", fileName).Replace("(ViewModel)", fileName.Replace("Panel", string.Empty));
+            string content = FileUtil.GetAsset(resourceFile).Utf8ToStr().Replace("(Class)", fileName).Replace("(ViewModel)", fileName.Replace("Panel", string.Empty));
             //写入新文件
             FileUtil.SaveAsset(fullName, content);
             //刷新本地资源

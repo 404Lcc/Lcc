@@ -1,32 +1,43 @@
 ﻿using ProtoBuf;
 using System;
+using System.ComponentModel;
 using System.IO;
 
 namespace LccModel
 {
     public static class ProtobufUtil
     {
-        public static byte[] Serialize(object message)
-        {
-            using (MemoryStream stream = new MemoryStream())
-            {
-                Serializer.Serialize(stream, message);
-                return stream.ToArray();
-            }
-        }
         public static object Deserialize(Type type, byte[] bytes, int index, int count)
         {
-            using (MemoryStream stream = new MemoryStream(bytes, index, count))
+            using MemoryStream stream = new MemoryStream(bytes, index, count);
+            object o = Serializer.Deserialize(type, stream);
+            if (o is ISupportInitialize supportInitialize)
             {
-                return Serializer.Deserialize(type, stream);
+                supportInitialize.EndInit();
             }
+            return o;
         }
-        public static T Deserialize<T>(byte[] bytes, int index, int count) where T : ProtobufObject
+
+        public static byte[] Serialize(object message)
         {
-            using (MemoryStream stream = new MemoryStream(bytes, index, count))
+            using MemoryStream stream = new MemoryStream();
+            Serializer.Serialize(stream, message);
+            return stream.ToArray();
+        }
+
+        public static void Serialize(object message, Stream stream)
+        {
+            Serializer.Serialize(stream, message);
+        }
+
+        public static object Deserialize(Type type, Stream stream)
+        {
+            object o = Serializer.Deserialize(type, stream);
+            if (o is ISupportInitialize supportInitialize)
             {
-                return Serializer.Deserialize<T>(stream);
+                supportInitialize.EndInit();
             }
+            return o;
         }
     }
 }
