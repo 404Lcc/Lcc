@@ -22,7 +22,6 @@ namespace LccHotfix
             base.Awake(p1);
 
             ((GameObject)(object)p1).ConvertComponent(this);
-            AutoReference(gameObject);
 
             Button button = gameObject.GetComponent<Button>();
             if (button == null)
@@ -59,51 +58,5 @@ namespace LccHotfix
                 normalGo.SetActive(!visible);
             }
         }
-        #region 自动引用
-        private void AutoReference(Transform transform)
-        {
-            Dictionary<string, FieldInfo> fieldInfoDict = new Dictionary<string, FieldInfo>();
-            FieldInfo[] fieldInfos = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            Type objectType = typeof(Object);
-            foreach (FieldInfo item in fieldInfos)
-            {
-                if (item.FieldType.IsSubclassOf(objectType))
-                {
-                    fieldInfoDict[item.Name.ToLower()] = item;
-                }
-            }
-            if (fieldInfoDict.Count > 0)
-            {
-                AutoReference(transform, fieldInfoDict);
-            }
-        }
-        private void AutoReference(Transform transform, Dictionary<string, FieldInfo> fieldInfoDict)
-        {
-            string name = transform.name.ToLower();
-            if (fieldInfoDict.ContainsKey(name))
-            {
-                if (fieldInfoDict[name].FieldType.Equals(typeof(GameObject)))
-                {
-                    fieldInfoDict[name].SetValue(this, transform.gameObject);
-                }
-                else if (fieldInfoDict[name].FieldType.Equals(typeof(Transform)))
-                {
-                    fieldInfoDict[name].SetValue(this, transform);
-                }
-                else
-                {
-                    fieldInfoDict[name].SetValue(this, transform.GetComponent(fieldInfoDict[name].FieldType));
-                }
-            }
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                AutoReference(transform.GetChild(i), fieldInfoDict);
-            }
-        }
-        private void AutoReference(GameObject gameObject)
-        {
-            AutoReference(gameObject.transform);
-        }
-        #endregion
     }
 }

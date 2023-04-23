@@ -1,3 +1,4 @@
+using LccModel;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -64,7 +65,19 @@ namespace LccHotfix
             AutoReference(gameObject.transform);
         }
         #endregion
+        #region œ‘ æ
+        private void ShowView(GameObject gameObject, GameObject parent = null)
+        {
+            LccView view = gameObject.AddComponent<LccView>();
+            view.className = GetType().Name;
+            view.type = this;
 
+            if (parent != null)
+            {
+                gameObject.transform.SetParent(parent.transform);
+            }
+        }
+        #endregion
         //private void GetItemComponent(Transform transform)
         //{
         //    Canvas canvas = transform.gameObject.GetComponent<Canvas>();
@@ -93,6 +106,7 @@ namespace LccHotfix
             //itemList = new List<UIItem>();
 
             AutoReference(gameObject);
+            ShowView(gameObject);
             //GetItemComponent(rectTransform);
         }
 
