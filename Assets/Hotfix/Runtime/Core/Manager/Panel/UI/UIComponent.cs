@@ -92,7 +92,7 @@ namespace LccHotfix
             itemList = new List<UIItem>();
 
             AutoReference(gameObject);
-            GetItemComponent(rectTransform);
+            //GetItemComponent(rectTransform);
         }
 
         protected T InitItem<T>(GameObject gameObject) where T : UIItem, new()
@@ -106,12 +106,12 @@ namespace LccHotfix
         //ˢ�²㼶
         protected void UpdateDepth()
         {
-            int depth = canvas.sortingOrder;
-            for (int i = 1; i <= canvasList.Count; i++)
-            {
-                canvasList[i - 1].overrideSorting = true;
-                canvasList[i - 1].sortingOrder = depth + i;
-            }
+            //int depth = canvas.sortingOrder;
+            //for (int i = 1; i <= canvasList.Count; i++)
+            //{
+            //    canvasList[i - 1].overrideSorting = true;
+            //    canvasList[i - 1].sortingOrder = depth + i;
+            //}
         }
     }
 }

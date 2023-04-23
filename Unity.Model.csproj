@@ -67,6 +67,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Object\Base\AObjectBase.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Action\IActionAbility.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Action\Action\CureAction.cs" />
+    <Compile Include="Assets\Framework\Util\EventTriggerListener.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Action\Action\DamageAction.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Action\Action\SpellSkillAction.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Logger\Logger.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Adapter\IComparerAdapter.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\CoroutineLockQueueType.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\TransformComponent.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Object\Pool\APool.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Rijndael\RijndaelUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\CoroutineLockManager.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\ActionPointComponent.cs" />
@@ -285,12 +287,10 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\WaitCoroutineLock.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Logger\UnityLogger.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AFSMState.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AttackState.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AttackState.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Object\Pool\APool.cs" />
-    <Compile Include="Assets\Framework\Util\EventTriggerListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />

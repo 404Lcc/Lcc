@@ -18,7 +18,7 @@ namespace LccHotfix
 
             ((GameObject)(object)p1).ConvertComponent(this);
 
-            EventTriggerListener.Get(gameObject).onClick = OnClick;
+            //EventTriggerListener.Get(gameObject).onClick = OnClick;
         }
         public virtual void UpdateData(object obj)
         {
