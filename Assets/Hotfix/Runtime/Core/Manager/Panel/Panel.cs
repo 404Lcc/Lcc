@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BM;
+using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -95,6 +96,7 @@ namespace LccHotfix
 
         private int _depth;
 
+        private LoadHandler _loadHandler;
         private GameObject _gameObject;
         private Canvas _canvas;
 
@@ -104,6 +106,17 @@ namespace LccHotfix
             get
             {
                 return PanelManager.Instance.GetPanelLogic(Type);
+            }
+        }
+        public LoadHandler LoadHandler
+        {
+            get
+            {
+                return _loadHandler;
+            }
+            set
+            {
+                _loadHandler = value;
             }
         }
         public GameObject GameObject

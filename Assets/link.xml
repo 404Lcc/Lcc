@@ -4843,7 +4843,7 @@
     <type fullname="LccModel.IComparerAdapter+Adapter" preserve="all" />
     <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c__DisplayClass5_0" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;LoadAssetAsync&gt;d__8`1" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;LoadAssetAsync&gt;d__7`1" preserve="all" />
     <type fullname="LccModel.CoroutineLockManager+&lt;Wait&gt;d__8" preserve="all" />
     <type fullname="LccModel.CoroutineLockQueue+&lt;&gt;c__DisplayClass7_0" preserve="all" />
     <type fullname="LccModel.CoroutineLockQueue+&lt;Wait&gt;d__7" preserve="all" />

@@ -1,3 +1,4 @@
+using BM;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,13 +9,14 @@ namespace LccModel
         public bool isRedDotActive;
         private GameObject redDot;
         private Text redDotCount;
+        public LoadHandler handler;
 
         public Vector3 scale = Vector3.one;
         public Vector2 offset = Vector2.zero;
 
         void Start()
         {
-            redDot = AssetManager.Instance.InstantiateAsset("RedDot", AssetType.Tool);
+            redDot = AssetManager.Instance.InstantiateAsset(out handler, "RedDot", AssetType.Tool);
             redDotCount = redDot.GetComponentInChildren<Text>();
 
 
@@ -53,6 +55,7 @@ namespace LccModel
         public void OnDestroy()
         {
             Hide();
+            AssetManager.Instance.UnLoadAsset(handler);
             Destroy(redDot);
 
 

@@ -268,7 +268,8 @@ namespace LccHotfix
             {
                 return;
             }
-            GameObject go = AssetManager.Instance.InstantiateAsset(name, _types);
+            GameObject go = AssetManager.Instance.InstantiateAsset(out LoadHandler handler, name, _types);
+            panel.LoadHandler = handler;
             panel.GameObject = CreateUIGameObject(go);
             panel.Canvas = panel.GameObject.GetComponent<Canvas>();
             panel.GameObject.name = go.name;
@@ -740,7 +741,7 @@ namespace LccHotfix
             panel.Logic.OnBeforeUnload(panel);
             if (panel.IsLoad)
             {
-                AssetManager.Instance.UnLoadAsset(panel.GameObject.name, _suff, _types);
+                AssetManager.Instance.UnLoadAsset(panel.LoadHandler);
 
                 UnityEngine.Object.Destroy(panel.GameObject);
                 panel.GameObject = null;
