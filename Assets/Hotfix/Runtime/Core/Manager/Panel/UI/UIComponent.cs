@@ -15,7 +15,7 @@ namespace LccHotfix
 
         public List<Canvas> canvasList;
 
-        public List<UIItem> itemList;
+        //public List<UIItem> itemList;
 
         #region 自动引用
         private void AutoReference(Transform transform)
@@ -89,19 +89,19 @@ namespace LccHotfix
             rectTransform = (RectTransform)gameObject.transform;
             canvas = gameObject.GetComponent<Canvas>();
             canvasList = new List<Canvas>();
-            itemList = new List<UIItem>();
+            //itemList = new List<UIItem>();
 
             AutoReference(gameObject);
             //GetItemComponent(rectTransform);
         }
 
-        protected T InitItem<T>(GameObject gameObject) where T : UIItem, new()
-        {
-            T item = new T();
-            item.OnInitComponent(gameObject);
-            itemList.Add(item);
-            return item;
-        }
+        //protected T InitItem<T>(GameObject gameObject) where T : UIItem, new()
+        //{
+        //    T item = new T();
+        //    item.OnInitComponent(gameObject);
+        //    itemList.Add(item);
+        //    return item;
+        //}
 
         //刷新层级
         protected void UpdateDepth()
