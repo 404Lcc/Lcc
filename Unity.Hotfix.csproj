@@ -60,10 +60,7 @@
     <Compile Include="Assets\Hotfix\Logic\SceneState\MainSceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\String\StringExpand.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Vector3\Vector3Expand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Scene.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Image\ImageExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\GameSetting\GameSettingManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\DisplayModeType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\EventSystem.cs" />
@@ -74,14 +71,12 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\ResolutionType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\LoopScrollRect\LoopScroll.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\UserData.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Vector2\Vector2Expand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\UIPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Manager\Manager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\ISingletonUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Base\ILateUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Base\IFixedUpdate.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\SpriteRenderer\SpriteRendererExpand.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Main\MainPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Base\AObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\IItemHandler.cs" />
@@ -95,12 +90,10 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Base\AttributeBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\UIComponent.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Awaiter\AwaiterExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\Event\AEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\UIEffect.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\ISingletonFixedUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Language\LanguageManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Byte\ByteExpand.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Top\TopPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\PanelType\PanelTypeExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\GlobalConfig\SceneName\SceneName.cs" />
@@ -108,7 +101,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\ISingleton.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Config\TestConfig.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\Event\IEvent.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Global\GlobalManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Video\VideoManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\MVVM\View\View\IView.cs" />
@@ -120,7 +112,6 @@
     <Compile Include="Assets\Hotfix\Logic\UI\Joystick\Joystick.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Init\Init.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateAttribute.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\UnityWebRequest\UnityWebRequestExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\ISceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\GameObjectComponent.cs" />
     <Compile Include="Assets\Hotfix\Logic\StatePipeline\EnterLogin.cs" />
@@ -133,7 +124,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\ISingletonLateUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\Event\EventAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\Panel.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Task\TaskExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Language\LanguageType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Command\CommandType.cs" />
     <Compile Include="Assets\Hotfix\Logic\Camera\SmoothFoolow2D.cs" />
