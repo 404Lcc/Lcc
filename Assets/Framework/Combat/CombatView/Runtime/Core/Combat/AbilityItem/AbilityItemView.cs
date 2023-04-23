@@ -10,13 +10,13 @@ namespace LccModel
         public Transform Transform => GameObject.transform;
         public TransformViewComponent TransformViewComponent => GetComponent<TransformViewComponent>();
 
-        public override void Awake()
+        public override void Awake<P1>(P1 p1)
         {
-            base.Awake();
+            base.Awake(p1);
 
+            ((GameObject)(object)p1).ConvertComponent(this);
 
             AddComponent<TransformViewComponent>();
-
         }
     }
 }

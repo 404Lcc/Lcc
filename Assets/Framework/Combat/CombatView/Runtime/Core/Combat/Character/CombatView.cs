@@ -17,11 +17,11 @@ namespace LccModel
         public SkinViewComponent SkinViewComponent => GetComponent<SkinViewComponent>();
 
 
-
-        public override void Awake()
+        public override void Awake<P1>(P1 p1)
         {
-            base.Awake();
+            base.Awake(p1);
 
+            ((GameObject)(object)p1).ConvertComponent(this);
 
             AddComponent<TransformViewComponent>();
             AddComponent<AnimationViewComponent>();

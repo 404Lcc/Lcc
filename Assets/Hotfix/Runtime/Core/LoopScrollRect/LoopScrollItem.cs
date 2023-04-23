@@ -16,7 +16,7 @@ namespace LccHotfix
         {
             base.Awake(p1);
 
-            AddComponent<GameObjectComponent, GameObject>((GameObject)(object)p1);
+            ((GameObject)(object)p1).ConvertComponent(this);
 
             EventTriggerListener.Get(gameObject).onClick = OnClick;
         }

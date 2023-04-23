@@ -14,8 +14,7 @@ namespace LccModel
         }
         public CombatView AddCombatView(long instanceId)
         {
-            CombatView combatView = AddChildrenWithId<CombatView>(instanceId);
-            combatView.AddComponent<GameObjectComponent, GameObject>(new GameObject(instanceId.ToString()));
+            CombatView combatView = AddChildrenWithId<CombatView, GameObject>(instanceId, new GameObject(instanceId.ToString()));
             return combatView;
         }
         public void RemoveCombatView(long instanceId)
@@ -41,8 +40,7 @@ namespace LccModel
 
         public AbilityItemView AddAbilityItemView(long instanceId)
         {
-            AbilityItemView abilityItemView = AddChildrenWithId<AbilityItemView>(instanceId);
-            abilityItemView.AddComponent<GameObjectComponent, GameObject>(new GameObject(instanceId.ToString()));
+            AbilityItemView abilityItemView = AddChildrenWithId<AbilityItemView, GameObject>(instanceId, new GameObject(instanceId.ToString()));
             return abilityItemView;
         }
         public void RemoveAbilityItemView(long instanceId)
