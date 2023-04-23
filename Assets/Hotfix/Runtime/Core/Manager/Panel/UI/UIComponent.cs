@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Profiling.HierarchyFrameDataView;
 using Object = UnityEngine.Object;
 
 namespace LccHotfix
 {
-    public class UIComponent
+    public class UIComponent : IPanelHandler
     {
         public GameObject gameObject;
         public RectTransform rectTransform;
         public Canvas canvas;
 
-        public List<Canvas> canvasList;
+        //public List<Canvas> canvasList;
 
         //public List<UIItem> itemList;
 
@@ -64,31 +65,31 @@ namespace LccHotfix
         }
         #endregion
 
-        private void GetItemComponent(Transform transform)
-        {
-            Canvas canvas = transform.gameObject.GetComponent<Canvas>();
-            if (canvas == null)
-            {
-                canvas = transform.gameObject.AddComponent<Canvas>();
-                transform.gameObject.AddComponent<GraphicRaycaster>();
-            }
-            if (canvas != this.canvas)
-            {
-                canvasList.Add(canvas);
-            }
+        //private void GetItemComponent(Transform transform)
+        //{
+        //    Canvas canvas = transform.gameObject.GetComponent<Canvas>();
+        //    if (canvas == null)
+        //    {
+        //        canvas = transform.gameObject.AddComponent<Canvas>();
+        //        transform.gameObject.AddComponent<GraphicRaycaster>();
+        //    }
+        //    if (canvas != this.canvas)
+        //    {
+        //        canvasList.Add(canvas);
+        //    }
 
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                GetItemComponent(transform.GetChild(i));
-            }
-        }
+        //    for (int i = 0; i < transform.childCount; i++)
+        //    {
+        //        GetItemComponent(transform.GetChild(i));
+        //    }
+        //}
 
         protected void InitComponent(GameObject gameObject)
         {
             this.gameObject = gameObject;
             rectTransform = (RectTransform)gameObject.transform;
             canvas = gameObject.GetComponent<Canvas>();
-            canvasList = new List<Canvas>();
+            //canvasList = new List<Canvas>();
             //itemList = new List<UIItem>();
 
             AutoReference(gameObject);
@@ -112,6 +113,37 @@ namespace LccHotfix
             //    canvasList[i - 1].overrideSorting = true;
             //    canvasList[i - 1].sortingOrder = depth + i;
             //}
+        }
+
+        public virtual void OnInitData(Panel panel)
+        {
+        }
+        public virtual void OnInitComponent(Panel panel)
+        {
+            InitComponent(panel.GameObject);
+        }
+        public virtual void OnRegisterUIEvent(Panel panel)
+        {
+        }
+
+        public virtual void OnShow(Panel panel, AObjectBase contextData = null)
+        {
+            //UpdateDepth();
+        }
+        public virtual void OnHide(Panel panel)
+        {
+        }
+        public virtual void OnBeforeUnload(Panel panel)
+        {
+        }
+
+        public virtual void OnReset(Panel panel)
+        {
+        }
+
+        public virtual bool IsReturn(Panel panel)
+        {
+            return false;
         }
     }
 }

@@ -21,37 +21,10 @@ namespace LccHotfix
             PanelManager.Instance.HidePanel(ViewModel.selfPanel.Type);
         }
 
-        public virtual void OnInitData(Panel panel)
+        public override void OnInitData(Panel panel)
         {
             ViewModel.selfPanel = panel;
             ViewModel.InitTopData();
-        }
-        public virtual void OnInitComponent(Panel panel)
-        {
-            InitComponent(panel.GameObject);
-        }
-        public virtual void OnRegisterUIEvent(Panel panel)
-        {
-        }
-
-        public virtual void OnShow(Panel panel, AObjectBase contextData = null)
-        {
-            UpdateDepth();
-        }
-        public virtual void OnHide(Panel panel)
-        {
-        }
-        public virtual void OnBeforeUnload(Panel panel)
-        {
-        }
-
-        public virtual void OnReset(Panel panel)
-        {
-        }
-
-        public virtual bool IsReturn(Panel panel)
-        {
-            return false;
         }
     }
 }

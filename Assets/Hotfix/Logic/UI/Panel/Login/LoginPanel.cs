@@ -20,31 +20,32 @@ namespace LccHotfix
             PanelManager.Instance.ShowPanel(PanelType.Login);
         }
     }
-    public class LoginModel : ViewModelBase
-    {
-        public bool isEnterMain;
-    }
-    public class LoginPanel : UIPanel<LoginModel>
+    //public class LoginModel : ViewModelBase
+    //{
+    //    public bool isEnterMain;
+    //}
+    public class LoginPanel : UIComponent //UIPanel<LoginModel>
     {
         public Button testBtn;
         public LoopScrollRect loop;
         public GameObject item;
         public LoopScroll<LoginItemData, LoginItem> loopScroll;
-        public override void InitView(LoginModel viewModel)
-        {
-            LogUtil.Debug("InitView第一个执行的函数");
-            LogUtil.Debug("负责给viewModel的字段绑定");
-            //参考
-            //Binding<bool>(nameof(viewModel.isLoading), IsLoading);
-            //public void IsLoading(bool oldValue, bool newValue)
-            //{
-            //}
-        }
-        public override void Binding(LoginModel oldValue, LoginModel newValue)
-        {
-            LogUtil.Debug("Binding第二个执行的函数");
-            LogUtil.Debug("LoginModel第一次初始化时会触发，LoginModel绑定切换的时候会调用");
-        }
+        public bool isEnterMain;
+        //public override void InitView(LoginModel viewModel)
+        //{
+        //    LogUtil.Debug("InitView第一个执行的函数");
+        //    LogUtil.Debug("负责给viewModel的字段绑定");
+        //    //参考
+        //    //Binding<bool>(nameof(viewModel.isLoading), IsLoading);
+        //    //public void IsLoading(bool oldValue, bool newValue)
+        //    //{
+        //    //}
+        //}
+        //public override void Binding(LoginModel oldValue, LoginModel newValue)
+        //{
+        //    LogUtil.Debug("Binding第二个执行的函数");
+        //    LogUtil.Debug("LoginModel第一次初始化时会触发，LoginModel绑定切换的时候会调用");
+        //}
 
         public override void OnInitComponent(Panel panel)
         {
@@ -98,9 +99,8 @@ namespace LccHotfix
 
         public void OnEnterMain()
         {
-            ViewModel.isEnterMain = true;
-
-
+            isEnterMain = true;
+            //ViewModel.isEnterMain = true;
         }
     }
 }
