@@ -1,4 +1,5 @@
 ﻿using ET;
+using NPOI.SS.Formula.Functions;
 using System;
 using UnityEngine;
 
@@ -10,12 +11,13 @@ namespace LccModel
         async ETTask Start()
         {
             DontDestroyOnLoad(gameObject);
-
-            globalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
             AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
             {
                 LogUtil.Error(e.ExceptionObject.ToString());
             };
+            ETTask.ExceptionHandler += LogUtil.Error;
+
+            globalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
 
             Game.AddSingleton<Logger>();
 
