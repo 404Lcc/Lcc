@@ -4764,7 +4764,7 @@
     <type fullname="LccModel.LccView" preserve="all" />
     <type fullname="LccModel.NumericEntity" preserve="all" />
     <type fullname="LccModel.NumericType" preserve="all" />
-    <type fullname="LccModel.Pool`1" preserve="all" />
+    <type fullname="LccModel.APool`1" preserve="all" />
     <type fullname="LccModel.ProtobufObject" preserve="all" />
     <type fullname="LccModel.Root" preserve="all" />
     <type fullname="LccModel.SceneFactory" preserve="all" />
@@ -4808,6 +4808,7 @@
     <type fullname="LccModel.EnterClickEvent" preserve="all" />
     <type fullname="LccModel.ExitClickEvent" preserve="all" />
     <type fullname="LccModel.EnterClickButton" preserve="all" />
+    <type fullname="LccModel.EventTriggerListener" preserve="all" />
     <type fullname="LccModel.LanguageText" preserve="all" />
     <type fullname="LccModel.LocalDialog" preserve="all" />
     <type fullname="LccModel.LongClickEvent" preserve="all" />
@@ -4870,5 +4871,6 @@
     <type fullname="LccModel.WebUtil+&lt;DownloadAudioClip&gt;d__4" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;DownloadAssetBundle&gt;d__5" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
+    <type fullname="LccModel.EventTriggerListener+VoidDelegate" preserve="all" />
   </assembly>
 </linker>

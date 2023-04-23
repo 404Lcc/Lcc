@@ -129,6 +129,7 @@
     <Compile Include="Assets\Framework\Runtime\Util\Json\JsonUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\StaticMethod\ILStaticMethod.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Time\Time.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Object\DoubleMap.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Object\ObjectUtil.cs" />
     <Compile Include="Assets\Framework\Util\DisplayMode.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\CoroutineLockQueue.cs" />
@@ -137,13 +138,13 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\FSMStateType.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Asset\AssetManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Expression\ExpressionUtil.cs" />
+    <Compile Include="Assets\Framework\Runtime\Util\SerializeUtil\SerializeUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Adapter\CoroutineAdapter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\AbilityEffectIntervalTriggerComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Object\Entity.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Timer\TimerType.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Base\IUpdate.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\Effect.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Object\Pool\Pool.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Web\WebUtil.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ExecutionEffect\ExecutionEffect.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Root.cs" />
@@ -284,12 +285,12 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\WaitCoroutineLock.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Logger\UnityLogger.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AFSMState.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AttackState.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AttackState.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Object\DoubleMap.cs" />
-    <Compile Include="Assets\Framework\Runtime\Util\SerializeUtil\SerializeUtil.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Object\Pool\APool.cs" />
+    <Compile Include="Assets\Framework\Util\EventTriggerListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />
