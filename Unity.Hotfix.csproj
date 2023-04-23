@@ -58,7 +58,6 @@
   <ItemGroup>
     <Compile Include="Assets\Hotfix\Logic\Camera\SmoothFoolow3D.cs" />
     <Compile Include="Assets\Hotfix\Logic\SceneState\MainSceneState.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Util\MessageSerialize\MessageSerializeUtil.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\String\StringExpand.cs" />
@@ -73,7 +72,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\Event\EventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Game.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\ResolutionType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\Circularbuffer.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\UserData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Vector2\Vector2Expand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\UIPanel.cs" />
@@ -84,15 +82,12 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Base\IFixedUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\SpriteRenderer\SpriteRendererExpand.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Main\MainPanel.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\AChannel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Base\AObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\IItemHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelType.cs" />
     <Compile Include="Assets\Hotfix\Logic\StatePipeline\EnterMain.cs" />
     <Compile Include="Assets\Hotfix\Runtime\GlobalConfig\AssetType\AssetType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\ProtobufObject.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\RpcException.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\NetServices.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\MVVM\View\Binding\Binding.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateName.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Command\CommandManager.cs" />
@@ -113,8 +108,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Config\Config\TestConfig.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\Event\IEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\Transform\TransformExpand.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\TChannel.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\PacketParser.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Global\GlobalManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Video\VideoManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\MVVM\View\View\IView.cs" />
@@ -123,7 +116,6 @@
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Game\GamePanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\Event\EventData.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\AService.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Joystick\Joystick.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Init\Init.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateAttribute.cs" />
@@ -132,7 +124,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\GameObjectComponent.cs" />
     <Compile Include="Assets\Hotfix\Logic\StatePipeline\EnterLogin.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\TService.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Command\CommandDataType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\IConfig.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Root.cs" />
@@ -160,8 +151,6 @@
     <Compile Include="Assets\Hotfix\Logic\SceneState\GameSceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\UserSetData.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Loading\LoadingPanel.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\MessageAttribute.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Module\Network\ErrorCore.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\UIBinding.cs" />
