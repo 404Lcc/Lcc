@@ -5,8 +5,7 @@ namespace LccHotfix
     {
         public override bool CheckState()
         {
-            MainPanel mainPanel = (MainPanel)PanelManager.Instance.GetPanelLogic(PanelType.Main);
-            return mainPanel.ViewModel.isEnterGame;
+            return ModelManager.Instance.GetModel<MainModel>().isEnterGame;
         }
     }
 }

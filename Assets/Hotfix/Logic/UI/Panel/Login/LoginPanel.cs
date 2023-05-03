@@ -17,20 +17,18 @@ namespace LccHotfix
     {
         public override void Publish()
         {
-            PanelManager.Instance.ShowPanel(PanelType.Login);
+            PanelManager.Instance.ShowPanel(PanelType.UILogin);
         }
     }
-    //public class LoginModel : ViewModelBase
-    //{
-    //    public bool isEnterMain;
-    //}
-    public class LoginPanel : UIComponent //UIPanel<LoginModel>
+    public class UILoginModel : ViewModelBase
+    {
+    }
+    public class UILoginPanel : UIPanel<UILoginModel>
     {
         public Button testBtn;
         public LoopScrollRect loop;
         public GameObject item;
         public LoopScroll<LoginItemData, LoginItem> loopScroll;
-        public bool isEnterMain;
         //public override void InitView(LoginModel viewModel)
         //{
         //    LogUtil.Debug("InitView第一个执行的函数");
@@ -96,11 +94,9 @@ namespace LccHotfix
         {
             LogUtil.Debug("BeforeUnload");
         }
-
         public void OnEnterMain()
         {
-            isEnterMain = true;
-            //ViewModel.isEnterMain = true;
+            ModelManager.Instance.GetModel<LoginModel>().OnEnterMain();
         }
     }
 }

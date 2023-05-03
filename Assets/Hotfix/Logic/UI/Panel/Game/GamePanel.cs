@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class GameModel : ViewModelBase
+    public class UIGameModel : ViewModelBase
     {
     }
-    public class GamePanel : UIPanel<GameModel>
+    public class UIGamePanel : UIPanel<UIGameModel>
     {
         public GameObject joystick;
         public Combat Player => CombatContext.Instance.GetCombatListByTag(TagType.Player)[0];

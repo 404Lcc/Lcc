@@ -5,8 +5,7 @@ namespace LccHotfix
     {
         public override bool CheckState()
         {
-            LoginPanel loginPanel = (LoginPanel)PanelManager.Instance.GetPanelLogic(PanelType.Login);
-            return loginPanel./*ViewModel.*/isEnterMain;
+            return ModelManager.Instance.GetModel<LoginModel>().isEnterMain;
         }
     }
 }

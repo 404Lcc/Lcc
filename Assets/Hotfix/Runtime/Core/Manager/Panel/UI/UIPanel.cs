@@ -13,7 +13,7 @@ namespace LccHotfix
             ViewModel.topData.topType = topType;
             ViewModel.topData.title = title;
             //刷新Top
-            PanelManager.Instance.ShowPanel(PanelType.Top, new ShowPanelData(false, false, ViewModel.topData, false, false, false));
+            PanelManager.Instance.ShowPanel(PanelType.UITop, new ShowPanelData(false, false, ViewModel.topData, false, false, false));
         }
 
         public virtual void OnHidePanel()

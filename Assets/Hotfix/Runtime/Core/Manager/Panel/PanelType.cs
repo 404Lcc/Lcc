@@ -3,10 +3,10 @@
     public enum PanelType
     {
         None,
-        Top,
-        Loading,
-        Login,
-        Main,
-        Game,
+        UITop,
+        UILoading,
+        UILogin,
+        UIMain,
+        UIGame,
     }
 }

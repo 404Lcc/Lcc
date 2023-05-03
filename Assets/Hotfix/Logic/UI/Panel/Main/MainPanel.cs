@@ -2,11 +2,10 @@
 
 namespace LccHotfix
 {
-    public class MainModel : ViewModelBase
+    public class UIMainModel : ViewModelBase
     {
-        public bool isEnterGame;
     }
-    public class MainPanel : UIPanel<MainModel>
+    public class UIMainPanel : UIPanel<UIMainModel>
     {
         public Button testBtn;
         public override void OnInitComponent(Panel panel)
@@ -34,7 +33,7 @@ namespace LccHotfix
 
         public void OnTest()
         {
-            ViewModel.isEnterGame = true;
+            ModelManager.Instance.GetModel<MainModel>().EnterGame();
         }
     }
 }

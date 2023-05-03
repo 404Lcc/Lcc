@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 namespace LccHotfix
 {
-    public class LoadingModel : ViewModelBase
+    public class UILoadingModel : ViewModelBase
     {
         public float currentPercent;
         public float targetPercent;
         public float updateRate;
     }
-    public class LoadingPanel : UIPanel<LoadingModel>
+    public class UILoadingPanel : UIPanel<UILoadingModel>
     {
-        public static LoadingPanel Instance { get; set; }
+        public static UILoadingPanel Instance { get; set; }
 
         public Slider progress;
         public Text progressText;
@@ -22,7 +22,7 @@ namespace LccHotfix
         {
             base.OnInitComponent(panel);
 
-            Instance = (LoadingPanel)panel.Logic;
+            Instance = (UILoadingPanel)panel.Logic;
         }
 
         public override void OnBeforeUnload(Panel panel)

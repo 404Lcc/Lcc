@@ -20,6 +20,7 @@ namespace LccHotfix
 
                 Game.Scene.AddComponent<Manager>();
 
+                Game.Scene.AddComponent<ModelManager>();
                 Game.Scene.AddComponent<ArchiveManager>();
                 Game.Scene.AddComponent<AudioManager>();
                 Game.Scene.AddComponent<CommandManager>();

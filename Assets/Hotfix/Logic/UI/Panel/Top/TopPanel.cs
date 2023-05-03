@@ -24,13 +24,13 @@ namespace LccHotfix
             curPanel = (int)datas[0];
         }
     }
-    public class TopModel : ViewModelBase
+    public class UITopModel : ViewModelBase
     {
         public int CurPanel => topData.curPanel;
         public TopType TopType => topData.topType;
         public string Title => topData.title;
     }
-    public class TopPanel : UIPanel<TopModel>
+    public class UITopPanel : UIPanel<UITopModel>
     {
         public Button closeBtn;
         public TMP_Text titleText;
