@@ -1,14 +1,14 @@
+using UnityEngine;
+
 namespace LccHotfix
 {
     public abstract class StatePipeline
     {
-        public string sceneName;
-        public string target;
+        public SceneStateType sceneType;
+        public SceneStateType target;
 
-        public StatePipeline(string sceneName, string target)
+        public StatePipeline()
         {
-            this.sceneName = sceneName;
-            this.target = target;
         }
         public abstract bool CheckState();
     }

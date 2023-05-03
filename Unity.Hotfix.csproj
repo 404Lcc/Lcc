@@ -85,7 +85,7 @@
     <Compile Include="Assets\Hotfix\Runtime\GlobalConfig\AssetType\AssetType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\ProtobufObject.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\MVVM\View\Binding\Binding.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateName.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Command\CommandManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Base\AttributeBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateManager.cs" />

@@ -1,26 +1,23 @@
-using System;
-
 namespace LccHotfix
 {
     public class StatePipelineAttribute : AttributeBase
     {
-        public string sceneName;
+        public SceneStateType sceneType;
 
-        public string target;
+        public SceneStateType target;
 
-        public StatePipelineAttribute(string sceneName, string target)
+        public StatePipelineAttribute(SceneStateType sceneType, SceneStateType target)
         {
-            this.sceneName = sceneName;
+            this.sceneType = sceneType;
             this.target = target;
-
         }
     }
     public class SceneStateAttribute : AttributeBase
     {
-        public string sceneName;
-        public SceneStateAttribute(string sceneName)
+        public SceneStateType sceneType;
+        public SceneStateAttribute(SceneStateType sceneType)
         {
-            this.sceneName = sceneName;
+            this.sceneType = sceneType;
         }
     }
 }

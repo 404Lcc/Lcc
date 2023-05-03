@@ -1,14 +1,12 @@
 using ET;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace LccHotfix
 {
     public abstract class SceneState : ISceneState
     {
-        public string sceneName;
+        public SceneStateType sceneType;
         private List<StatePipeline> _pipelineList = new List<StatePipeline>();
-
 
         public virtual async ETTask OnEnter()
         {
@@ -22,7 +20,7 @@ namespace LccHotfix
         {
         }
 
-        public string CheckTarget()
+        public SceneStateType CheckTarget()
         {
             for (int i = 0; i < _pipelineList.Count; i++)
             {
@@ -31,7 +29,7 @@ namespace LccHotfix
                     return _pipelineList[i].target;
                 }
             }
-            return SceneStateName.None;
+            return SceneStateType.None;
         }
         public void AddPipeline(StatePipeline statePipeline)
         {

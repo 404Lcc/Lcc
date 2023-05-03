@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    [SceneState(SceneStateName.Game)]
+    [SceneState(SceneStateType.Game)]
     public class GameSceneState : SceneState
     {
         public override async ETTask OnEnter()
