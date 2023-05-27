@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using YooAsset;
 
 namespace LccModel
 {
@@ -12,6 +13,10 @@ namespace LccModel
     [CreateAssetMenu(menuName = "Lcc/CreateGlobalConfig", fileName = "GlobalConfig", order = 0)]
     public class GlobalConfig : ScriptableObject
     {
+        public EPlayMode playMode;
+        public string hostServer;
+        public string version;
+
         public HotfixMode hotfixMode;
         public bool isRelease;
         public List<string> aotMetaAssemblyNameList;

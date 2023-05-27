@@ -1,14 +1,24 @@
-﻿using BM;
-using ET;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using ET;
+using YooAsset;
 
 namespace LccModel
 {
     public class UpdateManager : AObjectBase
     {
         public static UpdateManager Instance { get; set; }
-        public const string DefaultBundlePackageName = "ALL";
+
+
+        public EPlayMode PlayMode { private set; get; }
+        public string PackageVersion { set; get; }
+        public ResourceDownloaderOperation Downloader { set; get; }
+        private bool _isRun = false;
+        private StateMachine _machine;
+
+        public GlobalConfig globalConfig;
+
+        public const string DefaultPackage = "DefaultPackage";
+
+        private string _version = "v1.0";
 
         public override void Awake()
         {
@@ -22,30 +32,42 @@ namespace LccModel
 
             Instance = null;
         }
-
-
-        public async ETTask StartUpdate()
+        public void StartUpdate(GlobalConfig globalConfig)
         {
-            AssetComponentConfig.DefaultBundlePackageName = DefaultBundlePackageName;
-            Dictionary<string, bool> updatePackageBundle = new Dictionary<string, bool>();
-            updatePackageBundle.Add(AssetComponentConfig.DefaultBundlePackageName, false);
-
-            await UpdatePanel.Instance.UpdateLoadingPercent(0, 10);
-
-            UpdateBundleDataInfo updateBundleDataInfo = await AssetComponent.CheckAllBundlePackageUpdate(updatePackageBundle);
-
-            await UpdatePanel.Instance.UpdateLoadingPercent(11, 20);
-            if (updateBundleDataInfo.NeedUpdate)
+            if (_isRun == false)
             {
-                Debug.LogError("需要更新, 大小: " + updateBundleDataInfo.NeedUpdateSize);
-                await AssetComponent.DownLoadUpdate(updateBundleDataInfo);
+                _isRun = true;
+                this.globalConfig = globalConfig;
+                PlayMode = globalConfig.playMode;
+
+                _version = globalConfig.version;
+
+                LogUtil.Debug("开启补丁更新流程...");
+                _machine = new StateMachine(this);
+                _machine.AddNode<FsmPatchPrepare>();
+                _machine.AddNode<FsmInitialize>();
+                _machine.AddNode<FsmUpdateVersion>();
+                _machine.AddNode<FsmUpdateManifest>();
+                _machine.AddNode<FsmCreateDownloader>();
+                _machine.AddNode<FsmDownloadFiles>();
+                _machine.AddNode<FsmDownloadOver>();
+                _machine.AddNode<FsmClearCache>();
+                _machine.AddNode<FsmPatchDone>();
+                _machine.Run<FsmPatchPrepare>();
             }
+            else
+            {
+                LogUtil.Warning("补丁更新已经正在进行中!");
+            }
+        }
 
-            await UpdatePanel.Instance.UpdateLoadingPercent(21, 30);
-
-            await AssetComponent.Initialize(AssetComponentConfig.DefaultBundlePackageName);
-
-            await UpdatePanel.Instance.UpdateLoadingPercent(31, 40);
+        public string GetHostServer()
+        {
+            return globalConfig.hostServer;
+        }
+        public string GetVersion()
+        {
+            return _version;
         }
     }
 }

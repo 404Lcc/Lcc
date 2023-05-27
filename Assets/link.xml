@@ -4712,6 +4712,8 @@
     <type fullname="LccModel.IAsyncStateMachineAdapter" preserve="all" />
     <type fullname="LccModel.IComparerAdapter" preserve="all" />
     <type fullname="LccModel.ILRuntimeHelper" preserve="all" />
+    <type fullname="LccModel.IStateNode" preserve="all" />
+    <type fullname="LccModel.StateMachine" preserve="all" />
     <type fullname="LccModel.AssetManager" preserve="all" />
     <type fullname="LccModel.AssetSuffix" preserve="all" />
     <type fullname="LccModel.AssetType" preserve="all" />
@@ -4734,8 +4736,25 @@
     <type fullname="LccModel.RedDotManager" preserve="all" />
     <type fullname="LccModel.SceneLoadManager" preserve="all" />
     <type fullname="LccModel.SceneName" preserve="all" />
+    <type fullname="LccModel.BundleStream" preserve="all" />
+    <type fullname="LccModel.FsmClearCache" preserve="all" />
+    <type fullname="LccModel.FsmCreateDownloader" preserve="all" />
+    <type fullname="LccModel.FsmDownloadFiles" preserve="all" />
+    <type fullname="LccModel.FsmDownloadOver" preserve="all" />
+    <type fullname="LccModel.FsmInitialize" preserve="all" />
+    <type fullname="LccModel.FsmPatchDone" preserve="all" />
+    <type fullname="LccModel.FsmPatchPrepare" preserve="all" />
+    <type fullname="LccModel.FsmUpdateManifest" preserve="all" />
+    <type fullname="LccModel.FsmUpdateVersion" preserve="all" />
+    <type fullname="LccModel.UpdateEventDefine" preserve="all" />
     <type fullname="LccModel.UpdateManager" preserve="all" />
     <type fullname="LccModel.AABB2DComponent" preserve="all" />
+    <type fullname="LccModel.EventArgs`1" preserve="all" />
+    <type fullname="LccModel.EventArgsExtend" preserve="all" />
+    <type fullname="LccModel.Event" preserve="all" />
+    <type fullname="LccModel.EventType" preserve="all" />
+    <type fullname="LccModel.IEventArgs" preserve="all" />
+    <type fullname="LccModel.IEventListener" preserve="all" />
     <type fullname="LccModel.AEvent`1" preserve="all" />
     <type fullname="LccModel.EventAttribute" preserve="all" />
     <type fullname="LccModel.EventData" preserve="all" />
@@ -4801,6 +4820,8 @@
     <type fullname="LccModel.RijndaelUtil" preserve="all" />
     <type fullname="LccModel.SerializeUtil" preserve="all" />
     <type fullname="LccModel.SortUtil" preserve="all" />
+    <type fullname="LccModel.StreamingAssetsUtil" preserve="all" />
+    <type fullname="LccModel.AndroidPost" preserve="all" />
     <type fullname="LccModel.WebUtil" preserve="all" />
     <type fullname="LccModel.DisplayMode" preserve="all" />
     <type fullname="LccModel.DoubleClickEvent" preserve="all" />
@@ -4852,7 +4873,21 @@
     <type fullname="LccModel.WaitCoroutineLock+&lt;Wait&gt;d__5" preserve="all" />
     <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__9" preserve="all" />
     <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__10" preserve="all" />
-    <type fullname="LccModel.UpdateManager+&lt;StartUpdate&gt;d__7" preserve="all" />
+    <type fullname="LccModel.FsmCreateDownloader+&lt;CreateDownloader&gt;d__5" preserve="all" />
+    <type fullname="LccModel.FsmDownloadFiles+&lt;BeginDownload&gt;d__5" preserve="all" />
+    <type fullname="LccModel.FsmInitialize+GameQueryServices" preserve="all" />
+    <type fullname="LccModel.FsmInitialize+GameDecryptionServices" preserve="all" />
+    <type fullname="LccModel.FsmInitialize+&lt;InitPackage&gt;d__5" preserve="all" />
+    <type fullname="LccModel.FsmPatchPrepare+&lt;Next&gt;d__5" preserve="all" />
+    <type fullname="LccModel.FsmUpdateManifest+&lt;UpdateManifest&gt;d__5" preserve="all" />
+    <type fullname="LccModel.FsmUpdateVersion+&lt;GetStaticVersion&gt;d__5" preserve="all" />
+    <type fullname="LccModel.UpdateEventDefine+InitializeFailed" preserve="all" />
+    <type fullname="LccModel.UpdateEventDefine+PatchStatesChange" preserve="all" />
+    <type fullname="LccModel.UpdateEventDefine+FoundUpdateFiles" preserve="all" />
+    <type fullname="LccModel.UpdateEventDefine+DownloadProgressUpdate" preserve="all" />
+    <type fullname="LccModel.UpdateEventDefine+PackageVersionUpdateFailed" preserve="all" />
+    <type fullname="LccModel.UpdateEventDefine+PatchManifestUpdateFailed" preserve="all" />
+    <type fullname="LccModel.UpdateEventDefine+WebFileDownloadFailed" preserve="all" />
     <type fullname="LccModel.AEvent`1+&lt;Handle&gt;d__3" preserve="all" />
     <type fullname="LccModel.MainThreadSynchronizationContext+&lt;&gt;c__DisplayClass3_0" preserve="all" />
     <type fullname="LccModel.ThreadSynchronizationContext+&lt;&gt;c__DisplayClass3_0" preserve="all" />

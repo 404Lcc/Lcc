@@ -292,6 +292,24 @@
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Sort\SortUtil.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Machine\StateMachine.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Machine\IStateNode.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\FsmNode\FsmPatchDone.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\FsmNode\FsmCreateDownloader.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\FsmNode\FsmUpdateVersion.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\FsmNode\FsmClearCache.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\FsmNode\FsmPatchPrepare.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\FsmNode\FsmUpdateManifest.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\FsmNode\FsmInitialize.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\FsmNode\FsmDownloadFiles.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\FsmNode\FsmDownloadOver.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Module\Event\Event.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Module\Event\EventType.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Module\Event\IEventListener.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Module\Event\IEventArgs.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\UpdateEventDefine.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\BundleStream.cs" />
+    <Compile Include="Assets\Framework\Runtime\Util\StreamingAssets\StreamingAssetsUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />
@@ -1019,6 +1037,9 @@
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="YooAsset">
+      <HintPath>Library\ScriptAssemblies\YooAsset.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>

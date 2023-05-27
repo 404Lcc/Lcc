@@ -28,6 +28,8 @@ namespace LccModel
             Game.AddSingleton<Root>();
             Game.AddSingleton<Loader>();
 
+            Game.AddSingleton<Event>();
+
             Game.Scene.AddComponent<Manager>();
 
             Game.Scene.AddComponent<AssetManager>();
@@ -42,10 +44,7 @@ namespace LccModel
             Game.Scene.AddComponent<CombatContext>();
             Game.Scene.AddComponent<CombatViewContext>();
 
-            await UpdateManager.Instance.StartUpdate();
-
-
-            Loader.Instance.Start(globalConfig);
+            UpdateManager.Instance.StartUpdate(globalConfig);
 
         }
         void FixedUpdate()
