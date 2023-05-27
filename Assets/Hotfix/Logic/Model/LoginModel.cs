@@ -3,7 +3,6 @@ namespace LccHotfix
     [Model]
     public class LoginModel : ModelTemplate
     {
-        public bool isEnterMain;
         public override void Init()
         {
             base.Init();
@@ -11,7 +10,7 @@ namespace LccHotfix
 
         public void OnEnterMain()
         {
-            isEnterMain = true;
+            SceneStateManager.Instance.NextState(SceneStateType.Main);
         }
     }
 }

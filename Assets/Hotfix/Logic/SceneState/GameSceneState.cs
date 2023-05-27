@@ -14,8 +14,6 @@ namespace LccHotfix
 
             PanelManager.Instance.HidePanel(PanelType.UITop);
 
-            await SceneLoadManager.Instance.LoadSceneAsync(SceneName.Game, AssetType.Scene);
-
             var combat1 = CombatContext.Instance.AddCombat(1);
             var combat2 = CombatContext.Instance.AddCombat(2, TagType.Enemy);
             combat2.TransformComponent.position = new Vector3(0, 10, 0);

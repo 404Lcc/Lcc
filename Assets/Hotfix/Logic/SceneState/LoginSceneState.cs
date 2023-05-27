@@ -11,7 +11,6 @@ namespace LccHotfix
         {
             await base.OnEnter();
 
-            await SceneLoadManager.Instance.LoadSceneAsync(SceneName.Login, AssetType.Scene);
 
             UIEventManager.Instance.Publish(UIEventType.Login);
 

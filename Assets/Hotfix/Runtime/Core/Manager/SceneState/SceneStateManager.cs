@@ -33,28 +33,6 @@ namespace LccHotfix
                     _sceneStateDict.Add(sceneStateAttribute.sceneType, sceneState);
                 }
             }
-
-            foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(StatePipelineAttribute)))
-            {
-                object[] atts = item.GetCustomAttributes(typeof(StatePipelineAttribute), false);
-                if (atts != null && atts.Length > 0)
-                {
-                    StatePipelineAttribute statePipelineAttribute = (StatePipelineAttribute)atts[0];
-
-                    StatePipeline sceneState = (StatePipeline)Activator.CreateInstance(item);
-                    sceneState.sceneType = statePipelineAttribute.sceneType;
-                    sceneState.target = statePipelineAttribute.target;
-
-                    if (_sceneStateDict.ContainsKey(statePipelineAttribute.sceneType))
-                    {
-                        _sceneStateDict[statePipelineAttribute.sceneType].AddPipeline(sceneState);
-                    }
-                    else
-                    {
-                        LogUtil.Error("增加事件失败 " + statePipelineAttribute.sceneType + "不存在");
-                    }
-                }
-            }
         }
         public override void OnDestroy()
         {
@@ -79,6 +57,19 @@ namespace LccHotfix
             }
         }
 
+        public void NextState(SceneStateType type)
+        {
+            if (type != SceneStateType.None)
+            {
+                SceneState target = _sceneStateDict[type];
+                _last = _current;
+                _current = target;
+
+                _last.OnExit().Coroutine();
+                _current.OnEnter().Coroutine();
+            }
+        }
+
         public SceneState GetState(SceneStateType type)
         {
             if (!_sceneStateDict.ContainsKey(type)) return null;
@@ -95,21 +86,7 @@ namespace LccHotfix
             if (_current == null) return;
             if (_forceStop) return;
 
-            SceneStateType result = _current.CheckTarget();
-
-            if (result != SceneStateType.None)
-            {
-                SceneState target = _sceneStateDict[result];
-                _last = _current;
-                _current = target;
-
-                _last.OnExit().Coroutine();
-                _current.OnEnter().Coroutine();
-            }
-            else
-            {
-                _current.Tick();
-            }
+            _current.Tick();
         }
     }
 }

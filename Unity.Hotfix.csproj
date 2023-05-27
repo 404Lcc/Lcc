@@ -82,7 +82,6 @@
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Main\MainPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Base\AObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelType.cs" />
-    <Compile Include="Assets\Hotfix\Logic\StatePipeline\EnterMain.cs" />
     <Compile Include="Assets\Hotfix\Runtime\GlobalConfig\AssetType\AssetType.cs" />
     <Compile Include="Assets\Hotfix\Logic\Model\LoginModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\ProtobufObject.cs" />
@@ -99,7 +98,6 @@
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Top\TopPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\PanelType\PanelTypeExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\GlobalConfig\SceneName\SceneName.cs" />
-    <Compile Include="Assets\Hotfix\Logic\StatePipeline\EnterGame.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\ISingleton.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Model\ModelTemplate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Config\TestConfig.cs" />
@@ -118,12 +116,10 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\ISceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\GameObjectComponent.cs" />
-    <Compile Include="Assets\Hotfix\Logic\StatePipeline\EnterLogin.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Command\CommandDataType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\IConfig.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Root.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\StatePipeline.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\IPanelHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\ISingletonLateUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\Event\EventAttribute.cs" />

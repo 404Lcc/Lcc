@@ -3,7 +3,6 @@ namespace LccHotfix
     [Model]
     public class MainModel : ModelTemplate
     {
-        public bool isEnterGame;
         public override void Init()
         {
             base.Init();
@@ -11,7 +10,7 @@ namespace LccHotfix
 
         public void EnterGame()
         {
-            isEnterGame = true;
+            SceneStateManager.Instance.NextState(SceneStateType.Game);
         }
     }
 }
