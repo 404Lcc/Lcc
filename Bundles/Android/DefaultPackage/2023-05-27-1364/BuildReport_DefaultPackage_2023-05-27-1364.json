@@ -1,0 +1,424 @@
+{
+    "Summary": {
+        "YooVersion": "1.4.14",
+        "UnityVersion": "2021.3.20f1c1",
+        "BuildDate": "2023/5/27 22:44:50",
+        "BuildSeconds": 8,
+        "BuildTarget": 13,
+        "BuildPipeline": 0,
+        "BuildMode": 0,
+        "BuildPackageName": "DefaultPackage",
+        "BuildPackageVersion": "2023-05-27-1364",
+        "EnableAddressable": true,
+        "UniqueBundleName": false,
+        "EncryptionServicesClassName": "YooAsset.Editor.EncryptionNone",
+        "OutputNameStyle": 1,
+        "CompressOption": 2,
+        "DisableWriteTypeTree": false,
+        "IgnoreTypeTreeChanges": true,
+        "AssetFileTotalCount": 26,
+        "MainAssetTotalCount": 19,
+        "AllBundleTotalCount": 10,
+        "AllBundleTotalSize": 848381,
+        "EncryptedBundleTotalCount": 0,
+        "EncryptedBundleTotalSize": 0,
+        "RawBundleTotalCount": 0,
+        "RawBundleTotalSize": 0
+    },
+    "AssetInfos": [
+        {
+            "Address": "TestConfig",
+            "AssetPath": "Assets/Bundles/Config/TestConfig.txt",
+            "AssetGUID": "b57f3bc05f428234fb96810b23cce68f",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_config.bundle",
+            "MainBundleSize": 1349,
+            "DependBundles": [],
+            "DependAssets": []
+        },
+        {
+            "Address": "TestConfigCategory",
+            "AssetPath": "Assets/Bundles/Config/TestConfigCategory.bytes",
+            "AssetGUID": "99927160b4e4e9047aed97cdce2edde7",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_config.bundle",
+            "MainBundleSize": 1349,
+            "DependBundles": [],
+            "DependAssets": []
+        },
+        {
+            "Address": "Unity.Hotfix.dll",
+            "AssetPath": "Assets/Bundles/DLL/Unity.Hotfix.dll.bytes",
+            "AssetGUID": "7b6adee26e2d1754e9d84b2bc7fe3899",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_dll.bundle",
+            "MainBundleSize": 116572,
+            "DependBundles": [],
+            "DependAssets": []
+        },
+        {
+            "Address": "Unity.Hotfix.pdb",
+            "AssetPath": "Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes",
+            "AssetGUID": "fedcac26af2fd7a4db0ef247133d692f",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_dll.bundle",
+            "MainBundleSize": 116572,
+            "DependBundles": [],
+            "DependAssets": []
+        },
+        {
+            "Address": "UIGamePanel",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UIGamePanel.prefab",
+            "AssetGUID": "3b5fae36d5365d543a31f568be05f700",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_prefab_panel.bundle",
+            "MainBundleSize": 617362,
+            "DependBundles": [
+                "unityshaders.bundle"
+            ],
+            "DependAssets": [
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Font Asset Icon.psd",
+                "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader",
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Text Component Icon.psd",
+                "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset",
+                "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+                "Assets/TextMesh Pro/Fonts/LiberationSans.ttf"
+            ]
+        },
+        {
+            "Address": "UILoadingPanel",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UILoadingPanel.prefab",
+            "AssetGUID": "4f6c33459c44e9c46a0a4a4cc2c5d21f",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_prefab_panel.bundle",
+            "MainBundleSize": 617362,
+            "DependBundles": [],
+            "DependAssets": []
+        },
+        {
+            "Address": "UILoginPanel",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UILoginPanel.prefab",
+            "AssetGUID": "e333ac995d70997489a45afd61434a20",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_prefab_panel.bundle",
+            "MainBundleSize": 617362,
+            "DependBundles": [
+                "unityshaders.bundle"
+            ],
+            "DependAssets": [
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Input Field Icon.psd",
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Font Asset Icon.psd",
+                "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader",
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Text Component Icon.psd",
+                "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset",
+                "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+                "Assets/TextMesh Pro/Fonts/LiberationSans.ttf"
+            ]
+        },
+        {
+            "Address": "UIMainPanel",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UIMainPanel.prefab",
+            "AssetGUID": "960c153f358a8e44b89376204d407e20",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_prefab_panel.bundle",
+            "MainBundleSize": 617362,
+            "DependBundles": [
+                "unityshaders.bundle"
+            ],
+            "DependAssets": [
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Font Asset Icon.psd",
+                "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader",
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Text Component Icon.psd",
+                "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset",
+                "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+                "Assets/TextMesh Pro/Fonts/LiberationSans.ttf"
+            ]
+        },
+        {
+            "Address": "UITopPanel",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UITopPanel.prefab",
+            "AssetGUID": "9601b22ea8fbc634180394721699c175",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_prefab_panel.bundle",
+            "MainBundleSize": 617362,
+            "DependBundles": [
+                "unityshaders.bundle"
+            ],
+            "DependAssets": [
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Font Asset Icon.psd",
+                "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader",
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Text Component Icon.psd",
+                "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset",
+                "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+                "Assets/TextMesh Pro/Fonts/LiberationSans.ttf"
+            ]
+        },
+        {
+            "Address": "Game",
+            "AssetPath": "Assets/Bundles/Scene/Game.unity",
+            "AssetGUID": "0f4c80e250eafae488188ce4be79e4de",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_scene.bundle",
+            "MainBundleSize": 72351,
+            "DependBundles": [],
+            "DependAssets": []
+        },
+        {
+            "Address": "Login",
+            "AssetPath": "Assets/Bundles/Scene/Login.unity",
+            "AssetGUID": "f6d0d39a3633ae048b909613b27d912d",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_scene.bundle",
+            "MainBundleSize": 72351,
+            "DependBundles": [],
+            "DependAssets": []
+        },
+        {
+            "Address": "Main",
+            "AssetPath": "Assets/Bundles/Scene/Main.unity",
+            "AssetGUID": "cbef62eac474d9847a951023bfe96f63",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_scene.bundle",
+            "MainBundleSize": 72351,
+            "DependBundles": [],
+            "DependAssets": []
+        },
+        {
+            "Address": "Execution_1",
+            "AssetPath": "Assets/Bundles/SkillConfig/Execution/Execution_1.asset",
+            "AssetGUID": "6834d9841e3b55a44be8c960d9b7225f",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_skillconfig_execution.bundle",
+            "MainBundleSize": 2859,
+            "DependBundles": [],
+            "DependAssets": []
+        },
+        {
+            "Address": "Item_1",
+            "AssetPath": "Assets/Bundles/SkillConfig/Item/Item_1.asset",
+            "AssetGUID": "48fe1dc9b6504e94e9cd6ccf588f689a",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_skillconfig_item.bundle",
+            "MainBundleSize": 3338,
+            "DependBundles": [
+                "assets_bundles_skillconfig_status.bundle"
+            ],
+            "DependAssets": [
+                "Assets/Bundles/SkillConfig/Status/Status_1.asset",
+                "Assets/Bundles/SkillConfig/Status/Status_2.asset"
+            ]
+        },
+        {
+            "Address": "Skill_1",
+            "AssetPath": "Assets/Bundles/SkillConfig/Skill/Skill_1.asset",
+            "AssetGUID": "724140e11dd39a540bf1aadbc67b2caa",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_skillconfig_skill.bundle",
+            "MainBundleSize": 3059,
+            "DependBundles": [],
+            "DependAssets": []
+        },
+        {
+            "Address": "Status_1",
+            "AssetPath": "Assets/Bundles/SkillConfig/Status/Status_1.asset",
+            "AssetGUID": "211b851955cba4b45aa2da28f932ff8b",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_skillconfig_status.bundle",
+            "MainBundleSize": 3274,
+            "DependBundles": [],
+            "DependAssets": []
+        },
+        {
+            "Address": "Status_2",
+            "AssetPath": "Assets/Bundles/SkillConfig/Status/Status_2.asset",
+            "AssetGUID": "95593e1279321d94e9fc4932326463e4",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_skillconfig_status.bundle",
+            "MainBundleSize": 3274,
+            "DependBundles": [],
+            "DependAssets": []
+        },
+        {
+            "Address": "Tips",
+            "AssetPath": "Assets/Bundles/Tool/Tips.prefab",
+            "AssetGUID": "88b542c24f6c22e46bf2170716d84a52",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_tool.bundle",
+            "MainBundleSize": 6752,
+            "DependBundles": [],
+            "DependAssets": []
+        },
+        {
+            "Address": "TipsWindow",
+            "AssetPath": "Assets/Bundles/Tool/TipsWindow.prefab",
+            "AssetGUID": "b935fd6c9766c3f44a89c7a6eb42c327",
+            "AssetTags": [],
+            "MainBundleName": "assets_bundles_tool.bundle",
+            "MainBundleSize": 6752,
+            "DependBundles": [],
+            "DependAssets": []
+        }
+    ],
+    "BundleInfos": [
+        {
+            "BundleName": "assets_bundles_config.bundle",
+            "FileName": "cc2d76a5626ab5154a9a3446c579842b.bundle",
+            "FileHash": "cc2d76a5626ab5154a9a3446c579842b",
+            "FileCRC": "afee5231",
+            "FileSize": 1349,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [],
+            "ReferenceIDs": [],
+            "AllBuiltinAssets": [
+                "Assets/Bundles/Config/TestConfig.txt",
+                "Assets/Bundles/Config/TestConfigCategory.bytes"
+            ]
+        },
+        {
+            "BundleName": "assets_bundles_dll.bundle",
+            "FileName": "1dd24685151f4672307b7e64a5da36cb.bundle",
+            "FileHash": "1dd24685151f4672307b7e64a5da36cb",
+            "FileCRC": "32a96791",
+            "FileSize": 116572,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [],
+            "ReferenceIDs": [],
+            "AllBuiltinAssets": [
+                "Assets/Bundles/DLL/Unity.Hotfix.dll.bytes",
+                "Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes"
+            ]
+        },
+        {
+            "BundleName": "assets_bundles_prefab_panel.bundle",
+            "FileName": "e4a14dc3dcc3c047cb5c4307945160e4.bundle",
+            "FileHash": "e4a14dc3dcc3c047cb5c4307945160e4",
+            "FileCRC": "f26e8fe0",
+            "FileSize": 617362,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [],
+            "ReferenceIDs": [],
+            "AllBuiltinAssets": [
+                "Assets/Bundles/Prefab/Panel/UIGamePanel.prefab",
+                "Assets/Bundles/Prefab/Panel/UILoadingPanel.prefab",
+                "Assets/Bundles/Prefab/Panel/UILoginPanel.prefab",
+                "Assets/Bundles/Prefab/Panel/UIMainPanel.prefab",
+                "Assets/Bundles/Prefab/Panel/UITopPanel.prefab",
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Font Asset Icon.psd",
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Text Component Icon.psd",
+                "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset",
+                "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+                "Assets/TextMesh Pro/Fonts/LiberationSans.ttf",
+                "Packages/com.unity.textmeshpro/Editor Resources/Gizmos/TMP - Input Field Icon.psd"
+            ]
+        },
+        {
+            "BundleName": "assets_bundles_scene.bundle",
+            "FileName": "ff0cf2c9cca506e79cd27cfc4b535e0d.bundle",
+            "FileHash": "ff0cf2c9cca506e79cd27cfc4b535e0d",
+            "FileCRC": "b7710268",
+            "FileSize": 72351,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [],
+            "ReferenceIDs": [],
+            "AllBuiltinAssets": [
+                "Assets/Bundles/Scene/Game.unity",
+                "Assets/Bundles/Scene/Login.unity",
+                "Assets/Bundles/Scene/Main.unity"
+            ]
+        },
+        {
+            "BundleName": "assets_bundles_skillconfig_execution.bundle",
+            "FileName": "dfa3667f4b6226d130dfb939b677da65.bundle",
+            "FileHash": "dfa3667f4b6226d130dfb939b677da65",
+            "FileCRC": "66f6568a",
+            "FileSize": 2859,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [],
+            "ReferenceIDs": [],
+            "AllBuiltinAssets": [
+                "Assets/Bundles/SkillConfig/Execution/Execution_1.asset"
+            ]
+        },
+        {
+            "BundleName": "assets_bundles_skillconfig_item.bundle",
+            "FileName": "6318e7837cf06894a704e959b007310a.bundle",
+            "FileHash": "6318e7837cf06894a704e959b007310a",
+            "FileCRC": "e888d539",
+            "FileSize": 3338,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [],
+            "ReferenceIDs": [],
+            "AllBuiltinAssets": [
+                "Assets/Bundles/SkillConfig/Item/Item_1.asset"
+            ]
+        },
+        {
+            "BundleName": "assets_bundles_skillconfig_skill.bundle",
+            "FileName": "91dd28ed5d2873d442f905b5ef9f5a60.bundle",
+            "FileHash": "91dd28ed5d2873d442f905b5ef9f5a60",
+            "FileCRC": "d45a088c",
+            "FileSize": 3059,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [],
+            "ReferenceIDs": [],
+            "AllBuiltinAssets": [
+                "Assets/Bundles/SkillConfig/Skill/Skill_1.asset"
+            ]
+        },
+        {
+            "BundleName": "assets_bundles_skillconfig_status.bundle",
+            "FileName": "01e371ee78727ae976c8145f4d138fa2.bundle",
+            "FileHash": "01e371ee78727ae976c8145f4d138fa2",
+            "FileCRC": "e919d5fb",
+            "FileSize": 3274,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [],
+            "ReferenceIDs": [
+                5
+            ],
+            "AllBuiltinAssets": [
+                "Assets/Bundles/SkillConfig/Status/Status_1.asset",
+                "Assets/Bundles/SkillConfig/Status/Status_2.asset"
+            ]
+        },
+        {
+            "BundleName": "assets_bundles_tool.bundle",
+            "FileName": "432e3a11e7b4d610ef534efaec601227.bundle",
+            "FileHash": "432e3a11e7b4d610ef534efaec601227",
+            "FileCRC": "6482d65b",
+            "FileSize": 6752,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [],
+            "ReferenceIDs": [],
+            "AllBuiltinAssets": [
+                "Assets/Bundles/Tool/Tips.prefab",
+                "Assets/Bundles/Tool/TipsWindow.prefab"
+            ]
+        },
+        {
+            "BundleName": "unityshaders.bundle",
+            "FileName": "07b1e537e841349f9cf35172935ce53c.bundle",
+            "FileHash": "07b1e537e841349f9cf35172935ce53c",
+            "FileCRC": "796a752c",
+            "FileSize": 21465,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [],
+            "ReferenceIDs": [
+                2
+            ],
+            "AllBuiltinAssets": [
+                "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader"
+            ]
+        }
+    ]
+}

@@ -36,6 +36,9 @@ namespace LccModel
         {
             if (_isRun == false)
             {
+                YooAssets.Initialize();
+                YooAssets.SetOperationSystemMaxTimeSlice(30);
+
                 _isRun = true;
                 this.globalConfig = globalConfig;
                 PlayMode = globalConfig.playMode;

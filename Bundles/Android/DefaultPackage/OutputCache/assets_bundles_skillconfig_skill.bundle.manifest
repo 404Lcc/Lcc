@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 3883452669
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c5cf0cb698f906a952100751bdcb9a70
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9381d50f6780dc5735fed7d8e75f0fd0
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: 90a0c38887806c8419008ab853968f9d, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Sirenix.Serialization
+  ClassName: Sirenix.Serialization.SerializationData
+Assets:
+- Assets/Bundles/SkillConfig/Skill/Skill_1.asset
+Dependencies: []

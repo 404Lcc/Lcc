@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 1862168836
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 4f05d9233f92a964432bd9ab6f8b6d2a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 80d0ea2b2ed1fd470215f5f299735cd6
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: a4b74c267e78aec449e8861e1dcb4c36, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5fa68c14a93353447b8f06e1cb13662c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Sirenix.Serialization
+  ClassName: Sirenix.Serialization.SerializationData
+Assets:
+- Assets/Bundles/SkillConfig/Item/Item_1.asset
+Dependencies:
+- D:/Unity Project/Lcc/Bundles/Android/DefaultPackage/OutputCache/assets_bundles_skillconfig_status.bundle
