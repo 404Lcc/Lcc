@@ -1,5 +1,4 @@
-﻿using ET;
-using YooAsset;
+﻿using YooAsset;
 
 namespace LccModel
 {
