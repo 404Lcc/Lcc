@@ -310,6 +310,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\UpdateEventDefine.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\BundleStream.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\StreamingAssets\StreamingAssetsUtil.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\UserEventDefine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />

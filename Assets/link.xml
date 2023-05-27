@@ -4749,6 +4749,7 @@
     <type fullname="LccModel.FsmUpdateVersion" preserve="all" />
     <type fullname="LccModel.UpdateEventDefine" preserve="all" />
     <type fullname="LccModel.UpdateManager" preserve="all" />
+    <type fullname="LccModel.UserEventDefine" preserve="all" />
     <type fullname="LccModel.AABB2DComponent" preserve="all" />
     <type fullname="LccModel.EventArgs`1" preserve="all" />
     <type fullname="LccModel.EventArgsExtend" preserve="all" />
@@ -4891,6 +4892,11 @@
     <type fullname="LccModel.UpdateEventDefine+PackageVersionUpdateFailed" preserve="all" />
     <type fullname="LccModel.UpdateEventDefine+PatchManifestUpdateFailed" preserve="all" />
     <type fullname="LccModel.UpdateEventDefine+WebFileDownloadFailed" preserve="all" />
+    <type fullname="LccModel.UserEventDefine+UserTryInitialize" preserve="all" />
+    <type fullname="LccModel.UserEventDefine+UserBeginDownloadWebFiles" preserve="all" />
+    <type fullname="LccModel.UserEventDefine+UserTryUpdatePackageVersion" preserve="all" />
+    <type fullname="LccModel.UserEventDefine+UserTryUpdatePatchManifest" preserve="all" />
+    <type fullname="LccModel.UserEventDefine+UserTryDownloadWebFiles" preserve="all" />
     <type fullname="LccModel.AEvent`1+&lt;Handle&gt;d__3" preserve="all" />
     <type fullname="LccModel.MainThreadSynchronizationContext+&lt;&gt;c__DisplayClass3_0" preserve="all" />
     <type fullname="LccModel.ThreadSynchronizationContext+&lt;&gt;c__DisplayClass3_0" preserve="all" />

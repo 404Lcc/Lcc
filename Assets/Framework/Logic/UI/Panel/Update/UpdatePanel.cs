@@ -140,9 +140,9 @@ namespace LccModel
                 case EventType.InitializeFailed:
                     void InitializeFailed()
                     {
-                        System.Action callback = () =>
+                        Action callback = () =>
                         {
-                            //UserEventDefine.UserTryInitialize.SendEventMessage();
+                            UserEventDefine.UserTryInitialize.Publish();
                         };
                         ShowMessageBox($"Failed to initialize package !", callback);
                     }
@@ -161,9 +161,9 @@ namespace LccModel
                     void FoundUpdateFiles()
                     {
                         var foundUpdateFiles = args1.GetValue<UpdateEventDefine.FoundUpdateFiles>();
-                        System.Action callback = () =>
+                        Action callback = () =>
                         {
-                            //UserEventDefine.UserBeginDownloadWebFiles.SendEventMessage();
+                            UserEventDefine.UserBeginDownloadWebFiles.Publish();
                         };
                         float sizeMB = foundUpdateFiles.TotalSizeBytes / 1048576f;
                         sizeMB = Mathf.Clamp(sizeMB, 0.1f, float.MaxValue);
@@ -189,9 +189,9 @@ namespace LccModel
                 case EventType.PackageVersionUpdateFailed:
                     void PackageVersionUpdateFailed()
                     {
-                        System.Action callback = () =>
+                        Action callback = () =>
                         {
-                            //UserEventDefine.UserTryUpdatePackageVersion.SendEventMessage();
+                            UserEventDefine.UserTryUpdatePackageVersion.Publish();
                         };
                         ShowMessageBox($"Failed to update static version, please check the network status.", callback);
                     }
@@ -201,9 +201,9 @@ namespace LccModel
                 case EventType.PatchManifestUpdateFailed:
                     void PatchManifestUpdateFailed()
                     {
-                        System.Action callback = () =>
+                        Action callback = () =>
                         {
-                            //UserEventDefine.UserTryUpdatePatchManifest.SendEventMessage();
+                            UserEventDefine.UserTryUpdatePatchManifest.Publish();
                         };
                         ShowMessageBox($"Failed to update patch manifest, please check the network status.", callback);
                     }
@@ -213,9 +213,9 @@ namespace LccModel
                     void WebFileDownloadFailed()
                     {
                         var webFileDownloadFailed = args1.GetValue<UpdateEventDefine.WebFileDownloadFailed>();
-                        System.Action callback = () =>
+                        Action callback = () =>
                         {
-                            //UserEventDefine.UserTryDownloadWebFiles.SendEventMessage();
+                            UserEventDefine.UserTryDownloadWebFiles.Publish();
                         };
                         ShowMessageBox($"Failed to download file : {webFileDownloadFailed.FileName}", callback);
                     }

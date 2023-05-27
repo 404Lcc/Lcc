@@ -1,8 +1,9 @@
-﻿using YooAsset;
+﻿using UnityEditor.VersionControl;
+using YooAsset;
 
 namespace LccModel
 {
-    public class UpdateManager : AObjectBase
+    public class UpdateManager : AObjectBase, IEventListener
     {
         public static UpdateManager Instance { get; set; }
 
@@ -29,6 +30,12 @@ namespace LccModel
         {
             base.OnDestroy();
 
+            Event.Instance.RemoveListener(EventType.UserTryInitialize, this);
+            Event.Instance.RemoveListener(EventType.UserBeginDownloadWebFiles, this);
+            Event.Instance.RemoveListener(EventType.UserTryUpdatePackageVersion, this);
+            Event.Instance.RemoveListener(EventType.UserTryUpdatePatchManifest, this);
+            Event.Instance.RemoveListener(EventType.UserTryDownloadWebFiles, this);
+
             Instance = null;
         }
         public void StartUpdate(GlobalConfig globalConfig)
@@ -43,6 +50,12 @@ namespace LccModel
                 PlayMode = globalConfig.playMode;
 
                 _version = globalConfig.version;
+
+                Event.Instance.AddListener(EventType.UserTryInitialize, this);
+                Event.Instance.AddListener(EventType.UserBeginDownloadWebFiles, this);
+                Event.Instance.AddListener(EventType.UserTryUpdatePackageVersion, this);
+                Event.Instance.AddListener(EventType.UserTryUpdatePatchManifest, this);
+                Event.Instance.AddListener(EventType.UserTryDownloadWebFiles, this);
 
                 LogUtil.Debug("开启补丁更新流程...");
                 _machine = new StateMachine(this);
@@ -70,6 +83,28 @@ namespace LccModel
         public string GetVersion()
         {
             return _version;
+        }
+
+        public void HandleEvent(EventType eventType, IEventArgs args1 = null, IEventArgs args2 = null, IEventArgs args3 = null, IEventArgs args4 = null)
+        {
+            switch (eventType)
+            {
+                case EventType.UserTryInitialize:
+                    _machine.ChangeState<FsmInitialize>();
+                    break;
+                case EventType.UserBeginDownloadWebFiles:
+                    _machine.ChangeState<FsmDownloadFiles>();
+                    break;
+                case EventType.UserTryUpdatePackageVersion:
+                    _machine.ChangeState<FsmUpdateVersion>();
+                    break;
+                case EventType.UserTryUpdatePatchManifest:
+                    _machine.ChangeState<FsmUpdateManifest>();
+                    break;
+                case EventType.UserTryDownloadWebFiles:
+                    _machine.ChangeState<FsmCreateDownloader>();
+                    break;
+            }
         }
     }
 }
