@@ -2,6 +2,7 @@
   "dependencies": {
     "com.focus-creative-games.hybridclr_unity": "https://gitee.com/focus-creative-games/hybridclr_unity.git",
     "com.ourpalm.ilruntime": "2.1.0",
+    "com.tuyoogame.yooasset": "1.4.14",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.collab-proxy": "2.0.1",
     "com.unity.ide.rider": "3.0.18",
@@ -42,5 +43,14 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.cn",
+      "url": "https://package.openupm.cn",
+      "scopes": [
+        "com.tuyoogame.yooasset"
+      ]
+    }
+  ]
 }
