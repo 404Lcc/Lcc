@@ -74,16 +74,17 @@ namespace LccHotfix
         public UIShowMode showMode = UIShowMode.Normal;
         public UINavigationMode navigationMode = UINavigationMode.IgnoreNavigation;
     }
-    public class PanelCompare : IComparer<Panel>
-    {
-        public int Compare(Panel left, Panel right)
-        {
-            //返回值1，则left > right
-            //返回值0，则left = right
-            //返回值-1，则left < right
-            return left.Depth - right.Depth;
-        }
-    }
+    //ilr下有个bug
+    //public class PanelCompare : IComparer<Panel>
+    //{
+    //    public int Compare(Panel left, Panel right)
+    //    {
+    //        //返回值1，则left > right
+    //        //返回值0，则left = right
+    //        //返回值-1，则left < right
+    //        return left.Depth - right.Depth;
+    //    }
+    //}
     public class Panel : AObjectBase
     {
         private const int NormalDepth = 1000;

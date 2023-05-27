@@ -33,7 +33,7 @@ namespace LccHotfix
 
         public List<PanelType> cachedList = new List<PanelType>();//换成列表
 
-        public PanelCompare compare = new PanelCompare();
+        //public PanelCompare compare = new PanelCompare();
         public override void Awake()
         {
             base.Awake();
@@ -536,15 +536,21 @@ namespace LccHotfix
         private int GetCurrentShownPanel()
         {
             List<Panel> list = shownPanelDict.Values.ToList();
-            list.Sort(compare);
-            for (int i = list.Count - 1; i >= 0; i--)
+            //先进行个冒泡排序
+            int num = list.Count - 1;
+            for (int i = 0; i < num; i++)
             {
-                if (list[i].data.type != UIType.Fixed)
+                for (int j = 0; j < num - i; j++)
                 {
-                    return (int)list[i].Type;
+                    if (list[j].Depth < list[j + 1].Depth)
+                    {
+                        Panel temp = list[j];
+                        list[j] = list[j + 1];
+                        list[j + 1] = temp;
+                    }
                 }
             }
-            return (int)PanelType.None;
+            return (int)list[0].Type;
         }
 
         /// <summary>
@@ -644,7 +650,20 @@ namespace LccHotfix
                 //增加导航数据
                 if (panel.data.navigationMode == UINavigationMode.NormalNavigation && (showData == null || (!showData.ignoreAddNavigationData)))
                 {
-                    tempList.Sort(compare);
+                    //先进行个冒泡排序
+                    int num = tempList.Count - 1;
+                    for (int i = 0; i < num; i++)
+                    {
+                        for (int j = 0; j < num - i; j++)
+                        {
+                            if (tempList[j].Depth > tempList[j + 1].Depth)
+                            {
+                                Panel temp = tempList[j];
+                                tempList[j] = tempList[j + 1];
+                                tempList[j + 1] = temp;
+                            }
+                        }
+                    }
 
                     List<PanelType> hiddenPanelList = new List<PanelType>();
                     for (int i = 0; i < tempList.Count; i++)

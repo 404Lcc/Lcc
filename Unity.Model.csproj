@@ -173,7 +173,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Generated\UnityEngine_UI_RawImage_Binding.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Asset\AssetManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Expression\ExpressionUtil.cs" />
-    <Compile Include="Assets\Framework\Runtime\Util\SerializeUtil\SerializeUtil.cs" />
+    <Compile Include="Assets\Framework\Runtime\Util\Serialize\SerializeUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int32_ILTy.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Adapter\CoroutineAdapter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\AbilityEffectIntervalTriggerComponent.cs" />
@@ -432,6 +432,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
+    <Compile Include="Assets\Framework\Runtime\Util\Sort\SortUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />

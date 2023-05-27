@@ -66,6 +66,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\EventSystem.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\MVVM\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\ArchiveManager.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Model\MainModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\Event\EventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Game.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\ResolutionType.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelType.cs" />
     <Compile Include="Assets\Hotfix\Logic\StatePipeline\EnterMain.cs" />
     <Compile Include="Assets\Hotfix\Runtime\GlobalConfig\AssetType\AssetType.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Model\LoginModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\ProtobufObject.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\MVVM\View\Binding\Binding.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateType.cs" />
@@ -93,17 +95,20 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\Event\AEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\ISingletonFixedUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Language\LanguageManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Model\ModelAttribute.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Top\TopPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\PanelType\PanelTypeExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\GlobalConfig\SceneName\SceneName.cs" />
     <Compile Include="Assets\Hotfix\Logic\StatePipeline\EnterGame.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\ISingleton.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Model\ModelTemplate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Config\TestConfig.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\Event\IEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Global\GlobalManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Video\VideoManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\MVVM\View\View\IView.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEventType.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Model\ModelManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\Singleton.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Game\GamePanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
@@ -145,11 +150,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\UIBinding.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Model\ModelAttribute.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Model\ModelManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Model\ModelTemplate.cs" />
-    <Compile Include="Assets\Hotfix\Logic\Model\LoginModel.cs" />
-    <Compile Include="Assets\Hotfix\Logic\Model\MainModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

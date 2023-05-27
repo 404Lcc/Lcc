@@ -4941,6 +4941,7 @@
     <type fullname="LccModel.ResolutionUtil" preserve="all" />
     <type fullname="LccModel.RijndaelUtil" preserve="all" />
     <type fullname="LccModel.SerializeUtil" preserve="all" />
+    <type fullname="LccModel.SortUtil" preserve="all" />
     <type fullname="LccModel.WebUtil" preserve="all" />
     <type fullname="LccModel.DisplayMode" preserve="all" />
     <type fullname="LccModel.DoubleClickEvent" preserve="all" />
