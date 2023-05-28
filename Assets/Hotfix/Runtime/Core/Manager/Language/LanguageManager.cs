@@ -2,6 +2,7 @@
 using LccModel;
 using System.Collections.Generic;
 using UnityEngine;
+using YooAsset;
 
 namespace LccHotfix
 {
@@ -26,7 +27,7 @@ namespace LccHotfix
         }
         public void ChangeLanguage(LanguageType type)
         {
-            TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(out LoadHandler handler, type.ToString(), AssetSuffix.Txt, AssetType.Config);
+            TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetOperationHandle handle, type.ToString(), AssetSuffix.Txt, AssetType.Config);
             foreach (string item in asset.text.Split('\n'))
             {
                 if (string.IsNullOrEmpty(item))
@@ -37,7 +38,7 @@ namespace LccHotfix
                 if (languageDict.ContainsKey(KeyValue[0])) return;
                 languageDict.Add(KeyValue[0], KeyValue[1]);
             }
-            handler.UnLoad();
+            AssetManager.Instance.UnLoadAsset(handle);
         }
         public string GetValue(string key)
         {

@@ -1,6 +1,7 @@
 ﻿using BM;
 using System.Collections.Generic;
 using UnityEngine;
+using YooAsset;
 using Object = UnityEngine.Object;
 
 namespace LccHotfix
@@ -97,7 +98,7 @@ namespace LccHotfix
 
         private int _depth;
 
-        private LoadHandler _loadHandler;
+        private AssetOperationHandle _loadHandle;
         private GameObject _gameObject;
         private Canvas _canvas;
 
@@ -109,15 +110,15 @@ namespace LccHotfix
                 return PanelManager.Instance.GetPanelLogic(Type);
             }
         }
-        public LoadHandler LoadHandler
+        public AssetOperationHandle LoadHandle
         {
             get
             {
-                return _loadHandler;
+                return _loadHandle;
             }
             set
             {
-                _loadHandler = value;
+                _loadHandle = value;
             }
         }
         public GameObject GameObject

@@ -161,8 +161,8 @@
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\LanguageConstants.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\XmlProtoSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoException.cs" />
-    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\AssetComponentUnLoad.cs" />
     <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\Base\LoadBase.cs" />
+    <Compile Include="Assets\3rdPlugins\BundleMasterRuntime\AssetComponentUnLoad.cs" />
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Parameter.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Extensible.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\ValueMember.cs" />

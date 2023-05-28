@@ -70,8 +70,8 @@
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\FrameworkEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\FrameworkTreeWindow\FrameworkTreeWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\BuildAssets.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\DevelopSceneChange.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\InspectorEditor\LccView\LccViewEditor.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\BundleMasterEditor\DevelopSceneChange.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\IObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\Roslyn\BuildType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\EnumObjectType.cs" />
@@ -99,8 +99,8 @@
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\TagEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\MenuItem\Lcc\LccMenuItem.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectTypeUtil.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\MenuTree\MenuEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\IntObjectType.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\MenuTree\MenuEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\MenuTree\AMenuEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\FloatObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\RectObjectType.cs" />

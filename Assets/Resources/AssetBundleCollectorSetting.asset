@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AssetBundleCollectorSetting
   m_EditorClassIdentifier: 
   ShowPackageView: 1
-  EnableAddressable: 1
+  EnableAddressable: 0
   UniqueBundleName: 0
   ShowEditorAlias: 1
   Packages:

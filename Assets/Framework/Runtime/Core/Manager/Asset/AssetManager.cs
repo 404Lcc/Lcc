@@ -1,6 +1,6 @@
-﻿using BM;
-using ET;
+﻿using ET;
 using UnityEngine;
+using YooAsset;
 using Object = UnityEngine.Object;
 
 namespace LccModel
@@ -9,6 +9,11 @@ namespace LccModel
     public class AssetManager : AObjectBase
     {
         public static AssetManager Instance { get; set; }
+
+        public const string DefaultPackage = "DefaultPackage";
+
+        public ResourcePackage Package => YooAssets.GetPackage(DefaultPackage);
+
         public string GetAssetPath(string name, string suffix, params string[] types)
         {
             if (types.Length == 0) return name;
@@ -34,40 +39,34 @@ namespace LccModel
         {
             base.OnDestroy();
 
-            UnLoadAllAssets();
+            ForceUnloadAllAssets();
             Instance = null;
         }
-        public async ETTask<LoadHandler> LoadAssetAsync<T>(string name, string suffix, params string[] types) where T : Object
+
+
+        public void UnLoadAsset(AssetOperationHandle handle)
         {
-            string path = GetAssetPath(name, suffix, types);
-            await AssetComponent.LoadAsync<GameObject>(out LoadHandler handler, path);
-            return handler;
+            handle.Release();
         }
-        public T LoadAsset<T>(out LoadHandler handler, string name, string suffix, params string[] types) where T : Object
+        public void ForceUnloadAllAssets()
         {
-            string path = GetAssetPath(name, suffix, types);
-            T asset = AssetComponent.Load<T>(out handler, path);
-            return asset;
+            Package.ForceUnloadAllAssets();
         }
-        public void UnLoadAsset(LoadHandler handler)
+        public void UnloadUnusedAssets()
         {
-            AssetComponent.UnLoad(handler);
+            Package.UnloadUnusedAssets();
         }
-        public void UnLoadAllAssets()
+        public GameObject InstantiateAsset(out AssetOperationHandle handle, string name, params string[] types)
         {
-            AssetComponent.UnLoadAllAssets();
-        }
-        public GameObject InstantiateAsset(out LoadHandler handler, string name, params string[] types)
-        {
-            GameObject asset = LoadAsset<GameObject>(out handler, name, AssetSuffix.Prefab, types);
+            GameObject asset = LoadAsset<GameObject>(out handle, name, AssetSuffix.Prefab, types);
             if (asset == null) return null;
             GameObject gameObject = Object.Instantiate(asset);
             gameObject.name = name;
             return gameObject;
         }
-        public GameObject InstantiateAsset(out LoadHandler handler, string name, Transform parent, params string[] types)
+        public GameObject InstantiateAsset(out AssetOperationHandle handle, string name, Transform parent, params string[] types)
         {
-            GameObject asset = LoadAsset<GameObject>(out handler, name, AssetSuffix.Prefab, types);
+            GameObject asset = LoadAsset<GameObject>(out handle, name, AssetSuffix.Prefab, types);
             if (asset == null) return null;
             GameObject gameObject = Object.Instantiate(asset);
             gameObject.name = name;
@@ -76,6 +75,22 @@ namespace LccModel
             gameObject.transform.localRotation = Quaternion.identity;
             gameObject.transform.localScale = Vector3.one;
             return gameObject;
+        }
+
+
+
+        public T LoadAsset<T>(out AssetOperationHandle handle, string name, string suffix, params string[] types) where T : Object
+        {
+            string path = GetAssetPath(name, suffix, types);
+            handle = Package.LoadAssetSync<T>(path);
+            return handle.AssetObject as T;
+        }
+        public async ETTask<AssetOperationHandle> LoadAssetAsync<T>(string name, string suffix, params string[] types) where T : Object
+        {
+            string path = GetAssetPath(name, suffix, types);
+            AssetOperationHandle handle = Package.LoadAssetAsync<T>(path);
+            await handle.Task;
+            return handle;
         }
     }
 }

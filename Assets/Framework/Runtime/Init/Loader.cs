@@ -11,6 +11,7 @@ using System.Threading;
 using ILRuntime.Mono.Cecil.Pdb;
 using ILRuntime.Runtime;
 using HybridCLR;
+using YooAsset;
 
 namespace LccModel
 {
@@ -141,16 +142,16 @@ namespace LccModel
                         foreach (var item in config.aotMetaAssemblyNameList)
                         {
                             // 加载assembly对应的dll，会自动为它hook。一旦aot泛型函数的native函数不存在，用解释器版本代码
-                            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>(out LoadHandler dllHandler, item, AssetSuffix.Bytes, AssetType.DLL);
+                            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetOperationHandle dllHandle, item, AssetSuffix.Bytes, AssetType.DLL);
                             if (dllAsset == null)
                             {
                                 LogUtil.Error("AOT资源没找到" + item);
                                 return;
                             }
                             LoadImageErrorCode errorCode = RuntimeApi.LoadMetadataForAOTAssembly(dllAsset.bytes, mode);
-                            if (dllHandler != null)
+                            if (dllHandle != null)
                             {
-                                dllHandler.UnLoad();
+                                AssetManager.Instance.UnLoadAsset(dllHandle);
                             }
                         }
 
@@ -182,22 +183,22 @@ namespace LccModel
             byte[] pdbBytes = null;
 
 
-            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>(out LoadHandler dllHandler, $"{config.hotfix}.dll", AssetSuffix.Bytes, AssetType.DLL);
+            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetOperationHandle dllHandle, $"{config.hotfix}.dll", AssetSuffix.Bytes, AssetType.DLL);
             dllBytes = RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes);
 
-            if (dllHandler != null)
+            if (dllHandle != null)
             {
-                dllHandler.UnLoad();
+                AssetManager.Instance.UnLoadAsset(dllHandle);
             }
 
             if (!config.isRelease)
             {
-                TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>(out LoadHandler pdbHandler, $"{config.hotfix}.pdb", AssetSuffix.Bytes, AssetType.DLL);
+                TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetOperationHandle pdbHandle, $"{config.hotfix}.pdb", AssetSuffix.Bytes, AssetType.DLL);
                 pdbBytes = pdbAsset.bytes;
 
-                if (pdbHandler != null)
+                if (pdbHandle != null)
                 {
-                    pdbHandler.UnLoad();
+                    AssetManager.Instance.UnLoadAsset(pdbHandle);
                 }
             }
 

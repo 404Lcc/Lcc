@@ -1,16 +1,16 @@
-﻿using BM;
-using LccModel;
+﻿using LccModel;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using YooAsset;
 
 namespace LccHotfix
 {
     public class VideoManager : AObjectBase
     {
         public static VideoManager Instance { get; set; }
-        public Dictionary<string, LoadHandler> videoDict = new Dictionary<string, LoadHandler>();
+        public Dictionary<string, AssetOperationHandle> videoDict = new Dictionary<string, AssetOperationHandle>();
         public override void Awake()
         {
             base.Awake();
@@ -23,7 +23,7 @@ namespace LccHotfix
 
             foreach (var item in videoDict.Values)
             {
-                item.UnLoad();
+                AssetManager.Instance.UnLoadAsset(item);
             }
             videoDict.Clear();
             Instance = null;
@@ -38,9 +38,9 @@ namespace LccHotfix
         }
         public VideoClip LoadVideo(string video)
         {
-            AssetManager.Instance.LoadAsset<VideoClip>(out LoadHandler handler, video, AssetSuffix.Mp4, AssetType.Video);
-            videoDict.Add(video, handler);
-            return (VideoClip)handler.Asset;
+            AssetManager.Instance.LoadAsset<VideoClip>(out AssetOperationHandle handle, video, AssetSuffix.Mp4, AssetType.Video);
+            videoDict.Add(video, handle);
+            return (VideoClip)handle.AssetObject;
         }
         public void RemoveVideo(string video, VideoPlayer player)
         {
@@ -101,8 +101,8 @@ namespace LccHotfix
         {
             if (VideoExist(video))
             {
-                LoadHandler loadHandler = videoDict[video];
-                VideoClip clip = (VideoClip)loadHandler.Asset;
+                AssetOperationHandle loadHandle = videoDict[video];
+                VideoClip clip = (VideoClip)loadHandle.AssetObject;
                 return clip;
             }
             return null;

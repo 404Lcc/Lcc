@@ -1,8 +1,8 @@
-﻿using BM;
-using ET;
+﻿using ET;
 using LccModel;
 using System.Collections.Generic;
 using UnityEngine;
+using YooAsset;
 
 namespace LccHotfix
 {
@@ -10,7 +10,7 @@ namespace LccHotfix
     {
         public static AudioManager Instance { get; set; }
 
-        public Dictionary<string, LoadHandler> audioDict = new Dictionary<string, LoadHandler>();
+        public Dictionary<string, AssetOperationHandle> audioDict = new Dictionary<string, AssetOperationHandle>();
 
         public override void Awake()
         {
@@ -24,7 +24,7 @@ namespace LccHotfix
 
             foreach (var item in audioDict.Values)
             {
-                item.UnLoad();
+                AssetManager.Instance.UnLoadAsset(item);
             }
             audioDict.Clear();
             Instance = null;
@@ -40,9 +40,9 @@ namespace LccHotfix
         }
         public AudioClip LoadAudio(string audio)
         {
-            AssetManager.Instance.LoadAsset<AudioClip>(out LoadHandler handler, audio, AssetSuffix.Mp3, AssetType.Audio);
-            audioDict.Add(audio, handler);
-            return (AudioClip)handler.Asset;
+            AssetManager.Instance.LoadAsset<AudioClip>(out AssetOperationHandle handle, audio, AssetSuffix.Mp3, AssetType.Audio);
+            audioDict.Add(audio, handle);
+            return (AudioClip)handle.AssetObject;
         }
         public async ETTask<AudioClip> LoadAudio(string audio, AudioType type)
         {
@@ -98,8 +98,8 @@ namespace LccHotfix
         {
             if (AudioExist(audio))
             {
-                LoadHandler loadHandler = audioDict[audio];
-                AudioClip clip = (AudioClip)loadHandler.Asset;
+                AssetOperationHandle loadHandle = audioDict[audio];
+                AudioClip clip = (AudioClip)loadHandle.AssetObject;
                 return clip;
             }
             return null;

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using YooAsset;
 
 namespace LccHotfix
 {
@@ -268,8 +269,8 @@ namespace LccHotfix
             {
                 return;
             }
-            GameObject go = AssetManager.Instance.InstantiateAsset(out LoadHandler handler, name, _types);
-            panel.LoadHandler = handler;
+            GameObject go = AssetManager.Instance.InstantiateAsset(out AssetOperationHandle handle, name, _types);
+            panel.LoadHandle = handle;
             panel.GameObject = CreateUIGameObject(go);
             panel.Canvas = panel.GameObject.GetComponent<Canvas>();
             panel.GameObject.name = go.name;
@@ -321,8 +322,8 @@ namespace LccHotfix
             {
                 return;
             }
-            LoadHandler handler = await AssetManager.Instance.LoadAssetAsync<GameObject>(name, _suff, _types);
-            GameObject go = (GameObject)handler.Asset;
+            AssetOperationHandle handle = await AssetManager.Instance.LoadAssetAsync<GameObject>(name, _suff, _types);
+            GameObject go = (GameObject)handle.AssetObject;
             panel.GameObject = CreateUIGameObject(go);
             panel.Canvas = panel.GameObject.GetComponent<Canvas>();
             panel.GameObject.name = go.name;
@@ -760,7 +761,7 @@ namespace LccHotfix
             panel.Logic.OnBeforeUnload(panel);
             if (panel.IsLoad)
             {
-                AssetManager.Instance.UnLoadAsset(panel.LoadHandler);
+                AssetManager.Instance.UnLoadAsset(panel.LoadHandle);
 
                 UnityEngine.Object.Destroy(panel.GameObject);
                 panel.GameObject = null;

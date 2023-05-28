@@ -1,138 +1,138 @@
 {
     "FileVersion": "1.4.6",
-    "EnableAddressable": true,
+    "EnableAddressable": false,
     "OutputNameStyle": 1,
     "PackageName": "DefaultPackage",
     "PackageVersion": "Simulate",
     "AssetList": [
         {
-            "Address": "TestConfig",
+            "Address": "",
             "AssetPath": "Assets/Bundles/Config/TestConfig.txt",
             "AssetTags": [],
             "BundleID": 0,
             "DependIDs": []
         },
         {
-            "Address": "TestConfigCategory",
+            "Address": "",
             "AssetPath": "Assets/Bundles/Config/TestConfigCategory.bytes",
             "AssetTags": [],
             "BundleID": 0,
             "DependIDs": []
         },
         {
-            "Address": "Unity.Hotfix.dll",
+            "Address": "",
             "AssetPath": "Assets/Bundles/DLL/Unity.Hotfix.dll.bytes",
             "AssetTags": [],
             "BundleID": 1,
             "DependIDs": []
         },
         {
-            "Address": "Unity.Hotfix.pdb",
+            "Address": "",
             "AssetPath": "Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes",
             "AssetTags": [],
             "BundleID": 1,
             "DependIDs": []
         },
         {
-            "Address": "UIGamePanel",
+            "Address": "",
             "AssetPath": "Assets/Bundles/Prefab/Panel/UIGamePanel.prefab",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
         },
         {
-            "Address": "UILoadingPanel",
+            "Address": "",
             "AssetPath": "Assets/Bundles/Prefab/Panel/UILoadingPanel.prefab",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
         },
         {
-            "Address": "UILoginPanel",
+            "Address": "",
             "AssetPath": "Assets/Bundles/Prefab/Panel/UILoginPanel.prefab",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
         },
         {
-            "Address": "UIMainPanel",
+            "Address": "",
             "AssetPath": "Assets/Bundles/Prefab/Panel/UIMainPanel.prefab",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
         },
         {
-            "Address": "UITopPanel",
+            "Address": "",
             "AssetPath": "Assets/Bundles/Prefab/Panel/UITopPanel.prefab",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
         },
         {
-            "Address": "Game",
+            "Address": "",
             "AssetPath": "Assets/Bundles/Scene/Game.unity",
             "AssetTags": [],
             "BundleID": 3,
             "DependIDs": []
         },
         {
-            "Address": "Login",
+            "Address": "",
             "AssetPath": "Assets/Bundles/Scene/Login.unity",
             "AssetTags": [],
             "BundleID": 3,
             "DependIDs": []
         },
         {
-            "Address": "Main",
+            "Address": "",
             "AssetPath": "Assets/Bundles/Scene/Main.unity",
             "AssetTags": [],
             "BundleID": 3,
             "DependIDs": []
         },
         {
-            "Address": "Execution_1",
+            "Address": "",
             "AssetPath": "Assets/Bundles/SkillConfig/Execution/Execution_1.asset",
             "AssetTags": [],
             "BundleID": 4,
             "DependIDs": []
         },
         {
-            "Address": "Item_1",
+            "Address": "",
             "AssetPath": "Assets/Bundles/SkillConfig/Item/Item_1.asset",
             "AssetTags": [],
             "BundleID": 5,
             "DependIDs": []
         },
         {
-            "Address": "Skill_1",
+            "Address": "",
             "AssetPath": "Assets/Bundles/SkillConfig/Skill/Skill_1.asset",
             "AssetTags": [],
             "BundleID": 6,
             "DependIDs": []
         },
         {
-            "Address": "Status_1",
+            "Address": "",
             "AssetPath": "Assets/Bundles/SkillConfig/Status/Status_1.asset",
             "AssetTags": [],
             "BundleID": 7,
             "DependIDs": []
         },
         {
-            "Address": "Status_2",
+            "Address": "",
             "AssetPath": "Assets/Bundles/SkillConfig/Status/Status_2.asset",
             "AssetTags": [],
             "BundleID": 7,
             "DependIDs": []
         },
         {
-            "Address": "Tips",
+            "Address": "",
             "AssetPath": "Assets/Bundles/Tool/Tips.prefab",
             "AssetTags": [],
             "BundleID": 8,
             "DependIDs": []
         },
         {
-            "Address": "TipsWindow",
+            "Address": "",
             "AssetPath": "Assets/Bundles/Tool/TipsWindow.prefab",
             "AssetTags": [],
             "BundleID": 8,
