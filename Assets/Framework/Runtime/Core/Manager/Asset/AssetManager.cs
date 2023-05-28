@@ -1,5 +1,6 @@
 ﻿using ET;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using YooAsset;
 using Object = UnityEngine.Object;
 
@@ -91,6 +92,14 @@ namespace LccModel
             AssetOperationHandle handle = Package.LoadAssetAsync<T>(path);
             await handle.Task;
             return handle;
+        }
+
+        public async ETTask<UnityEngine.SceneManagement.Scene> LoadSceneAsync(string name, LoadSceneMode sceneMode, bool activateOnLoad, params string[] types)
+        {
+            string path = GetAssetPath(name, "", types);
+            SceneOperationHandle handle = Package.LoadSceneAsync(path, sceneMode, activateOnLoad);
+            await handle.Task;
+            return handle.SceneObject;
         }
     }
 }

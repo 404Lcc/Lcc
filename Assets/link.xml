@@ -4870,13 +4870,13 @@
     <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c__DisplayClass5_0" preserve="all" />
     <type fullname="LccModel.AssetManager+&lt;LoadAssetAsync&gt;d__16`1" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;LoadSceneAsync&gt;d__17" preserve="all" />
     <type fullname="LccModel.CoroutineLockManager+&lt;Wait&gt;d__8" preserve="all" />
     <type fullname="LccModel.CoroutineLockQueue+&lt;&gt;c__DisplayClass7_0" preserve="all" />
     <type fullname="LccModel.CoroutineLockQueue+&lt;Wait&gt;d__7" preserve="all" />
     <type fullname="LccModel.CoroutineLockQueueType+&lt;Wait&gt;d__6" preserve="all" />
     <type fullname="LccModel.WaitCoroutineLock+&lt;Wait&gt;d__5" preserve="all" />
-    <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__9" preserve="all" />
-    <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__10" preserve="all" />
+    <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__6" preserve="all" />
     <type fullname="LccModel.FsmCreateDownloader+&lt;CreateDownloader&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmDownloadFiles+&lt;BeginDownload&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmInitialize+GameQueryServices" preserve="all" />
