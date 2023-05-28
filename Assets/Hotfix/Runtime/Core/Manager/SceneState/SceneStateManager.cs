@@ -66,6 +66,7 @@ namespace LccHotfix
                 _current = target;
 
                 _last.OnExit().Coroutine();
+                AssetManager.Instance.UnloadUnusedAssets();
                 _current.OnEnter().Coroutine();
             }
         }

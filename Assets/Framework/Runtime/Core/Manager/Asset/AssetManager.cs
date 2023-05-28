@@ -78,7 +78,53 @@ namespace LccModel
             return gameObject;
         }
 
+        public GameObject AutoInstantiateAsset(Transform transform, string name, params string[] types)
+        {
+            GameObject asset = AutoLoadAsset<GameObject>(transform, name, AssetSuffix.Prefab, types);
+            if (asset == null) return null;
+            GameObject gameObject = Object.Instantiate(asset);
+            gameObject.name = name;
+            return gameObject;
+        }
+        public GameObject AutoInstantiateAsset(Transform transform, string name, Transform parent, params string[] types)
+        {
+            GameObject asset = AutoLoadAsset<GameObject>(transform, name, AssetSuffix.Prefab, types);
+            if (asset == null) return null;
+            GameObject gameObject = Object.Instantiate(asset);
+            gameObject.name = name;
+            gameObject.transform.SetParent(parent);
+            gameObject.transform.localPosition = Vector3.zero;
+            gameObject.transform.localRotation = Quaternion.identity;
+            gameObject.transform.localScale = Vector3.one;
+            return gameObject;
+        }
 
+
+        public T AutoLoadAsset<T>(Transform transform, string name, string suffix, params string[] types) where T : Object
+        {
+            string path = GetAssetPath(name, suffix, types);
+
+            GameObject gameObject = new GameObject();
+            gameObject.AddComponent<AssetObject>();
+            gameObject.name = "resPath" + path;
+            gameObject.transform.SetParent(transform);
+
+            AssetOperationHandle handle = Package.LoadAssetSync<T>(path);
+            return handle.AssetObject as T;
+        }
+        public async ETTask<T> AutoLoadAssetAsync<T>(Transform transform, string name, string suffix, params string[] types) where T : Object
+        {
+            string path = GetAssetPath(name, suffix, types);
+
+            GameObject gameObject = new GameObject();
+            gameObject.AddComponent<AssetObject>();
+            gameObject.name = "resPath" + path;
+            gameObject.transform.SetParent(transform);
+
+            AssetOperationHandle handle = Package.LoadAssetAsync<T>(path);
+            await handle.Task;
+            return handle.AssetObject as T;
+        }
 
         public T LoadAsset<T>(out AssetOperationHandle handle, string name, string suffix, params string[] types) where T : Object
         {
