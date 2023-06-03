@@ -40,6 +40,9 @@ namespace LccModel
             Game.Scene.AddComponent<SceneLoadManager>();
             Game.Scene.AddComponent<UpdateManager>();
 
+            Game.Scene.AddComponent<ModelPoolManager>();
+            
+
             Game.Scene.AddComponent<CombatContext>();
             Game.Scene.AddComponent<CombatViewContext>();
 

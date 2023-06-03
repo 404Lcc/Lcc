@@ -4731,6 +4731,8 @@
     <type fullname="LccModel.DownloadManager" preserve="all" />
     <type fullname="LccModel.DownloadState" preserve="all" />
     <type fullname="LccModel.Manager" preserve="all" />
+    <type fullname="LccModel.ModelBase" preserve="all" />
+    <type fullname="LccModel.ModelPoolManager" preserve="all" />
     <type fullname="LccModel.INumericEvent" preserve="all" />
     <type fullname="LccModel.NumericEventHandlerAttribute" preserve="all" />
     <type fullname="LccModel.NumericEventManager" preserve="all" />
@@ -4878,6 +4880,8 @@
     <type fullname="LccModel.CoroutineLockQueue+&lt;Wait&gt;d__7" preserve="all" />
     <type fullname="LccModel.CoroutineLockQueueType+&lt;Wait&gt;d__6" preserve="all" />
     <type fullname="LccModel.WaitCoroutineLock+&lt;Wait&gt;d__5" preserve="all" />
+    <type fullname="LccModel.ModelPoolManager+&lt;GetModelAsync&gt;d__8" preserve="all" />
+    <type fullname="LccModel.ModelPoolManager+&lt;LoadObjectAsync&gt;d__11" preserve="all" />
     <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__6" preserve="all" />
     <type fullname="LccModel.FsmCreateDownloader+&lt;CreateDownloader&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmDownloadFiles+&lt;BeginDownload&gt;d__5" preserve="all" />

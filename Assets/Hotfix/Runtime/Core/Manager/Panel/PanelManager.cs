@@ -330,8 +330,18 @@ namespace LccHotfix
             {
                 return;
             }
-            AssetOperationHandle handle = await AssetManager.Instance.LoadAssetAsync<GameObject>(name, _suff, _types);
-            GameObject go = (GameObject)handle.AssetObject;
+            var asset = await AssetManager.Instance.LoadAssetAsync<GameObject>(name, _suff, _types);
+
+            GameObject go = UnityEngine.Object.Instantiate((GameObject)asset.AssetObject);
+            go.name = name;
+            go.transform.localPosition = Vector3.zero;
+            go.transform.localRotation = Quaternion.identity;
+            go.transform.localScale = Vector3.one;
+
+
+
+
+            panel.LoadHandle = asset;
             panel.GameObject = CreateUIGameObject(go);
             panel.Canvas = panel.GameObject.GetComponent<Canvas>();
             panel.GameObject.name = go.name;
