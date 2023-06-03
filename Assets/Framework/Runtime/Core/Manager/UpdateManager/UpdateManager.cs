@@ -30,12 +30,6 @@ namespace LccModel
         {
             base.OnDestroy();
 
-            Event.Instance.RemoveListener(EventType.UserTryInitialize, this);
-            Event.Instance.RemoveListener(EventType.UserBeginDownloadWebFiles, this);
-            Event.Instance.RemoveListener(EventType.UserTryUpdatePackageVersion, this);
-            Event.Instance.RemoveListener(EventType.UserTryUpdatePatchManifest, this);
-            Event.Instance.RemoveListener(EventType.UserTryDownloadWebFiles, this);
-
             Instance = null;
         }
         public void StartUpdate(GlobalConfig globalConfig)

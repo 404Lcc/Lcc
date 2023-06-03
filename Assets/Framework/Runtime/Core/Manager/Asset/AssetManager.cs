@@ -51,10 +51,12 @@ namespace LccModel
         }
         public void ForceUnloadAllAssets()
         {
+            if (Package == null) return;
             Package.ForceUnloadAllAssets();
         }
         public void UnloadUnusedAssets()
         {
+            if (Package == null) return;
             Package.UnloadUnusedAssets();
         }
         public GameObject InstantiateAsset(out AssetOperationHandle handle, string name, params string[] types)

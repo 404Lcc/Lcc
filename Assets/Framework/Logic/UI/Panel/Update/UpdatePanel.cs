@@ -69,16 +69,6 @@ namespace LccModel
             Instance = this;
 
         }
-        public void OnDisable()
-        {
-            Event.Instance.RemoveListener(EventType.InitializeFailed, this);
-            Event.Instance.RemoveListener(EventType.PatchStatesChange, this);
-            Event.Instance.RemoveListener(EventType.FoundUpdateFiles, this);
-            Event.Instance.RemoveListener(EventType.DownloadProgressUpdate, this);
-            Event.Instance.RemoveListener(EventType.PackageVersionUpdateFailed, this);
-            Event.Instance.RemoveListener(EventType.PatchManifestUpdateFailed, this);
-            Event.Instance.RemoveListener(EventType.WebFileDownloadFailed, this);
-        }
         public void OnDestroy()
         {
 
