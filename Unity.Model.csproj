@@ -292,6 +292,7 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionEffectAssignToTargetComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAttributeModifyComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Manager\Manager.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\Asset\AssetObject.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AIComponet\AIComponet.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\NumericEvent\INumericEvent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AnimationComponent.cs" />
@@ -311,7 +312,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\Asset\AssetObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />
