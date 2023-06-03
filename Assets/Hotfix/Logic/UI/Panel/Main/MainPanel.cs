@@ -42,15 +42,16 @@ namespace LccHotfix
         //AssetOperationHandle handle;
         public void OnTest()
         {
-            AssetManager.Instance.LoadSceneAsync("Login", UnityEngine.SceneManagement.LoadSceneMode.Single, true, AssetType.Scene);
+            ModelManager.Instance.GetModel<MainModel>().EnterGame();
+            //AssetManager.Instance.LoadSceneAsync("Login", UnityEngine.SceneManagement.LoadSceneMode.Single, true, AssetType.Scene);
         }
         public void OnTest1()
         {
-            AssetManager.Instance.LoadSceneAsync("Game", UnityEngine.SceneManagement.LoadSceneMode.Single, true, AssetType.Scene);
+            //AssetManager.Instance.LoadSceneAsync("Game", UnityEngine.SceneManagement.LoadSceneMode.Single, true, AssetType.Scene);
         }
         public void OnTest2()
         {
-            AssetManager.Instance.LoadAsset<GameObject>(out var handle, "Tips", AssetSuffix.Prefab, AssetType.Tool);
+            //AssetManager.Instance.LoadAsset<GameObject>(out var handle, "Tips", AssetSuffix.Prefab, AssetType.Tool);
         }
         public void OnTest3()
         {

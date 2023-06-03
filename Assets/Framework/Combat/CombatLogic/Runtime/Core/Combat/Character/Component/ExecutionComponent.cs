@@ -15,7 +15,8 @@ namespace LccModel
             {
                 return GetExecution(executionId);
             }
-            ExecutionConfigObject executionConfigObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handler, $"Execution_{executionId}", AssetSuffix.Asset, AssetType.SkillConfig, AssetType.Execution);
+            ExecutionConfigObject executionConfigObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handle, $"Execution_{executionId}", AssetSuffix.Asset, AssetType.SkillConfig, AssetType.Execution);
+            AssetManager.Instance.UnLoadAsset(handle);
             if (executionConfigObject == null)
             {
                 return null;

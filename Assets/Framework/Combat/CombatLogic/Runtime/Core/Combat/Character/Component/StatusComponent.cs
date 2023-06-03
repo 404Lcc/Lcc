@@ -13,7 +13,8 @@ namespace LccModel
 
         public StatusAbility AttachStatus(int statusId)
         {
-            StatusConfigObject statusConfigObject = AssetManager.Instance.LoadAsset<StatusConfigObject>(out var handler, $"Status_{statusId}", AssetSuffix.Asset, AssetType.SkillConfig, AssetType.Status);
+            StatusConfigObject statusConfigObject = AssetManager.Instance.LoadAsset<StatusConfigObject>(out var handle, $"Status_{statusId}", AssetSuffix.Asset, AssetType.SkillConfig, AssetType.Status);
+            AssetManager.Instance.UnLoadAsset(handle);
             if (statusConfigObject == null)
             {
                 return null;

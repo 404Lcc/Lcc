@@ -59,47 +59,7 @@ namespace LccModel
             if (Package == null) return;
             Package.UnloadUnusedAssets();
         }
-        public GameObject InstantiateAsset(out AssetOperationHandle handle, string name, params string[] types)
-        {
-            GameObject asset = LoadAsset<GameObject>(out handle, name, AssetSuffix.Prefab, types);
-            if (asset == null) return null;
-            GameObject gameObject = Object.Instantiate(asset);
-            gameObject.name = name;
-            return gameObject;
-        }
-        public GameObject InstantiateAsset(out AssetOperationHandle handle, string name, Transform parent, params string[] types)
-        {
-            GameObject asset = LoadAsset<GameObject>(out handle, name, AssetSuffix.Prefab, types);
-            if (asset == null) return null;
-            GameObject gameObject = Object.Instantiate(asset);
-            gameObject.name = name;
-            gameObject.transform.SetParent(parent);
-            gameObject.transform.localPosition = Vector3.zero;
-            gameObject.transform.localRotation = Quaternion.identity;
-            gameObject.transform.localScale = Vector3.one;
-            return gameObject;
-        }
-
-        public GameObject AutoInstantiateAsset(Transform transform, string name, params string[] types)
-        {
-            GameObject asset = AutoLoadAsset<GameObject>(transform, name, AssetSuffix.Prefab, types);
-            if (asset == null) return null;
-            GameObject gameObject = Object.Instantiate(asset);
-            gameObject.name = name;
-            return gameObject;
-        }
-        public GameObject AutoInstantiateAsset(Transform transform, string name, Transform parent, params string[] types)
-        {
-            GameObject asset = AutoLoadAsset<GameObject>(transform, name, AssetSuffix.Prefab, types);
-            if (asset == null) return null;
-            GameObject gameObject = Object.Instantiate(asset);
-            gameObject.name = name;
-            gameObject.transform.SetParent(parent);
-            gameObject.transform.localPosition = Vector3.zero;
-            gameObject.transform.localRotation = Quaternion.identity;
-            gameObject.transform.localScale = Vector3.one;
-            return gameObject;
-        }
+        
 
 
         public T AutoLoadAsset<T>(Transform transform, string name, string suffix, params string[] types) where T : Object
@@ -107,11 +67,12 @@ namespace LccModel
             string path = GetAssetPath(name, suffix, types);
 
             GameObject gameObject = new GameObject();
-            gameObject.AddComponent<AssetObject>();
+            AssetObject assetObject = gameObject.AddComponent<AssetObject>();
             gameObject.name = "resPath" + path;
             gameObject.transform.SetParent(transform);
 
             AssetOperationHandle handle = Package.LoadAssetSync<T>(path);
+            assetObject.handle = handle;
             return handle.AssetObject as T;
         }
         public async ETTask<T> AutoLoadAssetAsync<T>(Transform transform, string name, string suffix, params string[] types) where T : Object
@@ -119,11 +80,12 @@ namespace LccModel
             string path = GetAssetPath(name, suffix, types);
 
             GameObject gameObject = new GameObject();
-            gameObject.AddComponent<AssetObject>();
+            AssetObject assetObject = gameObject.AddComponent<AssetObject>();
             gameObject.name = "resPath" + path;
             gameObject.transform.SetParent(transform);
 
             AssetOperationHandle handle = Package.LoadAssetAsync<T>(path);
+            assetObject.handle = handle;
             await handle.Task;
             return handle.AssetObject as T;
         }

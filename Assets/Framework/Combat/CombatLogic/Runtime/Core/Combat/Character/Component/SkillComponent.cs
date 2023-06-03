@@ -11,7 +11,8 @@ namespace LccModel
 
         public SkillAbility AttachSkill(int skillId)
         {
-            SkillConfigObject skillConfigObject = AssetManager.Instance.LoadAsset<SkillConfigObject>(out var handler, $"Skill_{skillId}", AssetSuffix.Asset, AssetType.SkillConfig, AssetType.Skill);
+            SkillConfigObject skillConfigObject = AssetManager.Instance.LoadAsset<SkillConfigObject>(out var handle, $"Skill_{skillId}", AssetSuffix.Asset, AssetType.SkillConfig, AssetType.Skill);
+            AssetManager.Instance.UnLoadAsset(handle);
             if (skillConfigObject == null)
             {
                 return null;

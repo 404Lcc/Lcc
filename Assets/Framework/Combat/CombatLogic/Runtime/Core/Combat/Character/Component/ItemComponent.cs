@@ -10,7 +10,8 @@ namespace LccModel
 
         public ItemAbility AttachItem(int itemId)
         {
-            ItemConfigObject itemConfigObject = AssetManager.Instance.LoadAsset<ItemConfigObject>(out var handler, $"Item_{itemId}", AssetSuffix.Asset, AssetType.SkillConfig, AssetType.Item);
+            ItemConfigObject itemConfigObject = AssetManager.Instance.LoadAsset<ItemConfigObject>(out var handle, $"Item_{itemId}", AssetSuffix.Asset, AssetType.SkillConfig, AssetType.Item);
+            AssetManager.Instance.UnLoadAsset(handle);
             if (itemConfigObject == null)
             {
                 return null;

@@ -1,3 +1,5 @@
+using NPOI.POIFS.Properties;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 using YooAsset;
@@ -16,7 +18,14 @@ namespace LccModel
 
         void Start()
         {
-            redDot = AssetManager.Instance.InstantiateAsset(out handle, "RedDot", AssetType.Tool);
+            var asset = AssetManager.Instance.AutoLoadAsset<GameObject>(gameObject.transform, "RedDot", AssetSuffix.Prefab, AssetType.Tool);
+
+            GameObject redDot = Object.Instantiate(asset);
+            redDot.name = name;
+            redDot.transform.localPosition = Vector3.zero;
+            redDot.transform.localRotation = Quaternion.identity;
+            redDot.transform.localScale = Vector3.one;
+
             redDotCount = redDot.GetComponentInChildren<Text>();
 
 
