@@ -53,6 +53,7 @@ namespace LccModel
                 if (cache.Count > 0)
                 {
                     var cacheModel = cache.Dequeue();
+                    cacheModel.gameObject.SetActive(true);
                     return cacheModel;
                 }
             }
@@ -62,6 +63,7 @@ namespace LccModel
             GameObject modelObj = InstantiateModel(await LoadObjectAsync(modelRes, resourceNameDict[modelId].Item1, resourceNameDict[modelId].Item2));
             SetParent(modelObj, modelRes.transform);
             model.InitData(modelId, modelObj);
+
             model.gameObject.SetActive(true);
             return model;
         }
