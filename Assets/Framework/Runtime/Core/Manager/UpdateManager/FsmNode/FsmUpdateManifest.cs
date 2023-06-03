@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ET;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using YooAsset;
@@ -19,7 +20,7 @@ namespace LccModel
 		public void OnEnter()
 		{
 			UpdateEventDefine.PatchStatesChange.Publish("更新资源清单！");
-			UpdateManager.Instance.StartCoroutine(UpdateManifest());
+			UpdateManifest().Coroutine();
 		}
 		public void OnUpdate()
 		{
@@ -28,16 +29,19 @@ namespace LccModel
 		{
 		}
 
-		private IEnumerator UpdateManifest()
-		{
-			yield return new WaitForSecondsRealtime(0.5f);
+		private async ETTask UpdateManifest()
+        {
+            ETTask task = UpdatePanel.Instance.UpdateLoadingPercent(70, 80);
 
-			bool savePackageVersion = true;
+            bool savePackageVersion = true;
 			var package = YooAssets.GetPackage(UpdateManager.DefaultPackage);
 			var operation = package.UpdatePackageManifestAsync(UpdateManager.Instance.PackageVersion, savePackageVersion);
-			yield return operation;
+			
+			await operation.Task;
+			await task;
 
-			if (operation.Status == EOperationStatus.Succeed)
+
+            if (operation.Status == EOperationStatus.Succeed)
 			{
 				_machine.ChangeState<FsmCreateDownloader>();
 			}

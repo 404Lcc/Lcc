@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ET;
+using System.Collections;
 using UnityEngine;
 using YooAsset;
 
@@ -18,7 +19,7 @@ namespace LccModel
 		public void OnEnter()
 		{
 			UpdateEventDefine.PatchStatesChange.Publish("开始下载补丁文件！");
-			UpdateManager.Instance.StartCoroutine(BeginDownload());
+			BeginDownload().Coroutine();
 		}
 		public void OnUpdate()
 		{
@@ -27,19 +28,23 @@ namespace LccModel
 		{
 		}
 
-		private IEnumerator BeginDownload()
-		{
-			var downloader = UpdateManager.Instance.Downloader;
+		private async ETTask BeginDownload()
+        {
+            ETTask task = UpdatePanel.Instance.UpdateLoadingPercent(85, 90);
+
+            var downloader = UpdateManager.Instance.Downloader;
 
 			// 注册下载回调
 			downloader.OnDownloadErrorCallback = UpdateEventDefine.WebFileDownloadFailed.Publish;
 			downloader.OnDownloadProgressCallback = UpdateEventDefine.DownloadProgressUpdate.Publish;
 			downloader.BeginDownload();
-			yield return downloader;
 
+			await downloader.Task;
+
+			await task;
 			// 检测下载结果
-			if (downloader.Status != EOperationStatus.Succeed)
-				yield break;
+			if (downloader.Status != EOperationStatus.Succeed) return;
+
 
 			_machine.ChangeState<FsmPatchDone>();
 		}

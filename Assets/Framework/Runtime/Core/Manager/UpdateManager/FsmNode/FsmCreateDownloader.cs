@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ET;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using YooAsset;
@@ -19,7 +20,7 @@ namespace LccModel
 		public void OnEnter()
 		{
 			UpdateEventDefine.PatchStatesChange.Publish("创建补丁下载器！");
-			UpdateManager.Instance.StartCoroutine(CreateDownloader());
+			CreateDownloader().Coroutine();
 		}
 		public void OnUpdate()
 		{
@@ -28,16 +29,18 @@ namespace LccModel
 		{
 		}
 
-		IEnumerator CreateDownloader()
+		public async ETTask CreateDownloader()
 		{
-			yield return new WaitForSecondsRealtime(0.5f);
+            ETTask task = UpdatePanel.Instance.UpdateLoadingPercent(80, 85);
 
-			int downloadingMaxNum = 10;
+            int downloadingMaxNum = 10;
 			int failedTryAgain = 3;
 			var downloader = YooAssets.CreateResourceDownloader(downloadingMaxNum, failedTryAgain);
 			UpdateManager.Instance.Downloader = downloader;
 
-			if (downloader.TotalDownloadCount == 0)
+			await task;
+
+            if (downloader.TotalDownloadCount == 0)
 			{
 				Debug.Log("Not found any download files !");
 				_machine.ChangeState<FsmDownloadOver>();

@@ -14,7 +14,9 @@ namespace LccModel
 		}
 		public void OnEnter()
 		{
-			UpdateEventDefine.PatchStatesChange.Publish("开始游戏！");
+            UpdatePanel.Instance.UpdateLoadingPercent(90, 100).Coroutine();
+
+            UpdateEventDefine.PatchStatesChange.Publish("开始游戏！");
 
 			Event.Instance.RemoveListener(EventType.UserTryInitialize, UpdateManager.Instance);
 			Event.Instance.RemoveListener(EventType.UserBeginDownloadWebFiles, UpdateManager.Instance);

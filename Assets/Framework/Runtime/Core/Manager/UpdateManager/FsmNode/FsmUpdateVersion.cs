@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ET;
+using System.Collections;
 using UnityEngine;
 using YooAsset;
 
@@ -18,7 +19,7 @@ namespace LccModel
 		public void OnEnter()
 		{
 			UpdateEventDefine.PatchStatesChange.Publish("获取最新的资源版本 !");
-			UpdateManager.Instance.StartCoroutine(GetStaticVersion());
+			GetStaticVersion().Coroutine();
 		}
 		public void OnUpdate()
 		{
@@ -27,15 +28,19 @@ namespace LccModel
 		{
 		}
 
-		private IEnumerator GetStaticVersion()
+		private async ETTask GetStaticVersion()
 		{
-			yield return new WaitForSecondsRealtime(0.5f);
+            ETTask task = UpdatePanel.Instance.UpdateLoadingPercent(50, 70);
 
-			var package = YooAssets.GetPackage(UpdateManager.DefaultPackage);
+            var package = YooAssets.GetPackage(UpdateManager.DefaultPackage);
 			var operation = package.UpdatePackageVersionAsync();
-			yield return operation;
 
-			if (operation.Status == EOperationStatus.Succeed)
+			await operation.Task;
+
+			await task;
+
+
+            if (operation.Status == EOperationStatus.Succeed)
 			{
 				UpdateManager.Instance.PackageVersion = operation.PackageVersion;
 				_machine.ChangeState<FsmUpdateManifest>();

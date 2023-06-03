@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections;
 using UnityEngine;
 using YooAsset;
+using ET;
 
 namespace LccModel
 {
@@ -20,7 +21,7 @@ namespace LccModel
 		public void OnEnter()
 		{
 			UpdateEventDefine.PatchStatesChange.Publish("初始化资源包！");
-			UpdateManager.Instance.StartCoroutine(InitPackage());
+			InitPackage().Coroutine();
 		}
 		public void OnUpdate()
 		{
@@ -29,9 +30,9 @@ namespace LccModel
 		{
 		}
 
-		private IEnumerator InitPackage()
+		private async ETTask InitPackage()
 		{
-			yield return new WaitForSeconds(1f);
+            ETTask task = UpdatePanel.Instance.UpdateLoadingPercent(10, 50);
 
 			var playMode = UpdateManager.Instance.PlayMode;
 
@@ -72,8 +73,13 @@ namespace LccModel
 				initializationOperation = package.InitializeAsync(createParameters);
 			}
 
-			yield return initializationOperation;
-			if (initializationOperation.Status == EOperationStatus.Succeed)
+			await initializationOperation.Task;
+
+
+			await task;
+
+
+            if (initializationOperation.Status == EOperationStatus.Succeed)
 			{
 				_machine.ChangeState<FsmUpdateVersion>();
 			}

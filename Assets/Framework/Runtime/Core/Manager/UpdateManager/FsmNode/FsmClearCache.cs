@@ -1,4 +1,6 @@
-﻿namespace LccModel
+﻿using ET;
+
+namespace LccModel
 {
 	/// <summary>
 	/// 清理未使用的缓存文件
@@ -26,8 +28,8 @@
 		}
 
 		private void Operation_Completed(YooAsset.AsyncOperationBase obj)
-		{
-			_machine.ChangeState<FsmPatchDone>();
+        {
+            _machine.ChangeState<FsmPatchDone>();
 		}
 	}
 }
