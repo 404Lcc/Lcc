@@ -4520,6 +4520,14 @@
     <type fullname="Vector2Binder" preserve="all" />
     <type fullname="Vector3Binder" preserve="all" />
     <type fullname="ScreenAdaptationUtil" preserve="all" />
+    <type fullname="RVO.Agent" preserve="all" />
+    <type fullname="RVO.KdTree" preserve="all" />
+    <type fullname="RVO.Line" preserve="all" />
+    <type fullname="RVO.Obstacle" preserve="all" />
+    <type fullname="RVO.ObstaclePolygon" preserve="all" />
+    <type fullname="RVO.RVOMath" preserve="all" />
+    <type fullname="RVO.Simulator" preserve="all" />
+    <type fullname="RVO.Vector2" preserve="all" />
     <type fullname="LccModel.AbilityLevelComponent" preserve="all" />
     <type fullname="LccModel.IAbility" preserve="all" />
     <type fullname="LccModel.IAbilityExecution" preserve="all" />
@@ -4736,6 +4744,7 @@
     <type fullname="LccModel.INumericEvent" preserve="all" />
     <type fullname="LccModel.NumericEventHandlerAttribute" preserve="all" />
     <type fullname="LccModel.NumericEventManager" preserve="all" />
+    <type fullname="LccModel.OrcaManager" preserve="all" />
     <type fullname="LccModel.RedDot" preserve="all" />
     <type fullname="LccModel.RedDotManager" preserve="all" />
     <type fullname="LccModel.SceneLoadManager" preserve="all" />
@@ -4843,6 +4852,10 @@
     <type fullname="LccModel.OpenFileName" preserve="all" />
     <type fullname="LccModel.RightClickEvent" preserve="all" />
     <type fullname="LccModel.RightClickButton" preserve="all" />
+    <type fullname="RVO.KdTree+AgentTreeNode" preserve="all" />
+    <type fullname="RVO.KdTree+FloatPair" preserve="all" />
+    <type fullname="RVO.KdTree+ObstacleTreeNode" preserve="all" />
+    <type fullname="RVO.Simulator+Worker" preserve="all" />
     <type fullname="LccModel.AbilityItemBezierMoveComponent+&lt;&gt;c__DisplayClass7_0" preserve="all" />
     <type fullname="LccModel.AbilityItemBezierMoveComponent+&lt;&gt;c__DisplayClass8_0" preserve="all" />
     <type fullname="LccModel.Effect+&lt;&gt;c" preserve="all" />

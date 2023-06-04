@@ -83,6 +83,7 @@
     <Compile Include="Assets\Framework\Runtime\Init\GlobalConfig.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Coroutine\CoroutineObject.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\FsmNode\FsmDownloadFiles.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\ModelPool\ModelPoolManager.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Item\ItemAbility.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\ClearAllStatusEffect.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Object\AStarMap\AStarMap.cs" />
     <Compile Include="Assets\Framework\Util\LongClickButton.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\CustomEffect.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\ModelPool\ModelBase.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Helper\RegisterCrossBindingAdaptorHelper.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Base\AttributeBase.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\CombatContext.cs" />
@@ -312,8 +314,15 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\ModelPool\ModelPoolManager.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\ModelPool\ModelBase.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\RVOMath.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\Simulator.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\Obstacle.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\Vector2.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\KdTree.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\Line.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\ObstaclePolygon.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\Agent.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\Orca\OrcaManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />
