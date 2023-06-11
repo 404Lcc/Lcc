@@ -27,7 +27,10 @@ namespace LccModel
 
             Instance = null;
 
-            Object.Destroy(parentRoot.gameObject);
+            if (parentRoot)
+            {
+                Object.Destroy(parentRoot.gameObject);
+            }
         }
 
         public void ResycleModel(ModelBase model)
