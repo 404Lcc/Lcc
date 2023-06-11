@@ -4591,6 +4591,7 @@
     <type fullname="LccModel.ItemComponent" preserve="all" />
     <type fullname="LccModel.JoystickComponent" preserve="all" />
     <type fullname="LccModel.MotionComponent" preserve="all" />
+    <type fullname="LccModel.OrcaComponent" preserve="all" />
     <type fullname="LccModel.SkillComponent" preserve="all" />
     <type fullname="LccModel.SpellItemComponent" preserve="all" />
     <type fullname="LccModel.SpellSkillComponent" preserve="all" />

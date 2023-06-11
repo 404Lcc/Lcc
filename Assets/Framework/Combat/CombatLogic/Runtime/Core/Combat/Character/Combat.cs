@@ -40,6 +40,8 @@ namespace LccModel
 
 
         public TransformComponent TransformComponent => GetComponent<TransformComponent>();
+        public OrcaComponent OrcaComponent => GetComponent<OrcaComponent>();
+
         public AnimationComponent AnimationComponent => GetComponent<AnimationComponent>();
         public AttributeComponent AttributeComponent => GetComponent<AttributeComponent>();
         public AABB2DComponent AABB2DComponent => GetComponent<AABB2DComponent>();
@@ -53,6 +55,8 @@ namespace LccModel
             EventSystem.Instance.Publish(new SyncCreateCombat(InstanceId));
 
             AddComponent<TransformComponent>();
+            AddComponent<OrcaComponent>();
+
             AddComponent<AnimationComponent>();
             AddComponent<AABB2DComponent, Vector2, Vector2>(new Vector2(-1, -1), new Vector2(1, 1));
 
@@ -84,6 +88,8 @@ namespace LccModel
 
             damageActionAbility = AttachAction<DamageActionAbility>();
             cureActionAbility = AttachAction<CureActionAbility>();
+
+            OrcaComponent.AddAgent2D(TransformComponent.position);
 
 
             ListenActionPoint(ActionPointType.PostReceiveDamage, (e) =>

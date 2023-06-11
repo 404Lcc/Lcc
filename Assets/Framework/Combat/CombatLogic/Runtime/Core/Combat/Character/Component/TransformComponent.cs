@@ -67,7 +67,8 @@ namespace LccModel
             {
                 rotation = Quaternion.Euler(0, 0, 0);
             }
-            Translate(normalDistance * UnityEngine.Time.deltaTime * speed);
+            //GetParent<Combat>().OrcaComponent.Set2DTarget(normalDistance);
+            //Translate(normalDistance * UnityEngine.Time.deltaTime * speed);
         }
         public void MoveToTarget(TransformComponent target, float speed)
         {
@@ -80,7 +81,8 @@ namespace LccModel
             {
                 rotation = Quaternion.Euler(0, 0, 0);
             }
-            Translate(normalDistance * UnityEngine.Time.deltaTime * speed);
+            GetParent<Combat>().OrcaComponent.Set2DTarget(target.position);
+            //Translate(normalDistance * UnityEngine.Time.deltaTime * speed);
         }
         public void MoveToTarget(Vector3 target, float speed)
         {
@@ -93,7 +95,8 @@ namespace LccModel
             {
                 rotation = Quaternion.Euler(0, 0, 0);
             }
-            Translate(normalDistance * UnityEngine.Time.deltaTime * speed);
+            GetParent<Combat>().OrcaComponent.Set2DTarget(target);
+            //Translate(normalDistance * UnityEngine.Time.deltaTime * speed);
         }
 
         private void SyncTransform()

@@ -87,6 +87,7 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Item\ItemAbility.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\ClearAllStatusEffect.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\RVOMath.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Object\GameTimer.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\SpellSkillComponent.cs" />
     <Compile Include="Assets\Framework\Util\LocalDialog.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Module\MainThreadSynchronizationContext\ThreadSynchronizationContext.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityItem\Component\AbilityItemTargetCounterComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\RedDot\RedDotManager.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\Obstacle.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Action\Action\SpellItemAction.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Sort\SortUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleRequestAwaiter.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\TransformViewComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Helper\RegisterMethodDelegateHelper.cs" />
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\EffectViewComponent.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\Simulator.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Math\AABB2DComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\EventSystem\Event\AEvent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Adapter\IAsyncStateMachineAdapter.cs" />
@@ -117,12 +120,14 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\BundleStream.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\MainThreadSynchronizationContext\MainThreadSynchronizationContext.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\ConditionComponent.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\ObstaclePolygon.cs" />
     <Compile Include="Assets\Framework\Runtime\Init\Init.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\NumericEvent\NumericEventManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\AStarMap\AStarMap.cs" />
     <Compile Include="Assets\Framework\Util\LongClickButton.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\CustomEffect.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\ModelPool\ModelBase.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Manager\Orca\OrcaManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Helper\RegisterCrossBindingAdaptorHelper.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Base\AttributeBase.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\CombatContext.cs" />
@@ -153,6 +158,7 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\AbilityEffectIntervalTriggerComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Object\Entity.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Timer\TimerType.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\Line.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Base\IUpdate.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\Effect.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\FsmNode\FsmDownloadOver.cs" />
@@ -193,6 +199,7 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\StatusConfigObject.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageReduceWithTargetCountComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Adapter\IComparerAdapter.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\KdTree.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\CoroutineLockQueueType.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\TransformComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Pool\APool.cs" />
@@ -214,6 +221,7 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectTriggerComponent\ExecutionEffectTimeTriggerComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Vector2\Vector2Expand.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\Vector2.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\AbilityEffectActionTriggerComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\LccView.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Ability\IAbility.cs" />
@@ -241,6 +249,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Module\Timer\Timer.cs" />
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\EventHandler\CombatEventHandler.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionEffectSpawnCollisionComponent.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\RVO\Agent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Event\IEventListener.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\AttributeModifyEffect.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\ExecutionConfigObject.cs" />
@@ -314,15 +323,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\RVO\RVOMath.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\RVO\Simulator.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\RVO\Obstacle.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\RVO\Vector2.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\RVO\KdTree.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\RVO\Line.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\RVO\ObstaclePolygon.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\RVO\Agent.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\Orca\OrcaManager.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\OrcaComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />
