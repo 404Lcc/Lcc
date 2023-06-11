@@ -71,9 +71,7 @@ namespace LccModel
         }
         public override void FixedUpdate()
         {
-
-            combat.TransformComponent.MoveToTarget(initialPosition - combat.TransformComponent.position, combat.AttributeComponent.MoveSpeed.Value);
-
+            combat.TransformComponent.MoveToTarget(initialPosition);
 
             Check();
         }

@@ -40,7 +40,7 @@ namespace LccModel
             RVO.Vector2 vector = new RVO.Vector2(pos.x, pos.y);
             agent = Simulator.Instance.addAgent(vector);
             agent.maxSpeed_ = AttributeComponent.MoveSpeed.Value;
-            agent.radius_ = 3;
+            agent.radius_ = 1;
             return agent;
         }
         public Agent AddAgent3D(Vector3 pos)
@@ -48,7 +48,7 @@ namespace LccModel
             RVO.Vector2 vector = new RVO.Vector2(pos.x, pos.z);
             agent = Simulator.Instance.addAgent(vector);
             agent.maxSpeed_ = AttributeComponent.MoveSpeed.Value;
-            agent.radius_ = 3;
+            agent.radius_ = 1;
             return agent;
         }
         public void RemoveAgent()
@@ -97,7 +97,6 @@ namespace LccModel
             TransformComponent.position = new Vector3(pos.x(), pos.y(), 0);
 
 
-            if (target.x() == 0 || target.y() == 0) return;
             if (Simulator.Instance.isNeedDelete(ID)) return;
             var goalVector = target - Simulator.Instance.getAgentPosition(ID);
             if (RVOMath.absSq(goalVector) > 0.01f)

@@ -70,7 +70,7 @@ namespace LccModel
             //GetParent<Combat>().OrcaComponent.Set2DTarget(normalDistance);
             //Translate(normalDistance * UnityEngine.Time.deltaTime * speed);
         }
-        public void MoveToTarget(TransformComponent target, float speed)
+        public void MoveToTarget(TransformComponent target)
         {
             Vector3 normalDistance = (target.position - position).normalized;
             if (normalDistance.x < 0)
@@ -84,9 +84,9 @@ namespace LccModel
             GetParent<Combat>().OrcaComponent.Set2DTarget(target.position);
             //Translate(normalDistance * UnityEngine.Time.deltaTime * speed);
         }
-        public void MoveToTarget(Vector3 target, float speed)
+        public void MoveToTarget(Vector3 target)
         {
-            Vector3 normalDistance = target.normalized;
+            Vector3 normalDistance = (target - position).normalized;
             if (normalDistance.x < 0)
             {
                 rotation = Quaternion.Euler(0, 180, 0);

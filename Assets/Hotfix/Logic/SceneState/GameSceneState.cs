@@ -17,6 +17,7 @@ namespace LccHotfix
             var combat1 = CombatContext.Instance.AddCombat(1);
             var combat2 = CombatContext.Instance.AddCombat(2, TagType.Enemy);
             combat2.TransformComponent.position = new Vector3(0, 10, 0);
+            combat2.OrcaComponent.SetAgent2DPos(new Vector3(0, 10, 0));
             combat2.AttachSkill(1);
             combat2.AddComponent<AIComponent>(Vector3.zero).SetState(new IdleState());
 

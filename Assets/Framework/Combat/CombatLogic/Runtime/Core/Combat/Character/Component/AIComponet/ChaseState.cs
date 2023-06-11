@@ -81,7 +81,7 @@ namespace LccModel
             target = FiltrationTarget.GetTarget(combat.TransformComponent, chaseRadius, TagType.Player);
             if (target != null)
             {
-                combat.TransformComponent.MoveToTarget(target.TransformComponent, combat.AttributeComponent.MoveSpeed.Value);
+                combat.TransformComponent.MoveToTarget(target.TransformComponent);
 
                 if (FiltrationTarget.IsIncludeTarget(combat.TransformComponent, target.TransformComponent))
                 {

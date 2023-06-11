@@ -86,7 +86,7 @@ namespace LccModel
                     {
                         aiComponent.SetState(new AttackState());
                     }
-                    else if (diatanceToPlayer < defendRadius)
+                    else if (diatanceToPlayer < chaseRadius)
                     {
                         aiComponent.SetState(new ChaseState());
                     }
