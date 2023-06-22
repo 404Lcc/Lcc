@@ -70,7 +70,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\Event\EventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Game.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\ResolutionType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\LoopScrollRect\LoopScroll.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\UserData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Pool\APool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\UIPanel.cs" />
@@ -130,8 +129,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEventManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Command\CommandData.cs" />
     <Compile Include="Assets\Hotfix\Logic\Camera\CameraController.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\LoopScrollRect\LoopScrollItem.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\LoopScrollRect\LoopScrollItemPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEventHandlerAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\MVVM\View\Binding\ViewModelBinding.cs" />
@@ -889,10 +886,6 @@
     <ProjectReference Include="Unity.Model.csproj">
       <Project>{57D111B4-22B4-6CA1-C350-5090EBF41DC0}</Project>
       <Name>Unity.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="LoopScrollRect.Runtime.csproj">
-      <Project>{E9505C4B-2DF9-C2B3-F3E2-ECB7DF3B049E}</Project>
-      <Name>LoopScrollRect.Runtime</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
