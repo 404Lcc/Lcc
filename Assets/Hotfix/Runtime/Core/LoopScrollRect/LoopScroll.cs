@@ -14,6 +14,7 @@ namespace LccHotfix
     {
         private LoopScrollRect loopScroll;
         private LoopScrollItemPool<View> loopScrollItemPool;
+
         public Dictionary<int, View> dict = new Dictionary<int, View>();
         public List<Data> dataList = new List<Data>();
         public bool needSelectWithClick = true;
@@ -95,12 +96,12 @@ namespace LccHotfix
         }
         public void ClearList()
         {
-            dataList.Clear();
             dict.Clear();
+            dataList.Clear();
             loopScroll.ClearCells();
         }
 
-        public void SetDataListAndRefill(List<Data> datas, int startItem = 0, bool fillViewRect = false, float contentOffset = 0)
+        public void Refill(List<Data> datas, int startItem = 0, bool fillViewRect = false, float contentOffset = 0)
         {
             dataList.Clear();
             if (datas != null)
@@ -110,7 +111,7 @@ namespace LccHotfix
             loopScroll.totalCount = dataList.Count;
             loopScroll.RefillCells(startItem, fillViewRect, contentOffset);
         }
-        public void SetDataList(List<Data> datas)
+        public void SetDataListAndRefreshList(List<Data> datas)
         {
             dataList.Clear();
             if (datas != null)
@@ -118,41 +119,26 @@ namespace LccHotfix
                 dataList.AddRange(datas);
             }
             loopScroll.totalCount = dataList.Count;
+            RefreshList(false);
         }
 
         public void AddData(Data data, bool setPosition = false)
         {
             dataList.Add(data);
             loopScroll.totalCount = dataList.Count;
+            RefreshList(true);
         }
 
         public void AddDataList(List<Data> datas, bool setPosition = false)
         {
             dataList.AddRange(datas);
             loopScroll.totalCount = dataList.Count;
-        }
-
-        public void RefillCells()
-        {
-            loopScroll.RefillCells(dataList.Count, true);
+            RefreshList(true);
         }
 
         public void RefreshList(bool resize = false)
         {
             loopScroll.RefreshCells(resize);
-        }
-
-
-        public void RefreshList(int idx, bool resize = false)
-        {
-            if (dict.TryGetValue(idx, out View view))
-            {
-                ProvideData(view.gameObject.transform, idx);
-                if (resize)
-                {
-                    loopScroll.RefreshPosition();
-                }
-            }
         }
 
 
