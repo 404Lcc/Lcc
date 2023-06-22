@@ -111,6 +111,7 @@ namespace LccHotfix
             loopScroll.totalCount = dataList.Count;
             loopScroll.RefillCells(startItem, fillViewRect, contentOffset);
         }
+
         public void SetDataListAndRefreshList(List<Data> datas)
         {
             dataList.Clear();
@@ -126,25 +127,33 @@ namespace LccHotfix
         {
             dataList.Add(data);
             loopScroll.totalCount = dataList.Count;
-            RefreshList(true);
+            if (setPosition)
+            {
+                loopScroll.RefillCells(dataList.Count);
+            }
+            else
+            {
+                RefreshList(true);
+            }
         }
 
         public void AddDataList(List<Data> datas, bool setPosition = false)
         {
             dataList.AddRange(datas);
             loopScroll.totalCount = dataList.Count;
-            RefreshList(true);
+            if (setPosition)
+            {
+                loopScroll.RefillCells(dataList.Count);
+            }
+            else
+            {
+                RefreshList(true);
+            }
         }
 
         public void RefreshList(bool resize = false)
         {
             loopScroll.RefreshCells(resize);
-        }
-
-
-        public void RefreshPosition()
-        {
-            loopScroll.RefreshPosition();
         }
 
         public View GetItem(int idx)
