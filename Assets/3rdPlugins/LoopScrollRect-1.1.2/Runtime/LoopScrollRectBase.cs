@@ -1082,18 +1082,20 @@ namespace UnityEngine.UI
                 sizeFilled += size;
             }
 
-            if (fillViewRect && itemSize > 0 && sizeFilled < sizeToFill)
-            {
-                //calculate how many items can be added above the offset, so it still is visible in the view
-                int itemsToAddCount = (int)((sizeToFill - sizeFilled) / itemSize);
-                int newOffset = startItem - itemsToAddCount;
-                if (newOffset < 0) newOffset = 0;
-                if (newOffset != startItem)
-                {
-                    //refill again, with the new offset value, and now with fillViewRect disabled.
-                    RefillCells(newOffset);
-                }
-            }
+            //===修改
+            //if (fillViewRect && itemSize > 0 && sizeFilled < sizeToFill)
+            //{
+            //    //calculate how many items can be added above the offset, so it still is visible in the view
+            //    int itemsToAddCount = (int)((sizeToFill - sizeFilled) / itemSize);
+            //    int newOffset = startItem - itemsToAddCount;
+            //    if (newOffset < 0) newOffset = 0;
+            //    if (newOffset != startItem)
+            //    {
+            //        //refill again, with the new offset value, and now with fillViewRect disabled.
+            //        RefillCells(newOffset);
+            //    }
+            //}
+            //===修改
 
             Vector2 pos = m_Content.anchoredPosition;
             if (direction == LoopScrollRectDirection.Vertical)
