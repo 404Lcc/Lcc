@@ -78,16 +78,16 @@ namespace LccHotfix
             UpdatePanel.Instance.Hide();
 
             List<LoginItemData> list = new List<LoginItemData>();
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 10; i++)
             {
                 list.Add(new LoginItemData());
             }
-            loopScroll.Refill(list);
+            loopScroll.Refill(list, 1);
 
-            for (int i = 0; i < 15; i++)
-            {
-                loopScroll.AddData(new LoginItemData());
-            }
+            //for (int i = 0; i < 15; i++)
+            //{
+            //    loopScroll.AddData(new LoginItemData(), false);
+            //}
         }
 
         public override void OnHide(Panel panel)
@@ -102,11 +102,11 @@ namespace LccHotfix
         public void OnEnterMain()
         {
             List<LoginItemData> list = new List<LoginItemData>();
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 10; i++)
             {
                 list.Add(new LoginItemData());
             }
-            //loopScroll.Refill(list);
+            loopScroll.Refill(list);
             //ModelManager.Instance.GetModel<LoginModel>().OnEnterMain();
         }
     }
