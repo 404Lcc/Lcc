@@ -50,7 +50,7 @@ namespace LccHotfix
             base.OnInitComponent(panel);
             LogUtil.Debug("OnInitComponent第三个执行的函数");
 
-            //loopScroll = panel.AddChildren<LoopScroll<LoginItemData, LoginItem>>(loop, item);
+            loopScroll = panel.AddChildren<LoopScroll<LoginItemData, LoginItem>>(loop, item);
         }
         public override void OnInitData(Panel panel)
         {
