@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 namespace LccHotfix
 {
-    //public class LoginItemData
-    //{
-    //}
-    //public class LoginItem : LoopScrollItem
-    //{
-    //}
+    public class LoginItemData
+    {
+    }
+    public class LoginItem : LoopScrollItem
+    {
+    }
 
     [UIEventHandler(UIEventType.Login)]
     public class LoginUIEventHandler : UIEvent
@@ -26,9 +26,9 @@ namespace LccHotfix
     public class UILoginPanel : UIPanel<UILoginModel>
     {
         public Button testBtn;
-        //public LoopScrollRect loop;
-        //public GameObject item;
-        //public LoopScroll<LoginItemData, LoginItem> loopScroll;
+        public LoopScrollRect loop;
+        public GameObject item;
+        public LoopScroll<LoginItemData, LoginItem> loopScroll;
         //public override void InitView(LoginModel viewModel)
         //{
         //    LogUtil.Debug("InitView第一个执行的函数");
@@ -77,14 +77,14 @@ namespace LccHotfix
 
             UpdatePanel.Instance.Hide();
 
-            //List<LoginItemData> list = new List<LoginItemData>();
-            //for (int i = 0; i < 1; i++)
-            //{
-            //    list.Add(new LoginItemData());
-            //}
-            //loopScroll.SetDataListAndRefill(list);
+            List<LoginItemData> list = new List<LoginItemData>();
+            for (int i = 0; i < 1; i++)
+            {
+                list.Add(new LoginItemData());
+            }
+            loopScroll.SetDataListAndRefill(list);
 
-            //loopScroll.AddData(new LoginItemData());
+            loopScroll.AddData(new LoginItemData());
         }
 
         public override void OnHide(Panel panel)
