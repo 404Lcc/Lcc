@@ -235,6 +235,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Download\DownloadManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Action\ActionWrap.cs" />
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Attribute\FloatNumericView.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\OrcaComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Condition\Component\ConditionWhenInTimeNoDamageComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\ValueTypeBinder\Vector3Binder.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Helper\RegisterCLRMethodRedirctionHelper.cs" />
@@ -323,7 +324,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\OrcaComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />

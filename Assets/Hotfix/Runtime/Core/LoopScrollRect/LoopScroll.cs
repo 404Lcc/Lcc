@@ -96,21 +96,69 @@ namespace LccHotfix
         public void ClearList()
         {
             dataList.Clear();
+            dict.Clear();
             loopScroll.ClearCells();
         }
-        public void SetDataList(List<Data> datas, int startItem = 0, bool fillViewRect = false, float contentOffset = 0)
+
+        public void SetDataListAndRefill(List<Data> datas, int startItem = 0, bool fillViewRect = false, float contentOffset = 0)
         {
             dataList.Clear();
-            dataList.AddRange(datas);
+            if (datas != null)
+            {
+                dataList.AddRange(datas);
+            }
             loopScroll.totalCount = dataList.Count;
             loopScroll.RefillCells(startItem, fillViewRect, contentOffset);
         }
         public void SetDataList(List<Data> datas)
         {
             dataList.Clear();
+            if (datas != null)
+            {
+                dataList.AddRange(datas);
+            }
+            loopScroll.totalCount = dataList.Count;
+        }
+
+        public void AddData(Data data, bool setPosition = false)
+        {
+            dataList.Add(data);
+            loopScroll.totalCount = dataList.Count;
+        }
+
+        public void AddDataList(List<Data> datas, bool setPosition = false)
+        {
             dataList.AddRange(datas);
             loopScroll.totalCount = dataList.Count;
-            loopScroll.RefillCells();
+        }
+
+        public void RefillCells()
+        {
+            loopScroll.RefillCells(dataList.Count, true);
+        }
+
+        public void RefreshList(bool resize = false)
+        {
+            loopScroll.RefreshCells(resize);
+        }
+
+
+        public void RefreshList(int idx, bool resize = false)
+        {
+            if (dict.TryGetValue(idx, out View view))
+            {
+                ProvideData(view.gameObject.transform, idx);
+                if (resize)
+                {
+                    loopScroll.RefreshPosition();
+                }
+            }
+        }
+
+
+        public void RefreshPosition()
+        {
+            loopScroll.RefreshPosition();
         }
 
         public View GetItem(int idx)

@@ -883,7 +883,7 @@ namespace UnityEngine.UI
         /// <summary>
         /// Refresh item data
         /// </summary>
-        public void RefreshCells()
+        public void RefreshCells(bool resize)
         {
             if (Application.isPlaying && this.isActiveAndEnabled)
             {
@@ -893,7 +893,7 @@ namespace UnityEngine.UI
                 {
                     if (itemTypeEnd < totalCount)
                     {
-                        ProvideData(m_Content.GetChild(i), itemTypeEnd);
+                        ProvideData(m_Content.GetChild(i), index);
                         itemTypeEnd++;
                     }
                     else
@@ -903,9 +903,42 @@ namespace UnityEngine.UI
                     }
                     index++;
                 }
-                UpdateBounds(true);
-                UpdateScrollbars(Vector2.zero);
+                if (resize)
+                {
+                    RefreshPosition();
+                }
             }
+        }
+        public void RefreshCell(int index, bool resize)
+        {
+            if (index < 0 || index >= totalCount) return;
+            if (index < itemTypeStart || index >= itemTypeEnd) return;
+            int idx = itemTypeStart;
+            if (Application.isPlaying && this.isActiveAndEnabled)
+            {
+                for (int i = 0; i < content.childCount; i++)
+                {
+                    if (idx < totalCount)
+                    {
+                        if (idx == index)
+                        {
+                            ProvideData(content.GetChild(i), index);
+                            break;
+                        }
+                        idx++;
+                    }
+                }
+                if (resize)
+                {
+                    RefreshPosition();
+                }
+            }
+        }
+
+        public void RefreshPosition()
+        {
+            UpdateBounds(true);
+            UpdateScrollbars(Vector2.zero);
         }
 
         /// <summary>

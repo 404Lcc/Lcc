@@ -22,7 +22,7 @@ public class LoopScrollRectInspector : Editor
         }
         if (GUILayout.Button("Refresh"))
         {
-            scroll.RefreshCells();
+            scroll.RefreshCells(true);
         }
         if(GUILayout.Button("Refill"))
         {
