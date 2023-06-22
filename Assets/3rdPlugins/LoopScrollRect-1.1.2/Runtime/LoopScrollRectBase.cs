@@ -1045,15 +1045,24 @@ namespace UnityEngine.UI
             if (!Application.isPlaying)
                 return;
 
+            //===修改
+
+            ReturnToTempPool(reverseDirection, m_Content.childCount);
+            if (totalCount > 0 && startItem > totalCount)
+            {
+                startItem = totalCount;
+            }
             itemTypeStart = reverseDirection ? totalCount - startItem : startItem;
             if (totalCount >= 0 && itemTypeStart % contentConstraintCount != 0)
             {
                 itemTypeStart = (itemTypeStart / contentConstraintCount) * contentConstraintCount;
             }
-            itemTypeEnd = itemTypeStart;
+            //itemTypeEnd = itemTypeStart;
+            itemTypeEnd = itemTypeStart > totalCount ? totalCount : itemTypeStart;
 
             // Don't `Canvas.ForceUpdateCanvases();` here, or it will new/delete cells to change itemTypeStart/End
-            ReturnToTempPool(reverseDirection, m_Content.childCount);
+            //ReturnToTempPool(reverseDirection, m_Content.childCount);
+            //===修改
 
             float sizeToFill = GetAbsDimension(viewRect.rect.size) + Mathf.Abs(contentOffset);
             float sizeFilled = 0;
