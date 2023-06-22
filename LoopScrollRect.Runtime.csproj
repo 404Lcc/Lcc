@@ -64,6 +64,9 @@
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopHorizontalScrollRect.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopHorizontalScrollRectMulti.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollRectMulti.cs" />
+    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollPrefabSource.cs" />
+    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollMultiDataSource.cs" />
+    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollDataSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollRect.Runtime.asmdef" />
