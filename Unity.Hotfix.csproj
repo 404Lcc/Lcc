@@ -887,6 +887,10 @@
       <Project>{57D111B4-22B4-6CA1-C350-5090EBF41DC0}</Project>
       <Name>Unity.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="LoopScrollRect.Runtime.csproj">
+      <Project>{E9505C4B-2DF9-C2B3-F3E2-ECB7DF3B049E}</Project>
+      <Name>LoopScrollRect.Runtime</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

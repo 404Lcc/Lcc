@@ -18,13 +18,22 @@ namespace UnityEngine.UI
     /// </remarks>
     public abstract class LoopScrollRectBase : UIBehaviour, IInitializePotentialDragHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IScrollHandler, ICanvasElement, ILayoutElement, ILayoutGroup
     {
+        //===修改
+        public Func<int, GameObject> GetObjectHandler = null;
+        public Action<Transform, int> ReturnObjectHandler = null;
+        public Action<Transform, int> ProvideDataHandler = null;
+        //===修改
+
+
         //==========LoopScrollRect==========
+        //===修改
         /// <summary>
         /// The scroll data source to fill items.
         /// </summary>
-        [HideInInspector]
-        [NonSerialized]
-        public LoopScrollPrefabSource prefabSource = null;
+        //[HideInInspector]
+        //[NonSerialized]
+        //public LoopScrollPrefabSource prefabSource = null;
+        //===修改
 
         /// <summary>
         /// The scroll's total count for items with id in [0, totalCount]. Negative value like -1 means infinite items.
@@ -691,13 +700,20 @@ namespace UnityEngine.UI
         {
             if (Application.isPlaying)
             {
+                //===修改
+                totalCount = 0;
+                ReturnToTempPool(reverseDirection, m_Content.childCount);
                 itemTypeStart = 0;
                 itemTypeEnd = 0;
-                totalCount = 0;
-                for (int i = m_Content.childCount - 1; i >= 0; i--)
-                {
-                    prefabSource.ReturnObject(m_Content.GetChild(i));
-                }
+
+                //itemTypeStart = 0;
+                //itemTypeEnd = 0;
+                //totalCount = 0;
+                //for (int i = m_Content.childCount - 1; i >= 0; i--)
+                //{
+                //    prefabSource.ReturnObject(m_Content.GetChild(i));
+                //}
+                //===修改
             }
         }
 
@@ -877,32 +893,85 @@ namespace UnityEngine.UI
 
         protected abstract void ProvideData(Transform transform, int index);
 
+        //===修改
         /// <summary>
         /// Refresh item data
         /// </summary>
-        public void RefreshCells()
+        public void RefreshCells(bool resize)
         {
             if (Application.isPlaying && this.isActiveAndEnabled)
             {
-                itemTypeEnd = itemTypeStart;
+                //===修改
+                int index = itemTypeEnd = itemTypeStart;
+                //===修改
                 // recycle items if we can
                 for (int i = 0; i < m_Content.childCount; i++)
                 {
                     if (itemTypeEnd < totalCount)
                     {
-                        ProvideData(m_Content.GetChild(i), itemTypeEnd);
+                        //===修改
+                        ProvideData(m_Content.GetChild(i), index);
+                        //===修改
                         itemTypeEnd++;
                     }
                     else
                     {
-                        prefabSource.ReturnObject(m_Content.GetChild(i));
+                        //===修改
+                        //prefabSource.ReturnObject(m_Content.GetChild(i));
+                        ReturnObjectHandler(content.GetChild(i), index);
+                        //修改
                         i--;
                     }
+                    //===修改
+                    index++;
+                    //===修改
                 }
-                UpdateBounds(true);
-                UpdateScrollbars(Vector2.zero);
+                if (resize)
+                {
+                    RefreshPosition();
+                }
             }
         }
+
+        public void RefreshCells(int index, bool resize)
+        {
+            if (index < 0 || index >= totalCount) return;
+            if (index < itemTypeStart || index >= itemTypeEnd) return;
+
+            if (Application.isPlaying && this.isActiveAndEnabled)
+            {
+                //===修改
+                int idx = itemTypeStart;
+                //===修改
+                for (int i = 0; i < content.childCount; i++)
+                {
+                    if (idx < totalCount)
+                    {
+                        if (idx == index)
+                        {
+                            ProvideData(content.GetChild(i), idx);
+                            break;
+                        }
+                    }
+                    //===修改
+                    idx++;
+                    //===修改
+                }
+                if (resize)
+                {
+                    RefreshPosition();
+                }
+            }
+        }
+
+        public void RefreshPosition()
+        {
+            UpdateBounds(true);
+            UpdateScrollbars(Vector2.zero);
+        }
+
+
+        //===修改
 
         /// <summary>
         /// Refill cells from endItem at the end while clear existing ones
