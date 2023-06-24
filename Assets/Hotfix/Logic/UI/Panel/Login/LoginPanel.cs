@@ -84,10 +84,10 @@ namespace LccHotfix
             }
             loopScroll.Refill(list, 1);
 
-            //for (int i = 0; i < 15; i++)
-            //{
-            //    loopScroll.AddData(new LoginItemData(), false);
-            //}
+            for (int i = 0; i < 15; i++)
+            {
+                loopScroll.AddData(new LoginItemData(), true);
+            }
         }
 
         public override void OnHide(Panel panel)
@@ -106,7 +106,7 @@ namespace LccHotfix
             {
                 list.Add(new LoginItemData());
             }
-            loopScroll.Refill(list);
+            loopScroll.Refill(list, list.Count);
             //ModelManager.Instance.GetModel<LoginModel>().OnEnterMain();
         }
     }
