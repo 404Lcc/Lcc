@@ -4,19 +4,19 @@ namespace LccModel
     {
         public long id;
         public TimerType timerType;
-        public long startTime;
-        public long time;
+        public float duration;
+        public float time;
         public int type;
         public object obj;
-        public static TimerData Create(long id, TimerType timerType, long startTime, long time, int type, object obj)
+        public static TimerData Create(long id, TimerType timerType, float duration, float time, int type, object obj)
         {
             TimerData data = new TimerData();
             data.id = id;
             data.timerType = timerType;
-            data.startTime = startTime;
-            data.obj = obj;
+            data.duration = duration;
             data.time = time;
             data.type = type;
+            data.obj = obj;
             return data;
         }
     }
