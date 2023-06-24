@@ -107,7 +107,7 @@ namespace LccHotfix
                 list.Add(new LoginItemData());
             }
             loopScroll.Refill(list, list.Count);
-            //ModelManager.Instance.GetModel<LoginModel>().OnEnterMain();
+            ModelManager.Instance.GetModel<LoginModel>().OnEnterMain();
         }
     }
 }
