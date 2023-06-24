@@ -19,5 +19,9 @@ namespace LccModel
             data.obj = obj;
             return data;
         }
+        public void Reset()
+        {
+            duration = 0;
+        }
     }
 }

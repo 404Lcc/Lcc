@@ -69,12 +69,13 @@ namespace LccModel
             }
         }
 
-
-        public bool RemoveTimer(ref long id)
+        public void ResetTimer(long id)
         {
-            long i = id;
-            id = 0;
-            return this.RemoveTimer(i);
+            if (!timerDataDict.TryGetValue(id, out var timerData))
+            {
+                return;
+            }
+            timerData.Reset();
         }
         private void AddTimer(TimerData timerData)
         {
@@ -89,7 +90,7 @@ namespace LccModel
             timerDataDict.Add(timerData.id, timerData);
             timerDataList.Add(timerData);
         }
-        private bool RemoveTimer(long id)
+        public bool RemoveTimer(long id)
         {
             if (id == 0)
             {
