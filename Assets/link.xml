@@ -4574,20 +4574,16 @@
     <type fullname="LccModel.ActionPointType" preserve="all" />
     <type fullname="LccModel.ActionPoint" preserve="all" />
     <type fullname="LccModel.ActionPointComponent" preserve="all" />
-    <type fullname="LccModel.AFSMState" preserve="all" />
-    <type fullname="LccModel.AIComponent" preserve="all" />
-    <type fullname="LccModel.AttackState" preserve="all" />
-    <type fullname="LccModel.ChaseState" preserve="all" />
-    <type fullname="LccModel.FSMStateType" preserve="all" />
-    <type fullname="LccModel.IdleState" preserve="all" />
-    <type fullname="LccModel.ReturnState" preserve="all" />
-    <type fullname="LccModel.WalkState" preserve="all" />
     <type fullname="LccModel.AnimationType" preserve="all" />
     <type fullname="LccModel.AnimationComponent" preserve="all" />
     <type fullname="LccModel.AttributeType" preserve="all" />
     <type fullname="LccModel.AttributeComponent" preserve="all" />
     <type fullname="LccModel.ConditionComponent" preserve="all" />
     <type fullname="LccModel.ExecutionComponent" preserve="all" />
+    <type fullname="LccModel.AFSMState" preserve="all" />
+    <type fullname="LccModel.AStateTransition" preserve="all" />
+    <type fullname="LccModel.FSMStateType" preserve="all" />
+    <type fullname="LccModel.FSMComponet" preserve="all" />
     <type fullname="LccModel.ItemComponent" preserve="all" />
     <type fullname="LccModel.JoystickComponent" preserve="all" />
     <type fullname="LccModel.MotionComponent" preserve="all" />
@@ -4674,7 +4670,6 @@
     <type fullname="LccModel.SyncModifyAttribute" preserve="all" />
     <type fullname="LccModel.Component" preserve="all" />
     <type fullname="LccModel.Entity" preserve="all" />
-    <type fullname="LccModel.GameTimer" preserve="all" />
     <type fullname="LccModel.AbilityItemView" preserve="all" />
     <type fullname="LccModel.FloatNumericView" preserve="all" />
     <type fullname="LccModel.HealthPointView" preserve="all" />
@@ -4920,11 +4915,9 @@
     <type fullname="LccModel.AEvent`1+&lt;Handle&gt;d__3" preserve="all" />
     <type fullname="LccModel.MainThreadSynchronizationContext+&lt;&gt;c__DisplayClass3_0" preserve="all" />
     <type fullname="LccModel.ThreadSynchronizationContext+&lt;&gt;c__DisplayClass3_0" preserve="all" />
-    <type fullname="LccModel.Timer+&lt;&gt;c__DisplayClass16_0" preserve="all" />
-    <type fullname="LccModel.Timer+&lt;WaitTillAsync&gt;d__16" preserve="all" />
-    <type fullname="LccModel.Timer+&lt;&gt;c__DisplayClass17_0" preserve="all" />
-    <type fullname="LccModel.Timer+&lt;WaitAsync&gt;d__17" preserve="all" />
-    <type fullname="LccModel.Timer+&lt;WaitFrameAsync&gt;d__18" preserve="all" />
+    <type fullname="LccModel.Timer+&lt;&gt;c__DisplayClass10_0" preserve="all" />
+    <type fullname="LccModel.Timer+&lt;WaitAsync&gt;d__10" preserve="all" />
+    <type fullname="LccModel.Timer+&lt;WaitFrameAsync&gt;d__11" preserve="all" />
     <type fullname="LccModel.Game+&lt;WaitFrameFinish&gt;d__10" preserve="all" />
     <type fullname="LccModel.Init+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.Init+&lt;Start&gt;d__1" preserve="all" />

@@ -19,7 +19,7 @@ namespace LccHotfix
             combat2.TransformComponent.position = new Vector3(0, 10, 0);
             combat2.OrcaComponent.SetAgent2DPos(new Vector3(0, 10, 0));
             combat2.AttachSkill(1);
-            combat2.AddComponent<AIComponent>(Vector3.zero).SetState(new IdleState());
+            combat2.AddComponent<FSMComponet>();
 
             //忽略增加main的导航数据
             //清除已经存在的导航数据，中断操作

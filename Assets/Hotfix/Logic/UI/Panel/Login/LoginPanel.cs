@@ -101,12 +101,12 @@ namespace LccHotfix
         }
         public void OnEnterMain()
         {
-            List<LoginItemData> list = new List<LoginItemData>();
-            for (int i = 0; i < 10; i++)
-            {
-                list.Add(new LoginItemData());
-            }
-            loopScroll.Refill(list, list.Count);
+            //List<LoginItemData> list = new List<LoginItemData>();
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    list.Add(new LoginItemData());
+            //}
+            //loopScroll.Refill(list, list.Count);
             ModelManager.Instance.GetModel<LoginModel>().OnEnterMain();
         }
     }
