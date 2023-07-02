@@ -1,6 +1,6 @@
 ﻿namespace LccModel
 {
-    public class StatusLifeTimeComponent : Component//, IUpdate
+    public class StatusLifeTimeComponent : Component
     {
 
         public long lifeTimer;
@@ -10,7 +10,6 @@
             long lifeTime = GetParent<StatusAbility>().duration;
 
             lifeTimer = Timer.Instance.NewOnceTimer(lifeTime, GetParent<StatusAbility>().EndAbility);
-            //lifeTimer = new GameTimer(lifeTime);
         }
 
         public override void OnDestroy()
@@ -19,13 +18,6 @@
 
             Timer.Instance.RemoveTimer(lifeTimer);
         }
-        //public void Update()
-        //{
-        //    if (lifeTimer.IsRunning)
-        //    {
-        //        lifeTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, LifeTimeFinish);
-        //    }
-        //}
 
     }
 }

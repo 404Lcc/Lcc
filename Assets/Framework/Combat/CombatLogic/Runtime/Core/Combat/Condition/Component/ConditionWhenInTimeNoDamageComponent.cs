@@ -2,7 +2,7 @@
 
 namespace LccModel
 {
-    public class ConditionWhenInTimeNoDamageComponent : Component//, IUpdate
+    public class ConditionWhenInTimeNoDamageComponent : Component
     {
         public long time;
         private long noDamageTimer;
@@ -30,18 +30,9 @@ namespace LccModel
             noDamageTimer = Timer.Instance.NewOnceTimer(time, whenNoDamageInTimeCallback);
         }
 
-        //public void Update()
-        //{
-        //    if (noDamageTimer.IsRunning)
-        //    {
-        //        noDamageTimer.UpdateAsFinish(UnityEngine.Time.deltaTime);
-        //    }
-        //}
-
         private void WhenReceiveDamage(Entity combatAction)
         {
             Timer.Instance.ResetTimer(noDamageTimer);
-            //noDamageTimer.Reset();
         }
     }
 }

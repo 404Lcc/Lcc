@@ -1,6 +1,6 @@
 ﻿namespace LccModel
 {
-    public class AbilityItemLifeTimeComponent : Component//, IUpdate
+    public class AbilityItemLifeTimeComponent : Component
     {
         public long lifeTimer;
 
@@ -9,8 +9,6 @@
             base.Awake(p1);
 
             lifeTimer = Timer.Instance.NewOnceTimer((long)(object)p1, Destroy);
-
-            //lifeTimer = new GameTimer((float)(object)p1);
         }
 
         public override void OnDestroy()
@@ -19,13 +17,6 @@
 
             Timer.Instance.RemoveTimer(lifeTimer);
         }
-        //public void Update()
-        //{
-        //    if (lifeTimer.IsRunning)
-        //    {
-        //        lifeTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, Destroy);
-        //    }
-        //}
 
         private void Destroy()
         {

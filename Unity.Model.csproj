@@ -88,7 +88,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\ClearAllStatusEffect.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\RVO\RVOMath.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Object\GameTimer.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\SpellSkillComponent.cs" />
     <Compile Include="Assets\Framework\Util\LocalDialog.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\FsmNode\FsmInitialize.cs" />
@@ -320,6 +319,8 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\FSMComponet\Base\FSMStateType.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\FSMComponet\Base\AFSMState.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\FSMComponet\Base\AStateTransition.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\FSMComponet\State\IdleState.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\FSMComponet\StateTransition\Idle2WalkState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />

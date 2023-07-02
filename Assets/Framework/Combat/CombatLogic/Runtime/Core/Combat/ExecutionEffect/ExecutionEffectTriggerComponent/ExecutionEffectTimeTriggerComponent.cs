@@ -1,6 +1,6 @@
 ﻿namespace LccModel
 {
-    public class ExecutionEffectTimeTriggerComponent : Component//, IUpdate
+    public class ExecutionEffectTimeTriggerComponent : Component
     {
         public long startTime;
         public long endTime;
@@ -31,16 +31,5 @@
             Timer.Instance.RemoveTimer(startTime);
             Timer.Instance.RemoveTimer(endTimer);
         }
-        //public void Update()
-        //{
-        //    if (startTimer != null && startTimer.IsFinished == false)
-        //    {
-        //        startTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, GetParent<ExecutionEffect>().StartTriggerEffect);
-        //    }
-        //    if (endTimer != null && endTimer.IsFinished == false)
-        //    {
-        //        endTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, GetParent<ExecutionEffect>().EndEffect);
-        //    }
-        //}
     }
 }

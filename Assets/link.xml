@@ -4516,6 +4516,7 @@
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=12" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Model">
+    <type fullname="Idle2WalkState" preserve="all" />
     <type fullname="QuaternionBinder" preserve="all" />
     <type fullname="Vector2Binder" preserve="all" />
     <type fullname="Vector3Binder" preserve="all" />
@@ -4584,6 +4585,7 @@
     <type fullname="LccModel.AStateTransition" preserve="all" />
     <type fullname="LccModel.FSMStateType" preserve="all" />
     <type fullname="LccModel.FSMComponet" preserve="all" />
+    <type fullname="LccModel.IdleState" preserve="all" />
     <type fullname="LccModel.ItemComponent" preserve="all" />
     <type fullname="LccModel.JoystickComponent" preserve="all" />
     <type fullname="LccModel.MotionComponent" preserve="all" />
