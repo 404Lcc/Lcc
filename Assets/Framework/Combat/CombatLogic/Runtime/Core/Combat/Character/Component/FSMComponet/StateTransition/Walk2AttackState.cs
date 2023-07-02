@@ -1,6 +1,6 @@
 namespace LccModel
 {
-    public class Idle2WalkState : AStateTransition
+    public class Walk2AttackState : AStateTransition
     {
         public override bool TransitionCondition()
         {

@@ -2,13 +2,13 @@ using UnityEngine;
 
 namespace LccModel
 {
-    public class IdleState : AFSMState
+    public class AttackState : AFSMState
     {
-        public override FSMStateType State => FSMStateType.Idle;
+        public override FSMStateType State => FSMStateType.Attack;
 
         public override void EnterState()
         {
-            combat.AnimationComponent.PlayAnimation(AnimationType.Idle);
+            combat.AnimationComponent.PlayAnimation(AnimationType.Attack);
         }
 
         public override void LevelState()
