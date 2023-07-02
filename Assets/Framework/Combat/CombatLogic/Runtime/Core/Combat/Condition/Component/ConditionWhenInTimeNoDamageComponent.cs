@@ -2,16 +2,17 @@
 
 namespace LccModel
 {
-    public class ConditionWhenInTimeNoDamageComponent : Component, IUpdate
+    public class ConditionWhenInTimeNoDamageComponent : Component//, IUpdate
     {
-        private GameTimer noDamageTimer;
+        public long time;
+        private long noDamageTimer;
 
         public override void Awake<P1>(P1 p1)
         {
             base.Awake(p1);
 
-            float time = (float)(object)p1;
-            noDamageTimer = new GameTimer(time);
+            time = (long)(object)p1;
+
             Parent.GetParent<Combat>().ListenActionPoint(ActionPointType.PostReceiveDamage, WhenReceiveDamage);
         }
 
@@ -19,25 +20,28 @@ namespace LccModel
         {
             base.OnDestroy();
 
+            Timer.Instance.RemoveTimer(noDamageTimer);
+
             Parent.GetParent<Combat>().UnListenActionPoint(ActionPointType.PostReceiveDamage, WhenReceiveDamage);
         }
 
         public void StartListen(Action whenNoDamageInTimeCallback)
         {
-            noDamageTimer.OnFinish(whenNoDamageInTimeCallback);
+            noDamageTimer = Timer.Instance.NewOnceTimer(time, whenNoDamageInTimeCallback);
         }
 
-        public void Update()
-        {
-            if (noDamageTimer.IsRunning)
-            {
-                noDamageTimer.UpdateAsFinish(UnityEngine.Time.deltaTime);
-            }
-        }
+        //public void Update()
+        //{
+        //    if (noDamageTimer.IsRunning)
+        //    {
+        //        noDamageTimer.UpdateAsFinish(UnityEngine.Time.deltaTime);
+        //    }
+        //}
 
         private void WhenReceiveDamage(Entity combatAction)
         {
-            noDamageTimer.Reset();
+            Timer.Instance.ResetTimer(noDamageTimer);
+            //noDamageTimer.Reset();
         }
     }
 }

@@ -13,8 +13,8 @@ namespace LccModel
    
 
         public float[] actionWeight => aiComponent.actionWeight;        //设置待机时各种动作的权重，顺序依次为呼吸、观察、移动
-        public float actRestTme => aiComponent.actRestTme;           //更换待机指令的间隔时间
-        public float attackTime => aiComponent.attackTime;        //攻击的间隔时间
+        public long actRestTme => aiComponent.actRestTme;           //更换待机指令的间隔时间
+        public long attackTime => aiComponent.attackTime;        //攻击的间隔时间
 
         public Combat target
         {
@@ -45,23 +45,34 @@ namespace LccModel
 
 
 
-        public GameTimer randomStateTimer;
+        public long randomStateTimer;
 
-        public GameTimer attackTimer;
+        public long attackTimer;
         public override FSMStateType State => FSMStateType.Attack;
 
         public override void EnterState()
         {
-            randomStateTimer = new GameTimer(actRestTme);
-            attackTimer = new GameTimer(attackTime);
+
+
+            randomStateTimer = Timer.Instance.NewRepeatedTimer(actRestTme, RandomState);
+
+            attackTimer = Timer.Instance.NewRepeatedTimer(attackTime, () =>
+            {
+                combat.GetComponent<SpellSkillComponent>().Spell(combat.GetSkill(1));
+            });
+
+            //randomStateTimer = new GameTimer(actRestTme);
+            //attackTimer = new GameTimer(attackTime);
 
             combat.AnimationComponent.PlayAnimation(AnimationType.Idle);
         }
 
         public override void LevelState()
         {
-            randomStateTimer = null;
-            attackTimer = null;
+            Timer.Instance.RemoveTimer(randomStateTimer);
+            Timer.Instance.RemoveTimer(attackTimer);
+            //randomStateTimer = null;
+            //attackTimer = null;
         }
         private void RandomState()
         {
@@ -97,14 +108,15 @@ namespace LccModel
                 diatanceToPlayer = Vector3.Distance(target.TransformComponent.position, combat.TransformComponent.position);
                 if (diatanceToPlayer < attackRange)
                 {
-                    randomStateTimer.Reset();
-                    if (attackTimer != null && !attackTimer.IsFinished)
-                    {
-                        attackTimer.UpdateAsRepeat(UnityEngine.Time.deltaTime, () =>
-                        {
-                            combat.GetComponent<SpellSkillComponent>().Spell(combat.GetSkill(1));
-                        });
-                    }
+                    Timer.Instance.ResetTimer(randomStateTimer);
+                    //randomStateTimer.Reset();
+                    //if (attackTimer != null && !attackTimer.IsFinished)
+                    //{
+                    //    attackTimer.UpdateAsRepeat(UnityEngine.Time.deltaTime, () =>
+                    //    {
+                    //        combat.GetComponent<SpellSkillComponent>().Spell(combat.GetSkill(1));
+                    //    });
+                    //}
                 }
                 else if (diatanceToPlayer < defendRadius)
                 {
@@ -112,11 +124,12 @@ namespace LccModel
                 }
                 else
                 {
-                    attackTimer.Reset();
-                    if (randomStateTimer != null && !randomStateTimer.IsFinished)
-                    {
-                        randomStateTimer.UpdateAsRepeat(UnityEngine.Time.deltaTime, RandomState);
-                    }
+                    Timer.Instance.ResetTimer(attackTimer);
+                    //attackTimer.Reset();
+                    //if (randomStateTimer != null && !randomStateTimer.IsFinished)
+                    //{
+                    //    randomStateTimer.UpdateAsRepeat(UnityEngine.Time.deltaTime, RandomState);
+                    //}
                 }
             }
             else

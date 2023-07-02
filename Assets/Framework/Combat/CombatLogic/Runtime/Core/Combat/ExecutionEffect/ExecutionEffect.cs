@@ -56,12 +56,12 @@ namespace LccModel
             ExecuteClipType clipType = executeClipData.ExecuteClipType;
             if (clipType == ExecuteClipType.ActionEvent)
             {
-                AddComponent<ExecutionEffectTimeTriggerComponent>().startTime = executeClipData.StartTime;
+                AddComponent<ExecutionEffectTimeTriggerComponent>().startTime = (long)(executeClipData.StartTime * 1000);
             }
             else if (executeClipData.Duration > 0)
             {
-                AddComponent<ExecutionEffectTimeTriggerComponent>().startTime = executeClipData.StartTime;
-                GetComponent<ExecutionEffectTimeTriggerComponent>().endTime = executeClipData.EndTime;
+                AddComponent<ExecutionEffectTimeTriggerComponent>().startTime = (long)(executeClipData.StartTime * 1000);
+                GetComponent<ExecutionEffectTimeTriggerComponent>().endTime = (long)(executeClipData.EndTime * 1000);
             }
 
             if (GetComponent<ExecutionEffectTimeTriggerComponent>() == null)

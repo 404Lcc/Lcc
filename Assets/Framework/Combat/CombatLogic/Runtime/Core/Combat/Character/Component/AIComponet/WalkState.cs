@@ -12,8 +12,8 @@ namespace LccModel
         public float attackRange => aiComponent.attackRange;           //攻击距离
 
         public float[] actionWeight => aiComponent.actionWeight;        //设置待机时各种动作的权重，顺序依次为呼吸、观察、移动
-        public float actRestTme => aiComponent.actRestTme;           //更换待机指令的间隔时间
-        public float attackTime => aiComponent.attackTime;        //攻击的间隔时间
+        public long actRestTme => aiComponent.actRestTme;           //更换待机指令的间隔时间
+        public long attackTime => aiComponent.attackTime;        //攻击的间隔时间
 
         public Combat target
         {
@@ -40,13 +40,13 @@ namespace LccModel
 
         public float range;
 
-        public GameTimer randomStateTimer;
+        public long randomStateTimer;
 
         public override FSMStateType State => FSMStateType.Walk;
 
         public override void EnterState()
         {
-            randomStateTimer = new GameTimer(actRestTme);
+            randomStateTimer = Timer.Instance.NewRepeatedTimer(actRestTme, RandomState);
 
             range = Random.Range(-180, 181f);
             combat.AnimationComponent.PlayAnimation(AnimationType.Walk);
@@ -54,15 +54,16 @@ namespace LccModel
 
         public override void LevelState()
         {
-            randomStateTimer = null;
+            Timer.Instance.RemoveTimer(randomStateTimer);
+            //randomStateTimer = null;
         }
 
         public override void FixedUpdate()
         {
-            if (randomStateTimer != null && !randomStateTimer.IsFinished)
-            {
-                randomStateTimer.UpdateAsRepeat(UnityEngine.Time.deltaTime, RandomState);
-            }
+            //if (randomStateTimer != null && !randomStateTimer.IsFinished)
+            //{
+            //    randomStateTimer.UpdateAsRepeat(UnityEngine.Time.deltaTime, RandomState);
+            //}
 
             combat.TransformComponent.Move(range, combat.AttributeComponent.MoveSpeed.Value);
 

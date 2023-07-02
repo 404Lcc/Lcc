@@ -1,23 +1,17 @@
 ﻿namespace LccModel
 {
-    public class ExecutionEffectTimeTriggerComponent : Component, IUpdate
+    public class ExecutionEffectTimeTriggerComponent : Component//, IUpdate
     {
-        public float startTime;
-        public float endTime;
-        public string timeValueExpression;
-        public GameTimer startTimer;
-        public GameTimer endTimer;
+        public long startTime;
+        public long endTime;
+        public long startTimer;
+        public long endTimer;
 
         public override void Awake()
         {
-            if (!string.IsNullOrEmpty(timeValueExpression))
+            if (startTime > 0)
             {
-                startTime = ExpressionUtil.Evaluate<int>(timeValueExpression) / 1000f;
-                startTimer = new GameTimer(startTime);
-            }
-            else if (startTime > 0)
-            {
-                startTimer = new GameTimer(startTime);
+                startTimer = Timer.Instance.NewOnceTimer(startTime, GetParent<ExecutionEffect>().StartTriggerEffect);
             }
             else
             {
@@ -26,20 +20,27 @@
 
             if (endTime > 0)
             {
-                endTimer = new GameTimer(endTime);
+                endTimer = Timer.Instance.NewOnceTimer(endTime, GetParent<ExecutionEffect>().EndEffect);
             }
 
         }
-        public void Update()
+        public override void OnDestroy()
         {
-            if (startTimer != null && startTimer.IsFinished == false)
-            {
-                startTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, GetParent<ExecutionEffect>().StartTriggerEffect);
-            }
-            if (endTimer != null && endTimer.IsFinished == false)
-            {
-                endTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, GetParent<ExecutionEffect>().EndEffect);
-            }
+            base.OnDestroy();
+
+            Timer.Instance.RemoveTimer(startTime);
+            Timer.Instance.RemoveTimer(endTimer);
         }
+        //public void Update()
+        //{
+        //    if (startTimer != null && startTimer.IsFinished == false)
+        //    {
+        //        startTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, GetParent<ExecutionEffect>().StartTriggerEffect);
+        //    }
+        //    if (endTimer != null && endTimer.IsFinished == false)
+        //    {
+        //        endTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, GetParent<ExecutionEffect>().EndEffect);
+        //    }
+        //}
     }
 }

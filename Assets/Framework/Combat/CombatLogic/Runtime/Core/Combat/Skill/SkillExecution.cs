@@ -135,14 +135,14 @@ namespace LccModel
             moveComp.rotateAgree = angle * MathF.PI / 180;
             moveComp.speed = clipData.Duration / 10;
             moveComp.DOMove();
-            abilityItem.AddComponent<AbilityItemLifeTimeComponent, float>(clipData.Duration);
+            abilityItem.AddComponent<AbilityItemLifeTimeComponent, long>((long)(clipData.Duration * 1000));
         }
 
         private void FixedPositionItem(AbilityItem abilityItem)
         {
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().executeClipData;
             abilityItem.TransformComponent.position = inputPoint;
-            abilityItem.AddComponent<AbilityItemLifeTimeComponent, float>(clipData.Duration);
+            abilityItem.AddComponent<AbilityItemLifeTimeComponent, long>((long)(clipData.Duration * 1000));
         }
 
 
@@ -151,7 +151,7 @@ namespace LccModel
             var clipData = abilityItem.GetComponent<AbilityItemCollisionExecuteComponent>().executeClipData;
             abilityItem.TransformComponent.position = Owner.TransformComponent.position;
             abilityItem.TransformComponent.rotation = Owner.TransformComponent.rotation;
-            abilityItem.AddComponent<AbilityItemLifeTimeComponent, float>(clipData.Duration);
+            abilityItem.AddComponent<AbilityItemLifeTimeComponent, long>((long)(clipData.Duration * 1000));
         }
     }
 }

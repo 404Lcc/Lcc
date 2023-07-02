@@ -1,27 +1,31 @@
 ﻿namespace LccModel
 {
-    public class StatusLifeTimeComponent : Component, IUpdate
+    public class StatusLifeTimeComponent : Component//, IUpdate
     {
 
-        public GameTimer lifeTimer;
+        public long lifeTimer;
 
         public override void Awake()
         {
-            var lifeTime = GetParent<StatusAbility>().duration / 1000f;
-            lifeTimer = new GameTimer(lifeTime);
+            long lifeTime = GetParent<StatusAbility>().duration;
+
+            lifeTimer = Timer.Instance.NewOnceTimer(lifeTime, GetParent<StatusAbility>().EndAbility);
+            //lifeTimer = new GameTimer(lifeTime);
         }
 
-        public void Update()
+        public override void OnDestroy()
         {
-            if (lifeTimer.IsRunning)
-            {
-                lifeTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, LifeTimeFinish);
-            }
-        }
+            base.OnDestroy();
 
-        private void LifeTimeFinish()
-        {
-            GetParent<StatusAbility>().EndAbility();
+            Timer.Instance.RemoveTimer(lifeTimer);
         }
+        //public void Update()
+        //{
+        //    if (lifeTimer.IsRunning)
+        //    {
+        //        lifeTimer.UpdateAsFinish(UnityEngine.Time.deltaTime, LifeTimeFinish);
+        //    }
+        //}
+
     }
 }

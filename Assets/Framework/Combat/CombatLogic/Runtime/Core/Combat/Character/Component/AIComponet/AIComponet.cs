@@ -13,8 +13,8 @@ namespace LccModel
 
 
         public float[] actionWeight = { 3000, 4000 };         //设置待机时各种动作的权重，顺序依次为呼吸、观察、移动
-        public float actRestTme = 3;            //更换待机指令的间隔时间
-        public float attackTime = 2;            //攻击的间隔时间
+        public long actRestTme = 3000;            //更换待机指令的间隔时间
+        public long attackTime = 2000;            //攻击的间隔时间
 
 
         public Combat target;

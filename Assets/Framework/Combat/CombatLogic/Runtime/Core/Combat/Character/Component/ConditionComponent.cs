@@ -13,9 +13,9 @@ namespace LccModel
             switch (type)
             {
                 case ConditionType.WhenInTimeNoDamage:
-                    var time = float.Parse((string)obj);
+                    var time = long.Parse((string)obj);
                     var condition = Parent.AddChildren<Condition>();
-                    var temp = condition.AddComponent<ConditionWhenInTimeNoDamageComponent, float>(time);
+                    var temp = condition.AddComponent<ConditionWhenInTimeNoDamageComponent, long>(time);
                     temp.StartListen(action);
                     _conditionDict.Add(action.GetHashCode(), condition);
                     break;

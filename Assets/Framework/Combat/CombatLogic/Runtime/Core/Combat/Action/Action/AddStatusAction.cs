@@ -57,8 +57,7 @@ namespace LccModel
                 {
                     status = Target.GetStatus(statusConfigObject.Id);
                     var statusLifeTimer = status.GetComponent<StatusLifeTimeComponent>().lifeTimer;
-                    statusLifeTimer.MaxTime = addStatusEffect.Duration / 1000f;
-                    statusLifeTimer.Reset();
+                    Timer.Instance.ResetTimer(statusLifeTimer);
                     return;
                 }
             }
