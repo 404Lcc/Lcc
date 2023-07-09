@@ -4770,6 +4770,8 @@
     <type fullname="LccModel.UpdateManager" preserve="all" />
     <type fullname="LccModel.UserEventDefine" preserve="all" />
     <type fullname="LccModel.AABB" preserve="all" />
+    <type fullname="LccModel.OBB" preserve="all" />
+    <type fullname="LccModel.OBBTest" preserve="all" />
     <type fullname="LccModel.EventArgs`1" preserve="all" />
     <type fullname="LccModel.EventArgsExtend" preserve="all" />
     <type fullname="LccModel.Event" preserve="all" />
@@ -4859,6 +4861,7 @@
     <type fullname="LccModel.OpenFileName" preserve="all" />
     <type fullname="LccModel.RightClickEvent" preserve="all" />
     <type fullname="LccModel.RightClickButton" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;" preserve="all" />
     <type fullname="RVO.KdTree+AgentTreeNode" preserve="all" />
     <type fullname="RVO.KdTree+FloatPair" preserve="all" />
     <type fullname="RVO.KdTree+ObstacleTreeNode" preserve="all" />
@@ -4941,5 +4944,6 @@
     <type fullname="LccModel.WebUtil+&lt;DownloadAssetBundle&gt;d__5" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.EventTriggerListener+VoidDelegate" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=144" preserve="all" />
   </assembly>
 </linker>
