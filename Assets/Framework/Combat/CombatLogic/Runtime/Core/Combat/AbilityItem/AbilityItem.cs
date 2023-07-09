@@ -10,7 +10,7 @@ namespace LccModel
         public EffectApplyType effectApplyType;
 
         public TransformComponent TransformComponent => GetComponent<TransformComponent>();
-        public AABB2DComponent AABB2DComponent => GetComponent<AABB2DComponent>();
+        public AABBComponent AABBComponent => GetComponent<AABBComponent>();
 
         public override void Awake<P1, P2>(P1 p1, P2 p2)
         {
@@ -23,7 +23,8 @@ namespace LccModel
 
             AddComponent<AbilityItemCollisionExecuteComponent, ExecuteClipData>(clipData);
 
-            AddComponent<AABB2DComponent, Vector2, Vector2>(new Vector2(-1, -1), new Vector2(1, 1));
+            AABB aabb = new AABB(new Vector2(-1, -1), new Vector2(1, 1));
+            AddComponent<AABBComponent, AABB>(aabb);
 
             abilityExecution = p1 as IAbilityExecution;//技能执行体
 
@@ -53,7 +54,7 @@ namespace LccModel
         {
             foreach (var item in CombatContext.Instance.combatDict.Values)
             {
-                if (AABB2DComponent.Intersects(item.AABB2DComponent))
+                if (AABBComponent.Intersects(item.AABBComponent))
                 {
                     OnCollision(item);
                 }

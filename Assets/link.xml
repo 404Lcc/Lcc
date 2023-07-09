@@ -4571,6 +4571,7 @@
     <type fullname="LccModel.FloatNumeric" preserve="all" />
     <type fullname="LccModel.HealthPoint" preserve="all" />
     <type fullname="LccModel.Combat" preserve="all" />
+    <type fullname="LccModel.AABBComponent" preserve="all" />
     <type fullname="LccModel.ActionPointType" preserve="all" />
     <type fullname="LccModel.ActionPoint" preserve="all" />
     <type fullname="LccModel.ActionPointComponent" preserve="all" />
@@ -4768,7 +4769,7 @@
     <type fullname="LccModel.UpdateEventDefine" preserve="all" />
     <type fullname="LccModel.UpdateManager" preserve="all" />
     <type fullname="LccModel.UserEventDefine" preserve="all" />
-    <type fullname="LccModel.AABB2DComponent" preserve="all" />
+    <type fullname="LccModel.AABB" preserve="all" />
     <type fullname="LccModel.EventArgs`1" preserve="all" />
     <type fullname="LccModel.EventArgsExtend" preserve="all" />
     <type fullname="LccModel.Event" preserve="all" />

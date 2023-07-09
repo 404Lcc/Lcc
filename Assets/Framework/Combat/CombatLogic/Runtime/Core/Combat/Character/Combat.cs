@@ -44,7 +44,7 @@ namespace LccModel
 
         public AnimationComponent AnimationComponent => GetComponent<AnimationComponent>();
         public AttributeComponent AttributeComponent => GetComponent<AttributeComponent>();
-        public AABB2DComponent AABB2DComponent => GetComponent<AABB2DComponent>();
+        public AABBComponent AABBComponent => GetComponent<AABBComponent>();
 
         public TagComponent TagComponent => GetComponent<TagComponent>();
 
@@ -58,7 +58,9 @@ namespace LccModel
             AddComponent<OrcaComponent>();
 
             AddComponent<AnimationComponent>();
-            AddComponent<AABB2DComponent, Vector2, Vector2>(new Vector2(-1, -1), new Vector2(1, 1));
+
+            AABB aabb = new AABB(new Vector2(-1, -1), new Vector2(1, 1));
+            AddComponent<AABBComponent, AABB>(aabb);
 
             AddComponent<AttributeComponent>();
             AddComponent<ActionPointComponent>();
