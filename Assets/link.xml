@@ -4843,8 +4843,11 @@
     <type fullname="LccModel.RijndaelUtil" preserve="all" />
     <type fullname="LccModel.SerializeUtil" preserve="all" />
     <type fullname="LccModel.SortUtil" preserve="all" />
+    <type fullname="LccModel.StreamingAssetsDefine" preserve="all" />
+    <type fullname="LccModel.BuildinFileManifest" preserve="all" />
+    <type fullname="LccModel.GameQueryServices" preserve="all" />
     <type fullname="LccModel.StreamingAssetsUtil" preserve="all" />
-    <type fullname="LccModel.AndroidPost" preserve="all" />
+    <type fullname="LccModel.PreprocessBuild" preserve="all" />
     <type fullname="LccModel.WebUtil" preserve="all" />
     <type fullname="LccModel.DisplayMode" preserve="all" />
     <type fullname="LccModel.DoubleClickEvent" preserve="all" />
@@ -4908,7 +4911,6 @@
     <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__6" preserve="all" />
     <type fullname="LccModel.FsmCreateDownloader+&lt;CreateDownloader&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmDownloadFiles+&lt;BeginDownload&gt;d__5" preserve="all" />
-    <type fullname="LccModel.FsmInitialize+GameQueryServices" preserve="all" />
     <type fullname="LccModel.FsmInitialize+GameDecryptionServices" preserve="all" />
     <type fullname="LccModel.FsmInitialize+&lt;InitPackage&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmPatchPrepare+&lt;Next&gt;d__5" preserve="all" />

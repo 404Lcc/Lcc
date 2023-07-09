@@ -120,18 +120,6 @@ namespace LccModel
 		}
 
 		/// <summary>
-		/// 内置文件查询服务类
-		/// </summary>
-		private class GameQueryServices : IQueryServices
-		{
-			public bool QueryStreamingAssets(string fileName)
-			{
-				string buildinFolderName = YooAssets.GetStreamingAssetBuildinFolderName();
-				return StreamingAssetsUtil.FileExists($"{buildinFolderName}/{fileName}");
-			}
-		}
-
-		/// <summary>
 		/// 资源文件解密服务类
 		/// </summary>
 		private class GameDecryptionServices : IDecryptionServices

@@ -1,5 +1,4 @@
-﻿using UnityEditor.VersionControl;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace LccModel
 {

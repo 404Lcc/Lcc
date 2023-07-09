@@ -56,7 +56,7 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Samples\YooAsset\1.4.14\Space Shooter\GameScript\Editor\Encryption.cs" />
+    <Compile Include="Assets\Samples\YooAsset\1.5.0\Space Shooter\GameScript\Editor\Encryption.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -803,6 +803,12 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="YooAsset.Editor">
+      <HintPath>Library\ScriptAssemblies\YooAsset.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.CacheServer">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.CacheServer.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -824,6 +830,15 @@
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ScriptableBuildPipeline">
+      <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="YooAsset">
+      <HintPath>Library\ScriptAssemblies\YooAsset.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ScriptableBuildPipeline.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
@@ -838,21 +853,6 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="YooAsset.Editor">
-      <HintPath>Library\ScriptAssemblies\YooAsset.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.CacheServer">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.CacheServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ScriptableBuildPipeline">
-      <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.dll</HintPath>
-    </Reference>
-    <Reference Include="YooAsset">
-      <HintPath>Library\ScriptAssemblies\YooAsset.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ScriptableBuildPipeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -876,37 +876,45 @@
       <Project>{0E07D9BD-8418-6FA4-7A89-7F6CB0E9C8B1}</Project>
       <Name>Unity.3rdPlugin</Name>
     </ProjectReference>
-    <ProjectReference Include="LoopScrollRect.Editor.csproj">
-      <Project>{7CB02817-C9D1-A666-0CDA-322463B525BC}</Project>
-      <Name>LoopScrollRect.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.Editor.csproj">
       <Project>{08A34834-D4C3-53DD-6264-CCC1F0737645}</Project>
       <Name>Unity.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="UniSingleton.csproj">
-      <Project>{56D1ADCF-F72F-C5B6-B38F-647876A04E22}</Project>
-      <Name>UniSingleton</Name>
+    <ProjectReference Include="UniFramework.Singleton.csproj">
+      <Project>{DE675AAB-CE04-552E-9458-EEF8CD4085C3}</Project>
+      <Name>UniFramework.Singleton</Name>
     </ProjectReference>
-    <ProjectReference Include="UniEvent.csproj">
-      <Project>{B41C53E5-E096-3E7A-6CC2-7A545744A355}</Project>
-      <Name>UniEvent</Name>
+    <ProjectReference Include="UniFramework.Machine.csproj">
+      <Project>{EC4CFAFC-A005-5CAC-EEDD-E1EC41924666}</Project>
+      <Name>UniFramework.Machine</Name>
     </ProjectReference>
-    <ProjectReference Include="UniWindow.csproj">
-      <Project>{1E1541F4-9DD6-30D9-B64B-DBADABEDC229}</Project>
-      <Name>UniWindow</Name>
+    <ProjectReference Include="UniFramework.Tween.csproj">
+      <Project>{F6F6EC12-8EB7-7831-1B12-73929AF97C2B}</Project>
+      <Name>UniFramework.Tween</Name>
     </ProjectReference>
-    <ProjectReference Include="UniMachine.csproj">
-      <Project>{8013F480-EB42-F131-FD88-F0332DB45777}</Project>
-      <Name>UniMachine</Name>
+    <ProjectReference Include="UniFramework.Network.csproj">
+      <Project>{066E729A-461F-44D2-0F67-3DB3B7C0B350}</Project>
+      <Name>UniFramework.Network</Name>
     </ProjectReference>
-    <ProjectReference Include="UniPooling.csproj">
-      <Project>{FE10D298-6BB1-0131-1864-EF78190AA1B9}</Project>
-      <Name>UniPooling</Name>
+    <ProjectReference Include="UniFramework.Event.csproj">
+      <Project>{0B00F680-83F8-4264-B7F0-88751B364344}</Project>
+      <Name>UniFramework.Event</Name>
     </ProjectReference>
-    <ProjectReference Include="UniUtility.csproj">
-      <Project>{5EC310BD-9010-745B-301A-4925DE0C7CD4}</Project>
-      <Name>UniUtility</Name>
+    <ProjectReference Include="UniFramework.Window.csproj">
+      <Project>{B57B1280-5217-9D63-1ED0-4EE7518B688E}</Project>
+      <Name>UniFramework.Window</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniFramework.Animation.csproj">
+      <Project>{50C69366-3F28-60E8-C313-1B262DAF0921}</Project>
+      <Name>UniFramework.Animation</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniFramework.Pooling.csproj">
+      <Project>{A70C721A-4990-A8C5-E5BE-457B53F4107B}</Project>
+      <Name>UniFramework.Pooling</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniFramework.Utility.csproj">
+      <Project>{940D5290-A37C-5F9A-92AC-4DE39CE13069}</Project>
+      <Name>UniFramework.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

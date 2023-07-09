@@ -2,7 +2,7 @@
   "dependencies": {
     "com.focus-creative-games.hybridclr_unity": "https://gitee.com/focus-creative-games/hybridclr_unity.git",
     "com.ourpalm.ilruntime": "2.1.0",
-    "com.tuyoogame.yooasset": "1.4.14",
+    "com.tuyoogame.yooasset": "1.5.0",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.collab-proxy": "2.0.1",
     "com.unity.ide.rider": "3.0.18",

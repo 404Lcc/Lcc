@@ -1,5 +1,4 @@
-﻿using UnityEditor.VersionControl;
-using YooAsset;
+﻿using YooAsset;
 
 namespace LccModel
 {

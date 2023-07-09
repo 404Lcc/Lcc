@@ -1,6 +1,8 @@
 {
-    "FileVersion": "1.4.6",
+    "FileVersion": "1.4.17",
     "EnableAddressable": false,
+    "LocationToLower": false,
+    "IncludeAssetGUID": false,
     "OutputNameStyle": 1,
     "PackageName": "DefaultPackage",
     "PackageVersion": "Simulate",
@@ -8,6 +10,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/Config/TestConfig.txt",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 0,
             "DependIDs": []
@@ -15,6 +18,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/Config/TestConfigCategory.bytes",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 0,
             "DependIDs": []
@@ -22,6 +26,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/DLL/Unity.Hotfix.dll.bytes",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 1,
             "DependIDs": []
@@ -29,6 +34,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 1,
             "DependIDs": []
@@ -36,6 +42,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/Prefab/Panel/UIGamePanel.prefab",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
@@ -43,6 +50,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/Prefab/Panel/UILoadingPanel.prefab",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
@@ -50,6 +58,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/Prefab/Panel/UILoginPanel.prefab",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
@@ -57,6 +66,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/Prefab/Panel/UIMainPanel.prefab",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
@@ -64,6 +74,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/Prefab/Panel/UITopPanel.prefab",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
@@ -71,6 +82,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/Scene/Game.unity",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 3,
             "DependIDs": []
@@ -78,6 +90,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/Scene/Login.unity",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 3,
             "DependIDs": []
@@ -85,6 +98,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/Scene/Main.unity",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 3,
             "DependIDs": []
@@ -92,6 +106,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/SkillConfig/Execution/Execution_1.asset",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 4,
             "DependIDs": []
@@ -99,6 +114,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/SkillConfig/Item/Item_1.asset",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 5,
             "DependIDs": []
@@ -106,6 +122,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/SkillConfig/Skill/Skill_1.asset",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 6,
             "DependIDs": []
@@ -113,6 +130,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/SkillConfig/Status/Status_1.asset",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 7,
             "DependIDs": []
@@ -120,6 +138,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/SkillConfig/Status/Status_2.asset",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 7,
             "DependIDs": []
@@ -127,6 +146,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/Tool/Tips.prefab",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 8,
             "DependIDs": []
@@ -134,6 +154,7 @@
         {
             "Address": "",
             "AssetPath": "Assets/Bundles/Tool/TipsWindow.prefab",
+            "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 8,
             "DependIDs": []
