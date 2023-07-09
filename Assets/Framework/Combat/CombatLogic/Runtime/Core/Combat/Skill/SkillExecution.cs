@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LccModel
 {
-    public class SkillExecution : Entity, IAbilityExecution, IUpdate
+    public class SkillExecution : Entity, IAbilityExecution
     {
         public Entity Ability { get; set; }
         public Combat Owner => GetParent<Combat>();
@@ -19,7 +19,6 @@ namespace LccModel
 
         public Vector3 inputPoint;
         public float inputDirection;
-        public long originTime;
 
 
         public bool actionOccupy = true;
@@ -30,22 +29,14 @@ namespace LccModel
             base.Awake(p1);
             Ability = p1 as SkillAbility;
 
-            originTime = Time.Instance.ClientNow();
+
         }
 
 
         public void LoadExecutionEffect()
         {
             AddComponent<ExecutionEffectComponent>();
-        }
-        public void Update()
-        {
-            var nowSeconds = (double)(Time.Instance.ClientNow() - originTime) / 1000;
-
-            if (nowSeconds >= executionConfigObject.TotalTime)
-            {
-                EndExecute();
-            }
+            Timer.Instance.NewOnceTimer((long)(executionConfigObject.TotalTime * 1000), EndExecute);
         }
 
 

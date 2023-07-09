@@ -4872,7 +4872,7 @@
     <type fullname="LccModel.ItemConfigObject+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.SkillConfigObject+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.StatusConfigObject+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.SkillExecution+&lt;&gt;c__DisplayClass21_0" preserve="all" />
+    <type fullname="LccModel.SkillExecution+&lt;&gt;c__DisplayClass19_0" preserve="all" />
     <type fullname="LccModel.SyncCreateCombatEventHandler+&lt;Run&gt;d__0" preserve="all" />
     <type fullname="LccModel.SyncDeleteCombatEventHandler+&lt;Run&gt;d__0" preserve="all" />
     <type fullname="LccModel.SyncCreateAbilityItemEventHandler+&lt;Run&gt;d__0" preserve="all" />

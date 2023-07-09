@@ -89,6 +89,7 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\ClearAllStatusEffect.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\RVO\RVOMath.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\SpellSkillComponent.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Math\OBBTest.cs" />
     <Compile Include="Assets\Framework\Util\LocalDialog.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\FsmNode\FsmInitialize.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Protobuf\ProtobufUtil.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Condition\Condition.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\JoystickComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\CoroutineLockType.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Math\OBB.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\AbilityEffectConditionTriggerComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\MD5\MD5Util.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\FSMComponet\StateTransition\Walk2AttackState.cs" />
@@ -267,6 +269,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Singleton\Singleton.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\StreamingAssets\StreamingAssetsUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\EventSystem\Event\EventType.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AABBComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\AbilityItem\AbilityItemView.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Vector3\Vector3Expand.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Random\RandomUtil.cs" />
@@ -329,9 +332,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AABBComponent.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Math\OBB.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Math\OBBTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />
