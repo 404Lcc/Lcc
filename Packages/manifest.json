@@ -51,6 +51,13 @@
       "scopes": [
         "com.tuyoogame.yooasset"
       ]
+    },
+    {
+      "name": "ILRuntime",
+      "url": "https://registry.npmjs.org",
+      "scopes": [
+        "com.ourpalm"
+      ]
     }
   ]
 }
