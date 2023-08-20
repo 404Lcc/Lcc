@@ -75,6 +75,7 @@ namespace LccHotfix
         #region 回调注册
         public void GetObject(Transform trans, int index)
         {
+            LogUtil.Debug("GetObject"+ index);
             if (!dict.ContainsKey(index))
             {
                 View item = loopScrollItemPool.GetOnPool();
@@ -88,6 +89,7 @@ namespace LccHotfix
         }
         public void ReturnObject(Transform trans, int index)
         {
+            LogUtil.Debug("ReturnObject" + index);
             //if (dict.ContainsKey(index))
             //{
             //    loopScrollItemPool.ReleaseOnPool(dict[index]);
