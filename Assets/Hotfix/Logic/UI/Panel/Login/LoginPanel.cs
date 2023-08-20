@@ -84,6 +84,8 @@ namespace LccHotfix
             }
             loopScroll.Refill(list, 1);
 
+
+
             //for (int i = 0; i < 15; i++)
             //{
             //    loopScroll.AddData(new LoginItemData(), true);
@@ -101,13 +103,14 @@ namespace LccHotfix
         }
         public void OnEnterMain()
         {
+            loopScroll.SetSize(1, new Vector2(500, 500));
             //List<LoginItemData> list = new List<LoginItemData>();
             //for (int i = 0; i < 10; i++)
             //{
             //    list.Add(new LoginItemData());
             //}
             //loopScroll.Refill(list, list.Count);
-            ModelManager.Instance.GetModel<LoginModel>().OnEnterMain();
+            //ModelManager.Instance.GetModel<LoginModel>().OnEnterMain();
         }
     }
 }

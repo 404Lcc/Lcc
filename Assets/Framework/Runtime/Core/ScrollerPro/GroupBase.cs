@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using EnhancedUI.EnhancedScroller;
+using UnityEngine.UI;
 
 namespace LccModel
 {
@@ -42,6 +43,12 @@ namespace LccModel
         public void SetData(int startIndex)
         {
             this.startIndex = startIndex;
+        }
+        public void SetSize(Vector2 sizeDelta)
+        {
+            LayoutElement layoutElement = GetComponent<LayoutElement>();
+            layoutElement.minWidth = sizeDelta.x;
+            layoutElement.minHeight = sizeDelta.y;
         }
 
         public override void RefreshCellView()

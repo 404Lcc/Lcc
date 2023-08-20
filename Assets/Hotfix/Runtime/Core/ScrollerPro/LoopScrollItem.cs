@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using LccModel;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace LccHotfix
@@ -6,6 +7,7 @@ namespace LccHotfix
     public class LoopScrollItem : AObjectBase
     {
         public int index = -1;
+        public Vector2 sizeDelta;
 
         private GameObject _gameObject;
         public GameObject gameObject
@@ -77,6 +79,13 @@ namespace LccHotfix
             {
                 normalGo.SetActive(!visible);
             }
+        }
+
+        public void SetSize(Vector2 sizeDelta)
+        {
+            this.sizeDelta = sizeDelta;
+            GroupBase groupBase = gameObject.transform.parent.GetComponent<GroupBase>();
+            groupBase.SetSize(sizeDelta);
         }
     }
 }

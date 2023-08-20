@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static EnhancedUI.EnhancedScroller.EnhancedScroller;
+using UnityEngine.UIElements;
 
 namespace LccHotfix
 {
@@ -21,6 +23,8 @@ namespace LccHotfix
         public bool needSelectWithClick = true;
         public Action<int, Data> selectAction = null;
 
+        public GameObject groupPrefab;
+
         public int CurSelect { get; set; } = -1;
 
         public override void InitData(object[] datas)
@@ -34,6 +38,7 @@ namespace LccHotfix
             loopScroll.GetObjectHandler = GetObject;
             loopScroll.ReturnObjectHandler = ReturnObject;
             loopScroll.ProvideDataHandler = ProvideData;
+            loopScroll.GetGroupSizeHandler = GetGroupSize;
             loopScroll.GetDataCountHandler = GetDataCount;
 
             var itemPrefab = (GameObject)datas[1];
@@ -47,18 +52,18 @@ namespace LccHotfix
         {
             itemPrefab.gameObject.SetActive(false);
 
-            GameObject group = new GameObject("groupPrefab");
-            group.SetActive(false);
-            group.transform.SetParent(loopScroll.transform);
-            group.AddComponent<RectTransform>();
+            groupPrefab = new GameObject("groupPrefab");
+            groupPrefab.SetActive(false);
+            groupPrefab.transform.SetParent(loopScroll.transform);
+            groupPrefab.AddComponent<RectTransform>();
 
-            RectTransform groupRect = group.transform as RectTransform;
+            RectTransform groupRect = groupPrefab.transform as RectTransform;
             RectTransform itemRect = itemPrefab.transform as RectTransform;
 
             if (loopScroll.isGrid)
             {
                 RectTransform loopScrollRect = loopScroll.transform as RectTransform;
-                GridLayoutGroup gridLayoutGroup = group.AddComponent<GridLayoutGroup>();
+                GridLayoutGroup gridLayoutGroup = groupPrefab.AddComponent<GridLayoutGroup>();
                 gridLayoutGroup.spacing = new Vector2(loopScroll.Scroller.spacing, 0);
                 gridLayoutGroup.cellSize = itemRect.sizeDelta();
                 groupRect.sizeDelta = new Vector2(loopScrollRect.sizeDelta().x, itemRect.sizeDelta().y);
@@ -68,7 +73,7 @@ namespace LccHotfix
                 groupRect.sizeDelta = itemRect.sizeDelta();
             }
 
-            GroupBase groupBase = group.AddComponent<GroupBase>();
+            GroupBase groupBase = groupPrefab.AddComponent<GroupBase>();
             groupBase.InitGroup(loopScroll, itemPrefab.transform);
             loopScroll.groupPrefab = groupBase;
         }
@@ -112,6 +117,21 @@ namespace LccHotfix
                 Debug.LogError("ProvideData不存在" + index);
             }
         }
+
+        public int GetGroupSize(int index)
+        {
+            if (dict.ContainsKey(index))
+            {
+                var groupSize = loopScroll.Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? dict[index].sizeDelta.y : dict[index].sizeDelta.x;
+                return (int)groupSize;
+            }
+            else
+            {
+                RectTransform rect = groupPrefab.transform as RectTransform;
+                var groupSize = loopScroll.Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? rect.sizeDelta().y : rect.sizeDelta().x;
+                return (int)groupSize;
+            }
+        }
         public int GetDataCount()
         {
             return dataList.Count;
@@ -135,9 +155,18 @@ namespace LccHotfix
                 }
             }
         }
+
+        public void SetSize(int index, Vector2 sizeDelta)
+        {
+            if (dict.ContainsKey(index))
+            {
+                dict[index].SetSize(sizeDelta);
+            }
+        }
         public void RefershData()
         {
-            loopScroll.RefershData();
+            loopScroll.ReloadData();
+            //loopScroll.RefershData();
         }
         //public void ClearList()
         //{

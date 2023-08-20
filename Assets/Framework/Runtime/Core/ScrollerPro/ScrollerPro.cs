@@ -9,6 +9,7 @@ namespace LccModel
         public Action<Transform, int> GetObjectHandler;
         public Action<Transform, int> ReturnObjectHandler;
         public Action<Transform, int> ProvideDataHandler;
+        public Func<int, int> GetGroupSizeHandler;
         public Func<int> GetDataCountHandler;
 
 
@@ -85,7 +86,16 @@ namespace LccModel
 
         public float GetCellViewSize(EnhancedScroller scroller, int dataIndex)
         {
-            return GroupSize;
+            //if (_groupSize == -1)
+            //{
+            //    RectTransform rect = groupPrefab.transform as RectTransform;
+            //    _groupSize = Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? rect.sizeDelta().y : rect.sizeDelta().x;
+            //    return _groupSize;
+            //}
+            //else
+            {
+                return GetGroupSizeHandler(dataIndex);
+            }
         }
 
         public int GetNumberOfCells(EnhancedScroller scroller)
