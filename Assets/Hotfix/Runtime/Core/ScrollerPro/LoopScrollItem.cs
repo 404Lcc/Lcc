@@ -1,29 +1,46 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace LccHotfix
 {
     public class LoopScrollItem : AObjectBase
     {
         public int index = -1;
-        public GameObject gameObject;
+
+        private GameObject _gameObject;
+        public GameObject gameObject
+        {
+            get
+            {
+                return _gameObject;
+            }
+            set
+            {
+                if (_gameObject == null)
+                {
+                    _gameObject = value;
+                    _gameObject.ConvertComponent(this);
+                    OnInit();
+                }
+            }
+        }
 
         public ILoopScrollSelect loopScrollSelect => (ILoopScrollSelect)Parent;
 
         public GameObject selectGo;
         public GameObject normalGo;
-        public override void Awake<P1>(P1 p1)
-        {
-            base.Awake(p1);
 
-            //Button button = gameObject.GetComponent<Button>();
-            //if (button == null)
-            //{
-            //    gameObject.AddComponent<Button>().onClick.AddListener(OnClick);
-            //}
-            //else
-            //{
-            //    button.onClick.AddListener(OnClick);
-            //}
+        public virtual void OnInit()
+        {
+            Button button = gameObject.GetComponent<Button>();
+            if (button == null)
+            {
+                gameObject.AddComponent<Button>().onClick.AddListener(OnClick);
+            }
+            else
+            {
+                button.onClick.AddListener(OnClick);
+            }
         }
 
         public virtual void OnShow()
