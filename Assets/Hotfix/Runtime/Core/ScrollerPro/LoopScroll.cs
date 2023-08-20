@@ -59,7 +59,7 @@ namespace LccHotfix
             {
                 RectTransform loopScrollRect = loopScroll.transform as RectTransform;
                 GridLayoutGroup gridLayoutGroup = group.AddComponent<GridLayoutGroup>();
-                gridLayoutGroup.spacing = new Vector2(0, loopScroll.Scroller.spacing);
+                gridLayoutGroup.spacing = new Vector2(loopScroll.Scroller.spacing, 0);
                 gridLayoutGroup.cellSize = itemRect.sizeDelta();
                 groupRect.sizeDelta = new Vector2(loopScrollRect.sizeDelta().x, itemRect.sizeDelta().y);
             }
