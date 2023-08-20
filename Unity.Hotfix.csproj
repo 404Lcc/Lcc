@@ -143,6 +143,9 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\UIBinding.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\ScrollerPro\LoopScroll.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\ScrollerPro\LoopScrollItemPool.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\ScrollerPro\LoopScrollItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
