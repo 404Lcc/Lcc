@@ -25,6 +25,17 @@ namespace LccHotfix
             //    button.onClick.AddListener(OnClick);
             //}
         }
+
+        public virtual void OnShow()
+        {
+
+        }
+
+        public virtual void OnHide()
+        {
+
+        }
+
         public virtual void UpdateData(object obj)
         {
             OnItemSelect(loopScrollSelect.CurSelect);

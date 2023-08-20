@@ -36,38 +36,40 @@ namespace LccHotfix
             loopScroll.ProvideDataHandler = ProvideData;
             loopScroll.GetDataCountHandler = GetDataCount;
 
-            InitGroup((GameObject)datas[1]);
-
-            ((GameObject)datas[1]).SetActive(false);
+            var itemPrefab = (GameObject)datas[1];
+            InitGroup(itemPrefab);
             if (datas.Length > 2)
             {
                 selectAction = (Action<int, Data>)datas[2];
             }
         }
-        public void InitGroup(GameObject itemPr)
+        public void InitGroup(GameObject itemPrefab)
         {
-            GameObject group = new GameObject("group");
+            itemPrefab.gameObject.SetActive(false);
+
+            GameObject group = new GameObject("groupPrefab");
             group.SetActive(false);
+            group.transform.SetParent(loopScroll.transform);
             group.AddComponent<RectTransform>();
 
-            GroupBase groupBase = group.AddComponent<GroupBase>();
-            group.transform.SetParent(loopScroll.transform);
             RectTransform groupRect = group.transform as RectTransform;
+            RectTransform itemRect = itemPrefab.transform as RectTransform;
 
-            RectTransform loopScrollRect = loopScroll.transform as RectTransform;
-            RectTransform itemRect = itemPr.transform as RectTransform;
             if (loopScroll.isGrid)
             {
+                RectTransform loopScrollRect = loopScroll.transform as RectTransform;
                 GridLayoutGroup gridLayoutGroup = group.AddComponent<GridLayoutGroup>();
                 gridLayoutGroup.spacing = new Vector2(0, loopScroll.Scroller.spacing);
-                groupRect.sizeDelta = new Vector2(loopScrollRect.sizeDelta().x, itemRect.sizeDelta().y);
                 gridLayoutGroup.cellSize = itemRect.sizeDelta();
+                groupRect.sizeDelta = new Vector2(loopScrollRect.sizeDelta().x, itemRect.sizeDelta().y);
             }
             else
             {
                 groupRect.sizeDelta = itemRect.sizeDelta();
             }
-            groupBase.InitGroup(loopScroll, itemPr.transform);
+
+            GroupBase groupBase = group.AddComponent<GroupBase>();
+            groupBase.InitGroup(loopScroll, itemPrefab.transform);
             loopScroll.groupPrefab = groupBase;
         }
         #region 回调注册
