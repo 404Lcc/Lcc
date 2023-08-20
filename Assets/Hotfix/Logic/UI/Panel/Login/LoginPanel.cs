@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 namespace LccHotfix
 {
-    public class LoginItemData
-    {
-    }
-    public class LoginItem : LoopScrollItem
-    {
-    }
+    //public class LoginItemData
+    //{
+    //}
+    //public class LoginItem : LoopScrollItem
+    //{
+    //}
 
     [UIEventHandler(UIEventType.Login)]
     public class LoginUIEventHandler : UIEvent
@@ -28,7 +28,7 @@ namespace LccHotfix
         public Button testBtn;
         public LoopScrollRect loop;
         public GameObject item;
-        public LoopScroll<LoginItemData, LoginItem> loopScroll;
+        //public LoopScroll<LoginItemData, LoginItem> loopScroll;
         //public override void InitView(LoginModel viewModel)
         //{
         //    LogUtil.Debug("InitView第一个执行的函数");
@@ -50,7 +50,7 @@ namespace LccHotfix
             base.OnInitComponent(panel);
             LogUtil.Debug("OnInitComponent第三个执行的函数");
 
-            loopScroll = panel.AddChildren<LoopScroll<LoginItemData, LoginItem>>(loop, item);
+            //loopScroll = panel.AddChildren<LoopScroll<LoginItemData, LoginItem>>(loop, item);
         }
         public override void OnInitData(Panel panel)
         {
@@ -77,17 +77,17 @@ namespace LccHotfix
 
             UpdatePanel.Instance.Hide();
 
-            List<LoginItemData> list = new List<LoginItemData>();
-            for (int i = 0; i < 10; i++)
-            {
-                list.Add(new LoginItemData());
-            }
-            loopScroll.Refill(list, 1);
+            //List<LoginItemData> list = new List<LoginItemData>();
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    list.Add(new LoginItemData());
+            //}
+            //loopScroll.Refill(list, 1);
 
-            for (int i = 0; i < 15; i++)
-            {
-                loopScroll.AddData(new LoginItemData(), true);
-            }
+            //for (int i = 0; i < 15; i++)
+            //{
+            //    loopScroll.AddData(new LoginItemData(), true);
+            //}
         }
 
         public override void OnHide(Panel panel)

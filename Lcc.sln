@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnhancedScroller_asmdef", "EnhancedScroller_asmdef.csproj", "{50A4DDDC-1012-D6CA-5D95-34EC1C8959A2}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Hotfix", "Unity.Hotfix.csproj", "{8543BC6F-FEC6-BDFC-0BD5-AB0B4E96C57B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Model", "Unity.Model.csproj", "{57D111B4-22B4-6CA1-C350-5090EBF41DC0}"
@@ -8,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.3rdPlugin", "Unity.3rdPlugin.csproj", "{0E07D9BD-8418-6FA4-7A89-7F6CB0E9C8B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoopScrollRect.Runtime", "LoopScrollRect.Runtime.csproj", "{E9505C4B-2DF9-C2B3-F3E2-ECB7DF3B049E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnhancedScroller_asmdef", "EnhancedScroller_asmdef.csproj", "{50A4DDDC-1012-D6CA-5D95-34EC1C8959A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Editor", "Unity.Editor.csproj", "{08A34834-D4C3-53DD-6264-CCC1F0737645}"
 EndProject
@@ -19,6 +19,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50A4DDDC-1012-D6CA-5D95-34EC1C8959A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50A4DDDC-1012-D6CA-5D95-34EC1C8959A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50A4DDDC-1012-D6CA-5D95-34EC1C8959A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50A4DDDC-1012-D6CA-5D95-34EC1C8959A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8543BC6F-FEC6-BDFC-0BD5-AB0B4E96C57B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8543BC6F-FEC6-BDFC-0BD5-AB0B4E96C57B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8543BC6F-FEC6-BDFC-0BD5-AB0B4E96C57B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,10 +39,6 @@ Global
 		{E9505C4B-2DF9-C2B3-F3E2-ECB7DF3B049E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9505C4B-2DF9-C2B3-F3E2-ECB7DF3B049E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9505C4B-2DF9-C2B3-F3E2-ECB7DF3B049E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50A4DDDC-1012-D6CA-5D95-34EC1C8959A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50A4DDDC-1012-D6CA-5D95-34EC1C8959A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50A4DDDC-1012-D6CA-5D95-34EC1C8959A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50A4DDDC-1012-D6CA-5D95-34EC1C8959A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{08A34834-D4C3-53DD-6264-CCC1F0737645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{08A34834-D4C3-53DD-6264-CCC1F0737645}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08A34834-D4C3-53DD-6264-CCC1F0737645}.Release|Any CPU.ActiveCfg = Release|Any CPU
