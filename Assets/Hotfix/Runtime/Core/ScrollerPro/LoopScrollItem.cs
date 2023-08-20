@@ -34,6 +34,9 @@ namespace LccHotfix
 
         public virtual void OnInit()
         {
+            var rect = gameObject.transform as RectTransform;
+            sizeDelta = rect.sizeDelta();
+
             Button button = gameObject.GetComponent<Button>();
             if (button == null)
             {

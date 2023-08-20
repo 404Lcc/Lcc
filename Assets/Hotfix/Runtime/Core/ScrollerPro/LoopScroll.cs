@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static EnhancedUI.EnhancedScroller.EnhancedScroller;
 using UnityEngine.UIElements;
+using EnhancedUI.EnhancedScroller;
 
 namespace LccHotfix
 {
@@ -80,7 +81,7 @@ namespace LccHotfix
         #region 回调注册
         public void GetObject(Transform trans, int index)
         {
-            LogUtil.Debug("GetObject"+ index);
+            LogUtil.Debug("GetObject" + index);
             if (!dict.ContainsKey(index))
             {
                 View item = loopScrollItemPool.GetOnPool();
@@ -162,6 +163,11 @@ namespace LccHotfix
             {
                 dict[index].SetSize(sizeDelta);
             }
+            var cellPosition = loopScroll.Scroller.GetScrollPositionForCellViewIndex(index, CellViewPositionEnum.Before);
+            var tweenCellOffset = cellPosition - loopScroll.Scroller.ScrollPosition;
+            loopScroll.Scroller.ReloadData();
+            cellPosition = loopScroll.Scroller.GetScrollPositionForCellViewIndex(index, CellViewPositionEnum.Before);
+            loopScroll.Scroller.SetScrollPositionImmediately(cellPosition - tweenCellOffset);
         }
         public void RefershData()
         {

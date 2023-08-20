@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnhancedUI.EnhancedScroller;
 using UnityEngine.UI;
+using static EnhancedUI.EnhancedScroller.EnhancedScroller;
+using UnityEngine.UIElements;
 
 namespace LccModel
 {
@@ -47,8 +49,14 @@ namespace LccModel
         public void SetSize(Vector2 sizeDelta)
         {
             LayoutElement layoutElement = GetComponent<LayoutElement>();
-            layoutElement.minWidth = sizeDelta.x;
-            layoutElement.minHeight = sizeDelta.y;
+            if (scrollerPro.Scroller.scrollDirection == ScrollDirectionEnum.Vertical)
+            {
+                layoutElement.minHeight = sizeDelta.y;
+            }
+            else
+            {
+                layoutElement.minWidth = sizeDelta.x;
+            }
         }
 
         public override void RefreshCellView()
