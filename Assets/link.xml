@@ -4813,6 +4813,8 @@
     <type fullname="LccModel.Scene" preserve="all" />
     <type fullname="LccModel.UnOrderMultiMap`2" preserve="all" />
     <type fullname="LccModel.UnOrderMultiMapSet`2" preserve="all" />
+    <type fullname="LccModel.GroupBase" preserve="all" />
+    <type fullname="LccModel.ScrollerPro" preserve="all" />
     <type fullname="LccModel.ISingleton" preserve="all" />
     <type fullname="LccModel.ISingletonLateUpdate" preserve="all" />
     <type fullname="LccModel.ISingletonFixedUpdate" preserve="all" />
