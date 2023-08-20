@@ -121,8 +121,8 @@
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\ParserArguments.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\KeyValuePairProxy.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DateTimeSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\ETTask\IAwaiter.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DateTimeSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\CompilerDelegates.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ByteSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\BclHelpers.cs" />
