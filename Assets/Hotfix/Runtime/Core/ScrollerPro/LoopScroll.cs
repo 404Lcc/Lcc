@@ -25,7 +25,7 @@ namespace LccHotfix
         public Action<int, Data> selectAction = null;
 
         public GameObject groupPrefab;
-
+        public Dictionary<int, GroupBase> groupDict = new Dictionary<int, GroupBase>();
         public int CurSelect { get; set; } = -1;
 
         public override void InitData(object[] datas)
@@ -88,6 +88,10 @@ namespace LccHotfix
                 item.index = index;
                 item.gameObject = trans.gameObject;
                 dict.Add(index, item);
+                if (!groupDict.ContainsKey(item.groupIndex))
+                {
+                    groupDict.Add(item.groupIndex, item.groupBase);
+                }
             }
             else
             {
@@ -119,11 +123,11 @@ namespace LccHotfix
             }
         }
 
-        public int GetGroupSize(int index)
+        public int GetGroupSize(int groupIndex)
         {
-            if (dict.ContainsKey(index))
+            if (groupDict.ContainsKey(groupIndex))
             {
-                var groupSize = loopScroll.Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? dict[index].sizeDelta.y : dict[index].sizeDelta.x;
+                var groupSize = loopScroll.Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? groupDict[groupIndex].sizeDelta.y : groupDict[groupIndex].sizeDelta.x;
                 return (int)groupSize;
             }
             else
@@ -161,18 +165,19 @@ namespace LccHotfix
         {
             if (dict.ContainsKey(index))
             {
-                dict[index].SetSize(sizeDelta);
+                dict[index].SetSize(sizeDelta, out var groupIndex);
+                var cellPosition = loopScroll.Scroller.GetScrollPositionForCellViewIndex(groupIndex, CellViewPositionEnum.Before);
+                var tweenCellOffset = cellPosition - loopScroll.Scroller.ScrollPosition;
+                loopScroll.IgnoreLoopJump(true);
+                loopScroll.Scroller.ReloadData();
+                cellPosition = loopScroll.Scroller.GetScrollPositionForCellViewIndex(groupIndex, CellViewPositionEnum.Before);
+                loopScroll.Scroller.SetScrollPositionImmediately(cellPosition - tweenCellOffset);
+                loopScroll.IgnoreLoopJump(false);
             }
-            var cellPosition = loopScroll.Scroller.GetScrollPositionForCellViewIndex(index, CellViewPositionEnum.Before);
-            var tweenCellOffset = cellPosition - loopScroll.Scroller.ScrollPosition;
-            loopScroll.Scroller.ReloadData();
-            cellPosition = loopScroll.Scroller.GetScrollPositionForCellViewIndex(index, CellViewPositionEnum.Before);
-            loopScroll.Scroller.SetScrollPositionImmediately(cellPosition - tweenCellOffset);
         }
         public void RefershData()
         {
-            loopScroll.ReloadData();
-            //loopScroll.RefershData();
+            loopScroll.RefershData();
         }
         //public void ClearList()
         //{

@@ -10,6 +10,7 @@ namespace LccModel
     public class GroupBase : EnhancedScrollerCellView
     {
         public int startIndex;
+        public Vector2 sizeDelta;
         public int gridCount;
         public ScrollerPro scrollerPro;
         public List<Transform> transformList = new List<Transform>();
@@ -48,14 +49,19 @@ namespace LccModel
         }
         public void SetSize(Vector2 sizeDelta)
         {
-            LayoutElement layoutElement = GetComponent<LayoutElement>();
             if (scrollerPro.Scroller.scrollDirection == ScrollDirectionEnum.Vertical)
             {
-                layoutElement.minHeight = sizeDelta.y;
+                if (sizeDelta.y > this.sizeDelta.y)
+                {
+                    this.sizeDelta = sizeDelta;
+                }
             }
             else
             {
-                layoutElement.minWidth = sizeDelta.x;
+                if (sizeDelta.x > this.sizeDelta.x)
+                {
+                    this.sizeDelta = sizeDelta;
+                }
             }
         }
 

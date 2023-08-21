@@ -190,6 +190,7 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\DamageEffect.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Timer\TimerData.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Event\IEventArgs.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\ScrollerPro\GroupBase.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Skill\SkillAbility.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Download\DownloadFile.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\UpdateManager\FsmNode\FsmPatchPrepare.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\FSMComponet\Base\AStateTransition.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\CoroutineLockManager.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\ActionPointComponent.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\ScrollerPro\ScrollerPro.cs" />
     <Compile Include="Assets\Framework\Util\LanguageText.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\StaticMethod\MonoStaticMethod.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Game.cs" />
@@ -332,8 +334,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAddStatusComponent.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\ScrollerPro\GroupBase.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\ScrollerPro\ScrollerPro.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Framework\Unity.Model.asmdef" />

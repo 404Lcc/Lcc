@@ -15,33 +15,33 @@ namespace LccModel
 
         public GroupBase groupPrefab;
 
-        private float _groupSize = -1;
-        public float GroupSize
-        {
-            get
-            {
-                if (_groupSize == -1)
-                {
-                    RectTransform rect = groupPrefab.transform as RectTransform;
-                    _groupSize = Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? rect.sizeDelta().y : rect.sizeDelta().x;
-                }
-                return _groupSize;
-            }
-        }
+        //private float _groupSize = -1;
+        //public float GroupSize
+        //{
+        //    get
+        //    {
+        //        if (_groupSize == -1)
+        //        {
+        //            RectTransform rect = groupPrefab.transform as RectTransform;
+        //            _groupSize = Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? rect.sizeDelta().y : rect.sizeDelta().x;
+        //        }
+        //        return _groupSize;
+        //    }
+        //}
 
-        private int _pageCount = -1;
+        //private int _pageCount = -1;
 
-        public int PageCount
-        {
-            get
-            {
-                if (_pageCount == -1)
-                {
-                    _pageCount = Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? (int)Scroller.ScrollRectSize / (int)GroupSize : (int)Scroller.ScrollRectSize / (int)GroupSize;
-                }
-                return _pageCount;
-            }
-        }
+        //public int PageCount
+        //{
+        //    get
+        //    {
+        //        if (_pageCount == -1)
+        //        {
+        //            _pageCount = Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? (int)Scroller.ScrollRectSize / (int)GroupSize : (int)Scroller.ScrollRectSize / (int)GroupSize;
+        //        }
+        //        return _pageCount;
+        //    }
+        //}
 
 
         public bool isGrid = false;
@@ -86,20 +86,13 @@ namespace LccModel
 
         public float GetCellViewSize(EnhancedScroller scroller, int dataIndex)
         {
-            //if (_groupSize == -1)
-            //{
-            //    RectTransform rect = groupPrefab.transform as RectTransform;
-            //    _groupSize = Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? rect.sizeDelta().y : rect.sizeDelta().x;
-            //    return _groupSize;
-            //}
-            //else
-            {
-                return GetGroupSizeHandler(dataIndex);
-            }
+            if (GetGroupSizeHandler == null) return 0;
+            return GetGroupSizeHandler(dataIndex);
         }
 
         public int GetNumberOfCells(EnhancedScroller scroller)
         {
+            if (GetDataCountHandler == null) return 0;
             if (isGrid == false)
             {
                 return GetDataCountHandler();

@@ -6,6 +6,8 @@ namespace LccHotfix
 {
     public class LoopScrollItem : AObjectBase
     {
+        public GroupBase groupBase;
+        public int groupIndex;
         public int index = -1;
         public Vector2 sizeDelta;
 
@@ -35,7 +37,8 @@ namespace LccHotfix
         public virtual void OnInit()
         {
             var rect = gameObject.transform as RectTransform;
-            sizeDelta = rect.sizeDelta();
+            groupBase = gameObject.transform.parent.GetComponent<GroupBase>();
+            SetSize(rect.sizeDelta(), out groupIndex);
 
             Button button = gameObject.GetComponent<Button>();
             if (button == null)
@@ -84,11 +87,11 @@ namespace LccHotfix
             }
         }
 
-        public void SetSize(Vector2 sizeDelta)
+        public void SetSize(Vector2 sizeDelta, out int groupIndex)
         {
             this.sizeDelta = sizeDelta;
-            GroupBase groupBase = gameObject.transform.parent.GetComponent<GroupBase>();
             groupBase.SetSize(sizeDelta);
+            groupIndex = groupBase.startIndex;
         }
     }
 }

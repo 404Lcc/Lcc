@@ -94,7 +94,9 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\ISingletonFixedUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Model\ModelAttribute.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\ScrollerPro\LoopScrollItemPool.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Top\TopPanel.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\ScrollerPro\LoopScrollItem.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\PanelType\PanelTypeExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\GlobalConfig\SceneName\SceneName.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\ISingleton.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="Assets\Hotfix\Logic\UI\Joystick\Joystick.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Init\Init.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateAttribute.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Core\ScrollerPro\LoopScroll.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\ISceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\GameObjectComponent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
@@ -143,9 +146,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\UIBinding.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\ScrollerPro\LoopScroll.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\ScrollerPro\LoopScrollItemPool.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\ScrollerPro\LoopScrollItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
