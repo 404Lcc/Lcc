@@ -269,6 +269,7 @@ namespace LccHotfix
             loopScroll.ClearAll();
             dict.Clear();
             dataList.Clear();
+            sizeDict.Clear();
         }
 
         public void Refill(List<Data> datas, int startItem = 0)
