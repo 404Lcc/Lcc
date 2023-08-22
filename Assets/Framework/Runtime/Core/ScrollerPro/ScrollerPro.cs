@@ -6,28 +6,28 @@ namespace LccModel
 {
     public class ScrollerPro : EnhancedScroller, IEnhancedScrollerDelegate
     {
-        public Action<Transform, int> GetObjectHandler;
-        public Action<Transform, int> ReturnObjectHandler;
-        public Action<Transform, int> ProvideDataHandler;
+        public Action<GroupBase, int> GetObjectHandler;
+        public Action<int> ReturnObjectHandler;
+        public Action<int> ProvideDataHandler;
         public Func<int, int> GetGroupSizeHandler;
         public Func<int> GetDataCountHandler;
 
 
         public GroupBase groupPrefab;
 
-        //private float _groupSize = -1;
-        //public float GroupSize
-        //{
-        //    get
-        //    {
-        //        if (_groupSize == -1)
-        //        {
-        //            RectTransform rect = groupPrefab.transform as RectTransform;
-        //            _groupSize = Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? rect.sizeDelta().y : rect.sizeDelta().x;
-        //        }
-        //        return _groupSize;
-        //    }
-        //}
+        private Vector2 _groupSize = Vector2.zero;
+        public Vector2 GroupSize
+        {
+            get
+            {
+                if (_groupSize == Vector2.zero)
+                {
+                    RectTransform rect = groupPrefab.transform as RectTransform;
+                    _groupSize = rect.sizeDelta();//Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? rect.sizeDelta().y : rect.sizeDelta().x;
+                }
+                return _groupSize;
+            }
+        }
 
         //private int _pageCount = -1;
 
@@ -47,7 +47,7 @@ namespace LccModel
         public bool isGrid = false;
 
         private int _numberOfCellsPerRow = -1;
-        private int NumberOfCellsPerRow
+        public int NumberOfCellsPerRow
         {
             get
             {
@@ -79,7 +79,7 @@ namespace LccModel
             GroupBase group = scroller.GetCellView(groupPrefab) as GroupBase;
 
             group.name = "Group " + (dataIndex * NumberOfCellsPerRow).ToString() + " to " + ((dataIndex * NumberOfCellsPerRow) + NumberOfCellsPerRow - 1).ToString();
-            group.SetData(dataIndex * NumberOfCellsPerRow);
+            group.SetGroupIndex(dataIndex * NumberOfCellsPerRow);
 
             return group;
         }

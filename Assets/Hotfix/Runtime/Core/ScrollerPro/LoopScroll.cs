@@ -4,17 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static EnhancedUI.EnhancedScroller.EnhancedScroller;
-using UnityEngine.UIElements;
-using EnhancedUI.EnhancedScroller;
 
 namespace LccHotfix
 {
-    public interface ILoopScrollSelect
+    public interface ILoopScroll
     {
         int CurSelect { get; set; }
         void SetSelect(int index);
+
+        void SetSize(int groupIndex, Vector2 size);
+        void SetSizeX(int groupIndex, int x);
+        void SetSizeY(int groupIndex, int y);
     }
-    public class LoopScroll<Data, View> : AObjectBase, ILoopScrollSelect where Data : new() where View : LoopScrollItem
+    public class LoopScroll<Data, View> : AObjectBase, ILoopScroll where Data : new() where View : LoopScrollItem
     {
         private ScrollerPro loopScroll;
         private LoopScrollItemPool<View> loopScrollItemPool;
@@ -25,7 +27,7 @@ namespace LccHotfix
         public Action<int, Data> selectAction = null;
 
         public GameObject groupPrefab;
-        public Dictionary<int, GroupBase> groupDict = new Dictionary<int, GroupBase>();
+        public Dictionary<int, Vector2> sizeDict = new Dictionary<int, Vector2>();
         public int CurSelect { get; set; } = -1;
 
         public override void InitData(object[] datas)
@@ -33,8 +35,8 @@ namespace LccHotfix
             base.InitData(datas);
 
             loopScroll = (ScrollerPro)datas[0];
-
-            loopScrollItemPool = new LoopScrollItemPool<View>(this, 100);
+            var itemPrefab = (GameObject)datas[1];
+            loopScrollItemPool = new LoopScrollItemPool<View>(this, 100, itemPrefab, loopScroll.transform);
 
             loopScroll.GetObjectHandler = GetObject;
             loopScroll.ReturnObjectHandler = ReturnObject;
@@ -42,7 +44,7 @@ namespace LccHotfix
             loopScroll.GetGroupSizeHandler = GetGroupSize;
             loopScroll.GetDataCountHandler = GetDataCount;
 
-            var itemPrefab = (GameObject)datas[1];
+
             InitGroup(itemPrefab);
             if (datas.Length > 2)
             {
@@ -79,40 +81,47 @@ namespace LccHotfix
             loopScroll.groupPrefab = groupBase;
         }
         #region 回调注册
-        public void GetObject(Transform trans, int index)
+        public void GetObject(GroupBase groupBase, int index)
         {
-            LogUtil.Debug("GetObject" + index);
             if (!dict.ContainsKey(index))
             {
                 View item = loopScrollItemPool.GetOnPool();
                 item.index = index;
-                item.gameObject = trans.gameObject;
+                item.gameObject.name = index.ToString();
+
+                item.groupBase = groupBase;
+
+                item.gameObject.transform.SetParent(groupBase.transform);
+                RectTransform rect = item.gameObject.transform as RectTransform;
+                rect.localPosition = Vector3.zero;
+                rect.localRotation = Quaternion.identity;
+                rect.localScale = Vector3.one;
+
+                item.OnShow();
                 dict.Add(index, item);
-                if (!groupDict.ContainsKey(item.groupIndex))
-                {
-                    groupDict.Add(item.groupIndex, item.groupBase);
-                }
+
+
             }
             else
             {
+                Debug.LogError("GetObject不存在" + index);
             }
         }
-        public void ReturnObject(Transform trans, int index)
+        public void ReturnObject(int index)
         {
-            LogUtil.Debug("ReturnObject" + index);
-            //if (dict.ContainsKey(index))
-            //{
-            //    loopScrollItemPool.ReleaseOnPool(dict[index]);
-            //    dict.Remove(index);
-            //}
-            //else
-            //{
-            //    Debug.LogError("ReturnObject不存在" + index);
-            //}
+            if (dict.ContainsKey(index))
+            {
+                dict[index].OnHide();
+                loopScrollItemPool.ReleaseOnPool(dict[index]);
+                dict.Remove(index);
+            }
+            else
+            {
+                Debug.LogError("ReturnObject不存在" + index);
+            }
         }
-        public void ProvideData(Transform transform, int index)
+        public void ProvideData(int index)
         {
-            transform.name = index.ToString();
             if (dict.ContainsKey(index))
             {
                 dict[index].UpdateData(dataList[index]);
@@ -125,17 +134,12 @@ namespace LccHotfix
 
         public int GetGroupSize(int groupIndex)
         {
-            if (groupDict.ContainsKey(groupIndex))
+            if (sizeDict.ContainsKey(groupIndex))
             {
-                var groupSize = loopScroll.Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? groupDict[groupIndex].sizeDelta.y : groupDict[groupIndex].sizeDelta.x;
+                var groupSize = loopScroll.Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? sizeDict[groupIndex].y : sizeDict[groupIndex].x;
                 return (int)groupSize;
             }
-            else
-            {
-                RectTransform rect = groupPrefab.transform as RectTransform;
-                var groupSize = loopScroll.Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? rect.sizeDelta().y : rect.sizeDelta().x;
-                return (int)groupSize;
-            }
+            return 0;
         }
         public int GetDataCount()
         {
@@ -161,83 +165,146 @@ namespace LccHotfix
             }
         }
 
-        public void SetSize(int index, Vector2 sizeDelta)
+        #region 设置大小
+        public void SetSize(int groupIndex, Vector2 size)
         {
-            if (dict.ContainsKey(index))
+            if (sizeDict.ContainsKey(groupIndex))
             {
-                dict[index].SetSize(sizeDelta, out var groupIndex);
-                var cellPosition = loopScroll.Scroller.GetScrollPositionForCellViewIndex(groupIndex, CellViewPositionEnum.Before);
-                var tweenCellOffset = cellPosition - loopScroll.Scroller.ScrollPosition;
-                loopScroll.IgnoreLoopJump(true);
-                loopScroll.Scroller.ReloadData();
-                cellPosition = loopScroll.Scroller.GetScrollPositionForCellViewIndex(groupIndex, CellViewPositionEnum.Before);
-                loopScroll.Scroller.SetScrollPositionImmediately(cellPosition - tweenCellOffset);
-                loopScroll.IgnoreLoopJump(false);
+                sizeDict[groupIndex] = size;
+            }
+
+
+            var cellPosition = loopScroll.Scroller.GetScrollPositionForCellViewIndex(groupIndex, CellViewPositionEnum.Before);
+            var tweenCellOffset = cellPosition - loopScroll.Scroller.ScrollPosition;
+            loopScroll.IgnoreLoopJump(true);
+            loopScroll.Scroller.ReloadData();
+            cellPosition = loopScroll.Scroller.GetScrollPositionForCellViewIndex(groupIndex, CellViewPositionEnum.Before);
+            loopScroll.Scroller.SetScrollPositionImmediately(cellPosition - tweenCellOffset);
+            loopScroll.IgnoreLoopJump(false);
+        }
+        public void SetSizeX(int groupIndex, int x)
+        {
+            if (sizeDict.ContainsKey(groupIndex))
+            {
+                var size = sizeDict[groupIndex];
+                size.x = x;
+                SetSize(groupIndex, size);
             }
         }
+        public void SetSizeY(int groupIndex, int y)
+        {
+            if (sizeDict.ContainsKey(groupIndex))
+            {
+                var size = sizeDict[groupIndex];
+                size.y = y;
+                SetSize(groupIndex, size);
+            }
+        }
+
+
+
+        public void SetSizeByIndex(int index, Vector2 size)
+        {
+            var groupIndex = index / loopScroll.NumberOfCellsPerRow;
+            SetSize(groupIndex, size);
+        }
+        public void SetSizeXByIndex(int index, int x)
+        {
+            var groupIndex = index / loopScroll.NumberOfCellsPerRow;
+            SetSizeX(groupIndex, x);
+        }
+        public void SetSizeYByIndex(int index, int y)
+        {
+            var groupIndex = index / loopScroll.NumberOfCellsPerRow;
+            SetSizeY(groupIndex, y);
+        }
+        #endregion
+
+        #region 预加载大小
+        public void PreloadSize(int index, Vector2 size)
+        {
+            var groupIndex = index / loopScroll.NumberOfCellsPerRow;
+            if (sizeDict.ContainsKey(groupIndex))
+            {
+                sizeDict[groupIndex] = size;
+            }
+            else
+            {
+                sizeDict.Add(groupIndex, size);
+            }
+        }
+        public void PreloadSizeX(int index, int x)
+        {
+            var groupIndex = index / loopScroll.NumberOfCellsPerRow;
+            if (sizeDict.ContainsKey(groupIndex))
+            {
+                sizeDict[groupIndex] = new Vector2(x, loopScroll.GroupSize.y);
+            }
+            else
+            {
+                sizeDict.Add(groupIndex, new Vector2(x, loopScroll.GroupSize.y));
+            }
+        }
+        public void PreloadSizeY(int index, int y)
+        {
+            var groupIndex = index / loopScroll.NumberOfCellsPerRow;
+            if (sizeDict.ContainsKey(groupIndex))
+            {
+                sizeDict[groupIndex] = new Vector2(loopScroll.GroupSize.x, y);
+            }
+            else
+            {
+                sizeDict.Add(groupIndex, new Vector2(loopScroll.GroupSize.x, y));
+            }
+        }
+        #endregion
+
+
         public void RefershData()
         {
             loopScroll.RefershData();
         }
-        //public void ClearList()
-        //{
-        //    dict.Clear();
-        //    dataList.Clear();
-        //    loopScroll.ClearCells();
-        //}
+        public void ClearList()
+        {
+            loopScroll.ClearAll();
+            dict.Clear();
+            dataList.Clear();
+        }
 
-        public void Refill(List<Data> datas, int startItem = 0, bool fillViewRect = false, float contentOffset = 0)
+        public void Refill(List<Data> datas, int startItem = 0)
         {
             dataList.Clear();
             if (datas != null)
             {
                 dataList.AddRange(datas);
             }
+
+            for (int i = 0; i < datas.Count / loopScroll.NumberOfCellsPerRow; i++)
+            {
+                if (!sizeDict.ContainsKey(i))
+                {
+                    sizeDict.Add(i, loopScroll.GroupSize);
+                }
+            }
+
             loopScroll.ReloadData();
+
+            if (startItem > 0)
+            {
+                loopScroll.JumpToDataIndex(startItem / loopScroll.NumberOfCellsPerRow);
+            }
         }
 
-        //public void SetDataListAndRefreshList(List<Data> datas)
-        //{
-        //    dataList.Clear();
-        //    if (datas != null)
-        //    {
-        //        dataList.AddRange(datas);
-        //    }
-        //    loopScroll.totalCount = dataList.Count;
-        //    RefreshList(false);
-        //}
-
-        //public void AddData(Data data, bool setPosition = false)
+        //public void AddData(Data data)
         //{
         //    dataList.Add(data);
-        //    loopScroll.totalCount = dataList.Count;
-        //    if (setPosition)
-        //    {
-        //        loopScroll.RefillCells(dataList.Count);
-        //    }
-        //    else
-        //    {
-        //        RefreshList(true);
-        //    }
+        //    loopScroll.ReloadData();
         //}
 
-        //public void AddDataList(List<Data> datas, bool setPosition = false)
+        //public void AddDataList(List<Data> datas)
         //{
         //    dataList.AddRange(datas);
-        //    loopScroll.totalCount = dataList.Count;
-        //    if (setPosition)
-        //    {
-        //        loopScroll.RefillCells(dataList.Count);
-        //    }
-        //    else
-        //    {
-        //        RefreshList(true);
-        //    }
-        //}
-
-        //public void RefreshList(bool resize = false)
-        //{
-        //    loopScroll.RefreshCells(resize);
+        //    loopScroll.ReloadData();
         //}
 
         public View GetItem(int idx)

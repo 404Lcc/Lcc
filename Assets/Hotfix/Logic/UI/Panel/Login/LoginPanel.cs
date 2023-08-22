@@ -7,9 +7,39 @@ namespace LccHotfix
 {
     public class LoginItemData
     {
+        public bool isSetSize;
     }
     public class LoginItem : LoopScrollItem
     {
+        public LoginItemData data;
+        public override void UpdateData(object obj)
+        {
+            base.UpdateData(obj);
+            data = obj as LoginItemData;
+            if (data.isSetSize)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        public override void OnClick()
+        {
+            base.OnClick();
+
+            if (!data.isSetSize)
+            {
+                data.isSetSize = true;
+                SetSizeY(500);
+            }
+            else
+            {
+                data.isSetSize = false;
+                SetSizeY(100);
+            }
+        }
     }
 
     [UIEventHandler(UIEventType.Login)]
@@ -78,7 +108,7 @@ namespace LccHotfix
             UpdatePanel.Instance.Hide();
 
             List<LoginItemData> list = new List<LoginItemData>();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
             {
                 list.Add(new LoginItemData());
             }
@@ -103,7 +133,7 @@ namespace LccHotfix
         }
         public void OnEnterMain()
         {
-            loopScroll.SetSize(3, new Vector2(500, 500));
+            loopScroll.SetSizeByIndex(90, new Vector2(500, 500));
             //List<LoginItemData> list = new List<LoginItemData>();
             //for (int i = 0; i < 10; i++)
             //{
