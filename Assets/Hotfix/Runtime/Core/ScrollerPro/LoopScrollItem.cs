@@ -88,15 +88,15 @@ namespace LccHotfix
 
         public void SetSize(Vector2 size)
         {
-            loopScroll.SetSize(groupIndex, size);
+            loopScroll.SetSize(index, size);
         }
         public void SetSizeX(int x)
         {
-            loopScroll.SetSizeX(groupIndex, x);
+            loopScroll.SetSizeX(index, x);
         }
         public void SetSizeY(int y)
         {
-            loopScroll.SetSizeY(groupIndex, y);
+            loopScroll.SetSizeY(index, y);
         }
 
         #region 自动索引

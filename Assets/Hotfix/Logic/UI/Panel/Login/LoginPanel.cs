@@ -133,7 +133,7 @@ namespace LccHotfix
         }
         public void OnEnterMain()
         {
-            loopScroll.SetSizeByIndex(90, new Vector2(500, 500));
+            loopScroll.SetSize(90, new Vector2(500, 500));
             //List<LoginItemData> list = new List<LoginItemData>();
             //for (int i = 0; i < 10; i++)
             //{

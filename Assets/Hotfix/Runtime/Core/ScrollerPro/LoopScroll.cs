@@ -1,4 +1,5 @@
 ﻿using LccModel;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,9 +13,9 @@ namespace LccHotfix
         int CurSelect { get; set; }
         void SetSelect(int index);
 
-        void SetSize(int groupIndex, Vector2 size);
-        void SetSizeX(int groupIndex, int x);
-        void SetSizeY(int groupIndex, int y);
+        void SetSize(int index, Vector2 size);
+        void SetSizeX(int index, int x);
+        void SetSizeY(int index, int y);
     }
     public class LoopScroll<Data, View> : AObjectBase, ILoopScroll where Data : new() where View : LoopScrollItem
     {
@@ -26,16 +27,32 @@ namespace LccHotfix
         public bool needSelectWithClick = true;
         public Action<int, Data> selectAction = null;
 
+        public GameObject itemPrefab;
+
         public GameObject groupPrefab;
         public Dictionary<int, Vector2> sizeDict = new Dictionary<int, Vector2>();
         public int CurSelect { get; set; } = -1;
+
+        private Vector2 _itemSize = Vector2.zero;
+        public Vector2 ItemSize
+        {
+            get
+            {
+                if (_itemSize == Vector2.zero)
+                {
+                    RectTransform rect = itemPrefab.transform as RectTransform;
+                    _itemSize = rect.sizeDelta();
+                }
+                return _itemSize;
+            }
+        }
 
         public override void InitData(object[] datas)
         {
             base.InitData(datas);
 
             loopScroll = (ScrollerPro)datas[0];
-            var itemPrefab = (GameObject)datas[1];
+            itemPrefab = (GameObject)datas[1];
             loopScrollItemPool = new LoopScrollItemPool<View>(this, 100, itemPrefab, loopScroll.transform);
 
             loopScroll.GetObjectHandler = GetObject;
@@ -66,9 +83,9 @@ namespace LccHotfix
             if (loopScroll.isGrid)
             {
                 RectTransform loopScrollRect = loopScroll.transform as RectTransform;
-                GridLayoutGroup gridLayoutGroup = groupPrefab.AddComponent<GridLayoutGroup>();
-                gridLayoutGroup.spacing = new Vector2(loopScroll.Scroller.spacing, 0);
-                gridLayoutGroup.cellSize = itemRect.sizeDelta();
+                //GridLayoutGroup gridLayoutGroup = groupPrefab.AddComponent<GridLayoutGroup>();
+                //gridLayoutGroup.spacing = new Vector2(loopScroll.Scroller.spacing, 0);
+                //gridLayoutGroup.cellSize = itemRect.sizeDelta();
                 groupRect.sizeDelta = new Vector2(loopScrollRect.sizeDelta().x, itemRect.sizeDelta().y);
             }
             else
@@ -92,14 +109,19 @@ namespace LccHotfix
                 item.groupBase = groupBase;
 
                 RectTransform rect = item.gameObject.transform as RectTransform;
-                rect.anchorMin = new Vector2(0.5f, 0.5f);
-                rect.anchorMax = new Vector2(0.5f, 0.5f);
-                rect.sizeDelta = sizeDict[groupBase.groupIndex];
+                rect.anchorMin = new Vector2(0, 1);
+                rect.anchorMax = new Vector2(0, 1);
+                rect.pivot = new Vector2(0, 1);
+                rect.sizeDelta = sizeDict[index];
                 rect.SetParent(groupBase.transform);
 
-                rect.localPosition = Vector3.zero;
+                
                 rect.localRotation = Quaternion.identity;
                 rect.localScale = Vector3.one;
+
+                int currentIndex = index % loopScroll.NumberOfCellsPerRow;
+                rect.anchoredPosition = new Vector2((sizeDict[index].x + loopScroll.Scroller.spacing) * currentIndex, 0);
+                LogUtil.Debug((index % loopScroll.NumberOfCellsPerRow).ToString());
 
                 item.OnShow();
                 dict.Add(index, item);
@@ -136,14 +158,31 @@ namespace LccHotfix
             }
         }
 
-        public int GetGroupSize(int groupIndex)
+        public int GetGroupSize(int dataIndex)
         {
-            if (sizeDict.ContainsKey(groupIndex))
+            int max = loopScroll.GetDataCountHandler();
+            var groupStart = dataIndex * loopScroll.NumberOfCellsPerRow;
+
+            Vector2 maxSize = Vector2.zero;
+            for (int i = 0; i < loopScroll.NumberOfCellsPerRow; i++)
             {
-                var groupSize = loopScroll.Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? sizeDict[groupIndex].y : sizeDict[groupIndex].x;
-                return (int)groupSize;
+                if (groupStart + i >= max) continue;
+                var index = groupStart + i;
+                if (sizeDict.ContainsKey(index))
+                {
+                    var temp = sizeDict[index];
+                    if (temp.x > maxSize.x)
+                    {
+                        maxSize.x = temp.x;
+                    }
+                    if (temp.y > maxSize.y)
+                    {
+                        maxSize.y = temp.y;
+                    }
+                }
             }
-            return 0;
+            var groupSize = loopScroll.Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? maxSize.y : maxSize.x;
+            return (int)groupSize;
         }
         public int GetDataCount()
         {
@@ -170,13 +209,13 @@ namespace LccHotfix
         }
 
         #region 设置大小
-        public void SetSize(int groupIndex, Vector2 size)
+        public void SetSize(int index, Vector2 size)
         {
-            if (sizeDict.ContainsKey(groupIndex))
+            if (sizeDict.ContainsKey(index))
             {
-                sizeDict[groupIndex] = size;
+                sizeDict[index] = size;
             }
-
+            var groupIndex = index / loopScroll.NumberOfCellsPerRow;
 
             var cellPosition = loopScroll.Scroller.GetScrollPositionForCellViewIndex(groupIndex, CellViewPositionEnum.Before);
             var tweenCellOffset = cellPosition - loopScroll.Scroller.ScrollPosition;
@@ -186,79 +225,59 @@ namespace LccHotfix
             loopScroll.Scroller.SetScrollPositionImmediately(cellPosition - tweenCellOffset);
             loopScroll.IgnoreLoopJump(false);
         }
-        public void SetSizeX(int groupIndex, int x)
+        public void SetSizeX(int index, int x)
         {
-            if (sizeDict.ContainsKey(groupIndex))
+            if (sizeDict.ContainsKey(index))
             {
-                var size = sizeDict[groupIndex];
+                var size = sizeDict[index];
                 size.x = x;
-                SetSize(groupIndex, size);
+                SetSize(index, size);
             }
         }
-        public void SetSizeY(int groupIndex, int y)
+        public void SetSizeY(int index, int y)
         {
-            if (sizeDict.ContainsKey(groupIndex))
+            if (sizeDict.ContainsKey(index))
             {
-                var size = sizeDict[groupIndex];
+                var size = sizeDict[index];
                 size.y = y;
-                SetSize(groupIndex, size);
+                SetSize(index, size);
             }
         }
 
-
-
-        public void SetSizeByIndex(int index, Vector2 size)
-        {
-            var groupIndex = index / loopScroll.NumberOfCellsPerRow;
-            SetSize(groupIndex, size);
-        }
-        public void SetSizeXByIndex(int index, int x)
-        {
-            var groupIndex = index / loopScroll.NumberOfCellsPerRow;
-            SetSizeX(groupIndex, x);
-        }
-        public void SetSizeYByIndex(int index, int y)
-        {
-            var groupIndex = index / loopScroll.NumberOfCellsPerRow;
-            SetSizeY(groupIndex, y);
-        }
         #endregion
 
         #region 预加载大小
         public void PreloadSize(int index, Vector2 size)
         {
-            var groupIndex = index / loopScroll.NumberOfCellsPerRow;
-            if (sizeDict.ContainsKey(groupIndex))
+            if (sizeDict.ContainsKey(index))
             {
-                sizeDict[groupIndex] = size;
+                sizeDict[index] = size;
             }
             else
             {
-                sizeDict.Add(groupIndex, size);
+                sizeDict.Add(index, size);
             }
         }
         public void PreloadSizeX(int index, int x)
         {
-            var groupIndex = index / loopScroll.NumberOfCellsPerRow;
-            if (sizeDict.ContainsKey(groupIndex))
+            if (sizeDict.ContainsKey(index))
             {
-                sizeDict[groupIndex] = new Vector2(x, loopScroll.GroupSize.y);
+                sizeDict[index] = new Vector2(x, ItemSize.y);
             }
             else
             {
-                sizeDict.Add(groupIndex, new Vector2(x, loopScroll.GroupSize.y));
+                sizeDict.Add(index, new Vector2(x, ItemSize.y));
             }
         }
         public void PreloadSizeY(int index, int y)
         {
-            var groupIndex = index / loopScroll.NumberOfCellsPerRow;
-            if (sizeDict.ContainsKey(groupIndex))
+            if (sizeDict.ContainsKey(index))
             {
-                sizeDict[groupIndex] = new Vector2(loopScroll.GroupSize.x, y);
+                sizeDict[index] = new Vector2(ItemSize.x, y);
             }
             else
             {
-                sizeDict.Add(groupIndex, new Vector2(loopScroll.GroupSize.x, y));
+                sizeDict.Add(index, new Vector2(ItemSize.x, y));
             }
         }
         #endregion
@@ -286,11 +305,11 @@ namespace LccHotfix
                 dataList.AddRange(datas);
             }
 
-            for (int i = 0; i < (datas.Count / loopScroll.NumberOfCellsPerRow) + 1; i++)
+            for (int i = 0; i < datas.Count/*(datas.Count / loopScroll.NumberOfCellsPerRow) + 1*/; i++)
             {
                 if (!sizeDict.ContainsKey(i))
                 {
-                    sizeDict.Add(i, loopScroll.GroupSize);
+                    sizeDict.Add(i, ItemSize);
                 }
             }
 
