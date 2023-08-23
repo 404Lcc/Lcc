@@ -79,7 +79,7 @@ namespace LccModel
             GroupBase group = scroller.GetCellView(groupPrefab) as GroupBase;
 
             group.name = "Group " + (dataIndex * NumberOfCellsPerRow).ToString() + " to " + ((dataIndex * NumberOfCellsPerRow) + NumberOfCellsPerRow - 1).ToString();
-            group.SetGroupIndex(dataIndex * NumberOfCellsPerRow);
+            group.SetGroup(dataIndex / NumberOfCellsPerRow, dataIndex * NumberOfCellsPerRow);
 
             return group;
         }
@@ -93,14 +93,7 @@ namespace LccModel
         public int GetNumberOfCells(EnhancedScroller scroller)
         {
             if (GetDataCountHandler == null) return 0;
-            if (isGrid == false)
-            {
-                return GetDataCountHandler();
-            }
-            else
-            {
-                return Mathf.CeilToInt((float)GetDataCountHandler() / (float)NumberOfCellsPerRow);
-            }
+            return Mathf.CeilToInt((float)GetDataCountHandler() / (float)NumberOfCellsPerRow);
         }
 
         public void CellViewVisibilityChanged(EnhancedScrollerCellView cellView)

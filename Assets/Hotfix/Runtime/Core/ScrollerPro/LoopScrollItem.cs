@@ -15,6 +15,7 @@ namespace LccHotfix
 
         public GroupBase groupBase;
         public int groupIndex => groupBase.groupIndex;
+        public int groupStart => groupBase.groupStart;
 
 
         public GameObject gameObject;

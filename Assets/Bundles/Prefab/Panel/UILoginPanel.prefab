@@ -298,7 +298,7 @@ MonoBehaviour:
   tweenPaused: 0
   _scrollPosition: 0
   groupPrefab: {fileID: 0}
-  isGrid: 0
+  isGrid: 1
 --- !u!1 &717271208889096702
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,8 @@ namespace LccModel
     public class GroupBase : EnhancedScrollerCellView
     {
         public int groupIndex;
-        public Vector2 sizeDelta;
+        public int groupStart;
+
         public int gridCount;
         public ScrollerPro scrollerPro;
         //public List<Transform> transformList = new List<Transform>();
@@ -43,26 +44,10 @@ namespace LccModel
 
 
 
-        public void SetGroupIndex(int groupIndex)
+        public void SetGroup(int groupIndex, int groupStart)
         {
             this.groupIndex = groupIndex;
-        }
-        public void SetSize(Vector2 sizeDelta)
-        {
-            if (scrollerPro.Scroller.scrollDirection == ScrollDirectionEnum.Vertical)
-            {
-                if (sizeDelta.y > this.sizeDelta.y)
-                {
-                    this.sizeDelta = sizeDelta;
-                }
-            }
-            else
-            {
-                if (sizeDelta.x > this.sizeDelta.x)
-                {
-                    this.sizeDelta = sizeDelta;
-                }
-            }
+            this.groupStart = groupStart;
         }
 
         public override void RefreshCellView()
@@ -70,15 +55,15 @@ namespace LccModel
             int max = scrollerPro.GetDataCountHandler();
             for (int i = 0; i < gridCount; i++)
             {
-                if (groupIndex + i >= max) continue;
+                if (groupStart + i >= max) continue;
                 if (active)
                 {
-                    scrollerPro.GetObjectHandler?.Invoke(this, groupIndex + i);
-                    scrollerPro.ProvideDataHandler?.Invoke(groupIndex + i);
+                    scrollerPro.GetObjectHandler?.Invoke(this, groupStart + i);
+                    scrollerPro.ProvideDataHandler?.Invoke(groupStart + i);
                 }
                 else
                 {
-                    scrollerPro.ReturnObjectHandler?.Invoke(groupIndex + i);
+                    scrollerPro.ReturnObjectHandler?.Invoke(groupStart + i);
                 }
             }
         }

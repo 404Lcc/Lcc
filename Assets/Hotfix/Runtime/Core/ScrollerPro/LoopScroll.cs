@@ -91,8 +91,12 @@ namespace LccHotfix
 
                 item.groupBase = groupBase;
 
-                item.gameObject.transform.SetParent(groupBase.transform);
                 RectTransform rect = item.gameObject.transform as RectTransform;
+                rect.anchorMin = new Vector2(0.5f, 0.5f);
+                rect.anchorMax = new Vector2(0.5f, 0.5f);
+                rect.sizeDelta = sizeDict[groupBase.groupIndex];
+                rect.SetParent(groupBase.transform);
+
                 rect.localPosition = Vector3.zero;
                 rect.localRotation = Quaternion.identity;
                 rect.localScale = Vector3.one;
@@ -270,6 +274,8 @@ namespace LccHotfix
             dict.Clear();
             dataList.Clear();
             sizeDict.Clear();
+
+            GameObject.Destroy(groupPrefab);
         }
 
         public void Refill(List<Data> datas, int startItem = 0)
@@ -280,7 +286,7 @@ namespace LccHotfix
                 dataList.AddRange(datas);
             }
 
-            for (int i = 0; i < datas.Count / loopScroll.NumberOfCellsPerRow; i++)
+            for (int i = 0; i < (datas.Count / loopScroll.NumberOfCellsPerRow) + 1; i++)
             {
                 if (!sizeDict.ContainsKey(i))
                 {
