@@ -9,7 +9,7 @@ namespace LccModel
         public bool isRedDotActive;
         private GameObject redDot;
         private Text redDotCount;
-        public AssetOperationHandle handle;
+        public AssetHandle handle;
 
         public Vector3 scale = Vector3.one;
         public Vector2 offset = Vector2.zero;

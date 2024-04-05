@@ -47,7 +47,7 @@ namespace LccModel
             Hide();
         }
     }
-    public class UpdatePanel : MonoBehaviour, IEventListener
+    public class UpdatePanel : MonoBehaviour
     {
         public float currentPercent;
         public float targetPercent;
@@ -58,20 +58,28 @@ namespace LccModel
         public Slider progress;
         public Text progressText;
         public Text tipsText;
-        public Text downloadText;
         public GameObject messageBox;
 
         public List<MessageBox> msgBoxList = new List<MessageBox>();
 
+        private readonly EventGroup _eventGroup = new EventGroup();
 
-        public void Awake()
+        public void Start()
         {
+
             Instance = this;
 
+            _eventGroup.AddListener<PatchEventDefine.InitializeFailed>(OnHandleEventMessage);
+            _eventGroup.AddListener<PatchEventDefine.PatchStatesChange>(OnHandleEventMessage);
+            _eventGroup.AddListener<PatchEventDefine.FoundUpdateFiles>(OnHandleEventMessage);
+            _eventGroup.AddListener<PatchEventDefine.DownloadProgressUpdate>(OnHandleEventMessage);
+            _eventGroup.AddListener<PatchEventDefine.PackageVersionUpdateFailed>(OnHandleEventMessage);
+            _eventGroup.AddListener<PatchEventDefine.PatchManifestUpdateFailed>(OnHandleEventMessage);
+            _eventGroup.AddListener<PatchEventDefine.WebFileDownloadFailed>(OnHandleEventMessage);
         }
         public void OnDestroy()
         {
-
+            _eventGroup.RemoveAllListener();
             Instance = null;
         }
 
@@ -123,95 +131,72 @@ namespace LccModel
             msgBox.Show(info, completed);
         }
 
-        public void HandleEvent(EventType eventType, IEventArgs args1 = null, IEventArgs args2 = null, IEventArgs args3 = null, IEventArgs args4 = null)
+        /// <summary>
+        /// 接收事件
+        /// </summary>
+        private void OnHandleEventMessage(IEventMessage message)
         {
-            switch (eventType)
+            if (message is PatchEventDefine.InitializeFailed)
             {
-                case EventType.InitializeFailed:
-                    void InitializeFailed()
-                    {
-                        Action callback = () =>
-                        {
-                            UserEventDefine.UserTryInitialize.Publish();
-                        };
-                        ShowMessageBox($"Failed to initialize package !", callback);
-                    }
-                    InitializeFailed();
-
-                    break;
-                case EventType.PatchStatesChange:
-                    void PatchStatesChange()
-                    {
-                        var patchStatesChange = args1.GetValue<UpdateEventDefine.PatchStatesChange>();
-                        tipsText.text = patchStatesChange.Tips;
-                    }
-                    PatchStatesChange();
-                    break;
-                case EventType.FoundUpdateFiles:
-                    void FoundUpdateFiles()
-                    {
-                        var foundUpdateFiles = args1.GetValue<UpdateEventDefine.FoundUpdateFiles>();
-                        Action callback = () =>
-                        {
-                            UserEventDefine.UserBeginDownloadWebFiles.Publish();
-                        };
-                        float sizeMB = foundUpdateFiles.TotalSizeBytes / 1048576f;
-                        sizeMB = Mathf.Clamp(sizeMB, 0.1f, float.MaxValue);
-                        string totalSizeMB = sizeMB.ToString("f1");
-                        ShowMessageBox($"Found update patch files, Total count {foundUpdateFiles.TotalCount} Total szie {totalSizeMB}MB", callback);
-                    }
-                    FoundUpdateFiles();
-
-                    break;
-                case EventType.DownloadProgressUpdate:
-                    void DownloadProgressUpdate()
-                    {
-                        var downloadProgressUpdate = args1.GetValue<UpdateEventDefine.DownloadProgressUpdate>();
-                        progress.value = (float)downloadProgressUpdate.CurrentDownloadCount / downloadProgressUpdate.TotalDownloadCount;
-                        progressText.text = $"{downloadProgressUpdate.CurrentDownloadCount}/{downloadProgressUpdate.TotalDownloadCount}";
-
-                        string currentSizeMB = (downloadProgressUpdate.CurrentDownloadSizeBytes / 1048576f).ToString("f1");
-                        string totalSizeMB = (downloadProgressUpdate.TotalDownloadSizeBytes / 1048576f).ToString("f1");
-                        downloadText.text = $"{downloadProgressUpdate.CurrentDownloadCount}/{downloadProgressUpdate.TotalDownloadCount} {currentSizeMB}MB/{totalSizeMB}MB";
-                    }
-                    DownloadProgressUpdate();
-                    break;
-                case EventType.PackageVersionUpdateFailed:
-                    void PackageVersionUpdateFailed()
-                    {
-                        Action callback = () =>
-                        {
-                            UserEventDefine.UserTryUpdatePackageVersion.Publish();
-                        };
-                        ShowMessageBox($"Failed to update static version, please check the network status.", callback);
-                    }
-                    PackageVersionUpdateFailed();
-
-                    break;
-                case EventType.PatchManifestUpdateFailed:
-                    void PatchManifestUpdateFailed()
-                    {
-                        Action callback = () =>
-                        {
-                            UserEventDefine.UserTryUpdatePatchManifest.Publish();
-                        };
-                        ShowMessageBox($"Failed to update patch manifest, please check the network status.", callback);
-                    }
-                    PatchManifestUpdateFailed();
-                    break;
-                case EventType.WebFileDownloadFailed:
-                    void WebFileDownloadFailed()
-                    {
-                        var webFileDownloadFailed = args1.GetValue<UpdateEventDefine.WebFileDownloadFailed>();
-                        Action callback = () =>
-                        {
-                            UserEventDefine.UserTryDownloadWebFiles.Publish();
-                        };
-                        ShowMessageBox($"Failed to download file : {webFileDownloadFailed.FileName}", callback);
-                    }
-                    WebFileDownloadFailed();
-
-                    break;
+                Action callback = () =>
+                {
+                    UserEventDefine.UserTryInitialize.SendEventMessage();
+                };
+                ShowMessageBox($"Failed to initialize package !", callback);
+            }
+            else if (message is PatchEventDefine.PatchStatesChange)
+            {
+                var msg = message as PatchEventDefine.PatchStatesChange;
+                tipsText.text = msg.Tips;
+            }
+            else if (message is PatchEventDefine.FoundUpdateFiles)
+            {
+                var msg = message as PatchEventDefine.FoundUpdateFiles;
+                Action callback = () =>
+                {
+                    UserEventDefine.UserBeginDownloadWebFiles.SendEventMessage();
+                };
+                float sizeMB = msg.TotalSizeBytes / 1048576f;
+                sizeMB = Mathf.Clamp(sizeMB, 0.1f, float.MaxValue);
+                string totalSizeMB = sizeMB.ToString("f1");
+                ShowMessageBox($"Found update patch files, Total count {msg.TotalCount} Total szie {totalSizeMB}MB", callback);
+            }
+            else if (message is PatchEventDefine.DownloadProgressUpdate)
+            {
+                var msg = message as PatchEventDefine.DownloadProgressUpdate;
+                progress.value = (float)msg.CurrentDownloadCount / msg.TotalDownloadCount;
+                string currentSizeMB = (msg.CurrentDownloadSizeBytes / 1048576f).ToString("f1");
+                string totalSizeMB = (msg.TotalDownloadSizeBytes / 1048576f).ToString("f1");
+                tipsText.text = $"{msg.CurrentDownloadCount}/{msg.TotalDownloadCount} {currentSizeMB}MB/{totalSizeMB}MB";
+            }
+            else if (message is PatchEventDefine.PackageVersionUpdateFailed)
+            {
+                Action callback = () =>
+                {
+                    UserEventDefine.UserTryUpdatePackageVersion.SendEventMessage();
+                };
+                ShowMessageBox($"Failed to update static version, please check the network status.", callback);
+            }
+            else if (message is PatchEventDefine.PatchManifestUpdateFailed)
+            {
+                Action callback = () =>
+                {
+                    UserEventDefine.UserTryUpdatePatchManifest.SendEventMessage();
+                };
+                ShowMessageBox($"Failed to update patch manifest, please check the network status.", callback);
+            }
+            else if (message is PatchEventDefine.WebFileDownloadFailed)
+            {
+                var msg = message as PatchEventDefine.WebFileDownloadFailed;
+                Action callback = () =>
+                {
+                    UserEventDefine.UserTryDownloadWebFiles.SendEventMessage();
+                };
+                ShowMessageBox($"Failed to download file : {msg.FileName}", callback);
+            }
+            else
+            {
+                throw new NotImplementedException($"{message.GetType()}");
             }
         }
     }

@@ -19,7 +19,7 @@ namespace LccHotfix
             Instance = this;
             foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(ConfigAttribute)))
             {
-                TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetOperationHandle handle, item.Name, AssetSuffix.Bytes, AssetType.Config);
+                TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetHandle handle, item.Name, AssetSuffix.Bytes, AssetType.Config);
                 ProtobufObject obj = (ProtobufObject)ProtobufUtil.Deserialize(item, asset.bytes, 0, asset.bytes.Length);
                 obj.AfterDeserialization();
                 configDict.Add(item, obj);

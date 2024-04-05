@@ -5,7 +5,7 @@ namespace LccModel
 {
     public class AssetObject : MonoBehaviour
     {
-        public AssetOperationHandle handle;
+        public AssetHandle handle;
         public void OnDestroy()
         {
             if (handle != null)

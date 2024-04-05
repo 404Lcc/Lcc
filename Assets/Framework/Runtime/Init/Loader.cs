@@ -141,7 +141,7 @@ namespace LccModel
                         foreach (var item in config.aotMetaAssemblyNameList)
                         {
                             // 加载assembly对应的dll，会自动为它hook。一旦aot泛型函数的native函数不存在，用解释器版本代码
-                            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetOperationHandle dllHandle, item, AssetSuffix.Bytes, AssetType.DLL);
+                            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetHandle dllHandle, item, AssetSuffix.Bytes, AssetType.DLL);
                             if (dllAsset == null)
                             {
                                 LogUtil.Error("AOT资源没找到" + item);
@@ -182,7 +182,7 @@ namespace LccModel
             byte[] pdbBytes = null;
 
 
-            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetOperationHandle dllHandle, $"{config.hotfix}.dll", AssetSuffix.Bytes, AssetType.DLL);
+            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetHandle dllHandle, $"{config.hotfix}.dll", AssetSuffix.Bytes, AssetType.DLL);
             dllBytes = RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes);
 
             if (dllHandle != null)
@@ -192,7 +192,7 @@ namespace LccModel
 
             if (!config.isRelease)
             {
-                TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetOperationHandle pdbHandle, $"{config.hotfix}.pdb", AssetSuffix.Bytes, AssetType.DLL);
+                TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetHandle pdbHandle, $"{config.hotfix}.pdb", AssetSuffix.Bytes, AssetType.DLL);
                 pdbBytes = pdbAsset.bytes;
 
                 if (pdbHandle != null)

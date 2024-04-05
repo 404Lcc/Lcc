@@ -10,7 +10,7 @@ namespace LccHotfix
     public class VideoManager : AObjectBase
     {
         public static VideoManager Instance { get; set; }
-        public Dictionary<string, AssetOperationHandle> videoDict = new Dictionary<string, AssetOperationHandle>();
+        public Dictionary<string, AssetHandle> videoDict = new Dictionary<string, AssetHandle>();
         public override void Awake()
         {
             base.Awake();
@@ -38,7 +38,7 @@ namespace LccHotfix
         }
         public VideoClip LoadVideo(string video)
         {
-            AssetManager.Instance.LoadAsset<VideoClip>(out AssetOperationHandle handle, video, AssetSuffix.Mp4, AssetType.Video);
+            AssetManager.Instance.LoadAsset<VideoClip>(out AssetHandle handle, video, AssetSuffix.Mp4, AssetType.Video);
             videoDict.Add(video, handle);
             return (VideoClip)handle.AssetObject;
         }
@@ -101,7 +101,7 @@ namespace LccHotfix
         {
             if (VideoExist(video))
             {
-                AssetOperationHandle loadHandle = videoDict[video];
+                AssetHandle loadHandle = videoDict[video];
                 VideoClip clip = (VideoClip)loadHandle.AssetObject;
                 return clip;
             }

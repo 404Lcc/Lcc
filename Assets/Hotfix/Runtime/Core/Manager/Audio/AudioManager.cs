@@ -10,7 +10,7 @@ namespace LccHotfix
     {
         public static AudioManager Instance { get; set; }
 
-        public Dictionary<string, AssetOperationHandle> audioDict = new Dictionary<string, AssetOperationHandle>();
+        public Dictionary<string, AssetHandle> audioDict = new Dictionary<string, AssetHandle>();
 
         public override void Awake()
         {
@@ -40,7 +40,7 @@ namespace LccHotfix
         }
         public AudioClip LoadAudio(string audio)
         {
-            AssetManager.Instance.LoadAsset<AudioClip>(out AssetOperationHandle handle, audio, AssetSuffix.Mp3, AssetType.Audio);
+            AssetManager.Instance.LoadAsset<AudioClip>(out AssetHandle handle, audio, AssetSuffix.Mp3, AssetType.Audio);
             audioDict.Add(audio, handle);
             return (AudioClip)handle.AssetObject;
         }
@@ -98,7 +98,7 @@ namespace LccHotfix
         {
             if (AudioExist(audio))
             {
-                AssetOperationHandle loadHandle = audioDict[audio];
+                AssetHandle loadHandle = audioDict[audio];
                 AudioClip clip = (AudioClip)loadHandle.AssetObject;
                 return clip;
             }

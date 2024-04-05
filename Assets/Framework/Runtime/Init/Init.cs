@@ -17,6 +17,7 @@ namespace LccModel
             ETTask.ExceptionHandler += LogUtil.Error;
 
             globalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
+            Event.Initalize();
 
             Game.AddSingleton<Logger>();
 
@@ -26,9 +27,7 @@ namespace LccModel
             Game.AddSingleton<EventSystem>();
             Game.AddSingleton<Root>();
             Game.AddSingleton<Loader>();
-
-            Game.AddSingleton<Event>();
-
+            
             Game.Scene.AddComponent<Manager>();
 
             Game.Scene.AddComponent<AssetManager>();
@@ -38,7 +37,7 @@ namespace LccModel
             Game.Scene.AddComponent<NumericEventManager>();
             Game.Scene.AddComponent<RedDotManager>();
             Game.Scene.AddComponent<SceneLoadManager>();
-            Game.Scene.AddComponent<UpdateManager>();
+            Game.Scene.AddComponent<PatchManager>();
 
             Game.Scene.AddComponent<ModelPoolManager>();
             Game.Scene.AddComponent<OrcaManager>();
@@ -47,7 +46,7 @@ namespace LccModel
             Game.Scene.AddComponent<CombatContext>();
             Game.Scene.AddComponent<CombatViewContext>();
 
-            UpdateManager.Instance.StartUpdate(globalConfig);
+            await PatchManager.Instance.StartUpdate(globalConfig);
 
         }
         void FixedUpdate()

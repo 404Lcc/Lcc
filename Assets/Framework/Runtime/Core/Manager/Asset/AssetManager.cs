@@ -45,7 +45,7 @@ namespace LccModel
         }
 
 
-        public void UnLoadAsset(AssetOperationHandle handle)
+        public void UnLoadAsset(AssetHandle handle)
         {
             handle.Release();
         }
@@ -71,7 +71,7 @@ namespace LccModel
             gameObject.name = "resPath" + path;
             gameObject.transform.SetParent(transform);
 
-            AssetOperationHandle handle = Package.LoadAssetSync<T>(path);
+            AssetHandle handle = Package.LoadAssetSync<T>(path);
             assetObject.handle = handle;
             return handle.AssetObject as T;
         }
@@ -84,22 +84,22 @@ namespace LccModel
             gameObject.name = "resPath" + path;
             gameObject.transform.SetParent(transform);
 
-            AssetOperationHandle handle = Package.LoadAssetAsync<T>(path);
+            AssetHandle handle = Package.LoadAssetAsync<T>(path);
             assetObject.handle = handle;
             await handle.Task;
             return handle.AssetObject as T;
         }
 
-        public T LoadAsset<T>(out AssetOperationHandle handle, string name, string suffix, params string[] types) where T : Object
+        public T LoadAsset<T>(out AssetHandle handle, string name, string suffix, params string[] types) where T : Object
         {
             string path = GetAssetPath(name, suffix, types);
             handle = Package.LoadAssetSync<T>(path);
             return handle.AssetObject as T;
         }
-        public async ETTask<AssetOperationHandle> LoadAssetAsync<T>(string name, string suffix, params string[] types) where T : Object
+        public async ETTask<AssetHandle> LoadAssetAsync<T>(string name, string suffix, params string[] types) where T : Object
         {
             string path = GetAssetPath(name, suffix, types);
-            AssetOperationHandle handle = Package.LoadAssetAsync<T>(path);
+            AssetHandle handle = Package.LoadAssetAsync<T>(path);
             await handle.Task;
             return handle;
         }
@@ -107,7 +107,7 @@ namespace LccModel
         public async ETTask<UnityEngine.SceneManagement.Scene> LoadSceneAsync(string name, LoadSceneMode sceneMode, bool activateOnLoad, params string[] types)
         {
             string path = GetAssetPath(name, "", types);
-            SceneOperationHandle handle = Package.LoadSceneAsync(path, sceneMode, activateOnLoad);
+            SceneHandle handle = Package.LoadSceneAsync(path, sceneMode, activateOnLoad);
             await handle.Task;
             return handle.SceneObject;
         }

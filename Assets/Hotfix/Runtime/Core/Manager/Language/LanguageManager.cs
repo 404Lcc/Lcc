@@ -26,7 +26,7 @@ namespace LccHotfix
         }
         public void ChangeLanguage(LanguageType type)
         {
-            TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetOperationHandle handle, type.ToString(), AssetSuffix.Txt, AssetType.Config);
+            TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetHandle handle, type.ToString(), AssetSuffix.Txt, AssetType.Config);
             foreach (string item in asset.text.Split('\n'))
             {
                 if (string.IsNullOrEmpty(item))

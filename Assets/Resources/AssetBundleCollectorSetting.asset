@@ -13,12 +13,16 @@ MonoBehaviour:
   m_Name: AssetBundleCollectorSetting
   m_EditorClassIdentifier: 
   ShowPackageView: 1
-  EnableAddressable: 0
-  UniqueBundleName: 0
   ShowEditorAlias: 1
+  UniqueBundleName: 1
   Packages:
   - PackageName: DefaultPackage
     PackageDesc: 
+    EnableAddressable: 0
+    LocationToLower: 0
+    IncludeAssetGUID: 0
+    IgnoreDefaultType: 1
+    AutoCollectShaders: 1
     Groups:
     - GroupName: Default Group
       GroupDesc: 
@@ -46,7 +50,7 @@ MonoBehaviour:
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
-        FilterRuleName: CollectPrefab
+        FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
       - CollectPath: Assets/Bundles/Scene
@@ -54,7 +58,7 @@ MonoBehaviour:
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
-        FilterRuleName: CollectScene
+        FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
       - CollectPath: Assets/Bundles/SkillConfig
@@ -70,6 +74,6 @@ MonoBehaviour:
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
-        FilterRuleName: CollectPrefab
+        FilterRuleName: CollectAll
         AssetTags: 
         UserData: 

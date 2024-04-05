@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using Object = System.Object;
 
 namespace LccModel
 {
 	public class StateMachine
 	{
+		private readonly Dictionary<string, Object> _blackboard = new Dictionary<string, object>(100);
 		private readonly Dictionary<string, IStateNode> _nodes = new Dictionary<string, IStateNode>(100);
 		private IStateNode _curNode;
 		private IStateNode _preNode;
@@ -13,7 +15,7 @@ namespace LccModel
 		/// <summary>
 		/// 状态机持有者
 		/// </summary>
-		public System.Object Owner { private set; get; }
+		public Object Owner { private set; get; }
 
 		/// <summary>
 		/// 当前运行的节点名称
@@ -33,7 +35,7 @@ namespace LccModel
 
 
 		private StateMachine() { }
-		public StateMachine(System.Object owner)
+		public StateMachine(Object owner)
 		{
 			Owner = owner;
 		}
@@ -96,7 +98,7 @@ namespace LccModel
 			}
 			else
 			{
-				LogUtil.Error($"State node already existed : {nodeName}");
+				Debug.LogError($"State node already existed : {nodeName}");
 			}
 		}
 
@@ -122,15 +124,44 @@ namespace LccModel
 			IStateNode node = TryGetNode(nodeName);
 			if (node == null)
 			{
-				LogUtil.Error($"Can not found state node : {nodeName}");
+				Debug.LogError($"Can not found state node : {nodeName}");
 				return;
 			}
 
-			LogUtil.Debug($"{_curNode.GetType().FullName} --> {node.GetType().FullName}");
+			Debug.Log($"{_curNode.GetType().FullName} --> {node.GetType().FullName}");
 			_preNode = _curNode;
 			_curNode.OnExit();
 			_curNode = node;
 			_curNode.OnEnter();
+		}
+
+		/// <summary>
+		/// 设置黑板数据
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="value"></param>
+		public void SetBlackboardValue(string key, Object value)
+		{
+			if (_blackboard.ContainsKey(key) == false)
+				_blackboard.Add(key, value);
+			else
+				_blackboard[key] = value;
+		}
+
+		/// <summary>
+		/// 获取黑板数据
+		/// </summary>
+		public Object GetBlackboardValue(string key)
+		{
+			if (_blackboard.TryGetValue(key, out Object value))
+			{
+				return value;
+			}
+			else
+			{
+				Debug.LogWarning($"Not found blackboard value : {key}");
+				return null;
+			}
 		}
 
 		private IStateNode TryGetNode(string nodeName)

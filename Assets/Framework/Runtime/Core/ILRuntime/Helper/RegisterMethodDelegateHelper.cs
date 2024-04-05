@@ -17,11 +17,14 @@ namespace LccModel
                 });
             });
             appdomain.DelegateManager.RegisterMethodDelegate<UnityEngine.EventSystems.PointerEventData>();
-
             appdomain.DelegateManager.RegisterMethodDelegate<ILRuntime.Runtime.Intepreter.ILTypeInstance>();
             appdomain.DelegateManager.RegisterFunctionDelegate<ILRuntime.Runtime.Intepreter.ILTypeInstance>();
             appdomain.DelegateManager.RegisterFunctionDelegate<System.Int32, UnityEngine.GameObject>();
             appdomain.DelegateManager.RegisterMethodDelegate<UnityEngine.Transform, System.Int32>();
+            appdomain.DelegateManager.RegisterMethodDelegate<LccModel.GroupBase, System.Int32>();
+            appdomain.DelegateManager.RegisterMethodDelegate<System.Int32>();
+            appdomain.DelegateManager.RegisterFunctionDelegate<System.Int32, System.Int32>();
+            appdomain.DelegateManager.RegisterFunctionDelegate<System.Int32>();
 
         }
     }

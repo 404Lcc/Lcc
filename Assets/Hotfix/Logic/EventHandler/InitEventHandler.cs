@@ -13,8 +13,6 @@ namespace LccHotfix
             //这里可以初始化
 
 
-            await UpdatePanel.Instance.UpdateLoadingPercent(51, 100);
-
             //进入第一个状态
             SceneStateManager.Instance.SetDefaultState(SceneStateType.Login);
         }

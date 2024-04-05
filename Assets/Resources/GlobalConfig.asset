@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d5b7b43d96b9241b0b85180d7ade92, type: 3}
   m_Name: GlobalConfig
   m_EditorClassIdentifier: 
+  packageName: DefaultPackage
+  buildPipeline: BuiltinBuildPipeline
+  playMode: 0
   hotfixMode: 1
   isRelease: 0
   aotMetaAssemblyNameList:

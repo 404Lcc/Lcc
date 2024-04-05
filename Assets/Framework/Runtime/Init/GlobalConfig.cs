@@ -13,9 +13,9 @@ namespace LccModel
     [CreateAssetMenu(menuName = "Lcc/CreateGlobalConfig", fileName = "GlobalConfig", order = 0)]
     public class GlobalConfig : ScriptableObject
     {
+        public string packageName;
+        public string buildPipeline;
         public EPlayMode playMode;
-        public string hostServer;
-        public string version;
 
         public HotfixMode hotfixMode;
         public bool isRelease;

@@ -1,0 +1,237 @@
+{
+    "FileVersion": "2.0.0",
+    "EnableAddressable": false,
+    "LocationToLower": false,
+    "IncludeAssetGUID": false,
+    "OutputNameStyle": 0,
+    "BuildPipeline": "BuiltinBuildPipeline",
+    "PackageName": "DefaultPackage",
+    "PackageVersion": "Simulate",
+    "AssetList": [
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Config/TestConfig.txt",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Config/TestConfigCategory.bytes",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/DLL/Unity.Hotfix.dll.bytes",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UIGamePanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UILoadingPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UILoginPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UIMainPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UITopPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Scene/Game.unity",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 3
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Scene/Login.unity",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 3
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Scene/Main.unity",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 3
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/SkillConfig/Execution/Execution_1.asset",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 4
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/SkillConfig/Item/Item_1.asset",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 5
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/SkillConfig/Skill/Skill_1.asset",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 6
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/SkillConfig/Status/Status_1.asset",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 7
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/SkillConfig/Status/Status_2.asset",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 7
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Tool/Tips.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 8
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Tool/TipsWindow.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 8
+        }
+    ],
+    "BundleList": [
+        {
+            "BundleName": "defaultpackage_assets_bundles_config.bundle",
+            "UnityCRC": 0,
+            "FileHash": "2b8882236779a7f6278ab094a906188b",
+            "FileCRC": "00000000",
+            "FileSize": 108,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_dll.bundle",
+            "UnityCRC": 0,
+            "FileHash": "2f411deaa6d09befd306e032b921505e",
+            "FileCRC": "00000000",
+            "FileSize": 158432,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_prefab_panel.bundle",
+            "UnityCRC": 0,
+            "FileHash": "d270a50de25eebad4ba58959b061f70b",
+            "FileCRC": "00000000",
+            "FileSize": 138829,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_scene.bundle",
+            "UnityCRC": 0,
+            "FileHash": "894551c7060d31b6c9192abb765344c0",
+            "FileCRC": "00000000",
+            "FileSize": 11049,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_skillconfig_execution.bundle",
+            "UnityCRC": 0,
+            "FileHash": "b9c8821baec2fc6f527f10810ca9c3ab",
+            "FileCRC": "00000000",
+            "FileSize": 3568,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_skillconfig_item.bundle",
+            "UnityCRC": 0,
+            "FileHash": "8a0451511759b973bc25c0b346b69837",
+            "FileCRC": "00000000",
+            "FileSize": 5443,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_skillconfig_skill.bundle",
+            "UnityCRC": 0,
+            "FileHash": "234a20eb992ffdb980b72d28f48c15aa",
+            "FileCRC": "00000000",
+            "FileSize": 2678,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_skillconfig_status.bundle",
+            "UnityCRC": 0,
+            "FileHash": "e96533019b08b764c31561a23658a60d",
+            "FileCRC": "00000000",
+            "FileSize": 5398,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_tool.bundle",
+            "UnityCRC": 0,
+            "FileHash": "99b605528567313bfd69f54059fe85b5",
+            "FileCRC": "00000000",
+            "FileSize": 26802,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        }
+    ]
+}

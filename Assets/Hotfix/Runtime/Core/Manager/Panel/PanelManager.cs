@@ -268,7 +268,7 @@ namespace LccHotfix
             {
                 return;
             }
-            var asset = AssetManager.Instance.LoadAsset<GameObject>(out AssetOperationHandle handle, name, _suff, _types);
+            var asset = AssetManager.Instance.LoadAsset<GameObject>(out AssetHandle handle, name, _suff, _types);
 
             GameObject go = UnityEngine.Object.Instantiate(asset);
             go.name = name;

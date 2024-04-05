@@ -1,56 +1,37 @@
-using System.IO;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using YooAsset;
 
 namespace LccModel
 {
-    public class StreamingAssetsDefine
-    {
-        public const string RootFolderName = "yoo";
-    }
-
     /// <summary>
-    /// 内置资源清单
+    /// 资源文件查询服务类
     /// </summary>
-    public class BuildinFileManifest : ScriptableObject
+    public class GameQueryServices : IBuildinQueryServices
     {
-        public List<string> BuildinFiles = new List<string>();
-    }
+        /// <summary>
+        /// 查询内置文件的时候，是否比对文件哈希值
+        /// </summary>
+        public static bool CompareFileCRC = false;
 
-    /// <summary>
-    /// 内置文件查询服务类
-    /// </summary>
-    public class GameQueryServices : IQueryServices
-    {
-        public bool QueryStreamingAssets(string packageName, string fileName)
+        public bool Query(string packageName, string fileName, string fileCRC)
         {
             // 注意：fileName包含文件格式
-            return StreamingAssetsUtil.FileExists(packageName, fileName);
+            return StreamingAssetsUtil.FileExists(packageName, fileName, fileCRC);
         }
     }
 
-#if UNITY_EDITOR
-    /// <summary>
-    /// StreamingAssets目录下资源查询帮助类
-    /// </summary>
-    public class StreamingAssetsUtil
+    public sealed class StreamingAssetsUtil
     {
-        public static void Init() { }
-        public static bool FileExists(string packageName, string fileName)
+        private class PackageQuery
         {
-            string filePath = Path.Combine(Application.streamingAssetsPath, StreamingAssetsDefine.RootFolderName, packageName, fileName);
-            return File.Exists(filePath);
+            public readonly Dictionary<string, BuildinFileManifest.Element> Elements = new Dictionary<string, BuildinFileManifest.Element>(1000);
         }
-    }
-#else
-    /// <summary>
-    /// StreamingAssets目录下资源查询帮助类
-    /// </summary>
-    public class StreamingAssetsUtil
-    {
+
         private static bool _isInit = false;
-        private static readonly HashSet<string> _cacheData = new HashSet<string>();
+        private static readonly Dictionary<string, PackageQuery> _packages = new Dictionary<string, PackageQuery>(10);
 
         /// <summary>
         /// 初始化
@@ -60,10 +41,19 @@ namespace LccModel
             if (_isInit == false)
             {
                 _isInit = true;
+
                 var manifest = Resources.Load<BuildinFileManifest>("BuildinFileManifest");
-                foreach (string fileName in manifest.BuildinFiles)
+                if (manifest != null)
                 {
-                    _cacheData.Add(fileName);
+                    foreach (var element in manifest.BuildinFiles)
+                    {
+                        if (_packages.TryGetValue(element.PackageName, out PackageQuery package) == false)
+                        {
+                            package = new PackageQuery();
+                            _packages.Add(element.PackageName, package);
+                        }
+                        package.Elements.Add(element.FileName, element);
+                    }
                 }
             }
         }
@@ -71,49 +61,25 @@ namespace LccModel
         /// <summary>
         /// 内置文件查询方法
         /// </summary>
-        public static bool FileExists(string packageName, string fileName)
+        public static bool FileExists(string packageName, string fileName, string fileCRC32)
         {
             if (_isInit == false)
                 Init();
-            return _cacheData.Contains(fileName);
-        }
-    }
-#endif
 
-#if UNITY_EDITOR
-    internal class PreprocessBuild : UnityEditor.Build.IPreprocessBuildWithReport
-    {
-        public int callbackOrder { get { return 0; } }
+            if (_packages.TryGetValue(packageName, out PackageQuery package) == false)
+                return false;
 
-        /// <summary>
-        /// 在构建应用程序前处理
-        /// </summary>
-        public void OnPreprocessBuild(UnityEditor.Build.Reporting.BuildReport report)
-        {
-            var manifest = ScriptableObject.CreateInstance<BuildinFileManifest>();
+            if (package.Elements.TryGetValue(fileName, out var element) == false)
+                return false;
 
-            string folderPath = $"{Application.dataPath}/StreamingAssets/{StreamingAssetsDefine.RootFolderName}";
-            DirectoryInfo root = new DirectoryInfo(folderPath);
-            FileInfo[] files = root.GetFiles("*", SearchOption.AllDirectories);
-            foreach (var fileInfo in files)
+            if (GameQueryServices.CompareFileCRC)
             {
-                if (fileInfo.Extension == ".meta")
-                    continue;
-                if (fileInfo.Name.StartsWith("PackageManifest_"))
-                    continue;
-                manifest.BuildinFiles.Add(fileInfo.Name);
+                return element.FileCRC32 == fileCRC32;
             }
-
-            string saveFilePath = "Assets/Resources/BuildinFileManifest.asset";
-            if (File.Exists(saveFilePath))
-                File.Delete(saveFilePath);
-            if (Directory.Exists("Assets/Resources") == false)
-                Directory.CreateDirectory("Assets/Resources");
-            UnityEditor.AssetDatabase.CreateAsset(manifest, saveFilePath);
-            UnityEditor.AssetDatabase.SaveAssets();
-            UnityEditor.AssetDatabase.Refresh();
-            Debug.Log($"一共{manifest.BuildinFiles.Count}个内置文件，内置资源清单保存成功 : {saveFilePath}");
+            else
+            {
+                return true;
+            }
         }
     }
-#endif
 }
