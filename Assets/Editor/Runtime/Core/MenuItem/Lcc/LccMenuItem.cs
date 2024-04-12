@@ -6,39 +6,6 @@ namespace LccEditor
 {
     public class LccMenuItem
     {
-        [MenuItem("Assets/工具箱/导表结构全部", false, 11)]
-        public static void ExportScriptALL()
-        {
-            ExcelExportUtil.ExportScriptALL();
-        }
-        [MenuItem("Assets/工具箱/导表数据全部", false, 12)]
-        public static void ExportDataALL()
-        {
-            ExcelExportUtil.ExportDataALL();
-        }
-        [MenuItem("Assets/工具箱/导表结构选中", false, 21)]
-        public static void ExportScript()
-        {
-            List<string> pathList = new List<string>();
-            foreach (Object item in Selection.objects)
-            {
-                string path = Application.dataPath.Replace("Assets", string.Empty) + AssetDatabase.GetAssetPath(item);
-                pathList.Add(path);
-            }
-            ExcelExportUtil.ExportScriptSelect(pathList);
-        }
-        [MenuItem("Assets/工具箱/导表数据选中", false, 22)]
-        public static void ExportData()
-        {
-            List<string> pathList = new List<string>();
-            foreach (Object item in Selection.objects)
-            {
-                string path = Application.dataPath.Replace("Assets", string.Empty) + AssetDatabase.GetAssetPath(item);
-                pathList.Add(path);
-            }
-            ExcelExportUtil.ExportDataSelect(pathList);
-        }
-
         [MenuItem("Assets/工具箱/热更Panel", false, 31)]
         public static void CreateHotfixPanel()
         {
