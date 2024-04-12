@@ -71,9 +71,8 @@
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\BoolObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector2ObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector3IntObjectType.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\LogConfig\LogConfig.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\MenuTree\AMenuEditorWindow.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\Util\LogConfig\LogConfigUtil.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\Util\LogConfig\LogConfig.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\FrameworkEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\Roslyn\RoslynUtil.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\AnimationCurveObjectType.cs" />
@@ -84,13 +83,13 @@
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\ObjectObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\IntObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector3ObjectType.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\FilterHotFixAssemblies\FilterHotFixAssemblies.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectTypeUtil.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\StringObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\DoubleObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\RectObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\BoundsObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector2IntObjectType.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\Util\EditorDefine\EditorDefine.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\CreateScript\CreateScriptUtil.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\ILRuntimeEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\MenuTree\MenuEditorWindow.cs" />
@@ -98,11 +97,13 @@
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\MenuTree\AEditorWindowBase.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\HotfixEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\FloatObjectType.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\LogConfig\LogConfigUtil.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\Link\LinkUtil.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\EditorDefine\EditorDefine.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector4ObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\TagEditorWindow.cs" />
+    <Compile Include="Assets\Editor\Runtime\Core\HybridCLR\HybridCLREditor.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\CharObjectType.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\Util\FilterHotfixAssemblie\FilterHotfixAssemblie.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\LayerEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\FrameworkTreeWindow\FrameworkTreeWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\MenuItem\Lcc\LccMenuItem.cs" />
@@ -1178,6 +1179,10 @@
     </Reference>
     <Reference Include="YooAsset.Editor">
       <HintPath>Library\ScriptAssemblies\YooAsset.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="HybridCLR.Editor">
+      <HintPath>Library\ScriptAssemblies\HybridCLR.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.UI">
