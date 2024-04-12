@@ -1,6 +1,7 @@
 ﻿using LccModel;
+using Luban;
+using SimpleJSON;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using YooAsset;
 
@@ -9,7 +10,6 @@ namespace LccHotfix
     public class ConfigManager : AObjectBase
     {
         public static ConfigManager Instance { get; set; }
-        public Dictionary<Type, ProtobufObject> configDict = new Dictionary<Type, ProtobufObject>();
 
 
         public override void Awake()
@@ -17,23 +17,30 @@ namespace LccHotfix
             base.Awake();
 
             Instance = this;
-            foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(ConfigAttribute)))
-            {
-                TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetHandle handle, item.Name, AssetSuffix.Bytes, AssetType.Config);
-                ProtobufObject obj = (ProtobufObject)ProtobufUtil.Deserialize(item, asset.bytes, 0, asset.bytes.Length);
-                obj.AfterDeserialization();
-                configDict.Add(item, obj);
-                AssetManager.Instance.UnLoadAsset(handle);
-            }
+
+
+            var tablesCtor = typeof(cfg.Tables).GetConstructors()[0];
+            var loaderReturnType = tablesCtor.GetParameters()[0].ParameterType.GetGenericArguments()[1];
+            // 根据cfg.Tables的构造函数的Loader的返回值类型决定使用json还是ByteBuf Loader
+            Delegate loader = loaderReturnType == typeof(ByteBuf) ? new Func<string, ByteBuf>(LoadByteBuf) : (Delegate)new Func<string, JSONNode>(LoadJson);
+            var tables = (cfg.Tables)tablesCtor.Invoke(new object[] { loader });
         }
         public override void OnDestroy()
         {
             base.OnDestroy();
 
-            configDict.Clear();
-            
             Instance = null;
         }
+        private static JSONNode LoadJson(string file)
+        {
+            var text = AssetManager.Instance.LoadAsset<TextAsset>(out AssetHandle handle, file, AssetSuffix.Json, AssetType.Config);
+            return JSON.Parse(text.text);
+        }
 
+        private static ByteBuf LoadByteBuf(string file)
+        {
+            var bytes = AssetManager.Instance.LoadAsset<TextAsset>(out AssetHandle handle, file, AssetSuffix.Bytes, AssetType.Config);
+            return new ByteBuf(bytes.bytes);
+        }
     }
 }

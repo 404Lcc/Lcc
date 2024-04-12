@@ -106,7 +106,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Base\IUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Init\Init.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateAttribute.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\IConfig.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Logic\Camera\SmoothFoolow2D.cs" />
@@ -134,7 +133,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\ISingletonUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\ScrollerPro\LoopScrollItemPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Config\ConfigAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Model\ModelManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEvent.cs" />
     <Compile Include="Assets\Hotfix\Logic\SceneState\MainSceneState.cs" />

@@ -10,14 +10,7 @@
     "AssetList": [
         {
             "Address": "",
-            "AssetPath": "Assets/Bundles/Config/TestConfig.txt",
-            "AssetGUID": "",
-            "AssetTags": [],
-            "BundleID": 0
-        },
-        {
-            "Address": "",
-            "AssetPath": "Assets/Bundles/Config/TestConfigCategory.bytes",
+            "AssetPath": "Assets/Bundles/Config/tbitem.json",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 0
@@ -148,7 +141,7 @@
             "UnityCRC": 0,
             "FileHash": "2b8882236779a7f6278ab094a906188b",
             "FileCRC": "00000000",
-            "FileSize": 108,
+            "FileSize": 743,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -158,7 +151,7 @@
             "UnityCRC": 0,
             "FileHash": "2f411deaa6d09befd306e032b921505e",
             "FileCRC": "00000000",
-            "FileSize": 158432,
+            "FileSize": 160920,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
