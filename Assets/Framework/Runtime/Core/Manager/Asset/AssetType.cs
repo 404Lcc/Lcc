@@ -6,6 +6,7 @@
         public const string Game = "Game";
         //资源目录
         public const string DLL = "DLL";
+        public const string AotDlls = "AotDlls";
         public const string Config = "Config";
         public const string Font = "Font";
         public const string Video = "Video";

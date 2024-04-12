@@ -1,9 +1,7 @@
 ﻿using LccModel;
-using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using static EnhancedUI.EnhancedScroller.EnhancedScroller;
 
 namespace LccHotfix

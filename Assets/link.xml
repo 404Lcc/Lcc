@@ -4622,149 +4622,6 @@
     <type fullname="RVO.RVOMath" preserve="all" />
     <type fullname="RVO.Simulator" preserve="all" />
     <type fullname="RVO.Vector2" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.CLRBindings" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.DG_Tweening_DOTween_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.DG_Tweening_TweenSettingsExtensions_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.EnhancedUI_EnhancedScroller_EnhancedScroller_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.ET_ETAsyncTaskMethodBuilder_1_AudioClip_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.ET_ETAsyncTaskMethodBuilder_1_ILTypeInstance_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.ET_ETAsyncTaskMethodBuilder_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.ET_ETTask_1_AssetHandle_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.ET_ETTask_1_AudioClip_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.ET_ETTask_1_CoroutineLock_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.ET_ETTask_1_ILTypeInstance_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.ET_ETTask_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_AObjectBase_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_AssetManager_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_ByteExpand_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_CombatContext_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_Combat_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_CoroutineLockManager_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_CoroutineLock_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_CoroutineObject_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_DisplayMode_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_DragEventTrigger_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_FileUtil_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_GroupBase_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_IdUtil_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_JsonUtil_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_LccView_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_Loader_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_LogUtil_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_ObjectUtil_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_OrcaComponent_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_PathUtil_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_ProtobufUtil_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_ResolutionUtil_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_RijndaelUtil_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_ScrollerPro_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_Singleton_1_Loader_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_Singleton_1_Timer_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_Timer_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_TransformComponent_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_TransformExpand_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_UnOrderMultiMapSet_2_Type_Type_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_UpdatePanel_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_Vector2Expand_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.LccModel_WebUtil_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.ScreenAdaptationUtil_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Action_2_Int32_ILTypeInstance_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Action_2_Vector2_Single_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Action_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Activator_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Array_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Byte_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Int32_ILTypeInstance_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Int32_ILTypeInstance_Binding_ValueCollection_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Int32_ILTypeInstance_Binding_ValueCollection_Binding_Enumerator_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Int32_ILTypeInstance_Binding_Enumerator_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Int32_String_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Int32_Vector2_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Int64_ILTypeInstance_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Int64_ILTypeInstance_Binding_ValueCollection_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Int64_ILTypeInstance_Binding_ValueCollection_Binding_Enumerator_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_String_AssetHandle_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_String_AssetHandle_Binding_ValueCollection_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_String_AssetHandle_Binding_ValueCollection_Binding_Enumerator_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_String_FieldInfo_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_String_ILTypeInstance_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_String_Int32_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_String_String_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_String_Type_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_String_Type_Binding_ValueCollection_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_String_Type_Binding_ValueCollection_Binding_Enumerator_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_String_Type_Binding_Enumerator_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Type_HashSet_1_Type_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Type_ILTypeInstance_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Type_ILTypeInstance_Binding_ValueCollection_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Type_ILTypeInstance_Binding_ValueCollection_Binding_Enumerator_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Type_List_1_ILTypeInstance_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_HashSet_1_Type_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_HashSet_1_Type_Binding_Enumerator_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_KeyValuePair_2_Int32_ILTypeInstance_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_KeyValuePair_2_String_Type_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_List_1_Combat_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_List_1_ILTypeInstance_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_List_1_ILTypeInstance_Binding_Enumerator_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_List_1_Int32_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_List_1_Type_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_List_1_Type_Binding_Enumerator_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Queue_1_ETTask_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Queue_1_ILTypeInstance_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Queue_1_Int64_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Stack_1_ILTypeInstance_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_IEnumerator_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Enum_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Exception_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Func_1_Int32_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_IDisposable_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Int32_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_IO_DirectoryInfo_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_IO_FileInfo_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_IO_FileSystemInfo_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Linq_Enumerable_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Object_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Reflection_FieldInfo_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Reflection_MemberInfo_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Reflection_MethodBase_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_String_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Type_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.TMPro_TMP_Text_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Application_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_AudioSource_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Camera_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Canvas_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Component_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Debug_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_EventSystems_EventSystem_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_EventSystems_PointerEventData_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Events_UnityEvent_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_GameObject_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Input_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_LayerMask_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Mathf_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Object_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Physics_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Pool_ObjectPool_1_ILTypeInstance_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_QualitySettings_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Quaternion_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_RaycastHit_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Ray_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_RectTransform_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_RenderTexture_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Screen_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_TextAsset_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Time_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Touch_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Transform_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_UI_Button_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_UI_RawImage_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_UI_Slider_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_UI_Text_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Vector2_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Vector3_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Video_VideoPlayer_Binding" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.YooAsset_AssetHandle_Binding" preserve="all" />
     <type fullname="LccModel.AbilityLevelComponent" preserve="all" />
     <type fullname="LccModel.IAbility" preserve="all" />
     <type fullname="LccModel.IAbilityExecution" preserve="all" />
@@ -5106,33 +4963,6 @@
     <type fullname="RVO.KdTree+FloatPair" preserve="all" />
     <type fullname="RVO.KdTree+ObstacleTreeNode" preserve="all" />
     <type fullname="RVO.Simulator+Worker" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.ET_ETAsyncTaskMethodBuilder_1_AudioClip_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.ET_ETAsyncTaskMethodBuilder_1_ILTypeInstance_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.ET_ETAsyncTaskMethodBuilder_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Byte_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Int32_ILTypeInstance_Binding_ValueCollection_Binding_Enumerator_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Int32_ILTypeInstance_Binding_Enumerator_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Int64_ILTypeInstance_Binding_ValueCollection_Binding_Enumerator_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_String_AssetHandle_Binding_ValueCollection_Binding_Enumerator_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_String_Type_Binding_ValueCollection_Binding_Enumerator_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_String_Type_Binding_Enumerator_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_Dictionary_2_Type_ILTypeInstance_Binding_ValueCollection_Binding_Enumerator_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_HashSet_1_Type_Binding_Enumerator_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_KeyValuePair_2_Int32_ILTypeInstance_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_KeyValuePair_2_String_Type_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_List_1_ILTypeInstance_Binding_Enumerator_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Collections_Generic_List_1_Type_Binding_Enumerator_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_Object_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.System_String_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_LayerMask_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Mathf_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Quaternion_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_RaycastHit_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Ray_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Touch_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Vector2_Binding+&lt;&gt;c" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Vector2_Binding+&lt;&gt;c__DisplayClass0_0" preserve="all" />
-    <type fullname="ILRuntime.Runtime.Generated.UnityEngine_Vector3_Binding+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.AbilityItemBezierMoveComponent+&lt;&gt;c__DisplayClass7_0" preserve="all" />
     <type fullname="LccModel.AbilityItemBezierMoveComponent+&lt;&gt;c__DisplayClass8_0" preserve="all" />
     <type fullname="LccModel.Effect+&lt;&gt;c" preserve="all" />
@@ -5164,7 +4994,7 @@
     <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c__DisplayClass5_0" preserve="all" />
     <type fullname="LccModel.AssetManager+&lt;AutoLoadAssetAsync&gt;d__14`1" preserve="all" />
     <type fullname="LccModel.AssetManager+&lt;LoadAssetAsync&gt;d__16`1" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;LoadSceneAsync&gt;d__17" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;LoadSceneAsync&gt;d__18" preserve="all" />
     <type fullname="LccModel.CoroutineLockManager+&lt;Wait&gt;d__8" preserve="all" />
     <type fullname="LccModel.CoroutineLockQueue+&lt;&gt;c__DisplayClass7_0" preserve="all" />
     <type fullname="LccModel.CoroutineLockQueue+&lt;Wait&gt;d__7" preserve="all" />
@@ -5216,7 +5046,7 @@
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.EventTriggerListener+VoidDelegate" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=144" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=21445" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=37211" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10845" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=23290" preserve="all" />
   </assembly>
 </linker>

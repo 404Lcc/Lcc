@@ -104,6 +104,13 @@ namespace LccModel
             return handle;
         }
 
+        public Object[] LoadAllAssets(out AllAssetsHandle handle, string name, string suffix, params string[] types)
+        {
+            string path = GetAssetPath(name, suffix, types);
+            handle = Package.LoadAllAssetsAsync(path);
+            return handle.AllAssetObjects;
+        }
+
         public async ETTask<UnityEngine.SceneManagement.Scene> LoadSceneAsync(string name, LoadSceneMode sceneMode, bool activateOnLoad, params string[] types)
         {
             string path = GetAssetPath(name, "", types);

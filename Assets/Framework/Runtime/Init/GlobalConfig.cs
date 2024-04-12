@@ -19,7 +19,5 @@ namespace LccModel
 
         public HotfixMode hotfixMode;
         public bool isRelease;
-        public List<string> aotMetaAssemblyNameList;
-        public string hotfix;
     }
 }

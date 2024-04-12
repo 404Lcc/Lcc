@@ -17,8 +17,3 @@ MonoBehaviour:
   playMode: 0
   hotfixMode: 1
   isRelease: 0
-  aotMetaAssemblyNameList:
-  - mscorlib.dll
-  - System.dll
-  - System.Core.dll
-  hotfix: Unity.Hotfix
