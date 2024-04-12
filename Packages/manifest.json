@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.code-philosophy.hybridclr": "https://github.com/focus-creative-games/hybridclr_unity.git",
+    "com.code-philosophy.luban": "https://github.com/focus-creative-games/luban_unity.git",
     "com.ourpalm.ilruntime": "2.1.0",
     "com.tuyoogame.yooasset": "2.1.1",
     "com.unity.2d.sprite": "1.0.0",
