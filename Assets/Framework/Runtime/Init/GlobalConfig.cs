@@ -7,7 +7,7 @@ namespace LccModel
     public enum HotfixMode
     {
         Mono = 1,
-        ILRuntime = 2,
+        //ILRuntime = 2,
         HybridCLR = 3,
     }
     [CreateAssetMenu(menuName = "Lcc/CreateGlobalConfig", fileName = "GlobalConfig", order = 0)]

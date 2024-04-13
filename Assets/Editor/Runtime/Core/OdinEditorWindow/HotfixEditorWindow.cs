@@ -23,13 +23,13 @@ namespace LccEditor
             EditorDefine.HotfixMode = HotfixMode.Mono;
             Refresh();
         }
-        [PropertySpace(10)]
-        [LabelText("ILRuntime模式"), Button(ButtonSizes.Gigantic)]
-        public void ILRuntime()
-        {
-            EditorDefine.HotfixMode = HotfixMode.ILRuntime;
-            Refresh();
-        }
+        //[PropertySpace(10)]
+        //[LabelText("ILRuntime模式"), Button(ButtonSizes.Gigantic)]
+        //public void ILRuntime()
+        //{
+        //    EditorDefine.HotfixMode = HotfixMode.ILRuntime;
+        //    Refresh();
+        //}
         [PropertySpace(10)]
         [LabelText("HybridCLR模式"), Button(ButtonSizes.Gigantic)]
         public void HybridCLR()
@@ -58,10 +58,10 @@ namespace LccEditor
             {
                 info = "当前是Mono模式";
             }
-            else if (EditorDefine.HotfixMode == HotfixMode.ILRuntime)
-            {
-                info = "当前是ILRuntime模式";
-            }
+            //else if (EditorDefine.HotfixMode == HotfixMode.ILRuntime)
+            //{
+            //    info = "当前是ILRuntime模式";
+            //}
             else if (EditorDefine.HotfixMode == HotfixMode.HybridCLR)
             {
                 info = "当前是HybridCLR模式";
