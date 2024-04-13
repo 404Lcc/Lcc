@@ -2,7 +2,6 @@
     "name": "Unity.Model",
     "rootNamespace": "",
     "references": [
-        "GUID:7a1fa966b0ea23f40a6a4dc4dab1e297",
         "GUID:13ba8ce62aa80c74598530029cb2d649",
         "GUID:89fdb54e773827b40b9127329bdaed75",
         "GUID:6055be8ebefd69e48b49212b09b47b2f",

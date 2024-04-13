@@ -1,40 +1,43 @@
 using LccModel;
 using UnityEditor;
 
-public static class EditorDefine
+namespace LccEditor
 {
-    private static GlobalConfig _globalConfig;
-    private static GlobalConfig GlobalConfig
+    public static class EditorDefine
     {
-        get
+        private static GlobalConfig _globalConfig;
+        private static GlobalConfig GlobalConfig
         {
-            if (_globalConfig == null)
+            get
             {
-                _globalConfig = AssetDatabase.LoadAssetAtPath<GlobalConfig>("Assets/Resources/GlobalConfig.asset");
+                if (_globalConfig == null)
+                {
+                    _globalConfig = AssetDatabase.LoadAssetAtPath<GlobalConfig>("Assets/Resources/GlobalConfig.asset");
+                }
+                return _globalConfig;
             }
-            return _globalConfig;
         }
-    }
-    public static HotfixMode HotfixMode
-    {
-        get
+        public static HotfixMode HotfixMode
         {
-            return GlobalConfig.hotfixMode;
+            get
+            {
+                return GlobalConfig.hotfixMode;
+            }
+            set
+            {
+                GlobalConfig.hotfixMode = value;
+            }
         }
-        set
+        public static bool IsRelease
         {
-            GlobalConfig.hotfixMode = value;
-        }
-    }
-    public static bool IsRelease
-    {
-        get
-        {
-            return GlobalConfig.isRelease;
-        }
-        set
-        {
-            GlobalConfig.isRelease = value;
+            get
+            {
+                return GlobalConfig.isRelease;
+            }
+            set
+            {
+                GlobalConfig.isRelease = value;
+            }
         }
     }
 }
