@@ -98,7 +98,6 @@
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\CharObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\IntObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector3ObjectType.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\FilterHotFixAssemblies\FilterHotFixAssemblies.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectTypeUtil.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\StringObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\LayerEditorWindow.cs" />

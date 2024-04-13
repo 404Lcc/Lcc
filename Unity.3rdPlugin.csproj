@@ -107,8 +107,8 @@
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Reflection\ReflectionExtensions.cs" />
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Exceptions\UnknownIdentifierException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TupleSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\JsonWriter.cs" />
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\ReferenceType.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\JsonWriter.cs" />
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\ParserArguments.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SByteSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />

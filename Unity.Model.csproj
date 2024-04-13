@@ -247,9 +247,9 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Manager\CombatScript\CombatScript.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\Component\AbilityEffectComponent.cs" />
+    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\TransformViewComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AABBComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Random\RandomUtil.cs" />
-    <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\TransformViewComponent.cs" />
     <Compile Include="Assets\Framework\Util\DisplayMode.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Byte\ByteExpand.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Status\Component\StatusLifeTimeComponent.cs" />
@@ -303,8 +303,8 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\CureEffect.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\AStarMap\AStarMap.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\AttributeModifyEffect.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Expand\UnityWebRequest\UnityWebRequestExpand.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Pool\APool.cs" />
+    <Compile Include="Assets\Framework\Runtime\Core\Expand\UnityWebRequest\UnityWebRequestExpand.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\String\StringExpand.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\ConditionComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\StaticMethod\MonoStaticMethod.cs" />
