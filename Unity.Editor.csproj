@@ -74,7 +74,6 @@
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\BoolObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector2ObjectType.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\Util\ObjectType\ObjectType\Vector3IntObjectType.cs" />
-    <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\ILRuntimeEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\LogConfig\LogConfig.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\MenuTree\MenuEditorWindow.cs" />
     <Compile Include="Assets\Editor\Runtime\Core\OdinEditorWindow\MenuTree\AMenuEditorWindow.cs" />
@@ -493,10 +492,6 @@
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.2.0\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.0\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.2.0\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
       <Private>False</Private>
@@ -625,10 +620,6 @@
       <HintPath>Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny\Jenny.Plugins.Unity.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.0\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Sirenix.Utilities.Editor">
       <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
       <Private>False</Private>
@@ -651,10 +642,6 @@
     </Reference>
     <Reference Include="NPOI">
       <HintPath>Assets\3rdPlugins\NPOI\NPOI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil.Mdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.0\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Collections.Immutable">
@@ -1171,10 +1158,6 @@
     </Reference>
     <Reference Include="System.Xml.XPath.XDocument">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1c1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="ILRuntime">
-      <HintPath>Library\ScriptAssemblies\ILRuntime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="YooAsset.Editor">

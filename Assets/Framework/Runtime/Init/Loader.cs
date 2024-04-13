@@ -7,8 +7,8 @@ using System.Linq;
 using LitJson;
 using ProtoBuf;
 using System.Threading;
-using ILRuntime.Mono.Cecil.Pdb;
-using ILRuntime.Runtime;
+//using ILRuntime.Mono.Cecil.Pdb;
+//using ILRuntime.Runtime;
 using HybridCLR;
 using YooAsset;
 
@@ -25,7 +25,7 @@ namespace LccModel
         private readonly Dictionary<string, Type> _hotfixTypeDict = new Dictionary<string, Type>();
 
         public Assembly assembly;
-        public ILRuntime.Runtime.Enviorment.AppDomain appDomain;
+        //public ILRuntime.Runtime.Enviorment.AppDomain appDomain;
 
         public Dictionary<string, Type> GetHotfixTypeDict()
         {
@@ -71,60 +71,60 @@ namespace LccModel
                         start.Run();
                         break;
                     }
-                case HotfixMode.ILRuntime:
-                    {
-                        (byte[], byte[]) hotfix = Load(config);
+//                case HotfixMode.ILRuntime:
+//                    {
+//                        (byte[], byte[]) hotfix = Load(config);
 
-                        byte[] dllBytes = hotfix.Item1;
-                        byte[] pdbBytes = hotfix.Item2;
+//                        byte[] dllBytes = hotfix.Item1;
+//                        byte[] pdbBytes = hotfix.Item2;
 
-                        appDomain = new ILRuntime.Runtime.Enviorment.AppDomain(ILRuntimeJITFlags.JITOnDemand);
+//                        appDomain = new ILRuntime.Runtime.Enviorment.AppDomain(ILRuntimeJITFlags.JITOnDemand);
 
-#if UNITY_EDITOR
-                        appDomain.DebugService.StartDebugService(56000);
-#endif
-#if DEBUG && (UNITY_EDITOR || UNITY_ANDROID || UNITY_IPHONE)
-                        appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;
-#endif
+//#if UNITY_EDITOR
+//                        appDomain.DebugService.StartDebugService(56000);
+//#endif
+//#if DEBUG && (UNITY_EDITOR || UNITY_ANDROID || UNITY_IPHONE)
+//                        appDomain.UnityMainThreadID = Thread.CurrentThread.ManagedThreadId;
+//#endif
 
-                        if (config.isRelease)
-                        {
-                            MemoryStream dllStream = new MemoryStream(dllBytes);
-                            appDomain.LoadAssembly(dllStream, null, new PdbReaderProvider());
-                        }
-                        else
-                        {
-                            MemoryStream dllStream = new MemoryStream(dllBytes);
-                            MemoryStream pdbStream = new MemoryStream(pdbBytes);
-                            appDomain.LoadAssembly(dllStream, pdbStream, new PdbReaderProvider());
-                        }
-
-
+//                        if (config.isRelease)
+//                        {
+//                            MemoryStream dllStream = new MemoryStream(dllBytes);
+//                            appDomain.LoadAssembly(dllStream, null, new PdbReaderProvider());
+//                        }
+//                        else
+//                        {
+//                            MemoryStream dllStream = new MemoryStream(dllBytes);
+//                            MemoryStream pdbStream = new MemoryStream(pdbBytes);
+//                            appDomain.LoadAssembly(dllStream, pdbStream, new PdbReaderProvider());
+//                        }
 
 
 
-                        Type[] types = appDomain.LoadedTypes.Values.Select(x => x.ReflectionType).ToArray();
 
-                        foreach (Type type in types)
-                        {
-                            _hotfixTypeDict[type.FullName] = type;
-                        }
 
-                        ILRuntimeHelper.RegisterCrossBindingAdaptor(appDomain);
-                        ILRuntimeHelper.RegisterCLRMethodRedirction(appDomain);
-                        ILRuntimeHelper.RegisterMethodDelegate(appDomain);
-                        ILRuntimeHelper.RegisterValueTypeBinderHelper(appDomain);
+//                        Type[] types = appDomain.LoadedTypes.Values.Select(x => x.ReflectionType).ToArray();
 
-                        JsonMapper.RegisterILRuntimeCLRRedirection(appDomain);
-                        PType.RegisterILRuntimeCLRRedirection(appDomain);
+//                        foreach (Type type in types)
+//                        {
+//                            _hotfixTypeDict[type.FullName] = type;
+//                        }
 
-                        //CLR绑定的注册，一定要记得将CLR绑定的注册写在CLR重定向的注册后面，因为同一个方法只能被重定向一次，只有先注册的那个才能生效
-                        Type.GetType("ILRuntime.Runtime.Generated.CLRBindings")?.GetMethod("Initialize")?.Invoke(null, new object[] { appDomain });
+//                        ILRuntimeHelper.RegisterCrossBindingAdaptor(appDomain);
+//                        ILRuntimeHelper.RegisterCLRMethodRedirction(appDomain);
+//                        ILRuntimeHelper.RegisterMethodDelegate(appDomain);
+//                        ILRuntimeHelper.RegisterValueTypeBinderHelper(appDomain);
 
-                        AStaticMethod start = new ILStaticMethod(appDomain, "LccHotfix.Init", "Start", 0);
-                        start.Run();
-                        break;
-                    }
+//                        JsonMapper.RegisterILRuntimeCLRRedirection(appDomain);
+//                        PType.RegisterILRuntimeCLRRedirection(appDomain);
+
+//                        //CLR绑定的注册，一定要记得将CLR绑定的注册写在CLR重定向的注册后面，因为同一个方法只能被重定向一次，只有先注册的那个才能生效
+//                        Type.GetType("ILRuntime.Runtime.Generated.CLRBindings")?.GetMethod("Initialize")?.Invoke(null, new object[] { appDomain });
+
+//                        AStaticMethod start = new ILStaticMethod(appDomain, "LccHotfix.Init", "Start", 0);
+//                        start.Run();
+//                        break;
+//                    }
                 case HotfixMode.HybridCLR:
                     {
                         (byte[], byte[]) hotfix = Load(config);
@@ -202,7 +202,7 @@ namespace LccModel
 
         protected override void Dispose()
         {
-            appDomain?.Dispose();
+            //appDomain?.Dispose();
         }
     }
 }

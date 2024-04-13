@@ -73,6 +73,16 @@ namespace LitJson
         public ICollection<string> Keys {
             get { EnsureDictionary (); return inst_object.Keys; }
         }
+        
+        /// <summary>
+        /// Determines whether the json contains an element that has the specified key.
+        /// </summary>
+        /// <param name="key">The key to locate in the json.</param>
+        /// <returns>true if the json contains an element that has the specified key; otherwise, false.</returns>
+        public Boolean ContainsKey(String key) {
+            EnsureDictionary();
+            return this.inst_object.Keys.Contains(key);
+        }
         #endregion
 
 
@@ -425,22 +435,27 @@ namespace LitJson
             return data.inst_double;
         }
 
-        public static explicit operator Int32 (JsonData data)
+       public static explicit operator Int32(JsonData data)
         {
-            if (data.type != JsonType.Int)
-                throw new InvalidCastException (
+            if (data.type != JsonType.Int && data.type != JsonType.Long)
+            {
+                throw new InvalidCastException(
                     "Instance of JsonData doesn't hold an int");
+            }
 
-            return data.inst_int;
+            // cast may truncate data... but that's up to the user to consider
+            return data.type == JsonType.Int ? data.inst_int : (int)data.inst_long;
         }
 
-        public static explicit operator Int64 (JsonData data)
+        public static explicit operator Int64(JsonData data)
         {
-            if (data.type != JsonType.Long)
-                throw new InvalidCastException (
-                    "Instance of JsonData doesn't hold an int");
+            if (data.type != JsonType.Long && data.type != JsonType.Int)
+            {
+                throw new InvalidCastException(
+                    "Instance of JsonData doesn't hold a long");
+            }
 
-            return data.inst_long;
+            return data.type == JsonType.Long ? data.inst_long : data.inst_int;
         }
 
         public static explicit operator String (JsonData data)
@@ -741,10 +756,6 @@ namespace LitJson
 
         private static void WriteJson (IJsonWrapper obj, JsonWriter writer)
         {
-            if(obj is JsonData && (obj as JsonData).type == JsonType.None)
-            {
-                (obj as JsonData).EnsureDictionary();
-            }
             if (obj == null) {
                 writer.Write (null);
                 return;
@@ -808,6 +819,25 @@ namespace LitJson
             return EnsureList ().Add (data);
         }
 
+        public bool Remove(object obj)
+        {
+            json = null;
+            if(IsObject)
+            {
+                JsonData value = null;
+                if (inst_object.TryGetValue((string)obj, out value))
+                    return inst_object.Remove((string)obj) && object_list.Remove(new KeyValuePair<string, JsonData>((string)obj, value));
+                else
+                    throw new KeyNotFoundException("The specified key was not found in the JsonData object.");
+            }
+            if(IsArray)
+            {
+                return inst_array.Remove(ToJsonData(obj));
+            }
+            throw new InvalidOperationException (
+                    "Instance of JsonData is not an object or a list.");
+        }
+
         public void Clear ()
         {
             if (IsObject) {
@@ -827,7 +857,14 @@ namespace LitJson
                 return false;
 
             if (x.type != this.type)
-                return false;
+            {
+                // further check to see if this is a long to int comparison
+                if ((x.type != JsonType.Int && x.type != JsonType.Long)
+                    || (this.type != JsonType.Int && this.type != JsonType.Long))
+                {
+                    return false;
+                }
+            }
 
             switch (this.type) {
             case JsonType.None:
@@ -843,10 +880,26 @@ namespace LitJson
                 return this.inst_string.Equals (x.inst_string);
 
             case JsonType.Int:
-                return this.inst_int.Equals (x.inst_int);
+            {
+                if (x.IsLong)
+                {
+                    if (x.inst_long < Int32.MinValue || x.inst_long > Int32.MaxValue)
+                        return false;
+                    return this.inst_int.Equals((int)x.inst_long);
+                }
+                return this.inst_int.Equals(x.inst_int);
+            }
 
             case JsonType.Long:
-                return this.inst_long.Equals (x.inst_long);
+            {
+                if (x.IsInt)
+                {
+                    if (this.inst_long < Int32.MinValue || this.inst_long > Int32.MaxValue)
+                        return false;
+                    return x.inst_int.Equals((int)this.inst_long);
+                }
+                return this.inst_long.Equals(x.inst_long);
+            }
 
             case JsonType.Double:
                 return this.inst_double.Equals (x.inst_double);

@@ -85,17 +85,19 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\PropertyDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoConverterAttribute.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\CompiledSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\NetObjectSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\CompiledSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Exceptions\DuplicateParameterException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Helpers.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\CompilerDelegates.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\CallbackSet.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\CompilerDelegates.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\UnityTypeBindings.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\KeyValuePairProxy.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\ProtoBehaviorExtensionElement.cs" />
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Parameter.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\SubType.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Properties\AssemblyInfo.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SystemTypeSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\NetObjectCache.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TagDecorator.cs" />
@@ -111,12 +113,12 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SByteSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt16Serializer.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtobufPropertyHelper.cs" />
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Exceptions\ExceptionExtensions.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\TypeFormatEventArgs.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\AttributeMap.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SingleSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\Netstandard15Polyfill.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\MemberSpecifiedDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\BlobSerializer.cs" />
@@ -145,7 +147,6 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\DiscriminatedUnion.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Extensible.cs" />
     <Compile Include="Assets\3rdPlugins\ETTask\ETCancellationToken.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\PType.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\ProtoEndpointBehavior.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ListDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Detector.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\ProtoSyntax.cs" />
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Parsing\TokenId.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\Extensions.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\SerializationContext.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\ValueMember.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\DataFormat.cs" />
@@ -192,8 +194,8 @@
     <Compile Include="Assets\3rdPlugins\LitJson\JsonMockWrapper.cs" />
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\InterpreterOptions.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\IProtoSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ImmutableCollectionDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\Int32Serializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ImmutableCollectionDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\EnumSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TimeSpanSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\RuntimeTypeModel.cs" />
@@ -645,10 +647,6 @@
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.2.0\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.0\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.2.0\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
       <Private>False</Private>
@@ -777,10 +775,6 @@
       <HintPath>Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny\Jenny.Plugins.Unity.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.0\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Sirenix.Utilities.Editor">
       <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
       <Private>False</Private>
@@ -803,10 +797,6 @@
     </Reference>
     <Reference Include="NPOI">
       <HintPath>Assets\3rdPlugins\NPOI\NPOI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil.Mdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.0\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Collections.Immutable">
@@ -1319,10 +1309,6 @@
     </Reference>
     <Reference Include="System.Xml.XPath.XDocument">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1c1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="ILRuntime">
-      <HintPath>Library\ScriptAssemblies\ILRuntime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.UI">

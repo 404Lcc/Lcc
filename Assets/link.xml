@@ -4609,9 +4609,6 @@
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=7232" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Model">
-    <type fullname="QuaternionBinder" preserve="all" />
-    <type fullname="Vector2Binder" preserve="all" />
-    <type fullname="Vector3Binder" preserve="all" />
     <type fullname="ScreenAdaptationUtil" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1" preserve="all" />
     <type fullname="RVO.Agent" preserve="all" />
@@ -4822,10 +4819,6 @@
     <type fullname="LccModel.UnityWebRequestExpand" preserve="all" />
     <type fullname="LccModel.Vector2Expand" preserve="all" />
     <type fullname="LccModel.Vector3Expand" preserve="all" />
-    <type fullname="LccModel.CoroutineAdapter" preserve="all" />
-    <type fullname="LccModel.IAsyncStateMachineAdapter" preserve="all" />
-    <type fullname="LccModel.IComparerAdapter" preserve="all" />
-    <type fullname="LccModel.ILRuntimeHelper" preserve="all" />
     <type fullname="LccModel.IStateNode" preserve="all" />
     <type fullname="LccModel.StateMachine" preserve="all" />
     <type fullname="LccModel.AssetManager" preserve="all" />
@@ -4913,7 +4906,6 @@
     <type fullname="LccModel.ISingletonUpdate" preserve="all" />
     <type fullname="LccModel.Singleton`1" preserve="all" />
     <type fullname="LccModel.AStaticMethod" preserve="all" />
-    <type fullname="LccModel.ILStaticMethod" preserve="all" />
     <type fullname="LccModel.MonoStaticMethod" preserve="all" />
     <type fullname="LccModel.HotfixMode" preserve="all" />
     <type fullname="LccModel.GlobalConfig" preserve="all" />
@@ -4987,11 +4979,6 @@
     <type fullname="LccModel.CoroutineHandler+&lt;CallWrapper&gt;d__28" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
     <type fullname="LccModel.TaskExpand+&lt;Continue&gt;d__0" preserve="all" />
-    <type fullname="LccModel.CoroutineAdapter+Adaptor" preserve="all" />
-    <type fullname="LccModel.IAsyncStateMachineAdapter+Adapter" preserve="all" />
-    <type fullname="LccModel.IComparerAdapter+Adapter" preserve="all" />
-    <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.ILRuntimeHelper+&lt;&gt;c__DisplayClass5_0" preserve="all" />
     <type fullname="LccModel.AssetManager+&lt;AutoLoadAssetAsync&gt;d__14`1" preserve="all" />
     <type fullname="LccModel.AssetManager+&lt;LoadAssetAsync&gt;d__16`1" preserve="all" />
     <type fullname="LccModel.AssetManager+&lt;LoadSceneAsync&gt;d__18" preserve="all" />
@@ -5034,7 +5021,6 @@
     <type fullname="LccModel.PatchOperation+ESteps" preserve="all" />
     <type fullname="LccModel.Init+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.Init+&lt;Start&gt;d__1" preserve="all" />
-    <type fullname="LccModel.Loader+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.BuildinFileManifest+Element" preserve="all" />
     <type fullname="LccModel.StreamingAssetsUtil+PackageQuery" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;DownloadAssetBundle&gt;d__5" preserve="all" />
@@ -5046,7 +5032,7 @@
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.EventTriggerListener+VoidDelegate" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=144" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10845" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=23290" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10419" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=22379" preserve="all" />
   </assembly>
 </linker>

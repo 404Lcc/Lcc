@@ -81,7 +81,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Download\DownloadFile.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Machine\StateMachine.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Base\ILateUpdate.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Adapter\IComparerAdapter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectAttributeModifyComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\SkillComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Patch\PatchOperation.cs" />
@@ -132,7 +131,6 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ExecutionEffect\Component\ExecutionEffectComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\RVO\KdTree.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\RedDot\RedDot.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Helper\RegisterMethodDelegateHelper.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\FSMComponet\StateTransition\Attack2WalkState.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Action\Action\DamageAction.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Timer\TimerData.cs" />
@@ -165,12 +163,10 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Action\Action\SpellItemAction.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectActionControlComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\UnOrderMultiMapSet.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Adapter\IAsyncStateMachineAdapter.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Patch\FsmNode\FsmUpdatePackageVersion.cs" />
     <Compile Include="Assets\Framework\Util\LongClickButton.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionEffectFiltrationTargetComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Action\IActionAbility.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\ValueTypeBinder\Vector2Binder.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Json\JsonUtil.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Manager\CombatScript\CombatScriptManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\EventSystem\Event\EventData.cs" />
@@ -227,7 +223,6 @@
     <Compile Include="Assets\Framework\Runtime\Util\Serialize\SerializeUtil.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\Base\IFixedUpdate.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityItem\AbilityItem.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Helper\RegisterCLRMethodRedirctionHelper.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Orca\OrcaManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Init\GlobalConfig.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Status\StatusAbility.cs" />
@@ -238,7 +233,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\Object\Root.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\EventType.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\NumericEvent\NumericEventManager.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Adapter\CoroutineAdapter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\FSMComponet\State\AttackState.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\GameObjectComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Protobuf\ProtobufUtil.cs" />
@@ -255,12 +249,10 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\Component\AbilityEffectComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\AABBComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Random\RandomUtil.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Helper\RegisterValueTypeBinderHelper.cs" />
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Character\Component\TransformViewComponent.cs" />
     <Compile Include="Assets\Framework\Util\DisplayMode.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Byte\ByteExpand.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Status\Component\StatusLifeTimeComponent.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\ValueTypeBinder\Vector3Binder.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Patch\PatchManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\CoroutineLockManager.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\EventSystem\Event\EventType.cs" />
@@ -270,7 +262,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\StaticMethod\AStaticMethod.cs" />
     <Compile Include="Assets\Framework\Runtime\Init\Init.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\ScrollerPro\ScrollerPro.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\ValueTypeBinder\QuaternionBinder.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\ClearAllStatusEffect.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageBloodSuckComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\AStarMap\AStarNodeData.cs" />
@@ -309,7 +300,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Asset\AssetObject.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\MainThreadSynchronizationContext\MainThreadSynchronizationContext.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Singleton\Singleton.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\ILRuntime\Helper\RegisterCrossBindingAdaptorHelper.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\CureEffect.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Object\AStarMap\AStarMap.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\Effect\AttributeModifyEffect.cs" />
@@ -716,10 +706,6 @@
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.2.0\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.0\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.2.0\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
       <Private>False</Private>
@@ -848,10 +834,6 @@
       <HintPath>Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny\Jenny.Plugins.Unity.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.0\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Sirenix.Utilities.Editor">
       <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
       <Private>False</Private>
@@ -874,10 +856,6 @@
     </Reference>
     <Reference Include="NPOI">
       <HintPath>Assets\3rdPlugins\NPOI\NPOI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil.Mdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.0\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Collections.Immutable">
@@ -1390,10 +1368,6 @@
     </Reference>
     <Reference Include="System.Xml.XPath.XDocument">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1c1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="ILRuntime">
-      <HintPath>Library\ScriptAssemblies\ILRuntime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="HybridCLR.Runtime">

@@ -2,7 +2,6 @@
   "dependencies": {
     "com.code-philosophy.hybridclr": "https://github.com/focus-creative-games/hybridclr_unity.git",
     "com.code-philosophy.luban": "https://github.com/focus-creative-games/luban_unity.git",
-    "com.ourpalm.ilruntime": "2.0.0",
     "com.tuyoogame.yooasset": "2.1.1",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ai.navigation": "1.1.5",
@@ -52,13 +51,6 @@
       "url": "https://package.openupm.cn",
       "scopes": [
         "com.tuyoogame.yooasset"
-      ]
-    },
-    {
-      "name": "ILRuntime",
-      "url": "https://registry.npmjs.org",
-      "scopes": [
-        "com.ourpalm"
       ]
     }
   ]

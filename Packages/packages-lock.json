@@ -14,13 +14,6 @@
       "dependencies": {},
       "hash": "de0348c453844f91d52e736be681f0713ae47201"
     },
-    "com.ourpalm.ilruntime": {
-      "version": "2.0.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://registry.npmjs.org"
-    },
     "com.tuyoogame.yooasset": {
       "version": "2.1.1",
       "depth": 0,
