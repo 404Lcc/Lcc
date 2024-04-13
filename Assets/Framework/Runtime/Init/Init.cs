@@ -7,7 +7,7 @@ namespace LccModel
     public class Init : MonoBehaviour
     {
         public GlobalConfig globalConfig;
-        async ETTask Start()
+        void Start()
         {
             DontDestroyOnLoad(gameObject);
             AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
@@ -27,7 +27,7 @@ namespace LccModel
             Game.AddSingleton<EventSystem>();
             Game.AddSingleton<Root>();
             Game.AddSingleton<Loader>();
-            
+
             Game.Scene.AddComponent<Manager>();
 
             Game.Scene.AddComponent<AssetManager>();
@@ -46,7 +46,7 @@ namespace LccModel
             Game.Scene.AddComponent<CombatContext>();
             Game.Scene.AddComponent<CombatViewContext>();
 
-            await PatchManager.Instance.StartUpdate(globalConfig);
+            PatchManager.Instance.StartUpdate(globalConfig);
 
         }
         void FixedUpdate()

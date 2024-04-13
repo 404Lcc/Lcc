@@ -4992,7 +4992,7 @@
     <type fullname="LccModel.PatchManager+&lt;StartUpdate&gt;d__7" preserve="all" />
     <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__6" preserve="all" />
     <type fullname="LccModel.AEvent`1+&lt;Handle&gt;d__3" preserve="all" />
-    <type fullname="LccModel.MainThreadSynchronizationContext+&lt;&gt;c__DisplayClass3_0" preserve="all" />
+    <type fullname="LccModel.MainThreadSynchronizationContext+&lt;&gt;c__DisplayClass5_0" preserve="all" />
     <type fullname="LccModel.ThreadSynchronizationContext+&lt;&gt;c__DisplayClass3_0" preserve="all" />
     <type fullname="LccModel.Timer+&lt;&gt;c__DisplayClass10_0" preserve="all" />
     <type fullname="LccModel.Timer+&lt;WaitAsync&gt;d__10" preserve="all" />
@@ -5020,7 +5020,6 @@
     <type fullname="LccModel.FsmUpdatePackageVersion+&lt;UpdatePackageVersion&gt;d__5" preserve="all" />
     <type fullname="LccModel.PatchOperation+ESteps" preserve="all" />
     <type fullname="LccModel.Init+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.Init+&lt;Start&gt;d__1" preserve="all" />
     <type fullname="LccModel.BuildinFileManifest+Element" preserve="all" />
     <type fullname="LccModel.StreamingAssetsUtil+PackageQuery" preserve="all" />
     <type fullname="LccModel.WebUtil+&lt;DownloadAssetBundle&gt;d__5" preserve="all" />
