@@ -7,9 +7,9 @@ namespace LccHotfix
     [SceneState(SceneStateType.Game)]
     public class GameSceneState : SceneState
     {
-        public override async ETTask OnEnter()
+        public override void OnEnter(object[] args)
         {
-            await base.OnEnter();
+            base.OnEnter(args);
             Debug.Log("Game" + "进入");
 
             PanelManager.Instance.HidePanel(PanelType.UITop);
@@ -26,17 +26,15 @@ namespace LccHotfix
             PanelManager.Instance.ShowPanel(PanelType.UIGame, new ShowPanelData(false, true, null, true, false, true));
 
 
-            //释放普攻有执行体，执行体会在下一帧执行所以需要等待下一帧使用道具
-            await Timer.Instance.WaitAsync(1000);
 
 
 
          
 
         }
-        public override async ETTask OnExit()
+        public override void OnExit()
         {
-            await base.OnExit();
+            base.OnExit();
             Debug.Log("Game" + "退出");
         }
     }

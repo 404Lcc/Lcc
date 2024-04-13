@@ -7,18 +7,18 @@ namespace LccHotfix
     [SceneState(SceneStateType.Login)]
     public class LoginSceneState : SceneState
     {
-        public override async ETTask OnEnter()
+        public override void OnEnter(object[] args)
         {
-            await base.OnEnter();
+            base.OnEnter(args);
 
 
             UIEventManager.Instance.Publish(UIEventType.Login);
 
             Debug.Log("Login" + "½øÈë");
         }
-        public override async ETTask OnExit()
+        public override void OnExit()
         {
-            await base.OnExit();
+            base.OnExit();
             Debug.Log("Login" + "ÍË³ö");
         }
     }

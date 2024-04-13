@@ -10,7 +10,7 @@ namespace LccHotfix
 
         public void EnterGame()
         {
-            SceneStateManager.Instance.NextState(SceneStateType.Game);
+            SceneStateManager.Instance.ChangeScene(SceneStateType.Game);
         }
     }
 }

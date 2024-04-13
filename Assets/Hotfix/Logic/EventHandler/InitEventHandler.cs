@@ -14,7 +14,7 @@ namespace LccHotfix
 
 
             //进入第一个状态
-            SceneStateManager.Instance.SetDefaultState(SceneStateType.Login);
+            SceneStateManager.Instance.ChangeScene(SceneStateType.Login);
         }
     }
 }

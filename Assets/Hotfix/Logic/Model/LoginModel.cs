@@ -10,7 +10,7 @@ namespace LccHotfix
 
         public void OnEnterMain()
         {
-            SceneStateManager.Instance.NextState(SceneStateType.Main);
+            SceneStateManager.Instance.ChangeScene(SceneStateType.Main);
         }
     }
 }

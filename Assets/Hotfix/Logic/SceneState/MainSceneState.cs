@@ -7,9 +7,9 @@ namespace LccHotfix
     [SceneState(SceneStateType.Main)]
     public class MainSceneState : SceneState
     {
-        public override async ETTask OnEnter()
+        public override void OnEnter(object[] args)
         {
-            await base.OnEnter();
+            base.OnEnter(args);
             Debug.Log("Main" + "进入");
 
             //忽略增加main的导航数据
@@ -17,9 +17,9 @@ namespace LccHotfix
             PanelManager.Instance.ShowPanel(PanelType.UIMain, new ShowPanelData(false, true, null, true, false, true));
 
         }
-        public override async ETTask OnExit()
+        public override void OnExit()
         {
-            await base.OnExit();
+            base.OnExit();
             Debug.Log("Main" + "退出");
         }
     }
