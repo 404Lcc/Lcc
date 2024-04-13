@@ -85,13 +85,13 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\PropertyDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoConverterAttribute.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\NetObjectSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\CompiledSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\NetObjectSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\Exceptions\DuplicateParameterException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Helpers.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\CallbackSet.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\CompilerDelegates.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\CallbackSet.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\UnityTypeBindings.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\KeyValuePairProxy.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\ProtoBehaviorExtensionElement.cs" />
@@ -194,8 +194,8 @@
     <Compile Include="Assets\3rdPlugins\LitJson\JsonMockWrapper.cs" />
     <Compile Include="Assets\3rdPlugins\DynamicExpresso.Core\InterpreterOptions.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\IProtoSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\Int32Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ImmutableCollectionDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\Int32Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\EnumSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TimeSpanSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\RuntimeTypeModel.cs" />
