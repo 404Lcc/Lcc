@@ -1,0 +1,296 @@
+{
+    "FileVersion": "2.0.0",
+    "EnableAddressable": false,
+    "LocationToLower": false,
+    "IncludeAssetGUID": false,
+    "OutputNameStyle": 0,
+    "BuildPipeline": "BuiltinBuildPipeline",
+    "PackageName": "DefaultPackage",
+    "PackageVersion": "2024-04-13-976",
+    "AssetList": [
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Config/tbitem.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/DLL/Unity.Hotfix.dll.bytes",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UIGamePanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UILoadingPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UILoginPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UIMainPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UITopPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Scene/Game.unity",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 3
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Scene/Login.unity",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 3
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Scene/Main.unity",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 3
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/SkillConfig/Execution/Execution_1.asset",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 4
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/SkillConfig/Item/Item_1.asset",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 5
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/SkillConfig/Skill/Skill_1.asset",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 6
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/SkillConfig/Status/Status_1.asset",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 7
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/SkillConfig/Status/Status_2.asset",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 7
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Tool/Tips.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 8
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/Tool/TipsWindow.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 8
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/Bundles/AotDlls/txt.txt",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 9
+        }
+    ],
+    "BundleList": [
+        {
+            "BundleName": "defaultpackage_assets_bundles_config.bundle",
+            "UnityCRC": 937957587,
+            "FileHash": "10031832ab7e4edb739544376584da92",
+            "FileCRC": "b614aeec",
+            "FileSize": 1323,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_dll.bundle",
+            "UnityCRC": 2146828329,
+            "FileHash": "03ae60b425558109162527a20d58dd47",
+            "FileCRC": "11cac2dc",
+            "FileSize": 137037,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_prefab_panel.bundle",
+            "UnityCRC": 3281738236,
+            "FileHash": "4ae00b8448088333cd56883b5b13cac1",
+            "FileCRC": "7dc8a3ad",
+            "FileSize": 22932,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": [
+                13,
+                12,
+                11
+            ]
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_scene.bundle",
+            "UnityCRC": 2161474500,
+            "FileHash": "19745afb9da146d15349091cb4b43e99",
+            "FileCRC": "2523d957",
+            "FileSize": 281041,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_skillconfig_execution.bundle",
+            "UnityCRC": 3832573499,
+            "FileHash": "016b87fd70d3585917c0294594ecf28b",
+            "FileCRC": "557fde31",
+            "FileSize": 2871,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_skillconfig_item.bundle",
+            "UnityCRC": 201870777,
+            "FileHash": "56cd8d8e9ea2b136710b9159fcd3b173",
+            "FileCRC": "70c1ef93",
+            "FileSize": 3346,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": [
+                7
+            ]
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_skillconfig_skill.bundle",
+            "UnityCRC": 1471279874,
+            "FileHash": "067db85fd539ef6256cc32378cdfdef9",
+            "FileCRC": "47a6f1b2",
+            "FileSize": 3068,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_skillconfig_status.bundle",
+            "UnityCRC": 479438315,
+            "FileHash": "ed271afe174b9448820729902137284e",
+            "FileCRC": "1d2c86ef",
+            "FileSize": 3289,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_tool.bundle",
+            "UnityCRC": 793377763,
+            "FileHash": "f0d7a6dedb5979c39d822b5411a5e9ab",
+            "FileCRC": "757a9484",
+            "FileSize": 6764,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_assets_bundles_aotdlls.bundle",
+            "UnityCRC": 2615298898,
+            "FileHash": "8850181e64fca12b10efea656bd313c9",
+            "FileCRC": "c3ef393f",
+            "FileSize": 1205,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_share_packages_com_unity_textmeshpro_editor resources_gizmos.bundle",
+            "UnityCRC": 1397747689,
+            "FileHash": "cba24f4af3c76b9d6b572f44d7eec49e",
+            "FileCRC": "413f021c",
+            "FileSize": 6954,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_unityshaders.bundle",
+            "UnityCRC": 1262332470,
+            "FileHash": "48a685cf6438cd9dc78f97a04dc6c8ce",
+            "FileCRC": "a492bb4a",
+            "FileSize": 20298,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "defaultpackage_share_assets_textmesh pro_resources_fonts & materials.bundle",
+            "UnityCRC": 585492090,
+            "FileHash": "9bce971ac4e73f8fdbe5380f5a83f27f",
+            "FileCRC": "a166e835",
+            "FileSize": 373492,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": [
+                13,
+                11
+            ]
+        },
+        {
+            "BundleName": "defaultpackage_share_assets_textmesh pro_fonts.bundle",
+            "UnityCRC": 831129932,
+            "FileHash": "5473d988a3fe4604ea3ef68a9746ee00",
+            "FileCRC": "b4f3107f",
+            "FileSize": 227282,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        }
+    ]
+}

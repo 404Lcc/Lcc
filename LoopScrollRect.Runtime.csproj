@@ -63,14 +63,14 @@
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollPrefabSource.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollRectMulti.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollMultiDataSource.cs" />
+    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopVerticalScrollRect.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollDataSource.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopHorizontalScrollRectMulti.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollSizeHelper.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopVerticalScrollRectMulti.cs" />
-    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopHorizontalScrollRect.cs" />
-    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopVerticalScrollRect.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollRect.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollRectBase.cs" />
+    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopHorizontalScrollRect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollRect.Runtime.asmdef" />
@@ -449,7 +449,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.1.0\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.0\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="unityplastic">
@@ -581,7 +581,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.1.0\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.0\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sirenix.Utilities.Editor">
@@ -609,7 +609,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="ILRuntime.Mono.Cecil.Mdb">
-      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.1.0\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@2.0.0\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Collections.Immutable">

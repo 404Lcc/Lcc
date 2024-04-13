@@ -1,0 +1,34 @@
+ManifestFileVersion: 0
+CRC: 3832573499
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9cf9a46dc85c094c369ae91e5c39b17c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 1c8545fa68d8fe1059ccfe7733d65e6d
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 9cf9a46dc85c094c369ae91e5c39b17c
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: beb448c210e2a7b4bb0777daef6b1b34, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4db22cb51ab2b354aae7c5f4e7e1d7aa, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Unity.Model
+  ClassName: LccModel.ActionEventData
+- AssemblyName: Unity.Model
+  ClassName: LccModel.AnimationData
+- AssemblyName: Unity.Model
+  ClassName: LccModel.AudioData
+- AssemblyName: Unity.Model
+  ClassName: LccModel.CollisionExecuteData
+- AssemblyName: Unity.Model
+  ClassName: LccModel.ParticleEffectData
+Assets:
+- Assets/Bundles/SkillConfig/Execution/Execution_1.asset
+Dependencies: []
