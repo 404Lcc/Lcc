@@ -1,3 +1,6 @@
+using cfg;
+using System.Collections.Generic;
+
 namespace LccHotfix
 {
     public class JumpNode
@@ -59,79 +62,69 @@ namespace LccHotfix
         /// <param name="gotoID"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        //public bool JumpToPanleByID(int gotoID, params object[] args)
-        //{
-        //    var config = ConfigManager.Instance.GetConfig<TJump>(gotoID);
-        //    if (config == null) return false;
+        public bool JumpToPanleByID(int gotoID, params object[] args)
+        {
+            var config = ConfigManager.Instance.Tables.TBJump.Get(gotoID);
+            if (config == null)
+                return false;
 
-        //    if (!CheckFuncIsOpenAndShowTip(config))
-        //        return false;
+            if (!CheckFuncOpen(config))
+                return false;
 
-        //    var list = new List<object>();
+            var list = new List<object>();
 
-        //    // 参数顺序
-        //    //  param3  >  param1  > param2  >  args
+            // 参数顺序
+            //  param3  >  param1  > param2  >  args
 
-        //    if (!string.IsNullOrEmpty(config.Param3))
-        //    {
-        //        list.Add(config.Param3);
-        //    }
+            if (!string.IsNullOrEmpty(config.Param3))
+            {
+                list.Add(config.Param3);
+            }
 
-        //    if (config.Param1 != -1)
-        //    {
-        //        list.Add(config.Param1);
+            if (config.Param1 != -1)
+            {
+                list.Add(config.Param1);
 
-        //        if (config.Param2 != -1)
-        //        {
-        //            list.Add(config.Param2);
-        //        }
-        //    }
+                if (config.Param2 != -1)
+                {
+                    list.Add(config.Param2);
+                }
+            }
 
-        //    if (args != null)
-        //    {
-        //        list.AddRange(args);
-        //    }
-        //    object[] nowArg = list.Count > 0 ? list.ToArray() : null;
+            if (args != null)
+            {
+                list.AddRange(args);
+            }
+            object[] nowArg = list.Count > 0 ? list.ToArray() : null;
 
-        //    int scene = config.SceneId;
+            int scene = config.SceneId;
 
-        //    JumpNode jump = new JumpNode(config.PanelName, nowArg);
+            JumpNode jump = new JumpNode(config.PanelName, nowArg);
 
-        //    ChangeWindowNode(jump);
+            ChangeWindowNode(jump);
 
-        //    var curState = (int)SceneStateManager.Instance.CurState;
-        //    //同场景跳转
-        //    if ((curState & scene) > 0)
-        //    {
-        //        if (OpenSpecialWindow(jump))
-        //        {
-        //            return true;
-        //        }
-        //        //PanelManager.Instance.ShowPanel(jump.nodeName, jump.nodeParam);
-        //        return true;
-        //    }
+            var curState = (int)SceneStateManager.Instance.CurState;
+            //同场景跳转
+            if ((curState & scene) > 0)
+            {
+                if (OpenSpecialWindow(jump))
+                {
+                    return true;
+                }
+                //PanelManager.Instance.ShowPanel(jump.nodeName, jump.nodeParam);
+                return true;
+            }
 
-        //    //todo 依赖的界面现在给不了参数
-        //    jump.SetDepend(new JumpDependNode(config.ScenePanelName));
-        //    return JumpPanelCrossScene(scene, jump);
+            //todo 依赖的界面现在给不了参数
+            jump.SetDepend(new JumpDependNode(config.ScenePanelName));
+            return JumpPanelCrossScene(scene, jump);
 
-        //}
+        }
 
-        //private bool CheckFuncIsOpenAndShowTip(TJump config)
-        //{
-        //    if (config == null)
-        //    {
-        //        return false;
-        //    }
-
-        //    //var mod = ModuleManager.Instance.GetModule<ModFunctionOpen>(EModuleType.FunctionOpen);
-        //    ////判断功能是否开启
-        //    //if (!mod.IsFuncOpened((FunctionID)config.FuncId))
-        //    //{
-        //    //    return false;
-        //    //}
-        //    return true;
-        //}
+        private bool CheckFuncOpen(Jump config)
+        {
+            return true;
+        }
 
         public bool OpenSpecialWindow(JumpNode jumpNode)
         {

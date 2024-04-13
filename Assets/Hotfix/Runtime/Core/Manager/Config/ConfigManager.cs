@@ -1,4 +1,5 @@
-﻿using LccModel;
+﻿using cfg;
+using LccModel;
 using Luban;
 using SimpleJSON;
 using System;
@@ -11,7 +12,7 @@ namespace LccHotfix
     {
         public static ConfigManager Instance { get; set; }
 
-
+        public Tables Tables { get; set; }
         public override void Awake()
         {
             base.Awake();
@@ -19,11 +20,11 @@ namespace LccHotfix
             Instance = this;
 
 
-            var tablesCtor = typeof(cfg.Tables).GetConstructors()[0];
+            var tablesCtor = typeof(Tables).GetConstructors()[0];
             var loaderReturnType = tablesCtor.GetParameters()[0].ParameterType.GetGenericArguments()[1];
             // 根据cfg.Tables的构造函数的Loader的返回值类型决定使用json还是ByteBuf Loader
             Delegate loader = loaderReturnType == typeof(ByteBuf) ? new Func<string, ByteBuf>(LoadByteBuf) : (Delegate)new Func<string, JSONNode>(LoadJson);
-            var tables = (cfg.Tables)tablesCtor.Invoke(new object[] { loader });
+            Tables = (Tables)tablesCtor.Invoke(new object[] { loader });
         }
         public override void OnDestroy()
         {

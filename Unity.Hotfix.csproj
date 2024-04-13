@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\UI\UIComponent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\MVVM\View\Binding\Binding.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\TBJump.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Module\EventSystem\Event\AEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Model\ModelAttribute.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Expand\ObjectBase\ObjectBaseExpand.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Manager\Manager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Base\AObjectBase.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\Jump.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Main\MainPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Audio\AudioManager.cs" />
