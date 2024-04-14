@@ -20,9 +20,5 @@ namespace LccModel
 
             Instance = null;
         }
-        private async ETTask LoadSceneAsync(string name, params string[] types)
-        {
-            await AssetManager.Instance.LoadSceneAsync(name, LoadSceneMode.Additive, true, types);
-        }
     }
 }

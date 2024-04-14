@@ -10,12 +10,14 @@ namespace LccHotfix
         public static LanguageManager Instance { get; set; }
         public Dictionary<string, string> languageDict = new Dictionary<string, string>();
 
+        public GameObject loader;
         public override void Awake()
         {
             base.Awake();
 
             Instance = this;
-
+            loader = new GameObject("loader");
+            GameObject.DontDestroyOnLoad(loader);
         }
         public override void OnDestroy()
         {
@@ -23,10 +25,12 @@ namespace LccHotfix
 
             Instance = null;
             languageDict.Clear();
+
+            GameObject.Destroy(loader);
         }
         public void ChangeLanguage(LanguageType type)
         {
-            TextAsset asset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetHandle handle, type.ToString(), AssetSuffix.Txt, AssetType.Config);
+            TextAsset asset = AssetManager.Instance.LoadRes<TextAsset>(loader, type.ToString());
             foreach (string item in asset.text.Split('\n'))
             {
                 if (string.IsNullOrEmpty(item))
@@ -37,7 +41,6 @@ namespace LccHotfix
                 if (languageDict.ContainsKey(KeyValue[0])) return;
                 languageDict.Add(KeyValue[0], KeyValue[1]);
             }
-            AssetManager.Instance.UnLoadAsset(handle);
         }
         public string GetValue(string key)
         {

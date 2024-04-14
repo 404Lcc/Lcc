@@ -138,18 +138,13 @@ namespace LccModel
                         // 热更新dll不缺元数据，不需要补充，如果调用LoadMetadataForAOTAssembly会返回错误
 
                         HomologousImageMode mode = HomologousImageMode.SuperSet;
-                        foreach (var item in AssetManager.Instance.LoadAllAssets(out AllAssetsHandle handle, "Unity.Model.dll", AssetSuffix.Bytes, AssetType.AotDlls))
+                        GameObject aot = new GameObject("aot");
+                        foreach (var item in AssetManager.Instance.LoadALLRes<TextAsset>(aot, "Unity.Model.dll"))
                         {
                             // 加载assembly对应的dll，会自动为它hook。一旦aot泛型函数的native函数不存在，用解释器版本代码
-                            TextAsset dllAsset = item as TextAsset;
-                            if (dllAsset == null)
-                            {
-                                LogUtil.Error("AOT资源没找到" + item);
-                                return;
-                            }
-                            LoadImageErrorCode errorCode = RuntimeApi.LoadMetadataForAOTAssembly(dllAsset.bytes, mode);
+                            LoadImageErrorCode errorCode = RuntimeApi.LoadMetadataForAOTAssembly(item.bytes, mode);
                         }
-
+                        GameObject.Destroy(aot);
 
                         if (config.isRelease)
                         {
@@ -177,25 +172,19 @@ namespace LccModel
             byte[] dllBytes = null;
             byte[] pdbBytes = null;
 
-
-            TextAsset dllAsset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetHandle dllHandle, $"Unity.Hotfix.dll", AssetSuffix.Bytes, AssetType.DLL);
+            GameObject obj = new GameObject("loader");
+            TextAsset dllAsset = AssetManager.Instance.LoadRes<TextAsset>(obj, $"Unity.Hotfix.dll");
             dllBytes = RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes);
 
-            if (dllHandle != null)
-            {
-                AssetManager.Instance.UnLoadAsset(dllHandle);
-            }
 
             if (!config.isRelease)
             {
-                TextAsset pdbAsset = AssetManager.Instance.LoadAsset<TextAsset>(out AssetHandle pdbHandle, $"Unity.Hotfix.pdb", AssetSuffix.Bytes, AssetType.DLL);
+                TextAsset pdbAsset = AssetManager.Instance.LoadRes<TextAsset>(obj, $"Unity.Hotfix.pdb");
                 pdbBytes = pdbAsset.bytes;
 
-                if (pdbHandle != null)
-                {
-                    AssetManager.Instance.UnLoadAsset(pdbHandle);
-                }
             }
+
+            GameObject.Destroy(obj);
 
             return (dllBytes, pdbBytes);
         }

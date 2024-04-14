@@ -16,7 +16,7 @@ namespace LccModel
 
         void Start()
         {
-            var asset = AssetManager.Instance.AutoLoadAsset<GameObject>(gameObject.transform, "RedDot", AssetSuffix.Prefab, AssetType.Tool);
+            var asset = AssetManager.Instance.LoadGameObject(gameObject, "RedDot");
 
             GameObject redDot = Object.Instantiate(asset);
             redDot.name = name;

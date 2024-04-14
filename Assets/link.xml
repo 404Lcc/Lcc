@@ -4823,6 +4823,8 @@
     <type fullname="LccModel.StateMachine" preserve="all" />
     <type fullname="LccModel.AssetManager" preserve="all" />
     <type fullname="LccModel.AssetObject" preserve="all" />
+    <type fullname="LccModel.AssetGameObject" preserve="all" />
+    <type fullname="LccModel.ALLAssetObject" preserve="all" />
     <type fullname="LccModel.AssetSuffix" preserve="all" />
     <type fullname="LccModel.AssetType" preserve="all" />
     <type fullname="LccModel.BridgeManager" preserve="all" />
@@ -4979,9 +4981,12 @@
     <type fullname="LccModel.CoroutineHandler+&lt;CallWrapper&gt;d__28" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
     <type fullname="LccModel.TaskExpand+&lt;Continue&gt;d__0" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;AutoLoadAssetAsync&gt;d__14`1" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;LoadAssetAsync&gt;d__16`1" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;LoadSceneAsync&gt;d__18" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;&gt;c__DisplayClass10_0`1" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;&gt;c__DisplayClass12_0" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;&gt;c__DisplayClass14_0`1" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;StartLoadALLRes&gt;d__14`1" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;StartLoadGameObject&gt;d__12" preserve="all" />
+    <type fullname="LccModel.AssetManager+&lt;StartLoadRes&gt;d__10`1" preserve="all" />
     <type fullname="LccModel.CoroutineLockManager+&lt;Wait&gt;d__8" preserve="all" />
     <type fullname="LccModel.CoroutineLockQueue+&lt;&gt;c__DisplayClass7_0" preserve="all" />
     <type fullname="LccModel.CoroutineLockQueue+&lt;Wait&gt;d__7" preserve="all" />
@@ -4990,7 +4995,6 @@
     <type fullname="LccModel.ModelPoolManager+&lt;GetModelAsync&gt;d__8" preserve="all" />
     <type fullname="LccModel.ModelPoolManager+&lt;LoadObjectAsync&gt;d__11" preserve="all" />
     <type fullname="LccModel.PatchManager+&lt;StartUpdate&gt;d__7" preserve="all" />
-    <type fullname="LccModel.SceneLoadManager+&lt;LoadSceneAsync&gt;d__6" preserve="all" />
     <type fullname="LccModel.AEvent`1+&lt;Handle&gt;d__3" preserve="all" />
     <type fullname="LccModel.MainThreadSynchronizationContext+&lt;&gt;c__DisplayClass5_0" preserve="all" />
     <type fullname="LccModel.ThreadSynchronizationContext+&lt;&gt;c__DisplayClass3_0" preserve="all" />
@@ -5031,7 +5035,7 @@
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.EventTriggerListener+VoidDelegate" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=144" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10419" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10476" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=22379" preserve="all" />
   </assembly>
 </linker>

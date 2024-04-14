@@ -32,10 +32,10 @@ namespace LccModel
             Game.AddSingleton<EventSystem>();
             Game.AddSingleton<Root>();
             Game.AddSingleton<Loader>();
+            Game.AddSingleton<AssetManager>();
 
             Game.Scene.AddComponent<Manager>();
 
-            Game.Scene.AddComponent<AssetManager>();
             Game.Scene.AddComponent<BridgeManager>();
             Game.Scene.AddComponent<CoroutineLockManager>();
             Game.Scene.AddComponent<DownloadManager>();

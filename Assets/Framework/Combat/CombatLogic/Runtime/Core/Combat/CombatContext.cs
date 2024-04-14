@@ -5,6 +5,7 @@ namespace LccModel
 {
     public class CombatContext : AObjectBase
     {
+        public GameObject loader;
         public static CombatContext Instance { get; set; }
 
         public Dictionary<long, Combat> combatDict = new Dictionary<long, Combat>();
@@ -14,6 +15,16 @@ namespace LccModel
             base.Awake();
 
             Instance = this;
+
+            loader = new GameObject("loader");
+            GameObject.DontDestroyOnLoad(loader);
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            GameObject.Destroy(loader);
         }
         public Combat AddCombat(long id, TagType type = TagType.Player)
         {

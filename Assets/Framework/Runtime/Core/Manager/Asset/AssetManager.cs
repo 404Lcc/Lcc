@@ -1,51 +1,36 @@
 ﻿using ET;
+using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using YooAsset;
 using Object = UnityEngine.Object;
 
 namespace LccModel
 {
     //Resources.UnloadAsset仅能释放非GameObject和Component的资源 比如Texture Mesh等真正的资源 对于由Prefab加载出来的Object或Component,则不能通过该函数来进行释放
-    public class AssetManager : AObjectBase
+    public class AssetManager : Singleton<AssetManager>
     {
-        public static AssetManager Instance { get; set; }
-
         public const string DefaultPackage = "DefaultPackage";
 
         public ResourcePackage Package => YooAssets.GetPackage(DefaultPackage);
 
-        public string GetAssetPath(string name, string suffix, params string[] types)
+        public override void Register()
         {
-            if (types.Length == 0) return name;
-            string path = string.Empty;
-            for (int i = 0; i < types.Length; i++)
-            {
-                path = $"{path}{types[i]}/";
-                if (i == types.Length - 1)
-                {
-                    path = $"{path}{name}";
-                }
-            }
-            return $"Assets/Bundles/{path}{suffix}";
-        }
+            base.Register();
 
-        public override void Awake()
-        {
-            base.Awake();
 
-            Instance = this;
         }
-        public override void OnDestroy()
+        public override void Destroy()
         {
-            base.OnDestroy();
+            base.Destroy();
 
             ForceUnloadAllAssets();
-            Instance = null;
         }
 
-
         public void UnLoadAsset(AssetHandle handle)
+        {
+            handle.Release();
+        }
+        public void UnLoadAsset(AllAssetsHandle handle)
         {
             handle.Release();
         }
@@ -59,64 +44,154 @@ namespace LccModel
             if (Package == null) return;
             Package.UnloadUnusedAssets();
         }
-        
 
-
-        public T AutoLoadAsset<T>(Transform transform, string name, string suffix, params string[] types) where T : Object
+        //异步加载
+        public AssetObject StartLoadRes<T>(GameObject loader, string location, Action<string, Object> onComplete = null) where T : Object
         {
-            string path = GetAssetPath(name, suffix, types);
-
-            GameObject gameObject = new GameObject();
-            AssetObject assetObject = gameObject.AddComponent<AssetObject>();
-            gameObject.name = "resPath" + path;
-            gameObject.transform.SetParent(transform);
-
-            AssetHandle handle = Package.LoadAssetSync<T>(path);
-            assetObject.handle = handle;
-            return handle.AssetObject as T;
-        }
-        public async ETTask<T> AutoLoadAssetAsync<T>(Transform transform, string name, string suffix, params string[] types) where T : Object
-        {
-            string path = GetAssetPath(name, suffix, types);
-
-            GameObject gameObject = new GameObject();
-            AssetObject assetObject = gameObject.AddComponent<AssetObject>();
-            gameObject.name = "resPath" + path;
-            gameObject.transform.SetParent(transform);
-
-            AssetHandle handle = Package.LoadAssetAsync<T>(path);
-            assetObject.handle = handle;
-            await handle.Task;
-            return handle.AssetObject as T;
+            if (loader != null && !string.IsNullOrEmpty(location))
+            {
+                AssetObject res = loader.AddComponent<AssetObject>();
+                res.SetInfo<T>(location, onComplete);
+                res.StartLoad();
+                return res;
+            }
+            return null;
         }
 
-        public T LoadAsset<T>(out AssetHandle handle, string name, string suffix, params string[] types) where T : Object
+        //异步加载
+        public async ETTask<T> StartLoadRes<T>(GameObject loader, string location) where T : Object
         {
-            string path = GetAssetPath(name, suffix, types);
-            handle = Package.LoadAssetSync<T>(path);
-            return handle.AssetObject as T;
-        }
-        public async ETTask<AssetHandle> LoadAssetAsync<T>(string name, string suffix, params string[] types) where T : Object
-        {
-            string path = GetAssetPath(name, suffix, types);
-            AssetHandle handle = Package.LoadAssetAsync<T>(path);
-            await handle.Task;
-            return handle;
+            ETTask task = ETTask.Create();
+            Action<string, Object> onComplete = (location, asset) =>
+            {
+                task.SetResult();
+            };
+
+            if (loader != null && !string.IsNullOrEmpty(location))
+            {
+                AssetObject res = loader.AddComponent<AssetObject>();
+                res.SetInfo<T>(location, onComplete);
+                res.StartLoad();
+
+                await task;
+                return res.Asset as T;
+            }
+            return null;
         }
 
-        public Object[] LoadAllAssets(out AllAssetsHandle handle, string name, string suffix, params string[] types)
+        //异步加载
+        public AssetGameObject StartLoadGameObject(GameObject loader, string location, Action<string, Object> onComplete = null)
         {
-            string path = GetAssetPath(name, suffix, types);
-            handle = Package.LoadAllAssetsAsync(path);
-            return handle.AllAssetObjects;
+            if (loader != null && !string.IsNullOrEmpty(location))
+            {
+                AssetGameObject res = loader.AddComponent<AssetGameObject>();
+                res.SetInfo(location, onComplete);
+                res.StartLoad();
+                return res;
+            }
+            return null;
         }
 
-        public async ETTask<UnityEngine.SceneManagement.Scene> LoadSceneAsync(string name, LoadSceneMode sceneMode, bool activateOnLoad, params string[] types)
+        //异步加载
+        public async ETTask<GameObject> StartLoadGameObject(GameObject loader, string location)
         {
-            string path = GetAssetPath(name, "", types);
-            SceneHandle handle = Package.LoadSceneAsync(path, sceneMode, activateOnLoad);
-            await handle.Task;
-            return handle.SceneObject;
+            ETTask task = ETTask.Create();
+            Action<string, Object> onComplete = (location, asset) =>
+            {
+                task.SetResult();
+            };
+
+            if (loader != null && !string.IsNullOrEmpty(location))
+            {
+                AssetGameObject res = loader.AddComponent<AssetGameObject>();
+                res.SetInfo(location, onComplete);
+                res.StartLoad();
+
+                await task;
+                return res.resGameObject;
+            }
+            return null;
+        }
+
+        //异步加载
+        public ALLAssetObject StartLoadALLRes<T>(GameObject loader, string location, Action<string, Object[]> onComplete = null) where T : Object
+        {
+            if (loader != null && !string.IsNullOrEmpty(location))
+            {
+                ALLAssetObject res = loader.AddComponent<ALLAssetObject>();
+                res.SetInfo<T>(location, onComplete);
+                res.StartLoad();
+                return res;
+            }
+            return null;
+        }
+
+        //异步加载
+        public async ETTask<T[]> StartLoadALLRes<T>(GameObject loader, string location) where T : Object
+        {
+            ETTask task = ETTask.Create();
+            Action<string, Object[]> onComplete = (location, asset) =>
+            {
+                task.SetResult();
+            };
+
+            if (loader != null && !string.IsNullOrEmpty(location))
+            {
+                ALLAssetObject res = loader.AddComponent<ALLAssetObject>();
+                res.SetInfo<T>(location, onComplete);
+                res.StartLoad();
+
+                await task;
+                return res.Assets as T[];
+            }
+            return null;
+        }
+
+
+        //同步加载
+        public T LoadRes<T>(GameObject loader, string location) where T : Object
+        {
+            if (loader != null && !string.IsNullOrEmpty(location))
+            {
+                AssetObject res = loader.AddComponent<AssetObject>();
+                res.SetInfo<T>(location);
+                res.Load();
+                return res.Asset as T;
+            }
+            return null;
+        }
+
+        //同步加载
+        public GameObject LoadGameObject(GameObject loader, string location)
+        {
+            if (loader != null && !string.IsNullOrEmpty(location))
+            {
+                AssetGameObject res = loader.AddComponent<AssetGameObject>();
+                res.SetInfo<GameObject>(location);
+                res.Load();
+                return res.resGameObject;
+            }
+            return null;
+        }
+
+        //同步加载
+        public T[] LoadALLRes<T>(GameObject loader, string location) where T : Object
+        {
+            if (loader != null && !string.IsNullOrEmpty(location))
+            {
+                ALLAssetObject res = loader.AddComponent<ALLAssetObject>();
+                res.SetInfo<T>(location);
+                res.Load();
+                return res.Assets as T[];
+            }
+            return null;
+        }
+
+        public RawFileHandle LoadRawAssetAsync(string location, Action<RawFileHandle> callback = null)
+        {
+            RawFileHandle rawFileOperation = YooAssets.GetPackage(DefaultPackage).LoadRawFileAsync(location);
+            rawFileOperation.Completed += callback;
+            return rawFileOperation;
         }
     }
 }

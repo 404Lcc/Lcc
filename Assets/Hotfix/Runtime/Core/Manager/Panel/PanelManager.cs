@@ -15,9 +15,6 @@ namespace LccHotfix
 
         public const int DepthMultiply = 100;
 
-        private readonly string _suff = AssetSuffix.Prefab;
-        private readonly string[] _types = new string[] { AssetType.Prefab, AssetType.Panel };//资源类型
-
         public Dictionary<int, Panel> allPanelDict = new Dictionary<int, Panel>();//已加载的界面
         public Dictionary<int, Panel> shownPanelDict = new Dictionary<int, Panel>();//打开的界面
 
@@ -34,13 +31,13 @@ namespace LccHotfix
         public List<PanelType> cachedList = new List<PanelType>();//换成列表
 
         //public PanelCompare compare = new PanelCompare();
+
         public override void Awake()
         {
             base.Awake();
 
 
             Instance = this;
-
 
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
@@ -81,8 +78,6 @@ namespace LccHotfix
             typeToLogicDict.Clear();
 
             UnAllPanel();
-
-
         }
 
 
@@ -268,7 +263,8 @@ namespace LccHotfix
             {
                 return;
             }
-            var asset = AssetManager.Instance.LoadAsset<GameObject>(out AssetHandle handle, name, _suff, _types);
+            var loader = new GameObject("loader");
+            var asset = AssetManager.Instance.LoadGameObject(loader, name);
 
             GameObject go = UnityEngine.Object.Instantiate(asset);
             go.name = name;
@@ -276,13 +272,11 @@ namespace LccHotfix
             go.transform.localRotation = Quaternion.identity;
             go.transform.localScale = Vector3.one;
 
-
-
-            panel.LoadHandle = handle;
+            panel.Loader = loader;
             panel.GameObject = CreateUIGameObject(go);
             panel.Canvas = panel.GameObject.GetComponent<Canvas>();
             panel.GameObject.name = go.name;
-
+            loader.transform.SetParent(panel.GameObject.transform);
 
             panel.Logic.OnInitComponent(panel);
             panel.Logic.OnInitData(panel);
@@ -330,22 +324,20 @@ namespace LccHotfix
             {
                 return;
             }
-            var asset = await AssetManager.Instance.LoadAssetAsync<GameObject>(name, _suff, _types);
+            var loader = new GameObject("loader");
+            var asset = await AssetManager.Instance.StartLoadGameObject(loader, name);
 
-            GameObject go = UnityEngine.Object.Instantiate((GameObject)asset.AssetObject);
+            GameObject go = UnityEngine.Object.Instantiate(asset);
             go.name = name;
             go.transform.localPosition = Vector3.zero;
             go.transform.localRotation = Quaternion.identity;
             go.transform.localScale = Vector3.one;
 
-
-
-
-            panel.LoadHandle = asset;
+            panel.Loader = loader;
             panel.GameObject = CreateUIGameObject(go);
             panel.Canvas = panel.GameObject.GetComponent<Canvas>();
             panel.GameObject.name = go.name;
-
+            loader.transform.SetParent(panel.GameObject.transform);
 
             panel.Logic.OnInitComponent(panel);
             panel.Logic.OnInitData(panel);
@@ -779,8 +771,6 @@ namespace LccHotfix
             panel.Logic.OnBeforeUnload(panel);
             if (panel.IsLoad)
             {
-                AssetManager.Instance.UnLoadAsset(panel.LoadHandle);
-
                 UnityEngine.Object.Destroy(panel.GameObject);
                 panel.GameObject = null;
             }

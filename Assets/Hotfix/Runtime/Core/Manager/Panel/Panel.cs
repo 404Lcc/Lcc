@@ -97,7 +97,7 @@ namespace LccHotfix
 
         private int _depth;
 
-        private AssetHandle _loadHandle;
+        private GameObject _loader;
         private GameObject _gameObject;
         private Canvas _canvas;
 
@@ -109,15 +109,15 @@ namespace LccHotfix
                 return PanelManager.Instance.GetPanelLogic(Type);
             }
         }
-        public AssetHandle LoadHandle
+        public GameObject Loader
         {
             get
             {
-                return _loadHandle;
+                return _loader;
             }
             set
             {
-                _loadHandle = value;
+                _loader = value;
             }
         }
         public GameObject GameObject

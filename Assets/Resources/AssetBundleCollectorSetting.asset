@@ -18,7 +18,7 @@ MonoBehaviour:
   Packages:
   - PackageName: DefaultPackage
     PackageDesc: 
-    EnableAddressable: 0
+    EnableAddressable: 1
     LocationToLower: 0
     IncludeAssetGUID: 0
     IgnoreDefaultType: 1

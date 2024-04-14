@@ -89,8 +89,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneStateType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Command\CommandManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\SceneState\SceneState.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Config\Item.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Config\TBItem.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\LoginPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\MVVM\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\ISingletonLateUpdate.cs" />

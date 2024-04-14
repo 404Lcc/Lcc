@@ -23,8 +23,8 @@ namespace LccModel
             skillConfigObject = p1 as SkillConfigObject;
             AddComponent<AbilityEffectComponent, List<Effect>>(skillConfigObject.EffectList);
 
-            executionConfigObject = AssetManager.Instance.LoadAsset<ExecutionConfigObject>(out var handle, $"Execution_{skillConfigObject.Id}", AssetSuffix.Asset, AssetType.SkillConfig, AssetType.Execution);
-            AssetManager.Instance.UnLoadAsset(handle);
+            executionConfigObject = AssetManager.Instance.LoadRes<ExecutionConfigObject>(CombatContext.Instance.loader, $"Execution_{skillConfigObject.Id}");
+            
         }
 
 

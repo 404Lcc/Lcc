@@ -5,12 +5,12 @@ namespace LccModel
 {
     public static class SpriteRendererExpand
     {
-        public static AssetHandle SetSprite(this SpriteRenderer spriteRenderer, string name, params string[] types)
+        public static void SetSprite(this SpriteRenderer spriteRenderer, string location)
         {
-            if (string.IsNullOrEmpty(name)) return null;
-            Sprite sprite = AssetManager.Instance.LoadAsset<Sprite>(out AssetHandle handle, name, AssetSuffix.Png, types);
+            if (string.IsNullOrEmpty(location))
+                return;
+            Sprite sprite = AssetManager.Instance.LoadRes<Sprite>(spriteRenderer.gameObject, location);
             spriteRenderer.sprite = sprite;
-            return handle;
         }
     }
 }

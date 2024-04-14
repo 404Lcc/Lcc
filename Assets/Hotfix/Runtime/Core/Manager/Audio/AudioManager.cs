@@ -10,24 +10,24 @@ namespace LccHotfix
     {
         public static AudioManager Instance { get; set; }
 
-        public Dictionary<string, AssetHandle> audioDict = new Dictionary<string, AssetHandle>();
-
+        public Dictionary<string, AudioClip> audioDict = new Dictionary<string, AudioClip>();
+        public GameObject loader;
         public override void Awake()
         {
             base.Awake();
 
             Instance = this;
+            loader = new GameObject("loader");
+            GameObject.DontDestroyOnLoad(loader);
         }
         public override void OnDestroy()
         {
             base.OnDestroy();
 
-            foreach (var item in audioDict.Values)
-            {
-                AssetManager.Instance.UnLoadAsset(item);
-            }
             audioDict.Clear();
             Instance = null;
+
+            GameObject.Destroy(loader);
         }
 
         public bool AudioExist(string audio)
@@ -40,9 +40,9 @@ namespace LccHotfix
         }
         public AudioClip LoadAudio(string audio)
         {
-            AssetManager.Instance.LoadAsset<AudioClip>(out AssetHandle handle, audio, AssetSuffix.Mp3, AssetType.Audio);
-            audioDict.Add(audio, handle);
-            return (AudioClip)handle.AssetObject;
+            var clip = AssetManager.Instance.LoadRes<AudioClip>(loader, audio);
+            audioDict.Add(audio, clip);
+            return clip;
         }
         public async ETTask<AudioClip> LoadAudio(string audio, AudioType type)
         {
@@ -98,8 +98,7 @@ namespace LccHotfix
         {
             if (AudioExist(audio))
             {
-                AssetHandle loadHandle = audioDict[audio];
-                AudioClip clip = (AudioClip)loadHandle.AssetObject;
+                AudioClip clip = audioDict[audio];
                 return clip;
             }
             return null;

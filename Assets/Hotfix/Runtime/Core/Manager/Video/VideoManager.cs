@@ -10,23 +10,26 @@ namespace LccHotfix
     public class VideoManager : AObjectBase
     {
         public static VideoManager Instance { get; set; }
-        public Dictionary<string, AssetHandle> videoDict = new Dictionary<string, AssetHandle>();
+        public Dictionary<string, VideoClip> videoDict = new Dictionary<string, VideoClip>();
+
+        public GameObject loader;
         public override void Awake()
         {
             base.Awake();
 
             Instance = this;
+
+            loader = new GameObject("loader");
+            GameObject.DontDestroyOnLoad(loader);
         }
         public override void OnDestroy()
         {
             base.OnDestroy();
 
-            foreach (var item in videoDict.Values)
-            {
-                AssetManager.Instance.UnLoadAsset(item);
-            }
             videoDict.Clear();
             Instance = null;
+
+            GameObject.Destroy(loader);
         }
         public bool VideoExist(string video)
         {
@@ -38,9 +41,9 @@ namespace LccHotfix
         }
         public VideoClip LoadVideo(string video)
         {
-            AssetManager.Instance.LoadAsset<VideoClip>(out AssetHandle handle, video, AssetSuffix.Mp4, AssetType.Video);
-            videoDict.Add(video, handle);
-            return (VideoClip)handle.AssetObject;
+            var clip = AssetManager.Instance.LoadRes<VideoClip>(loader, video);
+            videoDict.Add(video, clip);
+            return clip;
         }
         public void RemoveVideo(string video, VideoPlayer player)
         {
@@ -101,8 +104,7 @@ namespace LccHotfix
         {
             if (VideoExist(video))
             {
-                AssetHandle loadHandle = videoDict[video];
-                VideoClip clip = (VideoClip)loadHandle.AssetObject;
+                VideoClip clip = videoDict[video];
                 return clip;
             }
             return null;

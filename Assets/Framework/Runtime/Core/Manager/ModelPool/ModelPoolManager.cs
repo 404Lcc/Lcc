@@ -11,7 +11,7 @@ namespace LccModel
         public Dictionary<int, Queue<ModelBase>> cacheModelDict = new Dictionary<int, Queue<ModelBase>>();
         public Dictionary<string, GameObject> resourceDict = new Dictionary<string, GameObject>();
 
-        public Dictionary<int, (string, string)> resourceNameDict = new Dictionary<int, (string, string)>();//resourceNameDict不要，这里换成读表 正式项目
+        public Dictionary<int, string> resourceNameDict = new Dictionary<int, string>();//resourceNameDict不要，这里换成读表 正式项目
 
         public override void Awake()
         {
@@ -19,7 +19,7 @@ namespace LccModel
 
             Instance = this;
 
-            resourceNameDict.Add(1, ("name", "type"));
+            resourceNameDict.Add(1, "name");
         }
         public override void OnDestroy()
         {
@@ -63,7 +63,7 @@ namespace LccModel
             GameObject modelRes = new GameObject();
             ModelBase model = modelRes.AddComponent<ModelBase>();
             SetParent(modelRes, parentRoot);
-            GameObject modelObj = InstantiateModel(await LoadObjectAsync(modelRes, resourceNameDict[modelId].Item1, resourceNameDict[modelId].Item2));
+            GameObject modelObj = InstantiateModel(await LoadObjectAsync(modelRes, resourceNameDict[modelId]));
             SetParent(modelObj, modelRes.transform);
             model.InitData(modelId, modelObj);
 
@@ -81,13 +81,13 @@ namespace LccModel
         {
             return GameObject.Instantiate(asset);
         }
-        private async ETTask<GameObject> LoadObjectAsync(GameObject modelRes, string modelName, string type)
+        private async ETTask<GameObject> LoadObjectAsync(GameObject modelRes, string modelName)
         {
             if (resourceDict.ContainsKey(modelName))
             {
                 return resourceDict[modelName];
             }
-            var asset = await AssetManager.Instance.AutoLoadAssetAsync<GameObject>(modelRes.transform, modelName, AssetSuffix.Prefab, type);
+            var asset = await AssetManager.Instance.StartLoadGameObject(modelRes.gameObject, modelName);
             if (asset != null)
             {
                 resourceDict[modelName] = asset;

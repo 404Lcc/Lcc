@@ -6,12 +6,12 @@ namespace LccModel
 {
     public static class ImageExpand
     {
-        public static AssetHandle SetSprite(this Image image, string name, params string[] types)
+        public static void SetSprite(this Image image, string location)
         {
-            if (string.IsNullOrEmpty(name)) return null;
-            Sprite sprite = AssetManager.Instance.LoadAsset<Sprite>(out AssetHandle handle, name, AssetSuffix.Png, types);
+            if (string.IsNullOrEmpty(location))
+                return;
+            Sprite sprite = AssetManager.Instance.LoadRes<Sprite>(image.gameObject, location);
             image.sprite = sprite;
-            return handle;
         }
     }
 }
