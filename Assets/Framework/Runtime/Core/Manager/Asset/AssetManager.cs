@@ -1,4 +1,5 @@
 ﻿using ET;
+using NPOI.SS.Formula.Functions;
 using System;
 using UnityEngine;
 using YooAsset;
@@ -34,6 +35,10 @@ namespace LccModel
         {
             handle.Release();
         }
+        public void UnLoadAsset(RawFileHandle handle)
+        {
+            handle.Release();
+        }
         public void ForceUnloadAllAssets()
         {
             if (Package == null) return;
@@ -45,12 +50,15 @@ namespace LccModel
             Package.UnloadUnusedAssets();
         }
 
+        #region 异步加载
         //异步加载
         public AssetObject StartLoadRes<T>(GameObject loader, string location, Action<string, Object> onComplete = null) where T : Object
         {
             if (loader != null && !string.IsNullOrEmpty(location))
             {
-                AssetObject res = loader.AddComponent<AssetObject>();
+                GameObject subLoader = new GameObject("loader_" + location + "_" + typeof(T).Name);
+                subLoader.transform.SetParent(loader.transform);
+                AssetObject res = subLoader.AddComponent<AssetObject>();
                 res.SetInfo<T>(location, onComplete);
                 res.StartLoad();
                 return res;
@@ -69,7 +77,9 @@ namespace LccModel
 
             if (loader != null && !string.IsNullOrEmpty(location))
             {
-                AssetObject res = loader.AddComponent<AssetObject>();
+                GameObject subLoader = new GameObject("loader_" + location + "_" + typeof(T).Name);
+                subLoader.transform.SetParent(loader.transform);
+                AssetObject res = subLoader.AddComponent<AssetObject>();
                 res.SetInfo<T>(location, onComplete);
                 res.StartLoad();
 
@@ -80,12 +90,14 @@ namespace LccModel
         }
 
         //异步加载
-        public AssetGameObject StartLoadGameObject(GameObject loader, string location, Action<string, Object> onComplete = null)
+        public AssetObject StartLoadGameObject(GameObject loader, string location, Action<string, Object> onComplete = null)
         {
             if (loader != null && !string.IsNullOrEmpty(location))
             {
-                AssetGameObject res = loader.AddComponent<AssetGameObject>();
-                res.SetInfo(location, onComplete);
+                GameObject subLoader = new GameObject("loader_" + location + "_" + typeof(GameObject).Name);
+                subLoader.transform.SetParent(loader.transform);
+                AssetObject res = subLoader.AddComponent<AssetObject>();
+                res.SetInfo<GameObject>(location, onComplete);
                 res.StartLoad();
                 return res;
             }
@@ -103,12 +115,14 @@ namespace LccModel
 
             if (loader != null && !string.IsNullOrEmpty(location))
             {
-                AssetGameObject res = loader.AddComponent<AssetGameObject>();
-                res.SetInfo(location, onComplete);
+                GameObject subLoader = new GameObject("loader_" + location + "_" + typeof(GameObject).Name);
+                subLoader.transform.SetParent(loader.transform);
+                AssetObject res = subLoader.AddComponent<AssetObject>();
+                res.SetInfo<GameObject>(location, onComplete);
                 res.StartLoad();
 
                 await task;
-                return res.resGameObject;
+                return res.Asset as GameObject;
             }
             return null;
         }
@@ -118,7 +132,9 @@ namespace LccModel
         {
             if (loader != null && !string.IsNullOrEmpty(location))
             {
-                ALLAssetObject res = loader.AddComponent<ALLAssetObject>();
+                GameObject subLoader = new GameObject("loader_" + location + "_" + typeof(T).Name);
+                subLoader.transform.SetParent(loader.transform);
+                ALLAssetObject res = subLoader.AddComponent<ALLAssetObject>();
                 res.SetInfo<T>(location, onComplete);
                 res.StartLoad();
                 return res;
@@ -137,7 +153,9 @@ namespace LccModel
 
             if (loader != null && !string.IsNullOrEmpty(location))
             {
-                ALLAssetObject res = loader.AddComponent<ALLAssetObject>();
+                GameObject subLoader = new GameObject("loader_" + location + "_" + typeof(T).Name);
+                subLoader.transform.SetParent(loader.transform);
+                ALLAssetObject res = subLoader.AddComponent<ALLAssetObject>();
                 res.SetInfo<T>(location, onComplete);
                 res.StartLoad();
 
@@ -147,13 +165,55 @@ namespace LccModel
             return null;
         }
 
+        //异步加载
+        public byte[] StartLoadRawRes(GameObject loader, string location, Action<string, byte[]> onComplete = null)
+        {
+            if (loader != null && !string.IsNullOrEmpty(location))
+            {
+                GameObject subLoader = new GameObject("loader_" + location + "_" + typeof(byte[]).Name);
+                subLoader.transform.SetParent(loader.transform);
+                RawObject res = subLoader.AddComponent<RawObject>();
+                res.SetInfo(location, onComplete);
+                res.Load();
+                return res.Asset;
+            }
+            return null;
+        }
+
+        //异步加载
+        public async ETTask<byte[]> StartLoadRawRes<T>(GameObject loader, string location) where T : Object
+        {
+            ETTask task = ETTask.Create();
+            Action<string, byte[]> onComplete = (location, asset) =>
+            {
+                task.SetResult();
+            };
+
+            if (loader != null && !string.IsNullOrEmpty(location))
+            {
+                GameObject subLoader = new GameObject("loader_" + location + "_" + typeof(T).Name);
+                subLoader.transform.SetParent(loader.transform);
+                RawObject res = subLoader.AddComponent<RawObject>();
+                res.SetInfo(location, onComplete);
+                res.StartLoad();
+
+                await task;
+                return res.Asset;
+            }
+            return null;
+        }
+        #endregion
+
+        #region 同步加载
 
         //同步加载
         public T LoadRes<T>(GameObject loader, string location) where T : Object
         {
             if (loader != null && !string.IsNullOrEmpty(location))
             {
-                AssetObject res = loader.AddComponent<AssetObject>();
+                GameObject subLoader = new GameObject("loader_" + location + "_" + typeof(T).Name);
+                subLoader.transform.SetParent(loader.transform);
+                AssetObject res = subLoader.AddComponent<AssetObject>();
                 res.SetInfo<T>(location);
                 res.Load();
                 return res.Asset as T;
@@ -166,10 +226,12 @@ namespace LccModel
         {
             if (loader != null && !string.IsNullOrEmpty(location))
             {
-                AssetGameObject res = loader.AddComponent<AssetGameObject>();
+                GameObject subLoader = new GameObject("loader_" + location + "_" + typeof(GameObject).Name);
+                subLoader.transform.SetParent(loader.transform);
+                AssetObject res = subLoader.AddComponent<AssetObject>();
                 res.SetInfo<GameObject>(location);
                 res.Load();
-                return res.resGameObject;
+                return res.Asset as GameObject;
             }
             return null;
         }
@@ -179,7 +241,9 @@ namespace LccModel
         {
             if (loader != null && !string.IsNullOrEmpty(location))
             {
-                ALLAssetObject res = loader.AddComponent<ALLAssetObject>();
+                GameObject subLoader = new GameObject("loader_" + location + "_" + typeof(T).Name);
+                subLoader.transform.SetParent(loader.transform);
+                ALLAssetObject res = subLoader.AddComponent<ALLAssetObject>();
                 res.SetInfo<T>(location);
                 res.Load();
                 return res.Assets as T[];
@@ -187,11 +251,22 @@ namespace LccModel
             return null;
         }
 
-        public RawFileHandle LoadRawAssetAsync(string location, Action<RawFileHandle> callback = null)
+
+        //同步加载
+        public byte[] LoadRawRes(GameObject loader, string location)
         {
-            RawFileHandle rawFileOperation = YooAssets.GetPackage(DefaultPackage).LoadRawFileAsync(location);
-            rawFileOperation.Completed += callback;
-            return rawFileOperation;
+            if (loader != null && !string.IsNullOrEmpty(location))
+            {
+                GameObject subLoader = new GameObject("loader_" + location + "_" + typeof(byte[]).Name);
+                subLoader.transform.SetParent(loader.transform);
+                RawObject res = subLoader.AddComponent<RawObject>();
+                res.SetInfo(location);
+                res.Load();
+                return res.Asset;
+            }
+            return null;
         }
+        #endregion
+
     }
 }

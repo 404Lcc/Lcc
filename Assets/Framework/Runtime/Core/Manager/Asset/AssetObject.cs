@@ -4,12 +4,12 @@ using YooAsset;
 
 namespace LccModel
 {
+    //unity资源
     public class AssetObject : MonoBehaviour
     {
         public string path;
         public Type type;
         public Action<string, UnityEngine.Object> onComplete;
-
 
         public AssetHandle handle;
 
@@ -59,41 +59,12 @@ namespace LccModel
         }
     }
 
-    public class AssetGameObject : AssetObject
-    {
-        public GameObject resGameObject;
-
-        public new Action<string, GameObject> onComplete;
-        public void SetInfo(string path, Action<string, GameObject> onComplete)
-        {
-            this.path = path;
-            type = typeof(GameObject);
-            this.onComplete = onComplete;
-        }
-
-        public override void StartLoad()
-        {
-            handle = AssetManager.Instance.Package.LoadAssetAsync(path, type);
-            handle.Completed += LoadEnd;
-        }
-        public override void Load()
-        {
-            handle = AssetManager.Instance.Package.LoadAssetSync(path, type);
-            resGameObject = handle.AssetObject as GameObject;
-        }
-        public override void LoadEnd(AssetHandle callback)
-        {
-            resGameObject = callback.AssetObject as GameObject;
-            this.onComplete?.Invoke(path, resGameObject);
-        }
-    }
-
+    //allunity资源
     public class ALLAssetObject : MonoBehaviour
     {
         public string path;
         public Type type;
         public Action<string, UnityEngine.Object[]> onComplete;
-
 
         public AllAssetsHandle handle;
 
@@ -139,6 +110,59 @@ namespace LccModel
         public virtual void LoadEnd(AllAssetsHandle callback)
         {
             res = callback.AllAssetObjects;
+            this.onComplete?.Invoke(path, res);
+        }
+    }
+
+
+    //原生资源
+    public class RawObject : MonoBehaviour
+    {
+        public string path;
+        public Action<string, byte[]> onComplete;
+
+        public RawFileHandle handle;
+
+        protected byte[] res;
+
+        public byte[] Asset
+        {
+            get
+            {
+                return res;
+            }
+        }
+        public void OnDestroy()
+        {
+            if (handle != null)
+            {
+                AssetManager.Instance?.UnLoadAsset(handle);
+            }
+        }
+
+        public void SetInfo(string path, Action<string, byte[]> onComplete)
+        {
+            this.path = path;
+            this.onComplete = onComplete;
+        }
+        public void SetInfo(string path)
+        {
+            this.path = path;
+        }
+
+        public virtual void StartLoad()
+        {
+            handle = AssetManager.Instance.Package.LoadRawFileAsync(path);
+            handle.Completed += LoadEnd;
+        }
+        public virtual void Load()
+        {
+            handle = AssetManager.Instance.Package.LoadRawFileSync(path);
+            res = handle.GetRawFileData();
+        }
+        public virtual void LoadEnd(RawFileHandle callback)
+        {
+            res = callback.GetRawFileData();
             this.onComplete?.Invoke(path, res);
         }
     }

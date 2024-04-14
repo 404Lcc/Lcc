@@ -101,7 +101,6 @@
     <Compile Include="Assets\Framework\Runtime\Util\File\FileUtil.cs" />
     <Compile Include="Assets\Framework\Util\RightClickButton.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\SpriteRenderer\SpriteRendererExpand.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\Asset\AssetType.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Log\LogUtil.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Combat.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Action\Component\ActionComponent.cs" />
