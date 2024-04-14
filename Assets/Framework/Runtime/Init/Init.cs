@@ -41,7 +41,6 @@ namespace LccModel
             Game.Scene.AddComponent<DownloadManager>();
             Game.Scene.AddComponent<NumericEventManager>();
             Game.Scene.AddComponent<RedDotManager>();
-            Game.Scene.AddComponent<SceneLoadManager>();
             Game.Scene.AddComponent<PatchManager>();
 
             Game.Scene.AddComponent<ModelPoolManager>();

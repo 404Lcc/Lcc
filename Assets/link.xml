@@ -4847,8 +4847,6 @@
     <type fullname="LccModel.PatchManager" preserve="all" />
     <type fullname="LccModel.RedDot" preserve="all" />
     <type fullname="LccModel.RedDotManager" preserve="all" />
-    <type fullname="LccModel.SceneLoadManager" preserve="all" />
-    <type fullname="LccModel.SceneName" preserve="all" />
     <type fullname="LccModel.AABB" preserve="all" />
     <type fullname="LccModel.OBB" preserve="all" />
     <type fullname="LccModel.OBBTest" preserve="all" />
@@ -5036,7 +5034,7 @@
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.EventTriggerListener+VoidDelegate" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=144" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10447" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=22314" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10394" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=22169" preserve="all" />
   </assembly>
 </linker>

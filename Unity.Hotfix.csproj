@@ -70,8 +70,6 @@
     <Compile Include="Assets\Hotfix\Logic\SceneState\GameSceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Pool\APool.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\Joystick\Joystick.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEventHandlerAttribute.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Singleton\ISingletonFixedUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\GameSetting\GameSettingManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\CVType.cs" />
@@ -135,9 +133,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Core\ScrollerPro\LoopScrollItemPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Panel\PanelManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Model\ModelManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEvent.cs" />
     <Compile Include="Assets\Hotfix\Logic\SceneState\MainSceneState.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Core\Manager\UIEvent\UIEventManager.cs" />
     <Compile Include="Assets\Hotfix\Logic\EventHandler\InitEventHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Manager\Archive\UserSetData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Core\Object\Base\ILateUpdate.cs" />

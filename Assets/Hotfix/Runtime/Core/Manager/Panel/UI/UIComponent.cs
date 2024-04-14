@@ -139,7 +139,7 @@ namespace LccHotfix
         {
         }
 
-        public virtual void OnShow(Panel panel, AObjectBase contextData = null)
+        public virtual void OnShow(Panel panel, object contextData = null)
         {
             //UpdateDepth();
         }

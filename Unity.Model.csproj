@@ -220,7 +220,6 @@
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\CombatViewContext.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Event\EventGroup.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\JoystickComponent.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\SceneLoad\SceneLoadManager.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\FSMComponet\Base\AFSMState.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Expand\Awaiter\AwaiterExpand.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ConfigObject\ExecuteClipData.cs" />
@@ -246,7 +245,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Asset\AssetManager.cs" />
     <Compile Include="Assets\Framework\Util\LanguageText.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Patch\FsmNode\FsmCreatePackageDownloader.cs" />
-    <Compile Include="Assets\Framework\Runtime\Core\Manager\SceneLoad\SceneName.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Ability\IAbility.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityItem\Component\AbilityItemCollisionExecuteComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\CoroutineLock\CoroutineLock.cs" />

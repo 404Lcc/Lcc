@@ -219,7 +219,7 @@ namespace LccHotfix
             }
 
 
-            AObjectBase contextData = showData == null ? null : showData.contextData;
+            object contextData = showData == null ? null : showData.contextData;
             panel.Depth = GetCurrentPanelMaxDepth(panel.data.type);
             panel.IsShown = true;
             panel.SetRoot(GetRoot(panel.data.type));

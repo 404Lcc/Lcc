@@ -53,14 +53,6 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-      - CollectPath: Assets/Bundles/Scene
-        CollectorGUID: d16de6e0cac1d4e419c246d16c619dd5
-        CollectorType: 0
-        AddressRuleName: AddressByFileName
-        PackRuleName: PackDirectory
-        FilterRuleName: CollectAll
-        AssetTags: 
-        UserData: 
       - CollectPath: Assets/Bundles/SkillConfig
         CollectorGUID: 1b634ebf46ab68a4b874573573500306
         CollectorType: 0

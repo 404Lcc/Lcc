@@ -27,7 +27,7 @@ namespace LccHotfix
             panel.data.showMode = UIShowMode.HideOther;
             panel.data.navigationMode = UINavigationMode.IgnoreNavigation;
         }
-        public override void OnShow(Panel panel, AObjectBase contextData = null)
+        public override void OnShow(Panel panel, object contextData = null)
         {
             base.OnShow(panel, contextData);
             ShowTopPanel(TopType.CloseBtn | TopType.Gold, "Main");

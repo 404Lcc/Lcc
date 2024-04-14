@@ -26,7 +26,7 @@ namespace LccHotfix
 
 
 
-        public override void OnShow(Panel panel, AObjectBase contextData = null)
+        public override void OnShow(Panel panel, object contextData = null)
         {
             base.OnShow(panel, contextData);
 

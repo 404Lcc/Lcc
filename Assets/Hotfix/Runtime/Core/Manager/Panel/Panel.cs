@@ -29,7 +29,7 @@ namespace LccHotfix
         //强制清除导航数据
         public bool forceClearBackSequenceData;
 
-        public AObjectBase contextData;
+        public object contextData;
 
         //执行导航逻辑
         public bool executeNavigationLogic = true;
@@ -52,7 +52,7 @@ namespace LccHotfix
         /// <param name="executeNavigationLogic">执行导航逻辑，默认true</param>
         /// <param name="checkNavigation">检查导航</param>
         /// <param name="ignoreAddNavigationData">强制忽略添加导航数据</param>
-        public ShowPanelData(bool forceReset, bool forceClearBackSequenceData, AObjectBase contextData, bool executeNavigationLogic, bool checkNavigation, bool ignoreAddNavigationData)
+        public ShowPanelData(bool forceReset, bool forceClearBackSequenceData, object contextData, bool executeNavigationLogic, bool checkNavigation, bool ignoreAddNavigationData)
         {
             this.forceReset = forceReset;
             this.forceClearBackSequenceData = forceClearBackSequenceData;

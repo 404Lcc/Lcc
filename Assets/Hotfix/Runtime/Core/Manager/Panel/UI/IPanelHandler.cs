@@ -24,7 +24,7 @@ namespace LccHotfix
         /// </summary>
         /// <param name="panel"></param>
         /// <param name="contextData"></param>
-        void OnShow(Panel panel, AObjectBase contextData = null);
+        void OnShow(Panel panel, object contextData = null);
 
         /// <summary>
         /// Òþ²ØUI½çÃæ

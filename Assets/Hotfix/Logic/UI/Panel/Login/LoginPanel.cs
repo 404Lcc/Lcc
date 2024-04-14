@@ -42,14 +42,6 @@ namespace LccHotfix
         }
     }
 
-    [UIEventHandler(UIEventType.Login)]
-    public class LoginUIEventHandler : UIEvent
-    {
-        public override void Publish()
-        {
-            PanelManager.Instance.ShowPanel(PanelType.UILogin);
-        }
-    }
     public class UILoginModel : ViewModelBase
     {
     }
@@ -100,7 +92,7 @@ namespace LccHotfix
         }
 
 
-        public override void OnShow(Panel panel, AObjectBase contextData = null)
+        public override void OnShow(Panel panel, object contextData = null)
         {
             base.OnShow(panel, contextData);
             LogUtil.Debug("OnShow第六个执行的函数");

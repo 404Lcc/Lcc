@@ -16,16 +16,14 @@ namespace LccHotfix
         /// </summary>
         public float startLoadTime;
 
-
         /// <summary>
         /// 加载方式
         /// </summary>
         public LoadingType loadType;
 
-
-
-
-        //打开场景展示ui
+        /// <summary>
+        /// 打开场景展示ui
+        /// </summary>
         public JumpNode jumpNode;
 
 
@@ -42,8 +40,6 @@ namespace LccHotfix
             return false;
         }
 
-
-
         /// <summary>
         /// 加载完成回调
         /// </summary>
@@ -51,7 +47,6 @@ namespace LccHotfix
         {
             IsLoading = false;
         }
-
 
         public virtual void OnEnter(object[] args)
         {

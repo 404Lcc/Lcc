@@ -30,7 +30,7 @@ namespace LccHotfix
                 Game.Scene.AddComponent<LanguageManager>();
                 Game.Scene.AddComponent<PanelManager>();
                 Game.Scene.AddComponent<SceneStateManager>();
-                Game.Scene.AddComponent<UIEventManager>();
+                Game.Scene.AddComponent<JumpManager>();
                 Game.Scene.AddComponent<VideoManager>();
 
                 EventSystem.Instance.Publish(new Start());

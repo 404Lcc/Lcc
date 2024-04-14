@@ -1,22 +1,23 @@
 using cfg;
+using System;
 using System.Collections.Generic;
 
 namespace LccHotfix
 {
     public class JumpNode
     {
-        public string nodeName;
+        public PanelType nodeType;
         public object[] nodeParam;
         public JumpDependNode depend;//依赖只支持一层
 
-        public JumpNode(string nodeName)
+        public JumpNode(PanelType nodeType)
         {
-            this.nodeName = nodeName;
+            this.nodeType = nodeType;
 
         }
-        public JumpNode(string nodeName, object[] nodeParam)
+        public JumpNode(PanelType nodeType, object[] nodeParam)
         {
-            this.nodeName = nodeName;
+            this.nodeType = nodeType;
             this.nodeParam = nodeParam;
 
         }
@@ -27,12 +28,12 @@ namespace LccHotfix
     }
     public class JumpDependNode
     {
-        public string nodeName;
+        public PanelType nodeType;
         public object[] nodeParam;
 
-        public JumpDependNode(string nodeName)
+        public JumpDependNode(PanelType nodeType)
         {
-            this.nodeName = nodeName;
+            this.nodeType = nodeType;
 
         }
     }
@@ -99,7 +100,8 @@ namespace LccHotfix
 
             int scene = config.SceneId;
 
-            JumpNode jump = new JumpNode(config.PanelName, nowArg);
+            PanelType panel = (PanelType)Enum.Parse(typeof(PanelType), config.PanelName);
+            JumpNode jump = new JumpNode(panel, nowArg);
 
             ChangeWindowNode(jump);
 
@@ -111,12 +113,14 @@ namespace LccHotfix
                 {
                     return true;
                 }
-                //PanelManager.Instance.ShowPanel(jump.nodeName, jump.nodeParam);
+                var data = new ShowPanelData(false, true, jump.nodeParam, true, false, true);
+                PanelManager.Instance.ShowPanel(jump.nodeType, data);
                 return true;
             }
 
             //todo 依赖的界面现在给不了参数
-            jump.SetDepend(new JumpDependNode(config.ScenePanelName));
+            PanelType dependPanel = (PanelType)Enum.Parse(typeof(PanelType), config.ScenePanelName);
+            jump.SetDepend(new JumpDependNode(dependPanel));
             return JumpPanelCrossScene(scene, jump);
 
         }
@@ -128,7 +132,7 @@ namespace LccHotfix
 
         public bool OpenSpecialWindow(JumpNode jumpNode)
         {
-            switch (jumpNode.nodeName)
+            switch (jumpNode.nodeType)
             {
                 default:
                     break;
@@ -142,7 +146,7 @@ namespace LccHotfix
         /// <param name="jumpNode"></param>
         private void ChangeWindowNode(JumpNode jumpNode)
         {
-            switch (jumpNode.nodeName)
+            switch (jumpNode.nodeType)
             {
                 default:
                     break;

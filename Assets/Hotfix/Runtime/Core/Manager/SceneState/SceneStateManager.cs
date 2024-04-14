@@ -1,3 +1,4 @@
+using cfg;
 using LccModel;
 using System;
 using System.Collections;
@@ -57,7 +58,7 @@ namespace LccHotfix
                 return;
             }
             JumpNode node = curScene.jumpNode;
-            if (string.IsNullOrEmpty(node.nodeName))
+            if (node.nodeType == PanelType.None)
             {
                 return;
             }
@@ -68,9 +69,11 @@ namespace LccHotfix
 
             if (node.depend != null)
             {
-                //PanelManager.Instance.ShowPanel(node.depend.nodeName, node.depend.nodeParam);
+                var dependData = new ShowPanelData(false, true, node.depend.nodeParam, true, false, true);
+                PanelManager.Instance.ShowPanel(node.depend.nodeType, dependData);
             }
-            //PanelManager.Instance.ShowPanel(node.nodeName, node.nodeParam);
+            var data = new ShowPanelData(false, true, node.nodeParam, true, false, true);
+            PanelManager.Instance.ShowPanel(node.nodeType, data);
             curScene.jumpNode = null;
         }
 
