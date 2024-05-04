@@ -124,6 +124,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Patch\EventDefine\UserEventDefine.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Module\Time\Time.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\RVO\RVOMath.cs" />
+    <Compile Include="Assets\Framework\Battle\Worlds.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\FSMComponet\State\IdleState.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\RVO\Vector2.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\ItemComponent.cs" />
@@ -178,7 +179,6 @@
     <Compile Include="Assets\Framework\Runtime\Core\Object\Numeric\NumericEntity.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectTriggerComponent\AbilityEffectConditionTriggerComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectCureComponent.cs" />
-    <Compile Include="Assets\Framework\Battle\Contexts.cs" />
     <Compile Include="Assets\Framework\Util\OpenFileName.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Awaiter\UnityWebRequestAsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityEffect\AbilityEffectComponent\AbilityEffectDamageReduceWithTargetCountComponent.cs" />

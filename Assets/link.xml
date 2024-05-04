@@ -4609,7 +4609,6 @@
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=7232" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Model">
-    <type fullname="Contexts" preserve="all" />
     <type fullname="IDispose" preserve="all" />
     <type fullname="LogicComponent" preserve="all" />
     <type fullname="LogicComponentsLookup" preserve="all" />
@@ -4617,6 +4616,7 @@
     <type fullname="LogicMatcher" preserve="all" />
     <type fullname="LogicWorld" preserve="all" />
     <type fullname="IDComponent" preserve="all" />
+    <type fullname="Worlds" preserve="all" />
     <type fullname="WorldSystems" preserve="all" />
     <type fullname="ScreenAdaptationUtil" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1" preserve="all" />
@@ -4958,8 +4958,8 @@
     <type fullname="LccModel.RightClickEvent" preserve="all" />
     <type fullname="LccModel.RightClickButton" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;" preserve="all" />
-    <type fullname="Contexts+&lt;&gt;c" preserve="all" />
     <type fullname="LogicWorld+&lt;&gt;c" preserve="all" />
+    <type fullname="Worlds+&lt;&gt;c" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1+MonoScriptData" preserve="all" />
     <type fullname="RVO.KdTree+AgentTreeNode" preserve="all" />
     <type fullname="RVO.KdTree+FloatPair" preserve="all" />
@@ -5045,7 +5045,7 @@
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.EventTriggerListener+VoidDelegate" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=144" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10590" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=22682" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10588" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=22680" preserve="all" />
   </assembly>
 </linker>

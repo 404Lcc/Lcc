@@ -29,6 +29,6 @@ public class LogicWorld : Context<LogicEntity>
 
     public LogicEntity GetEntityWithID(long id)
     {
-        return ((PrimaryEntityIndex<LogicEntity, long>)GetEntityIndex(Contexts.ID)).GetEntity(id);
+        return ((PrimaryEntityIndex<LogicEntity, long>)GetEntityIndex(Worlds.ID)).GetEntity(id);
     }
 }

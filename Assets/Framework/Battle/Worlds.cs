@@ -1,15 +1,16 @@
 using Entitas;
 
-public partial class Contexts : IContexts
+public partial class Worlds : IContexts
 {
     public const string ID = "ID";
     public LogicWorld Logic { get; set; }
 
-    public IContext[] allContexts => new IContext[] { Logic };
+    public IContext[] allContexts { get; set; }
 
-    public Contexts()
+    public Worlds()
     {
         Logic = new LogicWorld();
+        allContexts = new IContext[] { Logic };
         InitializeEntityIndices();
     }
     public void InitializeEntityIndices()
