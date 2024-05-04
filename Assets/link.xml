@@ -4610,17 +4610,13 @@
   </assembly>
   <assembly fullname="Unity.Model">
     <type fullname="Contexts" preserve="all" />
-    <type fullname="Feature" preserve="all" />
-    <type fullname="GameAttribute" preserve="all" />
-    <type fullname="GameComponentsLookup" preserve="all" />
-    <type fullname="GameContext" preserve="all" />
-    <type fullname="GameEntity" preserve="all" />
-    <type fullname="GameMatcher" preserve="all" />
-    <type fullname="InputAttribute" preserve="all" />
-    <type fullname="InputComponentsLookup" preserve="all" />
-    <type fullname="InputContext" preserve="all" />
-    <type fullname="InputEntity" preserve="all" />
-    <type fullname="InputMatcher" preserve="all" />
+    <type fullname="ComponentBase" preserve="all" />
+    <type fullname="LogicComponentsLookup" preserve="all" />
+    <type fullname="LogicEntity" preserve="all" />
+    <type fullname="LogicMatcher" preserve="all" />
+    <type fullname="LogicWorld" preserve="all" />
+    <type fullname="IDComponent" preserve="all" />
+    <type fullname="WorldSystems" preserve="all" />
     <type fullname="ScreenAdaptationUtil" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1" preserve="all" />
     <type fullname="RVO.Agent" preserve="all" />
@@ -4962,8 +4958,7 @@
     <type fullname="LccModel.RightClickButton" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;" preserve="all" />
     <type fullname="Contexts+&lt;&gt;c" preserve="all" />
-    <type fullname="GameContext+&lt;&gt;c" preserve="all" />
-    <type fullname="InputContext+&lt;&gt;c" preserve="all" />
+    <type fullname="LogicWorld+&lt;&gt;c" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1+MonoScriptData" preserve="all" />
     <type fullname="RVO.KdTree+AgentTreeNode" preserve="all" />
     <type fullname="RVO.KdTree+FloatPair" preserve="all" />
@@ -5049,7 +5044,7 @@
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.EventTriggerListener+VoidDelegate" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=144" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10630" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=22926" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10575" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=22626" preserve="all" />
   </assembly>
 </linker>
