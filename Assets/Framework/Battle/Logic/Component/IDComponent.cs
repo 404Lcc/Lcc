@@ -1,6 +1,6 @@
 using Entitas;
 
-public class IDComponent : ComponentBase
+public class IDComponent : LogicComponent
 {
     public long id;
 }

@@ -4610,7 +4610,8 @@
   </assembly>
   <assembly fullname="Unity.Model">
     <type fullname="Contexts" preserve="all" />
-    <type fullname="ComponentBase" preserve="all" />
+    <type fullname="IDispose" preserve="all" />
+    <type fullname="LogicComponent" preserve="all" />
     <type fullname="LogicComponentsLookup" preserve="all" />
     <type fullname="LogicEntity" preserve="all" />
     <type fullname="LogicMatcher" preserve="all" />
@@ -5044,7 +5045,7 @@
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.EventTriggerListener+VoidDelegate" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=144" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10575" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=22626" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10590" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=22682" preserve="all" />
   </assembly>
 </linker>

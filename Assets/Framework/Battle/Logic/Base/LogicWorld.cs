@@ -18,13 +18,13 @@ public class LogicWorld : Context<LogicEntity>
     private void EntityCreated(IContext context, IEntity iEntity)
     {
         var entity = (LogicEntity)iEntity;
-        //entity.Enter(this);
+        entity.Enter();
     }
 
     private void EntityDestroyed(IContext context, IEntity iEntity)
     {
         var entity = (LogicEntity)iEntity;
-        //entity.Leave();
+        entity.Leave();
     }
 
     public LogicEntity GetEntityWithID(long id)

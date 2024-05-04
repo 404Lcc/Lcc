@@ -114,7 +114,6 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionEffectFiltrationTargetComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Action\IActionAbility.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Json\JsonUtil.cs" />
-    <Compile Include="Assets\Framework\Battle\Logic\Base\ComponentBase.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Math\OBBTest.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\ExecutionEffect\ExecutionEffectComponent\ExecutionEffectAnimationComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityItem\Component\AbilityItemMoveWithDotweenComponent.cs" />
@@ -128,6 +127,7 @@
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\FSMComponet\State\IdleState.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\RVO\Vector2.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\Character\Component\ItemComponent.cs" />
+    <Compile Include="Assets\Framework\Battle\Logic\Base\IDispose.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Patch\EventDefine\PatchEventDefine.cs" />
     <Compile Include="Assets\Framework\Battle\Logic\Base\LogicWorld.cs" />
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Download\DownloadState.cs" />
@@ -234,6 +234,7 @@
     <Compile Include="Assets\Framework\Runtime\Core\Manager\Bridge\BridgeManager.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityItem\Component\AbilityItemBezierMoveComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\FiltrationTarget\FiltrationTarget.cs" />
+    <Compile Include="Assets\Framework\Battle\Logic\Base\LogicComponent.cs" />
     <Compile Include="Assets\Framework\Combat\CombatView\Runtime\Core\Combat\Attribute\FloatNumericView.cs" />
     <Compile Include="Assets\Framework\Combat\CombatLogic\Runtime\Core\Combat\AbilityItem\Component\AbilityItemLifeTimeComponent.cs" />
     <Compile Include="Assets\Framework\Runtime\Util\Network\NetworkUtil.cs" />
