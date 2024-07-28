@@ -3164,6 +3164,7 @@
     <type fullname="Unity.IO.Archive.ArchiveHandle" preserve="all" />
     <type fullname="Unity.IO.Archive.ArchiveFileInterface" preserve="all" />
     <type fullname="Unity.Content.ContentNamespace" preserve="all" />
+    <type fullname="Unity.Collections.CollectionExtensions" preserve="all" />
     <type fullname="Unity.Collections.ReadOnlyAttribute" preserve="all" />
     <type fullname="Unity.Collections.WriteOnlyAttribute" preserve="all" />
     <type fullname="Unity.Collections.DeallocateOnJobCompletionAttribute" preserve="all" />
@@ -3629,6 +3630,9 @@
     <type fullname="UnityEngine.ResourcesAPIInternal" preserve="all" />
     <type fullname="UnityEngine.ResourcesAPI" preserve="all" />
     <type fullname="UnityEngine.Resources" preserve="all" />
+    <type fullname="UnityEngine.AsyncInstantiateOperation" preserve="all" />
+    <type fullname="UnityEngine.AsyncInstantiateOperation`1" preserve="all" />
+    <type fullname="UnityEngine.AsyncInstantiateOperationHelper" preserve="all" />
     <type fullname="UnityEngine.AsyncOperation" preserve="all" />
     <type fullname="UnityEngine.AttributeHelperEngine" preserve="all" />
     <type fullname="UnityEngine.DisallowMultipleComponent" preserve="all" />
@@ -3948,6 +3952,7 @@
     <type fullname="UnityEngine.PlayerLoop.EarlyUpdate+UpdateTextureStreamingManager" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.EarlyUpdate+UpdatePreloading" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.EarlyUpdate+UpdateContentLoading" preserve="all" />
+    <type fullname="UnityEngine.PlayerLoop.EarlyUpdate+UpdateAsyncInstantiate" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.EarlyUpdate+RendererNotifyInvisible" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.EarlyUpdate+PlayerCleanupCachedData" preserve="all" />
     <type fullname="UnityEngine.PlayerLoop.EarlyUpdate+UpdateMainGameViewRect" preserve="all" />

@@ -24,7 +24,7 @@
         "com.unity.modules.unitywebrequest": "1.0.0",
         "com.unity.modules.unitywebrequestassetbundle": "1.0.0"
       },
-      "url": "https://package.openupm.cn"
+      "url": "https://package.openupm.com"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -70,7 +70,7 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.collab-proxy": {
-      "version": "2.2.0",
+      "version": "2.3.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -116,21 +116,20 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.purchasing": {
-      "version": "4.9.3",
+      "version": "4.11.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.ugui": "1.0.0",
-        "com.unity.modules.unityanalytics": "1.0.0",
         "com.unity.modules.unitywebrequest": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0",
         "com.unity.modules.androidjni": "1.0.0",
-        "com.unity.services.core": "1.8.1"
+        "com.unity.services.core": "1.8.2"
       },
       "url": "https://packages.unity.cn"
     },
     "com.unity.scriptablebuildpipeline": {
-      "version": "1.21.21",
+      "version": "1.21.23",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
@@ -148,7 +147,7 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.services.core": {
-      "version": "1.12.0",
+      "version": "1.12.5",
       "depth": 1,
       "source": "registry",
       "dependencies": {
