@@ -174,7 +174,7 @@ namespace LccModel
 
             GameObject obj = new GameObject("loader");
             TextAsset dllAsset = AssetManager.Instance.LoadRes<TextAsset>(obj, $"Unity.Hotfix.dll");
-            dllBytes = RijndaelUtil.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes);
+            dllBytes = RijndaelHelper.RijndaelDecrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", dllAsset.bytes);
 
 
             if (!config.isRelease)

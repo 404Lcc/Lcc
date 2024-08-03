@@ -4623,7 +4623,7 @@
     <type fullname="IDComponent" preserve="all" />
     <type fullname="Worlds" preserve="all" />
     <type fullname="WorldSystems" preserve="all" />
-    <type fullname="ScreenAdaptationUtil" preserve="all" />
+    <type fullname="ScreenAdaptationHelper" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1" preserve="all" />
     <type fullname="RVO.Agent" preserve="all" />
     <type fullname="RVO.KdTree" preserve="all" />
@@ -4745,33 +4745,33 @@
     <type fullname="LccModel.Singleton`1" preserve="all" />
     <type fullname="LccModel.AStaticMethod" preserve="all" />
     <type fullname="LccModel.MonoStaticMethod" preserve="all" />
+    <type fullname="LccModel.ActionWrap`1" preserve="all" />
+    <type fullname="LccModel.DirectoryHelper" preserve="all" />
+    <type fullname="LccModel.ExpressionHelper" preserve="all" />
+    <type fullname="LccModel.FileHelper" preserve="all" />
+    <type fullname="LccModel.IdHelper" preserve="all" />
+    <type fullname="LccModel.JsonHelper" preserve="all" />
+    <type fullname="LccModel.LogHelper" preserve="all" />
+    <type fullname="LccModel.MD5Helper" preserve="all" />
+    <type fullname="LccModel.NetworkHelper" preserve="all" />
+    <type fullname="LccModel.ObjectHelper" preserve="all" />
+    <type fullname="LccModel.PathHelper" preserve="all" />
+    <type fullname="LccModel.PathType" preserve="all" />
+    <type fullname="LccModel.ProtobufHelper" preserve="all" />
+    <type fullname="LccModel.RandomHelper" preserve="all" />
+    <type fullname="LccModel.ResolutionHelper" preserve="all" />
+    <type fullname="LccModel.RijndaelHelper" preserve="all" />
+    <type fullname="LccModel.SerializeHelper" preserve="all" />
+    <type fullname="LccModel.SortHelper" preserve="all" />
+    <type fullname="LccModel.BuildinFileManifest" preserve="all" />
+    <type fullname="LccModel.StreamingAssetsDefine" preserve="all" />
+    <type fullname="LccModel.GameQueryServices" preserve="all" />
+    <type fullname="LccModel.StreamingAssetsHelper" preserve="all" />
+    <type fullname="LccModel.WebHelper" preserve="all" />
     <type fullname="LccModel.HotfixMode" preserve="all" />
     <type fullname="LccModel.GlobalConfig" preserve="all" />
     <type fullname="LccModel.Init" preserve="all" />
     <type fullname="LccModel.Loader" preserve="all" />
-    <type fullname="LccModel.ActionWrap`1" preserve="all" />
-    <type fullname="LccModel.DirectoryUtil" preserve="all" />
-    <type fullname="LccModel.ExpressionUtil" preserve="all" />
-    <type fullname="LccModel.FileUtil" preserve="all" />
-    <type fullname="LccModel.IdUtil" preserve="all" />
-    <type fullname="LccModel.JsonUtil" preserve="all" />
-    <type fullname="LccModel.LogUtil" preserve="all" />
-    <type fullname="LccModel.MD5Util" preserve="all" />
-    <type fullname="LccModel.NetworkUtil" preserve="all" />
-    <type fullname="LccModel.ObjectUtil" preserve="all" />
-    <type fullname="LccModel.PathType" preserve="all" />
-    <type fullname="LccModel.PathUtil" preserve="all" />
-    <type fullname="LccModel.ProtobufUtil" preserve="all" />
-    <type fullname="LccModel.RandomUtil" preserve="all" />
-    <type fullname="LccModel.ResolutionUtil" preserve="all" />
-    <type fullname="LccModel.RijndaelUtil" preserve="all" />
-    <type fullname="LccModel.SerializeUtil" preserve="all" />
-    <type fullname="LccModel.SortUtil" preserve="all" />
-    <type fullname="LccModel.BuildinFileManifest" preserve="all" />
-    <type fullname="LccModel.StreamingAssetsDefine" preserve="all" />
-    <type fullname="LccModel.GameQueryServices" preserve="all" />
-    <type fullname="LccModel.StreamingAssetsUtil" preserve="all" />
-    <type fullname="LccModel.WebUtil" preserve="all" />
     <type fullname="LccModel.DisplayMode" preserve="all" />
     <type fullname="LccModel.DoubleClickEvent" preserve="all" />
     <type fullname="LccModel.DoubleClickButton" preserve="all" />
@@ -4844,19 +4844,19 @@
     <type fullname="LccModel.FsmUpdatePackageManifest+&lt;UpdateManifest&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmUpdatePackageVersion+&lt;UpdatePackageVersion&gt;d__5" preserve="all" />
     <type fullname="LccModel.PatchOperation+ESteps" preserve="all" />
-    <type fullname="LccModel.Init+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.BuildinFileManifest+Element" preserve="all" />
-    <type fullname="LccModel.StreamingAssetsUtil+PackageQuery" preserve="all" />
-    <type fullname="LccModel.WebUtil+&lt;DownloadAssetBundle&gt;d__5" preserve="all" />
-    <type fullname="LccModel.WebUtil+&lt;DownloadAudioClip&gt;d__4" preserve="all" />
-    <type fullname="LccModel.WebUtil+&lt;DownloadBytes&gt;d__2" preserve="all" />
-    <type fullname="LccModel.WebUtil+&lt;DownloadText&gt;d__1" preserve="all" />
-    <type fullname="LccModel.WebUtil+&lt;DownloadTexture2D&gt;d__3" preserve="all" />
-    <type fullname="LccModel.WebUtil+&lt;Upload&gt;d__0" preserve="all" />
+    <type fullname="LccModel.StreamingAssetsHelper+PackageQuery" preserve="all" />
+    <type fullname="LccModel.WebHelper+&lt;DownloadAssetBundle&gt;d__5" preserve="all" />
+    <type fullname="LccModel.WebHelper+&lt;DownloadAudioClip&gt;d__4" preserve="all" />
+    <type fullname="LccModel.WebHelper+&lt;DownloadBytes&gt;d__2" preserve="all" />
+    <type fullname="LccModel.WebHelper+&lt;DownloadText&gt;d__1" preserve="all" />
+    <type fullname="LccModel.WebHelper+&lt;DownloadTexture2D&gt;d__3" preserve="all" />
+    <type fullname="LccModel.WebHelper+&lt;Upload&gt;d__0" preserve="all" />
+    <type fullname="LccModel.Init+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.EventTriggerListener+VoidDelegate" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=144" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=5465" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10228" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=5505" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10310" preserve="all" />
   </assembly>
 </linker>

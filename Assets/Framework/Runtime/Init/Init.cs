@@ -17,9 +17,9 @@ namespace LccModel
             DontDestroyOnLoad(gameObject);
             AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
             {
-                LogUtil.Error(e.ExceptionObject.ToString());
+                LogHelper.Error(e.ExceptionObject.ToString());
             };
-            ETTask.ExceptionHandler += LogUtil.Error;
+            ETTask.ExceptionHandler += LogHelper.Error;
 
             var globalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
             Event.Initalize();

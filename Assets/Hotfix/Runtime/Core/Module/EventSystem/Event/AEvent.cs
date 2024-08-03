@@ -23,7 +23,7 @@ namespace LccHotfix
             }
             catch (Exception e)
             {
-                LogUtil.Error(e);
+                LogHelper.Error(e);
             }
         }
     }

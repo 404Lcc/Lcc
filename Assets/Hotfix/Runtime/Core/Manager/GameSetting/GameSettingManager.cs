@@ -16,15 +16,15 @@ namespace LccHotfix
                 int height = int.Parse(name.Substring(name.IndexOf('x') + 1));
                 if (ArchiveManager.Instance.GetUserSetData().displayModeType == DisplayModeType.FullScreen)
                 {
-                    ResolutionUtil.SetResolution(true, width, height);
+                    ResolutionHelper.SetResolution(true, width, height);
                 }
                 else if (ArchiveManager.Instance.GetUserSetData().displayModeType == DisplayModeType.Window)
                 {
-                    ResolutionUtil.SetResolution(false, width, height);
+                    ResolutionHelper.SetResolution(false, width, height);
                 }
                 else if (ArchiveManager.Instance.GetUserSetData().displayModeType == DisplayModeType.BorderlessWindow)
                 {
-                    ResolutionUtil.SetResolution(false, width, height);
+                    ResolutionHelper.SetResolution(false, width, height);
                     StartCoroutine(DisplayMode.SetNoFrame(width, height));
                 }
                 QualitySettings.SetQualityLevel(6, true);

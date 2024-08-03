@@ -56,7 +56,7 @@ namespace LccEditor
             {
                 if (File.Exists(item))
                 {
-                    SyntaxTree cs = CSharpSyntaxTree.ParseText(FileUtil.GetAsset(item).Utf8ToStr(), parseOptions, item, Encoding.UTF8);
+                    SyntaxTree cs = CSharpSyntaxTree.ParseText(FileHelper.GetAsset(item).Utf8ToStr(), parseOptions, item, Encoding.UTF8);
                     if (cs == null)
                     {
                         continue;
@@ -87,8 +87,8 @@ namespace LccEditor
                     using (MemoryStream pdbStream = new MemoryStream())
                     {
                         result = compilation.Emit(dllStream, pdbStream, options: emitOptions);
-                        FileUtil.SaveAsset(path, dllStream.GetBuffer());
-                        FileUtil.SaveAsset(pdbPath, pdbStream.GetBuffer());
+                        FileHelper.SaveAsset(path, dllStream.GetBuffer());
+                        FileHelper.SaveAsset(pdbPath, pdbStream.GetBuffer());
                     }
                 }
             }
@@ -98,14 +98,14 @@ namespace LccEditor
             }
             if (result.Success)
             {
-                LogUtil.Debug("编译成功");
+                LogHelper.Debug("编译成功");
             }
             else
             {
                 List<Diagnostic> failureList = (from diagnostic in result.Diagnostics where diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error select diagnostic).ToList();
                 foreach (Diagnostic item in failureList)
                 {
-                    LogUtil.Error(item.ToString());
+                    LogHelper.Error(item.ToString());
                 }
             }
             return result.Success;

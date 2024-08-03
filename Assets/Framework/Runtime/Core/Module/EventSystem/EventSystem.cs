@@ -177,7 +177,7 @@ namespace LccModel
                     fixedUpdateCopy.Enqueue(id);
                 }
             }
-            ObjectUtil.Swap(ref fixedUpdate, ref fixedUpdateCopy);
+            ObjectHelper.Swap(ref fixedUpdate, ref fixedUpdateCopy);
         }
         public void Update()
         {
@@ -194,7 +194,7 @@ namespace LccModel
                     updateCopy.Enqueue(id);
                 }
             }
-            ObjectUtil.Swap(ref update, ref updateCopy);
+            ObjectHelper.Swap(ref update, ref updateCopy);
         }
         public void LateUpdate()
         {
@@ -211,7 +211,7 @@ namespace LccModel
                     lateUpdateCopy.Enqueue(id);
                 }
             }
-            ObjectUtil.Swap(ref lateUpdate, ref lateUpdateCopy);
+            ObjectHelper.Swap(ref lateUpdate, ref lateUpdateCopy);
         }
 
 
@@ -224,7 +224,7 @@ namespace LccModel
                 {
                     if (!(item.IEvent is AEvent<T> aEvent))
                     {
-                        LogUtil.Debug($"事件类型不匹配 {item.IEvent.GetType().Name}");
+                        LogHelper.Debug($"事件类型不匹配 {item.IEvent.GetType().Name}");
                         continue;
                     }
 
@@ -233,7 +233,7 @@ namespace LccModel
             }
             else
             {
-                LogUtil.Debug($"事件不存在，事件数据类型 {type.Name}");
+                LogHelper.Debug($"事件不存在，事件数据类型 {type.Name}");
             }
         }
     }

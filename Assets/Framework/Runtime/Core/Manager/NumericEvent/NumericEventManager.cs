@@ -49,7 +49,7 @@ namespace LccModel
             }
             else
             {
-                LogUtil.Warning($"事件不存在{type}");
+                LogHelper.Warning($"事件不存在{type}");
             }
         }
     }

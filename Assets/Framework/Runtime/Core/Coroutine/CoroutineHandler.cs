@@ -42,12 +42,12 @@ namespace LccModel
         {
             if (Running)
             {
-                LogUtil.Debug("当前协程未完成");
+                LogHelper.Debug("当前协程未完成");
                 return;
             }
             if (Coroutine == null)
             {
-                LogUtil.Debug("协程未指定");
+                LogHelper.Debug("协程未指定");
                 return;
             }
             Running = true;

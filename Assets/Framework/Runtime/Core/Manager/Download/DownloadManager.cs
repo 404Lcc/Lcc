@@ -173,7 +173,7 @@ namespace LccModel
                     runningDict.Remove(item);
                 }
             }
-            if (NetworkUtil.CheckNetwork())
+            if (NetworkHelper.CheckNetwork())
             {
                 if (runningDict.Count < taskCount && readyQueue.Count > 0)
                 {

@@ -46,7 +46,7 @@ namespace LccHotfix
         }
         public async ETTask<AudioClip> LoadAudio(string audio, AudioType type)
         {
-            return await WebUtil.DownloadAudioClip(audio, type);
+            return await WebHelper.DownloadAudioClip(audio, type);
         }
         public void RemoveAudio(string audio, AudioSource source)
         {

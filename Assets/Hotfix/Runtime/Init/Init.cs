@@ -37,7 +37,7 @@ namespace LccHotfix
             }
             catch (System.Exception e)
             {
-                LogUtil.Error(e);
+                LogHelper.Error(e);
             }
         }
         private static void FixedUpdate()

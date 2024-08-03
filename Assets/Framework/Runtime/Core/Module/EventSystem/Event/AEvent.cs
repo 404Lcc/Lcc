@@ -22,7 +22,7 @@ namespace LccModel
             }
             catch (Exception e)
             {
-                LogUtil.Error(e);
+                LogHelper.Error(e);
             }
         }
     }

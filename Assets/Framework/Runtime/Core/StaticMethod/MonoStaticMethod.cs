@@ -17,7 +17,7 @@ namespace LccModel
         {
             if (this.param.Length != param.Length)
             {
-                LogUtil.Error("调用失败");
+                LogHelper.Error("调用失败");
                 return;
             }
             for (int i = 0; i < param.Length; i++)

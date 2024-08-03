@@ -9,8 +9,8 @@ namespace LccHotfix
         }
         public T Clone<T>() where T : ProtobufObject
         {
-            byte[] bytes = ProtobufUtil.Serialize(this);
-            return (T)ProtobufUtil.Deserialize(typeof(T), bytes, 0, bytes.Length);
+            byte[] bytes = ProtobufHelper.Serialize(this);
+            return (T)ProtobufHelper.Deserialize(typeof(T), bytes, 0, bytes.Length);
         }
     }
 }

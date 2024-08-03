@@ -57,12 +57,12 @@ namespace LccHotfix
                     }
                     else
                     {
-                        LogUtil.Error($"{name} 未继承IPanelHandler");
+                        LogHelper.Error($"{name} 未继承IPanelHandler");
                     }
                 }
                 else
                 {
-                    LogUtil.Error($"UI逻辑未找到 {name}");
+                    LogHelper.Error($"UI逻辑未找到 {name}");
                 }
             }
 
@@ -351,7 +351,7 @@ namespace LccHotfix
         {
             gameObject.AddComponent<Canvas>();
             gameObject.AddComponent<GraphicRaycaster>();
-            ScreenAdaptationUtil.UIPanelAdaptation(gameObject);
+            ScreenAdaptationHelper.UIPanelAdaptation(gameObject);
             return gameObject;
         }
 

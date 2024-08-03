@@ -119,7 +119,7 @@ namespace LccHotfix
 
                 int currentIndex = index % loopScroll.NumberOfCellsPerRow;
                 rect.anchoredPosition = new Vector2((sizeDict[index].x + loopScroll.Scroller.spacing) * currentIndex, 0);
-                LogUtil.Debug((index % loopScroll.NumberOfCellsPerRow).ToString());
+                LogHelper.Debug((index % loopScroll.NumberOfCellsPerRow).ToString());
 
                 item.OnShow();
                 dict.Add(index, item);

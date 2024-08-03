@@ -70,14 +70,14 @@ namespace LccHotfix
         public override void OnInitComponent(Panel panel)
         {
             base.OnInitComponent(panel);
-            LogUtil.Debug("OnInitComponent第三个执行的函数");
+            LogHelper.Debug("OnInitComponent第三个执行的函数");
 
             loopScroll = panel.AddChildren<LoopScroll<LoginItemData, LoginItem>>(loop, item);
         }
         public override void OnInitData(Panel panel)
         {
             base.OnInitData(panel);
-            LogUtil.Debug("OnInitData第四个执行的函数");
+            LogHelper.Debug("OnInitData第四个执行的函数");
 
             panel.data.type = UIType.Normal;
             panel.data.showMode = UIShowMode.HideOther;
@@ -86,7 +86,7 @@ namespace LccHotfix
 
         public override void OnRegisterUIEvent(Panel panel)
         {
-            LogUtil.Debug("OnRegisterUIEvent第五个执行的函数");
+            LogHelper.Debug("OnRegisterUIEvent第五个执行的函数");
 
             testBtn.onClick.AddListener(OnEnterMain);
         }
@@ -95,7 +95,7 @@ namespace LccHotfix
         public override void OnShow(Panel panel, object contextData = null)
         {
             base.OnShow(panel, contextData);
-            LogUtil.Debug("OnShow第六个执行的函数");
+            LogHelper.Debug("OnShow第六个执行的函数");
 
             UpdatePanel.Instance.Hide();
 
@@ -116,12 +116,12 @@ namespace LccHotfix
 
         public override void OnHide(Panel panel)
         {
-            LogUtil.Debug("OnHide");
+            LogHelper.Debug("OnHide");
         }
 
         public override void OnBeforeUnload(Panel panel)
         {
-            LogUtil.Debug("BeforeUnload");
+            LogHelper.Debug("BeforeUnload");
         }
         public void OnEnterMain()
         {
