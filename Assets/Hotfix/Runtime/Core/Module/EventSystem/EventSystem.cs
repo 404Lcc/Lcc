@@ -252,7 +252,7 @@ namespace LccHotfix
                         continue;
                     }
 
-                    aEvent.Handle(data).Coroutine();
+                    aEvent.Handle(data);
                 }
             }
             else

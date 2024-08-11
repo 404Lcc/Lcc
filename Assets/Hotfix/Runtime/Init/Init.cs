@@ -47,7 +47,6 @@ namespace LccHotfix
         private static void Update()
         {
             Game.Update();
-            Game.FrameFinishUpdate();
         }
         private static void LateUpdate()
         {

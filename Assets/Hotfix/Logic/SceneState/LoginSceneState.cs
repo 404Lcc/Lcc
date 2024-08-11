@@ -1,5 +1,3 @@
-using ET;
-using LccModel;
 using UnityEngine;
 
 namespace LccHotfix

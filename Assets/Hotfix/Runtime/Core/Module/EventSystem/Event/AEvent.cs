@@ -1,5 +1,4 @@
-﻿using ET;
-using LccModel;
+﻿using LccModel;
 using System;
 
 namespace LccHotfix
@@ -13,13 +12,13 @@ namespace LccHotfix
                 return typeof(T);
             }
         }
-        protected abstract ETTask Run(T data);
+        protected abstract void Run(T data);
 
-        public async ETTask Handle(T data)
+        public void Handle(T data)
         {
             try
             {
-                await Run(data);
+                Run(data);
             }
             catch (Exception e)
             {

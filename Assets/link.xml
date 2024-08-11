@@ -4614,116 +4614,18 @@
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=7232" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Model">
-    <type fullname="IDispose" preserve="all" />
-    <type fullname="LogicComponent" preserve="all" />
-    <type fullname="LogicComponentsLookup" preserve="all" />
-    <type fullname="LogicEntity" preserve="all" />
-    <type fullname="LogicMatcher" preserve="all" />
-    <type fullname="LogicWorld" preserve="all" />
-    <type fullname="IDComponent" preserve="all" />
-    <type fullname="Worlds" preserve="all" />
-    <type fullname="WorldSystems" preserve="all" />
-    <type fullname="ScreenAdaptationHelper" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1" preserve="all" />
-    <type fullname="RVO.Agent" preserve="all" />
-    <type fullname="RVO.KdTree" preserve="all" />
-    <type fullname="RVO.Line" preserve="all" />
-    <type fullname="RVO.Obstacle" preserve="all" />
-    <type fullname="RVO.ObstaclePolygon" preserve="all" />
-    <type fullname="RVO.RVOMath" preserve="all" />
-    <type fullname="RVO.Simulator" preserve="all" />
-    <type fullname="RVO.Vector2" preserve="all" />
-    <type fullname="LccModel.MessageBox" preserve="all" />
-    <type fullname="LccModel.UpdatePanel" preserve="all" />
-    <type fullname="LccModel.AssetBundleCreateRequestAwaiter" preserve="all" />
-    <type fullname="LccModel.AssetBundleRequestAwaiter" preserve="all" />
-    <type fullname="LccModel.AsyncOperationAwaiter" preserve="all" />
-    <type fullname="LccModel.UnityWebRequestAsyncOperationAwaiter" preserve="all" />
-    <type fullname="LccModel.CoroutineCompletedHandler" preserve="all" />
-    <type fullname="LccModel.CoroutineHandler" preserve="all" />
-    <type fullname="LccModel.CoroutineObject" preserve="all" />
     <type fullname="LccModel.Event" preserve="all" />
     <type fullname="LccModel.EventDriver" preserve="all" />
     <type fullname="LccModel.EventGroup" preserve="all" />
     <type fullname="LccModel.IEventMessage" preserve="all" />
-    <type fullname="LccModel.AwaiterExpand" preserve="all" />
-    <type fullname="LccModel.ByteExpand" preserve="all" />
-    <type fullname="LccModel.GameObjectExpand" preserve="all" />
-    <type fullname="LccModel.ImageExpand" preserve="all" />
-    <type fullname="LccModel.ObjectBaseExpand" preserve="all" />
-    <type fullname="LccModel.SpriteRendererExpand" preserve="all" />
-    <type fullname="LccModel.StringExpand" preserve="all" />
-    <type fullname="LccModel.TaskExpand" preserve="all" />
-    <type fullname="LccModel.TransformExpand" preserve="all" />
-    <type fullname="LccModel.UnityWebRequestExpand" preserve="all" />
-    <type fullname="LccModel.Vector2Expand" preserve="all" />
-    <type fullname="LccModel.Vector3Expand" preserve="all" />
-    <type fullname="LccModel.IStateNode" preserve="all" />
-    <type fullname="LccModel.StateMachine" preserve="all" />
+    <type fullname="LccModel.RijndaelHelper" preserve="all" />
     <type fullname="LccModel.AssetManager" preserve="all" />
     <type fullname="LccModel.AssetObject" preserve="all" />
     <type fullname="LccModel.ALLAssetObject" preserve="all" />
     <type fullname="LccModel.RawObject" preserve="all" />
     <type fullname="LccModel.AssetSuffix" preserve="all" />
-    <type fullname="LccModel.BridgeManager" preserve="all" />
-    <type fullname="LccModel.CoroutineLock" preserve="all" />
-    <type fullname="LccModel.CoroutineLockManager" preserve="all" />
-    <type fullname="LccModel.CoroutineLockQueue" preserve="all" />
-    <type fullname="LccModel.CoroutineLockQueueType" preserve="all" />
-    <type fullname="LccModel.CoroutineLockType" preserve="all" />
-    <type fullname="LccModel.WaitCoroutineLock" preserve="all" />
-    <type fullname="LccModel.DownloadData" preserve="all" />
-    <type fullname="LccModel.DownloadFile" preserve="all" />
-    <type fullname="LccModel.DownloadManager" preserve="all" />
-    <type fullname="LccModel.DownloadState" preserve="all" />
-    <type fullname="LccModel.Manager" preserve="all" />
-    <type fullname="LccModel.ModelBase" preserve="all" />
-    <type fullname="LccModel.ModelPoolManager" preserve="all" />
-    <type fullname="LccModel.INumericEvent" preserve="all" />
-    <type fullname="LccModel.NumericEventHandlerAttribute" preserve="all" />
-    <type fullname="LccModel.NumericEventManager" preserve="all" />
-    <type fullname="LccModel.OrcaManager" preserve="all" />
-    <type fullname="LccModel.PatchManager" preserve="all" />
-    <type fullname="LccModel.RedDot" preserve="all" />
-    <type fullname="LccModel.RedDotManager" preserve="all" />
-    <type fullname="LccModel.AABB" preserve="all" />
-    <type fullname="LccModel.OBB" preserve="all" />
-    <type fullname="LccModel.OBBTest" preserve="all" />
-    <type fullname="LccModel.AEvent`1" preserve="all" />
-    <type fullname="LccModel.EventAttribute" preserve="all" />
-    <type fullname="LccModel.EventData" preserve="all" />
-    <type fullname="LccModel.Start" preserve="all" />
-    <type fullname="LccModel.IEvent" preserve="all" />
-    <type fullname="LccModel.EventSystem" preserve="all" />
-    <type fullname="LccModel.ILog" preserve="all" />
-    <type fullname="LccModel.Logger" preserve="all" />
-    <type fullname="LccModel.UnityLogger" preserve="all" />
-    <type fullname="LccModel.MainThreadSynchronizationContext" preserve="all" />
-    <type fullname="LccModel.ThreadSynchronizationContext" preserve="all" />
-    <type fullname="LccModel.Time" preserve="all" />
-    <type fullname="LccModel.Timer" preserve="all" />
-    <type fullname="LccModel.TimerData" preserve="all" />
-    <type fullname="LccModel.TimerType" preserve="all" />
-    <type fullname="LccModel.AStarMap" preserve="all" />
-    <type fullname="LccModel.AStarNodeData" preserve="all" />
-    <type fullname="LccModel.AObjectBase" preserve="all" />
-    <type fullname="LccModel.AttributeBase" preserve="all" />
-    <type fullname="LccModel.IFixedUpdate" preserve="all" />
-    <type fullname="LccModel.ILateUpdate" preserve="all" />
-    <type fullname="LccModel.IUpdate" preserve="all" />
-    <type fullname="LccModel.DoubleMap`2" preserve="all" />
-    <type fullname="LccModel.Game" preserve="all" />
-    <type fullname="LccModel.GameObjectComponent" preserve="all" />
     <type fullname="LccModel.LccView" preserve="all" />
-    <type fullname="LccModel.NumericEntity" preserve="all" />
-    <type fullname="LccModel.NumericType" preserve="all" />
-    <type fullname="LccModel.APool`1" preserve="all" />
-    <type fullname="LccModel.ProtobufObject" preserve="all" />
-    <type fullname="LccModel.Root" preserve="all" />
-    <type fullname="LccModel.SceneFactory" preserve="all" />
-    <type fullname="LccModel.Scene" preserve="all" />
-    <type fullname="LccModel.UnOrderMultiMap`2" preserve="all" />
-    <type fullname="LccModel.UnOrderMultiMapSet`2" preserve="all" />
     <type fullname="LccModel.PatchEventDefine" preserve="all" />
     <type fullname="LccModel.UserEventDefine" preserve="all" />
     <type fullname="LccModel.FsmClearPackageCache" preserve="all" />
@@ -4738,91 +4640,38 @@
     <type fullname="LccModel.PatchOperation" preserve="all" />
     <type fullname="LccModel.GroupBase" preserve="all" />
     <type fullname="LccModel.ScrollerPro" preserve="all" />
-    <type fullname="LccModel.ISingleton" preserve="all" />
-    <type fullname="LccModel.ISingletonLateUpdate" preserve="all" />
-    <type fullname="LccModel.ISingletonFixedUpdate" preserve="all" />
-    <type fullname="LccModel.ISingletonUpdate" preserve="all" />
     <type fullname="LccModel.Singleton`1" preserve="all" />
+    <type fullname="LccModel.SingletonMono`1" preserve="all" />
     <type fullname="LccModel.AStaticMethod" preserve="all" />
     <type fullname="LccModel.MonoStaticMethod" preserve="all" />
-    <type fullname="LccModel.ActionWrap`1" preserve="all" />
-    <type fullname="LccModel.DirectoryHelper" preserve="all" />
-    <type fullname="LccModel.ExpressionHelper" preserve="all" />
-    <type fullname="LccModel.FileHelper" preserve="all" />
-    <type fullname="LccModel.IdHelper" preserve="all" />
-    <type fullname="LccModel.JsonHelper" preserve="all" />
-    <type fullname="LccModel.LogHelper" preserve="all" />
-    <type fullname="LccModel.MD5Helper" preserve="all" />
-    <type fullname="LccModel.NetworkHelper" preserve="all" />
-    <type fullname="LccModel.ObjectHelper" preserve="all" />
-    <type fullname="LccModel.PathHelper" preserve="all" />
-    <type fullname="LccModel.PathType" preserve="all" />
-    <type fullname="LccModel.ProtobufHelper" preserve="all" />
-    <type fullname="LccModel.RandomHelper" preserve="all" />
-    <type fullname="LccModel.ResolutionHelper" preserve="all" />
-    <type fullname="LccModel.RijndaelHelper" preserve="all" />
-    <type fullname="LccModel.SerializeHelper" preserve="all" />
-    <type fullname="LccModel.SortHelper" preserve="all" />
-    <type fullname="LccModel.BuildinFileManifest" preserve="all" />
-    <type fullname="LccModel.StreamingAssetsDefine" preserve="all" />
-    <type fullname="LccModel.GameQueryServices" preserve="all" />
-    <type fullname="LccModel.StreamingAssetsHelper" preserve="all" />
-    <type fullname="LccModel.WebHelper" preserve="all" />
     <type fullname="LccModel.HotfixMode" preserve="all" />
     <type fullname="LccModel.GlobalConfig" preserve="all" />
     <type fullname="LccModel.Init" preserve="all" />
     <type fullname="LccModel.Loader" preserve="all" />
+    <type fullname="LccModel.PatchManager" preserve="all" />
+    <type fullname="LccModel.IStateNode" preserve="all" />
+    <type fullname="LccModel.StateMachine" preserve="all" />
+    <type fullname="LccModel.AABB" preserve="all" />
+    <type fullname="LccModel.OBB" preserve="all" />
     <type fullname="LccModel.DisplayMode" preserve="all" />
+    <type fullname="LccModel.LocalDialog" preserve="all" />
+    <type fullname="LccModel.OpenFileName" preserve="all" />
+    <type fullname="LccModel.TransformExpand" preserve="all" />
     <type fullname="LccModel.DoubleClickEvent" preserve="all" />
     <type fullname="LccModel.DoubleClickButton" preserve="all" />
-    <type fullname="LccModel.DragEventTrigger" preserve="all" />
     <type fullname="LccModel.EnterClickEvent" preserve="all" />
     <type fullname="LccModel.ExitClickEvent" preserve="all" />
     <type fullname="LccModel.EnterClickButton" preserve="all" />
     <type fullname="LccModel.EventTriggerListener" preserve="all" />
-    <type fullname="LccModel.LanguageText" preserve="all" />
-    <type fullname="LccModel.LocalDialog" preserve="all" />
     <type fullname="LccModel.LongClickEvent" preserve="all" />
     <type fullname="LccModel.LongClickButton" preserve="all" />
-    <type fullname="LccModel.OpenFileName" preserve="all" />
     <type fullname="LccModel.RightClickEvent" preserve="all" />
     <type fullname="LccModel.RightClickButton" preserve="all" />
+    <type fullname="LccModel.MessageBox" preserve="all" />
+    <type fullname="LccModel.UpdatePanel" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;" preserve="all" />
-    <type fullname="LogicWorld+&lt;&gt;c" preserve="all" />
-    <type fullname="Worlds+&lt;&gt;c" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1+MonoScriptData" preserve="all" />
-    <type fullname="RVO.KdTree+AgentTreeNode" preserve="all" />
-    <type fullname="RVO.KdTree+FloatPair" preserve="all" />
-    <type fullname="RVO.KdTree+ObstacleTreeNode" preserve="all" />
-    <type fullname="RVO.Simulator+Worker" preserve="all" />
-    <type fullname="LccModel.UpdatePanel+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.UpdatePanel+&lt;UpdateLoadingPercent&gt;d__12" preserve="all" />
-    <type fullname="LccModel.CoroutineHandler+&lt;CallWrapper&gt;d__28" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
-    <type fullname="LccModel.TaskExpand+&lt;Continue&gt;d__0" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;&gt;c__DisplayClass11_0`1" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;&gt;c__DisplayClass13_0" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;&gt;c__DisplayClass15_0`1" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;&gt;c__DisplayClass17_0`1" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;StartLoadALLRes&gt;d__15`1" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;StartLoadGameObject&gt;d__13" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;StartLoadRawRes&gt;d__17`1" preserve="all" />
-    <type fullname="LccModel.AssetManager+&lt;StartLoadRes&gt;d__11`1" preserve="all" />
-    <type fullname="LccModel.CoroutineLockManager+&lt;Wait&gt;d__8" preserve="all" />
-    <type fullname="LccModel.CoroutineLockQueue+&lt;&gt;c__DisplayClass7_0" preserve="all" />
-    <type fullname="LccModel.CoroutineLockQueue+&lt;Wait&gt;d__7" preserve="all" />
-    <type fullname="LccModel.CoroutineLockQueueType+&lt;Wait&gt;d__6" preserve="all" />
-    <type fullname="LccModel.WaitCoroutineLock+&lt;Wait&gt;d__5" preserve="all" />
-    <type fullname="LccModel.ModelPoolManager+&lt;GetModelAsync&gt;d__8" preserve="all" />
-    <type fullname="LccModel.ModelPoolManager+&lt;LoadObjectAsync&gt;d__11" preserve="all" />
-    <type fullname="LccModel.PatchManager+&lt;StartUpdate&gt;d__7" preserve="all" />
-    <type fullname="LccModel.AEvent`1+&lt;Handle&gt;d__3" preserve="all" />
-    <type fullname="LccModel.MainThreadSynchronizationContext+&lt;&gt;c__DisplayClass5_0" preserve="all" />
-    <type fullname="LccModel.ThreadSynchronizationContext+&lt;&gt;c__DisplayClass3_0" preserve="all" />
-    <type fullname="LccModel.Timer+&lt;&gt;c__DisplayClass10_0" preserve="all" />
-    <type fullname="LccModel.Timer+&lt;WaitAsync&gt;d__10" preserve="all" />
-    <type fullname="LccModel.Timer+&lt;WaitFrameAsync&gt;d__11" preserve="all" />
-    <type fullname="LccModel.Game+&lt;WaitFrameFinish&gt;d__10" preserve="all" />
     <type fullname="LccModel.PatchEventDefine+InitializeFailed" preserve="all" />
     <type fullname="LccModel.PatchEventDefine+PatchStatesChange" preserve="all" />
     <type fullname="LccModel.PatchEventDefine+FoundUpdateFiles" preserve="all" />
@@ -4844,19 +4693,11 @@
     <type fullname="LccModel.FsmUpdatePackageManifest+&lt;UpdateManifest&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmUpdatePackageVersion+&lt;UpdatePackageVersion&gt;d__5" preserve="all" />
     <type fullname="LccModel.PatchOperation+ESteps" preserve="all" />
-    <type fullname="LccModel.BuildinFileManifest+Element" preserve="all" />
-    <type fullname="LccModel.StreamingAssetsHelper+PackageQuery" preserve="all" />
-    <type fullname="LccModel.WebHelper+&lt;DownloadAssetBundle&gt;d__5" preserve="all" />
-    <type fullname="LccModel.WebHelper+&lt;DownloadAudioClip&gt;d__4" preserve="all" />
-    <type fullname="LccModel.WebHelper+&lt;DownloadBytes&gt;d__2" preserve="all" />
-    <type fullname="LccModel.WebHelper+&lt;DownloadText&gt;d__1" preserve="all" />
-    <type fullname="LccModel.WebHelper+&lt;DownloadTexture2D&gt;d__3" preserve="all" />
-    <type fullname="LccModel.WebHelper+&lt;Upload&gt;d__0" preserve="all" />
     <type fullname="LccModel.Init+&lt;&gt;c" preserve="all" />
+    <type fullname="LccModel.PatchManager+&lt;StartUpdate&gt;d__1" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
-    <type fullname="LccModel.EventTriggerListener+VoidDelegate" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=144" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=5505" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=10310" preserve="all" />
+    <type fullname="LccModel.UpdatePanel+&lt;&gt;c" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2268" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2528" preserve="all" />
   </assembly>
 </linker>

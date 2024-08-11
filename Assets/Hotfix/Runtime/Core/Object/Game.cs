@@ -1,4 +1,3 @@
-using ET;
 using LccModel;
 using System;
 using System.Collections.Generic;
@@ -13,7 +12,6 @@ namespace LccHotfix
         private static readonly Queue<ISingleton> fixedUpdates = new Queue<ISingleton>();
         private static readonly Queue<ISingleton> updates = new Queue<ISingleton>();
         private static readonly Queue<ISingleton> lateUpdates = new Queue<ISingleton>();
-        private static readonly Queue<ETTask> frameFinishTask = new Queue<ETTask>();
 
         public static Scene Scene => Root.Instance.Scene;
 
@@ -51,21 +49,6 @@ namespace LccHotfix
             }
 
             singleton.Register();
-        }
-
-        public static async ETTask WaitFrameFinish()
-        {
-            ETTask task = ETTask.Create(true);
-            frameFinishTask.Enqueue(task);
-            await task;
-        }
-        public static void FrameFinishUpdate()
-        {
-            while (frameFinishTask.Count > 0)
-            {
-                ETTask task = frameFinishTask.Dequeue();
-                task.SetResult();
-            }
         }
 
         public static void FixedUpdate()

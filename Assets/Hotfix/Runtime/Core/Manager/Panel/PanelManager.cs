@@ -1,5 +1,4 @@
-﻿using ET;
-using LccModel;
+﻿using LccModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -185,13 +184,13 @@ namespace LccHotfix
         /// <param name="type"></param>
         /// <param name="showData"></param>
         /// <returns></returns>
-        public async ETTask ShowPanelAsync(PanelType type, ShowPanelData showData = null)
+        public void ShowPanelAsync(PanelType type, ShowPanelData showData = null)
         {
-            Panel panel = await LoadPanelAsync(type);
-            if (panel != null)
-            {
-                InternalShowPanel(panel, type, showData);
-            }
+            //Panel panel = LoadPanelAsync(type);
+            //if (panel != null)
+            //{
+            //    InternalShowPanel(panel, type, showData);
+            //}
         }
         /// <summary>
         /// 打开界面
@@ -199,10 +198,10 @@ namespace LccHotfix
         /// <typeparam name="T"></typeparam>
         /// <param name="showData"></param>
         /// <returns></returns>
-        public async ETTask ShowPanelAsync<T>(ShowPanelData showData = null) where T : IPanelHandler
+        public void ShowPanelAsync<T>(ShowPanelData showData = null) where T : IPanelHandler
         {
             PanelType type = GetPanelByGeneric<T>();
-            await ShowPanelAsync(type, showData);
+            ShowPanelAsync(type, showData);
         }
         private void InternalShowPanel(Panel panel, PanelType type, ShowPanelData showData = null)
         {
@@ -289,61 +288,61 @@ namespace LccHotfix
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        private async ETTask<Panel> LoadPanelAsync(PanelType type)
+        private void LoadPanelAsync(PanelType type)
         {
-            CoroutineLock coroutineLock = null;
-            try
-            {
-                coroutineLock = await CoroutineLockManager.Instance.Wait(CoroutineLockType.LoadUI, (int)type);
-                Panel panel = GetPanel(type);
-                if (panel == null)
-                {
-                    panel = AddChildren<Panel>();
-                    panel.Type = type;
-                    await InternalLoadPanelAsync(panel);
-                }
+            //CoroutineLock coroutineLock = null;
+            //try
+            //{
+            //    coroutineLock = await CoroutineLockManager.Instance.Wait(CoroutineLockType.LoadUI, (int)type);
+            //    Panel panel = GetPanel(type);
+            //    if (panel == null)
+            //    {
+            //        panel = AddChildren<Panel>();
+            //        panel.Type = type;
+            //        await InternalLoadPanelAsync(panel);
+            //    }
 
-                if (!panel.IsLoad)
-                {
-                    await InternalLoadPanelAsync(panel);
-                }
-                return panel;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                coroutineLock?.Dispose();
-            }
+            //    if (!panel.IsLoad)
+            //    {
+            //        await InternalLoadPanelAsync(panel);
+            //    }
+            //    return panel;
+            //}
+            //catch (Exception e)
+            //{
+            //    throw e;
+            //}
+            //finally
+            //{
+            //    coroutineLock?.Dispose();
+            //}
         }
-        private async ETTask InternalLoadPanelAsync(Panel panel)
+        private void InternalLoadPanelAsync(Panel panel)
         {
-            if (!typeToNameDict.TryGetValue((int)panel.Type, out string name))
-            {
-                return;
-            }
-            var loader = new GameObject("loader");
-            var asset = await AssetManager.Instance.StartLoadGameObject(loader, name);
+            //if (!typeToNameDict.TryGetValue((int)panel.Type, out string name))
+            //{
+            //    return;
+            //}
+            //var loader = new GameObject("loader");
+            //var asset = await AssetManager.Instance.StartLoadGameObject(loader, name);
 
-            GameObject go = UnityEngine.Object.Instantiate(asset);
-            go.name = name;
-            go.transform.localPosition = Vector3.zero;
-            go.transform.localRotation = Quaternion.identity;
-            go.transform.localScale = Vector3.one;
+            //GameObject go = UnityEngine.Object.Instantiate(asset);
+            //go.name = name;
+            //go.transform.localPosition = Vector3.zero;
+            //go.transform.localRotation = Quaternion.identity;
+            //go.transform.localScale = Vector3.one;
 
-            panel.Loader = loader;
-            panel.GameObject = CreateUIGameObject(go);
-            panel.Canvas = panel.GameObject.GetComponent<Canvas>();
-            panel.GameObject.name = go.name;
-            loader.transform.SetParent(panel.GameObject.transform);
+            //panel.Loader = loader;
+            //panel.GameObject = CreateUIGameObject(go);
+            //panel.Canvas = panel.GameObject.GetComponent<Canvas>();
+            //panel.GameObject.name = go.name;
+            //loader.transform.SetParent(panel.GameObject.transform);
 
-            panel.Logic.OnInitComponent(panel);
-            panel.Logic.OnInitData(panel);
-            panel.Logic.OnRegisterUIEvent(panel);
+            //panel.Logic.OnInitComponent(panel);
+            //panel.Logic.OnInitData(panel);
+            //panel.Logic.OnRegisterUIEvent(panel);
 
-            allPanelDict[(int)panel.Type] = panel;
+            //allPanelDict[(int)panel.Type] = panel;
         }
 
 

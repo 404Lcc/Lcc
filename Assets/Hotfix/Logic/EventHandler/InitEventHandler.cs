@@ -1,13 +1,9 @@
-﻿using ET;
-using LccModel;
-using System;
-
-namespace LccHotfix
+﻿namespace LccHotfix
 {
     [Event]
     public class InitEventHandler : AEvent<Start>
     {
-        protected override async ETTask Run(Start data)
+        protected override void Run(Start data)
         {
 
             //这里可以初始化

@@ -1,5 +1,4 @@
-﻿using ET;
-using LccModel;
+﻿using LccModel;
 using System.Collections.Generic;
 using UnityEngine;
 using YooAsset;
@@ -44,9 +43,9 @@ namespace LccHotfix
             audioDict.Add(audio, clip);
             return clip;
         }
-        public async ETTask<AudioClip> LoadAudio(string audio, AudioType type)
+        public AudioClip LoadAudio(string audio, AudioType type)
         {
-            return await WebHelper.DownloadAudioClip(audio, type);
+            return null;//WebHelper.DownloadAudioClip(audio, type);
         }
         public void RemoveAudio(string audio, AudioSource source)
         {
@@ -57,7 +56,7 @@ namespace LccHotfix
                 audioDict.Remove(audio);
             }
         }
-        public async ETTask<AudioClip> PlayAudio(string audio, bool isAsset, AudioSource source)
+        public AudioClip PlayAudio(string audio, bool isAsset, AudioSource source)
         {
             AudioClip clip;
             if (AudioExist(audio))
@@ -73,7 +72,7 @@ namespace LccHotfix
             }
             else
             {
-                clip = await LoadAudio(audio, AudioType.WAV);
+                clip = LoadAudio(audio, AudioType.WAV);
                 if (clip == null)
                 {
                     return null;
