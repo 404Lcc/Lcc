@@ -4615,17 +4615,23 @@
   </assembly>
   <assembly fullname="Unity.Model">
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1" preserve="all" />
-    <type fullname="LccModel.Event" preserve="all" />
-    <type fullname="LccModel.EventDriver" preserve="all" />
-    <type fullname="LccModel.EventGroup" preserve="all" />
-    <type fullname="LccModel.IEventMessage" preserve="all" />
-    <type fullname="LccModel.RijndaelHelper" preserve="all" />
     <type fullname="LccModel.AssetManager" preserve="all" />
     <type fullname="LccModel.AssetObject" preserve="all" />
     <type fullname="LccModel.ALLAssetObject" preserve="all" />
     <type fullname="LccModel.RawObject" preserve="all" />
     <type fullname="LccModel.AssetSuffix" preserve="all" />
-    <type fullname="LccModel.LccView" preserve="all" />
+    <type fullname="LccModel.Event" preserve="all" />
+    <type fullname="LccModel.EventDriver" preserve="all" />
+    <type fullname="LccModel.EventGroup" preserve="all" />
+    <type fullname="LccModel.IEventMessage" preserve="all" />
+    <type fullname="LccModel.TransformExpand" preserve="all" />
+    <type fullname="LccModel.HotfixMode" preserve="all" />
+    <type fullname="LccModel.GlobalConfig" preserve="all" />
+    <type fullname="LccModel.Init" preserve="all" />
+    <type fullname="LccModel.Loader" preserve="all" />
+    <type fullname="LccModel.AStaticMethod" preserve="all" />
+    <type fullname="LccModel.MonoStaticMethod" preserve="all" />
+    <type fullname="LccModel.Patch" preserve="all" />
     <type fullname="LccModel.PatchEventDefine" preserve="all" />
     <type fullname="LccModel.UserEventDefine" preserve="all" />
     <type fullname="LccModel.FsmClearPackageCache" preserve="all" />
@@ -4638,25 +4644,18 @@
     <type fullname="LccModel.FsmUpdatePackageVersion" preserve="all" />
     <type fullname="LccModel.FsmUpdaterDone" preserve="all" />
     <type fullname="LccModel.PatchOperation" preserve="all" />
-    <type fullname="LccModel.GroupBase" preserve="all" />
-    <type fullname="LccModel.ScrollerPro" preserve="all" />
-    <type fullname="LccModel.Singleton`1" preserve="all" />
-    <type fullname="LccModel.SingletonMono`1" preserve="all" />
-    <type fullname="LccModel.AStaticMethod" preserve="all" />
-    <type fullname="LccModel.MonoStaticMethod" preserve="all" />
-    <type fullname="LccModel.HotfixMode" preserve="all" />
-    <type fullname="LccModel.GlobalConfig" preserve="all" />
-    <type fullname="LccModel.Init" preserve="all" />
-    <type fullname="LccModel.Loader" preserve="all" />
-    <type fullname="LccModel.PatchManager" preserve="all" />
+    <type fullname="LccModel.LccView" preserve="all" />
     <type fullname="LccModel.IStateNode" preserve="all" />
     <type fullname="LccModel.StateMachine" preserve="all" />
     <type fullname="LccModel.AABB" preserve="all" />
     <type fullname="LccModel.OBB" preserve="all" />
+    <type fullname="LccModel.GroupBase" preserve="all" />
+    <type fullname="LccModel.ScrollerPro" preserve="all" />
+    <type fullname="LccModel.Singleton`1" preserve="all" />
+    <type fullname="LccModel.SingletonMono`1" preserve="all" />
     <type fullname="LccModel.DisplayMode" preserve="all" />
     <type fullname="LccModel.LocalDialog" preserve="all" />
     <type fullname="LccModel.OpenFileName" preserve="all" />
-    <type fullname="LccModel.TransformExpand" preserve="all" />
     <type fullname="LccModel.DoubleClickEvent" preserve="all" />
     <type fullname="LccModel.DoubleClickButton" preserve="all" />
     <type fullname="LccModel.EnterClickEvent" preserve="all" />
@@ -4668,10 +4667,13 @@
     <type fullname="LccModel.RightClickEvent" preserve="all" />
     <type fullname="LccModel.RightClickButton" preserve="all" />
     <type fullname="LccModel.MessageBox" preserve="all" />
-    <type fullname="LccModel.UpdatePanel" preserve="all" />
+    <type fullname="LccModel.LoadingPanel" preserve="all" />
+    <type fullname="LccModel.RijndaelUtility" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1+MonoScriptData" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
+    <type fullname="LccModel.Init+&lt;&gt;c" preserve="all" />
+    <type fullname="LccModel.Patch+&lt;StartUpdate&gt;d__1" preserve="all" />
     <type fullname="LccModel.PatchEventDefine+InitializeFailed" preserve="all" />
     <type fullname="LccModel.PatchEventDefine+PatchStatesChange" preserve="all" />
     <type fullname="LccModel.PatchEventDefine+FoundUpdateFiles" preserve="all" />
@@ -4693,11 +4695,9 @@
     <type fullname="LccModel.FsmUpdatePackageManifest+&lt;UpdateManifest&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmUpdatePackageVersion+&lt;UpdatePackageVersion&gt;d__5" preserve="all" />
     <type fullname="LccModel.PatchOperation+ESteps" preserve="all" />
-    <type fullname="LccModel.Init+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.PatchManager+&lt;StartUpdate&gt;d__1" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
-    <type fullname="LccModel.UpdatePanel+&lt;&gt;c" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2268" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2528" preserve="all" />
+    <type fullname="LccModel.LoadingPanel+&lt;&gt;c" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2263" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2480" preserve="all" />
   </assembly>
 </linker>

@@ -97,7 +97,7 @@ namespace LccHotfix
             base.OnShow(panel, contextData);
             LogHelper.Debug("OnShow第六个执行的函数");
 
-            UpdatePanel.Instance.Hide();
+            LoadingPanel.Instance.Hide();
 
             List<LoginItemData> list = new List<LoginItemData>();
             for (int i = 0; i < 100; i++)

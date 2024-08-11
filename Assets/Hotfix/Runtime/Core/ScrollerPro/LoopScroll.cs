@@ -39,7 +39,7 @@ namespace LccHotfix
                 if (_itemSize == Vector2.zero)
                 {
                     RectTransform rect = itemPrefab.transform as RectTransform;
-                    _itemSize = rect.sizeDelta();
+                    _itemSize = rect.SizeDelta();
                 }
                 return _itemSize;
             }
@@ -84,11 +84,11 @@ namespace LccHotfix
                 //GridLayoutGroup gridLayoutGroup = groupPrefab.AddComponent<GridLayoutGroup>();
                 //gridLayoutGroup.spacing = new Vector2(loopScroll.Scroller.spacing, 0);
                 //gridLayoutGroup.cellSize = itemRect.sizeDelta();
-                groupRect.sizeDelta = new Vector2(loopScrollRect.sizeDelta().x, itemRect.sizeDelta().y);
+                groupRect.sizeDelta = new Vector2(loopScrollRect.SizeDelta().x, itemRect.SizeDelta().y);
             }
             else
             {
-                groupRect.sizeDelta = itemRect.sizeDelta();
+                groupRect.sizeDelta = itemRect.SizeDelta();
             }
 
             GroupBase groupBase = groupPrefab.AddComponent<GroupBase>();

@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using UnityEngine;
 
-namespace LccModel
+namespace LccHotfix
 {
     public static class LogHelper
     {

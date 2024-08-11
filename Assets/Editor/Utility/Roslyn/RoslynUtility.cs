@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using UnityEngine;
 
 namespace LccEditor
 {
@@ -98,14 +99,14 @@ namespace LccEditor
             }
             if (result.Success)
             {
-                LogHelper.Debug("编译成功");
+                Debug.Log("编译成功");
             }
             else
             {
                 List<Diagnostic> failureList = (from diagnostic in result.Diagnostics where diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error select diagnostic).ToList();
                 foreach (Diagnostic item in failureList)
                 {
-                    LogHelper.Error(item.ToString());
+                    Debug.LogError(item.ToString());
                 }
             }
             return result.Success;

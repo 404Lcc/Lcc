@@ -55,7 +55,7 @@ namespace LccHotfix
             if (_userData != null) return _userData;
             if (UserDataExist(name))
             {
-                string value = RijndaelHelper.RijndaelDecrypt(_key, FileHelper.GetAsset($"{PathHelper.GetPersistentDataPath(Res)}/{name}{AssetSuffix.Lcc}").Utf8ToStr());
+                string value = RijndaelUtility.RijndaelDecrypt(_key, FileHelper.GetAsset($"{PathHelper.GetPersistentDataPath(Res)}/{name}{AssetSuffix.Lcc}").Utf8ToStr());
                 _userData = JsonHelper.ToObject<UserData>(value);
                 return _userData;
             }
@@ -63,7 +63,7 @@ namespace LccHotfix
         }
         public void SaveUserData(string name = "user")
         {
-            string value = RijndaelHelper.RijndaelEncrypt(_key, JsonHelper.ToJson(_userData));
+            string value = RijndaelUtility.RijndaelEncrypt(_key, JsonHelper.ToJson(_userData));
             FileHelper.SaveAsset($"{PathHelper.GetPersistentDataPath(Res)}/{name}{AssetSuffix.Lcc}", value);
         }
         public void DeleteUserData(string name = "user")
@@ -89,7 +89,7 @@ namespace LccHotfix
             if (_userSetData != null) return _userSetData;
             if (UserSetDataExist())
             {
-                string value = RijndaelHelper.RijndaelDecrypt(_key, FileHelper.GetAsset($"{PathHelper.GetPersistentDataPath(Res)}/UserSet{AssetSuffix.Lcc}").Utf8ToStr());
+                string value = RijndaelUtility.RijndaelDecrypt(_key, FileHelper.GetAsset($"{PathHelper.GetPersistentDataPath(Res)}/UserSet{AssetSuffix.Lcc}").Utf8ToStr());
                 _userSetData = JsonHelper.ToObject<UserSetData>(value);
                 return _userSetData;
             }
@@ -97,7 +97,7 @@ namespace LccHotfix
         }
         public void SaveUserSetData()
         {
-            string value = RijndaelHelper.RijndaelEncrypt(_key, JsonHelper.ToJson(_userSetData));
+            string value = RijndaelUtility.RijndaelEncrypt(_key, JsonHelper.ToJson(_userSetData));
             FileHelper.SaveAsset($"{PathHelper.GetPersistentDataPath(Res)}/UserSet{AssetSuffix.Lcc}", value);
         }
         public void DeleteUserSetData()

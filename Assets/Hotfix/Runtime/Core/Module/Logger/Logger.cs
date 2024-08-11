@@ -1,7 +1,8 @@
 using System.Diagnostics;
 using System;
+using LccModel;
 
-namespace LccModel
+namespace LccHotfix
 {
     public interface ILog
     {
