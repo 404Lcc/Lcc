@@ -291,8 +291,6 @@ namespace LccHotfix
             dict.Clear();
             dataList.Clear();
             sizeDict.Clear();
-
-            GameObject.Destroy(groupPrefab);
         }
 
         public void Refill(List<Data> datas, int startItem = 0)
