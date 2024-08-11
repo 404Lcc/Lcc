@@ -1,0 +1,9 @@
+﻿namespace LccHotfix
+{
+    public class (Class) : APanelView<(ViewModel)ViewModel>
+    {
+        public override void Start()
+        {
+        }
+    }
+}

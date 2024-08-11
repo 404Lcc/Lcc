@@ -1,0 +1,9 @@
+﻿namespace LccModel
+{
+    public class (Class) : APanelView<(ViewModel)ViewModel>
+    {
+        public override void Start()
+        {
+        }
+    }
+}
