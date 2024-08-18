@@ -363,7 +363,6 @@ GameObject:
   - component: {fileID: 2777519532039113987}
   - component: {fileID: 297008548334663136}
   - component: {fileID: 114683599643110276}
-  - component: {fileID: 208983804110937773}
   m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
@@ -433,18 +432,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!225 &208983804110937773
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3186847008303003350}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &3735704149738883384
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,8 +442,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6880936061052193467}
   - component: {fileID: 3072738779838260655}
+  - component: {fileID: 1223464304830798482}
   m_Layer: 5
-  m_Name: LoadingPanel
+  m_Name: UILoadingPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -497,11 +485,25 @@ MonoBehaviour:
   currentPercent: 0
   targetPercent: 0
   updateRate: 0
+  bg: {fileID: 3186847008303003350}
+  progressBG: {fileID: 6073518687390215339}
   progress: {fileID: 6383022178851655959}
   progressText: {fileID: 1050371775462140091}
   tipsText: {fileID: 8960970146620521133}
   text: {fileID: 6536663054412071972}
   messageBox: {fileID: 4438024955531965309}
+--- !u!225 &1223464304830798482
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3735704149738883384}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4438024955531965309
 GameObject:
   m_ObjectHideFlags: 0
