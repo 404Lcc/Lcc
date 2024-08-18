@@ -60,14 +60,14 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Samples\YooAsset\2.2.2-preview\Space Shooter\ThirdParty\UniFramework\UniEvent\Runtime\UniLogger.cs" />
-    <Compile Include="Assets\Samples\YooAsset\2.2.2-preview\Space Shooter\ThirdParty\UniFramework\UniEvent\Runtime\UniEventDriver.cs" />
-    <Compile Include="Assets\Samples\YooAsset\2.2.2-preview\Space Shooter\ThirdParty\UniFramework\UniEvent\Runtime\UniEvent.cs" />
-    <Compile Include="Assets\Samples\YooAsset\2.2.2-preview\Space Shooter\ThirdParty\UniFramework\UniEvent\Runtime\EventGroup.cs" />
-    <Compile Include="Assets\Samples\YooAsset\2.2.2-preview\Space Shooter\ThirdParty\UniFramework\UniEvent\Runtime\IEventMessage.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.4-preview\Space Shooter\ThirdParty\UniFramework\UniEvent\Runtime\UniEventDriver.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.4-preview\Space Shooter\ThirdParty\UniFramework\UniEvent\Runtime\UniEvent.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.4-preview\Space Shooter\ThirdParty\UniFramework\UniEvent\Runtime\IEventMessage.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.4-preview\Space Shooter\ThirdParty\UniFramework\UniEvent\Runtime\EventGroup.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.4-preview\Space Shooter\ThirdParty\UniFramework\UniEvent\Runtime\UniLogger.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Samples\YooAsset\2.2.2-preview\Space Shooter\ThirdParty\UniFramework\UniEvent\Runtime\UniFramework.Event.asmdef" />
+    <None Include="Assets\Samples\YooAsset\2.2.4-preview\Space Shooter\ThirdParty\UniFramework\UniEvent\Runtime\UniFramework.Event.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

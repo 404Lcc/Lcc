@@ -40,7 +40,7 @@ namespace LccEditor
 #if UNITY_ANDROID
             name = $"{name}.apk";
 #endif
-            string locationPathName = $"{PathHelper.GetPersistentDataPath("Build")}/{name}";
+            string locationPathName = $"{PathUtility.GetPersistentDataPath("Build")}/{name}";
             BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, locationPathName, EditorUserBuildSettings.activeBuildTarget, EditorUserBuildSettings.development ? BuildOptions.Development : BuildOptions.None);
         }
     }

@@ -210,7 +210,7 @@ namespace LccEditor
                 //        }
                 //    }
                 //}
-                if (EditorDefine.HotfixMode == HotfixMode.HybridCLR || EditorDefine.HotfixMode == HotfixMode.Mono)
+                //if (EditorDefine.HotfixMode == HotfixMode.HybridCLR || EditorDefine.HotfixMode == HotfixMode.Mono)
                 {
                     FieldInfo[] fieldInfos = obj.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
                     foreach (FieldInfo item in fieldInfos)

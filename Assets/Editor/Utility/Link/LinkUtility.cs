@@ -21,7 +21,7 @@ namespace LccEditor
             assemblieList.Add(typeof(Transform).Assembly);
             assemblieList.Add(typeof(GameObject).Assembly);
             assemblieList.Add(typeof(Image).Assembly);
-            assemblieList.Add(typeof(Init).Assembly);
+            assemblieList.Add(typeof(Launcher).Assembly);
             string[] filePaths = Directory.GetFiles("Assets", "*.dll", SearchOption.AllDirectories);
             foreach (string item in filePaths)
             {

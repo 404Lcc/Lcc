@@ -60,51 +60,15 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\NewFramework\ObjectPool\IObjectPoolManager.cs" />
-    <Compile Include="Assets\NewFramework\Base\GameFrameworkLinkedList.cs" />
-    <Compile Include="Assets\NewFramework\ObjectPool\ObjectPoolManager.cs" />
-    <Compile Include="Assets\NewFramework\Base\EventPool\BaseEventArgs.cs" />
-    <Compile Include="Assets\NewFramework\Base\GameFrameworkException.cs" />
-    <Compile Include="Assets\NewFramework\Base\EventPool\EventPool.Event.cs" />
-    <Compile Include="Assets\NewFramework\ObjectPool\ReleaseObjectFilterCallback.cs" />
     <Compile Include="Assets\Battle\Logic\Base\LogicEntity.cs" />
-    <Compile Include="Assets\NewFramework\Event\IEventManager.cs" />
     <Compile Include="Assets\Battle\Logic\Base\IDispose.cs" />
     <Compile Include="Assets\Battle\Logic\Base\LogicWorld.cs" />
-    <Compile Include="Assets\NewFramework\Base\Variable\Variable.cs" />
-    <Compile Include="Assets\NewFramework\ObjectPool\IObjectPool.cs" />
-    <Compile Include="Assets\NewFramework\ObjectPool\ObjectPoolManager.Object.cs" />
-    <Compile Include="Assets\NewFramework\Base\Log\GameFrameworkLog.cs" />
-    <Compile Include="Assets\NewFramework\Event\GameEventArgs.cs" />
     <Compile Include="Assets\Battle\Worlds.cs" />
-    <Compile Include="Assets\NewFramework\Base\DataStruct\TypeNamePair.cs" />
     <Compile Include="Assets\Battle\Logic\Base\LogicComponent.cs" />
-    <Compile Include="Assets\NewFramework\Base\EventPool\EventPoolMode.cs" />
-    <Compile Include="Assets\NewFramework\Base\ReferencePool\IReference.cs" />
     <Compile Include="Assets\Battle\Logic\Base\LogicMatcher.cs" />
-    <Compile Include="Assets\NewFramework\Base\GameFrameworkEntry.cs" />
-    <Compile Include="Assets\NewFramework\Base\ReferencePool\ReferencePool.ReferenceCollection.cs" />
-    <Compile Include="Assets\NewFramework\Utility\Utility.Text.ITextHelper.cs" />
-    <Compile Include="Assets\NewFramework\Base\Log\GameFrameworkLogLevel.cs" />
-    <Compile Include="Assets\NewFramework\Event\EventManager.cs" />
-    <Compile Include="Assets\NewFramework\Base\GameFrameworkModule.cs" />
     <Compile Include="Assets\Battle\Logic\Base\LogicComponentsLookup.cs" />
     <Compile Include="Assets\Battle\Logic\Component\IDComponent.cs" />
-    <Compile Include="Assets\NewFramework\Utility\Utility.Text.cs" />
-    <Compile Include="Assets\NewFramework\Base\EventPool\EventPool.cs" />
-    <Compile Include="Assets\NewFramework\ObjectPool\ObjectBase.cs" />
-    <Compile Include="Assets\NewFramework\Base\Variable\GenericVariable.cs" />
-    <Compile Include="Assets\NewFramework\ObjectPool\ObjectInfo.cs" />
-    <Compile Include="Assets\NewFramework\Base\GameFrameworkMultiDictionary.cs" />
     <Compile Include="Assets\Battle\WorldSystems.cs" />
-    <Compile Include="Assets\NewFramework\Base\GameFrameworkEventArgs.cs" />
-    <Compile Include="Assets\NewFramework\Base\ReferencePool\ReferencePool.cs" />
-    <Compile Include="Assets\NewFramework\ObjectPool\ObjectPoolManager.ObjectPool.cs" />
-    <Compile Include="Assets\NewFramework\ObjectPool\ObjectPoolBase.cs" />
-    <Compile Include="Assets\NewFramework\Base\GameFrameworkLinkedListRange.cs" />
-    <Compile Include="Assets\NewFramework\Base\ReferencePool\ReferencePoolInfo.cs" />
-    <Compile Include="Assets\NewFramework\Base\Log\GameFrameworkLog.ILogHelper.cs" />
-    <Compile Include="Assets\NewFramework\Utility\Utility.Marshal.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

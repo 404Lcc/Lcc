@@ -64,7 +64,6 @@
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\IntObjectType.cs" />
     <Compile Include="Assets\Editor\Editor\OdinEditorWindow\GeneralEditorWindow.cs" />
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\Vector3ObjectType.cs" />
-    <Compile Include="Assets\Editor\EditorDefine\EditorDefine.cs" />
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\CharObjectType.cs" />
     <Compile Include="Assets\Editor\Editor\OdinEditorWindow\MenuTree\AMenuEditorWindow.cs" />
     <Compile Include="Assets\Editor\OpenAsset\LogConfig\LogConfig.cs" />

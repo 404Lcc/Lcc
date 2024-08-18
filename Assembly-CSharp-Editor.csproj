@@ -60,7 +60,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Samples\YooAsset\2.2.2-preview\Space Shooter\GameScript\Editor\Encryption.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.4-preview\Space Shooter\GameScript\Editor\Encryption.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1317,13 +1317,13 @@
       <Project>{50A4DDDC-1012-D6CA-5D95-34EC1C8959A2}</Project>
       <Name>EnhancedScroller_asmdef</Name>
     </ProjectReference>
-    <ProjectReference Include="UniFramework.Event.csproj">
-      <Project>{0B00F680-83F8-4264-B7F0-88751B364344}</Project>
-      <Name>UniFramework.Event</Name>
-    </ProjectReference>
     <ProjectReference Include="UniFramework.Machine.csproj">
       <Project>{EC4CFAFC-A005-5CAC-EEDD-E1EC41924666}</Project>
       <Name>UniFramework.Machine</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniFramework.Utility.csproj">
+      <Project>{940D5290-A37C-5F9A-92AC-4DE39CE13069}</Project>
+      <Name>UniFramework.Utility</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Editor.csproj">
       <Project>{08A34834-D4C3-53DD-6264-CCC1F0737645}</Project>
@@ -1332,6 +1332,10 @@
     <ProjectReference Include="Unity.Hotfix.csproj">
       <Project>{8543BC6F-FEC6-BDFC-0BD5-AB0B4E96C57B}</Project>
       <Name>Unity.Hotfix</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniFramework.Event.csproj">
+      <Project>{0B00F680-83F8-4264-B7F0-88751B364344}</Project>
+      <Name>UniFramework.Event</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Model.csproj">
       <Project>{57D111B4-22B4-6CA1-C350-5090EBF41DC0}</Project>
@@ -1344,10 +1348,6 @@
     <ProjectReference Include="Unity.3rdPlugin.csproj">
       <Project>{0E07D9BD-8418-6FA4-7A89-7F6CB0E9C8B1}</Project>
       <Name>Unity.3rdPlugin</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniFramework.Utility.csproj">
-      <Project>{940D5290-A37C-5F9A-92AC-4DE39CE13069}</Project>
-      <Name>UniFramework.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
