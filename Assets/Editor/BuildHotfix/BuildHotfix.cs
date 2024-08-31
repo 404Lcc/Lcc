@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using FileHelper = LccModel.FileHelper;
+using FileUtility = LccModel.FileUtility;
 
 namespace LccEditor
 {
@@ -43,7 +43,7 @@ namespace LccEditor
 
                     File.Copy("Library/ScriptAssemblies/Unity.Hotfix.dll", "Assets/Bundles/DLL/Unity.Hotfix.dll.bytes", true);
                     File.Copy("Library/ScriptAssemblies/Unity.Hotfix.pdb", "Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes", true);
-                    FileHelper.SaveAsset("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes", RijndaelUtility.RijndaelEncrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileHelper.GetAsset("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes")));
+                    FileUtility.SaveAsset("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes", RijndaelUtility.RijndaelEncrypt("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", FileUtility.GetAsset("Assets/Bundles/DLL/Unity.Hotfix.dll.bytes")));
                 }
 
                 LinkUtility.BuildLink();

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace LccModel
+namespace LccHotfix
 {
-    public static class ResolutionHelper
+    public static class ResolutionUtility
     {
         /// <summary>
         /// 设置分辨率

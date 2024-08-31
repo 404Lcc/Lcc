@@ -57,7 +57,7 @@ namespace LccEditor
             {
                 if (File.Exists(item))
                 {
-                    SyntaxTree cs = CSharpSyntaxTree.ParseText(FileHelper.GetAsset(item).Utf8ToStr(), parseOptions, item, Encoding.UTF8);
+                    SyntaxTree cs = CSharpSyntaxTree.ParseText(FileUtility.GetAsset(item).Utf8ToStr(), parseOptions, item, Encoding.UTF8);
                     if (cs == null)
                     {
                         continue;
@@ -88,8 +88,8 @@ namespace LccEditor
                     using (MemoryStream pdbStream = new MemoryStream())
                     {
                         result = compilation.Emit(dllStream, pdbStream, options: emitOptions);
-                        FileHelper.SaveAsset(path, dllStream.GetBuffer());
-                        FileHelper.SaveAsset(pdbPath, pdbStream.GetBuffer());
+                        FileUtility.SaveAsset(path, dllStream.GetBuffer());
+                        FileUtility.SaveAsset(pdbPath, pdbStream.GetBuffer());
                     }
                 }
             }

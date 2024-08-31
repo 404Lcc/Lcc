@@ -60,7 +60,6 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Hotfix\Old\Utility\Web\WebHelper.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Expand\PanelType\PanelTypeExpand.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Config\Tables.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\ObjectPool\ObjectBase.cs" />
@@ -72,9 +71,10 @@
     <Compile Include="Assets\Hotfix\NewFramework\Base\GameFrameworkModule.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Panel\MVVM\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\EventPool\EventPoolMode.cs" />
-    <Compile Include="Assets\Hotfix\Old\Utility\Random\RandomHelper.cs" />
+    <Compile Include="Assets\Hotfix\Old\Utility\Random\RandomUtility.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\SceneState\SceneStateManager.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Panel\PanelType.cs" />
+    <Compile Include="Assets\Hotfix\Old\Utility\Network\NetworkUtility.cs" />
     <Compile Include="Assets\Hotfix\Old\Expand\Awaiter\AwaiterExpand.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Module\Logger\Logger.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Model\ModelManager.cs" />
@@ -82,7 +82,6 @@
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\SceneState\SceneStateAttribute.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Orca\OrcaManager.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Singleton\ISingletonUpdate.cs" />
-    <Compile Include="Assets\Hotfix\Old\Utility\Protobuf\ProtobufHelper.cs" />
     <Compile Include="Assets\Hotfix\Old\Logic\SceneState\LoginSceneState.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Object\Root.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Event\GameEventArgs.cs" />
@@ -92,12 +91,12 @@
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Module\EventSystem\Event\IEvent.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Module\MainThreadSynchronizationContext\MainThreadSynchronizationContext.cs" />
     <Compile Include="Assets\Hotfix\Old\Logic\UI\Panel\Main\MainPanel.cs" />
-    <Compile Include="Assets\Hotfix\Old\Expand\String\StringExpand.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Object\Base\AttributeBase.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\SceneState\ISceneState.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Command\CommandManager.cs" />
-    <Compile Include="Assets\Hotfix\Old\Utility\Serialize\SerializeHelper.cs" />
     <Compile Include="Assets\Hotfix\Old\Logic\EventHandler\InitEventHandler.cs" />
+    <Compile Include="Assets\Hotfix\Old\Utility\Resolution\ResolutionUtility.cs" />
+    <Compile Include="Assets\Hotfix\Old\Utility\Id\IdUtility.cs" />
     <Compile Include="Assets\Hotfix\Old\Logic\SceneState\GameSceneState.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\ReferencePool\IReference.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Model\ModelTemplate.cs" />
@@ -115,7 +114,6 @@
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Archive\DisplayModeType.cs" />
     <Compile Include="Assets\Hotfix\Old\Logic\SceneState\MainSceneState.cs" />
     <Compile Include="Assets\Hotfix\Old\Awaiter\AsyncOperationAwaiter.cs" />
-    <Compile Include="Assets\Hotfix\Old\Utility\File\FileHelper.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\GameFrameworkMultiDictionary.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Panel\MVVM\View\View\IView.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Singleton\ISingletonFixedUpdate.cs" />
@@ -127,13 +125,11 @@
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\RedDot\RedDotManager.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Archive\CVType.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\ObjectPool\ObjectPoolBase.cs" />
-    <Compile Include="Assets\Hotfix\Old\Utility\Action\ActionWrap.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\DataStruct\TypeNamePair.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\RedDot\RedDot.cs" />
     <Compile Include="Assets\Hotfix\Old\Expand\SpriteRenderer\SpriteRendererExpand.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Object\AStarMap\AStarMap.cs" />
     <Compile Include="Assets\Hotfix\Old\Logic\Model\MainModel.cs" />
-    <Compile Include="Assets\Hotfix\Old\Utility\Resolution\ResolutionHelper.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\ObjectPool\ObjectInfo.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\ReferencePool\ReferencePool.ReferenceCollection.cs" />
     <Compile Include="Assets\Hotfix\Old\Expand\Image\ImageExpand.cs" />
@@ -174,21 +170,19 @@
     <Compile Include="Assets\Hotfix\Old\Awaiter\UnityWebRequestAsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Coroutine\CoroutineCompletedHandler.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Object\Base\IFixedUpdate.cs" />
+    <Compile Include="Assets\Hotfix\Old\Utility\ScreenAdaptation\ScreenAdaptationUtility.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Init\Init.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\ObjectPool\ObjectPoolManager.ObjectPool.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Global\GlobalManager.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\ScrollerPro\LoopScroll.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Download\DownloadFile.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Model\ModelAttribute.cs" />
-    <Compile Include="Assets\Hotfix\Old\Utility\Network\NetworkHelper.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\GameFrameworkLinkedListRange.cs" />
-    <Compile Include="Assets\Hotfix\Old\Utility\MD5\MD5Helper.cs" />
     <Compile Include="Assets\Hotfix\Old\Expand\Vector2\Vector2Expand.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Panel\UI\IPanelHandler.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\SceneState\SceneStateType.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\ObjectPool\ObjectPoolManager.cs" />
     <Compile Include="Assets\Hotfix\Old\Logic\UI\Panel\Login\LoginPanel.cs" />
-    <Compile Include="Assets\Hotfix\Old\Utility\Json\JsonHelper.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Object\ProtobufObject.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Utility\Utility.Marshal.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\HotfixBridge.cs" />
@@ -199,7 +193,6 @@
     <Compile Include="Assets\Hotfix\NewFramework\Base\GameFrameworkLinkedList.cs" />
     <Compile Include="Assets\Hotfix\Old\Logic\UI\Panel\Game\GamePanel.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Object\Base\AObjectBase.cs" />
-    <Compile Include="Assets\Hotfix\Old\Utility\Sort\SortHelper.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Object\GameObjectComponent.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Utility\Utility.Text.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Config\TBJump.cs" />
@@ -213,15 +206,13 @@
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Module\Logger\UnityLogger.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Module\Timer\Timer.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Archive\ArchiveManager.cs" />
+    <Compile Include="Assets\Hotfix\Old\Awaiter\Action\ActionWrap.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\EventPool\EventPool.Event.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\Log\GameFrameworkLog.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Event\IEventManager.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\GameFrameworkEntry.cs" />
-    <Compile Include="Assets\Hotfix\Old\Utility\Object\ObjectHelper.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\EventPool\BaseEventArgs.cs" />
-    <Compile Include="Assets\Hotfix\Old\Utility\Id\IdHelper.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Module\EventSystem\EventSystem.cs" />
-    <Compile Include="Assets\Hotfix\Old\Utility\ScreenAdaptation\ScreenAdaptationHelper.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\Variable\Variable.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\ReferencePool\ReferencePool.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Panel\PanelManager.cs" />

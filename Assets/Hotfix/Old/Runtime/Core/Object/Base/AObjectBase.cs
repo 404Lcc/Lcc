@@ -115,7 +115,7 @@ namespace LccHotfix
 
                 if (preDomain == null)
                 {
-                    this.InstanceId = IdHelper.GenerateInstanceId();
+                    this.InstanceId = IdUtility.GenerateInstanceId();
 
                     EventSystem.Instance.Register(this);
                 }
@@ -195,7 +195,7 @@ namespace LccHotfix
         public AObjectBase AddChildren(Type type, params object[] datas)
         {
             AObjectBase aObjectBase = Create(type);
-            aObjectBase.Id = IdHelper.GenerateId();
+            aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
             EventSystem.Instance.Awake(aObjectBase);
             EventSystem.Instance.Start(aObjectBase);
@@ -205,7 +205,7 @@ namespace LccHotfix
         public AObjectBase AddChildren<P1>(Type type, P1 p1, params object[] datas)
         {
             AObjectBase aObjectBase = Create(type);
-            aObjectBase.Id = IdHelper.GenerateId();
+            aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
             EventSystem.Instance.Awake(aObjectBase, p1);
             EventSystem.Instance.Start(aObjectBase);
@@ -215,7 +215,7 @@ namespace LccHotfix
         public AObjectBase AddChildren<P1, P2>(Type type, P1 p1, P2 p2, params object[] datas)
         {
             AObjectBase aObjectBase = Create(type);
-            aObjectBase.Id = IdHelper.GenerateId();
+            aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
             EventSystem.Instance.Awake(aObjectBase, p1, p2);
             EventSystem.Instance.Start(aObjectBase);
@@ -225,7 +225,7 @@ namespace LccHotfix
         public AObjectBase AddChildren<P1, P2, P3>(Type type, P1 p1, P2 p2, P3 p3, params object[] datas)
         {
             AObjectBase aObjectBase = Create(type);
-            aObjectBase.Id = IdHelper.GenerateId();
+            aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
             EventSystem.Instance.Start(aObjectBase);
@@ -235,7 +235,7 @@ namespace LccHotfix
         public AObjectBase AddChildren<P1, P2, P3, P4>(Type type, P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas)
         {
             AObjectBase aObjectBase = Create(type);
-            aObjectBase.Id = IdHelper.GenerateId();
+            aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
             EventSystem.Instance.Start(aObjectBase);
@@ -245,7 +245,7 @@ namespace LccHotfix
         public T AddChildren<T>(params object[] datas) where T : AObjectBase
         {
             T aObjectBase = Create<T>();
-            aObjectBase.Id = IdHelper.GenerateId();
+            aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
             EventSystem.Instance.Awake(aObjectBase);
             EventSystem.Instance.Start(aObjectBase);
@@ -255,7 +255,7 @@ namespace LccHotfix
         public T AddChildren<T, P1>(P1 p1, params object[] datas) where T : AObjectBase
         {
             T aObjectBase = Create<T>();
-            aObjectBase.Id = IdHelper.GenerateId();
+            aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
             EventSystem.Instance.Awake(aObjectBase, p1);
             EventSystem.Instance.Start(aObjectBase);
@@ -265,7 +265,7 @@ namespace LccHotfix
         public T AddChildren<T, P1, P2>(P1 p1, P2 p2, params object[] datas) where T : AObjectBase
         {
             T aObjectBase = Create<T>();
-            aObjectBase.Id = IdHelper.GenerateId();
+            aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
             EventSystem.Instance.Awake(aObjectBase, p1, p2);
             EventSystem.Instance.Start(aObjectBase);
@@ -275,7 +275,7 @@ namespace LccHotfix
         public T AddChildren<T, P1, P2, P3>(P1 p1, P2 p2, P3 p3, params object[] datas) where T : AObjectBase
         {
             T aObjectBase = Create<T>();
-            aObjectBase.Id = IdHelper.GenerateId();
+            aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
             EventSystem.Instance.Start(aObjectBase);
@@ -285,7 +285,7 @@ namespace LccHotfix
         public T AddChildren<T, P1, P2, P3, P4>(P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas) where T : AObjectBase
         {
             T aObjectBase = Create<T>();
-            aObjectBase.Id = IdHelper.GenerateId();
+            aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
             EventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
             EventSystem.Instance.Start(aObjectBase);

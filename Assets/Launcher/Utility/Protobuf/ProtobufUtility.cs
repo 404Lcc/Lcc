@@ -5,7 +5,7 @@ using System.IO;
 
 namespace LccModel
 {
-    public static class ProtobufHelper
+    public static class ProtobufUtility
     {
         public static object Deserialize(Type type, byte[] bytes, int index, int count)
         {

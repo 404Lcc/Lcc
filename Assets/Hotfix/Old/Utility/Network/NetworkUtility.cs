@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace LccModel
+namespace LccHotfix
 {
-    public static class NetworkHelper
+    public static class NetworkUtility
     {
         public static bool CheckNetwork()
         {

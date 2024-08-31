@@ -174,7 +174,7 @@ namespace LccHotfix
                     runningDict.Remove(item);
                 }
             }
-            if (NetworkHelper.CheckNetwork())
+            if (NetworkUtility.CheckNetwork())
             {
                 if (runningDict.Count < taskCount && readyQueue.Count > 0)
                 {

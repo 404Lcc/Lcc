@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace LccModel
 {
-    public static class JsonHelper
+    public static class JsonUtility
     {
         public static string ToJson(object obj)
         {

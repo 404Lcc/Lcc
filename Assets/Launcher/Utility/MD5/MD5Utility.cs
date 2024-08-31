@@ -3,7 +3,7 @@ using System.Text;
 
 namespace LccModel
 {
-    public static class MD5Helper
+    public static class MD5Utility
     {
         /// <summary>
         /// 计算MD5
@@ -56,7 +56,7 @@ namespace LccModel
         /// <returns></returns>
         public static string ComputeFileMD5(string path, string name)
         {
-            byte[] bytes = FileHelper.GetAsset($"{path}/{name}");
+            byte[] bytes = FileUtility.GetAsset($"{path}/{name}");
             return ComputeMD5(bytes);
         }
     }

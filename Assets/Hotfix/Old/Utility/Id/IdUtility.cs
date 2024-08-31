@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace LccModel
+namespace LccHotfix
 {
-    public static class IdHelper
+    public static class IdUtility
     {
         public static List<int> countList = new List<int>();
         public static int id;

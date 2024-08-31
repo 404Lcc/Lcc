@@ -201,7 +201,7 @@ namespace LccHotfix
                     fixedUpdateCopy.Enqueue(id);
                 }
             }
-            ObjectHelper.Swap(ref fixedUpdate, ref fixedUpdateCopy);
+            Swap(ref fixedUpdate, ref fixedUpdateCopy);
         }
         public void Update()
         {
@@ -218,7 +218,7 @@ namespace LccHotfix
                     updateCopy.Enqueue(id);
                 }
             }
-            ObjectHelper.Swap(ref update, ref updateCopy);
+            Swap(ref update, ref updateCopy);
         }
         public void LateUpdate()
         {
@@ -235,7 +235,7 @@ namespace LccHotfix
                     lateUpdateCopy.Enqueue(id);
                 }
             }
-            ObjectHelper.Swap(ref lateUpdate, ref lateUpdateCopy);
+            Swap(ref lateUpdate, ref lateUpdateCopy);
         }
 
 
@@ -259,6 +259,13 @@ namespace LccHotfix
             {
                 LogHelper.Debug($"事件不存在，事件数据类型 {type.Name}");
             }
+        }
+
+        public static void Swap<T>(ref T t1, ref T t2)
+        {
+            T t3 = t1;
+            t1 = t2;
+            t2 = t3;
         }
     }
 }

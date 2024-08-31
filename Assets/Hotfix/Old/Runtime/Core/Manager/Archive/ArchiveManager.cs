@@ -55,16 +55,16 @@ namespace LccHotfix
             if (_userData != null) return _userData;
             if (UserDataExist(name))
             {
-                string value = RijndaelUtility.RijndaelDecrypt(_key, FileHelper.GetAsset($"{PathUtility.GetPersistentDataPath(Res)}/{name}{AssetSuffix.Lcc}").Utf8ToStr());
-                _userData = JsonHelper.ToObject<UserData>(value);
+                string value = RijndaelUtility.RijndaelDecrypt(_key, FileUtility.GetAsset($"{PathUtility.GetPersistentDataPath(Res)}/{name}{AssetSuffix.Lcc}").Utf8ToStr());
+                _userData = JsonUtility.ToObject<UserData>(value);
                 return _userData;
             }
             return _userData = _userData ?? new UserData();
         }
         public void SaveUserData(string name = "user")
         {
-            string value = RijndaelUtility.RijndaelEncrypt(_key, JsonHelper.ToJson(_userData));
-            FileHelper.SaveAsset($"{PathUtility.GetPersistentDataPath(Res)}/{name}{AssetSuffix.Lcc}", value);
+            string value = RijndaelUtility.RijndaelEncrypt(_key, JsonUtility.ToJson(_userData));
+            FileUtility.SaveAsset($"{PathUtility.GetPersistentDataPath(Res)}/{name}{AssetSuffix.Lcc}", value);
         }
         public void DeleteUserData(string name = "user")
         {
@@ -89,16 +89,16 @@ namespace LccHotfix
             if (_userSetData != null) return _userSetData;
             if (UserSetDataExist())
             {
-                string value = RijndaelUtility.RijndaelDecrypt(_key, FileHelper.GetAsset($"{PathUtility.GetPersistentDataPath(Res)}/UserSet{AssetSuffix.Lcc}").Utf8ToStr());
-                _userSetData = JsonHelper.ToObject<UserSetData>(value);
+                string value = RijndaelUtility.RijndaelDecrypt(_key, FileUtility.GetAsset($"{PathUtility.GetPersistentDataPath(Res)}/UserSet{AssetSuffix.Lcc}").Utf8ToStr());
+                _userSetData = JsonUtility.ToObject<UserSetData>(value);
                 return _userSetData;
             }
             return _userSetData = _userSetData ?? new UserSetData(20, 100, CVType.Chinese, LanguageType.Chinese, DisplayModeType.FullScreen, ResolutionType.Resolution1920x1080);
         }
         public void SaveUserSetData()
         {
-            string value = RijndaelUtility.RijndaelEncrypt(_key, JsonHelper.ToJson(_userSetData));
-            FileHelper.SaveAsset($"{PathUtility.GetPersistentDataPath(Res)}/UserSet{AssetSuffix.Lcc}", value);
+            string value = RijndaelUtility.RijndaelEncrypt(_key, JsonUtility.ToJson(_userSetData));
+            FileUtility.SaveAsset($"{PathUtility.GetPersistentDataPath(Res)}/UserSet{AssetSuffix.Lcc}", value);
         }
         public void DeleteUserSetData()
         {

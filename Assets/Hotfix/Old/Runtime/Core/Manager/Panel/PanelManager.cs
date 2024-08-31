@@ -350,7 +350,7 @@ namespace LccHotfix
         {
             gameObject.AddComponent<Canvas>();
             gameObject.AddComponent<GraphicRaycaster>();
-            ScreenAdaptationHelper.UIPanelAdaptation(gameObject);
+            ScreenAdaptationUtility.UIPanelAdaptation(gameObject);
             return gameObject;
         }
 

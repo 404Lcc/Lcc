@@ -3,7 +3,7 @@ using System.IO;
 
 namespace LccModel
 {
-    public static class FileHelper
+    public static class FileUtility
     {
         /// <summary>
         /// 文件是否存在

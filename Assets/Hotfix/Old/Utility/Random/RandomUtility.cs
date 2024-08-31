@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace LccModel
+namespace LccHotfix
 {
-    public static class RandomHelper
+    public static class RandomUtility
     {
         public static Random random = new Random();
 

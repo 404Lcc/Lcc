@@ -12,7 +12,7 @@ namespace LccHotfix
         }
         public static Scene CreateScene(string name, AObjectBase parent = null)
         {
-            Scene scene = new Scene(IdHelper.GenerateId(), IdHelper.GenerateInstanceId(), name, parent);
+            Scene scene = new Scene(IdUtility.GenerateId(), IdUtility.GenerateInstanceId(), name, parent);
 
             return scene;
         }
