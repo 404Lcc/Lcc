@@ -24,31 +24,35 @@ namespace LccModel
             NoticeSucc = false;
             AnnouncementSave = "";
             string url = $"{Launcher.Instance.noticeUrl}/{Launcher.GameConfig.channel}/{Launcher.Instance.curLanguage}/notice.txt";
-            Debug.Log("GetNotice url=" + url);
-            UnityWebRequest uwr = UnityWebRequest.Get(url);
+            Debug.Log("GetNoticeBoard url=" + url);
 
-            var send = uwr.SendWebRequest();
-            //避免unity Curl error 28 错误
-            yield return send;
+            UnityWebRequest web = UnityWebRequest.Get(url);
+            web.SetRequestHeader("pragma", "no-cache");
+            web.SetRequestHeader("Cache-Control", "no-cache");
+#if UNITY_EDITOR
+            web.timeout = 2;
+#else
+		    web.timeout = 20;
+#endif
 
-            if (uwr.isDone)
+            yield return web.SendWebRequest();
+
+            if (!string.IsNullOrEmpty(web.error))
             {
-                if (uwr.result == UnityWebRequest.Result.Success)
-                {
-                    string text = uwr.downloadHandler.text;
-                    AnnouncementSave = text;
-                    NoticeSucc = true;
-                    uwr.Dispose();
-                }
-                else
-                {
-                    uwr.Dispose();
-                }
+                web.Dispose();
+                web = UnityWebRequest.Get(url);
+                web.timeout = 20;
+                yield return web.SendWebRequest();
+            }
 
+            if (!string.IsNullOrEmpty(web.error))
+            {
             }
             else
             {
-                uwr.Dispose();
+                string text = web.downloadHandler.text;
+                AnnouncementSave = text;
+                NoticeSucc = true;
             }
         }
 
@@ -68,30 +72,34 @@ namespace LccModel
             NoticeBoardSave = "";
             string url = $"{Launcher.Instance.noticeUrl}/{Launcher.GameConfig.channel}/{Launcher.Instance.curLanguage}/noticeBoard.txt";
             Debug.Log("GetNoticeBoard url=" + url);
-            UnityWebRequest uwr = UnityWebRequest.Get(url);
 
-            var send = uwr.SendWebRequest();
-            //避免unity Curl error 28 错误
-            yield return send;
+            UnityWebRequest web = UnityWebRequest.Get(url);
+            web.SetRequestHeader("pragma", "no-cache");
+            web.SetRequestHeader("Cache-Control", "no-cache");
+#if UNITY_EDITOR
+            web.timeout = 2;
+#else
+		    web.timeout = 20;
+#endif
 
-            if (uwr.isDone)
+            yield return web.SendWebRequest();
+
+            if (!string.IsNullOrEmpty(web.error))
             {
-                if (uwr.result == UnityWebRequest.Result.Success)
-                {
-                    string text = uwr.downloadHandler.text;
-                    NoticeBoardSave = text;
-                    NoticeBoardSucc = true;
-                    uwr.Dispose();
-                }
-                else
-                {
-                    uwr.Dispose();
-                }
+                web.Dispose();
+                web = UnityWebRequest.Get(url);
+                web.timeout = 20;
+                yield return web.SendWebRequest();
+            }
 
+            if (!string.IsNullOrEmpty(web.error))
+            {
             }
             else
             {
-                uwr.Dispose();
+                string text = web.downloadHandler.text;
+                NoticeBoardSave = text;
+                NoticeBoardSucc = true;
             }
         }
 

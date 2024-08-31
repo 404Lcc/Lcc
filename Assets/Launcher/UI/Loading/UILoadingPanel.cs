@@ -120,6 +120,16 @@ namespace LccModel
             progressText.text = (int)currentPercent + "%";
         }
 
+        public void Show(string text)
+        {
+            if (!string.IsNullOrEmpty(text))
+                this.tipsText.text = text;
+            else
+                this.tipsText.text = "";
+            currentPercent = targetPercent = 0;
+            gameObject.SetActive(true);
+
+        }
         public void SetText(string text)
         {
             this.text.text = text;

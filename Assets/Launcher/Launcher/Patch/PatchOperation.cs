@@ -16,7 +16,7 @@ namespace LccModel
         private readonly StateMachine _machine;
         private ESteps _steps = ESteps.None;
 
-        public PatchOperation(bool restart)
+        public PatchOperation()
         {
             // 注册监听事件
             _eventGroup.AddListener<UserTryInitialize>(OnHandleEventMessage);
@@ -40,7 +40,6 @@ namespace LccModel
 
             _machine.SetBlackboardValue("PackageName", Launcher.DefaultPackage);
             _machine.SetBlackboardValue("BuildPipeline", EDefaultBuildPipeline.BuiltinBuildPipeline.ToString());
-            _machine.SetBlackboardValue("Restart", restart);
             _machine.SetBlackboardValue("TotalDownloadCount", 0);
         }
         protected override void OnStart()

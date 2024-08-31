@@ -97,7 +97,6 @@
     <Compile Include="Assets\Launcher\UGUIExpand\EnterClickButton.cs" />
     <Compile Include="Assets\Launcher\System\DisplayMode.cs" />
     <Compile Include="Assets\Launcher\UGUIExpand\EventTriggerListener.cs" />
-    <Compile Include="Assets\Launcher\UI\LoadingPanel\UILoadingPanel.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\UpdateEvent.cs" />
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.cs" />
     <Compile Include="Assets\Launcher\Math\AABB.cs" />
@@ -116,6 +115,7 @@
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmUpdateVersion.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.GameServer.cs" />
     <Compile Include="Assets\Launcher\Machine\IStateNode.cs" />
+    <Compile Include="Assets\Launcher\UI\Loading\UILoadingPanel.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.Resource.cs" />
     <Compile Include="Assets\Launcher\System\LocalDialog.cs" />
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.Language.cs" />

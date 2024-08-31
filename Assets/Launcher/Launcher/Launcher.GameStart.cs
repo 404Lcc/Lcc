@@ -2,6 +2,7 @@ using Entitas.VisualDebugging.Unity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using YooAsset;
 
@@ -22,6 +23,7 @@ namespace LccModel
 
         public bool GameStarted { set; get; } = false;
 
+        public Assembly hotfixAssembly;
         public readonly Dictionary<string, Type> HotfixTypeDict = new Dictionary<string, Type>();
 
 
@@ -103,8 +105,9 @@ namespace LccModel
             Debug.Log("Local GameConfig.checkResUpdate:" + GameConfig.checkResUpdate);
             Debug.Log("Local GameConfig.useSDK:" + GameConfig.useSDK);
 
+            //本地版本
             var showApp = int.Parse(Application.version.Split('.')[0]);
-            UILoadingPanel.Instance.SetText("version " + showApp + "." + GameConfig.appVersion + "." + GameConfig.channel + "." + GameConfig.resVersion);
+            UILoadingPanel.Instance.SetText("version " + showApp + "." + Launcher.GameConfig.appVersion + "." + Launcher.GameConfig.channel + "." + Launcher.GameConfig.resVersion);
 
 
             StartServerLoad();
@@ -120,6 +123,7 @@ namespace LccModel
 
         private IEnumerator LoadCoroutine()
         {
+            UILoadingPanel.Instance.Show(GetLanguage("msg_retrieve_server_data"));
             ChangeFPS();
             UILoadingPanel.Instance.UpdateLoadingPercent(0, 3);
             yield return null;
@@ -146,13 +150,14 @@ namespace LccModel
             //读取本地版本信息
             if (GameConfig.checkResUpdate && !IsAuditServer())
             {
+                Launcher.GameConfig.AddConfig("resVersion", mSvrResVersion);
             }
             UILoadingPanel.Instance.UpdateLoadingPercent(41, 50);
             yield return null;
-            StartDownloadUpdate(false);
+            StartDownloadUpdate();
         }
 
-        private void StartDownloadUpdate(bool restart)
+        private void StartDownloadUpdate()
         {
             //清理
             StopAllCoroutines();
@@ -162,7 +167,7 @@ namespace LccModel
 
 
             Debug.Log("Launcher 开启补丁更新流程...");
-            PatchOperation patchOperation = new PatchOperation(restart);
+            PatchOperation patchOperation = new PatchOperation();
             YooAssets.StartOperation(patchOperation);
         }
 
@@ -204,6 +209,8 @@ namespace LccModel
             yield return null;
             GC.Collect();
             UILoadingPanel.Instance.ShowBG();
+            UILoadingPanel.Instance.Show(GetLanguage("msg_retrieve_server_data"));
+            UILoadingPanel.Instance.SetText(string.Empty);
             yield return new WaitForSeconds(0.1f);
             yield return StartCoroutine(ReCheckVersionCoroutine());
 
@@ -263,6 +270,7 @@ namespace LccModel
             //读取本地版本信息
             if (Launcher.GameConfig.checkResUpdate && !Launcher.Instance.IsAuditServer())
             {
+                Launcher.GameConfig.AddConfig("resVersion", mSvrResVersion);
             }
 
             UILoadingPanel.Instance.UpdateLoadingPercent(21, 48);
@@ -279,7 +287,7 @@ namespace LccModel
             yield return null;
 
 
-            StartDownloadUpdate(true);
+            StartDownloadUpdate();
         }
 
         public void LoadFinish()

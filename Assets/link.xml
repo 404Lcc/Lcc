@@ -4693,20 +4693,20 @@
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1+MonoScriptData" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetNotice&gt;d__100" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetNoticeBoard&gt;d__102" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetRemoteVersionList&gt;d__47" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;GetNotice&gt;d__106" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;GetNoticeBoard&gt;d__108" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;GetRemoteVersionList&gt;d__51" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;InitGameConfig&gt;d__16" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;InitLanguage&gt;d__82" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;InitLanguage&gt;d__88" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;LoadBuildConfig&gt;d__17" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;LoadCoroutine&gt;d__68" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;LoadCoroutine&gt;d__74" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;LoadLanguageConfig&gt;d__19" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;LoadLocalConfig&gt;d__66" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;LoadLocalConfig&gt;d__72" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;LoadVersionConfig&gt;d__18" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;ReCheckVersionCoroutine&gt;d__73" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;ReStartCoroutine&gt;d__72" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;RequestCenterServer&gt;d__46" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;UpdateLanguage&gt;d__91" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;ReCheckVersionCoroutine&gt;d__79" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;ReStartCoroutine&gt;d__78" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;RequestCenterServer&gt;d__50" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;UpdateLanguage&gt;d__97" preserve="all" />
     <type fullname="LccModel.FsmCreateDownloader+&lt;CreateDownloader&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmDownloadFiles+&lt;BeginDownload&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmGetNotice+&lt;GetNoticeInfo&gt;d__3" preserve="all" />
