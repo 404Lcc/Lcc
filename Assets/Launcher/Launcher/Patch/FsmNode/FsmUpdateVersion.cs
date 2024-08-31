@@ -40,7 +40,7 @@ namespace LccModel
 
             if (operation.Status != EOperationStatus.Succeed)
             {
-                Debug.LogWarning(operation.Error);
+                Debug.LogWarning("FsmUpdateVersion Error=" + operation.Error);
                 PackageVersionUpdateFailed.SendEventMessage();
             }
             else

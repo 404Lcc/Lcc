@@ -76,7 +76,6 @@
     <Compile Include="Assets\Launcher\Launcher\Launcher.Notice.cs" />
     <Compile Include="Assets\Launcher\Math\OBB.cs" />
     <Compile Include="Assets\Launcher\Event\IEventMessage.cs" />
-    <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmPatchPrepare.cs" />
     <Compile Include="Assets\Launcher\Launcher\Init.cs" />
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.Version.cs" />
     <Compile Include="Assets\Launcher\UI\ForeGround\UIForeGroundPanel.cs" />

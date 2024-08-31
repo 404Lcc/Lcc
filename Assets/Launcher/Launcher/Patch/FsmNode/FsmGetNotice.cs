@@ -18,7 +18,7 @@ namespace LccModel
         {
             PatchStatesChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_load"));
 
-            UILoadingPanel.Instance.UpdateLoadingPercent(51, 60);
+            UILoadingPanel.Instance.UpdateLoadingPercent(51, 70);
             Launcher.Instance.StartCoroutine(GetNoticeInfo());
         }
 
@@ -34,7 +34,7 @@ namespace LccModel
 
         public void NextState()
         {
-            _machine.ChangeState<FsmPatchPrepare>();
+            _machine.ChangeState<FsmInitialize>();
 
         }
 

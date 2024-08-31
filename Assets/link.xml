@@ -4641,7 +4641,6 @@
     <type fullname="LccModel.FsmInitialize" preserve="all" />
     <type fullname="LccModel.BundleStream" preserve="all" />
     <type fullname="LccModel.FsmPatchDone" preserve="all" />
-    <type fullname="LccModel.FsmPatchPrepare" preserve="all" />
     <type fullname="LccModel.FsmUpdateManifest" preserve="all" />
     <type fullname="LccModel.FsmUpdateVersion" preserve="all" />
     <type fullname="LccModel.PatchOperation" preserve="all" />
@@ -4713,14 +4712,13 @@
     <type fullname="LccModel.FsmInitialize+RemoteServices" preserve="all" />
     <type fullname="LccModel.FsmInitialize+&lt;InitPackage&gt;d__9" preserve="all" />
     <type fullname="LccModel.FsmPatchDone+&lt;LoadInitialize&gt;d__5" preserve="all" />
-    <type fullname="LccModel.FsmPatchPrepare+&lt;Next&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmUpdateManifest+&lt;UpdateManifest&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmUpdateVersion+&lt;GetStaticVersion&gt;d__5" preserve="all" />
     <type fullname="LccModel.PatchOperation+ESteps" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel+&lt;&gt;c__DisplayClass6_0" preserve="all" />
     <type fullname="LccModel.UILoadingPanel+&lt;&gt;c" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2335" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3291" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2306" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3225" preserve="all" />
   </assembly>
 </linker>

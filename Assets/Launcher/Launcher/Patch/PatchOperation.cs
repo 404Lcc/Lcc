@@ -28,7 +28,6 @@ namespace LccModel
             // 创建状态机
             _machine = new StateMachine(this);
             _machine.AddNode<FsmGetNotice>();
-            _machine.AddNode<FsmPatchPrepare>();
             _machine.AddNode<FsmInitialize>();
             _machine.AddNode<FsmUpdateVersion>();
             _machine.AddNode<FsmUpdateManifest>();

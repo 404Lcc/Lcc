@@ -38,8 +38,7 @@ namespace LccModel
             string languageName = Launcher.Instance.GetSelectedLanguage();
             yield return Launcher.Instance.UpdateLanguage(languageName);
 
-            var showApp = int.Parse(Application.version.Split('.')[0]);
-            UILoadingPanel.Instance.SetText("version " + showApp + "." + Launcher.GameConfig.appVersion + "." + Launcher.GameConfig.channel + "." + Launcher.GameConfig.resVersion);
+            UILoadingPanel.Instance.SetText(Launcher.Instance.GetClientVersion());
 
             UILoadingPanel.Instance.UpdateLoadingPercent(96, 100);
 
@@ -49,12 +48,21 @@ namespace LccModel
 
             PatchStatesChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_game_start"));
 
-            bool restart = (bool)_machine.GetBlackboardValue("Restart");
+            bool haveHotfixAssembly = Launcher.Instance.hotfixAssembly != null;
             int totalDownloadCount = (int)_machine.GetBlackboardValue("TotalDownloadCount");
-
-            if (restart && totalDownloadCount > 0)
+            Debug.Log("是否加载过程序集了 haveHotfixAssembly=" + haveHotfixAssembly + "  " + "下载资源数量=" + totalDownloadCount);
+            if (haveHotfixAssembly)
             {
-                UILoadingPanel.Instance.ShowMessageBox(Launcher.Instance.GetLanguage("msg_need_restart"), RestartApplication);
+                //如果没下载过资源就直接用当前的程序集跑
+                if (totalDownloadCount == 0)
+                {
+                    Run();
+                }
+                else
+                {
+                    //下载过资源就得重启游戏了
+                    UILoadingPanel.Instance.ShowMessageBox(Launcher.Instance.GetLanguage("msg_need_restart"), RestartApplication);
+                }
             }
             else
             {
@@ -101,7 +109,6 @@ namespace LccModel
 
         private void LoadAndRun()
         {
-            Assembly assembly = null;
             GameObject loader = new GameObject("loader");
 
             TextAsset aotTxt = AssetManager.Instance.LoadRes<TextAsset>(loader, "aot");
@@ -109,7 +116,7 @@ namespace LccModel
             var aotlist = aotTxt.text.Split('|');
             HomologousImageMode mode = HomologousImageMode.SuperSet;
 
-            Debug.Log($"LoadAndRun aotlist Length = {aotlist.Length}");
+            Debug.Log($"LoadAndRun aotlist Length={aotlist.Length}");
             foreach (var aotDllName in aotlist)
             {
                 if (string.IsNullOrEmpty(aotDllName))
@@ -119,7 +126,7 @@ namespace LccModel
 
                 var dllBytes = aotItem.bytes;
                 LoadImageErrorCode err = RuntimeApi.LoadMetadataForAOTAssembly(dllBytes, mode);
-                Debug.Log($"LoadMetadataForAOTAssembly aotDllName = {aotDllName} ret = {err}");
+                Debug.Log($"LoadMetadataForAOTAssembly aotDllName={aotDllName}, ret={err}");
             }
 
             TextAsset assetDll = AssetManager.Instance.LoadRes<TextAsset>(loader, "Unity.Hotfix.dll");
@@ -129,12 +136,23 @@ namespace LccModel
             {
                 return;
             }
-            assembly = Assembly.Load(assetDll.bytes, assetPdb.bytes);
+
+            //加个保底
+            try
+            {
+                Launcher.Instance.hotfixAssembly = Assembly.Load(assetDll.bytes, assetPdb.bytes);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("加载程序集崩溃了 提示玩家重启游戏了" + e.ToString());
+                UILoadingPanel.Instance.ShowMessageBox(Launcher.Instance.GetLanguage("msg_need_restart"), RestartApplication);
+                return;
+            }
 
             Object.Destroy(loader);
 
             var hotfixTypeDict = Launcher.Instance.HotfixTypeDict;
-            foreach (Type type in assembly.GetTypes())
+            foreach (Type type in Launcher.Instance.hotfixAssembly.GetTypes())
             {
                 if (type.FullName != null)
                 {
@@ -142,7 +160,14 @@ namespace LccModel
                 }
             }
 
-            AStaticMethod start = new MonoStaticMethod(assembly, "LccHotfix.Init", "Start");
+            Run();
+
+        }
+        private void Run()
+        {
+            if (Launcher.Instance.hotfixAssembly == null)
+                return;
+            AStaticMethod start = new MonoStaticMethod(Launcher.Instance.hotfixAssembly, "LccHotfix.Init", "Start");
             start.Run();
         }
     }
