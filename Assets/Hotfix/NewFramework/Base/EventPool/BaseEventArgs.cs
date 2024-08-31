@@ -3,7 +3,7 @@
     /// <summary>
     /// 事件基类。
     /// </summary>
-    public abstract class BaseEventArgs : GameFrameworkEventArgs
+    public abstract class BaseEventArgs : EventArgs
     {
         /// <summary>
         /// 获取类型编号。

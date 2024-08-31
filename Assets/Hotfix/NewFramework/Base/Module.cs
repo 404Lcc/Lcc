@@ -3,7 +3,7 @@
     /// <summary>
     /// 游戏框架模块抽象类。
     /// </summary>
-    internal abstract class GameFrameworkModule
+    internal abstract class Module
     {
         /// <summary>
         /// 获取游戏框架模块优先级。

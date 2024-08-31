@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LccModel
 {
-    internal sealed partial class ObjectPoolManager : GameFrameworkModule, IObjectPoolManager
+    internal sealed partial class ObjectPoolManager : Module, IObjectPoolManager
     {
         /// <summary>
         /// 对象池。

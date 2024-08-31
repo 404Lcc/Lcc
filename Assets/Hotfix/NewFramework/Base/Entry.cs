@@ -6,9 +6,9 @@ namespace LccModel
     /// <summary>
     /// 游戏框架入口。
     /// </summary>
-    public static class GameFrameworkEntry
+    public static class Entry
     {
-        private static readonly LinkedList<GameFrameworkModule> s_GameFrameworkModules = new LinkedList<GameFrameworkModule>();
+        private static readonly LinkedList<Module> s_GameFrameworkModules = new LinkedList<Module>();
 
         /// <summary>
         /// 所有游戏框架模块轮询。
@@ -17,7 +17,7 @@ namespace LccModel
         /// <param name="realElapseSeconds">真实流逝时间，以秒为单位。</param>
         public static void Update(float elapseSeconds, float realElapseSeconds)
         {
-            foreach (GameFrameworkModule module in s_GameFrameworkModules)
+            foreach (Module module in s_GameFrameworkModules)
             {
                 module.Update(elapseSeconds, realElapseSeconds);
             }
@@ -28,14 +28,14 @@ namespace LccModel
         /// </summary>
         public static void Shutdown()
         {
-            for (LinkedListNode<GameFrameworkModule> current = s_GameFrameworkModules.Last; current != null; current = current.Previous)
+            for (LinkedListNode<Module> current = s_GameFrameworkModules.Last; current != null; current = current.Previous)
             {
                 current.Value.Shutdown();
             }
 
             s_GameFrameworkModules.Clear();
             ReferencePool.ClearAll();
-            Utility.MarshalUtility.FreeCachedHGlobal();
+            MarshalUtility.FreeCachedHGlobal();
             Log.SetLogHelper(null);
         }
 
@@ -74,9 +74,9 @@ namespace LccModel
         /// <param name="moduleType">要获取的游戏框架模块类型。</param>
         /// <returns>要获取的游戏框架模块。</returns>
         /// <remarks>如果要获取的游戏框架模块不存在，则自动创建该游戏框架模块。</remarks>
-        private static GameFrameworkModule GetModule(Type moduleType)
+        private static Module GetModule(Type moduleType)
         {
-            foreach (GameFrameworkModule module in s_GameFrameworkModules)
+            foreach (Module module in s_GameFrameworkModules)
             {
                 if (module.GetType() == moduleType)
                 {
@@ -92,15 +92,15 @@ namespace LccModel
         /// </summary>
         /// <param name="moduleType">要创建的游戏框架模块类型。</param>
         /// <returns>要创建的游戏框架模块。</returns>
-        private static GameFrameworkModule CreateModule(Type moduleType)
+        private static Module CreateModule(Type moduleType)
         {
-            GameFrameworkModule module = (GameFrameworkModule)Activator.CreateInstance(moduleType);
+            Module module = (Module)Activator.CreateInstance(moduleType);
             if (module == null)
             {
                 throw new Exception(Utility.Text.Format("Can not create module '{0}'.", moduleType.FullName));
             }
 
-            LinkedListNode<GameFrameworkModule> current = s_GameFrameworkModules.First;
+            LinkedListNode<Module> current = s_GameFrameworkModules.First;
             while (current != null)
             {
                 if (module.Priority > current.Value.Priority)

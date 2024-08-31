@@ -64,10 +64,10 @@
     <Compile Include="Assets\Hotfix\Old\Runtime\Config\Tables.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\ObjectPool\ObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Singleton\ISingleton.cs" />
+    <Compile Include="Assets\Hotfix\NewFramework\Base\Module.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Expand\GameObject\GameObjectExpand.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\SceneState\SceneState.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Jump\JumpManager.cs" />
-    <Compile Include="Assets\Hotfix\NewFramework\Base\GameFrameworkModule.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\MultiDictionary.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Panel\MVVM\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\EventPool\EventPoolMode.cs" />
@@ -105,7 +105,6 @@
     <Compile Include="Assets\Hotfix\NewFramework\ObjectPool\ReleaseObjectFilterCallback.cs" />
     <Compile Include="Assets\Hotfix\Old\Expand\Task\TaskExpand.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Panel\UI\UIBinding.cs" />
-    <Compile Include="Assets\Hotfix\NewFramework\Base\GameFrameworkEventArgs.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\ScrollerPro\LoopScrollItem.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Object\AStarMap\AStarNodeData.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\LinkedListRange.cs" />
@@ -128,10 +127,12 @@
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\Archive\CVType.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\ObjectPool\ObjectPoolBase.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\DataStruct\TypeNamePair.cs" />
+    <Compile Include="Assets\Hotfix\NewFramework\Base\Entry.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Manager\RedDot\RedDot.cs" />
     <Compile Include="Assets\Hotfix\Old\Expand\SpriteRenderer\SpriteRendererExpand.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Object\AStarMap\AStarMap.cs" />
     <Compile Include="Assets\Hotfix\Old\Logic\Model\MainModel.cs" />
+    <Compile Include="Assets\Hotfix\NewFramework\Base\EventArgs.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\LinkedList.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\ObjectPool\ObjectInfo.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\ReferencePool\ReferencePool.ReferenceCollection.cs" />
@@ -209,7 +210,6 @@
     <Compile Include="Assets\Hotfix\Old\Awaiter\Action\ActionWrap.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\EventPool\EventPool.Event.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Event\IEventManager.cs" />
-    <Compile Include="Assets\Hotfix\NewFramework\Base\GameFrameworkEntry.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\EventPool\BaseEventArgs.cs" />
     <Compile Include="Assets\Hotfix\Old\Runtime\Core\Module\EventSystem\EventSystem.cs" />
     <Compile Include="Assets\Hotfix\NewFramework\Base\Variable\Variable.cs" />

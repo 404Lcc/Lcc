@@ -2,7 +2,7 @@
 
 namespace LccModel
 {
-    internal sealed partial class ObjectPoolManager : GameFrameworkModule, IObjectPoolManager
+    internal sealed partial class ObjectPoolManager : Module, IObjectPoolManager
     {
         /// <summary>
         /// 内部对象。

@@ -5,7 +5,7 @@ namespace LccModel
     /// <summary>
     /// 事件管理器。
     /// </summary>
-    internal sealed class EventManager : GameFrameworkModule, IEventManager
+    internal sealed class EventManager : Module, IEventManager
     {
         private readonly EventPool<GameEventArgs> m_EventPool;
 
