@@ -106,6 +106,7 @@
     <Compile Include="Assets\Launcher\Launcher\Launcher.GameConfig.cs" />
     <Compile Include="Assets\Launcher\Utility\Path\PathType.cs" />
     <Compile Include="Assets\Launcher\Machine\StateMachine.cs" />
+    <Compile Include="Assets\Launcher\ScrollerPro\ScrollerProEx.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.UpdateVersion.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmClearCache.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmDownloadOver.cs" />
@@ -463,6 +464,10 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEditor.Android.Extensions">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
@@ -677,6 +682,18 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>Library\PackageCache\com.unity.analytics@3.8.1\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Types">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Gradle">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.GradleProject">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.GradleProject.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="mscorlib">
