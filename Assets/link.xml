@@ -4664,7 +4664,10 @@
     <type fullname="LccModel.AABB" preserve="all" />
     <type fullname="LccModel.OBB" preserve="all" />
     <type fullname="LccModel.GroupBase" preserve="all" />
+    <type fullname="LccModel.PivotHorizontal" preserve="all" />
+    <type fullname="LccModel.PivotVerticle" preserve="all" />
     <type fullname="LccModel.ScrollerPro" preserve="all" />
+    <type fullname="LccModel.ScrollerProEx" preserve="all" />
     <type fullname="LccModel.Singleton`1" preserve="all" />
     <type fullname="LccModel.SingletonMono`1" preserve="all" />
     <type fullname="LccModel.DisplayMode" preserve="all" />
@@ -4715,10 +4718,14 @@
     <type fullname="LccModel.FsmUpdateManifest+&lt;UpdateManifest&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmUpdateVersion+&lt;GetStaticVersion&gt;d__5" preserve="all" />
     <type fullname="LccModel.PatchOperation+ESteps" preserve="all" />
+    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass2_0" preserve="all" />
+    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass3_0" preserve="all" />
+    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass4_0" preserve="all" />
+    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass5_0" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel+&lt;&gt;c__DisplayClass6_0" preserve="all" />
     <type fullname="LccModel.UILoadingPanel+&lt;&gt;c" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2306" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3225" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2333" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3278" preserve="all" />
   </assembly>
 </linker>

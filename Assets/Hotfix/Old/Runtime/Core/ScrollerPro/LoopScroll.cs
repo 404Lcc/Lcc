@@ -96,7 +96,7 @@ namespace LccHotfix
             loopScroll.groupPrefab = groupBase;
         }
         #region 回调注册
-        public void GetObject(GroupBase groupBase, int index)
+        public void GetObject(GroupBase groupBase, int index, int a)
         {
             if (!dict.ContainsKey(index))
             {
@@ -281,10 +281,10 @@ namespace LccHotfix
         #endregion
 
 
-        public void RefershData()
-        {
-            loopScroll.RefershData();
-        }
+        //public void RefershData()
+        //{
+        //    loopScroll.RefershData();
+        //}
         public void ClearList()
         {
             loopScroll.ClearAll();
