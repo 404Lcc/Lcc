@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
@@ -9,18 +10,18 @@ namespace LccModel
     /// </summary>
     /// <typeparam name="TKey">指定多值字典的主键类型。</typeparam>
     /// <typeparam name="TValue">指定多值字典的值类型。</typeparam>
-    public sealed class GameFrameworkMultiDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, GameFrameworkLinkedListRange<TValue>>>, IEnumerable
+    public sealed class MultiDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, LinkedListRange<TValue>>>, IEnumerable
     {
-        private readonly GameFrameworkLinkedList<TValue> m_LinkedList;
-        private readonly Dictionary<TKey, GameFrameworkLinkedListRange<TValue>> m_Dictionary;
+        private readonly LinkedList<TValue> m_LinkedList;
+        private readonly Dictionary<TKey, LinkedListRange<TValue>> m_Dictionary;
 
         /// <summary>
         /// 初始化游戏框架多值字典类的新实例。
         /// </summary>
-        public GameFrameworkMultiDictionary()
+        public MultiDictionary()
         {
-            m_LinkedList = new GameFrameworkLinkedList<TValue>();
-            m_Dictionary = new Dictionary<TKey, GameFrameworkLinkedListRange<TValue>>();
+            m_LinkedList = new LinkedList<TValue>();
+            m_Dictionary = new Dictionary<TKey, LinkedListRange<TValue>>();
         }
 
         /// <summary>
@@ -39,11 +40,11 @@ namespace LccModel
         /// </summary>
         /// <param name="key">指定的主键。</param>
         /// <returns>指定主键的范围。</returns>
-        public GameFrameworkLinkedListRange<TValue> this[TKey key]
+        public LinkedListRange<TValue> this[TKey key]
         {
             get
             {
-                GameFrameworkLinkedListRange<TValue> range = default(GameFrameworkLinkedListRange<TValue>);
+                LinkedListRange<TValue> range = default(LinkedListRange<TValue>);
                 m_Dictionary.TryGetValue(key, out range);
                 return range;
             }
@@ -76,7 +77,7 @@ namespace LccModel
         /// <returns>多值字典中是否包含指定值。</returns>
         public bool Contains(TKey key, TValue value)
         {
-            GameFrameworkLinkedListRange<TValue> range = default(GameFrameworkLinkedListRange<TValue>);
+            LinkedListRange<TValue> range = default(LinkedListRange<TValue>);
             if (m_Dictionary.TryGetValue(key, out range))
             {
                 return range.Contains(value);
@@ -91,7 +92,7 @@ namespace LccModel
         /// <param name="key">指定的主键。</param>
         /// <param name="range">指定主键的范围。</param>
         /// <returns>是否获取成功。</returns>
-        public bool TryGetValue(TKey key, out GameFrameworkLinkedListRange<TValue> range)
+        public bool TryGetValue(TKey key, out LinkedListRange<TValue> range)
         {
             return m_Dictionary.TryGetValue(key, out range);
         }
@@ -103,7 +104,7 @@ namespace LccModel
         /// <param name="value">指定的值。</param>
         public void Add(TKey key, TValue value)
         {
-            GameFrameworkLinkedListRange<TValue> range = default(GameFrameworkLinkedListRange<TValue>);
+            LinkedListRange<TValue> range = default(LinkedListRange<TValue>);
             if (m_Dictionary.TryGetValue(key, out range))
             {
                 m_LinkedList.AddBefore(range.Terminal, value);
@@ -112,7 +113,7 @@ namespace LccModel
             {
                 LinkedListNode<TValue> first = m_LinkedList.AddLast(value);
                 LinkedListNode<TValue> terminal = m_LinkedList.AddLast(default(TValue));
-                m_Dictionary.Add(key, new GameFrameworkLinkedListRange<TValue>(first, terminal));
+                m_Dictionary.Add(key, new LinkedListRange<TValue>(first, terminal));
             }
         }
 
@@ -124,7 +125,7 @@ namespace LccModel
         /// <returns>是否移除成功。</returns>
         public bool Remove(TKey key, TValue value)
         {
-            GameFrameworkLinkedListRange<TValue> range = default(GameFrameworkLinkedListRange<TValue>);
+            LinkedListRange<TValue> range = default(LinkedListRange<TValue>);
             if (m_Dictionary.TryGetValue(key, out range))
             {
                 for (LinkedListNode<TValue> current = range.First; current != null && current != range.Terminal; current = current.Next)
@@ -141,7 +142,7 @@ namespace LccModel
                             }
                             else
                             {
-                                m_Dictionary[key] = new GameFrameworkLinkedListRange<TValue>(next, range.Terminal);
+                                m_Dictionary[key] = new LinkedListRange<TValue>(next, range.Terminal);
                             }
                         }
 
@@ -161,7 +162,7 @@ namespace LccModel
         /// <returns>是否移除成功。</returns>
         public bool RemoveAll(TKey key)
         {
-            GameFrameworkLinkedListRange<TValue> range = default(GameFrameworkLinkedListRange<TValue>);
+            LinkedListRange<TValue> range = default(LinkedListRange<TValue>);
             if (m_Dictionary.TryGetValue(key, out range))
             {
                 m_Dictionary.Remove(key);
@@ -193,7 +194,7 @@ namespace LccModel
         /// 返回循环访问集合的枚举数。
         /// </summary>
         /// <returns>循环访问集合的枚举数。</returns>
-        IEnumerator<KeyValuePair<TKey, GameFrameworkLinkedListRange<TValue>>> IEnumerable<KeyValuePair<TKey, GameFrameworkLinkedListRange<TValue>>>.GetEnumerator()
+        IEnumerator<KeyValuePair<TKey, LinkedListRange<TValue>>> IEnumerable<KeyValuePair<TKey, LinkedListRange<TValue>>>.GetEnumerator()
         {
             return GetEnumerator();
         }
@@ -211,15 +212,15 @@ namespace LccModel
         /// 循环访问集合的枚举数。
         /// </summary>
         [StructLayout(LayoutKind.Auto)]
-        public struct Enumerator : IEnumerator<KeyValuePair<TKey, GameFrameworkLinkedListRange<TValue>>>, IEnumerator
+        public struct Enumerator : IEnumerator<KeyValuePair<TKey, LinkedListRange<TValue>>>, IEnumerator
         {
-            private Dictionary<TKey, GameFrameworkLinkedListRange<TValue>>.Enumerator m_Enumerator;
+            private Dictionary<TKey, LinkedListRange<TValue>>.Enumerator m_Enumerator;
 
-            internal Enumerator(Dictionary<TKey, GameFrameworkLinkedListRange<TValue>> dictionary)
+            internal Enumerator(Dictionary<TKey, LinkedListRange<TValue>> dictionary)
             {
                 if (dictionary == null)
                 {
-                    throw new GameFrameworkException("Dictionary is invalid.");
+                    throw new Exception("Dictionary is invalid.");
                 }
 
                 m_Enumerator = dictionary.GetEnumerator();
@@ -228,7 +229,7 @@ namespace LccModel
             /// <summary>
             /// 获取当前结点。
             /// </summary>
-            public KeyValuePair<TKey, GameFrameworkLinkedListRange<TValue>> Current
+            public KeyValuePair<TKey, LinkedListRange<TValue>> Current
             {
                 get
                 {
@@ -269,7 +270,7 @@ namespace LccModel
             /// </summary>
             void IEnumerator.Reset()
             {
-                ((IEnumerator<KeyValuePair<TKey, GameFrameworkLinkedListRange<TValue>>>)m_Enumerator).Reset();
+                ((IEnumerator<KeyValuePair<TKey, LinkedListRange<TValue>>>)m_Enumerator).Reset();
             }
         }
     }

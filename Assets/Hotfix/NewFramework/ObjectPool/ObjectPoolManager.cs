@@ -95,12 +95,12 @@ namespace LccModel
         {
             if (objectType == null)
             {
-                throw new GameFrameworkException("Object type is invalid.");
+                throw new Exception("Object type is invalid.");
             }
 
             if (!typeof(ObjectBase).IsAssignableFrom(objectType))
             {
-                throw new GameFrameworkException(Utility.Text.Format("Object type '{0}' is invalid.", objectType.FullName));
+                throw new Exception(Utility.Text.Format("Object type '{0}' is invalid.", objectType.FullName));
             }
 
             return InternalHasObjectPool(new TypeNamePair(objectType));
@@ -127,12 +127,12 @@ namespace LccModel
         {
             if (objectType == null)
             {
-                throw new GameFrameworkException("Object type is invalid.");
+                throw new Exception("Object type is invalid.");
             }
 
             if (!typeof(ObjectBase).IsAssignableFrom(objectType))
             {
-                throw new GameFrameworkException(Utility.Text.Format("Object type '{0}' is invalid.", objectType.FullName));
+                throw new Exception(Utility.Text.Format("Object type '{0}' is invalid.", objectType.FullName));
             }
 
             return InternalHasObjectPool(new TypeNamePair(objectType, name));
@@ -147,7 +147,7 @@ namespace LccModel
         {
             if (condition == null)
             {
-                throw new GameFrameworkException("Condition is invalid.");
+                throw new Exception("Condition is invalid.");
             }
 
             foreach (KeyValuePair<TypeNamePair, ObjectPoolBase> objectPool in m_ObjectPools)
@@ -180,12 +180,12 @@ namespace LccModel
         {
             if (objectType == null)
             {
-                throw new GameFrameworkException("Object type is invalid.");
+                throw new Exception("Object type is invalid.");
             }
 
             if (!typeof(ObjectBase).IsAssignableFrom(objectType))
             {
-                throw new GameFrameworkException(Utility.Text.Format("Object type '{0}' is invalid.", objectType.FullName));
+                throw new Exception(Utility.Text.Format("Object type '{0}' is invalid.", objectType.FullName));
             }
 
             return InternalGetObjectPool(new TypeNamePair(objectType));
@@ -212,12 +212,12 @@ namespace LccModel
         {
             if (objectType == null)
             {
-                throw new GameFrameworkException("Object type is invalid.");
+                throw new Exception("Object type is invalid.");
             }
 
             if (!typeof(ObjectBase).IsAssignableFrom(objectType))
             {
-                throw new GameFrameworkException(Utility.Text.Format("Object type '{0}' is invalid.", objectType.FullName));
+                throw new Exception(Utility.Text.Format("Object type '{0}' is invalid.", objectType.FullName));
             }
 
             return InternalGetObjectPool(new TypeNamePair(objectType, name));
@@ -232,7 +232,7 @@ namespace LccModel
         {
             if (condition == null)
             {
-                throw new GameFrameworkException("Condition is invalid.");
+                throw new Exception("Condition is invalid.");
             }
 
             foreach (KeyValuePair<TypeNamePair, ObjectPoolBase> objectPool in m_ObjectPools)
@@ -255,7 +255,7 @@ namespace LccModel
         {
             if (condition == null)
             {
-                throw new GameFrameworkException("Condition is invalid.");
+                throw new Exception("Condition is invalid.");
             }
 
             List<ObjectPoolBase> results = new List<ObjectPoolBase>();
@@ -279,12 +279,12 @@ namespace LccModel
         {
             if (condition == null)
             {
-                throw new GameFrameworkException("Condition is invalid.");
+                throw new Exception("Condition is invalid.");
             }
 
             if (results == null)
             {
-                throw new GameFrameworkException("Results is invalid.");
+                throw new Exception("Results is invalid.");
             }
 
             results.Clear();
@@ -355,7 +355,7 @@ namespace LccModel
         {
             if (results == null)
             {
-                throw new GameFrameworkException("Results is invalid.");
+                throw new Exception("Results is invalid.");
             }
 
             results.Clear();
@@ -1125,12 +1125,12 @@ namespace LccModel
         {
             if (objectType == null)
             {
-                throw new GameFrameworkException("Object type is invalid.");
+                throw new Exception("Object type is invalid.");
             }
 
             if (!typeof(ObjectBase).IsAssignableFrom(objectType))
             {
-                throw new GameFrameworkException(Utility.Text.Format("Object type '{0}' is invalid.", objectType.FullName));
+                throw new Exception(Utility.Text.Format("Object type '{0}' is invalid.", objectType.FullName));
             }
 
             return InternalDestroyObjectPool(new TypeNamePair(objectType));
@@ -1157,12 +1157,12 @@ namespace LccModel
         {
             if (objectType == null)
             {
-                throw new GameFrameworkException("Object type is invalid.");
+                throw new Exception("Object type is invalid.");
             }
 
             if (!typeof(ObjectBase).IsAssignableFrom(objectType))
             {
-                throw new GameFrameworkException(Utility.Text.Format("Object type '{0}' is invalid.", objectType.FullName));
+                throw new Exception(Utility.Text.Format("Object type '{0}' is invalid.", objectType.FullName));
             }
 
             return InternalDestroyObjectPool(new TypeNamePair(objectType, name));
@@ -1178,7 +1178,7 @@ namespace LccModel
         {
             if (objectPool == null)
             {
-                throw new GameFrameworkException("Object pool is invalid.");
+                throw new Exception("Object pool is invalid.");
             }
 
             return InternalDestroyObjectPool(new TypeNamePair(typeof(T), objectPool.Name));
@@ -1193,7 +1193,7 @@ namespace LccModel
         {
             if (objectPool == null)
             {
-                throw new GameFrameworkException("Object pool is invalid.");
+                throw new Exception("Object pool is invalid.");
             }
 
             return InternalDestroyObjectPool(new TypeNamePair(objectPool.ObjectType, objectPool.Name));
@@ -1244,7 +1244,7 @@ namespace LccModel
             TypeNamePair typeNamePair = new TypeNamePair(typeof(T), name);
             if (HasObjectPool<T>(name))
             {
-                throw new GameFrameworkException(Utility.Text.Format("Already exist object pool '{0}'.", typeNamePair));
+                throw new Exception(Utility.Text.Format("Already exist object pool '{0}'.", typeNamePair));
             }
 
             ObjectPool<T> objectPool = new ObjectPool<T>(name, allowMultiSpawn, autoReleaseInterval, capacity, expireTime, priority);
@@ -1256,18 +1256,18 @@ namespace LccModel
         {
             if (objectType == null)
             {
-                throw new GameFrameworkException("Object type is invalid.");
+                throw new Exception("Object type is invalid.");
             }
 
             if (!typeof(ObjectBase).IsAssignableFrom(objectType))
             {
-                throw new GameFrameworkException(Utility.Text.Format("Object type '{0}' is invalid.", objectType.FullName));
+                throw new Exception(Utility.Text.Format("Object type '{0}' is invalid.", objectType.FullName));
             }
 
             TypeNamePair typeNamePair = new TypeNamePair(objectType, name);
             if (HasObjectPool(objectType, name))
             {
-                throw new GameFrameworkException(Utility.Text.Format("Already exist object pool '{0}'.", typeNamePair));
+                throw new Exception(Utility.Text.Format("Already exist object pool '{0}'.", typeNamePair));
             }
 
             Type objectPoolType = typeof(ObjectPool<>).MakeGenericType(objectType);

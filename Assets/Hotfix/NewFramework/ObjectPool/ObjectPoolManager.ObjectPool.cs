@@ -11,7 +11,7 @@ namespace LccModel
         /// <typeparam name="T">对象类型。</typeparam>
         private sealed class ObjectPool<T> : ObjectPoolBase, IObjectPool<T> where T : ObjectBase
         {
-            private readonly GameFrameworkMultiDictionary<string, Object<T>> m_Objects;
+            private readonly MultiDictionary<string, Object<T>> m_Objects;
             private readonly Dictionary<object, Object<T>> m_ObjectMap;
             private readonly ReleaseObjectFilterCallback<T> m_DefaultReleaseObjectFilterCallback;
             private readonly List<T> m_CachedCanReleaseObjects;
@@ -35,7 +35,7 @@ namespace LccModel
             public ObjectPool(string name, bool allowMultiSpawn, float autoReleaseInterval, int capacity, float expireTime, int priority)
                 : base(name)
             {
-                m_Objects = new GameFrameworkMultiDictionary<string, Object<T>>();
+                m_Objects = new MultiDictionary<string, Object<T>>();
                 m_ObjectMap = new Dictionary<object, Object<T>>();
                 m_DefaultReleaseObjectFilterCallback = DefaultReleaseObjectFilterCallback;
                 m_CachedCanReleaseObjects = new List<T>();
@@ -121,7 +121,7 @@ namespace LccModel
                 {
                     if (value < 0)
                     {
-                        throw new GameFrameworkException("Capacity is invalid.");
+                        throw new Exception("Capacity is invalid.");
                     }
 
                     if (m_Capacity == value)
@@ -148,7 +148,7 @@ namespace LccModel
                 {
                     if (value < 0f)
                     {
-                        throw new GameFrameworkException("ExpireTime is invalid.");
+                        throw new Exception("ExpireTime is invalid.");
                     }
 
                     if (ExpireTime == value)
@@ -185,7 +185,7 @@ namespace LccModel
             {
                 if (obj == null)
                 {
-                    throw new GameFrameworkException("Object is invalid.");
+                    throw new Exception("Object is invalid.");
                 }
 
                 Object<T> internalObject = Object<T>.Create(obj, spawned);
@@ -216,10 +216,10 @@ namespace LccModel
             {
                 if (name == null)
                 {
-                    throw new GameFrameworkException("Name is invalid.");
+                    throw new Exception("Name is invalid.");
                 }
 
-                GameFrameworkLinkedListRange<Object<T>> objectRange = default(GameFrameworkLinkedListRange<Object<T>>);
+                LinkedListRange<Object<T>> objectRange = default(LinkedListRange<Object<T>>);
                 if (m_Objects.TryGetValue(name, out objectRange))
                 {
                     foreach (Object<T> internalObject in objectRange)
@@ -252,10 +252,10 @@ namespace LccModel
             {
                 if (name == null)
                 {
-                    throw new GameFrameworkException("Name is invalid.");
+                    throw new Exception("Name is invalid.");
                 }
 
-                GameFrameworkLinkedListRange<Object<T>> objectRange = default(GameFrameworkLinkedListRange<Object<T>>);
+                LinkedListRange<Object<T>> objectRange = default(LinkedListRange<Object<T>>);
                 if (m_Objects.TryGetValue(name, out objectRange))
                 {
                     foreach (Object<T> internalObject in objectRange)
@@ -278,7 +278,7 @@ namespace LccModel
             {
                 if (obj == null)
                 {
-                    throw new GameFrameworkException("Object is invalid.");
+                    throw new Exception("Object is invalid.");
                 }
 
                 Unspawn(obj.Target);
@@ -292,7 +292,7 @@ namespace LccModel
             {
                 if (target == null)
                 {
-                    throw new GameFrameworkException("Target is invalid.");
+                    throw new Exception("Target is invalid.");
                 }
 
                 Object<T> internalObject = GetObject(target);
@@ -306,7 +306,7 @@ namespace LccModel
                 }
                 else
                 {
-                    throw new GameFrameworkException(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
+                    throw new Exception(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
                 }
             }
 
@@ -319,7 +319,7 @@ namespace LccModel
             {
                 if (obj == null)
                 {
-                    throw new GameFrameworkException("Object is invalid.");
+                    throw new Exception("Object is invalid.");
                 }
 
                 SetLocked(obj.Target, locked);
@@ -334,7 +334,7 @@ namespace LccModel
             {
                 if (target == null)
                 {
-                    throw new GameFrameworkException("Target is invalid.");
+                    throw new Exception("Target is invalid.");
                 }
 
                 Object<T> internalObject = GetObject(target);
@@ -344,7 +344,7 @@ namespace LccModel
                 }
                 else
                 {
-                    throw new GameFrameworkException(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
+                    throw new Exception(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
                 }
             }
 
@@ -357,7 +357,7 @@ namespace LccModel
             {
                 if (obj == null)
                 {
-                    throw new GameFrameworkException("Object is invalid.");
+                    throw new Exception("Object is invalid.");
                 }
 
                 SetPriority(obj.Target, priority);
@@ -372,7 +372,7 @@ namespace LccModel
             {
                 if (target == null)
                 {
-                    throw new GameFrameworkException("Target is invalid.");
+                    throw new Exception("Target is invalid.");
                 }
 
                 Object<T> internalObject = GetObject(target);
@@ -382,7 +382,7 @@ namespace LccModel
                 }
                 else
                 {
-                    throw new GameFrameworkException(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
+                    throw new Exception(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
                 }
             }
 
@@ -395,7 +395,7 @@ namespace LccModel
             {
                 if (obj == null)
                 {
-                    throw new GameFrameworkException("Object is invalid.");
+                    throw new Exception("Object is invalid.");
                 }
 
                 return ReleaseObject(obj.Target);
@@ -410,7 +410,7 @@ namespace LccModel
             {
                 if (target == null)
                 {
-                    throw new GameFrameworkException("Target is invalid.");
+                    throw new Exception("Target is invalid.");
                 }
 
                 Object<T> internalObject = GetObject(target);
@@ -467,7 +467,7 @@ namespace LccModel
             {
                 if (releaseObjectFilterCallback == null)
                 {
-                    throw new GameFrameworkException("Release object filter callback is invalid.");
+                    throw new Exception("Release object filter callback is invalid.");
                 }
 
                 if (toReleaseCount < 0)
@@ -515,7 +515,7 @@ namespace LccModel
             public override ObjectInfo[] GetAllObjectInfos()
             {
                 List<ObjectInfo> results = new List<ObjectInfo>();
-                foreach (KeyValuePair<string, GameFrameworkLinkedListRange<Object<T>>> objectRanges in m_Objects)
+                foreach (KeyValuePair<string, LinkedListRange<Object<T>>> objectRanges in m_Objects)
                 {
                     foreach (Object<T> internalObject in objectRanges.Value)
                     {
@@ -555,7 +555,7 @@ namespace LccModel
             {
                 if (target == null)
                 {
-                    throw new GameFrameworkException("Target is invalid.");
+                    throw new Exception("Target is invalid.");
                 }
 
                 Object<T> internalObject = null;
@@ -571,7 +571,7 @@ namespace LccModel
             {
                 if (results == null)
                 {
-                    throw new GameFrameworkException("Results is invalid.");
+                    throw new Exception("Results is invalid.");
                 }
 
                 results.Clear();

@@ -8,7 +8,7 @@ namespace LccModel
     /// </summary>
     public static class GameFrameworkEntry
     {
-        private static readonly GameFrameworkLinkedList<GameFrameworkModule> s_GameFrameworkModules = new GameFrameworkLinkedList<GameFrameworkModule>();
+        private static readonly LinkedList<GameFrameworkModule> s_GameFrameworkModules = new LinkedList<GameFrameworkModule>();
 
         /// <summary>
         /// 所有游戏框架模块轮询。
@@ -35,7 +35,7 @@ namespace LccModel
 
             s_GameFrameworkModules.Clear();
             ReferencePool.ClearAll();
-            Utility.Marshal.FreeCachedHGlobal();
+            Utility.MarshalUtility.FreeCachedHGlobal();
             Log.SetLogHelper(null);
         }
 
@@ -50,19 +50,19 @@ namespace LccModel
             Type interfaceType = typeof(T);
             if (!interfaceType.IsInterface)
             {
-                throw new GameFrameworkException(Utility.Text.Format("You must get module by interface, but '{0}' is not.", interfaceType.FullName));
+                throw new Exception(Utility.Text.Format("You must get module by interface, but '{0}' is not.", interfaceType.FullName));
             }
 
             if (!interfaceType.FullName.StartsWith("GameFramework.", StringComparison.Ordinal))
             {
-                throw new GameFrameworkException(Utility.Text.Format("You must get a Game Framework module, but '{0}' is not.", interfaceType.FullName));
+                throw new Exception(Utility.Text.Format("You must get a Game Framework module, but '{0}' is not.", interfaceType.FullName));
             }
 
             string moduleName = Utility.Text.Format("{0}.{1}", interfaceType.Namespace, interfaceType.Name.Substring(1));
             Type moduleType = Type.GetType(moduleName);
             if (moduleType == null)
             {
-                throw new GameFrameworkException(Utility.Text.Format("Can not find Game Framework module type '{0}'.", moduleName));
+                throw new Exception(Utility.Text.Format("Can not find Game Framework module type '{0}'.", moduleName));
             }
 
             return GetModule(moduleType) as T;
@@ -97,7 +97,7 @@ namespace LccModel
             GameFrameworkModule module = (GameFrameworkModule)Activator.CreateInstance(moduleType);
             if (module == null)
             {
-                throw new GameFrameworkException(Utility.Text.Format("Can not create module '{0}'.", moduleType.FullName));
+                throw new Exception(Utility.Text.Format("Can not create module '{0}'.", moduleType.FullName));
             }
 
             LinkedListNode<GameFrameworkModule> current = s_GameFrameworkModules.First;

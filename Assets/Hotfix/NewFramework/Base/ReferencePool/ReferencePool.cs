@@ -103,7 +103,7 @@ namespace LccModel
         {
             if (reference == null)
             {
-                throw new GameFrameworkException("Reference is invalid.");
+                throw new Exception("Reference is invalid.");
             }
 
             Type referenceType = reference.GetType();
@@ -181,17 +181,17 @@ namespace LccModel
 
             if (referenceType == null)
             {
-                throw new GameFrameworkException("Reference type is invalid.");
+                throw new Exception("Reference type is invalid.");
             }
 
             if (!referenceType.IsClass || referenceType.IsAbstract)
             {
-                throw new GameFrameworkException("Reference type is not a non-abstract class type.");
+                throw new Exception("Reference type is not a non-abstract class type.");
             }
 
             if (!typeof(IReference).IsAssignableFrom(referenceType))
             {
-                throw new GameFrameworkException(Utility.Text.Format("Reference type '{0}' is invalid.", referenceType.FullName));
+                throw new Exception(Utility.Text.Format("Reference type '{0}' is invalid.", referenceType.FullName));
             }
         }
 
@@ -199,7 +199,7 @@ namespace LccModel
         {
             if (referenceType == null)
             {
-                throw new GameFrameworkException("ReferenceType is invalid.");
+                throw new Exception("ReferenceType is invalid.");
             }
 
             ReferenceCollection referenceCollection = null;

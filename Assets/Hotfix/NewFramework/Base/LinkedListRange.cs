@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
@@ -9,7 +10,7 @@ namespace LccModel
     /// </summary>
     /// <typeparam name="T">指定链表范围的元素类型。</typeparam>
     [StructLayout(LayoutKind.Auto)]
-    public struct GameFrameworkLinkedListRange<T> : IEnumerable<T>, IEnumerable
+    public struct LinkedListRange<T> : IEnumerable<T>, IEnumerable
     {
         private readonly LinkedListNode<T> m_First;
         private readonly LinkedListNode<T> m_Terminal;
@@ -19,11 +20,11 @@ namespace LccModel
         /// </summary>
         /// <param name="first">链表范围的开始结点。</param>
         /// <param name="terminal">链表范围的终结标记结点。</param>
-        public GameFrameworkLinkedListRange(LinkedListNode<T> first, LinkedListNode<T> terminal)
+        public LinkedListRange(LinkedListNode<T> first, LinkedListNode<T> terminal)
         {
             if (first == null || terminal == null || first == terminal)
             {
-                throw new GameFrameworkException("Range is invalid.");
+                throw new Exception("Range is invalid.");
             }
 
             m_First = first;
@@ -136,15 +137,15 @@ namespace LccModel
         [StructLayout(LayoutKind.Auto)]
         public struct Enumerator : IEnumerator<T>, IEnumerator
         {
-            private readonly GameFrameworkLinkedListRange<T> m_GameFrameworkLinkedListRange;
+            private readonly LinkedListRange<T> m_GameFrameworkLinkedListRange;
             private LinkedListNode<T> m_Current;
             private T m_CurrentValue;
 
-            internal Enumerator(GameFrameworkLinkedListRange<T> range)
+            internal Enumerator(LinkedListRange<T> range)
             {
                 if (!range.IsValid)
                 {
-                    throw new GameFrameworkException("Range is invalid.");
+                    throw new Exception("Range is invalid.");
                 }
 
                 m_GameFrameworkLinkedListRange = range;

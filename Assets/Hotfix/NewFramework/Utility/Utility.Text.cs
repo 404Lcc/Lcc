@@ -1,4 +1,6 @@
-﻿namespace LccModel
+﻿using System;
+
+namespace LccModel
 {
     public static partial class Utility
     {
@@ -29,7 +31,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -53,7 +55,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -79,7 +81,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -107,7 +109,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -137,7 +139,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -169,7 +171,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -203,7 +205,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -239,7 +241,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -277,7 +279,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -317,7 +319,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -359,7 +361,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -403,7 +405,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -449,7 +451,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -497,7 +499,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -547,7 +549,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)
@@ -599,7 +601,7 @@
             {
                 if (format == null)
                 {
-                    throw new GameFrameworkException("Format is invalid.");
+                    throw new Exception("Format is invalid.");
                 }
 
                 if (s_TextHelper == null)

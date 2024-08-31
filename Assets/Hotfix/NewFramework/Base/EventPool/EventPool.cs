@@ -9,7 +9,7 @@ namespace LccModel
     /// <typeparam name="T">事件类型。</typeparam>
     internal sealed partial class EventPool<T> where T : BaseEventArgs
     {
-        private readonly GameFrameworkMultiDictionary<int, EventHandler<T>> m_EventHandlers;
+        private readonly MultiDictionary<int, EventHandler<T>> m_EventHandlers;
         private readonly Queue<Event> m_Events;
         private readonly Dictionary<object, LinkedListNode<EventHandler<T>>> m_CachedNodes;
         private readonly Dictionary<object, LinkedListNode<EventHandler<T>>> m_TempNodes;
@@ -22,7 +22,7 @@ namespace LccModel
         /// <param name="mode">事件池模式。</param>
         public EventPool(EventPoolMode mode)
         {
-            m_EventHandlers = new GameFrameworkMultiDictionary<int, EventHandler<T>>();
+            m_EventHandlers = new MultiDictionary<int, EventHandler<T>>();
             m_Events = new Queue<Event>();
             m_CachedNodes = new Dictionary<object, LinkedListNode<EventHandler<T>>>();
             m_TempNodes = new Dictionary<object, LinkedListNode<EventHandler<T>>>();
@@ -100,7 +100,7 @@ namespace LccModel
         /// <returns>事件处理函数的数量。</returns>
         public int Count(int id)
         {
-            GameFrameworkLinkedListRange<EventHandler<T>> range = default(GameFrameworkLinkedListRange<EventHandler<T>>);
+            LinkedListRange<EventHandler<T>> range = default(LinkedListRange<EventHandler<T>>);
             if (m_EventHandlers.TryGetValue(id, out range))
             {
                 return range.Count;
@@ -119,7 +119,7 @@ namespace LccModel
         {
             if (handler == null)
             {
-                throw new GameFrameworkException("Event handler is invalid.");
+                throw new Exception("Event handler is invalid.");
             }
 
             return m_EventHandlers.Contains(id, handler);
@@ -134,7 +134,7 @@ namespace LccModel
         {
             if (handler == null)
             {
-                throw new GameFrameworkException("Event handler is invalid.");
+                throw new Exception("Event handler is invalid.");
             }
 
             if (!m_EventHandlers.Contains(id))
@@ -143,11 +143,11 @@ namespace LccModel
             }
             else if ((m_EventPoolMode & EventPoolMode.AllowMultiHandler) != EventPoolMode.AllowMultiHandler)
             {
-                throw new GameFrameworkException(Utility.Text.Format("Event '{0}' not allow multi handler.", id));
+                throw new Exception(Utility.Text.Format("Event '{0}' not allow multi handler.", id));
             }
             else if ((m_EventPoolMode & EventPoolMode.AllowDuplicateHandler) != EventPoolMode.AllowDuplicateHandler && Check(id, handler))
             {
-                throw new GameFrameworkException(Utility.Text.Format("Event '{0}' not allow duplicate handler.", id));
+                throw new Exception(Utility.Text.Format("Event '{0}' not allow duplicate handler.", id));
             }
             else
             {
@@ -164,7 +164,7 @@ namespace LccModel
         {
             if (handler == null)
             {
-                throw new GameFrameworkException("Event handler is invalid.");
+                throw new Exception("Event handler is invalid.");
             }
 
             if (m_CachedNodes.Count > 0)
@@ -190,7 +190,7 @@ namespace LccModel
 
             if (!m_EventHandlers.Remove(id, handler))
             {
-                throw new GameFrameworkException(Utility.Text.Format("Event '{0}' not exists specified handler.", id));
+                throw new Exception(Utility.Text.Format("Event '{0}' not exists specified handler.", id));
             }
         }
 
@@ -212,7 +212,7 @@ namespace LccModel
         {
             if (e == null)
             {
-                throw new GameFrameworkException("Event is invalid.");
+                throw new Exception("Event is invalid.");
             }
 
             Event eventNode = Event.Create(sender, e);
@@ -231,7 +231,7 @@ namespace LccModel
         {
             if (e == null)
             {
-                throw new GameFrameworkException("Event is invalid.");
+                throw new Exception("Event is invalid.");
             }
 
             HandleEvent(sender, e);
@@ -245,7 +245,7 @@ namespace LccModel
         private void HandleEvent(object sender, T e)
         {
             bool noHandlerException = false;
-            GameFrameworkLinkedListRange<EventHandler<T>> range = default(GameFrameworkLinkedListRange<EventHandler<T>>);
+            LinkedListRange<EventHandler<T>> range = default(LinkedListRange<EventHandler<T>>);
             if (m_EventHandlers.TryGetValue(e.Id, out range))
             {
                 LinkedListNode<EventHandler<T>> current = range.First;
@@ -271,7 +271,7 @@ namespace LccModel
 
             if (noHandlerException)
             {
-                throw new GameFrameworkException(Utility.Text.Format("Event '{0}' not allow no handler.", e.Id));
+                throw new Exception(Utility.Text.Format("Event '{0}' not allow no handler.", e.Id));
             }
         }
     }

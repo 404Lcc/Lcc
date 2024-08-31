@@ -117,7 +117,7 @@ namespace LccModel
             {
                 if (obj == null)
                 {
-                    throw new GameFrameworkException("Object is invalid.");
+                    throw new Exception("Object is invalid.");
                 }
 
                 Object<T> internalObject = ReferencePool.Acquire<Object<T>>();
@@ -171,7 +171,7 @@ namespace LccModel
                 m_SpawnCount--;
                 if (m_SpawnCount < 0)
                 {
-                    throw new GameFrameworkException(Utility.Text.Format("Object '{0}' spawn count is less than 0.", Name));
+                    throw new Exception(Utility.Text.Format("Object '{0}' spawn count is less than 0.", Name));
                 }
             }
 

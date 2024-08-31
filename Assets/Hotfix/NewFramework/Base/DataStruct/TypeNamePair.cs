@@ -29,7 +29,7 @@ namespace LccModel
         {
             if (type == null)
             {
-                throw new GameFrameworkException("Type is invalid.");
+                throw new Exception("Type is invalid.");
             }
 
             m_Type = type;
@@ -66,7 +66,7 @@ namespace LccModel
         {
             if (m_Type == null)
             {
-                throw new GameFrameworkException("Type is invalid.");
+                throw new Exception("Type is invalid.");
             }
 
             string typeName = m_Type.FullName;

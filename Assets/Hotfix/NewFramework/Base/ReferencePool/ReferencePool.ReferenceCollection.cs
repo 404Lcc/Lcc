@@ -86,7 +86,7 @@ namespace LccModel
             {
                 if (typeof(T) != m_ReferenceType)
                 {
-                    throw new GameFrameworkException("Type is invalid.");
+                    throw new Exception("Type is invalid.");
                 }
 
                 m_UsingReferenceCount++;
@@ -126,7 +126,7 @@ namespace LccModel
                 {
                     if (m_EnableStrictCheck && m_References.Contains(reference))
                     {
-                        throw new GameFrameworkException("The reference has been released.");
+                        throw new Exception("The reference has been released.");
                     }
 
                     m_References.Enqueue(reference);
@@ -140,7 +140,7 @@ namespace LccModel
             {
                 if (typeof(T) != m_ReferenceType)
                 {
-                    throw new GameFrameworkException("Type is invalid.");
+                    throw new Exception("Type is invalid.");
                 }
 
                 lock (m_References)
