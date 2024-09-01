@@ -1,15 +1,9 @@
 ﻿using UnityEngine;
 
-namespace LccModel
+namespace LccHotfix
 {
     public static class TransformExpand
     {
-        //public static Vector2 sizeDelta(this RectTransform rectTransform)
-        //{
-        //    Vector2 size = new Vector2(rectTransform.rect.size.x, rectTransform.rect.size.y);
-
-        //    return size;
-        //}
         public static GameObject GetChildGameObject(this Transform transform, params string[] childs)
         {
             if (transform == null) return null;

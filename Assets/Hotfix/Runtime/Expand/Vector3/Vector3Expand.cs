@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace LccModel
+namespace LccHotfix
 {
     public static class Vector3Expand
     {

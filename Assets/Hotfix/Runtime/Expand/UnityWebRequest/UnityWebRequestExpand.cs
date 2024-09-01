@@ -1,6 +1,6 @@
 using UnityEngine.Networking;
 
-namespace LccModel
+namespace LccHotfix
 {
     public static class UnityWebRequestExpand
     {

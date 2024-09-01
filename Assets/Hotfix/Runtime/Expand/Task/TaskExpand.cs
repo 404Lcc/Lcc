@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace LccModel
+namespace LccHotfix
 {
     public static class TaskExpand
     {

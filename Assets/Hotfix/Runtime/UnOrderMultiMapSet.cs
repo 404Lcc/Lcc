@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LccModel
+namespace LccHotfix
 {
     public class UnOrderMultiMapSet<T, K> : Dictionary<T, HashSet<K>>
     {

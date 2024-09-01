@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using LccModel;
+using UnityEngine;
 using UnityEngine.UI;
 using YooAsset;
 
-namespace LccModel
+namespace LccHotfix
 {
     public static class ImageExpand
     {

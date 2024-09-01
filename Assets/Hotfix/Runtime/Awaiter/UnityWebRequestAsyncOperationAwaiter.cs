@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace LccModel
+namespace LccHotfix
 {
     public class UnityWebRequestAsyncOperationAwaiter : ICriticalNotifyCompletion
     {

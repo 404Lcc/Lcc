@@ -1,6 +1,6 @@
 using System;
 
-namespace LccModel
+namespace LccHotfix
 {
     public class ActionWrap<T>
     {

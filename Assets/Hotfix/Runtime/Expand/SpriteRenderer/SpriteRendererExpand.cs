@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using LccModel;
+using UnityEngine;
 using YooAsset;
 
-namespace LccModel
+namespace LccHotfix
 {
     public static class SpriteRendererExpand
     {

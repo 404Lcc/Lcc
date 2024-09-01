@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace LccModel
+namespace LccHotfix
 {
     public static class AwaiterExpand
     {
