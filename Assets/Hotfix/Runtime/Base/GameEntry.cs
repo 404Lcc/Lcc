@@ -10,7 +10,7 @@ namespace LccHotfix
     /// </summary>
     public static class GameEntry
     {
-        private static readonly LinkedList<Component> s_GameFrameworkComponents = new LinkedList<Component>();
+        private static readonly LinkedList<Component> s_Components = new LinkedList<Component>();
 
         /// <summary>
         /// 游戏框架所在的场景编号。
@@ -34,7 +34,7 @@ namespace LccHotfix
         /// <returns>要获取的游戏框架组件。</returns>
         public static Component GetComponent(Type type)
         {
-            LinkedListNode<Component> current = s_GameFrameworkComponents.First;
+            LinkedListNode<Component> current = s_Components.First;
             while (current != null)
             {
                 if (current.Value.GetType() == type)
@@ -55,7 +55,7 @@ namespace LccHotfix
         /// <returns>要获取的游戏框架组件。</returns>
         public static Component GetComponent(string typeName)
         {
-            LinkedListNode<Component> current = s_GameFrameworkComponents.First;
+            LinkedListNode<Component> current = s_Components.First;
             while (current != null)
             {
                 Type type = current.Value.GetType();
@@ -76,7 +76,7 @@ namespace LccHotfix
         /// <param name="shutdownType">关闭游戏框架类型。</param>
         public static void Shutdown(ShutdownType shutdownType)
         {
-            Log.Info("Shutdown Game Framework ({0})...", shutdownType.ToString());
+            Log.Info("Shutdown Framework ({0})...", shutdownType.ToString());
             //BaseComponent baseComponent = GetComponent<BaseComponent>();
             //if (baseComponent != null)
             //{
@@ -84,7 +84,7 @@ namespace LccHotfix
             //    baseComponent = null;
             //}
 
-            s_GameFrameworkComponents.Clear();
+            s_Components.Clear();
 
             if (shutdownType == ShutdownType.None)
             {
@@ -115,25 +115,25 @@ namespace LccHotfix
         {
             if (gameFrameworkComponent == null)
             {
-                Log.Error("Game Framework component is invalid.");
+                Log.Error("Framework component is invalid.");
                 return;
             }
 
             Type type = gameFrameworkComponent.GetType();
 
-            LinkedListNode<Component> current = s_GameFrameworkComponents.First;
+            LinkedListNode<Component> current = s_Components.First;
             while (current != null)
             {
                 if (current.Value.GetType() == type)
                 {
-                    Log.Error("Game Framework component type '{0}' is already exist.", type.FullName);
+                    Log.Error("Framework component type '{0}' is already exist.", type.FullName);
                     return;
                 }
 
                 current = current.Next;
             }
 
-            s_GameFrameworkComponents.AddLast(gameFrameworkComponent);
+            s_Components.AddLast(gameFrameworkComponent);
         }
     }
 }

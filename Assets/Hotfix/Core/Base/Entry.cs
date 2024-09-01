@@ -8,7 +8,7 @@ namespace LccHotfix
     /// </summary>
     public static class Entry
     {
-        private static readonly LinkedList<Module> s_GameFrameworkModules = new LinkedList<Module>();
+        private static readonly LinkedList<Module> s_Modules = new LinkedList<Module>();
 
         /// <summary>
         /// 所有游戏框架模块轮询。
@@ -17,7 +17,7 @@ namespace LccHotfix
         /// <param name="realElapseSeconds">真实流逝时间，以秒为单位。</param>
         public static void Update(float elapseSeconds, float realElapseSeconds)
         {
-            foreach (Module module in s_GameFrameworkModules)
+            foreach (Module module in s_Modules)
             {
                 module.Update(elapseSeconds, realElapseSeconds);
             }
@@ -28,12 +28,12 @@ namespace LccHotfix
         /// </summary>
         public static void Shutdown()
         {
-            for (LinkedListNode<Module> current = s_GameFrameworkModules.Last; current != null; current = current.Previous)
+            for (LinkedListNode<Module> current = s_Modules.Last; current != null; current = current.Previous)
             {
                 current.Value.Shutdown();
             }
 
-            s_GameFrameworkModules.Clear();
+            s_Modules.Clear();
             ReferencePool.ClearAll();
             MarshalUtility.FreeCachedHGlobal();
             Log.SetLogHelper(null);
@@ -76,7 +76,7 @@ namespace LccHotfix
         /// <remarks>如果要获取的游戏框架模块不存在，则自动创建该游戏框架模块。</remarks>
         private static Module GetModule(Type moduleType)
         {
-            foreach (Module module in s_GameFrameworkModules)
+            foreach (Module module in s_Modules)
             {
                 if (module.GetType() == moduleType)
                 {
@@ -100,7 +100,7 @@ namespace LccHotfix
                 throw new Exception(string.Format("Can not create module '{0}'.", moduleType.FullName));
             }
 
-            LinkedListNode<Module> current = s_GameFrameworkModules.First;
+            LinkedListNode<Module> current = s_Modules.First;
             while (current != null)
             {
                 if (module.Priority > current.Value.Priority)
@@ -113,11 +113,11 @@ namespace LccHotfix
 
             if (current != null)
             {
-                s_GameFrameworkModules.AddBefore(current, module);
+                s_Modules.AddBefore(current, module);
             }
             else
             {
-                s_GameFrameworkModules.AddLast(module);
+                s_Modules.AddLast(module);
             }
 
             return module;
