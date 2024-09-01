@@ -70,7 +70,7 @@ namespace LccModel
             }
 
             string typeName = m_Type.FullName;
-            return string.IsNullOrEmpty(m_Name) ? typeName : Utility.Text.Format("{0}.{1}", typeName, m_Name);
+            return string.IsNullOrEmpty(m_Name) ? typeName : string.Format("{0}.{1}", typeName, m_Name);
         }
 
         /// <summary>

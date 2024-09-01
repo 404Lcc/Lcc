@@ -191,7 +191,7 @@ namespace LccModel
 
             if (!typeof(IReference).IsAssignableFrom(referenceType))
             {
-                throw new Exception(Utility.Text.Format("Reference type '{0}' is invalid.", referenceType.FullName));
+                throw new Exception(string.Format("Reference type '{0}' is invalid.", referenceType.FullName));
             }
         }
 

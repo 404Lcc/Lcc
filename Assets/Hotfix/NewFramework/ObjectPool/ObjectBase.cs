@@ -155,7 +155,7 @@ namespace LccModel
         {
             if (target == null)
             {
-                throw new Exception(Utility.Text.Format("Target '{0}' is invalid.", name));
+                throw new Exception(string.Format("Target '{0}' is invalid.", name));
             }
 
             m_Name = name ?? string.Empty;

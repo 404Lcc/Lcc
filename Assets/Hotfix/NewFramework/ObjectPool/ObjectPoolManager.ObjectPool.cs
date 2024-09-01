@@ -306,7 +306,7 @@ namespace LccModel
                 }
                 else
                 {
-                    throw new Exception(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
+                    throw new Exception(string.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
                 }
             }
 
@@ -344,7 +344,7 @@ namespace LccModel
                 }
                 else
                 {
-                    throw new Exception(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
+                    throw new Exception(string.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
                 }
             }
 
@@ -382,7 +382,7 @@ namespace LccModel
                 }
                 else
                 {
-                    throw new Exception(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
+                    throw new Exception(string.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
                 }
             }
 

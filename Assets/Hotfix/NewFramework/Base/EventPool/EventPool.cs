@@ -143,11 +143,11 @@ namespace LccModel
             }
             else if ((m_EventPoolMode & EventPoolMode.AllowMultiHandler) != EventPoolMode.AllowMultiHandler)
             {
-                throw new Exception(Utility.Text.Format("Event '{0}' not allow multi handler.", id));
+                throw new Exception(string.Format("Event '{0}' not allow multi handler.", id));
             }
             else if ((m_EventPoolMode & EventPoolMode.AllowDuplicateHandler) != EventPoolMode.AllowDuplicateHandler && Check(id, handler))
             {
-                throw new Exception(Utility.Text.Format("Event '{0}' not allow duplicate handler.", id));
+                throw new Exception(string.Format("Event '{0}' not allow duplicate handler.", id));
             }
             else
             {
@@ -190,7 +190,7 @@ namespace LccModel
 
             if (!m_EventHandlers.Remove(id, handler))
             {
-                throw new Exception(Utility.Text.Format("Event '{0}' not exists specified handler.", id));
+                throw new Exception(string.Format("Event '{0}' not exists specified handler.", id));
             }
         }
 
@@ -271,7 +271,7 @@ namespace LccModel
 
             if (noHandlerException)
             {
-                throw new Exception(Utility.Text.Format("Event '{0}' not allow no handler.", e.Id));
+                throw new Exception(string.Format("Event '{0}' not allow no handler.", e.Id));
             }
         }
     }

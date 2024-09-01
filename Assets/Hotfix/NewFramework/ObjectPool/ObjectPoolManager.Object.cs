@@ -171,7 +171,7 @@ namespace LccModel
                 m_SpawnCount--;
                 if (m_SpawnCount < 0)
                 {
-                    throw new Exception(Utility.Text.Format("Object '{0}' spawn count is less than 0.", Name));
+                    throw new Exception(string.Format("Object '{0}' spawn count is less than 0.", Name));
                 }
             }
 
