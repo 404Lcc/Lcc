@@ -106,7 +106,7 @@ namespace LccHotfix
                     preSceneHandler = curSceneHandler;
                 }
                 curSceneHandler = handler;
-                LogHelper.Info($"ChangeScene： scene type === {curSceneHandler.sceneType} loading type ==== {curSceneHandler.loadType}");
+                Log.Debug($"ChangeScene： scene type === {curSceneHandler.sceneType} loading type ==== {curSceneHandler.loadType}");
 
 
                 LccModel.Launcher.Instance.SetGameSpeed(1);
@@ -199,7 +199,7 @@ namespace LccHotfix
 
         public void BeginLoad(object[] args = null)
         {
-            LogHelper.Info($"BeginLoad： scene type === {curSceneHandler.sceneType} loading type ==== {curSceneHandler.loadType}");
+            Log.Debug($"BeginLoad： scene type === {curSceneHandler.sceneType} loading type ==== {curSceneHandler.loadType}");
             Instance.StartCoroutine(Instance.UnloadSceneCoroutine(args));
         }
 
@@ -229,7 +229,7 @@ namespace LccHotfix
 
             GC.Collect();
             yield return null;
-            LogHelper.Info($"UnloadSceneCoroutine： scene type === {curSceneHandler.sceneType} loading type ==== {curSceneHandler.loadType}");
+            Log.Debug($"UnloadSceneCoroutine： scene type === {curSceneHandler.sceneType} loading type ==== {curSceneHandler.loadType}");
             curSceneHandler.OnEnter(args);
         }
 

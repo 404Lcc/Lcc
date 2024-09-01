@@ -372,7 +372,7 @@ namespace LccHotfix
         {
             if (_componentDict.ContainsKey(type))
             {
-                LogHelper.Error("Component已存在" + type.FullName);
+                Log.Error("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = Create(type);
@@ -398,7 +398,7 @@ namespace LccHotfix
         {
             if (_componentDict.ContainsKey(type))
             {
-                LogHelper.Error("Component已存在" + type.FullName);
+                Log.Error("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = Create(type);
@@ -424,7 +424,7 @@ namespace LccHotfix
         {
             if (_componentDict.ContainsKey(type))
             {
-                LogHelper.Error("Component已存在" + type.FullName);
+                Log.Error("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = Create(type);
@@ -450,7 +450,7 @@ namespace LccHotfix
         {
             if (_componentDict.ContainsKey(type))
             {
-                LogHelper.Error("Component已存在" + type.FullName);
+                Log.Error("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = Create(type);
@@ -476,7 +476,7 @@ namespace LccHotfix
         {
             if (_componentDict.ContainsKey(type))
             {
-                LogHelper.Error("Component已存在" + type.FullName);
+                Log.Error("Component已存在" + type.FullName);
                 return null;
             }
             AObjectBase aObjectBase = Create(type);
@@ -503,7 +503,7 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                LogHelper.Error("Component已存在" + type.FullName);
+                Log.Error("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = Create<T>();
@@ -530,7 +530,7 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                LogHelper.Error("Component已存在" + type.FullName);
+                Log.Error("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = Create<T>();
@@ -557,7 +557,7 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                LogHelper.Error("Component已存在" + type.FullName);
+                Log.Error("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = Create<T>();
@@ -584,7 +584,7 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                LogHelper.Error("Component已存在" + type.FullName);
+                Log.Error("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = Create<T>();
@@ -611,7 +611,7 @@ namespace LccHotfix
             Type type = typeof(T);
             if (_componentDict.ContainsKey(type))
             {
-                LogHelper.Error("Component已存在" + type.FullName);
+                Log.Error("Component已存在" + type.FullName);
                 return null;
             }
             T aObjectBase = Create<T>();

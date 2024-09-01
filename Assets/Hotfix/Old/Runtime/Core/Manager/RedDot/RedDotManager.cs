@@ -50,24 +50,24 @@ namespace LccHotfix
         {
             if (!string.IsNullOrEmpty(parent) && !parentDict.ContainsKey(parent))
             {
-                LogHelper.Warning("父节点是新节点：" + parent);
+                Log.Debug("父节点是新节点：" + parent);
             }
 
 
 
             if (string.IsNullOrEmpty(target))
             {
-                LogHelper.Error($"目标不能为空");
+                Log.Error($"目标不能为空");
                 return;
             }
             if (string.IsNullOrEmpty(parent))
             {
-                LogHelper.Error($"父节点不能为空");
+                Log.Error($"父节点不能为空");
                 return;
             }
             if (childToParentDict.ContainsKey(target))
             {
-                LogHelper.Error($"{target} 已存在");
+                Log.Error($"{target} 已存在");
                 return;
             }
 
@@ -137,7 +137,7 @@ namespace LccHotfix
 
             if (!IsLeafNode(target))
             {
-                LogHelper.Error("不能删除父节点");
+                Log.Error("不能删除父节点");
                 return;
             }
 
@@ -181,7 +181,7 @@ namespace LccHotfix
         {
             if (!nodeCountDict.TryGetValue(target, out int nodeCount))
             {
-                LogHelper.Error($"节点不存在 {target} 不能增加");
+                Log.Error($"节点不存在 {target} 不能增加");
                 return;
             }
 
@@ -228,7 +228,7 @@ namespace LccHotfix
 
             if (!IsLeafNode(target))
             {
-                LogHelper.Error("不能显示父节点 " + target);
+                Log.Error("不能显示父节点 " + target);
                 return false;
             }
 
@@ -244,7 +244,7 @@ namespace LccHotfix
         {
             if (!IsLeafNode(target))
             {
-                LogHelper.Error("不能隐藏父节点 " + target);
+                Log.Error("不能隐藏父节点 " + target);
                 return false;
             }
 
@@ -260,7 +260,7 @@ namespace LccHotfix
         {
             if (!IsLeafNode(target))
             {
-                LogHelper.Error("不能刷新父节点");
+                Log.Error("不能刷新父节点");
                 return;
             }
 
@@ -311,13 +311,13 @@ namespace LccHotfix
         {
             if (!nodeCountDict.ContainsKey(target))
             {
-                LogHelper.Error($"{target} 节点不存在");
+                Log.Error($"{target} 节点不存在");
                 return;
             }
 
             if (!IsLeafNode(target))
             {
-                LogHelper.Error($"{target} 不能是父节点");
+                Log.Error($"{target} 不能是父节点");
                 return;
             }
             //提高计数
@@ -325,14 +325,14 @@ namespace LccHotfix
             {
                 if (nodeCountDict[target] == 1)
                 {
-                    LogHelper.Error($"{target} 节点计数已经是1了");
+                    Log.Error($"{target} 节点计数已经是1了");
                     return;
                 }
 
                 nodeCountDict[target] += 1;
                 if (nodeCountDict[target] != 1)
                 {
-                    LogHelper.Error($"{target} 节点计数错误 RetainCount = {nodeCountDict[target]}");
+                    Log.Error($"{target} 节点计数错误 RetainCount = {nodeCountDict[target]}");
                     return;
                 }
             }
@@ -340,7 +340,7 @@ namespace LccHotfix
             {
                 if (nodeCountDict[target] != 1)
                 {
-                    LogHelper.Error($"{target} 节点是不显示状态 RetainCount = {nodeCountDict[target]}");
+                    Log.Error($"{target} 节点是不显示状态 RetainCount = {nodeCountDict[target]}");
                     return;
                 }
                 nodeCountDict[target] += -1;
@@ -350,7 +350,7 @@ namespace LccHotfix
             int curr = nodeCountDict[target];
             if (curr < 0 || curr > 1)
             {
-                LogHelper.Error("红点计数错误，红点逻辑有问题");
+                Log.Error("红点计数错误，红点逻辑有问题");
                 return;
             }
             //显示红点

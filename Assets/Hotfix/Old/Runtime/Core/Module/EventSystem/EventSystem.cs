@@ -248,7 +248,7 @@ namespace LccHotfix
                 {
                     if (!(item.IEvent is AEvent<T> aEvent))
                     {
-                        LogHelper.Debug($"事件类型不匹配 {item.IEvent.GetType().Name}");
+                        Log.Debug($"事件类型不匹配 {item.IEvent.GetType().Name}");
                         continue;
                     }
 
@@ -257,7 +257,7 @@ namespace LccHotfix
             }
             else
             {
-                LogHelper.Debug($"事件不存在，事件数据类型 {type.Name}");
+                Log.Debug($"事件不存在，事件数据类型 {type.Name}");
             }
         }
 

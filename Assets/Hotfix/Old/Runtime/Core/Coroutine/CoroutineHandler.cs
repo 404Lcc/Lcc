@@ -43,12 +43,12 @@ namespace LccHotfix
         {
             if (Running)
             {
-                LogHelper.Debug("当前协程未完成");
+                Log.Debug("当前协程未完成");
                 return;
             }
             if (Coroutine == null)
             {
-                LogHelper.Debug("协程未指定");
+                Log.Debug("协程未指定");
                 return;
             }
             Running = true;
