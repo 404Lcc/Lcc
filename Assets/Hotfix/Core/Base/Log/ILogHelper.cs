@@ -1,4 +1,4 @@
-﻿namespace LccModel
+﻿namespace LccHotfix
 {
     /// <summary>
     /// 游戏框架日志辅助器接口。

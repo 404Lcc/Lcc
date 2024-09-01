@@ -1,4 +1,4 @@
-﻿namespace LccModel
+﻿namespace LccHotfix
 {
     /// <summary>
     /// 游戏逻辑事件基类。

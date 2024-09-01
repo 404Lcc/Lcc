@@ -1,4 +1,4 @@
-﻿namespace LccModel
+﻿namespace LccHotfix
 {
     internal sealed partial class EventPool<T> where T : BaseEventArgs
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LccModel
+namespace LccHotfix
 {
     /// <summary>
     /// 释放对象筛选函数。

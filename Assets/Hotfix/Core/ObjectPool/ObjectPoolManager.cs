@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LccModel
+namespace LccHotfix
 {
     /// <summary>
     /// 对象池管理器。

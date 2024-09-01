@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LccModel
+namespace LccHotfix
 {
     /// <summary>
     /// 事件管理器接口。

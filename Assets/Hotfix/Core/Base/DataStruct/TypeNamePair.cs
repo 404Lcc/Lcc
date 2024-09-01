@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace LccModel
+namespace LccHotfix
 {
     /// <summary>
     /// 类型和名称的组合值。

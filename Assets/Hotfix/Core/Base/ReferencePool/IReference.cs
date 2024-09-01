@@ -1,4 +1,4 @@
-﻿namespace LccModel
+﻿namespace LccHotfix
 {
     /// <summary>
     /// 引用接口。

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LccModel
+namespace LccHotfix
 {
     /// <summary>
     /// 游戏框架中包含事件数据的类的基类。

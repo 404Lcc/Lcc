@@ -1,5 +1,4 @@
-﻿using LccModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,7 +10,7 @@ namespace LccHotfix
     /// </summary>
     public static class GameEntry
     {
-        private static readonly LccModel.LinkedList<Component> s_GameFrameworkComponents = new LccModel.LinkedList<Component>();
+        private static readonly LinkedList<Component> s_GameFrameworkComponents = new LinkedList<Component>();
 
         /// <summary>
         /// 游戏框架所在的场景编号。

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LccModel
+namespace LccHotfix
 {
     /// <summary>
     /// 事件池。

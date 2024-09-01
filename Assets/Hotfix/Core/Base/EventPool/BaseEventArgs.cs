@@ -1,4 +1,4 @@
-﻿namespace LccModel
+﻿namespace LccHotfix
 {
     /// <summary>
     /// 事件基类。

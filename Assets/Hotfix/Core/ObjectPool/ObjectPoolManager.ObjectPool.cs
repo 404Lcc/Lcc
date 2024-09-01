@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LccModel
+namespace LccHotfix
 {
     internal sealed partial class ObjectPoolManager : Module, IObjectPoolManager
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LccModel
+namespace LccHotfix
 {
     public static partial class ReferencePool
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace LccModel
+namespace LccHotfix
 {
     /// <summary>
     /// 游戏框架多值字典类。

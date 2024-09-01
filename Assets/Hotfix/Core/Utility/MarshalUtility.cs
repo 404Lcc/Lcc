@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LccModel
+namespace LccHotfix
 {
     /// <summary>
     /// Marshal 相关的实用函数。

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LccModel
+namespace LccHotfix
 {
     internal sealed partial class ObjectPoolManager : Module, IObjectPoolManager
     {

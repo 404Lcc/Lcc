@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LccModel
+namespace LccHotfix
 {
     /// <summary>
     /// 对象基类。

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace LccModel
+namespace LccHotfix
 {
     /// <summary>
     /// 引用池信息。
