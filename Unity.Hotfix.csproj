@@ -63,11 +63,9 @@
     <Compile Include="Assets\Hotfix\Core\Base\Log\Log.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\TBJump.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Object\Base\IFixedUpdate.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScrollItemPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\UnOrderMultiMapSet.cs" />
     <Compile Include="Assets\Hotfix\Core\Utility\AssemblyUtility.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventPool\EventPoolMode.cs" />
-    <Compile Include="Assets\Hotfix\Logic\Model\MainModel.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Variable\GenericVariable.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Object\AStarMap\AStarMap.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\SceneState\SceneStateManager.cs" />
@@ -108,7 +106,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Archive\CVType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Module\EventSystem\Event\AEvent.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventPool\BaseEventArgs.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Login\LoginPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\SceneState\SceneStateType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Panel\Panel.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\CloseUIFormCompleteEventArgs.cs" />
@@ -134,7 +131,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelManager.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\IUIGroup.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Panel\UI\UIPanel.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScroll.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Panel\PanelType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Transform\TransformExtension.cs" />
@@ -152,7 +148,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelTemplate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\ScreenAdaptation\ScreenAdaptationUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Archive\UserData.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScrollItem.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Module\Time\Time.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Panel\UI\UIBinding.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\SceneState\SceneState.cs" />
@@ -168,7 +163,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Module\EventSystem\Event\EventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Object\Game.cs" />
     <Compile Include="Assets\Hotfix\Core\Resource\Constant.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Game\GamePanel.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventPool\EventPool.cs" />
     <Compile Include="Assets\Hotfix\Logic\SceneState\LoginSceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AsyncOperationAwaiter.cs" />
@@ -183,7 +177,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Panel\MVVM\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\IUIGroupHelper.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AssetBundleRequestAwaiter.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Object\Numeric\NumericType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Object\Scene.cs" />
     <Compile Include="Assets\Hotfix\Core\Event\EventManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Module\MainThreadSynchronizationContext\ThreadSynchronizationContext.cs" />
@@ -192,13 +185,11 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Jump.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Command\CommandManager.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Main\MainPanel.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectInfo.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventPool\EventPool.Event.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Base\GameEntry.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Video\VideoManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Archive\DisplayModeType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\GameSetting\GameSettingManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Singleton\ISingletonFixedUpdate.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelAttribute.cs" />
@@ -210,7 +201,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Object\ProtobufObject.cs" />
     <Compile Include="Assets\Hotfix\Logic\SceneState\MainSceneState.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\DataStruct\TypeNamePair.cs" />
-    <Compile Include="Assets\Hotfix\Logic\EventHandler\InitEventHandler.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\IUIManager.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolManager.ObjectPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Module\EventSystem\Event\EventData.cs" />
@@ -222,13 +212,10 @@
     <Compile Include="Assets\Hotfix\Runtime\Singleton\ISingleton.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Awaiter\AwaiterExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\GameObject\GameObjectExtension.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Object\Numeric\NumericEntity.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Singleton\ISingletonLateUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Base\Component.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Module\Timer\TimerData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Command\CommandDataType.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Panel\Top\TopPanel.cs" />
-    <Compile Include="Assets\Hotfix\Logic\Model\LoginModel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Download\DownloadData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Object\Base\AttributeBase.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\ReferencePool.cs" />

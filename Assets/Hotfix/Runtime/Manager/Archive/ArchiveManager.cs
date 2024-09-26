@@ -6,30 +6,22 @@ using System.IO;
 
 namespace LccHotfix
 {
-    public class ArchiveManager : AObjectBase
+    internal class ArchiveManager : Module
     {
-        public static ArchiveManager Instance { get; set; }
-
         private const string Res = "Res";
         private string _key;
         private UserData _userData;
         private UserSetData _userSetData;
 
-        public override void Awake()
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            base.Awake();
-
-            Instance = this;
         }
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
 
+        internal override void Shutdown()
+        {
             _key = string.Empty;
             _userData = null;
             _userSetData = null;
-
-            Instance = null;
         }
 
 
@@ -118,19 +110,6 @@ namespace LccHotfix
                 _userData = null;
                 _userSetData = null;
             }
-        }
-        public void SetValue(DOGetter<float> getter, DOSetter<float> setter, int value, int timer, bool isSave, bool isOpenPanel = false, Action completed = null)
-        {
-            if (isOpenPanel)
-            {
-            }
-            DOTween.To(getter, setter, value, timer).OnComplete(() =>
-            {
-                completed?.Invoke();
-                if (isSave)
-                {
-                }
-            });
         }
     }
 }
