@@ -31,7 +31,6 @@ namespace LccHotfix
                 Game.Scene.AddComponent<JumpManager>();
                 Game.Scene.AddComponent<VideoManager>();
 
-                EventSystem.Instance.Publish(new Start());
             }
             catch (System.Exception e)
             {

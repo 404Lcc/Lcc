@@ -10,8 +10,6 @@ namespace LccHotfix
 
         private readonly UnOrderMultiMapSet<Type, Type> attributeTypeDict = new UnOrderMultiMapSet<Type, Type>();
 
-        private readonly Dictionary<Type, List<EventData>> allEventDataDict = new Dictionary<Type, List<EventData>>();
-
         public Dictionary<long, AObjectBase> aObjectBaseDict = new Dictionary<long, AObjectBase>();
         public Queue<long> fixedUpdate = new Queue<long>();
         public Queue<long> fixedUpdateCopy = new Queue<long>();
@@ -68,30 +66,6 @@ namespace LccHotfix
                     }
                 }
             }
-
-
-            allEventDataDict.Clear();
-            foreach (Type type in attributeTypeDict[typeof(EventAttribute)])
-            {
-                IEvent iEvent = (IEvent)Activator.CreateInstance(type);
-                if (iEvent == null)
-                {
-                    throw new Exception($"类型不匹配 {type.Name}");
-                }
-
-                object[] eventAttributes = type.GetCustomAttributes(typeof(EventAttribute), false);
-                foreach (object item in eventAttributes)
-                {
-                    Type eventType = iEvent.Type;
-                    EventData eventData = new EventData(iEvent);
-                    if (!allEventDataDict.ContainsKey(eventType))
-                    {
-                        allEventDataDict.Add(eventType, new List<EventData>());
-                    }
-                    allEventDataDict[eventType].Add(eventData);
-                }
-
-            }
         }
 
         public HashSet<Type> GetTypesByAttribute(Type attributeType)
@@ -137,55 +111,7 @@ namespace LccHotfix
                 aObjectBaseDict.Remove(aObjectBase.InstanceId);
             }
         }
-        public void Awake(AObjectBase aObjectBase)
-        {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
-            {
-                aObjectBase.Awake();
-            }
-        }
-        public void Awake<P1>(AObjectBase aObjectBase, P1 p1)
-        {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
-            {
-                aObjectBase.Awake(p1);
-            }
-        }
-        public void Awake<P1, P2>(AObjectBase aObjectBase, P1 p1, P2 p2)
-        {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
-            {
-                aObjectBase.Awake(p1, p2);
-            }
-        }
-        public void Awake<P1, P2, P3>(AObjectBase aObjectBase, P1 p1, P2 p2, P3 p3)
-        {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
-            {
-                aObjectBase.Awake(p1, p2, p3);
-            }
-        }
-        public void Awake<P1, P2, P3, P4>(AObjectBase aObjectBase, P1 p1, P2 p2, P3 p3, P4 p4)
-        {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
-            {
-                aObjectBase.Awake(p1, p2, p3, p4);
-            }
-        }
-        public void Start(AObjectBase aObjectBase)
-        {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
-            {
-                aObjectBase.Start();
-            }
-        }
-        public void InitData(AObjectBase aObjectBase, object[] datas)
-        {
-            if (aObjectBaseDict.ContainsKey(aObjectBase.InstanceId))
-            {
-                aObjectBase.InitData(datas);
-            }
-        }
+        
         public void FixedUpdate()
         {
             while (fixedUpdate.Count > 0)
@@ -236,29 +162,6 @@ namespace LccHotfix
                 }
             }
             Swap(ref lateUpdate, ref lateUpdateCopy);
-        }
-
-
-        public void Publish<T>(T data)
-        {
-            Type type = typeof(T);
-            if (allEventDataDict.TryGetValue(type, out List<EventData> eventDataList))
-            {
-                foreach (EventData item in eventDataList)
-                {
-                    if (!(item.IEvent is AEvent<T> aEvent))
-                    {
-                        Log.Debug($"事件类型不匹配 {item.IEvent.GetType().Name}");
-                        continue;
-                    }
-
-                    aEvent.Handle(data);
-                }
-            }
-            else
-            {
-                Log.Debug($"事件不存在，事件数据类型 {type.Name}");
-            }
         }
 
         public static void Swap<T>(ref T t1, ref T t2)

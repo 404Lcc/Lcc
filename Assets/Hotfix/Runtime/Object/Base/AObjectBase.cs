@@ -116,8 +116,6 @@ namespace LccHotfix
                 if (preDomain == null)
                 {
                     this.InstanceId = IdUtility.GenerateInstanceId();
-
-                    EventSystem.Instance.Register(this);
                 }
 
                 // 递归设置孩子的Domain
@@ -197,9 +195,9 @@ namespace LccHotfix
             AObjectBase aObjectBase = Create(type);
             aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake();
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public AObjectBase AddChildren<P1>(Type type, P1 p1, params object[] datas)
@@ -207,9 +205,9 @@ namespace LccHotfix
             AObjectBase aObjectBase = Create(type);
             aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase, p1);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake(p1);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public AObjectBase AddChildren<P1, P2>(Type type, P1 p1, P2 p2, params object[] datas)
@@ -217,9 +215,9 @@ namespace LccHotfix
             AObjectBase aObjectBase = Create(type);
             aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase, p1, p2);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake(p1, p2);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public AObjectBase AddChildren<P1, P2, P3>(Type type, P1 p1, P2 p2, P3 p3, params object[] datas)
@@ -227,9 +225,9 @@ namespace LccHotfix
             AObjectBase aObjectBase = Create(type);
             aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake(p1, p2, p3);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public AObjectBase AddChildren<P1, P2, P3, P4>(Type type, P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas)
@@ -237,9 +235,9 @@ namespace LccHotfix
             AObjectBase aObjectBase = Create(type);
             aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake(p1, p2, p3, p4);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public T AddChildren<T>(params object[] datas) where T : AObjectBase
@@ -247,9 +245,9 @@ namespace LccHotfix
             T aObjectBase = Create<T>();
             aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake();
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public T AddChildren<T, P1>(P1 p1, params object[] datas) where T : AObjectBase
@@ -257,9 +255,9 @@ namespace LccHotfix
             T aObjectBase = Create<T>();
             aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase, p1);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake(p1);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public T AddChildren<T, P1, P2>(P1 p1, P2 p2, params object[] datas) where T : AObjectBase
@@ -267,9 +265,9 @@ namespace LccHotfix
             T aObjectBase = Create<T>();
             aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase, p1, p2);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake(p1, p2);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public T AddChildren<T, P1, P2, P3>(P1 p1, P2 p2, P3 p3, params object[] datas) where T : AObjectBase
@@ -277,9 +275,9 @@ namespace LccHotfix
             T aObjectBase = Create<T>();
             aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake(p1, p2, p3);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public T AddChildren<T, P1, P2, P3, P4>(P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas) where T : AObjectBase
@@ -287,9 +285,9 @@ namespace LccHotfix
             T aObjectBase = Create<T>();
             aObjectBase.Id = IdUtility.GenerateId();
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake(p1, p2, p3, p4);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public T AddChildrenWithId<T>(long id, params object[] datas) where T : AObjectBase
@@ -297,9 +295,9 @@ namespace LccHotfix
             T aObjectBase = Create<T>();
             aObjectBase.Id = id;
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake();
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public T AddChildrenWithId<T, P1>(long id, P1 p1, params object[] datas) where T : AObjectBase
@@ -307,9 +305,9 @@ namespace LccHotfix
             T aObjectBase = Create<T>();
             aObjectBase.Id = id;
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase, p1);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake(p1);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public T AddChildrenWithId<T, P1, P2>(long id, P1 p1, P2 p2, params object[] datas) where T : AObjectBase
@@ -317,9 +315,9 @@ namespace LccHotfix
             T aObjectBase = Create<T>();
             aObjectBase.Id = id;
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase, p1, p2);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake(p1, p2);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public T AddChildrenWithId<T, P1, P2, P3>(long id, P1 p1, P2 p2, P3 p3, params object[] datas) where T : AObjectBase
@@ -327,9 +325,9 @@ namespace LccHotfix
             T aObjectBase = Create<T>();
             aObjectBase.Id = id;
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake(p1, p2, p3);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public T AddChildrenWithId<T, P1, P2, P3, P4>(long id, P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas) where T : AObjectBase
@@ -337,9 +335,9 @@ namespace LccHotfix
             T aObjectBase = Create<T>();
             aObjectBase.Id = id;
             aObjectBase.EntityParent = this;
-            EventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake(p1, p2, p3, p4);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         #endregion
@@ -379,19 +377,9 @@ namespace LccHotfix
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
 
-            EventSystem.Instance.Awake(aObjectBase);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
-            #region 自动索引
-            if (aObjectBase is GameObjectComponent component)
-            {
-                if (component.gameObject != null)
-                {
-                    AutoReference(component.gameObject);
-                    ShowView(component.gameObject);
-                }
-            }
-            #endregion
+            Awake();
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public AObjectBase AddComponent<P1>(Type type, P1 p1, params object[] datas)
@@ -405,19 +393,9 @@ namespace LccHotfix
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
 
-            EventSystem.Instance.Awake(aObjectBase, p1);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
-            #region 自动索引
-            if (aObjectBase is GameObjectComponent component)
-            {
-                if (component.gameObject != null)
-                {
-                    AutoReference(component.gameObject);
-                    ShowView(component.gameObject);
-                }
-            }
-            #endregion
+            Awake(p1);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public AObjectBase AddComponent<P1, P2>(Type type, P1 p1, P2 p2, params object[] datas)
@@ -431,19 +409,9 @@ namespace LccHotfix
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
 
-            EventSystem.Instance.Awake(aObjectBase, p1, p2);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
-            #region 自动索引
-            if (aObjectBase is GameObjectComponent component)
-            {
-                if (component.gameObject != null)
-                {
-                    AutoReference(component.gameObject);
-                    ShowView(component.gameObject);
-                }
-            }
-            #endregion
+            Awake(p1, p2);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public AObjectBase AddComponent<P1, P2, P3>(Type type, P1 p1, P2 p2, P3 p3, params object[] datas)
@@ -457,19 +425,9 @@ namespace LccHotfix
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
 
-            EventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
-            #region 自动索引
-            if (aObjectBase is GameObjectComponent component)
-            {
-                if (component.gameObject != null)
-                {
-                    AutoReference(component.gameObject);
-                    ShowView(component.gameObject);
-                }
-            }
-            #endregion
+            Awake(p1, p2, p3);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public AObjectBase AddComponent<P1, P2, P3, P4>(Type type, P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas)
@@ -483,19 +441,9 @@ namespace LccHotfix
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
 
-            EventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
-            #region 自动索引
-            if (aObjectBase is GameObjectComponent component)
-            {
-                if (component.gameObject != null)
-                {
-                    AutoReference(component.gameObject);
-                    ShowView(component.gameObject);
-                }
-            }
-            #endregion
+            Awake(p1, p2, p3, p4);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public T AddComponent<T>(params object[] datas) where T : AObjectBase
@@ -510,19 +458,9 @@ namespace LccHotfix
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
 
-            EventSystem.Instance.Awake(aObjectBase);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
-            #region 自动索引
-            if (aObjectBase is GameObjectComponent component)
-            {
-                if (component.gameObject != null)
-                {
-                    AutoReference(component.gameObject);
-                    ShowView(component.gameObject);
-                }
-            }
-            #endregion
+            Awake();
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public T AddComponent<T, P1>(P1 p1, params object[] datas) where T : AObjectBase
@@ -537,19 +475,9 @@ namespace LccHotfix
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
 
-            EventSystem.Instance.Awake(aObjectBase, p1);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
-            #region 自动索引
-            if (aObjectBase is GameObjectComponent component)
-            {
-                if (component.gameObject != null)
-                {
-                    AutoReference(component.gameObject);
-                    ShowView(component.gameObject);
-                }
-            }
-            #endregion
+            Awake(p1);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public T AddComponent<T, P1, P2>(P1 p1, P2 p2, params object[] datas) where T : AObjectBase
@@ -564,9 +492,9 @@ namespace LccHotfix
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
 
-            EventSystem.Instance.Awake(aObjectBase, p1, p2);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
+            Awake(p1, p2);
+            Start();
+            InitData(datas);
             #region 自动索引
             if (aObjectBase is GameObjectComponent component)
             {
@@ -591,19 +519,9 @@ namespace LccHotfix
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
 
-            EventSystem.Instance.Awake(aObjectBase, p1, p2, p3);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
-            #region 自动索引
-            if (aObjectBase is GameObjectComponent component)
-            {
-                if (component.gameObject != null)
-                {
-                    AutoReference(component.gameObject);
-                    ShowView(component.gameObject);
-                }
-            }
-            #endregion
+            Awake(p1, p2, p3);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public T AddComponent<T, P1, P2, P3, P4>(P1 p1, P2 p2, P3 p3, P4 p4, params object[] datas) where T : AObjectBase
@@ -618,19 +536,9 @@ namespace LccHotfix
             aObjectBase.Id = Id;
             aObjectBase.ComponentParent = this;
 
-            EventSystem.Instance.Awake(aObjectBase, p1, p2, p3, p4);
-            EventSystem.Instance.Start(aObjectBase);
-            EventSystem.Instance.InitData(aObjectBase, datas);
-            #region 自动索引
-            if (aObjectBase is GameObjectComponent component)
-            {
-                if (component.gameObject != null)
-                {
-                    AutoReference(component.gameObject);
-                    ShowView(component.gameObject);
-                }
-            }
-            #endregion
+            Awake(p1, p2, p3, p4);
+            Start();
+            InitData(datas);
             return aObjectBase;
         }
         public void RemoveComponent(AObjectBase aObjectBase)
@@ -857,8 +765,6 @@ namespace LccHotfix
                 return;
             }
 
-
-            EventSystem.Instance.Remove(this);
             InstanceId = 0;
 
 

@@ -6,24 +6,28 @@ using System.IO;
 
 namespace LccHotfix
 {
-    internal class ArchiveManager : Module
+    internal class ArchiveManager : AObjectBase
     {
         private const string Res = "Res";
         private string _key;
         private UserData _userData;
         private UserSetData _userSetData;
 
-        internal override void Update(float elapseSeconds, float realElapseSeconds)
+        public override void Awake()
         {
+            base.Awake();
+
+
         }
 
-        internal override void Shutdown()
+        public override void OnDestroy()
         {
+            base.OnDestroy();
+
             _key = string.Empty;
             _userData = null;
             _userSetData = null;
         }
-
 
         public void ReadArchive(string key)
         {
