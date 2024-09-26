@@ -4624,9 +4624,6 @@
     <type fullname="LccModel.EventDriver" preserve="all" />
     <type fullname="LccModel.EventGroup" preserve="all" />
     <type fullname="LccModel.IEventMessage" preserve="all" />
-    <type fullname="LccModel.ByteExpand" preserve="all" />
-    <type fullname="LccModel.StringExpand" preserve="all" />
-    <type fullname="LccModel.TransformExpand" preserve="all" />
     <type fullname="LccModel.GameConfig" preserve="all" />
     <type fullname="LccModel.LanguageConfig" preserve="all" />
     <type fullname="LccModel.ClassInfo" preserve="all" />
@@ -4689,6 +4686,9 @@
     <type fullname="LccModel.MessageBox" preserve="all" />
     <type fullname="LccModel.UILoadingPanel" preserve="all" />
     <type fullname="LccModel.DirectoryUtility" preserve="all" />
+    <type fullname="LccModel.ByteExtension" preserve="all" />
+    <type fullname="LccModel.StringExtension" preserve="all" />
+    <type fullname="LccModel.TransformExtension" preserve="all" />
     <type fullname="LccModel.FileUtility" preserve="all" />
     <type fullname="LccModel.JsonUtility" preserve="all" />
     <type fullname="LccModel.MD5Utility" preserve="all" />
@@ -4731,7 +4731,7 @@
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel+&lt;&gt;c__DisplayClass6_0" preserve="all" />
     <type fullname="LccModel.UILoadingPanel+&lt;&gt;c" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2492" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3608" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2501" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3650" preserve="all" />
   </assembly>
 </linker>

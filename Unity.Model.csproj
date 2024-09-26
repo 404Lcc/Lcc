@@ -63,12 +63,12 @@
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmDownloadFiles.cs" />
     <Compile Include="Assets\Launcher\Utility\Directory\DirectoryUtility.cs" />
     <Compile Include="Assets\Launcher\LccView\LccView.cs" />
+    <Compile Include="Assets\Launcher\Utility\Extension\String\StringExtension.cs" />
     <Compile Include="Assets\Launcher\UI\ForeGround\BlackFadeMask.cs" />
     <Compile Include="Assets\Launcher\Event\EventDriver.cs" />
     <Compile Include="Assets\Launcher\UGUIExpand\LongClickButton.cs" />
     <Compile Include="Assets\Launcher\Utility\MD5\MD5Utility.cs" />
     <Compile Include="Assets\Launcher\Utility\Path\PathUtility.cs" />
-    <Compile Include="Assets\Launcher\Expand\String\StringExpand.cs" />
     <Compile Include="Assets\Launcher\Asset\AssetObject.cs" />
     <Compile Include="Assets\Launcher\Utility\Protobuf\ProtobufUtility.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\PatchOperation.cs" />
@@ -86,10 +86,10 @@
     <Compile Include="Assets\Launcher\ScrollerPro\GroupBase.cs" />
     <Compile Include="Assets\Launcher\Singleton\Singleton.cs" />
     <Compile Include="Assets\Launcher\UGUIExpand\RightClickButton.cs" />
-    <Compile Include="Assets\Launcher\Expand\Byte\ByteExpand.cs" />
     <Compile Include="Assets\Launcher\HotfixFunc\HotfixFunc.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmGetNotice.cs" />
     <Compile Include="Assets\Launcher\Launcher\StaticMethod\AStaticMethod.cs" />
+    <Compile Include="Assets\Launcher\Utility\Extension\Byte\ByteExtension.cs" />
     <Compile Include="Assets\Launcher\Utility\Rijndael\RijndaelUtility.cs" />
     <Compile Include="Assets\Launcher\Event\EventGroup.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\UserEvent.cs" />
@@ -106,7 +106,6 @@
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.Build.cs" />
     <Compile Include="Assets\Launcher\System\OpenFileName.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmPatchDone.cs" />
-    <Compile Include="Assets\Launcher\Expand\Transform\TransformExpand.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.GameConfig.cs" />
     <Compile Include="Assets\Launcher\Utility\Path\PathType.cs" />
     <Compile Include="Assets\Launcher\Machine\StateMachine.cs" />
@@ -117,6 +116,7 @@
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmClearCache.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmDownloadOver.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmInitialize.cs" />
+    <Compile Include="Assets\Launcher\Utility\Extension\Transform\TransformExtension.cs" />
     <Compile Include="Assets\Launcher\Asset\AssetSuffix.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmUpdateVersion.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.GameServer.cs" />
