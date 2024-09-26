@@ -1,20 +1,22 @@
 using System;
 using UnityEngine;
 using YooAsset;
+using Object = UnityEngine.Object;
 
 namespace LccModel
 {
     public class AssetObject : MonoBehaviour
     {
         public string path;
+        public object userData;
         public Type type;
-        public Action<string, UnityEngine.Object> onComplete;
+        public Action<string, Object, AssetObject> onComplete;
 
         public AssetHandle handle;
 
-        protected UnityEngine.Object res;
+        protected Object res;
 
-        public UnityEngine.Object Asset
+        public Object Asset
         {
             get
             {
@@ -29,9 +31,10 @@ namespace LccModel
             }
         }
 
-        public void SetInfo<T>(string path, Action<string, UnityEngine.Object> onComplete)
+        public void SetInfo<T>(string path, object userData, Action<string, Object, AssetObject> onComplete)
         {
             this.path = path;
+            this.userData = userData;
             type = typeof(T);
             this.onComplete = onComplete;
         }
@@ -54,22 +57,22 @@ namespace LccModel
         public virtual void LoadEnd(AssetHandle callback)
         {
             res = callback.AssetObject;
-            this.onComplete?.Invoke(path, res);
+            this.onComplete?.Invoke(path, res, this);
         }
     }
 
-    //allunity资源
+    //allunity璧勬簮
     public class ALLAssetObject : MonoBehaviour
     {
         public string path;
         public Type type;
-        public Action<string, UnityEngine.Object[]> onComplete;
+        public Action<string, Object[]> onComplete;
 
         public AllAssetsHandle handle;
 
-        protected UnityEngine.Object[] res;
+        protected Object[] res;
 
-        public UnityEngine.Object[] Assets
+        public Object[] Assets
         {
             get
             {
@@ -84,7 +87,7 @@ namespace LccModel
             }
         }
 
-        public void SetInfo<T>(string path, Action<string, UnityEngine.Object[]> onComplete)
+        public void SetInfo<T>(string path, Action<string, Object[]> onComplete)
         {
             this.path = path;
             type = typeof(T);
@@ -104,17 +107,17 @@ namespace LccModel
         public virtual void Load()
         {
             handle = AssetManager.Instance.Package.LoadAllAssetsSync(path, type);
-            res = (UnityEngine.Object[])handle.AllAssetObjects;
+            res = (Object[])handle.AllAssetObjects;
         }
         public virtual void LoadEnd(AllAssetsHandle callback)
         {
-            res = (UnityEngine.Object[])callback.AllAssetObjects;
+            res = (Object[])callback.AllAssetObjects;
             this.onComplete?.Invoke(path, res);
         }
     }
 
 
-    //原生资源
+    //鍘熺敓璧勬簮
     public class RawObject : MonoBehaviour
     {
         public string path;

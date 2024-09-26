@@ -70,8 +70,8 @@
     <Compile Include="Assets\Launcher\Utility\Path\PathUtility.cs" />
     <Compile Include="Assets\Launcher\Expand\String\StringExpand.cs" />
     <Compile Include="Assets\Launcher\Asset\AssetObject.cs" />
-    <Compile Include="Assets\Launcher\Launcher\Patch\PatchOperation.cs" />
     <Compile Include="Assets\Launcher\Utility\Protobuf\ProtobufUtility.cs" />
+    <Compile Include="Assets\Launcher\Launcher\Patch\PatchOperation.cs" />
     <Compile Include="Assets\Launcher\Launcher\StaticMethod\ILStaticMethod.cs" />
     <Compile Include="Assets\Launcher\Asset\AssetManager.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmCreateDownloader.cs" />
@@ -87,8 +87,8 @@
     <Compile Include="Assets\Launcher\Singleton\Singleton.cs" />
     <Compile Include="Assets\Launcher\UGUIExpand\RightClickButton.cs" />
     <Compile Include="Assets\Launcher\Expand\Byte\ByteExpand.cs" />
-    <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmGetNotice.cs" />
     <Compile Include="Assets\Launcher\HotfixFunc\HotfixFunc.cs" />
+    <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmGetNotice.cs" />
     <Compile Include="Assets\Launcher\Launcher\StaticMethod\AStaticMethod.cs" />
     <Compile Include="Assets\Launcher\Utility\Rijndael\RijndaelUtility.cs" />
     <Compile Include="Assets\Launcher\Event\EventGroup.cs" />
@@ -468,6 +468,10 @@
     </Reference>
     <Reference Include="UnityEditor.Graphs">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.WebGL.Extensions">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\WebGLSupport\UnityEditor.WebGL.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.Android.Extensions">

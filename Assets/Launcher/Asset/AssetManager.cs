@@ -42,14 +42,14 @@ namespace LccModel
 
         #region 异步加载
         //异步加载
-        public AssetObject StartLoadRes<T>(GameObject loader, string location, Action<string, Object> onComplete = null) where T : Object
+        public AssetObject StartLoadRes<T>(GameObject loader, string location, object userData = null, Action<string, Object, AssetObject> onComplete = null) where T : Object
         {
             if (loader != null && !string.IsNullOrEmpty(location))
             {
                 GameObject subLoader = new GameObject("loader_" + location + "_" + typeof(T).Name);
                 subLoader.transform.SetParent(loader.transform);
                 AssetObject res = subLoader.AddComponent<AssetObject>();
-                res.SetInfo<T>(location, onComplete);
+                res.SetInfo<T>(location, userData, onComplete);
                 res.StartLoad();
                 return res;
             }
@@ -57,14 +57,14 @@ namespace LccModel
         }
 
         //异步加载
-        public AssetObject StartLoadGameObject(GameObject loader, string location, Action<string, Object> onComplete = null)
+        public AssetObject StartLoadGameObject(GameObject loader, string location, object userData = null, Action<string, Object, AssetObject> onComplete = null)
         {
             if (loader != null && !string.IsNullOrEmpty(location))
             {
                 GameObject subLoader = new GameObject("loader_" + location + "_" + typeof(GameObject).Name);
                 subLoader.transform.SetParent(loader.transform);
                 AssetObject res = subLoader.AddComponent<AssetObject>();
-                res.SetInfo<GameObject>(location, onComplete);
+                res.SetInfo<GameObject>(location, userData, onComplete);
                 res.StartLoad();
                 return res;
             }
