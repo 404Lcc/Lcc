@@ -15,7 +15,7 @@ namespace LccHotfix
 
 
                 HotfixTypeManager.Instance.LoadTypes(Launcher.Instance.HotfixTypeDict);
-                Game.AddSingleton<Root>();
+                //Game.AddSingleton<Root>();
 
 
                 //Game.Scene.AddComponent<Manager>();
