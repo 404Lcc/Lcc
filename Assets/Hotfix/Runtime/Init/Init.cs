@@ -14,7 +14,7 @@ namespace LccHotfix
                 Launcher.Instance.ActionClose += Close;
 
 
-                EventSystem.Instance.InitType(Launcher.Instance.HotfixTypeDict);
+                HotfixTypeManager.Instance.LoadTypes(Launcher.Instance.HotfixTypeDict);
                 Game.AddSingleton<Root>();
 
 

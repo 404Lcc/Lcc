@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    internal class EventSystem : Module
+    internal class HotfixTypeManager : Module
     {
-        public static EventSystem Instance { get; } = Entry.GetModule<EventSystem>();
+        public static HotfixTypeManager Instance { get; } = Entry.GetModule<HotfixTypeManager>();
 
         private readonly Dictionary<string, Type> allTypeDict = new Dictionary<string, Type>();
 
@@ -20,25 +20,7 @@ namespace LccHotfix
         {
         }
 
-        private List<Type> GetAttributeBase(Dictionary<string, Type> typeDict)
-        {
-            List<Type> list = new List<Type>();
-            foreach (Type type in typeDict.Values)
-            {
-                if (type.IsAbstract)
-                {
-                    continue;
-                }
-
-                if (type.IsSubclassOf(typeof(AttributeBase)))
-                {
-                    list.Add(type);
-                }
-            }
-
-            return list;
-        }
-        public void InitType(Dictionary<string, Type> dict)
+        public void LoadTypes(Dictionary<string, Type> dict)
         {
             allTypeDict.Clear();
             attributeTypeDict.Clear();
@@ -68,6 +50,25 @@ namespace LccHotfix
                     }
                 }
             }
+        }
+
+        private List<Type> GetAttributeBase(Dictionary<string, Type> typeDict)
+        {
+            List<Type> list = new List<Type>();
+            foreach (Type type in typeDict.Values)
+            {
+                if (type.IsAbstract)
+                {
+                    continue;
+                }
+
+                if (type.IsSubclassOf(typeof(AttributeBase)))
+                {
+                    list.Add(type);
+                }
+            }
+
+            return list;
         }
 
         public HashSet<Type> GetTypesByAttribute(Type attributeType)

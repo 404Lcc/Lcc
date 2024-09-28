@@ -11,7 +11,7 @@ namespace LccHotfix
         public ModelManager()
         {
 
-            foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(ModelAttribute)))
+            foreach (Type item in HotfixTypeManager.Instance.GetTypesByAttribute(typeof(ModelAttribute)))
             {
                 object[] atts = item.GetCustomAttributes(typeof(ModelAttribute), false);
                 if (atts != null && atts.Length > 0)

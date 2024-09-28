@@ -45,7 +45,7 @@ namespace LccHotfix
                 nameToTypeDict.Add(name, (int)item);
 
 
-                Type type = Manager.Instance.GetTypeByName(item.GetType().Namespace + "." + name);
+                Type type = HotfixTypeManager.Instance.GetTypeByName(item.GetType().Namespace + "." + name);
                 if (type != null)
                 {
                     object ui = Activator.CreateInstance(type);
