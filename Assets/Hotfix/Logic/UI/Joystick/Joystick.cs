@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace LccHotfix
 {
-    public class Joystick : AObjectBase
+    public class Joystick
     {
         //原始坐标
         public Vector3 origin;
@@ -26,10 +26,8 @@ namespace LccHotfix
         public RectTransform joystickBG;
 
         public Action<Vector2, float> dragHandler;
-        public override void InitData(object[] datas)
+        public void InitJoystick(params object[] datas)
         {
-            base.InitData(datas);
-
             maxDistance = (float)datas[0];
             activeDistance = (float)datas[1];
             joystick = (GameObject)datas[2];
@@ -118,9 +116,8 @@ namespace LccHotfix
             dragHandler?.Invoke(normalDistance, angle);
         }
 
-        public override void OnDestroy()
+        public void Destroy()
         {
-            base.OnDestroy();
             EventTriggerListener.Get(joystick).onDown -= OnDown;
             EventTriggerListener.Get(joystick).onUP -= OnUP;
             EventTriggerListener.Get(joystick).onDrag -= OnDrag;

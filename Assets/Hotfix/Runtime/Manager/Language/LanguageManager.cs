@@ -5,25 +5,23 @@ using YooAsset;
 
 namespace LccHotfix
 {
-    public class LanguageManager : AObjectBase
+    internal class LanguageManager : Module
     {
-        public static LanguageManager Instance { get; set; }
+        public static LanguageManager Instance { get; } = Entry.GetModule<LanguageManager>();
         public Dictionary<string, string> languageDict = new Dictionary<string, string>();
 
         public GameObject loader;
-        public override void Awake()
+        public LanguageManager()
         {
-            base.Awake();
-
-            Instance = this;
             loader = new GameObject("loader");
             GameObject.DontDestroyOnLoad(loader);
         }
-        public override void OnDestroy()
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            base.OnDestroy();
+        }
 
-            Instance = null;
+        internal override void Shutdown()
+        {
             languageDict.Clear();
 
             GameObject.Destroy(loader);
@@ -48,5 +46,7 @@ namespace LccHotfix
             string value = languageDict[key];
             return value;
         }
+
+
     }
 }

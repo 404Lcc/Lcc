@@ -5,30 +5,16 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class CommandManager : AObjectBase, IUpdate
+    internal class CommandManager : Module
     {
-        public static CommandManager Instance { get; set; }
+        public static CommandManager Instance { get; } = Entry.GetModule<CommandManager>();
 
         public List<CommandData> commandDataList = new List<CommandData>();
         public int index;
         public CommandType commandType;
-        public override void Awake()
-        {
-            base.Awake();
 
-            Instance = this;
-        }
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
 
-            commandDataList.Clear();
-            index = 0;
-            commandType = CommandType.Automatic;
-
-            Instance = null;
-        }
-        public void Update()
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
             switch (commandType)
             {
@@ -40,6 +26,15 @@ namespace LccHotfix
                     break;
             }
         }
+
+        internal override void Shutdown()
+        {
+
+            commandDataList.Clear();
+            index = 0;
+            commandType = CommandType.Automatic;
+        }
+
         public void AddCommand(CommandData commandData)
         {
             if (commandData == null) return;
@@ -173,5 +168,6 @@ namespace LccHotfix
             if (commandDataList.Count == 0) return true;
             return false;
         }
+
     }
 }

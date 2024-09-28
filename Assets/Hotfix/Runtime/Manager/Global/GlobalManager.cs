@@ -3,9 +3,9 @@ using UnityEngine.Video;
 
 namespace LccHotfix
 {
-    public class GlobalManager : AObjectBase
+    internal class GlobalManager : Module
     {
-        public static GlobalManager Instance { get; set; }
+        public static GlobalManager Instance { get; } = Entry.GetModule<GlobalManager>();
         public Transform Global { get; set; }
 
         public Camera MainCamera { get; set; }
@@ -27,11 +27,8 @@ namespace LccHotfix
 
         public AudioSource AudioSource { get; set; }
         public VideoPlayer VideoPlayer { get; set; }
-        public override void Awake()
+        public GlobalManager()
         {
-            base.Awake();
-
-            Instance = this;
 
             Global = GameObject.Find("Global").transform;
 
@@ -51,12 +48,12 @@ namespace LccHotfix
             AudioSource = GameObject.Find("Global/AudioSource").GetComponent<AudioSource>();
             VideoPlayer = GameObject.Find("Global/VideoPlayer").GetComponent<VideoPlayer>();
         }
-        public override void OnDestroy()
+        internal override void Shutdown()
         {
-            base.OnDestroy();
+        }
 
-            Instance = null;
-
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
+        {
             Global = null;
 
             UIRoot = null;

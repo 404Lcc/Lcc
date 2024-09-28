@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public class SceneStateManager : AObjectBase
+    internal class SceneStateManager : Module
     {
-        public static SceneStateManager Instance { get; set; }
+        public static SceneStateManager Instance { get; } = Entry.GetModule<SceneStateManager>();
 
         private bool _forceStop;
         private SceneState preSceneHandler;
@@ -17,12 +17,9 @@ namespace LccHotfix
 
         private Dictionary<SceneStateType, SceneState> _sceneStateDict = new Dictionary<SceneStateType, SceneState>();
 
-
-        public override void Awake()
+        private CoroutineObject coroutineObject = new CoroutineObject();
+        public SceneStateManager()
         {
-            base.Awake();
-
-            Instance = this;
 
             _forceStop = false;
             foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(SceneStateAttribute)))
@@ -39,13 +36,13 @@ namespace LccHotfix
                 }
             }
         }
-
-        public override void OnDestroy()
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            base.OnDestroy();
+        }
 
-            Instance = null;
-
+        internal override void Shutdown()
+        {
+            coroutineObject.StopAllCoroutines();
             _forceStop = true;
             _sceneStateDict.Clear();
         }
@@ -117,7 +114,7 @@ namespace LccHotfix
                 handler.IsLoading = true;
                 if (!handler.SceneLoadHandler())
                 {
-                    StartCoroutine(ShowSceneLoading(handler.loadType, args));
+                    coroutineObject.StartCoroutine(ShowSceneLoading(handler.loadType, args));
                 }
                 else
                 {
@@ -200,7 +197,7 @@ namespace LccHotfix
         public void BeginLoad(object[] args = null)
         {
             Log.Debug($"BeginLoad： scene type === {curSceneHandler.sceneType} loading type ==== {curSceneHandler.loadType}");
-            Instance.StartCoroutine(Instance.UnloadSceneCoroutine(args));
+            coroutineObject.StartCoroutine(Instance.UnloadSceneCoroutine(args));
         }
 
         private IEnumerator UnloadSceneCoroutine(object[] args = null)
@@ -253,6 +250,8 @@ namespace LccHotfix
                 }
             }
         }
+
+
 
 
         #endregion

@@ -4,27 +4,29 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class OrcaManager : AObjectBase, IFixedUpdate
+    internal class OrcaManager : Module
     {
-        public static OrcaManager Instance;
+        public static OrcaManager Instance { get; } = Entry.GetModule<OrcaManager>();
 
         public Dictionary<int, ObstaclePolygon> obstacleDict = new Dictionary<int, ObstaclePolygon>();
-        public override void Awake()
+        public OrcaManager()
         {
-            base.Awake();
-
-            Instance = this;
 
             Simulator.Instance.setAgentDefaults(15f, 10, 10.0f, 10.0f, 3, 10, new RVO.Vector2(0.0f, 0.0f));
             Simulator.Instance.setTimeStep(0.02f);
         }
 
-        public override void OnDestroy()
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            base.OnDestroy();
-
-            Instance = null;
+            Simulator.Instance.doStep();
         }
+
+        internal override void Shutdown()
+        {
+            obstacleDict.Clear();
+        }
+
+
 
         public ObstaclePolygon AddObstacle(Bounds bounds)
         {
@@ -46,13 +48,6 @@ namespace LccHotfix
                 Simulator.Instance.delObstacle(id);
                 obstacleDict.Remove(id);
             }
-        }
-
-
-
-        public void FixedUpdate()
-        {
-            Simulator.Instance.doStep();
         }
     }
 }

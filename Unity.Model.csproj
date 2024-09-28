@@ -86,8 +86,8 @@
     <Compile Include="Assets\Launcher\ScrollerPro\GroupBase.cs" />
     <Compile Include="Assets\Launcher\Singleton\Singleton.cs" />
     <Compile Include="Assets\Launcher\UGUIExpand\RightClickButton.cs" />
-    <Compile Include="Assets\Launcher\HotfixFunc\HotfixFunc.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmGetNotice.cs" />
+    <Compile Include="Assets\Launcher\HotfixFunc\HotfixFunc.cs" />
     <Compile Include="Assets\Launcher\Launcher\StaticMethod\AStaticMethod.cs" />
     <Compile Include="Assets\Launcher\Utility\Extension\Byte\ByteExtension.cs" />
     <Compile Include="Assets\Launcher\Utility\Rijndael\RijndaelUtility.cs" />

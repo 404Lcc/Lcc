@@ -3,25 +3,18 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public class Manager : AObjectBase
+    internal class Manager : Module
     {
-        public static Manager Instance { get; set; }
-        public override void Awake()
+        public static Manager Instance { get; } = Entry.GetModule<Manager>();
+
+
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            base.Awake();
-
-
-            Instance = this;
-
-        }
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
-
-            Instance = null;
         }
 
-
+        internal override void Shutdown()
+        {
+        }
 
         public HashSet<Type> GetTypesByAttribute(Type attributeType)
         {
@@ -35,5 +28,7 @@ namespace LccHotfix
         {
             return EventSystem.Instance.GetTypeDict();
         }
+
+
     }
 }

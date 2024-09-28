@@ -495,16 +495,6 @@ namespace LccHotfix
             Awake(p1, p2);
             Start();
             InitData(datas);
-            #region 自动索引
-            if (aObjectBase is GameObjectComponent component)
-            {
-                if (component.gameObject != null)
-                {
-                    AutoReference(component.gameObject);
-                    ShowView(component.gameObject);
-                }
-            }
-            #endregion
             return aObjectBase;
         }
         public T AddComponent<T, P1, P2, P3>(P1 p1, P2 p2, P3 p3, params object[] datas) where T : AObjectBase

@@ -38,23 +38,16 @@ namespace LccHotfix
         }
     }
 
-    public class JumpManager : AObjectBase
+    internal class JumpManager : Module
     {
-        public static JumpManager Instance { get; set; }
+        public static JumpManager Instance { get; } = Entry.GetModule<JumpManager>();
 
-        public override void Awake()
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            base.Awake();
-
-            Instance = this;
-
-
         }
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
 
-            Instance = null;
+        internal override void Shutdown()
+        {
         }
 
         /// <summary>
@@ -172,5 +165,6 @@ namespace LccHotfix
 
             return false;
         }
+
     }
 }

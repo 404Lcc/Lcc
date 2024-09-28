@@ -5,28 +5,30 @@ using YooAsset;
 
 namespace LccHotfix
 {
-    public class AudioManager : AObjectBase
+    internal class AudioManager : Module
     {
-        public static AudioManager Instance { get; set; }
+        public static AudioManager Instance { get; } = Entry.GetModule<AudioManager>();
 
         public Dictionary<string, AudioClip> audioDict = new Dictionary<string, AudioClip>();
         public GameObject loader;
-        public override void Awake()
-        {
-            base.Awake();
 
-            Instance = this;
-            loader = new GameObject("loader");
-            GameObject.DontDestroyOnLoad(loader);
+
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
+        {
         }
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
 
+        internal override void Shutdown()
+        {
             audioDict.Clear();
-            Instance = null;
 
             GameObject.Destroy(loader);
+        }
+
+
+        public AudioManager()
+        {
+            loader = new GameObject("loader");
+            GameObject.DontDestroyOnLoad(loader);
         }
 
         public bool AudioExist(string audio)
@@ -115,5 +117,6 @@ namespace LccHotfix
             }
             return false;
         }
+
     }
 }

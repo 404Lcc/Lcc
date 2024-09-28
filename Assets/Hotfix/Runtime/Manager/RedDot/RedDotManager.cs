@@ -5,28 +5,22 @@ using UnityEngine.UI;
 
 namespace LccHotfix
 {
-    public class RedDotManager : AObjectBase
+    internal class RedDotManager : Module
     {
-        public static RedDotManager Instance { get; set; }
-        public Dictionary<string, List<string>> parentDict = new Dictionary<string, List<string>>();//key¸¸½Úµã value×Ó½ÚµãÁĞ±í
-        public HashSet<string> needShowParent = new HashSet<string>();//ĞèÒªÏÔÊ¾µÄ¸¸½Úµã key¸¸½Úµã
-        public Dictionary<string, int> redDotCountDict = new Dictionary<string, int>();//key×Ó½Úµã valueºìµã¼ÆÊı
-        public Dictionary<string, string> childToParentDict = new Dictionary<string, string>();//key×Ó½Úµã value¸¸½Úµã
-        public Dictionary<string, int> nodeCountDict = new Dictionary<string, int>();//key×Ó½Úµã value½Úµã¼ÆÊı
-        public Dictionary<string, RedDot> redDotDict = new Dictionary<string, RedDot>();//key×Ó½Úµã valueºìµã
+        public static RedDotManager Instance { get; } = Entry.GetModule<RedDotManager>();
+        public Dictionary<string, List<string>> parentDict = new Dictionary<string, List<string>>();//keyçˆ¶èŠ‚ç‚¹ valueå­èŠ‚ç‚¹åˆ—è¡¨
+        public HashSet<string> needShowParent = new HashSet<string>();//éœ€è¦æ˜¾ç¤ºçš„çˆ¶èŠ‚ç‚¹ keyçˆ¶èŠ‚ç‚¹
+        public Dictionary<string, int> redDotCountDict = new Dictionary<string, int>();//keyå­èŠ‚ç‚¹ valueçº¢ç‚¹è®¡æ•°
+        public Dictionary<string, string> childToParentDict = new Dictionary<string, string>();//keyå­èŠ‚ç‚¹ valueçˆ¶èŠ‚ç‚¹
+        public Dictionary<string, int> nodeCountDict = new Dictionary<string, int>();//keyå­èŠ‚ç‚¹ valueèŠ‚ç‚¹è®¡æ•°
+        public Dictionary<string, RedDot> redDotDict = new Dictionary<string, RedDot>();//keyå­èŠ‚ç‚¹ valueçº¢ç‚¹
 
-        public override void Awake()
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            base.Awake();
-
-
-            Instance = this;
         }
-        public override void OnDestroy()
+
+        internal override void Shutdown()
         {
-            base.OnDestroy();
-
-
             foreach (var item in parentDict.Values)
             {
                 item.Clear();
@@ -37,11 +31,9 @@ namespace LccHotfix
             redDotDict.Clear();
             needShowParent.Clear();
             redDotCountDict.Clear();
-
-            Instance = null;
         }
         /// <summary>
-        /// Ôö¼Óºìµã½Úµã
+        /// å¢åŠ çº¢ç‚¹èŠ‚ç‚¹
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="target"></param>
@@ -50,24 +42,24 @@ namespace LccHotfix
         {
             if (!string.IsNullOrEmpty(parent) && !parentDict.ContainsKey(parent))
             {
-                Log.Debug("¸¸½ÚµãÊÇĞÂ½Úµã£º" + parent);
+                Log.Debug("çˆ¶èŠ‚ç‚¹æ˜¯æ–°èŠ‚ç‚¹ï¼š" + parent);
             }
 
 
 
             if (string.IsNullOrEmpty(target))
             {
-                Log.Error($"Ä¿±ê²»ÄÜÎª¿Õ");
+                Log.Error($"ç›®æ ‡ä¸èƒ½ä¸ºç©º");
                 return;
             }
             if (string.IsNullOrEmpty(parent))
             {
-                Log.Error($"¸¸½Úµã²»ÄÜÎª¿Õ");
+                Log.Error($"çˆ¶èŠ‚ç‚¹ä¸èƒ½ä¸ºç©º");
                 return;
             }
             if (childToParentDict.ContainsKey(target))
             {
-                Log.Error($"{target} ÒÑ´æÔÚ");
+                Log.Error($"{target} å·²å­˜åœ¨");
                 return;
             }
 
@@ -113,7 +105,7 @@ namespace LccHotfix
             parentDict.Add(parent, list);
         }
         /// <summary>
-        /// Ôö¼Óºìµã½Úµã
+        /// å¢åŠ çº¢ç‚¹èŠ‚ç‚¹
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="target"></param>
@@ -125,7 +117,7 @@ namespace LccHotfix
             AddRedDot(target, redDot);
         }
         /// <summary>
-        /// ÒÆ³ıºìµã½Úµã
+        /// ç§»é™¤çº¢ç‚¹èŠ‚ç‚¹
         /// </summary>
         /// <param name="target"></param>
         public void RemoveRedDotNode(string target)
@@ -137,15 +129,15 @@ namespace LccHotfix
 
             if (!IsLeafNode(target))
             {
-                Log.Error("²»ÄÜÉ¾³ı¸¸½Úµã");
+                Log.Error("ä¸èƒ½åˆ é™¤çˆ¶èŠ‚ç‚¹");
                 return;
             }
 
-            //¼õÉÙºìµã¼ÆÊı
+            //å‡å°‘çº¢ç‚¹è®¡æ•°
             UpdateNodeCount(target, false);
 
 
-            //ÒÆ³ı½Úµã
+            //ç§»é™¤èŠ‚ç‚¹
             childToParentDict.Remove(target);
             if (!string.IsNullOrEmpty(parent))
             {
@@ -160,7 +152,7 @@ namespace LccHotfix
             nodeCountDict.Remove(target);
         }
         /// <summary>
-        /// ÒÆ³ıºìµã½Úµã
+        /// ç§»é™¤çº¢ç‚¹èŠ‚ç‚¹
         /// </summary>
         /// <param name="target"></param>
         /// <param name="isRemoveRedDot"></param>
@@ -173,7 +165,7 @@ namespace LccHotfix
             }
         }
         /// <summary>
-        /// Ôö¼Óºìµã
+        /// å¢åŠ çº¢ç‚¹
         /// </summary>
         /// <param name="target"></param>
         /// <param name="redDot"></param>
@@ -181,7 +173,7 @@ namespace LccHotfix
         {
             if (!nodeCountDict.TryGetValue(target, out int nodeCount))
             {
-                Log.Error($"½Úµã²»´æÔÚ {target} ²»ÄÜÔö¼Ó");
+                Log.Error($"èŠ‚ç‚¹ä¸å­˜åœ¨ {target} ä¸èƒ½å¢åŠ ");
                 return;
             }
 
@@ -194,7 +186,7 @@ namespace LccHotfix
             redDot.Show();
         }
         /// <summary>
-        /// ÒÆ³ıºìµã
+        /// ç§»é™¤çº¢ç‚¹
         /// </summary>
         /// <param name="target"></param>
         /// <param name="redDot"></param>
@@ -215,7 +207,7 @@ namespace LccHotfix
 
 
         /// <summary>
-        /// ÏÔÊ¾ºìµã½Úµã
+        /// æ˜¾ç¤ºçº¢ç‚¹èŠ‚ç‚¹
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
@@ -228,7 +220,7 @@ namespace LccHotfix
 
             if (!IsLeafNode(target))
             {
-                Log.Error("²»ÄÜÏÔÊ¾¸¸½Úµã " + target);
+                Log.Error("ä¸èƒ½æ˜¾ç¤ºçˆ¶èŠ‚ç‚¹ " + target);
                 return false;
             }
 
@@ -236,7 +228,7 @@ namespace LccHotfix
             return true;
         }
         /// <summary>
-        /// Òş²Øºìµã½Úµã
+        /// éšè—çº¢ç‚¹èŠ‚ç‚¹
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
@@ -244,7 +236,7 @@ namespace LccHotfix
         {
             if (!IsLeafNode(target))
             {
-                Log.Error("²»ÄÜÒş²Ø¸¸½Úµã " + target);
+                Log.Error("ä¸èƒ½éšè—çˆ¶èŠ‚ç‚¹ " + target);
                 return false;
             }
 
@@ -252,7 +244,7 @@ namespace LccHotfix
             return true;
         }
         /// <summary>
-        /// Ë¢ĞÂºìµã¼ÆÊı
+        /// åˆ·æ–°çº¢ç‚¹è®¡æ•°
         /// </summary>
         /// <param name="target"></param>
         /// <param name="Count"></param>
@@ -260,7 +252,7 @@ namespace LccHotfix
         {
             if (!IsLeafNode(target))
             {
-                Log.Error("²»ÄÜË¢ĞÂ¸¸½Úµã");
+                Log.Error("ä¸èƒ½åˆ·æ–°çˆ¶èŠ‚ç‚¹");
                 return;
             }
 
@@ -303,7 +295,7 @@ namespace LccHotfix
 
 
         /// <summary>
-        /// ¸üĞÂ½Úµã¼ÆÊı
+        /// æ›´æ–°èŠ‚ç‚¹è®¡æ•°
         /// </summary>
         /// <param name="target"></param>
         /// <param name="isRaiseCount"></param>
@@ -311,28 +303,28 @@ namespace LccHotfix
         {
             if (!nodeCountDict.ContainsKey(target))
             {
-                Log.Error($"{target} ½Úµã²»´æÔÚ");
+                Log.Error($"{target} èŠ‚ç‚¹ä¸å­˜åœ¨");
                 return;
             }
 
             if (!IsLeafNode(target))
             {
-                Log.Error($"{target} ²»ÄÜÊÇ¸¸½Úµã");
+                Log.Error($"{target} ä¸èƒ½æ˜¯çˆ¶èŠ‚ç‚¹");
                 return;
             }
-            //Ìá¸ß¼ÆÊı
+            //æé«˜è®¡æ•°
             if (isRaiseCount)
             {
                 if (nodeCountDict[target] == 1)
                 {
-                    Log.Error($"{target} ½Úµã¼ÆÊıÒÑ¾­ÊÇ1ÁË");
+                    Log.Error($"{target} èŠ‚ç‚¹è®¡æ•°å·²ç»æ˜¯1äº†");
                     return;
                 }
 
                 nodeCountDict[target] += 1;
                 if (nodeCountDict[target] != 1)
                 {
-                    Log.Error($"{target} ½Úµã¼ÆÊı´íÎó RetainCount = {nodeCountDict[target]}");
+                    Log.Error($"{target} èŠ‚ç‚¹è®¡æ•°é”™è¯¯ RetainCount = {nodeCountDict[target]}");
                     return;
                 }
             }
@@ -340,7 +332,7 @@ namespace LccHotfix
             {
                 if (nodeCountDict[target] != 1)
                 {
-                    Log.Error($"{target} ½ÚµãÊÇ²»ÏÔÊ¾×´Ì¬ RetainCount = {nodeCountDict[target]}");
+                    Log.Error($"{target} èŠ‚ç‚¹æ˜¯ä¸æ˜¾ç¤ºçŠ¶æ€ RetainCount = {nodeCountDict[target]}");
                     return;
                 }
                 nodeCountDict[target] += -1;
@@ -350,10 +342,10 @@ namespace LccHotfix
             int curr = nodeCountDict[target];
             if (curr < 0 || curr > 1)
             {
-                Log.Error("ºìµã¼ÆÊı´íÎó£¬ºìµãÂß¼­ÓĞÎÊÌâ");
+                Log.Error("çº¢ç‚¹è®¡æ•°é”™è¯¯ï¼Œçº¢ç‚¹é€»è¾‘æœ‰é—®é¢˜");
                 return;
             }
-            //ÏÔÊ¾ºìµã
+            //æ˜¾ç¤ºçº¢ç‚¹
             if (redDotDict.TryGetValue(target, out RedDot redDot))
             {
                 if (isRaiseCount)
@@ -368,9 +360,9 @@ namespace LccHotfix
 
 
 
-            //»ñÈ¡¸¸½Úµã
+            //è·å–çˆ¶èŠ‚ç‚¹
             bool isParentExist = childToParentDict.TryGetValue(target, out string parent);
-            //Ñ­»·±éÀúÉÏ²ã½Úµã
+            //å¾ªç¯éå†ä¸Šå±‚èŠ‚ç‚¹
             while (isParentExist)
             {
                 nodeCountDict[parent] += isRaiseCount ? 1 : -1;
@@ -397,7 +389,7 @@ namespace LccHotfix
             }
         }
         /// <summary>
-        /// ÅĞ¶ÏÊÇ·ñÊÇÒ¶×Ó½Úµã
+        /// åˆ¤æ–­æ˜¯å¦æ˜¯å¶å­èŠ‚ç‚¹
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
@@ -406,7 +398,7 @@ namespace LccHotfix
             return !parentDict.ContainsKey(target);
         }
         /// <summary>
-        /// ºìµãÊÇ·ñÒÑ¾­´¦ÓÚÏÔÊ¾×´Ì¬
+        /// çº¢ç‚¹æ˜¯å¦å·²ç»å¤„äºæ˜¾ç¤ºçŠ¶æ€
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
@@ -418,9 +410,6 @@ namespace LccHotfix
             }
             return nodeCountDict[target] >= 1;
         }
-
-
-
 
 
     }

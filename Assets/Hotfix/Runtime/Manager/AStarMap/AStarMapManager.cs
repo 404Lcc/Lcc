@@ -3,8 +3,10 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class AStarMap : AObjectBase
+    internal class AStarMapManager : Module
     {
+        public static AStarMapManager Instance { get; } = Entry.GetModule<AStarMapManager>();
+
         public float radius;
         public LayerMask layer;
         public bool isShowWall;
@@ -14,6 +16,17 @@ namespace LccHotfix
         public AStarNodeData[,] aStarNodeDatas;
 
         public bool isDebugDraw;
+
+
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
+        {
+        }
+
+        internal override void Shutdown()
+        {
+        }
+
+
         public void CreateAStarMap(float radius, LayerMask layer, bool isShowWall, bool isShowPath, Bounds bounds, float ratio = 1, bool isDebugDraw = false)
         {
             this.radius = radius;
@@ -408,5 +421,6 @@ namespace LccHotfix
             //}
 
         }
+
     }
 }

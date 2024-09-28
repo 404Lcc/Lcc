@@ -8,19 +8,15 @@ using YooAsset;
 
 namespace LccHotfix
 {
-    public class ConfigManager : AObjectBase
+    internal class ConfigManager : Module
     {
-        public static ConfigManager Instance { get; set; }
+        public static ConfigManager Instance { get; } = Entry.GetModule<ConfigManager>();
 
         public Tables Tables { get; set; }
 
         public GameObject loader;
-
-        public override void Awake()
+        public ConfigManager()
         {
-            base.Awake();
-
-            Instance = this;
             loader = new GameObject("loader");
             GameObject.DontDestroyOnLoad(loader);
 
@@ -30,14 +26,18 @@ namespace LccHotfix
             Delegate loaderFun = loaderReturnType == typeof(ByteBuf) ? new Func<string, ByteBuf>(LoadByteBuf) : (Delegate)new Func<string, JSONNode>(LoadJson);
             Tables = (Tables)tablesCtor.Invoke(new object[] { loaderFun });
         }
-        public override void OnDestroy()
+
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            base.OnDestroy();
+        }
 
-            Instance = null;
-
+        internal override void Shutdown()
+        {
             GameObject.Destroy(loader);
         }
+
+
+
         private JSONNode LoadJson(string file)
         {
             var text = AssetManager.Instance.LoadRes<TextAsset>(loader, file);
@@ -49,5 +49,6 @@ namespace LccHotfix
             var bytes = AssetManager.Instance.LoadRes<TextAsset>(loader, file);
             return new ByteBuf(bytes.bytes);
         }
+
     }
 }

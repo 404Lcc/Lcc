@@ -3,16 +3,13 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public class ModelManager : AObjectBase
+    internal class ModelManager : Module
     {
-        public static ModelManager Instance { get; set; }
+        public static ModelManager Instance { get; } = Entry.GetModule<ModelManager>();
         public Dictionary<Type, ModelTemplate> modelDict = new Dictionary<Type, ModelTemplate>();
 
-        public override void Awake()
+        public ModelManager()
         {
-            base.Awake();
-
-            Instance = this;
 
             foreach (Type item in Manager.Instance.GetTypesByAttribute(typeof(ModelAttribute)))
             {
@@ -32,13 +29,14 @@ namespace LccHotfix
             }
 
         }
-        public override void OnDestroy()
+
+
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            base.OnDestroy();
+        }
 
-            Instance = null;
-
-
+        internal override void Shutdown()
+        {
             foreach (var item in modelDict.Values)
             {
                 item.OnDestroy();
@@ -54,5 +52,6 @@ namespace LccHotfix
             }
             return null;
         }
+
     }
 }

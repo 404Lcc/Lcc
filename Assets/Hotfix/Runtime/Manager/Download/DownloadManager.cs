@@ -11,9 +11,9 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class DownloadManager : AObjectBase, IUpdate
+    internal class DownloadManager : Module
     {
-        public static DownloadManager Instance { get; set; }
+        public static DownloadManager Instance { get; } = Entry.GetModule<DownloadManager>();
 
 
         public object lockObject = new object();
@@ -28,19 +28,24 @@ namespace LccHotfix
         //错误列表
         public List<DownloadFile> errorList = new List<DownloadFile>();
 
-        public override void Awake()
+
+
+
+        public DownloadManager()
         {
-            base.Awake();
 
             ServicePointManager.DefaultConnectionLimit = 100;
             ServicePointManager.ServerCertificateValidationCallback = ServerCertificateValidationCallback;
 
-            Instance = this;
         }
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
 
+
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
+        {
+        }
+
+        internal override void Shutdown()
+        {
             readyQueue.Clear();
             foreach (var item in runningDict)
             {
@@ -49,8 +54,6 @@ namespace LccHotfix
             runningDict.Clear();
             completedList.Clear();
             errorList.Clear();
-
-            Instance = null;
         }
 
 

@@ -8,9 +8,9 @@ using YooAsset;
 
 namespace LccHotfix
 {
-    public class PanelManager : AObjectBase
+    internal class PanelManager : Module
     {
-        public static PanelManager Instance { get; set; }
+        public static PanelManager Instance { get; } = Entry.GetModule<PanelManager>();
 
         public const int DepthMultiply = 100;
 
@@ -31,12 +31,11 @@ namespace LccHotfix
 
         //public PanelCompare compare = new PanelCompare();
 
-        public override void Awake()
+
+
+
+        public PanelManager()
         {
-            base.Awake();
-
-
-            Instance = this;
 
             foreach (PanelType item in Enum.GetValues(typeof(PanelType)))
             {
@@ -66,12 +65,12 @@ namespace LccHotfix
             }
 
         }
-        public override void OnDestroy()
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            base.OnDestroy();
+        }
 
-            Instance = null;
-
+        internal override void Shutdown()
+        {
             typeToNameDict.Clear();
             nameToTypeDict.Clear();
             typeToLogicDict.Clear();
@@ -244,7 +243,7 @@ namespace LccHotfix
             Panel panel = GetPanel(type);
             if (panel == null)
             {
-                panel = AddChildren<Panel>();
+                panel = new Panel();
                 panel.Type = type;
                 InternalLoadPanel(panel);
             }
@@ -818,8 +817,6 @@ namespace LccHotfix
             curNavigation = null;
             lastNavigation = null;
         }
-
-
 
     }
 }

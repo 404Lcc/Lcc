@@ -7,27 +7,25 @@ using YooAsset;
 
 namespace LccHotfix
 {
-    public class VideoManager : AObjectBase
+    internal class VideoManager : Module
     {
-        public static VideoManager Instance { get; set; }
+        public static VideoManager Instance { get; } = Entry.GetModule<VideoManager>();
         public Dictionary<string, VideoClip> videoDict = new Dictionary<string, VideoClip>();
 
         public GameObject loader;
-        public override void Awake()
+        public VideoManager()
         {
-            base.Awake();
-
-            Instance = this;
 
             loader = new GameObject("loader");
             GameObject.DontDestroyOnLoad(loader);
         }
-        public override void OnDestroy()
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            base.OnDestroy();
+        }
 
+        internal override void Shutdown()
+        {
             videoDict.Clear();
-            Instance = null;
 
             GameObject.Destroy(loader);
         }
@@ -133,5 +131,7 @@ namespace LccHotfix
                 return false;
             }
         }
+
+
     }
 }
