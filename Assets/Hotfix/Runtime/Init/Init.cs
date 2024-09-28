@@ -1,4 +1,5 @@
 ﻿using LccModel;
+using System.Reflection;
 
 namespace LccHotfix
 {
@@ -14,7 +15,7 @@ namespace LccHotfix
                 Launcher.Instance.ActionClose += Close;
 
 
-                HotfixTypeManager.Instance.LoadTypes(Launcher.Instance.HotfixTypeDict);
+                CodeTypesManager.Instance.LoadTypes(new Assembly[] { Launcher.Instance.hotfixAssembly });
                 //Game.AddSingleton<Root>();
 
 

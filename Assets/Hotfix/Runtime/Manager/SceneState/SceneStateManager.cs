@@ -22,7 +22,7 @@ namespace LccHotfix
         {
 
             _forceStop = false;
-            foreach (Type item in HotfixTypeManager.Instance.GetTypesByAttribute(typeof(SceneStateAttribute)))
+            foreach (Type item in CodeTypesManager.Instance.GetTypes(typeof(SceneStateAttribute)))
             {
                 object[] atts = item.GetCustomAttributes(typeof(SceneStateAttribute), false);
                 if (atts != null && atts.Length > 0)
