@@ -55,7 +55,7 @@ namespace LccHotfix
                 return;
             }
             JumpNode node = curScene.jumpNode;
-            if (node.nodeType == PanelType.None)
+            if (node.nodePanel == "")
             {
                 return;
             }

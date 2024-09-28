@@ -6,18 +6,18 @@ namespace LccHotfix
 {
     public class JumpNode
     {
-        public PanelType nodeType;
+        public string nodePanel;
         public object[] nodeParam;
         public JumpDependNode depend;//依赖只支持一层
 
-        public JumpNode(PanelType nodeType)
+        public JumpNode(string nodePanel)
         {
-            this.nodeType = nodeType;
+            this.nodePanel = nodePanel;
 
         }
-        public JumpNode(PanelType nodeType, object[] nodeParam)
+        public JumpNode(string nodePanel, object[] nodeParam)
         {
-            this.nodeType = nodeType;
+            this.nodePanel = nodePanel;
             this.nodeParam = nodeParam;
 
         }
@@ -28,12 +28,12 @@ namespace LccHotfix
     }
     public class JumpDependNode
     {
-        public PanelType nodeType;
+        public string nodePanel;
         public object[] nodeParam;
 
-        public JumpDependNode(PanelType nodeType)
+        public JumpDependNode(string nodePanel)
         {
-            this.nodeType = nodeType;
+            this.nodePanel = nodePanel;
 
         }
     }
@@ -93,8 +93,7 @@ namespace LccHotfix
 
             int scene = config.SceneId;
 
-            PanelType panel = (PanelType)Enum.Parse(typeof(PanelType), config.PanelName);
-            JumpNode jump = new JumpNode(panel, nowArg);
+            JumpNode jump = new JumpNode(config.PanelName, nowArg);
 
             ChangeWindowNode(jump);
 
@@ -112,8 +111,7 @@ namespace LccHotfix
             }
 
             //todo 依赖的界面现在给不了参数
-            PanelType dependPanel = (PanelType)Enum.Parse(typeof(PanelType), config.ScenePanelName);
-            jump.SetDepend(new JumpDependNode(dependPanel));
+            jump.SetDepend(new JumpDependNode(config.ScenePanelName));
             return JumpPanelCrossScene(scene, jump);
 
         }
@@ -125,7 +123,7 @@ namespace LccHotfix
 
         public bool OpenSpecialWindow(JumpNode jumpNode)
         {
-            switch (jumpNode.nodeType)
+            switch (jumpNode.nodePanel)
             {
                 default:
                     break;
@@ -139,7 +137,7 @@ namespace LccHotfix
         /// <param name="jumpNode"></param>
         private void ChangeWindowNode(JumpNode jumpNode)
         {
-            switch (jumpNode.nodeType)
+            switch (jumpNode.nodePanel)
             {
                 default:
                     break;
