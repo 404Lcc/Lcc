@@ -40,15 +40,15 @@ namespace LccHotfix
         }
         private static void FixedUpdate()
         {
-            Game.FixedUpdate();
+            //Game.FixedUpdate();
         }
         private static void Update()
         {
-            Game.Update();
+            //Game.Update();
         }
         private static void LateUpdate()
         {
-            Game.LateUpdate();
+            //Game.LateUpdate();
         }
         private static void Close()
         {
@@ -56,7 +56,7 @@ namespace LccHotfix
             Launcher.Instance.ActionUpdate -= Update;
             Launcher.Instance.ActionLateUpdate -= LateUpdate;
             Launcher.Instance.ActionClose -= Close;
-            Game.Close();
+            //Game.Close();
         }
     }
 }
