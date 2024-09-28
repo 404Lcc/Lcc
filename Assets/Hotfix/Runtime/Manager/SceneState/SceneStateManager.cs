@@ -64,14 +64,14 @@ namespace LccHotfix
                 return;
             }
 
-            if (node.depend != null)
-            {
-                var dependData = new ShowPanelData(false, true, node.depend.nodeParam, true, false, true);
-                PanelManager.Instance.ShowPanel(node.depend.nodeType, dependData);
-            }
-            var data = new ShowPanelData(false, true, node.nodeParam, true, false, true);
-            PanelManager.Instance.ShowPanel(node.nodeType, data);
-            curScene.jumpNode = null;
+            //if (node.depend != null)
+            //{
+            //    var dependData = new ShowPanelData(false, true, node.depend.nodeParam, true, false, true);
+            //    PanelManager.Instance.ShowPanel(node.depend.nodeType, dependData);
+            //}
+            //var data = new ShowPanelData(false, true, node.nodeParam, true, false, true);
+            //PanelManager.Instance.ShowPanel(node.nodeType, data);
+            //curScene.jumpNode = null;
         }
 
         public void CleanChangeSceneParam()
@@ -208,7 +208,7 @@ namespace LccHotfix
             }
 
 
-            PanelManager.Instance.HideAllShownPanel();
+            //PanelManager.Instance.HideAllShownPanel();
 
 
             //移除旧的

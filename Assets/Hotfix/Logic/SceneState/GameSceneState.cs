@@ -8,20 +8,7 @@ namespace LccHotfix
         public override void OnEnter(object[] args)
         {
             base.OnEnter(args);
-            Debug.Log("Game" + "½øÈë");
-
-            PanelManager.Instance.HidePanel(PanelType.UITop);
-
-            //var combat1 = CombatContext.Instance.AddCombat(1);
-            //var combat2 = CombatContext.Instance.AddCombat(2, TagType.Enemy);
-            //combat2.TransformComponent.position = new Vector3(0, 10, 0);
-            //combat2.OrcaComponent.SetAgent2DPos(new Vector3(0, 10, 0));
-            //combat2.AttachSkill(1);
-            //combat2.AddComponent<FSMComponet>();
-
-            //ºöÂÔÔö¼ÓmainµÄµ¼º½Êý¾Ý
-            //Çå³ýÒÑ¾­´æÔÚµÄµ¼º½Êý¾Ý£¬ÖÐ¶Ï²Ù×÷
-            PanelManager.Instance.ShowPanel(PanelType.UIGame, new ShowPanelData(false, true, null, true, false, true));
+            Debug.Log("Game" + "è¿›å…¥");
 
 
 
@@ -33,7 +20,7 @@ namespace LccHotfix
         public override void OnExit()
         {
             base.OnExit();
-            Debug.Log("Game" + "ÍË³ö");
+            Debug.Log("Game" + "é€€å‡º");
         }
     }
 }

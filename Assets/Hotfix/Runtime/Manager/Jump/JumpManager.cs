@@ -106,8 +106,8 @@ namespace LccHotfix
                 {
                     return true;
                 }
-                var data = new ShowPanelData(false, true, jump.nodeParam, true, false, true);
-                PanelManager.Instance.ShowPanel(jump.nodeType, data);
+                //var data = new ShowPanelData(false, true, jump.nodeParam, true, false, true);
+                //PanelManager.Instance.ShowPanel(jump.nodeType, data);
                 return true;
             }
 

@@ -8,17 +8,14 @@ namespace LccHotfix
         public override void OnEnter(object[] args)
         {
             base.OnEnter(args);
-            Debug.Log("Main" + "½øÈë");
+            Debug.Log("Main" + "è¿›å…¥");
 
-            //ºöÂÔÔö¼ÓmainµÄµ¼º½Êý¾Ý
-            //Çå³ýÒÑ¾­´æÔÚµÄµ¼º½Êý¾Ý£¬ÖÐ¶Ï²Ù×÷
-            PanelManager.Instance.ShowPanel(PanelType.UIMain, new ShowPanelData(false, true, null, true, false, true));
 
         }
         public override void OnExit()
         {
             base.OnExit();
-            Debug.Log("Main" + "ÍË³ö");
+            Debug.Log("Main" + "é€€å‡º");
         }
     }
 }
