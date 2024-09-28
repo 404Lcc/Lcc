@@ -2,8 +2,10 @@ using System;
 
 namespace LccHotfix
 {
-    public class Time : Singleton<Time>, ISingletonUpdate
+    internal class Time : Module
     {
+        public static Time Instance { get; } = Entry.GetModule<Time>();
+
         private int timeZone;
 
 
@@ -27,19 +29,20 @@ namespace LccHotfix
                 dt = dt1970.AddHours(TimeZone);
             }
         }
-        public override void Register()
-        {
-            base.Register();
 
+        public Time()
+        {
             this.dt1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             this.dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             this.FrameTime = this.ClientNow();
         }
 
-        protected override void Dispose()
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            base.Dispose();
+        }
 
+        internal override void Shutdown()
+        {
             timeZone = 0;
             dt1970 = default;
             dt = default;
@@ -54,14 +57,14 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// ∏˘æ› ±º‰¥¡ªÒ»° ±º‰
+        /// Ê†πÊçÆÊó∂Èó¥Êà≥Ëé∑ÂèñÊó∂Èó¥
         /// </summary>
         public DateTime ToDateTime(long timeStamp)
         {
             return dt.AddTicks(timeStamp * 10000);
         }
 
-        // œﬂ≥Ã∞≤»´
+        // Á∫øÁ®ãÂÆâÂÖ®
         public long ClientNow()
         {
             return (DateTime.UtcNow.Ticks - this.dt1970.Ticks) / 10000;
@@ -69,7 +72,7 @@ namespace LccHotfix
 
         public long ServerNow()
         {
-            return ClientNow() + Instance.ServerMinusClientTime;
+            return ClientNow() + ServerMinusClientTime;
         }
 
         public long ClientFrameTime()
@@ -79,7 +82,7 @@ namespace LccHotfix
 
         public long ServerFrameTime()
         {
-            return this.FrameTime + Instance.ServerMinusClientTime;
+            return this.FrameTime + ServerMinusClientTime;
         }
 
         public long Transition(DateTime d)

@@ -4,29 +4,28 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class MainThreadSynchronizationContext : Singleton<MainThreadSynchronizationContext>, ISingletonUpdate
+    internal class MainThreadSynchronizationContext : Module
     {
+        public static MainThreadSynchronizationContext Instance { get; } = Entry.GetModule<MainThreadSynchronizationContext>();
+
         private SynchronizationContext last;
         private readonly ThreadSynchronizationContext threadSynchronizationContext = new ThreadSynchronizationContext();
 
-        public override void Register()
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            base.Register();
-
-            last = SynchronizationContext.Current;
-            SynchronizationContext.SetSynchronizationContext(this.threadSynchronizationContext);
+            this.threadSynchronizationContext.Update();
         }
 
-        public override void Destroy()
+        internal override void Shutdown()
         {
-            base.Destroy();
-
             SynchronizationContext.SetSynchronizationContext(this.last);
         }
 
-        public void Update()
+        public MainThreadSynchronizationContext()
         {
-            this.threadSynchronizationContext.Update();
+
+            last = SynchronizationContext.Current;
+            SynchronizationContext.SetSynchronizationContext(this.threadSynchronizationContext);
         }
 
         public void Post(SendOrPostCallback callback, object state)

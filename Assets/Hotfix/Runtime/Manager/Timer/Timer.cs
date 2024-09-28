@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public class Timer : Singleton<Timer>, ISingletonUpdate
+    internal class Timer : Module
     {
+        public static Timer Instance { get; } = Entry.GetModule<Timer>();
+
         private readonly Dictionary<long, TimerData> timerDataDict = new Dictionary<long, TimerData>();
         private readonly List<TimerData> timerDataList = new List<TimerData>();
 
@@ -15,15 +17,7 @@ namespace LccHotfix
             return ++this._idGenerator;
         }
 
-        protected override void Dispose()
-        {
-            base.Dispose();
-            timerDataDict.Clear();
-            timerDataList.Clear();
-            _idGenerator = 0;
-        }
-
-        public void Update()
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
             for (int i = timerDataList.Count - 1; i >= 0; i--)
             {
@@ -35,7 +29,13 @@ namespace LccHotfix
                     item.duration = 0;
                 }
             }
+        }
 
+        internal override void Shutdown()
+        {
+            timerDataDict.Clear();
+            timerDataList.Clear();
+            _idGenerator = 0;
         }
 
 
@@ -122,6 +122,7 @@ namespace LccHotfix
             AddTimer(timer);
             return timer.id;
         }
+
 
     }
 }
