@@ -16,15 +16,15 @@ namespace LccModel
 
     public partial class Launcher : SingletonMono<Launcher>
     {
-        public bool mRestartOver = false;
-        private Coroutine mCoroutine;
+        public bool restartOver = false;
+        private Coroutine _coroutine;
 
         public GameState GameState { set; get; } = GameState.Official;
 
         public bool GameStarted { set; get; } = false;
 
         public Assembly hotfixAssembly;
-        public readonly Dictionary<string, Type> HotfixTypeDict = new Dictionary<string, Type>();
+        public readonly Dictionary<string, Type> hotfixTypeDict = new Dictionary<string, Type>();
 
 
         public const string DefaultPackage = "GamePackage";
@@ -116,8 +116,8 @@ namespace LccModel
         //出问题就走这个重来一遍
         public void StartServerLoad()
         {
-            if (mCoroutine != null) StopCoroutine(mCoroutine);
-            mCoroutine = StartCoroutine(LoadCoroutine());
+            if (_coroutine != null) StopCoroutine(_coroutine);
+            _coroutine = StartCoroutine(LoadCoroutine());
         }
 
 
@@ -131,7 +131,7 @@ namespace LccModel
             UILoadingPanel.Instance.UpdateLoadingPercent(4, 20, 0.5f);
             yield return Launcher.Instance.RequestCenterServer();
 
-            if (!Launcher.Instance.RequestCenterServerSucc)
+            if (!Launcher.Instance.requestCenterServerSucc)
             {
                 yield break;
             }
@@ -141,7 +141,7 @@ namespace LccModel
             //检测是否需要重新下载安装包
             if (CheckIfAppShouldUpdate())
             {
-                Debug.Log($"初始化 需要重新下载安装包 GameConfig.appVersion:{GameConfig.appVersion}, mSvrVersion:{mSvrVersion}");
+                Debug.Log($"初始化 需要重新下载安装包 GameConfig.appVersion:{GameConfig.appVersion}, mSvrVersion:{svrVersion}");
                 ForceUpdate();
                 yield break;
             }
@@ -150,7 +150,7 @@ namespace LccModel
             //读取本地版本信息
             if (GameConfig.checkResUpdate && !IsAuditServer())
             {
-                Launcher.GameConfig.AddConfig("resVersion", mSvrResVersion);
+                Launcher.GameConfig.AddConfig("resVersion", svrResVersion);
             }
             UILoadingPanel.Instance.UpdateLoadingPercent(41, 50);
             yield return null;
@@ -197,13 +197,13 @@ namespace LccModel
         #region 重启游戏
         public void Restart()
         {
-            if (mCoroutine != null)
-                StopCoroutine(mCoroutine);
-            mCoroutine = StartCoroutine(ReStartCoroutine());
+            if (_coroutine != null)
+                StopCoroutine(_coroutine);
+            _coroutine = StartCoroutine(ReStartCoroutine());
         }
         private IEnumerator ReStartCoroutine()
         {
-            mRestartOver = false;
+            restartOver = false;
             GameStarted = false;
             UIForeGroundPanel.Instance.FadeOut(0.3f);
             yield return null;
@@ -215,7 +215,7 @@ namespace LccModel
             yield return StartCoroutine(ReCheckVersionCoroutine());
 
             // 中途结束
-            if (mRestartOver)
+            if (restartOver)
             {
                 UILoadingPanel.Instance.UpdateLoadingPercent(91, 98);
                 //切换场景
@@ -235,11 +235,11 @@ namespace LccModel
             UILoadingPanel.Instance.UpdateLoadingPercent(0, 18);
             //连接中心服，请求失败重新请求
             yield return StartCoroutine(RequestCenterServer());
-            if (!RequestCenterServerSucc)
+            if (!requestCenterServerSucc)
             {
                 //请求中心服如果失败了，直接断流程，清理下热更代码和资源，走初始化流程
 
-                ActionClose?.Invoke();
+                actionClose?.Invoke();
                 yield return null;
                 AssetManager.Instance.UnloadAllAssetsAsync();
                 yield return null;
@@ -252,17 +252,17 @@ namespace LccModel
             //检测是否需要重新下载安装包
             if (CheckIfAppShouldUpdate())
             {
-                Debug.Log($"重启 需要重新下载安装包 GameConfig.appVersion:{GameConfig.appVersion}, mSvrVersion:{mSvrVersion}");
+                Debug.Log($"重启 需要重新下载安装包 GameConfig.appVersion:{GameConfig.appVersion}, mSvrVersion:{svrVersion}");
                 ForceUpdate();
                 yield break;
             }
 
             //读取Package的版本信息
-            if (!Launcher.Instance.reCheckVersionUpdate && GameConfig.resVersion == Launcher.Instance.mSvrResVersion)
+            if (!Launcher.Instance.reCheckVersionUpdate && GameConfig.resVersion == Launcher.Instance.svrResVersion)
             {
                 if (isHotfixGameStarted)
                 {
-                    mRestartOver = true;
+                    restartOver = true;
                     yield break;
                 }
             }
@@ -270,14 +270,14 @@ namespace LccModel
             //读取本地版本信息
             if (Launcher.GameConfig.checkResUpdate && !Launcher.Instance.IsAuditServer())
             {
-                Launcher.GameConfig.AddConfig("resVersion", mSvrResVersion);
+                Launcher.GameConfig.AddConfig("resVersion", svrResVersion);
             }
 
             UILoadingPanel.Instance.UpdateLoadingPercent(21, 48);
             Launcher.Instance.reCheckVersionUpdate = false;
 
 
-            ActionClose?.Invoke();
+            actionClose?.Invoke();
             yield return null;
             AssetManager.Instance.UnloadAllAssetsAsync();
             yield return null;
@@ -294,7 +294,7 @@ namespace LccModel
         {
             GameStarted = true;
             ChangeFPS();
-            mCoroutine = null;
+            _coroutine = null;
             UILoadingPanel.Instance.Hide();
         }
 

@@ -5,27 +5,27 @@ namespace LccModel
 {
     public class MonoStaticMethod : AStaticMethod
     {
-        private readonly MethodInfo methodInfo;
+        private readonly MethodInfo _methodInfo;
 
-        private readonly object[] param;
+        private readonly object[] _param;
 
         public MonoStaticMethod(Assembly assembly, string typeName, string methodName)
         {
-            methodInfo = assembly.GetType(typeName).GetMethod(methodName);
-            param = new object[methodInfo.GetParameters().Length];
+            _methodInfo = assembly.GetType(typeName).GetMethod(methodName);
+            _param = new object[_methodInfo.GetParameters().Length];
         }
         public override void Run(params object[] param)
         {
-            if (this.param.Length != param.Length)
+            if (this._param.Length != param.Length)
             {
-                Debug.LogError("µ÷ÓÃÊ§°Ü");
+                Debug.LogError("è°ƒç”¨å¤±è´¥");
                 return;
             }
             for (int i = 0; i < param.Length; i++)
             {
-                this.param[i] = param[i];
+                this._param[i] = param[i];
             }
-            methodInfo.Invoke(null, this.param);
+            _methodInfo.Invoke(null, this._param);
         }
     }
 }

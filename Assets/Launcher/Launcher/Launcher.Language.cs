@@ -10,10 +10,10 @@ namespace LccModel
         public const string ALLLanguageKey = "ALLLanguage";
         public const string CacheLanguageKey = "MutiLanguage";
 
-        private string languageTxt = null;
+        private string _languageTxt = null;
 
-        private bool localizationHasBeenSet = false;
-        private Dictionary<string, string> mLanguageDict = new Dictionary<string, string>();
+        private bool _localizationHasBeenSet = false;
+        private Dictionary<string, string> _languageDict = new Dictionary<string, string>();
 
         private string _curLanguage;
 
@@ -35,12 +35,12 @@ namespace LccModel
             TextAsset txtAsset = txtRes.asset as TextAsset;
             if (txtAsset != null)
             {
-                languageTxt = txtAsset.text;
+                _languageTxt = txtAsset.text;
                 Resources.UnloadAsset(txtAsset);
             }
 
             yield return null;
-            OnLanguageAssetLoad(languageTxt);
+            OnLanguageAssetLoad(_languageTxt);
             Set(curLanguage);
 
             Debug.Log("完成多语言初始化加载");
@@ -191,15 +191,15 @@ namespace LccModel
                 Debug.LogError("[language update] 加载多语言失败 " + txtBundle);
                 yield break;
             }
-            languageTxt = txtAsset.text;
+            _languageTxt = txtAsset.text;
 
-            if (string.IsNullOrEmpty(languageTxt))
+            if (string.IsNullOrEmpty(_languageTxt))
                 yield break;
             yield return null;
 
             curLanguage = languageName;
             //UpdateALLLanguages();
-            OnLanguageAssetLoad(languageTxt);
+            OnLanguageAssetLoad(_languageTxt);
 
             Set(curLanguage);
         }
@@ -215,13 +215,13 @@ namespace LccModel
                 }
                 foreach (var item in ReadDictionary(languageTxt))
                 {
-                    if (mLanguageDict.ContainsKey(item.Key))
+                    if (_languageDict.ContainsKey(item.Key))
                     {
-                        mLanguageDict[item.Key] = item.Value;
+                        _languageDict[item.Key] = item.Value;
                     }
                     else
                     {
-                        mLanguageDict.Add(item.Key, item.Value);
+                        _languageDict.Add(item.Key, item.Value);
                     }
                 }
             }
@@ -231,7 +231,7 @@ namespace LccModel
         }
         void Set(string languageName)
         {
-            localizationHasBeenSet = true;
+            _localizationHasBeenSet = true;
             //ok 了 如果有本地回调可以在重新触发
         }
 
@@ -269,7 +269,7 @@ namespace LccModel
         {
             if (string.IsNullOrEmpty(key))
                 return key;
-            if (!localizationHasBeenSet)
+            if (!_localizationHasBeenSet)
             {
                 if (Application.isPlaying)
                 {
@@ -278,12 +278,12 @@ namespace LccModel
                 return key;
             }
 
-            if (!mLanguageDict.ContainsKey(key))
+            if (!_languageDict.ContainsKey(key))
             {
                 Debug.LogError($"多语言配置里不包含key = {key}。 请策划检查");
                 return key;
             }
-            string value = mLanguageDict[key];
+            string value = _languageDict[key];
 
             if (args.Length > 0)
             {

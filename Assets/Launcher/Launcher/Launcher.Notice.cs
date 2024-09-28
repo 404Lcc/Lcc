@@ -14,15 +14,15 @@ namespace LccModel
         ////一条公告：标题&内容&索引&类型
         ////多条公告用|连接
         ////示例：000&0000&0000&000|000&0000&0000&000|000&0000&0000&000|
-        public string AnnouncementSave;
-        public bool NoticeSucc;
+        public string announcementSave;
+        public bool noticeSucc;
 
-        public string NoticeBoardSave;
-        public bool NoticeBoardSucc;
+        public string noticeBoardSave;
+        public bool noticeBoardSucc;
         public IEnumerator GetNotice()
         {
-            NoticeSucc = false;
-            AnnouncementSave = "";
+            noticeSucc = false;
+            announcementSave = "";
             string url = $"{Launcher.Instance.noticeUrl}/{Launcher.GameConfig.channel}/{Launcher.Instance.curLanguage}/notice.txt";
             Debug.Log("GetNoticeBoard url=" + url);
 
@@ -51,14 +51,14 @@ namespace LccModel
             else
             {
                 string text = web.downloadHandler.text;
-                AnnouncementSave = text;
-                NoticeSucc = true;
+                announcementSave = text;
+                noticeSucc = true;
             }
         }
 
         public bool CheckNoticeBoard()
         {
-            if (!string.IsNullOrEmpty(Launcher.Instance.NoticeBoardSave) && Launcher.Instance.NoticeBoardSucc && !Launcher.Instance.IsAuditServer())
+            if (!string.IsNullOrEmpty(Launcher.Instance.noticeBoardSave) && Launcher.Instance.noticeBoardSucc && !Launcher.Instance.IsAuditServer())
             {
                 //停服了
                 return true;
@@ -68,8 +68,8 @@ namespace LccModel
 
         public IEnumerator GetNoticeBoard()
         {
-            NoticeBoardSucc = false;
-            NoticeBoardSave = "";
+            noticeBoardSucc = false;
+            noticeBoardSave = "";
             string url = $"{Launcher.Instance.noticeUrl}/{Launcher.GameConfig.channel}/{Launcher.Instance.curLanguage}/noticeBoard.txt";
             Debug.Log("GetNoticeBoard url=" + url);
 
@@ -98,8 +98,8 @@ namespace LccModel
             else
             {
                 string text = web.downloadHandler.text;
-                NoticeBoardSave = text;
-                NoticeBoardSucc = true;
+                noticeBoardSave = text;
+                noticeBoardSucc = true;
             }
         }
 

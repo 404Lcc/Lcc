@@ -13,54 +13,54 @@ namespace LccModel
         public bool reCheckVersionUpdate = false;
 
         //远程渠道
-        public int mSvrChannel;
+        public int svrChannel;
         //远程版本
-        public int mSvrVersion;
+        public int svrVersion;
 
         //远程推荐服
-        public string mSvrLoginServer;
+        public string svrLoginServer;
         //远程服务器列表
-        public List<string> mSvrLoginServerList;
+        public List<string> svrLoginServerList;
         //远程资源服
-        public string mSvrResourceServerUrl;
+        public string svrResourceServerUrl;
         //远程资源版本号
-        public int mSvrResVersion;
+        public int svrResVersion;
         //远程更包地址
-        public string mSvrAppForceUpdateUrl;
+        public string svrAppForceUpdateUrl;
 
         //公告地址
         public string noticeUrl;
 
-        private int index = 0;
-        private List<string> centerServerAddressLsit = new List<string>();
+        private int _index = 0;
+        private List<string> _centerServerAddressLsit = new List<string>();
         private string GetCenterServerAddress()
         {
-            centerServerAddressLsit.Clear();
+            _centerServerAddressLsit.Clear();
             var urls = GameConfig.centerServerAddress.Split('#');
             foreach (var item in urls)
             {
-                centerServerAddressLsit.Add(item);
+                _centerServerAddressLsit.Add(item);
             }
-            if (index >= centerServerAddressLsit.Count)
+            if (_index >= _centerServerAddressLsit.Count)
             {
-                index = 0;
+                _index = 0;
             }
-            var url = centerServerAddressLsit[index];
-            index++;
+            var url = _centerServerAddressLsit[_index];
+            _index++;
             return url;
         }
         private void ResetCenterServerAddress()
         {
-            index = 0;
+            _index = 0;
         }
 
         /// <summary>
         /// 是否成功请求中心服地址
         /// </summary>
-        public bool RequestCenterServerSucc;
+        public bool requestCenterServerSucc;
         public IEnumerator RequestCenterServer()
         {
-            RequestCenterServerSucc = false;
+            requestCenterServerSucc = false;
 
             string url = $"{GetCenterServerAddress()}/{(Launcher.GameConfig.isRelease ? "Release" : "Dev")}/{Launcher.Instance.GetPlatform()}/channelList.txt";
             Debug.Log("RequestCenterServer=" + url);
@@ -86,7 +86,7 @@ namespace LccModel
 
             if (!string.IsNullOrEmpty(web.error))
             {
-                Debug.LogError($"RequestCenterServer 请求中心服 失败url= {url} index = {index - 1}");
+                Debug.LogError($"RequestCenterServer 请求中心服 失败url= {url} index = {_index - 1}");
                 StartServerLoad();
             }
             else
@@ -103,7 +103,7 @@ namespace LccModel
 
         private IEnumerator GetRemoteVersionList()
         {
-            RequestCenterServerSucc = false;
+            requestCenterServerSucc = false;
 
             string url = $"{GetCenterServerAddress()}/{(Launcher.GameConfig.isRelease ? "Release" : "Dev")}/{Launcher.Instance.GetPlatform()}/versionList.txt";
             Debug.Log("GetRemoteVersionList=" + url);
@@ -129,7 +129,7 @@ namespace LccModel
 
             if (!string.IsNullOrEmpty(web.error))
             {
-                Debug.LogError($"GetRemoteVersionList 请求VersionList 失败url= {url} index = {index - 1}");
+                Debug.LogError($"GetRemoteVersionList 请求VersionList 失败url= {url} index = {_index - 1}");
                 StartServerLoad();
             }
             else
@@ -144,7 +144,7 @@ namespace LccModel
                 yield return Launcher.Instance.GetNotice();
 
 
-                RequestCenterServerSucc = true;
+                requestCenterServerSucc = true;
             }
 
         }
@@ -166,7 +166,7 @@ namespace LccModel
                                 var channel = int.Parse(channelConfigList[i]["channel"].ToString());
                                 if (GameConfig.channel == channel)
                                 {
-                                    this.mSvrChannel = channel;
+                                    this.svrChannel = channel;
                                     int defaultVersion = 0;
                                     int fetchVersion = 0;
 
@@ -186,13 +186,13 @@ namespace LccModel
                                     if (appVersion == fetchVersion)
                                     {
                                         Debug.Log($"GetRemoteVersionList 判定走提审包 mSvrVersion = 远端版本={fetchVersion}");
-                                        this.mSvrVersion = fetchVersion;
+                                        this.svrVersion = fetchVersion;
                                         Launcher.Instance.GameState = GameState.Fetch;
                                     }
                                     else
                                     {
                                         Debug.Log($"GetRemoteVersionList 判走普通包 mSvrVersion = 远端版本={defaultVersion}");
-                                        this.mSvrVersion = defaultVersion;
+                                        this.svrVersion = defaultVersion;
                                         Launcher.Instance.GameState = GameState.Official;
                                     }
 
@@ -233,36 +233,36 @@ namespace LccModel
                     if (versionConfigList[i].ContainsKey("clientVersion"))
                     {
                         var clientVersion = int.Parse(versionConfigList[i]["clientVersion"].ToString());
-                        if (mSvrVersion == clientVersion)
+                        if (svrVersion == clientVersion)
                         {
                             findClientVersion = true;
 
                             if (versionConfigList[i].ContainsKey("loginServer"))
                             {
-                                mSvrLoginServer = versionConfigList[i]["loginServer"].ToString();
+                                svrLoginServer = versionConfigList[i]["loginServer"].ToString();
                             }
                             if (versionConfigList[i].ContainsKey("loginServerList"))
                             {
-                                mSvrLoginServerList = JsonMapper.ToObject<List<string>>(versionConfigList[i]["loginServerList"].ToJson());
+                                svrLoginServerList = JsonMapper.ToObject<List<string>>(versionConfigList[i]["loginServerList"].ToJson());
                             }
                             if (versionConfigList[i].ContainsKey("resourceServerUrl"))
                             {
-                                mSvrResourceServerUrl = versionConfigList[i]["resourceServerUrl"].ToString();
+                                svrResourceServerUrl = versionConfigList[i]["resourceServerUrl"].ToString();
                             }
                             if (versionConfigList[i].ContainsKey("resourceVersion"))
                             {
-                                mSvrResVersion = int.Parse(versionConfigList[i]["resourceVersion"].ToString());
+                                svrResVersion = int.Parse(versionConfigList[i]["resourceVersion"].ToString());
                             }
                             if (versionConfigList[i].ContainsKey("appForceUpdateUrl"))
                             {
-                                mSvrAppForceUpdateUrl = versionConfigList[i]["appForceUpdateUrl"].ToString();
+                                svrAppForceUpdateUrl = versionConfigList[i]["appForceUpdateUrl"].ToString();
                             }
                             if (versionConfigList[i].ContainsKey("noticeUrl"))
                             {
                                 noticeUrl = versionConfigList[i]["noticeUrl"].ToString();
                             }
 
-                            Launcher.Instance.SetUpdateInfo(mSvrVersion, mSvrAppForceUpdateUrl, "");
+                            Launcher.Instance.SetUpdateInfo(svrVersion, svrAppForceUpdateUrl, "");
 
                             break;
                         }
@@ -271,7 +271,7 @@ namespace LccModel
 
                 if (!findClientVersion)
                 {
-                    Debug.LogError($"ReadVersionListConfig !findClientVersion mSvrVersion={mSvrVersion}");
+                    Debug.LogError($"ReadVersionListConfig !findClientVersion mSvrVersion={svrVersion}");
                 }
             }
             catch (Exception ex)
@@ -289,7 +289,7 @@ namespace LccModel
             clientVersion = "version " + showApp + "." + GameConfig.appVersion + "." + GameConfig.channel + "." + mSvrResVersion;
 #else
             if (IsAuditServer() || !GameConfig.checkResUpdate)
-                clientVersion = "version " + showApp + "." + GameConfig.appVersion + "." + GameConfig.channel + "." + mSvrResVersion;
+                clientVersion = "version " + showApp + "." + GameConfig.appVersion + "." + GameConfig.channel + "." + svrResVersion;
             else
                 clientVersion = "version " + showApp + "." + GameConfig.appVersion + "." + GameConfig.channel + "." + GameConfig.resVersion;
 #endif

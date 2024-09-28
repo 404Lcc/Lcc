@@ -5,28 +5,28 @@
 //{
 //    public class ILStaticMethod : AStaticMethod
 //    {
-//        private readonly AppDomain appDomain;
-//        private readonly IMethod method;
-//        private readonly object[] param;
+//        private readonly AppDomain _appDomain;
+//        private readonly IMethod _method;
+//        private readonly object[] _param;
 
 //        public ILStaticMethod(AppDomain appDomain, string typeName, string methodName, int paramsCount)
 //        {
-//            this.appDomain = appDomain;
-//            method = appDomain.GetType(typeName).GetMethod(methodName, paramsCount);
-//            param = new object[method.ParameterCount];
+//            this._appDomain = appDomain;
+//            _method = appDomain.GetType(typeName).GetMethod(methodName, paramsCount);
+//            _param = new object[_method.ParameterCount];
 //        }
 //        public override void Run(params object[] param)
 //        {
-//            if (this.param.Length != param.Length)
+//            if (this._param.Length != param.Length)
 //            {
-//                LogUtil.Error("µ÷ÓÃÊ§°Ü");
+//                LogUtil.Error("è°ƒç”¨å¤±è´¥");
 //                return;
 //            }
 //            for (int i = 0; i < param.Length; i++)
 //            {
-//                this.param[i] = param[i];
+//                this._param[i] = param[i];
 //            }
-//            appDomain.Invoke(method, null, this.param);
+//            _appDomain.Invoke(_method, null, this._param);
 //        }
 //    }
 //}

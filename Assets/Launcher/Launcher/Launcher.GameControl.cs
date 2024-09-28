@@ -25,27 +25,27 @@ namespace LccModel
         {
             if (isPause)
             {
-                Time.timeScale = mGameTimeScale * mSlowTimeScale;
+                Time.timeScale = _gameTimeScale * _slowTimeScale;
                 isPause = false;
             }
         }
 
 
 
-        public float standardDeltaTime = 0.033f;
+        private float _standardDeltaTime = 0.033f;
         public void ChangeFPS()
         {
             Application.targetFrameRate = FPS_DEFAULT;
-            standardDeltaTime = 1f / Application.targetFrameRate;
+            _standardDeltaTime = 1f / Application.targetFrameRate;
         }
 
         public void ChangeFPS(int value)
         {
             Application.targetFrameRate = value;
-            standardDeltaTime = 1f / Application.targetFrameRate;
+            _standardDeltaTime = 1f / Application.targetFrameRate;
         }
 
-        private float mGameTimeScale = 1f;
+        private float _gameTimeScale = 1f;
         public void SetGameSpeed(float timeScale)
         {
             if (timeScale < 1)
@@ -53,11 +53,11 @@ namespace LccModel
                 Debug.LogError("SetGameSpeed = " + timeScale);
                 return;
             }
-            mGameTimeScale = timeScale;
-            Time.timeScale = mGameTimeScale * mSlowTimeScale;
+            _gameTimeScale = timeScale;
+            Time.timeScale = _gameTimeScale * _slowTimeScale;
         }
 
-        private float mSlowTimeScale = 1f;
+        private float _slowTimeScale = 1f;
         public void SetGameSlow(bool slow, float timeScale = 1f)
         {
             if (slow)
@@ -67,22 +67,22 @@ namespace LccModel
                     Debug.LogError("SetGameSpeed = " + timeScale);
                     return;
                 }
-                mSlowTimeScale = timeScale;
+                _slowTimeScale = timeScale;
             }
             else
             {
-                mSlowTimeScale = 1f;
+                _slowTimeScale = 1f;
             }
-            Time.timeScale = mGameTimeScale * mSlowTimeScale;
+            Time.timeScale = _gameTimeScale * _slowTimeScale;
         }
 
         public float GetGameTimeScale()
         {
-            return mGameTimeScale;
+            return _gameTimeScale;
         }
         public float GetSlowTimeScale()
         {
-            return mSlowTimeScale;
+            return _slowTimeScale;
         }
 
     }

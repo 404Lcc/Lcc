@@ -9,10 +9,10 @@ namespace LccHotfix
         {
             try
             {
-                Launcher.Instance.ActionFixedUpdate += FixedUpdate;
-                Launcher.Instance.ActionUpdate += Update;
-                Launcher.Instance.ActionLateUpdate += LateUpdate;
-                Launcher.Instance.ActionClose += Close;
+                Launcher.Instance.actionFixedUpdate += FixedUpdate;
+                Launcher.Instance.actionUpdate += Update;
+                Launcher.Instance.actionLateUpdate += LateUpdate;
+                Launcher.Instance.actionClose += Close;
 
 
                 CodeTypesManager.Instance.LoadTypes(new Assembly[] { Launcher.Instance.hotfixAssembly });
@@ -52,10 +52,10 @@ namespace LccHotfix
         }
         private static void Close()
         {
-            Launcher.Instance.ActionFixedUpdate -= FixedUpdate;
-            Launcher.Instance.ActionUpdate -= Update;
-            Launcher.Instance.ActionLateUpdate -= LateUpdate;
-            Launcher.Instance.ActionClose -= Close;
+            Launcher.Instance.actionFixedUpdate -= FixedUpdate;
+            Launcher.Instance.actionUpdate -= Update;
+            Launcher.Instance.actionLateUpdate -= LateUpdate;
+            Launcher.Instance.actionClose -= Close;
             //Game.Close();
         }
     }

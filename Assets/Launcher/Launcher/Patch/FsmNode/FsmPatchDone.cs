@@ -151,7 +151,7 @@ namespace LccModel
 
             Object.Destroy(loader);
 
-            var hotfixTypeDict = Launcher.Instance.HotfixTypeDict;
+            var hotfixTypeDict = Launcher.Instance.hotfixTypeDict;
             foreach (Type type in Launcher.Instance.hotfixAssembly.GetTypes())
             {
                 if (type.FullName != null)

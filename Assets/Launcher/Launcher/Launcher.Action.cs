@@ -8,35 +8,35 @@ namespace LccModel
 {
     public partial class Launcher
     {
-        public Action ActionFixedUpdate;
-        public Action ActionUpdate;
-        public Action ActionLateUpdate;
-        public Action ActionClose;
-        public Action ActionOnDrawGizmos;
+        public Action actionFixedUpdate;
+        public Action actionUpdate;
+        public Action actionLateUpdate;
+        public Action actionClose;
+        public Action actionOnDrawGizmos;
 
         public void FixedUpdate()
         {
-            ActionFixedUpdate?.Invoke();
+            actionFixedUpdate?.Invoke();
         }
 
         public void Update()
         {
-            ActionUpdate?.Invoke();
+            actionUpdate?.Invoke();
         }
 
         public void LateUpdate()
         {
-            ActionLateUpdate?.Invoke();
+            actionLateUpdate?.Invoke();
         }
 
         public void OnApplicationQuit()
         {
-            ActionClose?.Invoke();
+            actionClose?.Invoke();
         }
 
         public void OnDrawGizmos()
         {
-            ActionOnDrawGizmos?.Invoke();
+            actionOnDrawGizmos?.Invoke();
         }
     }
 

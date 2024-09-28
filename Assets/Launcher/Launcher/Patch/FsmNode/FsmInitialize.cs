@@ -141,11 +141,11 @@ namespace LccModel
 
             if (GameConfig.checkResUpdate)
             {
-                appVersion = Launcher.Instance.mSvrVersion;
-                resVersion = Launcher.Instance.mSvrResVersion;
+                appVersion = Launcher.Instance.svrVersion;
+                resVersion = Launcher.Instance.svrResVersion;
             }
 
-            var svrResourceServerUrl = Launcher.Instance.mSvrResourceServerUrl;
+            var svrResourceServerUrl = Launcher.Instance.svrResourceServerUrl;
 #if UNITY_EDITOR
             if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.Android)
                 return $"{svrResourceServerUrl}/{release}/Android/{GameConfig.channel}/{appVersion}/{resVersion}";
