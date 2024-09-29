@@ -6,7 +6,7 @@ namespace LccHotfix
 {
     internal class OrcaManager : Module
     {
-        public static OrcaManager Instance { get; } = Entry.GetModule<OrcaManager>();
+        public static OrcaManager Instance => Entry.GetModule<OrcaManager>();
 
         public Dictionary<int, ObstaclePolygon> obstacleDict = new Dictionary<int, ObstaclePolygon>();
         public OrcaManager()

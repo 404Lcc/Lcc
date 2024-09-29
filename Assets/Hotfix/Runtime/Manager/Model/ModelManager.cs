@@ -5,7 +5,7 @@ namespace LccHotfix
 {
     internal class ModelManager : Module
     {
-        public static ModelManager Instance { get; } = Entry.GetModule<ModelManager>();
+        public static ModelManager Instance => Entry.GetModule<ModelManager>();
         public Dictionary<Type, ModelTemplate> modelDict = new Dictionary<Type, ModelTemplate>();
 
         public ModelManager()

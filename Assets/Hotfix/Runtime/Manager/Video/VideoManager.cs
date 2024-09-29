@@ -9,7 +9,7 @@ namespace LccHotfix
 {
     internal class VideoManager : Module
     {
-        public static VideoManager Instance { get; } = Entry.GetModule<VideoManager>();
+        public static VideoManager Instance => Entry.GetModule<VideoManager>();
         public Dictionary<string, VideoClip> videoDict = new Dictionary<string, VideoClip>();
 
         public GameObject loader;

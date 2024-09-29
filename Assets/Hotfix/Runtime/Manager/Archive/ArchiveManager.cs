@@ -8,7 +8,7 @@ namespace LccHotfix
 {
     internal class ArchiveManager : Module
     {
-        public static ArchiveManager Instance { get; } = Entry.GetModule<ArchiveManager>();
+        public static ArchiveManager Instance => Entry.GetModule<ArchiveManager>();
 
         private const string Res = "Res";
         private string _key;

@@ -8,7 +8,7 @@ namespace LccHotfix
 {
     internal class SceneStateManager : Module
     {
-        public static SceneStateManager Instance { get; } = Entry.GetModule<SceneStateManager>();
+        public static SceneStateManager Instance => Entry.GetModule<SceneStateManager>();
 
         private bool _forceStop;
         private SceneState preSceneHandler;

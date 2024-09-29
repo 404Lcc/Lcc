@@ -7,7 +7,7 @@ namespace LccHotfix
 {
     internal class AudioManager : Module
     {
-        public static AudioManager Instance { get; } = Entry.GetModule<AudioManager>();
+        public static AudioManager Instance => Entry.GetModule<AudioManager>();
 
         public Dictionary<string, AudioClip> audioDict = new Dictionary<string, AudioClip>();
         public GameObject loader;

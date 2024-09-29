@@ -7,7 +7,7 @@ namespace LccHotfix
 {
     internal class CommandManager : Module
     {
-        public static CommandManager Instance { get; } = Entry.GetModule<CommandManager>();
+        public static CommandManager Instance => Entry.GetModule<CommandManager>();
 
         public List<CommandData> commandDataList = new List<CommandData>();
         public int index;

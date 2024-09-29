@@ -14,7 +14,7 @@ namespace LccHotfix
 
     internal class FiberManager : Module
     {
-        public static FiberManager Instance { get; } = Entry.GetModule<FiberManager>();
+        public static FiberManager Instance => Entry.GetModule<FiberManager>();
 
         private readonly IScheduler[] schedulers = new IScheduler[3];
 

@@ -13,7 +13,7 @@ namespace LccHotfix
 {
     internal class DownloadManager : Module
     {
-        public static DownloadManager Instance { get; } = Entry.GetModule<DownloadManager>();
+        public static DownloadManager Instance => Entry.GetModule<DownloadManager>();
 
 
         public object lockObject = new object();

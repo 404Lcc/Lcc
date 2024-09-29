@@ -7,7 +7,7 @@ namespace LccHotfix
 {
     internal class LanguageManager : Module
     {
-        public static LanguageManager Instance { get; } = Entry.GetModule<LanguageManager>();
+        public static LanguageManager Instance => Entry.GetModule<LanguageManager>();
         public Dictionary<string, string> languageDict = new Dictionary<string, string>();
 
         public GameObject loader;

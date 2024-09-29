@@ -10,7 +10,7 @@ namespace LccHotfix
 {
     internal class ConfigManager : Module
     {
-        public static ConfigManager Instance { get; } = Entry.GetModule<ConfigManager>();
+        public static ConfigManager Instance => Entry.GetModule<ConfigManager>();
 
         public Tables Tables { get; set; }
 

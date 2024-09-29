@@ -5,7 +5,7 @@ namespace LccHotfix
 {
     internal class GlobalManager : Module
     {
-        public static GlobalManager Instance { get; } = Entry.GetModule<GlobalManager>();
+        public static GlobalManager Instance => Entry.GetModule<GlobalManager>();
         public Transform Global { get; set; }
 
         public Camera MainCamera { get; set; }

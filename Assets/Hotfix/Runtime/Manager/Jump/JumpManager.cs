@@ -40,7 +40,7 @@ namespace LccHotfix
 
     internal class JumpManager : Module
     {
-        public static JumpManager Instance { get; } = Entry.GetModule<JumpManager>();
+        public static JumpManager Instance => Entry.GetModule<JumpManager>();
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {

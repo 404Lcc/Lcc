@@ -5,7 +5,7 @@ namespace LccHotfix
 {
     internal class AStarMapManager : Module
     {
-        public static AStarMapManager Instance { get; } = Entry.GetModule<AStarMapManager>();
+        public static AStarMapManager Instance => Entry.GetModule<AStarMapManager>();
 
         public float radius;
         public LayerMask layer;
