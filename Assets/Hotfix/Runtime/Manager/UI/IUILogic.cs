@@ -12,65 +12,65 @@ namespace LccHotfix
 		/// 出生
 		/// WindowManager调用
 		/// </summary>
-		void _OnStart();
+		void OnStart();
 		/// <summary>
 		/// 更新
 		/// WindowManager调用
 		/// </summary>
-		void _OnUpdate();
+		void OnUpdate();
 		/// <summary>
 		/// 打开前的准备
 		/// 可以在这里请求数据
 		/// </summary>
-		void _OnSwitch(Action<bool> callback);
+		void OnSwitch(Action<bool> callback);
 		/// <summary>
 		/// 打开
 		/// </summary>
 		/// <param name="paramsList"></param>
-		void _OnOpen(object[] paramsList);
+		void OnOpen(object[] paramsList);
 		/// <summary>
 		/// 再次已经打开的界面，传参，刷新
 		/// </summary>
 		/// <param name="paramsList"></param>
-		void _OnReset(object[] paramsList);
+		void OnReset(object[] paramsList);
 		/// <summary>
 		/// 返回
 		/// </summary>
-		void _OnResume();
+		void OnResume();
 		/// <summary>
 		/// 暂停
 		/// </summary>
-		void _OnPause();
+		void OnPause();
 		/// <summary>
 		/// 关闭
 		/// </summary>
-		object _OnClose();
+		object OnClose();
 		/// <summary>
 		/// 卸载
 		/// </summary>
-		void _OnRemove();
+		void OnRemove();
 		/// <summary>
 		/// Escape退出结果
 		/// </summary>
 		/// <returns></returns>
-		bool _OnEscape(ref EscapeType escapeType);
+		bool OnEscape(ref EscapeType escapeType);
 		/// <summary>
 		/// 子节点打开
 		/// </summary>
-		void _OnChildOpened(WNode child);
+		void OnChildOpened(WNode child);
 		
 		/// <summary>
 		/// 子节点关闭
 		/// </summary>
 		/// <param name="child"></param>
 		/// <returns>通过子节点状态，返回是否关闭自己</returns>
-		bool _OnChildClosed(WNode child);
+		bool OnChildClosed(WNode child);
 		/// <summary>
 		/// 子节点请求退出
 		/// </summary>
 		/// <param name="child"></param>
 		/// <returns></returns>
-		bool _OnChildRequireEscape(WNode child);
+		bool OnChildRequireEscape(WNode child);
 
 
 	}

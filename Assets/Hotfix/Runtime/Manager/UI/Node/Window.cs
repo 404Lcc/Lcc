@@ -31,15 +31,15 @@ namespace LccHotfix
 		
         protected override void DoStart()
         {
-			w_logic._OnStart();
+			w_logic.OnStart();
 		}
 		protected override void DoUpdate()
 		{
-			w_logic._OnUpdate();
+			w_logic.OnUpdate();
 		}
 		protected override void DoSwitch(Action<bool> callback)
 		{
-			w_logic._OnSwitch(callback);
+			w_logic.OnSwitch(callback);
 		}
 		protected override void DoOpen(object[] param)
         {
@@ -56,11 +56,11 @@ namespace LccHotfix
 			}
 			
 			InternalOpen(true);
-			w_logic._OnOpen(param);
+			w_logic.OnOpen(param);
 		}
 		protected override void DoReset(object[] param)
 		{
-			w_logic._OnReset(param);
+			w_logic.OnReset(param);
 		}
 
 		protected override void DoResume()
@@ -74,18 +74,18 @@ namespace LccHotfix
 			{
                 Entry.GetModule<WindowManager>().commonRoot.Blackboard.Set(BlackboardType.UILouderSetDepth, new List<object>() { windowMode.depth - 100, windowMode.louderY });
 			}
-			w_logic._OnResume();
+			w_logic.OnResume();
 		}
         protected override void DoPause()
         {
 			InternalResume(false);
-			w_logic._OnPause();
+			w_logic.OnPause();
 		}
 
 		protected override object DoClose()
 		{
 			InternalOpen(false);
-			var backValue = w_logic._OnClose();
+			var backValue = w_logic.OnClose();
             Entry.GetModule<WindowManager>().OnWindowClose(nodeName, backValue);
             Entry.GetModule<WindowManager>().AddToReleaseQueue(this);
 			return backValue;
@@ -144,7 +144,7 @@ namespace LccHotfix
 			escape = this.escapeType;
 			if (escape == EscapeType.SKIP_OVER)
 				return false;
-			if (!w_logic._OnEscape(ref escape))
+			if (!w_logic.OnEscape(ref escape))
 				return false;
 			if (escape == EscapeType.AUTO_CLOSE && ParentNode != null)
 			{
@@ -161,14 +161,14 @@ namespace LccHotfix
 		{
 			if (w_logic != null)
 			{
-				return w_logic._OnChildRequireEscape(child);
+				return w_logic.OnChildRequireEscape(child);
 			}
 			return true; 
 		}
 
 		protected override void DoRemove()
 		{
-			w_logic._OnRemove();
+			w_logic.OnRemove();
 			if (gameObject != null)
 				Object.Destroy(gameObject);
 		}

@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-	public static class UILogicFact
-	{
-		private static Dictionary<string, Type> uiLogics = new Dictionary<string, Type>();
+    internal partial class WindowManager : Module
+    {
+		private Dictionary<string, Type> uiLogics = new Dictionary<string, Type>();
 		
-		public static void InitializeForAssembly(Assembly assembly)
+		public void InitializeForAssembly(Assembly assembly)
 		{
 			var types = assembly.GetTypes();
 			foreach (Type t in types)
@@ -21,7 +21,7 @@ namespace LccHotfix
 				}
 			}
 		}
-		public static void CreateUILogic(Window window)
+		public void CreateUILogic(Window window)
 		{
 			IUILogic iLogic = CreateLogic(window.logicName, window);
 			if (iLogic != null)
@@ -34,7 +34,7 @@ namespace LccHotfix
 				Log.Error($"window {window.nodeName} can't find logic {window.logicName}");
 			}
 		}
-		public static IUILogic CreateLogic(string logicName, Window window)
+		public IUILogic CreateLogic(string logicName, Window window)
 		{
 			Debug.Assert(!string.IsNullOrEmpty(logicName));
 

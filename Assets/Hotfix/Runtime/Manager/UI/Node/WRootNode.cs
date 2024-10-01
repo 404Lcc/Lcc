@@ -23,25 +23,25 @@ namespace LccHotfix
             this.escapeType = EscapeType.AUTO_CLOSE;
             this.releaseType = ReleaseType.AUTO;
             this.w_blackboard = new WBlackboard();
-            this.w_logic = UILogicFact.CreateLogic(rootName, null);
+            this.w_logic = Entry.GetModule<WindowManager>().CreateLogic(rootName, null);
             if (w_logic != null)
                 w_logic.wNode = this;
         }
 
         protected override void DoStart()
         {
-            w_logic?._OnStart();
+            w_logic?.OnStart();
         }
         protected override void DoUpdate()
         {
-            w_logic?._OnUpdate();
+            w_logic?.OnUpdate();
             w_blackboard?.Update();
         }
         protected override void DoSwitch(Action<bool> callback)
         {
             if (w_logic != null)
             {
-                w_logic._OnSwitch(callback);
+                w_logic.OnSwitch(callback);
             }
             else
             {
@@ -51,20 +51,20 @@ namespace LccHotfix
         protected override void DoOpen(object[] param)
         {
 			gameObject?.SetActive(true);
-			w_logic?._OnOpen(param);
+			w_logic?.OnOpen(param);
         }
 		protected override void DoReset(object[] param)
 		{
-			w_logic?._OnReset(param);
+			w_logic?.OnReset(param);
 		}
 
 		protected override void DoResume()
         {
-            w_logic?._OnResume();
+            w_logic?.OnResume();
         }
         protected override void DoPause()
         {
-            w_logic?._OnPause();
+            w_logic?.OnPause();
         }
 
         protected override object DoClose()
@@ -72,7 +72,7 @@ namespace LccHotfix
 			gameObject?.SetActive(false);
             object backValue = null;
             if (w_logic != null)
-                backValue = w_logic._OnClose();
+                backValue = w_logic.OnClose();
             Entry.GetModule<WindowManager>().OnWindowClose(nodeName, backValue);
             Entry.GetModule<WindowManager>().AddToReleaseQueue(this);
             return backValue;
@@ -81,19 +81,19 @@ namespace LccHotfix
         protected override bool DoEscape(ref EscapeType escape)
         {
             if (w_logic != null)
-                return w_logic._OnEscape(ref escape);
+                return w_logic.OnEscape(ref escape);
             return base.DoEscape(ref escape);
         }
 
         protected override void DoRemove()
         {
-            w_logic?._OnRemove();
+            w_logic?.OnRemove();
 			if (gameObject != null)
 				UnityEngine.Object.Destroy(gameObject);
 		}
 	    protected override void DoChildOpened(WNode child)
         {
-            w_logic?._OnChildOpened(child);
+            w_logic?.OnChildOpened(child);
         }
         protected override void DoChildClosed(WNode child)
         {
@@ -122,7 +122,7 @@ namespace LccHotfix
 
 			if (w_logic != null)
 			{
-                if (w_logic._OnChildClosed(child))
+                if (w_logic.OnChildClosed(child))
                     return;
 			}
 			else
@@ -164,7 +164,7 @@ namespace LccHotfix
         {
             if (w_logic != null)
             {
-                return w_logic._OnChildRequireEscape(child);
+                return w_logic.OnChildRequireEscape(child);
             }
             
             return true; 

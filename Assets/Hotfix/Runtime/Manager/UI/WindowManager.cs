@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-	internal class WindowManager : Module
+	internal partial class WindowManager : Module
 	{
 		/// <summary>
 		/// 当前活动窗口的栈
@@ -368,7 +368,7 @@ namespace LccHotfix
 				window = new Window(windowName, mode);
 				window.CreateWindowView();
 				TDUI.SortDepthFunc?.Invoke(window.gameObject, mode.depth);
-				UILogicFact.CreateUILogic(window);
+				CreateUILogic(window);
 				window.Start();
 			}
 			return window;
