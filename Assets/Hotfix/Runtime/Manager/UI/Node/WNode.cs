@@ -14,9 +14,9 @@ namespace LccHotfix
 	    /// </summary>
 	    public class TurnNode
 	    {
-		    public string NodeName;
-		    public NodeType NodeType;
-		    public object[] NodeParam;
+		    public string nodeName;
+		    public NodeType nodeType;
+		    public object[] nodeParam;
 	    }
 		
 		/// <summary>

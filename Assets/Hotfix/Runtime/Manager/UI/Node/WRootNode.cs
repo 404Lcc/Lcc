@@ -104,15 +104,15 @@ namespace LccHotfix
 				if (turn != null)
 				{
 
-					if (!TryGetNodeForward(turn.NodeName, out WNode node))
+					if (!TryGetNodeForward(turn.nodeName, out WNode node))
 					{
-						switch (turn.NodeType)
+						switch (turn.nodeType)
 						{
 							case NodeType.ROOT:
-                                Entry.GetModule<WindowManager>().OpenRoot(turn.NodeName, turn.NodeParam);
+                                Entry.GetModule<WindowManager>().OpenRoot(turn.nodeName, turn.nodeParam);
 								break;
 							case NodeType.WINDOW:
-                                Entry.GetModule<WindowManager>().OpenWindow(turn.NodeName, turn.NodeParam);
+                                Entry.GetModule<WindowManager>().OpenWindow(turn.nodeName, turn.nodeParam);
 								break;
 						}
 					}

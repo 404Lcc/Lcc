@@ -48,11 +48,11 @@ namespace LccHotfix
 			{
 				returnNode = new WNode.TurnNode()
 				{
-					NodeName = windowMode.returnNodeName,
-					NodeType = (NodeType)windowMode.returnNodeType,
+					nodeName = windowMode.returnNodeName,
+					nodeType = (NodeType)windowMode.returnNodeType,
 				};
 				if (windowMode.returnNodeParam >= 0)
-					returnNode.NodeParam = new object[] { windowMode.returnNodeParam };
+					returnNode.nodeParam = new object[] { windowMode.returnNodeParam };
 			}
 			
 			InternalOpen(true);
@@ -99,15 +99,15 @@ namespace LccHotfix
 				if (turn != null)
 				{
 
-					if (!TryGetNodeForward(turn.NodeName, out WNode node))
+					if (!TryGetNodeForward(turn.nodeName, out WNode node))
 					{
-						switch (turn.NodeType)
+						switch (turn.nodeType)
 						{
 							case NodeType.ROOT:
-                                Entry.GetModule<WindowManager>().OpenRoot(turn.NodeName, turn.NodeParam);
+                                Entry.GetModule<WindowManager>().OpenRoot(turn.nodeName, turn.nodeParam);
 								break;
 							case NodeType.WINDOW:
-                                Entry.GetModule<WindowManager>().OpenWindow(turn.NodeName, turn.NodeParam);
+                                Entry.GetModule<WindowManager>().OpenWindow(turn.nodeName, turn.nodeParam);
 								break;
 						}
 					}
