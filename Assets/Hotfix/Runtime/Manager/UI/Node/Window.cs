@@ -23,7 +23,7 @@ namespace LccHotfix
             _nodeName = windowName;
             _mode = mode;
             RejectFlag = mode.rejectFlag;
-            nodeFlag = mode.windowFlag;
+            NodeFlag = mode.windowFlag;
             escapeType = (EscapeType) mode.escapeType;
 			releaseType = (ReleaseType)mode.releaseType;
             _logicName = mode.logicName;
