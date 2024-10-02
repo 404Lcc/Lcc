@@ -225,16 +225,20 @@ namespace LccHotfix
 			bool switchScreen = false;
 			var root = window.rootNode;
 
-			if (root != CommonRoot)
+            //不是通用节点
+            if (root != CommonRoot)
 			{
-				if (root.stackIndex < 0)
+                //如果是新创建的一个root
+                if (root.stackIndex < 0)
 				{
 					switchScreen = true;
-					if (_rootStack.Count > 0)
+                    //如果前面有老的root，先暂停
+                    if (_rootStack.Count > 0)
 						_rootStack.Peek().Pause();
 					root.stackIndex = _rootStack.Count;
 					_rootStack.Push(root);
-					if (window == root)
+                    //打开的window就是root就把参数传进去，当前window不是root就只需要把root打开
+                    if (window == root)
 					{
 						root.Open(param);
 					}
@@ -244,10 +248,13 @@ namespace LccHotfix
 					}
 					root.Resume();
 				}
-				else
-				{
-					bool isTop = _rootStack.Count == window.rootNode.stackIndex + 1;
-					if (!isTop)
+                //如果root不是新创建的，是之前的
+                else
+                {
+                    //判断当前window的root在不在栈顶
+                    bool isTop = _rootStack.Count == window.rootNode.stackIndex + 1;
+                    //如果不在按照顺序把后面的root都关掉
+                    if (!isTop)
 					{
 						switchScreen = true;
 						while (_rootStack.Peek() != root)
@@ -256,7 +263,8 @@ namespace LccHotfix
 							top.Close();
 						}
 					}
-					if (window == root)
+                    //如果当前的window就是root
+                    if (window == root)
 					{
 						root.Reset(param);
 					}
@@ -264,13 +272,15 @@ namespace LccHotfix
 				}
 			}
 
-
-			if (window is Window)
+            //如果window是窗口,不是root节点
+            if (window is Window)
 			{
-				if (root.Contains(window))
+                //如果root里存在这个窗口
+                if (root.Contains(window))
 				{
-					// 保持队列的顺序不变,不能循环打开
-					if (window.parentNode == root && (window.IsFullScreen || window.IsMainNode))
+                    //如果窗口的父级是root节点，并且窗口是关键节点或者是全屏的，则关闭root节点下除了window以外的所有节点
+                    // 保持队列的顺序不变,不能循环打开
+                    if (window.parentNode == root && (window.IsFullScreen || window.IsMainNode))
 					{
 						for (int i = root.ChildNode.Count - 1; i >= 0; i--)
 						{
@@ -279,19 +289,23 @@ namespace LccHotfix
 							root.ChildNode[i].Close();
 						}
 					}
-					window.parentNode = parentNode;
+                    //设置父级，重置窗口
+                    window.parentNode = parentNode;
 					window.Reset(param);
 					window.Resume();
 				}
-				else
-				{
-					int mask = ((Window)window).WindowMode.showScreenMask;
+                //如果不存在这个窗口
+                else
+                {
+                    //设置遮罩
+                    int mask = ((Window)window).WindowMode.showScreenMask;
 					if (mask == 2)
 						switchScreen = true;
 					else if (mask == 1 && window.newCreate)
 						switchScreen = true;
 
-					window.parentNode = parentNode;
+                    //设置父级，打开窗口
+                    window.parentNode = parentNode;
 					window.Open(param);
 					window.Resume();
 				}
@@ -447,15 +461,17 @@ namespace LccHotfix
 		{
 			if (_rootStack.Count == 0) return;
 
-			if (root == _rootStack.Peek())
+            //如果当前root是栈顶，则移出去
+            if (root == _rootStack.Peek())
 			{
 				_rootStack.Pop();
 
 				if (_rootStack.Count > 0)
 					_rootStack.Peek().Resume();
 			}
-			else
-			{
+            //如果不是栈顶
+            else
+            {
 				var index = 0;
 				foreach (var node in _rootStack)
 				{
@@ -463,13 +479,16 @@ namespace LccHotfix
 						break;
 					index++;
 				}
-				if (index == _rootStack.Count)
+
+                //如果相等说明这个root不在栈里管理，不需要重新计算栈，直接return
+                if (index == _rootStack.Count)
 					return;
 				Stack<WRootNode> tempStack = new Stack<WRootNode>();
 
 				while (index >= 0)
 				{
-					var top = _rootStack.Pop();
+                    //这里会提前pop出来，index==0之后不会把这个塞进去（index==0这个是要移除的）
+                    var top = _rootStack.Pop();
 					if (index-- == 0)
 					{
 
@@ -478,7 +497,8 @@ namespace LccHotfix
 						tempStack.Push(top);
 				}
 
-				while (tempStack.Count > 0)
+                //按照原来栈顺序重新塞回来，并且重新计算stackIndex
+                while (tempStack.Count > 0)
 				{
 					var temp = tempStack.Pop();
 					temp.stackIndex = _rootStack.Count;
