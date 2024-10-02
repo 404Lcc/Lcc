@@ -78,14 +78,6 @@ namespace LccHotfix
 		//{
 		//	return Entry.GetModule<WindowManager>().OpenRoot(rootName, param);
 		//}
-		//public static Window OpenChild(this IUILogic logic, string windowName, object[] param = null)
-		//{
-		//	return Entry.GetModule<WindowManager>().OpenWindow(logic.wNode, windowName, param);
-		//}
-		//public static Window OpenChild(this WNode openBy, string windowName, object[] param = null)
-		//{
-		//	return Entry.GetModule<WindowManager>().OpenWindow(openBy, windowName, param);
-		//}
 
 		public object Close(string windowName)
 		{
