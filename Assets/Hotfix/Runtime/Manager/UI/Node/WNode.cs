@@ -1,31 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace LccHotfix
 {
-    public abstract class WNode
-    {
-	    /// <summary>
-	    /// 用于保存关闭时的处理
-	    /// </summary>
-	    public class TurnNode
-	    {
-		    public string nodeName;
-		    public NodeType nodeType;
-		    public object[] nodeParam;
-	    }
-		
+	public abstract class WNode
+	{
+		/// <summary>
+		/// 用于保存关闭时的处理
+		/// </summary>
+		public class TurnNode
+		{
+			public string nodeName;
+			public NodeType nodeType;
+			public object[] nodeParam;
+		}
+
 		/// <summary>
 		/// 窗口的状态
 		/// </summary>
 		protected NodePhase _nodePhase;
 		public bool Active => _nodePhase == NodePhase.ACTIVE;
 
-        protected string _nodeName;
+		protected string _nodeName;
 		public string NodeName => _nodeName;
 
 		public WRootNode rootNode;
@@ -38,26 +35,26 @@ namespace LccHotfix
 		protected List<WNode> _childNode;
 		public List<WNode> ChildNode => _childNode;
 
-        /// <summary>
-        /// 关闭后会返回的界面
-        /// </summary>
-        public TurnNode returnNode;
+		/// <summary>
+		/// 关闭后会返回的界面
+		/// </summary>
+		public TurnNode returnNode;
 
 		public bool newCreate = true;
-		
+
 		/// <summary>
 		/// 用于处理两个窗口彼此互斥的情况
 		/// 从属于同一窗口的子窗口flag的 & 运算结果不能大于0
 		/// </summary>
 		public int RejectFlag { get; protected set; }
-		
+
 		public int NodeFlag { get; protected set; }
 		public bool IsFullScreen => (NodeFlag & (int)LccHotfix.NodeFlag.FULL_SCREEN) > 0;
 
 		public bool IsMainNode => (NodeFlag & (int)LccHotfix.NodeFlag.MAIN_NODE) > 0;
 		public bool IsTopNode => (NodeFlag & (int)LccHotfix.NodeFlag.TOP_NODE) > 0;
 
-        public EscapeType escapeType;
+		public EscapeType escapeType;
 
 		public ReleaseType releaseType = ReleaseType.AUTO;
 
@@ -78,7 +75,7 @@ namespace LccHotfix
 		}
 
 		protected IUILogic _logic;
-		public IUILogic logic
+		public IUILogic Logic
 		{
 			get => _logic;
 			set => _logic = value;
@@ -96,8 +93,8 @@ namespace LccHotfix
 			if (node == this) return true;
 			if (_childNode == null) return false;
 			foreach (WNode childNode in _childNode)
-            {
-				if( childNode.Contains(node))
+			{
+				if (childNode.Contains(node))
 					return true;
 			}
 			return false;
@@ -106,11 +103,11 @@ namespace LccHotfix
 		public bool TryGetNode(string windowName, out WNode node)
 		{
 			node = null;
-			if (_nodeName.Equals(windowName)) 
-            {
+			if (_nodeName.Equals(windowName))
+			{
 				node = this;
 				return true;
-            }
+			}
 			if (_childNode == null || _childNode.Count == 0) return false;
 			foreach (var childNode in _childNode)
 			{
@@ -135,7 +132,7 @@ namespace LccHotfix
 
 			if (parentNode._childNode != null && parentNode._childNode.Count > 0)
 			{
-				foreach(var child in parentNode._childNode)
+				foreach (var child in parentNode._childNode)
 				{
 					if (child.NodeName == windowName)
 					{
@@ -155,23 +152,23 @@ namespace LccHotfix
 		}
 
 		public void Start()
-        {
+		{
 			_nodePhase = NodePhase.DEACTIVE;
 			DoStart();
 		}
 
 		public void Update()
-        {
+		{
 			if (_nodePhase == NodePhase.ACTIVE)
-            {
+			{
 				DoUpdate();
 			}
 		}
 		public void Open(object[] param)
-        {
+		{
 
 			if (_nodePhase == NodePhase.DEACTIVE)
-            {
+			{
 				if (parentNode != null && parentNode._nodePhase < NodePhase.OPENED) return;
 				Log.Debug($"ui open window {NodeName}");
 				newCreate = false;
@@ -179,7 +176,7 @@ namespace LccHotfix
 				if (parentNode != null)
 					parentNode.ChildOpened(this);
 				DoOpen(param);
-				
+
 			}
 		}
 
@@ -222,7 +219,7 @@ namespace LccHotfix
 
 				for (int i = _childNode.Count - 2; i >= 0; i--)
 				{
-					if (i < fullIndex && !_childNode[i].IsTopNode) 
+					if (i < fullIndex && !_childNode[i].IsTopNode)
 						_childNode[i].Pause();
 					else
 						_childNode[i].Resume();
@@ -234,7 +231,7 @@ namespace LccHotfix
 		}
 
 		public void Resume()
-        {
+		{
 			if (_nodePhase == NodePhase.OPENED)
 			{
 				if (parentNode != null && parentNode._nodePhase < NodePhase.ACTIVE) return;
@@ -253,7 +250,7 @@ namespace LccHotfix
 						}
 					}
 
-					for (int i = fullIndex; i < _childNode.Count; i++) 
+					for (int i = fullIndex; i < _childNode.Count; i++)
 					{
 						_childNode[i].Resume();
 					}
@@ -261,7 +258,7 @@ namespace LccHotfix
 			}
 		}
 		public void Pause()
-        {
+		{
 			if (_nodePhase == NodePhase.ACTIVE)
 			{
 				Log.Debug($"ui pause window {NodeName}");
@@ -278,9 +275,9 @@ namespace LccHotfix
 		}
 
 		public object Close()
-        {
+		{
 			if (_nodePhase == NodePhase.ACTIVE)
-            {
+			{
 				Pause();
 			}
 			if (_nodePhase == NodePhase.OPENED)
@@ -291,10 +288,10 @@ namespace LccHotfix
 				{
 					parentNode.ChildClosed(this);
 				}
-                else if(this is WRootNode)
-                {
-                    Entry.GetModule<WindowManager>().RemoveRoot(this as WRootNode);
-                }
+				else if (this is WRootNode)
+				{
+					Entry.GetModule<WindowManager>().RemoveRoot(this as WRootNode);
+				}
 				// 由上向下
 				while (_childNode != null && _childNode.Count > 0)
 				{
@@ -328,12 +325,12 @@ namespace LccHotfix
 		/// 从内存中移除
 		/// </summary>
 		public void Remove()
-        {
+		{
 			DoRemove();
-        }
+		}
 
 		public void Switch(Action<bool> callback)
-        {
+		{
 			DoSwitch(callback);
 		}
 
@@ -343,7 +340,7 @@ namespace LccHotfix
 		/// <param name="escape"></param>
 		/// <returns></returns>
 		public bool Escape(ref EscapeType escape)
-        {
+		{
 			// 首先处理子节点的返回
 			if (_childNode != null && _childNode.Count > 0)
 			{
@@ -358,13 +355,13 @@ namespace LccHotfix
 			// 处理自己的返回
 			return DoEscape(ref escape);
 		}
-		
-		
-		
+
+
+
 		public bool ChildRequireEscape(WNode child)
-        {
+		{
 			if (DoChildRequireEscape(child))
-            {
+			{
 				child.Close();
 				return true;
 			}
@@ -392,7 +389,7 @@ namespace LccHotfix
 		{
 			return true;
 		}
-		protected virtual bool DoEscape(ref EscapeType escape) 
+		protected virtual bool DoEscape(ref EscapeType escape)
 		{
 			escape = this.escapeType;
 			if (escape == EscapeType.SKIP_OVER)
@@ -427,7 +424,7 @@ namespace LccHotfix
 						return true;
 				}
 			}
-			
+
 			return false;
 		}
 
@@ -456,7 +453,7 @@ namespace LccHotfix
 
 		public bool AutoRemove()
 		{
-			if (releaseType > ReleaseType.AUTO) 
+			if (releaseType > ReleaseType.AUTO)
 				return false;
 			if (--releaseTimer <= 0)
 			{
@@ -466,16 +463,16 @@ namespace LccHotfix
 			return false;
 		}
 
-	
+
 		/// <summary>
 		/// 递归的获取自身及所有子节点
 		/// </summary>
 		/// <param name="childList"></param>
 		public void GetAllChild(List<WNode> childList)
-        {
+		{
 			childList.Add(this);
 			if (_childNode != null)
-            {
+			{
 				foreach (var child in _childNode)
 				{
 					child.GetAllChild(childList);

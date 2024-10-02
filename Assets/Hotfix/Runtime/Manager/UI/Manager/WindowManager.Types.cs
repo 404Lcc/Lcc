@@ -25,7 +25,7 @@ namespace LccHotfix
 			IUILogic iLogic = CreateLogic(window.LogicName, window);
 			if (iLogic != null)
 			{
-				window.logic = iLogic;
+				window.Logic = iLogic;
 				iLogic.WNode = window;
 			}
 			else
