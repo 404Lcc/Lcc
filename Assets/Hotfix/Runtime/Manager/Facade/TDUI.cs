@@ -122,10 +122,10 @@ namespace LccHotfix
 		//	return Entry.GetModule<WindowManager>().GetTopRoot();
 		//}
 
-		//public WRootNode GetCommonRoot()
-		//{
-		//	return Entry.GetModule<WindowManager>().CommonRoot;
-		//}
+		public WRootNode GetCommonRoot()
+		{
+			return Entry.GetModule<WindowManager>().CommonRoot;
+		}
 		//public WRootNode GetRoot(string rootName)
 		//{
 		//	return Entry.GetModule<WindowManager>().GetRoot(rootName);
