@@ -9,7 +9,7 @@ namespace LccHotfix
 		/// <summary>
 		/// 同步加载GameObject
 		/// </summary>
-		public Func<string, string, bool, GameObject> LoadGameObject;
+		public Func<string, GameObject> LoadGameObject;
 
 	}
 }

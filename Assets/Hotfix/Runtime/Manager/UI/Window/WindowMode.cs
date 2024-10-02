@@ -9,7 +9,6 @@ namespace LccHotfix
 	public struct WindowMode
 	{
 		public string prefabName;
-		public string bundleName;
 		public int depth;
 		public string rootName;
 		public string logicName;

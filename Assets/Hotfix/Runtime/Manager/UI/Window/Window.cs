@@ -169,7 +169,7 @@ namespace LccHotfix
 
 		public void CreateWindowView()
 		{
-            _gameObject = Entry.GetModule<WindowManager>().LoadGameObject?.Invoke(_mode.bundleName, _mode.prefabName, true);
+            _gameObject = Entry.GetModule<WindowManager>().LoadGameObject?.Invoke(_mode.prefabName);
             if (_gameObject != null)
 			{
 				_transform = _gameObject.transform;
