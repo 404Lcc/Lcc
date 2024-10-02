@@ -289,7 +289,7 @@ namespace LccHotfix
 				}
 				else
                 {
-                    int mask = ((Window)window).windowMode.showScreenMask;
+                    int mask = ((Window)window).WindowMode.showScreenMask;
                     if (mask == 2)
                         switchScreen = true;
                     else if (mask == 1 && window.newCreate)

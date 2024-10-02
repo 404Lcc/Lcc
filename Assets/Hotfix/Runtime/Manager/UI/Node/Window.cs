@@ -15,7 +15,7 @@ namespace LccHotfix
         /// window的配置数据
         /// </summary>
         private WindowMode _mode;
-        public WindowMode windowMode => _mode;
+        public WindowMode WindowMode => _mode;
 
 
         public Window(string windowName, WindowMode mode)
@@ -44,15 +44,15 @@ namespace LccHotfix
 		protected override void DoOpen(object[] param)
         {
 			// 重置下返回节点
-			if (!string.IsNullOrEmpty(windowMode.returnNodeName) && returnNode == null) 
+			if (!string.IsNullOrEmpty(WindowMode.returnNodeName) && returnNode == null) 
 			{
 				returnNode = new WNode.TurnNode()
 				{
-					nodeName = windowMode.returnNodeName,
-					nodeType = (NodeType)windowMode.returnNodeType,
+					nodeName = WindowMode.returnNodeName,
+					nodeType = (NodeType)WindowMode.returnNodeType,
 				};
-				if (windowMode.returnNodeParam >= 0)
-					returnNode.nodeParam = new object[] { windowMode.returnNodeParam };
+				if (WindowMode.returnNodeParam >= 0)
+					returnNode.nodeParam = new object[] { WindowMode.returnNodeParam };
 			}
 			
 			InternalOpen(true);
@@ -66,13 +66,13 @@ namespace LccHotfix
 		protected override void DoResume()
         {
 			InternalResume(true);
-			if (windowMode.canShowLouder == 1)
+			if (WindowMode.canShowLouder == 1)
 			{
-                Entry.GetModule<WindowManager>().CommonRoot.Blackboard.Set(BlackboardType.UILouderSetDepth, new List<object>() { windowMode.depth + 100, windowMode.louderY });
+                Entry.GetModule<WindowManager>().CommonRoot.Blackboard.Set(BlackboardType.UILouderSetDepth, new List<object>() { WindowMode.depth + 100, WindowMode.louderY });
 			}
-			else if (windowMode.canShowLouder == 0 && windowMode.windowFlag > 0)
+			else if (WindowMode.canShowLouder == 0 && WindowMode.windowFlag > 0)
 			{
-                Entry.GetModule<WindowManager>().CommonRoot.Blackboard.Set(BlackboardType.UILouderSetDepth, new List<object>() { windowMode.depth - 100, windowMode.louderY });
+                Entry.GetModule<WindowManager>().CommonRoot.Blackboard.Set(BlackboardType.UILouderSetDepth, new List<object>() { WindowMode.depth - 100, WindowMode.louderY });
 			}
 			_logic.OnResume();
 		}
@@ -194,7 +194,7 @@ namespace LccHotfix
 
 		private void InternalResume(bool enable)
 		{
-			if (windowMode.canShowLouder == 1)
+			if (WindowMode.canShowLouder == 1)
 			{
 				if (enable)
                     Entry.GetModule<WindowManager>().CommonRoot.Blackboard.SetNum(BlackboardType.UILouderIsShow, 1);

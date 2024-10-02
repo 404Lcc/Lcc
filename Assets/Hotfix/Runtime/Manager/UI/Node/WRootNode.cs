@@ -13,8 +13,8 @@ namespace LccHotfix
         /// <summary>
         /// 每个根节点用于向下广播的黑板
         /// </summary>
-        private WBlackboard w_blackboard;
-        public WBlackboard Blackboard => w_blackboard;
+        private WBlackboard _blackboard;
+        public WBlackboard Blackboard => _blackboard;
         public WRootNode(string rootName)
         {
             this._nodeName = rootName;
@@ -22,7 +22,7 @@ namespace LccHotfix
             this.rootNode = this;
             this.escapeType = EscapeType.AUTO_CLOSE;
             this.releaseType = ReleaseType.AUTO;
-            this.w_blackboard = new WBlackboard();
+            this._blackboard = new WBlackboard();
             this._logic = Entry.GetModule<WindowManager>().CreateLogic(rootName, null);
             if (_logic != null)
                 _logic.wNode = this;
@@ -35,7 +35,7 @@ namespace LccHotfix
         protected override void DoUpdate()
         {
             _logic?.OnUpdate();
-            w_blackboard?.Update();
+            _blackboard?.Update();
         }
         protected override void DoSwitch(Action<bool> callback)
         {
