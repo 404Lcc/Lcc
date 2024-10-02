@@ -68,11 +68,11 @@ namespace LccHotfix
 			InternalResume(true);
 			if (windowMode.canShowLouder == 1)
 			{
-                Entry.GetModule<WindowManager>().commonRoot.Blackboard.Set(BlackboardType.UILouderSetDepth, new List<object>() { windowMode.depth + 100, windowMode.louderY });
+                Entry.GetModule<WindowManager>().CommonRoot.Blackboard.Set(BlackboardType.UILouderSetDepth, new List<object>() { windowMode.depth + 100, windowMode.louderY });
 			}
 			else if (windowMode.canShowLouder == 0 && windowMode.windowFlag > 0)
 			{
-                Entry.GetModule<WindowManager>().commonRoot.Blackboard.Set(BlackboardType.UILouderSetDepth, new List<object>() { windowMode.depth - 100, windowMode.louderY });
+                Entry.GetModule<WindowManager>().CommonRoot.Blackboard.Set(BlackboardType.UILouderSetDepth, new List<object>() { windowMode.depth - 100, windowMode.louderY });
 			}
 			w_logic.OnResume();
 		}
@@ -197,9 +197,9 @@ namespace LccHotfix
 			if (windowMode.canShowLouder == 1)
 			{
 				if (enable)
-                    Entry.GetModule<WindowManager>().commonRoot.Blackboard.SetNum(BlackboardType.UILouderIsShow, 1);
+                    Entry.GetModule<WindowManager>().CommonRoot.Blackboard.SetNum(BlackboardType.UILouderIsShow, 1);
 				else
-                    Entry.GetModule<WindowManager>().commonRoot.Blackboard.UnsetNum(BlackboardType.UILouderIsShow, 1);
+                    Entry.GetModule<WindowManager>().CommonRoot.Blackboard.UnsetNum(BlackboardType.UILouderIsShow, 1);
 			}
 
 			TDUI.PauseWindowFunc?.Invoke(transform, enable);

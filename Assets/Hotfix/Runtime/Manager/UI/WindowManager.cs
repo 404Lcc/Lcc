@@ -11,21 +11,21 @@ namespace LccHotfix
 		/// 栈里的每个窗口实际是一个全屏窗口和从属于这个全屏窗口的子窗口
 		/// 每个窗口的作用域是自己和从属于自己的子窗口，不能跨域修改其它窗口
 		/// </summary>
-		private Stack<WRootNode> m_rootStack = new Stack<WRootNode>();
+		private Stack<WRootNode> _rootStack = new Stack<WRootNode>();
 		/// <summary>
 		/// 当前活动的通用窗口
 		/// 这些特殊窗口不受栈的限制，可以用任意方式唤醒和关闭
 		/// </summary>
-		private WRootNode m_commonRoot;
-		public WRootNode commonRoot => m_commonRoot;
+		private WRootNode _commonRoot;
+		public WRootNode CommonRoot => _commonRoot;
 		/// <summary>
 		/// 等待释放的窗口
 		/// </summary>
-		private List<WNode> m_waitReleaseWindow = new List<WNode>();
+		private List<WNode> _waitReleaseWindow = new List<WNode>();
 		/// <summary>
 		/// 缓存窗口配置
 		/// </summary>
-		private Dictionary<string, WindowMode> m_windowModeDic = new Dictionary<string, WindowMode>();
+		private Dictionary<string, WindowMode> _windowModeDic = new Dictionary<string, WindowMode>();
 		/// <summary>
 		/// 被关闭界面会自动缓存多少帧然后释放
 		/// 30s
@@ -34,11 +34,11 @@ namespace LccHotfix
 		/// <summary>
 		/// 窗口父节点
 		/// </summary>
-		internal Transform windowRoot { get { return TDUI.WindowRoot; } }
+		internal Transform WindowRoot { get { return TDUI.WindowRoot; } }
 		/// <summary>
 		/// 窗口关闭回调
 		/// </summary>
-		private Dictionary<string, Action<object>> m_windowCloseCallback = new Dictionary<string, Action<object>>();
+		private Dictionary<string, Action<object>> _windowCloseCallback = new Dictionary<string, Action<object>>();
 		
 
 		public bool Enable => true;
@@ -48,29 +48,29 @@ namespace LccHotfix
 
 		internal void Init()
 		{
-			m_commonRoot = GetAndCreateRoot("UIRootCommon");
-			m_commonRoot.stackIndex = 0;
-			m_commonRoot.Open(null);
-			m_commonRoot.Resume();
+			_commonRoot = GetAndCreateRoot("UIRootCommon");
+			_commonRoot.stackIndex = 0;
+			_commonRoot.Open(null);
+			_commonRoot.Resume();
 		}
 
 		List<WNode> m_updateNodes = new List<WNode>();
 
 		internal override void Update(float elapseSeconds, float realElapseSeconds)
 		{
-			if (m_commonRoot != null)
+			if (_commonRoot != null)
 			{
 				m_updateNodes.Clear();
-				m_commonRoot.GetAllChild(m_updateNodes);
+				_commonRoot.GetAllChild(m_updateNodes);
 				foreach(var node in m_updateNodes)
                 {
 					node.Update();
                 }
 			}
 
-			if (m_rootStack.Count == 0)
+			if (_rootStack.Count == 0)
 				return;
-			var peekWindow = m_rootStack.Peek();
+			var peekWindow = _rootStack.Peek();
 			if (peekWindow != null)
 			{
 				m_updateNodes.Clear();
@@ -130,10 +130,10 @@ namespace LccHotfix
 			
 			if (!openBy.TryGetNode(windowName, out WNode openedWindow))
 			{
-				if(!m_windowModeDic.TryGetValue(windowName, out WindowMode mode))
+				if(!_windowModeDic.TryGetValue(windowName, out WindowMode mode))
 				{
 					mode = TDUI.GetModeFunc.Invoke(windowName);
-					m_windowModeDic.Add(windowName, mode);
+					_windowModeDic.Add(windowName, mode);
 				}
 				
 				openedWindow = CreateWindow(windowName, mode);
@@ -167,10 +167,10 @@ namespace LccHotfix
 
 			Log.Debug($"open window {windowName}");
 
-			if (!m_windowModeDic.TryGetValue(windowName, out WindowMode mode))
+			if (!_windowModeDic.TryGetValue(windowName, out WindowMode mode))
 			{
 				mode = TDUI.GetModeFunc.Invoke(windowName);
-				m_windowModeDic.Add(windowName, mode);
+				_windowModeDic.Add(windowName, mode);
 			}
 
 			WRootNode root = GetAndCreateRoot(mode.rootName);
@@ -229,15 +229,15 @@ namespace LccHotfix
 			bool switchScreen = false;
 			var root = window.RootNode;
 
-			if (root != commonRoot)
+			if (root != CommonRoot)
 			{
 				if (root.stackIndex < 0)
 				{
 					switchScreen = true;
-					if (m_rootStack.Count > 0)
-						m_rootStack.Peek().Pause();
-					root.stackIndex = m_rootStack.Count;
-					m_rootStack.Push(root);
+					if (_rootStack.Count > 0)
+						_rootStack.Peek().Pause();
+					root.stackIndex = _rootStack.Count;
+					_rootStack.Push(root);
 					if (window == root)
 					{
 						root.Open(param);
@@ -250,13 +250,13 @@ namespace LccHotfix
 				}
 				else
 				{
-					bool isTop = m_rootStack.Count == window.RootNode.stackIndex + 1;
+					bool isTop = _rootStack.Count == window.RootNode.stackIndex + 1;
 					if (!isTop)
 					{
 						switchScreen = true;
-						while (m_rootStack.Peek() != root)
+						while (_rootStack.Peek() != root)
 						{
-							var top = m_rootStack.Pop();
+							var top = _rootStack.Pop();
 							top.Close();
 						}
 					}
@@ -310,14 +310,14 @@ namespace LccHotfix
         {
             if (string.IsNullOrEmpty(rootName))
             {
-				Debug.Assert(m_rootStack.Count > 0);
-				return m_rootStack.Peek();
+				Debug.Assert(_rootStack.Count > 0);
+				return _rootStack.Peek();
             }
 
-			if (m_commonRoot != null && rootName == m_commonRoot.nodeName) 
-				return m_commonRoot;
+			if (_commonRoot != null && rootName == _commonRoot.nodeName) 
+				return _commonRoot;
 
-			foreach(var item in m_rootStack)
+			foreach(var item in _rootStack)
             {
                 if (item.nodeName.Equals(rootName))
                 {
@@ -325,12 +325,12 @@ namespace LccHotfix
                 }
             }
 			WRootNode root = null;
-			for (int i = 0; i < m_waitReleaseWindow.Count; i++)
+			for (int i = 0; i < _waitReleaseWindow.Count; i++)
 			{
-				if (m_waitReleaseWindow[i].nodeName.Equals(rootName))
+				if (_waitReleaseWindow[i].nodeName.Equals(rootName))
 				{
-					root = m_waitReleaseWindow[i] as WRootNode;
-					m_waitReleaseWindow.RemoveAt(i);
+					root = _waitReleaseWindow[i] as WRootNode;
+					_waitReleaseWindow.RemoveAt(i);
 					break;
 				}
 			}
@@ -342,7 +342,7 @@ namespace LccHotfix
 				root.Start();
 			}
 
-			root.transform.SetParent(windowRoot);
+			root.transform.SetParent(WindowRoot);
 			root.transform.localPosition = Vector3.zero;
 			root.transform.localScale = Vector3.one;
 			root.transform.localRotation = Quaternion.identity;
@@ -354,12 +354,12 @@ namespace LccHotfix
 		private Window CreateWindow(string windowName, WindowMode mode)
 		{
 			Window window = null;
-			for (int i = 0; i < m_waitReleaseWindow.Count; i++) 
+			for (int i = 0; i < _waitReleaseWindow.Count; i++) 
 			{
-				if (m_waitReleaseWindow[i].nodeName.Equals(windowName)) 
+				if (_waitReleaseWindow[i].nodeName.Equals(windowName)) 
 				{
-					window = m_waitReleaseWindow[i] as Window;
-					m_waitReleaseWindow.RemoveAt(i);
+					window = _waitReleaseWindow[i] as Window;
+					_waitReleaseWindow.RemoveAt(i);
 					break;
 				}
 			}
@@ -386,16 +386,16 @@ namespace LccHotfix
 		internal object CloseWindow(string windowClose)
 		{
 			if (string.IsNullOrEmpty(windowClose)) return null;
-			if(m_commonRoot.TryCloseChild(windowClose,out object val))
+			if(_commonRoot.TryCloseChild(windowClose,out object val))
 			{
 				return val;
 			}
 
-			if (m_rootStack.Count == 0) return null;
+			if (_rootStack.Count == 0) return null;
 
 			Log.Debug($"close window {windowClose}");
 			
-			WRootNode root = m_rootStack.Peek();
+			WRootNode root = _rootStack.Peek();
 
 			// 关闭子窗口
 			if(root.TryCloseChild(windowClose, out val))
@@ -408,10 +408,10 @@ namespace LccHotfix
 
 		internal void CloseWindow(int windowFlag)
 		{
-			if (m_rootStack.Count == 0) return;
+			if (_rootStack.Count == 0) return;
 			if (0 == windowFlag) return;
 
-			WRootNode root = m_rootStack.Peek();
+			WRootNode root = _rootStack.Peek();
 			root.CloseChild(windowFlag);
 		}
 
@@ -423,22 +423,22 @@ namespace LccHotfix
 				AddToReleaseQueue(switchingNode);
 				switchingNode = null;
 			}
-			commonRoot.CloseAllChild();
-			while (m_rootStack.Count > 0) 
+			CommonRoot.CloseAllChild();
+			while (_rootStack.Count > 0) 
 			{
-				m_rootStack.Pop().Close();
+				_rootStack.Pop().Close();
 			}
 		}
 
 		internal void EscapeTopWindow()
 		{
 			EscapeType escape = EscapeType.AUTO_CLOSE;
-			if (m_commonRoot.Escape(ref escape))
+			if (_commonRoot.Escape(ref escape))
 				return;
 
-			if (m_rootStack.Count == 0) return;
+			if (_rootStack.Count == 0) return;
 
-			var top = m_rootStack.Peek();
+			var top = _rootStack.Peek();
 			top.Escape(ref escape);
 		}
 
@@ -449,31 +449,31 @@ namespace LccHotfix
 		/// <param name="root"></param>
 		internal void RemoveRoot(WRootNode root)
         {
-			if (m_rootStack.Count == 0) return;
+			if (_rootStack.Count == 0) return;
 
-			if (root == m_rootStack.Peek())
+			if (root == _rootStack.Peek())
 			{
-				m_rootStack.Pop();
+				_rootStack.Pop();
 
-				if (m_rootStack.Count > 0)
-					m_rootStack.Peek().Resume();
+				if (_rootStack.Count > 0)
+					_rootStack.Peek().Resume();
 			}
 			else
 			{
 				var index = 0;
-				foreach (var node in m_rootStack)
+				foreach (var node in _rootStack)
 				{
 					if (node == root)
 						break;
 					index++;
 				}
-				if (index == m_rootStack.Count)
+				if (index == _rootStack.Count)
 					return;
 				Stack<WRootNode> tempStack = new Stack<WRootNode>();
 
 				while (index >= 0)
 				{
-					var top = m_rootStack.Pop();
+					var top = _rootStack.Pop();
 					if (index-- == 0)
 					{
 
@@ -485,12 +485,12 @@ namespace LccHotfix
 				while (tempStack.Count > 0)
 				{
 					var temp = tempStack.Pop();
-					temp.stackIndex = m_rootStack.Count;
-					m_rootStack.Push(temp);
+					temp.stackIndex = _rootStack.Count;
+					_rootStack.Push(temp);
 				}
 
 			}
-			if (m_rootStack.Count == 0)
+			if (_rootStack.Count == 0)
 			{
 				TDUI.ClosedLastRoot();
 			}
@@ -522,18 +522,18 @@ namespace LccHotfix
 					node.transform.parent = releaseRoot;
 				}	
 
-				m_waitReleaseWindow.Add(node);
+				_waitReleaseWindow.Add(node);
 			}
 		}
 
 
 		private void AutoReleaseWindow()
 		{
-			for (int i = m_waitReleaseWindow.Count - 1; i >= 0; i--)  
+			for (int i = _waitReleaseWindow.Count - 1; i >= 0; i--)  
 			{
-				if (m_waitReleaseWindow[i].AutoRemove())
+				if (_waitReleaseWindow[i].AutoRemove())
 				{
-					m_waitReleaseWindow.RemoveAt(i);
+					_waitReleaseWindow.RemoveAt(i);
 				}
 			}
 		}
@@ -544,32 +544,32 @@ namespace LccHotfix
 		/// <param name="type">筛选释放window的级别，释放小于这个级别的所有窗口</param>
 		internal void ReleaseAllWindow(ReleaseType level = ReleaseType.AUTO)
 		{
-			for (int i = m_waitReleaseWindow.Count - 1; i >= 0; i--) 
+			for (int i = _waitReleaseWindow.Count - 1; i >= 0; i--) 
 			{
-				if (m_waitReleaseWindow[i].releaseType<=level)
+				if (_waitReleaseWindow[i].releaseType<=level)
 				{
-					m_waitReleaseWindow[i].Remove();
-					m_waitReleaseWindow.RemoveAt(i);
+					_waitReleaseWindow[i].Remove();
+					_waitReleaseWindow.RemoveAt(i);
 				}
 			}
 		}
 
 		internal void AddCloseCallback(string windowName, Action<object> callback)
 		{
-			if (m_windowCloseCallback.TryGetValue(windowName, out Action<object> action))
+			if (_windowCloseCallback.TryGetValue(windowName, out Action<object> action))
 			{
 				action -= callback;
 				action += callback;
 			}
 			else
 			{
-				m_windowCloseCallback.Add(windowName, callback);
+				_windowCloseCallback.Add(windowName, callback);
 			}
 		}
 
 		internal void RemoveCloseCallback(string windowName, Action<object> callback)
 		{
-			if (m_windowCloseCallback.TryGetValue(windowName, out Action<object> action))
+			if (_windowCloseCallback.TryGetValue(windowName, out Action<object> action))
 			{
 				action -= callback;
 			}
@@ -577,7 +577,7 @@ namespace LccHotfix
 
 		internal void OnWindowClose(string windowName, object backValue)
 		{
-			if (m_windowCloseCallback.TryGetValue(windowName, out Action<object> action))
+			if (_windowCloseCallback.TryGetValue(windowName, out Action<object> action))
 			{
 				action?.Invoke(backValue);
 			}
@@ -585,9 +585,9 @@ namespace LccHotfix
 
 		internal Window GetWindow(string windowName)
 		{
-			if (m_rootStack.Count == 0) return null;
+			if (_rootStack.Count == 0) return null;
 
-			var top = m_rootStack.Peek();
+			var top = _rootStack.Peek();
 			if(top.TryGetNode(windowName, out var node))
             {
 				return node as Window;
@@ -598,9 +598,9 @@ namespace LccHotfix
 
 		internal WRootNode GetRoot(string rootName)
 		{
-			if (m_rootStack.Count == 0) return null;
+			if (_rootStack.Count == 0) return null;
 
-			foreach(var root in m_rootStack)
+			foreach(var root in _rootStack)
             {
 				if (root.nodeName == rootName)
 					return root;
@@ -611,16 +611,16 @@ namespace LccHotfix
 
 		internal WRootNode GetTopRoot()
 		{
-			if (m_rootStack.Count == 0) return null;
+			if (_rootStack.Count == 0) return null;
 
-			return m_rootStack.Peek();
+			return _rootStack.Peek();
 		}
 
 		internal Window GetTopWindow()
 		{
-			if (m_rootStack.Count == 0) return null;
+			if (_rootStack.Count == 0) return null;
 
-			var peekWindow = m_rootStack.Peek();
+			var peekWindow = _rootStack.Peek();
 			if (peekWindow != null)
 				return peekWindow.GetTopWindow() as Window;
 			return null;

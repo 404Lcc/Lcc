@@ -124,7 +124,7 @@ namespace LccHotfix
 
 		public static WRootNode GetCommonRoot()
 		{
-			return Entry.GetModule<WindowManager>().commonRoot;
+			return Entry.GetModule<WindowManager>().CommonRoot;
 		}
 		public static WRootNode GetRoot(string rootName)
 		{
