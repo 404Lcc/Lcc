@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-	public static class TDRes
-	{
+    internal partial class WindowManager : Module
+    {
 		/// <summary>
 		/// 同步加载GameObject
 		/// </summary>
-		public static Func<string, string, bool, GameObject> LoadGameObject;
+		public Func<string, string, bool, GameObject> LoadGameObject;
 
 	}
 }
