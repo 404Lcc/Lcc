@@ -25,7 +25,7 @@ namespace LccHotfix
             this._blackboard = new WBlackboard();
             this._logic = Entry.GetModule<WindowManager>().CreateLogic(rootName, null);
             if (_logic != null)
-                _logic.wNode = this;
+                _logic.WNode = this;
         }
 
         protected override void DoStart()

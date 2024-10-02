@@ -6,29 +6,29 @@
     public enum NodeType
     {
         WINDOW = 0,
-        ROOT   = 1,
+        ROOT = 1,
     }
-    
+
     /// <summary>
     /// 节点状态、阶段
     /// </summary>
     public enum NodePhase
     {
         DEACTIVE,  //未激活
-        OPENED,    //已打开，但不显示        
+        OPENED,    //已打开，但不显示
         ACTIVE     //激活显示
     }
-    
+
     /// <summary>
     /// 释放方式
     /// </summary>
     public enum ReleaseType
     {
-        IMMEDIATE			= -1,	//立即销毁
-        AUTO				= 0,	//延时自动销毁
-        CHANGE_SCENE		= 1,	//切换场景
-        DEEPLY				= 2,	//深度清理
-        NEVER				= 3,	//永久缓存
+        IMMEDIATE = -1,	//立即销毁
+        AUTO = 0,	//延时自动销毁
+        CHANGE_SCENE = 1,	//切换场景
+        DEEPLY = 2,	//深度清理
+        NEVER = 3,	//永久缓存
     }
 
     /// <summary>
@@ -36,9 +36,9 @@
     /// </summary>
     public enum EscapeType
     {
-        SKIP_OVER			= 0,    //跳过
-        AUTO_CLOSE			= 1,    //关闭
-        REFUSE_AND_BREAK	= 2,	//中断
+        SKIP_OVER = 0,    //跳过
+        AUTO_CLOSE = 1,    //关闭
+        REFUSE_AND_BREAK = 2,	//中断
     }
 
     /// <summary>
@@ -46,10 +46,10 @@
     /// </summary>
     public enum NodeFlag
     {
-        NONE            = 0,
-        FULL_SCREEN     = 1 << 0,   // 全屏界面
-        MAIN_NODE       = 1 << 1,   // 主要节点，当root的所有主节点被关闭时，root会被关闭
-        TOP_NODE        = 1 << 2,   // 顶层节点，不会被全屏遮挡      
+        NONE = 0,
+        FULL_SCREEN = 1 << 0,   // 全屏界面
+        MAIN_NODE = 1 << 1,   // 主要节点，当root的所有主节点被关闭时，root会被关闭
+        TOP_NODE = 1 << 2,   // 顶层节点，不会被全屏遮挡
     }
 
     /// <summary>
@@ -58,19 +58,19 @@
     public enum RejectFlag : long
     {
         NONE = 0,
-        MAIN_CITY_TAB       = 1 << 0,
-        SLG_MAP_TAB         = 1 << 1,
-        SLG_MAP_OPERTION    = 1 << 2,
-		ACTIVITY            = 1 << 3,
-		MAGIC_WEAPON        = 1 << 4,
-        OLD_MAIL            = 1 << 5,
-	}
-    
+        MAIN_CITY_TAB = 1 << 0,
+        SLG_MAP_TAB = 1 << 1,
+        SLG_MAP_OPERTION = 1 << 2,
+        ACTIVITY = 1 << 3,
+        MAGIC_WEAPON = 1 << 4,
+        OLD_MAIL = 1 << 5,
+    }
+
     public enum MaskType
     {
-        WINDOW_SWITCH   = 1 << 0,    // 切换窗口的过程
-        WINDOW_ANIM     = 1 << 1,
-        CHANGE_SCENE    = 1 << 2,
-        NET_REQUEST     = 1 << 3,
+        WINDOW_SWITCH = 1 << 0,    // 切换窗口的过程
+        WINDOW_ANIM = 1 << 1,
+        CHANGE_SCENE = 1 << 2,
+        NET_REQUEST = 1 << 3,
     }
 }

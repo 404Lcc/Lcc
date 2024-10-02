@@ -26,7 +26,7 @@ namespace LccHotfix
 			if (iLogic != null)
 			{
 				window.logic = iLogic;
-				iLogic.wNode = window;
+				iLogic.WNode = window;
 			}
 			else
 			{

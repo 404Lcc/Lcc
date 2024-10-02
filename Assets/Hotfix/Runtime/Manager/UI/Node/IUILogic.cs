@@ -7,7 +7,7 @@ namespace LccHotfix
 		/// <summary>
 		/// 访问所属node
 		/// </summary>
-		WNode wNode { set; get; }
+		WNode WNode { set; get; }
 		/// <summary>
 		/// 出生
 		/// WindowManager调用
@@ -58,7 +58,7 @@ namespace LccHotfix
 		/// 子节点打开
 		/// </summary>
 		void OnChildOpened(WNode child);
-		
+
 		/// <summary>
 		/// 子节点关闭
 		/// </summary>
