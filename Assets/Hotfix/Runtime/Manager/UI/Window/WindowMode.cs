@@ -13,7 +13,6 @@ namespace LccHotfix
 		public string rootName;
 		public string logicName;
 		public string bgTex;
-		public int music;
 		public int sound;
 		public bool openAnim;
 		/// <summary>
