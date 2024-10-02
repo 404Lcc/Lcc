@@ -39,12 +39,8 @@ namespace LccHotfix
 		/// 窗口关闭回调
 		/// </summary>
 		private Dictionary<string, Action<object>> _windowCloseCallback = new Dictionary<string, Action<object>>();
-		
 
-		public bool Enable => true;
-		public string Name => "WindowManager";
-
-		private WNode switchingNode;
+		private WNode _switchingNode;
 
 		internal void Init()
 		{
@@ -54,18 +50,18 @@ namespace LccHotfix
 			_commonRoot.Resume();
 		}
 
-		List<WNode> m_updateNodes = new List<WNode>();
+		List<WNode> _updateNodes = new List<WNode>();
 
 		internal override void Update(float elapseSeconds, float realElapseSeconds)
 		{
 			if (_commonRoot != null)
 			{
-				m_updateNodes.Clear();
-				_commonRoot.GetAllChild(m_updateNodes);
-				foreach(var node in m_updateNodes)
-                {
+				_updateNodes.Clear();
+				_commonRoot.GetAllChild(_updateNodes);
+				foreach (var node in _updateNodes)
+				{
 					node.Update();
-                }
+				}
 			}
 
 			if (_rootStack.Count == 0)
@@ -73,34 +69,34 @@ namespace LccHotfix
 			var peekWindow = _rootStack.Peek();
 			if (peekWindow != null)
 			{
-				m_updateNodes.Clear();
-				peekWindow.GetAllChild(m_updateNodes);
-				foreach (var node in m_updateNodes)
+				_updateNodes.Clear();
+				peekWindow.GetAllChild(_updateNodes);
+				foreach (var node in _updateNodes)
 				{
 					node.Update();
 				}
 			}
 		}
 
-		private bool m_escaped = false;
+		private bool _escaped = false;
 		internal void LateUpdate()
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				if (!m_escaped)
+				if (!_escaped)
 				{
 					bool escape = EscapeJudgeFunc == null ? true : EscapeJudgeFunc.Invoke();
 					if (escape)
 					{
 						EscapeTopWindow();
 					}
-					m_escaped = true;
+					_escaped = true;
 				}
-				
+
 			}
-			else if(m_escaped)
+			else if (_escaped)
 			{
-				m_escaped = false;
+				_escaped = false;
 			}
 			AutoReleaseWindow();
 		}
@@ -113,29 +109,29 @@ namespace LccHotfix
 
 		internal Window OpenWindow(WNode openBy, string windowName, object[] param)
 		{
-			if (switchingNode != null) 
+			if (_switchingNode != null)
 			{
-				Log.Error($"request open window {windowName} during switch one other window {switchingNode.NodeName}");
+				Log.Error($"request open window {windowName} during switch one other window {_switchingNode.NodeName}");
 				return null;
 			}
-			if (openBy == null) 
+			if (openBy == null)
 				return OpenWindow(windowName, param);
 
 			// 打开一个与自己同名的界面
-            if (openBy.NodeName == windowName)
-            {
+			if (openBy.NodeName == windowName)
+			{
 				Log.Error($"request open a same name child window {windowName}");
 				return null;
 			}
-			
+
 			if (!openBy.TryGetNode(windowName, out WNode openedWindow))
 			{
-				if(!_windowModeDic.TryGetValue(windowName, out WindowMode mode))
+				if (!_windowModeDic.TryGetValue(windowName, out WindowMode mode))
 				{
 					mode = GetModeFunc.Invoke(windowName);
 					_windowModeDic.Add(windowName, mode);
 				}
-				
+
 				openedWindow = CreateWindow(windowName, mode);
 				openedWindow.rootNode = openBy.rootNode;
 				openedWindow.transform.SetParent(openBy.rootNode.transform);
@@ -148,7 +144,7 @@ namespace LccHotfix
 
 			return openedWindow as Window;
 		}
-		
+
 		/// <summary>
 		/// 打开一个界面
 		/// 这里只是创建，并不会改变当前栈结构
@@ -159,9 +155,9 @@ namespace LccHotfix
 		/// <returns></returns>
 		internal Window OpenWindow(string windowName, object[] param)
 		{
-			if (switchingNode != null)
+			if (_switchingNode != null)
 			{
-				Log.Error($"request open window {windowName} during switch one other window {switchingNode.NodeName}");
+				Log.Error($"request open window {windowName} during switch one other window {_switchingNode.NodeName}");
 				return null;
 			}
 
@@ -176,7 +172,7 @@ namespace LccHotfix
 			WRootNode root = GetAndCreateRoot(mode.rootName);
 
 			WNode window = null;
-			if (!root.TryGetNode(windowName, out window)) 
+			if (!root.TryGetNode(windowName, out window))
 			{
 				window = CreateWindow(windowName, mode);
 				window.rootNode = root;
@@ -192,14 +188,14 @@ namespace LccHotfix
 
 		internal WRootNode OpenRoot(string rootName, object[] param)
 		{
-			if (switchingNode != null)
+			if (_switchingNode != null)
 			{
-				Log.Error($"request open window {rootName} during switch one other window {switchingNode.NodeName}");
+				Log.Error($"request open window {rootName} during switch one other window {_switchingNode.NodeName}");
 				return null;
 			}
 
 			if (string.IsNullOrEmpty(rootName)) return null;
-			
+
 			WRootNode root = GetAndCreateRoot(rootName);
 			SwitchWindow(root, null, param);
 
@@ -208,18 +204,18 @@ namespace LccHotfix
 
 		private void SwitchWindow(WNode window, WNode parentNode, object[] param)
 		{
-			switchingNode = window;
+			_switchingNode = window;
 			ShowMaskBox((int)MaskType.WINDOW_SWITCH, true);
 			window.Switch((canOpen) => SwitchEnd(window, parentNode, canOpen, param));
 		}
 		private void SwitchEnd(WNode window, WNode parentNode, bool canOpen, object[] param)
 		{
 			ShowMaskBox((int)MaskType.WINDOW_SWITCH, false);
-			if (switchingNode == null) 
+			if (_switchingNode == null)
 				return;
-			if (switchingNode != window)
+			if (_switchingNode != window)
 				return;
-			switchingNode = null;
+			_switchingNode = null;
 			// 打开失败
 			if (!canOpen)
 			{
@@ -267,14 +263,14 @@ namespace LccHotfix
 					root.Resume();
 				}
 			}
-			
+
 
 			if (window is Window)
 			{
 				if (root.Contains(window))
 				{
 					// 保持队列的顺序不变,不能循环打开
-					if (window.parentNode == root && (window.IsFullScreen || window.IsMainNode)) 
+					if (window.parentNode == root && (window.IsFullScreen || window.IsMainNode))
 					{
 						for (int i = root.ChildNode.Count - 1; i >= 0; i--)
 						{
@@ -288,15 +284,15 @@ namespace LccHotfix
 					window.Resume();
 				}
 				else
-                {
-                    int mask = ((Window)window).WindowMode.showScreenMask;
-                    if (mask == 2)
-                        switchScreen = true;
-                    else if (mask == 1 && window.newCreate)
-                        switchScreen = true;
+				{
+					int mask = ((Window)window).WindowMode.showScreenMask;
+					if (mask == 2)
+						switchScreen = true;
+					else if (mask == 1 && window.newCreate)
+						switchScreen = true;
 
-                    window.parentNode = parentNode;
-                    window.Open(param);
+					window.parentNode = parentNode;
+					window.Open(param);
 					window.Resume();
 				}
 			}
@@ -307,23 +303,23 @@ namespace LccHotfix
 		}
 
 		private WRootNode GetAndCreateRoot(string rootName)
-        {
-            if (string.IsNullOrEmpty(rootName))
-            {
+		{
+			if (string.IsNullOrEmpty(rootName))
+			{
 				Debug.Assert(_rootStack.Count > 0);
 				return _rootStack.Peek();
-            }
+			}
 
-			if (_commonRoot != null && rootName == _commonRoot.NodeName) 
+			if (_commonRoot != null && rootName == _commonRoot.NodeName)
 				return _commonRoot;
 
-			foreach(var item in _rootStack)
-            {
-                if (item.NodeName.Equals(rootName))
-                {
+			foreach (var item in _rootStack)
+			{
+				if (item.NodeName.Equals(rootName))
+				{
 					return item;
-                }
-            }
+				}
+			}
 			WRootNode root = null;
 			for (int i = 0; i < _waitReleaseWindow.Count; i++)
 			{
@@ -348,15 +344,15 @@ namespace LccHotfix
 			root.transform.localRotation = Quaternion.identity;
 			root.stackIndex = -1;
 			return root;
-        }
+		}
 
 
 		private Window CreateWindow(string windowName, WindowMode mode)
 		{
 			Window window = null;
-			for (int i = 0; i < _waitReleaseWindow.Count; i++) 
+			for (int i = 0; i < _waitReleaseWindow.Count; i++)
 			{
-				if (_waitReleaseWindow[i].NodeName.Equals(windowName)) 
+				if (_waitReleaseWindow[i].NodeName.Equals(windowName))
 				{
 					window = _waitReleaseWindow[i] as Window;
 					_waitReleaseWindow.RemoveAt(i);
@@ -386,7 +382,7 @@ namespace LccHotfix
 		internal object CloseWindow(string windowClose)
 		{
 			if (string.IsNullOrEmpty(windowClose)) return null;
-			if(_commonRoot.TryCloseChild(windowClose,out object val))
+			if (_commonRoot.TryCloseChild(windowClose, out object val))
 			{
 				return val;
 			}
@@ -394,14 +390,14 @@ namespace LccHotfix
 			if (_rootStack.Count == 0) return null;
 
 			Log.Debug($"close window {windowClose}");
-			
+
 			WRootNode root = _rootStack.Peek();
 
 			// 关闭子窗口
-			if(root.TryCloseChild(windowClose, out val))
-            {
+			if (root.TryCloseChild(windowClose, out val))
+			{
 				return val;
-            }
+			}
 			return null;
 		}
 
@@ -418,13 +414,13 @@ namespace LccHotfix
 
 		internal void CloseAllWindow()
 		{
-			if (switchingNode != null)
+			if (_switchingNode != null)
 			{
-				AddToReleaseQueue(switchingNode);
-				switchingNode = null;
+				AddToReleaseQueue(_switchingNode);
+				_switchingNode = null;
 			}
 			CommonRoot.CloseAllChild();
-			while (_rootStack.Count > 0) 
+			while (_rootStack.Count > 0)
 			{
 				_rootStack.Pop().Close();
 			}
@@ -442,13 +438,13 @@ namespace LccHotfix
 			top.Escape(ref escape);
 		}
 
-	
+
 		/// <summary>
 		/// 关闭root时从栈内移除
 		/// </summary>
 		/// <param name="root"></param>
 		internal void RemoveRoot(WRootNode root)
-        {
+		{
 			if (_rootStack.Count == 0) return;
 
 			if (root == _rootStack.Peek())
@@ -492,11 +488,11 @@ namespace LccHotfix
 			}
 			if (_rootStack.Count == 0)
 			{
-                OnClosedLastRootFunc?.Invoke();
-            }
+				OnClosedLastRootFunc?.Invoke();
+			}
 		}
 
-		private Transform releaseRoot;
+		private Transform _releaseRoot;
 		internal void AddToReleaseQueue(WNode node)
 		{
 			if (node != null)
@@ -509,18 +505,18 @@ namespace LccHotfix
 				{
 					node.releaseTimer = 0;
 				}
-				if (releaseRoot == null)
+				if (_releaseRoot == null)
 				{
-					releaseRoot = (new GameObject("WaitForRelease")).transform;
-					releaseRoot.SetParent(WindowRoot);
-					releaseRoot.localScale = Vector3.one;
-					releaseRoot.localPosition = new Vector3(30000, 0, 0);
+					_releaseRoot = (new GameObject("WaitForRelease")).transform;
+					_releaseRoot.SetParent(WindowRoot);
+					_releaseRoot.localScale = Vector3.one;
+					_releaseRoot.localPosition = new Vector3(30000, 0, 0);
 				}
 
-				if(node.transform!=null)
+				if (node.transform != null)
 				{
-					node.transform.parent = releaseRoot;
-				}	
+					node.transform.parent = _releaseRoot;
+				}
 
 				_waitReleaseWindow.Add(node);
 			}
@@ -529,7 +525,7 @@ namespace LccHotfix
 
 		private void AutoReleaseWindow()
 		{
-			for (int i = _waitReleaseWindow.Count - 1; i >= 0; i--)  
+			for (int i = _waitReleaseWindow.Count - 1; i >= 0; i--)
 			{
 				if (_waitReleaseWindow[i].AutoRemove())
 				{
@@ -544,9 +540,9 @@ namespace LccHotfix
 		/// <param name="type">筛选释放window的级别，释放小于这个级别的所有窗口</param>
 		internal void ReleaseAllWindow(ReleaseType level = ReleaseType.AUTO)
 		{
-			for (int i = _waitReleaseWindow.Count - 1; i >= 0; i--) 
+			for (int i = _waitReleaseWindow.Count - 1; i >= 0; i--)
 			{
-				if (_waitReleaseWindow[i].releaseType<=level)
+				if (_waitReleaseWindow[i].releaseType <= level)
 				{
 					_waitReleaseWindow[i].Remove();
 					_waitReleaseWindow.RemoveAt(i);
@@ -588,11 +584,11 @@ namespace LccHotfix
 			if (_rootStack.Count == 0) return null;
 
 			var top = _rootStack.Peek();
-			if(top.TryGetNode(windowName, out var node))
-            {
+			if (top.TryGetNode(windowName, out var node))
+			{
 				return node as Window;
 			}
-			
+
 			return null;
 		}
 
@@ -600,11 +596,11 @@ namespace LccHotfix
 		{
 			if (_rootStack.Count == 0) return null;
 
-			foreach(var root in _rootStack)
-            {
+			foreach (var root in _rootStack)
+			{
 				if (root.NodeName == rootName)
 					return root;
-            }
+			}
 
 			return null;
 		}
@@ -632,7 +628,7 @@ namespace LccHotfix
 		/// <param name="maskType"></param>
 		internal void ShowMaskBox(int maskType, bool enable)
 		{
-            ShowMaskBoxFunc?.Invoke(maskType, enable);
+			ShowMaskBoxFunc?.Invoke(maskType, enable);
 		}
 
 		/// <summary>
@@ -641,9 +637,9 @@ namespace LccHotfix
 		/// </summary>
 		internal void ShowScreenMask()
 		{
-            ShowScreenMaskFunc?.Invoke();
-        }
+			ShowScreenMaskFunc?.Invoke();
+		}
 
-		
+
 	}
 }

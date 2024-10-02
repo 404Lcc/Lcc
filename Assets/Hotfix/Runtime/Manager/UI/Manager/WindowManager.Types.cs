@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
 namespace LccHotfix
 {
-    internal partial class WindowManager : Module
-    {
+	internal partial class WindowManager : Module
+	{
 		private Dictionary<string, Type> _uiLogics = new Dictionary<string, Type>();
-		
+
 		public void InitializeForAssembly(Assembly assembly)
 		{
 			var types = assembly.GetTypes();
@@ -45,15 +44,12 @@ namespace LccHotfix
 				{
 					iLogic = Entry.GetModule<WindowManager>().GetUILogicMonoFunc(window, monoType);
 				}
-                else
-                {
-	                iLogic = Activator.CreateInstance(monoType) as IUILogic;
+				else
+				{
+					iLogic = Activator.CreateInstance(monoType) as IUILogic;
 				}
 			}
 			return iLogic;
 		}
-
-	
-
 	}
 }

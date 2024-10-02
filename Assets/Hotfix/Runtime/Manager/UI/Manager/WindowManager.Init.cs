@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    internal partial class WindowManager : Module
-    {
+	internal partial class WindowManager : Module
+	{
 		/// <summary>
 		/// 从prefab上获取mono对象
 		/// </summary>
