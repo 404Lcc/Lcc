@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LccHotfix
+﻿namespace LccHotfix
 {
 	public struct WindowMode
 	{
@@ -31,6 +25,4 @@ namespace LccHotfix
 		public string returnNodeName;
 		public int returnNodeParam;
 	}
-
-	
 }
