@@ -20,13 +20,14 @@ namespace LccHotfix
 		/// 窗口的状态
 		/// </summary>
 		protected NodePhase _nodePhase;
+		//是否激活
 		public bool Active => _nodePhase == NodePhase.ACTIVE;
 
 		protected string _nodeName;
 		public string NodeName => _nodeName;
-
+		//根节点
 		public WRootNode rootNode;
-
+		//父节点
 		public WNode parentNode;
 
 		/// <summary>
@@ -47,15 +48,17 @@ namespace LccHotfix
 		/// 从属于同一窗口的子窗口flag的 & 运算结果不能大于0
 		/// </summary>
 		public int RejectFlag { get; protected set; }
-
+		//节点类型
 		public int NodeFlag { get; protected set; }
+		//是否全屏窗口
 		public bool IsFullScreen => (NodeFlag & (int)LccHotfix.NodeFlag.FULL_SCREEN) > 0;
-
+		//是否主窗口
 		public bool IsMainNode => (NodeFlag & (int)LccHotfix.NodeFlag.MAIN_NODE) > 0;
+		//是否顶层窗口
 		public bool IsTopNode => (NodeFlag & (int)LccHotfix.NodeFlag.TOP_NODE) > 0;
-
+		//回退类型
 		public EscapeType escapeType;
-
+		//释放窗口类型
 		public ReleaseType releaseType = ReleaseType.AUTO;
 
 		public int releaseTimer;
@@ -73,7 +76,7 @@ namespace LccHotfix
 			get => _transform;
 			set => _transform = value;
 		}
-
+		//窗口逻辑
 		protected IUILogic _logic;
 		public IUILogic Logic
 		{
@@ -88,7 +91,8 @@ namespace LccHotfix
 			set => _logicName = value;
 		}
 
-		public bool Contains(WNode node)
+        //判断是否包含节点（包含自身）
+        public bool Contains(WNode node)
 		{
 			if (node == this) return true;
 			if (_childNode == null) return false;
@@ -100,7 +104,8 @@ namespace LccHotfix
 			return false;
 		}
 
-		public bool TryGetNode(string windowName, out WNode node)
+        //获取节点（包含自身）
+        public bool TryGetNode(string windowName, out WNode node)
 		{
 			node = null;
 			if (_nodeName.Equals(windowName))
@@ -119,7 +124,8 @@ namespace LccHotfix
 			return false;
 		}
 
-		public bool TryGetNodeForward(string windowName, out WNode node)
+        //从下向上，判断这个节点是否存在，存在则返回节点的父节点
+        public bool TryGetNodeForward(string windowName, out WNode node)
 		{
 			node = null;
 
@@ -145,7 +151,8 @@ namespace LccHotfix
 			return parentNode.TryGetNodeForward(windowName, out node);
 		}
 
-		public WNode GetTopWindow()
+        //获取当前节点下最新的节点
+        public WNode GetTopWindow()
 		{
 			if (_childNode == null || _childNode.Count == 0) return this;
 			return _childNode[_childNode.Count - 1].GetTopWindow();
@@ -173,7 +180,8 @@ namespace LccHotfix
 				Log.Debug($"ui open window {NodeName}");
 				newCreate = false;
 				_nodePhase = NodePhase.OPENED;
-				if (parentNode != null)
+                //如果有父节点则把自己加进父级的子节点
+                if (parentNode != null)
 					parentNode.ChildOpened(this);
 				DoOpen(param);
 
@@ -197,16 +205,19 @@ namespace LccHotfix
 			{
 				for (int i = _childNode.Count - 1; i >= 0; i--)
 				{
-					if ((_childNode[i].RejectFlag & child.RejectFlag) > 0)
+                    //如果是互斥的界面就关掉
+                    if ((_childNode[i].RejectFlag & child.RejectFlag) > 0)
 					{
 						_childNode[i].Close();
 					}
 				}
 			}
+			//加进子节点
 			_childNode.Add(child);
 
 			if (_childNode != null && _childNode.Count > 1)
 			{
+				//找到全屏窗口索引
 				int fullIndex = _childNode.Count;
 				for (int i = _childNode.Count - 1; i >= 0; i--)
 				{
@@ -216,10 +227,12 @@ namespace LccHotfix
 						break;
 					}
 				}
-
-				for (int i = _childNode.Count - 2; i >= 0; i--)
+                //如果没找到全屏窗口fullIndex就是_childNode.Count。-2是排除刚才加入的节点
+                for (int i = _childNode.Count - 2; i >= 0; i--)
 				{
-					if (i < fullIndex && !_childNode[i].IsTopNode)
+                    //小于全屏索引的节点并且不是顶层窗口的节点全部暂停，否则调用恢复窗口
+					//用小于是因为全屏窗口不要暂停
+                    if (i < fullIndex && !_childNode[i].IsTopNode)
 						_childNode[i].Pause();
 					else
 						_childNode[i].Resume();
@@ -232,15 +245,18 @@ namespace LccHotfix
 
 		public void Resume()
 		{
+			//如果是暂停状态
 			if (_nodePhase == NodePhase.OPENED)
 			{
 				if (parentNode != null && parentNode._nodePhase < NodePhase.ACTIVE) return;
 				Log.Debug($"ui resume window {NodeName}");
+				//设置成激活
 				_nodePhase = NodePhase.ACTIVE;
 				DoResume();
 				if (_childNode != null && _childNode.Count > 0)
-				{
-					int fullIndex = _childNode.Count;
+                {
+					//找到全屏窗口索引
+                    int fullIndex = _childNode.Count;
 					for (int i = _childNode.Count - 1; i >= 0; i--)
 					{
 						fullIndex = i;
@@ -250,8 +266,10 @@ namespace LccHotfix
 						}
 					}
 
+					//找到全屏窗口后面的节点，包含全屏窗口
 					for (int i = fullIndex; i < _childNode.Count; i++)
 					{
+						//给子节点恢复
 						_childNode[i].Resume();
 					}
 				}
@@ -259,11 +277,14 @@ namespace LccHotfix
 		}
 		public void Pause()
 		{
+			//如果是激活状态
 			if (_nodePhase == NodePhase.ACTIVE)
 			{
 				Log.Debug($"ui pause window {NodeName}");
 				DoPause();
+				//设置成暂停
 				_nodePhase = NodePhase.OPENED;
+				//给子节点全部暂停
 				if (_childNode != null && _childNode.Count > 0)
 				{
 					for (int i = _childNode.Count - 1; i >= 0; i--)
@@ -276,22 +297,28 @@ namespace LccHotfix
 
 		public object Close()
 		{
+			//如果激活状态，先暂停
 			if (_nodePhase == NodePhase.ACTIVE)
 			{
 				Pause();
 			}
+			//如果是暂停状态
 			if (_nodePhase == NodePhase.OPENED)
 			{
 				Log.Debug($"ui close window {NodeName}");
+				//如果有父级
 				// 由下向上
 				if (parentNode != null)
 				{
+					//移除从父级移除当前节点
 					parentNode.ChildClosed(this);
 				}
+				//如果是当前节点是根节点，则移除根节点
 				else if (this is WRootNode)
 				{
 					Entry.GetModule<WindowManager>().RemoveRoot(this as WRootNode);
 				}
+				//移除当前节点的子节点
 				// 由上向下
 				while (_childNode != null && _childNode.Count > 0)
 				{
@@ -302,6 +329,7 @@ namespace LccHotfix
 				}
 				_childNode = null;
 				returnNode = null;
+				//设置关闭状态
 				_nodePhase = NodePhase.DEACTIVE;
 				var returnValue = DoClose();
 
@@ -313,6 +341,7 @@ namespace LccHotfix
 		{
 			if (_childNode == null)
 				return;
+			//移除节点
 			_childNode.Remove(child);
 			child.parentNode = null;
 			child.rootNode = null;
@@ -357,9 +386,10 @@ namespace LccHotfix
 		}
 
 
-
+		//处理子节点退出
 		public bool ChildRequireEscape(WNode child)
 		{
+			//判断条件
 			if (DoChildRequireEscape(child))
 			{
 				child.Close();
@@ -368,16 +398,27 @@ namespace LccHotfix
 			return false;
 		}
 
+		//开始
 		protected virtual void DoStart() { }
+		//更新
 		protected virtual void DoUpdate() { }
+		//打开
 		protected virtual void DoOpen(object[] param) { }
+		//重置
 		protected virtual void DoReset(object[] param) { }
+		//恢复
 		protected virtual void DoResume() { }
+		//暂停
 		protected virtual void DoPause() { }
+		//关闭
 		protected virtual object DoClose() { return null; }
+		//移除（彻底关闭）
 		protected virtual void DoRemove() { }
+		//切换窗口
 		protected virtual void DoSwitch(Action<bool> callback) { }
+		//子节点打开
 		protected virtual void DoChildOpened(WNode child) { }
+		//子节点关闭
 		protected virtual void DoChildClosed(WNode child) { }
 
 		/// <summary>
@@ -389,6 +430,7 @@ namespace LccHotfix
 		{
 			return true;
 		}
+		//处理窗口返回
 		protected virtual bool DoEscape(ref EscapeType escape)
 		{
 			escape = this.escapeType;
@@ -405,11 +447,11 @@ namespace LccHotfix
 			return true;
 		}
 
-
+		//尝试关闭子窗口，根据名称
 		public bool TryCloseChild(string windowClose, out object val)
 		{
 			val = null;
-
+			//如果是自己是关闭
 			if (windowClose == NodeName)
 			{
 				val = Close();
@@ -417,6 +459,7 @@ namespace LccHotfix
 			}
 			else
 			{
+				//如果不是就找子节点
 				if (_childNode == null || _childNode.Count == 0) return false;
 				for (int i = _childNode.Count - 1; i >= 0; i--)
 				{
@@ -428,6 +471,7 @@ namespace LccHotfix
 			return false;
 		}
 
+		//关闭子窗口，根据互斥
 		public void CloseChild(int flag)
 		{
 			if ((RejectFlag & flag) > 0)
@@ -441,6 +485,7 @@ namespace LccHotfix
 			}
 		}
 
+		//关闭所有子窗口
 		public void CloseAllChild()
 		{
 			if (_childNode == null || _childNode.Count == 0) return;
@@ -450,7 +495,7 @@ namespace LccHotfix
 			}
 		}
 
-
+		//更新移除
 		public bool AutoRemove()
 		{
 			if (releaseType > ReleaseType.AUTO)
