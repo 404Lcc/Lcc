@@ -232,7 +232,7 @@ namespace LccHotfix
                 if (root.stackIndex < 0)
 				{
 					switchScreen = true;
-                    //如果前面有老的root，先暂停
+                    //把栈顶的节点暂停
                     if (_rootStack.Count > 0)
 						_rootStack.Peek().Pause();
 					root.stackIndex = _rootStack.Count;
@@ -284,6 +284,7 @@ namespace LccHotfix
 					{
 						for (int i = root.ChildNode.Count - 1; i >= 0; i--)
 						{
+							//把当前窗口后面的窗口全部关闭
 							if (root.ChildNode[i] == window)
 								break;
 							root.ChildNode[i].Close();

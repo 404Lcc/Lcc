@@ -49,6 +49,7 @@ namespace LccHotfix
 					returnNode.nodeParam = new object[] { WindowMode.returnNodeParam };
 			}
 
+			//内部打开
 			InternalOpen(true);
 			_logic.OnOpen(param);
 		}
@@ -59,34 +60,41 @@ namespace LccHotfix
 
 		protected override void DoResume()
 		{
+			//内部恢复
 			InternalResume(true);
 
 			_logic.OnResume();
 		}
 		protected override void DoPause()
 		{
+			//内部暂停
 			InternalResume(false);
 			_logic.OnPause();
 		}
 
 		protected override object DoClose()
 		{
+			//内部关闭
 			InternalOpen(false);
 			var backValue = _logic.OnClose();
-			Entry.GetModule<WindowManager>().OnWindowClose(NodeName, backValue);
-			Entry.GetModule<WindowManager>().AddToReleaseQueue(this);
+            //触发关闭节点回调
+            Entry.GetModule<WindowManager>().OnWindowClose(NodeName, backValue);
+            //加入到释放列表
+            Entry.GetModule<WindowManager>().AddToReleaseQueue(this);
 			return backValue;
 		}
 		protected override void DoChildClosed(WNode child)
 		{
-			if (rootNode.Active)
+            //如果根节点激活
+            if (rootNode.Active)
 			{
 				TurnNode turn = child.returnNode;
 
-				if (turn != null)
+                //如果有关闭后返回窗口，尝试打开
+                if (turn != null)
 				{
-
-					if (!TryGetNodeForward(turn.nodeName, out WNode node))
+                    //如果没有父节点，尝试根据类型打开窗口
+                    if (!TryGetNodeForward(turn.nodeName, out WNode node))
 					{
 						switch (turn.nodeType)
 						{
@@ -101,12 +109,13 @@ namespace LccHotfix
 				}
 			}
 
-
-			if (Active && child.IsFullScreen)
+            //如果当前节点激活并且关闭的子节点是全屏窗口
+            if (Active && child.IsFullScreen)
 			{
 				if (_childNode != null && _childNode.Count > 0)
 				{
-					int fullIndex = _childNode.Count;
+                    //找到最新的全屏窗口索引
+                    int fullIndex = _childNode.Count;
 					for (int i = _childNode.Count - 1; i >= 0; i--)
 					{
 						fullIndex = i;
@@ -116,7 +125,8 @@ namespace LccHotfix
 						}
 					}
 
-					if (fullIndex < _childNode.Count)
+                    //找到全屏窗口后面的节点，包含这个全屏窗口
+                    if (fullIndex < _childNode.Count)
 					{
 						for (int i = _childNode.Count - 1; i >= fullIndex; i--)
 						{
@@ -126,6 +136,7 @@ namespace LccHotfix
 				}
 			}
 		}
+		//处理窗口返回
 		protected override bool DoEscape(ref EscapeType escape)
 		{
 			escape = this.escapeType;
@@ -144,7 +155,8 @@ namespace LccHotfix
 			return true;
 		}
 
-		protected override bool DoChildRequireEscape(WNode child)
+        //子节点请求退出
+        protected override bool DoChildRequireEscape(WNode child)
 		{
 			if (_logic != null)
 			{
@@ -152,7 +164,7 @@ namespace LccHotfix
 			}
 			return true;
 		}
-
+		//移除
 		protected override void DoRemove()
 		{
 			_logic.OnRemove();
@@ -160,7 +172,7 @@ namespace LccHotfix
 				Object.Destroy(gameObject);
 		}
 
-
+		//创建窗口
 		public void CreateWindowView()
 		{
 			_gameObject = Entry.GetModule<WindowManager>().LoadGameObject?.Invoke(_mode.prefabName);
@@ -173,12 +185,12 @@ namespace LccHotfix
 		}
 
 
-
+		//内部打开关闭
 		private void InternalOpen(bool enable)
 		{
 			gameObject?.SetActive(enable);
 		}
-
+		//内部恢复暂停
 		private void InternalResume(bool enable)
 		{
 			Entry.GetModule<WindowManager>().PauseWindowFunc?.Invoke(transform, enable);

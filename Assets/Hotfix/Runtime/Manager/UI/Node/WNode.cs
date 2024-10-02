@@ -232,6 +232,7 @@ namespace LccHotfix
 				{
                     //小于全屏索引的节点并且不是顶层窗口的节点全部暂停，否则调用恢复窗口
 					//用小于是因为全屏窗口不要暂停
+					//主要节点也会暂停
                     if (i < fullIndex && !_childNode[i].IsTopNode)
 						_childNode[i].Pause();
 					else

@@ -71,7 +71,9 @@ namespace LccHotfix
             object backValue = null;
             if (_logic != null)
                 backValue = _logic.OnClose();
+            //触发关闭节点回调
             Entry.GetModule<WindowManager>().OnWindowClose(NodeName, backValue);
+            //加入到释放列表
             Entry.GetModule<WindowManager>().AddToReleaseQueue(this);
             return backValue;
         }
@@ -82,7 +84,7 @@ namespace LccHotfix
                 return _logic.OnEscape(ref escape);
             return base.DoEscape(ref escape);
         }
-
+        //移除
         protected override void DoRemove()
         {
             _logic?.OnRemove();
@@ -95,13 +97,15 @@ namespace LccHotfix
         }
         protected override void DoChildClosed(WNode child)
         {
+            //如果根节点激活
             if (Active)
             {
                 TurnNode turn = child.returnNode;
 
+                //如果有关闭后返回窗口，尝试打开
                 if (turn != null)
                 {
-
+                    //根节点肯定没有父节点，尝试根据类型打开窗口
                     if (!TryGetNodeForward(turn.nodeName, out WNode node))
                     {
                         switch (turn.nodeType)
@@ -125,6 +129,7 @@ namespace LccHotfix
             }
             else
             {
+                //根据子节点状态，检查是否需要关闭根节点
                 if (DefaultChildCheck())
                 {
                     Close();
@@ -132,11 +137,12 @@ namespace LccHotfix
                 }
             }
 
-
+            //如果当前节点激活并且关闭的子节点是全屏窗口
             if (Active && child.IsFullScreen)
             {
                 if (_childNode != null && _childNode.Count > 0)
                 {
+                    //找到最新的全屏窗口索引
                     int fullIndex = _childNode.Count;
                     for (int i = _childNode.Count - 1; i >= 0; i--)
                     {
@@ -147,10 +153,12 @@ namespace LccHotfix
                         }
                     }
 
+                    //找到全屏窗口后面的节点，包含这个全屏窗口
                     if (fullIndex < _childNode.Count)
                     {
                         for (int i = _childNode.Count - 1; i >= fullIndex; i--)
                         {
+                            //给子节点恢复
                             _childNode[i].Resume();
                         }
                     }
@@ -158,6 +166,7 @@ namespace LccHotfix
             }
 
         }
+        //子节点请求退出
         protected override bool DoChildRequireEscape(WNode child)
         {
             if (_logic != null)
@@ -183,6 +192,7 @@ namespace LccHotfix
 
             foreach (WNode wNode in _childNode)
             {
+                //如果有主要节点，则不关闭
                 if (wNode.IsMainNode)
                 {
                     return false;
