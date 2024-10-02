@@ -24,8 +24,6 @@ namespace LccHotfix
 		/// 2：每次打开都显示
 		/// </summary>
 		public int showScreenMask;
-		public int canShowLouder;
-		public int louderY;
 		public int windowFlag;
 		public int rejectFlag;
 		public EscapeType escapeType;

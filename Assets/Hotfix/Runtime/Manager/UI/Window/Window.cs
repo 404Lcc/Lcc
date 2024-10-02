@@ -66,14 +66,7 @@ namespace LccHotfix
 		protected override void DoResume()
         {
 			InternalResume(true);
-			if (WindowMode.canShowLouder == 1)
-			{
-                Entry.GetModule<WindowManager>().CommonRoot.Blackboard.Set(BlackboardType.UILouderSetDepth, new List<object>() { WindowMode.depth + 100, WindowMode.louderY });
-			}
-			else if (WindowMode.canShowLouder == 0 && WindowMode.windowFlag > 0)
-			{
-                Entry.GetModule<WindowManager>().CommonRoot.Blackboard.Set(BlackboardType.UILouderSetDepth, new List<object>() { WindowMode.depth - 100, WindowMode.louderY });
-			}
+		
 			_logic.OnResume();
 		}
         protected override void DoPause()
@@ -194,13 +187,7 @@ namespace LccHotfix
 
 		private void InternalResume(bool enable)
 		{
-			if (WindowMode.canShowLouder == 1)
-			{
-				if (enable)
-                    Entry.GetModule<WindowManager>().CommonRoot.Blackboard.SetNum(BlackboardType.UILouderIsShow, 1);
-				else
-                    Entry.GetModule<WindowManager>().CommonRoot.Blackboard.UnsetNum(BlackboardType.UILouderIsShow, 1);
-			}
+		
 
             Entry.GetModule<WindowManager>().PauseWindowFunc?.Invoke(transform, enable);
 			

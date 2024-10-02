@@ -73,10 +73,4 @@
         CHANGE_SCENE    = 1 << 2,
         NET_REQUEST     = 1 << 3,
     }
-
-    public class BlackboardType
-    {
-        public const string UILouderIsShow = "UILouderIsShow";
-        public const string UILouderSetDepth = "UILouderSetDepth";
-    }
 }
