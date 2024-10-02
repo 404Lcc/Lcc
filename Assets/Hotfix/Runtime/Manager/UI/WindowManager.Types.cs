@@ -23,7 +23,7 @@ namespace LccHotfix
 		}
 		public void CreateUILogic(Window window)
 		{
-			IUILogic iLogic = CreateLogic(window.logicName, window);
+			IUILogic iLogic = CreateLogic(window.LogicName, window);
 			if (iLogic != null)
 			{
 				window.logic = iLogic;
@@ -31,7 +31,7 @@ namespace LccHotfix
 			}
 			else
 			{
-				Log.Error($"window {window.nodeName} can't find logic {window.logicName}");
+				Log.Error($"window {window.NodeName} can't find logic {window.LogicName}");
 			}
 		}
 		public IUILogic CreateLogic(string logicName, Window window)

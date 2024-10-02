@@ -22,26 +22,26 @@ namespace LccHotfix
 		/// <summary>
 		/// 窗口的状态
 		/// </summary>
-		protected NodePhase nodePhase;
-		public bool active { get { return nodePhase == NodePhase.ACTIVE; } }
+		protected NodePhase _nodePhase;
+		public bool Active => _nodePhase == NodePhase.ACTIVE;
 
-		protected string w_nodeName;
-		public string nodeName => w_nodeName;
+        protected string _nodeName;
+		public string NodeName => _nodeName;
 
-		public WRootNode RootNode;
+		public WRootNode rootNode;
 
-		public WNode ParentNode;
+		public WNode parentNode;
 
 		/// <summary>
 		/// 全屏界面可以包含许多子界面
 		/// </summary>
-		protected List<WNode> m_childNode;
-		public List<WNode> childNode { get { return m_childNode; } }
-		
-		/// <summary>
-		/// 关闭后会返回的界面
-		/// </summary>
-		public TurnNode returnNode;
+		protected List<WNode> _childNode;
+		public List<WNode> ChildNode => _childNode;
+
+        /// <summary>
+        /// 关闭后会返回的界面
+        /// </summary>
+        public TurnNode returnNode;
 
 		public bool newCreate = true;
 		
@@ -49,19 +49,19 @@ namespace LccHotfix
 		/// 用于处理两个窗口彼此互斥的情况
 		/// 从属于同一窗口的子窗口flag的 & 运算结果不能大于0
 		/// </summary>
-		public int rejectFlag { get; protected set; }
+		public int RejectFlag { get; protected set; }
 		
 		public int nodeFlag { get; protected set; }
-		public bool isFullScreen
+		public bool IsFullScreen
 		{
 			get { return (nodeFlag & (int) NodeFlag.FULL_SCREEN) > 0; }
 		}
 
-		public bool isMainNode
+		public bool IsMainNode
 		{
 			get { return (nodeFlag & (int) NodeFlag.MAIN_NODE) > 0; }
 		}
-		public bool isTopNode
+		public bool IsTopNode
 		{
 			get { return (nodeFlag & (int)NodeFlag.TOP_NODE) > 0; }
 		}
@@ -72,39 +72,39 @@ namespace LccHotfix
 
 		public int releaseTimer;
 
-		protected GameObject w_gameObject;
+		protected GameObject _gameObject;
 		public GameObject gameObject
 		{
-			get => w_gameObject;
-			set => w_gameObject = value;
+			get => _gameObject;
+			set => _gameObject = value;
 		}
 
-		protected Transform w_transform;
+		protected Transform _transform;
 		public Transform transform
 		{
-			get => w_transform;
-			set => w_transform = value;
+			get => _transform;
+			set => _transform = value;
 		}
 
-		protected IUILogic w_logic;
+		protected IUILogic _logic;
 		public IUILogic logic
 		{
-			get => w_logic;
-			set => w_logic = value;
+			get => _logic;
+			set => _logic = value;
 		}
 
-		protected string w_logicName;
-		public string logicName
+		protected string _logicName;
+		public string LogicName
 		{
-			get => w_logicName;
-			set => w_logicName = value;
+			get => _logicName;
+			set => _logicName = value;
 		}
 
 		public bool Contains(WNode node)
 		{
 			if (node == this) return true;
-			if (m_childNode == null) return false;
-			foreach (WNode childNode in m_childNode)
+			if (_childNode == null) return false;
+			foreach (WNode childNode in _childNode)
             {
 				if( childNode.Contains(node))
 					return true;
@@ -115,13 +115,13 @@ namespace LccHotfix
 		public bool TryGetNode(string windowName, out WNode node)
 		{
 			node = null;
-			if (w_nodeName.Equals(windowName)) 
+			if (_nodeName.Equals(windowName)) 
             {
 				node = this;
 				return true;
             }
-			if (m_childNode == null || m_childNode.Count == 0) return false;
-			foreach (var childNode in m_childNode)
+			if (_childNode == null || _childNode.Count == 0) return false;
+			foreach (var childNode in _childNode)
 			{
 				if (childNode.TryGetNode(windowName, out node))
 				{
@@ -135,43 +135,43 @@ namespace LccHotfix
 		{
 			node = null;
 
-			if (ParentNode == null) return false;
-			if (ParentNode.nodeName == windowName)
+			if (parentNode == null) return false;
+			if (parentNode.NodeName == windowName)
 			{
-				node = ParentNode;
+				node = parentNode;
 				return true;
 			}
 
-			if (ParentNode.m_childNode != null && ParentNode.m_childNode.Count > 0)
+			if (parentNode._childNode != null && parentNode._childNode.Count > 0)
 			{
-				foreach(var child in ParentNode.m_childNode)
+				foreach(var child in parentNode._childNode)
 				{
-					if (child.nodeName == windowName)
+					if (child.NodeName == windowName)
 					{
-						node = ParentNode;
+						node = parentNode;
 						return true;
 					}
 				}
 			}
 
-			return ParentNode.TryGetNodeForward(windowName, out node);
+			return parentNode.TryGetNodeForward(windowName, out node);
 		}
 
 		public WNode GetTopWindow()
 		{
-			if (m_childNode == null || m_childNode.Count == 0) return this;
-			return m_childNode[m_childNode.Count - 1].GetTopWindow();
+			if (_childNode == null || _childNode.Count == 0) return this;
+			return _childNode[_childNode.Count - 1].GetTopWindow();
 		}
 
 		public void Start()
         {
-			nodePhase = NodePhase.DEACTIVE;
+			_nodePhase = NodePhase.DEACTIVE;
 			DoStart();
 		}
 
 		public void Update()
         {
-			if (nodePhase == NodePhase.ACTIVE)
+			if (_nodePhase == NodePhase.ACTIVE)
             {
 				DoUpdate();
 			}
@@ -179,14 +179,14 @@ namespace LccHotfix
 		public void Open(object[] param)
         {
 
-			if (nodePhase == NodePhase.DEACTIVE)
+			if (_nodePhase == NodePhase.DEACTIVE)
             {
-				if (ParentNode != null && ParentNode.nodePhase < NodePhase.OPENED) return;
-				Log.Debug($"ui open window {nodeName}");
+				if (parentNode != null && parentNode._nodePhase < NodePhase.OPENED) return;
+				Log.Debug($"ui open window {NodeName}");
 				newCreate = false;
-				nodePhase = NodePhase.OPENED;
-				if (ParentNode != null)
-					ParentNode.ChildOpened(this);
+				_nodePhase = NodePhase.OPENED;
+				if (parentNode != null)
+					parentNode.ChildOpened(this);
 				DoOpen(param);
 				
 			}
@@ -194,7 +194,7 @@ namespace LccHotfix
 
 		public void Reset(object[] param)
 		{
-			if (nodePhase >= NodePhase.OPENED)
+			if (_nodePhase >= NodePhase.OPENED)
 			{
 				DoReset(param);
 			}
@@ -202,39 +202,39 @@ namespace LccHotfix
 
 		public void ChildOpened(WNode child)
 		{
-			if (m_childNode == null)
-				m_childNode = new List<WNode>();
+			if (_childNode == null)
+				_childNode = new List<WNode>();
 			// 检查节点标记
-			if (m_childNode != null && m_childNode.Count > 0)
+			if (_childNode != null && _childNode.Count > 0)
 			{
-				for (int i = m_childNode.Count - 1; i >= 0; i--)
+				for (int i = _childNode.Count - 1; i >= 0; i--)
 				{
-					if ((m_childNode[i].rejectFlag & child.rejectFlag) > 0)
+					if ((_childNode[i].RejectFlag & child.RejectFlag) > 0)
 					{
-						m_childNode[i].Close();
+						_childNode[i].Close();
 					}
 				}
 			}
-			m_childNode.Add(child);
+			_childNode.Add(child);
 
-			if (m_childNode != null && m_childNode.Count > 1)
+			if (_childNode != null && _childNode.Count > 1)
 			{
-				int fullIndex = m_childNode.Count;
-				for (int i = m_childNode.Count - 1; i >= 0; i--)
+				int fullIndex = _childNode.Count;
+				for (int i = _childNode.Count - 1; i >= 0; i--)
 				{
 					fullIndex = i;
-					if (m_childNode[i].isFullScreen)
+					if (_childNode[i].IsFullScreen)
 					{
 						break;
 					}
 				}
 
-				for (int i = m_childNode.Count - 2; i >= 0; i--)
+				for (int i = _childNode.Count - 2; i >= 0; i--)
 				{
-					if (i < fullIndex && !m_childNode[i].isTopNode) 
-						m_childNode[i].Pause();
+					if (i < fullIndex && !_childNode[i].IsTopNode) 
+						_childNode[i].Pause();
 					else
-						m_childNode[i].Resume();
+						_childNode[i].Resume();
 				}
 
 			}
@@ -244,43 +244,43 @@ namespace LccHotfix
 
 		public void Resume()
         {
-			if (nodePhase == NodePhase.OPENED)
+			if (_nodePhase == NodePhase.OPENED)
 			{
-				if (ParentNode != null && ParentNode.nodePhase < NodePhase.ACTIVE) return;
-				Log.Debug($"ui resume window {nodeName}");
-				nodePhase = NodePhase.ACTIVE;
+				if (parentNode != null && parentNode._nodePhase < NodePhase.ACTIVE) return;
+				Log.Debug($"ui resume window {NodeName}");
+				_nodePhase = NodePhase.ACTIVE;
 				DoResume();
-				if (m_childNode != null && m_childNode.Count > 0)
+				if (_childNode != null && _childNode.Count > 0)
 				{
-					int fullIndex = m_childNode.Count;
-					for (int i = m_childNode.Count - 1; i >= 0; i--)
+					int fullIndex = _childNode.Count;
+					for (int i = _childNode.Count - 1; i >= 0; i--)
 					{
 						fullIndex = i;
-						if (m_childNode[i].isFullScreen)
+						if (_childNode[i].IsFullScreen)
 						{
 							break;
 						}
 					}
 
-					for (int i = fullIndex; i < m_childNode.Count; i++) 
+					for (int i = fullIndex; i < _childNode.Count; i++) 
 					{
-						m_childNode[i].Resume();
+						_childNode[i].Resume();
 					}
 				}
 			}
 		}
 		public void Pause()
         {
-			if (nodePhase == NodePhase.ACTIVE)
+			if (_nodePhase == NodePhase.ACTIVE)
 			{
-				Log.Debug($"ui pause window {nodeName}");
+				Log.Debug($"ui pause window {NodeName}");
 				DoPause();
-				nodePhase = NodePhase.OPENED;
-				if (m_childNode != null && m_childNode.Count > 0)
+				_nodePhase = NodePhase.OPENED;
+				if (_childNode != null && _childNode.Count > 0)
 				{
-					for (int i = m_childNode.Count - 1; i >= 0; i--)
+					for (int i = _childNode.Count - 1; i >= 0; i--)
 					{
-						m_childNode[i].Pause();
+						_childNode[i].Pause();
 					}
 				}
 			}
@@ -288,33 +288,33 @@ namespace LccHotfix
 
 		public object Close()
         {
-			if (nodePhase == NodePhase.ACTIVE)
+			if (_nodePhase == NodePhase.ACTIVE)
             {
 				Pause();
 			}
-			if (nodePhase == NodePhase.OPENED)
+			if (_nodePhase == NodePhase.OPENED)
 			{
-				Log.Debug($"ui close window {nodeName}");
+				Log.Debug($"ui close window {NodeName}");
 				// 由下向上
-				if (ParentNode != null)
+				if (parentNode != null)
 				{
-					ParentNode.ChildClosed(this);
+					parentNode.ChildClosed(this);
 				}
                 else if(this is WRootNode)
                 {
                     Entry.GetModule<WindowManager>().RemoveRoot(this as WRootNode);
                 }
 				// 由上向下
-				while (m_childNode != null && m_childNode.Count > 0)
+				while (_childNode != null && _childNode.Count > 0)
 				{
-					var child = m_childNode[m_childNode.Count - 1];
-					m_childNode.RemoveAt(m_childNode.Count - 1);
-					child.ParentNode = null;
+					var child = _childNode[_childNode.Count - 1];
+					_childNode.RemoveAt(_childNode.Count - 1);
+					child.parentNode = null;
 					child.Close();
 				}
-				m_childNode = null;
+				_childNode = null;
 				returnNode = null;
-				nodePhase = NodePhase.DEACTIVE;
+				_nodePhase = NodePhase.DEACTIVE;
 				var returnValue = DoClose();
 
 				return returnValue;
@@ -323,11 +323,11 @@ namespace LccHotfix
 		}
 		public void ChildClosed(WNode child)
 		{
-			if (m_childNode == null)
+			if (_childNode == null)
 				return;
-			m_childNode.Remove(child);
-			child.ParentNode = null;
-			child.RootNode = null;
+			_childNode.Remove(child);
+			child.parentNode = null;
+			child.rootNode = null;
 
 			DoChildClosed(child);
 
@@ -354,11 +354,11 @@ namespace LccHotfix
 		public bool Escape(ref EscapeType escape)
         {
 			// 首先处理子节点的返回
-			if (m_childNode != null && m_childNode.Count > 0)
+			if (_childNode != null && _childNode.Count > 0)
 			{
-				for (int i = m_childNode.Count - 1; i >= 0; i--)
+				for (int i = _childNode.Count - 1; i >= 0; i--)
 				{
-					if (m_childNode[i].Escape(ref escape))
+					if (_childNode[i].Escape(ref escape))
 					{
 						return true;
 					}
@@ -406,9 +406,9 @@ namespace LccHotfix
 			escape = this.escapeType;
 			if (escape == EscapeType.SKIP_OVER)
 				return false;
-			if (escape == EscapeType.AUTO_CLOSE && ParentNode != null)
+			if (escape == EscapeType.AUTO_CLOSE && parentNode != null)
 			{
-				if (!ParentNode.ChildRequireEscape(this))
+				if (!parentNode.ChildRequireEscape(this))
 				{
 					escape = EscapeType.REFUSE_AND_BREAK;
 					return false;
@@ -422,17 +422,17 @@ namespace LccHotfix
 		{
 			val = null;
 
-			if (windowClose == nodeName)
+			if (windowClose == NodeName)
 			{
 				val = Close();
 				return true;
 			}
 			else
 			{
-				if (m_childNode == null || m_childNode.Count == 0) return false;
-				for (int i = m_childNode.Count - 1; i >= 0; i--)
+				if (_childNode == null || _childNode.Count == 0) return false;
+				for (int i = _childNode.Count - 1; i >= 0; i--)
 				{
-					if (m_childNode[i].TryCloseChild(windowClose, out val))
+					if (_childNode[i].TryCloseChild(windowClose, out val))
 						return true;
 				}
 			}
@@ -442,23 +442,23 @@ namespace LccHotfix
 
 		public void CloseChild(int flag)
 		{
-			if ((rejectFlag & flag) > 0)
+			if ((RejectFlag & flag) > 0)
 			{
 				Close();
 			}
-			if (m_childNode == null || m_childNode.Count == 0) return;
-			for (int i = m_childNode.Count - 1; i >= 0; i--)
+			if (_childNode == null || _childNode.Count == 0) return;
+			for (int i = _childNode.Count - 1; i >= 0; i--)
 			{
-				m_childNode[i].CloseChild(flag);
+				_childNode[i].CloseChild(flag);
 			}
 		}
 
 		public void CloseAllChild()
 		{
-			if (m_childNode == null || m_childNode.Count == 0) return;
-			for (int i = m_childNode.Count - 1; i >= 0; i--)
+			if (_childNode == null || _childNode.Count == 0) return;
+			for (int i = _childNode.Count - 1; i >= 0; i--)
 			{
-				m_childNode[i].Close();
+				_childNode[i].Close();
 			}
 		}
 
@@ -483,9 +483,9 @@ namespace LccHotfix
 		public void GetAllChild(List<WNode> childList)
         {
 			childList.Add(this);
-			if (m_childNode != null)
+			if (_childNode != null)
             {
-				foreach (var child in m_childNode)
+				foreach (var child in _childNode)
 				{
 					child.GetAllChild(childList);
 				}

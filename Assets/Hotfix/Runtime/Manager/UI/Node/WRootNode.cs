@@ -17,31 +17,31 @@ namespace LccHotfix
         public WBlackboard Blackboard => w_blackboard;
         public WRootNode(string rootName)
         {
-            this.w_nodeName = rootName;
-            this.w_logicName = rootName;
-            this.RootNode = this;
+            this._nodeName = rootName;
+            this._logicName = rootName;
+            this.rootNode = this;
             this.escapeType = EscapeType.AUTO_CLOSE;
             this.releaseType = ReleaseType.AUTO;
             this.w_blackboard = new WBlackboard();
-            this.w_logic = Entry.GetModule<WindowManager>().CreateLogic(rootName, null);
-            if (w_logic != null)
-                w_logic.wNode = this;
+            this._logic = Entry.GetModule<WindowManager>().CreateLogic(rootName, null);
+            if (_logic != null)
+                _logic.wNode = this;
         }
 
         protected override void DoStart()
         {
-            w_logic?.OnStart();
+            _logic?.OnStart();
         }
         protected override void DoUpdate()
         {
-            w_logic?.OnUpdate();
+            _logic?.OnUpdate();
             w_blackboard?.Update();
         }
         protected override void DoSwitch(Action<bool> callback)
         {
-            if (w_logic != null)
+            if (_logic != null)
             {
-                w_logic.OnSwitch(callback);
+                _logic.OnSwitch(callback);
             }
             else
             {
@@ -51,53 +51,53 @@ namespace LccHotfix
         protected override void DoOpen(object[] param)
         {
 			gameObject?.SetActive(true);
-			w_logic?.OnOpen(param);
+			_logic?.OnOpen(param);
         }
 		protected override void DoReset(object[] param)
 		{
-			w_logic?.OnReset(param);
+			_logic?.OnReset(param);
 		}
 
 		protected override void DoResume()
         {
-            w_logic?.OnResume();
+            _logic?.OnResume();
         }
         protected override void DoPause()
         {
-            w_logic?.OnPause();
+            _logic?.OnPause();
         }
 
         protected override object DoClose()
         {
 			gameObject?.SetActive(false);
             object backValue = null;
-            if (w_logic != null)
-                backValue = w_logic.OnClose();
-            Entry.GetModule<WindowManager>().OnWindowClose(nodeName, backValue);
+            if (_logic != null)
+                backValue = _logic.OnClose();
+            Entry.GetModule<WindowManager>().OnWindowClose(NodeName, backValue);
             Entry.GetModule<WindowManager>().AddToReleaseQueue(this);
             return backValue;
         }
 
         protected override bool DoEscape(ref EscapeType escape)
         {
-            if (w_logic != null)
-                return w_logic.OnEscape(ref escape);
+            if (_logic != null)
+                return _logic.OnEscape(ref escape);
             return base.DoEscape(ref escape);
         }
 
         protected override void DoRemove()
         {
-            w_logic?.OnRemove();
+            _logic?.OnRemove();
 			if (gameObject != null)
 				UnityEngine.Object.Destroy(gameObject);
 		}
 	    protected override void DoChildOpened(WNode child)
         {
-            w_logic?.OnChildOpened(child);
+            _logic?.OnChildOpened(child);
         }
         protected override void DoChildClosed(WNode child)
         {
-			if (active)
+			if (Active)
 			{
 				TurnNode turn = child.returnNode;
 
@@ -120,9 +120,9 @@ namespace LccHotfix
 			}
 			
 
-			if (w_logic != null)
+			if (_logic != null)
 			{
-                if (w_logic.OnChildClosed(child))
+                if (_logic.OnChildClosed(child))
                     return;
 			}
 			else
@@ -135,25 +135,25 @@ namespace LccHotfix
 			}
 
 
-			if (active && child.isFullScreen)
+			if (Active && child.IsFullScreen)
 			{
-				if (m_childNode != null && m_childNode.Count > 0)
+				if (_childNode != null && _childNode.Count > 0)
 				{
-					int fullIndex = m_childNode.Count;
-					for (int i = m_childNode.Count - 1; i >= 0; i--)
+					int fullIndex = _childNode.Count;
+					for (int i = _childNode.Count - 1; i >= 0; i--)
 					{
 						fullIndex = i;
-						if (m_childNode[i].isFullScreen)
+						if (_childNode[i].IsFullScreen)
 						{
 							break;
 						}
 					}
 
-					if (fullIndex < m_childNode.Count)
+					if (fullIndex < _childNode.Count)
 					{
-						for (int i = m_childNode.Count - 1; i >= fullIndex; i--)
+						for (int i = _childNode.Count - 1; i >= fullIndex; i--)
 						{
-							m_childNode[i].Resume();
+							_childNode[i].Resume();
 						}
 					}
 				}
@@ -162,9 +162,9 @@ namespace LccHotfix
 		}
         protected override bool DoChildRequireEscape(WNode child)
         {
-            if (w_logic != null)
+            if (_logic != null)
             {
-                return w_logic.OnChildRequireEscape(child);
+                return _logic.OnChildRequireEscape(child);
             }
             
             return true; 
@@ -178,14 +178,14 @@ namespace LccHotfix
         /// <returns></returns>
         public bool DefaultChildCheck()
 		{
-			if (m_childNode == null || m_childNode.Count == 0)
+			if (_childNode == null || _childNode.Count == 0)
 			{
 				return true;
 			}
 
-			foreach (WNode wNode in m_childNode)
+			foreach (WNode wNode in _childNode)
 			{
-				if (wNode.isMainNode)
+				if (wNode.IsMainNode)
 				{
                     return false;
 				}

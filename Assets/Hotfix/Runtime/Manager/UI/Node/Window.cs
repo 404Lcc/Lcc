@@ -14,32 +14,32 @@ namespace LccHotfix
         /// <summary>
         /// window的配置数据
         /// </summary>
-        private WindowMode w_mode;
-        public WindowMode windowMode => w_mode;
+        private WindowMode _mode;
+        public WindowMode windowMode => _mode;
 
 
         public Window(string windowName, WindowMode mode)
 		{
-            w_nodeName = windowName;
-            w_mode = mode;
-            rejectFlag = mode.rejectFlag;
+            _nodeName = windowName;
+            _mode = mode;
+            RejectFlag = mode.rejectFlag;
             nodeFlag = mode.windowFlag;
             escapeType = (EscapeType) mode.escapeType;
 			releaseType = (ReleaseType)mode.releaseType;
-            w_logicName = mode.logicName;
+            _logicName = mode.logicName;
 		}
 		
         protected override void DoStart()
         {
-			w_logic.OnStart();
+			_logic.OnStart();
 		}
 		protected override void DoUpdate()
 		{
-			w_logic.OnUpdate();
+			_logic.OnUpdate();
 		}
 		protected override void DoSwitch(Action<bool> callback)
 		{
-			w_logic.OnSwitch(callback);
+			_logic.OnSwitch(callback);
 		}
 		protected override void DoOpen(object[] param)
         {
@@ -56,11 +56,11 @@ namespace LccHotfix
 			}
 			
 			InternalOpen(true);
-			w_logic.OnOpen(param);
+			_logic.OnOpen(param);
 		}
 		protected override void DoReset(object[] param)
 		{
-			w_logic.OnReset(param);
+			_logic.OnReset(param);
 		}
 
 		protected override void DoResume()
@@ -74,25 +74,25 @@ namespace LccHotfix
 			{
                 Entry.GetModule<WindowManager>().CommonRoot.Blackboard.Set(BlackboardType.UILouderSetDepth, new List<object>() { windowMode.depth - 100, windowMode.louderY });
 			}
-			w_logic.OnResume();
+			_logic.OnResume();
 		}
         protected override void DoPause()
         {
 			InternalResume(false);
-			w_logic.OnPause();
+			_logic.OnPause();
 		}
 
 		protected override object DoClose()
 		{
 			InternalOpen(false);
-			var backValue = w_logic.OnClose();
-            Entry.GetModule<WindowManager>().OnWindowClose(nodeName, backValue);
+			var backValue = _logic.OnClose();
+            Entry.GetModule<WindowManager>().OnWindowClose(NodeName, backValue);
             Entry.GetModule<WindowManager>().AddToReleaseQueue(this);
 			return backValue;
 		}
 		protected override void DoChildClosed(WNode child)
 		{
-			if (RootNode.active)
+			if (rootNode.Active)
 			{
 				TurnNode turn = child.returnNode;
 
@@ -115,25 +115,25 @@ namespace LccHotfix
 			}
 			
 			
-			if (active && child.isFullScreen)
+			if (Active && child.IsFullScreen)
 			{
-				if (m_childNode != null && m_childNode.Count > 0)
+				if (_childNode != null && _childNode.Count > 0)
 				{
-					int fullIndex = m_childNode.Count;
-					for (int i = m_childNode.Count - 1; i >= 0; i--)
+					int fullIndex = _childNode.Count;
+					for (int i = _childNode.Count - 1; i >= 0; i--)
 					{
 						fullIndex = i;
-						if (m_childNode[i].isFullScreen)
+						if (_childNode[i].IsFullScreen)
 						{
 							break;
 						}
 					}
 
-					if (fullIndex < m_childNode.Count)
+					if (fullIndex < _childNode.Count)
 					{
-						for (int i = m_childNode.Count - 1; i >= fullIndex; i--)
+						for (int i = _childNode.Count - 1; i >= fullIndex; i--)
 						{
-							m_childNode[i].Resume();
+							_childNode[i].Resume();
 						}
 					}
 				}
@@ -144,11 +144,11 @@ namespace LccHotfix
 			escape = this.escapeType;
 			if (escape == EscapeType.SKIP_OVER)
 				return false;
-			if (!w_logic.OnEscape(ref escape))
+			if (!_logic.OnEscape(ref escape))
 				return false;
-			if (escape == EscapeType.AUTO_CLOSE && ParentNode != null)
+			if (escape == EscapeType.AUTO_CLOSE && parentNode != null)
 			{
-				if (!ParentNode.ChildRequireEscape(this))
+				if (!parentNode.ChildRequireEscape(this))
 				{
 					escape = EscapeType.REFUSE_AND_BREAK;
 					return false;
@@ -159,16 +159,16 @@ namespace LccHotfix
 		
 		protected override bool DoChildRequireEscape(WNode child)
 		{
-			if (w_logic != null)
+			if (_logic != null)
 			{
-				return w_logic.OnChildRequireEscape(child);
+				return _logic.OnChildRequireEscape(child);
 			}
 			return true; 
 		}
 
 		protected override void DoRemove()
 		{
-			w_logic.OnRemove();
+			_logic.OnRemove();
 			if (gameObject != null)
 				Object.Destroy(gameObject);
 		}
@@ -176,12 +176,12 @@ namespace LccHotfix
 
 		public void CreateWindowView()
 		{
-            w_gameObject = TDRes.LoadGameObject?.Invoke(w_mode.bundleName, w_mode.prefabName, true);
-            if (w_gameObject != null)
+            _gameObject = TDRes.LoadGameObject?.Invoke(_mode.bundleName, _mode.prefabName, true);
+            if (_gameObject != null)
 			{
-				w_transform = w_gameObject.transform;
+				_transform = _gameObject.transform;
 			
-				w_gameObject.SetActive(true);
+				_gameObject.SetActive(true);
 			}
 		}
 
@@ -206,10 +206,10 @@ namespace LccHotfix
 			
 			if (enable)
 			{
-				if (!string.IsNullOrEmpty(w_mode.bgTex))
-					TDUI.RefreshBackgroundFunc?.Invoke(this, w_mode.bgTex);
-				if (w_mode.sound > 0)
-					TDUI.PlayWindowSound(w_mode.sound);
+				if (!string.IsNullOrEmpty(_mode.bgTex))
+					TDUI.RefreshBackgroundFunc?.Invoke(this, _mode.bgTex);
+				if (_mode.sound > 0)
+					TDUI.PlayWindowSound(_mode.sound);
 			}
 		}
 		

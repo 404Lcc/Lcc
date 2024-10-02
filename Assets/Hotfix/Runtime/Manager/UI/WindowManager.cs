@@ -115,14 +115,14 @@ namespace LccHotfix
 		{
 			if (switchingNode != null) 
 			{
-				Log.Error($"request open window {windowName} during switch one other window {switchingNode.nodeName}");
+				Log.Error($"request open window {windowName} during switch one other window {switchingNode.NodeName}");
 				return null;
 			}
 			if (openBy == null) 
 				return OpenWindow(windowName, param);
 
 			// 打开一个与自己同名的界面
-            if (openBy.nodeName == windowName)
+            if (openBy.NodeName == windowName)
             {
 				Log.Error($"request open a same name child window {windowName}");
 				return null;
@@ -137,8 +137,8 @@ namespace LccHotfix
 				}
 				
 				openedWindow = CreateWindow(windowName, mode);
-				openedWindow.RootNode = openBy.RootNode;
-				openedWindow.transform.SetParent(openBy.RootNode.transform);
+				openedWindow.rootNode = openBy.rootNode;
+				openedWindow.transform.SetParent(openBy.rootNode.transform);
 				openedWindow.transform.localPosition = Vector3.zero;
 				openedWindow.transform.localRotation = Quaternion.identity;
 				openedWindow.transform.localScale = Vector3.one;
@@ -161,7 +161,7 @@ namespace LccHotfix
 		{
 			if (switchingNode != null)
 			{
-				Log.Error($"request open window {windowName} during switch one other window {switchingNode.nodeName}");
+				Log.Error($"request open window {windowName} during switch one other window {switchingNode.NodeName}");
 				return null;
 			}
 
@@ -179,7 +179,7 @@ namespace LccHotfix
 			if (!root.TryGetNode(windowName, out window)) 
 			{
 				window = CreateWindow(windowName, mode);
-				window.RootNode = root;
+				window.rootNode = root;
 				window.transform.SetParent(root.transform);
 				window.transform.localPosition = Vector3.zero;
 				window.transform.localRotation = Quaternion.identity;
@@ -194,7 +194,7 @@ namespace LccHotfix
 		{
 			if (switchingNode != null)
 			{
-				Log.Error($"request open window {rootName} during switch one other window {switchingNode.nodeName}");
+				Log.Error($"request open window {rootName} during switch one other window {switchingNode.NodeName}");
 				return null;
 			}
 
@@ -227,7 +227,7 @@ namespace LccHotfix
 				return;
 			}
 			bool switchScreen = false;
-			var root = window.RootNode;
+			var root = window.rootNode;
 
 			if (root != CommonRoot)
 			{
@@ -250,7 +250,7 @@ namespace LccHotfix
 				}
 				else
 				{
-					bool isTop = _rootStack.Count == window.RootNode.stackIndex + 1;
+					bool isTop = _rootStack.Count == window.rootNode.stackIndex + 1;
 					if (!isTop)
 					{
 						switchScreen = true;
@@ -274,16 +274,16 @@ namespace LccHotfix
 				if (root.Contains(window))
 				{
 					// 保持队列的顺序不变,不能循环打开
-					if (window.ParentNode == root && (window.isFullScreen || window.isMainNode)) 
+					if (window.parentNode == root && (window.IsFullScreen || window.IsMainNode)) 
 					{
-						for (int i = root.childNode.Count - 1; i >= 0; i--)
+						for (int i = root.ChildNode.Count - 1; i >= 0; i--)
 						{
-							if (root.childNode[i] == window)
+							if (root.ChildNode[i] == window)
 								break;
-							root.childNode[i].Close();
+							root.ChildNode[i].Close();
 						}
 					}
-					window.ParentNode = parentNode;
+					window.parentNode = parentNode;
 					window.Reset(param);
 					window.Resume();
 				}
@@ -295,7 +295,7 @@ namespace LccHotfix
                     else if (mask == 1 && window.newCreate)
                         switchScreen = true;
 
-                    window.ParentNode = parentNode;
+                    window.parentNode = parentNode;
                     window.Open(param);
 					window.Resume();
 				}
@@ -314,12 +314,12 @@ namespace LccHotfix
 				return _rootStack.Peek();
             }
 
-			if (_commonRoot != null && rootName == _commonRoot.nodeName) 
+			if (_commonRoot != null && rootName == _commonRoot.NodeName) 
 				return _commonRoot;
 
 			foreach(var item in _rootStack)
             {
-                if (item.nodeName.Equals(rootName))
+                if (item.NodeName.Equals(rootName))
                 {
 					return item;
                 }
@@ -327,7 +327,7 @@ namespace LccHotfix
 			WRootNode root = null;
 			for (int i = 0; i < _waitReleaseWindow.Count; i++)
 			{
-				if (_waitReleaseWindow[i].nodeName.Equals(rootName))
+				if (_waitReleaseWindow[i].NodeName.Equals(rootName))
 				{
 					root = _waitReleaseWindow[i] as WRootNode;
 					_waitReleaseWindow.RemoveAt(i);
@@ -356,7 +356,7 @@ namespace LccHotfix
 			Window window = null;
 			for (int i = 0; i < _waitReleaseWindow.Count; i++) 
 			{
-				if (_waitReleaseWindow[i].nodeName.Equals(windowName)) 
+				if (_waitReleaseWindow[i].NodeName.Equals(windowName)) 
 				{
 					window = _waitReleaseWindow[i] as Window;
 					_waitReleaseWindow.RemoveAt(i);
@@ -602,7 +602,7 @@ namespace LccHotfix
 
 			foreach(var root in _rootStack)
             {
-				if (root.nodeName == rootName)
+				if (root.NodeName == rootName)
 					return root;
             }
 
