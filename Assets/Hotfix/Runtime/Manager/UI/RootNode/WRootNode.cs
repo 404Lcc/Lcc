@@ -48,15 +48,15 @@ namespace LccHotfix
         }
         protected override void DoOpen(object[] param)
         {
-			gameObject?.SetActive(true);
-			_logic?.OnOpen(param);
+            gameObject?.SetActive(true);
+            _logic?.OnOpen(param);
         }
-		protected override void DoReset(object[] param)
-		{
-			_logic?.OnReset(param);
-		}
+        protected override void DoReset(object[] param)
+        {
+            _logic?.OnReset(param);
+        }
 
-		protected override void DoResume()
+        protected override void DoResume()
         {
             _logic?.OnResume();
         }
@@ -67,7 +67,7 @@ namespace LccHotfix
 
         protected override object DoClose()
         {
-			gameObject?.SetActive(false);
+            gameObject?.SetActive(false);
             object backValue = null;
             if (_logic != null)
                 backValue = _logic.OnClose();
@@ -86,112 +86,112 @@ namespace LccHotfix
         protected override void DoRemove()
         {
             _logic?.OnRemove();
-			if (gameObject != null)
-				UnityEngine.Object.Destroy(gameObject);
-		}
-	    protected override void DoChildOpened(WNode child)
+            if (gameObject != null)
+                UnityEngine.Object.Destroy(gameObject);
+        }
+        protected override void DoChildOpened(WNode child)
         {
             _logic?.OnChildOpened(child);
         }
         protected override void DoChildClosed(WNode child)
         {
-			if (Active)
-			{
-				TurnNode turn = child.returnNode;
+            if (Active)
+            {
+                TurnNode turn = child.returnNode;
 
-				if (turn != null)
-				{
+                if (turn != null)
+                {
 
-					if (!TryGetNodeForward(turn.nodeName, out WNode node))
-					{
-						switch (turn.nodeType)
-						{
-							case NodeType.ROOT:
+                    if (!TryGetNodeForward(turn.nodeName, out WNode node))
+                    {
+                        switch (turn.nodeType)
+                        {
+                            case NodeType.ROOT:
                                 Entry.GetModule<WindowManager>().OpenRoot(turn.nodeName, turn.nodeParam);
-								break;
-							case NodeType.WINDOW:
+                                break;
+                            case NodeType.WINDOW:
                                 Entry.GetModule<WindowManager>().OpenWindow(turn.nodeName, turn.nodeParam);
-								break;
-						}
-					}
-				}
-			}
-			
+                                break;
+                        }
+                    }
+                }
+            }
 
-			if (_logic != null)
-			{
+
+            if (_logic != null)
+            {
                 if (_logic.OnChildClosed(child))
                     return;
-			}
-			else
-			{
-				if (DefaultChildCheck())
-				{
+            }
+            else
+            {
+                if (DefaultChildCheck())
+                {
                     Close();
                     return;
-				}
-			}
+                }
+            }
 
 
-			if (Active && child.IsFullScreen)
-			{
-				if (_childNode != null && _childNode.Count > 0)
-				{
-					int fullIndex = _childNode.Count;
-					for (int i = _childNode.Count - 1; i >= 0; i--)
-					{
-						fullIndex = i;
-						if (_childNode[i].IsFullScreen)
-						{
-							break;
-						}
-					}
+            if (Active && child.IsFullScreen)
+            {
+                if (_childNode != null && _childNode.Count > 0)
+                {
+                    int fullIndex = _childNode.Count;
+                    for (int i = _childNode.Count - 1; i >= 0; i--)
+                    {
+                        fullIndex = i;
+                        if (_childNode[i].IsFullScreen)
+                        {
+                            break;
+                        }
+                    }
 
-					if (fullIndex < _childNode.Count)
-					{
-						for (int i = _childNode.Count - 1; i >= fullIndex; i--)
-						{
-							_childNode[i].Resume();
-						}
-					}
-				}
-			}
-			
-		}
+                    if (fullIndex < _childNode.Count)
+                    {
+                        for (int i = _childNode.Count - 1; i >= fullIndex; i--)
+                        {
+                            _childNode[i].Resume();
+                        }
+                    }
+                }
+            }
+
+        }
         protected override bool DoChildRequireEscape(WNode child)
         {
             if (_logic != null)
             {
                 return _logic.OnChildRequireEscape(child);
             }
-            
-            return true; 
+
+            return true;
         }
 
-       
+
 
         /// <summary>
         /// 根据子节点的状态判断根节点是否需要关闭
         /// </summary>
         /// <returns></returns>
         public bool DefaultChildCheck()
-		{
-			if (_childNode == null || _childNode.Count == 0)
-			{
-				return true;
-			}
+        {
+            if (_childNode == null || _childNode.Count == 0)
+            {
+                return true;
+            }
 
-			foreach (WNode wNode in _childNode)
-			{
-				if (wNode.IsMainNode)
-				{
+            foreach (WNode wNode in _childNode)
+            {
+                if (wNode.IsMainNode)
+                {
                     return false;
-				}
-			}
+                }
+            }
 
-			return true;
-		}
+            return true;
+        }
 
 
-	}
+    }
 }

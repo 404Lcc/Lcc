@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace LccHotfix
 {
@@ -24,23 +23,23 @@ namespace LccHotfix
             }
         }
 
-        private Dictionary<string, object> data = new Dictionary<string, object>();
-        private Dictionary<string, List<System.Action<Type, object>>> observers = new Dictionary<string, List<System.Action<Type, object>>>();
-        private bool isNotifiyng = false;
-        private Dictionary<string, List<System.Action<Type, object>>> addObservers = new Dictionary<string, List<System.Action<Type, object>>>();
-        private Dictionary<string, List<System.Action<Type, object>>> removeObservers = new Dictionary<string, List<System.Action<Type, object>>>();
-        private List<Notification> notifications = new List<Notification>();
-        private List<Notification> notificationsDispatch = new List<Notification>();
-       
+        private Dictionary<string, object> _data = new Dictionary<string, object>();
+        private Dictionary<string, List<System.Action<Type, object>>> _observers = new Dictionary<string, List<System.Action<Type, object>>>();
+        private bool _isNotifiyng = false;
+        private Dictionary<string, List<System.Action<Type, object>>> _addObservers = new Dictionary<string, List<System.Action<Type, object>>>();
+        private Dictionary<string, List<System.Action<Type, object>>> _removeObservers = new Dictionary<string, List<System.Action<Type, object>>>();
+        private List<Notification> _notifications = new List<Notification>();
+        private List<Notification> _notificationsDispatch = new List<Notification>();
+
 
         public void Enable()
         {
-           
+
         }
 
         public void Disable()
         {
-           
+
         }
 
         public object this[string key]
@@ -65,27 +64,27 @@ namespace LccHotfix
 
         public void Set(string key, object value)
         {
-            if (!this.data.ContainsKey(key))
+            if (!this._data.ContainsKey(key))
             {
-                this.data[key] = value;
-                this.notifications.Add(new Notification(key, Type.ADD, value));
+                this._data[key] = value;
+                this._notifications.Add(new Notification(key, Type.ADD, value));
             }
             else
             {
-                if ((this.data[key] == null && value != null) || (this.data[key] != null && !this.data[key].Equals(value)))
+                if ((this._data[key] == null && value != null) || (this._data[key] != null && !this._data[key].Equals(value)))
                 {
-                    this.data[key] = value;
-                    this.notifications.Add(new Notification(key, Type.CHANGE, value));
+                    this._data[key] = value;
+                    this._notifications.Add(new Notification(key, Type.CHANGE, value));
                 }
             }
         }
-        
+
         public void Unset(string key)
         {
-            if (this.data.ContainsKey(key))
+            if (this._data.ContainsKey(key))
             {
-                this.data.Remove(key);
-                this.notifications.Add(new Notification(key, Type.REMOVE, null));
+                this._data.Remove(key);
+                this._notifications.Add(new Notification(key, Type.REMOVE, null));
             }
         }
         /// <summary>
@@ -96,37 +95,37 @@ namespace LccHotfix
         public void SetNum(string key, int value)
         {
             if (value <= 0) return;
-            if (!this.data.ContainsKey(key))
+            if (!this._data.ContainsKey(key))
             {
-                this.data[key] = value;
-                this.notifications.Add(new Notification(key, Type.ADD, value));
-                this.notifications.Add(new Notification(key, Type.CHANGE, value));
+                this._data[key] = value;
+                this._notifications.Add(new Notification(key, Type.ADD, value));
+                this._notifications.Add(new Notification(key, Type.CHANGE, value));
             }
             else
             {
-                int num = (int) this.data[key];
+                int num = (int)this._data[key];
                 num += value;
-                this.data[key] = num;
-                this.notifications.Add(new Notification(key, Type.CHANGE, num));
+                this._data[key] = num;
+                this._notifications.Add(new Notification(key, Type.CHANGE, num));
             }
         }
-        
+
         public void UnsetNum(string key, int value)
         {
-            if (this.data.ContainsKey(key))
+            if (this._data.ContainsKey(key))
             {
-                int num = (int) this.data[key];
+                int num = (int)this._data[key];
                 num -= value;
                 if (num == 0)
                 {
-                    this.data.Remove(key);
-                    this.notifications.Add(new Notification(key, Type.REMOVE, null));
+                    this._data.Remove(key);
+                    this._notifications.Add(new Notification(key, Type.REMOVE, null));
                 }
                 else
                 {
-                    this.data[key] = num;
+                    this._data[key] = num;
                 }
-                this.notifications.Add(new Notification(key, Type.CHANGE, num));
+                this._notifications.Add(new Notification(key, Type.CHANGE, num));
             }
         }
 
@@ -142,9 +141,9 @@ namespace LccHotfix
 
         public object Get(string key)
         {
-            if (this.data.ContainsKey(key))
+            if (this._data.ContainsKey(key))
             {
-                return data[key];
+                return _data[key];
             }
             else
             {
@@ -154,13 +153,13 @@ namespace LccHotfix
 
         public bool Isset(string key)
         {
-            return this.data.ContainsKey(key);
+            return this._data.ContainsKey(key);
         }
 
         public void AddObserver(string key, System.Action<Type, object> observer)
         {
-            List<System.Action<Type, object>> observers = GetObserverList(this.observers, key);
-            if (!isNotifiyng)
+            List<System.Action<Type, object>> observers = GetObserverList(this._observers, key);
+            if (!_isNotifiyng)
             {
                 if (!observers.Contains(observer))
                 {
@@ -171,14 +170,14 @@ namespace LccHotfix
             {
                 if (!observers.Contains(observer))
                 {
-                    List<System.Action<Type, object>> addObservers = GetObserverList(this.addObservers, key);
+                    List<System.Action<Type, object>> addObservers = GetObserverList(this._addObservers, key);
                     if (!addObservers.Contains(observer))
                     {
                         addObservers.Add(observer);
                     }
                 }
 
-                List<System.Action<Type, object>> removeObservers = GetObserverList(this.removeObservers, key);
+                List<System.Action<Type, object>> removeObservers = GetObserverList(this._removeObservers, key);
                 if (removeObservers.Contains(observer))
                 {
                     removeObservers.Remove(observer);
@@ -188,8 +187,8 @@ namespace LccHotfix
 
         public void RemoveObserver(string key, System.Action<Type, object> observer)
         {
-            List<System.Action<Type, object>> observers = GetObserverList(this.observers, key);
-            if (!isNotifiyng)
+            List<System.Action<Type, object>> observers = GetObserverList(this._observers, key);
+            if (!_isNotifiyng)
             {
                 if (observers.Contains(observer))
                 {
@@ -198,7 +197,7 @@ namespace LccHotfix
             }
             else
             {
-                List<System.Action<Type, object>> removeObservers = GetObserverList(this.removeObservers, key);
+                List<System.Action<Type, object>> removeObservers = GetObserverList(this._removeObservers, key);
                 if (!removeObservers.Contains(observer))
                 {
                     if (observers.Contains(observer))
@@ -207,7 +206,7 @@ namespace LccHotfix
                     }
                 }
 
-                List<System.Action<Type, object>> addObservers = GetObserverList(this.addObservers, key);
+                List<System.Action<Type, object>> addObservers = GetObserverList(this._addObservers, key);
                 if (addObservers.Contains(observer))
                 {
                     addObservers.Remove(observer);
@@ -221,7 +220,7 @@ namespace LccHotfix
         {
             get
             {
-                return new List<string>(data.Keys);
+                return new List<string>(_data.Keys);
             }
         }
 
@@ -230,9 +229,9 @@ namespace LccHotfix
             get
             {
                 int count = 0;
-                foreach (string key in observers.Keys)
+                foreach (string key in _observers.Keys)
                 {
-                    count += observers[key].Count;
+                    count += _observers[key].Count;
                 }
                 return count;
             }
@@ -246,28 +245,28 @@ namespace LccHotfix
 
         private void NotifiyObservers()
         {
-            if (notifications.Count == 0)
+            if (_notifications.Count == 0)
             {
                 return;
             }
 
-            notificationsDispatch.Clear();
-            notificationsDispatch.AddRange(notifications);
-            notifications.Clear();
+            _notificationsDispatch.Clear();
+            _notificationsDispatch.AddRange(_notifications);
+            _notifications.Clear();
 
-            isNotifiyng = true;
-            foreach (Notification notification in notificationsDispatch)
+            _isNotifiyng = true;
+            foreach (Notification notification in _notificationsDispatch)
             {
-                if (!this.observers.ContainsKey(notification.key))
+                if (!this._observers.ContainsKey(notification.key))
                 {
-                    //                Debug.Log("1 do not notify for key:" + notification.key + " value: " + notification.value);
+                    //Debug.Log("1 do not notify for key:" + notification.key + " value: " + notification.value);
                     continue;
                 }
 
-                List<System.Action<Type, object>> observers = GetObserverList(this.observers, notification.key);
+                List<System.Action<Type, object>> observers = GetObserverList(this._observers, notification.key);
                 foreach (System.Action<Type, object> observer in observers)
                 {
-                    if (this.removeObservers.ContainsKey(notification.key) && this.removeObservers[notification.key].Contains(observer))
+                    if (this._removeObservers.ContainsKey(notification.key) && this._removeObservers[notification.key].Contains(observer))
                     {
                         continue;
                     }
@@ -275,21 +274,21 @@ namespace LccHotfix
                 }
             }
 
-            foreach (string key in this.addObservers.Keys)
+            foreach (string key in this._addObservers.Keys)
             {
-                GetObserverList(this.observers, key).AddRange(this.addObservers[key]);
+                GetObserverList(this._observers, key).AddRange(this._addObservers[key]);
             }
-            foreach (string key in this.removeObservers.Keys)
+            foreach (string key in this._removeObservers.Keys)
             {
-                foreach (System.Action<Type, object> action in removeObservers[key])
+                foreach (System.Action<Type, object> action in _removeObservers[key])
                 {
-                    GetObserverList(this.observers, key).Remove(action);
+                    GetObserverList(this._observers, key).Remove(action);
                 }
             }
-            this.addObservers.Clear();
-            this.removeObservers.Clear();
+            this._addObservers.Clear();
+            this._removeObservers.Clear();
 
-            isNotifiyng = false;
+            _isNotifiyng = false;
         }
 
         private List<System.Action<Type, object>> GetObserverList(Dictionary<string, List<System.Action<Type, object>>> target, string key)
