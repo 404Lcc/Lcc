@@ -85,6 +85,7 @@
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Image\ImageExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Coroutine\CoroutineHandler.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\UI\WindowManager.Res.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Vector3\Vector3Extension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\ThreadPoolScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\WindowEnum.cs" />
@@ -155,7 +156,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\WindowManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Resource\Constant.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventPool\EventPool.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\Facade\TDRes.cs" />
     <Compile Include="Assets\Hotfix\Logic\SceneState\LoginSceneState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\Window.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AsyncOperationAwaiter.cs" />
