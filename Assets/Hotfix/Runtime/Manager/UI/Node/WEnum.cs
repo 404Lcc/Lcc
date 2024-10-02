@@ -5,8 +5,8 @@
     /// </summary>
     public enum NodeType
     {
-        WINDOW = 0,
-        ROOT = 1,
+        WINDOW = 0,//窗口
+        ROOT = 1,//根节点
     }
 
     /// <summary>
