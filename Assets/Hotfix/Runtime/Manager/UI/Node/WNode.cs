@@ -52,21 +52,12 @@ namespace LccHotfix
 		public int RejectFlag { get; protected set; }
 		
 		public int nodeFlag { get; protected set; }
-		public bool IsFullScreen
-		{
-			get { return (nodeFlag & (int) NodeFlag.FULL_SCREEN) > 0; }
-		}
+		public bool IsFullScreen => (nodeFlag & (int)NodeFlag.FULL_SCREEN) > 0;
 
-		public bool IsMainNode
-		{
-			get { return (nodeFlag & (int) NodeFlag.MAIN_NODE) > 0; }
-		}
-		public bool IsTopNode
-		{
-			get { return (nodeFlag & (int)NodeFlag.TOP_NODE) > 0; }
-		}
+		public bool IsMainNode => (nodeFlag & (int)NodeFlag.MAIN_NODE) > 0;
+		public bool IsTopNode => (nodeFlag & (int)NodeFlag.TOP_NODE) > 0;
 
-		public EscapeType escapeType;
+        public EscapeType escapeType;
 
 		public ReleaseType releaseType = ReleaseType.AUTO;
 

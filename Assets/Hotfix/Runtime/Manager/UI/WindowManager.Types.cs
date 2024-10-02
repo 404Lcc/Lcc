@@ -8,7 +8,7 @@ namespace LccHotfix
 {
     internal partial class WindowManager : Module
     {
-		private Dictionary<string, Type> uiLogics = new Dictionary<string, Type>();
+		private Dictionary<string, Type> _uiLogics = new Dictionary<string, Type>();
 		
 		public void InitializeForAssembly(Assembly assembly)
 		{
@@ -17,7 +17,7 @@ namespace LccHotfix
 			{
 				if (typeof(IUILogic).IsAssignableFrom(t))
 				{
-					uiLogics[t.Name] = t;
+					_uiLogics[t.Name] = t;
 				}
 			}
 		}
@@ -39,7 +39,7 @@ namespace LccHotfix
 			Debug.Assert(!string.IsNullOrEmpty(logicName));
 
 			IUILogic iLogic = null;
-			if (uiLogics.TryGetValue(logicName, out Type monoType))
+			if (_uiLogics.TryGetValue(logicName, out Type monoType))
 			{
 				if (typeof(MonoBehaviour).IsAssignableFrom(monoType))
 				{
