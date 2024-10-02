@@ -34,7 +34,7 @@ namespace LccHotfix
 		/// <summary>
 		/// 窗口父节点
 		/// </summary>
-		internal Transform WindowRoot { get { return TDUI.WindowRoot; } }
+		//internal Transform WindowRoot { get { return TDUI.WindowRoot; } }
 		/// <summary>
 		/// 窗口关闭回调
 		/// </summary>
@@ -89,7 +89,7 @@ namespace LccHotfix
 			{
 				if (!m_escaped)
 				{
-					bool escape = TDUI.EscapeJudgeFunc == null ? true : TDUI.EscapeJudgeFunc.Invoke();
+					bool escape = EscapeJudgeFunc == null ? true : EscapeJudgeFunc.Invoke();
 					if (escape)
 					{
 						EscapeTopWindow();
@@ -132,7 +132,7 @@ namespace LccHotfix
 			{
 				if(!_windowModeDic.TryGetValue(windowName, out WindowMode mode))
 				{
-					mode = TDUI.GetModeFunc.Invoke(windowName);
+					mode = GetModeFunc.Invoke(windowName);
 					_windowModeDic.Add(windowName, mode);
 				}
 				
@@ -169,7 +169,7 @@ namespace LccHotfix
 
 			if (!_windowModeDic.TryGetValue(windowName, out WindowMode mode))
 			{
-				mode = TDUI.GetModeFunc.Invoke(windowName);
+				mode = GetModeFunc.Invoke(windowName);
 				_windowModeDic.Add(windowName, mode);
 			}
 
@@ -367,7 +367,7 @@ namespace LccHotfix
 			{
 				window = new Window(windowName, mode);
 				window.CreateWindowView();
-				TDUI.SortDepthFunc?.Invoke(window.gameObject, mode.depth);
+				SortDepthFunc?.Invoke(window.gameObject, mode.depth);
 				CreateUILogic(window);
 				window.Start();
 			}
@@ -492,8 +492,8 @@ namespace LccHotfix
 			}
 			if (_rootStack.Count == 0)
 			{
-				TDUI.ClosedLastRoot();
-			}
+                OnClosedLastRootFunc?.Invoke();
+            }
 		}
 
 		private Transform releaseRoot;
@@ -512,7 +512,7 @@ namespace LccHotfix
 				if (releaseRoot == null)
 				{
 					releaseRoot = (new GameObject("WaitForRelease")).transform;
-					releaseRoot.SetParent(TDUI.WindowRoot);
+					releaseRoot.SetParent(WindowRoot);
 					releaseRoot.localScale = Vector3.one;
 					releaseRoot.localPosition = new Vector3(30000, 0, 0);
 				}
@@ -632,7 +632,7 @@ namespace LccHotfix
 		/// <param name="maskType"></param>
 		internal void ShowMaskBox(int maskType, bool enable)
 		{
-			TDUI.ShowMaskBox(maskType, enable);
+            ShowMaskBoxFunc?.Invoke(maskType, enable);
 		}
 
 		/// <summary>
@@ -641,8 +641,8 @@ namespace LccHotfix
 		/// </summary>
 		internal void ShowScreenMask()
 		{
-			TDUI.ShowScreenFadeMask();
-		}
+            ShowScreenMaskFunc?.Invoke();
+        }
 
 		
 	}

@@ -43,7 +43,7 @@ namespace LccHotfix
 			{
 				if (typeof(MonoBehaviour).IsAssignableFrom(monoType))
 				{
-					iLogic = TDUI.GetUILogicMonoFunc(window, monoType);
+					iLogic = Entry.GetModule<WindowManager>().GetUILogicMonoFunc(window, monoType);
 				}
                 else
                 {

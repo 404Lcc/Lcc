@@ -202,14 +202,14 @@ namespace LccHotfix
                     Entry.GetModule<WindowManager>().CommonRoot.Blackboard.UnsetNum(BlackboardType.UILouderIsShow, 1);
 			}
 
-			TDUI.PauseWindowFunc?.Invoke(transform, enable);
+            Entry.GetModule<WindowManager>().PauseWindowFunc?.Invoke(transform, enable);
 			
 			if (enable)
 			{
 				if (!string.IsNullOrEmpty(_mode.bgTex))
-					TDUI.RefreshBackgroundFunc?.Invoke(this, _mode.bgTex);
+                    Entry.GetModule<WindowManager>().RefreshBackgroundFunc?.Invoke(this, _mode.bgTex);
 				if (_mode.sound > 0)
-					TDUI.PlayWindowSound(_mode.sound);
+                    Entry.GetModule<WindowManager>().PlayWindowSoundFunc?.Invoke(_mode.sound);
 			}
 		}
 		
