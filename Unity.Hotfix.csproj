@@ -140,6 +140,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Random\RandomUtility.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\IUIForm.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\SceneState\IScene.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UIDefine.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\Action\ActionWrap.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\IReference.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelTemplate.cs" />
@@ -154,7 +155,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Archive\UserSetData.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\ReferencePoolInfo.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\AStarMap\AStarNodeData.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UIPanelDefine.cs" />
     <Compile Include="Assets\Hotfix\Core\Resource\Constant.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventPool\EventPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AsyncOperationAwaiter.cs" />

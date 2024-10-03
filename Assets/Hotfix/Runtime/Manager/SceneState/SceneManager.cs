@@ -1,3 +1,4 @@
+using LccModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -124,12 +125,17 @@ namespace LccHotfix
 
         public IEnumerator ShowSceneLoading(LoadingType loadType)
         {
+            UILoadingPanel loadingPanel = null;
             switch (loadType)
             {
                 case LoadingType.Normal:
+                    loadingPanel = UILoadingPanel.Instance;
+                    loadingPanel.Show(string.Empty);
+                    loadingPanel.UpdateLoadingPercent(0, 5);
                     yield return null;
                     break;
                 case LoadingType.Fast:
+                    UIForeGroundPanel.Instance.FadeOut(1.5f);
                     yield return null;
                     break;
             }

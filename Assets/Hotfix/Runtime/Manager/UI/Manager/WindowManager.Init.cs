@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Reflection;
 using System.Collections;
+using LccModel;
 
 namespace LccHotfix
 {
@@ -12,7 +13,7 @@ namespace LccHotfix
 
         private GameObject _uiMask;
 
-
+        private UIWindowModeDefine _uiWindowModeDefine;
         public void InitWindowManager()
         {
             uiRoot = GameObject.Find("UI Root");
@@ -24,7 +25,7 @@ namespace LccHotfix
             _uiMask = uiRoot.transform.Find("WindowRoot/UIMask").gameObject;
             _uiMask.SetActive(false);
 
-
+            _uiWindowModeDefine = new UIWindowModeDefine();
 
             UICamera = uiCamera;
             WindowRoot = windowRoot;
@@ -32,10 +33,10 @@ namespace LccHotfix
             GetUILogicMonoFunc = GetUILogic;
             EscapeJudgeFunc = IsEscapeEnable;
             SortDepthFunc = null;
-            PauseWindowFunc = null;
+            PauseWindowFunc = (transform, active) => transform.gameObject.SetActive(active);
             RefreshBackgroundFunc = null;
             PlayWindowSoundFunc = null;
-            ShowScreenMaskFunc = null;
+            ShowScreenMaskFunc = () => UIForeGroundPanel.Instance.FadeOut(0.5f);
             ShowMaskBoxFunc = ShowMask;
             GetMaskBoxStateFunc = GetMaskState;
             ShowNoticeFunc = null;
@@ -68,7 +69,8 @@ namespace LccHotfix
 
         public WindowMode GetWindowMode(string windowName)
         {
-            return default;
+            var windowMode = _uiWindowModeDefine.Get(windowName);
+            return windowMode;
         }
 
         public bool IsEscapeEnable()
