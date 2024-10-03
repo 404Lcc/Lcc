@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    internal class SceneManager : Module
+    internal class SceneManager : Module, ICoroutine
     {
         public static SceneManager Instance => Entry.GetModule<SceneManager>();
 
@@ -16,8 +16,6 @@ namespace LccHotfix
 
 
         private Dictionary<SceneType, SceneState> _sceneDict = new Dictionary<SceneType, SceneState>();
-
-        private CoroutineObject coroutineObject = new CoroutineObject();
         public SceneManager()
         {
 
@@ -42,7 +40,7 @@ namespace LccHotfix
 
         internal override void Shutdown()
         {
-            coroutineObject.StopAllCoroutines();
+            this.StopAllCoroutines();
             _forceStop = true;
             _sceneDict.Clear();
         }
@@ -114,7 +112,7 @@ namespace LccHotfix
                 handler.IsLoading = true;
                 if (!handler.SceneLoadHandler())
                 {
-                    coroutineObject.StartCoroutine(ShowSceneLoading(handler.loadType, args));
+                    this.StartCoroutine(ShowSceneLoading(handler.loadType, args));
                 }
                 else
                 {
@@ -197,7 +195,7 @@ namespace LccHotfix
         public void BeginLoad(object[] args = null)
         {
             Log.Debug($"BeginLoad： scene type === {curSceneHandler.sceneType} loading type ==== {curSceneHandler.loadType}");
-            coroutineObject.StartCoroutine(Instance.UnloadSceneCoroutine(args));
+            this.StartCoroutine(UnloadSceneCoroutine(args));
         }
 
         private IEnumerator UnloadSceneCoroutine(object[] args = null)

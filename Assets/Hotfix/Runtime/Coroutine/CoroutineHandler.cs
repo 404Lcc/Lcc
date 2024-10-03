@@ -11,6 +11,10 @@ namespace LccHotfix
     {
         public Action<CoroutineHandler> remove;
         public CoroutineCompletedHandler completed = new CoroutineCompletedHandler();
+        public ICoroutine Owner
+        {
+            get; private set;
+        }
         public IEnumerator Coroutine
         {
             get; private set;
@@ -33,8 +37,9 @@ namespace LccHotfix
         public CoroutineHandler()
         {
         }
-        public CoroutineHandler(IEnumerator coroutine, Action<CoroutineHandler> remove)
+        public CoroutineHandler(ICoroutine owner, IEnumerator coroutine, Action<CoroutineHandler> remove)
         {
+            Owner = owner;
             Coroutine = coroutine;
             this.remove = remove;
         }
@@ -43,12 +48,12 @@ namespace LccHotfix
         {
             if (Running)
             {
-                Log.Debug("µ±Ç°Ğ­³ÌÎ´Íê³É");
+                Log.Debug("å½“å‰åç¨‹æœªå®Œæˆ");
                 return;
             }
             if (Coroutine == null)
             {
-                Log.Debug("Ğ­³ÌÎ´Ö¸¶¨");
+                Log.Debug("åç¨‹æœªæŒ‡å®š");
                 return;
             }
             Running = true;

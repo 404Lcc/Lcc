@@ -170,7 +170,6 @@
     <Compile Include="Assets\Hotfix\Core\Event\EventManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Extension\IUILogicExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\RedDot\RedDot.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Coroutine\CoroutineObject.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\IScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Init.cs" />
@@ -207,6 +206,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Download\DownloadData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\ReferencePool.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
