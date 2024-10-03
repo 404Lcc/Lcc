@@ -26,7 +26,7 @@ namespace LccEditor
                         objectObjectType.Draw(iList[i].GetType(), $"Element {i}", iList[i], null, indentLevel + 1);
                         continue;
                     }
-                    if (iList[i].GetType().Assembly.ManifestModule.Name == "ILRuntime.dll" || iList[i].GetType().Assembly.ManifestModule.Name == "Unity.Model.dll")
+                    if (iList[i].GetType().Assembly.ManifestModule.Name == "Unity.Model.dll")
                     {
                         ObjectObjectType objectObjectType = new ObjectObjectType();
                         objectObjectType.Draw(iList[i].GetType(), $"Element {i}", iList[i], null, indentLevel + 1);
