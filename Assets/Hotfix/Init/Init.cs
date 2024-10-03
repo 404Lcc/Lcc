@@ -28,6 +28,8 @@ namespace LccHotfix
                     ReadUserRegion();
                 }
 
+                WindowManager.Instance.InitWindowManager();
+
                 //SceneManager.Instance.GetScene(SceneType.Login).turnNode = new WNode.TurnNode();
                 //SceneManager.Instance.ChangeScene(SceneType.Login);
 
