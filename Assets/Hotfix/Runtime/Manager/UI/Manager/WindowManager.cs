@@ -376,7 +376,7 @@ namespace LccHotfix
 			root.transform.localPosition = Vector3.zero;
 			root.transform.localScale = Vector3.one;
 			root.transform.localRotation = Quaternion.identity;
-
+            //归一
             root.transform.anchorMin = Vector3.zero;
             root.transform.anchorMax = Vector3.one;
             root.transform.sizeDelta = Vector3.zero;
@@ -568,7 +568,7 @@ namespace LccHotfix
 					_releaseRoot.SetParent(WindowRoot);
 					_releaseRoot.localScale = Vector3.one;
 					_releaseRoot.localPosition = new Vector3(30000, 0, 0);
-
+					//归一
                     _releaseRoot.anchorMin = Vector3.zero;
                     _releaseRoot.anchorMax = Vector3.one;
                     _releaseRoot.sizeDelta = Vector3.zero;
