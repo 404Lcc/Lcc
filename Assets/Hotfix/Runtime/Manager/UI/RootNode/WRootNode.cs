@@ -138,6 +138,7 @@ namespace LccHotfix
             }
 
             //如果当前节点激活并且关闭的子节点是全屏窗口
+            //这个时候_childNode里已经没有要移除的child了
             if (Active && child.IsFullScreen)
             {
                 if (_childNode != null && _childNode.Count > 0)
@@ -156,6 +157,7 @@ namespace LccHotfix
                     //找到全屏窗口后面的节点，包含这个全屏窗口
                     if (fullIndex < _childNode.Count)
                     {
+                        //恢复全屏界面和后面的节点（假如_childNode.count是10个节点，fullIndex是5，则恢复5到9）
                         for (int i = _childNode.Count - 1; i >= fullIndex; i--)
                         {
                             //给子节点恢复

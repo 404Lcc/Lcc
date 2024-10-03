@@ -179,6 +179,7 @@ namespace LccHotfix
 				if (parentNode != null && parentNode._nodePhase < NodePhase.OPENED) return;
 				Log.Debug($"ui open window {NodeName}");
 				newCreate = false;
+				//把自己节点状态设置为激活
 				_nodePhase = NodePhase.OPENED;
                 //如果有父节点则把自己加进父级的子节点
                 if (parentNode != null)
@@ -196,6 +197,7 @@ namespace LccHotfix
 			}
 		}
 
+		//父级调用打开孩子
 		public void ChildOpened(WNode child)
 		{
 			if (_childNode == null)
@@ -217,7 +219,7 @@ namespace LccHotfix
 
 			if (_childNode != null && _childNode.Count > 1)
 			{
-				//找到全屏窗口索引
+				//找到全屏窗口索引，这里遍历包含刚才加入的节点
 				int fullIndex = _childNode.Count;
 				for (int i = _childNode.Count - 1; i >= 0; i--)
 				{
@@ -228,6 +230,8 @@ namespace LccHotfix
 					}
 				}
                 //如果没找到全屏窗口fullIndex就是_childNode.Count。-2是排除刚才加入的节点
+                //遍历子节点，排除刚才加入的节点（排除顶层节点，假如_childNode.count是10个节点，fullIndex是5，则暂停5以前的节点，恢复5到8节点。）
+                //刚才加入的节点在后面调用Resume
                 for (int i = _childNode.Count - 2; i >= 0; i--)
 				{
                     //小于全屏索引的节点并且不是顶层窗口的节点全部暂停，否则调用恢复窗口
