@@ -1,43 +1,8 @@
 using cfg;
-using System;
 using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public class JumpNode
-    {
-        public string nodePanel;
-        public object[] nodeParam;
-        public JumpDependNode depend;//依赖只支持一层
-
-        public JumpNode(string nodePanel)
-        {
-            this.nodePanel = nodePanel;
-
-        }
-        public JumpNode(string nodePanel, object[] nodeParam)
-        {
-            this.nodePanel = nodePanel;
-            this.nodeParam = nodeParam;
-
-        }
-        public void SetDepend(JumpDependNode depend)
-        {
-            this.depend = depend;
-        }
-    }
-    public class JumpDependNode
-    {
-        public string nodePanel;
-        public object[] nodeParam;
-
-        public JumpDependNode(string nodePanel)
-        {
-            this.nodePanel = nodePanel;
-
-        }
-    }
-
     internal class JumpManager : Module
     {
         public static JumpManager Instance => Entry.GetModule<JumpManager>();
@@ -62,7 +27,7 @@ namespace LccHotfix
             if (config == null)
                 return false;
 
-            if (!CheckFuncOpen(config))
+            if (!CheckFuncIsOpenAndShowTip(config))
                 return false;
 
             var list = new List<object>();
@@ -93,55 +58,42 @@ namespace LccHotfix
 
             int scene = config.SceneId;
 
-            JumpNode jump = new JumpNode(config.PanelName, nowArg);
+            WNode.TurnNode turn = new WNode.TurnNode
+            {
+                nodeName = config.PanelName,
+                nodeParam = nowArg,
+                nodeType = NodeType.WINDOW
+            };
 
-            ChangeWindowNode(jump);
+            ChangeWindowNode(turn);
 
-            var curState = (int)SceneManager.Instance.CurState;
+            var curState = (int)SceneManager.Instance.curState;
             //同场景跳转
             if ((curState & scene) > 0)
             {
-                if (OpenSpecialWindow(jump))
+                if (OpenSpecialWindow(turn))
                 {
                     return true;
                 }
-                //var data = new ShowPanelData(false, true, jump.nodeParam, true, false, true);
-                //PanelManager.Instance.ShowPanel(jump.nodeType, data);
+                if (turn.nodeType == NodeType.ROOT)
+                {
+                    Entry.GetModule<WindowManager>().OpenRoot(turn.nodeName, turn.nodeParam);
+                }
+                else
+                {
+                    Entry.GetModule<WindowManager>().OpenWindow(turn.nodeName, turn.nodeParam);
+                }
                 return true;
             }
-
-            //todo 依赖的界面现在给不了参数
-            jump.SetDepend(new JumpDependNode(config.ScenePanelName));
-            return JumpPanelCrossScene(scene, jump);
+            return JumpPanelCrossScene(scene, turn);
 
         }
 
-        private bool CheckFuncOpen(Jump config)
+        private bool CheckFuncIsOpenAndShowTip(Jump config)
         {
+            if (config == null)
+                return false;
             return true;
-        }
-
-        public bool OpenSpecialWindow(JumpNode jumpNode)
-        {
-            switch (jumpNode.nodePanel)
-            {
-                default:
-                    break;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// 调整界面和参数
-        /// </summary>
-        /// <param name="jumpNode"></param>
-        private void ChangeWindowNode(JumpNode jumpNode)
-        {
-            switch (jumpNode.nodePanel)
-            {
-                default:
-                    break;
-            }
         }
 
         /// <summary>
@@ -151,18 +103,46 @@ namespace LccHotfix
         /// <param name="panelName"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        private bool JumpPanelCrossScene(int scene, JumpNode jumpNode)
+        private bool JumpPanelCrossScene(int scene, WNode.TurnNode turn)
         {
             //目前只能跳主场景
             if ((scene & (int)SceneType.Main) > 0)
             {
-                SceneManager.Instance.GetState(SceneType.Main).jumpNode = jumpNode;
+                SceneManager.Instance.GetScene(SceneType.Main).turnNode = turn;
                 SceneManager.Instance.ChangeScene(SceneType.Main);
                 return true;
             }
 
             return false;
         }
+
+        /// <summary>
+        /// 调整界面和参数
+        /// </summary>
+        /// <param name="turnNode"></param>
+        private void ChangeWindowNode(WNode.TurnNode turnNode)
+        {
+            switch (turnNode.nodeName)
+            {
+                default:
+                    break;
+            }
+        }
+        /// <summary>
+        /// 有些面板不能直接打开，打开方式比较特殊
+        /// </summary>
+        /// <param name="turnNode"></param>
+        /// <returns></returns>
+        public bool OpenSpecialWindow(WNode.TurnNode turnNode)
+        {
+            switch (turnNode.nodeName)
+            {
+                default:
+                    break;
+            }
+            return false;
+        }
+
 
     }
 }

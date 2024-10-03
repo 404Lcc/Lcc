@@ -31,8 +31,8 @@ namespace LccHotfix
                     ReadUserRegion();
                 }
 
-                SceneManager.Instance.GetState(SceneType.Login).jumpNode = null;
-                SceneManager.Instance.ChangeScene(SceneType.Login);
+                //SceneManager.Instance.GetScene(SceneType.Login).turnNode = new WNode.TurnNode();
+                //SceneManager.Instance.ChangeScene(SceneType.Login);
 
                 Launcher.Instance.LoadFinish();
                 HotfixGameStarted = true;

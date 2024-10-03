@@ -3,24 +3,7 @@ using UnityEngine;
 namespace LccHotfix
 {
     [SceneState(SceneType.Game)]
-    public class GameSceneState : SceneState
+    public class GameSceneState : LoadSceneHandler
     {
-        public override void OnEnter(object[] args)
-        {
-            base.OnEnter(args);
-            Debug.Log("Game" + "进入");
-
-
-
-
-
-         
-
-        }
-        public override void OnExit()
-        {
-            base.OnExit();
-            Debug.Log("Game" + "退出");
-        }
     }
 }

@@ -6,25 +6,19 @@ namespace LccHotfix
         Normal,
         Fast,
     }
-    public abstract class SceneState : ISceneState
+    public abstract class LoadSceneHandler : IScene
     {
 
         public SceneType sceneType;
 
-        /// <summary>
-        /// 开始加载时间
-        /// </summary>
-        public float startLoadTime;
+
 
         /// <summary>
         /// 加载方式
         /// </summary>
         public LoadingType loadType;
 
-        /// <summary>
-        /// 打开场景展示ui
-        /// </summary>
-        public JumpNode jumpNode;
+
 
 
         /// <summary>
@@ -32,13 +26,31 @@ namespace LccHotfix
         /// </summary>
         public bool IsLoading { get; set; }
 
+
+
         /// <summary>
         /// 加载显示回调
         /// </summary>
-        public virtual bool SceneLoadHandler()
+        public virtual void SceneLoadHandler()
         {
-            return false;
+            SceneManager.Instance.StartCoroutine(SceneManager.Instance.ShowSceneLoading(loadType));
         }
+
+        /// <summary>
+        /// 验证场景是否可进入
+        /// </summary>
+        public virtual bool SceneEnterStateHandler()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// 进入回调
+        /// </summary>
+        public virtual void SceneStartHandler()
+        {
+        }
+
 
         /// <summary>
         /// 加载完成回调
@@ -48,14 +60,39 @@ namespace LccHotfix
             IsLoading = false;
         }
 
-        public virtual void OnEnter(object[] args)
+        /// <summary>
+        /// 退出回调
+        /// </summary>
+        public virtual void SceneExitHandler()
         {
+
         }
 
-        public virtual void OnExit()
-        {
-        }
+        /// <summary>
+        /// 开始加载时间
+        /// </summary>
+        public float startLoadTime;
 
+        /// <summary>
+        ///	深度清理
+        /// </summary>
+        public bool deepClean;
+
+        /// <summary>
+        /// 传递的参数缓存
+        /// </summary>
+        public object param;
+
+        /// <summary>
+        /// 开启场景后跳转到界面
+        /// </summary>
+        public WNode.TurnNode turnNode;
+
+
+
+        /// <summary>
+        /// 更新
+        /// </summary>
         public virtual void Tick()
         {
         }

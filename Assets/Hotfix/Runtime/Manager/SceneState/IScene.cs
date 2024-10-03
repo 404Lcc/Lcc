@@ -1,9 +1,7 @@
 namespace LccHotfix
 {
-    public interface ISceneState
+    public interface IScene
     {
-        public void OnEnter(object[] args);
-        public void OnExit();
-        public void Tick();
+
     }
 }
