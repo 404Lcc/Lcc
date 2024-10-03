@@ -16,6 +16,7 @@ namespace LccHotfix
         private UIWindowModeDefine _uiWindowModeDefine;
         public void InitWindowManager()
         {
+            //初始化辅助方法
             uiRoot = GameObject.Find("UI Root");
 
             var uiCamera = uiRoot.GetComponentInChildren<Camera>();
@@ -52,6 +53,9 @@ namespace LccHotfix
                 }
             }
 
+            //初始化加载器
+            LoadGameObject = (prefabName) => AssetManager.Instance.LoadGameObject(uiRoot, prefabName);
+            //初始化通用节点
             Init();
         }
         public WindowMode GetWindowMode(string windowName)
