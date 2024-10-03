@@ -19,9 +19,9 @@ namespace LccHotfix
 
             var uiCamera = uiRoot.GetComponentInChildren<Camera>();
 
-            var windowRoot = uiRoot.transform.Find("Camera").transform;
+            var windowRoot = uiRoot.transform.Find("WindowRoot").transform;
 
-            _uiMask = uiRoot.transform.Find("Camera/UIMask").gameObject;
+            _uiMask = uiRoot.transform.Find("WindowRoot/UIMask").gameObject;
             _uiMask.SetActive(false);
 
 

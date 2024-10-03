@@ -442,7 +442,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6880936061052193467}
   - component: {fileID: 3072738779838260655}
-  - component: {fileID: 1223464304830798482}
   m_Layer: 5
   m_Name: UILoadingPanel
   m_TagString: Untagged
@@ -492,18 +491,6 @@ MonoBehaviour:
   tipsText: {fileID: 8960970146620521133}
   text: {fileID: 6536663054412071972}
   messageBox: {fileID: 4438024955531965309}
---- !u!225 &1223464304830798482
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3735704149738883384}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &4438024955531965309
 GameObject:
   m_ObjectHideFlags: 0

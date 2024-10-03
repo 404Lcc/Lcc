@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8097111742375802147}
   - component: {fileID: 8599059731441829887}
-  - component: {fileID: 1830645705291990964}
   m_Layer: 5
   m_Name: UIForeGroundPanel
   m_TagString: Untagged
@@ -51,18 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blackMask: {fileID: 8979053565877147138}
---- !u!225 &1830645705291990964
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2707039070021399530}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &6266815161766361344
 GameObject:
   m_ObjectHideFlags: 0
