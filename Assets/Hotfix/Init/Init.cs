@@ -1,9 +1,6 @@
 ﻿using LccModel;
-using Sirenix.OdinInspector.Editor.Modules;
 using System.Reflection;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace LccHotfix
 {
@@ -73,7 +70,7 @@ namespace LccHotfix
         }
         private static void ReadUserRegion()
         {
-            string region = "";
+            string region = PlatformManager.Instance.GetUserRegion();
 
             var regions = Launcher.GameConfig.regionList;
 

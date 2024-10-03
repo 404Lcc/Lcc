@@ -3,7 +3,7 @@ using UnityEngine;
 namespace LccHotfix
 {
     [SceneState(SceneType.Login)]
-    public class LoginSceneState : LoadSceneHandler
+    public class LoginScene : LoadSceneHandler
     {
     }
 }
