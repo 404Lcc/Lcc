@@ -80,7 +80,7 @@ namespace LccHotfix
 		}
 		//是否可以回退值
 		private bool _escaped = false;
-		internal void LateUpdate()
+		internal override void LateUpdate()
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{

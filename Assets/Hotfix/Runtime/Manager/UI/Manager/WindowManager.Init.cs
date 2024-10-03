@@ -54,7 +54,11 @@ namespace LccHotfix
 
             Init();
         }
-
+        public WindowMode GetWindowMode(string windowName)
+        {
+            var windowMode = _uiWindowModeDefine.Get(windowName);
+            return windowMode;
+        }
         public IUILogic GetUILogic(Window window, Type monoType)
         {
             if (window.gameObject == null) return null;
@@ -65,12 +69,6 @@ namespace LccHotfix
             }
 
             return logic;
-        }
-
-        public WindowMode GetWindowMode(string windowName)
-        {
-            var windowMode = _uiWindowModeDefine.Get(windowName);
-            return windowMode;
         }
 
         public bool IsEscapeEnable()

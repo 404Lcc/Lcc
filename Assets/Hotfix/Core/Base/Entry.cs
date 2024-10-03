@@ -22,6 +22,13 @@ namespace LccHotfix
                 module.Update(elapseSeconds, realElapseSeconds);
             }
         }
+        public static void LateUpdate()
+        {
+            foreach (Module module in s_Modules)
+            {
+                module.LateUpdate();
+            }
+        }
 
         /// <summary>
         /// 关闭并清理所有游戏框架模块。
