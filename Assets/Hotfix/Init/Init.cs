@@ -10,6 +10,7 @@ namespace LccHotfix
         public static void Start()
         {
             HotfixGameStarted = false;
+            Log.SetLogHelper(new DefaultLogHelper());
             try
             {
                 Launcher.Instance.actionFixedUpdate += FixedUpdate;
@@ -27,9 +28,9 @@ namespace LccHotfix
                 {
                     ReadUserRegion();
                 }
-
+                //初始化管理器 配置表
                 WindowManager.Instance.InitWindowManager();
-
+                WindowManager.Instance.OpenWindow<UILoginPanel>(UIWindowDefine.UILoginPanel);
                 //SceneManager.Instance.GetScene(SceneType.Login).turnNode = new WNode.TurnNode();
                 //SceneManager.Instance.ChangeScene(SceneType.Login);
 

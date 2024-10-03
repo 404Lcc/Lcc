@@ -73,7 +73,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\SceneState\SceneAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Action.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Module.cs" />
-    <Compile Include="Assets\Hotfix\Logic\UI\Joystick\Joystick.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Task\TaskExtension.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\IObjectPoolManager.cs" />
@@ -120,8 +119,8 @@
     <Compile Include="Assets\Hotfix\Core\Utility\MarshalUtility.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventArgs.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\UIManager.UIGroup.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\Fiber.cs" />
     <Compile Include="Assets\Hotfix\Logic\Scene\GameScene.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\Fiber.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Global\GlobalManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelManager.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\IUIGroup.cs" />
@@ -135,6 +134,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\MultiDictionary.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\OpenUIFormSuccessEventArgs.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Joystick\Joystick.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\Dev\DevCallbackMessage.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\AStarMap\AStarMapManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Random\RandomUtility.cs" />
@@ -164,6 +164,7 @@
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\View\IView.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Variable\Variable.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Orca\OrcaManager.cs" />
+    <Compile Include="Assets\Hotfix\Logic\UI\UILogin\UILoginPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\SceneState\SceneManager.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\IUIFormHelper.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineCompletedHandler.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Window\Window.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\IUIGroupHelper.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AssetBundleRequestAwaiter.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Utility\Helper\DefaultLogHelper.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Extension\WNodeExtension.cs" />
     <Compile Include="Assets\Hotfix\Core\Event\EventManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Extension\IUILogicExtension.cs" />

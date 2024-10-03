@@ -9,7 +9,7 @@ namespace LccHotfix
     }
     public class UIWindowDefine
     {
-        public const string UITestPanel = "UITestPanel";
+        public const string UILoginPanel = "UILoginPanel";
     }
     public class UIWindowModeDefine
     {
@@ -17,11 +17,11 @@ namespace LccHotfix
 
         public UIWindowModeDefine()
         {
-            _dict.Add(UIWindowDefine.UITestPanel, new WindowMode()
+            _dict.Add(UIWindowDefine.UILoginPanel, new WindowMode()
             {
-                prefabName = UIWindowDefine.UITestPanel,
+                prefabName = UIWindowDefine.UILoginPanel,
                 depth = 0,
-                logicName = UIWindowDefine.UITestPanel,
+                logicName = UIWindowDefine.UILoginPanel,
                 bgTex = "",
                 openAnim = false,
                 sound = 0,

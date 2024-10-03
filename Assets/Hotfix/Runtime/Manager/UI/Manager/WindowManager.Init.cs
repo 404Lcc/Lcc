@@ -43,18 +43,11 @@ namespace LccHotfix
             ShowNoticeFunc = null;
             ShowSelectFunc = null;
 
-            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                var asName = assembly.GetName();
-                if (asName.Name == "Unity.Model")
-                {
-                    InitializeForAssembly(assembly);
-                    break;
-                }
-            }
+            //初始化程序集
+            InitializeForAssembly(Launcher.Instance.hotfixAssembly);
 
             //初始化加载器
-            LoadGameObject = (prefabName) => AssetManager.Instance.LoadGameObject(uiRoot, prefabName);
+            LoadGameObject = (prefabName) => GameObject.Instantiate(AssetManager.Instance.LoadGameObject(uiRoot, prefabName));
             //初始化通用节点
             Init();
         }
