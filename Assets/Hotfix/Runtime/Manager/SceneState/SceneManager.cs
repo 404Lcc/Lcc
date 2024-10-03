@@ -13,8 +13,6 @@ namespace LccHotfix
         private Dictionary<SceneType, LoadSceneHandler> _sceneDict = new Dictionary<SceneType, LoadSceneHandler>();
         public SceneManager()
         {
-
-            _forceStop = false;
             foreach (Type item in CodeTypesManager.Instance.GetTypes(typeof(SceneStateAttribute)))
             {
                 object[] atts = item.GetCustomAttributes(typeof(SceneStateAttribute), false);
@@ -37,11 +35,12 @@ namespace LccHotfix
         internal override void Shutdown()
         {
             this.StopAllCoroutines();
-            _forceStop = true;
             _sceneDict.Clear();
         }
 
-        private bool _forceStop;
+        #region Load Scene
+        private bool _inLoading;
+
         private LoadSceneHandler preSceneHandler;
         private LoadSceneHandler curSceneHandler;
 
@@ -68,6 +67,7 @@ namespace LccHotfix
             get
             {
                 if (!Init.HotfixGameStarted) return true;
+                if (_inLoading) return true;
                 if (curSceneHandler == null) return true;
                 return curSceneHandler.IsLoading;
             }
@@ -101,7 +101,7 @@ namespace LccHotfix
             LccModel.Launcher.Instance.SetGameSpeed(1);
             LccModel.Launcher.Instance.ChangeFPS();
 
-
+            _inLoading = false;
             handler.IsLoading = true;
             handler.startLoadTime = Time.realtimeSinceStartup;
 
@@ -127,11 +127,9 @@ namespace LccHotfix
             switch (loadType)
             {
                 case LoadingType.Normal:
-
                     yield return null;
                     break;
                 case LoadingType.Fast:
-
                     yield return null;
                     break;
             }
@@ -142,7 +140,7 @@ namespace LccHotfix
         public void BeginLoad()
         {
             Log.Info($"BeginLoad： scene type === {curSceneHandler.sceneType.ToString()} loading type ==== {((LoadingType)curSceneHandler.loadType).ToString()}");
-            this.StartCoroutine(Instance.UnloadSceneCoroutine());
+            Instance.StartCoroutine(Instance.UnloadSceneCoroutine());
         }
 
         private IEnumerator UnloadSceneCoroutine()
@@ -187,6 +185,7 @@ namespace LccHotfix
                 }
             }
         }
+        #endregion
 
         #region 切场景界面
         public void OpenChangeScenePanel()

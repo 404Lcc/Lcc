@@ -18,13 +18,15 @@ public sealed partial class Jump : Luban.BeanBase
     public Jump(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
-        { if(!_buf["funId"].IsNumber) { throw new SerializationException(); }  FunId = _buf["funId"]; }
-        { if(!_buf["sceneId"].IsNumber) { throw new SerializationException(); }  SceneId = _buf["sceneId"]; }
-        { if(!_buf["scenePanelName"].IsString) { throw new SerializationException(); }  ScenePanelName = _buf["scenePanelName"]; }
+        { if(!_buf["panelType"].IsNumber) { throw new SerializationException(); }  PanelType = _buf["panelType"]; }
         { if(!_buf["panelName"].IsString) { throw new SerializationException(); }  PanelName = _buf["panelName"]; }
+        { if(!_buf["panelNameDes"].IsString) { throw new SerializationException(); }  PanelNameDes = _buf["panelNameDes"]; }
+        { if(!_buf["funcType"].IsNumber) { throw new SerializationException(); }  FuncType = _buf["funcType"]; }
+        { if(!_buf["funcId"].IsNumber) { throw new SerializationException(); }  FuncId = _buf["funcId"]; }
         { if(!_buf["param1"].IsNumber) { throw new SerializationException(); }  Param1 = _buf["param1"]; }
         { if(!_buf["param2"].IsNumber) { throw new SerializationException(); }  Param2 = _buf["param2"]; }
         { if(!_buf["param3"].IsString) { throw new SerializationException(); }  Param3 = _buf["param3"]; }
+        { if(!_buf["sceneID"].IsNumber) { throw new SerializationException(); }  SceneID = _buf["sceneID"]; }
     }
 
     public static Jump DeserializeJump(JSONNode _buf)
@@ -37,21 +39,25 @@ public sealed partial class Jump : Luban.BeanBase
     /// </summary>
     public readonly int Id;
     /// <summary>
-    /// 功能id
+    /// 界面类型
     /// </summary>
-    public readonly int FunId;
-    /// <summary>
-    /// 场景id
-    /// </summary>
-    public readonly int SceneId;
-    /// <summary>
-    /// 场景界面
-    /// </summary>
-    public readonly string ScenePanelName;
+    public readonly int PanelType;
     /// <summary>
     /// 跳转界面
     /// </summary>
     public readonly string PanelName;
+    /// <summary>
+    /// 跳转界面UI名称
+    /// </summary>
+    public readonly string PanelNameDes;
+    /// <summary>
+    /// 功能类型
+    /// </summary>
+    public readonly int FuncType;
+    /// <summary>
+    /// 功能id
+    /// </summary>
+    public readonly int FuncId;
     /// <summary>
     /// 参数1
     /// </summary>
@@ -64,6 +70,10 @@ public sealed partial class Jump : Luban.BeanBase
     /// 参数3
     /// </summary>
     public readonly string Param3;
+    /// <summary>
+    /// 场景位或
+    /// </summary>
+    public readonly int SceneID;
    
     public const int __ID__ = 2320462;
     public override int GetTypeId() => __ID__;
@@ -78,19 +88,23 @@ public sealed partial class Jump : Luban.BeanBase
         
         
         
+        
+        
     }
 
     public override string ToString()
     {
         return "{ "
         + "id:" + Id + ","
-        + "funId:" + FunId + ","
-        + "sceneId:" + SceneId + ","
-        + "scenePanelName:" + ScenePanelName + ","
+        + "panelType:" + PanelType + ","
         + "panelName:" + PanelName + ","
+        + "panelNameDes:" + PanelNameDes + ","
+        + "funcType:" + FuncType + ","
+        + "funcId:" + FuncId + ","
         + "param1:" + Param1 + ","
         + "param2:" + Param2 + ","
         + "param3:" + Param3 + ","
+        + "sceneID:" + SceneID + ","
         + "}";
     }
 }

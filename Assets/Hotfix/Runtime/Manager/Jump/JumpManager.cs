@@ -1,5 +1,6 @@
 using cfg;
 using System.Collections.Generic;
+using static LccHotfix.WNode;
 
 namespace LccHotfix
 {
@@ -33,7 +34,7 @@ namespace LccHotfix
             var list = new List<object>();
 
             // 参数顺序
-            //  param3  >  param1  > param2  >  args
+            // param3  >  param1  > param2  >  args
 
             if (!string.IsNullOrEmpty(config.Param3))
             {
@@ -56,13 +57,13 @@ namespace LccHotfix
             }
             object[] nowArg = list.Count > 0 ? list.ToArray() : null;
 
-            int scene = config.SceneId;
+            int scene = config.SceneID;
 
             WNode.TurnNode turn = new WNode.TurnNode
             {
                 nodeName = config.PanelName,
                 nodeParam = nowArg,
-                nodeType = NodeType.WINDOW
+                nodeType = (NodeType)config.PanelType
             };
 
             ChangeWindowNode(turn);
@@ -89,13 +90,6 @@ namespace LccHotfix
 
         }
 
-        private bool CheckFuncIsOpenAndShowTip(Jump config)
-        {
-            if (config == null)
-                return false;
-            return true;
-        }
-
         /// <summary>
         /// 跨场景跳转
         /// </summary>
@@ -105,11 +99,14 @@ namespace LccHotfix
         /// <returns></returns>
         private bool JumpPanelCrossScene(int scene, WNode.TurnNode turn)
         {
+            LoadSceneHandler handler = null;
+
             //目前只能跳主场景
             if ((scene & (int)SceneType.Main) > 0)
             {
-                SceneManager.Instance.GetScene(SceneType.Main).turnNode = turn;
-                SceneManager.Instance.ChangeScene(SceneType.Main);
+                handler = SceneManager.Instance.GetScene(SceneType.Main);
+                handler.turnNode = turn;
+                SceneManager.Instance.ChangeScene(handler);
                 return true;
             }
 
@@ -143,6 +140,16 @@ namespace LccHotfix
             return false;
         }
 
-
+        private bool CheckFuncIsOpenAndShowTip(Jump config)
+        {
+            if (config == null)
+                return false;
+            if (config.FuncType == 0)
+            {
+                //判断功能是否开启
+                return true;
+            }
+            return true;
+        }
     }
 }
