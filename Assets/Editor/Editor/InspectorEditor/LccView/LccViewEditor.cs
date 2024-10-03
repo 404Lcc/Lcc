@@ -23,9 +23,6 @@ namespace LccEditor
                     case "Unity.Hotfix":
                         directoryName = "Hotfix";
                         break;
-                    case "ILRuntime":
-                        directoryName = "Hotfix";
-                        break;
                 }
                 string fileName = lccView.className;
                 string[] filePaths = Directory.GetFiles($"Assets/{directoryName}", "*.cs", SearchOption.AllDirectories);

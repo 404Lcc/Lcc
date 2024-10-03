@@ -259,7 +259,7 @@ namespace LccModel
 
             string clientVersion = string.Empty;
 #if !UNITY_EDITOR
-            clientVersion = "version " + showApp + "." + GameConfig.appVersion + "." + GameConfig.channel + "." + mSvrResVersion;
+            clientVersion = "version " + showApp + "." + GameConfig.appVersion + "." + GameConfig.channel + "." + svrResVersion;
 #else
             if (IsAuditServer() || !GameConfig.checkResUpdate)
                 clientVersion = "version " + showApp + "." + GameConfig.appVersion + "." + GameConfig.channel + "." + svrResVersion;

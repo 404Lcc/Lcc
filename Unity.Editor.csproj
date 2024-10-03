@@ -85,6 +85,7 @@
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\FloatObjectType.cs" />
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\AnimationCurveObjectType.cs" />
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\ListObjectType.cs" />
+    <Compile Include="Assets\Editor\Editor\OdinEditorWindow\GameConfigEditorWindow.cs" />
     <Compile Include="Assets\Editor\Utility\Roslyn\BuildType.cs" />
     <Compile Include="Assets\Editor\Editor\OdinEditorWindow\TagEditorWindow.cs" />
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\BoundsObjectType.cs" />

@@ -72,7 +72,6 @@
     <Compile Include="Assets\Launcher\Asset\AssetObject.cs" />
     <Compile Include="Assets\Launcher\Utility\Protobuf\ProtobufUtility.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\PatchOperation.cs" />
-    <Compile Include="Assets\Launcher\Launcher\StaticMethod\ILStaticMethod.cs" />
     <Compile Include="Assets\Launcher\Asset\AssetManager.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmCreateDownloader.cs" />
     <Compile Include="Assets\Launcher\ScrollerPro\ScrollerPro.cs" />

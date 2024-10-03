@@ -18,7 +18,7 @@ MonoBehaviour:
   Packages:
   - PackageName: DefaultPackage
     PackageDesc: 
-    EnableAddressable: 0
+    EnableAddressable: 1
     LocationToLower: 0
     IncludeAssetGUID: 0
     AutoCollectShaders: 1
@@ -55,14 +55,6 @@ MonoBehaviour:
         UserData: 
       - CollectPath: Assets/Bundles/Prefab
         CollectorGUID: 8a795a9c4dd701040acc53899eb1c555
-        CollectorType: 0
-        AddressRuleName: AddressByFileName
-        PackRuleName: PackDirectory
-        FilterRuleName: CollectAll
-        AssetTags: 
-        UserData: 
-      - CollectPath: Assets/Bundles/SkillConfig
-        CollectorGUID: 1b634ebf46ab68a4b874573573500306
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory

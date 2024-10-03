@@ -1,0 +1,15 @@
+{
+    "list" : [
+        {
+            "loginServer" : "",
+            "loginServerList" : [
+                ""
+            ],
+            "resourceServerUrl" : "",
+            "resourceVersion"   : 1,
+            "clientVersion"     : 1,
+            "appForceUpdateUrl" : "",
+            "noticeUrl"         : ""
+        }
+    ]
+}

@@ -27,7 +27,7 @@ namespace LccModel
         public readonly Dictionary<string, Type> hotfixTypeDict = new Dictionary<string, Type>();
 
 
-        public const string DefaultPackage = "GamePackage";
+        public const string DefaultPackage = "DefaultPackage";
 
 
         public void Init()

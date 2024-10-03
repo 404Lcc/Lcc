@@ -3,7 +3,7 @@
     "appVersion" : 1,
     "channel"    : 1,
     "resVersion" : 1,
-    "centerServerAddress"   : "",
+    "centerServerAddress"   : "file:///D:/Lcc/Assets/StreamingAssets",
     "isReleaseCenterServer" : false,
     "isRelease"             : false,
     "chargeDirect"          : true,
