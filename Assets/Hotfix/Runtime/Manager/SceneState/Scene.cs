@@ -9,7 +9,7 @@ namespace LccHotfix
     public abstract class SceneState : ISceneState
     {
 
-        public SceneStateType sceneType;
+        public SceneType sceneType;
 
         /// <summary>
         /// 开始加载时间

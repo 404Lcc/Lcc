@@ -1,37 +1,41 @@
 ﻿using LccModel;
+using Sirenix.OdinInspector.Editor.Modules;
 using System.Reflection;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace LccHotfix
 {
     public class Init
     {
+        public static bool HotfixGameStarted { set; get; } = false;
         public static void Start()
         {
+            HotfixGameStarted = false;
             try
             {
                 Launcher.Instance.actionFixedUpdate += FixedUpdate;
                 Launcher.Instance.actionUpdate += Update;
                 Launcher.Instance.actionLateUpdate += LateUpdate;
                 Launcher.Instance.actionClose += Close;
+                Launcher.Instance.actionOnDrawGizmos += DrawGizmos;
 
 
                 CodeTypesManager.Instance.LoadTypes(new Assembly[] { Launcher.Instance.hotfixAssembly });
-                //Game.AddSingleton<Root>();
 
+                HotfixBridge.Init();
 
-                //Game.Scene.AddComponent<Manager>();
+                if (Launcher.GameConfig.regionList != null)
+                {
+                    ReadUserRegion();
+                }
 
-                //Game.Scene.AddComponent<ModelManager>();
-                //Game.Scene.AddComponent<AudioManager>();
-                //Game.Scene.AddComponent<CommandManager>();
-                //Game.Scene.AddComponent<ConfigManager>();
-                //Game.Scene.AddComponent<GlobalManager>();
-                //Game.Scene.AddComponent<LanguageManager>();
-                //Game.Scene.AddComponent<PanelManager>();
-                //Game.Scene.AddComponent<SceneStateManager>();
-                //Game.Scene.AddComponent<JumpManager>();
-                //Game.Scene.AddComponent<VideoManager>();
+                SceneManager.Instance.GetState(SceneType.Login).jumpNode = null;
+                SceneManager.Instance.ChangeScene(SceneType.Login);
 
+                Launcher.Instance.LoadFinish();
+                HotfixGameStarted = true;
             }
             catch (System.Exception e)
             {
@@ -40,15 +44,22 @@ namespace LccHotfix
         }
         private static void FixedUpdate()
         {
-            //Game.FixedUpdate();
+            if (!Launcher.Instance.GameStarted)
+                return;
         }
         private static void Update()
         {
-            //Game.Update();
+            if (!Launcher.Instance.GameStarted)
+                return;
+            Entry.Update(Time.deltaTime, Time.unscaledDeltaTime);
         }
         private static void LateUpdate()
         {
-            //Game.LateUpdate();
+            if (!Launcher.Instance.GameStarted)
+                return;
+        }
+        private static void DrawGizmos()
+        {
         }
         private static void Close()
         {
@@ -56,7 +67,21 @@ namespace LccHotfix
             Launcher.Instance.actionUpdate -= Update;
             Launcher.Instance.actionLateUpdate -= LateUpdate;
             Launcher.Instance.actionClose -= Close;
-            //Game.Close();
+            Launcher.Instance.actionOnDrawGizmos -= DrawGizmos;
+
+            Entry.Shutdown();
+        }
+        private static void ReadUserRegion()
+        {
+            string region = "";
+
+            var regions = Launcher.GameConfig.regionList;
+
+            if (string.IsNullOrEmpty(region) || !regions.Contains(region))
+            {
+                region = "US";
+            }
+            Launcher.GameConfig.AddConfig("region", region);
         }
     }
 }

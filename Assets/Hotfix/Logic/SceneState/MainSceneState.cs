@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    [SceneState(SceneStateType.Main)]
+    [SceneState(SceneType.Main)]
     public class MainSceneState : SceneState
     {
         public override void OnEnter(object[] args)

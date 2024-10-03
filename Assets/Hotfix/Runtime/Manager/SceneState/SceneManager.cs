@@ -6,19 +6,19 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    internal class SceneStateManager : Module
+    internal class SceneManager : Module
     {
-        public static SceneStateManager Instance => Entry.GetModule<SceneStateManager>();
+        public static SceneManager Instance => Entry.GetModule<SceneManager>();
 
         private bool _forceStop;
         private SceneState preSceneHandler;
         private SceneState curSceneHandler;
 
 
-        private Dictionary<SceneStateType, SceneState> _sceneStateDict = new Dictionary<SceneStateType, SceneState>();
+        private Dictionary<SceneType, SceneState> _sceneDict = new Dictionary<SceneType, SceneState>();
 
         private CoroutineObject coroutineObject = new CoroutineObject();
-        public SceneStateManager()
+        public SceneManager()
         {
 
             _forceStop = false;
@@ -32,7 +32,7 @@ namespace LccHotfix
                     SceneState sceneState = (SceneState)Activator.CreateInstance(item);
                     sceneState.sceneType = sceneStateAttribute.sceneType;
 
-                    _sceneStateDict.Add(sceneStateAttribute.sceneType, sceneState);
+                    _sceneDict.Add(sceneStateAttribute.sceneType, sceneState);
                 }
             }
         }
@@ -44,7 +44,7 @@ namespace LccHotfix
         {
             coroutineObject.StopAllCoroutines();
             _forceStop = true;
-            _sceneStateDict.Clear();
+            _sceneDict.Clear();
         }
 
         public void OpenChangeScenePanel()
@@ -84,11 +84,11 @@ namespace LccHotfix
         }
 
 
-        public void ChangeScene(SceneStateType type, object[] args = null)
+        public void ChangeScene(SceneType type, object[] args = null)
         {
-            if (type != SceneStateType.None)
+            if (type != SceneType.None)
             {
-                SceneState handler = _sceneStateDict[type];
+                SceneState handler = _sceneDict[type];
                 if (handler == null)
                 {
                     return;
@@ -142,10 +142,10 @@ namespace LccHotfix
             BeginLoad(args);
         }
 
-        public SceneState GetState(SceneStateType type)
+        public SceneState GetState(SceneType type)
         {
-            if (!_sceneStateDict.ContainsKey(type)) return null;
-            return _sceneStateDict[type];
+            if (!_sceneDict.ContainsKey(type)) return null;
+            return _sceneDict[type];
         }
 
         public SceneState GetCurrentState()
@@ -165,7 +165,7 @@ namespace LccHotfix
         #region Load Scene
 
 
-        public SceneStateType CurState
+        public SceneType CurState
         {
             get
             {
@@ -173,7 +173,7 @@ namespace LccHotfix
                 return 0;
             }
         }
-        public SceneStateType PreState
+        public SceneType PreState
         {
             get
             {

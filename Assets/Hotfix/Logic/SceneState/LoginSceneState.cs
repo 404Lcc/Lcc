@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    [SceneState(SceneStateType.Login)]
+    [SceneState(SceneType.Login)]
     public class LoginSceneState : SceneState
     {
         public override bool SceneLoadHandler()
@@ -16,16 +16,16 @@ namespace LccHotfix
 
 
 
-            Debug.Log("Login" + "½øÈë");
+            Debug.Log("Login" + "è¿›å…¥");
 
-            SceneStateManager.Instance.OpenChangeScenePanel();
+            SceneManager.Instance.OpenChangeScenePanel();
 
             SceneLoadEndHandler();
         }
         public override void OnExit()
         {
             base.OnExit();
-            Debug.Log("Login" + "ÍË³ö");
+            Debug.Log("Login" + "é€€å‡º");
         }
     }
 }

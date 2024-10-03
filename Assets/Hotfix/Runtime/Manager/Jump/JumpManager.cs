@@ -97,7 +97,7 @@ namespace LccHotfix
 
             ChangeWindowNode(jump);
 
-            var curState = (int)SceneStateManager.Instance.CurState;
+            var curState = (int)SceneManager.Instance.CurState;
             //同场景跳转
             if ((curState & scene) > 0)
             {
@@ -154,10 +154,10 @@ namespace LccHotfix
         private bool JumpPanelCrossScene(int scene, JumpNode jumpNode)
         {
             //目前只能跳主场景
-            if ((scene & (int)SceneStateType.Main) > 0)
+            if ((scene & (int)SceneType.Main) > 0)
             {
-                SceneStateManager.Instance.GetState(SceneStateType.Main).jumpNode = jumpNode;
-                SceneStateManager.Instance.ChangeScene(SceneStateType.Main);
+                SceneManager.Instance.GetState(SceneType.Main).jumpNode = jumpNode;
+                SceneManager.Instance.ChangeScene(SceneType.Main);
                 return true;
             }
 
