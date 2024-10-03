@@ -56,6 +56,7 @@ namespace LccHotfix
         {
             if (!Launcher.Instance.GameStarted)
                 return;
+            Entry.LateUpdate();
         }
         private static void DrawGizmos()
         {
