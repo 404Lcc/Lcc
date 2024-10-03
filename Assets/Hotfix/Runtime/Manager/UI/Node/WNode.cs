@@ -70,8 +70,8 @@ namespace LccHotfix
 			set => _gameObject = value;
 		}
 
-		protected Transform _transform;
-		public Transform transform
+		protected RectTransform _transform;
+		public RectTransform transform
 		{
 			get => _transform;
 			set => _transform = value;

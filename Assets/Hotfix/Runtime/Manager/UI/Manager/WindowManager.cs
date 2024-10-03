@@ -368,7 +368,7 @@ namespace LccHotfix
 			{
 				root = new WRootNode(rootName);
 				root.gameObject = new GameObject(rootName);
-				root.transform = root.gameObject.transform;
+				root.transform = root.gameObject.AddComponent<RectTransform>();
 				root.Start();
 			}
 
@@ -376,8 +376,13 @@ namespace LccHotfix
 			root.transform.localPosition = Vector3.zero;
 			root.transform.localScale = Vector3.one;
 			root.transform.localRotation = Quaternion.identity;
-			//新建的根节点 索引一定要设置-1
-			root.stackIndex = -1;
+
+            root.transform.anchorMin = Vector3.zero;
+            root.transform.anchorMax = Vector3.one;
+            root.transform.sizeDelta = Vector3.zero;
+
+            //新建的根节点 索引一定要设置-1
+            root.stackIndex = -1;
 			return root;
 		}
 
@@ -541,7 +546,7 @@ namespace LccHotfix
 			}
 		}
 		//释放节点
-		private Transform _releaseRoot;
+		private RectTransform _releaseRoot;
 		//增加到释放队列
 		internal void AddToReleaseQueue(WNode node)
 		{
@@ -559,11 +564,15 @@ namespace LccHotfix
 				//创建释放节点
 				if (_releaseRoot == null)
 				{
-					_releaseRoot = (new GameObject("WaitForRelease")).transform;
+					_releaseRoot = new GameObject("WaitForRelease").AddComponent<RectTransform>();
 					_releaseRoot.SetParent(WindowRoot);
 					_releaseRoot.localScale = Vector3.one;
 					_releaseRoot.localPosition = new Vector3(30000, 0, 0);
-				}
+
+                    _releaseRoot.anchorMin = Vector3.zero;
+                    _releaseRoot.anchorMax = Vector3.one;
+                    _releaseRoot.sizeDelta = Vector3.zero;
+                }
 
 				if (node.transform != null)
 				{

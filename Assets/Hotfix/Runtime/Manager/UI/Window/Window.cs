@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace LccHotfix
@@ -180,7 +181,7 @@ namespace LccHotfix
 			_gameObject = Entry.GetModule<WindowManager>().LoadGameObject?.Invoke(_mode.prefabName);
 			if (_gameObject != null)
 			{
-				_transform = _gameObject.transform;
+				_transform = _gameObject.transform as RectTransform;
 
 				_gameObject.SetActive(true);
 			}
