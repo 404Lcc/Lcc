@@ -9,7 +9,7 @@
             "resourceVersion"   : 1,
             "clientVersion"     : 1,
             "appForceUpdateUrl" : "",
-            "noticeUrl"         : ""
+            "noticeUrl"         : "file:///D:/Lcc/Assets/StreamingAssets"
         }
     ]
 }
