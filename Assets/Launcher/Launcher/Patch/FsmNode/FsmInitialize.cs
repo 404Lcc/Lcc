@@ -12,7 +12,7 @@ namespace LccModel
     {
         private StateMachine _machine;
 
-        public EPlayMode mPlayMode { set; get; } = EPlayMode.HostPlayMode;
+        public EPlayMode PlayMode { set; get; } = EPlayMode.HostPlayMode;
 
         public void OnCreate(StateMachine machine)
         {
@@ -38,26 +38,26 @@ namespace LccModel
             //不检测热更走本地资源
             if (!Launcher.GameConfig.checkResUpdate)
             {
-                mPlayMode = EPlayMode.OfflinePlayMode;
+                PlayMode = EPlayMode.OfflinePlayMode;
             }
 
 
             //提审包走本地资源
             if (Launcher.Instance.IsAuditServer())
             {
-                mPlayMode = EPlayMode.OfflinePlayMode;
+                PlayMode = EPlayMode.OfflinePlayMode;
             }
 
             if (Application.isEditor)
             {
-                mPlayMode = EPlayMode.EditorSimulateMode;
+                PlayMode = EPlayMode.EditorSimulateMode;
 
 #if USE_ASSETBUNDLE
-                mPlayMode = EPlayMode.OfflinePlayMode;
+                PlayMode = EPlayMode.OfflinePlayMode;
 #endif
             }
 
-            Debug.Log($"FsmInitialize mPlayMode = {mPlayMode}");
+            Debug.Log($"FsmInitialize PlayMode = {PlayMode}");
 
             // 创建默认的资源包
             var packageName = (string)_machine.GetBlackboardValue("PackageName");
@@ -69,7 +69,7 @@ namespace LccModel
 
             // 编辑器下的模拟模式
             InitializationOperation initializationOperation = null;
-            if (mPlayMode == EPlayMode.EditorSimulateMode)
+            if (PlayMode == EPlayMode.EditorSimulateMode)
             {
                 var simulateBuildResult = EditorSimulateModeHelper.SimulateBuild(buildPipeline, packageName);
                 var createParameters = new EditorSimulateModeParameters();
@@ -78,7 +78,7 @@ namespace LccModel
             }
 
             // 单机运行模式
-            if (mPlayMode == EPlayMode.OfflinePlayMode)
+            if (PlayMode == EPlayMode.OfflinePlayMode)
             {
                 var createParameters = new OfflinePlayModeParameters();
                 createParameters.BuildinFileSystemParameters = FileSystemParameters.CreateDefaultBuildinFileSystemParameters();
@@ -86,7 +86,7 @@ namespace LccModel
             }
 
             // 联机运行模式
-            if (mPlayMode == EPlayMode.HostPlayMode)
+            if (PlayMode == EPlayMode.HostPlayMode)
             {
                 Debug.Log($"FsmInitialize 初始化资源包 hostServerURL = {GetHostServerURL()}");
                 string defaultHostServer = GetHostServerURL();
@@ -99,7 +99,7 @@ namespace LccModel
             }
 
             // WebGL运行模式
-            if (mPlayMode == EPlayMode.WebPlayMode)
+            if (PlayMode == EPlayMode.WebPlayMode)
             {
                 var createParameters = new WebPlayModeParameters();
                 createParameters.WebFileSystemParameters = FileSystemParameters.CreateDefaultWebFileSystemParameters();
