@@ -1,0 +1,32 @@
+{
+	"language": {
+		"defaultLanguage": "English",
+		"languageList": [
+			{
+				"name": "English",
+				"font": "font_default",
+				"setName": "English",
+				"shortName":"en"
+			},
+			{
+				"name": "ChineseSimplified",
+				"font": "font_default",
+				"setName": "简体中文",
+				"shortName":"zh"
+			}
+		],
+		"languageNameList": [
+			"ChineseSimplified",
+			"English"
+		]
+	},
+	"regionList": [
+		"US",
+		"CA",
+		"UK",
+		"AU",
+		"PH",
+		"SG",
+		"HK"
+	]
+}

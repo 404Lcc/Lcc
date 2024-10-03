@@ -1,0 +1,13 @@
+
+{
+    "appVersion" : 1,
+    "channel"    : 1,
+    "resVersion" : 1,
+    "centerServerAddress"   : "",
+    "isReleaseCenterServer" : false,
+    "isRelease"             : false,
+    "chargeDirect"          : true,
+    "selectServer"          : true,
+    "checkResUpdate"        : false,
+    "useSDK"                : false
+}
