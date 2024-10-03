@@ -31,29 +31,6 @@ namespace LccModel
         //公告地址
         public string noticeUrl;
 
-        private int _index = 0;
-        private List<string> _centerServerAddressLsit = new List<string>();
-        private string GetCenterServerAddress()
-        {
-            _centerServerAddressLsit.Clear();
-            var urls = GameConfig.centerServerAddress.Split('#');
-            foreach (var item in urls)
-            {
-                _centerServerAddressLsit.Add(item);
-            }
-            if (_index >= _centerServerAddressLsit.Count)
-            {
-                _index = 0;
-            }
-            var url = _centerServerAddressLsit[_index];
-            _index++;
-            return url;
-        }
-        private void ResetCenterServerAddress()
-        {
-            _index = 0;
-        }
-
         /// <summary>
         /// 是否成功请求中心服地址
         /// </summary>
@@ -62,7 +39,7 @@ namespace LccModel
         {
             requestCenterServerSucc = false;
 
-            string url = $"{GetCenterServerAddress()}/{(Launcher.GameConfig.isRelease ? "Release" : "Dev")}/{Launcher.Instance.GetPlatform()}/channelList.txt";
+            string url = $"{GameConfig.centerServerAddress}/{(Launcher.GameConfig.isRelease ? "Release" : "Dev")}/{Launcher.Instance.GetPlatform()}/channelList.txt";
             Debug.Log("RequestCenterServer=" + url);
 
             UnityWebRequest web = UnityWebRequest.Get(url);
@@ -86,7 +63,7 @@ namespace LccModel
 
             if (!string.IsNullOrEmpty(web.error))
             {
-                Debug.LogError($"RequestCenterServer 请求中心服 失败url= {url} index = {_index - 1}");
+                Debug.LogError($"RequestCenterServer 请求中心服 失败url= {url}");
                 StartServerLoad();
             }
             else
@@ -94,8 +71,6 @@ namespace LccModel
                 string response = web.downloadHandler.text;
 
                 ReadChannelListConfig(response);
-
-                ResetCenterServerAddress();
 
                 yield return GetRemoteVersionList();
             }
@@ -105,7 +80,7 @@ namespace LccModel
         {
             requestCenterServerSucc = false;
 
-            string url = $"{GetCenterServerAddress()}/{(Launcher.GameConfig.isRelease ? "Release" : "Dev")}/{Launcher.Instance.GetPlatform()}/versionList.txt";
+            string url = $"{GameConfig.centerServerAddress}/{(Launcher.GameConfig.isRelease ? "Release" : "Dev")}/{Launcher.Instance.GetPlatform()}/versionList.txt";
             Debug.Log("GetRemoteVersionList=" + url);
 
             UnityWebRequest web = UnityWebRequest.Get(url);
@@ -129,7 +104,7 @@ namespace LccModel
 
             if (!string.IsNullOrEmpty(web.error))
             {
-                Debug.LogError($"GetRemoteVersionList 请求VersionList 失败url= {url} index = {_index - 1}");
+                Debug.LogError($"GetRemoteVersionList 请求VersionList 失败url= {url}");
                 StartServerLoad();
             }
             else
@@ -137,8 +112,6 @@ namespace LccModel
                 string response = web.downloadHandler.text;
 
                 ReadVersionListConfig(response);
-
-                ResetCenterServerAddress();
 
                 yield return Launcher.Instance.GetNoticeBoard();
                 yield return Launcher.Instance.GetNotice();
