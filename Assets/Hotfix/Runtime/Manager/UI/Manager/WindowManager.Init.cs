@@ -50,6 +50,8 @@ namespace LccHotfix
                     break;
                 }
             }
+
+            Init();
         }
 
         public IUILogic GetUILogic(Window window, Type monoType)
