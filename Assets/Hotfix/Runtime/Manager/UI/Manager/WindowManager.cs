@@ -184,6 +184,10 @@ namespace LccHotfix
 				window.transform.localPosition = Vector3.zero;
 				window.transform.localRotation = Quaternion.identity;
 				window.transform.localScale = Vector3.one;
+				//归一
+				window.transform.anchorMin = Vector3.zero;
+				window.transform.anchorMax = Vector3.one;
+				window.transform.sizeDelta = Vector3.zero;
 			}
 			//切换窗口
 			SwitchWindow(window, root, param);
