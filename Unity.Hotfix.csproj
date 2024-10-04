@@ -76,6 +76,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Task\TaskExtension.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\IObjectPoolManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UIRootBase.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ReleaseObjectFilterCallback.cs" />
     <Compile Include="Assets\Hotfix\Core\Event\GameEventArgs.cs" />
     <Compile Include="Assets\Hotfix\Runtime\HotfixBridge.cs" />
@@ -119,7 +120,6 @@
     <Compile Include="Assets\Hotfix\Core\Utility\MarshalUtility.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventArgs.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\UIManager.UIGroup.cs" />
-    <Compile Include="Assets\Hotfix\Logic\Scene\GameScene.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\Fiber.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Global\GlobalManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelManager.cs" />
@@ -197,6 +197,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Jump\JumpManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Entry.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineHandler.cs" />
+    <Compile Include="Assets\Hotfix\Logic\UI\UIMain\UIMainPanel.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\DataStruct\TypeNamePair.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\IUIManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\BasePlatform.cs" />
