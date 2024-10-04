@@ -5,6 +5,5 @@ namespace LccHotfix
         None,
         Login,
         Main,
-        Game,
     }
 }

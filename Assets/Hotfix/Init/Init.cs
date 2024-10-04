@@ -30,9 +30,8 @@ namespace LccHotfix
                 }
                 //初始化管理器 配置表
                 WindowManager.Instance.InitWindowManager();
-                WindowManager.Instance.OpenWindow<UILoginPanel>(UIWindowDefine.UILoginPanel);
-                //SceneManager.Instance.GetScene(SceneType.Login).turnNode = new WNode.TurnNode();
-                //SceneManager.Instance.ChangeScene(SceneType.Login);
+
+                SceneManager.Instance.ChangeScene(SceneType.Login);
 
                 Launcher.Instance.LoadFinish();
                 HotfixGameStarted = true;

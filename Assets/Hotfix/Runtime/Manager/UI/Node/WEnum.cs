@@ -58,12 +58,7 @@
     public enum RejectFlag : long
     {
         NONE = 0,
-        MAIN_CITY_TAB = 1 << 0,
-        SLG_MAP_TAB = 1 << 1,
-        SLG_MAP_OPERTION = 1 << 2,
-        ACTIVITY = 1 << 3,
-        MAGIC_WEAPON = 1 << 4,
-        OLD_MAIL = 1 << 5,
+        MAIN = 1 << 0,
     }
 
     public enum MaskType
