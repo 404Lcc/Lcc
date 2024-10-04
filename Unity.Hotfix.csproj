@@ -122,10 +122,12 @@
     <Compile Include="Assets\Hotfix\Core\UI\UIManager.UIGroup.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\Fiber.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Global\GlobalManager.cs" />
+    <Compile Include="Assets\Hotfix\Logic\UI\UIRoot\UIRootMain.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelManager.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\IUIGroup.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Res.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Window\WindowMode.cs" />
+    <Compile Include="Assets\Hotfix\Logic\UI\UIRoot\UIRootCommon.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Transform\TransformExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\SpriteRenderer\SpriteRendererExtension.cs" />
@@ -139,6 +141,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\AStarMap\AStarMapManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Random\RandomUtility.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\IUIForm.cs" />
+    <Compile Include="Assets\Hotfix\Logic\UI\UIRoot\UIRootLogin.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\SceneState\IScene.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UIDefine.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\Action\ActionWrap.cs" />
