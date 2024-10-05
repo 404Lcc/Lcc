@@ -67,10 +67,8 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\WNode.cs" />
     <Compile Include="Assets\Hotfix\Core\Utility\AssemblyUtility.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventPool\EventPoolMode.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\SceneState\SceneType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\BaseCallbackMessage.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Variable\GenericVariable.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\SceneState\SceneAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Action.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Module.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Audio\AudioManager.cs" />
@@ -94,6 +92,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Command\CommandType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Id\IdUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\PlatformManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\LoadSceneHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\IUILogic.cs" />
     <Compile Include="Assets\Hotfix\Core\Event\IEventManager.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\UIManager.OpenUIFormInfo.cs" />
@@ -115,7 +114,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Types.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\RootNode\WBlackboard.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\SceneState\Scene.cs" />
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\Binding\Binding.cs" />
     <Compile Include="Assets\Hotfix\Core\Utility\MarshalUtility.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventArgs.cs" />
@@ -132,17 +130,18 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Transform\TransformExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\SpriteRenderer\SpriteRendererExtension.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\OpenUIFormFailureEventArgs.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\SceneType.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\LinkedList.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\MultiDictionary.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\OpenUIFormSuccessEventArgs.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\SceneManager.cs" />
     <Compile Include="Assets\Hotfix\Logic\Joystick\Joystick.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\Dev\DevCallbackMessage.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\AStarMap\AStarMapManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Random\RandomUtility.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\IUIForm.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIRoot\UIRootLogin.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\SceneState\IScene.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UIDefine.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\Action\ActionWrap.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\IReference.cs" />
@@ -168,7 +167,6 @@
     <Compile Include="Assets\Hotfix\Core\Base\Variable\Variable.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Orca\OrcaManager.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UILogin\UILoginPanel.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\SceneState\SceneManager.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\IUIFormHelper.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineCompletedHandler.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\UIManager.UIFormInstanceObject.cs" />
@@ -220,6 +218,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Download\DownloadData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\ReferencePool.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\SceneAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineManager.cs" />
   </ItemGroup>
   <ItemGroup>

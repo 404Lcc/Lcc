@@ -5,6 +5,7 @@ namespace LccHotfix
         None,
         Normal,
         Fast,
+        AfterLogin,
     }
     public abstract class LoadSceneHandler
     {
