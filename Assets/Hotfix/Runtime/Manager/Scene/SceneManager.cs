@@ -204,7 +204,7 @@ namespace LccHotfix
             WNode.TurnNode node = curSceneHandler.turnNode;
             if (string.IsNullOrEmpty(node.nodeName))
                 return;
-            if (JumpManager.Instance.OpenSpecialWindow(node))
+            if (Entry.GetModule<WindowManager>().OpenSpecialWindow(node))
                 return;
             if (node.nodeType == NodeType.ROOT)
             {

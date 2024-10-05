@@ -1,30 +1,19 @@
 using cfg;
 using System.Collections.Generic;
-using static LccHotfix.WNode;
 
 namespace LccHotfix
 {
-    internal class JumpManager : Module
+    internal partial class WindowManager : Module
     {
-        public static JumpManager Instance => Entry.GetModule<JumpManager>();
-
-        internal override void Update(float elapseSeconds, float realElapseSeconds)
-        {
-        }
-
-        internal override void Shutdown()
-        {
-        }
-
         /// <summary>
         /// 跳转至指定UI，校验功能是否开启
         /// </summary>
         /// <param name="gotoID"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        public bool JumpToPanleByID(int gotoID, params object[] args)
+        public bool JumpToWindowByID(int gotoID, params object[] args)
         {
-            var config = ConfigManager.Instance.Tables.TBJump.Get(gotoID);
+            var config = ConfigManager.Instance.Tables.TBEmptyGoTo.Get(gotoID);
             if (config == null)
                 return false;
 
@@ -61,9 +50,9 @@ namespace LccHotfix
 
             WNode.TurnNode turn = new WNode.TurnNode
             {
-                nodeName = config.PanelName,
+                nodeName = config.WindowName,
                 nodeParam = nowArg,
-                nodeType = (NodeType)config.PanelType
+                nodeType = (NodeType)config.WindowType
             };
 
             ChangeWindowNode(turn);
@@ -78,15 +67,15 @@ namespace LccHotfix
                 }
                 if (turn.nodeType == NodeType.ROOT)
                 {
-                    Entry.GetModule<WindowManager>().OpenRoot(turn.nodeName, turn.nodeParam);
+                    OpenRoot(turn.nodeName, turn.nodeParam);
                 }
                 else
                 {
-                    Entry.GetModule<WindowManager>().OpenWindow(turn.nodeName, turn.nodeParam);
+                    OpenWindow(turn.nodeName, turn.nodeParam);
                 }
                 return true;
             }
-            return JumpPanelCrossScene(scene, turn);
+            return JumpWindowCrossScene(scene, turn);
 
         }
 
@@ -97,7 +86,7 @@ namespace LccHotfix
         /// <param name="panelName"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        private bool JumpPanelCrossScene(int scene, WNode.TurnNode turn)
+        private bool JumpWindowCrossScene(int scene, WNode.TurnNode turn)
         {
             LoadSceneHandler handler = null;
 
@@ -140,7 +129,7 @@ namespace LccHotfix
             return false;
         }
 
-        private bool CheckFuncIsOpenAndShowTip(Jump config)
+        private bool CheckFuncIsOpenAndShowTip(EmptyGoTo config)
         {
             if (config == null)
                 return false;

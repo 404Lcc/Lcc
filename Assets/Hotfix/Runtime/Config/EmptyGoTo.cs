@@ -13,14 +13,14 @@ using SimpleJSON;
 
 namespace cfg
 {
-public sealed partial class Jump : Luban.BeanBase
+public sealed partial class EmptyGoTo : Luban.BeanBase
 {
-    public Jump(JSONNode _buf) 
+    public EmptyGoTo(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
-        { if(!_buf["panelType"].IsNumber) { throw new SerializationException(); }  PanelType = _buf["panelType"]; }
-        { if(!_buf["panelName"].IsString) { throw new SerializationException(); }  PanelName = _buf["panelName"]; }
-        { if(!_buf["panelNameDes"].IsString) { throw new SerializationException(); }  PanelNameDes = _buf["panelNameDes"]; }
+        { if(!_buf["windowType"].IsNumber) { throw new SerializationException(); }  WindowType = _buf["windowType"]; }
+        { if(!_buf["windowName"].IsString) { throw new SerializationException(); }  WindowName = _buf["windowName"]; }
+        { if(!_buf["windowNameDes"].IsString) { throw new SerializationException(); }  WindowNameDes = _buf["windowNameDes"]; }
         { if(!_buf["funcType"].IsNumber) { throw new SerializationException(); }  FuncType = _buf["funcType"]; }
         { if(!_buf["funcId"].IsNumber) { throw new SerializationException(); }  FuncId = _buf["funcId"]; }
         { if(!_buf["param1"].IsNumber) { throw new SerializationException(); }  Param1 = _buf["param1"]; }
@@ -29,9 +29,9 @@ public sealed partial class Jump : Luban.BeanBase
         { if(!_buf["sceneID"].IsNumber) { throw new SerializationException(); }  SceneID = _buf["sceneID"]; }
     }
 
-    public static Jump DeserializeJump(JSONNode _buf)
+    public static EmptyGoTo DeserializeEmptyGoTo(JSONNode _buf)
     {
-        return new Jump(_buf);
+        return new EmptyGoTo(_buf);
     }
 
     /// <summary>
@@ -41,15 +41,15 @@ public sealed partial class Jump : Luban.BeanBase
     /// <summary>
     /// 界面类型
     /// </summary>
-    public readonly int PanelType;
+    public readonly int WindowType;
     /// <summary>
     /// 跳转界面
     /// </summary>
-    public readonly string PanelName;
+    public readonly string WindowName;
     /// <summary>
     /// 跳转界面UI名称
     /// </summary>
-    public readonly string PanelNameDes;
+    public readonly string WindowNameDes;
     /// <summary>
     /// 功能类型
     /// </summary>
@@ -75,7 +75,7 @@ public sealed partial class Jump : Luban.BeanBase
     /// </summary>
     public readonly int SceneID;
    
-    public const int __ID__ = 2320462;
+    public const int __ID__ = 583608400;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
@@ -96,9 +96,9 @@ public sealed partial class Jump : Luban.BeanBase
     {
         return "{ "
         + "id:" + Id + ","
-        + "panelType:" + PanelType + ","
-        + "panelName:" + PanelName + ","
-        + "panelNameDes:" + PanelNameDes + ","
+        + "windowType:" + WindowType + ","
+        + "windowName:" + WindowName + ","
+        + "windowNameDes:" + WindowNameDes + ","
         + "funcType:" + FuncType + ","
         + "funcId:" + FuncId + ","
         + "param1:" + Param1 + ","

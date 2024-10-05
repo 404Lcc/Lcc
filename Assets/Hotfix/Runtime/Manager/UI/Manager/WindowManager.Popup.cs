@@ -153,7 +153,7 @@ namespace LccHotfix
 				else
 					_normalWindow = popWindowName;
 
-				AddCloseCallback(popWindowName, (o) => OnPopPanelClose(popWindowName));
+				AddCloseCallback(popWindowName, (o) => OnPopWindowClose(popWindowName));
 			}
 		}
 
@@ -163,9 +163,9 @@ namespace LccHotfix
 		}
 
 
-		public void OnPopPanelClose(string windowName)
+		public void OnPopWindowClose(string windowName)
 		{
-			RemoveCloseCallback(windowName, (o) => OnPopPanelClose(windowName));
+			RemoveCloseCallback(windowName, (o) => OnPopWindowClose(windowName));
 			if (windowName == _normalWindow)
 				_normalWindow = null;
 			else if (windowName == _advanceWindow)
