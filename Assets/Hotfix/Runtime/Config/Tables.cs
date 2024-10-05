@@ -15,16 +15,19 @@ namespace cfg
 public partial class Tables
 {
     public TBJump TBJump {get; }
+    public TBPopupWindow TBPopupWindow {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
         TBJump = new TBJump(loader("tbjump"));
+        TBPopupWindow = new TBPopupWindow(loader("tbpopupwindow"));
         ResolveRef();
     }
     
     private void ResolveRef()
     {
         TBJump.ResolveRef(this);
+        TBPopupWindow.ResolveRef(this);
     }
 }
 

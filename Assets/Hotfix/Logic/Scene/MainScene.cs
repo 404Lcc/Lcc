@@ -48,6 +48,7 @@ namespace LccHotfix
             WindowManager.Instance.ShowMaskBox((int)MaskType.CHANGE_SCENE, false);
 
             SceneLoadEndHandler();
+            WindowManager.Instance.TryPopupWindow();
         }
         public override void SceneExitHandler()
         {
