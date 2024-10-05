@@ -72,6 +72,7 @@
     <Compile Include="Assets\Hotfix\Core\Base\Module.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Task\TaskExtension.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\FunctionOpen\FunctionOpenManager.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\IObjectPoolManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UIRootBase.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ReleaseObjectFilterCallback.cs" />

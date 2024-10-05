@@ -136,7 +136,8 @@ namespace LccHotfix
             if (config.FuncType == 0)
             {
                 //判断功能是否开启
-                return true;
+                if (!FunctionOpenManager.Instance.IsFunctionOpenedAndShowTips(config.FuncId))
+                    return false;
             }
             return true;
         }
