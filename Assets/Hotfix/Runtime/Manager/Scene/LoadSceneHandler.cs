@@ -5,7 +5,7 @@ namespace LccHotfix
         None,
         Normal,
         Fast,
-        AfterLogin,
+        AfterLogin,//考虑登录之后重新回login的情况，首次进入登录进度条和重新进入登录进度条不一样
     }
     public abstract class LoadSceneHandler
     {
