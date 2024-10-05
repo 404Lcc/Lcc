@@ -11,7 +11,7 @@ namespace LccHotfix
         public static SceneManager Instance => Entry.GetModule<SceneManager>();
 
 
-        private Dictionary<SceneType, LoadSceneHandler> _sceneDict = new Dictionary<SceneType, LoadSceneHandler>();
+        private Dictionary<SceneType, LoadSceneHandler> _loadSceneHandlerDict = new Dictionary<SceneType, LoadSceneHandler>();
         public SceneManager()
         {
             foreach (Type item in CodeTypesManager.Instance.GetTypes(typeof(SceneStateAttribute)))
@@ -24,19 +24,23 @@ namespace LccHotfix
                     LoadSceneHandler sceneState = (LoadSceneHandler)Activator.CreateInstance(item);
                     sceneState.sceneType = sceneStateAttribute.sceneType;
 
-                    _sceneDict.Add(sceneStateAttribute.sceneType, sceneState);
+                    _loadSceneHandlerDict.Add(sceneStateAttribute.sceneType, sceneState);
                 }
             }
         }
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
             UpdateLoadingTime();
+            if (curSceneHandler != null && !curSceneHandler.IsLoading)
+            {
+                curSceneHandler.Tick();
+            }
         }
 
         internal override void Shutdown()
         {
             this.StopAllCoroutines();
-            _sceneDict.Clear();
+            _loadSceneHandlerDict.Clear();
         }
 
         #region Load Scene
@@ -80,7 +84,7 @@ namespace LccHotfix
             {
                 return null;
             }
-            LoadSceneHandler handler = _sceneDict[type];
+            LoadSceneHandler handler = _loadSceneHandlerDict[type];
             return handler;
         }
 
@@ -115,7 +119,7 @@ namespace LccHotfix
             {
                 return;
             }
-            LoadSceneHandler handler = _sceneDict[type];
+            LoadSceneHandler handler = _loadSceneHandlerDict[type];
             if (handler == null)
             {
                 return;

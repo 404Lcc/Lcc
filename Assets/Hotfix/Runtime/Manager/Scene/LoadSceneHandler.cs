@@ -6,7 +6,7 @@ namespace LccHotfix
         Normal,
         Fast,
     }
-    public abstract class LoadSceneHandler : IScene
+    public abstract class LoadSceneHandler
     {
 
         public SceneType sceneType;
