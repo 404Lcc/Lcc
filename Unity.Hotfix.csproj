@@ -61,7 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Hotfix\Core\Base\Log\Log.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScrollItemPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UILogicBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\ThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\WNode.cs" />
@@ -95,6 +94,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Id\IdUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\PlatformManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\LoadSceneHandler.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScrollPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\IUILogic.cs" />
     <Compile Include="Assets\Hotfix\Core\Event\IEventManager.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\UIManager.OpenUIFormInfo.cs" />
