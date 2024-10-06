@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Hotfix\Core\Base\Log\Log.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScrollItemPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UILogicBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\ThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\WNode.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Assets\Hotfix\Core\UI\IUIGroup.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Res.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Window\WindowMode.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScroll.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIRoot\UIRootCommon.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Transform\TransformExtension.cs" />
@@ -150,6 +152,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelTemplate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\ScreenAdaptation\ScreenAdaptationUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Archive\UserData.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScrollItem.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\CodeTypes\UnOrderMultiMapSet.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Archive\ResolutionType.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\ReferencePool.ReferenceCollection.cs" />
