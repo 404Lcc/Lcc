@@ -146,8 +146,8 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UIDefine.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\Action\ActionWrap.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\IReference.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelTemplate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\TBPopupWindow.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelTemplate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\ScreenAdaptation\ScreenAdaptationUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Archive\UserData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\CodeTypes\UnOrderMultiMapSet.cs" />

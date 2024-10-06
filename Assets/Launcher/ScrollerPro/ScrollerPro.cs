@@ -2,7 +2,6 @@ using UnityEngine;
 using EnhancedUI.EnhancedScroller;
 using System;
 using Sirenix.OdinInspector;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace LccModel
@@ -13,9 +12,9 @@ namespace LccModel
         [LabelText("左对齐")]
         Left,
         [LabelText("单个item居中对齐")]
-        Center, //（组居中，组里的item还是左对齐）
+        Center,//根据每组固定item数量居中
         [LabelText("居中对齐")]
-        Middle, //（以item为标准居中，一组里面有多少item就把这些item居中）
+        Middle,//根据真实的item数量居中
         [LabelText("右对齐")]
         Right,
     }
@@ -50,55 +49,13 @@ namespace LccModel
 
         public GroupBase groupPrefab;
 
-        private Vector2 _groupSize = Vector2.zero;
-        public Vector2 GroupSize
-        {
-            get
-            {
-                if (_groupSize == Vector2.zero)
-                {
-                    RectTransform rect = groupPrefab.transform as RectTransform;
-                    _groupSize = rect.SizeDelta();//Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? rect.sizeDelta().y : rect.sizeDelta().x;
-                }
-                return _groupSize;
-            }
-        }
-
-        //private int _pageCount = -1;
-
-        //public int PageCount
-        //{
-        //    get
-        //    {
-        //        if (_pageCount == -1)
-        //        {
-        //            _pageCount = Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? (int)Scroller.ScrollRectSize / (int)GroupSize : (int)Scroller.ScrollRectSize / (int)GroupSize;
-        //        }
-        //        return _pageCount;
-        //    }
-        //}
-
-
         public bool isGrid = false;
-
-        private int _numberOfCellsPerRow = -1;
-        //NumberOfCellsPerRow一排or一行有几个
-        public int NumberOfCellsPerRow
-        {
-            get
-            {
-                if (_numberOfCellsPerRow == -1)
-                {
-                    _numberOfCellsPerRow = groupPrefab.gridCount;
-                }
-                return _numberOfCellsPerRow;
-            }
-        }
-
-
         public EnhancedScroller Scroller => this;
 
-        public void Start()
+        //NumberOfCellsPerRow一排or一行有几个
+        private int NumberOfCellsPerRow => groupPrefab.gridCount;
+
+        public void Awake()
         {
             Delegate = this;
             cellViewVisibilityChanged = CellViewVisibilityChanged;
@@ -133,7 +90,6 @@ namespace LccModel
 
             group.name = "Group " + (dataIndex * NumberOfCellsPerRow).ToString() + " to " + ((dataIndex * NumberOfCellsPerRow) + NumberOfCellsPerRow - 1).ToString();
             group.SetGroup(dataIndex / NumberOfCellsPerRow, dataIndex * NumberOfCellsPerRow, ((dataIndex * NumberOfCellsPerRow) + NumberOfCellsPerRow - 1));
-
 
             return group;
         }

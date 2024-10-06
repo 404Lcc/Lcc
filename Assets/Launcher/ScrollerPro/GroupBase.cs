@@ -1,9 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 using EnhancedUI.EnhancedScroller;
-using UnityEngine.UI;
 using static EnhancedUI.EnhancedScroller.EnhancedScroller;
-using UnityEngine.UIElements;
 
 namespace LccModel
 {
@@ -18,7 +15,6 @@ namespace LccModel
         public Vector3 groupSize;
 
         public ScrollerPro scrollerPro;
-        //public List<Transform> transformList = new List<Transform>();
 
         public void InitGroup(ScrollerPro scrollerPro, Transform itemPrefab)
         {
@@ -37,20 +33,10 @@ namespace LccModel
                 {
                     gridCount = (int)(rect.SizeDelta().y / (itemRect.SizeDelta().y + scrollerPro.Scroller.spacing));
                 }
-
-                //for (int i = 0; i < gridCount; i++)
-                //{
-                //    var item = Instantiate(itemPrefab, transform).transform;
-                //    item.gameObject.SetActive(false);
-                //    transformList.Add(item);
-                //}
             }
             else if (!scrollerPro.isGrid)
             {
                 gridCount = 1;
-                //var item = Instantiate(itemPrefab, transform).transform;
-                //item.gameObject.SetActive(false);
-                //transformList.Add(item);
             }
             cellIdentifier = "GroupBase";
         }
