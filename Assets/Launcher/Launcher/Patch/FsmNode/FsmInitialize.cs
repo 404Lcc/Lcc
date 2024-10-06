@@ -62,11 +62,25 @@ namespace LccModel
             // 创建默认的资源包
             var packageName = (string)_machine.GetBlackboardValue("PackageName");
             var buildPipeline = (string)_machine.GetBlackboardValue("BuildPipeline");
+
+            //默认资源包清空
+            YooAssets.SetDefaultPackage(null);
+
             // 创建资源包裹类
             var package = YooAssets.TryGetPackage(packageName);
             if (package == null)
+            {
                 package = YooAssets.CreatePackage(packageName);
+            }
+            else
+            {
+                //如果有上次遗留的先销毁在重建
+                var destroyOperation = package.DestroyAsync();
+                yield return destroyOperation;
 
+                YooAssets.RemovePackage(packageName);
+                package = YooAssets.CreatePackage(packageName);
+            }
             // 编辑器下的模拟模式
             InitializationOperation initializationOperation = null;
             if (PlayMode == EPlayMode.EditorSimulateMode)

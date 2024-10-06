@@ -35,7 +35,7 @@ namespace LccModel
         /// 是否成功请求中心服地址
         /// </summary>
         public bool requestCenterServerSucc;
-        public IEnumerator RequestCenterServer()
+        public IEnumerator RequestCenterServer(bool restart = false)
         {
             requestCenterServerSucc = false;
 
@@ -52,7 +52,6 @@ namespace LccModel
 #endif
 
             yield return web.SendWebRequest();
-
             if (!string.IsNullOrEmpty(web.error))
             {
                 web.Dispose();
@@ -60,11 +59,13 @@ namespace LccModel
                 web.timeout = 20;
                 yield return web.SendWebRequest();
             }
-
             if (!string.IsNullOrEmpty(web.error))
             {
                 Debug.LogError($"RequestCenterServer 请求中心服 失败url= {url}");
-                StartServerLoad();
+                if (!restart)
+                {
+                    StartServerLoad();
+                }
             }
             else
             {
@@ -72,11 +73,11 @@ namespace LccModel
 
                 ReadChannelListConfig(response);
 
-                yield return GetRemoteVersionList();
+                yield return GetRemoteVersionList(restart);
             }
         }
 
-        private IEnumerator GetRemoteVersionList()
+        private IEnumerator GetRemoteVersionList(bool restart = false)
         {
             requestCenterServerSucc = false;
 
@@ -105,7 +106,10 @@ namespace LccModel
             if (!string.IsNullOrEmpty(web.error))
             {
                 Debug.LogError($"GetRemoteVersionList 请求VersionList 失败url= {url}");
-                StartServerLoad();
+                if (!restart)
+                {
+                    StartServerLoad();
+                }
             }
             else
             {

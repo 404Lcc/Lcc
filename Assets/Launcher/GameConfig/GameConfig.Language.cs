@@ -147,7 +147,7 @@ namespace LccModel
                     {
                         var regionList = JsonMapper.ToObject<List<string>>(data["regionList"].ToJson());
                         AddConfig("regionList", regionList);
-                        //ReadUserRegion();
+                        ReadUserRegion();
                     }
                 }
                 catch (Exception ex)
@@ -158,6 +158,18 @@ namespace LccModel
             else
             {
             }
+        }
+        private static void ReadUserRegion()
+        {
+            string region = "";
+
+            var regions = Launcher.GameConfig.regionList;
+
+            if (string.IsNullOrEmpty(region) || !regions.Contains(region))
+            {
+                region = "US";
+            }
+            Launcher.GameConfig.AddConfig("region", region);
         }
     }
 }

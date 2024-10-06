@@ -1,7 +1,6 @@
 using Entitas.VisualDebugging.Unity;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using YooAsset;
@@ -16,16 +15,14 @@ namespace LccModel
 
     public partial class Launcher : SingletonMono<Launcher>
     {
-        public bool restartOver = false;
-        private Coroutine _coroutine;
+        public Coroutine coroutine;
 
         public GameState GameState { set; get; } = GameState.Official;
 
         public bool GameStarted { set; get; } = false;
 
         public Assembly hotfixAssembly;
-        public readonly Dictionary<string, Type> hotfixTypeDict = new Dictionary<string, Type>();
-
+        public PatchOperation patchOperation = new PatchOperation();
 
         public const string DefaultPackage = "DefaultPackage";
 
@@ -116,8 +113,8 @@ namespace LccModel
         //出问题就走这个重来一遍
         public void StartServerLoad()
         {
-            if (_coroutine != null) StopCoroutine(_coroutine);
-            _coroutine = StartCoroutine(LoadCoroutine());
+            if (coroutine != null) StopCoroutine(coroutine);
+            coroutine = StartCoroutine(LoadCoroutine());
         }
 
 
@@ -141,7 +138,7 @@ namespace LccModel
             //检测是否需要重新下载安装包
             if (CheckIfAppShouldUpdate())
             {
-                Debug.Log($"初始化 需要重新下载安装包 GameConfig.appVersion:{GameConfig.appVersion}, mSvrVersion:{svrVersion}");
+                Debug.Log($"初始化 需要重新下载安装包 GameConfig.appVersion:{GameConfig.appVersion}, svrVersion:{svrVersion}");
                 ForceUpdate();
                 yield break;
             }
@@ -157,18 +154,10 @@ namespace LccModel
             StartDownloadUpdate();
         }
 
-        private void StartDownloadUpdate()
+        public void StartDownloadUpdate()
         {
-            //清理
-            StopAllCoroutines();
-            Event.ClearAll();
-            YooAssets.SetDefaultPackage(null);
-            YooAssets.RemovePackage(DefaultPackage);
-
-
             Debug.Log("Launcher 开启补丁更新流程...");
-            PatchOperation patchOperation = new PatchOperation();
-            YooAssets.StartOperation(patchOperation);
+            patchOperation.Run();
         }
 
         public string GetPlatform()
@@ -192,113 +181,15 @@ namespace LccModel
         }
 
 
-
-
-        #region 重启游戏
-        public void Restart()
-        {
-            if (_coroutine != null)
-                StopCoroutine(_coroutine);
-            _coroutine = StartCoroutine(ReStartCoroutine());
-        }
-        private IEnumerator ReStartCoroutine()
-        {
-            restartOver = false;
-            GameStarted = false;
-            UIForeGroundPanel.Instance.FadeOut(0.3f);
-            yield return null;
-            GC.Collect();
-            UILoadingPanel.Instance.ShowBG();
-            UILoadingPanel.Instance.Show(GetLanguage("msg_retrieve_server_data"));
-            UILoadingPanel.Instance.SetText(string.Empty);
-            yield return new WaitForSeconds(0.1f);
-            yield return StartCoroutine(ReCheckVersionCoroutine());
-
-            // 中途结束
-            if (restartOver)
-            {
-                UILoadingPanel.Instance.UpdateLoadingPercent(91, 98);
-                //切换场景
-                HotfixFunc.CallPublicStaticMethod("Hotfix", "GameUtil", "ChangeSceneById", 1 << 0, "UILogin");//Login =1 <<0,// 登录   1
-                yield return null;
-                LoadFinish();
-            }
-        }
-
-        private IEnumerator ReCheckVersionCoroutine()
-        {
-            ChangeFPS();
-
-            var isHotfixGameStartedObj = HotfixFunc.CallPublicStaticMethod("Hotfix", "GameUtil", "IsHotfixGameStarted");
-            var isHotfixGameStarted = isHotfixGameStartedObj == null ? false : (bool)isHotfixGameStartedObj;
-
-            UILoadingPanel.Instance.UpdateLoadingPercent(0, 18);
-            //连接中心服，请求失败重新请求
-            yield return StartCoroutine(RequestCenterServer());
-            if (!requestCenterServerSucc)
-            {
-                //请求中心服如果失败了，直接断流程，清理下热更代码和资源，走初始化流程
-
-                actionClose?.Invoke();
-                yield return null;
-                AssetManager.Instance.UnloadAllAssetsAsync();
-                yield return null;
-
-                yield break;
-            }
-
-            UILoadingPanel.Instance.UpdateLoadingPercent(19, 20);
-
-            //检测是否需要重新下载安装包
-            if (CheckIfAppShouldUpdate())
-            {
-                Debug.Log($"重启 需要重新下载安装包 GameConfig.appVersion:{GameConfig.appVersion}, mSvrVersion:{svrVersion}");
-                ForceUpdate();
-                yield break;
-            }
-
-            //读取Package的版本信息
-            if (!Launcher.Instance.reCheckVersionUpdate && GameConfig.resVersion == Launcher.Instance.svrResVersion)
-            {
-                if (isHotfixGameStarted)
-                {
-                    restartOver = true;
-                    yield break;
-                }
-            }
-
-            //读取本地版本信息
-            if (Launcher.GameConfig.checkResUpdate && !Launcher.Instance.IsAuditServer())
-            {
-                Launcher.GameConfig.AddConfig("resVersion", svrResVersion);
-            }
-
-            UILoadingPanel.Instance.UpdateLoadingPercent(21, 48);
-            Launcher.Instance.reCheckVersionUpdate = false;
-
-
-            actionClose?.Invoke();
-            yield return null;
-            AssetManager.Instance.UnloadAllAssetsAsync();
-            yield return null;
-
-            yield return new WaitForSeconds(0.3f);
-            UILoadingPanel.Instance.UpdateLoadingPercent(49, 50);
-            yield return null;
-
-
-            StartDownloadUpdate();
-        }
-
         public void LoadFinish()
         {
             GameStarted = true;
             ChangeFPS();
-            _coroutine = null;
+            coroutine = null;
             UILoadingPanel.Instance.Hide();
         }
 
-        #endregion
+
 
     }
 }

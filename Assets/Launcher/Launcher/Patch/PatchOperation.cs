@@ -3,21 +3,18 @@ using YooAsset;
 
 namespace LccModel
 {
-    public class PatchOperation : GameAsyncOperation
+    public class PatchOperation
     {
-        private enum ESteps
-        {
-            None,
-            Update,
-            Done,
-        }
-
-        private readonly EventGroup _eventGroup = new EventGroup();
-        private readonly StateMachine _machine;
-        private ESteps _steps = ESteps.None;
+        private EventGroup _eventGroup = new EventGroup();
+        private StateMachine _machine;
 
         public PatchOperation()
         {
+        }
+
+        public void Run()
+        {
+            RemoveAllListener();
             // 注册监听事件
             _eventGroup.AddListener<UserTryInitialize>(OnHandleEventMessage);
             _eventGroup.AddListener<UserBeginDownloadWebFiles>(OnHandleEventMessage);
@@ -40,30 +37,13 @@ namespace LccModel
             _machine.SetBlackboardValue("PackageName", Launcher.DefaultPackage);
             _machine.SetBlackboardValue("BuildPipeline", EDefaultBuildPipeline.BuiltinBuildPipeline.ToString());
             _machine.SetBlackboardValue("TotalDownloadCount", 0);
-        }
-        protected override void OnStart()
-        {
-            _steps = ESteps.Update;
+
             _machine.Run<FsmGetNotice>();
         }
-        protected override void OnUpdate()
-        {
-            if (_steps == ESteps.None || _steps == ESteps.Done)
-                return;
 
-            if (_steps == ESteps.Update)
-            {
-                _machine.Update();
-                if (_machine.CurrentNode == typeof(FsmPatchDone).FullName)
-                {
-                    _eventGroup.RemoveAllListener();
-                    Status = EOperationStatus.Succeed;
-                    _steps = ESteps.Done;
-                }
-            }
-        }
-        protected override void OnAbort()
+        public void RemoveAllListener()
         {
+            _eventGroup.RemoveAllListener();
         }
 
         /// <summary>

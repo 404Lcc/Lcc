@@ -22,6 +22,8 @@ namespace LccModel
         }
         public void OnEnter()
         {
+            var patchOperation = _machine.Owner as PatchOperation;
+            patchOperation.RemoveAllListener();
             Launcher.Instance.StartCoroutine(LoadInitialize());
         }
         public void OnUpdate()
@@ -150,15 +152,6 @@ namespace LccModel
             }
 
             Object.Destroy(loader);
-
-            var hotfixTypeDict = Launcher.Instance.hotfixTypeDict;
-            foreach (Type type in Launcher.Instance.hotfixAssembly.GetTypes())
-            {
-                if (type.FullName != null)
-                {
-                    hotfixTypeDict[type.FullName] = type;
-                }
-            }
 
             Run();
 

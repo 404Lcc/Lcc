@@ -41,6 +41,9 @@ namespace LccHotfix
         {
             this.StopAllCoroutines();
             _loadSceneHandlerDict.Clear();
+            _inLoading = false;
+            preSceneHandler = null;
+            curSceneHandler = null;
         }
 
         #region Load Scene
