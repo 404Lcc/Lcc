@@ -53,7 +53,7 @@ namespace LccModel
         public EnhancedScroller Scroller => this;
 
         //NumberOfCellsPerRow一排or一行有几个
-        private int NumberOfCellsPerRow => groupPrefab.gridCount;
+        public int NumberOfCellsPerRow => groupPrefab.gridCount;
 
         public void Awake()
         {
