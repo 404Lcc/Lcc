@@ -26,7 +26,7 @@ namespace LccHotfix
 
                 HotfixBridge.Init();
 
-                //初始化管理器 配置表
+                //初始化管理器
                 WindowManager.Instance.InitWindowManager();
 
                 SceneManager.Instance.ChangeScene(SceneType.Login);
@@ -76,7 +76,7 @@ namespace LccHotfix
         /// </summary>
         public static void ReturnToStart()
         {
-            //关闭所有协程
+            //关闭所有协程，如果patchOperation的状态机在运行，这里会杀掉
             CoroutineManager.Instance.StopAllTypeCoroutines();
             Entry.GetModule<WindowManager>().ShowMaskBox(0xFF, false);
             //todo清理菊花界面

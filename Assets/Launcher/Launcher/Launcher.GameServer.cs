@@ -162,13 +162,13 @@ namespace LccModel
                                     //如果版本号跟提审号的一样就走提审包，其他情况走默认的
                                     if (appVersion == fetchVersion)
                                     {
-                                        Debug.Log($"GetRemoteVersionList 判定走提审包 mSvrVersion = 远端版本={fetchVersion}");
+                                        Debug.Log($"GetRemoteVersionList 判定走提审包 svrVersion = 远端版本={fetchVersion}");
                                         this.svrVersion = fetchVersion;
                                         Launcher.Instance.GameState = GameState.Fetch;
                                     }
                                     else
                                     {
-                                        Debug.Log($"GetRemoteVersionList 判走普通包 mSvrVersion = 远端版本={defaultVersion}");
+                                        Debug.Log($"GetRemoteVersionList 判走普通包 svrVersion = 远端版本={defaultVersion}");
                                         this.svrVersion = defaultVersion;
                                         Launcher.Instance.GameState = GameState.Official;
                                     }
@@ -248,7 +248,7 @@ namespace LccModel
 
                 if (!findClientVersion)
                 {
-                    Debug.LogError($"ReadVersionListConfig !findClientVersion mSvrVersion={svrVersion}");
+                    Debug.LogError($"ReadVersionListConfig !findClientVersion svrVersion={svrVersion}");
                 }
             }
             catch (Exception ex)
