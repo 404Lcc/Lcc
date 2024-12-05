@@ -392,20 +392,13 @@ namespace LccHotfix
             CurSelect = index;
             if (CurSelect < _dataList.Count)
             {
-                //如果不判断空 有可能当前选中的索引不在实例化的列表内(他可能滑动到屏幕外面)
-                var tempItem = GetItem(CurSelect);
-                if (tempItem != null)
-                {
-                    tempItem.OnItemClick();
-                }
+                OnItemSelect(index);
+                OnItemClick(index);
             }
             else
             {
-                var tempItem = GetItem(0);
-                if (tempItem != null)
-                {
-                    tempItem.OnItemClick();
-                }
+                OnItemSelect(0);
+                OnItemClick(0);
             }
         }
 
