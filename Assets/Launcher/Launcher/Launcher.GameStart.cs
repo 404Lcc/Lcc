@@ -1,4 +1,3 @@
-using Entitas.VisualDebugging.Unity;
 using System;
 using System.Collections;
 using System.Reflection;
@@ -40,8 +39,6 @@ namespace LccModel
                 YooAssets.Initialize();
                 Event.Initalize();
                 YooAssets.SetOperationSystemMaxTimeSlice(30);
-
-                DebugSystems.avgResetInterval = AvgResetInterval.Never;
 
                 System.Globalization.CultureInfo cul = System.Globalization.CultureInfo.GetCultureInfo("en-us");
                 System.Threading.Thread.CurrentThread.CurrentCulture = cul;

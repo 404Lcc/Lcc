@@ -67,44 +67,75 @@
     <Compile Include="Assets\3rdPlugins\LitJson\JsonReader.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoReader.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ParseableSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Matcher\MatcherException.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Group\Group.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Collector\CollectorException.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Entity\EntityEqualityComparer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoConverterAttribute.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Group\GroupExtension.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Entity\Exceptions\EntityIsNotEnabledException.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\UnityTypeBindings.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Properties\AssemblyInfo.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Entity\UnsafeAERC.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SystemTypeSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Matcher\Interfaces\IAnyOfMatcher.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\TypeModel.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Systems\Interfaces\ICleanupSystem.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Entity\Entity.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Collector\Collector.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SByteSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\TypeFormatEventArgs.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\AttributeMap.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SingleSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\MemberSpecifiedDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Extensions\CollectionExtension.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\BlobSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Entity\Exceptions\EntityAlreadyHasComponentException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\NullDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\BufferPool.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DoubleSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Group\GroupEvent.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\MapDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\EntityIndex\PrimaryEntityIndex.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoIncludeAttribute.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\IComponent.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SubItemSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\EntityIndex\EntityIndex.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\Local.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DateTimeSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\RVO\Agent.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoWriter.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\EntityIndex\EntityIndexException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\IProtoTypeSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Context\Exceptions\ContextDoesNotContainEntityException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\WireType.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Matcher\Interfaces\ICompoundMatcher.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\DiscriminatedUnion.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\ProtoEndpointBehavior.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Matcher\Interfaces\IMatcher.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ListDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TypeSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ImplicitFields.cs" />
     <Compile Include="Assets\3rdPlugins\RVO\Simulator.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Systems\Interfaces\IReactiveSystem.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Context\Context.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Group\IGroup.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ProtoDecoratorBase.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoMapAttribute.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Matcher\MatcherEquals.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ArrayDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Collector\TriggerOnEventMatcherExtension.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\IExtensible.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Systems\Systems.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\CharSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Matcher\Interfaces\INoneOfMatcher.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Systems\ReactiveSystem.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\Extensions.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\SerializationContext.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\EntityIndex\AbstractEntityIndex.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Systems\Interfaces\ITearDownSystem.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\ValueMember.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\StringSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\MetaType.cs" />
@@ -112,40 +143,60 @@
     <Compile Include="Assets\3rdPlugins\LitJson\JsonMockWrapper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\IProtoSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ImmutableCollectionDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Context\Exceptions\ContextInfoException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TimeSpanSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Collector\CollectorContextExtension.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\EntityIndex\IEntityIndex.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Entity\SafeAERC.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\Lexer.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Matcher\MatcherStatic.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\CallbackAttributes.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ISerializerProxy.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DecimalSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Collector\ICollector.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Entity\Exceptions\EntityDoesNotHaveComponentException.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\EntitasException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\Int16Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\BooleanSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DefaultValueDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Systems\Interfaces\IExecuteSystem.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Extensions\EntitasStringExtension.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\SubItemToken.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\IJsonWrapper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\CompilerContext.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\PropertyDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\RVO\KdTree.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Matcher\Interfaces\IAllOfMatcher.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\NetObjectSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\CompiledSerializer.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Context\ContextInfo.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Helpers.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Matcher\Matcher.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\CompilerDelegates.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\CallbackSet.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Entity\IAERC.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\KeyValuePairProxy.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\ProtoBehaviorExtensionElement.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\SubType.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Systems\Interfaces\ISystem.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Matcher\MatcherToString.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\NetObjectCache.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TagDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonData.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt64Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TupleSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonWriter.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Entity\Exceptions\EntityIsNotRetainedByOwnerException.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt16Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\RVO\ObstaclePolygon.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Context\Exceptions\EntityIsNotDestroyedException.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Systems\ParallelSystem.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Context\Exceptions\ContextStillHasRetainedEntitiesException.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\Netstandard15Polyfill.cs" />
     <Compile Include="Assets\3rdPlugins\RVO\Obstacle.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
@@ -157,65 +208,59 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\GuidSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\FieldDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Extensible.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Entity\Exceptions\EntityIsAlreadyRetainedByOwnerException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\ProtoBehaviorAttribute.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\ParserToken.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\BasicList.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\ProtoOperationBehavior.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoEnumAttribute.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Group\GroupSingleEntityException.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonMapper.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\Int64Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ExtensibleUtil.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoMemberAttribute.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\SurrogateSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Context\Exceptions\ContextEntityIndexDoesAlreadyExistException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoContractAttribute.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Collector\TriggerOnEvent.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\PrefixStyle.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\ProtoSyntax.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\DataFormat.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Context\IContext.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Systems\Interfaces\IInitializeSystem.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\GlobalSuppressions.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\Int32Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\EnumSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\RuntimeTypeModel.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoIgnoreAttribute.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ReflectedUriDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Context\Exceptions\ContextEntityIndexDoesNotExistException.cs" />
     <Compile Include="Assets\3rdPlugins\RVO\Vector2.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\XmlProtoSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\3rdPlugins\Entitas\Entitas\Entitas.VisualDebugging.Unity.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\Sherlog\Sherlog.dll" />
     <None Include="Assets\3rdPlugins\NPOI\NPOI.OpenXmlFormats.dll" />
     <None Include="Assets\3rdPlugins\BouncyCastle\BouncyCastle.Crypto.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Serialization.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\Entitas\Editor\Entitas.Unity.Editor.dll" />
     <None Include="Assets\3rdPlugins\NPOI\NPOI.OOXML.dll" />
     <None Include="Assets\3rdPlugins\Demigiant\DOTween\DOTween.XML" />
-    <None Include="Assets\3rdPlugins\Entitas\Entitas\Entitas.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.xml" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.xml" />
     <None Include="Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.dll" />
     <None Include="Assets\3rdPlugins\Roslyn\System.Buffers.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Unity.dll" />
     <None Include="Assets\3rdPlugins\Demigiant\DOTween\Editor\DOTweenEditor.dll" />
     <None Include="Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\Sherlog\Sherlog.Formatters.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\NoEditor\Sirenix.Serialization.dll" />
     <None Include="Assets\3rdPlugins\SharpZipLib\ICSharpCode.SharpZipLib.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\Entitas\LICENSE.txt" />
-    <None Include="Assets\3rdPlugins\Entitas\TCPeasy\TCPeasy.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.xml" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.xml" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.dll" />
     <None Include="Assets\3rdPlugins\Demigiant\DOTween\DOTween.dll" />
     <None Include="Assets\3rdPlugins\Roslyn\System.Runtime.CompilerServices.Unsafe.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny.Generator.Unity.Editor.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Extensions.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Threading.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\Entitas\Editor\Entitas.Migration.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\Entitas\Editor\Entitas.Migration.Unity.Editor.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\NoEditor\Sirenix.Utilities.dll" />
     <None Include="Assets\3rdPlugins\Roslyn\System.Threading.Tasks.Extensions.dll" />
     <None Include="Assets\3rdPlugins\Unity.3rdPlugin.asmdef" />
@@ -224,25 +269,13 @@
     <None Include="Assets\3rdPlugins\Roslyn\System.Reflection.Metadata.dll" />
     <None Include="Assets\3rdPlugins\Roslyn\System.Memory.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\link.xml" />
-    <None Include="Assets\3rdPlugins\Entitas\Entitas\Entitas.Unity.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny.Generator.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Serialization.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\Sherlog\Sherlog.Appenders.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Reflection.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny\Jenny.Plugins.Unity.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.xml" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny\Jenny.Plugins.dll" />
     <None Include="Assets\3rdPlugins\Demigiant\DOTween\readme.txt" />
-    <None Include="Assets\3rdPlugins\Entitas\DesperateDevs\Editor\DesperateDevs.Unity.Editor.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\Entitas\Entitas.CodeGeneration.Attributes.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\Entitas\Editor\Entitas.VisualDebugging.Unity.Editor.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\NoEmitAndNoEditor\Sirenix.Utilities.dll" />
     <None Include="Assets\3rdPlugins\NPOI\NPOI.dll" />
     <None Include="Assets\3rdPlugins\Demigiant\DOTween\Editor\DOTweenEditor.XML" />
     <None Include="Assets\3rdPlugins\Roslyn\System.Collections.Immutable.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny.dll" />
-    <None Include="Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Caching.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Odin Inspector\Assets\Editor\Bootstrap License.txt" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.dll" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.xml" />
@@ -596,14 +629,6 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Entitas.VisualDebugging.Unity">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Entitas.VisualDebugging.Unity.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Sherlog">
-      <HintPath>Assets\3rdPlugins\Entitas\Sherlog\Sherlog.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
       <HintPath>Assets\3rdPlugins\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
       <Private>False</Private>
@@ -628,20 +653,12 @@
       <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Entitas.Unity.Editor">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Editor\Entitas.Unity.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="NPOI.OOXML">
       <HintPath>Assets\3rdPlugins\NPOI\NPOI.OOXML.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.3.1\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Entitas">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Entitas.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sirenix.Serialization.Config">
@@ -656,10 +673,6 @@
       <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DesperateDevs.Unity">
-      <HintPath>Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Unity.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="DOTweenEditor">
       <HintPath>Assets\3rdPlugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
       <Private>False</Private>
@@ -672,20 +685,12 @@
       <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sherlog.Formatters">
-      <HintPath>Assets\3rdPlugins\Entitas\Sherlog\Sherlog.Formatters.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.3.1\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>Assets\3rdPlugins\SharpZipLib\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TCPeasy">
-      <HintPath>Assets\3rdPlugins\Entitas\TCPeasy\TCPeasy.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sirenix.OdinInspector.Attributes">
@@ -704,26 +709,6 @@
       <HintPath>Assets\3rdPlugins\Roslyn\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Jenny.Generator.Unity.Editor">
-      <HintPath>Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny.Generator.Unity.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DesperateDevs.Extensions">
-      <HintPath>Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DesperateDevs.Threading">
-      <HintPath>Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Threading.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Entitas.Migration">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Editor\Entitas.Migration.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Entitas.Migration.Unity.Editor">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Editor\Entitas.Migration.Unity.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="dnlib">
       <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@6c679cc3ab\Plugins\dnlib.dll</HintPath>
       <Private>False</Private>
@@ -740,30 +725,6 @@
       <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@6c679cc3ab\Plugins\LZ4.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Entitas.Unity">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Entitas.Unity.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Jenny.Generator">
-      <HintPath>Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny.Generator.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DesperateDevs.Serialization">
-      <HintPath>Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Serialization.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Sherlog.Appenders">
-      <HintPath>Assets\3rdPlugins\Entitas\Sherlog\Sherlog.Appenders.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DesperateDevs.Reflection">
-      <HintPath>Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Reflection.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Jenny.Plugins.Unity">
-      <HintPath>Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny\Jenny.Plugins.Unity.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Sirenix.Utilities.Editor">
       <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
       <Private>False</Private>
@@ -772,36 +733,12 @@
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Jenny.Plugins">
-      <HintPath>Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny\Jenny.Plugins.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DesperateDevs.Unity.Editor">
-      <HintPath>Assets\3rdPlugins\Entitas\DesperateDevs\Editor\DesperateDevs.Unity.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Entitas.CodeGeneration.Attributes">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Entitas.CodeGeneration.Attributes.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Entitas.VisualDebugging.Unity.Editor">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Editor\Entitas.VisualDebugging.Unity.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="NPOI">
       <HintPath>Assets\3rdPlugins\NPOI\NPOI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Collections.Immutable">
       <HintPath>Assets\3rdPlugins\Roslyn\System.Collections.Immutable.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Jenny">
-      <HintPath>Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DesperateDevs.Caching">
-      <HintPath>Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Caching.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">

@@ -43,7 +43,7 @@ public partial class LogicMatcher
             if (_matcherID == null)
             {
                 var matcher = (Matcher<LogicEntity>)Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ID);
-                matcher.componentNames = LogicComponentsLookup.componentNames;
+                matcher.ComponentNames = LogicComponentsLookup.componentNames;
                 _matcherID = matcher;
             }
 

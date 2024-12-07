@@ -1,0 +1,103 @@
+{
+    "FileVersion": "2.0.0",
+    "EnableAddressable": true,
+    "LocationToLower": false,
+    "IncludeAssetGUID": false,
+    "OutputNameStyle": 0,
+    "BuildPipeline": "BuiltinBuildPipeline",
+    "PackageName": "DefaultPackage",
+    "PackageVersion": "Simulate",
+    "AssetList": [
+        {
+            "Address": "aot",
+            "AssetPath": "Assets/Bundles/AotDlls/aot.txt",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 0
+        },
+        {
+            "Address": "tbemptygoto",
+            "AssetPath": "Assets/Bundles/Config/tbemptygoto.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "tbpopupwindow",
+            "AssetPath": "Assets/Bundles/Config/tbpopupwindow.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "Unity.Hotfix.dll",
+            "AssetPath": "Assets/Bundles/DLL/Unity.Hotfix.dll.bytes",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2
+        },
+        {
+            "Address": "Unity.Hotfix.pdb",
+            "AssetPath": "Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 2
+        },
+        {
+            "Address": "UILoginPanel",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UILoginPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 3
+        },
+        {
+            "Address": "UIMainPanel",
+            "AssetPath": "Assets/Bundles/Prefab/Panel/UIMainPanel.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 3
+        }
+    ],
+    "BundleList": [
+        {
+            "BundleName": "assets_bundles_aotdlls.bundle",
+            "UnityCRC": 0,
+            "FileHash": "f8fecc514472ad9bf32e5830c7f1342b",
+            "FileCRC": "00000000",
+            "FileSize": 1,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "assets_bundles_config.bundle",
+            "UnityCRC": 0,
+            "FileHash": "ea42e939e3a2d0d68ee7e7cc761cd7e8",
+            "FileCRC": "00000000",
+            "FileSize": 302,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "assets_bundles_dll.bundle",
+            "UnityCRC": 0,
+            "FileHash": "c34a93da87570e612fb189056b197f57",
+            "FileCRC": "00000000",
+            "FileSize": 334548,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "assets_bundles_prefab_panel.bundle",
+            "UnityCRC": 0,
+            "FileHash": "a537064360b9cc20194c8b371f5f3577",
+            "FileCRC": "00000000",
+            "FileSize": 28125,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        }
+    ]
+}

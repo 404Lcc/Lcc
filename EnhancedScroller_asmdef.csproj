@@ -501,14 +501,6 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Entitas.VisualDebugging.Unity">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Entitas.VisualDebugging.Unity.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Sherlog">
-      <HintPath>Assets\3rdPlugins\Entitas\Sherlog\Sherlog.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
       <HintPath>Assets\3rdPlugins\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
       <Private>False</Private>
@@ -533,20 +525,12 @@
       <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Entitas.Unity.Editor">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Editor\Entitas.Unity.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="NPOI.OOXML">
       <HintPath>Assets\3rdPlugins\NPOI\NPOI.OOXML.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.3.1\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Entitas">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Entitas.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sirenix.Serialization.Config">
@@ -561,10 +545,6 @@
       <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DesperateDevs.Unity">
-      <HintPath>Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Unity.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="DOTweenEditor">
       <HintPath>Assets\3rdPlugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
       <Private>False</Private>
@@ -577,20 +557,12 @@
       <HintPath>Assets\3rdPlugins\Roslyn\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sherlog.Formatters">
-      <HintPath>Assets\3rdPlugins\Entitas\Sherlog\Sherlog.Formatters.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.3.1\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>Assets\3rdPlugins\SharpZipLib\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TCPeasy">
-      <HintPath>Assets\3rdPlugins\Entitas\TCPeasy\TCPeasy.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sirenix.OdinInspector.Attributes">
@@ -609,26 +581,6 @@
       <HintPath>Assets\3rdPlugins\Roslyn\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Jenny.Generator.Unity.Editor">
-      <HintPath>Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny.Generator.Unity.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DesperateDevs.Extensions">
-      <HintPath>Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DesperateDevs.Threading">
-      <HintPath>Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Threading.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Entitas.Migration">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Editor\Entitas.Migration.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Entitas.Migration.Unity.Editor">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Editor\Entitas.Migration.Unity.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="dnlib">
       <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@6c679cc3ab\Plugins\dnlib.dll</HintPath>
       <Private>False</Private>
@@ -645,30 +597,6 @@
       <HintPath>Library\PackageCache\com.code-philosophy.hybridclr@6c679cc3ab\Plugins\LZ4.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Entitas.Unity">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Entitas.Unity.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Jenny.Generator">
-      <HintPath>Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny.Generator.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DesperateDevs.Serialization">
-      <HintPath>Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Serialization.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Sherlog.Appenders">
-      <HintPath>Assets\3rdPlugins\Entitas\Sherlog\Sherlog.Appenders.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DesperateDevs.Reflection">
-      <HintPath>Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Reflection.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Jenny.Plugins.Unity">
-      <HintPath>Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny\Jenny.Plugins.Unity.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Sirenix.Utilities.Editor">
       <HintPath>Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
       <Private>False</Private>
@@ -677,36 +605,12 @@
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Jenny.Plugins">
-      <HintPath>Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny\Jenny.Plugins.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DesperateDevs.Unity.Editor">
-      <HintPath>Assets\3rdPlugins\Entitas\DesperateDevs\Editor\DesperateDevs.Unity.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Entitas.CodeGeneration.Attributes">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Entitas.CodeGeneration.Attributes.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Entitas.VisualDebugging.Unity.Editor">
-      <HintPath>Assets\3rdPlugins\Entitas\Entitas\Editor\Entitas.VisualDebugging.Unity.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="NPOI">
       <HintPath>Assets\3rdPlugins\NPOI\NPOI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Collections.Immutable">
       <HintPath>Assets\3rdPlugins\Roslyn\System.Collections.Immutable.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Jenny">
-      <HintPath>Assets\3rdPlugins\Entitas\Jenny\Editor\Jenny.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DesperateDevs.Caching">
-      <HintPath>Assets\3rdPlugins\Entitas\DesperateDevs\DesperateDevs.Caching.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">

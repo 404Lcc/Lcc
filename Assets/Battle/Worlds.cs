@@ -1,6 +1,6 @@
 using Entitas;
 
-public partial class Worlds : IContexts
+public partial class Worlds
 {
     public const string ID = "ID";
     public LogicWorld Logic { get; set; }
