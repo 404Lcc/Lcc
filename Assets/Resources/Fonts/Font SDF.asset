@@ -66,8 +66,8 @@ MonoBehaviour:
   m_Version: 1.1.0
   m_SourceFontFileGUID: 063d2e3b5d6ef734083365ce3cf14db1
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 063d2e3b5d6ef734083365ce3cf14db1, type: 3}
-  m_SourceFontFile: {fileID: 12800000, guid: 063d2e3b5d6ef734083365ce3cf14db1, type: 3}
-  m_AtlasPopulationMode: 1
+  m_SourceFontFile: {fileID: 0}
+  m_AtlasPopulationMode: 0
   m_FaceInfo:
     m_FaceIndex: 0
     m_FamilyName: Survivors
@@ -136,7 +136,8 @@ MonoBehaviour:
   m_FontFeatureTable:
     m_GlyphPairAdjustmentRecords: []
   fallbackFontAssets: []
-  m_FallbackFontAssetTable: []
+  m_FallbackFontAssetTable:
+  - {fileID: 0}
   m_CreationSettings:
     sourceFontFileName: 
     sourceFontFileGUID: 063d2e3b5d6ef734083365ce3cf14db1
