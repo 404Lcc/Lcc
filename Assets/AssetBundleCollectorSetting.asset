@@ -29,7 +29,7 @@ MonoBehaviour:
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/Bundles/AotDlls
+      - CollectPath: Assets/Res/AotDlls
         CollectorGUID: 1af528ad0407c4644bd2eeddf4d2f2a5
         CollectorType: 0
         AddressRuleName: AddressByFileName
@@ -37,7 +37,7 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-      - CollectPath: Assets/Bundles/Config
+      - CollectPath: Assets/Res/Config
         CollectorGUID: ba008e2cb347f954285fcad218bf8d77
         CollectorType: 0
         AddressRuleName: AddressByFileName
@@ -45,7 +45,7 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-      - CollectPath: Assets/Bundles/DLL
+      - CollectPath: Assets/Res/DLL
         CollectorGUID: 59291aea2effad245bb7b8190da3f1fc
         CollectorType: 0
         AddressRuleName: AddressByFileName
@@ -53,7 +53,7 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-      - CollectPath: Assets/Bundles/Prefab
+      - CollectPath: Assets/Res/Prefab
         CollectorGUID: 8a795a9c4dd701040acc53899eb1c555
         CollectorType: 0
         AddressRuleName: AddressByFileName

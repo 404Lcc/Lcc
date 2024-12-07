@@ -69,8 +69,8 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ParseableSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Matcher\MatcherException.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Group\Group.cs" />
-    <Compile Include="Assets\3rdPlugins\Entitas\Collector\CollectorException.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Entity\EntityEqualityComparer.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Collector\CollectorException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoConverterAttribute.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Group\GroupExtension.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Entity\Exceptions\EntityIsNotEnabledException.cs" />
@@ -144,8 +144,8 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\IProtoSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ImmutableCollectionDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Context\Exceptions\ContextInfoException.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TimeSpanSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Collector\CollectorContextExtension.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TimeSpanSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\EntityIndex\IEntityIndex.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Entity\SafeAERC.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\Lexer.cs" />

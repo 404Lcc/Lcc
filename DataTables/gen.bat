@@ -8,6 +8,6 @@ dotnet %LUBAN_DLL% ^
     -d json ^
     --conf %CONF_ROOT%\luban.conf ^
     -x outputCodeDir=..\Assets/Hotfix/Runtime/Config ^
-    -x outputDataDir=..\Assets/Bundles/Config
+    -x outputDataDir=..\Assets/Res/Config
 
 pause

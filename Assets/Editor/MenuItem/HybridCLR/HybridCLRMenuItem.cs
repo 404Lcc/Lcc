@@ -7,12 +7,12 @@ namespace LccEditor
 {
     public static class HybridCLRMenuItem
     {
-        [MenuItem("HybridCLR/øΩ±¥AotDll")]
+        [MenuItem("HybridCLR/Êã∑Ë¥ùAotDll")]
         public static void CopyAotDll()
         {
             BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
             string fromDir = Path.Combine(HybridCLRSettings.Instance.strippedAOTDllOutputRootDir, target.ToString());
-            string toDir = "Assets/Bundles/AotDlls";
+            string toDir = "Assets/Res/AotDlls";
             if (Directory.Exists(toDir))
             {
                 Directory.Delete(toDir, true);

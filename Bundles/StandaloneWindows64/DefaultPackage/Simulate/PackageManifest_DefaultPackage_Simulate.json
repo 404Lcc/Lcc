@@ -10,49 +10,49 @@
     "AssetList": [
         {
             "Address": "aot",
-            "AssetPath": "Assets/Bundles/AotDlls/aot.txt",
+            "AssetPath": "Assets/Res/AotDlls/aot.txt",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 0
         },
         {
             "Address": "tbemptygoto",
-            "AssetPath": "Assets/Bundles/Config/tbemptygoto.json",
+            "AssetPath": "Assets/Res/Config/tbemptygoto.json",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 1
         },
         {
             "Address": "tbpopupwindow",
-            "AssetPath": "Assets/Bundles/Config/tbpopupwindow.json",
+            "AssetPath": "Assets/Res/Config/tbpopupwindow.json",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 1
         },
         {
             "Address": "Unity.Hotfix.dll",
-            "AssetPath": "Assets/Bundles/DLL/Unity.Hotfix.dll.bytes",
+            "AssetPath": "Assets/Res/DLL/Unity.Hotfix.dll.bytes",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 2
         },
         {
             "Address": "Unity.Hotfix.pdb",
-            "AssetPath": "Assets/Bundles/DLL/Unity.Hotfix.pdb.bytes",
+            "AssetPath": "Assets/Res/DLL/Unity.Hotfix.pdb.bytes",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 2
         },
         {
             "Address": "UILoginPanel",
-            "AssetPath": "Assets/Bundles/Prefab/Panel/UILoginPanel.prefab",
+            "AssetPath": "Assets/Res/Prefab/Panel/UILoginPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 3
         },
         {
             "Address": "UIMainPanel",
-            "AssetPath": "Assets/Bundles/Prefab/Panel/UIMainPanel.prefab",
+            "AssetPath": "Assets/Res/Prefab/Panel/UIMainPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 3
@@ -60,9 +60,9 @@
     ],
     "BundleList": [
         {
-            "BundleName": "assets_bundles_aotdlls.bundle",
+            "BundleName": "assets_res_aotdlls.bundle",
             "UnityCRC": 0,
-            "FileHash": "f8fecc514472ad9bf32e5830c7f1342b",
+            "FileHash": "8e5013692a9493278b0b72ed93b2468f",
             "FileCRC": "00000000",
             "FileSize": 1,
             "Encrypted": false,
@@ -70,9 +70,9 @@
             "DependIDs": []
         },
         {
-            "BundleName": "assets_bundles_config.bundle",
+            "BundleName": "assets_res_config.bundle",
             "UnityCRC": 0,
-            "FileHash": "ea42e939e3a2d0d68ee7e7cc761cd7e8",
+            "FileHash": "8e0b78f87b215ffbe6445533f7090724",
             "FileCRC": "00000000",
             "FileSize": 302,
             "Encrypted": false,
@@ -80,9 +80,9 @@
             "DependIDs": []
         },
         {
-            "BundleName": "assets_bundles_dll.bundle",
+            "BundleName": "assets_res_dll.bundle",
             "UnityCRC": 0,
-            "FileHash": "c34a93da87570e612fb189056b197f57",
+            "FileHash": "083e6a08c2f0ee41263a000e26338562",
             "FileCRC": "00000000",
             "FileSize": 334548,
             "Encrypted": false,
@@ -90,9 +90,9 @@
             "DependIDs": []
         },
         {
-            "BundleName": "assets_bundles_prefab_panel.bundle",
+            "BundleName": "assets_res_prefab_panel.bundle",
             "UnityCRC": 0,
-            "FileHash": "a537064360b9cc20194c8b371f5f3577",
+            "FileHash": "055d5a75776c06f58a2b3db29540d0d7",
             "FileCRC": "00000000",
             "FileSize": 28125,
             "Encrypted": false,
