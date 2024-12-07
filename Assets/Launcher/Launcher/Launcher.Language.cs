@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace LccModel
@@ -9,6 +10,7 @@ namespace LccModel
     {
         public const string ALLLanguageKey = "ALLLanguage";
         public const string CacheLanguageKey = "MutiLanguage";
+        public const string DefaultFont = "DefaultFont";  // 默认字体资源
 
         private string _languageTxt = null;
 
@@ -39,6 +41,9 @@ namespace LccModel
                 Resources.UnloadAsset(txtAsset);
             }
 
+            yield return null;
+            // 加载字体
+            InitFontAsset();
             yield return null;
             OnLanguageAssetLoad(_languageTxt);
             Set(curLanguage);
@@ -198,6 +203,10 @@ namespace LccModel
             yield return null;
 
             curLanguage = languageName;
+
+            // 加载字体
+            InitFontAsset();
+
             //UpdateALLLanguages();
             OnLanguageAssetLoad(_languageTxt);
 
@@ -294,6 +303,32 @@ namespace LccModel
                 Debug.LogError($"多语言配置key = {key} value == null。 请策划检查");
             }
             return value;
+        }
+
+        public void InitFontAsset()
+        {
+            TMP_FontAsset defaultFontAsset = Resources.Load<TMP_FontAsset>("Fonts/" + DefaultFont);
+
+            if (GameConfig.languageDict != null && GameConfig.languageDict.ContainsKey(curLanguage))
+            {
+                var font = GameConfig.languageDict[curLanguage].font;
+                Font fontAssetCur = Resources.Load<Font>("Fonts/" + font);
+
+                //清除之前用的字体资源数据和字符，使fallback略过该字体
+                //删除texture至一张， 且将尺寸置为0
+                defaultFontAsset.ClearFontAssetData(true);
+                defaultFontAsset.characterLookupTable.Clear();
+
+                //设置目标字体为静态生成，阻止新的字符生成
+                defaultFontAsset.atlasPopulationMode = AtlasPopulationMode.Static;
+
+
+
+                TMP_FontAsset fontAsset = TMP_FontAsset.CreateFontAsset(fontAssetCur, 53, 8, UnityEngine.TextCore.LowLevel.GlyphRenderMode.SDFAA, 2048, 2048, AtlasPopulationMode.Dynamic);
+                defaultFontAsset.fallbackFontAssetTable.Clear();
+                defaultFontAsset.fallbackFontAssetTable.Add(fontAsset);
+
+            }
         }
     }
 }
