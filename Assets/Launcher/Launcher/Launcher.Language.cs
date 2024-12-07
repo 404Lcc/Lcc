@@ -158,7 +158,7 @@ namespace LccModel
             {
                 if (newLanguage == GameConfig.languageNameList[i])
                 {
-                    //if (languages.Contains(newLanguage)) 不需要分开下载多语言，先不考虑 todo
+                    if (languages.Contains(newLanguage)) //不需要分开下载多语言，先不考虑 todo
                     {
                         PlayerPrefs.SetString(CacheLanguageKey, newLanguage);
                         StartCoroutine(UpdateLanguage(newLanguage));
