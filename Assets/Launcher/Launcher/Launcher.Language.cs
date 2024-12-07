@@ -10,7 +10,7 @@ namespace LccModel
     {
         public const string ALLLanguageKey = "ALLLanguage";
         public const string CacheLanguageKey = "MutiLanguage";
-        public const string Font = "Font SDF";  // 默认字体资源
+        public const string DefaultFont = "Font SDF";  // 默认字体资源
 
         private string _languageTxt = null;
 
@@ -19,11 +19,7 @@ namespace LccModel
 
         private string _curLanguage;
 
-        public void ClearLocal()
-        {
-
-        }
-
+        public List<string> languages;
 
         //游戏启动时第一次初始化语言
         private IEnumerator InitLanguage()
@@ -76,42 +72,37 @@ namespace LccModel
             }
         }
 
-        //public List<string> languages;
 
-        //public void AddLanguage(string languageName)
-        //{
 
-        //}
-
-        ///// <summary>
-        ///// 更新已有语言
-        ///// </summary>
-        ///// <returns></returns>
-        //public void UpdateALLLanguages()
-        //{
-        //    try
-        //    {
-        //        string lang = PlayerPrefs.GetString(ALLLanguageKey);
-        //        if (!string.IsNullOrEmpty(lang))
-        //        {
-        //            languages = JsonHelper.ToObject<List<string>>(lang);
-        //            if (!languages.Contains(curLanguage))
-        //            {
-        //                languages.Add(curLanguage);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            languages = new List<string>() { curLanguage };
-        //        }
-        //        PlayerPrefs.SetString(ALLLanguageKey, JsonHelper.ToJson(languages));
-        //    }
-        //    catch
-        //    {
-        //        languages = new List<string>() { curLanguage };
-        //        PlayerPrefs.SetString(ALLLanguageKey, JsonHelper.ToJson(languages));
-        //    }
-        //}
+        /// <summary>
+        /// 获取使用过的语言
+        /// </summary>
+        /// <returns></returns>
+        public void GetALLLanguages()
+        {
+            try
+            {
+                string lang = PlayerPrefs.GetString(ALLLanguageKey);
+                if (!string.IsNullOrEmpty(lang))
+                {
+                    languages = JsonUtility.ToObject<List<string>>(lang);
+                    if (!languages.Contains(curLanguage))
+                    {
+                        languages.Add(curLanguage);
+                    }
+                }
+                else
+                {
+                    languages = new List<string>() { curLanguage };
+                }
+                PlayerPrefs.SetString(ALLLanguageKey, JsonUtility.ToJson(languages));
+            }
+            catch
+            {
+                languages = new List<string>() { curLanguage };
+                PlayerPrefs.SetString(ALLLanguageKey, JsonUtility.ToJson(languages));
+            }
+        }
 
         public string GetSelectedLanguage()
         {
@@ -207,7 +198,7 @@ namespace LccModel
             // 加载字体
             InitFontAsset();
 
-            //UpdateALLLanguages();
+            GetALLLanguages();
             OnLanguageAssetLoad(_languageTxt);
 
             Set(curLanguage);
@@ -307,7 +298,7 @@ namespace LccModel
 
         public void InitFontAsset()
         {
-            TMP_FontAsset defaultFontAsset = Resources.Load<TMP_FontAsset>("Fonts/" + Font);
+            TMP_FontAsset defaultFontAsset = Resources.Load<TMP_FontAsset>("Fonts/" + DefaultFont);
 
             if (GameConfig.languageDict != null && GameConfig.languageDict.ContainsKey(curLanguage))
             {
