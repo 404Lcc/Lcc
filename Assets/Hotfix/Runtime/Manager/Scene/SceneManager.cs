@@ -111,6 +111,7 @@ namespace LccHotfix
 
             _inLoading = false;
             handler.IsLoading = true;
+            handler.IsCleanup = false;
             handler.startLoadTime = Time.realtimeSinceStartup;
 
             handler.SceneLoadHandler();
@@ -163,6 +164,7 @@ namespace LccHotfix
             if (preSceneHandler != null)
             {
                 preSceneHandler.SceneExitHandler();
+                preSceneHandler.IsCleanup = true;
                 yield return null;
             }
             Entry.GetModule<WindowManager>().ShowMaskBox((int)MaskType.WINDOW_ANIM, false);
@@ -181,6 +183,15 @@ namespace LccHotfix
 
         public void CleanScene()
         {
+            //如果上一个还没清理完成 直接清理一下
+            if (preSceneHandler != null)
+            {
+                if (!preSceneHandler.IsCleanup)
+                {
+                    preSceneHandler.SceneExitHandler();
+                }
+            }
+
             if (curSceneHandler != null)
             {
                 curSceneHandler.SceneExitHandler();
@@ -195,6 +206,7 @@ namespace LccHotfix
             {
                 if (Time.realtimeSinceStartup - curSceneHandler.startLoadTime > 150)
                 {
+                    Init.ReturnToStart();
                 }
             }
         }

@@ -27,6 +27,10 @@ namespace LccHotfix
         /// </summary>
         public bool IsLoading { get; set; }
 
+        /// <summary>
+        /// 清理完成
+        /// </summary>
+        public bool IsCleanup { get; set; }
 
 
         /// <summary>
