@@ -10,7 +10,7 @@ namespace LccModel
     {
         public const string ALLLanguageKey = "ALLLanguage";
         public const string CacheLanguageKey = "MutiLanguage";
-        public const string DefaultFont = "DefaultFont";  // 默认字体资源
+        public const string Font = "Font SDF";  // 默认字体资源
 
         private string _languageTxt = null;
 
@@ -307,7 +307,7 @@ namespace LccModel
 
         public void InitFontAsset()
         {
-            TMP_FontAsset defaultFontAsset = Resources.Load<TMP_FontAsset>("Fonts/" + DefaultFont);
+            TMP_FontAsset defaultFontAsset = Resources.Load<TMP_FontAsset>("Fonts/" + Font);
 
             if (GameConfig.languageDict != null && GameConfig.languageDict.ContainsKey(curLanguage))
             {
@@ -324,7 +324,7 @@ namespace LccModel
 
 
 
-                TMP_FontAsset fontAsset = TMP_FontAsset.CreateFontAsset(fontAssetCur, 53, 8, UnityEngine.TextCore.LowLevel.GlyphRenderMode.SDFAA, 2048, 2048, AtlasPopulationMode.Dynamic);
+                TMP_FontAsset fontAsset = TMP_FontAsset.CreateFontAsset(fontAssetCur, 50, 8, UnityEngine.TextCore.LowLevel.GlyphRenderMode.SDFAA, 2048, 2048, AtlasPopulationMode.Dynamic);
                 defaultFontAsset.fallbackFontAssetTable.Clear();
                 defaultFontAsset.fallbackFontAssetTable.Add(fontAsset);
 
