@@ -69,6 +69,7 @@
     <Compile Include="Assets\Launcher\UGUIExpand\LongClickButton.cs" />
     <Compile Include="Assets\Launcher\Utility\MD5\MD5Utility.cs" />
     <Compile Include="Assets\Launcher\Utility\Path\PathUtility.cs" />
+    <Compile Include="Assets\Launcher\UI\ScreenBackgroundMessage\UIScreenBackgroundMessage.cs" />
     <Compile Include="Assets\Launcher\Asset\AssetObject.cs" />
     <Compile Include="Assets\Launcher\Utility\Protobuf\ProtobufUtility.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\PatchOperation.cs" />

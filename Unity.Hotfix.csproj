@@ -79,6 +79,7 @@
     <Compile Include="Assets\Hotfix\Core\Event\GameEventArgs.cs" />
     <Compile Include="Assets\Hotfix\Runtime\HotfixBridge.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\RedDot\RedDotManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Input\InputManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Image\ImageExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Vector3\Vector3Extension.cs" />
