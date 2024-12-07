@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ namespace LccModel
     public class MessageBox
     {
         public GameObject cloneObject;
-        public Text infoText;
+        public TextMeshProUGUI infoText;
         public Button confirmBtn;
         public Action completed;
         public bool confirmHide;
@@ -24,7 +25,7 @@ namespace LccModel
         public void Create(GameObject cloneObject)
         {
             this.cloneObject = cloneObject;
-            infoText = cloneObject.transform.Find("BG/InfoText").GetComponent<Text>();
+            infoText = cloneObject.transform.Find("BG/InfoText").GetComponent<TextMeshProUGUI>();
             confirmBtn = cloneObject.transform.Find("BG/ConfirmBtn").GetComponent<Button>();
             confirmBtn.onClick.AddListener(OnConfirm);
         }
@@ -63,10 +64,10 @@ namespace LccModel
         public GameObject progressBG;
 
         public Slider progress;
-        public Text progressText;
-        public Text tipsText;
+        public TextMeshProUGUI progressText;
+        public TextMeshProUGUI tipsText;
 
-        public Text text;
+        public TextMeshProUGUI text;
 
         public GameObject messageBox;
 
