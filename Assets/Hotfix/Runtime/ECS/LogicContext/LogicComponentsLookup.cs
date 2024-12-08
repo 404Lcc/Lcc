@@ -5,11 +5,18 @@ namespace LccHotfix
 {
     public static partial class LogicComponentsLookup
     {
+        //通用
         public static int ComID;
         public static int ComTag;
         public static int ComFaction;
         public static int ComOwnerEntity;
         public static int ComUnityObjectRelated;
+        public static int ComTransform;
+        public static int ComView;
+
+        //战斗
+        public static int ComHP;
+        
 
         public static int TotalComponents => componentTypes.Length;
         public static List<string> componentNameList;
