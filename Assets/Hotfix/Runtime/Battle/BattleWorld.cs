@@ -32,11 +32,11 @@ namespace LccHotfix
         {
             base.InitializeEntityIndices();
 
-            LogicContext.AddEntityIndex(new PrimaryEntityIndex<LogicEntity, long>(ComID, LogicContext.GetGroup(LogicMatcher.ComID), (e, c) => ((ComID)c).Value));
+            LogicContext.AddEntityIndex(new PrimaryEntityIndex<LogicEntity, long>(ComID, LogicContext.GetGroup(LogicMatcher.ComID), (e, c) => ((ComID)c).id));
             LogicContext.AddEntityIndex(new EntityIndexEnum<LogicEntity, TagType>(ComTag, LogicContext.GetGroup(LogicMatcher.ComTag), (e, c) => ((ComTag)c).tag));
             LogicContext.AddEntityIndex(new EntityIndex<LogicEntity, FactionType>(ComFaction, LogicContext.GetGroup(LogicMatcher.ComFaction), (e, c) => ((ComFaction)c).faction));
-            LogicContext.AddEntityIndex(new EntityIndex<LogicEntity, int>(ComOwnerEntity, LogicContext.GetGroup(LogicMatcher.ComOwnerEntity), (e, c) => ((ComOwnerEntity)c).OwnerEntityID));
-            LogicContext.AddEntityIndex(new GroupEntityIndex<LogicEntity, int>(ComUnityObjectRelated, LogicContext.GetGroup(LogicMatcher.ComUnityObjectRelated), (e, c) => ((ComUnityObjectRelated)c).GameObjectInstanceID.Keys.ToArray()));
+            LogicContext.AddEntityIndex(new EntityIndex<LogicEntity, int>(ComOwnerEntity, LogicContext.GetGroup(LogicMatcher.ComOwnerEntity), (e, c) => ((ComOwnerEntity)c).ownerEntityID));
+            LogicContext.AddEntityIndex(new GroupEntityIndex<LogicEntity, int>(ComUnityObjectRelated, LogicContext.GetGroup(LogicMatcher.ComUnityObjectRelated), (e, c) => ((ComUnityObjectRelated)c).gameObjectInstanceID.Keys.ToArray()));
         }
 
         public LogicEntity GetEntityWithComID(long id)

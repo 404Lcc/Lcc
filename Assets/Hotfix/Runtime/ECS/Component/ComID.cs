@@ -2,7 +2,7 @@ namespace LccHotfix
 {
     public class ComID : LogicComponent
     {
-        public long Value;
+        public long id;
     }
 
     public partial class LogicEntity
@@ -10,11 +10,11 @@ namespace LccHotfix
         public ComID comID { get { return (ComID)GetComponent(LogicComponentsLookup.ComID); } }
         public bool hasComID { get { return HasComponent(LogicComponentsLookup.ComID); } }
 
-        public void AddComID(long newValue)
+        public void AddComID(long newId)
         {
             var index = LogicComponentsLookup.ComID;
             var component = (ComID)CreateComponent(index, typeof(ComID));
-            component.Value = newValue;
+            component.id = newId;
             AddComponent(index, component);
         }
     }

@@ -11,11 +11,11 @@ namespace LccHotfix
 
     public class ComUnityObjectRelated : LogicComponent
     {
-        public Dictionary<int, GameObjectType> GameObjectInstanceID { get; set; }
+        public Dictionary<int, GameObjectType> gameObjectInstanceID;
 
         public GameObjectType GetGameObjectType(int id)
         {
-            if (GameObjectInstanceID.TryGetValue(id, out var type))
+            if (gameObjectInstanceID.TryGetValue(id, out var type))
             {
                 return type;
             }
@@ -25,7 +25,7 @@ namespace LccHotfix
         {
             base.Dispose();
 
-            GameObjectInstanceID.Clear();
+            gameObjectInstanceID.Clear();
         }
     }
 
@@ -38,7 +38,7 @@ namespace LccHotfix
         {
             var index = LogicComponentsLookup.ComUnityObjectRelated;
             var component = (ComUnityObjectRelated)CreateComponent(index, typeof(ComUnityObjectRelated));
-            component.GameObjectInstanceID = newGameObjectInstanceID;
+            component.gameObjectInstanceID = newGameObjectInstanceID;
             AddComponent(index, component);
         }
 
@@ -46,7 +46,7 @@ namespace LccHotfix
         {
             var index = LogicComponentsLookup.ComUnityObjectRelated;
             var component = (ComUnityObjectRelated)CreateComponent(index, typeof(ComUnityObjectRelated));
-            component.GameObjectInstanceID = newGameObjectInstanceID;
+            component.gameObjectInstanceID = newGameObjectInstanceID;
             ReplaceComponent(index, component);
         }
 
