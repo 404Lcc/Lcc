@@ -88,6 +88,7 @@
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Log\LogLevel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\TBEmptyGoTo.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\Base\IDispose.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Language\LanguageType.cs" />
     <Compile Include="Assets\Hotfix\Logic\Scene\MainScene.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Log\ILogHelper.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\FiberManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\Binding\ViewModelBinding.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\CloseUIFormCompleteEventArgs.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\LogicWorld\LogicComponentsLookup.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Download\DownloadManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Singleton\ISingletonUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Download\DownloadState.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Types.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\RootNode\WBlackboard.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\MetaWorld\MetaEntity.cs" />
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\Binding\Binding.cs" />
     <Compile Include="Assets\Hotfix\Core\Utility\MarshalUtility.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventArgs.cs" />
@@ -130,6 +133,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Window\WindowMode.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScroll.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIRoot\UIRootCommon.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\MetaWorld\MetaComponentsLookup.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Transform\TransformExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\SpriteRenderer\SpriteRendererExtension.cs" />
@@ -168,18 +172,24 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\IObjectPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Download\DownloadFile.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\WorldSystems.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\LogicWorld\LogicEntity.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Tables.cs" />
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\View\IView.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Variable\Variable.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Orca\OrcaManager.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UILogin\UILoginPanel.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\LogicWorld\LogicContext.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\LogicWorld\LogicComponent.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\IUIFormHelper.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\Base\GroupEntityIndex.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineCompletedHandler.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\UIManager.UIFormInstanceObject.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\MainThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Window\Window.cs" />
     <Compile Include="Assets\Hotfix\Core\UI\IUIGroupHelper.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\EmptyGoTo.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\MetaWorld\MetaMatcher.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AssetBundleRequestAwaiter.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Helper\DefaultLogHelper.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Extension\WNodeExtension.cs" />
@@ -191,9 +201,11 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\IScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Init.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\MetaWorld\MetaComponent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\WEnum.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Command\CommandManager.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectInfo.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\Base\EntityIndexEnum.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventPool\EventPool.Event.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ThreadSynchronizationContext\ThreadSynchronizationContext.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Video\VideoManager.cs" />
@@ -222,6 +234,8 @@
     <Compile Include="Assets\Hotfix\Runtime\Singleton\ISingletonLateUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\CodeTypes\CodeTypesManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Command\CommandDataType.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\MetaWorld\MetaContext.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\LogicWorld\LogicMatcher.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\RootNode\WRootNode.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Download\DownloadData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.cs" />
