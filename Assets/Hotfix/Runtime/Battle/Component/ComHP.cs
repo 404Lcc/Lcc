@@ -5,14 +5,14 @@ namespace LccHotfix
         private float _hp;
         public float HP => _hp;
 
-        public void SetHP(float newHp)
+        public void SetHP(float newHP)
         {
-            _hp = newHp;
+            _hp = newHP;
         }
 
-        public void ChangeHP(float changeHp)
+        public void ChangeHP(float changeHP)
         {
-            _hp += changeHp;
+            _hp += changeHP;
         }
     }
 
