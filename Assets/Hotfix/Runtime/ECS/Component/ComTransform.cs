@@ -61,8 +61,7 @@ namespace LccHotfix
             comTransform.SetPosition(component.position);
             comTransform.SetRotation(component.rotation);
             comTransform.SetScale(component.scale);
-            //todo view 需要同步
-            if (this.hasComView)
+            if (hasComView)
             {
                 if (comView.HasActorView)
                 {
