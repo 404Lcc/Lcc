@@ -7,7 +7,7 @@ namespace LccHotfix
     {
         private readonly static int _totalComponents = MetaComponentsLookup.TotalComponents;
         private readonly static int _startCreationIndex = 0;
-        private readonly static ContextInfo _contextInfo = new ContextInfo("Meta", MetaComponentsLookup.componentNames, MetaComponentsLookup.componentTypes);
+        private readonly static ContextInfo _contextInfo = new ContextInfo("Meta", MetaComponentsLookup.componentNames.ToArray(), MetaComponentsLookup.componentTypes.ToArray());
         private readonly static Func<Entity, IAERC> _aercFactory = (entity) => new SafeAERC(entity);
         private readonly static Func<MetaEntity> _entityFactory = () => new MetaEntity();
 

@@ -1,11 +1,14 @@
+using System;
+using System.Collections.Generic;
+
 namespace LccHotfix
 {
     public static partial class MetaComponentsLookup
     {
-        public static int TotalComponents => componentTypes.Length;
+        public static int TotalComponents => componentTypes.Count;
 
-        public static readonly string[] componentNames;
+        public static List<string> componentNames;
 
-        public static readonly System.Type[] componentTypes;
+        public static List<Type> componentTypes;
     }
 }

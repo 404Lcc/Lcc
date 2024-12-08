@@ -17,11 +17,17 @@ namespace LccHotfix
         public virtual void InitWorld()
         {
             LogicComponentsLookup.componentTypes.Clear();
+            MetaComponentsLookup.componentTypes.Clear();
             Setup();
             LogicComponentsLookup.componentNames.Clear();
+            MetaComponentsLookup.componentNames.Clear();
             foreach (var item in LogicComponentsLookup.componentTypes)
             {
                 LogicComponentsLookup.componentNames.Add(item.Name);
+            }
+            foreach (var item in MetaComponentsLookup.componentTypes)
+            {
+                MetaComponentsLookup.componentNames.Add(item.Name);
             }
 
             ContextList = new List<IContext>();
