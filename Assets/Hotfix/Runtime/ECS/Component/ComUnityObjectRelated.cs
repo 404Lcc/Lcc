@@ -66,7 +66,7 @@ namespace LccHotfix
                 if (_matcherComUnityObjectRelated == null)
                 {
                     var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComUnityObjectRelated);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames.ToArray();
+                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
                     _matcherComUnityObjectRelated = matcher;
                 }
 

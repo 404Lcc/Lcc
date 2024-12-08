@@ -56,7 +56,7 @@ namespace LccHotfix
                 if (_matcherComTag == null)
                 {
                     var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComTag);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames.ToArray();
+                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
                     _matcherComTag = matcher;
                 }
 

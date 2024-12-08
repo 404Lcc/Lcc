@@ -30,7 +30,7 @@ namespace LccHotfix
                 if (_matcherComID == null)
                 {
                     var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComID);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames.ToArray();
+                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
                     _matcherComID = matcher;
                 }
 

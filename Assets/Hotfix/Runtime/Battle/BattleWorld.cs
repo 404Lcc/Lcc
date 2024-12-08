@@ -22,11 +22,11 @@ namespace LccHotfix
             LogicComponentsLookup.ComOwnerEntity = 3;
             LogicComponentsLookup.ComUnityObjectRelated = 4;
 
-            LogicComponentsLookup.componentTypes.Add(typeof(ComID));
-            LogicComponentsLookup.componentTypes.Add(typeof(ComTag));
-            LogicComponentsLookup.componentTypes.Add(typeof(ComFaction));
-            LogicComponentsLookup.componentTypes.Add(typeof(ComOwnerEntity));
-            LogicComponentsLookup.componentTypes.Add(typeof(ComUnityObjectRelated));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComID));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComTag));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComFaction));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComOwnerEntity));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComUnityObjectRelated));
         }
         protected override void InitializeEntityIndices()
         {

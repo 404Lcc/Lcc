@@ -38,7 +38,7 @@ namespace LccHotfix
                 if (_matcherComOwnerEntity == null)
                 {
                     var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComOwnerEntity);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames.ToArray();
+                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
                     _matcherComOwnerEntity = matcher;
                 }
 
