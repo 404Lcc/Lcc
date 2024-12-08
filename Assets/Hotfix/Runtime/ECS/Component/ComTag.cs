@@ -3,18 +3,18 @@ using System;
 namespace LccHotfix
 {
     [Flags]
-    public enum GameEntityTag
+    public enum TagType
     {
         MainPlayer = 1 << 0, //当前客户端操作的对象 1
     }
 
     public class ComTag : LogicComponent
     {
-        public GameEntityTag TagType;
+        public TagType tag;
 
-        public bool HasTag(GameEntityTag tag)
+        public bool HasTag(TagType tag)
         {
-            return TagType.HasFlag(tag);
+            return this.tag.HasFlag(tag);
         }
     }
 
@@ -23,19 +23,19 @@ namespace LccHotfix
         public ComTag comTag { get { return (ComTag)GetComponent(LogicComponentsLookup.ComTag); } }
         public bool hasComTag { get { return HasComponent(LogicComponentsLookup.ComTag); } }
 
-        public void AddComTag(GameEntityTag newTagType)
+        public void AddComTag(TagType newTag)
         {
             var index = LogicComponentsLookup.ComTag;
             var component = (ComTag)CreateComponent(index, typeof(ComTag));
-            component.TagType = newTagType;
+            component.tag = newTag;
             AddComponent(index, component);
         }
 
-        public void ReplaceComTag(GameEntityTag newTagType)
+        public void ReplaceComTag(TagType newTag)
         {
             var index = LogicComponentsLookup.ComTag;
             var component = (ComTag)CreateComponent(index, typeof(ComTag));
-            component.TagType = newTagType;
+            component.tag = newTag;
             ReplaceComponent(index, component);
         }
 

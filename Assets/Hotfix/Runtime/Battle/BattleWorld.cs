@@ -33,20 +33,20 @@ namespace LccHotfix
             base.InitializeEntityIndices();
 
             LogicContext.AddEntityIndex(new PrimaryEntityIndex<LogicEntity, long>(ComID, LogicContext.GetGroup(LogicMatcher.ComID), (e, c) => ((ComID)c).Value));
-            LogicContext.AddEntityIndex(new EntityIndexEnum<LogicEntity, GameEntityTag>(ComTag, LogicContext.GetGroup(LogicMatcher.ComTag), (e, c) => ((ComTag)c).TagType));
+            LogicContext.AddEntityIndex(new EntityIndexEnum<LogicEntity, TagType>(ComTag, LogicContext.GetGroup(LogicMatcher.ComTag), (e, c) => ((ComTag)c).tag));
             LogicContext.AddEntityIndex(new EntityIndex<LogicEntity, FactionType>(ComFaction, LogicContext.GetGroup(LogicMatcher.ComFaction), (e, c) => ((ComFaction)c).faction));
             LogicContext.AddEntityIndex(new EntityIndex<LogicEntity, int>(ComOwnerEntity, LogicContext.GetGroup(LogicMatcher.ComOwnerEntity), (e, c) => ((ComOwnerEntity)c).OwnerEntityID));
             LogicContext.AddEntityIndex(new GroupEntityIndex<LogicEntity, int>(ComUnityObjectRelated, LogicContext.GetGroup(LogicMatcher.ComUnityObjectRelated), (e, c) => ((ComUnityObjectRelated)c).GameObjectInstanceID.Keys.ToArray()));
         }
 
-        public LogicEntity GetEntityWithComID(long Value)
+        public LogicEntity GetEntityWithComID(long id)
         {
-            return ((PrimaryEntityIndex<LogicEntity, long>)LogicContext.GetEntityIndex(ComID)).GetEntity(Value);
+            return ((PrimaryEntityIndex<LogicEntity, long>)LogicContext.GetEntityIndex(ComID)).GetEntity(id);
         }
 
-        public HashSet<LogicEntity> GetEntitiesWithComTag(GameEntityTag TagType)
+        public HashSet<LogicEntity> GetEntitiesWithComTag(TagType tag)
         {
-            return ((EntityIndexEnum<LogicEntity, GameEntityTag>)LogicContext.GetEntityIndex(ComTag)).GetEntities(TagType);
+            return ((EntityIndexEnum<LogicEntity, TagType>)LogicContext.GetEntityIndex(ComTag)).GetEntities(tag);
         }
 
         public HashSet<LogicEntity> GetEntitiesWithComFaction(FactionType faction)
@@ -54,14 +54,14 @@ namespace LccHotfix
             return ((EntityIndex<LogicEntity, FactionType>)LogicContext.GetEntityIndex(ComFaction)).GetEntities(faction);
         }
 
-        public HashSet<LogicEntity> GetEntitiesWithComOwnerEntity(int OwnerEntityID)
+        public HashSet<LogicEntity> GetEntitiesWithComOwnerEntity(int ownerEntityID)
         {
-            return ((EntityIndex<LogicEntity, int>)LogicContext.GetEntityIndex(ComOwnerEntity)).GetEntities(OwnerEntityID);
+            return ((EntityIndex<LogicEntity, int>)LogicContext.GetEntityIndex(ComOwnerEntity)).GetEntities(ownerEntityID);
         }
 
-        public LogicEntity GetEntitiesWithComUnityObjectRelated(int GameObjectInstanceID)
+        public LogicEntity GetEntitiesWithComUnityObjectRelated(int gameObjectInstanceID)
         {
-            return ((GroupEntityIndex<LogicEntity, int>)LogicContext.GetEntityIndex(ComUnityObjectRelated)).GetEntity(GameObjectInstanceID);
+            return ((GroupEntityIndex<LogicEntity, int>)LogicContext.GetEntityIndex(ComUnityObjectRelated)).GetEntity(gameObjectInstanceID);
         }
     }
 }
