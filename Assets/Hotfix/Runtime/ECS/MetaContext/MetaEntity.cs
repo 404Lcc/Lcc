@@ -4,7 +4,7 @@ namespace LccHotfix
 {
     public partial class MetaEntity : Entity
     {
-        public MetaContext OwnerWorld { get; private set; }
+        public MetaContext OwnerContext { get; private set; }
 
         private readonly EntityComponentChanged _addComponent;
         private readonly EntityComponentChanged _removeComponent;
@@ -19,7 +19,7 @@ namespace LccHotfix
 
         public virtual void Enter(MetaContext metaContext)
         {
-            OwnerWorld = metaContext;
+            OwnerContext = metaContext;
             OnComponentAdded += _addComponent;
             OnComponentRemoved += _removeComponent;
             OnComponentReplaced += _replacedComponent;

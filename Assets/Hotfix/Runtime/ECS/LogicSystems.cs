@@ -8,7 +8,7 @@ namespace LccHotfix
         void LateUpdate();
     }
 
-    public class WorldSystems : Systems
+    public class LogicSystems : Systems
     {
         private readonly List<ILateUpdateSystem> _lateUpdateSystemList = new List<ILateUpdateSystem>();
 

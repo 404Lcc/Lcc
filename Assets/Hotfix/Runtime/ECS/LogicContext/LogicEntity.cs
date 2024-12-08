@@ -4,7 +4,7 @@ namespace LccHotfix
 {
     public partial class LogicEntity : Entity
     {
-        public LogicContext OwnerWorld { get; private set; }
+        public LogicContext OwnerContext { get; private set; }
 
         private readonly EntityComponentChanged _addComponent;
         private readonly EntityComponentChanged _removeComponent;
@@ -19,7 +19,7 @@ namespace LccHotfix
 
         public virtual void Enter(LogicContext logicContext)
         {
-            OwnerWorld = logicContext;
+            OwnerContext = logicContext;
             OnComponentAdded += _addComponent;
             OnComponentRemoved += _removeComponent;
             OnComponentReplaced += _replacedComponent;
