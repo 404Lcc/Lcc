@@ -21,15 +21,15 @@ namespace LccHotfix
         public ComHP comHP { get { return (ComHP)GetComponent(LogicComponentsLookup.ComHP); } }
         public bool hasComHP { get { return HasComponent(LogicComponentsLookup.ComHP); } }
 
-        public void AddComHp(float newHp)
+        public void AddComHP(float newHP)
         {
             var index = LogicComponentsLookup.ComHP;
             var component = (ComHP)CreateComponent(index, typeof(ComHP));
             AddComponent(index, component);
-            component.SetHP(newHp);
+            component.SetHP(newHP);
         }
 
-        public void RemoveComHp()
+        public void RemoveComHP()
         {
             RemoveComponent(LogicComponentsLookup.ComHP);
         }
