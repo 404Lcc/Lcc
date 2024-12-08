@@ -50,6 +50,5 @@ namespace LccHotfix
                 return;
             _fsm = null;
         }
-
     }
 }

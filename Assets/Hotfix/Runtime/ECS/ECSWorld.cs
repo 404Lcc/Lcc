@@ -9,20 +9,36 @@ namespace LccHotfix
         private bool _pause = false;
 
         public bool IsPause => _pause;
+        public LogicContext LogicContext { get; private set; }
+        public MetaContext MetaContext { get; private set; }
         public List<IContext> ContextList { get; private set; }
         public LogicSystems System { get; private set; }
 
         public virtual void InitWorld()
         {
+            LogicComponentsLookup.componentTypes.Clear();
+            Setup();
+            LogicComponentsLookup.componentNames.Clear();
+            foreach (var item in LogicComponentsLookup.componentTypes)
+            {
+                LogicComponentsLookup.componentNames.Add(item.Name);
+            }
+
             ContextList = new List<IContext>();
-            ContextList.Add(new LogicContext());
-            ContextList.Add(new MetaContext());
+            LogicContext = new LogicContext();
+            MetaContext = new MetaContext();
+            ContextList.Add(LogicContext);
+            ContextList.Add(MetaContext);
             InitializeEntityIndices();
             InitComponent();
             System = new LogicSystems();
             InitSystem();
             System.Initialize();
             System.ActivateReactiveSystems();
+        }
+
+        protected virtual void Setup()
+        {
         }
 
         protected virtual void InitializeEntityIndices()

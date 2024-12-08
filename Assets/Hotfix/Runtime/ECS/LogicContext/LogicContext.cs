@@ -7,7 +7,7 @@ namespace LccHotfix
     {
         private readonly static int _totalComponents = LogicComponentsLookup.TotalComponents;
         private readonly static int _startCreationIndex = 0;
-        private readonly static ContextInfo _contextInfo = new ContextInfo("Logic", LogicComponentsLookup.componentNames, LogicComponentsLookup.componentTypes);
+        private readonly static ContextInfo _contextInfo = new ContextInfo("Logic", LogicComponentsLookup.componentNames.ToArray(), LogicComponentsLookup.componentTypes.ToArray());
         private readonly static Func<Entity, IAERC> _aercFactory = (entity) => new SafeAERC(entity);
         private readonly static Func<LogicEntity> _entityFactory = () => new LogicEntity();
 

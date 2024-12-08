@@ -68,6 +68,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicContext.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Variable\GenericVariable.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Module.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\BattleWorld.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\FunctionOpen\FunctionOpenManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UIRootBase.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\MetaContext\MetaComponentsLookup.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\ReferencePoolInfo.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\AStarMap\AStarNodeData.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComID.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\IObjectPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Download\DownloadFile.cs" />
