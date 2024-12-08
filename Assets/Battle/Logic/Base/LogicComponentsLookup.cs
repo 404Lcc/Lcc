@@ -1,11 +1,11 @@
 public static class LogicComponentsLookup
 {
-    public const int ID = 0;
+    public const int IDComponent = 0;
 
     public const int TotalComponents = 1;
 
     public static readonly string[] componentNames = {
-        "ID"
+        "IDComponent"
     };
 
     public static readonly System.Type[] componentTypes = {

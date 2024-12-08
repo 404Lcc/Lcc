@@ -7,12 +7,12 @@ public class IDComponent : LogicComponent
 
 public partial class LogicEntity
 {
-    public IDComponent ID => (IDComponent)GetComponent(LogicComponentsLookup.ID);
-    public bool HasID => HasComponent(LogicComponentsLookup.ID);
+    public IDComponent ID => (IDComponent)GetComponent(LogicComponentsLookup.IDComponent);
+    public bool HasID => HasComponent(LogicComponentsLookup.IDComponent);
 
     public void AddID(long newId)
     {
-        var index = LogicComponentsLookup.ID;
+        var index = LogicComponentsLookup.IDComponent;
         var component = (IDComponent)CreateComponent(index, typeof(IDComponent));
         component.id = newId;
         AddComponent(index, component);
@@ -20,7 +20,7 @@ public partial class LogicEntity
 
     public void ReplaceID(long newId)
     {
-        var index = LogicComponentsLookup.ID;
+        var index = LogicComponentsLookup.IDComponent;
         var component = (IDComponent)CreateComponent(index, typeof(IDComponent));
         component.id = newId;
         ReplaceComponent(index, component);
@@ -28,7 +28,7 @@ public partial class LogicEntity
 
     public void RemoveID()
     {
-        RemoveComponent(LogicComponentsLookup.ID);
+        RemoveComponent(LogicComponentsLookup.IDComponent);
     }
 }
 
@@ -42,7 +42,7 @@ public partial class LogicMatcher
         {
             if (_matcherID == null)
             {
-                var matcher = (Matcher<LogicEntity>)Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ID);
+                var matcher = (Matcher<LogicEntity>)Matcher<LogicEntity>.AllOf(LogicComponentsLookup.IDComponent);
                 matcher.ComponentNames = LogicComponentsLookup.componentNames;
                 _matcherID = matcher;
             }
