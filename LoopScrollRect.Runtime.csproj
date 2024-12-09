@@ -60,17 +60,17 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopHorizontalScrollRectMulti.cs" />
-    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollSizeHelper.cs" />
-    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopVerticalScrollRectMulti.cs" />
-    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopHorizontalScrollRect.cs" />
-    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollRect.cs" />
-    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollRectBase.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollPrefabSource.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollRectMulti.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollMultiDataSource.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollDataSource.cs" />
+    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopHorizontalScrollRectMulti.cs" />
+    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollSizeHelper.cs" />
+    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopVerticalScrollRectMulti.cs" />
+    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopHorizontalScrollRect.cs" />
     <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopVerticalScrollRect.cs" />
+    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollRect.cs" />
+    <Compile Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollRectBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdPlugins\LoopScrollRect-1.1.2\Runtime\LoopScrollRect.Runtime.asmdef" />
