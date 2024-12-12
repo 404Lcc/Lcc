@@ -71,11 +71,13 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\BaseCallbackMessage.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicContext.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Variable\GenericVariable.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\Decorators\SetParentDecorator.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicEntity.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Action.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Module.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\BattleWorld.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\GameObjectPoolObject.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Task\TaskExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\FunctionOpen\FunctionOpenManager.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\IObjectPoolManager.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Image\ImageExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicComponentsLookup.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Vector3\Vector3Extension.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\GameObjectPool.cs" />
     <Compile Include="Assets\Hotfix\Init\Init.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\ThreadPoolScheduler.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolManager.cs" />
@@ -98,6 +101,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Config\TBEmptyGoTo.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Base\IDispose.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Language\LanguageType.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\Decorators\MaxActiveDecorator.cs" />
     <Compile Include="Assets\Hotfix\Logic\Scene\MainScene.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Log\ILogHelper.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicMatcher.cs" />
@@ -139,6 +143,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Res.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Window\WindowMode.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScroll.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\Decorators\AutoReleaseDecorator.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIRoot\UIRootCommon.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComFaction.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectBase.cs" />
@@ -155,6 +160,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\AStarMap\AStarMapManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\MetaContext\MetaContext.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Random\RandomUtility.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\GameObjectPoolManager.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIRoot\UIRootLogin.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UIDefine.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\Action\ActionWrap.cs" />
@@ -181,10 +187,12 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\IObjectPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Download\DownloadFile.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\Decorators\PreloadDecorator.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Tables.cs" />
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\View\IView.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Variable\Variable.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Orca\OrcaManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\Decorators\GameObjectPoolDecorator.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\GameMode\GameModeBase.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UILogin\UILoginPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Base\GroupEntityIndex.cs" />
