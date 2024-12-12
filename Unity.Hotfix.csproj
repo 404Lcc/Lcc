@@ -218,6 +218,7 @@
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelAttribute.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolManager.Object.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Timer\TimerManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Entry.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineHandler.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIMain\UIMainPanel.cs" />
