@@ -47,7 +47,7 @@ namespace LccHotfix
             InitializeForAssembly(Launcher.Instance.hotfixAssembly);
 
             //初始化加载器
-            LoadGameObject = (prefabName) => GameObject.Instantiate(AssetManager.Instance.LoadGameObject(uiRoot, prefabName));
+            LoadGameObject = (prefabName) => AssetManager.Instance.LoadGameObject(prefabName, true);
             //初始化通用节点
             Init();
         }

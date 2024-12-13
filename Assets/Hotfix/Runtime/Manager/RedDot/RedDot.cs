@@ -1,7 +1,6 @@
 using LccModel;
 using UnityEngine;
 using UnityEngine.UI;
-using YooAsset;
 
 namespace LccHotfix
 {
@@ -10,17 +9,13 @@ namespace LccHotfix
         public bool isRedDotActive;
         private GameObject redDot;
         private Text redDotCount;
-        public AssetHandle handle;
 
         public Vector3 scale = Vector3.one;
         public Vector2 offset = Vector2.zero;
 
         void Start()
         {
-            var asset = AssetManager.Instance.LoadGameObject(gameObject, "RedDot");
-
-            GameObject redDot = Object.Instantiate(asset);
-            redDot.name = name;
+            redDot = AssetManager.Instance.LoadGameObject("RedDot", true);
             redDot.transform.localPosition = Vector3.zero;
             redDot.transform.localRotation = Quaternion.identity;
             redDot.transform.localScale = Vector3.one;
@@ -63,12 +58,7 @@ namespace LccHotfix
         public void OnDestroy()
         {
             Hide();
-            AssetManager.Instance.UnLoadAsset(handle);
             Destroy(redDot);
-
-
         }
-
     }
-
 }

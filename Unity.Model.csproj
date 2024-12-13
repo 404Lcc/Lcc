@@ -70,7 +70,6 @@
     <Compile Include="Assets\Launcher\Utility\MD5\MD5Utility.cs" />
     <Compile Include="Assets\Launcher\Utility\Path\PathUtility.cs" />
     <Compile Include="Assets\Launcher\UI\ScreenBackgroundMessage\UIScreenBackgroundMessage.cs" />
-    <Compile Include="Assets\Launcher\Asset\AssetObject.cs" />
     <Compile Include="Assets\Launcher\Utility\Protobuf\ProtobufUtility.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\PatchOperation.cs" />
     <Compile Include="Assets\Launcher\Asset\AssetManager.cs" />
@@ -96,7 +95,9 @@
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmUpdateManifest.cs" />
     <Compile Include="Assets\Launcher\Launcher\StaticMethod\MonoStaticMethod.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.Action.cs" />
+    <Compile Include="Assets\Launcher\Asset\ResShader.cs" />
     <Compile Include="Assets\Launcher\UGUIExpand\DoubleClickButton.cs" />
+    <Compile Include="Assets\Launcher\Asset\ResALLObject.cs" />
     <Compile Include="Assets\Launcher\UGUIExpand\EnterClickButton.cs" />
     <Compile Include="Assets\Launcher\System\DisplayMode.cs" />
     <Compile Include="Assets\Launcher\UGUIExpand\EventTriggerListener.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Assets\Launcher\Launcher\Launcher.GameConfig.cs" />
     <Compile Include="Assets\Launcher\Utility\Path\PathType.cs" />
     <Compile Include="Assets\Launcher\Machine\StateMachine.cs" />
+    <Compile Include="Assets\Launcher\Asset\ResGameObject.cs" />
     <Compile Include="Assets\Launcher\ScrollerPro\ScrollerProEx.cs" />
     <Compile Include="Assets\Launcher\Utility\Json\JsonUtility.cs" />
     <Compile Include="Assets\Launcher\Utility\Serialize\SerializeUtility.cs" />
@@ -117,9 +119,9 @@
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmDownloadOver.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmInitialize.cs" />
     <Compile Include="Assets\Launcher\Utility\Extension\Transform\TransformExtension.cs" />
-    <Compile Include="Assets\Launcher\Asset\AssetSuffix.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmUpdateVersion.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.GameServer.cs" />
+    <Compile Include="Assets\Launcher\Asset\ResObject.cs" />
     <Compile Include="Assets\Launcher\Machine\IStateNode.cs" />
     <Compile Include="Assets\Launcher\UI\Loading\UILoadingPanel.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.Resource.cs" />

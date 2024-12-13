@@ -24,7 +24,7 @@ namespace LccHotfix
 
                 CodeTypesManager.Instance.LoadTypes(new Assembly[] { Launcher.Instance.hotfixAssembly });
 
-                GameObjectPoolManager.Instance.SetLoader((location) => AssetManager.Instance.LoadGameObject(GameObjectPoolManager.Instance.Root.gameObject, location));
+                GameObjectPoolManager.Instance.SetLoader((location) => AssetManager.Instance.LoadRes<GameObject>(GameObjectPoolManager.Instance.Root.gameObject, location));
 
                 HotfixBridge.Init();
 
