@@ -2,7 +2,7 @@
 
 namespace LccHotfix
 {
-    public static class RedDotHelper
+    public static class RedDotUtility
     {
         /// <summary>
         /// 增加逻辑红点节点
