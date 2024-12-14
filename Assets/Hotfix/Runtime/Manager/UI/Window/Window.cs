@@ -178,7 +178,7 @@ namespace LccHotfix
 		//创建窗口
 		public void CreateWindowView()
 		{
-			_gameObject = Entry.GetModule<WindowManager>().LoadGameObject?.Invoke(_mode.prefabName);
+			_gameObject = Entry.GetModule<WindowManager>().LoadGameObject?.Invoke(_mode.prefabName, true);
 			if (_gameObject != null)
 			{
 				_transform = _gameObject.transform as RectTransform;
