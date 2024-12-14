@@ -1,7 +1,5 @@
-using LccModel;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace LccHotfix
 {
@@ -105,18 +103,7 @@ namespace LccHotfix
             list.Add(target);
             parentDict.Add(parent, list);
         }
-        /// <summary>
-        /// 增加红点节点
-        /// </summary>
-        /// <param name="parent"></param>
-        /// <param name="target"></param>
-        /// <param name="isNeedShow"></param>
-        /// <param name="redDot"></param>
-        public void AddRedDotNode(string parent, string target, bool isNeedShow, RedDot redDot)
-        {
-            AddRedDotNode(parent, target, isNeedShow);
-            AddRedDot(target, redDot);
-        }
+
         /// <summary>
         /// 移除红点节点
         /// </summary>
@@ -135,7 +122,7 @@ namespace LccHotfix
             }
 
             //减少红点计数
-            UpdateNodeCount(target, false);
+            UpdateLogicNodeRetainCount(target, false);
 
 
             //移除节点
@@ -152,25 +139,13 @@ namespace LccHotfix
             }
             nodeCountDict.Remove(target);
         }
-        /// <summary>
-        /// 移除红点节点
-        /// </summary>
-        /// <param name="target"></param>
-        /// <param name="isRemoveRedDot"></param>
-        public void RemoveRedDotNode(string target, bool isRemoveRedDot)
-        {
-            RemoveRedDotNode(target);
-            if (isRemoveRedDot)
-            {
-                RemoveRedDot(target, out RedDot redDot);
-            }
-        }
+
         /// <summary>
         /// 增加红点
         /// </summary>
         /// <param name="target"></param>
         /// <param name="redDot"></param>
-        public void AddRedDot(string target, RedDot redDot)
+        public void AddRedDotView(string target, RedDot redDot)
         {
             if (!nodeCountDict.TryGetValue(target, out int nodeCount))
             {
@@ -184,14 +159,14 @@ namespace LccHotfix
             {
                 return;
             }
-            redDot.Show();
+            redDot.Show(GameObjectPoolManager.Instance.GetObject("RedDot"));
         }
         /// <summary>
         /// 移除红点
         /// </summary>
         /// <param name="target"></param>
         /// <param name="redDot"></param>
-        public void RemoveRedDot(string target, out RedDot redDot)
+        public void RemoveRedDotView(string target, out RedDot redDot)
         {
             if (redDotDict.TryGetValue(target, out redDot))
             {
@@ -205,29 +180,16 @@ namespace LccHotfix
             Object.Destroy(redDot);
         }
 
-
-
         /// <summary>
-        /// 显示红点节点
+        /// 判断是否是叶子节点
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        public bool ShowRedDotNode(string target)
+        private bool IsLeafNode(string target)
         {
-            if (IsAlreadyShow(target))
-            {
-                return false;
-            }
-
-            if (!IsLeafNode(target))
-            {
-                Log.Error("不能显示父节点 " + target);
-                return false;
-            }
-
-            UpdateNodeCount(target, true);
-            return true;
+            return !parentDict.ContainsKey(target);
         }
+
         /// <summary>
         /// 隐藏红点节点
         /// </summary>
@@ -241,66 +203,33 @@ namespace LccHotfix
                 return false;
             }
 
-            UpdateNodeCount(target, false);
+            UpdateLogicNodeRetainCount(target, false);
             return true;
         }
+
         /// <summary>
-        /// 刷新红点计数
+        /// 显示红点节点
         /// </summary>
         /// <param name="target"></param>
-        /// <param name="Count"></param>
-        public void RefreshRedDotCount(string target, int Count)
+        /// <returns></returns>
+        public bool ShowRedDotNode(string target)
         {
             if (!IsLeafNode(target))
             {
-                Log.Error("不能刷新父节点");
-                return;
+                Log.Error("不能显示父节点 " + target);
+                return false;
             }
 
-            redDotDict.TryGetValue(target, out RedDot redDot);
-
-            redDotCountDict[target] = Count;
-
-            if (needShowParent.Contains(target) && redDot != null)
-            {
-                redDot.RefreshRedDotCount(redDotCountDict[target]);
-            }
-
-
-            bool isParentExist = childToParentDict.TryGetValue(target, out string parent);
-
-            while (isParentExist)
-            {
-                var viewCount = 0;
-
-                foreach (var childNode in parentDict[parent])
-                {
-                    viewCount += redDotCountDict[childNode];
-                }
-
-
-                redDotCountDict[parent] = viewCount;
-
-                if (redDotDict.TryGetValue(parent, out redDot))
-                {
-                    if (needShowParent.Contains(parent))
-                    {
-                        redDot.RefreshRedDotCount(redDotCountDict[parent]);
-                    }
-                }
-                isParentExist = childToParentDict.TryGetValue(parent, out parent);
-            }
+            UpdateLogicNodeRetainCount(target, true);
+            return true;
         }
-
-
-
 
         /// <summary>
         /// 更新节点计数
         /// </summary>
         /// <param name="target"></param>
         /// <param name="isRaiseCount"></param>
-        private void UpdateNodeCount(string target, bool isRaiseCount)
+        private void UpdateLogicNodeRetainCount(string target, bool isRaiseCount)
         {
             if (!nodeCountDict.ContainsKey(target))
             {
@@ -351,11 +280,11 @@ namespace LccHotfix
             {
                 if (isRaiseCount)
                 {
-                    redDot.Show();
+                    redDot.Show(GameObjectPoolManager.Instance.GetObject("RedDot"));
                 }
                 else
                 {
-                    redDot.Hide();
+                    GameObjectPoolManager.Instance.ReleaseObject(redDot.Recovery());
                 }
             }
 
@@ -374,7 +303,7 @@ namespace LccHotfix
                     {
                         if (!redDot.isRedDotActive)
                         {
-                            redDot.Show();
+                            redDot.Show(GameObjectPoolManager.Instance.GetObject("RedDot"));
                         }
                     }
                 }
@@ -383,33 +312,65 @@ namespace LccHotfix
                 {
                     if (redDotDict.TryGetValue(parent, out redDot))
                     {
-                        redDot.Hide();
+                        GameObjectPoolManager.Instance.ReleaseObject(redDot.Recovery());
                     }
                 }
                 isParentExist = childToParentDict.TryGetValue(parent, out parent);
             }
         }
+
+
         /// <summary>
-        /// 判断是否是叶子节点
+        /// 刷新红点计数
         /// </summary>
         /// <param name="target"></param>
-        /// <returns></returns>
-        private bool IsLeafNode(string target)
+        /// <param name="Count"></param>
+        public void RefreshRedDotViewCount(string target, int Count)
         {
-            return !parentDict.ContainsKey(target);
-        }
-        /// <summary>
-        /// 红点是否已经处于显示状态
-        /// </summary>
-        /// <param name="target"></param>
-        /// <returns></returns>
-        private bool IsAlreadyShow(string target)
-        {
-            if (!nodeCountDict.ContainsKey(target))
+            if (!IsLeafNode(target))
             {
-                return false;
+                Log.Error("不能刷新父节点");
+                return;
             }
-            return nodeCountDict[target] >= 1;
+
+            redDotDict.TryGetValue(target, out RedDot redDot);
+
+            redDotCountDict[target] = Count;
+
+            if (needShowParent.Contains(target) && redDot != null)
+            {
+                redDot.RefreshRedDotCount(redDotCountDict[target]);
+            }
+
+
+            bool isParentExist = childToParentDict.TryGetValue(target, out string parent);
+
+            while (isParentExist)
+            {
+                var viewCount = 0;
+
+                foreach (var childNode in parentDict[parent])
+                {
+                    viewCount += redDotCountDict[childNode];
+                }
+
+
+                redDotCountDict[parent] = viewCount;
+
+                if (redDotDict.TryGetValue(parent, out redDot))
+                {
+                    if (needShowParent.Contains(parent))
+                    {
+                        redDot.RefreshRedDotCount(redDotCountDict[parent]);
+                    }
+                }
+                isParentExist = childToParentDict.TryGetValue(parent, out parent);
+            }
         }
+
+
+        #region 接口
+
+        #endregion
     }
 }

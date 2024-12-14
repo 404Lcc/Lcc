@@ -1,53 +1,56 @@
-using LccModel;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace LccHotfix
 {
     public class RedDot : MonoBehaviour
     {
         public bool isRedDotActive;
+        private GameObjectPoolObject _redDotGameObject;
+        private TextMeshProUGUI _redDotCountText;
 
-        private GameObject _redDot;
-        private Text _redDotCount;
+        public Vector3 scale = Vector3.one;
+        public Vector2 offset = Vector2.zero;
 
-        void Start()
+        private void Awake()
         {
-            _redDot = AssetManager.Instance.LoadGameObject("RedDot", true);
-            _redDot.transform.localPosition = Vector3.zero;
-            _redDot.transform.localRotation = Quaternion.identity;
-            _redDot.transform.localScale = Vector3.one;
-
-            _redDotCount = _redDot.GetComponentInChildren<Text>();
-
-
-            _redDot.transform.SetParent(transform, false);
-            _redDot.transform.localScale = Vector3.one;
-            _redDot.transform.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-
-            Hide();
-
+            this.isRedDotActive = false;
         }
-        public void Show()
+
+        public void Show(GameObjectPoolObject redDotGameObject)
         {
-            isRedDotActive = true;
-            _redDotCount.text = string.Empty;
-            _redDot.SetActive(isRedDotActive);
-        }
-        public void Hide()
-        {
-            isRedDotActive = false;
-            _redDotCount.text = string.Empty;
-            _redDot.SetActive(isRedDotActive);
+            this.isRedDotActive = true;
+            this._redDotGameObject = redDotGameObject;
+            redDotGameObject.GameObject.transform.SetParent(this.transform, false);
+            redDotGameObject.GameObject.transform.localScale = scale;
+            redDotGameObject.GameObject.transform.GetComponent<RectTransform>().anchoredPosition = this.offset;
+            this._redDotCountText = redDotGameObject.GameObject.GetComponentInChildren<TextMeshProUGUI>();
+            redDotGameObject.GameObject.SetActive(true);
         }
 
         public void RefreshRedDotCount(int count)
         {
-            if (!isRedDotActive)
+            if (null == this._redDotGameObject)
             {
                 return;
             }
-            _redDotCount.text = count <= 0 ? string.Empty : count.ToString();
+            this._redDotGameObject.GameObject.transform.localScale = scale;
+            this._redDotCountText.text = count <= 0 ? string.Empty : count.ToString();
+        }
+
+        public GameObjectPoolObject Recovery()
+        {
+            if (this._redDotCountText != null)
+            {
+                this._redDotCountText.text = "";
+            }
+
+            this.isRedDotActive = false;
+            this._redDotCountText = null;
+            this._redDotGameObject?.GameObject?.SetActive(false);
+            GameObjectPoolObject go = this._redDotGameObject;
+            this._redDotGameObject = null;
+            return go;
         }
     }
 }

@@ -72,6 +72,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicContext.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Variable\GenericVariable.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\Decorators\SetParentDecorator.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\RedDot\RedDotHelper.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicEntity.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Action.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Module.cs" />
