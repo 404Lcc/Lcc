@@ -8,6 +8,7 @@ namespace LccHotfix
     internal class RedDotManager : Module
     {
         public static RedDotManager Instance => Entry.GetModule<RedDotManager>();
+
         public Dictionary<string, List<string>> parentDict = new Dictionary<string, List<string>>();//key父节点 value子节点列表
         public HashSet<string> needShowParent = new HashSet<string>();//需要显示的父节点 key父节点
         public Dictionary<string, int> redDotCountDict = new Dictionary<string, int>();//key子节点 value红点计数
@@ -410,7 +411,5 @@ namespace LccHotfix
             }
             return nodeCountDict[target] >= 1;
         }
-
-
     }
 }

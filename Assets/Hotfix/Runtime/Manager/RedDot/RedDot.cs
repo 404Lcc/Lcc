@@ -7,25 +7,23 @@ namespace LccHotfix
     public class RedDot : MonoBehaviour
     {
         public bool isRedDotActive;
-        private GameObject redDot;
-        private Text redDotCount;
 
-        public Vector3 scale = Vector3.one;
-        public Vector2 offset = Vector2.zero;
+        private GameObject _redDot;
+        private Text _redDotCount;
 
         void Start()
         {
-            redDot = AssetManager.Instance.LoadGameObject("RedDot", true);
-            redDot.transform.localPosition = Vector3.zero;
-            redDot.transform.localRotation = Quaternion.identity;
-            redDot.transform.localScale = Vector3.one;
+            _redDot = AssetManager.Instance.LoadGameObject("RedDot", true);
+            _redDot.transform.localPosition = Vector3.zero;
+            _redDot.transform.localRotation = Quaternion.identity;
+            _redDot.transform.localScale = Vector3.one;
 
-            redDotCount = redDot.GetComponentInChildren<Text>();
+            _redDotCount = _redDot.GetComponentInChildren<Text>();
 
 
-            redDot.transform.SetParent(transform, false);
-            redDot.transform.localScale = scale;
-            redDot.transform.GetComponent<RectTransform>().anchoredPosition = offset;
+            _redDot.transform.SetParent(transform, false);
+            _redDot.transform.localScale = Vector3.one;
+            _redDot.transform.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
             Hide();
 
@@ -33,16 +31,14 @@ namespace LccHotfix
         public void Show()
         {
             isRedDotActive = true;
-            redDotCount.text = string.Empty;
-            redDot.SetActive(isRedDotActive);
+            _redDotCount.text = string.Empty;
+            _redDot.SetActive(isRedDotActive);
         }
         public void Hide()
         {
             isRedDotActive = false;
-            redDotCount.text = string.Empty;
-            redDot.SetActive(isRedDotActive);
-
-
+            _redDotCount.text = string.Empty;
+            _redDot.SetActive(isRedDotActive);
         }
 
         public void RefreshRedDotCount(int count)
@@ -51,14 +47,7 @@ namespace LccHotfix
             {
                 return;
             }
-            redDotCount.text = count <= 0 ? string.Empty : count.ToString();
-        }
-
-
-        public void OnDestroy()
-        {
-            Hide();
-            Destroy(redDot);
+            _redDotCount.text = count <= 0 ? string.Empty : count.ToString();
         }
     }
 }
