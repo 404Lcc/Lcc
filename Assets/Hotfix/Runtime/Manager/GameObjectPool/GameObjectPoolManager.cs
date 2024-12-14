@@ -22,7 +22,7 @@ namespace LccHotfix
         public static GameObjectPoolManager Instance => Entry.GetModule<GameObjectPoolManager>();
 
         private GameObjectPoolSetting _poolSetting;
-        private Func<string, GameObject> _loaderHandle;
+        private Func<string, GameObject, GameObject> _loaderHandle;
         private Dictionary<string, IGameObjectPool> _poolDict;
         private Transform _root;
 
@@ -68,7 +68,7 @@ namespace LccHotfix
             _root = null;
         }
 
-        public void SetLoader(Func<string, GameObject> loader)
+        public void SetLoader(Func<string, GameObject, GameObject> loader)
         {
             _loaderHandle = loader;
         }
@@ -81,7 +81,9 @@ namespace LccHotfix
             }
             else
             {
-                pool = new GameObjectPool(_loaderHandle(poolName), PoolSetting, poolName);
+                var root = new GameObject(poolName + "Pool");
+                root.transform.SetParent(Root);
+                pool = new GameObjectPool(_loaderHandle(poolName, root), root, PoolSetting, poolName);
 
                 IGameObjectPool decorator = new SetParentDecorator(pool);
 

@@ -5,9 +5,9 @@ namespace LccHotfix
 {
     public interface IGameObjectPool
     {
+        GameObject Root { get; }
         GameObjectPoolSetting PoolSetting { get; }
         string Name { get; }
-        GameObject Root { get; }
         int Count { get; }
 
         void Update();
@@ -20,25 +20,24 @@ namespace LccHotfix
 
     public class GameObjectPool : IGameObjectPool
     {
-        private GameObjectPoolSetting _poolSetting;
         private GameObject _original;
-        private Stack<GameObjectPoolObject> _cachedStack;
         private GameObject _root;
+        private GameObjectPoolSetting _poolSetting;
+        private Stack<GameObjectPoolObject> _cachedStack;
 
+        public GameObject Root => _root;
         public GameObjectPoolSetting PoolSetting => _poolSetting;
         public string Name { get; private set; }
-        public GameObject Root => _root;
         public int Count => _cachedStack.Count;
 
-        public GameObjectPool(GameObject original, GameObjectPoolSetting poolSetting, string poolName)
+        public GameObjectPool(GameObject original, GameObject root, GameObjectPoolSetting poolSetting, string poolName)
         {
             Debug.Assert(original != null);
-            _cachedStack = new Stack<GameObjectPoolObject>();
-            Name = poolName;
             _original = original;
+            _root = root;
             _poolSetting = poolSetting;
-            _root = new GameObject(poolName + "Pool");
-            _root.transform.SetParent(GameObjectPoolManager.Instance.Root);
+            Name = poolName;
+            _cachedStack = new Stack<GameObjectPoolObject>();
         }
 
         public virtual GameObjectPoolObject Get()
@@ -75,6 +74,7 @@ namespace LccHotfix
             {
                 GameObject.Destroy(_cachedStack.Pop().GameObject);
             }
+            GameObject.Destroy(_root);
         }
 
         public void Update()
