@@ -30,7 +30,7 @@ namespace LccHotfix
             RedDotManager.Instance.RemoveRedDotNode(target);
             if (isRemoveView)
             {
-                RedDotManager.Instance.RemoveRedDotView(target, out RedDot redDotMonoView);
+                RedDotManager.Instance.RemoveRedDotView(target, out RedDot redDot);
             }
         }
 
