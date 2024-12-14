@@ -14,7 +14,7 @@ namespace LccHotfix
         {
             if (!string.IsNullOrEmpty(parent) && !RedDotManager.Instance.parentDict.ContainsKey(parent))
             {
-                Log.Warning("Runtime动态添加的红点，其父节点是新节点： " + parent);
+                Log.Warning("Runtime动态添加的红点，其父节点是新节点：" + parent);
             }
 
             RedDotManager.Instance.AddRedDotNode(parent, target, isNeedShowNum);

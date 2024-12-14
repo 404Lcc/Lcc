@@ -39,13 +39,6 @@ namespace LccHotfix
         /// <param name="isNeedShow"></param>
         public void AddRedDotNode(string parent, string target, bool isNeedShow)
         {
-            if (!string.IsNullOrEmpty(parent) && !parentDict.ContainsKey(parent))
-            {
-                Log.Debug("父节点是新节点：" + parent);
-            }
-
-
-
             if (string.IsNullOrEmpty(target))
             {
                 Log.Error($"目标不能为空");
