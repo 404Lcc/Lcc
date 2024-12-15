@@ -3,6 +3,11 @@ using UnityEngine;
 
 namespace LccHotfix
 {
+    public class RawHit
+    {
+        private Vector2 _point;
+        private Vector2 _normal;
+    }
     public abstract class RaycastHitColliderHandler : IEntityColliderHandler
     {
         protected RaycastHit2D[] _rawHits;
@@ -38,7 +43,7 @@ namespace LccHotfix
 
             var pos = ownerEntity.comTransform.position;
 
-            if (_hitMethod == HitMethod.Point)
+            if (_hitMethod == HitMethod.Point2D)
             {
                 if (_rayRadius <= 0f)
                 {
@@ -50,8 +55,9 @@ namespace LccHotfix
                 }
 
             }
-            else
+            else if (_hitMethod == HitMethod.Line2D)
             {
+                //Physics.RaycastNonAlloc
                 Physics2D.RaycastNonAlloc(pos, _dir.normalized, _rawHits, int.MaxValue, _layerMask);
             }
 

@@ -60,14 +60,41 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ECSWorld\WorldManager.cs" />
-    <Compile Include="Assets\ECSWorld\Contexts.cs" />
-    <Compile Include="Assets\ECSWorld\GameModeBase.cs" />
-    <Compile Include="Assets\ECSWorld\ECSWorld.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\GameLogic\GameManager.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\BattleLogic\EntityEnemy.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\BattleLogic\EntityEffect.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\PatchLogic\FsmNode\FsmInitializePackage.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\PatchLogic\FsmNode\FsmUpdatePackageManifest.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\BattleLogic\BattleRoom.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\WindowLogic\UILoadingWindow.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\WindowLogic\UIBattleWindow.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\EventDefine\PatchEventDefine.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\GameLogic\SceneHome.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\PatchLogic\PatchOperation.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\PatchLogic\FsmNode\FsmCreatePackageDownloader.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\PatchLogic\FsmNode\FsmUpdaterDone.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\EventDefine\BattleEventDefine.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\Behaviour\BackgroundScroller.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\PatchLogic\FsmNode\FsmUpdatePackageVersion.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\EventDefine\SceneEventDefine.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\WindowLogic\UIAboutWindow.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\WindowLogic\UIHomeWindow.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\PatchLogic\FsmNode\FsmClearPackageCache.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\BattleLogic\EntityBullet.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\PatchLogic\PatchWindow.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\PatchLogic\FsmNode\FsmDownloadPackageOver.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\BattleLogic\EntityPlayer.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\GameLogic\SceneBattle.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\PatchLogic\FsmNode\FsmDownloadPackageFiles.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\Boot.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\EventDefine\UserEventDefine.cs" />
+    <Compile Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameScript\Runtime\BattleLogic\EntityAsteroid.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameSetting\AssetBundleCollectorConfig.xml" />
+    <None Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameArt\Shader\MyUnlitShader.shader" />
     <None Include="Assets\StreamingAssets\Dev\Android\channelList.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\GameConfig\GameConfig_Version.txt" />
@@ -89,9 +116,11 @@
     <None Include="Assets\StreamingAssets\GameConfig_Version.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\StreamingAssets\Dev\Android\versionList.txt" />
+    <None Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameArt\Shader\StandardMobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Resources\LanguageConfig_ChineseSimplified.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\Samples\YooAsset\2.2.0-preview\Space Shooter\GameArt\Shader\StandardMobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
@@ -1220,9 +1249,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="UniFramework.Machine.csproj">
+      <Project>{EC4CFAFC-A005-5CAC-EEDD-E1EC41924666}</Project>
+      <Name>UniFramework.Machine</Name>
+    </ProjectReference>
     <ProjectReference Include="EnhancedScroller_asmdef.csproj">
       <Project>{50A4DDDC-1012-D6CA-5D95-34EC1C8959A2}</Project>
       <Name>EnhancedScroller_asmdef</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniFramework.Event.csproj">
+      <Project>{0B00F680-83F8-4264-B7F0-88751B364344}</Project>
+      <Name>UniFramework.Event</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniFramework.Utility.csproj">
+      <Project>{940D5290-A37C-5F9A-92AC-4DE39CE13069}</Project>
+      <Name>UniFramework.Utility</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Editor.csproj">
       <Project>{08A34834-D4C3-53DD-6264-CCC1F0737645}</Project>
