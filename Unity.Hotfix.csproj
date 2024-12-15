@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComOwnerEntity.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Log\Log.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Collider\ComCollider.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UILogicBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\ThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\WNode.cs" />
@@ -244,6 +245,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineHandler.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIMain\UIMainPanel.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\DataStruct\TypeNamePair.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Collider\ColliderHandlerBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\BasePlatform.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolManager.ObjectPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicSystems.cs" />

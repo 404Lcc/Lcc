@@ -17,6 +17,7 @@ namespace LccHotfix
         public static int ComLife;
         public static int ComDeath;
         public static int ComLocomotion;
+        public static int ComCollider;
 
         //战斗
         public static int ComHP;
