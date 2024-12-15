@@ -61,4 +61,8 @@ namespace LccHotfix
             }
         }
     }
+    public static partial class LogicComponentsLookup
+    {
+        public static int ComDeath;
+    }
 }
