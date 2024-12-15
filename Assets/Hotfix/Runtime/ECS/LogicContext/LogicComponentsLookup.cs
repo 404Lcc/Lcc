@@ -20,7 +20,9 @@ namespace LccHotfix
 
         //战斗
         public static int ComHP;
-        
+        public static int ComProperty;
+
+
 
         public static int TotalComponents => componentTypes.Length;
         public static List<string> componentNameList;
