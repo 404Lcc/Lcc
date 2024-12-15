@@ -13,6 +13,10 @@ namespace LccHotfix
         public static int ComUnityObjectRelated;
         public static int ComTransform;
         public static int ComView;
+        public static int ComTimer;
+        public static int ComLife;
+        public static int ComDeath;
+        public static int ComLocomotion;
 
         //战斗
         public static int ComHP;

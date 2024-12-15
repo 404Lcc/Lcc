@@ -109,5 +109,14 @@ namespace LccHotfix
                 item.Reset();
             }
         }
+
+        public IEntityIndex GetEntityIndex<T>()
+        {
+            return LogicContext.GetEntityIndex(typeof(T).Name);
+        }
+        public TIndex GetEntityIndex<TComponent, TIndex>()
+        {
+            return (TIndex)GetEntityIndex<TComponent>();
+        }
     }
 }

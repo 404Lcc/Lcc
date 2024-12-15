@@ -1,4 +1,3 @@
-using NPOI.OpenXmlFormats.Wordprocessing;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,7 +14,10 @@ namespace LccHotfix
         //生命周期不跟随Main
         //可以随时增加或者删除
     }
-
+    public interface IViewUpdate
+    {
+        void Update(float dt);
+    }
     public interface IViewWrapper : IDispose
     {
         void SyncTransform(Vector3 position, Quaternion rotation, Vector3 scale);

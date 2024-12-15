@@ -73,17 +73,17 @@ namespace LccHotfix
         }
     }
 
-    public sealed partial class GameMatcher
+    public sealed partial class LogicMatcher
     {
-        private static Entitas.IMatcher<LogicEntity> _matcherComTransform;
+        private static IMatcher<LogicEntity> _matcherComTransform;
 
-        public static Entitas.IMatcher<LogicEntity> ComTransform
+        public static IMatcher<LogicEntity> ComTransform
         {
             get
             {
                 if (_matcherComTransform == null)
                 {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComTransform);
+                    var matcher = (Matcher<LogicEntity>)Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComTransform);
                     matcher.ComponentNames = LogicComponentsLookup.componentNames;
                     _matcherComTransform = matcher;
                 }
