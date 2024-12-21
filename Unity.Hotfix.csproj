@@ -209,8 +209,8 @@
     <Compile Include="Assets\Hotfix\Logic\UI\UILogin\UILoginPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Base\GroupEntityIndex.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineCompletedHandler.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\MainThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysViewUpdate.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\MainThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Window\Window.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\EmptyGoTo.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AssetBundleRequestAwaiter.cs" />

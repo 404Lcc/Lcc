@@ -76,6 +76,7 @@
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmCreateDownloader.cs" />
     <Compile Include="Assets\Launcher\ScrollerPro\ScrollerPro.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.Notice.cs" />
+    <Compile Include="Assets\Launcher\UI\UIAdapt\UIAdapt.cs" />
     <Compile Include="Assets\Launcher\Math\OBB.cs" />
     <Compile Include="Assets\Launcher\Event\IEventMessage.cs" />
     <Compile Include="Assets\Launcher\Utility\File\FileUtility.cs" />

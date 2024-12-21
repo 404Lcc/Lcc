@@ -4686,6 +4686,7 @@
     <type fullname="LccModel.MessageBox" preserve="all" />
     <type fullname="LccModel.UILoadingPanel" preserve="all" />
     <type fullname="LccModel.UIScreenBackgroundMessage" preserve="all" />
+    <type fullname="LccModel.UIAdapt" preserve="all" />
     <type fullname="LccModel.DirectoryUtility" preserve="all" />
     <type fullname="LccModel.ByteExtension" preserve="all" />
     <type fullname="LccModel.StringExtension" preserve="all" />
@@ -4731,7 +4732,7 @@
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel+&lt;&gt;c__DisplayClass6_0" preserve="all" />
     <type fullname="LccModel.UILoadingPanel+&lt;&gt;c" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2538" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3819" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2559" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3865" preserve="all" />
   </assembly>
 </linker>
