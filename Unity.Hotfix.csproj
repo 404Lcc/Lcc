@@ -96,6 +96,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicComponentsLookup.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Vector3\Vector3Extension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\GameObjectPool.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\RedDot\RedDotBind.cs" />
     <Compile Include="Assets\Hotfix\Init\Init.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\ThreadPoolScheduler.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolManager.cs" />
@@ -191,7 +192,6 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\MetaContext\MetaComponentsLookup.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Archive\UserSetData.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\ReferencePoolInfo.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\RedDot\RedDotUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\AStarMap\AStarNodeData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\ECSWorld.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Death\DeathProcess.cs" />
@@ -224,7 +224,6 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysLocomotion.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Extension\IUILogicExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.FunctionTurn.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\RedDot\RedDot.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Popup.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\IScheduler.cs" />
