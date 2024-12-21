@@ -63,6 +63,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComOwnerEntity.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Log\Log.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Collider\ComCollider.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComUniGameMode.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UILogicBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\ThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\WNode.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineCompletedHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysViewUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\MainThreadScheduler.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\Component\SkillProcess\ISkillProcess.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Window\Window.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\EmptyGoTo.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AssetBundleRequestAwaiter.cs" />
@@ -240,6 +242,7 @@
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelAttribute.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolManager.Object.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\Component\SkillProcess\ComSkillProcess.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Timer\TimerManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Entry.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineHandler.cs" />

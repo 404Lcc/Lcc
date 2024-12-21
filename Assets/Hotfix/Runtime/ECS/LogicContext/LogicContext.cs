@@ -3,7 +3,7 @@ using System;
 
 namespace LccHotfix
 {
-    public class LogicContext : Context<LogicEntity>
+    public partial class LogicContext : Context<LogicEntity>
     {
         private readonly static int _totalComponents = LogicComponentsLookup.TotalComponents;
         private readonly static int _startCreationIndex = 0;

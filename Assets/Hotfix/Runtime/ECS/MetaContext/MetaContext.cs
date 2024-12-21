@@ -3,7 +3,7 @@ using System;
 
 namespace LccHotfix
 {
-    public class MetaContext : Context<MetaEntity>
+    public partial class MetaContext : Context<MetaEntity>
     {
         private readonly static int _totalComponents = MetaComponentsLookup.TotalComponents;
         private readonly static int _startCreationIndex = 0;
