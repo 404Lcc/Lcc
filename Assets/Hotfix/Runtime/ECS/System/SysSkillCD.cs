@@ -5,13 +5,11 @@ namespace LccHotfix
 {
     public class SysSkillCD : IExecuteSystem
     {
-        private readonly ECSWorld _world;
-        private readonly IGroup<LogicEntity> _group;
+        private IGroup<LogicEntity> _group;
 
         public SysSkillCD(ECSWorld world)
         {
-            _world = world;
-            _group = _world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComSkills, LogicMatcher.ComProperty, LogicMatcher.ComTransform));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComSkills, LogicMatcher.ComProperty, LogicMatcher.ComTransform));
         }
 
         public void Execute()

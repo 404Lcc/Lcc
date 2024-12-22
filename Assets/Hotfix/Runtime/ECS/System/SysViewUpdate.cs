@@ -4,13 +4,10 @@ namespace LccHotfix
 {
     public class SysViewUpdate : IExecuteSystem
     {
-        private readonly ECSWorld _contexts;
-        private readonly IGroup<LogicEntity> _group;
-        public SysViewUpdate(ECSWorld contexts)
+        private IGroup<LogicEntity> _group;
+        public SysViewUpdate(ECSWorld world)
         {
-            _contexts = contexts;
-
-            _group = _contexts.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComView));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComView));
         }
 
 

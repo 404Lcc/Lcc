@@ -5,12 +5,10 @@ namespace LccHotfix
 {
     public class SysLocomotion : IExecuteSystem
     {
-        private ECSWorld _contexts;
         private IGroup<LogicEntity> _group;
-        public SysLocomotion(ECSWorld contexts)
+        public SysLocomotion(ECSWorld world)
         {
-            _contexts = contexts;
-            _group = _contexts.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComLocomotion, LogicMatcher.ComTransform));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComLocomotion, LogicMatcher.ComTransform));
         }
 
         public void Execute()

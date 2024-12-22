@@ -4,12 +4,10 @@ namespace LccHotfix
 {
     public class SysDeathProcess : IExecuteSystem
     {
-        private ECSWorld _world;
         private IGroup<LogicEntity> _group;
 
         public SysDeathProcess(ECSWorld world)
         {
-            _world = world;
             _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComDeath));
         }
 
