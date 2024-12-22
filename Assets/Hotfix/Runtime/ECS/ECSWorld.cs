@@ -59,13 +59,13 @@ namespace LccHotfix
         {
         }
 
-        public virtual void PauseGame()
+        public virtual void Pause()
         {
             _pause = true;
             Launcher.Instance.Pause();
         }
 
-        public virtual void ResumeGame()
+        public virtual void Resume()
         {
             if (_pause)
             {

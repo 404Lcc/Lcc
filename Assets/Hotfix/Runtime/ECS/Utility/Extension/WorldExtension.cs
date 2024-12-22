@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public static class ECSWorldExtension
+    public static class WorldExtension
     {
         public static LogicEntity GetEntityWithComID(this ECSWorld world, long id)
         {
