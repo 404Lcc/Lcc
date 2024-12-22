@@ -169,6 +169,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Transform\TransformExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\SpriteRenderer\SpriteRendererExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\SceneType.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysSkillCD.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\LinkedList.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\MultiDictionary.cs" />

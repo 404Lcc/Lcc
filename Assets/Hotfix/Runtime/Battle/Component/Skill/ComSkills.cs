@@ -167,7 +167,7 @@ namespace LccHotfix
             RemoveComponent(LogicComponentsLookup.ComSkills);
         }
     }
-    public sealed partial class GameMatcher
+    public sealed partial class LogicMatcher
     {
 
         static Entitas.IMatcher<LogicEntity> _matcherComSkills;
