@@ -123,7 +123,7 @@ namespace LccHotfix
         {
             //TODO处理消耗
 
-            var id = owner.comID.id;
+            var entityId = owner.comID.id;
             SkillProcess process = new SkillProcess();
             if (context == null)
             {
@@ -134,8 +134,9 @@ namespace LccHotfix
             context.SetObject(KVType.SkillOwnerEntity, owner);
 
 
+            LogicAgent agent = new LogicAgent();
+            agent.Init(null, entityId, skillId, context);
 
-            LogicAgent agent = null;//BA.CreateBTAgent<BTAgent>(skillConfig.BTName, entityId, skill_tid, context);
             process.Owner = owner;
             process.SkillAbility = this;
             process.Agent = agent;

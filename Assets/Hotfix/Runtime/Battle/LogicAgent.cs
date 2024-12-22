@@ -8,16 +8,16 @@ namespace LccHotfix
     {
         protected LogicScript _rootScript;
 
-        protected int _entityId;
+        protected long _entityId;
         protected int _logicId;
         protected KVContext _context;
         protected List<TimerTask> _timerList;
 
-        public int EntityId => _entityId;
+        public long EntityId => _entityId;
         public int LogicId => _logicId;
         public KVContext Context => _context;
 
-        public void Init(LogicScript root, int entityId, int logicId, KVContext preContext = null)
+        public void Init(LogicScript root, long entityId, int logicId, KVContext preContext = null)
         {
             _rootScript = root;
 
