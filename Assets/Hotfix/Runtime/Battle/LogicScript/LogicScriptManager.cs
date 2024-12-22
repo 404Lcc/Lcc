@@ -5,6 +5,7 @@ namespace LccHotfix
 {
     internal class LogicScriptManager : Module
     {
+        public static LogicScriptManager Instance => Entry.GetModule<LogicScriptManager>();
         private Dictionary<string, LogicScript> _scriptDict = new Dictionary<string, LogicScript>();
 
         public LogicScriptManager()

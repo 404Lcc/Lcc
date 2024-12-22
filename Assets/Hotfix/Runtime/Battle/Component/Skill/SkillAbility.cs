@@ -135,7 +135,7 @@ namespace LccHotfix
 
 
             LogicAgent agent = new LogicAgent();
-            agent.Init(null, entityId, skillId, context);
+            agent.Init(skillData.LogicScript, entityId, skillId, context);
 
             process.Owner = owner;
             process.SkillAbility = this;

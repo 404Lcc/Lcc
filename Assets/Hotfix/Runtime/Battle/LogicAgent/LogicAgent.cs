@@ -17,9 +17,9 @@ namespace LccHotfix
         public int LogicId => _logicId;
         public KVContext Context => _context;
 
-        public void Init(LogicScript root, long entityId, int logicId, KVContext preContext = null)
+        public void Init(string rootName, long entityId, int logicId, KVContext preContext = null)
         {
-            _rootScript = root;
+            _rootScript = LogicScriptManager.Instance.GetScript(rootName);
 
             _entityId = entityId;
             _logicId = logicId;
