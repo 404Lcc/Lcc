@@ -61,17 +61,17 @@ namespace LccHotfix
             OnSet(key, value);
         }
 
-        public void Set(T value)
-        {
-            _multiValue[0] = value;
-            _sum = value;
-        }
-
         public T Get(int key)
         {
             var value = default(T);
             _multiValue.TryGetValue(key, out value);
             return value;
+        }
+
+        public void Set(T value)
+        {
+            _multiValue[0] = value;
+            _sum = value;
         }
 
         public T Get()
@@ -100,7 +100,9 @@ namespace LccHotfix
         protected override void OnAdd(int key, float value)
         {
             if (!_multiValue.ContainsKey(key))
+            {
                 _multiValue.Add(key, 0);
+            }
 
             _multiValue[key] += value;
             _sum += value;
@@ -109,7 +111,9 @@ namespace LccHotfix
         protected override void OnMinus(int key, float value)
         {
             if (!_multiValue.ContainsKey(key))
+            {
                 _multiValue.Add(key, 0);
+            }
 
             _multiValue[key] -= value;
             _sum -= value;
@@ -161,8 +165,7 @@ namespace LccHotfix
 
         protected override void OnClear(int key)
         {
-            var value = Get(key);
-            _multiValue[key] = true;
+            _multiValue.Remove(key);
             if (key != 0)
             {
                 bool ret = true;
