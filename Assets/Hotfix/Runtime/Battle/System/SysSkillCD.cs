@@ -14,8 +14,7 @@ namespace LccHotfix
 
         public void Execute()
         {
-            var entities = _group.GetEntities();
-            foreach (var entity in entities)
+            foreach (var entity in _group.GetEntities())
             {
                 var comProp = entity.comProperty;
                 if (!comProp.isSkillable)

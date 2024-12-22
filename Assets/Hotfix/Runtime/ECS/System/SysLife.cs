@@ -13,10 +13,8 @@ namespace LccHotfix
 
         public void Execute()
         {
-            var dt = Time.deltaTime;
-
-            var entities = _group.GetEntities();
-            foreach (var entity in entities)
+            float dt = Time.deltaTime;
+            foreach (var entity in _group.GetEntities())
             {
                 var comWithLife = entity.comLife;
                 if (comWithLife.duration > 0)

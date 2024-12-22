@@ -74,6 +74,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicContext.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Variable\GenericVariable.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\Decorators\SetParentDecorator.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\System\SysSkillCD.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicEntity.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Action.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Module.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Id\IdUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\PlatformManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\LoadSceneHandler.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\Component\FSM\ComFSM.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScrollPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\IUILogic.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysDeathProcess.cs" />
@@ -171,7 +173,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Transform\TransformExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\SpriteRenderer\SpriteRendererExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\SceneType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysSkillCD.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\LinkedList.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\MultiDictionary.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\View\IView.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Variable\Variable.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Orca\OrcaManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\System\SysSkillProcess.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\Decorators\GameObjectPoolDecorator.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Skill\SkillCD.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\GameMode\GameModeBase.cs" />
@@ -228,6 +230,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysViewUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\MainThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\SkillProcess\ISkillProcess.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysFSM.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Window\Window.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\EmptyGoTo.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AssetBundleRequestAwaiter.cs" />
@@ -241,7 +244,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Extension\IUILogicExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.FunctionTurn.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Popup.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysSkillProcess.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\IScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Init.cs" />

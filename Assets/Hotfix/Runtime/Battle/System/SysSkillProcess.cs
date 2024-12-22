@@ -13,9 +13,9 @@ namespace LccHotfix
 
         public void LateUpdate()
         {
-            foreach (var item in _group.GetEntities())
+            foreach (var entity in _group.GetEntities())
             {
-                var comSkillProcess = item.comSkillProcess;
+                var comSkillProcess = entity.comSkillProcess;
                 var process = comSkillProcess.skillProcess;
                 if (process != null)
                 {
@@ -26,13 +26,13 @@ namespace LccHotfix
 
         void IExecuteSystem.Execute()
         {
-            foreach (var item in _group.GetEntities())
+            foreach (var entity in _group.GetEntities())
             {
-                var comSkillProcess = item.comSkillProcess;
+                var comSkillProcess = entity.comSkillProcess;
                 var process = comSkillProcess.skillProcess;
                 if (process == null)
                 {
-                    item.RemoveComSkillProcess();
+                    entity.RemoveComSkillProcess();
                 }
                 else
                 {
@@ -40,7 +40,7 @@ namespace LccHotfix
 
                     if (process.IsFinished())
                     {
-                        item.RemoveComSkillProcess();
+                        entity.RemoveComSkillProcess();
                     }
                 }
             }

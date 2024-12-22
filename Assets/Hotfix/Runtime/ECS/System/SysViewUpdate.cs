@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 namespace LccHotfix
 {
@@ -13,9 +14,8 @@ namespace LccHotfix
 
         public void Execute()
         {
-            var dt = UnityEngine.Time.deltaTime;
-            var entities = _group.GetEntities();
-            foreach (var entity in entities)
+            float dt = Time.deltaTime;
+            foreach (var entity in _group.GetEntities())
             {
                 var comView = entity.comView;
                 var viewList = comView.ViewList;
