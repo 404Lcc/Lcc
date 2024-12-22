@@ -16,11 +16,13 @@ public partial class Tables
 {
     public TBEmptyGoTo TBEmptyGoTo {get; }
     public TBPopupWindow TBPopupWindow {get; }
+    public TBSkill TBSkill {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
         TBEmptyGoTo = new TBEmptyGoTo(loader("tbemptygoto"));
         TBPopupWindow = new TBPopupWindow(loader("tbpopupwindow"));
+        TBSkill = new TBSkill(loader("tbskill"));
         ResolveRef();
     }
     
@@ -28,6 +30,7 @@ public partial class Tables
     {
         TBEmptyGoTo.ResolveRef(this);
         TBPopupWindow.ResolveRef(this);
+        TBSkill.ResolveRef(this);
     }
 }
 
