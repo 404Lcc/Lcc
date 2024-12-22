@@ -15,10 +15,6 @@ namespace LccHotfix
         void DestroyAgent(LogicAgent agent);
     }
 
-    public enum LogicAction
-    {
-        OnReleaseSkill
-    }
 
     public class LogicScript : ILogicScript, ICoroutine
     {

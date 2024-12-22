@@ -3,12 +3,6 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public enum KVType
-    {
-        RootScript,
-        SourceSkillAbility,
-        SkillOwnerEntity,
-    }
     public class KVContext
     {
         protected Dictionary<KVType, int> _intDict = new Dictionary<KVType, int>();
