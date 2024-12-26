@@ -1,3 +1,4 @@
+using LccModel;
 using System.Collections;
 
 namespace LccHotfix
@@ -16,6 +17,11 @@ namespace LccHotfix
             //进入
 
             Log.Debug("进入login场景");
+
+            //进入游戏
+            UILoadingPanel.Instance.SetStartLoadingBg();
+
+
             this.StartCoroutine(LoadReadyForShow());
         }
         // 初始化显示

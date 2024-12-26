@@ -77,10 +77,16 @@ namespace LccModel
 
         public IEnumerator LoadLocalConfig()
         {
+            UIForeGroundPanel.Instance.FadeIn(0, null, false, 1, false);
+
             //初始化游戏配置
             yield return InitGameConfig();
             //初始化多语言
             yield return InitLanguage();
+
+            UIForeGroundPanel.Instance.FadeOut(0.5f, null, false);
+
+            UILoadingPanel.Instance.SetStartLoadingBg();
 
             if (GameConfig.isReleaseCenterServer && GameConfig.isRelease)
             {

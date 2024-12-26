@@ -145,7 +145,7 @@ namespace LccHotfix
             UIForeGroundPanel.Instance.FadeOut(0.3f);
             yield return null;
             GC.Collect();
-            UILoadingPanel.Instance.ShowBG();
+            UILoadingPanel.Instance.SetStartLoadingBg();
             UILoadingPanel.Instance.Show(Launcher.Instance.GetLanguage("msg_retrieve_server_data"));
             UILoadingPanel.Instance.SetText(string.Empty);
             yield return new WaitForSeconds(0.1f);

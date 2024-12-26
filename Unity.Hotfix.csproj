@@ -149,8 +149,8 @@
     <Compile Include="Assets\Hotfix\Core\Utility\MarshalUtility.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventArgs.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Global\GlobalManager.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Battle\LogicAgent\LogicAgent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\LogicScript\LogicAction.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\LogicAgent\LogicAgent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\Fiber.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIRoot\UIRootMain.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelManager.cs" />

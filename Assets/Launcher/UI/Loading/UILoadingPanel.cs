@@ -60,8 +60,7 @@ namespace LccModel
 
         public static UILoadingPanel Instance;
 
-        public GameObject bg;
-        public GameObject progressBG;
+        public RawImage backTex;
 
         public Slider progress;
         public TextMeshProUGUI progressText;
@@ -108,9 +107,16 @@ namespace LccModel
             }
         }
 
+        #region 启动时loading背景
+        public void SetStartLoadingBg()
+        {
+            //backTex.texture = Resources.Load<Texture2D>("");
+        }
+        #endregion
+
         public void UpdateLoadingPercent(int from, int to, float rate = 1)
         {
-            ShowAll();
+            gameObject.SetActive(true);
 
 
             updateRate = rate;
@@ -139,22 +145,6 @@ namespace LccModel
         {
             progressText.text = "";
             tipsText.text = "";
-        }
-
-        public void ShowBG()
-        {
-            gameObject.SetActive(true);
-
-
-            bg.SetActive(true);
-            progressBG.SetActive(false);
-        }
-        public void ShowAll()
-        {
-            gameObject.SetActive(true);
-
-            bg.SetActive(true);
-            progressBG.SetActive(true);
         }
 
         public void Hide()

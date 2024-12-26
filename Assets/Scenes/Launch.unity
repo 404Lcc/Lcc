@@ -130,49 +130,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 535548532}
     m_Modifications:
-    - target: {fileID: 950979994497513065, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2766386631627339724, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2848687228407242142, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2890984334664775142, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2979085322666666634, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3186847008303003350, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 3735704149738883384, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
       propertyPath: m_Name
       value: UILoadingPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 3735704149738883384, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4438024955531965309, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6073518687390215339, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6686254684040741355, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6880936061052193467, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
       propertyPath: m_Pivot.x
@@ -254,33 +214,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6979715903728139209, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6998829880877108082, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7100643577746102506, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7354431381562548442, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8285430246660031763, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8578601267196515638, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8851117589677471744, guid: 3c326eb07e7b4c84d841eea30832a972, type: 3}
-      propertyPath: m_Layer
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
