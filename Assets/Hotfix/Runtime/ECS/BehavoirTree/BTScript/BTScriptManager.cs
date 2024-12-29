@@ -3,19 +3,19 @@ using System;
 
 namespace LccHotfix
 {
-    internal class LogicScriptManager : Module
+    internal class BTScriptManager : Module
     {
-        public static LogicScriptManager Instance => Entry.GetModule<LogicScriptManager>();
-        private Dictionary<string, LogicScript> _scriptDict = new Dictionary<string, LogicScript>();
+        public static BTScriptManager Instance => Entry.GetModule<BTScriptManager>();
+        private Dictionary<string, BTScript> _scriptDict = new Dictionary<string, BTScript>();
 
-        public LogicScriptManager()
+        public BTScriptManager()
         {
-            foreach (Type item in CodeTypesManager.Instance.GetTypes(typeof(LogicScriptAttribute)))
+            foreach (Type item in CodeTypesManager.Instance.GetTypes(typeof(BTScriptAttribute)))
             {
-                object[] atts = item.GetCustomAttributes(typeof(LogicScriptAttribute), false);
+                object[] atts = item.GetCustomAttributes(typeof(BTScriptAttribute), false);
                 if (atts != null && atts.Length > 0)
                 {
-                    var obj = Activator.CreateInstance(item) as LogicScript;
+                    var obj = Activator.CreateInstance(item) as BTScript;
                     if (obj == null)
                     {
                         continue;
@@ -38,7 +38,7 @@ namespace LccHotfix
             _scriptDict.Clear();
         }
 
-        public LogicScript GetScript(string name)
+        public BTScript GetScript(string name)
         {
             _scriptDict.TryGetValue(name, out var obj);
             return obj;

@@ -134,8 +134,8 @@ namespace LccHotfix
             context.SetObject(KVType.SkillOwnerEntity, owner);
 
 
-            LogicAgent agent = new LogicAgent();
-            agent.Init(skillData.LogicScript, entityId, skillId, context);
+            BTAgent agent = new BTAgent();
+            agent.Init(skillData.BTScript, entityId, skillId, context);
 
             process.Owner = owner;
             process.SkillAbility = this;

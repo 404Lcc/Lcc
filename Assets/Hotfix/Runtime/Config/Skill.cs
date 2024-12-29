@@ -20,7 +20,7 @@ public sealed partial class Skill : Luban.BeanBase
         { if(!_buf["skillId"].IsNumber) { throw new SerializationException(); }  SkillId = _buf["skillId"]; }
         { if(!_buf["name"].IsString) { throw new SerializationException(); }  Name = _buf["name"]; }
         { if(!_buf["coldTime"].IsNumber) { throw new SerializationException(); }  ColdTime = _buf["coldTime"]; }
-        { if(!_buf["logicScript"].IsString) { throw new SerializationException(); }  LogicScript = _buf["logicScript"]; }
+        { if(!_buf["btScript"].IsString) { throw new SerializationException(); }  BtScript = _buf["btScript"]; }
         { if(!_buf["range"].IsNumber) { throw new SerializationException(); }  Range = _buf["range"]; }
         { if(!_buf["weight"].IsNumber) { throw new SerializationException(); }  Weight = _buf["weight"]; }
         { if(!_buf["damageRate"].IsNumber) { throw new SerializationException(); }  DamageRate = _buf["damageRate"]; }
@@ -46,9 +46,9 @@ public sealed partial class Skill : Luban.BeanBase
     /// </summary>
     public readonly float ColdTime;
     /// <summary>
-    /// 逻辑脚本
+    /// 行为树脚本
     /// </summary>
-    public readonly string LogicScript;
+    public readonly string BtScript;
     /// <summary>
     /// 范围
     /// </summary>
@@ -92,7 +92,7 @@ public sealed partial class Skill : Luban.BeanBase
         + "skillId:" + SkillId + ","
         + "name:" + Name + ","
         + "coldTime:" + ColdTime + ","
-        + "logicScript:" + LogicScript + ","
+        + "btScript:" + BtScript + ","
         + "range:" + Range + ","
         + "weight:" + Weight + ","
         + "damageRate:" + DamageRate + ","

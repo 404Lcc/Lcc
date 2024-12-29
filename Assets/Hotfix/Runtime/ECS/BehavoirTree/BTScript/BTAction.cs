@@ -1,6 +1,6 @@
 namespace LccHotfix
 {
-    public enum LogicAction
+    public enum BTAction
     {
         OnReleaseSkill
     }

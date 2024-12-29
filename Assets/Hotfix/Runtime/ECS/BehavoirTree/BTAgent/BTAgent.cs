@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class LogicAgent
+    public class BTAgent
     {
-        protected LogicScript _rootScript;
+        protected BTScript _rootScript;
 
         protected long _entityId;
         protected int _logicId;
@@ -19,7 +19,7 @@ namespace LccHotfix
 
         public void Init(string rootName, long entityId, int logicId, KVContext preContext = null)
         {
-            _rootScript = LogicScriptManager.Instance.GetScript(rootName);
+            _rootScript = BTScriptManager.Instance.GetScript(rootName);
 
             _entityId = entityId;
             _logicId = logicId;
@@ -58,12 +58,12 @@ namespace LccHotfix
             _context.Clear();
         }
 
-        public void Trigger(LogicAction trigger, params object[] args)
+        public void Trigger(BTAction trigger, params object[] args)
         {
             _rootScript.Trigger(trigger, this, args);
         }
 
-        public void DelayTrigger(LogicAction trigger, float delay, params object[] args)
+        public void DelayTrigger(BTAction trigger, float delay, params object[] args)
         {
             var action = _rootScript.GetTrigger(trigger);
             if (action != null)
@@ -72,7 +72,7 @@ namespace LccHotfix
             }
         }
 
-        public void AddDelay(float delay, Action<LogicAgent, object[]> action, params object[] args)
+        public void AddDelay(float delay, Action<BTAgent, object[]> action, params object[] args)
         {
             if (delay == 0)
             {

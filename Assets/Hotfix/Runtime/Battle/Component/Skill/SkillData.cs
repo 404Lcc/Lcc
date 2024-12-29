@@ -8,7 +8,7 @@ namespace LccHotfix
         public int SkillId => config.SkillId;
         public string Name => config.Name;
         public float ColdTime => config.ColdTime;
-        public string LogicScript => config.LogicScript;
+        public string BTScript => config.BtScript;
         public float Range => config.Range;
         //技能权重
         public int Weight => config.Weight == 0 ? 1 : config.Weight;

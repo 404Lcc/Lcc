@@ -3,7 +3,7 @@
     "skillId": 1001,
     "name": "",
     "coldTime": 0,
-    "logicScript": "",
+    "btScript": "",
     "range": 0,
     "weight": 0,
     "damageRate": 0,
