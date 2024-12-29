@@ -113,6 +113,11 @@ namespace LccModel
                 _scalerChangeFrameCount = Time.frameCount;
                 _mainCamera.rect = realRect;
                 //urp下需要处理subCamera的rect
+                //var cameraData = _mainCamera.GetComponent<UniversalAdditionalCameraData>();
+                //if (cameraData.renderType == CameraRenderType.Base && cameraData.cameraStack.Count > 0)
+                //{
+                //    cameraData.cameraStack.ForEach(subCamera => subCamera.rect = _mainCamera.rect);
+                //}
                 return;
             }
             _scalerChangeFrameCount = -1;
