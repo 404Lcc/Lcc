@@ -1199,7 +1199,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 5
-  m_Depth: 10
+  m_Depth: -10
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 64
@@ -1266,7 +1266,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4790159911042785865}
-  - {fileID: 8795239688905281652}
   - {fileID: 1986105661}
   - {fileID: 535548532}
   - {fileID: 6016605345286705212}
@@ -1549,6 +1548,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4790159910024081051}
+  - {fileID: 8795239688905281652}
   - {fileID: 5943470414643370497}
   - {fileID: 3547251086756354211}
   - {fileID: 4790159909910813766}
@@ -2177,12 +2177,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2107912133771853129}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4790159909910813766}
+  m_Father: {fileID: 4790159911524014115}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

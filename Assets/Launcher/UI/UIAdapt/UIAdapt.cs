@@ -24,7 +24,6 @@ namespace LccModel
 
         
         private Camera _mainCamera;
-        private Camera _uiCamera;
 
 
 
@@ -43,8 +42,8 @@ namespace LccModel
             _uiDownCanvasRoot = (RectTransform)GameObject.Find("Global/UI Root/AdaptCanvas/DownCanvas").transform;
             _uiLeftCanvasRoot = (RectTransform)GameObject.Find("Global/UI Root/AdaptCanvas/LeftCanvas").transform;
             _uiRightCanvasRoot = (RectTransform)GameObject.Find("Global/UI Root/AdaptCanvas/RightCanvas").transform;
-
-            _uiCamera = GameObject.Find("Global/UI Root/UICamera").GetComponent<Camera>();
+            //urp下设置主相机 buildin下设置ui相机
+            _mainCamera = GameObject.Find("Global/UI Root/UICamera").GetComponent<Camera>();
             AdaptUIRoot(true, true, leftOffset, rightOffset);
         }
         public void Update()
@@ -109,11 +108,11 @@ namespace LccModel
                 1 - (tempLeft + tempRight) / _uiAdaptCanvasRoot.rect.size.x, 1 - (tempUP + tempDown) / _uiAdaptCanvasRoot.rect.size.y);
 
 
-            if (!_uiCamera.rect.Equals(realRect))
+            if (!_mainCamera.rect.Equals(realRect))
             {
                 _scalerChangeFrameCount = Time.frameCount;
                 _mainCamera.rect = realRect;
-                _uiCamera.rect = realRect;
+                //urp下需要处理subCamera的rect
                 return;
             }
             _scalerChangeFrameCount = -1;
