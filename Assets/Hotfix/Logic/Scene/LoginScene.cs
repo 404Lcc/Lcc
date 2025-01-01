@@ -35,6 +35,13 @@ namespace LccHotfix
         {
             SceneLoadEndHandler();
             WindowManager.Instance.OpenWindow<UILoginPanel>(UIWindowDefine.UILoginPanel);
+
+            //GetLoginResult
+            //如果不在提审状态
+            if (!Launcher.Instance.IsAuditServer())
+            {
+                Launcher.Instance.OpenGameNoticeBoard(() => { /*WindowManager.Instance.OpenWindow<UINoticeBoardPanel>(UIWindowDefine.UINoticeBoardPanel);*/ });
+            }
         }
         public override void Tick()
         {

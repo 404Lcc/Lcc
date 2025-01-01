@@ -4705,8 +4705,9 @@
     <type fullname="LccModel.ResShader+&lt;WarmUp&gt;d__4" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetNotice&gt;d__101" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetNoticeBoard&gt;d__103" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;GetNotice&gt;d__105" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;GetNoticeBoard&gt;d__107" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;GetNoticeWhiteList&gt;d__108" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;GetRemoteVersionList&gt;d__47" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;InitGameConfig&gt;d__16" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;InitLanguage&gt;d__81" preserve="all" />

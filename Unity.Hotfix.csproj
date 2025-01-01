@@ -222,8 +222,8 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Skill\SkillCD.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\GameMode\GameModeBase.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UILogin\UILoginPanel.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\ECS\Base\GroupEntityIndex.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTScript\BTScriptAttribute.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\Base\GroupEntityIndex.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineCompletedHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysViewUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\MainThreadScheduler.cs" />
@@ -275,9 +275,9 @@
     <Compile Include="Assets\Hotfix\Runtime\Singleton\Singleton.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\Dev\DevPlatform.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Resolution\ResolutionUtility.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\KVContext\KVType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Singleton\ISingleton.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Awaiter\AwaiterExtension.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\KVContext\KVType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\GameObject\GameObjectExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\RootNode\BlackboardType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Singleton\ISingletonLateUpdate.cs" />

@@ -117,8 +117,7 @@ namespace LccModel
 
                 ReadVersionListConfig(response);
 
-                yield return Launcher.Instance.GetNoticeBoard();
-                yield return Launcher.Instance.GetNotice();
+
 
 
                 requestCenterServerSucc = true;
