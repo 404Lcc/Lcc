@@ -27,6 +27,7 @@ namespace LccHotfix
                 var isNoticeBoard = Launcher.Instance.CheckNoticeBoard();
                 if (isNoticeBoard)
                 {
+                    Log.Debug("打开维护公告");
                     //屏蔽登录
                     yield break;
                 }
