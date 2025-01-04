@@ -1,12 +1,13 @@
+using cfg;
 using System.Collections.Generic;
 
 namespace LccHotfix
 {
     public class ComProperty : LogicComponent
     {
-        private Dictionary<PropertyType, FloatProperty> _floatDict = new Dictionary<PropertyType, FloatProperty>();
+        private Dictionary<ValuePropertyType, FloatProperty> _floatDict = new Dictionary<ValuePropertyType, FloatProperty>();
 
-        private Dictionary<PropertyType, BoolProperty> _boolDict = new Dictionary<PropertyType, BoolProperty>();
+        private Dictionary<BoolPropertyType, BoolProperty> _boolDict = new Dictionary<BoolPropertyType, BoolProperty>();
 
         public override void Dispose()
         {
@@ -21,28 +22,28 @@ namespace LccHotfix
             _floatDict.Clear();
             _boolDict.Clear();
 
-            SetBaseFloat(PropertyType.MaxHp, initHp);
-            SetBaseFloat(PropertyType.Attack, initAttack);
-            SetBaseFloat(PropertyType.MoveSpeed, initMoveSpeed);
+            SetBaseFloat(ValuePropertyType.MaxHp, initHp);
+            SetBaseFloat(ValuePropertyType.Attack, initAttack);
+            SetBaseFloat(ValuePropertyType.MoveSpeed, initMoveSpeed);
 
 
 
-            SetBaseBool(PropertyType.Stunable, true);
-            SetBaseBool(PropertyType.Moveable, true);
-            SetBaseBool(PropertyType.Skillable, true);
-            SetBaseBool(PropertyType.Hitbackable, true);
-            SetBaseBool(PropertyType.Blockable, true);
-            SetBaseBool(PropertyType.Damageable, true);
-            SetBaseBool(PropertyType.Targetable, true);
-            SetBaseBool(PropertyType.Healable, true);
-            SetBaseBool(PropertyType.Dieable, true);
-            SetBaseBool(PropertyType.IsAlive, true);
-            SetBaseBool(PropertyType.IsStuning, false);
+            SetBaseBool(BoolPropertyType.Stunable, true);
+            SetBaseBool(BoolPropertyType.Moveable, true);
+            SetBaseBool(BoolPropertyType.Skillable, true);
+            SetBaseBool(BoolPropertyType.Hitbackable, true);
+            SetBaseBool(BoolPropertyType.Blockable, true);
+            SetBaseBool(BoolPropertyType.Damageable, true);
+            SetBaseBool(BoolPropertyType.Targetable, true);
+            SetBaseBool(BoolPropertyType.Healable, true);
+            SetBaseBool(BoolPropertyType.Dieable, true);
+            SetBaseBool(BoolPropertyType.IsAlive, true);
+            SetBaseBool(BoolPropertyType.IsStuning, false);
 
         }
 
         //Float
-        public float GetBaseFloat(PropertyType key)
+        public float GetBaseFloat(ValuePropertyType key)
         {
             if (_floatDict.TryGetValue(key, out var prop))
             {
@@ -51,7 +52,7 @@ namespace LccHotfix
             return 0;
         }
 
-        public void SetBaseFloat(PropertyType key, float value)
+        public void SetBaseFloat(ValuePropertyType key, float value)
         {
             if (!_floatDict.ContainsKey(key))
             {
@@ -61,7 +62,7 @@ namespace LccHotfix
             _floatDict[key].Set(value);
         }
 
-        public void AddBaseFloat(PropertyType key, float value)
+        public void AddBaseFloat(ValuePropertyType key, float value)
         {
             if (_floatDict.TryGetValue(key, out var oldProp))
             {
@@ -69,7 +70,7 @@ namespace LccHotfix
             }
         }
 
-        public void MinusBaseFloat(PropertyType key, float value)
+        public void MinusBaseFloat(ValuePropertyType key, float value)
         {
             if (_floatDict.TryGetValue(key, out var oldProp))
             {
@@ -77,7 +78,7 @@ namespace LccHotfix
             }
         }
 
-        public float GetFloat(PropertyType key)
+        public float GetFloat(ValuePropertyType key)
         {
             if (_floatDict.TryGetValue(key, out var prop))
             {
@@ -86,7 +87,7 @@ namespace LccHotfix
             return 0;
         }
 
-        public void SetSubFloat(PropertyType key, int subKey, float value)
+        public void SetSubFloat(ValuePropertyType key, int subKey, float value)
         {
             if (!_floatDict.ContainsKey(key))
             {
@@ -95,7 +96,7 @@ namespace LccHotfix
 
             _floatDict[key].Add(subKey, value);
         }
-        public void ClearSubFloat(PropertyType key, int subKey)
+        public void ClearSubFloat(ValuePropertyType key, int subKey)
         {
             if (_floatDict.TryGetValue(key, out var prop))
             {
@@ -107,7 +108,7 @@ namespace LccHotfix
 
 
         //Bool
-        public bool GetBaseBool(PropertyType key)
+        public bool GetBaseBool(BoolPropertyType key)
         {
             if (_boolDict.TryGetValue(key, out var prop))
             {
@@ -116,7 +117,7 @@ namespace LccHotfix
             return false;
         }
 
-        public void SetBaseBool(PropertyType key, bool value)
+        public void SetBaseBool(BoolPropertyType key, bool value)
         {
             if (!_boolDict.ContainsKey(key))
             {
@@ -125,7 +126,7 @@ namespace LccHotfix
             _boolDict[key].Set(value);
         }
 
-        public bool GetBool(PropertyType key)
+        public bool GetBool(BoolPropertyType key)
         {
             if (_boolDict.TryGetValue(key, out var prop))
             {
@@ -136,7 +137,7 @@ namespace LccHotfix
 
 
 
-        public void SetSubBool(PropertyType key, int subKey, bool value)
+        public void SetSubBool(BoolPropertyType key, int subKey, bool value)
         {
             if (!_boolDict.ContainsKey(key))
             {
@@ -145,7 +146,7 @@ namespace LccHotfix
 
             _boolDict[key].Set(subKey, value);
         }
-        public void ClearBool(PropertyType key, int subKey)
+        public void ClearBool(BoolPropertyType key, int subKey)
         {
             if (_boolDict.TryGetValue(key, out var prop))
             {
@@ -155,30 +156,30 @@ namespace LccHotfix
 
         public float GetBaseAttack()
         {
-            return _floatDict[PropertyType.Attack].Get(0);
+            return _floatDict[ValuePropertyType.Attack].Get(0);
         }
 
 
         // bool values
-        public bool isStunable => GetBool(PropertyType.Stunable);
-        public bool isMovable => GetBool(PropertyType.Moveable);
-        public bool isSkillable => GetBool(PropertyType.Skillable);
-        public bool isHitbackable => GetBool(PropertyType.Hitbackable);
-        public bool isBlockable => GetBool(PropertyType.Blockable);
-        public bool isDamageable => GetBool(PropertyType.Damageable);
-        public bool isTargetable => GetBool(PropertyType.Targetable);
-        public bool isHealable => GetBool(PropertyType.Healable);
-        public bool isDieable => GetBool(PropertyType.Dieable);
-        public bool isAlive => GetBool(PropertyType.IsAlive);
-        public bool isStuning => GetBool(PropertyType.IsStuning);
+        public bool isStunable => GetBool(BoolPropertyType.Stunable);
+        public bool isMovable => GetBool(BoolPropertyType.Moveable);
+        public bool isSkillable => GetBool(BoolPropertyType.Skillable);
+        public bool isHitbackable => GetBool(BoolPropertyType.Hitbackable);
+        public bool isBlockable => GetBool(BoolPropertyType.Blockable);
+        public bool isDamageable => GetBool(BoolPropertyType.Damageable);
+        public bool isTargetable => GetBool(BoolPropertyType.Targetable);
+        public bool isHealable => GetBool(BoolPropertyType.Healable);
+        public bool isDieable => GetBool(BoolPropertyType.Dieable);
+        public bool isAlive => GetBool(BoolPropertyType.IsAlive);
+        public bool isStuning => GetBool(BoolPropertyType.IsStuning);
 
 
         // float values
-        public float moveSpeed => GetFloat(PropertyType.MoveSpeed);
-        public float maxHP => GetFloat(PropertyType.MaxHp);
-        public float attack => GetFloat(PropertyType.Attack);
-        public float criticalRate => GetFloat(PropertyType.CriticalRate);
-        public float criticalDamage => GetFloat(PropertyType.CriticalDamage);
+        public float moveSpeed => GetFloat(ValuePropertyType.MoveSpeed);
+        public float maxHP => GetFloat(ValuePropertyType.MaxHp);
+        public float attack => GetFloat(ValuePropertyType.Attack);
+        public float criticalRate => GetFloat(ValuePropertyType.CriticalRate);
+        public float criticalDamage => GetFloat(ValuePropertyType.CriticalDamage);
 
 
     }
@@ -206,7 +207,7 @@ namespace LccHotfix
             ReplaceComponent(index, component);
         }
 
-        public void SetProperty(PropertyType key, float newValue, int subKey = 0)
+        public void SetProperty(ValuePropertyType key, float newValue, int subKey = 0)
         {
             if (!hasComProperty)
             {
@@ -215,7 +216,7 @@ namespace LccHotfix
             comProperty.SetSubFloat(key, subKey, newValue);
         }
 
-        public void SetProperty(PropertyType key, bool newValue, int subKey = 0)
+        public void SetProperty(BoolPropertyType key, bool newValue, int subKey = 0)
         {
             if (!hasComProperty)
             {

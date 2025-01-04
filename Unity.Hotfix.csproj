@@ -176,6 +176,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Property\ComProperty.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\SceneManager.cs" />
     <Compile Include="Assets\Hotfix\Logic\Joystick\Joystick.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\TBBuff.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\Dev\DevCallbackMessage.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\AStarMap\AStarMapManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\MetaContext\MetaContext.cs" />
@@ -207,8 +208,10 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Death\DeathProcess.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\KVContext\KVContext.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventPool\EventPool.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\ValuePropertyType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComID.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AsyncOperationAwaiter.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\TBBuffValue.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\IObjectPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Download\DownloadFile.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Utility\WorldUtility.cs" />
@@ -239,12 +242,14 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\MetaContext\MetaComponent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysLocomotion.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Extension\IUILogicExtension.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\BoolPropertyType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.FunctionTurn.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Popup.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Camera\CameraManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\IScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Init.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\Buff.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Skill\ComSkills.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Base\EntityIndexEnum.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\WEnum.cs" />

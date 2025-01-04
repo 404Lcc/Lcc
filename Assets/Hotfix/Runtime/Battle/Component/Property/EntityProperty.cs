@@ -2,39 +2,39 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public enum PropertyType
-    {
-        Invalid = 0,
+    //public enum PropertyType
+    //{
+    //    Invalid = 0,
 
-        Stunable,//能不能被眩晕
-        Moveable,//能不能移动
-        Skillable,//能不能放技能
-        Hitbackable,//能不能受击
-        Visible,//能不能显示
-        Blockable,//能不能被被碰撞
-        Damageable,//能不能被伤害
-        Targetable,//能不能主动碰撞
-        Healable,//能不能回血
-        Dieable,//能不能死亡
+    //    Stunable,//能不能被眩晕
+    //    Moveable,//能不能移动
+    //    Skillable,//能不能放技能
+    //    Hitbackable,//能不能受击
+    //    Visible,//能不能显示
+    //    Blockable,//能不能被被碰撞
+    //    Damageable,//能不能被伤害
+    //    Targetable,//能不能主动碰撞
+    //    Healable,//能不能回血
+    //    Dieable,//能不能死亡
 
-        IsAlive, //是否活着
-        IsStuning,//是否眩晕
+    //    IsAlive, //是否活着
+    //    IsStuning,//是否眩晕
 
-        BoolPropertyTypeMax,//end
+    //    BoolPropertyTypeMax,//end
 
-        ValuePropertyType = 32,
+    //    ValuePropertyType = 32,
 
-        Attack,
-        Defence,
-        MaxHp,
-        MoveSpeed,//移动速度
-        CriticalRate,//暴击率
-        CriticalDamage,//暴击伤害
-        Cure,//治疗
+    //    Attack,
+    //    Defence,
+    //    MaxHp,
+    //    MoveSpeed,//移动速度
+    //    CriticalRate,//暴击率
+    //    CriticalDamage,//暴击伤害
+    //    Cure,//治疗
 
 
-        ValuePropertyTypeMax,//end
-    }
+    //    ValuePropertyTypeMax,//end
+    //}
 
     public abstract class EntityProperty<T>
     {

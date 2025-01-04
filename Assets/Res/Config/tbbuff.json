@@ -1,0 +1,29 @@
+[
+  {
+    "buffId": 1001,
+    "name": "",
+    "desc": "",
+    "during": 0,
+    "stack": false,
+    "iconId": 0,
+    "buffGroup": 0,
+    "maxStack": 0,
+    "btScript": "",
+    "maskType": 0,
+    "boolBuffType": 0,
+    "valueBuffType": [
+      {
+        "type": 1,
+        "value": 100
+      }
+    ],
+    "immuneBoolBuffType": 0,
+    "disperseBoolBuffType": 0,
+    "immuneValueBuffTypeList": [],
+    "disperseValueBuffTypeList": [],
+    "immuneBuffGroupList": [],
+    "disperseBuffGroupList": [],
+    "isDisperse": false,
+    "buffFx": []
+  }
+]

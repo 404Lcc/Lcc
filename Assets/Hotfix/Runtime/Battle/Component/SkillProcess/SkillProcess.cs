@@ -1,3 +1,5 @@
+using cfg;
+
 namespace LccHotfix
 {
     public class SkillProcess : ISkillProcess
@@ -10,13 +12,13 @@ namespace LccHotfix
         public void Start()
         {
             //关闭移动
-            Owner.comProperty.SetSubBool(PropertyType.Moveable, SkillAbility.skillId, false);
+            Owner.comProperty.SetSubBool(BoolPropertyType.Moveable, SkillAbility.skillId, false);
 
 
             //如果不能被打断 开启不能眩晕
             if (!SkillAbility.skillData.Interruptible)
             {
-                Owner.comProperty.SetSubBool(PropertyType.Stunable, SkillAbility.skillId, false);
+                Owner.comProperty.SetSubBool(BoolPropertyType.Stunable, SkillAbility.skillId, false);
             }
 
 
@@ -71,12 +73,12 @@ namespace LccHotfix
                 }
             }
             //开启移动
-            Owner.comProperty.SetSubBool(PropertyType.Moveable, SkillAbility.skillId, true);
+            Owner.comProperty.SetSubBool(BoolPropertyType.Moveable, SkillAbility.skillId, true);
 
             //如果不能被打断 结束不能眩晕
             if (!SkillAbility.skillData.Interruptible)
             {
-                Owner.comProperty.SetSubBool(PropertyType.Stunable, SkillAbility.skillId, true);
+                Owner.comProperty.SetSubBool(BoolPropertyType.Stunable, SkillAbility.skillId, true);
             }
 
 
