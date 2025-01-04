@@ -23,20 +23,19 @@ public sealed partial class Buff : Luban.BeanBase
         { if(!_buf["during"].IsNumber) { throw new SerializationException(); }  During = _buf["during"]; }
         { if(!_buf["stack"].IsBoolean) { throw new SerializationException(); }  Stack = _buf["stack"]; }
         { if(!_buf["iconId"].IsNumber) { throw new SerializationException(); }  IconId = _buf["iconId"]; }
-        { if(!_buf["buffGroup"].IsNumber) { throw new SerializationException(); }  BuffGroup = _buf["buffGroup"]; }
+        { if(!_buf["buffGroupId"].IsNumber) { throw new SerializationException(); }  BuffGroupId = _buf["buffGroupId"]; }
         { if(!_buf["maxStack"].IsNumber) { throw new SerializationException(); }  MaxStack = _buf["maxStack"]; }
         { if(!_buf["btScript"].IsString) { throw new SerializationException(); }  BtScript = _buf["btScript"]; }
-        { if(!_buf["maskType"].IsNumber) { throw new SerializationException(); }  MaskType = _buf["maskType"]; }
         { if(!_buf["boolBuffType"].IsNumber) { throw new SerializationException(); }  BoolBuffType = (BoolPropertyType)_buf["boolBuffType"].AsInt; }
         { var __json0 = _buf["valueBuffType"]; if(!__json0.IsArray) { throw new SerializationException(); } ValueBuffType = new System.Collections.Generic.List<TBBuffValue>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { TBBuffValue __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = TBBuffValue.DeserializeTBBuffValue(__e0);  }  ValueBuffType.Add(__v0); }   }
         { if(!_buf["immuneBoolBuffType"].IsNumber) { throw new SerializationException(); }  ImmuneBoolBuffType = (BoolPropertyType)_buf["immuneBoolBuffType"].AsInt; }
         { if(!_buf["disperseBoolBuffType"].IsNumber) { throw new SerializationException(); }  DisperseBoolBuffType = (BoolPropertyType)_buf["disperseBoolBuffType"].AsInt; }
         { var __json0 = _buf["immuneValueBuffTypeList"]; if(!__json0.IsArray) { throw new SerializationException(); } ImmuneValueBuffTypeList = new System.Collections.Generic.List<ValuePropertyType>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { ValuePropertyType __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = (ValuePropertyType)__e0.AsInt; }  ImmuneValueBuffTypeList.Add(__v0); }   }
         { var __json0 = _buf["disperseValueBuffTypeList"]; if(!__json0.IsArray) { throw new SerializationException(); } DisperseValueBuffTypeList = new System.Collections.Generic.List<ValuePropertyType>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { ValuePropertyType __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = (ValuePropertyType)__e0.AsInt; }  DisperseValueBuffTypeList.Add(__v0); }   }
-        { var __json0 = _buf["immuneBuffGroupList"]; if(!__json0.IsArray) { throw new SerializationException(); } ImmuneBuffGroupList = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ImmuneBuffGroupList.Add(__v0); }   }
-        { var __json0 = _buf["disperseBuffGroupList"]; if(!__json0.IsArray) { throw new SerializationException(); } DisperseBuffGroupList = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DisperseBuffGroupList.Add(__v0); }   }
+        { var __json0 = _buf["immuneBuffGroupIdList"]; if(!__json0.IsArray) { throw new SerializationException(); } ImmuneBuffGroupIdList = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  ImmuneBuffGroupIdList.Add(__v0); }   }
+        { var __json0 = _buf["disperseBuffGroupIdList"]; if(!__json0.IsArray) { throw new SerializationException(); } DisperseBuffGroupIdList = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  DisperseBuffGroupIdList.Add(__v0); }   }
         { if(!_buf["isDisperse"].IsBoolean) { throw new SerializationException(); }  IsDisperse = _buf["isDisperse"]; }
-        { var __json0 = _buf["buffFx"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffFx = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffFx.Add(__v0); }   }
+        { var __json0 = _buf["buffFxId"]; if(!__json0.IsArray) { throw new SerializationException(); } BuffFxId = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  BuffFxId.Add(__v0); }   }
     }
 
     public static Buff DeserializeBuff(JSONNode _buf)
@@ -69,9 +68,9 @@ public sealed partial class Buff : Luban.BeanBase
     /// </summary>
     public readonly int IconId;
     /// <summary>
-    /// buff组
+    /// buff组id
     /// </summary>
-    public readonly int BuffGroup;
+    public readonly int BuffGroupId;
     /// <summary>
     /// 最大层数
     /// </summary>
@@ -81,15 +80,11 @@ public sealed partial class Buff : Luban.BeanBase
     /// </summary>
     public readonly string BtScript;
     /// <summary>
-    /// mask
-    /// </summary>
-    public readonly int MaskType;
-    /// <summary>
     /// bool属性类型
     /// </summary>
     public readonly BoolPropertyType BoolBuffType;
     /// <summary>
-    /// 类型
+    /// value属性类型列表
     /// </summary>
     public readonly System.Collections.Generic.List<TBBuffValue> ValueBuffType;
     /// <summary>
@@ -111,26 +106,25 @@ public sealed partial class Buff : Luban.BeanBase
     /// <summary>
     /// 免疫buff组id
     /// </summary>
-    public readonly System.Collections.Generic.List<int> ImmuneBuffGroupList;
+    public readonly System.Collections.Generic.List<int> ImmuneBuffGroupIdList;
     /// <summary>
     /// 驱散buff组id
     /// </summary>
-    public readonly System.Collections.Generic.List<int> DisperseBuffGroupList;
+    public readonly System.Collections.Generic.List<int> DisperseBuffGroupIdList;
     /// <summary>
     /// 不可驱散
     /// </summary>
     public readonly bool IsDisperse;
     /// <summary>
-    /// buff自带特效
+    /// buff自带特效Id
     /// </summary>
-    public readonly System.Collections.Generic.List<int> BuffFx;
+    public readonly System.Collections.Generic.List<int> BuffFxId;
    
     public const int __ID__ = 2081907;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
-        
         
         
         
@@ -161,20 +155,19 @@ public sealed partial class Buff : Luban.BeanBase
         + "during:" + During + ","
         + "stack:" + Stack + ","
         + "iconId:" + IconId + ","
-        + "buffGroup:" + BuffGroup + ","
+        + "buffGroupId:" + BuffGroupId + ","
         + "maxStack:" + MaxStack + ","
         + "btScript:" + BtScript + ","
-        + "maskType:" + MaskType + ","
         + "boolBuffType:" + BoolBuffType + ","
         + "valueBuffType:" + Luban.StringUtil.CollectionToString(ValueBuffType) + ","
         + "immuneBoolBuffType:" + ImmuneBoolBuffType + ","
         + "disperseBoolBuffType:" + DisperseBoolBuffType + ","
         + "immuneValueBuffTypeList:" + Luban.StringUtil.CollectionToString(ImmuneValueBuffTypeList) + ","
         + "disperseValueBuffTypeList:" + Luban.StringUtil.CollectionToString(DisperseValueBuffTypeList) + ","
-        + "immuneBuffGroupList:" + Luban.StringUtil.CollectionToString(ImmuneBuffGroupList) + ","
-        + "disperseBuffGroupList:" + Luban.StringUtil.CollectionToString(DisperseBuffGroupList) + ","
+        + "immuneBuffGroupIdList:" + Luban.StringUtil.CollectionToString(ImmuneBuffGroupIdList) + ","
+        + "disperseBuffGroupIdList:" + Luban.StringUtil.CollectionToString(DisperseBuffGroupIdList) + ","
         + "isDisperse:" + IsDisperse + ","
-        + "buffFx:" + Luban.StringUtil.CollectionToString(BuffFx) + ","
+        + "buffFxId:" + Luban.StringUtil.CollectionToString(BuffFxId) + ","
         + "}";
     }
 }

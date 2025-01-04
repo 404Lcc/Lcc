@@ -6,10 +6,9 @@
     "during": 0,
     "stack": false,
     "iconId": 0,
-    "buffGroup": 0,
+    "buffGroupId": 0,
     "maxStack": 0,
     "btScript": "",
-    "maskType": 0,
     "boolBuffType": 0,
     "valueBuffType": [
       {
@@ -21,9 +20,9 @@
     "disperseBoolBuffType": 0,
     "immuneValueBuffTypeList": [],
     "disperseValueBuffTypeList": [],
-    "immuneBuffGroupList": [],
-    "disperseBuffGroupList": [],
+    "immuneBuffGroupIdList": [],
+    "disperseBuffGroupIdList": [],
     "isDisperse": false,
-    "buffFx": []
+    "buffFxId": []
   }
 ]
