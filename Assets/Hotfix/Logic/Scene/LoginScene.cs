@@ -9,7 +9,7 @@ namespace LccHotfix
         public LoginScene()
         {
             sceneType = SceneType.Login;
-            loadType = LoadingType.None;
+            loadType = LoadingType.Fast;
         }
         public override void SceneStartHandler()
         {
@@ -34,14 +34,11 @@ namespace LccHotfix
         public void StartLevel()
         {
             SceneLoadEndHandler();
-            WindowManager.Instance.OpenWindow<UILoginPanel>(UIWindowDefine.UILoginPanel);
 
             //GetLoginResult
-            //如果不在提审状态
-            if (!Launcher.Instance.IsAuditServer())
-            {
-                Launcher.Instance.OpenGameNoticeBoard(() => { /*WindowManager.Instance.OpenWindow<UINoticeBoardPanel>(UIWindowDefine.UINoticeBoardPanel);*/ });
-            }
+            WindowManager.Instance.OpenWindow<UILoginPanel>(UIWindowDefine.UILoginPanel);
+
+
         }
         public override void Tick()
         {
