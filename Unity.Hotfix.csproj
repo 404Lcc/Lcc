@@ -275,6 +275,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Collider\ColliderHandlerBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\BasePlatform.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolManager.ObjectPool.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Buff\BuffProperty.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicSystems.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\PopupWindow.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Singleton\Singleton.cs" />
