@@ -161,6 +161,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComView\ActorView.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Res.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Window\WindowMode.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\FX\FXManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScroll.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\Decorators\AutoReleaseDecorator.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIRoot\UIRootCommon.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AssetBundleRequestAwaiter.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Helper\DefaultLogHelper.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Extension\WNodeExtension.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Buff\BuffState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Death\ComDeath.cs" />
     <Compile Include="Assets\Hotfix\Core\Event\EventManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\MetaContext\MetaComponent.cs" />

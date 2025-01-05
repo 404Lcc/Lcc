@@ -2,6 +2,10 @@ namespace LccHotfix
 {
     public enum BTAction
     {
-        OnReleaseSkill
+        //技能
+        OnReleaseSkill,
+        //buff
+        OnActiveBuff,
+        OnDeactiveBuff,
     }
 }
