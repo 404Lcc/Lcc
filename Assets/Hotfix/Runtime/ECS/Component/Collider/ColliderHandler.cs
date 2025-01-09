@@ -13,7 +13,7 @@ namespace LccHotfix
             this._point = point;
         }
     }
-    public abstract class RaycastHitColliderHandler : IEntityColliderHandler
+    public abstract class ColliderHandler : IEntityColliderHandler
     {
         private ContactFilter2D _contactFilter2D;
         private Collider2D[] _collider2Ds;
