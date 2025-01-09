@@ -160,8 +160,8 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Property\EntityProperty.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComView\ActorView.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Res.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Window\WindowMode.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\FX\FXManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Window\WindowMode.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScroll.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\Decorators\AutoReleaseDecorator.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIRoot\UIRootCommon.cs" />

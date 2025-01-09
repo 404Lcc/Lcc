@@ -2,8 +2,10 @@ namespace LccHotfix
 {
     public enum HitMethod
     {
-        Point2D,
-        Line2D,
+        Collider2D,
+        Raycast2D,
+        BoxCollider,
+        Raycast,
     }
 
     public interface IEntityColliderHandler : IDispose
