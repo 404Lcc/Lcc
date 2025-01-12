@@ -1,3 +1,4 @@
+using cfg;
 using System;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ namespace LccHotfix
 
         protected RawHit[] _rawHits;
 
-        protected HitMethod _hitMethod;
+        protected CollisionType _collisionType;
         protected Vector3 _dir;
         protected int _layerMask;
 
@@ -59,7 +60,7 @@ namespace LccHotfix
 
             var pos = ownerEntity.comTransform.position;
 
-            if (_hitMethod == HitMethod.Collider2D)
+            if (_collisionType == CollisionType.Collider2D)
             {
                 var collider = ownerEntity.comView.ActorView.GameObject.GetComponent<Collider2D>();
                 Physics2D.OverlapCollider(collider, _contactFilter2D, _collider2Ds);
@@ -74,7 +75,7 @@ namespace LccHotfix
                     _rawHits[i] = new RawHit(item.gameObject, item.bounds.ClosestPoint(pos));
                 }
             }
-            else if (_hitMethod == HitMethod.Raycast2D)
+            else if (_collisionType == CollisionType.Raycast2D)
             {
                 Physics2D.RaycastNonAlloc(pos, _dir.normalized, _raycastHit2Ds, int.MaxValue, _layerMask);
                 for (int i = 0; i < _raycastHit2Ds.Length; i++)
@@ -89,7 +90,7 @@ namespace LccHotfix
 
 
 
-            if (_hitMethod == HitMethod.BoxCollider)
+            if (_collisionType == CollisionType.BoxCollider)
             {
                 var collider = ownerEntity.comView.ActorView.GameObject.GetComponent<BoxCollider>();
                 Physics.OverlapBoxNonAlloc(collider.center, collider.size, _colliders);
@@ -104,7 +105,7 @@ namespace LccHotfix
                     _rawHits[i] = new RawHit(item.gameObject, item.bounds.ClosestPoint(pos));
                 }
             }
-            else if (_hitMethod == HitMethod.Raycast)
+            else if (_collisionType == CollisionType.Raycast)
             {
                 Physics.RaycastNonAlloc(pos, _dir.normalized, _raycastHits, int.MaxValue, _layerMask);
                 for (int i = 0; i < _raycastHits.Length; i++)

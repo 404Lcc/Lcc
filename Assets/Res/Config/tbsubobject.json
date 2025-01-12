@@ -1,0 +1,15 @@
+[
+  {
+    "subobjectId": 1001,
+    "modelId": 0,
+    "during": 0,
+    "btScript": "",
+    "hitFxId": 0,
+    "damageRate": 0,
+    "collisionType": 0,
+    "singleCollisionCount": 0,
+    "maxCollisionCount": 0,
+    "collisionInterval": 0,
+    "collisionWithLife": false
+  }
+]

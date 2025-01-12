@@ -18,6 +18,7 @@ public partial class Tables
     public TBPopupWindow TBPopupWindow {get; }
     public TBSkill TBSkill {get; }
     public TBBuff TBBuff {get; }
+    public TBSubobject TBSubobject {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -25,6 +26,7 @@ public partial class Tables
         TBPopupWindow = new TBPopupWindow(loader("tbpopupwindow"));
         TBSkill = new TBSkill(loader("tbskill"));
         TBBuff = new TBBuff(loader("tbbuff"));
+        TBSubobject = new TBSubobject(loader("tbsubobject"));
         ResolveRef();
     }
     
@@ -34,6 +36,7 @@ public partial class Tables
         TBPopupWindow.ResolveRef(this);
         TBSkill.ResolveRef(this);
         TBBuff.ResolveRef(this);
+        TBSubobject.ResolveRef(this);
     }
 }
 
