@@ -139,6 +139,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Download\DownloadState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Command\CommandData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ProtobufObject\ProtobufObject.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\System\SysSubobject.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\LinkedListRange.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Collider\ColliderHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComTransform.cs" />
