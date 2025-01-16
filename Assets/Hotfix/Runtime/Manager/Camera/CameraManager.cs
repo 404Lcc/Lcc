@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace LccHotfix
@@ -64,7 +63,8 @@ namespace LccHotfix
         {
             //var cameraData = MainCamera.GetComponent<UniversalAdditionalCameraData>();
             //cameraData.cameraStack.Clear();
-            //cameraData.cameraStack.AddRange(new List<Camera>() { camera, UICamera });
+            //cameraData.cameraStack.Add(camera);
+            //cameraData.cameraStack.Add(UICamera);
             //if (cameraData.renderType == CameraRenderType.Base && cameraData.cameraStack.Count > 0)
             //{
             //    cameraData.cameraStack.ForEach(subCamera => subCamera.rect = MainCamera.rect);
