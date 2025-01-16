@@ -288,10 +288,10 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\Dev\DevPlatform.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Resolution\ResolutionUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\KVContext\KVType.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Singleton\ISingleton.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Awaiter\AwaiterExtension.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\GameObject\GameObjectExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComSubobject.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Awaiter\AwaiterExtension.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Singleton\ISingleton.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\GameObject\GameObjectExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\RootNode\BlackboardType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Singleton\ISingletonLateUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\CodeTypes\CodeTypesManager.cs" />

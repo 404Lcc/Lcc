@@ -7,9 +7,9 @@
     "hitFxId": 0,
     "damageRate": 0,
     "collisionType": 0,
-    "singleCollisionCount": 0,
-    "maxCollisionCount": 0,
-    "collisionInterval": 0,
-    "collisionWithLife": false
+    "singleHitCount": 0,
+    "maxHitCount": 0,
+    "hitInterval": 0,
+    "hitWithLife": false
   }
 ]

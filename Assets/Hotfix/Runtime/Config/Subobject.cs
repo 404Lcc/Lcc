@@ -24,10 +24,10 @@ public sealed partial class Subobject : Luban.BeanBase
         { if(!_buf["hitFxId"].IsNumber) { throw new SerializationException(); }  HitFxId = _buf["hitFxId"]; }
         { if(!_buf["damageRate"].IsNumber) { throw new SerializationException(); }  DamageRate = _buf["damageRate"]; }
         { if(!_buf["collisionType"].IsNumber) { throw new SerializationException(); }  CollisionType = (CollisionType)_buf["collisionType"].AsInt; }
-        { if(!_buf["singleCollisionCount"].IsNumber) { throw new SerializationException(); }  SingleCollisionCount = _buf["singleCollisionCount"]; }
-        { if(!_buf["maxCollisionCount"].IsNumber) { throw new SerializationException(); }  MaxCollisionCount = _buf["maxCollisionCount"]; }
-        { if(!_buf["collisionInterval"].IsNumber) { throw new SerializationException(); }  CollisionInterval = _buf["collisionInterval"]; }
-        { if(!_buf["collisionWithLife"].IsBoolean) { throw new SerializationException(); }  CollisionWithLife = _buf["collisionWithLife"]; }
+        { if(!_buf["singleHitCount"].IsNumber) { throw new SerializationException(); }  SingleHitCount = _buf["singleHitCount"]; }
+        { if(!_buf["maxHitCount"].IsNumber) { throw new SerializationException(); }  MaxHitCount = _buf["maxHitCount"]; }
+        { if(!_buf["hitInterval"].IsNumber) { throw new SerializationException(); }  HitInterval = _buf["hitInterval"]; }
+        { if(!_buf["hitWithLife"].IsBoolean) { throw new SerializationException(); }  HitWithLife = _buf["hitWithLife"]; }
     }
 
     public static Subobject DeserializeSubobject(JSONNode _buf)
@@ -52,7 +52,7 @@ public sealed partial class Subobject : Luban.BeanBase
     /// </summary>
     public readonly string BtScript;
     /// <summary>
-    /// 受击特效id
+    /// 碰撞特效id
     /// </summary>
     public readonly int HitFxId;
     /// <summary>
@@ -66,19 +66,19 @@ public sealed partial class Subobject : Luban.BeanBase
     /// <summary>
     /// 单实体碰撞次数
     /// </summary>
-    public readonly int SingleCollisionCount;
+    public readonly int SingleHitCount;
     /// <summary>
     /// 最大碰撞次数
     /// </summary>
-    public readonly int MaxCollisionCount;
+    public readonly int MaxHitCount;
     /// <summary>
     /// 碰撞间隔
     /// </summary>
-    public readonly float CollisionInterval;
+    public readonly float HitInterval;
     /// <summary>
     /// 碰撞结束消失
     /// </summary>
-    public readonly bool CollisionWithLife;
+    public readonly bool HitWithLife;
    
     public const int __ID__ = -1891839649;
     public override int GetTypeId() => __ID__;
@@ -108,10 +108,10 @@ public sealed partial class Subobject : Luban.BeanBase
         + "hitFxId:" + HitFxId + ","
         + "damageRate:" + DamageRate + ","
         + "collisionType:" + CollisionType + ","
-        + "singleCollisionCount:" + SingleCollisionCount + ","
-        + "maxCollisionCount:" + MaxCollisionCount + ","
-        + "collisionInterval:" + CollisionInterval + ","
-        + "collisionWithLife:" + CollisionWithLife + ","
+        + "singleHitCount:" + SingleHitCount + ","
+        + "maxHitCount:" + MaxHitCount + ","
+        + "hitInterval:" + HitInterval + ","
+        + "hitWithLife:" + HitWithLife + ","
         + "}";
     }
 }
