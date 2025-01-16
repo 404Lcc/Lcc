@@ -63,6 +63,7 @@ namespace LccHotfix
         public void AddOverlayCamera(Camera camera)
         {
             //var cameraData = MainCamera.GetComponent<UniversalAdditionalCameraData>();
+            //cameraData.cameraStack.Clear();
             //cameraData.cameraStack.AddRange(new List<Camera>() { camera, UICamera });
             //if (cameraData.renderType == CameraRenderType.Base && cameraData.cameraStack.Count > 0)
             //{
