@@ -4,7 +4,7 @@ namespace LccHotfix
 {
     public class ComSubobject : LogicComponent
     {
-        public int OwnerId { get; set; }//施法者id
+        public long OwnerId { get; set; }//施法者id
         public int SkillId { get; set; }//技能id
         public int ConfigId { get; set; }//子物体id
         public BTAgent Agent { get; set; }
@@ -44,7 +44,7 @@ namespace LccHotfix
         public ComSubobject comSubobject { get { return (ComSubobject)GetComponent(LogicComponentsLookup.ComSubobject); } }
         public bool hasComSubobject { get { return HasComponent(LogicComponentsLookup.ComSubobject); } }
 
-        public void AddComSubobject(int newOwnerId, int newSkillId, int newConfigId, BTAgent newAgent)
+        public void AddComSubobject(long newOwnerId, int newSkillId, int newConfigId, BTAgent newAgent)
         {
             var index = LogicComponentsLookup.ComSubobject;
             var component = (ComSubobject)CreateComponent(index, typeof(ComSubobject));
