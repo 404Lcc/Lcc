@@ -8,6 +8,9 @@ namespace LccHotfix
     {
         private GameObject _collider;
         private Vector3 _point;
+        public GameObject Collider => _collider;
+        public Vector3 Point => _point;
+
         public RawHit(GameObject collider, Vector3 point)
         {
             this._collider = collider;
@@ -62,6 +65,15 @@ namespace LccHotfix
 
             if (_collisionType == CollisionType.Collider2D)
             {
+                if (!ownerEntity.hasComView)
+                    return false;
+                if (!ownerEntity.comView.HasActorView)
+                    return false;
+                if (!ownerEntity.comView.ActorView.GameObject)
+                    return false;
+                if (!ownerEntity.comView.ActorView.GameObject.GetComponent<Collider2D>())
+                    return false;
+
                 var collider = ownerEntity.comView.ActorView.GameObject.GetComponent<Collider2D>();
                 Physics2D.OverlapCollider(collider, _contactFilter2D, _collider2Ds);
                 for (int i = 0; i < _collider2Ds.Length; i++)
@@ -92,6 +104,15 @@ namespace LccHotfix
 
             if (_collisionType == CollisionType.BoxCollider)
             {
+                if (!ownerEntity.hasComView)
+                    return false;
+                if (!ownerEntity.comView.HasActorView)
+                    return false;
+                if (!ownerEntity.comView.ActorView.GameObject)
+                    return false;
+                if (!ownerEntity.comView.ActorView.GameObject.GetComponent<BoxCollider>())
+                    return false;
+
                 var collider = ownerEntity.comView.ActorView.GameObject.GetComponent<BoxCollider>();
                 Physics.OverlapBoxNonAlloc(collider.center, collider.size, _colliders);
                 for (int i = 0; i < _colliders.Length; i++)
