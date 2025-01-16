@@ -21,10 +21,10 @@ public sealed partial class Buff : Luban.BeanBase
         { if(!_buf["name"].IsString) { throw new SerializationException(); }  Name = _buf["name"]; }
         { if(!_buf["desc"].IsString) { throw new SerializationException(); }  Desc = _buf["desc"]; }
         { if(!_buf["during"].IsNumber) { throw new SerializationException(); }  During = _buf["during"]; }
-        { if(!_buf["stack"].IsBoolean) { throw new SerializationException(); }  Stack = _buf["stack"]; }
+        { if(!_buf["stackType"].IsNumber) { throw new SerializationException(); }  StackType = (StackType)_buf["stackType"].AsInt; }
         { if(!_buf["iconId"].IsNumber) { throw new SerializationException(); }  IconId = _buf["iconId"]; }
         { if(!_buf["buffGroupId"].IsNumber) { throw new SerializationException(); }  BuffGroupId = _buf["buffGroupId"]; }
-        { if(!_buf["maxStack"].IsNumber) { throw new SerializationException(); }  MaxStack = _buf["maxStack"]; }
+        { if(!_buf["maxLevel"].IsNumber) { throw new SerializationException(); }  MaxLevel = _buf["maxLevel"]; }
         { if(!_buf["btScript"].IsString) { throw new SerializationException(); }  BtScript = _buf["btScript"]; }
         { if(!_buf["boolBuffType"].IsNumber) { throw new SerializationException(); }  BoolBuffType = (BoolPropertyType)_buf["boolBuffType"].AsInt; }
         { var __json0 = _buf["valueBuffType"]; if(!__json0.IsArray) { throw new SerializationException(); } ValueBuffType = new System.Collections.Generic.List<TBBuffValue>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { TBBuffValue __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = TBBuffValue.DeserializeTBBuffValue(__e0);  }  ValueBuffType.Add(__v0); }   }
@@ -60,9 +60,9 @@ public sealed partial class Buff : Luban.BeanBase
     /// </summary>
     public readonly float During;
     /// <summary>
-    /// 能否叠加
+    /// 叠加类型
     /// </summary>
-    public readonly bool Stack;
+    public readonly StackType StackType;
     /// <summary>
     /// 图标
     /// </summary>
@@ -74,7 +74,7 @@ public sealed partial class Buff : Luban.BeanBase
     /// <summary>
     /// 最大层数
     /// </summary>
-    public readonly int MaxStack;
+    public readonly int MaxLevel;
     /// <summary>
     /// 行为树脚本
     /// </summary>
@@ -153,10 +153,10 @@ public sealed partial class Buff : Luban.BeanBase
         + "name:" + Name + ","
         + "desc:" + Desc + ","
         + "during:" + During + ","
-        + "stack:" + Stack + ","
+        + "stackType:" + StackType + ","
         + "iconId:" + IconId + ","
         + "buffGroupId:" + BuffGroupId + ","
-        + "maxStack:" + MaxStack + ","
+        + "maxLevel:" + MaxLevel + ","
         + "btScript:" + BtScript + ","
         + "boolBuffType:" + BoolBuffType + ","
         + "valueBuffType:" + Luban.StringUtil.CollectionToString(ValueBuffType) + ","

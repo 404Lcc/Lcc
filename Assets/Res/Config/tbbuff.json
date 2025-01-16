@@ -4,10 +4,10 @@
     "name": "",
     "desc": "",
     "during": 0,
-    "stack": false,
+    "stackType": 0,
     "iconId": 0,
     "buffGroupId": 0,
-    "maxStack": 0,
+    "maxLevel": 0,
     "btScript": "",
     "boolBuffType": 0,
     "valueBuffType": [

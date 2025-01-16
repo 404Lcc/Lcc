@@ -286,6 +286,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Buff\BuffProperty.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicSystems.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\PopupWindow.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\StackType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Singleton\Singleton.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\Dev\DevPlatform.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Resolution\ResolutionUtility.cs" />
