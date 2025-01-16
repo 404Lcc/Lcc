@@ -234,6 +234,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTScript\BTScriptAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Base\GroupEntityIndex.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineCompletedHandler.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\System\SysBuffs.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysViewUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\MainThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\SkillProcess\ISkillProcess.cs" />
