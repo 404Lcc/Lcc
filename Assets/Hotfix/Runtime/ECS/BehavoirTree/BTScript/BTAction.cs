@@ -7,5 +7,9 @@ namespace LccHotfix
         //buff
         OnActiveBuff,
         OnDeactiveBuff,
+
+        //子物体
+        OnHitEntity,
+        OnHitObstacle,
     }
 }

@@ -5,5 +5,7 @@ namespace LccHotfix
         RootScript,
         SourceSkillAbility,
         SkillOwnerEntity,
+
+        HitWhiteList,
     }
 }

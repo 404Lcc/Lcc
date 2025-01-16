@@ -78,6 +78,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\System\SysSkillCD.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicEntity.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Action.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Collider\SubobjectColliderHandlerBase.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Module.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Skill\SkillData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\BattleWorld.cs" />
