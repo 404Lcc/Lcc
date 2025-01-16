@@ -6,10 +6,10 @@ namespace LccHotfix
     {
         protected int _level = 0;
         protected int _propType;
-        protected int _entityId = 0;
+        protected long _entityId = 0;
         protected int _key = 0;
 
-        public void Init(int level, int propType, int entityId, int key)
+        public void Init(int level, int propType, long entityId, int key)
         {
             _level = level;
             _propType = propType;
@@ -38,7 +38,7 @@ namespace LccHotfix
         protected float _value = 0;
         protected bool _isPercent = false;
 
-        public void Init(int level, int propType, int entityId, int key, float value, bool isPercent)
+        public void Init(int level, int propType, long entityId, int key, float value, bool isPercent)
         {
             base.Init(level, propType, entityId, key);
 
@@ -87,7 +87,7 @@ namespace LccHotfix
     {
         protected bool _value = false;
 
-        public void Init(int level, int propType, int entityId, int key, bool value)
+        public void Init(int level, int propType, long entityId, int key, bool value)
         {
             base.Init(level, propType, entityId, key);
 

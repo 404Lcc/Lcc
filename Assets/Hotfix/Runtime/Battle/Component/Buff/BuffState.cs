@@ -6,8 +6,8 @@ namespace LccHotfix
     public struct BuffInfo
     {
         public int buffId;
-        public int fromEntityId;
-        public int entityId;
+        public long fromEntityId;
+        public long entityId;
         public int fromLogicId;
         public float during;
         public int level;
@@ -28,8 +28,8 @@ namespace LccHotfix
         protected List<BuffProperty> _propList = new List<BuffProperty>();
 
         public int BuffId => _buffInfo.buffId;
-        public int FromEntityId => _buffInfo.fromEntityId;
-        public int EntityId => _buffInfo.entityId;
+        public long FromEntityId => _buffInfo.fromEntityId;
+        public long EntityId => _buffInfo.entityId;
         public int FromLogicId => _buffInfo.fromLogicId;
         public float During => _buffInfo.during;
         public int Level => _buffInfo.level;
@@ -122,8 +122,55 @@ namespace LccHotfix
             }
 
             _agent?.Trigger(BTAction.OnDeactiveBuff);
-
+            _agent.Dispose();
             FXManager.Instance.Release(_fxId);
+        }
+
+        /// <summary>
+        /// 更新层数
+        /// </summary>
+        public void UpdateLevel(BuffInfo newInfo)
+        {
+            foreach (var item in _propList)
+            {
+                item.OnDeactive();
+            }
+            _agent?.Trigger(BTAction.OnDeactiveBuff);
+
+            _aliveTime = 0;
+            _propList.Clear();
+
+            _isActive = true;
+            _buffInfo = newInfo;
+
+            var key = FromLogicId << 16 | BuffId;
+
+            // 加bool属性
+            for (int i = (int)BoolPropertyType.Invalid + 1; i <= (int)BoolPropertyType.IsStuning; i <<= 1)
+            {
+                if (((int)_buffConfig.BoolBuffType & i) == 0)
+                    continue;
+
+                var prop = new BoolBuffProperty();
+                prop.Init(Level, i, EntityId, key, false);
+                _propList.Add(prop);
+            }
+
+            // 加float属性
+            foreach (var item in _buffConfig.ValueBuffType)
+            {
+                //todo
+                var prop = new FloatBuffProperty();
+                prop.Init(Level, (int)item.Type, EntityId, key, item.Value, false);
+                _propList.Add(prop);
+            }
+
+            foreach (var item in _propList)
+            {
+                item.OnActive();
+            }
+
+            _agent?.Trigger(BTAction.OnActiveBuff);
         }
 
         public void TriggerAction(BTAction action, params object[] args)
