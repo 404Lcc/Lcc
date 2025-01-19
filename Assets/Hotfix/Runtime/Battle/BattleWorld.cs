@@ -6,13 +6,13 @@ namespace LccHotfix
 {
     public class BattleGameMode : GameModeBase
     {
-        public BattleModeState data;
+        public BattleGameModeState data;
 
         public override void Init(GameModeState state)
         {
             base.Init(state);
 
-            data = state as BattleModeState;
+            data = state as BattleGameModeState;
         }
 
         public override void Start()
@@ -29,7 +29,7 @@ namespace LccHotfix
             data.map = null;
         }
     }
-    public class BattleModeState : GameModeState
+    public class BattleGameModeState : GameModeState
     {
         public GameObject map;
     }
@@ -39,6 +39,7 @@ namespace LccHotfix
         {
             base.Setup();
 
+            //基础
             LogicComponentsLookup.ComID = 0;
             LogicComponentsLookup.ComTag = 1;
             LogicComponentsLookup.ComFaction = 2;
@@ -53,6 +54,19 @@ namespace LccHotfix
 
             MetaComponentsLookup.ComUniGameMode = 0;
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniGameMode));
+
+
+            //战斗部分
+            LogicComponentsLookup.ComView = 5;
+            LogicComponentsLookup.ComTransform = 6;
+            LogicComponentsLookup.ComFSM = 7;
+            LogicComponentsLookup.ComLife = 8;
+            LogicComponentsLookup.ComDeath = 9;
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComView));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComTransform));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComFSM));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComLife));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComDeath));
         }
         protected override void InitializeEntityIndices()
         {
@@ -71,9 +85,9 @@ namespace LccHotfix
 
             var mode = new BattleGameMode();
 
-            var state = new BattleModeState();
+            var state = new BattleGameModeState();
             state.gameModeType = GameModeType.Battle;
-            state.map = null;
+            state.map = new GameObject("Battle");
 
             mode.Init(state);
             MetaContext.SetComUniGameMode(mode);

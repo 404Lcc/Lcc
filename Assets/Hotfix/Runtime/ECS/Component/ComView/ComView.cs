@@ -88,7 +88,7 @@ namespace LccHotfix
             return null;
         }
 
-        public void AddView(IViewWrapper newView, ViewCategory newViewCategory, bool needReplace = false)
+        public void AddView(IViewWrapper newView, ViewCategory newViewCategory)
         {
             if (_viewDict.ContainsKey(newViewCategory))
             {
@@ -98,10 +98,7 @@ namespace LccHotfix
             //更新缓存
             _cache.CheckViewCache(newView, newViewCategory);
 
-            if (!needReplace)
-            {
-                Owner.ReplaceComponent(LogicComponentsLookup.ComView, this);
-            }
+            Owner.ReplaceComponent(LogicComponentsLookup.ComView, this);
         }
 
         public bool RemoveView(ViewCategory newViewCategory)

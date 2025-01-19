@@ -175,7 +175,6 @@
     <Compile Include="Assets\Hotfix\Logic\UI\UIRoot\UIRootCommon.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComFaction.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectBase.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Battle\BattleGameModeState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Transform\TransformExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\SpriteRenderer\SpriteRendererExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComUniDamage\Data\DamageType.cs" />

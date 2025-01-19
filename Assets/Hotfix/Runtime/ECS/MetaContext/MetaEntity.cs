@@ -50,6 +50,11 @@ namespace LccHotfix
 
         private void OnReplacedComponent(Entity entity, int index, IComponent previousComponent, IComponent newComponent)
         {
+            if (previousComponent == newComponent)
+            {
+                return;
+            }
+
             if (previousComponent is IDispose dispose)
             {
                 dispose.Dispose();
