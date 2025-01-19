@@ -23,9 +23,9 @@ namespace LccHotfix
             _context = context;
         }
 
-        public void ForceChangeState(string state)
+        public void ForceChangeState<TNode>() where TNode : IStateNode
         {
-            _fsm.ChangeState(state);
+            _fsm.ChangeState<TNode>();
         }
     }
     public partial class LogicEntity
