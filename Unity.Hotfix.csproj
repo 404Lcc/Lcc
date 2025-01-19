@@ -64,7 +64,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComUniDamage\ComUniDamage.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Log\Log.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Collider\ComCollider.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComUniGameMode.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTAgent\BTAgent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UILogicBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\ThreadScheduler.cs" />
@@ -127,6 +126,8 @@
     <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScrollPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\IUILogic.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysDeathProcess.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComUniGameMode.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysGameMode.cs" />
     <Compile Include="Assets\Hotfix\Core\Event\IEventManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Locomotion\ComLocomotion.cs" />
     <Compile Include="Assets\Hotfix\Logic\Scene\LoginScene.cs" />

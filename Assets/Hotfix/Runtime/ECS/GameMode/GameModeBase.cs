@@ -32,9 +32,9 @@ namespace LccHotfix
 
         }
 
-        public virtual void Start<T>() where T : IStateNode
+        public virtual void Start()
         {
-            _fsm.Run<IStateNode>();
+
         }
 
         public virtual void Update()

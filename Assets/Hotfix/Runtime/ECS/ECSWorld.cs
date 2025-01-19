@@ -1,5 +1,6 @@
 using Entitas;
 using LccModel;
+using System;
 using System.Collections.Generic;
 
 namespace LccHotfix
@@ -16,11 +17,11 @@ namespace LccHotfix
 
         public virtual void InitWorld()
         {
-            LogicComponentsLookup.componentTypeList.Clear();
-            MetaComponentsLookup.componentTypeList.Clear();
+            LogicComponentsLookup.componentTypeList = new List<Type>();
+            MetaComponentsLookup.componentTypeList = new List<Type>();
             Setup();
-            LogicComponentsLookup.componentNameList.Clear();
-            MetaComponentsLookup.componentNameList.Clear();
+            LogicComponentsLookup.componentNameList = new List<string>();
+            MetaComponentsLookup.componentNameList = new List<string>();
             foreach (var item in LogicComponentsLookup.componentTypes)
             {
                 LogicComponentsLookup.componentNameList.Add(item.Name);

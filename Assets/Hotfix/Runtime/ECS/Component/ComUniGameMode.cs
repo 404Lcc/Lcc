@@ -12,7 +12,6 @@ namespace LccHotfix
 
         public MetaEntity SetComUniGameMode(GameModeBase newMode)
         {
-
             if (hasComUniGameMode)
             {
                 var entity = comUniGameModeEntity;
@@ -25,11 +24,7 @@ namespace LccHotfix
                 entity.AddComUniGameMode(newMode);
                 return entity;
             }
-
         }
-
-
-
     }
     public partial class MetaEntity
     {

@@ -1,3 +1,5 @@
+using System;
+
 namespace LccHotfix
 {
     internal class WorldManager : Module
@@ -26,8 +28,10 @@ namespace LccHotfix
             _world = null;
         }
 
-        public void CreateWorld()
+        public void CreateWorld<T>() where T : ECSWorld
         {
+            _world = Activator.CreateInstance<T>();
+            _world.InitWorld();
         }
 
         public ECSWorld GetWorld()
