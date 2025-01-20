@@ -15,7 +15,7 @@ namespace LccHotfix
         private Animator _animator;
         public Animator Animator => _animator;
 
-        public void Init(GameObject go, bool isPoolRes)
+        public virtual void Init(GameObject go, bool isPoolRes)
         {
             _isPoolRes = isPoolRes;
             _gameObject = go;
