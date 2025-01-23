@@ -34,6 +34,11 @@ namespace LccHotfix
         {
             if (_isPoolRes)
             {
+                //TODO
+            }
+            else
+            {
+                GameObject.Destroy(_gameObject);
             }
 
             EnableAnimator(true);

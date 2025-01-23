@@ -9,14 +9,14 @@ namespace LccHotfix
             return WorldManager.Instance.GetWorld().GetEntityWithComID(id);
         }
 
-        public static LogicEntity AddEntity<T>(GameObject obj) where T : ActorView, new()
+        public static LogicEntity AddEntity<T>(GameObject obj, bool isPoolRes = false) where T : ActorView, new()
         {
             var entity = WorldManager.Instance.GetWorld().LogicContext.CreateEntity();
 
             entity.AddComID(IdUtility.GenerateId());
 
             T viewWrapper = new T();
-            viewWrapper.Init(obj, true);
+            viewWrapper.Init(obj, isPoolRes);
             entity.AddView(viewWrapper, ViewCategory.Actor);
 
             entity.AddComTransform(obj.transform.position, obj.transform.rotation, obj.transform.localScale);
