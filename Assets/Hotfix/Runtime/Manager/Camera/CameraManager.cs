@@ -4,6 +4,7 @@ namespace LccHotfix
 {
     internal class CameraManager : Module
     {
+        public static CameraManager Instance => Entry.GetModule<CameraManager>();
         private Camera _mainCamera = null;
         public Camera MainCamera
         {
