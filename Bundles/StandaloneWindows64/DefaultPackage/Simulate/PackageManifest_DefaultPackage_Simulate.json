@@ -16,6 +16,13 @@
             "BundleID": 0
         },
         {
+            "Address": "tbbuff",
+            "AssetPath": "Assets/Res/Config/tbbuff.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
             "Address": "tbemptygoto",
             "AssetPath": "Assets/Res/Config/tbemptygoto.json",
             "AssetGUID": "",
@@ -32,6 +39,13 @@
         {
             "Address": "tbskill",
             "AssetPath": "Assets/Res/Config/tbskill.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "tbsubobject",
+            "AssetPath": "Assets/Res/Config/tbsubobject.json",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 1
@@ -81,7 +95,7 @@
             "UnityCRC": 0,
             "FileHash": "8e0b78f87b215ffbe6445533f7090724",
             "FileCRC": "00000000",
-            "FileSize": 502,
+            "FileSize": 1322,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -91,7 +105,7 @@
             "UnityCRC": 0,
             "FileHash": "083e6a08c2f0ee41263a000e26338562",
             "FileCRC": "00000000",
-            "FileSize": 488012,
+            "FileSize": 463804,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []

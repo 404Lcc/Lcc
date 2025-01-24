@@ -86,6 +86,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Task\TaskExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\FunctionOpen\FunctionOpenManager.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Utility\GameUtility.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\IObjectPoolManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComLife.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UIRootBase.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\Decorators\PreloadDecorator.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Tables.cs" />
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\View\IView.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Utility\AutoReference\AutoReferenceUtility.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Variable\Variable.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Orca\OrcaManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\System\SysSkillProcess.cs" />
@@ -262,6 +264,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Popup.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Camera\CameraManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComUniDamage\DamageBase.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Event\GameEvent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\IScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Init.cs" />
@@ -316,6 +319,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\ReferencePool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\SceneAttribute.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Event\GameEventType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineManager.cs" />
   </ItemGroup>
   <ItemGroup>

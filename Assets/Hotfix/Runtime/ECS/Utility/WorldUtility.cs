@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LccHotfix
@@ -7,6 +8,11 @@ namespace LccHotfix
         public static LogicEntity GetEntity(long id)
         {
             return WorldManager.Instance.GetWorld().GetEntityWithComID(id);
+        }
+
+        public static LogicEntity GetEntity(GameObject go)
+        {
+            return WorldManager.Instance.GetWorld().GetEntitiesWithComUnityObjectRelated(go.GetInstanceID());
         }
 
         public static LogicEntity AddEntity<T>(GameObject obj, bool isPoolRes = false) where T : ActorView, new()
@@ -21,8 +27,26 @@ namespace LccHotfix
 
             entity.AddComTransform(obj.transform.position, obj.transform.rotation, obj.transform.localScale);
 
-
+            var dict = new Dictionary<int, GameObjectType>();
+            dict.Add(obj.GetInstanceID(), GameObjectType.Self);
+            entity.AddComUnityObjectRelated(dict);
             return entity;
+        }
+
+        public static MetaContext GetMetaContext()
+        {
+            var metaContext = WorldManager.Instance.GetWorld().MetaContext;
+            return metaContext;
+        }
+
+        public static T GetComUniGameMode<T>() where T : GameModeBase
+        {
+            var metaContext = GetMetaContext();
+            if (metaContext.hasComUniGameMode)
+            {
+                return metaContext.comUniGameMode.mode as T;
+            }
+            return null;
         }
     }
 }
