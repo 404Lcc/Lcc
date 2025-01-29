@@ -1,3 +1,4 @@
+using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,6 +48,16 @@ namespace LccHotfix
                 return metaContext.comUniGameMode.mode as T;
             }
             return null;
+        }
+
+        public static IGroup<LogicEntity> GetLogicGroup(params IMatcher<LogicEntity>[] matchers)
+        {
+            var matcher = LogicMatcher.AllOf(matchers);
+            var world = WorldManager.Instance.GetWorld();
+            if (world == null)
+                return new Group<LogicEntity>(matcher);
+            var group = world.LogicContext.GetGroup(matcher);
+            return group;
         }
     }
 }

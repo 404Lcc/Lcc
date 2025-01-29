@@ -404,27 +404,70 @@ namespace LccHotfix
 		}
 
 		//开始
-		protected virtual void DoStart() { }
+		protected virtual void DoStart()
+		{
+
+		}
+
 		//更新
-		protected virtual void DoUpdate() { }
+		protected virtual void DoUpdate()
+		{
+
+		}
+
 		//打开
-		protected virtual void DoOpen(object[] param) { }
+		protected virtual void DoOpen(object[] param)
+		{
+
+		}
+
 		//重置
-		protected virtual void DoReset(object[] param) { }
+		protected virtual void DoReset(object[] param)
+		{
+
+		}
+
 		//恢复
-		protected virtual void DoResume() { }
+		protected virtual void DoResume()
+		{
+
+		}
+
 		//暂停
-		protected virtual void DoPause() { }
+		protected virtual void DoPause()
+		{
+
+		}
+
 		//关闭
-		protected virtual object DoClose() { return null; }
+		protected virtual object DoClose()
+		{
+			return null;
+		}
+
 		//移除（彻底关闭）
-		protected virtual void DoRemove() { }
+		protected virtual void DoRemove()
+		{
+
+		}
+
 		//切换窗口
-		protected virtual void DoSwitch(Action<bool> callback) { }
+		protected virtual void DoSwitch(Action<bool> callback)
+		{
+
+		}
+
 		//子节点打开
-		protected virtual void DoChildOpened(WNode child) { }
+		protected virtual void DoChildOpened(WNode child)
+		{
+
+		}
+
 		//子节点关闭
-		protected virtual void DoChildClosed(WNode child) { }
+		protected virtual void DoChildClosed(WNode child)
+		{
+
+		}
 
 		/// <summary>
 		/// 子节点请求推出
@@ -435,6 +478,7 @@ namespace LccHotfix
 		{
 			return true;
 		}
+
 		//处理窗口返回
 		protected virtual bool DoEscape(ref EscapeType escape)
 		{
