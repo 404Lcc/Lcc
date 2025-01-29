@@ -71,8 +71,8 @@
     <Compile Include="Assets\3rdPlugins\Entitas\Group\Group.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Entity\EntityEqualityComparer.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Collector\CollectorException.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoConverterAttribute.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Group\GroupExtension.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoConverterAttribute.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Entity\Exceptions\EntityIsNotEnabledException.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\UnityTypeBindings.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Properties\AssemblyInfo.cs" />

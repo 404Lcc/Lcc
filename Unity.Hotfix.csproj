@@ -85,8 +85,8 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\GameObjectPoolObject.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Task\TaskExtension.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\FunctionOpen\FunctionOpenManager.cs" />
     <Compile Include="Assets\Hotfix\Logic\Utility\GameUtility.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\FunctionOpen\FunctionOpenManager.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\IObjectPoolManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComLife.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UIRootBase.cs" />
@@ -226,9 +226,9 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Download\DownloadFile.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Utility\WorldUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\Decorators\PreloadDecorator.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Utility\AutoReference\AutoReferenceUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Tables.cs" />
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\View\IView.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Utility\AutoReference\AutoReferenceUtility.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Variable\Variable.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Orca\OrcaManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\System\SysSkillProcess.cs" />
