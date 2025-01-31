@@ -90,7 +90,7 @@ namespace LccHotfix
                 _userSetData = JsonUtility.ToObject<UserSetData>(value);
                 return _userSetData;
             }
-            return _userSetData = _userSetData ?? new UserSetData(20, 100, CVType.Chinese, LanguageType.Chinese, DisplayModeType.FullScreen, ResolutionType.Resolution1920x1080);
+            return _userSetData = _userSetData ?? new UserSetData(20, 100, CVType.Chinese, DisplayModeType.FullScreen, ResolutionType.Resolution1920x1080);
         }
         public void SaveUserSetData()
         {

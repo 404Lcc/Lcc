@@ -19,6 +19,7 @@ public partial class Tables
     public TBSkill TBSkill {get; }
     public TBBuff TBBuff {get; }
     public TBSubobject TBSubobject {get; }
+    public TBLanguage TBLanguage {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -27,6 +28,7 @@ public partial class Tables
         TBSkill = new TBSkill(loader("tbskill"));
         TBBuff = new TBBuff(loader("tbbuff"));
         TBSubobject = new TBSubobject(loader("tbsubobject"));
+        TBLanguage = new TBLanguage(loader("tblanguage"));
         ResolveRef();
     }
     
@@ -37,6 +39,7 @@ public partial class Tables
         TBSkill.ResolveRef(this);
         TBBuff.ResolveRef(this);
         TBSubobject.ResolveRef(this);
+        TBLanguage.ResolveRef(this);
     }
 }
 

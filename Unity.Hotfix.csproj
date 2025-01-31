@@ -65,6 +65,7 @@
     <Compile Include="Assets\Hotfix\Core\Base\Log\Log.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Collider\ComCollider.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTAgent\BTAgent.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\Language.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UILogicBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\ThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\WNode.cs" />
@@ -111,7 +112,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComHP.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\TBEmptyGoTo.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Base\IDispose.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\Language\LanguageType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\Decorators\MaxActiveDecorator.cs" />
     <Compile Include="Assets\Hotfix\Logic\Scene\MainScene.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Log\ILogHelper.cs" />
@@ -193,6 +193,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Random\RandomUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\GameObjectPoolManager.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIRoot\UIRootLogin.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\TBLanguage.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UIDefine.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\Action\ActionWrap.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\IReference.cs" />
