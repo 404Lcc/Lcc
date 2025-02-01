@@ -4681,6 +4681,9 @@
     <type fullname="LccModel.LongClickButton" preserve="all" />
     <type fullname="LccModel.RightClickEvent" preserve="all" />
     <type fullname="LccModel.RightClickButton" preserve="all" />
+    <type fullname="LccModel.EmImageType" preserve="all" />
+    <type fullname="LccModel.UIImageCtrl" preserve="all" />
+    <type fullname="LccModel.UISpriteCtrl" preserve="all" />
     <type fullname="LccModel.BlackFadeMask" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel" preserve="all" />
     <type fullname="LccModel.MessageBox" preserve="all" />
@@ -4733,7 +4736,7 @@
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel+&lt;&gt;c__DisplayClass6_0" preserve="all" />
     <type fullname="LccModel.UILoadingPanel+&lt;&gt;c" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2559" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3865" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2610" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3978" preserve="all" />
   </assembly>
 </linker>

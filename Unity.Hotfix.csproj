@@ -66,6 +66,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Collider\ComCollider.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTAgent\BTAgent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Language.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\TBMultiLanguageTexture.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UILogicBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\ThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\WNode.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\System\SysSubobject.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\LinkedListRange.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Collider\ColliderHandler.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\MultiLanguageTexture.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComTransform.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Vector2\Vector2Extension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\CollisionType.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Types.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\RootNode\WBlackboard.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\Texture.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComTimer.cs" />
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\Binding\Binding.cs" />
     <Compile Include="Assets\Hotfix\Core\Utility\MarshalUtility.cs" />
@@ -168,6 +171,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\SkillProcess\SkillProcess.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Property\EntityProperty.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComView\ActorView.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\TBIcon.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Res.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\FX\FXManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Window\WindowMode.cs" />
@@ -184,6 +188,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\MultiDictionary.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Property\ComProperty.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Utility\IconUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\SceneManager.cs" />
     <Compile Include="Assets\Hotfix\Logic\Joystick\Joystick.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\TBBuff.cs" />
@@ -238,6 +243,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Skill\SkillCD.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\GameMode\GameModeBase.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UILogin\UILoginPanel.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\TBTexture.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTScript\BTScriptAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Base\GroupEntityIndex.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineCompletedHandler.cs" />
@@ -290,6 +296,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\SkillProcess\ComSkillProcess.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Timer\TimerManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Entry.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\Icon.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineHandler.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIMain\UIMainPanel.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\DataStruct\TypeNamePair.cs" />

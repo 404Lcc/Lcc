@@ -17,5 +17,15 @@ namespace LccHotfix
         {
             Entry.GetModule<EventManager>().Unsubscribe((int)type, handler);
         }
+
+        public static string GetLanguageText(string key, params object[] args)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                Log.Error("key不能等于空");
+                return "";
+            }
+            return LanguageManager.Instance.GetValue(key, args);
+        }
     }
 }
