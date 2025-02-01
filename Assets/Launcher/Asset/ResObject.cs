@@ -136,6 +136,7 @@ namespace LccModel
             _assetName = null;
             _state = LoadState.None;
             _obj = null;
+            _type = null;
             _onComplete = null;
         }
         #endregion
