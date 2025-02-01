@@ -152,7 +152,7 @@ namespace LccModel
                     return;
                 }
 #endif
-                ResObject.StartLoadRes<GameObject>(gameObject, spriteName, LoadSpriteDone);
+                ResObject.StartLoadRes<Sprite>(gameObject, spriteName, LoadSpriteDone);
             }
         }
 

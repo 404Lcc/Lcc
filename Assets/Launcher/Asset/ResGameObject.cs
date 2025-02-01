@@ -92,7 +92,7 @@ namespace LccModel
 				GameObject ins = new GameObject($"res-{asset}");
 				ResGameObject res = ins.AddComponent<ResGameObject>();
 
-				res.SetInfo(ins, asset, null);
+				res.SetInfo<GameObject>(ins, asset, null);
 				res._keepHierar = keepHierar;
 				res.Load();
 				return res;
@@ -108,7 +108,7 @@ namespace LccModel
 				ins.transform.SetParent(loader.transform);
 				ResGameObject res = ins.AddComponent<ResGameObject>();
 
-				res.SetInfo(ins, asset, null);
+				res.SetInfo<GameObject>(ins, asset, null);
 				res._keepHierar = keepHierar;
 				res._onGameObjectComplete = onComplete;
 				res.StartLoad();

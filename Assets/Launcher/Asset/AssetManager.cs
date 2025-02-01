@@ -1,4 +1,5 @@
 ﻿using NPOI.SS.Formula.Functions;
+using System;
 using UnityEngine;
 using YooAsset;
 using Object = UnityEngine.Object;
@@ -38,24 +39,24 @@ namespace LccModel
             return Package.CheckLocationValid(location);
         }
 
-        public AssetHandle LoadAssetSync(string location)
+        public AssetHandle LoadAssetSync(string location, Type type)
         {
-            return Package.LoadAssetSync(location);
+            return Package.LoadAssetSync(location, type);
         }
 
-        public AssetHandle LoadAssetAsync(string location)
+        public AssetHandle LoadAssetAsync(string location, Type type)
         {
-            return Package.LoadAssetAsync(location);
+            return Package.LoadAssetAsync(location, type);
         }
 
-        public AllAssetsHandle LoadAllAssetsSync(string location)
+        public AllAssetsHandle LoadAllAssetsSync(string location, Type type)
         {
-            return Package.LoadAllAssetsSync(location);
+            return Package.LoadAllAssetsSync(location, type);
         }
 
-        public AllAssetsHandle LoadAllAssetsAsync(string location)
+        public AllAssetsHandle LoadAllAssetsAsync(string location, Type type)
         {
-            return Package.LoadAllAssetsAsync(location);
+            return Package.LoadAllAssetsAsync(location, type);
         }
 
 

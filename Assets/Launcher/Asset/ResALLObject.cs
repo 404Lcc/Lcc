@@ -27,7 +27,7 @@ namespace LccModel
             _state = LoadState.Loading;
             _loadStartTime = Time.realtimeSinceStartup;
 
-            _handleBase = AssetManager.Instance.LoadAllAssetsAsync(_assetName);
+            _handleBase = AssetManager.Instance.LoadAllAssetsAsync(_assetName, _type);
             ((AllAssetsHandle)_handleBase).Completed += OnCompleted;
         }
 
@@ -98,7 +98,7 @@ namespace LccModel
                 {
                     res = loader.AddComponent<ResALLObject>();
                 }
-                res.SetInfo(loader, asset, null);
+                res.SetInfo<Object>(loader, asset, null);
                 res.StartLoad();
                 return res;
             }

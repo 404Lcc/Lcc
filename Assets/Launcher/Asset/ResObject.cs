@@ -24,11 +24,13 @@ namespace LccModel
         protected float _loadStartTime;
 
         protected HandleBase _handleBase;
+        protected Type _type;
         protected Object _obj;
 
         public string AssetName => _assetName;
         public bool Loaded => _state == LoadState.Done || _state == LoadState.Error;
         public bool Loading => _state == LoadState.Loading;
+        public Type Type => _type;
         public Object Asset => _obj;
 
         private void OnDestroy()
@@ -37,10 +39,11 @@ namespace LccModel
             Release();
         }
 
-        public void SetInfo(GameObject bind, string asset, Action<string, Object> onComplete)
+        public void SetInfo<T>(GameObject bind, string asset, Action<string, Object> onComplete)
         {
             this._bindObject = bind;
             this._assetName = asset;
+            this._type = typeof(T);
             this._onComplete = onComplete;
             this._state = LoadState.None;
         }
@@ -67,7 +70,7 @@ namespace LccModel
                 LoadEnd();
                 return;
             }
-            _handleBase = AssetManager.Instance.LoadAssetSync(_assetName);
+            _handleBase = AssetManager.Instance.LoadAssetSync(_assetName, _type);
             _obj = ((AssetHandle)_handleBase).AssetObject;
             if (_obj != null)
             {
@@ -92,7 +95,7 @@ namespace LccModel
             _state = LoadState.Loading;
             _loadStartTime = Time.realtimeSinceStartup;
 
-            _handleBase = AssetManager.Instance.LoadAssetAsync(_assetName);
+            _handleBase = AssetManager.Instance.LoadAssetAsync(_assetName, _type);
             ((AssetHandle)_handleBase).Completed += OnCompleted;
         }
 
@@ -110,6 +113,7 @@ namespace LccModel
         private void OnCompleted(AssetHandle assetHandle)
         {
             _state = LoadState.Done;
+            _obj = assetHandle.AssetObject;
             LoadEnd();
         }
         #endregion
@@ -158,7 +162,7 @@ namespace LccModel
                         if (string.IsNullOrEmpty(old[i]._assetName))
                         {
                             ResObject oldRes = old[i];
-                            oldRes.SetInfo(loader, asset, null);
+                            oldRes.SetInfo<T>(loader, asset, null);
                             oldRes.Load();
                             return oldRes;
                         }
@@ -166,7 +170,7 @@ namespace LccModel
                 }
 
                 ResObject res = loader.AddComponent<ResObject>();
-                res.SetInfo(loader, asset, null);
+                res.SetInfo<T>(loader, asset, null);
                 res.Load();
                 return res;
             }
@@ -197,7 +201,7 @@ namespace LccModel
                             if (string.IsNullOrEmpty(old[i]._assetName))
                             {
                                 res = old[i];
-                                res.SetInfo(loader, asset, onComplete);
+                                res.SetInfo<T>(loader, asset, onComplete);
                                 break;
                             }
                         }
@@ -206,7 +210,7 @@ namespace LccModel
                 if (res == null)
                 {
                     res = loader.AddComponent<ResObject>();
-                    res.SetInfo(loader, asset, onComplete);
+                    res.SetInfo<T>(loader, asset, onComplete);
                 }
                 if (res.Loading)
                     return res;

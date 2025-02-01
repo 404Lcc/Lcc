@@ -24,7 +24,7 @@ namespace LccModel
 				LoadEnd();
 				return;
 			}
-			_handleBase = AssetManager.Instance.LoadAllAssetsSync(_assetName);
+			_handleBase = AssetManager.Instance.LoadAllAssetsSync(_assetName, _type);
 			if (LoadShader(_handleBase))
 			{
 				_state = LoadState.Done;
@@ -93,7 +93,7 @@ namespace LccModel
 			if (loader != null && !string.IsNullOrEmpty(asset))
 			{
 				ResShader res = loader.AddComponent<ResShader>();
-				res.SetInfo(loader, asset, null);
+				res.SetInfo<Shader>(loader, asset, null);
 				res.Load();
 				return res;
 			}
