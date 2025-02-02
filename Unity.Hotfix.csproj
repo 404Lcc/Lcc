@@ -134,7 +134,6 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Locomotion\ComLocomotion.cs" />
     <Compile Include="Assets\Hotfix\Logic\Scene\LoginScene.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Locomotion\LocomotionBase.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\Archive\CVType.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventPool\BaseEventArgs.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\CodeTypes\AttributeBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\FiberManager.cs" />

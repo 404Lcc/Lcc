@@ -2,19 +2,17 @@
 {
     public class UserSetData
     {
-        public int audio = 20;
-        public int voice = 100;
-        public CVType cvType = CVType.Chinese;
+        public int musicVolume = 100;
+        public int soundFXVolume = 100;
         public DisplayModeType displayModeType = DisplayModeType.FullScreen;
         public ResolutionType resolutionType = ResolutionType.Resolution1920x1080;
         public UserSetData()
         {
         }
-        public UserSetData(int audio, int voice, CVType cvType, DisplayModeType displayModeType, ResolutionType resolutionType)
+        public UserSetData(int musicVolume, int soundFXVolume, DisplayModeType displayModeType, ResolutionType resolutionType)
         {
-            this.audio = audio;
-            this.voice = voice;
-            this.cvType = cvType;
+            this.musicVolume = musicVolume;
+            this.soundFXVolume = soundFXVolume;
             this.displayModeType = displayModeType;
             this.resolutionType = resolutionType;
         }
