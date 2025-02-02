@@ -11,6 +11,7 @@ namespace LccEditor
             AddAEditorWindowBase<HotfixEditorWindow>("热更新模式");
             AddAEditorWindowBase<TagEditorWindow>("标签工具");
             AddAEditorWindowBase<LayerEditorWindow>("层工具");
+            AddAEditorWindowBase<UIEditorWindow>("UI工具");
             AddAEditorWindowBase<GameConfigEditorWindow>("框架配置");
         }
         [MenuItem("Lcc框架/工具箱")]

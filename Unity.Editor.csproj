@@ -63,6 +63,7 @@
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\RectObjectType.cs" />
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\IntObjectType.cs" />
     <Compile Include="Assets\Editor\Editor\OdinEditorWindow\GeneralEditorWindow.cs" />
+    <Compile Include="Assets\Editor\Editor\OdinEditorWindow\UIEditorWindow.cs" />
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\Vector3ObjectType.cs" />
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\CharObjectType.cs" />
     <Compile Include="Assets\Editor\Editor\OdinEditorWindow\MenuTree\AMenuEditorWindow.cs" />
@@ -1105,6 +1106,10 @@
       <HintPath>Library\ScriptAssemblies\HybridCLR.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
       <Private>False</Private>
@@ -1134,6 +1139,10 @@
     <ProjectReference Include="Unity.Hotfix.csproj">
       <Project>{8543BC6F-FEC6-BDFC-0BD5-AB0B4E96C57B}</Project>
       <Name>Unity.Hotfix</Name>
+    </ProjectReference>
+    <ProjectReference Include="EnhancedScroller_asmdef.csproj">
+      <Project>{50A4DDDC-1012-D6CA-5D95-34EC1C8959A2}</Project>
+      <Name>EnhancedScroller_asmdef</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
