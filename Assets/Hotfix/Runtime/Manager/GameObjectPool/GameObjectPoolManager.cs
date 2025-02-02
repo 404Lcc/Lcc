@@ -64,7 +64,7 @@ namespace LccHotfix
             }
             _poolDict.Clear();
 
-            GameObject.Destroy(_root);
+            GameObject.Destroy(_root.gameObject);
             _root = null;
         }
 
