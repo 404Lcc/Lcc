@@ -9,20 +9,17 @@ namespace LccModel
 {
     public class ResPath
     {
-        private static string pathStreamingWeb;
-        private static string pathPersistentWeb;
-        public static string pathPersistent;
+        private static string _pathStreamingWeb;
+        private static string _pathPersistentWeb;
+        public static string _pathPersistent;
 
-        private static StringBuilder build = new StringBuilder();
-        private static string platStr;
-        public static string platformDirectory
-        {
-            get { return RuntimePlatformDirectory(); }
-        }
+        private static StringBuilder _build = new StringBuilder();
+        private static string _platStr;
+        public static string PlatformDirectory => RuntimePlatformDirectory();
 
         public static void InitPath()
         {
-            platStr = RuntimePlatformDirectory();
+            _platStr = RuntimePlatformDirectory();
 
 #if UNITY_EDITOR
             string outPath = Application.dataPath.Replace("Assets", "OutPackage");
@@ -30,24 +27,24 @@ namespace LccModel
             {
                 Directory.CreateDirectory(outPath);
             }
-            pathPersistent = outPath + Path.DirectorySeparatorChar;
+            _pathPersistent = outPath + Path.DirectorySeparatorChar;
 #else
-            pathPersistent = Application.persistentDataPath + Path.DirectorySeparatorChar;
+            _pathPersistent = Application.persistentDataPath + Path.DirectorySeparatorChar;
 #endif
-            Debug.Log("persistent 地址：" + pathPersistent);
+            Debug.Log("Persistent 地址：" + _pathPersistent);
 
 #if UNITY_IOS
-            pathStreamingWeb = @"file://" + Application.streamingAssetsPath;
-            pathPersistentWeb = @"file://" + pathPersistent;
+            _pathStreamingWeb = @"file://" + Application.streamingAssetsPath;
+            _pathPersistentWeb = @"file://" + _pathPersistent;
 #elif UNITY_ANDROID
-		    pathStreamingWeb = Application.streamingAssetsPath;
-            pathPersistentWeb = "file://" + pathPersistent;
+		    _pathStreamingWeb = Application.streamingAssetsPath;
+            _pathPersistentWeb = "file://" + _pathPersistent;
 #else
-            pathStreamingWeb = "file://" + Application.streamingAssetsPath;
-            pathPersistentWeb = pathPersistent;
+            _pathStreamingWeb = "file://" + Application.streamingAssetsPath;
+            _pathPersistentWeb = _pathPersistent;
 #endif
-            Debug.Log("streaming web 地址：" + pathStreamingWeb);
-            Debug.Log("Persistent web 地址：" + pathPersistentWeb);
+            Debug.Log("Streaming web 地址：" + _pathStreamingWeb);
+            Debug.Log("Persistent web 地址：" + _pathPersistentWeb);
         }
 
         /// <summary>
@@ -57,14 +54,14 @@ namespace LccModel
         {
             get
             {
-                return pathStreamingWeb;
+                return _pathStreamingWeb;
             }
         }
         public static string ResPersistentPathWeb
         {
             get
             {
-                return pathPersistentWeb;
+                return _pathPersistentWeb;
             }
         }
 
@@ -79,72 +76,73 @@ namespace LccModel
             }
         }
 
-        public static string StreamingPath(string bundleName)
+        public static string StreamingPath(string name)
         {
-            lock (build)
+            lock (_build)
             {
-                build.Clear();
-                build.Append(ResStreamingPathAB);
-                build.Append(Path.DirectorySeparatorChar);
-                build.Append(platformDirectory);
-                build.Append(Path.DirectorySeparatorChar);
-                build.Append(bundleName.ToLower());
-                return build.ToString();
+                _build.Clear();
+                _build.Append(ResStreamingPathAB);
+                _build.Append(Path.DirectorySeparatorChar);
+                _build.Append(PlatformDirectory);
+                _build.Append(Path.DirectorySeparatorChar);
+                _build.Append(name.ToLower());
+                return _build.ToString();
             }
         }
 
-        public static string StreamingPathWeb(string bundleName)
+        public static string StreamingPathWeb(string name)
         {
-            lock (build)
+            lock (_build)
             {
-                build.Clear();
-                build.Append(ResStreamingPathWeb);
-                build.Append(Path.DirectorySeparatorChar);
-                build.Append(platformDirectory);
-                build.Append(Path.DirectorySeparatorChar);
-                build.Append(bundleName.ToLower());
-                return build.ToString();
+                _build.Clear();
+                _build.Append(ResStreamingPathWeb);
+                _build.Append(Path.DirectorySeparatorChar);
+                _build.Append(PlatformDirectory);
+                _build.Append(Path.DirectorySeparatorChar);
+                _build.Append(name.ToLower());
+                return _build.ToString();
             }
         }
-        public static string PersistentPath(string bundleName)
+        public static string PersistentPath(string name)
         {
-            lock (build)
+            lock (_build)
             {
-                build.Clear();
-                build.Append(pathPersistent);
-                build.Append(platformDirectory);
-                build.Append(Path.DirectorySeparatorChar);
-                build.Append(bundleName.ToLower());
-                return build.ToString();
+                _build.Clear();
+                _build.Append(_pathPersistent);
+                _build.Append(PlatformDirectory);
+                _build.Append(Path.DirectorySeparatorChar);
+                _build.Append(name.ToLower());
+                return _build.ToString();
             }
         }
-        public static string PersistentPathWeb(string bundleName)
+        public static string PersistentPathWeb(string name)
         {
-            lock (build)
+            lock (_build)
             {
-                build.Clear();
-                build.Append(ResPersistentPathWeb);
-                build.Append(platformDirectory);
-                build.Append(Path.DirectorySeparatorChar);
-                build.Append(bundleName.ToLower());
-                return build.ToString();
+                _build.Clear();
+                _build.Append(ResPersistentPathWeb);
+                _build.Append(PlatformDirectory);
+                _build.Append(Path.DirectorySeparatorChar);
+                _build.Append(name.ToLower());
+                return _build.ToString();
             }
         }
 
         public static string PersistentDirectory()
         {
-            lock (build)
+            lock (_build)
             {
-                build.Clear();
-                build.Append(pathPersistent);
-                build.Append(platformDirectory);
-                return build.ToString();
+                _build.Clear();
+                _build.Append(_pathPersistent);
+                _build.Append(PlatformDirectory);
+                return _build.ToString();
             }
         }
 
         public static string RuntimePlatformDirectory()
         {
-            if (!string.IsNullOrEmpty(platStr)) return platStr;
+            if (!string.IsNullOrEmpty(_platStr))
+                return _platStr;
 #if UNITY_EDITOR
             BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
             switch (target)
