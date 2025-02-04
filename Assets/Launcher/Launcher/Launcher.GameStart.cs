@@ -179,7 +179,7 @@ namespace LccModel
             else if (Application.platform == RuntimePlatform.IPhonePlayer)
                 return "IOS";
             else
-                return "PC";
+                return "Windows";
 #endif
 
         }
