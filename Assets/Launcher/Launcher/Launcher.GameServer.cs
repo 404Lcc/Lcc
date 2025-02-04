@@ -39,7 +39,7 @@ namespace LccModel
         {
             requestCenterServerSucc = false;
 
-            string url = $"{GameConfig.centerServerAddress}/{(Launcher.GameConfig.isRelease ? "Release" : "Dev")}/{Launcher.Instance.GetPlatform()}/channelList.txt";
+            string url = $"{GameConfig.centerServerAddress}/{(Launcher.GameConfig.isRelease ? "Release" : "Dev")}/{ResPath.PlatformDirectory}/channelList.txt";
             Debug.Log("RequestCenterServer=" + url);
 
             UnityWebRequest web = UnityWebRequest.Get(url);
@@ -81,7 +81,7 @@ namespace LccModel
         {
             requestCenterServerSucc = false;
 
-            string url = $"{GameConfig.centerServerAddress}/{(Launcher.GameConfig.isRelease ? "Release" : "Dev")}/{Launcher.Instance.GetPlatform()}/versionList.txt";
+            string url = $"{GameConfig.centerServerAddress}/{(Launcher.GameConfig.isRelease ? "Release" : "Dev")}/{ResPath.PlatformDirectory}/versionList.txt";
             Debug.Log("GetRemoteVersionList=" + url);
 
             UnityWebRequest web = UnityWebRequest.Get(url);

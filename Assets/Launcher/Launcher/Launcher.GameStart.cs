@@ -163,28 +163,6 @@ namespace LccModel
             Debug.Log("Launcher 开启补丁更新流程...");
             patchOperation.Run();
         }
-
-        public string GetPlatform()
-        {
-#if UNITY_EDITOR
-            if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.Android)
-                return "Android";
-            else if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.iOS)
-                return "IOS";
-            else
-                return "Android";
-#else
-            if (Application.platform == RuntimePlatform.Android)
-                return "Android";
-            else if (Application.platform == RuntimePlatform.IPhonePlayer)
-                return "IOS";
-            else
-                return "Windows";
-#endif
-
-        }
-
-
         public void LoadFinish()
         {
             GameStarted = true;
