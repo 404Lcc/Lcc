@@ -68,7 +68,6 @@
     <Compile Include="Assets\Launcher\Event\EventDriver.cs" />
     <Compile Include="Assets\Launcher\UGUIExpand\LongClickButton.cs" />
     <Compile Include="Assets\Launcher\Utility\MD5\MD5Utility.cs" />
-    <Compile Include="Assets\Launcher\Utility\Path\PathUtility.cs" />
     <Compile Include="Assets\Launcher\UI\ScreenBackgroundMessage\UIScreenBackgroundMessage.cs" />
     <Compile Include="Assets\Launcher\Utility\Protobuf\ProtobufUtility.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\PatchOperation.cs" />
@@ -80,6 +79,7 @@
     <Compile Include="Assets\Launcher\Math\OBB.cs" />
     <Compile Include="Assets\Launcher\Event\IEventMessage.cs" />
     <Compile Include="Assets\Launcher\Utility\File\FileUtility.cs" />
+    <Compile Include="Assets\Launcher\Utility\Path\ResPath.cs" />
     <Compile Include="Assets\Launcher\Launcher\Init.cs" />
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.Version.cs" />
     <Compile Include="Assets\Launcher\UI\ForeGround\UIForeGroundPanel.cs" />
@@ -110,7 +110,6 @@
     <Compile Include="Assets\Launcher\System\OpenFileName.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmPatchDone.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.GameConfig.cs" />
-    <Compile Include="Assets\Launcher\Utility\Path\PathType.cs" />
     <Compile Include="Assets\Launcher\Machine\StateMachine.cs" />
     <Compile Include="Assets\Launcher\Asset\ResGameObject.cs" />
     <Compile Include="Assets\Launcher\ScrollerPro\ScrollerProEx.cs" />

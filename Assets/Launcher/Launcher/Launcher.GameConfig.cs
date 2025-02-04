@@ -23,7 +23,7 @@ namespace LccModel
         }
         private IEnumerator LoadBuildConfig()
         {
-            string configUrl = PathUtility.GetStreamingAssetsPathWeb(ConfigBuild);
+            string configUrl = $"{ResPath.ResStreamingPathWeb}/{ConfigBuild}";
             UnityWebRequest req = UnityWebRequest.Get(configUrl);
             yield return req.SendWebRequest();
             if (!string.IsNullOrEmpty(req.error))
@@ -46,7 +46,7 @@ namespace LccModel
         }
         private IEnumerator LoadVersionConfig()
         {
-            string configUrl = PathUtility.GetStreamingAssetsPathWeb(ConfigVersion);
+            string configUrl = $"{ResPath.ResStreamingPathWeb}/{ConfigVersion}";
             UnityWebRequest req = UnityWebRequest.Get(configUrl);
             yield return req.SendWebRequest();
             if (!string.IsNullOrEmpty(req.error))
@@ -72,7 +72,7 @@ namespace LccModel
 
         public IEnumerator LoadLanguageConfig()
         {
-            string configUrl = PathUtility.GetStreamingAssetsPathWeb(ConfigLanguage);
+            string configUrl = $"{ResPath.ResStreamingPathWeb}/{ConfigLanguage}";
             UnityWebRequest req = UnityWebRequest.Get(configUrl);
             yield return req.SendWebRequest();
             if (!string.IsNullOrEmpty(req.error))

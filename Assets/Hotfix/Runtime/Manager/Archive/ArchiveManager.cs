@@ -40,7 +40,7 @@ namespace LccHotfix
 
         public bool UserDataExist(string name = "user")
         {
-            FileInfo fileInfo = new FileInfo($"{PathUtility.GetPersistentDataPath(Res)}/{name}{Suffix}");
+            FileInfo fileInfo = new FileInfo($"{ResPath.PersistentPath(Res)}/{name}{Suffix}");
             if (fileInfo.Exists)
             {
                 return true;
@@ -52,7 +52,7 @@ namespace LccHotfix
             if (_userData != null) return _userData;
             if (UserDataExist(name))
             {
-                string value = RijndaelUtility.RijndaelDecrypt(_key, FileUtility.GetAsset($"{PathUtility.GetPersistentDataPath(Res)}/{name}{Suffix}").Utf8ToStr());
+                string value = RijndaelUtility.RijndaelDecrypt(_key, FileUtility.GetAsset($"{ResPath.PersistentPath(Res)}/{name}{Suffix}").Utf8ToStr());
                 _userData = JsonUtility.ToObject<UserData>(value);
                 return _userData;
             }
@@ -61,20 +61,20 @@ namespace LccHotfix
         public void SaveUserData(string name = "user")
         {
             string value = RijndaelUtility.RijndaelEncrypt(_key, JsonUtility.ToJson(_userData));
-            FileUtility.SaveAsset($"{PathUtility.GetPersistentDataPath(Res)}/{name}{Suffix}", value);
+            FileUtility.SaveAsset($"{ResPath.PersistentPath(Res)}/{name}{Suffix}", value);
         }
         public void DeleteUserData(string name = "user")
         {
             if (UserDataExist(name))
             {
-                FileInfo fileInfo = new FileInfo($"{PathUtility.GetPersistentDataPath(Res)}/{name}{Suffix}");
+                FileInfo fileInfo = new FileInfo($"{ResPath.PersistentPath(Res)}/{name}{Suffix}");
                 fileInfo.Delete();
                 _userData = null;
             }
         }
         public bool UserSetDataExist()
         {
-            FileInfo fileInfo = new FileInfo($"{PathUtility.GetPersistentDataPath(Res)}/UserSet{Suffix}");
+            FileInfo fileInfo = new FileInfo($"{ResPath.PersistentPath(Res)}/UserSet{Suffix}");
             if (fileInfo.Exists)
             {
                 return true;
@@ -86,7 +86,7 @@ namespace LccHotfix
             if (_userSetData != null) return _userSetData;
             if (UserSetDataExist())
             {
-                string value = RijndaelUtility.RijndaelDecrypt(_key, FileUtility.GetAsset($"{PathUtility.GetPersistentDataPath(Res)}/UserSet{Suffix}").Utf8ToStr());
+                string value = RijndaelUtility.RijndaelDecrypt(_key, FileUtility.GetAsset($"{ResPath.PersistentPath(Res)}/UserSet{Suffix}").Utf8ToStr());
                 _userSetData = JsonUtility.ToObject<UserSetData>(value);
                 return _userSetData;
             }
@@ -95,20 +95,20 @@ namespace LccHotfix
         public void SaveUserSetData()
         {
             string value = RijndaelUtility.RijndaelEncrypt(_key, JsonUtility.ToJson(_userSetData));
-            FileUtility.SaveAsset($"{PathUtility.GetPersistentDataPath(Res)}/UserSet{Suffix}", value);
+            FileUtility.SaveAsset($"{ResPath.PersistentPath(Res)}/UserSet{Suffix}", value);
         }
         public void DeleteUserSetData()
         {
             if (UserSetDataExist())
             {
-                FileInfo fileInfo = new FileInfo($"{PathUtility.GetPersistentDataPath(Res)}/UserSet{Suffix}");
+                FileInfo fileInfo = new FileInfo($"{ResPath.PersistentPath(Res)}/UserSet{Suffix}");
                 fileInfo.Delete();
                 _userSetData = null;
             }
         }
         public void DeleteAll()
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(PathUtility.GetPersistentDataPath(Res));
+            DirectoryInfo directoryInfo = new DirectoryInfo(ResPath.PersistentPath(Res));
             if (directoryInfo.Exists)
             {
                 directoryInfo.Delete();

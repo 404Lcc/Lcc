@@ -30,6 +30,27 @@
             "BundleID": 1
         },
         {
+            "Address": "tbicon",
+            "AssetPath": "Assets/Res/Config/tbicon.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "tblanguage",
+            "AssetPath": "Assets/Res/Config/tblanguage.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "tbmultilanguagetexture",
+            "AssetPath": "Assets/Res/Config/tbmultilanguagetexture.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
             "Address": "tbpopupwindow",
             "AssetPath": "Assets/Res/Config/tbpopupwindow.json",
             "AssetGUID": "",
@@ -46,6 +67,13 @@
         {
             "Address": "tbsubobject",
             "AssetPath": "Assets/Res/Config/tbsubobject.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "tbtexture",
+            "AssetPath": "Assets/Res/Config/tbtexture.json",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 1
@@ -77,6 +105,20 @@
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 3
+        },
+        {
+            "Address": "logoSprite",
+            "AssetPath": "Assets/Res/Sprite/logoSprite.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 4
+        },
+        {
+            "Address": "logoTexture",
+            "AssetPath": "Assets/Res/Texture/logoTexture.png",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 5
         }
     ],
     "BundleList": [
@@ -95,7 +137,7 @@
             "UnityCRC": 0,
             "FileHash": "8e0b78f87b215ffbe6445533f7090724",
             "FileCRC": "00000000",
-            "FileSize": 1322,
+            "FileSize": 1988,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -105,7 +147,7 @@
             "UnityCRC": 0,
             "FileHash": "083e6a08c2f0ee41263a000e26338562",
             "FileCRC": "00000000",
-            "FileSize": 463804,
+            "FileSize": 562344,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -116,6 +158,26 @@
             "FileHash": "055d5a75776c06f58a2b3db29540d0d7",
             "FileCRC": "00000000",
             "FileSize": 28125,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "assets_res_sprite.bundle",
+            "UnityCRC": 0,
+            "FileHash": "a632e1d9aefc12900490f30786bfbc6b",
+            "FileCRC": "00000000",
+            "FileSize": 19198,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "assets_res_texture.bundle",
+            "UnityCRC": 0,
+            "FileHash": "1d32810699a9eec26b0346cc050e782d",
+            "FileCRC": "00000000",
+            "FileSize": 19198,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []

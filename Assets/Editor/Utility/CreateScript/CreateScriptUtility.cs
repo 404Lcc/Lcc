@@ -33,7 +33,7 @@ namespace LccEditor
         public static string GetSelectedPath()
         {
             //默认路径为Assets
-            string selectedPath = PathUtility.GetDataPath();
+            string selectedPath = Application.dataPath;
             //遍历选中的资源以返回路径
             foreach (Object item in Selection.GetFiltered(typeof(Object), SelectionMode.Assets))
             {

@@ -72,6 +72,7 @@ namespace LccModel
         }
         public void StartLoad()
         {
+            ResPath.InitPath();
             StartCoroutine(LoadLocalConfig());
         }
 

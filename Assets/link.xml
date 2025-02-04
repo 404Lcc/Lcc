@@ -4697,8 +4697,7 @@
     <type fullname="LccModel.FileUtility" preserve="all" />
     <type fullname="LccModel.JsonUtility" preserve="all" />
     <type fullname="LccModel.MD5Utility" preserve="all" />
-    <type fullname="LccModel.PathType" preserve="all" />
-    <type fullname="LccModel.PathUtility" preserve="all" />
+    <type fullname="LccModel.ResPath" preserve="all" />
     <type fullname="LccModel.ProtobufUtility" preserve="all" />
     <type fullname="LccModel.RijndaelUtility" preserve="all" />
     <type fullname="LccModel.SerializeUtility" preserve="all" />
@@ -4736,7 +4735,7 @@
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel+&lt;&gt;c__DisplayClass6_0" preserve="all" />
     <type fullname="LccModel.UILoadingPanel+&lt;&gt;c" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2610" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3978" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2606" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3974" preserve="all" />
   </assembly>
 </linker>
