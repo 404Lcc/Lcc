@@ -33,6 +33,10 @@ namespace LccHotfix
         public void ReadArchive(string key)
         {
             _key = key;
+            if (!Directory.Exists(ResPath.PersistentPath(Res)))
+            {
+                Directory.CreateDirectory(ResPath.PersistentPath(Res));
+            }
             _userData = GetUserData();
             _userSetData = GetUserSetData();
         }
