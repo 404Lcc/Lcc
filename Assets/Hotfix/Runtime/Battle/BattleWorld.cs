@@ -144,7 +144,8 @@ namespace LccHotfix
 
             //显示
             System.Add(new SysViewUpdate(this));
-
+            System.Add(new SysSyncViewTransform(this));
+            
             //生命周期
             System.Add(new SysLife(this));
             System.Add(new SysDeathProcess(this));
