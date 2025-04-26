@@ -28,10 +28,10 @@ namespace LccHotfix
             _world = null;
         }
 
-        public void CreateWorld<T>() where T : ECSWorld
+        public void CreateWorld<T>(GameModeState gameModeState) where T : ECSWorld
         {
             _world = Activator.CreateInstance<T>();
-            _world.InitWorld();
+            _world.InitWorld(gameModeState);
         }
 
         public ECSWorld GetWorld()

@@ -8,6 +8,7 @@ namespace LccHotfix
     public class ECSWorld
     {
         private bool _pause = false;
+        protected GameModeState _gameModeState;
 
         public bool IsPause => _pause;
         public LogicContext LogicContext { get; private set; }
@@ -15,8 +16,9 @@ namespace LccHotfix
         public List<IContext> ContextList { get; private set; }
         public LogicSystems System { get; private set; }
 
-        public virtual void InitWorld()
+        public virtual void InitWorld(GameModeState gameModeState)
         {
+            _gameModeState = gameModeState;
             LogicComponentsLookup.componentTypeList = new List<Type>();
             MetaComponentsLookup.componentTypeList = new List<Type>();
             Setup();

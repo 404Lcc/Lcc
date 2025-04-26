@@ -25,14 +25,20 @@ namespace LccHotfix
         {
             base.Release();
 
-            GameObject.Destroy(data.map);
-            data.map = null;
+            GameObject.Destroy(data.Map);
         }
     }
+
     public class BattleGameModeState : GameModeState
     {
-        public GameObject map;
+        public GameObject Map { get; private set; }
+
+        public void Init(GameObject map)
+        {
+            this.Map = map;
+        }
     }
+
     public class BattleWorld : ECSWorld
     {
         protected override void Setup()
@@ -55,19 +61,40 @@ namespace LccHotfix
             MetaComponentsLookup.ComUniGameMode = 0;
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniGameMode));
 
-
             //战斗部分
-            LogicComponentsLookup.ComView = 5;
-            LogicComponentsLookup.ComTransform = 6;
-            LogicComponentsLookup.ComFSM = 7;
-            LogicComponentsLookup.ComLife = 8;
-            LogicComponentsLookup.ComDeath = 9;
+            LogicComponentsLookup.ComLocomotion = 5;
+            LogicComponentsLookup.ComCollider = 6;
+            LogicComponentsLookup.ComView = 7;
+            LogicComponentsLookup.ComTransform = 8;
+            LogicComponentsLookup.ComFSM = 9;
+            LogicComponentsLookup.ComLife = 10;
+            LogicComponentsLookup.ComDeath = 11;
+            LogicComponentsLookup.ComProperty = 12;
+            LogicComponentsLookup.ComHP = 13;
+            LogicComponentsLookup.ComSkills = 14;
+            LogicComponentsLookup.ComSkillProcess = 15;
+            LogicComponentsLookup.ComBuffs = 16;
+            LogicComponentsLookup.ComSubobject = 17;
+            LogicComponentsLookup.ComControl = 18;
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComLocomotion));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComCollider));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComView));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComTransform));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComFSM));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComLife));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComDeath));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComProperty));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComHP));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComSkills));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComSkillProcess));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComBuffs));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComSubobject));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComControl));
+
+            MetaComponentsLookup.ComUniDamage = 1;
+            MetaComponentsLookup.componentTypeList.Add(typeof(ComUniDamage));
         }
+
         protected override void InitializeEntityIndices()
         {
             base.InitializeEntityIndices();
@@ -84,19 +111,18 @@ namespace LccHotfix
             base.InitComponent();
 
             var mode = new BattleGameMode();
-
-            var state = new BattleGameModeState();
-            state.gameModeType = GameModeType.Battle;
-            state.map = new GameObject("Battle");
-
-            mode.Init(state);
+            mode.Init(_gameModeState);
             MetaContext.SetComUniGameMode(mode);
 
             MetaContext.SetComUniDamage(new DamageBase());
         }
+
         protected override void InitSystem()
         {
             base.InitSystem();
+
+            //控制
+            System.Add(new SysControl(this));
 
             //技能
             System.Add(new SysSkillCD(this));
