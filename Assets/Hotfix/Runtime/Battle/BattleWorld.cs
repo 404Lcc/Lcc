@@ -92,7 +92,9 @@ namespace LccHotfix
             LogicComponentsLookup.componentTypeList.Add(typeof(ComControl));
 
             MetaComponentsLookup.ComUniDamage = 1;
+            MetaComponentsLookup.ComUniCameraBlender = 2;
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniDamage));
+            MetaComponentsLookup.componentTypeList.Add(typeof(ComUniCameraBlender));
         }
 
         protected override void InitializeEntityIndices()

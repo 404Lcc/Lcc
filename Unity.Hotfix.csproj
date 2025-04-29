@@ -88,6 +88,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Input\InputManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Image\ImageExtension.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComUniCameraBlender\ComUniCameraBlender.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicComponentsLookup.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Vector3\Vector3Extension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\GameObjectPool.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Texture.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComTimer.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComUniCameraBlender\ICameraBlender.cs" />
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\Binding\Binding.cs" />
     <Compile Include="Assets\Hotfix\Core\Utility\MarshalUtility.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventArgs.cs" />
