@@ -7,9 +7,9 @@ namespace LccHotfix
     public partial class MetaContext
     {
 
-        public MetaEntity ComUniDamageEntity { get { return GetGroup(MetaMatcher.ComUniDamage).GetSingleEntity(); } }
-        public ComUniDamage ComUniDamage { get { return ComUniDamageEntity.ComUniDamage; } }
-        public bool hasComUniDamage { get { return ComUniDamageEntity != null; } }
+        public MetaEntity comUniDamageEntity { get { return GetGroup(MetaMatcher.ComUniDamage).GetSingleEntity(); } }
+        public ComUniDamage comUniDamage { get { return comUniDamageEntity.comUniDamage; } }
+        public bool hasComUniDamage { get { return comUniDamageEntity != null; } }
 
         public MetaEntity SetComUniDamage(DamageBase damage)
         {
@@ -30,7 +30,7 @@ namespace LccHotfix
     public partial class MetaEntity
     {
 
-        public ComUniDamage ComUniDamage { get { return (ComUniDamage)GetComponent(MetaComponentsLookup.ComUniDamage); } }
+        public ComUniDamage comUniDamage { get { return (ComUniDamage)GetComponent(MetaComponentsLookup.ComUniDamage); } }
         public bool hasComUniDamage { get { return HasComponent(MetaComponentsLookup.ComUniDamage); } }
 
         public void AddComUniDamage(DamageBase damage)
