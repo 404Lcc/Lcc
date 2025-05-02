@@ -59,7 +59,9 @@ namespace LccHotfix
             LogicComponentsLookup.componentTypeList.Add(typeof(ComUnityObjectRelated));
 
             MetaComponentsLookup.ComUniGameMode = 0;
+            MetaComponentsLookup.ComUniCameraBlender = 1;
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniGameMode));
+            MetaComponentsLookup.componentTypeList.Add(typeof(ComUniCameraBlender));
 
             //战斗部分
             LogicComponentsLookup.ComLocomotion = 5;
@@ -91,10 +93,8 @@ namespace LccHotfix
             LogicComponentsLookup.componentTypeList.Add(typeof(ComSubobject));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComControl));
 
-            MetaComponentsLookup.ComUniDamage = 1;
-            MetaComponentsLookup.ComUniCameraBlender = 2;
+            MetaComponentsLookup.ComUniDamage = 2;
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniDamage));
-            MetaComponentsLookup.componentTypeList.Add(typeof(ComUniCameraBlender));
         }
 
         protected override void InitializeEntityIndices()
@@ -115,7 +115,8 @@ namespace LccHotfix
             var mode = new BattleGameMode();
             mode.Init(_gameModeState);
             MetaContext.SetComUniGameMode(mode);
-
+            // MetaContext.SetComUniCameraBlender();
+            
             MetaContext.SetComUniDamage(new DamageBase());
         }
 
@@ -123,38 +124,9 @@ namespace LccHotfix
         {
             base.InitSystem();
 
-            //控制
-            System.Add(new SysControl(this));
-
-            //技能
-            System.Add(new SysSkillCD(this));
-            System.Add(new SysSkillProcess(this));
-
-            //buff
-            System.Add(new SysBuffs(this));
-
-            //子物体
-            System.Add(new SysSubobject(this));
-
-            //状态机
-            System.Add(new SysFSM(this));
-
-            //移动
-            System.Add(new SysLocomotion(this));
-            //碰撞
-            System.Add(new SysCollision(this));
-
-            //显示
-            System.Add(new SysViewUpdate(this));
-            System.Add(new SysSyncViewTransform(this));
-            
-            //生命周期
-            System.Add(new SysLife(this));
-            System.Add(new SysDeathProcess(this));
-
-
-            //游戏模式
-            System.Add(new SysGameMode(this));
+            this.AddRender();
+            this.AddDeath();
+            this.AddBattle();
         }
     }
 }

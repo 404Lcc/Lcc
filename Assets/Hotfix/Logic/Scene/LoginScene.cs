@@ -1,5 +1,6 @@
 using LccModel;
 using System.Collections;
+using UnityEngine;
 
 namespace LccHotfix
 {
@@ -11,6 +12,7 @@ namespace LccHotfix
             sceneType = SceneType.Login;
             loadType = LoadingType.Fast;
         }
+
         public override void SceneStartHandler()
         {
             base.SceneStartHandler();
@@ -25,29 +27,33 @@ namespace LccHotfix
             UILoadingPanel.Instance.SetStartLoadingBg();
 
 
-            this.StartCoroutine(LoadReadyForShow());
+            this.StartCoroutine(LoadSceneCoroutine());
         }
-        // 初始化显示
-        private IEnumerator LoadReadyForShow()
-        {
-            yield return null;
-            StartLevel();
 
-        }
-        public void StartLevel()
+        // 初始化显示
+        private IEnumerator LoadSceneCoroutine()
         {
+            yield return LevelStartWaiting();
+        }
+
+        // 开启场景后屏蔽操作，等待0.5秒钟弹出弹窗
+        IEnumerator LevelStartWaiting()
+        {
+            WindowManager.Instance.ShowMaskBox((int)MaskType.CHANGE_SCENE, true);
+            yield return new WaitForSecondsRealtime(1f);
+            WindowManager.Instance.ShowMaskBox((int)MaskType.CHANGE_SCENE, false);
+
             SceneLoadEndHandler();
 
-            //GetLoginResult
             WindowManager.Instance.OpenWindow<UILoginPanel>(UIWindowDefine.UILoginPanel);
-
-
         }
+
         public override void Tick()
         {
             base.Tick();
             Log.Debug("login update");
         }
+
         public override void SceneExitHandler()
         {
             base.SceneExitHandler();

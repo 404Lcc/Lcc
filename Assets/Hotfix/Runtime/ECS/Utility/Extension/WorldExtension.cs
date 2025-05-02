@@ -29,5 +29,54 @@ namespace LccHotfix
         {
             return world.GetEntityIndex<ComUnityObjectRelated, GroupEntityIndex<LogicEntity, int>>().GetEntity(gameObjectInstanceID);
         }
+
+        public static void AddBattle(this ECSWorld world)
+        {
+            LogicSystems System = world.System;
+
+            //控制
+            System.Add(new SysControl(world));
+
+            //技能
+            System.Add(new SysSkillCD(world));
+            System.Add(new SysSkillProcess(world));
+
+            //buff
+            System.Add(new SysBuffs(world));
+
+            //子物体
+            System.Add(new SysSubobject(world));
+
+            //状态机
+            System.Add(new SysFSM(world));
+
+            //移动
+            System.Add(new SysLocomotion(world));
+
+            //碰撞
+            System.Add(new SysCollision(world));
+
+            //游戏模式
+            System.Add(new SysGameMode(world));
+        }
+
+        public static void AddRender(this ECSWorld world)
+        {
+            LogicSystems System = world.System;
+            //显示
+            System.Add(new SysSyncViewTransform(world));
+            System.Add(new SysViewUpdate(world));
+
+            System.Add(new SysCameraBlender(world));
+        }
+
+
+        public static void AddDeath(this ECSWorld world)
+        {
+            LogicSystems System = world.System;
+            //生命周期
+            System.Add(new SysLife(world));
+            System.Add(new SysDeathProcess(world));
+        }
     }
 }
