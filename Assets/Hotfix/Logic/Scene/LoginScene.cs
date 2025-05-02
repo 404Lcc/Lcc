@@ -26,6 +26,7 @@ namespace LccHotfix
             //进入游戏
             UILoadingPanel.Instance.SetStartLoadingBg();
 
+            WindowManager.Instance.OpenWindow<UILoginPanel>(UIWindowDefine.UILoginPanel);
 
             this.StartCoroutine(LoadSceneCoroutine());
         }
@@ -44,8 +45,6 @@ namespace LccHotfix
             WindowManager.Instance.ShowMaskBox((int)MaskType.CHANGE_SCENE, false);
 
             SceneLoadEndHandler();
-
-            WindowManager.Instance.OpenWindow<UILoginPanel>(UIWindowDefine.UILoginPanel);
         }
 
         public override void Tick()
