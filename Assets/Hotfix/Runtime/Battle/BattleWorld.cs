@@ -1,5 +1,6 @@
 using Entitas;
 using System.Linq;
+using LccModel;
 using UnityEngine;
 
 namespace LccHotfix
@@ -15,10 +16,18 @@ namespace LccHotfix
             data = state as BattleGameModeState;
         }
 
+        public override void InitFSM()
+        {
+            base.InitFSM();
+            FSM.SetBlackboardValue("GameMode", this);
+            FSM.AddNode<BattleStartState>();
+        }
+
         public override void Start()
         {
             base.Start();
 
+            FSM.Run<BattleStartState>();
         }
 
         public override void Release()
@@ -60,8 +69,10 @@ namespace LccHotfix
 
             MetaComponentsLookup.ComUniGameMode = 0;
             MetaComponentsLookup.ComUniCameraBlender = 1;
+            MetaComponentsLookup.ComUniDamage = 2;
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniGameMode));
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniCameraBlender));
+            MetaComponentsLookup.componentTypeList.Add(typeof(ComUniDamage));
 
             //战斗部分
             LogicComponentsLookup.ComLocomotion = 5;
@@ -92,9 +103,7 @@ namespace LccHotfix
             LogicComponentsLookup.componentTypeList.Add(typeof(ComBuffs));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComSubobject));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComControl));
-
-            MetaComponentsLookup.ComUniDamage = 2;
-            MetaComponentsLookup.componentTypeList.Add(typeof(ComUniDamage));
+            
         }
 
         protected override void InitializeEntityIndices()
@@ -116,7 +125,7 @@ namespace LccHotfix
             mode.Init(_gameModeState);
             MetaContext.SetComUniGameMode(mode);
             // MetaContext.SetComUniCameraBlender();
-            
+
             MetaContext.SetComUniDamage(new DamageBase());
         }
 

@@ -3,8 +3,8 @@ namespace LccHotfix
     public enum FactionType
     {
         None = 0,
-        Player = 1,
-        Enemy = 2,
+        Friend = 1,//友方
+        Enemy = 2,//敌方
     }
 
     public class ComFaction : LogicComponent

@@ -5,7 +5,7 @@ namespace LccHotfix
     [Flags]
     public enum TagType
     {
-        MainPlayer = 1 << 0, //当前客户端操作的对象 1
+        Hero = 1 << 0, //英雄对象 1
     }
 
     public class ComTag : LogicComponent
