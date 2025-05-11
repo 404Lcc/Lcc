@@ -71,7 +71,6 @@
     <Compile Include="Assets\Hotfix\Core\Base\Module.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Skill\SkillData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\System\SysControl.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComInGamePlayers.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\BattleWorld.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\GameObjectPoolObject.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Audio\AudioManager.cs" />
@@ -194,9 +193,9 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\GameObjectPoolManager.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIRoot\UIRootLogin.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\TBLanguage.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UIDefine.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\Action\ActionWrap.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComOwnerPlayer.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\Action\ActionWrap.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\UI\UILogic\UIDefine.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\IReference.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\TBPopupWindow.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComUnityObjectRelated.cs" />
@@ -221,6 +220,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\KVContext\KVContext.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventPool\EventPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\ValuePropertyType.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComUniInGamePlayers.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComID.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Awaiter\AsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\TBBuffValue.cs" />

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Entitas;
 using System.Linq;
 using LccModel;
@@ -70,9 +71,11 @@ namespace LccHotfix
             MetaComponentsLookup.ComUniGameMode = 0;
             MetaComponentsLookup.ComUniCameraBlender = 1;
             MetaComponentsLookup.ComUniDamage = 2;
+            MetaComponentsLookup.ComUniInGamePlayers = 3;
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniGameMode));
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniCameraBlender));
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniDamage));
+            MetaComponentsLookup.componentTypeList.Add(typeof(ComUniInGamePlayers));
 
             //战斗部分
             LogicComponentsLookup.ComLocomotion = 5;
@@ -89,6 +92,7 @@ namespace LccHotfix
             LogicComponentsLookup.ComBuffs = 16;
             LogicComponentsLookup.ComSubobject = 17;
             LogicComponentsLookup.ComControl = 18;
+            LogicComponentsLookup.ComOwnerPlayer = 19;
             LogicComponentsLookup.componentTypeList.Add(typeof(ComLocomotion));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComCollider));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComView));
@@ -103,7 +107,9 @@ namespace LccHotfix
             LogicComponentsLookup.componentTypeList.Add(typeof(ComBuffs));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComSubobject));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComControl));
-            
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComOwnerPlayer));
+
+            //自定义
         }
 
         protected override void InitializeEntityIndices()
@@ -124,9 +130,9 @@ namespace LccHotfix
             var mode = new BattleGameMode();
             mode.Init(_gameModeState);
             MetaContext.SetComUniGameMode(mode);
-            // MetaContext.SetComUniCameraBlender();
-
+            // MetaContext.SetComUniCameraBlender(new SmoothFoolow2D());
             MetaContext.SetComUniDamage(new DamageBase());
+            MetaContext.SetComUniInGamePlayers(new List<InGamePlayerInfo>());
         }
 
         protected override void InitSystem()

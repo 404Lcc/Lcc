@@ -13,7 +13,7 @@ namespace LccHotfix
     }
 
 
-    public class ComInGamePlayers : MetaComponent
+    public class ComUniInGamePlayers : MetaComponent
     {
         public List<InGamePlayerInfo> PlayerInfoList { get; private set; } = new List<InGamePlayerInfo>();
         public InGamePlayerInfo LocalPlayerInfo { get; private set; }
@@ -40,17 +40,19 @@ namespace LccHotfix
 
         public override void Dispose()
         {
+            base.Dispose();
+
             PlayerInfoList.Clear();
             LocalPlayerInfo = null;
         }
 
-        public InGamePlayerInfo GetPlayerInfo(long playerUid)
+        public InGamePlayerInfo GetPlayerInfo(long playerUID)
         {
-            foreach (var info in PlayerInfoList)
+            foreach (var item in PlayerInfoList)
             {
-                if (info.PlayerUID == playerUid)
+                if (item.PlayerUID == playerUID)
                 {
-                    return info;
+                    return item;
                 }
             }
 
@@ -60,43 +62,43 @@ namespace LccHotfix
 
     public partial class MetaContext
     {
-        public MetaEntity comInGamePlayersEntity
+        public MetaEntity comUniInGamePlayersEntity
         {
-            get { return GetGroup(MetaMatcher.ComInGamePlayers).GetSingleEntity(); }
+            get { return GetGroup(MetaMatcher.ComUniInGamePlayers).GetSingleEntity(); }
         }
 
-        public ComInGamePlayers comInGamePlayers
+        public ComUniInGamePlayers comUniInGamePlayers
         {
-            get { return comInGamePlayersEntity.comUniPlayers; }
+            get { return comUniInGamePlayersEntity.comUniInGamePlayers; }
         }
 
-        public bool hasComUniPlayers
+        public bool hasComUniInGamePlayers
         {
-            get { return comInGamePlayersEntity != null; }
+            get { return comUniInGamePlayersEntity != null; }
         }
 
-        public MetaEntity SetComInGamePlayers(List<InGamePlayerInfo> playerInfoList)
+        public MetaEntity SetComUniInGamePlayers(List<InGamePlayerInfo> playerInfoList)
         {
-            if (hasComUniPlayers)
+            if (hasComUniInGamePlayers)
             {
-                var entity = comInGamePlayersEntity;
-                entity.ReplaceComInGamePlayers(playerInfoList);
+                var entity = comUniInGamePlayersEntity;
+                entity.ReplaceComUniInGamePlayers(playerInfoList);
                 return entity;
             }
             else
             {
                 var entity = CreateEntity();
-                entity.AddComInGamePlayers(playerInfoList);
+                entity.AddComUniInGamePlayers(playerInfoList);
                 return entity;
             }
         }
 
         public InGamePlayerInfo GetPlayerInfo(long playerUID)
         {
-            if (hasComUniPlayers)
+            if (hasComUniInGamePlayers)
             {
-                var entity = comInGamePlayersEntity;
-                return entity.comUniPlayers.GetPlayerInfo(playerUID);
+                var entity = comUniInGamePlayersEntity;
+                return entity.comUniInGamePlayers.GetPlayerInfo(playerUID);
             }
 
             return null;
@@ -116,62 +118,62 @@ namespace LccHotfix
 
     public partial class MetaEntity
     {
-        public ComInGamePlayers comUniPlayers
+        public ComUniInGamePlayers comUniInGamePlayers
         {
-            get { return (ComInGamePlayers)GetComponent(MetaComponentsLookup.ComInGamePlayers); }
+            get { return (ComUniInGamePlayers)GetComponent(MetaComponentsLookup.ComUniInGamePlayers); }
         }
 
-        public bool hasComUniPlayers
+        public bool hasComUniInGamePlayers
         {
-            get { return HasComponent(MetaComponentsLookup.ComInGamePlayers); }
+            get { return HasComponent(MetaComponentsLookup.ComUniInGamePlayers); }
         }
 
-        public void AddComInGamePlayers(List<InGamePlayerInfo> playerInfoList)
+        public void AddComUniInGamePlayers(List<InGamePlayerInfo> playerInfoList)
         {
-            var index = MetaComponentsLookup.ComInGamePlayers;
-            var component = (ComInGamePlayers)CreateComponent(index, typeof(ComInGamePlayers));
+            var index = MetaComponentsLookup.ComUniInGamePlayers;
+            var component = (ComUniInGamePlayers)CreateComponent(index, typeof(ComUniInGamePlayers));
             component.InitPlayerInfoList(playerInfoList);
             AddComponent(index, component);
         }
 
-        public void ReplaceComInGamePlayers(List<InGamePlayerInfo> playerInfoList)
+        public void ReplaceComUniInGamePlayers(List<InGamePlayerInfo> playerInfoList)
         {
-            var index = MetaComponentsLookup.ComInGamePlayers;
-            var component = (ComInGamePlayers)CreateComponent(index, typeof(ComInGamePlayers));
+            var index = MetaComponentsLookup.ComUniInGamePlayers;
+            var component = (ComUniInGamePlayers)CreateComponent(index, typeof(ComUniInGamePlayers));
             component.InitPlayerInfoList(playerInfoList);
             ReplaceComponent(index, component);
         }
 
-        public void RemoveComInGamePlayers()
+        public void RemoveComUniInGamePlayers()
         {
-            var index = MetaComponentsLookup.ComInGamePlayers;
-            var component = (ComInGamePlayers)CreateComponent(index, typeof(ComInGamePlayers));
-            RemoveComponent(MetaComponentsLookup.ComInGamePlayers);
+            var index = MetaComponentsLookup.ComUniInGamePlayers;
+            var component = (ComUniInGamePlayers)CreateComponent(index, typeof(ComUniInGamePlayers));
+            RemoveComponent(MetaComponentsLookup.ComUniInGamePlayers);
         }
     }
 
     public sealed partial class MetaMatcher
     {
-        static Entitas.IMatcher<MetaEntity> _matcherComInGamePlayers;
+        static Entitas.IMatcher<MetaEntity> _matcherComUniInGamePlayers;
 
-        public static Entitas.IMatcher<MetaEntity> ComInGamePlayers
+        public static Entitas.IMatcher<MetaEntity> ComUniInGamePlayers
         {
             get
             {
-                if (_matcherComInGamePlayers == null)
+                if (_matcherComUniInGamePlayers == null)
                 {
-                    var matcher = (Entitas.Matcher<MetaEntity>)Entitas.Matcher<MetaEntity>.AllOf(MetaComponentsLookup.ComInGamePlayers);
+                    var matcher = (Entitas.Matcher<MetaEntity>)Entitas.Matcher<MetaEntity>.AllOf(MetaComponentsLookup.ComUniInGamePlayers);
                     matcher.ComponentNames = MetaComponentsLookup.componentNames;
-                    _matcherComInGamePlayers = matcher;
+                    _matcherComUniInGamePlayers = matcher;
                 }
 
-                return _matcherComInGamePlayers;
+                return _matcherComUniInGamePlayers;
             }
         }
     }
 
     public static partial class MetaComponentsLookup
     {
-        public static int ComInGamePlayers;
+        public static int ComUniInGamePlayers;
     }
 }
