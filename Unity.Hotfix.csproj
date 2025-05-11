@@ -95,7 +95,6 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\GameObjectPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\RedDot\RedDotBind.cs" />
     <Compile Include="Assets\Hotfix\Init\Init.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\ECS\Component\FSM\BattleState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\ThreadPoolScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Utility\Extension\WorldExtension.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolManager.cs" />
@@ -112,6 +111,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Skill\SkillAbility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\Utility\Extension\BTAgentExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Command\CommandType.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\Utility\TargetUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Id\IdUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\PlatformManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\LoadSceneHandler.cs" />
@@ -259,6 +259,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Buff\BuffState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Death\ComDeath.cs" />
     <Compile Include="Assets\Hotfix\Core\Event\EventManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\Component\FSM\StateNode.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\MetaContext\MetaComponent.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysLocomotion.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Extension\IUILogicExtension.cs" />
