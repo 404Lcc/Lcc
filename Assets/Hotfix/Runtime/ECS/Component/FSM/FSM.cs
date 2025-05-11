@@ -6,6 +6,7 @@ namespace LccHotfix
     {
         protected LogicEntity entity;
         protected KVContext context;
+        public LogicEntity Entity => entity;
         public KVContext Context => context;
 
         public FSM(object owner) : base(owner)

@@ -47,6 +47,7 @@ namespace LccHotfix
             {
                 return metaContext.comUniGameMode.mode as T;
             }
+
             return null;
         }
 
@@ -58,6 +59,23 @@ namespace LccHotfix
                 return new Group<LogicEntity>(matcher);
             var group = world.LogicContext.GetGroup(matcher);
             return group;
+        }
+
+        public static IGroup<LogicEntity> GetLogicGroup_Faction_Property_Transform()
+        {
+            return GetLogicGroup(LogicMatcher.AllOf(LogicMatcher.ComFaction, LogicMatcher.ComProperty, LogicMatcher.ComTransform));
+        }
+
+        public static IGroup<LogicEntity> GetLogicGroup_Subobject_Faction_Transform()
+        {
+
+            return GetLogicGroup(LogicMatcher.AllOf(LogicMatcher.ComSubobject, LogicMatcher.ComFaction, LogicMatcher.ComTransform));
+        }
+
+        public static IGroup<LogicEntity> GetLogicGroup_OwnerEntity_Tag()
+        {
+
+            return GetLogicGroup(LogicMatcher.AllOf(LogicMatcher.ComOwnerEntity, LogicMatcher.ComTag));
         }
     }
 }
