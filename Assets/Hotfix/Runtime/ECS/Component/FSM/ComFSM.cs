@@ -38,7 +38,7 @@ namespace LccHotfix
         {
             var obj = Activator.CreateInstance(CodeTypesManager.Instance.GetType(fsmName), new object[] { this });
             FSM fsm = obj as FSM;
-            fsm.InitFSM(comFSM.Owner, preContext,-1);
+            fsm.InitFSM(this, preContext,-1);
 
             var index = LogicComponentsLookup.ComFSM;
             var component = (ComFSM)CreateComponent(index, typeof(ComFSM));
