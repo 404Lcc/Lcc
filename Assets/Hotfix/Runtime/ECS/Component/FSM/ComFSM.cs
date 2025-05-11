@@ -1,31 +1,32 @@
+using System;
 using LccModel;
 
 namespace LccHotfix
 {
     public class ComFSM : LogicComponent
     {
-        private StateMachine _fsm;
-        private KVContext _context;
+        private FSM _fsm;
 
         public StateMachine FSM => _fsm;
-        public KVContext Context => _context;
+        public KVContext Context => _fsm.Context;
         public string CurState => _fsm.CurrentNode;
 
-        public override void Dispose()
-        {
-            base.Dispose();
-            _context.Clear();
-        }
 
-        public void Init(StateMachine fsm, KVContext context)
+
+        public void Init(FSM fsm)
         {
             _fsm = fsm;
-            _context = context;
         }
 
         public void ForceChangeState<TNode>() where TNode : IStateNode
         {
             _fsm.ChangeState<TNode>();
+        }
+        
+        public override void Dispose()
+        {
+            base.Dispose();
+            _fsm.Dispose();
         }
     }
     public partial class LogicEntity
@@ -33,22 +34,18 @@ namespace LccHotfix
         public ComFSM comFSM { get { return (ComFSM)GetComponent(LogicComponentsLookup.ComFSM); } }
         public bool hasComFSM { get { return HasComponent(LogicComponentsLookup.ComFSM); } }
 
-        public void AddComFSM(KVContext preContext = null)
+        public void AddComFSM(string fsmName, KVContext preContext = null)
         {
-            StateMachine fsm = new StateMachine(this);
-
-            KVContext context = null;
-            if (preContext == null)
-            {
-                context = new KVContext();
-            }
-            context = preContext;
+            var obj = Activator.CreateInstance(CodeTypesManager.Instance.GetType(fsmName), new object[] { this });
+            FSM fsm = obj as FSM;
+            fsm.InitFSM(comFSM.Owner, preContext,-1);
 
             var index = LogicComponentsLookup.ComFSM;
             var component = (ComFSM)CreateComponent(index, typeof(ComFSM));
-            component.Init(fsm, context);
+            component.Init(fsm);
 
             AddComponent(index, component);
+            fsm.StartFSM();
         }
 
         public void AddState<T>() where T : IStateNode
