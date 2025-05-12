@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace LccHotfix
@@ -8,7 +9,7 @@ namespace LccHotfix
         /// <summary>
         /// entity是否是有效的目标
         /// </summary>
-        public static bool IsValidTarget(this LogicEntity entity)
+        private static bool IsValidTarget(this LogicEntity entity)
         {
             if (entity == null)
                 return false;
@@ -35,6 +36,110 @@ namespace LccHotfix
             return entity.hasComView;
         }
 
+        /// <summary>
+        /// 基础筛选
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="target"></param>
+        /// <param name="isOtherFaction"></param>
+        /// <param name="sameFactionExcludeSelf"></param>
+        /// <param name="excludeTargetIdList"></param>
+        /// <returns></returns>
+        private static bool BaseFilter(LogicEntity entity, LogicEntity target, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, List<long> excludeTargetIdList = null)
+        {
+            if (target.hasComSubobject)
+                return false;
+            var comFaction = target.comFaction;
+            var sameFaction = comFaction.faction == entity.comFaction.faction;
+            if (isOtherFaction)
+            {
+                if (sameFaction)
+                    return false;
+            }
+            else
+            {
+                if (!sameFaction)
+                    return false;
+                // 同一个Faction下是否要排除自己
+                if (sameFactionExcludeSelf)
+                {
+                    if (target.comID.id == entity.comID.id)
+                        return false;
+                }
+            }
+
+            // 排除需要主动排除的目标
+            if (excludeTargetIdList != null)
+            {
+                if (excludeTargetIdList.Contains(target.comID.id))
+                {
+                    return false;
+                }
+            }
+
+            if (!target.IsValidTarget())
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// 基础筛选
+        /// </summary>
+        /// <param name="selfEntityId"></param>
+        /// <param name="selfFaction"></param>
+        /// <param name="target"></param>
+        /// <param name="isOtherFaction"></param>
+        /// <param name="sameFactionExcludeSelf"></param>
+        /// <param name="excludeTargetIdList"></param>
+        /// <returns></returns>
+        private static bool BaseFilter(long selfEntityId, FactionType selfFaction, LogicEntity target, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, List<long> excludeTargetIdList = null)
+        {
+            if (target.hasComSubobject)
+                return false;
+            var comFaction = target.comFaction;
+            var sameFaction = comFaction.faction == selfFaction;
+            if (isOtherFaction)
+            {
+                if (sameFaction)
+                    return false;
+            }
+            else
+            {
+                if (!sameFaction)
+                    return false;
+                // 同一个Faction下是否要排除自己
+                if (sameFactionExcludeSelf)
+                {
+                    if (target.comID.id == selfEntityId)
+                        return false;
+                }
+            }
+
+            // 排除需要主动排除的目标
+            if (excludeTargetIdList != null)
+            {
+                if (excludeTargetIdList.Contains(target.comID.id))
+                {
+                    return false;
+                }
+            }
+
+            if (!target.IsValidTarget())
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// 找到范围内最近的1个敌人
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="maxDis"></param>
+        /// <param name="isOtherFaction"></param>
+        /// <param name="sameFactionExcludeSelf"></param>
+        /// <param name="excludeTargetIdList"></param>
+        /// <returns></returns>
         public static LogicEntity GetNearestTarget(LogicEntity entity, float maxDis = 10, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, List<long> excludeTargetIdList = null)
         {
             var group = WorldUtility.GetLogicGroup_Faction_Property_Transform();
@@ -44,56 +149,38 @@ namespace LccHotfix
                 return ret;
             }
 
-            float minSqrDis = maxDis * maxDis;
+            float maxSqrDis = maxDis * maxDis;
             var entities = group.GetEntities();
             foreach (var target in entities)
             {
-                if (target.hasComSubobject)
+                if (!BaseFilter(entity, target, isOtherFaction, sameFactionExcludeSelf, excludeTargetIdList))
+                {
                     continue;
-                var comFaction = target.comFaction;
-                var sameFaction = comFaction.faction == entity.comFaction.faction;
-                if (isOtherFaction)
-                {
-                    if (sameFaction)
-                        continue;
                 }
-                else
-                {
-                    if (!sameFaction)
-                        continue;
-                    // 同一个Faction下是否要排除自己
-                    if (sameFactionExcludeSelf)
-                    {
-                        if (target.comID.id == entity.comID.id)
-                            continue;
-                    }
-                }
-
-                // 排除需要主动排除的目标
-                if (excludeTargetIdList != null)
-                {
-                    if (excludeTargetIdList.Contains(target.comID.id))
-                    {
-                        continue;
-                    }
-                }
-
-                if (!target.IsValidTarget())
-                    continue;
 
                 // 计算到目标距离
                 var dir = target.comTransform.position - entity.comTransform.position;
                 var sqrDis = dir.sqrMagnitude;
-                if (sqrDis <= minSqrDis)
+                if (sqrDis <= maxSqrDis)
                 {
                     ret = target;
-                    minSqrDis = sqrDis;
+                    maxSqrDis = sqrDis;
                 }
             }
 
             return ret;
         }
 
+        /// <summary>
+        /// 找到范围内最近的1个敌人
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="minDis"></param>
+        /// <param name="maxDis"></param>
+        /// <param name="isOtherFaction"></param>
+        /// <param name="sameFactionExcludeSelf"></param>
+        /// <param name="excludeTargetIdList"></param>
+        /// <returns></returns>
         public static LogicEntity GetNearestTarget(LogicEntity entity, float minDis = 10, float maxDis = 10, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, List<long> excludeTargetIdList = null)
         {
             var group = WorldUtility.GetLogicGroup_Faction_Property_Transform();
@@ -108,38 +195,10 @@ namespace LccHotfix
             var entities = group.GetEntities();
             foreach (var target in entities)
             {
-                if (target.hasComSubobject)
+                if (!BaseFilter(entity, target, isOtherFaction, sameFactionExcludeSelf, excludeTargetIdList))
+                {
                     continue;
-                var comFaction = target.comFaction;
-                var sameFaction = comFaction.faction == entity.comFaction.faction;
-                if (isOtherFaction)
-                {
-                    if (sameFaction)
-                        continue;
                 }
-                else
-                {
-                    if (!sameFaction)
-                        continue;
-                    // 同一个Faction下是否要排除自己
-                    if (sameFactionExcludeSelf)
-                    {
-                        if (target.comID.id == entity.comID.id)
-                            continue;
-                    }
-                }
-
-                // 排除需要主动排除的目标
-                if (excludeTargetIdList != null)
-                {
-                    if (excludeTargetIdList.Contains(target.comID.id))
-                    {
-                        continue;
-                    }
-                }
-
-                if (!target.IsValidTarget())
-                    continue;
 
                 // 计算到目标距离
                 var dir = target.comTransform.position - entity.comTransform.position;
@@ -147,14 +206,23 @@ namespace LccHotfix
                 if (sqrDis >= minSqrDis && sqrDis <= maxSqrDis)
                 {
                     ret = target;
-                    break;
+                    maxSqrDis = sqrDis;
                 }
             }
 
             return ret;
         }
 
-        public static LogicEntity GetHPHightTarget(LogicEntity entity, float maxDis = 10, bool isOtherFaction = true, bool sameFactionExcludeSelf = false)
+        /// <summary>
+        /// 找到范围内固定血量最高的1个敌人
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="maxDis"></param>
+        /// <param name="isOtherFaction"></param>
+        /// <param name="sameFactionExcludeSelf"></param>
+        /// <param name="excludeTargetIdList"></param>
+        /// <returns></returns>
+        public static LogicEntity GetHPHightTarget(LogicEntity entity, float maxDis = 10, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, List<long> excludeTargetIdList = null)
         {
             var group = WorldUtility.GetLogicGroup_Faction_Property_Transform();
             LogicEntity ret = null;
@@ -168,29 +236,10 @@ namespace LccHotfix
             var entities = group.GetEntities();
             foreach (var target in entities)
             {
-                if (target.hasComSubobject)
-                    continue;
-                var comFaction = target.comFaction;
-                var sameFaction = comFaction.faction == entity.comFaction.faction;
-                if (isOtherFaction)
+                if (!BaseFilter(entity, target, isOtherFaction, sameFactionExcludeSelf, excludeTargetIdList))
                 {
-                    if (sameFaction)
-                        continue;
-                }
-                else
-                {
-                    if (!sameFaction)
-                        continue;
-                    // 同一个Faction下是否要排除自己
-                    if (sameFactionExcludeSelf)
-                    {
-                        if (target.comID.id == entity.comID.id)
-                            continue;
-                    }
-                }
-
-                if (!target.IsValidTarget())
                     continue;
+                }
 
                 // 计算到目标距离
                 var dir = target.comTransform.position - entity.comTransform.position;
@@ -215,43 +264,45 @@ namespace LccHotfix
             return ret;
         }
 
-        public static LogicEntity GetHPPercentLowTarget(LogicEntity entity, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, bool excludeFullHp = true)
+        /// <summary>
+        /// 找到范围内血量百分比最低的1个敌人
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="maxDis"></param>
+        /// <param name="isOtherFaction"></param>
+        /// <param name="sameFactionExcludeSelf"></param>
+        /// <param name="excludeTargetIdList"></param>
+        /// <param name="excludeFullHp"></param>
+        /// <returns></returns>
+        public static LogicEntity GetHPPercentLowTarget(LogicEntity entity, float maxDis = 10, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, List<long> excludeTargetIdList = null, bool excludeFullHp = true)
         {
             var group = WorldUtility.GetLogicGroup_Faction_Property_Transform();
             LogicEntity ret = null;
             List<LogicEntity> targetList = new List<LogicEntity>();
+            if (maxDis <= 0)
+            {
+                return ret;
+            }
+
+            float maxSqrDis = maxDis * maxDis;
             var entities = group.GetEntities();
             foreach (var target in entities)
             {
-                if (target.hasComSubobject)
+                if (!BaseFilter(entity, target, isOtherFaction, sameFactionExcludeSelf, excludeTargetIdList))
+                {
                     continue;
-                var comFaction = target.comFaction;
-                var sameFaction = comFaction.faction == entity.comFaction.faction;
-                if (isOtherFaction)
-                {
-                    if (sameFaction)
-                        continue;
-                }
-                else
-                {
-                    if (!sameFaction)
-                        continue;
-                    // 同一个Faction下是否要排除自己
-                    if (sameFactionExcludeSelf)
-                    {
-                        if (target.comID.id == entity.comID.id)
-                            continue;
-                    }
                 }
 
-                if (!target.IsValidTarget())
-                    continue;
-
-                targetList.Add(target);
+                // 计算到目标距离
+                var dir = target.comTransform.position - entity.comTransform.position;
+                var sqrDis = dir.sqrMagnitude;
+                if (sqrDis <= maxSqrDis)
+                {
+                    targetList.Add(target);
+                }
             }
 
             float HPPercent = float.MaxValue;
-
             for (int i = 0; i < targetList.Count; i++)
             {
                 var comProp = targetList[i].comProperty;
@@ -270,7 +321,17 @@ namespace LccHotfix
             return ret;
         }
 
-        public static List<LogicEntity> GetNearestTargetList(Vector3 pos, FactionType faction, int targetNum, float maxDis = 10, bool isOtherFaction = true, List<long> excludeTargetIdList = null)
+        /// <summary>
+        /// 找到范围内最近的n个敌人
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="targetNum"></param>
+        /// <param name="maxDis"></param>
+        /// <param name="isOtherFaction"></param>
+        /// <param name="sameFactionExcludeSelf"></param>
+        /// <param name="excludeTargetIdList"></param>
+        /// <returns></returns>
+        public static List<LogicEntity> GetNearestTargetList(LogicEntity entity, int targetNum, float maxDis = 10, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, List<long> excludeTargetIdList = null)
         {
             var group = WorldUtility.GetLogicGroup_Faction_Property_Transform();
             List<LogicEntity> targetList = new List<LogicEntity>();
@@ -283,35 +344,13 @@ namespace LccHotfix
             var entities = group.GetEntities();
             foreach (var target in entities)
             {
-                if (target.hasComSubobject)
+                if (!BaseFilter(entity, target, isOtherFaction, sameFactionExcludeSelf, excludeTargetIdList))
+                {
                     continue;
-                var comFaction = target.comFaction;
-                var sameFaction = comFaction.faction == faction;
-                if (isOtherFaction)
-                {
-                    if (sameFaction)
-                        continue;
-                }
-                else
-                {
-                    if (!sameFaction)
-                        continue;
-                }
-
-                if (!target.IsValidTarget())
-                    continue;
-
-                // 排除需要主动排除的目标
-                if (excludeTargetIdList != null)
-                {
-                    if (excludeTargetIdList.Contains(target.comID.id))
-                    {
-                        continue;
-                    }
                 }
 
                 // 计算到目标距离
-                var dir = target.comTransform.position - pos;
+                var dir = target.comTransform.position - entity.comTransform.position;
                 var sqrDis = dir.sqrMagnitude;
                 if (sqrDis <= maxSqrDis)
                 {
@@ -320,7 +359,7 @@ namespace LccHotfix
             }
 
             // 根据距离排序
-            targetList.Sort(SortByDist);
+            targetList = targetList.OrderBy(x => (x.comTransform.position - entity.comTransform.position).sqrMagnitude).ToList();
 
             var targetLeftCount = targetNum;
             var ret = new List<LogicEntity>();
@@ -336,13 +375,74 @@ namespace LccHotfix
             return ret;
         }
 
-        public static List<LogicEntity> GetNearestTargetList(LogicEntity entity, int targetNum, float maxDis = 10, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, List<long> excludeTargetIdList = null)
+        /// <summary>
+        /// 找到范围内最近的n个敌人
+        /// </summary>
+        /// <param name="selfPos"></param>
+        /// <param name="selfEntityId"></param>
+        /// <param name="selfFaction"></param>
+        /// <param name="targetNum"></param>
+        /// <param name="maxDis"></param>
+        /// <param name="isOtherFaction"></param>
+        /// <param name="sameFactionExcludeSelf"></param>
+        /// <param name="excludeTargetIdList"></param>
+        /// <returns></returns>
+        public static List<LogicEntity> GetNearestTargetList(Vector3 selfPos, long selfEntityId, FactionType selfFaction, int targetNum, float maxDis = 10, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, List<long> excludeTargetIdList = null)
         {
-            Vector3 pos = entity.comTransform.position;
-            FactionType faction = entity.comFaction.faction;
-            return GetNearestTargetList(pos, faction, targetNum, maxDis, isOtherFaction, excludeTargetIdList);
+            var group = WorldUtility.GetLogicGroup_Faction_Property_Transform();
+            List<LogicEntity> targetList = new List<LogicEntity>();
+            if (maxDis <= 0)
+            {
+                return targetList;
+            }
+
+            float maxSqrDis = maxDis * maxDis;
+            var entities = group.GetEntities();
+            foreach (var target in entities)
+            {
+                if (!BaseFilter(selfEntityId, selfFaction, target, isOtherFaction, sameFactionExcludeSelf, excludeTargetIdList))
+                {
+                    continue;
+                }
+
+                // 计算到目标距离
+                var dir = target.comTransform.position - selfPos;
+                var sqrDis = dir.sqrMagnitude;
+                if (sqrDis <= maxSqrDis)
+                {
+                    targetList.Add(target);
+                }
+            }
+
+            // 根据距离排序
+            targetList = targetList.OrderBy(x => (x.comTransform.position - selfPos).sqrMagnitude).ToList();
+
+            var targetLeftCount = targetNum;
+            var ret = new List<LogicEntity>();
+            for (int i = 0; i < targetList.Count; i++)
+            {
+                targetLeftCount--;
+                ret.Add(targetList[i]);
+
+                if (targetLeftCount <= 0)
+                    break;
+            }
+
+            return ret;
         }
 
+        /// <summary>
+        /// 找到距离线最近的n个敌人
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="targetNum"></param>
+        /// <param name="start"></param>
+        /// <param name="dir"></param>
+        /// <param name="dis2line"></param>
+        /// <param name="isOtherFaction"></param>
+        /// <param name="sameFactionExcludeSelf"></param>
+        /// <param name="excludeTargetIdList"></param>
+        /// <returns></returns>
         public static List<LogicEntity> GetNearestTargetList(LogicEntity entity, int targetNum, Vector3 start, Vector3 dir, float dis2line, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, List<long> excludeTargetIdList = null)
         {
             var group = WorldUtility.GetLogicGroup_Faction_Property_Transform();
@@ -350,38 +450,9 @@ namespace LccHotfix
             var entities = group.GetEntities();
             foreach (var target in entities)
             {
-                if (target.hasComSubobject)
+                if (!BaseFilter(entity, target, isOtherFaction, sameFactionExcludeSelf, excludeTargetIdList))
+                {
                     continue;
-                var comFaction = target.comFaction;
-                var sameFaction = comFaction.faction == entity.comFaction.faction;
-                if (isOtherFaction)
-                {
-                    if (sameFaction)
-                        continue;
-                }
-                else
-                {
-                    if (!sameFaction)
-                        continue;
-                    // 同一个Faction下是否要排除自己
-                    if (sameFactionExcludeSelf)
-                    {
-                        if (target.comID.id == entity.comID.id)
-                            continue;
-                    }
-
-                }
-
-                if (!target.IsValidTarget())
-                    continue;
-
-                // 排除需要主动排除的目标
-                if (excludeTargetIdList != null)
-                {
-                    if (excludeTargetIdList.Contains(target.comID.id))
-                    {
-                        continue;
-                    }
                 }
 
                 //计算距离线的距离
@@ -393,7 +464,7 @@ namespace LccHotfix
             }
 
             // 根据距离排序
-            targetList.Sort(SortByDist);
+            targetList = targetList.OrderBy(x => (x.comTransform.position - entity.comTransform.position).sqrMagnitude).ToList();
 
             var targetLeftCount = targetNum;
             var ret = new List<LogicEntity>();
@@ -409,45 +480,49 @@ namespace LccHotfix
             return ret;
         }
 
-        public static List<LogicEntity> GetHPPercentLowTargetList(LogicEntity entity, int targetNum, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, bool excludeFullHp = true)
+        /// <summary>
+        /// 找到范围内血量百分比最低的n个敌人
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="targetNum"></param>
+        /// <param name="maxDis"></param>
+        /// <param name="isOtherFaction"></param>
+        /// <param name="sameFactionExcludeSelf"></param>
+        /// <param name="excludeTargetIdList"></param>
+        /// <param name="excludeFullHp"></param>
+        /// <returns></returns>
+        public static List<LogicEntity> GetHPPercentLowTargetList(LogicEntity entity, int targetNum, float maxDis = 10, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, List<long> excludeTargetIdList = null, bool excludeFullHp = true)
         {
             var group = WorldUtility.GetLogicGroup_Faction_Property_Transform();
-            List<LogicEntity> ret = new List<LogicEntity>();
             List<LogicEntity> targetList = new List<LogicEntity>();
+            if (maxDis <= 0)
+            {
+                return targetList;
+            }
+
+            float maxSqrDis = maxDis * maxDis;
             var entities = group.GetEntities();
             foreach (var target in entities)
             {
-                if (target.hasComSubobject)
+                if (!BaseFilter(entity, target, isOtherFaction, sameFactionExcludeSelf, excludeTargetIdList))
+                {
                     continue;
-                var comFaction = target.comFaction;
-                var sameFaction = comFaction.faction == entity.comFaction.faction;
-                if (isOtherFaction)
-                {
-                    if (sameFaction)
-                        continue;
-                }
-                else
-                {
-                    if (!sameFaction)
-                        continue;
-                    // 同一个Faction下是否要排除自己
-                    if (sameFactionExcludeSelf)
-                    {
-                        if (target.comID.id == entity.comID.id)
-                            continue;
-                    }
                 }
 
-                if (!target.IsValidTarget())
-                    continue;
-
-                targetList.Add(target);
+                // 计算到目标距离
+                var dir = target.comTransform.position - entity.comTransform.position;
+                var sqrDis = dir.sqrMagnitude;
+                if (sqrDis <= maxSqrDis)
+                {
+                    targetList.Add(target);
+                }
             }
 
-            targetList.Sort(SortByHPPercent);
+            // 根据血量百分比排序
+            targetList = targetList.OrderBy(x => x.comHP.HP / x.comProperty.maxHP).ToList();
 
             var targetLeftCount = targetNum;
-
+            var ret = new List<LogicEntity>();
             for (int i = 0; i < targetList.Count; i++)
             {
                 targetLeftCount--;
@@ -457,54 +532,12 @@ namespace LccHotfix
                 if (!excludeFullHp && isFullHp)
                     continue;
                 ret.Add(targetList[i]);
+
                 if (targetLeftCount <= 0)
                     break;
             }
 
             return ret;
-        }
-
-        /// <summary>
-        /// 根据hp排序
-        /// </summary>
-        private static int SortByHPPercent(LogicEntity a, LogicEntity b)
-        {
-            if (a == null || b == null)
-                return 0;
-
-            if (!a.hasComHP || !b.hasComHP)
-                return 0;
-
-            if (!a.hasComProperty || !b.hasComProperty)
-                return 0;
-
-            var aHpPercent = a.comHP.HP / a.comProperty.maxHP;
-            var bHpPercent = b.comHP.HP / b.comProperty.maxHP;
-
-            if (aHpPercent < bHpPercent)
-            {
-                return -1;
-            }
-            else
-            {
-                return 1;
-            }
-        }
-
-        /// <summary>
-        /// 根据距离排序,目前只是判断z轴
-        /// </summary>
-        private static int SortByDist(LogicEntity a, LogicEntity b)
-        {
-            if (a == null || b == null)
-                return 0;
-
-            if (!a.hasComTransform || !b.hasComTransform)
-                return 0;
-
-            var aDis = a.comTransform.position.x + a.comTransform.position.y + a.comTransform.position.z;
-            var bDis = b.comTransform.position.x + b.comTransform.position.y + b.comTransform.position.z;
-            return aDis.CompareTo(bDis);
         }
 
         /// <summary>
