@@ -68,7 +68,7 @@ namespace LccHotfix
             }
 
             bool ignoreTimeScale = false;
-            TimerTask timerTask = TimerManager.Instance.Register(delay, TimerUnitType.Millisecond, 1, ignoreTimeScale, null, () =>
+            TimerTask timerTask = TimerManager.Instance.Register(delay, TimerUnitType.Second, 1, ignoreTimeScale, null, () =>
             {
                 if (!hasComTimer)
                     return;
