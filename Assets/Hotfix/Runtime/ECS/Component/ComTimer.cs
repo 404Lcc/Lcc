@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace LccHotfix
 {
@@ -24,10 +26,18 @@ namespace LccHotfix
             base.Dispose();
         }
     }
+
     public partial class LogicEntity
     {
-        public ComTimer comTimer { get { return (ComTimer)GetComponent(LogicComponentsLookup.ComTimer); } }
-        public bool hasComTimer { get { return HasComponent(LogicComponentsLookup.ComTimer); } }
+        public ComTimer comTimer
+        {
+            get { return (ComTimer)GetComponent(LogicComponentsLookup.ComTimer); }
+        }
+
+        public bool hasComTimer
+        {
+            get { return HasComponent(LogicComponentsLookup.ComTimer); }
+        }
 
 
         public void AddTimer(TimerTask timerTask)
@@ -49,11 +59,32 @@ namespace LccHotfix
 
         }
 
+        public void AddDelay(float delay, Action<LogicEntity, object[]> action, params object[] args)
+        {
+            if (delay == 0)
+            {
+                action(this, args);
+                return;
+            }
+
+            bool ignoreTimeScale = false;
+            TimerTask timerTask = TimerManager.Instance.Register(delay, TimerUnitType.Millisecond, 1, ignoreTimeScale, null, () =>
+            {
+                if (!hasComTimer)
+                    return;
+
+                action(this, args);
+            });
+
+            AddTimer(timerTask);
+        }
+
         public void RemoveComTimer()
         {
             RemoveComponent(LogicComponentsLookup.ComTimer);
         }
     }
+
     public sealed partial class LogicMatcher
     {
 
