@@ -17,7 +17,7 @@ namespace LccHotfix
             foreach (var entity in _group.GetEntities())
             {
                 var comFSM = entity.comFSM;
-                comFSM.FSM.Update();
+                comFSM.FSM.UpdateFSM();
             }
         }
     }
