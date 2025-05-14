@@ -3,6 +3,13 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
+    public interface IBTScriptTrigger
+    {
+        void RegisterCallback(BTAction trigger, Action<BTAgent, object[]> callback);
+        void Trigger(BTAction trigger, BTAgent agent, params object[] args);
+        Action<BTAgent, object[]> GetTrigger(BTAction trigger);
+    }
+    
     public interface IBTScript
     {
         void Init();
@@ -16,7 +23,7 @@ namespace LccHotfix
     }
 
 
-    public class BTScript : IBTScript, ICoroutine
+    public class BTScript : IBTScript, IBTScriptTrigger, ICoroutine
     {
         private Dictionary<BTAction, Action<BTAgent, object[]>> _trigger;
 

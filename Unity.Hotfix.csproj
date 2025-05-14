@@ -77,6 +77,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Task\TaskExtension.cs" />
     <Compile Include="Assets\Hotfix\Logic\Utility\GameUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\FunctionOpen\FunctionOpenManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Battle\BTScript\Skill\SkillBTScript.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\IObjectPoolManager.cs" />
     <Compile Include="Assets\Hotfix\Logic\Module\Character\ModCharacter.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComLife.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Image\ImageExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicComponentsLookup.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Vector3\Vector3Extension.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTScript\ParallelBTScript.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\GameObjectPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\RedDot\RedDotBind.cs" />
     <Compile Include="Assets\Hotfix\Init\Init.cs" />

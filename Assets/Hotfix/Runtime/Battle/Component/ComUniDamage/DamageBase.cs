@@ -16,7 +16,7 @@ namespace LccHotfix
             info.damageProp = prop;
             info.defenderId = defenderId;
 
-            var defender = WorldUtility.GetEntity(defenderId);
+            var defender = EntityUtility.GetEntity(defenderId);
             if (defender == null)
                 return;
 
@@ -129,7 +129,7 @@ namespace LccHotfix
         {
             var defenderId = info.defenderId;
             var resultValue = 0f;
-            var defender = WorldUtility.GetEntity(defenderId);
+            var defender = EntityUtility.GetEntity(defenderId);
             if (defender == null)
                 return resultValue;
 
@@ -167,8 +167,8 @@ namespace LccHotfix
         public virtual float ApplyDamageChange(CalcDamageInfo info)
         {
             var resultValue = 0f;
-            var attacker = WorldUtility.GetEntity(info.damageProp.entityId);
-            var defender = WorldUtility.GetEntity(info.defenderId);
+            var attacker = EntityUtility.GetEntity(info.damageProp.entityId);
+            var defender = EntityUtility.GetEntity(info.defenderId);
 
             if (defender == null)
             {
@@ -201,7 +201,7 @@ namespace LccHotfix
         public virtual void PreDamageChange(CalcDamageInfo info)
         {
             var defenderId = info.defenderId;
-            var defender = WorldUtility.GetEntity(defenderId);
+            var defender = EntityUtility.GetEntity(defenderId);
 
             var isCrit = CalcCrit(info.damageProp);
 
@@ -216,7 +216,7 @@ namespace LccHotfix
         public virtual void PostDamageChange(CalcDamageInfo info)
         {
             var defenderId = info.defenderId;
-            var defender = WorldUtility.GetEntity(defenderId);
+            var defender = EntityUtility.GetEntity(defenderId);
 
             AfterChange(info);
 
@@ -229,7 +229,11 @@ namespace LccHotfix
                 if (defenderProperty.isDieable)
                 {
                     //不能受伤
+                    defenderProperty.SetBaseBool(BoolPropertyType.IsAlive, false);
                     defenderProperty.SetBaseBool(BoolPropertyType.Damageable, false);
+                    defenderProperty.SetBaseBool(BoolPropertyType.Targetable, false);
+                    defenderProperty.SetBaseBool(BoolPropertyType.Hitbackable, false);
+                    defenderProperty.SetBaseBool(BoolPropertyType.Stunable, false);
                     //进入死亡
                     defender.AddComLife(0);
                 }
@@ -248,7 +252,7 @@ namespace LccHotfix
             var resultValue = 0f;
 
             var defenderId = info.defenderId;
-            var defender = WorldUtility.GetEntity(defenderId);
+            var defender = EntityUtility.GetEntity(defenderId);
 
             if (defender == null)
             {
@@ -296,7 +300,7 @@ namespace LccHotfix
         public virtual void PostRecoverChange(CalcDamageInfo info)
         {
             var defenderId = info.defenderId;
-            var defender = WorldUtility.GetEntity(defenderId);
+            var defender = EntityUtility.GetEntity(defenderId);
 
             AfterChange(info);
 
@@ -325,7 +329,7 @@ namespace LccHotfix
         public virtual void AfterChange(CalcDamageInfo info)
         {
             var defenderId = info.defenderId;
-            var defender = WorldUtility.GetEntity(defenderId);
+            var defender = EntityUtility.GetEntity(defenderId);
 
             //展示hud飘字
 

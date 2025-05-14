@@ -7,7 +7,7 @@ namespace LccHotfix
     {
         private FSM _fsm;
 
-        public StateMachine FSM => _fsm;
+        public FSM FSM => _fsm;
         public KVContext Context => _fsm.Context;
         public string CurState => _fsm.CurrentNode;
 

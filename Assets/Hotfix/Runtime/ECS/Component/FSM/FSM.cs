@@ -26,6 +26,10 @@ namespace LccHotfix
         public virtual void StartFSM()
         {
         }
+        public virtual void UpdateFSM()
+        {
+            Update();
+        }
         public virtual void Dispose()
         {
             if (context != null)

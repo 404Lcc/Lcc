@@ -67,7 +67,7 @@ namespace LccHotfix
 
         public void AddBuff(int buffId, int fromLogicID, long fromEntityID, long toEntityID, float during = -1, KVContext context = null)
         {
-            var entity = WorldUtility.GetEntity(toEntityID);
+            var entity = EntityUtility.GetEntity(toEntityID);
             if (entity == null)
                 return;
 

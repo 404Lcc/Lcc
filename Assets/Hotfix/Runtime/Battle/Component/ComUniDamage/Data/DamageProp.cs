@@ -16,7 +16,7 @@ namespace LccHotfix
 
         public void Init(long attackerId)
         {
-            var entity = WorldUtility.GetEntity(attackerId);
+            var entity = EntityUtility.GetEntity(attackerId);
             if (entity == null)
                 return;
 

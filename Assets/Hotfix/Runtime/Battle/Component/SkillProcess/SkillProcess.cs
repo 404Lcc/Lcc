@@ -7,7 +7,6 @@ namespace LccHotfix
         public LogicEntity Owner { get; set; }
         public SkillAbility SkillAbility { get; set; }
         public BTAgent Agent { get; set; }
-        public bool IsFinish { get; set; }
 
         public void Start()
         {
@@ -47,7 +46,7 @@ namespace LccHotfix
                     }
                 }
             }
-            return IsFinish;
+            return Agent.IsFinish;
         }
 
         public void Dispose()
@@ -80,9 +79,7 @@ namespace LccHotfix
             {
                 Owner.comProperty.SetSubBool(BoolPropertyType.Stunable, SkillAbility.skillId, true);
             }
-
-
-            IsFinish = true;
+            
             Agent.Dispose();
         }
     }

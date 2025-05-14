@@ -10,11 +10,13 @@ namespace LccHotfix
 
         protected long _entityId;
         protected int _logicId;
+        protected bool _isFinish;
         protected KVContext _context;
         protected List<TimerTask> _timerList;
 
         public long EntityId => _entityId;
         public int LogicId => _logicId;
+        public bool IsFinish => _isFinish;
         public KVContext Context => _context;
 
         public void Init(string rootName, long entityId, int logicId, KVContext preContext = null)
@@ -99,6 +101,11 @@ namespace LccHotfix
 
             entity.AddTimer(timer);
             _timerList.Add(timer);
+        }
+        
+        public void SetFinish()
+        {
+            _isFinish = true;
         }
     }
 }

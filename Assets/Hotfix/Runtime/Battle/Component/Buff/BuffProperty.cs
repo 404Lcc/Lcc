@@ -48,7 +48,7 @@ namespace LccHotfix
 
         public override void OnActive()
         {
-            var entity = WorldUtility.GetEntity(_entityId);
+            var entity = EntityUtility.GetEntity(_entityId);
 
             if (entity == null)
                 return;
@@ -66,7 +66,7 @@ namespace LccHotfix
 
         public override void OnDeactive()
         {
-            var entity = WorldUtility.GetEntity(_entityId);
+            var entity = EntityUtility.GetEntity(_entityId);
 
             if (entity == null)
                 return;
@@ -96,7 +96,7 @@ namespace LccHotfix
 
         public override void OnActive()
         {
-            var entity = WorldUtility.GetEntity(_entityId);
+            var entity = EntityUtility.GetEntity(_entityId);
 
             if (entity == null)
                 return;
@@ -110,7 +110,7 @@ namespace LccHotfix
 
         public override void OnDeactive()
         {
-            var entity = WorldUtility.GetEntity(_entityId);
+            var entity = EntityUtility.GetEntity(_entityId);
 
             if (entity == null)
                 return;

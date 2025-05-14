@@ -132,6 +132,53 @@ namespace LccHotfix
         }
 
         /// <summary>
+        /// 找到前方最近的1个敌人
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="maxRange"></param>
+        /// <param name="maxDis"></param>
+        /// <param name="isOtherFaction"></param>
+        /// <param name="sameFactionExcludeSelf"></param>
+        /// <param name="excludeTargetIdList"></param>
+        /// <returns></returns>
+        public static LogicEntity GetForwardNearestTarget(LogicEntity entity, float maxRange = 90, float maxDis = 10, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, List<long> excludeTargetIdList = null)
+        {
+            var group = WorldUtility.GetLogicGroup_Faction_Property_Transform();
+            LogicEntity ret = null;
+            if (maxDis <= 0)
+            {
+                return ret;
+            }
+
+            float maxSqrDis = maxDis * maxDis;
+            var entities = group.GetEntities();
+            foreach (var target in entities)
+            {
+                if (!BaseFilter(entity, target, isOtherFaction, sameFactionExcludeSelf, excludeTargetIdList))
+                {
+                    continue;
+                }
+
+                // 计算到目标距离
+                var dir = target.comTransform.position - entity.comTransform.position;
+                var sqrDis = dir.sqrMagnitude;
+                if (sqrDis <= maxSqrDis)
+                {
+                    var forwardDir = entity.comTransform.rotation * (Vector3.right * entity.comTransform.dirX);
+                    // 计算角度
+                    float angleToTarget = Vector3.Angle(forwardDir, dir.normalized);
+                    if (angleToTarget <= maxRange / 2f)
+                    {
+                        ret = target;
+                        maxSqrDis = sqrDis;
+                    }
+                }
+            }
+
+            return ret;
+        }
+        
+        /// <summary>
         /// 找到范围内最近的1个敌人
         /// </summary>
         /// <param name="entity"></param>
@@ -320,7 +367,68 @@ namespace LccHotfix
 
             return ret;
         }
+        
+        /// <summary>
+        /// 找到前方范围内最近的n个敌人
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="targetNum"></param>
+        /// <param name="maxRange"></param>
+        /// <param name="maxDis"></param>
+        /// <param name="isOtherFaction"></param>
+        /// <param name="sameFactionExcludeSelf"></param>
+        /// <param name="excludeTargetIdList"></param>
+        /// <returns></returns>
+        public static List<LogicEntity> GetForwardNearestTargetList(LogicEntity entity, int targetNum, float maxRange = 90, float maxDis = 10, bool isOtherFaction = true, bool sameFactionExcludeSelf = false, List<long> excludeTargetIdList = null)
+        {
+            var group = WorldUtility.GetLogicGroup_Faction_Property_Transform();
+            List<LogicEntity> targetList = new List<LogicEntity>();
+            if (maxDis <= 0)
+            {
+                return targetList;
+            }
 
+            float maxSqrDis = maxDis * maxDis;
+            var entities = group.GetEntities();
+            foreach (var target in entities)
+            {
+                if (!BaseFilter(entity, target, isOtherFaction, sameFactionExcludeSelf, excludeTargetIdList))
+                {
+                    continue;
+                }
+
+                // 计算到目标距离
+                var dir = target.comTransform.position - entity.comTransform.position;
+                var sqrDis = dir.sqrMagnitude;
+                if (sqrDis <= maxSqrDis)
+                {
+                    var forwardDir = entity.comTransform.rotation * (Vector3.right * entity.comTransform.dirX);
+                    // 计算角度
+                    float angleToTarget = Vector3.Angle(forwardDir, dir.normalized);
+                    if (angleToTarget <= maxRange / 2f)
+                    {
+                        targetList.Add(target);
+                    }
+                }
+            }
+
+            // 根据距离排序
+            targetList = targetList.OrderBy(x => (x.comTransform.position - entity.comTransform.position).sqrMagnitude).ToList();
+
+            var targetLeftCount = targetNum;
+            var ret = new List<LogicEntity>();
+            for (int i = 0; i < targetList.Count; i++)
+            {
+                targetLeftCount--;
+                ret.Add(targetList[i]);
+
+                if (targetLeftCount <= 0)
+                    break;
+            }
+
+            return ret;
+        }
+        
         /// <summary>
         /// 找到范围内最近的n个敌人
         /// </summary>
