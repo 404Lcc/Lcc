@@ -94,6 +94,9 @@ namespace LccHotfix
             LogicComponentsLookup.ComControl = 18;
             LogicComponentsLookup.ComOwnerPlayer = 19;
             LogicComponentsLookup.ComTimer = 20;
+            LogicComponentsLookup.ComHero = 21;
+            LogicComponentsLookup.ComMonster = 22;
+            LogicComponentsLookup.ComConfig = 23;
             LogicComponentsLookup.componentTypeList.Add(typeof(ComLocomotion));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComCollider));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComView));
@@ -110,6 +113,9 @@ namespace LccHotfix
             LogicComponentsLookup.componentTypeList.Add(typeof(ComControl));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComOwnerPlayer));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComTimer));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComHero));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComMonster));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComConfig));
 
             //自定义
         }

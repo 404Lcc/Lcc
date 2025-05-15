@@ -132,7 +132,7 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 找到前方最近的1个敌人
+        /// 找到前方最近的1个目标
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="maxRange"></param>
@@ -179,7 +179,7 @@ namespace LccHotfix
         }
         
         /// <summary>
-        /// 找到范围内最近的1个敌人
+        /// 找到范围内最近的1个目标
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="maxDis"></param>
@@ -219,7 +219,7 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 找到范围内最近的1个敌人
+        /// 找到范围内最近的1个目标
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="minDis"></param>
@@ -261,7 +261,7 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 找到范围内固定血量最高的1个敌人
+        /// 找到范围内固定血量最高的1个目标
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="maxDis"></param>
@@ -312,7 +312,7 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 找到范围内血量百分比最低的1个敌人
+        /// 找到范围内血量百分比最低的1个目标
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="maxDis"></param>
@@ -369,7 +369,7 @@ namespace LccHotfix
         }
         
         /// <summary>
-        /// 找到前方范围内最近的n个敌人
+        /// 找到前方范围内最近的n个目标
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="targetNum"></param>
@@ -430,7 +430,7 @@ namespace LccHotfix
         }
         
         /// <summary>
-        /// 找到范围内最近的n个敌人
+        /// 找到范围内最近的n个目标
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="targetNum"></param>
@@ -484,7 +484,7 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 找到范围内最近的n个敌人
+        /// 找到范围内最近的n个目标
         /// </summary>
         /// <param name="selfPos"></param>
         /// <param name="selfEntityId"></param>
@@ -540,7 +540,7 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 找到距离线最近的n个敌人
+        /// 找到距离线最近的n个目标
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="targetNum"></param>
@@ -589,7 +589,7 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 找到范围内血量百分比最低的n个敌人
+        /// 找到范围内血量百分比最低的n个目标
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="targetNum"></param>

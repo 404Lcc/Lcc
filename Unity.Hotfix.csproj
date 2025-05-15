@@ -92,8 +92,8 @@
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Image\ImageExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicComponentsLookup.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Vector3\Vector3Extension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTScript\ParallelBTScript.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Vector3\Vector3Extension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\GameObjectPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\RedDot\RedDotBind.cs" />
     <Compile Include="Assets\Hotfix\Init\Init.cs" />
@@ -247,6 +247,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\Base\GroupEntityIndex.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineCompletedHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\System\SysBuffs.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComConfig.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysViewUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\MainThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\SkillProcess\ISkillProcess.cs" />

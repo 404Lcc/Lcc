@@ -46,8 +46,14 @@ namespace LccHotfix
 
         public void ChangeLocomotion(ILocomotion locomotion)
         {
+            if(!hasComTransform)
+                return;
             if (hasComLocomotion)
             {
+                locomotion.CurPosition = comTransform.position;
+                locomotion.CurRotation = comTransform.rotation;
+                locomotion.CurScale = comTransform.scale;
+                
                 var index = LogicComponentsLookup.ComLocomotion;
                 var component = (ComLocomotion)CreateComponent(index, typeof(ComLocomotion));
                 component.Locomotion = locomotion;
