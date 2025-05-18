@@ -101,5 +101,9 @@ namespace LccHotfix
         public virtual void Tick()
         {
         }
+
+        public virtual void LateUpdate()
+        {
+        }
     }
 }

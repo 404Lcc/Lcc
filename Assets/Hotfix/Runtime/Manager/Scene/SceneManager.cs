@@ -37,6 +37,15 @@ namespace LccHotfix
             }
         }
 
+        internal override void LateUpdate()
+        {
+            base.LateUpdate();
+            if (curSceneHandler != null && !curSceneHandler.IsLoading)
+            {
+                curSceneHandler.LateUpdate();
+            }
+        }
+
         internal override void Shutdown()
         {
             this.StopAllCoroutines();

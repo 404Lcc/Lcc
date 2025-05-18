@@ -78,9 +78,20 @@ namespace LccHotfix
             }
 
             WorldManager.Instance.GetWorld().Update();
+        }
+
+        public override void LateUpdate()
+        {
+            base.LateUpdate();
+            
+            if (IsLoading)
+            {
+                return;
+            }
+            
             WorldManager.Instance.GetWorld().LateUpdate();
         }
-        
+
         public override void SceneExitHandler()
         {
             base.SceneExitHandler();
