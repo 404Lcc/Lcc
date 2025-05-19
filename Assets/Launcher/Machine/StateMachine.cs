@@ -149,19 +149,26 @@ namespace LccModel
 		}
 
 		/// <summary>
+		/// 判断黑板是否存在某值
+		/// </summary>
+		/// <param name="key"></param>
+		/// <returns></returns>
+		public bool ContainsBlackboardValue(string key)
+		{
+			return _blackboard.ContainsKey(key);
+		}
+		
+		/// <summary>
 		/// 获取黑板数据
 		/// </summary>
 		public Object GetBlackboardValue(string key)
 		{
-			if (_blackboard.TryGetValue(key, out Object value))
+			if (ContainsBlackboardValue(key))
 			{
-				return value;
+				return _blackboard[key];
 			}
-			else
-			{
-				Debug.LogWarning($"Not found blackboard value : {key}");
-				return null;
-			}
+			
+			return null;
 		}
 
 		private IStateNode TryGetNode(string nodeName)
