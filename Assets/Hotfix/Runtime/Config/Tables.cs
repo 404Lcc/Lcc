@@ -23,6 +23,7 @@ public partial class Tables
     public TBIcon TBIcon {get; }
     public TBTexture TBTexture {get; }
     public TBMultiLanguageTexture TBMultiLanguageTexture {get; }
+    public TBPanel TBPanel {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -35,6 +36,7 @@ public partial class Tables
         TBIcon = new TBIcon(loader("tbicon"));
         TBTexture = new TBTexture(loader("tbtexture"));
         TBMultiLanguageTexture = new TBMultiLanguageTexture(loader("tbmultilanguagetexture"));
+        TBPanel = new TBPanel(loader("tbpanel"));
         ResolveRef();
     }
     
@@ -49,6 +51,7 @@ public partial class Tables
         TBIcon.ResolveRef(this);
         TBTexture.ResolveRef(this);
         TBMultiLanguageTexture.ResolveRef(this);
+        TBPanel.ResolveRef(this);
     }
 }
 
