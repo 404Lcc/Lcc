@@ -122,6 +122,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScrollPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Node\IUILogic.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysDeathProcess.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\Panel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComUniGameMode.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysGameMode.cs" />
     <Compile Include="Assets\Hotfix\Core\Event\IEventManager.cs" />
@@ -315,6 +316,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Config\PopupWindow.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\StackType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Singleton\Singleton.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\TBPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\Dev\DevPlatform.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Resolution\ResolutionUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\KVContext\KVType.cs" />
