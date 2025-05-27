@@ -178,6 +178,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComFaction.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Transform\TransformExtension.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Module\Setting\ModSetting.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\SpriteRenderer\SpriteRendererExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComUniDamage\Data\DamageType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\SceneType.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineCompletedHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\System\SysBuffs.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Save\SaveManager.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Module\Setting\DisplayModeType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComConfig.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysViewUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\MainThreadScheduler.cs" />
@@ -309,6 +311,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\BattleState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\ClientTools\ClientTools.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicSystems.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Module\Setting\ResolutionType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\PopupWindow.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\StackType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Singleton\Singleton.cs" />
