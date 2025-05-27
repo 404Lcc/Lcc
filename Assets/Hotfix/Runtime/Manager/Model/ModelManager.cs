@@ -52,6 +52,15 @@ namespace LccHotfix
             }
             return null;
         }
+        
+        public object GetModel(Type type)
+        {
+            if (modelDict.ContainsKey(type))
+            {
+                return modelDict[type];
+            }
+            return null;
+        }
 
     }
 }
