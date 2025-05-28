@@ -69,6 +69,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\Manager\WindowManager.Action.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Collider\SubobjectColliderHandlerBase.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Module.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\TBEquipment.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Skill\SkillData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\System\SysControl.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\BattleWorld.cs" />
@@ -92,14 +93,17 @@
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Image\ImageExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\LogicContext\LogicComponentsLookup.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\EquipmentType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTScript\ParallelBTScript.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\Vector3\Vector3Extension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\GameObjectPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\RedDot\RedDotBind.cs" />
     <Compile Include="Assets\Hotfix\Init\Init.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\RewardTemplate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\ThreadPoolScheduler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Utility\Extension\WorldExtension.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\QualityType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\MetaContext\MetaMatcher.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Log\LogLevel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComHP.cs" />
@@ -129,6 +133,8 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Locomotion\ComLocomotion.cs" />
     <Compile Include="Assets\Hotfix\Logic\Scene\LoginScene.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Locomotion\LocomotionBase.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\Item.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\TBItem.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventPool\BaseEventArgs.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\CodeTypes\AttributeBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\FiberManager.cs" />
@@ -138,6 +144,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Download\DownloadState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Command\CommandData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ProtobufObject\ProtobufObject.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\ItemType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComMonster.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\System\SysSubobject.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\LinkedListRange.cs" />
@@ -204,8 +211,8 @@
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\IReference.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\TBPopupWindow.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComUnityObjectRelated.cs" />
-    <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelTemplate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTScript\BTScript.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelTemplate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\ScreenAdaptation\ScreenAdaptationUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysDebug.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScrollItem.cs" />
@@ -220,6 +227,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Death\DeathProcess.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\KVContext\KVContext.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\EventPool\EventPool.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\TBReward.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\ValuePropertyType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComUniInGamePlayers.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComID.cs" />
@@ -241,6 +249,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\GameMode\GameModeBase.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UILogin\UILoginPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\TBTexture.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\ItemSmallType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTScript\BTScriptAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Base\GroupEntityIndex.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineCompletedHandler.cs" />
@@ -300,11 +309,13 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Timer\TimerManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\Entry.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComControl\IControl.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\Equipment.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Icon.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineHandler.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIMain\UIMainPanel.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\DataStruct\TypeNamePair.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTScript\BTAction.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Config\TBRewardTemplate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\BasePlatform.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolManager.ObjectPool.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Buff\BuffProperty.cs" />

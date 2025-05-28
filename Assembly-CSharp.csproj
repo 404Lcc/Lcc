@@ -41,6 +41,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Assets\Res\Config\tbitem.json" />
     <None Include="Assets\Res\Config\tbpanel.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\Res\Config\tbskill.json" />
@@ -73,6 +74,7 @@
     <None Include="Assets\Res\Config\tbpopupwindow.json" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Res\Config\tblanguage.json" />
+    <None Include="Assets\Res\Config\tbequipment.json" />
     <None Include="Assets\Resources\LanguageConfig_ChineseSimplified.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\StreamingAssets\1\noticeWhiteList.txt" />
@@ -81,6 +83,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\Res\Config\tbemptygoto.json" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\Res\Config\tbrewardtemplate.json" />
     <None Include="Assets\StreamingAssets\1\English\notice.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\GameConfig\GameConfig_Language.txt" />

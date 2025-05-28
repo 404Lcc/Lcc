@@ -24,6 +24,9 @@ public partial class Tables
     public TBTexture TBTexture {get; }
     public TBMultiLanguageTexture TBMultiLanguageTexture {get; }
     public TBPanel TBPanel {get; }
+    public TBItem TBItem {get; }
+    public TBRewardTemplate TBRewardTemplate {get; }
+    public TBEquipment TBEquipment {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -37,6 +40,9 @@ public partial class Tables
         TBTexture = new TBTexture(loader("tbtexture"));
         TBMultiLanguageTexture = new TBMultiLanguageTexture(loader("tbmultilanguagetexture"));
         TBPanel = new TBPanel(loader("tbpanel"));
+        TBItem = new TBItem(loader("tbitem"));
+        TBRewardTemplate = new TBRewardTemplate(loader("tbrewardtemplate"));
+        TBEquipment = new TBEquipment(loader("tbequipment"));
         ResolveRef();
     }
     
@@ -52,6 +58,9 @@ public partial class Tables
         TBTexture.ResolveRef(this);
         TBMultiLanguageTexture.ResolveRef(this);
         TBPanel.ResolveRef(this);
+        TBItem.ResolveRef(this);
+        TBRewardTemplate.ResolveRef(this);
+        TBEquipment.ResolveRef(this);
     }
 }
 
