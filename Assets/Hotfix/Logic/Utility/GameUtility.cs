@@ -1,4 +1,5 @@
 using System;
+using cfg;
 
 namespace LccHotfix
 {
@@ -26,6 +27,29 @@ namespace LccHotfix
                 return "";
             }
             return LanguageManager.Instance.GetValue(key, args);
+        }
+        
+        public static int GetItemFrameIcon(QualityType qualityType)
+        {
+            switch (qualityType)
+            {
+                case QualityType.White:
+                    return 0;
+                case QualityType.Green:
+                    return 0;
+                case QualityType.Blue:
+                    return 0;
+                case QualityType.Purple:
+                    return 0;
+                case QualityType.Yellow:
+                    return 0;
+                case QualityType.Red:
+                    return 0;
+                case QualityType.Platinum:
+                    return 0;
+            }
+
+            return 0;
         }
     }
 }

@@ -146,6 +146,8 @@
     <Compile Include="Assets\Hotfix\Runtime\ProtobufObject\ProtobufObject.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\ItemType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\ComMonster.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Module\Equipment\ModEquipment.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Module\Bag\RewardItemData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\System\SysSubobject.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\LinkedListRange.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Collider\ColliderHandler.cs" />
@@ -270,6 +272,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComUniDamage\Data\DamageSource.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Buff\BuffState.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\Death\ComDeath.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Module\Bag\ItemData.cs" />
     <Compile Include="Assets\Hotfix\Core\Event\EventManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Component\FSM\StateNode.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\MetaContext\MetaComponent.cs" />
@@ -312,6 +315,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Config\Equipment.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\Icon.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Coroutine\CoroutineHandler.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Module\Bag\ModBag.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UIMain\UIMainPanel.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\DataStruct\TypeNamePair.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTScript\BTAction.cs" />
