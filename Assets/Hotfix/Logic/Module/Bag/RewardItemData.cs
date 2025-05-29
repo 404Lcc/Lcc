@@ -29,6 +29,15 @@ public class RewardItemData : ItemData
     {
         return true;
     }
+    
+    /// <summary>
+    /// 是否显示预览
+    /// </summary>
+    /// <returns></returns>
+    public bool IsShowPreview()
+    {
+        return true;
+    }
 
 
     public RewardItemData Clone()

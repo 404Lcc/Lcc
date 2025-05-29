@@ -13,7 +13,7 @@ public class ItemData
     public int ItemId { get; private set; }
     public int Count { get; private set; }
 
-        
+
 
 
     public void InitData(int itemId, int count)
@@ -27,8 +27,8 @@ public class ItemData
             return;
         }
     }
-    
-    
+
+
     public void SetCount(int count)
     {
         this.Count = count;
@@ -52,21 +52,21 @@ public class ItemData
         return GameUtility.GetLanguageText(_item.Name);
     }
     
+    public int GetIconId()
+    {
+        return _item.Icon;
+    }
+    
     public string GetTips()
     {
         return GameUtility.GetLanguageText(_item.Tips);
     }
-    
+
     public QualityType GetQuality()
     {
         return _item.Quality;
     }
-    
-    public int GetItemFrameIcon()
-    {
-        return GameUtility.GetItemFrameIcon(GetQuality());
-    }
-    
+
     public ItemType GetItemType()
     {
         return _item.Type;
@@ -81,7 +81,7 @@ public class ItemData
     {
         return _item.SmallSubId;
     }
-    
+
     //是否不支持显示
     public bool GetNotDisplay()
     {

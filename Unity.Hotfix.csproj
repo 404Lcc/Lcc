@@ -108,6 +108,7 @@
     <Compile Include="Assets\Hotfix\Core\Base\Log\LogLevel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComHP.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\TBEmptyGoTo.cs" />
+    <Compile Include="Assets\Hotfix\Logic\Icon\UIRewardNormal.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Base\IDispose.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\GameObjectPool\Decorators\MaxActiveDecorator.cs" />
     <Compile Include="Assets\Hotfix\Logic\Scene\MainScene.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\SpriteRenderer\SpriteRendererExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComUniDamage\Data\DamageType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\SceneType.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Icon\IconBase.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\LinkedList.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Config\ConfigManager.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\MultiDictionary.cs" />
@@ -319,6 +321,7 @@
     <Compile Include="Assets\Hotfix\Logic\UI\UIMain\UIMainPanel.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\DataStruct\TypeNamePair.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTScript\BTAction.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Icon\IconManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\TBRewardTemplate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Platform\BasePlatform.cs" />
     <Compile Include="Assets\Hotfix\Core\ObjectPool\ObjectPoolManager.ObjectPool.cs" />
