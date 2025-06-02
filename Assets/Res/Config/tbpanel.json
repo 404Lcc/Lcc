@@ -32,5 +32,22 @@
     "returnNodeType": 0,
     "returnNodeName": "",
     "returnNodeParam": 0
+  },
+  {
+    "prefabName": "UITipsBase",
+    "depth": 0,
+    "rootName": "",
+    "logicName": "UITipsBase",
+    "bgTex": "",
+    "sound": 0,
+    "openAnim": false,
+    "showScreenMask": 0,
+    "windowFlag": 1,
+    "rejectFlag": 1,
+    "escapeType": 1,
+    "releaseType": 0,
+    "returnNodeType": 0,
+    "returnNodeName": "",
+    "returnNodeParam": 0
   }
 ]

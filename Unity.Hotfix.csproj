@@ -344,6 +344,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\UI\RootNode\BlackboardType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Singleton\ISingletonLateUpdate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\CodeTypes\CodeTypesManager.cs" />
+    <Compile Include="Assets\Hotfix\Logic\UI\UITipsBase\UITipsBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\Skill\SkillSpellType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTScript\BTScriptManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Command\CommandDataType.cs" />
