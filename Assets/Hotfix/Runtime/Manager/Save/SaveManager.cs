@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using ES3Internal;
 using ES3Types;
 
+using UnityEngine;
+
 namespace LccHotfix
 {
     public enum StoreMode
@@ -15,19 +17,31 @@ namespace LccHotfix
     public interface ISavePipeline
     {
         void InitData(GameSaveData gameSaveData);
-        void SaveData(GameSaveData gameSaveData);
+    }
+
+    public interface IRunData
+    {
+        /// <summary>
+        /// 从存档初始化数据
+        /// </summary>
+        void Init();
+
+        /// <summary>
+        /// 填充数据到存档
+        /// </summary>
+        void Flush();
     }
 
     // 数据转换接口
-    public interface ISaveDataConverter<T>
+    public interface ISaveDataConverter<T> : IRunData where T : ISave
     {
-        T ToSaveData();
-        void FromSaveData(T saveData);
+        T Save { get; set; }
     }
 
-    public abstract class SaveData
+    // 存档数据
+    public interface ISave
     {
-        public abstract void CreateNewSaveData();
+        void Init();
     }
 
     [Serializable]
@@ -38,38 +52,50 @@ namespace LccHotfix
         public int saveVersion; // 数据版本控制
 
         // 模块数据存储
-        public Dictionary<Type, SaveData> moduleDict;
+        public Dictionary<Type, ISave> saveDict;
+
+        private Dictionary<Type, IRunData> _runDataDict;
 
         public void InitData()
         {
             saveTime = DateTime.Now;
             saveVersion = 1;
-            moduleDict = new Dictionary<Type, SaveData>();
+            saveDict = new Dictionary<Type, ISave>();
+            _runDataDict = new Dictionary<Type, IRunData>();
         }
 
-        public T GetModule<T>() where T : SaveData
+        public T GetRunData<T, TSaveData>() where T : ISaveDataConverter<TSaveData>, new() where TSaveData : ISave
         {
-            moduleDict.TryGetValue(typeof(T), out var module);
+            Type type = typeof(T);
+            if (_runDataDict.ContainsKey(type))
+            {
+                return (T)_runDataDict[type];
+            }
+            else
+            {
+                T data = new T();
+                data.Save = GetSave<TSaveData>();
+                data.Init();
+                _runDataDict.Add(data.GetType(), data);
+                return data;
+            }
+        }
+
+        private T GetSave<T>() where T : ISave
+        {
+            saveDict.TryGetValue(typeof(T), out var module);
             if (module == null)
             {
                 module = Activator.CreateInstance<T>();
-                module.CreateNewSaveData();
+                module.Init();
             }
 
             return (T)module;
         }
 
-        public void SetModule<T>(T module) where T : SaveData
+        public Dictionary<Type, IRunData> GetRunDataDict()
         {
-            var type = typeof(T);
-            if (moduleDict.ContainsKey(type))
-            {
-                moduleDict[type] = module;
-            }
-            else
-            {
-                moduleDict.Add(type, module);
-            }
+            return _runDataDict;
         }
     }
 
@@ -83,6 +109,8 @@ namespace LccHotfix
         private ES3Settings _settings;
 
         private GameSaveData _gameSaveData;
+
+        public bool IsSaveLoaded { get; private set; }
 
 
         public SaveManager()
@@ -160,7 +188,7 @@ namespace LccHotfix
         public bool ValidateSaveData(GameSaveData data)
         {
             //校验逻辑示例
-            return data != null && data.saveTime < DateTime.Now.AddDays(1) && data.moduleDict.Count > 0;
+            return data != null && data.saveTime < DateTime.Now.AddDays(1) && data.saveDict.Count > 0;
         }
 
         /// <summary>
@@ -179,6 +207,7 @@ namespace LccHotfix
         {
             _gameSaveData = new GameSaveData();
             _gameSaveData.InitData();
+            IsSaveLoaded = true;
             foreach (var item in saveDict.Values)
             {
                 item.InitData(_gameSaveData);
@@ -193,6 +222,7 @@ namespace LccHotfix
             if (CheckHaveSaveData())
             {
                 _gameSaveData = Load<GameSaveData>("GameSaveData");
+                IsSaveLoaded = true;
                 foreach (var item in saveDict.Values)
                 {
                     item.InitData(_gameSaveData);
@@ -207,14 +237,24 @@ namespace LccHotfix
         {
             _gameSaveData.saveTime = DateTime.Now;
 
-            foreach (var pipeline in saveDict.Values)
+            foreach (var item in _gameSaveData.GetRunDataDict().Values)
             {
-                pipeline.SaveData(_gameSaveData);
+                item.Flush();
             }
 
             Save("GameSaveData", _gameSaveData);
         }
 
+        public T GetRunData<T, TSaveData>() where T : ISaveDataConverter<TSaveData>, new() where TSaveData : ISave
+        {
+            if (!IsSaveLoaded)
+            {
+                Debug.LogError("Save file has not been loaded yet");
+                return default;
+            }
+
+            return _gameSaveData.GetRunData<T, TSaveData>();
+        }
 
         #region ES3接口
 

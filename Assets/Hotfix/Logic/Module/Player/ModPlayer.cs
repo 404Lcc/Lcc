@@ -1,11 +1,11 @@
 namespace LccHotfix
 {
-    public class PlayerSimpleSaveData : SaveData
+    public class PlayerSimpleSaveData : ISave
     {
         public long UID { get; set; } // 角色id
         public string Name { get; set; } // 昵称
 
-        public override void CreateNewSaveData()
+        public void Init()
         {
             UID = 1;
             Name = "";
@@ -15,21 +15,20 @@ namespace LccHotfix
     //简易信息
     public class PlayerSimpleData : ISaveDataConverter<PlayerSimpleSaveData>
     {
+        public PlayerSimpleSaveData Save { get; set; }
         public long UID { get; private set; } // 角色id
         public string Name { get; private set; } // 昵称
 
-        public PlayerSimpleSaveData ToSaveData()
+        public void Flush()
         {
-            var save = new PlayerSimpleSaveData();
-            save.UID = UID;
-            save.Name = Name;
-            return save;
+            Save.UID = UID;
+            Save.Name = Name;
         }
 
-        public void FromSaveData(PlayerSimpleSaveData data)
+        public void Init()
         {
-            this.UID = data.UID;
-            this.Name = data.Name;
+            this.UID = Save.UID;
+            this.Name = Save.Name;
         }
     }
 
@@ -40,15 +39,7 @@ namespace LccHotfix
 
         public void InitData(GameSaveData gameSaveData)
         {
-            var saveData = gameSaveData.GetModule<PlayerSimpleSaveData>();
-            PlayerSimpleData = new PlayerSimpleData();
-            PlayerSimpleData.FromSaveData(saveData);
-        }
-
-        public void SaveData(GameSaveData gameSaveData)
-        {
-            var module = PlayerSimpleData.ToSaveData();
-            gameSaveData.SetModule(module);
+            PlayerSimpleData = gameSaveData.GetRunData<PlayerSimpleData, PlayerSimpleSaveData>();
         }
     }
 }

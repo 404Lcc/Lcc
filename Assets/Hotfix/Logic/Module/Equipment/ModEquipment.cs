@@ -25,7 +25,7 @@ namespace LccHotfix
         /// 行为树脚本
         /// </summary>
         public string BtScript => _equipment.BtScript;
-        
+
         //额外值
 
         public void InitData(int id)
@@ -34,10 +34,11 @@ namespace LccHotfix
         }
     }
 
-    public class CurrentEquipmentSaveData : SaveData
+    public class CurrentEquipmentSaveData : ISave
     {
         public List<EquipmentData> CurrentDataList { get; set; }
-        public override void CreateNewSaveData()
+
+        public void Init()
         {
             CurrentDataList = new List<EquipmentData>();
         }
@@ -45,20 +46,19 @@ namespace LccHotfix
 
     public class CurrentEquipmentData : ISaveDataConverter<CurrentEquipmentSaveData>
     {
+        public CurrentEquipmentSaveData Save { get; set; }
         public List<EquipmentData> CurrentDataList { get; set; }
-        
-        public CurrentEquipmentSaveData ToSaveData()
+
+        public void Flush()
         {
-            var save = new CurrentEquipmentSaveData();
-            save.CurrentDataList = new List<EquipmentData>();
-            save.CurrentDataList.AddRange(save.CurrentDataList);
-            return save;
+            Save.CurrentDataList = new List<EquipmentData>();
+            Save.CurrentDataList.AddRange(Save.CurrentDataList);
         }
 
-        public void FromSaveData(CurrentEquipmentSaveData data)
+        public void Init()
         {
             CurrentDataList = new List<EquipmentData>();
-            CurrentDataList.AddRange(data.CurrentDataList);
+            CurrentDataList.AddRange(Save.CurrentDataList);
         }
     }
 
@@ -67,22 +67,15 @@ namespace LccHotfix
     public class ModEquipment : ModelTemplate
     {
         public CurrentEquipmentData CurrentEquipmentData { get; set; }
+
         public override void Init()
         {
             base.Init();
         }
-        
+
         public void InitData(GameSaveData gameSaveData)
         {
-            var saveData = gameSaveData.GetModule<CurrentEquipmentSaveData>();
-            CurrentEquipmentData = new CurrentEquipmentData();
-            CurrentEquipmentData.FromSaveData(saveData);
-        }
-
-        public void SaveData(GameSaveData gameSaveData)
-        {
-            var module = CurrentEquipmentData.ToSaveData();
-            gameSaveData.SetModule(module);
+            CurrentEquipmentData = gameSaveData.GetRunData<CurrentEquipmentData, CurrentEquipmentSaveData>();
         }
     }
 }

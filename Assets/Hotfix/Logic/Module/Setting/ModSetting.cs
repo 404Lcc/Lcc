@@ -1,13 +1,13 @@
 namespace LccHotfix
 {
-    public class SettingSaveData : SaveData
+    public class SettingSaveData : ISave
     {
         public int MusicVolume { get; set; }
         public int SoundFXVolume { get; set; }
         public DisplayModeType DisplayModeType { get; set; }
         public ResolutionType ResolutionType { get; set; }
 
-        public override void CreateNewSaveData()
+        public void Init()
         {
             MusicVolume = 100;
             SoundFXVolume = 100;
@@ -18,27 +18,26 @@ namespace LccHotfix
 
     public class SettingData : ISaveDataConverter<SettingSaveData>
     {
+        public SettingSaveData Save { get; set; }
         public int MusicVolume { get; private set; }
         public int SoundFXVolume { get; private set; }
         public DisplayModeType DisplayModeType { get; private set; }
         public ResolutionType ResolutionType { get; private set; }
 
-        public SettingSaveData ToSaveData()
+        public void Flush()
         {
-            var save = new SettingSaveData();
-            save.MusicVolume = MusicVolume;
-            save.SoundFXVolume = SoundFXVolume;
-            save.DisplayModeType = DisplayModeType;
-            save.ResolutionType = ResolutionType;
-            return save;
+            Save.MusicVolume = MusicVolume;
+            Save.SoundFXVolume = SoundFXVolume;
+            Save.DisplayModeType = DisplayModeType;
+            Save.ResolutionType = ResolutionType;
         }
 
-        public void FromSaveData(SettingSaveData data)
+        public void Init()
         {
-            this.MusicVolume = data.MusicVolume;
-            this.SoundFXVolume = data.SoundFXVolume;
-            this.DisplayModeType = data.DisplayModeType;
-            this.ResolutionType = data.ResolutionType;
+            this.MusicVolume = Save.MusicVolume;
+            this.SoundFXVolume = Save.SoundFXVolume;
+            this.DisplayModeType = Save.DisplayModeType;
+            this.ResolutionType = Save.ResolutionType;
         }
     }
 
@@ -49,15 +48,7 @@ namespace LccHotfix
 
         public void InitData(GameSaveData gameSaveData)
         {
-            var saveData = gameSaveData.GetModule<SettingSaveData>();
-            SettingData = new SettingData();
-            SettingData.FromSaveData(saveData);
-        }
-
-        public void SaveData(GameSaveData gameSaveData)
-        {
-            var module = SettingData.ToSaveData();
-            gameSaveData.SetModule(module);
+            SettingData = gameSaveData.GetRunData<SettingData, SettingSaveData>();
         }
     }
 }
