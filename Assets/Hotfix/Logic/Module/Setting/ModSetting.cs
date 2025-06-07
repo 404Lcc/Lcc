@@ -2,15 +2,11 @@ namespace LccHotfix
 {
     public class SettingSaveData : ISave
     {
-        public int MusicVolume { get; set; }
-        public int SoundFXVolume { get; set; }
         public DisplayModeType DisplayModeType { get; set; }
         public ResolutionType ResolutionType { get; set; }
 
         public void Init()
         {
-            MusicVolume = 100;
-            SoundFXVolume = 100;
             DisplayModeType = DisplayModeType.FullScreen;
             ResolutionType = ResolutionType.Resolution1920x1080;
         }
@@ -26,16 +22,12 @@ namespace LccHotfix
 
         public void Flush()
         {
-            Save.MusicVolume = MusicVolume;
-            Save.SoundFXVolume = SoundFXVolume;
             Save.DisplayModeType = DisplayModeType;
             Save.ResolutionType = ResolutionType;
         }
 
         public void Init()
         {
-            this.MusicVolume = Save.MusicVolume;
-            this.SoundFXVolume = Save.SoundFXVolume;
             this.DisplayModeType = Save.DisplayModeType;
             this.ResolutionType = Save.ResolutionType;
         }

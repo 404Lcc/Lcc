@@ -6,6 +6,35 @@ using UnityEngine;
 
 namespace LccHotfix
 {
+    public class AudioSaveData : ISave
+    {
+        public float SoundVolume { get; set; } = 1;
+        public float MusicVolume { get; set; } = 1;
+
+        public void Init()
+        {
+        }
+    }
+
+    public class AudioData : ISaveConverter<AudioSaveData>
+    {
+        public AudioSaveData Save { get; set; }
+        public float SoundVolume { get; set; }
+        public float MusicVolume { get; set; }
+
+        public void Flush()
+        {
+            Save.SoundVolume = SoundVolume;
+            Save.MusicVolume = MusicVolume;
+        }
+
+        public void Init()
+        {
+            this.SoundVolume = Save.SoundVolume;
+            this.MusicVolume = Save.MusicVolume;
+        }
+    }
+
     public class AudioAsset
     {
         public ResObject ResObject { get; set; }
@@ -100,6 +129,20 @@ namespace LccHotfix
         private HashSet<AudioSource> _activeSources = new HashSet<AudioSource>();
         private List<AudioSource> _removeList = new List<AudioSource>(10);
 
+        private AudioData save;
+
+        public float SoundVolume
+        {
+            get => save.SoundVolume;
+            set { save.SoundVolume = value; }
+        }
+
+        public float MusicVolume
+        {
+            get => save.MusicVolume;
+            set { save.MusicVolume = value; }
+        }
+
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
             // 每帧检测临时音源状态
@@ -149,6 +192,8 @@ namespace LccHotfix
             _audioPool = new AudioSourcePool(10);
             loader = new GameObject("loader");
             GameObject.DontDestroyOnLoad(loader);
+
+            save = SaveManager.Instance.GetSaveData<AudioData, AudioSaveData>();
         }
 
         /// <summary>
@@ -182,18 +227,37 @@ namespace LccHotfix
 
 
         /// <summary>
-        /// 播放音频
+        /// 播放声音
         /// </summary>
         /// <param name="audio"></param>
         /// <param name="volume"></param>
         /// <param name="loop"></param>
         /// <returns></returns>
-        public AudioSource PlayAudio(string audio, float volume = 1f, bool loop = false)
+        public AudioSource PlaySound(string audio, float volume = 1f, float pitch = 1, bool loop = false)
         {
             var clip = LoadAudio(audio);
             var source = _audioPool.Get();
             source.clip = clip;
-            source.volume = volume;
+            source.volume = volume * save.SoundVolume;
+            source.pitch = pitch;
+            source.loop = loop;
+            source.Play();
+
+            if (!loop)
+            {
+                _activeSources.Add(source);
+            }
+
+            return source;
+        }
+
+        public AudioSource PlayMusic(string audio, float volume = 1f, float pitch = 1, bool loop = false)
+        {
+            var clip = LoadAudio(audio);
+            var source = _audioPool.Get();
+            source.clip = clip;
+            source.volume = volume * save.MusicVolume;
+            source.pitch = pitch;
             source.loop = loop;
             source.Play();
 
