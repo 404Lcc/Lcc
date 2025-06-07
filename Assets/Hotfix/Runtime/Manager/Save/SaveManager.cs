@@ -13,13 +13,20 @@ namespace LccHotfix
         Official
     }
 
+    // 存档数据
+    public interface ISave
+    {
+        void Init();
+    }
+
     //存档管线
     public interface ISavePipeline
     {
         void InitData(GameSaveData gameSaveData);
     }
 
-    public interface IRunData
+    //运行时数据
+    public interface ISaveData
     {
         /// <summary>
         /// 从存档初始化数据
@@ -33,15 +40,9 @@ namespace LccHotfix
     }
 
     // 数据转换接口
-    public interface ISaveDataConverter<T> : IRunData where T : ISave
+    public interface ISaveConverter<T> : ISaveData where T : ISave
     {
         T Save { get; set; }
-    }
-
-    // 存档数据
-    public interface ISave
-    {
-        void Init();
     }
 
     [Serializable]
@@ -54,29 +55,29 @@ namespace LccHotfix
         // 模块数据存储
         public Dictionary<Type, ISave> saveDict;
 
-        private Dictionary<Type, IRunData> _runDataDict;
+        private Dictionary<Type, ISaveData> _dataDict;
 
         public void InitData()
         {
             saveTime = DateTime.Now;
             saveVersion = 1;
             saveDict = new Dictionary<Type, ISave>();
-            _runDataDict = new Dictionary<Type, IRunData>();
+            _dataDict = new Dictionary<Type, ISaveData>();
         }
 
-        public T GetRunData<T, TSaveData>() where T : ISaveDataConverter<TSaveData>, new() where TSaveData : ISave
+        public T GetSaveData<T, TSave>() where T : ISaveConverter<TSave>, new() where TSave : ISave
         {
             Type type = typeof(T);
-            if (_runDataDict.ContainsKey(type))
+            if (_dataDict.ContainsKey(type))
             {
-                return (T)_runDataDict[type];
+                return (T)_dataDict[type];
             }
             else
             {
                 T data = new T();
-                data.Save = GetSave<TSaveData>();
+                data.Save = GetSave<TSave>();
                 data.Init();
-                _runDataDict.Add(data.GetType(), data);
+                _dataDict.Add(data.GetType(), data);
                 return data;
             }
         }
@@ -93,9 +94,9 @@ namespace LccHotfix
             return (T)module;
         }
 
-        public Dictionary<Type, IRunData> GetRunDataDict()
+        public Dictionary<Type, ISaveData> GetRunDataDict()
         {
-            return _runDataDict;
+            return _dataDict;
         }
     }
 
@@ -245,7 +246,7 @@ namespace LccHotfix
             Save("GameSaveData", _gameSaveData);
         }
 
-        public T GetRunData<T, TSaveData>() where T : ISaveDataConverter<TSaveData>, new() where TSaveData : ISave
+        public T GetSaveData<T, TSave>() where T : ISaveConverter<TSave>, new() where TSave : ISave
         {
             if (!IsSaveLoaded)
             {
@@ -253,7 +254,7 @@ namespace LccHotfix
                 return default;
             }
 
-            return _gameSaveData.GetRunData<T, TSaveData>();
+            return _gameSaveData.GetSaveData<T, TSave>();
         }
 
         #region ES3接口

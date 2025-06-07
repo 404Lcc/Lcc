@@ -13,7 +13,7 @@ namespace LccHotfix
     }
 
     //简易信息
-    public class PlayerSimpleData : ISaveDataConverter<PlayerSimpleSaveData>
+    public class PlayerSimpleData : ISaveConverter<PlayerSimpleSaveData>
     {
         public PlayerSimpleSaveData Save { get; set; }
         public long UID { get; private set; } // 角色id
@@ -39,7 +39,7 @@ namespace LccHotfix
 
         public void InitData(GameSaveData gameSaveData)
         {
-            PlayerSimpleData = gameSaveData.GetRunData<PlayerSimpleData, PlayerSimpleSaveData>();
+            PlayerSimpleData = gameSaveData.GetSaveData<PlayerSimpleData, PlayerSimpleSaveData>();
         }
     }
 }

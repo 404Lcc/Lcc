@@ -16,7 +16,7 @@ namespace LccHotfix
         }
     }
 
-    public class SettingData : ISaveDataConverter<SettingSaveData>
+    public class SettingData : ISaveConverter<SettingSaveData>
     {
         public SettingSaveData Save { get; set; }
         public int MusicVolume { get; private set; }
@@ -48,7 +48,7 @@ namespace LccHotfix
 
         public void InitData(GameSaveData gameSaveData)
         {
-            SettingData = gameSaveData.GetRunData<SettingData, SettingSaveData>();
+            SettingData = gameSaveData.GetSaveData<SettingData, SettingSaveData>();
         }
     }
 }

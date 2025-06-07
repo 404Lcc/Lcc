@@ -44,7 +44,7 @@ namespace LccHotfix
         }
     }
 
-    public class CurrentEquipmentData : ISaveDataConverter<CurrentEquipmentSaveData>
+    public class CurrentEquipmentData : ISaveConverter<CurrentEquipmentSaveData>
     {
         public CurrentEquipmentSaveData Save { get; set; }
         public List<EquipmentData> CurrentDataList { get; set; }
@@ -75,7 +75,7 @@ namespace LccHotfix
 
         public void InitData(GameSaveData gameSaveData)
         {
-            CurrentEquipmentData = gameSaveData.GetRunData<CurrentEquipmentData, CurrentEquipmentSaveData>();
+            CurrentEquipmentData = gameSaveData.GetSaveData<CurrentEquipmentData, CurrentEquipmentSaveData>();
         }
     }
 }
