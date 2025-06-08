@@ -140,6 +140,7 @@
     <Compile Include="Assets\Hotfix\Core\Base\EventPool\BaseEventArgs.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\CodeTypes\AttributeBase.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Fiber\FiberManager.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Vibration\VibrationManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\MVVM\View\Binding\ViewModelBinding.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Download\DownloadManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Singleton\ISingletonUpdate.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Utility\Extension\SpriteRenderer\SpriteRendererExtension.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Battle\Component\ComUniDamage\Data\DamageType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Scene\SceneType.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Vibration\SimpleVibrationHandler.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Icon\IconBase.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\LinkedList.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\Config\ConfigManager.cs" />
@@ -222,6 +224,7 @@
     <Compile Include="Assets\Hotfix\Runtime\Manager\Model\ModelTemplate.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Utility\ScreenAdaptation\ScreenAdaptationUtility.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\System\SysDebug.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Vibration\VibrationData.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ScrollerPro\LoopScrollItem.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Manager\CodeTypes\UnOrderMultiMapSet.cs" />
     <Compile Include="Assets\Hotfix\Core\Base\ReferencePool\ReferencePool.ReferenceCollection.cs" />
@@ -257,6 +260,7 @@
     <Compile Include="Assets\Hotfix\Runtime\ECS\GameMode\GameModeBase.cs" />
     <Compile Include="Assets\Hotfix\Logic\UI\UILogin\UILoginPanel.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\TBTexture.cs" />
+    <Compile Include="Assets\Hotfix\Runtime\Manager\Vibration\IVibrationManager.cs" />
     <Compile Include="Assets\Hotfix\Runtime\Config\ItemSmallType.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\BehavoirTree\BTScript\BTScriptAttribute.cs" />
     <Compile Include="Assets\Hotfix\Runtime\ECS\Base\GroupEntityIndex.cs" />
