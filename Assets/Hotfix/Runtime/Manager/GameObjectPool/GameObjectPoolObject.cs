@@ -19,6 +19,7 @@ namespace LccHotfix
             }
         }
         public GameObject GameObject => _gameObject;
+        public Transform Transform => GameObject.transform;
 
         public GameObjectPoolObject(GameObject gameObject)
         {
