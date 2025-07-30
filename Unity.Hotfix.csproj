@@ -111,6 +111,7 @@
     <Compile Include="Assets\Hotfix\Framework\Core\Base\Log\LogLevel.cs" />
     <Compile Include="Assets\Hotfix\Utility\MVVM\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\ECS\Component\ComTransform.cs" />
+    <Compile Include="Assets\Hotfix\Init\Init.Return.cs" />
     <Compile Include="Assets\Hotfix\Framework\Core\Service\IService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Save\Interface\ISaveService.cs" />
     <Compile Include="Assets\Hotfix\ECS\Component\ComFaction.cs" />
