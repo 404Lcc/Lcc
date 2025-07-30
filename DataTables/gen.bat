@@ -7,7 +7,7 @@ dotnet %LUBAN_DLL% ^
     -c cs-simple-json ^
     -d json ^
     --conf %CONF_ROOT%\luban.conf ^
-    -x outputCodeDir=..\Assets/Hotfix/Runtime/Config ^
+    -x outputCodeDir=..\Assets/Hotfix/Config ^
     -x outputDataDir=..\Assets/Res/Config
 
 pause
