@@ -3,10 +3,8 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    internal class AStarMapManager : Module
+    internal class AStarMapManager : Module, IAStarMapService
     {
-        public static AStarMapManager Instance => Entry.GetModule<AStarMapManager>();
-
         public float radius;
         public LayerMask layer;
         public bool isShowWall;
