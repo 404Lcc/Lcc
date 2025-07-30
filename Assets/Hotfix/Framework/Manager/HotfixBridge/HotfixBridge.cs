@@ -13,6 +13,12 @@ namespace LccHotfix
             HotfixFunc.CrossDomainProperty = CrossDomainCallProperty;
             HotfixFunc.CrossDomainField = CrossDomainCallField;
         }
+
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
+        {
+            
+        }
+
         internal override void Shutdown()
         {
             HotfixFunc.CrossDomainFunction = null;
