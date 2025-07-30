@@ -7,17 +7,17 @@ public static class EntityUtility
 {
     public static LogicEntity GetEntity(long id)
     {
-        return WorldManager.Instance.GetWorld().GetEntityWithComID(id);
+        return Main.WorldService.GetWorld().GetEntityWithComID(id);
     }
 
     public static LogicEntity GetEntity(GameObject go)
     {
-        return WorldManager.Instance.GetWorld().GetEntitiesWithComUnityObjectRelated(go.GetInstanceID());
+        return Main.WorldService.GetWorld().GetEntitiesWithComUnityObjectRelated(go.GetInstanceID());
     }
 
     public static LogicEntity AddEntity<T>(GameObject obj, bool isPoolRes = false) where T : ActorView, new()
     {
-        var entity = WorldManager.Instance.GetWorld().LogicContext.CreateEntity();
+        var entity = Main.WorldService.GetWorld().LogicContext.CreateEntity();
 
         entity.AddComID(IdUtility.GenerateId());
 
@@ -35,7 +35,7 @@ public static class EntityUtility
 
     public static List<LogicEntity> GetHeroList()
     {
-        var list = WorldManager.Instance.GetWorld().GetEntitiesWithComTag(TagType.Hero);
+        var list = Main.WorldService.GetWorld().GetEntitiesWithComTag(TagType.Hero);
         return list.ToList();
     }
 

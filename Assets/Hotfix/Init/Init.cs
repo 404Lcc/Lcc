@@ -22,16 +22,14 @@ namespace LccHotfix
                 Launcher.Instance.actionClose += Close;
                 Launcher.Instance.actionOnDrawGizmos += DrawGizmos;
 
-                CodeTypesManager.Instance.LoadTypes(new Assembly[] { Launcher.Instance.hotfixAssembly });
+                Main.CodeTypesService.LoadTypes(new Assembly[] { Launcher.Instance.hotfixAssembly });
 
-                GameObjectPoolManager.Instance.SetLoader((location, root) => AssetManager.Instance.LoadRes<GameObject>(root, location));
-
-                HotfixBridge.Init();
+                Main.GameObjectPoolService.SetLoader((location, root) => AssetManager.Instance.LoadRes<GameObject>(root, location));
 
                 //初始化管理器
-                WindowManager.Instance.InitWindowManager();
+                Main.WindowService.InitWindowManager();
 
-                SceneManager.Instance.ChangeScene(SceneType.Login);
+                Main.SceneService.ChangeScene(SceneType.Login);
 
                 Launcher.Instance.LoadFinish();
                 HotfixGameStarted = true;
@@ -50,13 +48,13 @@ namespace LccHotfix
         {
             if (!Launcher.Instance.GameStarted)
                 return;
-            Entry.Update(Time.deltaTime, Time.unscaledDeltaTime);
+            Main.Current.Update(Time.deltaTime, Time.unscaledDeltaTime);
         }
         private static void LateUpdate()
         {
             if (!Launcher.Instance.GameStarted)
                 return;
-            Entry.LateUpdate();
+            Main.Current.LateUpdate();
         }
         private static void DrawGizmos()
         {
@@ -68,9 +66,7 @@ namespace LccHotfix
             Launcher.Instance.actionLateUpdate -= LateUpdate;
             Launcher.Instance.actionClose -= Close;
             Launcher.Instance.actionOnDrawGizmos -= DrawGizmos;
-
-            HotfixBridge.Dispose();
-            Entry.Shutdown();
+            Main.Current.Shutdown();
         }
 
         /// <summary>
@@ -79,8 +75,8 @@ namespace LccHotfix
         public static void ReturnToStart()
         {
             //关闭所有协程，如果patchOperation的状态机在运行，这里会杀掉
-            CoroutineManager.Instance.StopAllTypeCoroutines();
-            Entry.GetModule<WindowManager>().ShowMaskBox(0xFF, false);
+            Main.CoroutineService.StopAllTypeCoroutines();
+            Main.WindowService.ShowMaskBox(0xFF, false);
             //todo清理菊花界面
             //清理加载界面
             UILoadingPanel.Instance.Hide();
@@ -93,7 +89,7 @@ namespace LccHotfix
             //清理上个玩家数据
             ClearLastUserData();
             //清理场景
-            SceneManager.Instance.CleanScene();
+            Main.SceneService.CleanScene();
             //重启
             Restart();
         }
@@ -103,15 +99,15 @@ namespace LccHotfix
         /// </summary>
         public static void ReturnToLogin()
         {
-            if (SceneManager.Instance.curState == SceneType.None || SceneManager.Instance.curState == SceneType.Login)
+            if (Main.SceneService.curState == SceneType.None || Main.SceneService.curState == SceneType.Login)
             {
                 ReturnToStart();
                 return;
             }
 
             //关闭所有协程
-            CoroutineManager.Instance.StopAllTypeCoroutines();
-            Entry.GetModule<WindowManager>().ShowMaskBox(0xFF, false);
+            Main.CoroutineService.StopAllTypeCoroutines();
+            Main.WindowService.ShowMaskBox(0xFF, false);
             //todo清理菊花界面
             //清理加载界面
             UILoadingPanel.Instance.Hide();
@@ -124,7 +120,7 @@ namespace LccHotfix
             //清理上个玩家数据
             ClearLastUserData();
 
-            SceneManager.Instance.ChangeScene(SceneType.Login);
+            Main.SceneService.ChangeScene(SceneType.Login);
         }
 
         private static void ClearLastUserData()
@@ -156,7 +152,7 @@ namespace LccHotfix
             {
                 UILoadingPanel.Instance.UpdateLoadingPercent(91, 98);
                 //切换场景
-                SceneManager.Instance.ChangeScene(SceneType.Login);
+                Main.SceneService.ChangeScene(SceneType.Login);
                 yield return null;
                 Launcher.Instance.LoadFinish();
             }

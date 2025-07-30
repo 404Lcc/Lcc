@@ -30,7 +30,7 @@ namespace LccHotfix
 
         public void InitData(int id)
         {
-            _equipment = ConfigManager.Instance.Tables.TBEquipment.Get(id);
+            _equipment = Main.ConfigService.Tables.TBEquipment.Get(id);
         }
     }
 

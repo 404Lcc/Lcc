@@ -21,6 +21,12 @@ namespace LccHotfix
         public static IFunctionOpenService FunctionOpenService { get; set; }
         public static IIconService IconService { get; set; }
         public static IFXService FXService { get; set; }
+        public static IEventService EventService { get; set; }
+        public static ILanguageService LanguageService { get; set; }
+        public static ICameraService CameraService { get; set; }
+        public static ITimerService TimerService { get; set; }
+        public static IWorldService WorldService { get; set; }
+        public static IBTScriptService BTScriptService { get; set; }
 
         public static void SetMain(Main main)
         {
@@ -50,8 +56,13 @@ namespace LccHotfix
             FunctionOpenService = Current.AddModule<FunctionOpenManager>();
             IconService = Current.AddModule<IconManager>();
             FXService = Current.AddModule<FXManager>();
-
-
+            EventService = Current.AddModule<EventManager>();
+            LanguageService = Current.AddModule<LanguageManager>();
+            CameraService = Current.AddModule<CameraManager>();
+            TimerService = Current.AddModule<TimerManager>();
+            WorldService = Current.AddModule<WorldManager>();
+            BTScriptService = Current.AddModule<BTScriptManager>();
+            
             SceneService.ChangeScene(SceneType.Login);
         }
     }

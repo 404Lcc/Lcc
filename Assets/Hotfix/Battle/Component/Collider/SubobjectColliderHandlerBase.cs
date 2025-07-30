@@ -113,7 +113,7 @@ namespace LccHotfix
                     continue;
                 }
 
-                var hitEntity = WorldManager.Instance.GetWorld().GetEntitiesWithComUnityObjectRelated(hitCollider.GetInstanceID());
+                var hitEntity = Main.WorldService.GetWorld().GetEntitiesWithComUnityObjectRelated(hitCollider.GetInstanceID());
                 if (!Check2EntityHitable(ownerEntity, hitEntity))
                     continue;
 

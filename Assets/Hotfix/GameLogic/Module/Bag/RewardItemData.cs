@@ -64,7 +64,7 @@ public class RewardData
 
     public void InitData(int rewardTemplateId)
     {
-        var rewardTemplate = ConfigManager.Instance.Tables.TBRewardTemplate.Get(rewardTemplateId);
+        var rewardTemplate = Main.ConfigService.Tables.TBRewardTemplate.Get(rewardTemplateId);
         if (rewardTemplate == null)
         {
             return;
@@ -91,7 +91,7 @@ public class RewardData
     {
         if (reward == null)
             return;
-        var itemCfg = ConfigManager.Instance.Tables.TBItem.Get(reward.ItemId);
+        var itemCfg = Main.ConfigService.Tables.TBItem.Get(reward.ItemId);
         if (itemCfg == null)
             return;
         AddItem(reward.ItemId, reward.Count, false);
@@ -99,7 +99,7 @@ public class RewardData
 
     public void AddItem(int itemId, int count, bool isNew)
     {
-        var itemCfg = ConfigManager.Instance.Tables.TBItem.Get(itemId);
+        var itemCfg = Main.ConfigService.Tables.TBItem.Get(itemId);
         if (itemCfg == null)
         {
             Debug.LogError($" ItemId = {itemId}, item Cfg is null");

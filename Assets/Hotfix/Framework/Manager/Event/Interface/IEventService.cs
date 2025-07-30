@@ -5,7 +5,7 @@ namespace LccHotfix
     /// <summary>
     /// 事件管理器接口。
     /// </summary>
-    public interface IEventService
+    public interface IEventService : IService
     {
         /// <summary>
         /// 获取事件处理函数的数量。

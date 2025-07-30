@@ -8,7 +8,7 @@ namespace LccHotfix
     {
         public static MetaContext GetMetaContext()
         {
-            var metaContext = WorldManager.Instance.GetWorld().MetaContext;
+            var metaContext = Main.WorldService.GetWorld().MetaContext;
             return metaContext;
         }
 
@@ -26,7 +26,7 @@ namespace LccHotfix
         public static IGroup<LogicEntity> GetLogicGroup(params IMatcher<LogicEntity>[] matchers)
         {
             var matcher = LogicMatcher.AllOf(matchers);
-            var world = WorldManager.Instance.GetWorld();
+            var world = Main.WorldService.GetWorld();
             if (world == null)
                 return new Group<LogicEntity>(matcher);
             var group = world.LogicContext.GetGroup(matcher);

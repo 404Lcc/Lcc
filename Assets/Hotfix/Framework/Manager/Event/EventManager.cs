@@ -5,7 +5,7 @@ namespace LccHotfix
     /// <summary>
     /// 事件管理器。
     /// </summary>
-    internal sealed class EventManager : Module, IEventService
+    internal class EventManager : Module, IEventService
     {
         private readonly EventPool<GameEventArgs> m_EventPool;
 

@@ -32,7 +32,7 @@ namespace LccHotfix
 
         public Buff GetBuffConfig(int buffId)
         {
-            var config = ConfigManager.Instance.Tables.TBBuff.Get(buffId);
+            var config = Main.ConfigService.Tables.TBBuff.Get(buffId);
             return config;
         }
 

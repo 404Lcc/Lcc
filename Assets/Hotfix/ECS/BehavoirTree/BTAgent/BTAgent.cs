@@ -21,7 +21,7 @@ namespace LccHotfix
 
         public void Init(string rootName, long entityId, int logicId, KVContext preContext = null)
         {
-            _rootScript = BTScriptManager.Instance.GetScript(rootName);
+            _rootScript = Main.BTScriptService.GetScript(rootName);
 
             _entityId = entityId;
             _logicId = logicId;
@@ -89,7 +89,7 @@ namespace LccHotfix
             }
 
 
-            var timer = TimerManager.Instance.Register(delay, TimerUnitType.Millisecond, 1, false, null, () =>
+            var timer = Main.TimerService.Register(delay, TimerUnitType.Millisecond, 1, false, null, () =>
             {
                 if (entity == null)
                     return;

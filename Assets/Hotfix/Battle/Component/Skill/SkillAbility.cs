@@ -153,7 +153,7 @@ namespace LccHotfix
 
         public SkillData LoadSkillData(int skillId)
         {
-            var config = ConfigManager.Instance.Tables.TBSkill.Get(skillId);
+            var config = Main.ConfigService.Tables.TBSkill.Get(skillId);
             if (config == null)
             {
                 return null;

@@ -20,7 +20,7 @@ public class ItemData
     {
         this.ItemId = itemId;
         this.Count = count;
-        _item = ConfigManager.Instance.Tables.TBItem.Get(itemId);
+        _item = Main.ConfigService.Tables.TBItem.Get(itemId);
         if (_item == null)
         {
             Debug.LogError("item表错了 id" + itemId);

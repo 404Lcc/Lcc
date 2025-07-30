@@ -35,9 +35,9 @@ namespace LccHotfix
             SetBattleCamera();
             BattleGameModeState state = new BattleGameModeState();
             state.Init(map);
-            WorldManager.Instance.CreateWorld<BattleWorld>(state);
+            Main.WorldService.CreateWorld<BattleWorld>(state);
             
-            WindowManager.Instance.OpenWindow<UIMainPanel>(UIWindowDefine.UIMainPanel);
+            Main.WindowService.OpenWindow<UIMainPanel>(UIWindowDefine.UIMainPanel);
 
             yield return new WaitForSeconds(1f);
 
@@ -53,19 +53,19 @@ namespace LccHotfix
         // 开启场景后屏蔽操作，等待0.5秒钟弹出弹窗
         IEnumerator LevelStartWaiting()
         {
-            WindowManager.Instance.ShowMaskBox((int)MaskType.CHANGE_SCENE, true);
+            Main.WindowService.ShowMaskBox((int)MaskType.CHANGE_SCENE, true);
             yield return new WaitForSecondsRealtime(1f);
-            WindowManager.Instance.ShowMaskBox((int)MaskType.CHANGE_SCENE, false);
+            Main.WindowService.ShowMaskBox((int)MaskType.CHANGE_SCENE, false);
 
             SceneLoadEndHandler();
-            WindowManager.Instance.TryPopupWindow();
+            Main.WindowService.TryPopupWindow();
         }
         
         public void SetBattleCamera()
         {
             currentCamera = map.transform.Find("Camera").GetComponent<Camera>();
-            CameraManager.Instance.CurrentCamera = currentCamera;
-            CameraManager.Instance.AddOverlayCamera(currentCamera);
+            Main.CameraService.CurrentCamera = currentCamera;
+            Main.CameraService.AddOverlayCamera(currentCamera);
         }
         
         public override void Tick()
@@ -77,7 +77,7 @@ namespace LccHotfix
                 return;
             }
 
-            WorldManager.Instance.GetWorld().Update();
+            Main.WorldService.GetWorld().Update();
         }
 
         public override void LateUpdate()
@@ -89,14 +89,14 @@ namespace LccHotfix
                 return;
             }
             
-            WorldManager.Instance.GetWorld().LateUpdate();
+            Main.WorldService.GetWorld().LateUpdate();
         }
 
         public override void SceneExitHandler()
         {
             base.SceneExitHandler();
 
-            CameraManager.Instance.CurrentCamera = null;
+            Main.CameraService.CurrentCamera = null;
             
             Log.Debug("退出main场景");
         }

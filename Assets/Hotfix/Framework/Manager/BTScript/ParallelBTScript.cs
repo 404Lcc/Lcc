@@ -94,7 +94,7 @@ namespace LccHotfix
 
         public void AddBTScript(string name)
         {
-            var btScript = BTScriptManager.Instance.GetScript(name);
+            var btScript = Main.BTScriptService.GetScript(name);
             if (btScript != null)
             {
                 _nodeList.Add(btScript);

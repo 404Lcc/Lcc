@@ -26,7 +26,7 @@ namespace LccHotfix
             //进入游戏
             UILoadingPanel.Instance.SetStartLoadingBg();
 
-            WindowManager.Instance.OpenWindow<UILoginPanel>(UIWindowDefine.UILoginPanel);
+            Main.WindowService.OpenWindow<UILoginPanel>(UIWindowDefine.UILoginPanel);
 
             this.StartCoroutine(LoadSceneCoroutine());
         }
@@ -40,9 +40,9 @@ namespace LccHotfix
         // 开启场景后屏蔽操作，等待0.5秒钟弹出弹窗
         IEnumerator LevelStartWaiting()
         {
-            WindowManager.Instance.ShowMaskBox((int)MaskType.CHANGE_SCENE, true);
+            Main.WindowService.ShowMaskBox((int)MaskType.CHANGE_SCENE, true);
             yield return new WaitForSecondsRealtime(1f);
-            WindowManager.Instance.ShowMaskBox((int)MaskType.CHANGE_SCENE, false);
+            Main.WindowService.ShowMaskBox((int)MaskType.CHANGE_SCENE, false);
 
             SceneLoadEndHandler();
         }

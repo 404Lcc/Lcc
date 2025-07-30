@@ -48,7 +48,7 @@ namespace LccHotfix
         }
         public void OnStartBtn()
         {
-            SceneManager.Instance.ChangeScene(SceneType.Main);
+            Main.SceneService.ChangeScene(SceneType.Main);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace LccHotfix
 
         public void AddComFSM(string fsmName, KVContext preContext = null)
         {
-            var obj = Activator.CreateInstance(CodeTypesManager.Instance.GetType(fsmName), new object[] { this });
+            var obj = Activator.CreateInstance(Main.CodeTypesService.GetType(fsmName), new object[] { this });
             FSM fsm = obj as FSM;
             fsm.InitFSM(this, preContext,-1);
 

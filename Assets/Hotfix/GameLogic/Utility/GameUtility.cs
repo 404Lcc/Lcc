@@ -10,17 +10,17 @@ namespace LccHotfix
     {
         public static void FireNow(object sender, GameEventArgs e)
         {
-            Entry.GetModule<EventManager>().FireNow(sender, e);
+            Main.EventService.FireNow(sender, e);
         }
 
         public static void Subscribe(GameEventType type, EventHandler<GameEventArgs> handler)
         {
-            Entry.GetModule<EventManager>().Subscribe((int)type, handler);
+            Main.EventService.Subscribe((int)type, handler);
         }
 
         public static void Unsubscribe(GameEventType type, EventHandler<GameEventArgs> handler)
         {
-            Entry.GetModule<EventManager>().Unsubscribe((int)type, handler);
+            Main.EventService.Unsubscribe((int)type, handler);
         }
 
         public static string GetLanguageText(string key, params object[] args)
@@ -31,7 +31,7 @@ namespace LccHotfix
                 return "";
             }
 
-            return LanguageManager.Instance.GetValue(key, args);
+            return Main.LanguageService.GetValue(key, args);
         }
 
         /// <summary>

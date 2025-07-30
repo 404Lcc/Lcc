@@ -57,7 +57,7 @@ namespace LccHotfix
         {
             _isActive = true;
             _buffInfo = info;
-            _buffConfig = ConfigManager.Instance.Tables.TBBuff.Get(BuffId);
+            _buffConfig = Main.ConfigService.Tables.TBBuff.Get(BuffId);
 
             var key = FromLogicId << 16 | BuffId;
 
@@ -123,7 +123,7 @@ namespace LccHotfix
 
             _agent?.Trigger(BTAction.OnDeactiveBuff);
             _agent.Dispose();
-            FXManager.Instance.Release(_fxId);
+            Main.FXService.Release(_fxId);
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace LccHotfix
 
         public FXObject GetFX()
         {
-            return FXManager.Instance.GetFX(_fxId);
+            return Main.FXService.GetFX(_fxId);
         }
         private void PlayFX()
         {

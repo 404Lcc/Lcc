@@ -17,7 +17,7 @@ namespace LccHotfix
             {
                 if (_subobject == null)
                 {
-                    _subobject = ConfigManager.Instance.Tables.TBSubobject.Get(ConfigId);
+                    _subobject = Main.ConfigService.Tables.TBSubobject.Get(ConfigId);
                 }
                 return _subobject;
             }

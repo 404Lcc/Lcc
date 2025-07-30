@@ -40,7 +40,7 @@ namespace LccHotfix
         {
             base.OnOpen(paramsList);
 
-            _uiCamera = CameraManager.Instance.UICamera;
+            _uiCamera = Main.CameraService.UICamera;
             _maxRect = gameObject.transform as RectTransform;
 
             Init(TipsAutoDirType.Auto, gameObject.transform.Find("MaxRect/TipsRect").transform as RectTransform, null);
@@ -53,8 +53,8 @@ namespace LccHotfix
 
             if (!_isInit)
                 return;
-            CameraManager.Instance.CurrentCamera = CameraManager.Instance.MainCamera;
-            var pos = CameraManager.Instance.MainCamera.ScreenToWorldPoint(Input.mousePosition);
+            Main.CameraService.CurrentCamera = Main.CameraService.MainCamera;
+            var pos = Main.CameraService.MainCamera.ScreenToWorldPoint(Input.mousePosition);
             SetTipsRectBy3DWorld(pos);
 
             UpdateMaxRectLocalPos();
@@ -305,7 +305,7 @@ namespace LccHotfix
 
         public void SetTipsRectBy3DWorld(Vector3 pos)
         {
-            Vector2 screenPoint = CameraManager.Instance.CurrentCamera.WorldToScreenPoint(pos);
+            Vector2 screenPoint = Main.CameraService.CurrentCamera.WorldToScreenPoint(pos);
             var localPos = ClientTools.Screen2UILocal(screenPoint, _maxRect, _uiCamera);
             _tipsRect.localPosition = localPos;
         }

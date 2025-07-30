@@ -2,10 +2,8 @@ using System;
 
 namespace LccHotfix
 {
-    internal class WorldManager : Module
+    internal class WorldManager : Module, IWorldService
     {
-        public static WorldManager Instance => Entry.GetModule<WorldManager>();
-
         private ECSWorld _world;
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {

@@ -3,14 +3,13 @@ using System;
 
 namespace LccHotfix
 {
-    internal class BTScriptManager : Module
+    internal class BTScriptManager : Module, IBTScriptService
     {
-        public static BTScriptManager Instance => Entry.GetModule<BTScriptManager>();
         private Dictionary<string, BTScript> _scriptDict = new Dictionary<string, BTScript>();
 
         public BTScriptManager()
         {
-            foreach (Type item in CodeTypesManager.Instance.GetTypes(typeof(BTScriptAttribute)))
+            foreach (Type item in Main.CodeTypesService.GetTypes(typeof(BTScriptAttribute)))
             {
                 object[] atts = item.GetCustomAttributes(typeof(BTScriptAttribute), false);
                 if (atts != null && atts.Length > 0)
