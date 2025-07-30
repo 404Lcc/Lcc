@@ -8,10 +8,8 @@ using YooAsset;
 
 namespace LccHotfix
 {
-    internal class ConfigManager : Module
+    internal class ConfigManager : Module, IConfigService
     {
-        public static ConfigManager Instance => Entry.GetModule<ConfigManager>();
-
         public Tables Tables { get; set; }
 
         public GameObject loader;

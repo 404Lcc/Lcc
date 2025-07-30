@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    internal class PlatformManager : Module
+    internal class PlatformManager : Module, IPlatformService
     {
-        public static PlatformManager Instance => Entry.GetModule<PlatformManager>();
 
         private BaseCallbackMessage baseCallbackMessage;
 

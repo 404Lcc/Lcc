@@ -2,9 +2,8 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    internal class CameraManager : Module
+    internal class CameraManager : Module, ICameraService
     {
-        public static CameraManager Instance => Entry.GetModule<CameraManager>();
         private Camera _mainCamera = null;
         public Camera MainCamera
         {

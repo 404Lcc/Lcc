@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-	internal partial class WindowManager : Module
+	internal partial class WindowManager : Module, IWindowService
 	{
 		/// <summary>
 		/// 当前活动窗口的栈
@@ -109,7 +109,7 @@ namespace LccHotfix
 		}
 
 		//根据一个窗口打开一个新窗口
-		internal Window OpenWindow(WNode openBy, string windowName, object[] param)
+		public Window OpenWindow(WNode openBy, string windowName, object[] param)
 		{
 			if (_switchingNode != null)
 			{
@@ -156,7 +156,7 @@ namespace LccHotfix
 		/// <param name="windowName"></param>
 		/// <param name="param"></param>
 		/// <returns></returns>
-		internal Window OpenWindow(string windowName, object[] param)
+		public Window OpenWindow(string windowName, object[] param)
 		{
 			if (_switchingNode != null)
 			{
@@ -195,7 +195,7 @@ namespace LccHotfix
 			return window as Window;
 		}
 		//打开根节点
-		internal WRootNode OpenRoot(string rootName, object[] param)
+		public WRootNode OpenRoot(string rootName, object[] param)
 		{
 			if (_switchingNode != null)
 			{
@@ -460,7 +460,7 @@ namespace LccHotfix
 		}
 
 		//关闭全部窗口
-		internal void CloseAllWindow()
+		public void CloseAllWindow()
 		{
 			//如果有切换中的节点，则加入释放列表
 			if (_switchingNode != null)
@@ -495,7 +495,7 @@ namespace LccHotfix
 		/// 关闭root时从栈内移除
 		/// </summary>
 		/// <param name="root"></param>
-		internal void RemoveRoot(WRootNode root)
+		public void RemoveRoot(WRootNode root)
 		{
 			if (_rootStack.Count == 0) return;
 
@@ -552,7 +552,7 @@ namespace LccHotfix
 		//释放节点
 		private RectTransform _releaseRoot;
 		//增加到释放队列
-		internal void AddToReleaseQueue(WNode node)
+		public void AddToReleaseQueue(WNode node)
 		{
 			if (node != null)
 			{
@@ -604,7 +604,7 @@ namespace LccHotfix
 		/// 释放全部window资源
 		/// </summary>
 		/// <param name="type">筛选释放window的级别，释放小于这个级别的所有窗口</param>
-		internal void ReleaseAllWindow(ReleaseType level = ReleaseType.AUTO)
+		public void ReleaseAllWindow(ReleaseType level = ReleaseType.AUTO)
 		{
 			for (int i = _waitReleaseWindow.Count - 1; i >= 0; i--)
 			{
@@ -637,7 +637,7 @@ namespace LccHotfix
 			}
 		}
 		//触发节点关闭回调
-		internal void OnWindowClose(string windowName, object backValue)
+		public void OnWindowClose(string windowName, object backValue)
 		{
 			if (_windowCloseCallback.TryGetValue(windowName, out Action<object> action))
 			{
@@ -692,7 +692,7 @@ namespace LccHotfix
 		/// 显示一个碰撞框，不能再次点击
 		/// </summary>
 		/// <param name="maskType"></param>
-		internal void ShowMaskBox(int maskType, bool enable)
+		public void ShowMaskBox(int maskType, bool enable)
 		{
 			ShowMaskBoxFunc?.Invoke(maskType, enable);
 		}

@@ -100,9 +100,8 @@ namespace LccHotfix
         }
     }
 
-    internal class SaveManager : Module
+    internal class SaveManager : Module, ISaveService
     {
-        public static SaveManager Instance => Entry.GetModule<SaveManager>();
         public Dictionary<Type, ISavePipeline> saveDict = new Dictionary<Type, ISavePipeline>();
 
         private readonly string SavePath = "../SaveDatas/";
@@ -120,14 +119,14 @@ namespace LccHotfix
             SetEncryption(true);
             SetStorePath(StoreMode.Official);
 
-            foreach (Type item in CodeTypesManager.Instance.GetTypes(typeof(ModelAttribute)))
+            foreach (Type item in Main.CodeTypesService.GetTypes(typeof(ModelAttribute)))
             {
                 object[] atts = item.GetCustomAttributes(typeof(ModelAttribute), false);
                 if (atts != null && atts.Length > 0)
                 {
                     ModelAttribute modelAttribute = (ModelAttribute)atts[0];
 
-                    var obj = ModelManager.Instance.GetModel(item);
+                    var obj = Main.ModelService.GetModel(item);
                     if (obj != null && obj as ISavePipeline != null)
                     {
                         saveDict.Add(item, obj as ISavePipeline);

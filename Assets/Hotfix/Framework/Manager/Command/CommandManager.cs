@@ -5,10 +5,8 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    internal class CommandManager : Module
+    internal class CommandManager : Module, ICommandService
     {
-        public static CommandManager Instance => Entry.GetModule<CommandManager>();
-
         public List<CommandData> commandDataList = new List<CommandData>();
         public int index;
         public CommandType commandType;
@@ -29,7 +27,6 @@ namespace LccHotfix
 
         internal override void Shutdown()
         {
-
             commandDataList.Clear();
             index = 0;
             commandType = CommandType.Automatic;
@@ -45,13 +42,16 @@ namespace LccHotfix
                     target = new CommandData();
                     break;
             }
+
             FieldInfo[] fieldInfos = target.GetType().GetFields();
             foreach (FieldInfo item in fieldInfos)
             {
                 item.SetValue(target, item.GetValue(commandData));
             }
+
             commandDataList.Add(target);
         }
+
         public void AddCommands(CommandData[] commandDatas)
         {
             if (commandDatas == null) return;
@@ -65,19 +65,24 @@ namespace LccHotfix
                         target = new CommandData();
                         break;
                 }
+
                 FieldInfo[] fieldInfos = target.GetType().GetFields();
                 foreach (FieldInfo fieldinfoitem in fieldInfos)
                 {
                     fieldinfoitem.SetValue(target, fieldinfoitem.GetValue(item));
                 }
+
                 targetList.Add(target);
             }
+
             commandDataList.AddRange(targetList.ToArray());
         }
+
         public void SetCommandType(CommandType type)
         {
             commandType = type;
         }
+
         public void AutomaticExcute()
         {
             if (index < commandDataList.Count)
@@ -86,6 +91,7 @@ namespace LccHotfix
                 Next();
             }
         }
+
         public void ManuallyExcute()
         {
             if (index < commandDataList.Count)
@@ -94,9 +100,11 @@ namespace LccHotfix
                 {
                     Excute();
                 }
+
                 Next();
             }
         }
+
         public bool SetIsCondition
         {
             set
@@ -107,6 +115,7 @@ namespace LccHotfix
                 }
             }
         }
+
         public bool GetIsCondition
         {
             get
@@ -115,9 +124,11 @@ namespace LccHotfix
                 {
                     return commandDataList[index].isCondition;
                 }
+
                 return true;
             }
         }
+
         public bool SetIsFinish
         {
             set
@@ -128,6 +139,7 @@ namespace LccHotfix
                 }
             }
         }
+
         public bool GetIsFinish
         {
             get
@@ -136,9 +148,11 @@ namespace LccHotfix
                 {
                     return commandDataList[index].isFinish;
                 }
+
                 return true;
             }
         }
+
         public void Excute()
         {
             if (commandDataList[index].isCondition)
@@ -150,6 +164,7 @@ namespace LccHotfix
                 }
             }
         }
+
         public void Next()
         {
             if (commandDataList[index].isExcute && commandDataList[index].isFinish)
@@ -163,11 +178,11 @@ namespace LccHotfix
                 }
             }
         }
+
         public bool IsFinishAllCommand()
         {
             if (commandDataList.Count == 0) return true;
             return false;
         }
-
     }
 }

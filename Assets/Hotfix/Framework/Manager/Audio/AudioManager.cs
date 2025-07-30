@@ -72,7 +72,7 @@ namespace LccHotfix
         {
             for (int i = 0; i < count; i++)
             {
-                var obj = GameObjectPoolManager.Instance.GetObject("AudioSource").GameObject;
+                var obj = Main.GameObjectPoolService.GetObject("AudioSource").GameObject;
                 var source = obj.GetComponent<AudioSource>();
                 _pool.Enqueue(source);
             }
@@ -110,14 +110,12 @@ namespace LccHotfix
         {
             _pool.Clear();
             _activeSourceList.Clear();
-            GameObjectPoolManager.Instance.ReleasePool("AudioSource");
+            Main.GameObjectPoolService.ReleasePool("AudioSource");
         }
     }
 
-    internal class AudioManager : Module
+    internal class AudioManager : Module, IAudioService
     {
-        public static AudioManager Instance => Entry.GetModule<AudioManager>();
-
         private const int MaxCache = 20;
         private const int CacheCleanThreshold = 15;
 
@@ -193,7 +191,7 @@ namespace LccHotfix
             loader = new GameObject("loader");
             GameObject.DontDestroyOnLoad(loader);
 
-            save = SaveManager.Instance.GetSaveData<AudioData, AudioSaveData>();
+            save = Main.SaveService.GetSaveData<AudioData, AudioSaveData>();
         }
 
         /// <summary>

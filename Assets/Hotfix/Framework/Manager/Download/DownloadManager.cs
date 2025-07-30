@@ -11,37 +11,39 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    internal class DownloadManager : Module
+    internal class DownloadManager : Module, IDownloadService
     {
-        public static DownloadManager Instance => Entry.GetModule<DownloadManager>();
-
-
         public object lockObject = new object();
+
         //最大任务数
         public int taskCount = 20;
+
         //准备队列
         public Queue<DownloadFile> readyQueue = new Queue<DownloadFile>();
+
         //运行
         public Dictionary<Thread, DownloadFile> runningDict = new Dictionary<Thread, DownloadFile>();
+
         //完成列表
         public List<DownloadData> completedList = new List<DownloadData>();
+
         //错误列表
         public List<DownloadFile> errorList = new List<DownloadFile>();
 
 
-
-
         public DownloadManager()
         {
-
             ServicePointManager.DefaultConnectionLimit = 100;
             ServicePointManager.ServerCertificateValidationCallback = ServerCertificateValidationCallback;
-
         }
 
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
+            UpdateTask();
+            UpdateProgress();
+            UpdateCompleted();
+            UpdateError();
         }
 
         internal override void Shutdown()
@@ -51,19 +53,12 @@ namespace LccHotfix
             {
                 item.Key.Abort();
             }
+
             runningDict.Clear();
             completedList.Clear();
             errorList.Clear();
         }
 
-
-        public void Update()
-        {
-            UpdateTask();
-            UpdateProgress();
-            UpdateCompleted();
-            UpdateError();
-        }
         public bool ServerCertificateValidationCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             bool isOk = true;
@@ -85,8 +80,10 @@ namespace LccHotfix
                     }
                 }
             }
+
             return isOk;
         }
+
         public void DownloadAsync(DownloadData downloadData)
         {
             DownloadFile downloadFile = new DownloadFile(downloadData);
@@ -94,10 +91,12 @@ namespace LccHotfix
             {
                 readyQueue.Enqueue(downloadFile);
             }
+
             if (runningDict.Count >= taskCount) return;
             Task task = Task.Run(DownloadTask);
             task.Start();
         }
+
         public void DownloadAsync(DownloadData[] downloadDatas)
         {
             foreach (DownloadData item in downloadDatas)
@@ -105,12 +104,14 @@ namespace LccHotfix
                 DownloadAsync(item);
             }
         }
+
         public void DownloadTask()
         {
             lock (lockObject)
             {
                 runningDict.Add(Thread.CurrentThread, null);
             }
+
             while (true)
             {
                 DownloadFile downloadFile = null;
@@ -122,6 +123,7 @@ namespace LccHotfix
                         runningDict[Thread.CurrentThread] = downloadFile;
                     }
                 }
+
                 if (downloadFile == null) break;
                 downloadFile.Download();
                 if (downloadFile.state == DownloadState.Completed)
@@ -145,6 +147,7 @@ namespace LccHotfix
                             readyQueue.Enqueue(downloadFile);
                         }
                     }
+
                     break;
                 }
                 else
@@ -153,6 +156,7 @@ namespace LccHotfix
                 }
             }
         }
+
         public void UpdateTask()
         {
             if (readyQueue.Count == 0 && runningDict.Count == 0) return;
@@ -168,15 +172,18 @@ namespace LccHotfix
                         {
                             readyQueue.Enqueue(item.Value);
                         }
+
                         threadList.Add(item.Key);
                     }
                 }
+
                 foreach (Thread item in threadList)
                 {
                     item.Abort();
                     runningDict.Remove(item);
                 }
             }
+
             if (NetworkUtility.CheckNetwork())
             {
                 if (runningDict.Count < taskCount && readyQueue.Count > 0)
@@ -186,6 +193,7 @@ namespace LccHotfix
                 }
             }
         }
+
         public void UpdateProgress()
         {
             if (runningDict.Count == 0) return;
@@ -200,11 +208,13 @@ namespace LccHotfix
                     }
                 }
             }
+
             foreach (DownloadFile item in downloadFileList)
             {
                 item.downloadData.ProgressExcute(item.currentSize, item.downloadData.size);
             }
         }
+
         public void UpdateCompleted()
         {
             if (completedList.Count == 0) return;
@@ -214,12 +224,14 @@ namespace LccHotfix
                 downloadDataList.AddRange(completedList.ToArray());
                 completedList.Clear();
             }
+
             foreach (DownloadData item in downloadDataList)
             {
                 item.ProgressExcute(item.size, item.size);
                 item.CompletedExcute();
             }
         }
+
         public void UpdateError()
         {
             if (errorList.Count == 0) return;
@@ -229,6 +241,7 @@ namespace LccHotfix
                 downloadFileList.AddRange(errorList.ToArray());
                 errorList.Clear();
             }
+
             foreach (DownloadFile item in downloadFileList)
             {
                 item.downloadData.ErrorExcute(item.error);

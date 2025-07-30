@@ -6,15 +6,12 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    internal class SceneManager : Module, ICoroutine
+    internal class SceneManager : Module, ISceneService, ICoroutine
     {
-        public static SceneManager Instance => Entry.GetModule<SceneManager>();
-
-
         private Dictionary<SceneType, LoadSceneHandler> _loadSceneHandlerDict = new Dictionary<SceneType, LoadSceneHandler>();
         public SceneManager()
         {
-            foreach (Type item in CodeTypesManager.Instance.GetTypes(typeof(SceneStateAttribute)))
+            foreach (Type item in Main.CodeTypesService.GetTypes(typeof(SceneStateAttribute)))
             {
                 object[] atts = item.GetCustomAttributes(typeof(SceneStateAttribute), false);
                 if (atts != null && atts.Length > 0)
@@ -163,7 +160,7 @@ namespace LccHotfix
         public void BeginLoad()
         {
             Log.Info($"BeginLoad： scene type === {curSceneHandler.sceneType.ToString()} loading type ==== {((LoadingType)curSceneHandler.loadType).ToString()}");
-            Instance.StartCoroutine(Instance.UnloadSceneCoroutine());
+            this.StartCoroutine(UnloadSceneCoroutine());
         }
 
         private IEnumerator UnloadSceneCoroutine()
@@ -176,13 +173,13 @@ namespace LccHotfix
                 preSceneHandler.IsCleanup = true;
                 yield return null;
             }
-            Entry.GetModule<WindowManager>().ShowMaskBox((int)MaskType.WINDOW_ANIM, false);
-            Entry.GetModule<WindowManager>().CloseAllWindow();
+            Main.WindowService.ShowMaskBox((int)MaskType.WINDOW_ANIM, false);
+            Main.WindowService.CloseAllWindow();
             yield return null;
             if (curSceneHandler.deepClean || (preSceneHandler != null && preSceneHandler.deepClean))
-                Entry.GetModule<WindowManager>().ReleaseAllWindow(ReleaseType.DEEPLY);
+                Main.WindowService.ReleaseAllWindow(ReleaseType.DEEPLY);
             else
-                Entry.GetModule<WindowManager>().ReleaseAllWindow(ReleaseType.CHANGE_SCENE);
+                Main.WindowService.ReleaseAllWindow(ReleaseType.CHANGE_SCENE);
             yield return null;
             System.GC.Collect();
             yield return null;
@@ -228,15 +225,15 @@ namespace LccHotfix
             WNode.TurnNode node = curSceneHandler.turnNode;
             if (string.IsNullOrEmpty(node.nodeName))
                 return;
-            if (Entry.GetModule<WindowManager>().OpenSpecialWindow(node))
+            if (Main.WindowService.OpenSpecialWindow(node))
                 return;
             if (node.nodeType == NodeType.ROOT)
             {
-                Entry.GetModule<WindowManager>().OpenRoot(node.nodeName, node.nodeParam);
+                Main.WindowService.OpenRoot(node.nodeName, node.nodeParam);
             }
             else
             {
-                Entry.GetModule<WindowManager>().OpenWindow(node.nodeName, node.nodeParam);
+                Main.WindowService.OpenWindow(node.nodeName, node.nodeParam);
             }
 
             curSceneHandler.turnNode = null;

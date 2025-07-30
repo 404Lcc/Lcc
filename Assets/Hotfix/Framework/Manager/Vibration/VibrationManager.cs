@@ -2,10 +2,8 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    internal class VibrationManager : Module, IVibrationManager
+    internal class VibrationManager : Module, IVibrationService
     {
-        public static VibrationManager Instance => Entry.GetModule<VibrationManager>();
-
         private VibrationData save;
 
         private SimpleVibrationHandler vibrationHandler;
@@ -16,11 +14,9 @@ namespace LccHotfix
             set => save.IsVibrationEnabled = value;
         }
 
-        private IEasingCoroutine gamepadVibrationCoroutine;
-
-        public void Start()
+        public VibrationManager()
         {
-            save = SaveManager.Instance.GetSaveData<VibrationData, VibrationSaveData>();
+            save = Main.SaveService.GetSaveData<VibrationData, VibrationSaveData>();
             IsVibrationEnabled = true;
             vibrationHandler = new SimpleVibrationHandler();
         }
@@ -42,12 +38,10 @@ namespace LccHotfix
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-
         }
 
         internal override void Shutdown()
         {
-
         }
     }
 }

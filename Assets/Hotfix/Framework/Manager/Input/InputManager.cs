@@ -5,10 +5,8 @@ using UnityEngine.Video;
 
 namespace LccHotfix
 {
-    internal class InputManager : Module
+    internal class InputManager : Module, IInputService
     {
-        public static InputManager Instance => Entry.GetModule<InputManager>();
-
         //点击场景触发
         public event Action<Vector2, bool> PressEvent;
         public event Action<Vector2> ClickEvent;

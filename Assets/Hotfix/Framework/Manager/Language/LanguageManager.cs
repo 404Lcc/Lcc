@@ -5,14 +5,13 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    internal class LanguageManager : Module
+    internal class LanguageManager : Module, ILanguageService
     {
-        public static LanguageManager Instance => Entry.GetModule<LanguageManager>();
         public Dictionary<string, Language> languageDict = new Dictionary<string, Language>();
 
         public LanguageManager()
         {
-            foreach (var item in ConfigManager.Instance.Tables.TBLanguage.DataList)
+            foreach (var item in Main.ConfigService.Tables.TBLanguage.DataList)
             {
                 if (string.IsNullOrEmpty(item.Key))
                     continue;

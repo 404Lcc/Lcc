@@ -3,15 +3,14 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    internal class ModelManager : Module
+    internal class ModelManager : Module, IModelService
     {
-        public static ModelManager Instance => Entry.GetModule<ModelManager>();
         public Dictionary<Type, ModelTemplate> modelDict = new Dictionary<Type, ModelTemplate>();
 
         public ModelManager()
         {
 
-            foreach (Type item in CodeTypesManager.Instance.GetTypes(typeof(ModelAttribute)))
+            foreach (Type item in Main.CodeTypesService.GetTypes(typeof(ModelAttribute)))
             {
                 object[] atts = item.GetCustomAttributes(typeof(ModelAttribute), false);
                 if (atts != null && atts.Length > 0)

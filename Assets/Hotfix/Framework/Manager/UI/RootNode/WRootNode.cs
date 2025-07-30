@@ -21,7 +21,7 @@ namespace LccHotfix
             this.escapeType = EscapeType.AUTO_CLOSE;
             this.releaseType = ReleaseType.AUTO;
             this._blackboard = new WBlackboard();
-            this._logic = Entry.GetModule<WindowManager>().CreateLogic(rootName, null);
+            this._logic = Main.WindowService.CreateLogic(rootName, null);
             if (_logic != null)
                 _logic.WNode = this;
         }
@@ -72,9 +72,9 @@ namespace LccHotfix
             if (_logic != null)
                 backValue = _logic.OnClose();
             //触发关闭节点回调
-            Entry.GetModule<WindowManager>().OnWindowClose(NodeName, backValue);
+            Main.WindowService.OnWindowClose(NodeName, backValue);
             //加入到释放列表
-            Entry.GetModule<WindowManager>().AddToReleaseQueue(this);
+            Main.WindowService.AddToReleaseQueue(this);
             return backValue;
         }
 
@@ -111,10 +111,10 @@ namespace LccHotfix
                         switch (turn.nodeType)
                         {
                             case NodeType.ROOT:
-                                Entry.GetModule<WindowManager>().OpenRoot(turn.nodeName, turn.nodeParam);
+                                Main.WindowService.OpenRoot(turn.nodeName, turn.nodeParam);
                                 break;
                             case NodeType.WINDOW:
-                                Entry.GetModule<WindowManager>().OpenWindow(turn.nodeName, turn.nodeParam);
+                                Main.WindowService.OpenWindow(turn.nodeName, turn.nodeParam);
                                 break;
                         }
                     }

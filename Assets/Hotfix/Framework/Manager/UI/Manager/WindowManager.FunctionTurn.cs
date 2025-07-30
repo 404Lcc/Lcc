@@ -13,7 +13,7 @@ namespace LccHotfix
         /// <returns></returns>
         public bool JumpToWindowByID(int gotoID, params object[] args)
         {
-            var config = ConfigManager.Instance.Tables.TBEmptyGoTo.Get(gotoID);
+            var config = Main.ConfigService.Tables.TBEmptyGoTo.Get(gotoID);
             if (config == null)
                 return false;
 
@@ -57,7 +57,7 @@ namespace LccHotfix
 
             ChangeWindowNode(turn);
 
-            var curState = (int)SceneManager.Instance.curState;
+            var curState = (int)Main.SceneService.curState;
             //同场景跳转
             if ((curState & scene) > 0)
             {
@@ -93,9 +93,9 @@ namespace LccHotfix
             //目前只能跳主场景
             if ((scene & (int)SceneType.Main) > 0)
             {
-                handler = SceneManager.Instance.GetScene(SceneType.Main);
+                handler = Main.SceneService.GetScene(SceneType.Main);
                 handler.turnNode = turn;
-                SceneManager.Instance.ChangeScene(handler);
+                Main.SceneService.ChangeScene(handler);
                 return true;
             }
 
@@ -136,7 +136,7 @@ namespace LccHotfix
             if (config.FuncType == 0)
             {
                 //判断功能是否开启
-                if (!FunctionOpenManager.Instance.IsFunctionOpenedAndShowTips(config.FuncId))
+                if (!Main.FunctionOpenService.IsFunctionOpenedAndShowTips(config.FuncId))
                     return false;
             }
             return true;

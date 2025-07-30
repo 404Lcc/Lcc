@@ -6,9 +6,8 @@ using UnityEngine.Events;
 
 namespace LccHotfix
 {
-    internal class EasingManager : Module
+    internal class EasingManager : Module, IEasingService
     {
-        public static EasingManager Instance => Entry.GetModule<EasingManager>();
         
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {

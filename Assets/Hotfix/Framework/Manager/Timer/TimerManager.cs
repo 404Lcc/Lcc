@@ -234,10 +234,8 @@ namespace LccHotfix
     /// <summary>
     /// 计时器管理器
     /// </summary>
-    internal class TimerManager : Module
+    internal class TimerManager : Module, ITimerService
     {
-        public static TimerManager Instance => Entry.GetModule<TimerManager>();
-
         private List<TimerTask> _taskList = new List<TimerTask>();//计时器任务列表 
         private List<TimerTask> _taskListToAdd = new List<TimerTask>();//计时器任务列表(先缓存所有计时器)
 

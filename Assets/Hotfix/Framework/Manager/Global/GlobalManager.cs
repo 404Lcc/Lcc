@@ -3,9 +3,8 @@ using UnityEngine.Video;
 
 namespace LccHotfix
 {
-    internal class GlobalManager : Module
+    internal class GlobalManager : Module, IGlobalService
     {
-        public static GlobalManager Instance => Entry.GetModule<GlobalManager>();
         public Transform Global { get; set; }
 
 

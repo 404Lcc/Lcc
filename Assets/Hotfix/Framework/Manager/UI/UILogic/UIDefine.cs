@@ -20,7 +20,7 @@ namespace LccHotfix
 
         public UIWindowModeDefine()
         {
-            foreach (var item in ConfigManager.Instance.Tables.TBPanel.DataList)
+            foreach (var item in Main.ConfigService.Tables.TBPanel.DataList)
             {
                 WindowMode mode = new WindowMode();
                 mode.prefabName = item.PrefabName;

@@ -7,9 +7,8 @@ namespace LccHotfix
 
 	}
 
-	internal partial class FunctionOpenManager : Module
+	internal partial class FunctionOpenManager : Module, IFunctionOpenService
 	{
-		public static FunctionOpenManager Instance => Entry.GetModule<FunctionOpenManager>();
         private List<int> _functionOpenStatus = new List<int>();
 		internal override void Update(float elapseSeconds, float realElapseSeconds)
 		{

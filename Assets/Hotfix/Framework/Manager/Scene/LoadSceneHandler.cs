@@ -7,7 +7,7 @@ namespace LccHotfix
         Fast,
         AfterLogin,//考虑登录之后重新回login的情况，首次进入登录进度条和重新进入登录进度条不一样
     }
-    public abstract class LoadSceneHandler
+    public abstract class LoadSceneHandler : ICoroutine
     {
 
         public SceneType sceneType;
@@ -38,7 +38,7 @@ namespace LccHotfix
         /// </summary>
         public virtual void SceneLoadHandler()
         {
-            SceneManager.Instance.StartCoroutine(SceneManager.Instance.ShowSceneLoading(loadType));
+            this.StartCoroutine(Main.SceneService.ShowSceneLoading(loadType));
         }
 
         /// <summary>

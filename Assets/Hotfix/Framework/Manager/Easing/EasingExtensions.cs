@@ -30,7 +30,7 @@ namespace LccHotfix
         {
             Vector3 startPosition = transform.position;
 
-            IEasingCoroutine coroutine = EasingManager.Instance.DoFloat(0, 1, duration, (value) =>
+            IEasingCoroutine coroutine = Main.EasingService.DoFloat(0, 1, duration, (value) =>
             {
                 transform.position = Vector3.LerpUnclamped(startPosition, targetTransform.position, value);
             }, delay);

@@ -5,12 +5,24 @@ using UnityEngine;
 
 namespace LccHotfix
 {
+    public static class CoroutineExtension
+    {
+        public static CoroutineHandler StartCoroutine(this ICoroutine owner, IEnumerator coroutine)
+        {
+            return Main.CoroutineService.StartCoroutine(owner, coroutine);
+        }
+        public static void StopAllCoroutines(this ICoroutine owner)
+        {
+            Main.CoroutineService.StopAllCoroutines(owner);
+        }
+    }
+    
     public interface ICoroutine
     {
     }
-    internal class CoroutineManager : Module
+    
+    internal class CoroutineManager : Module, ICoroutineService
     {
-        public static CoroutineManager Instance => Entry.GetModule<CoroutineManager>();
         internal override void Shutdown()
         {
         }
@@ -92,17 +104,6 @@ namespace LccHotfix
                 }
             }
             _coroutineDict.Clear();
-        }
-    }
-    public static class CoroutineExtension
-    {
-        public static CoroutineHandler StartCoroutine(this ICoroutine owner, IEnumerator coroutine)
-        {
-            return CoroutineManager.Instance.StartCoroutine(owner, coroutine);
-        }
-        public static void StopAllCoroutines(this ICoroutine owner)
-        {
-            CoroutineManager.Instance.StopAllCoroutines(owner);
         }
     }
 }

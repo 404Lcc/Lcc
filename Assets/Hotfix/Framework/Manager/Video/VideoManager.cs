@@ -7,15 +7,13 @@ using YooAsset;
 
 namespace LccHotfix
 {
-    internal class VideoManager : Module
+    internal class VideoManager : Module, IVideoService
     {
-        public static VideoManager Instance => Entry.GetModule<VideoManager>();
         public Dictionary<string, VideoClip> videoDict = new Dictionary<string, VideoClip>();
 
         public GameObject loader;
         public VideoManager()
         {
-
             loader = new GameObject("loader");
             GameObject.DontDestroyOnLoad(loader);
         }
@@ -29,6 +27,7 @@ namespace LccHotfix
 
             GameObject.Destroy(loader);
         }
+        
         public bool VideoExist(string video)
         {
             if (videoDict.ContainsKey(video))

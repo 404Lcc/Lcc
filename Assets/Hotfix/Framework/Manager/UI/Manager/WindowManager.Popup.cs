@@ -67,7 +67,7 @@ namespace LccHotfix
 		/// <param name="param">面板参数</param>
 		public void StackWindow(string windowName, object[] param)
 		{
-			PopupWindow popup = ConfigManager.Instance.Tables.TBPopupWindow.Get(windowName);
+			PopupWindow popup = Main.ConfigService.Tables.TBPopupWindow.Get(windowName);
 			if (popup != null)
 			{
 				_popList.Add(new PopupWindowData(popup, param));
@@ -119,7 +119,7 @@ namespace LccHotfix
 				return;
 			}
 
-			if (!CheckScene() || SceneManager.Instance.IsLoading)
+			if (!CheckScene() || Main.SceneService.IsLoading)
 			{
 				return;
 			}
@@ -159,7 +159,7 @@ namespace LccHotfix
 
 		private bool CheckScene()
 		{
-			return SceneManager.Instance.curState == SceneType.Main;
+			return Main.SceneService.curState == SceneType.Main;
 		}
 
 

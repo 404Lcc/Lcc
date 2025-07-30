@@ -8,7 +8,6 @@ namespace LccHotfix
 {
     internal partial class WindowManager : Module
     {
-        public static WindowManager Instance => Entry.GetModule<WindowManager>();
         public GameObject uiRoot;
 
         private GameObject _uiMask;

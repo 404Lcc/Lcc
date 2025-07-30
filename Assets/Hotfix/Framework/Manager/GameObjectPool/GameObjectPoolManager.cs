@@ -17,9 +17,8 @@ namespace LccHotfix
         public int maxActiveObjects = 0;
 
     }
-    internal class GameObjectPoolManager : Module
+    internal class GameObjectPoolManager : Module, IGameObjectPoolService
     {
-        public static GameObjectPoolManager Instance => Entry.GetModule<GameObjectPoolManager>();
 
         private GameObjectPoolSetting _poolSetting;
         private Func<string, GameObject, GameObject> _loaderHandle;

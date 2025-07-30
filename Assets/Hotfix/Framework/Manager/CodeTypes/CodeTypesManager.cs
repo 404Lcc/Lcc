@@ -4,10 +4,8 @@ using System.Reflection;
 
 namespace LccHotfix
 {
-    internal class CodeTypesManager : Module
+    internal class CodeTypesManager : Module, ICodeTypesService
     {
-        public static CodeTypesManager Instance => Entry.GetModule<CodeTypesManager>();
-
         private readonly Dictionary<string, Type> allTypes = new Dictionary<string, Type>();
         private readonly UnOrderMultiMapSet<Type, Type> types = new UnOrderMultiMapSet<Type, Type>();
 

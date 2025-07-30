@@ -92,7 +92,7 @@ namespace LccHotfix
 
         public void SetSize(IconSize size = IconSize.Size_100)
         {
-            var scale = IconManager.Instance.GetIconScale(size);
+            var scale = Main.IconService.GetIconScale(size);
             _gameObject.transform.localScale = scale;
         }
 

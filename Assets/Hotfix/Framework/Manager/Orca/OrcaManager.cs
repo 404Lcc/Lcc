@@ -4,10 +4,8 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    internal class OrcaManager : Module
+    internal class OrcaManager : Module, IOrcaService
     {
-        public static OrcaManager Instance => Entry.GetModule<OrcaManager>();
-
         public Dictionary<int, ObstaclePolygon> obstacleDict = new Dictionary<int, ObstaclePolygon>();
         public OrcaManager()
         {

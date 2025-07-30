@@ -4,7 +4,7 @@ namespace LccHotfix
     {
         public static Window OpenChild(this WNode openBy, string windowName, object[] param = null)
         {
-            return Entry.GetModule<WindowManager>().OpenWindow(openBy, windowName, param);
+            return Main.WindowService.OpenWindow(openBy, windowName, param);
         }
     }
 }

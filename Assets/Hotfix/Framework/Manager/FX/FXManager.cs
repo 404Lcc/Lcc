@@ -81,7 +81,7 @@ namespace LccHotfix
 
             if (!followTrans.gameObject.activeSelf)
             {
-                FXManager.Instance.Release(this);
+                Main.FXService.Release(this);
                 return;
             }
 
@@ -114,7 +114,7 @@ namespace LccHotfix
             ignoreTimeScale = false;
             if (res != null)
             {
-                GameObjectPoolManager.Instance.ReleaseObject(res);
+                Main.GameObjectPoolService.ReleaseObject(res);
             }
 
             res = null;
@@ -131,9 +131,9 @@ namespace LccHotfix
     }
 
 
-    internal class FXManager : Module
+    internal class FXManager : Module, IFXService
     {
-        public static FXManager Instance => Entry.GetModule<FXManager>();
+
 
         private List<FXObject> _fxList = new List<FXObject>();
 
@@ -208,7 +208,7 @@ namespace LccHotfix
             if (fx == null)
                 return -1;
 
-            var res = GameObjectPoolManager.Instance.GetObject(path);
+            var res = Main.GameObjectPoolService.GetObject(path);
             if (res == null)
                 return -1;
 
@@ -229,7 +229,7 @@ namespace LccHotfix
             if (fx == null)
                 return -1;
 
-            var res = GameObjectPoolManager.Instance.GetObject(path);
+            var res = Main.GameObjectPoolService.GetObject(path);
             if (res == null)
                 return -1;
 
@@ -266,7 +266,7 @@ namespace LccHotfix
             if (fx == null)
                 return -1;
 
-            var res = GameObjectPoolManager.Instance.GetObject(path);
+            var res = Main.GameObjectPoolService.GetObject(path);
             if (res == null)
                 return -1;
 

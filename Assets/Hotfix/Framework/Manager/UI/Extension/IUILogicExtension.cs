@@ -4,7 +4,7 @@ namespace LccHotfix
     {
         public static Window OpenChild(this IUILogic logic, string windowName, object[] param = null)
         {
-            return Entry.GetModule<WindowManager>().OpenWindow(logic.WNode, windowName, param);
+            return Main.WindowService.OpenWindow(logic.WNode, windowName, param);
         }
     }
 }

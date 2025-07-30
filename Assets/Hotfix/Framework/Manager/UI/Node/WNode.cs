@@ -321,7 +321,7 @@ namespace LccHotfix
 				//如果是当前节点是根节点，则移除根节点
 				else if (this is WRootNode)
 				{
-					Entry.GetModule<WindowManager>().RemoveRoot(this as WRootNode);
+					Main.WindowService.RemoveRoot(this as WRootNode);
 				}
 				//移除当前节点的子节点
 				// 由上向下

@@ -30,9 +30,8 @@ namespace LccHotfix
         }
     }
 
-    internal class IconManager : Module
+    internal class IconManager : Module, IIconService
     {
-        public static IconManager Instance => Entry.GetModule<IconManager>();
 
         private Dictionary<IconType, Type> iconTypeDict = new Dictionary<IconType, Type>();
 
@@ -44,7 +43,7 @@ namespace LccHotfix
             root = new GameObject("IconRoot");
             GameObject.DontDestroyOnLoad(root);
 
-            foreach (Type item in CodeTypesManager.Instance.GetTypes(typeof(IconAttribute)))
+            foreach (Type item in Main.CodeTypesService.GetTypes(typeof(IconAttribute)))
             {
                 object[] atts = item.GetCustomAttributes(typeof(IconAttribute), false);
                 if (atts != null && atts.Length > 0)
