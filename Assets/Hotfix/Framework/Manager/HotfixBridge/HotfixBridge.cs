@@ -7,19 +7,12 @@ namespace LccHotfix
 {
     internal class HotfixBridge : Module, IHotfixBridgeService
     {
-        
         public void Init()
         {
             HotfixFunc.CrossDomainFunction = CrossDomainCallMethod;
             HotfixFunc.CrossDomainProperty = CrossDomainCallProperty;
             HotfixFunc.CrossDomainField = CrossDomainCallField;
         }
-
-        internal override void Update(float elapseSeconds, float realElapseSeconds)
-        {
-
-        }
-
         internal override void Shutdown()
         {
             HotfixFunc.CrossDomainFunction = null;
