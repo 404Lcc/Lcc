@@ -2,6 +2,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using YooAsset;
 
 namespace LccModel
 {
@@ -43,7 +44,7 @@ namespace LccModel
             {
                 if (_material == null)
                 {
-                    _material = ResObject.LoadRes<Material>(gameObject, "Actor_RGBA_Flow").GetAsset<Material>();
+                    _material = YooAssets.GetPackage("DefaultPackage").LoadAssetSync("Actor_RGBA_Flow", typeof(Material)).AssetObject as Material;
                 }
                 return _material;
             }
@@ -152,7 +153,11 @@ namespace LccModel
                     return;
                 }
 #endif
-                ResObject.StartLoadRes<Sprite>(gameObject, spriteName, LoadSpriteDone);
+                var handle = YooAssets.GetPackage("DefaultPackage").LoadAssetAsync<Sprite>(spriteName);
+                handle.Completed += (assetHandle) =>
+                {
+                    LoadSpriteDone(spriteName, assetHandle.AssetObject);
+                };
             }
         }
 

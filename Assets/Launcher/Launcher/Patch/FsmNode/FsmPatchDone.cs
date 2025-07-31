@@ -113,7 +113,7 @@ namespace LccModel
         {
             GameObject loader = new GameObject("loader");
 
-            TextAsset aotTxt = AssetManager.Instance.LoadRes<TextAsset>(loader, "aot");
+            TextAsset aotTxt = YooAssets.GetPackage("DefaultPackage").LoadAssetSync("aot", typeof(TextAsset)).AssetObject as TextAsset;
 
             var aotlist = aotTxt.text.Split('|');
             HomologousImageMode mode = HomologousImageMode.SuperSet;
@@ -124,15 +124,15 @@ namespace LccModel
                 if (string.IsNullOrEmpty(aotDllName))
                     continue;
                 // 加载assembly对应的dll，会自动为它hook。一旦aot泛型函数的native函数不存在，用解释器版本代码
-                var aotItem = AssetManager.Instance.LoadRes<TextAsset>(loader, aotDllName);
+                var aotItem = YooAssets.GetPackage("DefaultPackage").LoadAssetSync(aotDllName, typeof(TextAsset)).AssetObject as TextAsset;
 
                 var dllBytes = aotItem.bytes;
                 LoadImageErrorCode err = RuntimeApi.LoadMetadataForAOTAssembly(dllBytes, mode);
                 Debug.Log($"LoadMetadataForAOTAssembly aotDllName={aotDllName}, ret={err}");
             }
 
-            TextAsset assetDll = AssetManager.Instance.LoadRes<TextAsset>(loader, "Unity.Hotfix.dll");
-            TextAsset assetPdb = AssetManager.Instance.LoadRes<TextAsset>(loader, "Unity.Hotfix.pdb");
+            TextAsset assetDll = YooAssets.GetPackage("DefaultPackage").LoadAssetSync("Unity.Hotfix.dll", typeof(TextAsset)).AssetObject as TextAsset;
+            TextAsset assetPdb = YooAssets.GetPackage("DefaultPackage").LoadAssetSync("Unity.Hotfix.pdb", typeof(TextAsset)).AssetObject as TextAsset;
 
             if (assetDll == null || assetPdb == null)
             {
