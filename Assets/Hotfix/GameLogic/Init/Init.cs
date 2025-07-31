@@ -13,7 +13,7 @@ namespace LccHotfix
         {
             HotfixGameStarted = false;
             Log.SetLogHelper(new DefaultLogHelper());
-            Main.SetMain(new DefaultMain());
+            Main.SetMain(new GameMain());
             
             try
             {
@@ -25,6 +25,8 @@ namespace LccHotfix
 
                 Launcher.Instance.LoadFinish();
                 HotfixGameStarted = true;
+                
+                Main.SceneService.ChangeScene(SceneType.Login);
             }
             catch (System.Exception e)
             {

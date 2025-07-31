@@ -40,7 +40,7 @@ namespace LccHotfix
         /// </summary>
         public static void ReturnToLogin()
         {
-            if (Main.SceneService.curState == SceneType.None || Main.SceneService.curState == SceneType.Login)
+            if (Main.SceneService.CurState == SceneType.None || Main.SceneService.CurState == SceneType.Login)
             {
                 ReturnToStart();
                 return;
