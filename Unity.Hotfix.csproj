@@ -94,7 +94,6 @@
     <Compile Include="Assets\Hotfix\GameLogic\Battle\BattleState.cs" />
     <Compile Include="Assets\Hotfix\Utility\MVVM\View\Binding\Binding.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\IScheduler.cs" />
-    <Compile Include="Assets\Hotfix\Init\Init.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Scene\SceneAttribute.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Coroutine\Interface\ICoroutineService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\Interface\IBTScriptService.cs" />
@@ -109,7 +108,6 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\Manager\WindowManager.Res.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\Network\NetworkUtility.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\Assembly\AssemblyUtility.cs" />
-    <Compile Include="Assets\Hotfix\Init\Init.Return.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\Data\DamageType.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Save\Interface\ISaveService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Utility\TargetUtility.cs" />
@@ -234,6 +232,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaContext.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Asset\ResALLObject.cs" />
     <Compile Include="Assets\Hotfix\Config\Language.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Init\Init.Return.cs" />
     <Compile Include="Assets\Hotfix\Utility\ClientTools\ClientTools.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\System\SysBuffs.cs" />
     <Compile Include="Assets\Hotfix\Config\ItemType.cs" />
@@ -287,6 +286,7 @@
     <Compile Include="Assets\Hotfix\Framework\Base\Log\Log.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Asset\ResGameObject.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Decorators\MaxActiveDecorator.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Init\Init.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysLocomotion.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\BasePlatform.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Easing\EasingType.cs" />
