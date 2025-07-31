@@ -98,8 +98,8 @@
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_float.cs" />
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES32DArrayType.cs" />
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3CollectionType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Guid.cs" />
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3ReferenceMgrEditor.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Guid.cs" />
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Texture2D.cs" />
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_byte.cs" />
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3EditorUtility.cs" />
