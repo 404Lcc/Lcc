@@ -32,11 +32,12 @@ namespace LccHotfix
             TimerService = Current.AddModule<TimerManager>();
             AssetService = Current.AddModule<AssetManager>();
             ProcedureService = Current.AddModule<ProcedureManager>();
+            SceneService = Current.AddModule<SceneManager>();
+            SceneService.SetSceneHelper(new DefaultSceneHelper());
             
             IconService = Current.AddModule<IconManager>();
             HotfixBridgeService = Current.AddModule<HotfixBridge>();
             HotfixBridgeService.Init();
-            SceneService = Current.AddModule<SceneManager>();
             ConfigService = Current.AddModule<ConfigManager>();
             LanguageService = Current.AddModule<LanguageManager>();
             WorldService = Current.AddModule<WorldManager>();
@@ -50,7 +51,6 @@ namespace LccHotfix
     {
         public static IIconService IconService { get; set; }
         public static IHotfixBridgeService HotfixBridgeService { get; set; }
-        public static ISceneService SceneService { get; set; }
         public static IConfigService ConfigService { get; set; }
         public static ILanguageService LanguageService { get; set; }
         public static IWorldService WorldService { get; set; }

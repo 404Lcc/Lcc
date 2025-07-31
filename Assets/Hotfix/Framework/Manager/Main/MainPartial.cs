@@ -17,7 +17,8 @@ namespace LccHotfix
         public static ITimerService TimerService { get; set; }
         public static IAssetService AssetService { get; set; }
         public static IProcedureService ProcedureService { get; set; }
-
+        public static ISceneService SceneService { get; set; }
+        
         public static void SetMain(Main main)
         {
             main.OnInstall();
