@@ -1,5 +1,4 @@
-﻿using LccModel;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Threading;
 

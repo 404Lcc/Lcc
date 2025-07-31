@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace LccHotfix
 {
@@ -23,6 +22,7 @@ namespace LccHotfix
     
     internal class CoroutineManager : Module, ICoroutineService
     {
+        public ICoroutineHelper CoroutineHelper { get; set; }
         internal override void Shutdown()
         {
         }
@@ -31,6 +31,12 @@ namespace LccHotfix
         {
         }
         private Dictionary<ICoroutine, List<CoroutineHandler>> _coroutineDict = new Dictionary<ICoroutine, List<CoroutineHandler>>();
+        
+
+        public void SetCoroutineHelper(ICoroutineHelper coroutineHelper)
+        {
+            CoroutineHelper = coroutineHelper;
+        }
 
         public CoroutineHandler StartCoroutine(ICoroutine owner, IEnumerator coroutine)
         {

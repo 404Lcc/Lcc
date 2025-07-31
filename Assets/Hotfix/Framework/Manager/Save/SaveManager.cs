@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ES3Internal;
-using ES3Types;
-
 using UnityEngine;
 
 namespace LccHotfix
@@ -104,10 +101,7 @@ namespace LccHotfix
     {
         public Dictionary<Type, ISavePipeline> saveDict = new Dictionary<Type, ISavePipeline>();
 
-        private readonly string SavePath = "../SaveDatas/";
-        private readonly string FileName = "saveData.lcc";
-        private ES3Settings _settings;
-
+        private ISaveHelper _saveHelper;
         private GameSaveData _gameSaveData;
 
         public bool IsSaveLoaded { get; private set; }
@@ -115,10 +109,6 @@ namespace LccHotfix
 
         public SaveManager()
         {
-            _settings = new ES3Settings();
-            SetEncryption(true);
-            SetStorePath(StoreMode.Official);
-
             foreach (Type item in Main.CodeTypesService.GetTypes(typeof(ModelAttribute)))
             {
                 object[] atts = item.GetCustomAttributes(typeof(ModelAttribute), false);
@@ -144,22 +134,17 @@ namespace LccHotfix
         }
 
 
-
+        public void SetSaveHelper(ISaveHelper saveHelper)
+        {
+            _saveHelper = saveHelper;
+        }
 
         /// <summary>
         /// 设置全局加密方式
         /// </summary>
         public void SetEncryption(bool isAES)
         {
-            if (isAES)
-            {
-                _settings.encryptionType = ES3.EncryptionType.AES;
-                _settings.encryptionPassword = "xxxxxxxxxxxxxxxx";
-            }
-            else
-            {
-                _settings.encryptionType = ES3.EncryptionType.None;
-            }
+            _saveHelper.SetEncryption(isAES);
         }
 
 
@@ -168,16 +153,7 @@ namespace LccHotfix
         /// </summary>
         public void SetStorePath(StoreMode mode)
         {
-            if (mode == StoreMode.Beta)
-            {
-                _settings.directory = ES3.Directory.DataPath;
-                _settings.path = SavePath + FileName;
-            }
-            else if (mode == StoreMode.Official)
-            {
-                _settings.directory = ES3.Directory.PersistentDataPath;
-                _settings.path = SavePath + FileName;
-            }
+            _saveHelper.SetStorePath(mode);
         }
 
         /// <summary>
@@ -197,7 +173,7 @@ namespace LccHotfix
         /// <returns></returns>
         public bool CheckHaveSaveData()
         {
-            return KeyExists("GameSaveData");
+            return _saveHelper.KeyExists("GameSaveData");
         }
 
         /// <summary>
@@ -221,7 +197,7 @@ namespace LccHotfix
         {
             if (CheckHaveSaveData())
             {
-                _gameSaveData = Load<GameSaveData>("GameSaveData");
+                _gameSaveData = _saveHelper.Load<GameSaveData>("GameSaveData");
                 IsSaveLoaded = true;
                 foreach (var item in saveDict.Values)
                 {
@@ -242,7 +218,7 @@ namespace LccHotfix
                 item.Flush();
             }
 
-            Save("GameSaveData", _gameSaveData);
+            _saveHelper.Save("GameSaveData", _gameSaveData);
         }
 
         public T GetSaveData<T, TSave>() where T : ISaveConverter<TSave>, new() where TSave : ISave
@@ -255,78 +231,5 @@ namespace LccHotfix
 
             return _gameSaveData.GetSaveData<T, TSave>();
         }
-
-        #region ES3接口
-
-        public void Save<T>(string key, T value)
-        {
-            ES3.Save<T>(key, value, _settings);
-        }
-
-
-
-        public T Load<T>(string key)
-        {
-            return ES3.Load<T>(key, _settings);
-        }
-
-        public T Load<T>(string key, T defaultValue)
-        {
-            return ES3.Load<T>(key, defaultValue, _settings);
-        }
-
-        //加载到
-        public void LoadInto<T>(string key, T obj) where T : class
-        {
-            ES3.LoadInto<T>(key, obj, _settings);
-        }
-
-
-        public void DeleteFile()
-        {
-            ES3.DeleteFile(_settings);
-        }
-
-        public void DeleteDirectory()
-        {
-            ES3.DeleteDirectory(_settings);
-        }
-
-        public void DeleteKey(string key)
-        {
-            ES3.DeleteKey(key, _settings);
-        }
-
-        public bool KeyExists(string key)
-        {
-            return ES3.KeyExists(key, _settings);
-        }
-
-        public bool FileExists()
-        {
-            return ES3.FileExists(_settings);
-        }
-
-        public bool DirectoryExists()
-        {
-            return ES3.DirectoryExists(_settings);
-        }
-
-        public string[] GetKeys()
-        {
-            return ES3.GetKeys(_settings);
-        }
-
-        public string[] GetFiles()
-        {
-            return ES3.GetFiles(_settings);
-        }
-
-        public string[] GetDirectories()
-        {
-            return ES3.GetDirectories(_settings);
-        }
-
-        #endregion
     }
 }

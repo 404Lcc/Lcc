@@ -5,22 +5,17 @@ namespace LccHotfix
         None,
         Normal,
         Fast,
-        AfterLogin,//考虑登录之后重新回login的情况，首次进入登录进度条和重新进入登录进度条不一样
+        AfterLogin, //考虑登录之后重新回login的情况，首次进入登录进度条和重新进入登录进度条不一样
     }
+
     public abstract class LoadSceneHandler : ICoroutine
     {
-
         public SceneType sceneType;
-
-
 
         /// <summary>
         /// 加载方式
         /// </summary>
         public LoadingType loadType;
-
-
-
 
         /// <summary>
         /// 正在加载
@@ -32,13 +27,12 @@ namespace LccHotfix
         /// </summary>
         public bool IsCleanup { get; set; }
 
-
         /// <summary>
         /// 加载显示回调
         /// </summary>
         public virtual void SceneLoadHandler()
         {
-            this.StartCoroutine(Main.SceneService.ShowSceneLoading(loadType));
+            // this.StartCoroutine(Main.SceneService.ShowSceneLoading(loadType));
         }
 
         /// <summary>
@@ -56,7 +50,6 @@ namespace LccHotfix
         {
         }
 
-
         /// <summary>
         /// 加载完成回调
         /// </summary>
@@ -70,7 +63,6 @@ namespace LccHotfix
         /// </summary>
         public virtual void SceneExitHandler()
         {
-
         }
 
         /// <summary>
@@ -84,16 +76,9 @@ namespace LccHotfix
         public bool deepClean;
 
         /// <summary>
-        /// 传递的参数缓存
-        /// </summary>
-        public object param;
-
-        /// <summary>
         /// 开启场景后跳转到界面
         /// </summary>
         public WNode.TurnNode turnNode;
-
-
 
         /// <summary>
         /// 更新

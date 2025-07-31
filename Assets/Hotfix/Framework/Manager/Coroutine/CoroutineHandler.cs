@@ -1,4 +1,3 @@
-using LccModel;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -57,7 +56,7 @@ namespace LccHotfix
                 return;
             }
             Running = true;
-            Object.FindObjectOfType<LccModel.Launcher>().StartCoroutine(CallWrapper());
+            Main.CoroutineService.CoroutineHelper.StartCoroutine(CallWrapper());
         }
         public void Stop()
         {

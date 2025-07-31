@@ -1,25 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using cfg;
-using LccModel;
-using Luban;
-using RVO;
-using SimpleJSON;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Video;
-
 namespace LccHotfix
 {
     public interface ISaveService : IService
     {
         bool IsSaveLoaded { get; }
 
-
+        void SetSaveHelper(ISaveHelper saveHelper);
         /// <summary>
         /// 设置全局加密方式
         /// </summary>
@@ -60,38 +45,5 @@ namespace LccHotfix
         void Save();
 
         T GetSaveData<T, TSave>() where T : ISaveConverter<TSave>, new() where TSave : ISave;
-
-        #region ES3接口
-
-        void Save<T>(string key, T value);
-
-
-        T Load<T>(string key);
-
-        T Load<T>(string key, T defaultValue);
-
-        //加载到
-        void LoadInto<T>(string key, T obj) where T : class;
-
-
-        void DeleteFile();
-
-        void DeleteDirectory();
-
-        void DeleteKey(string key);
-
-        bool KeyExists(string key);
-
-        bool FileExists();
-
-        bool DirectoryExists();
-
-        string[] GetKeys();
-
-        string[] GetFiles();
-
-        string[] GetDirectories();
-
-        #endregion
     }
 }

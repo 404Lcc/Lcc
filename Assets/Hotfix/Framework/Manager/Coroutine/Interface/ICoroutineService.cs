@@ -1,19 +1,13 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using cfg;
-using LccModel;
-using Luban;
-using SimpleJSON;
-using UnityEngine;
 
 namespace LccHotfix
 {
     public interface ICoroutineService : IService
     {
+        ICoroutineHelper CoroutineHelper { get; set; }
+        void SetCoroutineHelper(ICoroutineHelper coroutineHelper);
         CoroutineHandler StartCoroutine(ICoroutine owner, IEnumerator coroutine);
-
         void StopCoroutine(CoroutineHandler handler);
 
         void PauseCoroutine(CoroutineHandler handler);

@@ -55,6 +55,10 @@ namespace LccHotfix
             }
         }
 
+        public virtual void OnInstall()
+        {
+        }
+
         /// <summary>
         /// 增加游戏框架模块。
         /// </summary>

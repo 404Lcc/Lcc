@@ -1,4 +1,3 @@
-using LccModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +8,34 @@ namespace LccHotfix
     internal class SceneManager : Module, ISceneService, ICoroutine
     {
         private Dictionary<SceneType, LoadSceneHandler> _loadSceneHandlerDict = new Dictionary<SceneType, LoadSceneHandler>();
+        private bool _inLoading;
+        private LoadSceneHandler _curSceneHandler;
+        private ISceneHelper _sceneHelper;
+
+        public SceneType CurState
+        {
+            get
+            {
+                if (_curSceneHandler != null)
+                    return _curSceneHandler.sceneType;
+                return SceneType.None;
+            }
+        }
+
+        public bool IsLoading
+        {
+            get
+            {
+                if (!Init.HotfixGameStarted)
+                    return true;
+                if (_inLoading)
+                    return true;
+                if (_curSceneHandler == null)
+                    return true;
+                return _curSceneHandler.IsLoading;
+            }
+        }
+
         public SceneManager()
         {
             foreach (Type item in Main.CodeTypesService.GetTypes(typeof(SceneStateAttribute)))
@@ -25,21 +52,30 @@ namespace LccHotfix
                 }
             }
         }
+
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            UpdateLoadingTime();
-            if (curSceneHandler != null && !curSceneHandler.IsLoading)
+            if (_curSceneHandler == null)
+                return;
+
+            if (!_curSceneHandler.IsLoading)
             {
-                curSceneHandler.Tick();
+                _curSceneHandler.Tick();
             }
+
+            _sceneHelper.UpdateLoadingTime(_curSceneHandler);
         }
 
         internal override void LateUpdate()
         {
             base.LateUpdate();
-            if (curSceneHandler != null && !curSceneHandler.IsLoading)
+            
+            if (_curSceneHandler == null)
+                return;
+            
+            if (!_curSceneHandler.IsLoading)
             {
-                curSceneHandler.LateUpdate();
+                _curSceneHandler.LateUpdate();
             }
         }
 
@@ -48,203 +84,121 @@ namespace LccHotfix
             this.StopAllCoroutines();
             _loadSceneHandlerDict.Clear();
             _inLoading = false;
-            preSceneHandler = null;
-            curSceneHandler = null;
+            _curSceneHandler = null;
         }
 
-        #region Load Scene
-        private bool _inLoading;
-
-        private LoadSceneHandler preSceneHandler;
-        private LoadSceneHandler curSceneHandler;
-
-        public SceneType curState
+        public void SetSceneHelper(ISceneHelper sceneHelper)
         {
-            get
-            {
-                if (curSceneHandler != null)
-                    return curSceneHandler.sceneType;
-                return 0;
-            }
+            this._sceneHelper = sceneHelper;
         }
-        public SceneType preState
-        {
-            get
-            {
-                if (preSceneHandler != null)
-                    return preSceneHandler.sceneType;
-                return 0;
-            }
-        }
-        public bool IsLoading
-        {
-            get
-            {
-                if (!Init.HotfixGameStarted) return true;
-                if (_inLoading) return true;
-                if (curSceneHandler == null) return true;
-                return curSceneHandler.IsLoading;
-            }
-        }
-
+        
         public LoadSceneHandler GetScene(SceneType type)
         {
             if (type == SceneType.None)
             {
                 return null;
             }
+
             LoadSceneHandler handler = _loadSceneHandlerDict[type];
             return handler;
         }
-
-        public void ChangeScene(LoadSceneHandler handler)
-        {
-            if (handler == null) return;
-
-            if (curSceneHandler != null && curSceneHandler.sceneType == handler.sceneType && !curSceneHandler.IsLoading)
-                return;
-            if (!handler.SceneEnterStateHandler())
-                return;
-
-            if (curSceneHandler != null)
-                preSceneHandler = curSceneHandler;
-            curSceneHandler = handler;
-            Log.Info($"ChangeScene： scene type === {curSceneHandler.sceneType.ToString()} loading type ==== {((LoadingType)curSceneHandler.loadType).ToString()}");
-
-
-            LccModel.Launcher.Instance.SetGameSpeed(1);
-            LccModel.Launcher.Instance.ChangeFPS();
-
-            _inLoading = false;
-            handler.IsLoading = true;
-            handler.IsCleanup = false;
-            handler.startLoadTime = Time.realtimeSinceStartup;
-
-            handler.SceneLoadHandler();
-        }
-
+        
         public void ChangeScene(SceneType type)
         {
             if (type == SceneType.None)
             {
                 return;
             }
+
             LoadSceneHandler handler = _loadSceneHandlerDict[type];
             if (handler == null)
             {
                 return;
             }
+
             ChangeScene(handler);
         }
-
-        public IEnumerator ShowSceneLoading(LoadingType loadType)
+        
+        private void ChangeScene(LoadSceneHandler handler)
         {
-            UILoadingPanel loadingPanel = null;
-            switch (loadType)
+            if (handler == null)
+                return;
+
+            if (_curSceneHandler != null && _curSceneHandler.sceneType == handler.sceneType)
+                return;
+
+            if (!handler.SceneEnterStateHandler())
+                return;
+
+            LoadSceneHandler last = null;
+            if (_curSceneHandler != null)
             {
-                case LoadingType.Normal:
-                    loadingPanel = UILoadingPanel.Instance;
-                    loadingPanel.Show(string.Empty);
-                    loadingPanel.UpdateLoadingPercent(0, 5);
-                    yield return null;
-                    break;
-                case LoadingType.Fast:
-                    UIForeGroundPanel.Instance.FadeOut(1.5f);
-                    yield return null;
-                    break;
+                last = _curSceneHandler;
             }
-            BeginLoad();
+
+            _curSceneHandler = handler;
+
+            Log.Info($"ChangeScene： scene type === {_curSceneHandler.sceneType.ToString()} loading type ==== {_curSceneHandler.loadType.ToString()}");
+
+            _sceneHelper.ResetSpeed();
+
+            _inLoading = false;
+            handler.IsLoading = true;
+            handler.IsCleanup = false;
+            handler.startLoadTime = Time.realtimeSinceStartup;
+            handler.SceneLoadHandler();
+            
+            Log.Info($"BeginLoad： scene type === {_curSceneHandler.sceneType.ToString()} loading type ==== {_curSceneHandler.loadType.ToString()}");
+            this.StartCoroutine(UnloadSceneCoroutine(last));
         }
 
-
-        public void BeginLoad()
+        private IEnumerator UnloadSceneCoroutine(LoadSceneHandler last)
         {
-            Log.Info($"BeginLoad： scene type === {curSceneHandler.sceneType.ToString()} loading type ==== {((LoadingType)curSceneHandler.loadType).ToString()}");
-            this.StartCoroutine(UnloadSceneCoroutine());
-        }
+            if (_curSceneHandler == null)
+                yield break;
 
-        private IEnumerator UnloadSceneCoroutine()
-        {
-            if (curSceneHandler == null) yield break;
             //移除旧的
-            if (preSceneHandler != null)
+            if (last != null)
             {
-                preSceneHandler.SceneExitHandler();
-                preSceneHandler.IsCleanup = true;
+                last.SceneExitHandler();
+                last.IsCleanup = true;
                 yield return null;
             }
-            Main.WindowService.ShowMaskBox((int)MaskType.WINDOW_ANIM, false);
-            Main.WindowService.CloseAllWindow();
+
+            _sceneHelper.UnloadAllWindow(last, _curSceneHandler);
+            
             yield return null;
-            if (curSceneHandler.deepClean || (preSceneHandler != null && preSceneHandler.deepClean))
-                Main.WindowService.ReleaseAllWindow(ReleaseType.DEEPLY);
-            else
-                Main.WindowService.ReleaseAllWindow(ReleaseType.CHANGE_SCENE);
+
+            GC.Collect();
+
             yield return null;
-            System.GC.Collect();
-            yield return null;
-            Log.Info($"UnloadSceneCoroutine： scene type === {curSceneHandler.sceneType.ToString()} loading type ==== {((LoadingType)curSceneHandler.loadType).ToString()}");
-            curSceneHandler.SceneStartHandler();
+
+            Log.Info($"UnloadSceneCoroutine： scene type === {_curSceneHandler.sceneType.ToString()} loading type ==== {((LoadingType)_curSceneHandler.loadType).ToString()}");
+            _curSceneHandler.SceneStartHandler();
         }
 
         public void CleanScene()
         {
-            //如果上一个还没清理完成 直接清理一下
-            if (preSceneHandler != null)
+            if (_curSceneHandler != null)
             {
-                if (!preSceneHandler.IsCleanup)
-                {
-                    preSceneHandler.SceneExitHandler();
-                }
-            }
-
-            if (curSceneHandler != null)
-            {
-                curSceneHandler.SceneExitHandler();
-                curSceneHandler = null;
-            }
-            preSceneHandler = null;
-        }
-
-        private void UpdateLoadingTime()
-        {
-            if (curSceneHandler != null && curSceneHandler.IsLoading)
-            {
-                if (Time.realtimeSinceStartup - curSceneHandler.startLoadTime > 150)
-                {
-                    Init.ReturnToStart();
-                }
+                _curSceneHandler.SceneExitHandler();
+                _curSceneHandler = null;
             }
         }
-        #endregion
 
         #region 切场景界面
+
         public void OpenChangeScenePanel()
         {
-            if (curSceneHandler == null || curSceneHandler.turnNode == null) return;
-            WNode.TurnNode node = curSceneHandler.turnNode;
-            if (string.IsNullOrEmpty(node.nodeName))
-                return;
-            if (Main.WindowService.OpenSpecialWindow(node))
-                return;
-            if (node.nodeType == NodeType.ROOT)
-            {
-                Main.WindowService.OpenRoot(node.nodeName, node.nodeParam);
-            }
-            else
-            {
-                Main.WindowService.OpenWindow(node.nodeName, node.nodeParam);
-            }
-
-            curSceneHandler.turnNode = null;
+            _sceneHelper.OpenChangeScenePanel(_curSceneHandler);
         }
 
         public void CleanChangeSceneParam()
         {
-            if (curSceneHandler != null)
-                curSceneHandler.turnNode = null;
+            if (_curSceneHandler != null)
+                _curSceneHandler.turnNode = null;
         }
-        #endregion
 
+        #endregion
     }
 }

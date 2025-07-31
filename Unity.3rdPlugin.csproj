@@ -89,7 +89,6 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\Local.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\DateTimeSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\RVO\Agent.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoWriter.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\EntityIndex\EntityIndexException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\IProtoTypeSerializer.cs" />
@@ -103,7 +102,6 @@
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TypeSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ImplicitFields.cs" />
-    <Compile Include="Assets\3rdPlugins\RVO\Simulator.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Context\Context.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Systems\Interfaces\IReactiveSystem.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Group\IGroup.cs" />
@@ -152,7 +150,6 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Compiler\CompilerContext.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoException.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\PropertyDecorator.cs" />
-    <Compile Include="Assets\3rdPlugins\RVO\KdTree.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Matcher\Interfaces\IAllOfMatcher.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\NetObjectSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\CompiledSerializer.cs" />
@@ -177,18 +174,14 @@
     <Compile Include="Assets\3rdPlugins\Entitas\Entity\Exceptions\EntityIsNotRetainedByOwnerException.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt16Serializer.cs" />
-    <Compile Include="Assets\3rdPlugins\RVO\ObstaclePolygon.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Context\Exceptions\EntityIsNotDestroyedException.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Systems\ParallelSystem.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Context\Exceptions\ContextStillHasRetainedEntitiesException.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\Netstandard15Polyfill.cs" />
-    <Compile Include="Assets\3rdPlugins\RVO\Obstacle.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ByteSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
-    <Compile Include="Assets\3rdPlugins\RVO\Line.cs" />
-    <Compile Include="Assets\3rdPlugins\RVO\RVOMath.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UriDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\GuidSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\FieldDecorator.cs" />
@@ -221,7 +214,6 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoIgnoreAttribute.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ReflectedUriDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Context\Exceptions\ContextEntityIndexDoesNotExistException.cs" />
-    <Compile Include="Assets\3rdPlugins\RVO\Vector2.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ServiceModel\XmlProtoSerializer.cs" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.xml" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.xml" />
