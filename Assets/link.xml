@@ -4615,11 +4615,6 @@
   </assembly>
   <assembly fullname="Unity.Model">
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1" preserve="all" />
-    <type fullname="LccModel.AssetManager" preserve="all" />
-    <type fullname="LccModel.ResALLObject" preserve="all" />
-    <type fullname="LccModel.ResGameObject" preserve="all" />
-    <type fullname="LccModel.ResObject" preserve="all" />
-    <type fullname="LccModel.ResShader" preserve="all" />
     <type fullname="LccModel.Event" preserve="all" />
     <type fullname="LccModel.EventDriver" preserve="all" />
     <type fullname="LccModel.EventGroup" preserve="all" />
@@ -4703,8 +4698,6 @@
     <type fullname="LccModel.SerializeUtility" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1+MonoScriptData" preserve="all" />
-    <type fullname="LccModel.ResObject+LoadState" preserve="all" />
-    <type fullname="LccModel.ResShader+&lt;WarmUp&gt;d__4" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;GetNotice&gt;d__104" preserve="all" />
@@ -4735,7 +4728,7 @@
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel+&lt;&gt;c__DisplayClass6_0" preserve="all" />
     <type fullname="LccModel.UILoadingPanel+&lt;&gt;c" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2606" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3974" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2481" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3749" preserve="all" />
   </assembly>
 </linker>
