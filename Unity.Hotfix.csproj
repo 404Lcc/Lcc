@@ -152,6 +152,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Orca\RVO\Agent.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Decorators\AutoReleaseDecorator.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\Log\DefaultLogHelper.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Save\DefaultSaveHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComTransform.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Base\EntityIndexEnum.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\BTAction.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Model\Interface\IModelService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Model\ModelAttribute.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\System\SysSkillProcess.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Coroutine\DefaultCoroutineHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Input\Interface\IInputService.cs" />
     <Compile Include="Assets\Hotfix\Utility\Resolution\ResolutionUtility.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysLife.cs" />
@@ -219,6 +221,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\AStarMap\AStarMapManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Main\MainPartial.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\RootNode\BlackboardType.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Scene\DefaultSceneHelper.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\TypeNamePair.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\Interface\IPlatformService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\RootNode\WRootNode.cs" />
@@ -288,6 +291,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\BasePlatform.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Easing\EasingType.cs" />
     <Compile Include="Assets\Hotfix\Utility\Extension\Task\TaskExtension.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\GameMain\GameMain.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventPool\EventArgs.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysDebug.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\UI\UIMain\UIMainPanel.cs" />

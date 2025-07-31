@@ -46,7 +46,7 @@ namespace LccHotfix
             InitializeForAssembly(Launcher.Instance.hotfixAssembly);
 
             //初始化加载器
-            LoadGameObject = (asset, keepHierar) => AssetManager.Instance.LoadGameObject(asset, keepHierar);
+            LoadGameObject = (asset, keepHierar) => Main.AssetService.LoadGameObject(asset, keepHierar);
             //初始化通用节点
             Init();
         }

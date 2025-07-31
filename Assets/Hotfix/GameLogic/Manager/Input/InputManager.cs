@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using LccModel;
-using UnityEngine.Video;
 
 namespace LccHotfix
 {

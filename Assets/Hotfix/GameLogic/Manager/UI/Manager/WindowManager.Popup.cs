@@ -159,7 +159,7 @@ namespace LccHotfix
 
 		private bool CheckScene()
 		{
-			return Main.SceneService.curState == SceneType.Main;
+			return Main.SceneService.CurState == SceneType.Main;
 		}
 
 

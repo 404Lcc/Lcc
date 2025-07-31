@@ -57,7 +57,7 @@ namespace LccHotfix
 
             ChangeWindowNode(turn);
 
-            var curState = (int)Main.SceneService.curState;
+            var curState = (int)Main.SceneService.CurState;
             //同场景跳转
             if ((curState & scene) > 0)
             {
@@ -88,14 +88,11 @@ namespace LccHotfix
         /// <returns></returns>
         private bool JumpWindowCrossScene(int scene, WNode.TurnNode turn)
         {
-            LoadSceneHandler handler = null;
-
             //目前只能跳主场景
             if ((scene & (int)SceneType.Main) > 0)
             {
-                handler = Main.SceneService.GetScene(SceneType.Main);
-                handler.turnNode = turn;
-                Main.SceneService.ChangeScene(handler);
+                Main.SceneService.GetScene(SceneType.Main).turnNode = turn;
+                Main.SceneService.ChangeScene(SceneType.Main);
                 return true;
             }
 

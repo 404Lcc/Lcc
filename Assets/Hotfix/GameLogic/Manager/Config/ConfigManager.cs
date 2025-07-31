@@ -4,7 +4,6 @@ using Luban;
 using SimpleJSON;
 using System;
 using UnityEngine;
-using YooAsset;
 
 namespace LccHotfix
 {
@@ -38,13 +37,13 @@ namespace LccHotfix
 
         private JSONNode LoadJson(string file)
         {
-            var text = AssetManager.Instance.LoadRes<TextAsset>(loader, file);
+            var text = Main.AssetService.LoadRes<TextAsset>(loader, file);
             return JSON.Parse(text.text);
         }
 
         private ByteBuf LoadByteBuf(string file)
         {
-            var bytes = AssetManager.Instance.LoadRes<TextAsset>(loader, file);
+            var bytes = Main.AssetService.LoadRes<TextAsset>(loader, file);
             return new ByteBuf(bytes.bytes);
         }
 
