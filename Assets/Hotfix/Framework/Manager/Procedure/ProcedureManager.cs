@@ -7,17 +7,17 @@ namespace LccHotfix
 {
     internal class ProcedureManager : Module, IProcedureService, ICoroutine
     {
-        private Dictionary<ProcedureType, LoadProcedureHandler> _loadSceneHandlerDict = new Dictionary<ProcedureType, LoadProcedureHandler>();
+        private Dictionary<ProcedureType, LoadProcedureHandler> _loadProcedureHandlerDict = new Dictionary<ProcedureType, LoadProcedureHandler>();
         private bool _inLoading;
-        private LoadProcedureHandler _curSceneHandler;
-        private IProcedureHelper _sceneHelper;
+        private LoadProcedureHandler _curProcedureHandler;
+        private IProcedureHelper _procedureHelper;
 
         public ProcedureType CurState
         {
             get
             {
-                if (_curSceneHandler != null)
-                    return _curSceneHandler.procedureType;
+                if (_curProcedureHandler != null)
+                    return _curProcedureHandler.procedureType;
                 return ProcedureType.None;
             }
         }
@@ -28,9 +28,9 @@ namespace LccHotfix
             {
                 if (_inLoading)
                     return true;
-                if (_curSceneHandler == null)
+                if (_curProcedureHandler == null)
                     return true;
-                return _curSceneHandler.IsLoading;
+                return _curProcedureHandler.IsLoading;
             }
         }
 
@@ -41,53 +41,53 @@ namespace LccHotfix
                 object[] atts = item.GetCustomAttributes(typeof(ProcedureAttribute), false);
                 if (atts != null && atts.Length > 0)
                 {
-                    ProcedureAttribute sceneStateAttribute = (ProcedureAttribute)atts[0];
+                    ProcedureAttribute procedureAttribute = (ProcedureAttribute)atts[0];
 
-                    LoadProcedureHandler sceneState = (LoadProcedureHandler)Activator.CreateInstance(item);
-                    sceneState.procedureType = sceneStateAttribute.type;
+                    LoadProcedureHandler handler = (LoadProcedureHandler)Activator.CreateInstance(item);
+                    handler.procedureType = procedureAttribute.type;
 
-                    _loadSceneHandlerDict.Add(sceneStateAttribute.type, sceneState);
+                    _loadProcedureHandlerDict.Add(procedureAttribute.type, handler);
                 }
             }
         }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            if (_curSceneHandler == null)
+            if (_curProcedureHandler == null)
                 return;
 
-            if (!_curSceneHandler.IsLoading)
+            if (!_curProcedureHandler.IsLoading)
             {
-                _curSceneHandler.Tick();
+                _curProcedureHandler.Tick();
             }
 
-            _sceneHelper.UpdateLoadingTime(_curSceneHandler);
+            _procedureHelper.UpdateLoadingTime(_curProcedureHandler);
         }
 
         internal override void LateUpdate()
         {
             base.LateUpdate();
             
-            if (_curSceneHandler == null)
+            if (_curProcedureHandler == null)
                 return;
             
-            if (!_curSceneHandler.IsLoading)
+            if (!_curProcedureHandler.IsLoading)
             {
-                _curSceneHandler.LateUpdate();
+                _curProcedureHandler.LateUpdate();
             }
         }
 
         internal override void Shutdown()
         {
             this.StopAllCoroutines();
-            _loadSceneHandlerDict.Clear();
+            _loadProcedureHandlerDict.Clear();
             _inLoading = false;
-            _curSceneHandler = null;
+            _curProcedureHandler = null;
         }
 
-        public void SetProcedureHelper(IProcedureHelper sceneHelper)
+        public void SetProcedureHelper(IProcedureHelper procedureHelper)
         {
-            this._sceneHelper = sceneHelper;
+            this._procedureHelper = procedureHelper;
         }
         
         public LoadProcedureHandler GetProcedure(ProcedureType type)
@@ -97,7 +97,7 @@ namespace LccHotfix
                 return null;
             }
 
-            LoadProcedureHandler handler = _loadSceneHandlerDict[type];
+            LoadProcedureHandler handler = _loadProcedureHandlerDict[type];
             return handler;
         }
         
@@ -108,37 +108,37 @@ namespace LccHotfix
                 return;
             }
 
-            LoadProcedureHandler handler = _loadSceneHandlerDict[type];
+            LoadProcedureHandler handler = _loadProcedureHandlerDict[type];
             if (handler == null)
             {
                 return;
             }
 
-            ChangeScene(handler);
+            ChangeProcedure(handler);
         }
         
-        private void ChangeScene(LoadProcedureHandler handler)
+        private void ChangeProcedure(LoadProcedureHandler handler)
         {
             if (handler == null)
                 return;
 
-            if (_curSceneHandler != null && _curSceneHandler.procedureType == handler.procedureType)
+            if (_curProcedureHandler != null && _curProcedureHandler.procedureType == handler.procedureType)
                 return;
 
             if (!handler.ProcedureEnterStateHandler())
                 return;
 
             LoadProcedureHandler last = null;
-            if (_curSceneHandler != null)
+            if (_curProcedureHandler != null)
             {
-                last = _curSceneHandler;
+                last = _curProcedureHandler;
             }
 
-            _curSceneHandler = handler;
+            _curProcedureHandler = handler;
 
-            Log.Info($"ChangeScene： scene type === {_curSceneHandler.procedureType.ToString()} loading type ==== {_curSceneHandler.loadType.ToString()}");
+            Log.Info($"ChangeProcedure： procedure type === {_curProcedureHandler.procedureType.ToString()} loading type ==== {_curProcedureHandler.loadType.ToString()}");
 
-            _sceneHelper.ResetSpeed();
+            _procedureHelper.ResetSpeed();
 
             _inLoading = false;
             handler.IsLoading = true;
@@ -146,13 +146,13 @@ namespace LccHotfix
             handler.startLoadTime = Time.realtimeSinceStartup;
             handler.ProcedureLoadHandler();
             
-            Log.Info($"BeginLoad： scene type === {_curSceneHandler.procedureType.ToString()} loading type ==== {_curSceneHandler.loadType.ToString()}");
-            this.StartCoroutine(UnloadSceneCoroutine(last));
+            Log.Info($"BeginLoad： procedure type === {_curProcedureHandler.procedureType.ToString()} loading type ==== {_curProcedureHandler.loadType.ToString()}");
+            this.StartCoroutine(UnloadProcedureCoroutine(last));
         }
 
-        private IEnumerator UnloadSceneCoroutine(LoadProcedureHandler last)
+        private IEnumerator UnloadProcedureCoroutine(LoadProcedureHandler last)
         {
-            if (_curSceneHandler == null)
+            if (_curProcedureHandler == null)
                 yield break;
 
             //移除旧的
@@ -163,7 +163,7 @@ namespace LccHotfix
                 yield return null;
             }
 
-            _sceneHelper.UnloadAllPanel(last, _curSceneHandler);
+            _procedureHelper.UnloadAllPanel(last, _curProcedureHandler);
             
             yield return null;
 
@@ -171,16 +171,16 @@ namespace LccHotfix
 
             yield return null;
 
-            Log.Info($"UnloadSceneCoroutine： scene type === {_curSceneHandler.procedureType.ToString()} loading type ==== {((LoadingType)_curSceneHandler.loadType).ToString()}");
-            _curSceneHandler.ProcedureStartHandler();
+            Log.Info($"UnloadProcedureCoroutine： procedure type === {_curProcedureHandler.procedureType.ToString()} loading type ==== {((LoadingType)_curProcedureHandler.loadType).ToString()}");
+            _curProcedureHandler.ProcedureStartHandler();
         }
 
         public void CleanProcedure()
         {
-            if (_curSceneHandler != null)
+            if (_curProcedureHandler != null)
             {
-                _curSceneHandler.ProcedureExitHandler();
-                _curSceneHandler = null;
+                _curProcedureHandler.ProcedureExitHandler();
+                _curProcedureHandler = null;
             }
         }
 
@@ -188,13 +188,13 @@ namespace LccHotfix
 
         public void OpenChangeProcedurePanel()
         {
-            _sceneHelper.OpenChangeProcedurePanel(_curSceneHandler);
+            _procedureHelper.OpenChangeProcedurePanel(_curProcedureHandler);
         }
 
         public void CleanChangeProcedureParam()
         {
-            if (_curSceneHandler != null)
-                _curSceneHandler.turnNode = null;
+            if (_curProcedureHandler != null)
+                _curProcedureHandler.turnNode = null;
         }
 
         #endregion
