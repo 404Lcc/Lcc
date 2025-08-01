@@ -160,6 +160,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\ComUniDamage.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\System\SysSubobject.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\Locomotion\LocomotionBase.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Procedure\DefaultProcedureHelper.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Decorators\GameObjectPoolDecorator.cs" />
     <Compile Include="Assets\Hotfix\Utility\Awaiter\UnityWebRequestAsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Texture.cs" />
@@ -206,7 +207,6 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\AStarMap\AStarMapManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Main\MainPartial.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\LoadProcedureHandler.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Scene\DefaultSceneHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\BoolPropertyType.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBItem.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\TypeNamePair.cs" />
