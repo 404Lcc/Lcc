@@ -4,7 +4,7 @@ using cfg;
 
 namespace LccHotfix
 {
-	public enum PopPanelType
+	public enum PopupPanelType
 	{
 		Normal,
 		Advance,
@@ -12,14 +12,14 @@ namespace LccHotfix
 	}
 	public class PopupPanelData
 	{
-		public PopPanelType type;
+		public PopupPanelType type;
 		public string panelName;
 		public int sortValue;
 		public object[] param;
 		public PopupPanelData(PopupPanel popup, object[] param)
 		{
 			this.panelName = popup.PanelName;
-			this.type = (PopPanelType)popup.PopType;
+			this.type = (PopupPanelType)popup.PopType;
 			this.sortValue = popup.SortValue;
 			this.param = param;
 		}
@@ -124,7 +124,7 @@ namespace LccHotfix
 			}
 
 			PopupPanelData popData = _popList[0];
-			bool isAdvance = popData.type > PopPanelType.Normal;
+			bool isAdvance = popData.type > PopupPanelType.Normal;
 
 			//todo判断新手引导
 
