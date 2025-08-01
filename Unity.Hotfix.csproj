@@ -118,6 +118,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\VibrationData.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysCollision.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\RewardTemplate.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Procedure\LoginProcedure.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\EquipmentType.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Property\ComProperty.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\Data\DamageProp.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Battle\System\SysSubobject.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\Locomotion\LocomotionBase.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Procedure\DefaultProcedureHelper.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Procedure\MainProcedure.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Decorators\GameObjectPoolDecorator.cs" />
     <Compile Include="Assets\Hotfix\Utility\Awaiter\UnityWebRequestAsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Texture.cs" />
@@ -349,7 +351,6 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\BehavoirTree\Utility\Extension\BTAgentExtension.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\BTScriptManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\BTScript\Skill\SkillBTScript.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Scene\MainScene.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\ReferencePool\IReference.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Equipment.cs" />
@@ -399,7 +400,6 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Global\GlobalManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUnityObjectRelated.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComHP.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Scene\LoginScene.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Easing\EasingManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysDeathProcess.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\ProcedureAttribute.cs" />
