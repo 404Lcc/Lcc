@@ -4,40 +4,39 @@ using cfg;
 
 namespace LccHotfix
 {
-	public enum WindowType
+	public enum PopPanelType
 	{
 		Normal,
 		Advance,
 		Special,
 	}
-	public class PopupWindowData
+	public class PopupPanelData
 	{
-		public WindowType type;
-		public string windowName;
+		public PopPanelType type;
+		public string panelName;
 		public int sortValue;
 		public object[] param;
-		public PopupWindowData(PopupWindow popup, object[] param)
+		public PopupPanelData(PopupPanel popup, object[] param)
 		{
-			this.windowName = popup.WindowName;
-			this.type = (WindowType)popup.PopType;
+			this.panelName = popup.PanelName;
+			this.type = (PopPanelType)popup.PopType;
 			this.sortValue = popup.SortValue;
 			this.param = param;
 		}
 	}
 
-	internal partial class WindowManager : Module
+	public partial class UIManager : Module
 	{
-
-		private List<PopupWindowData> _popList = new List<PopupWindowData>();
+		private List<PopupPanelData> _popList = new List<PopupPanelData>();
 
         /// <summary>
         /// 当前普通弹窗
         /// </summary>
-        private string _normalWindow = null;
+        private string _normalPanel = null;
         /// <summary>
         /// 当前高级弹窗
         /// </summary>
-        private string _advanceWindow = null;
+        private string _advancePanel = null;
 
 
 		/// <summary>
@@ -45,13 +44,13 @@ namespace LccHotfix
 		/// </summary>
 		public bool isAutoPop = true;
 
-        private List<string> _preventPopupWindow = new List<string>();
+        private List<string> _preventPopupPanel = new List<string>();
 
-		bool HaveAnyPreventPopupWindowOpened()
+		bool HaveAnyPreventPopupPanelOpened()
 		{
-			foreach (var w in _preventPopupWindow)
+			foreach (var w in _preventPopupPanel)
 			{
-				if (IsWindowActive(w))
+				if (Main.IUIService.IsPanelActive(w))
 				{
 					return true;
 				}
@@ -65,40 +64,40 @@ namespace LccHotfix
 		/// </summary>
 		/// <param name="type">面板类型</param>
 		/// <param name="param">面板参数</param>
-		public void StackWindow(string windowName, object[] param)
+		public void StackPanel(string panelName, object[] param)
 		{
-			PopupWindow popup = Main.ConfigService.Tables.TBPopupWindow.Get(windowName);
+			PopupPanel popup = Main.ConfigService.Tables.TBPopupPanel.Get(panelName);
 			if (popup != null)
 			{
-				_popList.Add(new PopupWindowData(popup, param));
+				_popList.Add(new PopupPanelData(popup, param));
 			}
 
 			_popList = _popList.OrderBy(data => (int)data.sortValue).ToList();
 
 			if (isAutoPop)
-				TryPopupWindow();
+				TryPopupPanel();
 		}
-		public void StackWindow(string windowName)
+		public void StackPanel(string panelName)
 		{
-			StackWindow(windowName, null);
+			StackPanel(panelName, null);
 		}
-		public void StackWindow(string windowName, object param)
+		public void StackPanel(string panelName, object param)
 		{
-			StackWindow(windowName, new object[] { param });
+			StackPanel(panelName, new object[] { param });
 		}
 		/// <summary>
 		/// 判断是否压入了某种类型的弹窗
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public bool IsStackWindow(string windowName)
+		public bool IsStackPanel(string panelName)
 		{
 			if (_popList == null)
 				return false;
 
 			for (int i = 0; i < _popList.Count; i++)
 			{
-				if (_popList[i].windowName == windowName)
+				if (_popList[i].panelName == panelName)
 					return true;
 			}
 			return false;
@@ -107,72 +106,72 @@ namespace LccHotfix
 		/// <summary>
 		/// 打开弹窗
 		/// </summary>
-		public void TryPopupWindow()
+		public void TryPopupPanel()
 		{
 			if (_popList.Count == 0)
 			{
 				return;
 			}
 
-			if (HaveAnyPreventPopupWindowOpened())
+			if (HaveAnyPreventPopupPanelOpened())
 			{
 				return;
 			}
 
-			if (!CheckScene() || Main.SceneService.IsLoading)
+			if (!CheckProcedure() || Main.ProcedureService.IsLoading)
 			{
 				return;
 			}
 
-			PopupWindowData popData = _popList[0];
-			bool isAdvance = popData.type > WindowType.Normal;
+			PopupPanelData popData = _popList[0];
+			bool isAdvance = popData.type > PopPanelType.Normal;
 
 			//todo判断新手引导
 
 			if (isAdvance)
 			{
-				if (_normalWindow != null || _advanceWindow != null) return;
+				if (_normalPanel != null || _advancePanel != null) return;
 			}
 			else
 			{
-				if (_normalWindow != null) return;
+				if (_normalPanel != null) return;
 			}
 
 			_popList.RemoveAt(0);
-			string popWindowName = popData.windowName;
+			string popPanelName = popData.panelName;
 
-			var currentWindow = OpenWindow(popWindowName, popData.param);
-			if (currentWindow == null)
+			var currentPanel = UI.OpenWindow(popPanelName, popData.param);
+			if (currentPanel == null)
 			{
-				TryPopupWindow();
+				TryPopupPanel();
 			}
-			else if (currentWindow.Active)
+			else if (currentPanel.Active)
 			{
 				if (isAdvance)
-					_advanceWindow = popWindowName;
+					_advancePanel = popPanelName;
 				else
-					_normalWindow = popWindowName;
+					_normalPanel = popPanelName;
 
-				AddCloseCallback(popWindowName, (o) => OnPopWindowClose(popWindowName));
+				UI.AddCloseCallback(popPanelName, (o) => OnPopPanelClose(popPanelName));
 			}
 		}
 
-		private bool CheckScene()
+		private bool CheckProcedure()
 		{
-			return Main.SceneService.CurState == SceneType.Main;
+			return Main.ProcedureService.CurState == ProcedureType.Main;
 		}
 
 
-		public void OnPopWindowClose(string windowName)
+		public void OnPopPanelClose(string panelName)
 		{
-			RemoveCloseCallback(windowName, (o) => OnPopWindowClose(windowName));
-			if (windowName == _normalWindow)
-				_normalWindow = null;
-			else if (windowName == _advanceWindow)
-				_advanceWindow = null;
+			UI.RemoveCloseCallback(panelName, (o) => OnPopPanelClose(panelName));
+			if (panelName == _normalPanel)
+				_normalPanel = null;
+			else if (panelName == _advancePanel)
+				_advancePanel = null;
 			else
 				return;
-			TryPopupWindow();
+			TryPopupPanel();
 		}
 	}
 }

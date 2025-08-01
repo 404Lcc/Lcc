@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    internal partial class WindowManager : Module
+    public partial class UIManager : Module
     {
         /// <summary>
         /// 跳转至指定UI，校验功能是否开启
@@ -11,7 +11,7 @@ namespace LccHotfix
         /// <param name="gotoID"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        public bool JumpToWindowByID(int gotoID, params object[] args)
+        public bool JumpToPanelByID(int gotoID, params object[] args)
         {
             var config = Main.ConfigService.Tables.TBEmptyGoTo.Get(gotoID);
             if (config == null)
@@ -46,53 +46,51 @@ namespace LccHotfix
             }
             object[] nowArg = list.Count > 0 ? list.ToArray() : null;
 
-            int scene = config.SceneID;
+            int procedure = config.ProcedureID;
 
             WNode.TurnNode turn = new WNode.TurnNode
             {
-                nodeName = config.WindowName,
+                nodeName = config.PanelName,
                 nodeParam = nowArg,
-                nodeType = (NodeType)config.WindowType
+                nodeType = (NodeType)config.PanelType
             };
 
-            ChangeWindowNode(turn);
+            ChangePanelNode(turn);
 
-            var curState = (int)Main.SceneService.CurState;
-            //同场景跳转
-            if ((curState & scene) > 0)
+            var curState = (int)Main.ProcedureService.CurState;
+            //同流程跳转
+            if ((curState & procedure) > 0)
             {
-                if (OpenSpecialWindow(turn))
+                if (OpenSpecialPanel(turn))
                 {
                     return true;
                 }
                 if (turn.nodeType == NodeType.ROOT)
                 {
-                    OpenRoot(turn.nodeName, turn.nodeParam);
+                    UI.OpenRoot(turn.nodeName, turn.nodeParam);
                 }
                 else
                 {
-                    OpenWindow(turn.nodeName, turn.nodeParam);
+                    UI.OpenWindow(turn.nodeName, turn.nodeParam);
                 }
                 return true;
             }
-            return JumpWindowCrossScene(scene, turn);
+            return JumpPanelCrossProcedure(procedure, turn);
 
         }
 
         /// <summary>
-        /// 跨场景跳转
+        /// 跨流程跳转
         /// </summary>
-        /// <param name="scene"></param>
-        /// <param name="panelName"></param>
-        /// <param name="args"></param>
+        /// <param name="procedure"></param>
         /// <returns></returns>
-        private bool JumpWindowCrossScene(int scene, WNode.TurnNode turn)
+        private bool JumpPanelCrossProcedure(int procedure, WNode.TurnNode turn)
         {
-            //目前只能跳主场景
-            if ((scene & (int)SceneType.Main) > 0)
+            //目前只能跳主流程
+            if ((procedure & (int)ProcedureType.Main) > 0)
             {
-                Main.SceneService.GetScene(SceneType.Main).turnNode = turn;
-                Main.SceneService.ChangeScene(SceneType.Main);
+                Main.ProcedureService.GetProcedure(ProcedureType.Main).turnNode = turn;
+                Main.ProcedureService.ChangeProcedure(ProcedureType.Main);
                 return true;
             }
 
@@ -103,7 +101,7 @@ namespace LccHotfix
         /// 调整界面和参数
         /// </summary>
         /// <param name="turnNode"></param>
-        private void ChangeWindowNode(WNode.TurnNode turnNode)
+        private void ChangePanelNode(WNode.TurnNode turnNode)
         {
             switch (turnNode.nodeName)
             {
@@ -116,7 +114,7 @@ namespace LccHotfix
         /// </summary>
         /// <param name="turnNode"></param>
         /// <returns></returns>
-        public bool OpenSpecialWindow(WNode.TurnNode turnNode)
+        public bool OpenSpecialPanel(WNode.TurnNode turnNode)
         {
             switch (turnNode.nodeName)
             {

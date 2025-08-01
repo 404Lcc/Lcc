@@ -241,7 +241,9 @@
     <Compile Include="Assets\Hotfix\Utility\AutoReference\AutoReferenceUtility.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Download\Interface\IDownloadService.cs" />
     <Compile Include="Assets\Hotfix\Utility\Extension\Transform\TransformExtension.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\IUIHelper.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\UnOrderMultiMapSet.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\Interface\IUIService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\WindowManager.Action.cs" />
     <Compile Include="Assets\Hotfix\Utility\Awaiter\AsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Module\Bag\ItemData.cs" />

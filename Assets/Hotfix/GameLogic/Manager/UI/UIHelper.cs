@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public class UIWindowModeDefine
+    public class UIHelper : IUIHelper
     {
         private Dictionary<string, WindowMode> _dict = new Dictionary<string, WindowMode>();
 
-        public UIWindowModeDefine()
+        public UIHelper()
         {
             foreach (var item in Main.ConfigService.Tables.TBPanel.DataList)
             {
@@ -68,7 +68,7 @@ namespace LccHotfix
             // });
         }
 
-        public WindowMode Get(string windowName)
+        public WindowMode GetWindowMode(string windowName)
         {
             if (_dict.TryGetValue(windowName, out var windowMode))
             {
