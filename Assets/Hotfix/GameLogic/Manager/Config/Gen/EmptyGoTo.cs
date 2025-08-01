@@ -25,7 +25,7 @@ public sealed partial class EmptyGoTo : Luban.BeanBase
         { if(!_buf["param1"].IsNumber) { throw new SerializationException(); }  Param1 = _buf["param1"]; }
         { if(!_buf["param2"].IsNumber) { throw new SerializationException(); }  Param2 = _buf["param2"]; }
         { if(!_buf["param3"].IsString) { throw new SerializationException(); }  Param3 = _buf["param3"]; }
-        { if(!_buf["sceneID"].IsNumber) { throw new SerializationException(); }  SceneID = _buf["sceneID"]; }
+        { if(!_buf["procedureID"].IsNumber) { throw new SerializationException(); }  ProcedureID = _buf["procedureID"]; }
     }
 
     public static EmptyGoTo DeserializeEmptyGoTo(JSONNode _buf)
@@ -66,9 +66,9 @@ public sealed partial class EmptyGoTo : Luban.BeanBase
     /// </summary>
     public readonly string Param3;
     /// <summary>
-    /// 场景位或
+    /// 流程位或
     /// </summary>
-    public readonly int SceneID;
+    public readonly int ProcedureID;
    
     public const int __ID__ = 583608400;
     public override int GetTypeId() => __ID__;
@@ -97,7 +97,7 @@ public sealed partial class EmptyGoTo : Luban.BeanBase
         + "param1:" + Param1 + ","
         + "param2:" + Param2 + ","
         + "param3:" + Param3 + ","
-        + "sceneID:" + SceneID + ","
+        + "procedureID:" + ProcedureID + ","
         + "}";
     }
 }
