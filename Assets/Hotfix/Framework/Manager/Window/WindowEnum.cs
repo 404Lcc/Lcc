@@ -24,11 +24,11 @@
     /// </summary>
     public enum ReleaseType
     {
-        IMMEDIATE = -1,	//立即销毁
-        AUTO = 0,	//延时自动销毁
-        CHANGE_SCENE = 1,	//切换场景
-        DEEPLY = 2,	//深度清理
-        NEVER = 3,	//永久缓存
+        IMMEDIATE = -1,//立即销毁
+        AUTO = 0,//延时自动销毁
+        CHANGE_PROCEDURE = 1,//切换流程
+        DEEPLY = 2,//深度清理
+        NEVER = 3,//永久缓存
     }
 
     /// <summary>
@@ -65,7 +65,7 @@
     {
         WINDOW_SWITCH = 1 << 0,    // 切换窗口的过程
         WINDOW_ANIM = 1 << 1,
-        CHANGE_SCENE = 1 << 2,
+        CHANGE_PROCEDURE = 1 << 2,
         NET_REQUEST = 1 << 3,
     }
 }

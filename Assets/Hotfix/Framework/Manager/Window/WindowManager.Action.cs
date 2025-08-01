@@ -69,7 +69,5 @@ namespace LccHotfix
 		/// 关闭最后一个root
 		/// </summary>
 		public Action OnClosedLastRootFunc { get; set; }
-
-
 	}
 }

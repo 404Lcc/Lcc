@@ -43,7 +43,7 @@ namespace LccHotfix
 		//当前切换中的窗口
 		private WNode _switchingNode;
 		//初始化通用节点
-		internal void Init()
+		public void Init()
 		{
 			_commonRoot = GetAndCreateRoot("UIRootCommon");
 			_commonRoot.stackIndex = 0;
@@ -425,7 +425,7 @@ namespace LccHotfix
 		/// </summary>
 		/// <param name="windowClose"></param>
 		/// <returns></returns>
-		internal object CloseWindow(string windowClose)
+		public object CloseWindow(string windowClose)
 		{
 			if (string.IsNullOrEmpty(windowClose)) return null;
 			//从通用节点尝试关闭窗口
@@ -449,7 +449,7 @@ namespace LccHotfix
 		}
 
         //栈顶节点关闭互斥子节点
-        internal void CloseWindow(int windowFlag)
+        public void CloseWindow(int windowFlag)
 		{
 			if (_rootStack.Count == 0) return;
 			if (0 == windowFlag) return;
@@ -477,7 +477,7 @@ namespace LccHotfix
 			}
 		}
         //返回键请求关闭窗口处理
-        internal void EscapeTopWindow()
+        public void EscapeTopWindow()
 		{
 			EscapeType escape = EscapeType.AUTO_CLOSE;
 			//处理通用节点
@@ -616,7 +616,7 @@ namespace LccHotfix
 			}
 		}
 		//增加节点关闭回调
-		internal void AddCloseCallback(string windowName, Action<object> callback)
+		public void AddCloseCallback(string windowName, Action<object> callback)
 		{
 			if (_windowCloseCallback.TryGetValue(windowName, out Action<object> action))
 			{
@@ -629,7 +629,7 @@ namespace LccHotfix
 			}
 		}
 		//移除节点关闭回调
-		internal void RemoveCloseCallback(string windowName, Action<object> callback)
+		public void RemoveCloseCallback(string windowName, Action<object> callback)
 		{
 			if (_windowCloseCallback.TryGetValue(windowName, out Action<object> action))
 			{
@@ -645,7 +645,7 @@ namespace LccHotfix
 			}
 		}
 		//获取窗口，根据窗口名称
-		internal Window GetWindow(string windowName)
+		public Window GetWindow(string windowName)
 		{
 			if (_rootStack.Count == 0) return null;
 			//在栈顶根节点找子节点
@@ -658,7 +658,7 @@ namespace LccHotfix
 			return null;
 		}
 		//获取根节点，根据根节点名称
-		internal WRootNode GetRoot(string rootName)
+		public WRootNode GetRoot(string rootName)
 		{
 			if (_rootStack.Count == 0) return null;
 
@@ -671,14 +671,14 @@ namespace LccHotfix
 			return null;
 		}
 		//获取栈顶的根节点
-		internal WRootNode GetTopRoot()
+		public WRootNode GetTopRoot()
 		{
 			if (_rootStack.Count == 0) return null;
 
 			return _rootStack.Peek();
 		}
 		//获取栈顶的最新窗口
-		internal Window GetTopWindow()
+		public Window GetTopWindow()
 		{
 			if (_rootStack.Count == 0) return null;
 
@@ -701,7 +701,7 @@ namespace LccHotfix
 		/// 屏幕遮黑淡入
 		/// 替换以前的截屏操作，这个更快，不需要等待一帧
 		/// </summary>
-		internal void ShowScreenMask()
+		public void ShowScreenMask()
 		{
 			ShowScreenMaskFunc?.Invoke();
 		}
