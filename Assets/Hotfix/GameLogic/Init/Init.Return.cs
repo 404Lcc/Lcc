@@ -17,7 +17,7 @@ namespace LccHotfix
         {
             //关闭所有协程，如果patchOperation的状态机在运行，这里会杀掉
             Main.CoroutineService.StopAllTypeCoroutines();
-            Main.WindowService.ShowMaskBox(0xFF, false);
+            Main.IUIService.ShowMask(0xFF, false);
             //todo清理菊花界面
             //清理加载界面
             UILoadingPanel.Instance.Hide();
@@ -29,8 +29,8 @@ namespace LccHotfix
 
             //清理上个玩家数据
             ClearLastUserData();
-            //清理场景
-            Main.SceneService.CleanScene();
+            //清理流程
+            Main.ProcedureService.CleanProcedure();
             //重启
             Restart();
         }
@@ -40,7 +40,7 @@ namespace LccHotfix
         /// </summary>
         public static void ReturnToLogin()
         {
-            if (Main.SceneService.CurState == SceneType.None || Main.SceneService.CurState == SceneType.Login)
+            if (Main.ProcedureService.CurState == ProcedureType.None || Main.ProcedureService.CurState == ProcedureType.Login)
             {
                 ReturnToStart();
                 return;
@@ -48,7 +48,7 @@ namespace LccHotfix
 
             //关闭所有协程
             Main.CoroutineService.StopAllTypeCoroutines();
-            Main.WindowService.ShowMaskBox(0xFF, false);
+            Main.IUIService.ShowMask(0xFF, false);
             //todo清理菊花界面
             //清理加载界面
             UILoadingPanel.Instance.Hide();
@@ -61,7 +61,7 @@ namespace LccHotfix
             //清理上个玩家数据
             ClearLastUserData();
 
-            Main.SceneService.ChangeScene(SceneType.Login);
+            Main.ProcedureService.ChangeProcedure(ProcedureType.Login);
         }
 
         private static void ClearLastUserData()
@@ -92,8 +92,8 @@ namespace LccHotfix
             if (restartOver)
             {
                 UILoadingPanel.Instance.UpdateLoadingPercent(91, 98);
-                //切换场景
-                Main.SceneService.ChangeScene(SceneType.Login);
+                //切换流程
+                Main.ProcedureService.ChangeProcedure(ProcedureType.Login);
                 yield return null;
                 Launcher.Instance.LoadFinish();
             }

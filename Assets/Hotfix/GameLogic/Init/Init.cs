@@ -1,17 +1,12 @@
 ﻿using LccModel;
-using System;
-using System.Reflection;
 using UnityEngine;
-using System.Collections;
 
 namespace LccHotfix
 {
     public partial class Init
     {
-        public static bool HotfixGameStarted { set; get; } = false;
         public static void Start()
         {
-            HotfixGameStarted = false;
             Log.SetLogHelper(new DefaultLogHelper());
             Main.SetMain(new GameMain());
             
@@ -24,9 +19,8 @@ namespace LccHotfix
                 Launcher.Instance.actionOnDrawGizmos += DrawGizmos;
 
                 Launcher.Instance.LoadFinish();
-                HotfixGameStarted = true;
                 
-                Main.SceneService.ChangeScene(SceneType.Login);
+                Main.ProcedureService.ChangeProcedure(ProcedureType.Login);
             }
             catch (System.Exception e)
             {
