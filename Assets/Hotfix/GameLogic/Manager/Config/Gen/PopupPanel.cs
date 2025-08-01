@@ -13,24 +13,24 @@ using SimpleJSON;
 
 namespace cfg
 {
-public sealed partial class PopupWindow : Luban.BeanBase
+public sealed partial class PopupPanel : Luban.BeanBase
 {
-    public PopupWindow(JSONNode _buf) 
+    public PopupPanel(JSONNode _buf) 
     {
-        { if(!_buf["windowName"].IsString) { throw new SerializationException(); }  WindowName = _buf["windowName"]; }
+        { if(!_buf["panelName"].IsString) { throw new SerializationException(); }  PanelName = _buf["panelName"]; }
         { if(!_buf["popType"].IsNumber) { throw new SerializationException(); }  PopType = _buf["popType"]; }
         { if(!_buf["sortValue"].IsNumber) { throw new SerializationException(); }  SortValue = _buf["sortValue"]; }
     }
 
-    public static PopupWindow DeserializePopupWindow(JSONNode _buf)
+    public static PopupPanel DeserializePopupPanel(JSONNode _buf)
     {
-        return new PopupWindow(_buf);
+        return new PopupPanel(_buf);
     }
 
     /// <summary>
     /// 弹出窗口名称
     /// </summary>
-    public readonly string WindowName;
+    public readonly string PanelName;
     /// <summary>
     /// 特殊弹窗
     /// </summary>
@@ -40,7 +40,7 @@ public sealed partial class PopupWindow : Luban.BeanBase
     /// </summary>
     public readonly int SortValue;
    
-    public const int __ID__ = -1974161508;
+    public const int __ID__ = 68161752;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
@@ -53,7 +53,7 @@ public sealed partial class PopupWindow : Luban.BeanBase
     public override string ToString()
     {
         return "{ "
-        + "windowName:" + WindowName + ","
+        + "panelName:" + PanelName + ","
         + "popType:" + PopType + ","
         + "sortValue:" + SortValue + ","
         + "}";

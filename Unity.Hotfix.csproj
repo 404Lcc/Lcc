@@ -106,6 +106,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Save\Interface\ISaveService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Utility\TargetUtility.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Event\GameEventArgs.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\PopupPanel.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaComponentsLookup.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Buff\ComBuffs.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Asset\ResObject.cs" />
@@ -196,7 +197,6 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventPool\EventPool.Event.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\VibrationManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\UI\UIRoot\UIRootLogin.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBPopupWindow.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\ValuePropertyType.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\BattleWorld.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Download\DownloadFile.cs" />
@@ -219,6 +219,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Easing\EasingExtensions.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\CodeTypes\AttributeBase.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Download\DownloadData.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBPopupPanel.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\BehavoirTree\KVContext\KVType.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Buff.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaContext.cs" />
@@ -404,7 +405,6 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysDeathProcess.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\ProcedureAttribute.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Coroutine\CoroutineCompletedHandler.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\PopupWindow.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Orca\RVO\ObstaclePolygon.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\Collider\ComCollider.cs" />
     <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />

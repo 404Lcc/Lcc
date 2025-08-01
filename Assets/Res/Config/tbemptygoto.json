@@ -1,9 +1,8 @@
 [
   {
     "id": 10000,
-    "windowType": 0,
-    "windowName": "",
-    "windowNameDes": "",
+    "panelType": 0,
+    "panelName": "",
     "funcType": 0,
     "funcId": 0,
     "param1": 0,

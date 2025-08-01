@@ -15,7 +15,7 @@ namespace cfg
 public partial class Tables
 {
     public TBEmptyGoTo TBEmptyGoTo {get; }
-    public TBPopupWindow TBPopupWindow {get; }
+    public TBPopupPanel TBPopupPanel {get; }
     public TBSkill TBSkill {get; }
     public TBBuff TBBuff {get; }
     public TBSubobject TBSubobject {get; }
@@ -31,7 +31,7 @@ public partial class Tables
     public Tables(System.Func<string, JSONNode> loader)
     {
         TBEmptyGoTo = new TBEmptyGoTo(loader("tbemptygoto"));
-        TBPopupWindow = new TBPopupWindow(loader("tbpopupwindow"));
+        TBPopupPanel = new TBPopupPanel(loader("tbpopuppanel"));
         TBSkill = new TBSkill(loader("tbskill"));
         TBBuff = new TBBuff(loader("tbbuff"));
         TBSubobject = new TBSubobject(loader("tbsubobject"));
@@ -49,7 +49,7 @@ public partial class Tables
     private void ResolveRef()
     {
         TBEmptyGoTo.ResolveRef(this);
-        TBPopupWindow.ResolveRef(this);
+        TBPopupPanel.ResolveRef(this);
         TBSkill.ResolveRef(this);
         TBBuff.ResolveRef(this);
         TBSubobject.ResolveRef(this);

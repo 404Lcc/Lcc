@@ -18,9 +18,8 @@ public sealed partial class EmptyGoTo : Luban.BeanBase
     public EmptyGoTo(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
-        { if(!_buf["windowType"].IsNumber) { throw new SerializationException(); }  WindowType = _buf["windowType"]; }
-        { if(!_buf["windowName"].IsString) { throw new SerializationException(); }  WindowName = _buf["windowName"]; }
-        { if(!_buf["windowNameDes"].IsString) { throw new SerializationException(); }  WindowNameDes = _buf["windowNameDes"]; }
+        { if(!_buf["panelType"].IsNumber) { throw new SerializationException(); }  PanelType = _buf["panelType"]; }
+        { if(!_buf["panelName"].IsString) { throw new SerializationException(); }  PanelName = _buf["panelName"]; }
         { if(!_buf["funcType"].IsNumber) { throw new SerializationException(); }  FuncType = _buf["funcType"]; }
         { if(!_buf["funcId"].IsNumber) { throw new SerializationException(); }  FuncId = _buf["funcId"]; }
         { if(!_buf["param1"].IsNumber) { throw new SerializationException(); }  Param1 = _buf["param1"]; }
@@ -41,15 +40,11 @@ public sealed partial class EmptyGoTo : Luban.BeanBase
     /// <summary>
     /// 界面类型
     /// </summary>
-    public readonly int WindowType;
+    public readonly int PanelType;
     /// <summary>
     /// 跳转界面
     /// </summary>
-    public readonly string WindowName;
-    /// <summary>
-    /// 跳转界面UI名称
-    /// </summary>
-    public readonly string WindowNameDes;
+    public readonly string PanelName;
     /// <summary>
     /// 功能类型
     /// </summary>
@@ -89,16 +84,14 @@ public sealed partial class EmptyGoTo : Luban.BeanBase
         
         
         
-        
     }
 
     public override string ToString()
     {
         return "{ "
         + "id:" + Id + ","
-        + "windowType:" + WindowType + ","
-        + "windowName:" + WindowName + ","
-        + "windowNameDes:" + WindowNameDes + ","
+        + "panelType:" + PanelType + ","
+        + "panelName:" + PanelName + ","
         + "funcType:" + FuncType + ","
         + "funcId:" + FuncId + ","
         + "param1:" + Param1 + ","

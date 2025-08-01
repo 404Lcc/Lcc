@@ -43,6 +43,7 @@
   <ItemGroup>
     <None Include="Assets\Res\Config\tbitem.json" />
     <None Include="Assets\Res\Config\tbpanel.json" />
+    <None Include="Assets\Res\Config\tbpopuppanel.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\Res\Config\tbskill.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -71,7 +72,6 @@
     <None Include="Assets\StreamingAssets\GameConfig_Version.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\StreamingAssets\Dev\Android\versionList.txt" />
-    <None Include="Assets\Res\Config\tbpopupwindow.json" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Res\Config\tblanguage.json" />
     <None Include="Assets\Res\Config\tbequipment.json" />
