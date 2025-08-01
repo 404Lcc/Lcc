@@ -102,8 +102,8 @@
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TypeSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ImplicitFields.cs" />
-    <Compile Include="Assets\3rdPlugins\Entitas\Context\Context.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Systems\Interfaces\IReactiveSystem.cs" />
+    <Compile Include="Assets\3rdPlugins\Entitas\Context\Context.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Group\IGroup.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ProtoDecoratorBase.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\ProtoMapAttribute.cs" />

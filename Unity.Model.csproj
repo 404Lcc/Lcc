@@ -99,8 +99,8 @@
     <Compile Include="Assets\Launcher\Launcher\Launcher.UpdateVersion.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmClearCache.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmDownloadOver.cs" />
-    <Compile Include="Assets\Launcher\Utility\Extension\Transform\TransformExtension.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmInitialize.cs" />
+    <Compile Include="Assets\Launcher\Utility\Extension\Transform\TransformExtension.cs" />
     <Compile Include="Assets\Launcher\UI\CustomControl\UISpriteCtrl.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmUpdateVersion.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.GameServer.cs" />

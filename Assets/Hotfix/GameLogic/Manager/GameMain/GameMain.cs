@@ -31,7 +31,6 @@ namespace LccHotfix
             CameraService = Current.AddModule<CameraManager>();
             TimerService = Current.AddModule<TimerManager>();
             AssetService = Current.AddModule<AssetManager>();
-            ProcedureService = Current.AddModule<ProcedureManager>();
             SceneService = Current.AddModule<SceneManager>();
             SceneService.SetSceneHelper(new DefaultSceneHelper());
             
@@ -42,8 +41,6 @@ namespace LccHotfix
             LanguageService = Current.AddModule<LanguageManager>();
             WorldService = Current.AddModule<WorldManager>();
             BTScriptService = Current.AddModule<BTScriptManager>();
-            WindowService = Current.AddModule<WindowManager>();
-            WindowService.InitWindowManager();
         }
     }
 
@@ -55,6 +52,5 @@ namespace LccHotfix
         public static ILanguageService LanguageService { get; set; }
         public static IWorldService WorldService { get; set; }
         public static IBTScriptService BTScriptService { get; set; }
-        public static IWindowService WindowService { get; set; }
     }
 }
