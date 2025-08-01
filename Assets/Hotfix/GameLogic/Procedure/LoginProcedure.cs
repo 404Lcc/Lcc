@@ -4,21 +4,21 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    [SceneState(SceneType.Login)]
-    public class LoginScene : LoadSceneHandler, ICoroutine
+    [Procedure(ProcedureType.Login)]
+    public class LoginProcedure : LoadProcedureHandler, ICoroutine
     {
-        public LoginScene()
+        public LoginProcedure()
         {
-            sceneType = SceneType.Login;
+            procedureType = ProcedureType.Login;
             loadType = LoadingType.Fast;
         }
 
-        public override void SceneStartHandler()
+        public override void ProcedureStartHandler()
         {
-            base.SceneStartHandler();
+            base.ProcedureStartHandler();
             //进入
 
-            Log.Debug("进入login场景");
+            Log.Debug("进入login");
 
             //设备id
             Log.Debug("设备id = " + UnityEngine.SystemInfo.deviceUniqueIdentifier);
@@ -26,25 +26,25 @@ namespace LccHotfix
             //进入游戏
             UILoadingPanel.Instance.SetStartLoadingBg();
 
-            Main.WindowService.OpenWindow<UILoginPanel>(UIWindowDefine.UILoginPanel);
+            Main.IUIService.OpenPanel(UIPanelDefine.UILoginPanel);
 
-            this.StartCoroutine(LoadSceneCoroutine());
+            this.StartCoroutine(LoadProcedureCoroutine());
         }
 
         // 初始化显示
-        private IEnumerator LoadSceneCoroutine()
+        private IEnumerator LoadProcedureCoroutine()
         {
             yield return LevelStartWaiting();
         }
 
-        // 开启场景后屏蔽操作，等待0.5秒钟弹出弹窗
+        // 开启流程后屏蔽操作，等待0.5秒钟弹出弹窗
         IEnumerator LevelStartWaiting()
         {
-            Main.WindowService.ShowMaskBox((int)MaskType.CHANGE_SCENE, true);
+            UI.ShowMaskBox((int)MaskType.CHANGE_PROCEDURE, true);
             yield return new WaitForSecondsRealtime(1f);
-            Main.WindowService.ShowMaskBox((int)MaskType.CHANGE_SCENE, false);
+            UI.ShowMaskBox((int)MaskType.CHANGE_PROCEDURE, false);
 
-            SceneLoadEndHandler();
+            ProcedureLoadEndHandler();
         }
 
         public override void Tick()
@@ -53,11 +53,11 @@ namespace LccHotfix
             Log.Debug("login update");
         }
 
-        public override void SceneExitHandler()
+        public override void ProcedureExitHandler()
         {
-            base.SceneExitHandler();
+            base.ProcedureExitHandler();
 
-            Log.Debug("退出login场景");
+            Log.Debug("退出login");
         }
     }
 }
