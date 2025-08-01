@@ -1,6 +1,6 @@
 namespace LccHotfix
 {
-    public enum SceneType : int
+    public enum ProcedureType : int
     {
         None,
         Login,

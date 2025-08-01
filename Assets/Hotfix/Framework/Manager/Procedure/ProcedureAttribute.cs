@@ -1,11 +1,11 @@
 namespace LccHotfix
 {
-    public class SceneStateAttribute : AttributeBase
+    public class ProcedureAttribute : AttributeBase
     {
-        public SceneType sceneType;
-        public SceneStateAttribute(SceneType sceneType)
+        public ProcedureType type;
+        public ProcedureAttribute(ProcedureType type)
         {
-            this.sceneType = sceneType;
+            this.type = type;
         }
     }
 }

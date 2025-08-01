@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using LccHotfix;
 using UnityEngine;
 
-public interface ISceneHelper
+public interface IProcedureHelper
 {
-    IEnumerator ShowSceneLoading(LoadingType loadType);
+    void UpdateLoadingTime(LoadProcedureHandler handler);
     void ResetSpeed();
-    void UpdateLoadingTime(LoadSceneHandler handler);
-    void UnloadAllWindow(LoadSceneHandler last, LoadSceneHandler cur);
-    void OpenChangeScenePanel(LoadSceneHandler handler);
+    void UnloadAllPanel(LoadProcedureHandler last, LoadProcedureHandler cur);
+    void OpenChangeProcedurePanel(LoadProcedureHandler handler);
+    IEnumerator ShowProcedureLoading(LoadingType loadType);
 }

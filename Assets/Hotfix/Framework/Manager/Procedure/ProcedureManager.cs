@@ -5,20 +5,20 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    internal class SceneManager : Module, ISceneService, ICoroutine
+    internal class ProcedureManager : Module, IProcedureService, ICoroutine
     {
-        private Dictionary<SceneType, LoadSceneHandler> _loadSceneHandlerDict = new Dictionary<SceneType, LoadSceneHandler>();
+        private Dictionary<ProcedureType, LoadProcedureHandler> _loadSceneHandlerDict = new Dictionary<ProcedureType, LoadProcedureHandler>();
         private bool _inLoading;
-        private LoadSceneHandler _curSceneHandler;
-        private ISceneHelper _sceneHelper;
+        private LoadProcedureHandler _curSceneHandler;
+        private IProcedureHelper _sceneHelper;
 
-        public SceneType CurState
+        public ProcedureType CurState
         {
             get
             {
                 if (_curSceneHandler != null)
-                    return _curSceneHandler.sceneType;
-                return SceneType.None;
+                    return _curSceneHandler.procedureType;
+                return ProcedureType.None;
             }
         }
 
@@ -26,8 +26,6 @@ namespace LccHotfix
         {
             get
             {
-                if (!Init.HotfixGameStarted)
-                    return true;
                 if (_inLoading)
                     return true;
                 if (_curSceneHandler == null)
@@ -36,19 +34,19 @@ namespace LccHotfix
             }
         }
 
-        public SceneManager()
+        public ProcedureManager()
         {
-            foreach (Type item in Main.CodeTypesService.GetTypes(typeof(SceneStateAttribute)))
+            foreach (Type item in Main.CodeTypesService.GetTypes(typeof(ProcedureAttribute)))
             {
-                object[] atts = item.GetCustomAttributes(typeof(SceneStateAttribute), false);
+                object[] atts = item.GetCustomAttributes(typeof(ProcedureAttribute), false);
                 if (atts != null && atts.Length > 0)
                 {
-                    SceneStateAttribute sceneStateAttribute = (SceneStateAttribute)atts[0];
+                    ProcedureAttribute sceneStateAttribute = (ProcedureAttribute)atts[0];
 
-                    LoadSceneHandler sceneState = (LoadSceneHandler)Activator.CreateInstance(item);
-                    sceneState.sceneType = sceneStateAttribute.sceneType;
+                    LoadProcedureHandler sceneState = (LoadProcedureHandler)Activator.CreateInstance(item);
+                    sceneState.procedureType = sceneStateAttribute.type;
 
-                    _loadSceneHandlerDict.Add(sceneStateAttribute.sceneType, sceneState);
+                    _loadSceneHandlerDict.Add(sceneStateAttribute.type, sceneState);
                 }
             }
         }
@@ -87,30 +85,30 @@ namespace LccHotfix
             _curSceneHandler = null;
         }
 
-        public void SetSceneHelper(ISceneHelper sceneHelper)
+        public void SetProcedureHelper(IProcedureHelper sceneHelper)
         {
             this._sceneHelper = sceneHelper;
         }
         
-        public LoadSceneHandler GetScene(SceneType type)
+        public LoadProcedureHandler GetProcedure(ProcedureType type)
         {
-            if (type == SceneType.None)
+            if (type == ProcedureType.None)
             {
                 return null;
             }
 
-            LoadSceneHandler handler = _loadSceneHandlerDict[type];
+            LoadProcedureHandler handler = _loadSceneHandlerDict[type];
             return handler;
         }
         
-        public void ChangeScene(SceneType type)
+        public void ChangeProcedure(ProcedureType type)
         {
-            if (type == SceneType.None)
+            if (type == ProcedureType.None)
             {
                 return;
             }
 
-            LoadSceneHandler handler = _loadSceneHandlerDict[type];
+            LoadProcedureHandler handler = _loadSceneHandlerDict[type];
             if (handler == null)
             {
                 return;
@@ -119,18 +117,18 @@ namespace LccHotfix
             ChangeScene(handler);
         }
         
-        private void ChangeScene(LoadSceneHandler handler)
+        private void ChangeScene(LoadProcedureHandler handler)
         {
             if (handler == null)
                 return;
 
-            if (_curSceneHandler != null && _curSceneHandler.sceneType == handler.sceneType)
+            if (_curSceneHandler != null && _curSceneHandler.procedureType == handler.procedureType)
                 return;
 
-            if (!handler.SceneEnterStateHandler())
+            if (!handler.ProcedureEnterStateHandler())
                 return;
 
-            LoadSceneHandler last = null;
+            LoadProcedureHandler last = null;
             if (_curSceneHandler != null)
             {
                 last = _curSceneHandler;
@@ -138,7 +136,7 @@ namespace LccHotfix
 
             _curSceneHandler = handler;
 
-            Log.Info($"ChangeScene： scene type === {_curSceneHandler.sceneType.ToString()} loading type ==== {_curSceneHandler.loadType.ToString()}");
+            Log.Info($"ChangeScene： scene type === {_curSceneHandler.procedureType.ToString()} loading type ==== {_curSceneHandler.loadType.ToString()}");
 
             _sceneHelper.ResetSpeed();
 
@@ -146,13 +144,13 @@ namespace LccHotfix
             handler.IsLoading = true;
             handler.IsCleanup = false;
             handler.startLoadTime = Time.realtimeSinceStartup;
-            handler.SceneLoadHandler();
+            handler.ProcedureLoadHandler();
             
-            Log.Info($"BeginLoad： scene type === {_curSceneHandler.sceneType.ToString()} loading type ==== {_curSceneHandler.loadType.ToString()}");
+            Log.Info($"BeginLoad： scene type === {_curSceneHandler.procedureType.ToString()} loading type ==== {_curSceneHandler.loadType.ToString()}");
             this.StartCoroutine(UnloadSceneCoroutine(last));
         }
 
-        private IEnumerator UnloadSceneCoroutine(LoadSceneHandler last)
+        private IEnumerator UnloadSceneCoroutine(LoadProcedureHandler last)
         {
             if (_curSceneHandler == null)
                 yield break;
@@ -160,12 +158,12 @@ namespace LccHotfix
             //移除旧的
             if (last != null)
             {
-                last.SceneExitHandler();
+                last.ProcedureExitHandler();
                 last.IsCleanup = true;
                 yield return null;
             }
 
-            _sceneHelper.UnloadAllWindow(last, _curSceneHandler);
+            _sceneHelper.UnloadAllPanel(last, _curSceneHandler);
             
             yield return null;
 
@@ -173,27 +171,27 @@ namespace LccHotfix
 
             yield return null;
 
-            Log.Info($"UnloadSceneCoroutine： scene type === {_curSceneHandler.sceneType.ToString()} loading type ==== {((LoadingType)_curSceneHandler.loadType).ToString()}");
-            _curSceneHandler.SceneStartHandler();
+            Log.Info($"UnloadSceneCoroutine： scene type === {_curSceneHandler.procedureType.ToString()} loading type ==== {((LoadingType)_curSceneHandler.loadType).ToString()}");
+            _curSceneHandler.ProcedureStartHandler();
         }
 
-        public void CleanScene()
+        public void CleanProcedure()
         {
             if (_curSceneHandler != null)
             {
-                _curSceneHandler.SceneExitHandler();
+                _curSceneHandler.ProcedureExitHandler();
                 _curSceneHandler = null;
             }
         }
 
-        #region 切场景界面
+        #region 切流程界面
 
-        public void OpenChangeScenePanel()
+        public void OpenChangeProcedurePanel()
         {
-            _sceneHelper.OpenChangeScenePanel(_curSceneHandler);
+            _sceneHelper.OpenChangeProcedurePanel(_curSceneHandler);
         }
 
-        public void CleanChangeSceneParam()
+        public void CleanChangeProcedureParam()
         {
             if (_curSceneHandler != null)
                 _curSceneHandler.turnNode = null;

@@ -1,26 +1,24 @@
-using System.Collections;
-
 namespace LccHotfix
 {
-    public interface ISceneService : IService
+    public interface IProcedureService : IService
     {
-        SceneType CurState { get; }
+        ProcedureType CurState { get; }
 
         bool IsLoading { get; }
 
-        void SetSceneHelper(ISceneHelper sceneHelper);
+        void SetProcedureHelper(IProcedureHelper procedureHelper);
         
-        LoadSceneHandler GetScene(SceneType type);
+        LoadProcedureHandler GetProcedure(ProcedureType type);
 
-        void ChangeScene(SceneType type);
+        void ChangeProcedure(ProcedureType type);
         
-        void CleanScene();
+        void CleanProcedure();
 
-        #region 切场景界面
+        #region 切流程界面
 
-        void OpenChangeScenePanel();
+        void OpenChangeProcedurePanel();
 
-        void CleanChangeSceneParam();
+        void CleanChangeProcedureParam();
 
         #endregion
     }

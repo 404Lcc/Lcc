@@ -8,9 +8,9 @@ namespace LccHotfix
         AfterLogin, //考虑登录之后重新回login的情况，首次进入登录进度条和重新进入登录进度条不一样
     }
 
-    public abstract class LoadSceneHandler : ICoroutine
+    public abstract class LoadProcedureHandler : ICoroutine
     {
-        public SceneType sceneType;
+        public ProcedureType procedureType;
 
         /// <summary>
         /// 加载方式
@@ -30,15 +30,14 @@ namespace LccHotfix
         /// <summary>
         /// 加载显示回调
         /// </summary>
-        public virtual void SceneLoadHandler()
+        public virtual void ProcedureLoadHandler()
         {
-            // this.StartCoroutine(Main.SceneService.ShowSceneLoading(loadType));
         }
 
         /// <summary>
-        /// 验证场景是否可进入
+        /// 验证流程是否可进入
         /// </summary>
-        public virtual bool SceneEnterStateHandler()
+        public virtual bool ProcedureEnterStateHandler()
         {
             return true;
         }
@@ -46,14 +45,14 @@ namespace LccHotfix
         /// <summary>
         /// 进入回调
         /// </summary>
-        public virtual void SceneStartHandler()
+        public virtual void ProcedureStartHandler()
         {
         }
 
         /// <summary>
         /// 加载完成回调
         /// </summary>
-        public virtual void SceneLoadEndHandler()
+        public virtual void ProcedureLoadEndHandler()
         {
             IsLoading = false;
         }
@@ -61,7 +60,7 @@ namespace LccHotfix
         /// <summary>
         /// 退出回调
         /// </summary>
-        public virtual void SceneExitHandler()
+        public virtual void ProcedureExitHandler()
         {
         }
 
@@ -76,7 +75,7 @@ namespace LccHotfix
         public bool deepClean;
 
         /// <summary>
-        /// 开启场景后跳转到界面
+        /// 开启流程后跳转到界面
         /// </summary>
         public WNode.TurnNode turnNode;
 
