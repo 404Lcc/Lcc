@@ -2,18 +2,6 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public class UIRootDefine
-    {
-        // public const string UIRootLogin = "UIRootLogin";
-        // public const string UIRootMain = "UIRootMain";
-    }
-
-    public class UIWindowDefine
-    {
-        public const string UILoginPanel = "UILoginPanel";
-        public const string UIMainPanel = "UIMainPanel";
-    }
-
     public class UIWindowModeDefine
     {
         private Dictionary<string, WindowMode> _dict = new Dictionary<string, WindowMode>();
