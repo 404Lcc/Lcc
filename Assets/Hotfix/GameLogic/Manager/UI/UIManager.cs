@@ -72,7 +72,7 @@ namespace LccHotfix
             Main.WindowService.GetMaskBoxStateFunc = GetMaskState;
             Main.WindowService.ShowNoticeFunc = ShowNotice;
             Main.WindowService.ShowSelectFunc = ShowSelect;
-
+            Main.WindowService.LoadGameObject = (asset, keepHierar) => Main.AssetService.LoadGameObject(asset, keepHierar);
             Main.WindowService.InitializeForAssembly(Launcher.Instance.hotfixAssembly);
         }
 
