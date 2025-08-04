@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LccModel;
 using UnityEngine;
 
 namespace LccHotfix

@@ -4615,6 +4615,11 @@
   </assembly>
   <assembly fullname="Unity.Model">
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1" preserve="all" />
+    <type fullname="LccModel.AssetManager" preserve="all" />
+    <type fullname="LccModel.ResALLObject" preserve="all" />
+    <type fullname="LccModel.ResGameObject" preserve="all" />
+    <type fullname="LccModel.ResObject" preserve="all" />
+    <type fullname="LccModel.ResShader" preserve="all" />
     <type fullname="LccModel.LccView" preserve="all" />
     <type fullname="LccModel.GroupBase" preserve="all" />
     <type fullname="LccModel.PivotHorizontal" preserve="all" />
@@ -4698,6 +4703,8 @@
     <type fullname="LccModel.OpenFileName" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1+MonoScriptData" preserve="all" />
+    <type fullname="LccModel.ResObject+LoadState" preserve="all" />
+    <type fullname="LccModel.ResShader+&lt;WarmUp&gt;d__4" preserve="all" />
     <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass2_0" preserve="all" />
     <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass3_0" preserve="all" />
     <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass4_0" preserve="all" />
@@ -4728,7 +4735,7 @@
     <type fullname="LccModel.FsmUpdateVersion+&lt;GetStaticVersion&gt;d__5" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2481" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3933" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2606" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4158" preserve="all" />
   </assembly>
 </linker>

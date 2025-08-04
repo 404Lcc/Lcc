@@ -3,7 +3,7 @@ using UnityEngine;
 using YooAsset;
 using Object = UnityEngine.Object;
 
-namespace LccHotfix
+namespace LccModel
 {
     public class ResObject : MonoBehaviour
     {
@@ -63,14 +63,14 @@ namespace LccHotfix
         #region 加载资源
         protected virtual void Load()
         {
-            bool valid = Main.AssetService.CheckLocationValid(_assetName);
+            bool valid = AssetManager.Instance.CheckLocationValid(_assetName);
             if (!valid)
             {
                 _state = LoadState.Error;
                 LoadEnd();
                 return;
             }
-            _handleBase = Main.AssetService.LoadAssetSync(_assetName, _type);
+            _handleBase = AssetManager.Instance.LoadAssetSync(_assetName, _type);
             _obj = ((AssetHandle)_handleBase).AssetObject;
             if (_obj != null)
             {
@@ -85,7 +85,7 @@ namespace LccHotfix
 
         protected virtual void StartLoad()
         {
-            bool valid = Main.AssetService.CheckLocationValid(_assetName);
+            bool valid = AssetManager.Instance.CheckLocationValid(_assetName);
             if (!valid)
             {
                 _state = LoadState.Error;
@@ -95,7 +95,7 @@ namespace LccHotfix
             _state = LoadState.Loading;
             _loadStartTime = Time.realtimeSinceStartup;
 
-            _handleBase = Main.AssetService.LoadAssetAsync(_assetName, _type);
+            _handleBase = AssetManager.Instance.LoadAssetAsync(_assetName, _type);
             ((AssetHandle)_handleBase).Completed += OnCompleted;
         }
 

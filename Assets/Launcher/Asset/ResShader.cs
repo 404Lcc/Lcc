@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using YooAsset;
 
-namespace LccHotfix
+namespace LccModel
 {
 	public class ResShader : ResObject
 	{
@@ -17,14 +17,14 @@ namespace LccHotfix
 
 		protected override void Load()
 		{
-			bool valid = Main.AssetService.CheckLocationValid(_assetName);
+			bool valid = AssetManager.Instance.CheckLocationValid(_assetName);
 			if (!valid)
 			{
 				_state = LoadState.Error;
 				LoadEnd();
 				return;
 			}
-			_handleBase = Main.AssetService.LoadAllAssetsSync(_assetName, _type);
+			_handleBase = AssetManager.Instance.LoadAllAssetsSync(_assetName, _type);
 			if (LoadShader(_handleBase))
 			{
 				_state = LoadState.Done;

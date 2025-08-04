@@ -15,7 +15,6 @@ namespace LccHotfix
         public static IEventService EventService { get; set; }
         public static ICameraService CameraService { get; set; }
         public static ITimerService TimerService { get; set; }
-        public static IAssetService AssetService { get; set; }
         public static IProcedureService ProcedureService { get; set; }
         public static IWindowService WindowService { get; set; }
         public static IThreadSyncService ThreadSyncService { get; set; }

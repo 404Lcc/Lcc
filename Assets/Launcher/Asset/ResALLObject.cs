@@ -2,7 +2,7 @@
 using UnityEngine;
 using YooAsset;
 
-namespace LccHotfix
+namespace LccModel
 {
     public class ResALLObject : ResObject
     {
@@ -16,7 +16,7 @@ namespace LccHotfix
 
         protected override void StartLoad()
         {
-            bool valid = Main.AssetService.CheckLocationValid(_assetName);
+            bool valid = AssetManager.Instance.CheckLocationValid(_assetName);
             if (!valid)
             {
                 _state = LoadState.Error;
@@ -27,7 +27,7 @@ namespace LccHotfix
             _state = LoadState.Loading;
             _loadStartTime = Time.realtimeSinceStartup;
 
-            _handleBase = Main.AssetService.LoadAllAssetsAsync(_assetName, _type);
+            _handleBase = AssetManager.Instance.LoadAllAssetsAsync(_assetName, _type);
             ((AllAssetsHandle)_handleBase).Completed += OnCompleted;
         }
 

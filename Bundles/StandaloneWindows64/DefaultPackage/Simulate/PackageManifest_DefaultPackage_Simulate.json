@@ -10,7 +10,7 @@
     "AssetList": [
         {
             "Address": "aot",
-            "AssetPath": "Assets/Res/AotDlls/aot.txt",
+            "AssetPath": "Assets/Res/AotDlls/aot.bytes",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 0
@@ -30,8 +30,22 @@
             "BundleID": 1
         },
         {
+            "Address": "tbequipment",
+            "AssetPath": "Assets/Res/Config/tbequipment.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
             "Address": "tbicon",
             "AssetPath": "Assets/Res/Config/tbicon.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "tbitem",
+            "AssetPath": "Assets/Res/Config/tbitem.json",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 1
@@ -51,8 +65,22 @@
             "BundleID": 1
         },
         {
-            "Address": "tbpopupwindow",
-            "AssetPath": "Assets/Res/Config/tbpopupwindow.json",
+            "Address": "tbpanel",
+            "AssetPath": "Assets/Res/Config/tbpanel.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "tbpopuppanel",
+            "AssetPath": "Assets/Res/Config/tbpopuppanel.json",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1
+        },
+        {
+            "Address": "tbrewardtemplate",
+            "AssetPath": "Assets/Res/Config/tbrewardtemplate.json",
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 1
@@ -93,32 +121,46 @@
             "BundleID": 2
         },
         {
+            "Address": "RewardNormal",
+            "AssetPath": "Assets/Res/Prefab/Icon/RewardNormal.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 3
+        },
+        {
+            "Address": "Map",
+            "AssetPath": "Assets/Res/Prefab/Map/Map.prefab",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 4
+        },
+        {
             "Address": "UILoginPanel",
             "AssetPath": "Assets/Res/Prefab/Panel/UILoginPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 3
+            "BundleID": 5
         },
         {
             "Address": "UIMainPanel",
             "AssetPath": "Assets/Res/Prefab/Panel/UIMainPanel.prefab",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 3
+            "BundleID": 5
         },
         {
             "Address": "logoSprite",
             "AssetPath": "Assets/Res/Sprite/logoSprite.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 4
+            "BundleID": 6
         },
         {
             "Address": "logoTexture",
             "AssetPath": "Assets/Res/Texture/logoTexture.png",
             "AssetGUID": "",
             "AssetTags": [],
-            "BundleID": 5
+            "BundleID": 7
         }
     ],
     "BundleList": [
@@ -137,7 +179,7 @@
             "UnityCRC": 0,
             "FileHash": "8e0b78f87b215ffbe6445533f7090724",
             "FileCRC": "00000000",
-            "FileSize": 1988,
+            "FileSize": 3555,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []
@@ -147,7 +189,27 @@
             "UnityCRC": 0,
             "FileHash": "083e6a08c2f0ee41263a000e26338562",
             "FileCRC": "00000000",
-            "FileSize": 562344,
+            "FileSize": 726148,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "assets_res_prefab_icon.bundle",
+            "UnityCRC": 0,
+            "FileHash": "d35361ba7f6a3bab5365a0fcca801395",
+            "FileCRC": "00000000",
+            "FileSize": 24306,
+            "Encrypted": false,
+            "Tags": [],
+            "DependIDs": []
+        },
+        {
+            "BundleName": "assets_res_prefab_map.bundle",
+            "UnityCRC": 0,
+            "FileHash": "eed3fe17355446acafedbdc0a689c1f7",
+            "FileCRC": "00000000",
+            "FileSize": 5624,
             "Encrypted": false,
             "Tags": [],
             "DependIDs": []

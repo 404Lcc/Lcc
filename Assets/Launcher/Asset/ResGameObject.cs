@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace LccHotfix
+namespace LccModel
 {
 	public class ResGameObject : ResObject
 	{

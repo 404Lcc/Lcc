@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using LccModel;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -36,7 +37,7 @@ namespace LccHotfix
         }
         public VideoClip LoadVideo(string video)
         {
-            var clip = Main.AssetService.LoadRes<VideoClip>(loader, video);
+            var clip = ResObject.LoadRes<VideoClip>(loader, video).GetAsset<VideoClip>();
             videoDict.Add(video, clip);
             return clip;
         }

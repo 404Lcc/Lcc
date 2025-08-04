@@ -18,7 +18,7 @@ namespace LccHotfix
             CodeTypesService = Current.AddModule<CodeTypesManager>();
             CodeTypesService.LoadTypes(new Assembly[] { Launcher.Instance.hotfixAssembly });
             GameObjectPoolService = Current.AddModule<GameObjectPoolManager>();
-            GameObjectPoolService.SetLoader((location, root) => AssetService.LoadRes<GameObject>(root, location));
+            GameObjectPoolService.SetLoader((location, root) => ResObject.LoadRes<GameObject>(root, location).GetAsset<GameObject>());
             EasingService = Current.AddModule<EasingManager>();
             CoroutineService = Current.AddModule<CoroutineManager>();
             CoroutineService.SetCoroutineHelper(new DefaultCoroutineHelper());
@@ -30,7 +30,6 @@ namespace LccHotfix
             EventService = Current.AddModule<EventManager>();
             CameraService = Current.AddModule<CameraManager>();
             TimerService = Current.AddModule<TimerManager>();
-            AssetService = Current.AddModule<AssetManager>();
             ProcedureService = Current.AddModule<ProcedureManager>();
             ProcedureService.SetProcedureHelper(new DefaultProcedureHelper());
             WindowService = Current.AddModule<WindowManager>();
