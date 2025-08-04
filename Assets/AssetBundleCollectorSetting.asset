@@ -22,7 +22,7 @@ MonoBehaviour:
     LocationToLower: 0
     IncludeAssetGUID: 0
     AutoCollectShaders: 1
-    IgnoreRuleName: NormalIgnoreRule
+    IgnoreRuleName: RawFileIgnoreRule
     Groups:
     - GroupName: Default Group
       GroupDesc: 
