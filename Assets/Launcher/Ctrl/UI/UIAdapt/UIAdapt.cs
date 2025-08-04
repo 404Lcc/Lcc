@@ -1,32 +1,32 @@
 using UnityEngine;
+#if URP
+using UnityEngine.Rendering.Universal;
+#endif
 
 namespace LccModel
 {
     public class UIAdapt : MonoBehaviour
     {
         //最小适配比
+#if Horizontal
         public const float MinAdaptScal = 16 / 9f;
         public const float MaxAdaptScal = 2400 / 1080f;
+#elif Vertical
+        public const float MinAdaptScal = 9 / 16f;
+        public const float MaxAdaptScal = 1080 / 2400f;
+#endif
 
         public float leftOffset;
         public float rightOffset;
-
-
-
+        
         private int _scalerChangeFrameCount = -1;
-
         private RectTransform _uiAdaptCanvasRoot;
-
         private RectTransform _uiUpCanvasRoot;
         private RectTransform _uiDownCanvasRoot;
         private RectTransform _uiLeftCanvasRoot;
         private RectTransform _uiRightCanvasRoot;
-
-        
         private Camera _mainCamera;
-
-
-
+        
         public float ScreenRatio
         {
             get
@@ -36,14 +36,17 @@ namespace LccModel
         }
         private void Start()
         {
-
             _uiAdaptCanvasRoot = (RectTransform)GameObject.Find("Global/UI Root/AdaptCanvas").transform;
             _uiUpCanvasRoot = (RectTransform)GameObject.Find("Global/UI Root/AdaptCanvas/UpCanvas").transform;
             _uiDownCanvasRoot = (RectTransform)GameObject.Find("Global/UI Root/AdaptCanvas/DownCanvas").transform;
             _uiLeftCanvasRoot = (RectTransform)GameObject.Find("Global/UI Root/AdaptCanvas/LeftCanvas").transform;
             _uiRightCanvasRoot = (RectTransform)GameObject.Find("Global/UI Root/AdaptCanvas/RightCanvas").transform;
             //urp下设置主相机 buildin下设置ui相机
+#if URP
+            _mainCamera = GameObject.Find("Global/MainCamera").GetComponent<Camera>();
+#else
             _mainCamera = GameObject.Find("Global/UI Root/UICamera").GetComponent<Camera>();
+#endif
             AdaptUIRoot(true, true, leftOffset, rightOffset);
         }
         public void Update()
@@ -104,7 +107,7 @@ namespace LccModel
                 }
             }
 
-            Rect realRect = new Rect(tempLeft / _uiAdaptCanvasRoot.rect.size.x, tempDown / _uiAdaptCanvasRoot.rect.size.y,
+            Rect realRect = new Rect(tempLeft / _uiAdaptCanvasRoot.rect.size.x, tempDown / _uiAdaptCanvasRoot.rect.size.y, 
                 1 - (tempLeft + tempRight) / _uiAdaptCanvasRoot.rect.size.x, 1 - (tempUP + tempDown) / _uiAdaptCanvasRoot.rect.size.y);
 
 
@@ -113,11 +116,13 @@ namespace LccModel
                 _scalerChangeFrameCount = Time.frameCount;
                 _mainCamera.rect = realRect;
                 //urp下需要处理subCamera的rect
-                //var cameraData = _mainCamera.GetComponent<UniversalAdditionalCameraData>();
-                //if (cameraData.renderType == CameraRenderType.Base && cameraData.cameraStack.Count > 0)
-                //{
-                //    cameraData.cameraStack.ForEach(subCamera => subCamera.rect = _mainCamera.rect);
-                //}
+#if URP
+                var cameraData = _mainCamera.GetComponent<UniversalAdditionalCameraData>();
+                if (cameraData.renderType == CameraRenderType.Base && cameraData.cameraStack.Count > 0)
+                {
+                    cameraData.cameraStack.ForEach(subCamera => subCamera.rect = _mainCamera.rect);
+                }
+#endif
                 return;
             }
             _scalerChangeFrameCount = -1;
