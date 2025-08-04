@@ -37,23 +37,19 @@ namespace LccHotfix
 
     public class AudioAsset
     {
-        public ResObject ResObject { get; set; }
+        public GameObject ResRef { get; set; }
+        public AudioClip Clip { get; set; }
         public int RefCount { get; set; }
         public DateTime LastUsedTime { get; set; }
-
-        public AudioClip GetClip()
-        {
-            if (ResObject == null)
-                return null;
-            return ResObject.GetAsset<AudioClip>();
-        }
-
+        
         public void Release()
         {
-            if (ResObject != null)
+            if (ResRef != null)
             {
-                ResObject.Release();
-                ResObject = null;
+                RefCount = 0;
+                Clip = null;
+                GameObject.Destroy(ResRef);
+                ResRef = null;
             }
         }
     }
@@ -120,7 +116,7 @@ namespace LccHotfix
         private const int CacheCleanThreshold = 15;
 
         private Dictionary<string, AudioAsset> _audioAssets = new Dictionary<string, AudioAsset>();
-        private GameObject loader;
+        private GameObject _rootLoader;
 
         private AudioSourcePool _audioPool;
 
@@ -181,15 +177,15 @@ namespace LccHotfix
             _audioAssets.Clear();
             _audioPool.Dispose();
 
-            GameObject.Destroy(loader);
+            GameObject.Destroy(_rootLoader);
         }
 
 
         public AudioManager()
         {
             _audioPool = new AudioSourcePool(10);
-            loader = new GameObject("loader");
-            GameObject.DontDestroyOnLoad(loader);
+            _rootLoader = new GameObject("AudioLoader");
+            GameObject.DontDestroyOnLoad(_rootLoader);
 
             save = Main.SaveService.GetSaveData<AudioData, AudioSaveData>();
         }
@@ -205,9 +201,11 @@ namespace LccHotfix
             {
                 asset.RefCount++;
                 asset.LastUsedTime = DateTime.Now;
-                return asset.GetClip();
+                return asset.Clip;
             }
-
+            
+            var loader = new GameObject("loader");
+            loader.transform.SetParent(_rootLoader.transform);
             var resObject = ResObject.LoadRes<AudioClip>(loader, audio);
             if (resObject == null)
             {
@@ -216,11 +214,12 @@ namespace LccHotfix
             }
 
             var newAsset = new AudioAsset();
-            newAsset.ResObject = resObject;
+            newAsset.ResRef = resObject.gameObject;
+            newAsset.Clip = resObject.GetAsset<AudioClip>();
             newAsset.RefCount = 1;
             newAsset.LastUsedTime = DateTime.Now;
             _audioAssets.Add(audio, newAsset);
-            return newAsset.GetClip();
+            return newAsset.Clip;
         }
 
 
