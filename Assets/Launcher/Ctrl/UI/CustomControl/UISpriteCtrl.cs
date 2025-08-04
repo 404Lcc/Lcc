@@ -44,7 +44,7 @@ namespace LccModel
             {
                 if (_material == null)
                 {
-                    _material = YooAssets.GetPackage("DefaultPackage").LoadAssetSync("Actor_RGBA_Flow", typeof(Material)).AssetObject as Material;
+                    _material = ResObject.LoadRes<Material>(gameObject, "Actor_RGBA_Flow").GetAsset<Material>();
                 }
                 return _material;
             }
@@ -153,11 +153,7 @@ namespace LccModel
                     return;
                 }
 #endif
-                var handle = YooAssets.GetPackage("DefaultPackage").LoadAssetAsync<Sprite>(spriteName);
-                handle.Completed += (assetHandle) =>
-                {
-                    LoadSpriteDone(spriteName, assetHandle.AssetObject);
-                };
+                ResObject.StartLoadRes<Sprite>(gameObject, spriteName, LoadSpriteDone);
             }
         }
 
