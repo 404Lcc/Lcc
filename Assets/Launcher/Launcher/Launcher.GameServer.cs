@@ -37,6 +37,10 @@ namespace LccModel
         public bool requestCenterServerSucc;
         public IEnumerator RequestCenterServer(bool restart = false)
         {
+#if Offline
+            requestCenterServerSucc = true;
+            yield break;
+#endif
             requestCenterServerSucc = false;
 
             string url = $"{GameConfig.centerServerAddress}/{(Launcher.GameConfig.isRelease ? "Release" : "Dev")}/{ResPath.PlatformDirectory}/channelList.txt";

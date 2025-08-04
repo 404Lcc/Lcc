@@ -38,7 +38,11 @@ namespace LccModel
             _machine.SetBlackboardValue("BuildPipeline", EDefaultBuildPipeline.BuiltinBuildPipeline.ToString());
             _machine.SetBlackboardValue("TotalDownloadCount", 0);
 
+#if Offline
+            _machine.Run<FsmInitialize>();
+#else
             _machine.Run<FsmGetNotice>();
+#endif
         }
 
         public void RemoveAllListener()
