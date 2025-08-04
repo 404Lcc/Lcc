@@ -4615,14 +4615,33 @@
   </assembly>
   <assembly fullname="Unity.Model">
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1" preserve="all" />
-    <type fullname="LccModel.Event" preserve="all" />
-    <type fullname="LccModel.EventDriver" preserve="all" />
-    <type fullname="LccModel.EventGroup" preserve="all" />
-    <type fullname="LccModel.IEventMessage" preserve="all" />
+    <type fullname="LccModel.LccView" preserve="all" />
+    <type fullname="LccModel.GroupBase" preserve="all" />
+    <type fullname="LccModel.PivotHorizontal" preserve="all" />
+    <type fullname="LccModel.PivotVerticle" preserve="all" />
+    <type fullname="LccModel.ScrollerPro" preserve="all" />
+    <type fullname="LccModel.ScrollerProEx" preserve="all" />
+    <type fullname="LccModel.DoubleClickEvent" preserve="all" />
+    <type fullname="LccModel.DoubleClickButton" preserve="all" />
+    <type fullname="LccModel.EnterClickEvent" preserve="all" />
+    <type fullname="LccModel.ExitClickEvent" preserve="all" />
+    <type fullname="LccModel.EnterClickButton" preserve="all" />
+    <type fullname="LccModel.EventTriggerListener" preserve="all" />
+    <type fullname="LccModel.LongClickEvent" preserve="all" />
+    <type fullname="LccModel.LongClickButton" preserve="all" />
+    <type fullname="LccModel.RightClickEvent" preserve="all" />
+    <type fullname="LccModel.RightClickButton" preserve="all" />
+    <type fullname="LccModel.EmImageType" preserve="all" />
+    <type fullname="LccModel.UIImageCtrl" preserve="all" />
+    <type fullname="LccModel.UISpriteCtrl" preserve="all" />
+    <type fullname="LccModel.BlackFadeMask" preserve="all" />
+    <type fullname="LccModel.UIForeGroundPanel" preserve="all" />
+    <type fullname="LccModel.MessageBox" preserve="all" />
+    <type fullname="LccModel.UILoadingPanel" preserve="all" />
+    <type fullname="LccModel.UIScreenBackgroundMessage" preserve="all" />
+    <type fullname="LccModel.UIAdapt" preserve="all" />
     <type fullname="LccModel.GameConfig" preserve="all" />
     <type fullname="LccModel.LanguageConfig" preserve="all" />
-    <type fullname="LccModel.ClassInfo" preserve="all" />
-    <type fullname="LccModel.HotfixFunc" preserve="all" />
     <type fullname="LccModel.Init" preserve="all" />
     <type fullname="LccModel.Launcher" preserve="all" />
     <type fullname="LccModel.GameState" preserve="all" />
@@ -4651,54 +4670,40 @@
     <type fullname="LccModel.UserTryDownloadWebFiles" preserve="all" />
     <type fullname="LccModel.AStaticMethod" preserve="all" />
     <type fullname="LccModel.MonoStaticMethod" preserve="all" />
-    <type fullname="LccModel.LccView" preserve="all" />
-    <type fullname="LccModel.IStateNode" preserve="all" />
-    <type fullname="LccModel.StateMachine" preserve="all" />
-    <type fullname="LccModel.AABB" preserve="all" />
-    <type fullname="LccModel.OBB" preserve="all" />
-    <type fullname="LccModel.GroupBase" preserve="all" />
-    <type fullname="LccModel.PivotHorizontal" preserve="all" />
-    <type fullname="LccModel.PivotVerticle" preserve="all" />
-    <type fullname="LccModel.ScrollerPro" preserve="all" />
-    <type fullname="LccModel.ScrollerProEx" preserve="all" />
-    <type fullname="LccModel.Singleton`1" preserve="all" />
-    <type fullname="LccModel.SingletonMono`1" preserve="all" />
-    <type fullname="LccModel.DisplayMode" preserve="all" />
-    <type fullname="LccModel.LocalDialog" preserve="all" />
-    <type fullname="LccModel.OpenFileName" preserve="all" />
-    <type fullname="LccModel.DoubleClickEvent" preserve="all" />
-    <type fullname="LccModel.DoubleClickButton" preserve="all" />
-    <type fullname="LccModel.EnterClickEvent" preserve="all" />
-    <type fullname="LccModel.ExitClickEvent" preserve="all" />
-    <type fullname="LccModel.EnterClickButton" preserve="all" />
-    <type fullname="LccModel.EventTriggerListener" preserve="all" />
-    <type fullname="LccModel.LongClickEvent" preserve="all" />
-    <type fullname="LccModel.LongClickButton" preserve="all" />
-    <type fullname="LccModel.RightClickEvent" preserve="all" />
-    <type fullname="LccModel.RightClickButton" preserve="all" />
-    <type fullname="LccModel.EmImageType" preserve="all" />
-    <type fullname="LccModel.UIImageCtrl" preserve="all" />
-    <type fullname="LccModel.UISpriteCtrl" preserve="all" />
-    <type fullname="LccModel.BlackFadeMask" preserve="all" />
-    <type fullname="LccModel.UIForeGroundPanel" preserve="all" />
-    <type fullname="LccModel.MessageBox" preserve="all" />
-    <type fullname="LccModel.UILoadingPanel" preserve="all" />
-    <type fullname="LccModel.UIScreenBackgroundMessage" preserve="all" />
-    <type fullname="LccModel.UIAdapt" preserve="all" />
     <type fullname="LccModel.DirectoryUtility" preserve="all" />
+    <type fullname="LccModel.Event" preserve="all" />
+    <type fullname="LccModel.EventDriver" preserve="all" />
+    <type fullname="LccModel.EventGroup" preserve="all" />
+    <type fullname="LccModel.IEventMessage" preserve="all" />
     <type fullname="LccModel.ByteExtension" preserve="all" />
     <type fullname="LccModel.StringExtension" preserve="all" />
     <type fullname="LccModel.TransformExtension" preserve="all" />
     <type fullname="LccModel.FileUtility" preserve="all" />
+    <type fullname="LccModel.ClassInfo" preserve="all" />
+    <type fullname="LccModel.HotfixFunc" preserve="all" />
     <type fullname="LccModel.JsonUtility" preserve="all" />
+    <type fullname="LccModel.IStateNode" preserve="all" />
+    <type fullname="LccModel.StateMachine" preserve="all" />
+    <type fullname="LccModel.AABB" preserve="all" />
+    <type fullname="LccModel.OBB" preserve="all" />
     <type fullname="LccModel.MD5Utility" preserve="all" />
     <type fullname="LccModel.ResPath" preserve="all" />
     <type fullname="LccModel.ProtobufUtility" preserve="all" />
     <type fullname="LccModel.RijndaelUtility" preserve="all" />
     <type fullname="LccModel.SerializeUtility" preserve="all" />
+    <type fullname="LccModel.Singleton`1" preserve="all" />
+    <type fullname="LccModel.SingletonMono`1" preserve="all" />
+    <type fullname="LccModel.DisplayMode" preserve="all" />
+    <type fullname="LccModel.LocalDialog" preserve="all" />
+    <type fullname="LccModel.OpenFileName" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1+MonoScriptData" preserve="all" />
-    <type fullname="LccModel.Event+PostWrapper" preserve="all" />
+    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass2_0" preserve="all" />
+    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass3_0" preserve="all" />
+    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass4_0" preserve="all" />
+    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass5_0" preserve="all" />
+    <type fullname="LccModel.UIForeGroundPanel+&lt;&gt;c__DisplayClass6_0" preserve="all" />
+    <type fullname="LccModel.UILoadingPanel+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;GetNotice&gt;d__104" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;GetNoticeBoard&gt;d__106" preserve="all" />
@@ -4721,14 +4726,9 @@
     <type fullname="LccModel.FsmPatchDone+&lt;LoadInitialize&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmUpdateManifest+&lt;UpdateManifest&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmUpdateVersion+&lt;GetStaticVersion&gt;d__5" preserve="all" />
-    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass2_0" preserve="all" />
-    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass3_0" preserve="all" />
-    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass4_0" preserve="all" />
-    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass5_0" preserve="all" />
+    <type fullname="LccModel.Event+PostWrapper" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
-    <type fullname="LccModel.UIForeGroundPanel+&lt;&gt;c__DisplayClass6_0" preserve="all" />
-    <type fullname="LccModel.UILoadingPanel+&lt;&gt;c" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2481" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3749" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3933" preserve="all" />
   </assembly>
 </linker>

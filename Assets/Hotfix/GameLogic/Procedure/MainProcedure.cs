@@ -37,7 +37,7 @@ namespace LccHotfix
             state.Init(map);
             Main.WorldService.CreateWorld<BattleWorld>(state);
             
-            Main.IUIService.OpenPanel(UIPanelDefine.UIMainPanel);
+            Main.UIService.OpenPanel(UIPanelDefine.UIMainPanel);
 
             yield return new WaitForSeconds(1f);
 
@@ -58,7 +58,7 @@ namespace LccHotfix
             UI.ShowMaskBox((int)MaskType.CHANGE_PROCEDURE, false);
 
             ProcedureLoadEndHandler();
-            Main.IUIService.TryPopupPanel();
+            Main.UIService.TryPopupPanel();
         }
         
         public void SetBattleCamera()

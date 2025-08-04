@@ -17,7 +17,7 @@ namespace LccHotfix
         {
             //关闭所有协程，如果patchOperation的状态机在运行，这里会杀掉
             Main.CoroutineService.StopAllTypeCoroutines();
-            Main.IUIService.ShowMask(0xFF, false);
+            Main.UIService.ShowMask(0xFF, false);
             //todo清理菊花界面
             //清理加载界面
             UILoadingPanel.Instance.Hide();
@@ -48,7 +48,7 @@ namespace LccHotfix
 
             //关闭所有协程
             Main.CoroutineService.StopAllTypeCoroutines();
-            Main.IUIService.ShowMask(0xFF, false);
+            Main.UIService.ShowMask(0xFF, false);
             //todo清理菊花界面
             //清理加载界面
             UILoadingPanel.Instance.Hide();

@@ -35,6 +35,7 @@ namespace LccHotfix
             ProcedureService.SetProcedureHelper(new DefaultProcedureHelper());
             WindowService = Current.AddModule<WindowManager>();
             WindowService.Init();
+            ThreadSyncService = Current.AddModule<ThreadSyncManager>();
 
             IconService = Current.AddModule<IconManager>();
             HotfixBridgeService = Current.AddModule<HotfixBridge>();
@@ -43,9 +44,9 @@ namespace LccHotfix
             LanguageService = Current.AddModule<LanguageManager>();
             WorldService = Current.AddModule<WorldManager>();
             BTScriptService = Current.AddModule<BTScriptManager>();
-            IUIService = Current.AddModule<UIManager>();
-            IUIService.SetUIHelper(new UIHelper());
-            IUIService.Init();
+            UIService = Current.AddModule<UIManager>();
+            UIService.SetUIHelper(new UIHelper());
+            UIService.Init();
         }
     }
 
@@ -57,6 +58,6 @@ namespace LccHotfix
         public static ILanguageService LanguageService { get; set; }
         public static IWorldService WorldService { get; set; }
         public static IBTScriptService BTScriptService { get; set; }
-        public static IUIService IUIService { get; set; }
+        public static IUIService UIService { get; set; }
     }
 }

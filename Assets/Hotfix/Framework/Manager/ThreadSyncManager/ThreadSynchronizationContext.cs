@@ -9,6 +9,7 @@ namespace LccHotfix
         private readonly ConcurrentQueue<Action> queue = new ConcurrentQueue<Action>();
 
         private Action _action;
+
         public void Update()
         {
             while (true)

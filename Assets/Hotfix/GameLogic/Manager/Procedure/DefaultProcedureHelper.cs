@@ -45,7 +45,7 @@ public class DefaultProcedureHelper : IProcedureHelper
         if (string.IsNullOrEmpty(node.nodeName))
             return;
 
-        if (Main.IUIService.OpenSpecialPanel(node))
+        if (Main.UIService.OpenSpecialPanel(node))
             return;
 
         if (node.nodeType == NodeType.ROOT)

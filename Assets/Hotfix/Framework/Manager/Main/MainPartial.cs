@@ -18,6 +18,7 @@ namespace LccHotfix
         public static IAssetService AssetService { get; set; }
         public static IProcedureService ProcedureService { get; set; }
         public static IWindowService WindowService { get; set; }
+        public static IThreadSyncService ThreadSyncService { get; set; }
         
         public static void SetMain(Main main)
         {

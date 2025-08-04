@@ -21,16 +21,18 @@ namespace LccHotfix
         //标准操作
         public bool isStandard;
 
+        public Camera uiCamera;
         public GameObject joystick;
         public RectTransform joystickCenter;
         public RectTransform joystickBG;
 
         public Action<Vector2, float> dragHandler;
-        public void InitJoystick(params object[] datas)
+        public void InitJoystick(float maxDistance, float activeDistance, Camera uiCamera, GameObject joystick)
         {
-            maxDistance = (float)datas[0];
-            activeDistance = (float)datas[1];
-            joystick = (GameObject)datas[2];
+            this.maxDistance = maxDistance;
+            this.activeDistance = activeDistance;
+            this.uiCamera = uiCamera;
+            this.joystick = joystick;
             joystickCenter = (RectTransform)joystick.transform.GetChild(1);
             joystickBG = (RectTransform)joystick.transform.GetChild(0);
 
@@ -93,8 +95,8 @@ namespace LccHotfix
             }
             joystickCenter.gameObject.SetActive(true);
             joystickBG.gameObject.SetActive(true);
-            joystickCenter.localPosition = Input.mousePosition.ScreenToUGUI((RectTransform)joystick.transform);
-            joystickBG.localPosition = Input.mousePosition.ScreenToUGUI((RectTransform)joystick.transform);
+            joystickCenter.localPosition = Input.mousePosition.ScreenToUGUI(uiCamera, (RectTransform)joystick.transform);
+            joystickBG.localPosition = Input.mousePosition.ScreenToUGUI(uiCamera, (RectTransform)joystick.transform);
             origin = joystickCenter.localPosition;
             JoystackDistance();
             dragHandler?.Invoke(normalDistance, angle);
@@ -111,7 +113,7 @@ namespace LccHotfix
         }
         public void OnDrag(GameObject obj)
         {
-            joystickCenter.localPosition = Input.mousePosition.ScreenToUGUI((RectTransform)joystick.transform);
+            joystickCenter.localPosition = Input.mousePosition.ScreenToUGUI(uiCamera, (RectTransform)joystick.transform);
             JoystackDistance();
             dragHandler?.Invoke(normalDistance, angle);
         }

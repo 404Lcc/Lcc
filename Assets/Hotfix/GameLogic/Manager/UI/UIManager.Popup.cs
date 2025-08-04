@@ -50,7 +50,7 @@ namespace LccHotfix
 		{
 			foreach (var w in _preventPopupPanel)
 			{
-				if (Main.IUIService.IsPanelActive(w))
+				if (Main.UIService.IsPanelActive(w))
 				{
 					return true;
 				}
