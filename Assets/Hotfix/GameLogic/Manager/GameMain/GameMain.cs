@@ -37,7 +37,6 @@ namespace LccHotfix
             ProcedureService = Current.AddModule<ProcedureManager>();
             ProcedureService.SetProcedureHelper(new DefaultProcedureHelper());
             WindowService = Current.AddModule<WindowManager>();
-            WindowService.Init();
             ThreadSyncService = Current.AddModule<ThreadSyncManager>();
             AssetService = Current.AddModule<AssetManager>();
             AssetService.SetHelper(new DefaultAssetHelper());
@@ -47,16 +46,17 @@ namespace LccHotfix
             
             IconService = Current.AddModule<IconManager>();
             HotfixBridgeService = Current.AddModule<HotfixBridge>();
-            HotfixBridgeService.Init();
             ConfigService = Current.AddModule<ConfigManager>();
             LanguageService = Current.AddModule<LanguageManager>();
             WorldService = Current.AddModule<WorldManager>();
             BTScriptService = Current.AddModule<BTScriptManager>();
             UIService = Current.AddModule<UIManager>();
             UIService.SetUIHelper(new UIHelper());
-            UIService.Init();
             
             //最后初始化
+            HotfixBridgeService.Init();
+            UIService.Init();
+            WindowService.Init();
             ModelService.Init();
         }
     }
