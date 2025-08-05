@@ -36,6 +36,21 @@ namespace LccHotfix
                 return _uiCamera;
             }
         }
+        
+        private Camera _adaptCamera = null;
+
+        public Camera AdaptCamera
+        {
+            get
+            {
+                if (_adaptCamera == null)
+                {
+                    _adaptCamera = GameObject.Find("Global/AdaptCamera").GetComponent<Camera>();
+                }
+
+                return _adaptCamera;
+            }
+        }
 
         private Camera _currentCamera = null;
 

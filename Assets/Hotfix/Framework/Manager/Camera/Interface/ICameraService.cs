@@ -9,6 +9,7 @@ namespace LccHotfix
     {
         Camera MainCamera { get; }
         Camera UICamera { get; }
+        Camera AdaptCamera { get; }
         Camera CurrentCamera { get; set; }
         void AddOverlayCamera(Camera camera);
         void RemoveOverlayCamera(Camera camera);
