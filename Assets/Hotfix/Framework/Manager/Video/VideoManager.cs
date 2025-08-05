@@ -37,9 +37,9 @@ namespace LccHotfix
         }
         public VideoClip LoadVideo(string video)
         {
-            var clip = ResObject.LoadRes<VideoClip>(loader, video).GetAsset<VideoClip>();
-            videoDict.Add(video, clip);
-            return clip;
+            Main.AssetService.LoadRes<VideoClip>(loader, video, out var res);
+            videoDict.Add(video, res);
+            return res;
         }
         public void RemoveVideo(string video, VideoPlayer player)
         {

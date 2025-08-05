@@ -181,6 +181,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Orca\RVO\Line.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\IVibrationManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Coroutine\CoroutineHandler.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\Asset\AssetManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBTexture.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\HotfixBridge\HotfixBridge.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\FX\FXManager.cs" />
@@ -219,9 +220,9 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBPopupPanel.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\BehavoirTree\KVContext\KVType.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\ThreadSyncManager\ThreadSynchronizationContext.cs" />
+    <Compile Include="Assets\Hotfix\Utility\LoopScroll\LoopScrollItem.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Buff.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaContext.cs" />
-    <Compile Include="Assets\Hotfix\Utility\LoopScroll\LoopScrollItem.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Init\Init.Return.cs" />
     <Compile Include="Assets\Hotfix\Utility\ClientTools\ClientTools.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\System\SysBuffs.cs" />
@@ -234,6 +235,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\MultiLanguageTexture.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Save\Interface\ISaveHelper.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Asset\DefaultAssetHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\PlatformManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\UILogic\IUILogic.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\LogicContext\LogicContext.cs" />
@@ -251,8 +253,8 @@
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\LinkedListRange.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\HotfixBridge\Interface\IHotfixBridgeService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComID.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBMultiLanguageTexture.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBPanel.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\UIPanelDefine.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComControl\ComControl.cs" />
@@ -320,6 +322,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysViewTransform.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Icon\IconManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\RedDot\RedDotManager.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\Asset\IAssetHelper.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\AStarMap\Interface\IAStarMapService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\ItemType.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\UI\UIRoot\UIRootMain.cs" />
@@ -344,6 +347,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\SkillProcess\ComSkillProcess.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\GameObjectPool.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBBuffValue.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\Asset\Interface\IAssetService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\FiberManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\UI.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\BehavoirTree\Utility\Extension\BTAgentExtension.cs" />

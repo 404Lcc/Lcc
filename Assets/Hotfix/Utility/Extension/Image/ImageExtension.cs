@@ -11,8 +11,8 @@ namespace LccHotfix
         {
             if (string.IsNullOrEmpty(location))
                 return;
-            Sprite sprite = ResObject.LoadRes<Sprite>(image.gameObject, location).GetAsset<Sprite>();
-            image.sprite = sprite;
+            Main.AssetService.LoadRes<Sprite>(image.gameObject, location, out var res);
+            image.sprite = res;
         }
     }
 }

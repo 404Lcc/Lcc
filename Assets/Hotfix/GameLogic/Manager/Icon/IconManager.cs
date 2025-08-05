@@ -96,8 +96,8 @@ namespace LccHotfix
             IconBase iconBase = ReferencePool.Acquire(iconTypeDict[iconType]) as IconBase;
             if (iconBase.GameObject == null)
             {
-                var obj = ResGameObject.LoadGameObject(iconType.ToString(), true).ResGO;
-                iconBase.InitIcon(obj, iconType);
+                Main.AssetService.LoadGameObject(iconType.ToString(), true, out var res);
+                iconBase.InitIcon(res, iconType);
             }
 
             return iconBase;

@@ -31,7 +31,7 @@ namespace LccHotfix
         {
             UILoadingPanel.Instance.UpdateLoadingPercent(10, 98, 2f);
 
-            map = ResGameObject.LoadGameObject("Map", true).ResGO;
+            Main.AssetService.LoadGameObject("Map", true, out map);
             SetBattleCamera();
             BattleGameModeState state = new BattleGameModeState();
             state.Init(map);

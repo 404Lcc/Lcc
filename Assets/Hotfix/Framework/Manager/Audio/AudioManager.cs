@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LccModel;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace LccHotfix
 {
@@ -37,19 +38,19 @@ namespace LccHotfix
 
     public class AudioAsset
     {
-        public GameObject ResRef { get; set; }
+        public Object Handle { get; set; }
         public AudioClip Clip { get; set; }
         public int RefCount { get; set; }
         public DateTime LastUsedTime { get; set; }
         
         public void Release()
         {
-            if (ResRef != null)
+            if (Handle != null)
             {
                 RefCount = 0;
                 Clip = null;
-                GameObject.Destroy(ResRef);
-                ResRef = null;
+                GameObject.Destroy(Handle);
+                Handle = null;
             }
         }
     }
@@ -204,18 +205,16 @@ namespace LccHotfix
                 return asset.Clip;
             }
             
-            var loader = new GameObject("loader");
-            loader.transform.SetParent(_rootLoader.transform);
-            var resObject = ResObject.LoadRes<AudioClip>(loader, audio);
-            if (resObject == null)
+            var handle = Main.AssetService.LoadRes<AudioClip>(_rootLoader, audio, out var res);
+            if (handle == null)
             {
                 Debug.LogError($"Failed to load audio: {audio}");
                 return null;
             }
 
             var newAsset = new AudioAsset();
-            newAsset.ResRef = resObject.gameObject;
-            newAsset.Clip = resObject.GetAsset<AudioClip>();
+            newAsset.Handle = handle;
+            newAsset.Clip = res;
             newAsset.RefCount = 1;
             newAsset.LastUsedTime = DateTime.Now;
             _audioAssets.Add(audio, newAsset);

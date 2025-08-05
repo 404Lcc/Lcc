@@ -18,7 +18,11 @@ namespace LccHotfix
             CodeTypesService = Current.AddModule<CodeTypesManager>();
             CodeTypesService.LoadTypes(new Assembly[] { Launcher.Instance.hotfixAssembly });
             GameObjectPoolService = Current.AddModule<GameObjectPoolManager>();
-            GameObjectPoolService.SetLoader((location, root) => ResObject.LoadRes<GameObject>(root, location).GetAsset<GameObject>());
+            GameObjectPoolService.SetLoader((location, root) =>
+            {
+                Main.AssetService.LoadRes<GameObject>(root, location, out var res);
+                return res;
+            });
             EasingService = Current.AddModule<EasingManager>();
             CoroutineService = Current.AddModule<CoroutineManager>();
             CoroutineService.SetCoroutineHelper(new DefaultCoroutineHelper());
@@ -35,7 +39,9 @@ namespace LccHotfix
             WindowService = Current.AddModule<WindowManager>();
             WindowService.Init();
             ThreadSyncService = Current.AddModule<ThreadSyncManager>();
-
+            AssetService = Current.AddModule<AssetManager>();
+            AssetService.SetHelper(new DefaultAssetHelper());
+            
             IconService = Current.AddModule<IconManager>();
             HotfixBridgeService = Current.AddModule<HotfixBridge>();
             HotfixBridgeService.Init();
@@ -46,6 +52,7 @@ namespace LccHotfix
             UIService = Current.AddModule<UIManager>();
             UIService.SetUIHelper(new UIHelper());
             UIService.Init();
+            
         }
     }
 

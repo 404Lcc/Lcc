@@ -9,6 +9,11 @@ namespace LccModel
 	{
 		private static Dictionary<string, Shader> _shaderDict = new Dictionary<string, Shader>();
 
+		public Dictionary<string, Shader> FindShaders()
+		{
+			return _shaderDict;
+		}
+		
 		public static Shader FindShader(string shaderName)
 		{
 			_shaderDict.TryGetValue(shaderName, out Shader shader);

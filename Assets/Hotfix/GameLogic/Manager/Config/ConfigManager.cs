@@ -37,14 +37,14 @@ namespace LccHotfix
 
         private JSONNode LoadJson(string file)
         {
-            var text = ResObject.LoadRes<TextAsset>(loader, file).GetAsset<TextAsset>();
-            return JSON.Parse(text.text);
+            Main.AssetService.LoadRes<TextAsset>(loader, file, out var res);
+            return JSON.Parse(res.text);
         }
 
         private ByteBuf LoadByteBuf(string file)
         {
-            var bytes = ResObject.LoadRes<TextAsset>(loader, file).GetAsset<TextAsset>();
-            return new ByteBuf(bytes.bytes);
+            Main.AssetService.LoadRes<TextAsset>(loader, file, out var res);
+            return new ByteBuf(res.bytes);
         }
 
     }
