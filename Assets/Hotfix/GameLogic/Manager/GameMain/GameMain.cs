@@ -41,6 +41,9 @@ namespace LccHotfix
             ThreadSyncService = Current.AddModule<ThreadSyncManager>();
             AssetService = Current.AddModule<AssetManager>();
             AssetService.SetHelper(new DefaultAssetHelper());
+            NetworkService = Current.AddModule<NetworkManager>();
+            NetworkService.SetPackageHelper(new DefaultPackageHelper());
+            NetworkService.SetMessageHelper(new DefaultMessageHelper());
             
             IconService = Current.AddModule<IconManager>();
             HotfixBridgeService = Current.AddModule<HotfixBridge>();
