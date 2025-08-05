@@ -56,6 +56,8 @@ namespace LccHotfix
             UIService.SetUIHelper(new UIHelper());
             UIService.Init();
             
+            //最后初始化
+            ModelService.Init();
         }
     }
 

@@ -22,11 +22,6 @@ namespace LccHotfix
                     modelDict.Add(model.GetType(), model);
                 }
             }
-            foreach (var item in modelDict.Values)
-            {
-                item.Init();
-            }
-
         }
 
 
@@ -42,7 +37,15 @@ namespace LccHotfix
             }
             modelDict.Clear();
         }
-
+        
+        public void Init()
+        {
+            foreach (var item in modelDict.Values)
+            {
+                item.Init();
+            }
+        }
+        
         public T GetModel<T>() where T : ModelTemplate
         {
             if (modelDict.ContainsKey(typeof(T)))

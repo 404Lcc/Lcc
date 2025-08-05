@@ -1,6 +1,6 @@
 namespace LccHotfix
 {
-    public class ModelTemplate
+    public partial class ModelTemplate
     {
         public virtual void Init()
         {
