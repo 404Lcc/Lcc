@@ -40,7 +40,7 @@
                 return eventNode;
             }
 
-            public void Clear()
+            public void OnRecycle()
             {
                 m_Sender = null;
                 m_EventArgs = null;

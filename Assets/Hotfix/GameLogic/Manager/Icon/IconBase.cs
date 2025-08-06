@@ -108,7 +108,7 @@ namespace LccHotfix
         }
 
 
-        public void Clear()
+        public void OnRecycle()
         {
             //重置点击
             //重置置灰

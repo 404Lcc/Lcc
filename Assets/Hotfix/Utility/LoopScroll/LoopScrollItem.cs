@@ -39,10 +39,6 @@ namespace LccHotfix
         {
         }
 
-        public virtual void Dispose()
-        {
-        }
-
         public virtual void OnShow()
         {
         }
@@ -91,7 +87,7 @@ namespace LccHotfix
             loopScroll.SetSizeY(index, y);
         }
 
-        public virtual void Clear()
+        public virtual void OnRecycle()
         {
             RectTransform rect = gameObject.transform as RectTransform;
             gameObject.SetActive(false);

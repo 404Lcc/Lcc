@@ -121,7 +121,7 @@ namespace LccHotfix
 
             public void Release(IReference reference)
             {
-                reference.Clear();
+                reference.OnRecycle();
                 lock (m_References)
                 {
                     if (m_EnableStrictCheck && m_References.Contains(reference))

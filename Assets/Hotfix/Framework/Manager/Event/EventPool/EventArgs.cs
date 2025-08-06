@@ -17,6 +17,6 @@ namespace LccHotfix
         /// <summary>
         /// 清理引用。
         /// </summary>
-        public abstract void Clear();
+        public abstract void OnRecycle();
     }
 }

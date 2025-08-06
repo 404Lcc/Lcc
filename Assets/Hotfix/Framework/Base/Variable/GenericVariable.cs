@@ -65,7 +65,7 @@ namespace LccHotfix
         /// <summary>
         /// 清理变量值。
         /// </summary>
-        public override void Clear()
+        public override void OnRecycle()
         {
             m_Value = default(T);
         }

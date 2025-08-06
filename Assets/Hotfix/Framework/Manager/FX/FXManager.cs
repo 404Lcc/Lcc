@@ -105,7 +105,7 @@ namespace LccHotfix
             lineRenderer.SetPosition(1, toTrans.position);
         }
 
-        public void Clear()
+        public void OnRecycle()
         {
             active = false;
             id = 0;

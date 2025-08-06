@@ -86,7 +86,6 @@ namespace LccHotfix
             var scale = GetIconScale(size);
             icon.GameObject.transform.localScale = scale;
             icon.GameObject.SetActive(true);
-            icon.Clear();
             return icon;
         }
 

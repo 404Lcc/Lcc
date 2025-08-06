@@ -37,6 +37,6 @@ namespace LccHotfix
         /// <summary>
         /// 清理变量值。
         /// </summary>
-        public abstract void Clear();
+        public abstract void OnRecycle();
     }
 }

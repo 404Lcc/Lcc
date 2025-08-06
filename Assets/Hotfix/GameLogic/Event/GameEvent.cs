@@ -4,7 +4,7 @@ namespace LccHotfix
     {
         public override int Id => (int)GameEventType.Test;
 
-        public override void Clear()
+        public override void OnRecycle()
         {
         }
     }
