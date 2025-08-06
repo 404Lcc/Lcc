@@ -304,13 +304,13 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Camera\Interface\ICameraService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBLanguage.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniCameraBlender\ICameraBlender.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Property\EntityProperty.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Network\DefaultMessageHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\World\Interface\IWorldService.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Property\EntityProperty.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\FunctionOpen\Interface\IFunctionOpenService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Main\Main.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysGameMode.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Network\IMessageHelper.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysGameMode.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Buff\BuffProperty.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaComponent.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Module\Equipment\ModEquipment.cs" />
