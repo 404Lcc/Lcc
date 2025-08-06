@@ -8,6 +8,8 @@ namespace LccHotfix
 {
     public static class GameUtility
     {
+        public const long CSHARP_1970_TIME = 621355968000000000; //C#中1970年的时间，用于处理java时间戳
+        
         public static void FireNow(object sender, GameEventArgs e)
         {
             Main.EventService.FireNow(sender, e);
@@ -32,6 +34,52 @@ namespace LccHotfix
             }
 
             return Main.LanguageService.GetValue(key, args);
+        }
+
+        public static string GetLanguageText(int id, params object[] args)
+        {
+            if (id == 0)
+            {
+                Log.Error("id不能等于0");
+                return "";
+            }
+
+            var key = Main.ConfigService.Tables.TBLanguage.GetOrDefault(id).Key;
+            return GetLanguageText(key, args);
+        }
+
+        public static string GetLanguageText(uint id, params object[] args)
+        {
+            if (id == 0)
+            {
+                Log.Error("id不能等于0");
+                return "";
+            }
+
+            var key = Main.ConfigService.Tables.TBLanguage.GetOrDefault((int)id).Key;
+            return GetLanguageText(key, args);
+        }
+
+        public static string GetLanguageKey(int id)
+        {
+            if (id == 0)
+            {
+                Log.Error("id不能等于0");
+                return "";
+            }
+
+            return Main.ConfigService.Tables.TBLanguage.GetOrDefault(id).Key;
+        }
+
+        public static string GetLanguageKey(uint id)
+        {
+            if (id == 0)
+            {
+                Log.Error("id不能等于0");
+                return "";
+            }
+
+            return Main.ConfigService.Tables.TBLanguage.GetOrDefault((int)id).Key;
         }
 
         /// <summary>
@@ -104,6 +152,35 @@ namespace LccHotfix
             }
 
             return str;
+        }
+        
+        public static int GetWeightIndex(List<int> weight)
+        {
+            int weightAll = 0;
+            int addWeight = 0;
+            int random = 0;
+            foreach (int _weight in weight)
+            {
+                if (_weight < 0)
+                {
+                    Debug.LogError("随机出错");
+                    return 0;
+                }
+
+                weightAll += _weight;
+            }
+
+            random = UnityEngine.Random.Range(1, weightAll + 1);
+            for (int i = 0; i < weight.Count; i++)
+            {
+                addWeight += weight[i];
+                if (random <= addWeight)
+                {
+                    return i;
+                }
+            }
+
+            return 0;
         }
     }
 }
