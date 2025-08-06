@@ -28,7 +28,7 @@ namespace LccHotfix
 				default:
 					break;
 			}
-			enable = GetFuncOpenState((FunctionID)functionID);
+			enable = GetFuncOpenState(funcID);
 			return enable;
 		}
 
