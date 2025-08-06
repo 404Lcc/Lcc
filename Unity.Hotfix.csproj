@@ -131,7 +131,6 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComOwnerEntity.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\SkillSpellType.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\Data\DamageSource.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\FunctionOpen\FunctionOpenManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\DamageBase.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\Interface\IProcedureService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\TcpConnection.cs" />
@@ -309,7 +308,6 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Network\DefaultMessageHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\World\Interface\IWorldService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Property\EntityProperty.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\FunctionOpen\Interface\IFunctionOpenService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Main\Main.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Network\IMessageHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysGameMode.cs" />
@@ -320,6 +318,7 @@
     <Compile Include="Assets\Hotfix\Framework\Base\ReferencePool\ReferencePool.ReferenceCollection.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\Collider\ColliderHandler.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Network\DefaultPackage.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Module\FunctionOpen\ModFunctionOpen.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventPool\EventPoolMode.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\SimpleVibrationHandler.cs" />
     <Compile Include="Assets\Hotfix\Utility\LoopScroll\LoopScrollPool.cs" />

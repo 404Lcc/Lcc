@@ -7,17 +7,17 @@ namespace LccHotfix
 
 	}
 
-	internal partial class FunctionOpenManager : Module, IFunctionOpenService
+	[Model]
+	internal class ModFunctionOpen : ModelTemplate
 	{
         private List<int> _functionOpenStatus = new List<int>();
-		internal override void Update(float elapseSeconds, float realElapseSeconds)
-		{
-		}
 
-		internal override void Shutdown()
-		{
-			_functionOpenStatus.Clear();
-		}
+        public override void OnDestroy()
+        {
+	        base.OnDestroy();
+	        _functionOpenStatus.Clear();
+        }
+        
 		public bool IsFuncOpened(int functionID, bool dataCheck = false)
 		{
 			if (functionID <= 0) return true;
@@ -38,6 +38,7 @@ namespace LccHotfix
 			int funcID = (int)functionID;
 			return _functionOpenStatus.Contains(funcID);
 		}
+		
 		public bool IsFunctionOpenedAndShowTips(int functionID, bool useNotice = false, bool popTips = true)
 		{
 			if (!IsFuncOpened(functionID))

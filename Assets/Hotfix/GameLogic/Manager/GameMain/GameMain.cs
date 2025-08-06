@@ -29,7 +29,6 @@ namespace LccHotfix
             ModelService = Current.AddModule<ModelManager>();
             SaveService = Current.AddModule<SaveManager>();
             SaveService.SetSaveHelper(new DefaultSaveHelper());
-            FunctionOpenService = Current.AddModule<FunctionOpenManager>();
             FXService = Current.AddModule<FXManager>();
             EventService = Current.AddModule<EventManager>();
             CameraService = Current.AddModule<CameraManager>();

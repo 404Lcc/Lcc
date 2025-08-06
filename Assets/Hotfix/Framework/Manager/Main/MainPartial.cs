@@ -10,7 +10,6 @@ namespace LccHotfix
         public static ICoroutineService CoroutineService { get; set; }
         public static IModelService ModelService { get; set; }
         public static ISaveService SaveService { get; set; }
-        public static IFunctionOpenService FunctionOpenService { get; set; }
         public static IFXService FXService { get; set; }
         public static IEventService EventService { get; set; }
         public static ICameraService CameraService { get; set; }
