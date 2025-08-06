@@ -119,6 +119,7 @@
     <Compile Include="Assets\Hotfix\Framework\Base\Service\IService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Orca\RVO\Obstacle.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\VibrationData.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\DictionaryList.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysCollision.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\BlockBuffer.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Procedure\LoginProcedure.cs" />
@@ -274,6 +275,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Model\ModelManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Module\Setting\ModSetting.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBBuff.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\StackList.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Command\Interface\ICommandService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Icon\Interface\IIconService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\WindowManager.Types.cs" />
