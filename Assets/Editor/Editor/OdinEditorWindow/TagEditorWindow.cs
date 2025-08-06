@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace LccEditor
 {
+    [MenuTree("标签工具", 4)]
     public class TagEditorWindow : AEditorWindowBase
     {
         [PropertySpace(10)]

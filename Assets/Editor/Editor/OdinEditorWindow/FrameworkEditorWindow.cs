@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LccEditor
 {
+    [MenuTree("框架介绍", 1)]
     public class FrameworkEditorWindow : AEditorWindowBase
     {
         [PropertySpace(10)]

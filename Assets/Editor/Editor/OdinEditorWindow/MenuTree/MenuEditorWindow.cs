@@ -1,4 +1,8 @@
-﻿using UnityEditor;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using UnityEditor;
 
 namespace LccEditor
 {
@@ -6,14 +10,28 @@ namespace LccEditor
     {
         protected override void OnEnable()
         {
-            AddAEditorWindowBase<FrameworkEditorWindow>("框架介绍");
-            AddAEditorWindowBase<GeneralEditorWindow>("通用功能");
-            AddAEditorWindowBase<HotfixEditorWindow>("热更新模式");
-            AddAEditorWindowBase<TagEditorWindow>("标签工具");
-            AddAEditorWindowBase<LayerEditorWindow>("层工具");
-            AddAEditorWindowBase<UIEditorWindow>("UI工具");
-            AddAEditorWindowBase<GameConfigEditorWindow>("框架配置");
+            List<MenuTreeAttribute> menuTreeAttributeList = new List<MenuTreeAttribute>();
+            Assembly assembly = GetType().Assembly;
+            foreach (Type item in assembly.GetTypes())
+            {
+                if (item.IsAbstract)
+                    continue;
+                
+                MenuTreeAttribute menuTreeAttribute = (MenuTreeAttribute)item.GetCustomAttribute(typeof(MenuTreeAttribute), false);
+                if (menuTreeAttribute != null)
+                {
+                    menuTreeAttribute.type = item;
+                    menuTreeAttributeList.Add(menuTreeAttribute);
+
+                }
+            }
+            menuTreeAttributeList = menuTreeAttributeList.OrderBy(item => item.order).ToList();
+            foreach (var item in menuTreeAttributeList)
+            {
+                AddEditorWindow(item.type, item.name);
+            }
         }
+        
         [MenuItem("Lcc框架/工具箱")]
         public static void ShowFramework()
         {

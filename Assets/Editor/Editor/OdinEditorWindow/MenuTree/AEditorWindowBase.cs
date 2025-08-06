@@ -19,5 +19,8 @@ namespace LccEditor
         public virtual void OnDisable()
         {
         }
+        public virtual void OnGUI()
+        {
+        }
     }
 }

@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace LccEditor
 {
+    [MenuTree("UI工具", 6)]
     public class UIEditorWindow : AEditorWindowBase
     {
         [PropertySpace(10)]

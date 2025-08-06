@@ -4,6 +4,7 @@ using UnityEditor;
 
 namespace LccEditor
 {
+    [MenuTree("热更新模式", 3)]
     public class HotfixEditorWindow : AEditorWindowBase
     {
         [PropertySpace(10)]

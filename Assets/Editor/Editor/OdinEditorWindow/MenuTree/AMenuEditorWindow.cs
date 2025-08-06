@@ -12,6 +12,7 @@ namespace LccEditor
         private OdinMenuTree odinMenuTree;
         public AEditorWindowBase current;
         public List<AEditorWindowBase> aEditorWindowBaseList = new List<AEditorWindowBase>();
+
         public OdinMenuTree OdinMenuTree
         {
             get
@@ -22,18 +23,22 @@ namespace LccEditor
                     odinMenuTree.Config.DrawSearchToolbar = true;
                     odinMenuTree.Selection.SelectionChanged += OnSelectionChanged;
                 }
+
                 return odinMenuTree;
             }
         }
+
         public static void OpenEditorWindow(string title)
         {
             EditorWindow editorWindow = GetWindow<T>(title, true);
-            editorWindow.position = GUIHelper.GetEditorWindowRect().AlignCenter(1000, 500);//new Rect(Screen.currentResolution.width / 2 - 500, Screen.currentResolution.height / 2 - 250, 1000, 500);
+            editorWindow.position = GUIHelper.GetEditorWindowRect().AlignCenter(1000, 500); //new Rect(Screen.currentResolution.width / 2 - 500, Screen.currentResolution.height / 2 - 250, 1000, 500);
         }
+
         protected override OdinMenuTree BuildMenuTree()
         {
             return OdinMenuTree;
         }
+
         public void OnSelectionChanged(SelectionChangedType selectionChangedType)
         {
             switch (selectionChangedType)
@@ -46,6 +51,7 @@ namespace LccEditor
                         current = (AEditorWindowBase)OdinMenuTree.Selection.SelectedValue;
                         current.OnEnable();
                     }
+
                     break;
                 case SelectionChangedType.SelectionCleared:
                     if (current != null)
@@ -53,12 +59,14 @@ namespace LccEditor
                         current.OnDisable();
                         current = null;
                     }
+
                     break;
             }
         }
-        public void AddAEditorWindowBase<EditorWindowBase>(string path, EditorIcon icon = null) where EditorWindowBase : AEditorWindowBase
+
+        public void AddEditorWindow(Type type, string path, EditorIcon icon = null)
         {
-            AEditorWindowBase aEditorWindowBase = (AEditorWindowBase)Activator.CreateInstance(typeof(EditorWindowBase), new object[] { this });
+            AEditorWindowBase aEditorWindowBase = (AEditorWindowBase)Activator.CreateInstance(type, new object[] { this });
             if (icon == null)
             {
                 OdinMenuTree.Add(path, aEditorWindowBase);
@@ -67,9 +75,11 @@ namespace LccEditor
             {
                 OdinMenuTree.Add(path, aEditorWindowBase, icon);
             }
+
             aEditorWindowBaseList.Add(aEditorWindowBase);
         }
-        public void SelectAEditorWindowBase<EditorWindowBase>()
+
+        public void SelectEditorWindow<EditorWindowBase>()
         {
             foreach (AEditorWindowBase item in aEditorWindowBaseList)
             {
@@ -80,6 +90,7 @@ namespace LccEditor
                 }
             }
         }
+
         protected override void OnDestroy()
         {
             base.OnDestroy();
@@ -87,7 +98,16 @@ namespace LccEditor
             {
                 item.OnDisable();
             }
+
             aEditorWindowBaseList.Clear();
+        }
+
+        protected override void OnGUI()
+        {
+            base.OnGUI();
+
+            if (current != null)
+                current.OnGUI();
         }
     }
 }

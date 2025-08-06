@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace LccEditor
 {
+    [MenuTree("框架配置", 7)]
     public class GameConfigEditorWindow : AEditorWindowBase
     {
         [PropertySpace(10)]

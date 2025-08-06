@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace LccEditor
 {
+    [MenuTree("层工具", 5)]
     public class LayerEditorWindow : AEditorWindowBase
     {
         [PropertySpace(10)]
