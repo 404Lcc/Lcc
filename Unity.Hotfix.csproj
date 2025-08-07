@@ -118,8 +118,8 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComView\ActorView.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\Service\IService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Orca\RVO\Obstacle.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\VibrationData.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\DictionaryList.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\VibrationData.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysCollision.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\BlockBuffer.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Procedure\LoginProcedure.cs" />
@@ -315,10 +315,10 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaComponent.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Module\Equipment\ModEquipment.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\SkillAbility.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Module\FunctionOpen\ModFunctionOpen.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\ReferencePool\ReferencePool.ReferenceCollection.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\Collider\ColliderHandler.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Network\DefaultPackage.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\FunctionOpen\ModFunctionOpen.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventPool\EventPoolMode.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\SimpleVibrationHandler.cs" />
     <Compile Include="Assets\Hotfix\Utility\LoopScroll\LoopScrollPool.cs" />

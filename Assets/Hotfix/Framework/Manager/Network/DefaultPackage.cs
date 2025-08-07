@@ -15,11 +15,13 @@ public class DefaultPackage : IPackage
         sendBuffer.WriteAtEnd(message);
     }
 
-    public void Unpack(IBlockBuffer<byte> receiveBuffer, ref byte[] message)
+    public bool Unpack(IBlockBuffer<byte> receiveBuffer, out byte[] message)
     {
-        if (_packageHelper.Parse(receiveBuffer, out var bytes))
+        if (_packageHelper.Parse(receiveBuffer, out message))
         {
-            message = bytes;
+            return true;
         }
+        
+        return false;
     }
 }

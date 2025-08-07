@@ -1,4 +1,4 @@
-﻿/***************************************************************
+/***************************************************************
  * Description: Block buffer for reuse array
  * 
  * Documents: https://github.com/hiram3512/HiSocket
@@ -24,6 +24,6 @@ namespace HiSocket.Tcp
         /// </summary>
         /// <param name="receiveBuffer"></param>
         /// <param name="message"></param>
-        void Unpack(IBlockBuffer<byte> receiveBuffer, ref byte[] message);
+        bool Unpack(IBlockBuffer<byte> receiveBuffer, out byte[] message);
     }
 }
