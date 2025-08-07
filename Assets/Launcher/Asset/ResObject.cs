@@ -121,6 +121,9 @@ namespace LccModel
         #region 卸载
         public void Release()
         {
+            if (_handleBase == null)
+                return;
+            
             if (_handleBase.IsValid)
             {
                 if (_handleBase is AssetHandle assetHandle)

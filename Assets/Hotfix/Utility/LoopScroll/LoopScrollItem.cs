@@ -1,5 +1,6 @@
 using LccModel;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LccHotfix
 {
@@ -27,9 +28,9 @@ namespace LccHotfix
             this.loopScroll = loopScroll;
             this.gameObject = gameObject;
 
-            //ClientTools.AutoReference(gameObject,this);
+            ClientTools.AutoReference(gameObject, this);
 
-            //ClientTools.ForceGetComponent<Button>(this.gameObject).onClick.AddListener(OnItemClick);
+            ClientTools.ForceGetComponent<Button>(this.gameObject).onClick.AddListener(OnItemClick);
 
             OnInit();
 
