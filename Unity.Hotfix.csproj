@@ -101,6 +101,7 @@
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\MultiDictionary.cs" />
     <Compile Include="Assets\Hotfix\Utility\Awaiter\Action\ActionWrap.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\Aes.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\BaseAccount.cs" />
     <Compile Include="Assets\Hotfix\Utility\MVVM\View\ViewModel\ViewModelBase.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\Network\NetworkUtility.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Network\Interface\INetworkService.cs" />
@@ -411,6 +412,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\BaseCallbackMessage.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\MainThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaMatcher.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\Dev\DevAccount.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Icon\UIRewardNormal.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Decorators\PreloadDecorator.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\ItemSmallType.cs" />

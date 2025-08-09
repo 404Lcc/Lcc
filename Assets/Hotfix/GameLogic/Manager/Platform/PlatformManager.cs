@@ -6,16 +6,15 @@ namespace LccHotfix
 {
     internal class PlatformManager : Module, IPlatformService
     {
-
         private BaseCallbackMessage baseCallbackMessage;
-
         private BasePlatform basePlatform;
-
+        private BaseAccount baseAccount;
 
         public PlatformManager()
         {
             InitCallbackMessage();
             InitPlatform();
+            InitAccount();
 
             if (basePlatform.RequestServer() == string.Empty)
             {
@@ -30,7 +29,6 @@ namespace LccHotfix
                 {
                     Log.Debug("服务器列表是空的");
                 }
-
             }
             else
             {
@@ -45,7 +43,6 @@ namespace LccHotfix
         internal override void Shutdown()
         {
         }
-
 
 
         public void InitCallbackMessage()
@@ -85,28 +82,74 @@ namespace LccHotfix
                     basePlatform = new DevPlatform();
                 }
             }
+        }
 
+        public void InitAccount()
+        {
+            if (Application.isEditor)
+            {
+                baseAccount = new DevAccount();
+            }
+            else
+            {
+                if (Launcher.GameConfig.useSDK)
+                {
+                    baseAccount = new DevAccount();
+                }
+                else
+                {
+                    baseAccount = new DevAccount();
+                }
+            }
         }
 
 
+        #region 账号
+
+        public void SetAccount(string account)
+        {
+            baseAccount.SetAccount(account);
+        }
+
+        public void SetPlayerId(string playerId)
+        {
+            baseAccount.SetPlayerId(playerId);
+        }
+
+        public string GetAccount()
+        {
+            return baseAccount.GetAccount();
+        }
+
+        public string GetToken()
+        {
+            return baseAccount.GetToken();
+        }
+
+        #endregion
 
         #region 回调
+
         public void OnAndroidCallback(string data)
         {
             baseCallbackMessage.OnAndroidCallback(data);
         }
+
         #endregion
 
 
         #region 平台
+
         public List<string> RequestServerList()
         {
             return basePlatform.RequestServerList();
         }
+
         public void SetServerCurrent(string server)
         {
             basePlatform.SetServerCurrent(server);
         }
+
         public string GetServerCurrent()
         {
             return basePlatform.GetServerCurrent();
@@ -122,9 +165,16 @@ namespace LccHotfix
             return basePlatform.GetUserRegion();
         }
 
+        public string GetChannel()
+        {
+            return basePlatform.GetChannel();
+        }
+
+        public string GetDeviceId()
+        {
+            return basePlatform.GetDeviceId();
+        }
+
         #endregion
-
-
-
     }
 }

@@ -10,6 +10,18 @@ namespace LccHotfix
         void InitPlatform();
 
 
+        #region 账号
+
+        void SetAccount(string account);
+
+        void SetPlayerId(string playerId);
+
+        string GetAccount();
+
+        string GetToken();
+
+        #endregion
+
         #region 回调
 
         void OnAndroidCallback(string data);
@@ -26,6 +38,10 @@ namespace LccHotfix
         string GetTimeZone();
 
         string GetUserRegion();
+
+        string GetChannel();
+
+        string GetDeviceId();
 
         #endregion
     }
