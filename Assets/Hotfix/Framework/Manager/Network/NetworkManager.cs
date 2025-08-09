@@ -174,7 +174,6 @@ public class NetworkManager : Module, INetworkService
         {
             if (_tcp != null)
             {
-                _tcp.Dispose();
                 _tcp = null;
             }
 
