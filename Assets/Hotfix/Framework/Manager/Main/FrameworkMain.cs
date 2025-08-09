@@ -8,5 +8,12 @@ namespace LccHotfix
             
             Current = this;
         }
+
+        internal override void Shutdown()
+        {
+            base.Shutdown();
+            
+            Current = null;
+        }
     }
 }
