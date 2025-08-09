@@ -38,48 +38,22 @@ namespace LccHotfix
 
         public static string GetLanguageText(int id, params object[] args)
         {
-            if (id == 0)
-            {
-                Log.Error("id不能等于0");
-                return "";
-            }
-
-            var key = Main.ConfigService.Tables.TBLanguage.GetOrDefault(id).Key;
-            return GetLanguageText(key, args);
+            return Main.LanguageService.GetValue(id, args);
         }
 
         public static string GetLanguageText(uint id, params object[] args)
         {
-            if (id == 0)
-            {
-                Log.Error("id不能等于0");
-                return "";
-            }
-
-            var key = Main.ConfigService.Tables.TBLanguage.GetOrDefault((int)id).Key;
-            return GetLanguageText(key, args);
+            return Main.LanguageService.GetValue(id, args);
         }
 
         public static string GetLanguageKey(int id)
         {
-            if (id == 0)
-            {
-                Log.Error("id不能等于0");
-                return "";
-            }
-
-            return Main.ConfigService.Tables.TBLanguage.GetOrDefault(id).Key;
+            return Main.LanguageService.GetKey(id);
         }
 
         public static string GetLanguageKey(uint id)
         {
-            if (id == 0)
-            {
-                Log.Error("id不能等于0");
-                return "";
-            }
-
-            return Main.ConfigService.Tables.TBLanguage.GetOrDefault((int)id).Key;
+            return Main.LanguageService.GetKey(id);
         }
 
         /// <summary>
