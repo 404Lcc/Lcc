@@ -43,6 +43,7 @@ namespace LccHotfix
             NetworkService.SetPackageHelper(new DefaultPackageHelper());
             NetworkService.SetMessageHelper(new DefaultMessageHelper());
             
+            PlatformService = Current.AddModule<PlatformManager>();
             IconService = Current.AddModule<IconManager>();
             HotfixBridgeService = Current.AddModule<HotfixBridge>();
             ConfigService = Current.AddModule<ConfigManager>();
@@ -63,6 +64,7 @@ namespace LccHotfix
 
     internal partial class Main : Module
     {
+        public static IPlatformService PlatformService { get; set; }
         public static IIconService IconService { get; set; }
         public static IHotfixBridgeService HotfixBridgeService { get; set; }
         public static IConfigService ConfigService { get; set; }
