@@ -1,4 +1,4 @@
-﻿/***************************************************************
+/***************************************************************
  * Description: Block buffer for reuse array
  * 
  * Documents: https://github.com/hiram3512/HiSocket
@@ -13,6 +13,7 @@ namespace HiSocket.Tcp
 {
     public class TcpSocket : ITcpSocket
     {
+        private bool _isSending;
         public System.Net.Sockets.Socket Socket { get; private set; }
 
         /// <summary>
@@ -139,13 +140,20 @@ namespace HiSocket.Tcp
         {
             try
             {
+                if (_isSending || SendBuffer.Index == 0)
+                {
+                    return;
+                }
+
                 if (SendBuffer.Index > 0)
                 {
+                    _isSending = true;
                     Socket.BeginSend(SendBuffer.Buffer, 0, SendBuffer.Index, SocketFlags.None, SendCallback, Socket);
                 }
             }
             catch (Exception e)
             {
+                _isSending = false;
                 ExceptionEvent(e);
             }
         }
@@ -190,13 +198,15 @@ namespace HiSocket.Tcp
                     int remain = SendBuffer.Index;
                     if (remain > 0)
                     {
-                        SendBytes(SendBuffer.Buffer, 0, SendBuffer.Index);
+                        socket.BeginSend(SendBuffer.Buffer, 0, SendBuffer.Index, SocketFlags.None, SendCallback, socket);
+                        return;
                     }
                 }
                 else
                 {
                     DisconnectedEvent();
                 }
+                _isSending = false;
             }
             catch (Exception e)
             {
