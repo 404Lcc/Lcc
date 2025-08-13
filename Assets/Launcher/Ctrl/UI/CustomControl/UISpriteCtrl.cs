@@ -45,6 +45,7 @@ namespace LccModel
                 if (_material == null)
                 {
                     _material = ResObject.LoadRes<Material>(gameObject, "Actor_RGBA_Flow").GetAsset<Material>();
+                    _image.material = _material;
                 }
                 return _material;
             }
