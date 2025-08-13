@@ -61,6 +61,7 @@
     <None Include="Assets\StreamingAssets\GameConfig_Build.txt" />
     <None Include="Assets\Resources\LanguageConfig_English.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\Res\Shader\Actor-RGBA_Flow.shader" />
     <None Include="Assets\Resources\BillingMode.json" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -79,6 +80,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\StreamingAssets\1\noticeWhiteList.txt" />
     <None Include="Assets\Res\Config\tbsubobject.json" />
+    <None Include="Assets\Res\Shader\Actor-RGB_Flow.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\Res\Config\tbemptygoto.json" />
