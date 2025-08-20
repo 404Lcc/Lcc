@@ -46,6 +46,9 @@ namespace LccHotfix
         }
         private static void DrawGizmos()
         {
+            if (!Launcher.Instance.GameStarted)
+                return;
+            Main.GizmoService.OnDrawGizmos();
         }
         private static void Close()
         {

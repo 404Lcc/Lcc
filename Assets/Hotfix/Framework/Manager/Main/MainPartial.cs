@@ -19,6 +19,7 @@ namespace LccHotfix
         public static IThreadSyncService ThreadSyncService { get; set; }
         public static IAssetService AssetService { get; set; }
         public static INetworkService NetworkService { get; set; }
+        public static IGizmoService GizmoService { get; set; }
         
         public static void SetMain(Main main)
         {

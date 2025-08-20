@@ -42,6 +42,7 @@ namespace LccHotfix
             NetworkService = Current.AddModule<NetworkManager>();
             NetworkService.SetPackageHelper(new DefaultPackageHelper());
             NetworkService.SetMessageHelper(new DefaultMessageHelper());
+            GizmoService = Current.AddModule<GizmoManager>();
             
             PlatformService = Current.AddModule<PlatformManager>();
             IconService = Current.AddModule<IconManager>();
