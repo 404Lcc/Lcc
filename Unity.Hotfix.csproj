@@ -147,8 +147,8 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Orca\RVO\Agent.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Decorators\AutoReleaseDecorator.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBRewardTemplate.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Save\DefaultSaveHelper.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Gizmo\GizmoManager.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Save\DefaultSaveHelper.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\Log\DefaultLogHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComTransform.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Base\EntityIndexEnum.cs" />
@@ -241,9 +241,9 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\Death\ComDeath.cs" />
     <Compile Include="Assets\Hotfix\Utility\Extension\Vector3\Vector3Extension.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\FSM\StateNode.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Interface\IGameObjectPoolService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\MultiLanguageTexture.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\ThreadSync\ThreadSyncManager.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\MultiLanguageTexture.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Interface\IGameObjectPoolService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Save\Interface\ISaveHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Asset\DefaultAssetHelper.cs" />

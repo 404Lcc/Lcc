@@ -2,7 +2,17 @@ namespace LccHotfix
 {
     public class ComControl : LogicComponent
     {
-        public IControl control;
+        private IControl control;
+
+        public T GetControl<T>() where T : class, IControl
+        {
+            return (T)control;
+        }
+        
+        public void SetControl(IControl control)
+        {
+            this.control = control;
+        }
 
         public override void Dispose()
         {
@@ -31,7 +41,14 @@ namespace LccHotfix
             AddComponent(index, component);
             var control = new T();
             control.Entity = this;
-            component.control = control;
+            component.SetControl(control);
+        }
+
+        public T GetControl<T>() where T : class, IControl
+        {
+            if (!hasComControl)
+                return null;
+            return comControl.GetControl<T>();
         }
 
         public void RemoveComControl()

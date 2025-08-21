@@ -9,16 +9,15 @@ namespace LccHotfix
 
         public SysControl(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComControl, LogicMatcher.ComProperty, LogicMatcher.ComTransform));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComControl, LogicMatcher.ComTransform));
         }
 
         public void Execute()
         {
             foreach (var entity in _group.GetEntities())
             {
-                var comProp = entity.comProperty;
                 var comControl = entity.comControl;
-                comControl.control.Update();
+                comControl.GetControl<IControl>().Update();
             }
         }
     }
