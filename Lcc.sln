@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Hotfix", "Unity.Hotfi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Editor", "Unity.Editor.csproj", "{3448a308-c3d4-dd53-6264-ccc1f0737645}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySave3.Editor", "EasySave3.Editor.csproj", "{87ce7012-5b47-9feb-1c11-3674247ca035}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoopScrollRect.Runtime", "LoopScrollRect.Runtime.csproj", "{4b5c50e9-f92d-b3c2-f3e2-ecb7df3b049e}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{7361f22e-cbd4-9b9e-5dcf-5990cfbeb812}"
@@ -36,6 +38,8 @@ Global
 		{6fbc4385-c6fe-fcbd-0bd5-ab0b4e96c57b}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3448a308-c3d4-dd53-6264-ccc1f0737645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3448a308-c3d4-dd53-6264-ccc1f0737645}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87ce7012-5b47-9feb-1c11-3674247ca035}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87ce7012-5b47-9feb-1c11-3674247ca035}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4b5c50e9-f92d-b3c2-f3e2-ecb7df3b049e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4b5c50e9-f92d-b3c2-f3e2-ecb7df3b049e}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7361f22e-cbd4-9b9e-5dcf-5990cfbeb812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

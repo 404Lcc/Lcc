@@ -12,11 +12,11 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{fb6f6069-4e18-ef9a-c267-baf5686cd98b}</ProjectGuid>
+    <ProjectGuid>{87ce7012-5b47-9feb-1c11-3674247ca035}</ProjectGuid>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>EasySave3</AssemblyName>
+    <AssemblyName>EasySave3.Editor</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -25,8 +25,8 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>Temp\Bin\Debug\EasySave3\</OutputPath>
-    <DefineConstants>UNITY_2022_3_34;UNITY_2022_3;UNITY_2022;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;ENABLE_NAVIGATION_PACKAGE_DEBUG_VISUALIZATION;ENABLE_NAVIGATION_HEIGHTMESH_RUNTIME_SUPPORT;ENABLE_NAVIGATION_UI_REQUIRES_PACKAGE;PLATFORM_STANDALONE;TEXTCORE_1_0_OR_NEWER;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;UNITY_UGP_API;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_INITIALIZES_MEMORY_MANAGER_EXPLICITLY;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;Offline;Horizontal;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;ES3_TMPRO;ES3_UGUI;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <OutputPath>Temp\Bin\Debug\EasySave3.Editor\</OutputPath>
+    <DefineConstants>UNITY_2022_3_34;UNITY_2022_3;UNITY_2022;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;ENABLE_NAVIGATION_PACKAGE_DEBUG_VISUALIZATION;ENABLE_NAVIGATION_HEIGHTMESH_RUNTIME_SUPPORT;ENABLE_NAVIGATION_UI_REQUIRES_PACKAGE;PLATFORM_STANDALONE;TEXTCORE_1_0_OR_NEWER;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;UNITY_UGP_API;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_INITIALIZES_MEMORY_MANAGER_EXPLICITLY;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;Offline;Horizontal;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;ES3_TMPRO;ES3_UGUI;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;UNITY_EDITOR_ONLY_COMPILATION</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169,0649</NoWarn>
@@ -45,179 +45,36 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Font.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_long.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_PhysicsMaterial2D.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Writers\ES3BinaryWriter.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Quaternion.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Settings\ES3Settings.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Rect.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_CollisionModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_EventSystem.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Settings\ES3DefaultSettings.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\ES3ScriptableObjectType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Reflected Types\ES3ReflectedComponentType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_BoxCollider2D.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Light.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Web\ES3Cloud.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Color.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Writers\ES3Writer.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\NET Types\ES3Type_Random.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3HashSetType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3ConcurrentDictionaryType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Gradient.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Auto Save\ES3AutoSaveMgr.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_SpriteRenderer.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_RawImage.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3Spreadsheet.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Writers\ES3JSONWriter.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Reflected Types\ES3ReflectedType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Reflected Types\ES3ReflectedScriptableObjectType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Debugging\ES3Debug.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_SizeOverLifetimeModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_Rigidbody.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_RotationOverLifetimeModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3ArrayType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\UnityObjectType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3ObservableListType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3GlobalManager.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Vector2.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_BoneWeight.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3NativeArrayType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\ES3GenericType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_EmissionModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_ulong.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_SkinnedMeshRenderer.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3InspectorInfo.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_string.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_float.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES32DArrayType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3CollectionType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Guid.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Texture2D.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_byte.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3ListType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_char.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_SphereCollider.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_sbyte.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_InheritVelocityModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\ES3UnityObjectType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Material.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3ReferenceMgr.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_ColorBySpeedModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_LightsModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_BoxCollider.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_TextureSheetAnimationModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_MinMaxGradient.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3StackType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3DictionaryType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_byteArray.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Matrix4x4.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3Type_ArrayList.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_GradientAlphaKey.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Readers\ES3XMLReader.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_bool.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Streams\ES3PlayerPrefsStream.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_CapsuleCollider.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_MinMaxCurve.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Vector4.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Settings\ES3Defaults.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3QueueType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Sprite.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_RectTransform.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Save Slots\ES3Slot.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3TupleType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3ReferenceMgrBase.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Vector3Int.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Streams\ES3Stream.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_SubEmittersModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Vector2Int.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_Image.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_ColorOverLifetimeModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\ES3ComponentType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Reflected Types\ES3ReflectedValueType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Mesh.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_PolygonCollider2D.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Save Slots\ES3SlotManager.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_enum.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Reflected Types\ES3ReflectedUnityObjectType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_short.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3IO.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Streams\ES3ResourcesStream.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Texture.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Readers\ES3Reader.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_intptr.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_Transform.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\ES3IListGenericType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3Reflection.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_SizeBySpeedModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_RenderTexture.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\PlayMaker\ES3PlayMaker.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Burst.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_ShapeModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_AnimationCurve.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\NET Types\ES3Type_Type.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES33DArrayType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_ushort.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_ExternalForcesModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Writers\ES3Binary.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_MeshCollider.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3Prefab.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Bounds.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\NET Types\ES3Type_Nullable.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_decimal.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\ES3ObjectType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Attributes\ES3Attributes.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_PhysicMaterial.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Save Slots\ES3SlotDialog.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Streams\ES3FileStream.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Readers\ES3JSONReader.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_ForceOverLifetimeModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3File.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_LimitVelocityOverLifetimeModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_TrailModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_GradientColorKey.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_int.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_Camera.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Web\ES3WebClass.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_RotationBySpeedModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_AudioClip.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_UIntPtr.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_MeshRenderer.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\ES3TypeMgr.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3SerializableDictionary.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_ES3Ref.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Color32.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_double.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\NET Types\ES3Type_BigInteger.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3GameObject.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Keyframe.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\ES3Type.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_MainModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3Crypto.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_DateTime.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_GameObject.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Referencing\ES3GlobalReferences.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Reflected Types\ES3ReflectedObjectType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Writers\ES3XMLWriter.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_VelocityOverLifetimeModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Auto Save\ES3AutoSave.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\ES3Property.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_LayerMask.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Flare.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_ParticleSystem.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_MeshFilter.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Primitive Types\ES3Type_uint.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_TriggerModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Vector3.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Writers\ES3CacheWriter.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_Text.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_NoiseModule.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Save Slots\ES3CreateSlot.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Shader.cs" />
-    <None Include="Assets\3rdPlugins\Easy Save 3\Change Log\Change Log.txt" />
-    <None Include="Assets\3rdPlugins\Easy Save 3\Easy Save 3.asmdef" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\EnableES3AssemblyDefinitions.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\HomeWindow.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ToolsWindow.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\TypesWindow.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3GameObjectEditor.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3ReferenceMgrEditor.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3EditorUtility.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3PlayMakerEditor.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3Postprocessor.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3GlobalReferencesEditor.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3AutoSaveMgrEditor.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ReferencesWindow.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3SettingsEditor.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3EditorStyle.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3PrefabEditor.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\AddES3Prefab.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3Window.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\SettingsWindow.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3AutoSaveEditor.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\AutoSaveWindow.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3InspectorInfoEditor.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3ScriptingDefineSymbols.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Editor\ChangeReferenceID.cs" />
+    <None Include="Assets\3rdPlugins\Easy Save 3\Editor\Easy Save 3.Editor.asmdef" />
+    <None Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3ValueTypeTemplate.txt" />
+    <None Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3ComponentTypeTemplate.txt" />
+    <None Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3TypeTemplate.txt" />
+    <None Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3Type_MaterialTemplate.txt" />
+    <None Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3ScriptableObjectTypeTemplate.txt" />
+    <None Include="Assets\3rdPlugins\Easy Save 3\Editor\ES3ClassTypeTemplate.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -295,6 +152,9 @@
     </Reference>
     <Reference Include="UnityEngine.LocalizationModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.LocalizationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.NVIDIAModule">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.NVIDIAModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.ParticleSystemModule.dll</HintPath>
@@ -565,6 +425,9 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>D:\Lcc\Library\PackageCache\com.unity.analytics@3.8.1\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>D:\Lcc\Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
@@ -950,17 +813,24 @@
     <Reference Include="System.Xml.XPath.XDocument">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:\Lcc\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.TestRunner">
+      <HintPath>D:\Lcc\Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>D:\Lcc\Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="EasySave3.csproj">
+      <Project>{fb6f6069-4e18-ef9a-c267-baf5686cd98b}</Project>
+      <Name>EasySave3</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
