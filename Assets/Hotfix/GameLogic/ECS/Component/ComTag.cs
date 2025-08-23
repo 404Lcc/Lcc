@@ -5,7 +5,7 @@ namespace LccHotfix
     [Flags]
     public enum TagType
     {
-        Hero = 1 << 0, //英雄对象 1
+        Hero = 1 << 1, //英雄对象 1
     }
 
     public class ComTag : LogicComponent
