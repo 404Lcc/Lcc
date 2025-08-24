@@ -93,6 +93,7 @@ namespace LccHotfix
             base.ProcedureExitHandler();
 
             Main.CameraService.CurrentCamera = null;
+            Main.WorldService.ExitWorld();
             
             Log.Debug("退出main");
         }
