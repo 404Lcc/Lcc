@@ -33,7 +33,7 @@ namespace LccHotfix
 
             Main.AssetService.LoadGameObject("Map", true, out map);
             SetBattleCamera();
-            BattleGameModeState state = new BattleGameModeState();
+            BattleModeState state = new BattleModeState();
             state.Init(map);
             Main.WorldService.CreateWorld<BattleWorld>(state);
             
@@ -76,8 +76,6 @@ namespace LccHotfix
             {
                 return;
             }
-
-            Main.WorldService.GetWorld().Update();
         }
 
         public override void LateUpdate()
@@ -88,8 +86,6 @@ namespace LccHotfix
             {
                 return;
             }
-            
-            Main.WorldService.GetWorld().LateUpdate();
         }
 
         public override void ProcedureExitHandler()

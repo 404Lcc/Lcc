@@ -86,7 +86,6 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\BehavoirTree\KVContext\KVContext.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComTag.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\IBlockBuffer.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\BattleState.cs" />
     <Compile Include="Assets\Hotfix\Utility\MVVM\View\Binding\Binding.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\Window\Window.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\IScheduler.cs" />

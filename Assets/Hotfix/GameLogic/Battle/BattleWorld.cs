@@ -6,29 +6,29 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class BattleGameMode : GameModeBase
+    public class BattleMode : GameModeBase
     {
-        public BattleGameModeState data;
+        public BattleModeState data;
 
         public override void Init(GameModeState state)
         {
             base.Init(state);
 
-            data = state as BattleGameModeState;
+            data = state as BattleModeState;
         }
 
         public override void InitFSM()
         {
             base.InitFSM();
             FSM.SetBlackboardValue("GameMode", this);
-            FSM.AddNode<BattleStartState>();
+            FSM.AddNode<BattleStart>();
         }
 
         public override void Start()
         {
             base.Start();
 
-            FSM.Run<BattleStartState>();
+            FSM.Run<BattleStart>();
         }
 
         public override void Release()
@@ -39,13 +39,35 @@ namespace LccHotfix
         }
     }
 
-    public class BattleGameModeState : GameModeState
+    public class BattleModeState : GameModeState
     {
         public GameObject Map { get; private set; }
 
         public void Init(GameObject map)
         {
             this.Map = map;
+        }
+    }
+    
+    public class BattleStart : IStateNode
+    {
+        public BattleMode mode;
+
+        public void OnCreate(StateMachine machine)
+        {
+            mode = machine.GetBlackboardValue("GameMode") as BattleMode;
+        }
+
+        public void OnEnter()
+        {
+        }
+
+        public void OnUpdate()
+        {
+        }
+
+        public void OnExit()
+        {
         }
     }
 
@@ -135,7 +157,7 @@ namespace LccHotfix
         {
             base.InitComponent();
 
-            var mode = new BattleGameMode();
+            var mode = new BattleMode();
             mode.Init(_gameModeState);
             MetaContext.SetComUniGameMode(mode);
             // MetaContext.SetComUniCameraBlender(new SmoothFoolow2D());
