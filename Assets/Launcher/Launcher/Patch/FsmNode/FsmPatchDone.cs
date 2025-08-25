@@ -113,6 +113,7 @@ namespace LccModel
         {
             GameObject loader = new GameObject("loader");
 
+#if HybridCLR
             TextAsset aotTxt = ResObject.LoadRes<TextAsset>(loader, "aot").GetAsset<TextAsset>();
 
             var aotlist = aotTxt.text.Split('|');
@@ -130,6 +131,7 @@ namespace LccModel
                 LoadImageErrorCode err = RuntimeApi.LoadMetadataForAOTAssembly(dllBytes, mode);
                 Debug.Log($"LoadMetadataForAOTAssembly aotDllName={aotDllName}, ret={err}");
             }
+#endif
 
             TextAsset assetDll = ResObject.LoadRes<TextAsset>(loader, "Unity.Hotfix.dll").GetAsset<TextAsset>();
             TextAsset assetPdb = ResObject.LoadRes<TextAsset>(loader, "Unity.Hotfix.pdb").GetAsset<TextAsset>();

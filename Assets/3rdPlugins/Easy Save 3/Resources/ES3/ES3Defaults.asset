@@ -38,6 +38,7 @@ MonoBehaviour:
     - EasySave3
     - EnhancedScroller_asmdef
     - HybridCLR.Runtime
+    - IngameDebugConsole.Runtime
     - LoopScrollRect.Runtime
     - Luban.Runtime
     - Purchasing.Common
