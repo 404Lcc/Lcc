@@ -9,7 +9,7 @@ namespace LccHotfix
     public static class GameUtility
     {
         public const long CSHARP_1970_TIME = 621355968000000000; //C#中1970年的时间，用于处理java时间戳
-        
+
         public static void FireNow(object sender, GameEventArgs e)
         {
             Main.EventService.FireNow(sender, e);
@@ -127,7 +127,7 @@ namespace LccHotfix
 
             return str;
         }
-        
+
         public static int GetWeightIndex(List<int> weight)
         {
             int weightAll = 0;
@@ -155,6 +155,21 @@ namespace LccHotfix
             }
 
             return 0;
+        }
+
+        public static GameObjectPoolObject GetObj(string poolKey)
+        {
+            var obj = Main.GameObjectPoolService.GetObject(poolKey);
+            return obj;
+        }
+
+        public static void PutObj(ref GameObjectPoolObject poolObject)
+        {
+            if (poolObject == null)
+                return;
+
+            Main.GameObjectPoolService.ReleaseObject(poolObject);
+            poolObject = null;
         }
     }
 }

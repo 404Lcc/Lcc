@@ -41,10 +41,10 @@ namespace LccHotfix
             _poolSetting.preloadPerFrame = 10;
 
             //自动回收
-            _poolSetting.autoRelease = 100;
+            _poolSetting.autoRelease = -1;
 
             //最大数量
-            _poolSetting.maxActiveObjects = 100;
+            _poolSetting.maxActiveObjects = -1;
         }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)

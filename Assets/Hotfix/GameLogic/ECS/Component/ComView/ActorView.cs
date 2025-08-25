@@ -4,8 +4,7 @@ namespace LccHotfix
 {
     public class ActorView : IViewWrapper
     {
-        private bool _isPoolRes;
-
+        private GameObjectPoolObject _poolObject;
         private GameObject _gameObject;
         public GameObject GameObject => _gameObject;
 
@@ -15,11 +14,11 @@ namespace LccHotfix
         private Animator _animator;
         public Animator Animator => _animator;
 
-        public virtual void Init(GameObject go, bool isPoolRes)
+        public virtual void Init(GameObjectPoolObject poolObject)
         {
-            _isPoolRes = isPoolRes;
-            _gameObject = go;
-            _transform = go.transform;
+            _poolObject = poolObject;
+            _gameObject = _poolObject.GameObject;
+            _transform = _poolObject.Transform;
             _animator = _gameObject.GetComponent<Animator>();
         }
 
@@ -32,19 +31,12 @@ namespace LccHotfix
 
         public virtual void Dispose()
         {
-            if (_isPoolRes)
-            {
-                //TODO
-            }
-            else
-            {
-                GameObject.Destroy(_gameObject);
-            }
-
             EnableAnimator(true);
 
             _gameObject = null;
             _animator = null;
+            
+            GameUtility.PutObj(ref _poolObject);
         }
 
         public void EnableAnimator(bool enable)

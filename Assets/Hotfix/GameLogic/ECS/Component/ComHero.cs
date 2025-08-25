@@ -28,6 +28,11 @@ namespace LccHotfix
             AddComponent(index, component);
             return component;
         }
+        
+        public void RemoveComHero()
+        {
+            RemoveComponent(LogicComponentsLookup.ComHero);
+        }
 
     }
 

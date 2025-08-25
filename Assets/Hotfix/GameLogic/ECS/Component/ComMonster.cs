@@ -25,6 +25,11 @@ namespace LccHotfix
             AddComponent(index, component);
             return component;
         }
+        
+        public void RemoveComMonster()
+        {
+            RemoveComponent(LogicComponentsLookup.ComMonster);
+        }
 
     }
 

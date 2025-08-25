@@ -15,20 +15,20 @@ public static class EntityUtility
         return Main.WorldService.GetWorld().GetEntitiesWithComUnityObjectRelated(go.GetInstanceID());
     }
 
-    public static LogicEntity AddEntity<T>(GameObject obj, bool isPoolRes = false) where T : ActorView, new()
+    public static LogicEntity AddEntity<T>(GameObjectPoolObject poolObject) where T : ActorView, new()
     {
         var entity = Main.WorldService.GetWorld().LogicContext.CreateEntity();
 
         entity.AddComID(IdUtility.GenerateId());
 
         T viewWrapper = new T();
-        viewWrapper.Init(obj, isPoolRes);
+        viewWrapper.Init(poolObject);
         entity.AddView(viewWrapper, ViewCategory.Actor);
 
-        entity.AddComTransform(obj.transform.position, obj.transform.rotation, obj.transform.localScale);
+        entity.AddComTransform(poolObject.Transform.position, poolObject.Transform.rotation, poolObject.Transform.localScale);
 
         var dict = new Dictionary<int, GameObjectType>();
-        dict.Add(obj.GetInstanceID(), GameObjectType.Self);
+        dict.Add(poolObject.GameObject.GetInstanceID(), GameObjectType.Self);
         entity.AddComUnityObjectRelated(dict);
         return entity;
     }
