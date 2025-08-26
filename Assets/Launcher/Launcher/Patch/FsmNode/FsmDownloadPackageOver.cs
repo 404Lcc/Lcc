@@ -7,7 +7,7 @@ namespace LccModel
     /// <summary>
     /// 下载完毕
     /// </summary>
-    public class FsmDownloadOver : IStateNode
+    public class FsmDownloadPackageOver : IStateNode
     {
         private StateMachine _machine;
 
@@ -17,7 +17,7 @@ namespace LccModel
         }
         public void OnEnter()
         {
-            _machine.ChangeState<FsmClearCache>();
+            _machine.ChangeState<FsmClearCacheBundle>();
         }
         public void OnUpdate()
         {

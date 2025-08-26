@@ -33,7 +33,7 @@ namespace LccModel
 
         public void NextState()
         {
-            _machine.ChangeState<FsmInitialize>();
+            _machine.ChangeState<FsmInitializePackage>();
 
         }
 

@@ -45,7 +45,7 @@ namespace LccModel
             if (downloader.TotalDownloadCount == 0)
             {
                 Debug.Log("FsmCreateDownloader Not found any download files !");
-                _machine.ChangeState<FsmDownloadOver>();
+                _machine.ChangeState<FsmDownloadPackageOver>();
             }
             else
             {

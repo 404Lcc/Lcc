@@ -36,10 +36,10 @@ namespace LccModel
             _isLoadingAssets = true;
             try
             {
-                Object[] allAssets = allAssetsHandle.AllAssetObjects;
-                if (allAssets != null && allAssets.Length > 0)
+                var allAssets = allAssetsHandle.AllAssetObjects;
+                if (allAssets != null && allAssets.Count > 0)
                 {
-                    for (int i = allAssets.Length - 1; i >= 0; i--)
+                    for (int i = allAssets.Count - 1; i >= 0; i--)
                     {
                         if (!_assetDict.ContainsKey(allAssets[i].name))
                         {

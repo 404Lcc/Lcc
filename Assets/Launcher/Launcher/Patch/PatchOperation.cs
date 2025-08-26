@@ -3,18 +3,22 @@ using YooAsset;
 
 namespace LccModel
 {
-    public class PatchOperation
+    public enum ESteps
+    {
+        None,
+        Update,
+        Done,
+    }
+
+    public class PatchOperation : GameAsyncOperation
     {
         private EventGroup _eventGroup = new EventGroup();
         private StateMachine _machine;
+        private ESteps _steps = ESteps.None;
 
         public PatchOperation()
         {
-        }
-
-        public void Run()
-        {
-            RemoveAllListener();
+            _eventGroup.RemoveAllListener();
             // 注册监听事件
             _eventGroup.AddListener<UserTryInitialize>(OnHandleEventMessage);
             _eventGroup.AddListener<UserBeginDownloadWebFiles>(OnHandleEventMessage);
@@ -25,29 +29,49 @@ namespace LccModel
             // 创建状态机
             _machine = new StateMachine(this);
             _machine.AddNode<FsmGetNotice>();
-            _machine.AddNode<FsmInitialize>();
-            _machine.AddNode<FsmUpdateVersion>();
-            _machine.AddNode<FsmUpdateManifest>();
+            _machine.AddNode<FsmInitializePackage>();
+            _machine.AddNode<FsmRequestPackageVersion>();
+            _machine.AddNode<FsmUpdatePackageManifest>();
             _machine.AddNode<FsmCreateDownloader>();
-            _machine.AddNode<FsmDownloadFiles>();
-            _machine.AddNode<FsmDownloadOver>();
-            _machine.AddNode<FsmClearCache>();
-            _machine.AddNode<FsmPatchDone>();
+            _machine.AddNode<FsmDownloadPackageFiles>();
+            _machine.AddNode<FsmDownloadPackageOver>();
+            _machine.AddNode<FsmClearCacheBundle>();
+            _machine.AddNode<FsmStartGame>();
 
             _machine.SetBlackboardValue("PackageName", Launcher.DefaultPackage);
-            _machine.SetBlackboardValue("BuildPipeline", EDefaultBuildPipeline.BuiltinBuildPipeline.ToString());
             _machine.SetBlackboardValue("TotalDownloadCount", 0);
+        }
 
+        protected override void OnStart()
+        {
+            _steps = ESteps.Update;
 #if Offline
-            _machine.Run<FsmInitialize>();
+            _machine.Run<FsmInitializePackage>();
 #else
             _machine.Run<FsmGetNotice>();
 #endif
         }
 
-        public void RemoveAllListener()
+        protected override void OnUpdate()
         {
+            if (_steps == ESteps.None || _steps == ESteps.Done)
+                return;
+
+            if (_steps == ESteps.Update)
+            {
+                _machine.Update();
+            }
+        }
+
+        protected override void OnAbort()
+        {
+        }
+
+        public void SetFinish()
+        {
+            _steps = ESteps.Done;
             _eventGroup.RemoveAllListener();
+            Status = EOperationStatus.Succeed;
         }
 
         /// <summary>
@@ -57,19 +81,19 @@ namespace LccModel
         {
             if (message is UserTryInitialize)
             {
-                _machine.ChangeState<FsmInitialize>();
+                _machine.ChangeState<FsmInitializePackage>();
             }
             else if (message is UserBeginDownloadWebFiles)
             {
-                _machine.ChangeState<FsmDownloadFiles>();
+                _machine.ChangeState<FsmDownloadPackageFiles>();
             }
             else if (message is UserTryUpdatePackageVersion)
             {
-                _machine.ChangeState<FsmUpdateVersion>();
+                _machine.ChangeState<FsmRequestPackageVersion>();
             }
             else if (message is UserTryUpdatePatchManifest)
             {
-                _machine.ChangeState<FsmUpdateManifest>();
+                _machine.ChangeState<FsmUpdatePackageManifest>();
             }
             else if (message is UserTryDownloadWebFiles)
             {

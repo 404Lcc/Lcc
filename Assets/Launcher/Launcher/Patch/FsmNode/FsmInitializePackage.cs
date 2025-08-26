@@ -8,7 +8,7 @@ namespace LccModel
     /// <summary>
     /// 初始化资源包
     /// </summary>
-    public class FsmInitialize : IStateNode
+    public class FsmInitializePackage : IStateNode
     {
         private StateMachine _machine;
 
@@ -61,7 +61,6 @@ namespace LccModel
 
             // 创建默认的资源包
             var packageName = (string)_machine.GetBlackboardValue("PackageName");
-            var buildPipeline = (string)_machine.GetBlackboardValue("BuildPipeline");
 
             //默认资源包清空
             YooAssets.SetDefaultPackage(null);
@@ -85,9 +84,10 @@ namespace LccModel
             InitializationOperation initializationOperation = null;
             if (PlayMode == EPlayMode.EditorSimulateMode)
             {
-                var simulateBuildResult = EditorSimulateModeHelper.SimulateBuild(buildPipeline, packageName);
+                var buildResult = EditorSimulateModeHelper.SimulateBuild(packageName);
+                var packageRoot = buildResult.PackageRootDirectory;
                 var createParameters = new EditorSimulateModeParameters();
-                createParameters.EditorFileSystemParameters = FileSystemParameters.CreateDefaultEditorFileSystemParameters(simulateBuildResult);
+                createParameters.EditorFileSystemParameters = FileSystemParameters.CreateDefaultEditorFileSystemParameters(packageRoot);
                 initializationOperation = package.InitializeAsync(createParameters);
             }
 
@@ -115,9 +115,19 @@ namespace LccModel
             // WebGL运行模式
             if (PlayMode == EPlayMode.WebPlayMode)
             {
+#if UNITY_WEBGL && WEIXINMINIGAME && !UNITY_EDITOR
                 var createParameters = new WebPlayModeParameters();
-                createParameters.WebFileSystemParameters = FileSystemParameters.CreateDefaultWebFileSystemParameters();
+                string defaultHostServer = GetHostServerURL();
+                string fallbackHostServer = GetHostServerURL();
+                string packageRoot = $"{WeChatWASM.WX.env.USER_DATA_PATH}/__GAME_FILE_CACHE"; //注意：如果有子目录，请修改此处！
+                IRemoteServices remoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
+                createParameters.WebServerFileSystemParameters = WechatFileSystemCreater.CreateFileSystemParameters(packageRoot, remoteServices);
                 initializationOperation = package.InitializeAsync(createParameters);
+#else
+                var createParameters = new WebPlayModeParameters();
+                createParameters.WebServerFileSystemParameters = FileSystemParameters.CreateDefaultWebServerFileSystemParameters();
+                initializationOperation = package.InitializeAsync(createParameters);
+#endif
             }
 
             yield return initializationOperation;
@@ -126,14 +136,7 @@ namespace LccModel
 
             if (initializationOperation.Status == EOperationStatus.Succeed)
             {
-                if (!Launcher.GameConfig.checkResUpdate)
-                {
-                    _machine.ChangeState<FsmPatchDone>();
-                }
-                else
-                {
-                    _machine.ChangeState<FsmUpdateVersion>();
-                }
+                _machine.ChangeState<FsmRequestPackageVersion>();
             }
             else
             {

@@ -161,7 +161,7 @@ namespace LccModel
         public void StartDownloadUpdate()
         {
             Debug.Log("Launcher 开启补丁更新流程...");
-            patchOperation.Run();
+            YooAssets.StartOperation(patchOperation);
         }
         public void LoadFinish()
         {

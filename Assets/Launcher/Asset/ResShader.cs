@@ -47,10 +47,10 @@ namespace LccModel
 
 			if (allAssetsHandle.AllAssetObjects != null)
 			{
-				Object[] allAssets = allAssetsHandle.AllAssetObjects;
-				if (allAssets != null && allAssets.Length > 0)
+				var allAssets = allAssetsHandle.AllAssetObjects;
+				if (allAssets != null && allAssets.Count > 0)
 				{
-					for (int i = allAssets.Length - 1; i >= 0; i--)
+					for (int i = allAssets.Count - 1; i >= 0; i--)
 					{
 						var obj = allAssets[i];
 						if (obj is Shader)

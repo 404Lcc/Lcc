@@ -1,3 +1,5 @@
+using YooAsset;
+
 namespace LccModel
 {
 
@@ -55,13 +57,13 @@ namespace LccModel
         public long TotalDownloadSizeBytes;
         public long CurrentDownloadSizeBytes;
 
-        public static void SendEventMessage(int totalDownloadCount, int currentDownloadCount, long totalDownloadSizeBytes, long currentDownloadSizeBytes)
+        public static void SendEventMessage(DownloadUpdateData data)
         {
             var msg = new DownloadProgressUpdate();
-            msg.TotalDownloadCount = totalDownloadCount;
-            msg.CurrentDownloadCount = currentDownloadCount;
-            msg.TotalDownloadSizeBytes = totalDownloadSizeBytes;
-            msg.CurrentDownloadSizeBytes = currentDownloadSizeBytes;
+            msg.TotalDownloadCount = data.TotalDownloadCount;
+            msg.CurrentDownloadCount = data.CurrentDownloadCount;
+            msg.TotalDownloadSizeBytes = data.TotalDownloadBytes;
+            msg.CurrentDownloadSizeBytes = data.CurrentDownloadBytes;
             Event.SendMessage(msg);
         }
     }
@@ -98,11 +100,11 @@ namespace LccModel
         public string FileName;
         public string Error;
 
-        public static void SendEventMessage(string fileName, string error)
+        public static void SendEventMessage(DownloadErrorData data)
         {
             var msg = new WebFileDownloadFailed();
-            msg.FileName = fileName;
-            msg.Error = error;
+            msg.FileName = data.FileName;
+            msg.Error = data.ErrorInfo;
             Event.SendMessage(msg);
         }
     }

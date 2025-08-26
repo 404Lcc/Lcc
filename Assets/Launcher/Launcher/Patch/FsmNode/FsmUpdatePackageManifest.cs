@@ -8,7 +8,7 @@ namespace LccModel
     /// <summary>
     /// 更新资源清单
     /// </summary>
-    public class FsmUpdateManifest : IStateNode
+    public class FsmUpdatePackageManifest : IStateNode
     {
         private StateMachine _machine;
 
@@ -42,13 +42,15 @@ namespace LccModel
             yield return operation;
 
 
-            if (operation.Status == EOperationStatus.Succeed)
+            if (operation.Status != EOperationStatus.Succeed)
             {
-                _machine.ChangeState<FsmCreateDownloader>();
+                Debug.LogWarning(operation.Error);
+                PatchManifestUpdateFailed.SendEventMessage();
+                yield break;
             }
             else
             {
-                PatchManifestUpdateFailed.SendEventMessage();
+                _machine.ChangeState<FsmCreateDownloader>();
             }
         }
     }

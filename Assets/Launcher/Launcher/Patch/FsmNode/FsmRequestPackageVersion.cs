@@ -7,7 +7,7 @@ namespace LccModel
     /// <summary>
     /// 更新资源版本号
     /// </summary>
-    public class FsmUpdateVersion : IStateNode
+    public class FsmRequestPackageVersion : IStateNode
     {
         private StateMachine _machine;
 
@@ -47,7 +47,7 @@ namespace LccModel
             {
                 Debug.Log($"Request package version : {operation.PackageVersion}");
                 _machine.SetBlackboardValue("PackageVersion", operation.PackageVersion);
-                _machine.ChangeState<FsmUpdateManifest>();
+                _machine.ChangeState<FsmUpdatePackageManifest>();
             }
         }
     }

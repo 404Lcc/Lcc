@@ -12,23 +12,24 @@ namespace LccModel
     /// <summary>
     /// 流程更新完毕
     /// </summary>
-    public class FsmPatchDone : IStateNode
+    public class FsmStartGame : IStateNode
     {
         private StateMachine _machine;
+
         public void OnCreate(StateMachine machine)
         {
             _machine = machine;
-
         }
+
         public void OnEnter()
         {
-            var patchOperation = _machine.Owner as PatchOperation;
-            patchOperation.RemoveAllListener();
             Launcher.Instance.StartCoroutine(LoadInitialize());
         }
+
         public void OnUpdate()
         {
         }
+
         public void OnExit()
         {
         }
@@ -81,6 +82,7 @@ namespace LccModel
 #endif
                 return;
             }
+
             if (Application.platform == RuntimePlatform.Android)
             {
                 //AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
@@ -105,7 +107,6 @@ namespace LccModel
                     int pid = process.CallStatic<int>("myPid");
                     process.CallStatic("killProcess", pid);
                 }
-
             }
         }
 
@@ -156,14 +157,17 @@ namespace LccModel
             Object.Destroy(loader);
 
             Run();
-
         }
+
         private void Run()
         {
             if (Launcher.Instance.hotfixAssembly == null)
                 return;
             AStaticMethod start = new MonoStaticMethod(Launcher.Instance.hotfixAssembly, "LccHotfix.Init", "Start");
             start.Run();
+            
+            var patchOperation = _machine.Owner as PatchOperation;
+            patchOperation.SetFinish();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace LccModel
     /// <summary>
     /// 下载更新文件
     /// </summary>
-    public class FsmDownloadFiles : IStateNode
+    public class FsmDownloadPackageFiles : IStateNode
     {
         private StateMachine _machine;
 
@@ -34,8 +34,8 @@ namespace LccModel
             var downloader = (ResourceDownloaderOperation)_machine.GetBlackboardValue("Downloader");
 
             // 注册下载回调
-            downloader.OnDownloadErrorCallback = WebFileDownloadFailed.SendEventMessage;
-            downloader.OnDownloadProgressCallback = DownloadProgressUpdate.SendEventMessage;
+            downloader.DownloadErrorCallback = WebFileDownloadFailed.SendEventMessage;
+            downloader.DownloadUpdateCallback = DownloadProgressUpdate.SendEventMessage;
             downloader.BeginDownload();
 
             yield return downloader;
@@ -45,7 +45,7 @@ namespace LccModel
                 yield break;
 
 
-            _machine.ChangeState<FsmPatchDone>();
+            _machine.ChangeState<FsmStartGame>();
         }
     }
 }
