@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 8745698399402738727}
   - component: {fileID: 4664964965079030195}
   m_Layer: 5
-  m_Name: InfoText
+  m_Name: ContentText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 2795204165606787291}
   - component: {fileID: 1221815735905468471}
   m_Layer: 5
-  m_Name: Text
+  m_Name: VersionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -710,7 +710,7 @@ MonoBehaviour:
   progress: {fileID: 6383022178851655959}
   progressText: {fileID: 1743253596661232442}
   tipsText: {fileID: 2311672516825369426}
-  text: {fileID: 1221815735905468471}
+  versionText: {fileID: 1221815735905468471}
   messageBox: {fileID: 4438024955531965309}
 --- !u!223 &5544731813826709979
 Canvas:
