@@ -105,6 +105,7 @@ namespace LccHotfix
 		internal override void Shutdown()
 		{
 			CloseAllWindow();
+			_commonRoot.Remove();
 			ReleaseAllWindow(ReleaseType.NEVER);
 		}
 
