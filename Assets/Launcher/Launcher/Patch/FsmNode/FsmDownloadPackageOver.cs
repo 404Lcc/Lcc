@@ -17,6 +17,7 @@ namespace LccModel
         }
         public void OnEnter()
         {
+            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_download_patch_finish"));
             _machine.ChangeState<FsmClearCacheBundle>();
         }
         public void OnUpdate()

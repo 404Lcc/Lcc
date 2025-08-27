@@ -170,8 +170,8 @@
     <Compile Include="Assets\3rdPlugins\LitJson\JsonData.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt64Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TupleSerializer.cs" />
-    <Compile Include="Assets\3rdPlugins\LitJson\JsonWriter.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Entity\Exceptions\EntityIsNotRetainedByOwnerException.cs" />
+    <Compile Include="Assets\3rdPlugins\LitJson\JsonWriter.cs" />
     <Compile Include="Assets\3rdPlugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt16Serializer.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Context\Exceptions\EntityIsNotDestroyedException.cs" />

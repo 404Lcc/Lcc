@@ -21,11 +21,7 @@ namespace LccModel
         public bool GameStarted { set; get; } = false;
 
         public Assembly hotfixAssembly;
-        public PatchOperation patchOperation = new PatchOperation();
-
-        public const string DefaultPackage = "DefaultPackage";
-
-
+        
         public void Init()
         {
             try
@@ -108,7 +104,7 @@ namespace LccModel
 
             //本地版本
             var showApp = int.Parse(Application.version.Split('.')[0]);
-            UILoadingPanel.Instance.SetText("version " + showApp + "." + Launcher.GameConfig.appVersion + "." + Launcher.GameConfig.channel + "." + Launcher.GameConfig.resVersion);
+            UILoadingPanel.Instance.SetVersion("version " + showApp + "." + Launcher.GameConfig.appVersion + "." + Launcher.GameConfig.channel + "." + Launcher.GameConfig.resVersion);
 
 
             StartServerLoad();
@@ -161,8 +157,34 @@ namespace LccModel
         public void StartDownloadUpdate()
         {
             Debug.Log("Launcher 开启补丁更新流程...");
-            YooAssets.StartOperation(patchOperation);
+
+            EPlayMode playMode = EPlayMode.HostPlayMode;
+            //不检测热更走本地资源
+            if (!Launcher.GameConfig.checkResUpdate)
+            {
+                playMode = EPlayMode.OfflinePlayMode;
+            }
+
+            //提审包走本地资源
+            if (Launcher.Instance.IsAuditServer())
+            {
+                playMode = EPlayMode.OfflinePlayMode;
+            }
+
+            if (Application.isEditor)
+            {
+                playMode = EPlayMode.EditorSimulateMode;
+
+#if USE_ASSETBUNDLE
+                playMode = EPlayMode.OfflinePlayMode;
+#endif
+            }
+
+            // 开始补丁更新流程
+            var operation = new PatchOperation("DefaultPackage", playMode);
+            YooAssets.StartOperation(operation);
         }
+
         public void LoadFinish()
         {
             GameStarted = true;
@@ -170,8 +192,5 @@ namespace LccModel
             coroutine = null;
             UILoadingPanel.Instance.Hide();
         }
-
-
-
     }
 }

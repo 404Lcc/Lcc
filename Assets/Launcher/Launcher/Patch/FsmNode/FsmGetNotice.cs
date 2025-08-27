@@ -16,7 +16,7 @@ namespace LccModel
         }
         public void OnEnter()
         {
-            PatchStatesChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_load"));
+            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_load"));
 
             UILoadingPanel.Instance.UpdateLoadingPercent(51, 70);
             Launcher.Instance.StartCoroutine(GetNoticeInfo());

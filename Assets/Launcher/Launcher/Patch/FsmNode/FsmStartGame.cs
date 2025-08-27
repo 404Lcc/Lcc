@@ -37,27 +37,30 @@ namespace LccModel
         //初始化配置文件
         public IEnumerator LoadInitialize()
         {
+            var packageName = (string)_machine.GetBlackboardValue("PackageName");
+            
             // 更新多语言
             string languageName = Launcher.Instance.GetSelectedLanguage();
             yield return Launcher.Instance.UpdateLanguage(languageName);
 
-            UILoadingPanel.Instance.SetText(Launcher.Instance.GetClientVersion());
+            UILoadingPanel.Instance.SetVersion(Launcher.Instance.GetClientVersion());
 
             UILoadingPanel.Instance.UpdateLoadingPercent(96, 100);
 
             // 设置默认的资源包
-            var gamePackage = YooAssets.GetPackage(Launcher.DefaultPackage);
+            var gamePackage = YooAssets.GetPackage(packageName);
             YooAssets.SetDefaultPackage(gamePackage);
 
-            PatchStatesChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_game_start"));
+            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_game_start"));
 
             bool haveHotfixAssembly = Launcher.Instance.hotfixAssembly != null;
-            int totalDownloadCount = (int)_machine.GetBlackboardValue("TotalDownloadCount");
-            Debug.Log("是否加载过程序集了 haveHotfixAssembly=" + haveHotfixAssembly + "  " + "下载资源数量=" + totalDownloadCount);
+            ResourceDownloaderOperation downloader = (ResourceDownloaderOperation)_machine.GetBlackboardValue("Downloader");
+            
+            Debug.Log("是否加载过程序集了 haveHotfixAssembly=" + haveHotfixAssembly + "  " + "下载资源数量=" + downloader.TotalDownloadCount);
             if (haveHotfixAssembly)
             {
                 //如果没下载过资源就直接用当前的程序集跑
-                if (totalDownloadCount == 0)
+                if (downloader.TotalDownloadCount == 0)
                 {
                     Run();
                 }
@@ -85,12 +88,6 @@ namespace LccModel
 
             if (Application.platform == RuntimePlatform.Android)
             {
-                //AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-                //AndroidJavaObject mainActivity = jc.GetStatic<AndroidJavaObject>("currentActivity");
-                //mainActivity.Call("RestartApplication", 0);
-                //jc.Dispose();
-                //mainActivity.Dispose();
-
                 using (var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
                 {
                     const int kIntent_FLAG_ACTIVITY_CLEAR_TASK = 0x00008000;

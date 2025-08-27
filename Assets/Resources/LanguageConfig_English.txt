@@ -2,6 +2,7 @@ msg_load = Loading
 msg_clean_cache = Cleaning Unused Cache Files
 msg_patch_downloader = Creating Patch Downloader
 msg_download_patch = Start Downloading Patch Files
+msg_download_patch_finish = Resource files download completed
 msg_init_resource = Initializing Resource Packs
 msg_game_start = Start Game
 msg_update_resource = Updating Resource List

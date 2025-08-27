@@ -15,14 +15,17 @@ namespace LccModel
         {
             _machine = machine;
         }
+
         public void OnEnter()
         {
-            PatchStatesChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_get_latest"));
+            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_get_latest"));
             Launcher.Instance.StartCoroutine(GetStaticVersion());
         }
+
         public void OnUpdate()
         {
         }
+
         public void OnExit()
         {
         }
@@ -31,8 +34,6 @@ namespace LccModel
         {
             UILoadingPanel.Instance.UpdateLoadingPercent(76, 80);
 
-            yield return new WaitForSecondsRealtime(0.5f);
-
             var packageName = (string)_machine.GetBlackboardValue("PackageName");
             var package = YooAssets.GetPackage(packageName);
             var operation = package.RequestPackageVersionAsync();
@@ -40,8 +41,8 @@ namespace LccModel
 
             if (operation.Status != EOperationStatus.Succeed)
             {
-                Debug.LogWarning("FsmUpdateVersion Error=" + operation.Error);
-                PackageVersionUpdateFailed.SendEventMessage();
+                Debug.LogWarning(operation.Error);
+                PatchEventDefine.PackageVersionRequestFailed.SendEventMessage();
             }
             else
             {

@@ -14,17 +14,19 @@ namespace LccModel
     {
         private EventGroup _eventGroup = new EventGroup();
         private StateMachine _machine;
+        private string _packageName;
         private ESteps _steps = ESteps.None;
 
-        public PatchOperation()
+        public PatchOperation(string packageName, EPlayMode playMode)
         {
-            _eventGroup.RemoveAllListener();
+            _packageName = packageName;
+
             // 注册监听事件
-            _eventGroup.AddListener<UserTryInitialize>(OnHandleEventMessage);
-            _eventGroup.AddListener<UserBeginDownloadWebFiles>(OnHandleEventMessage);
-            _eventGroup.AddListener<UserTryUpdatePackageVersion>(OnHandleEventMessage);
-            _eventGroup.AddListener<UserTryUpdatePatchManifest>(OnHandleEventMessage);
-            _eventGroup.AddListener<UserTryDownloadWebFiles>(OnHandleEventMessage);
+            _eventGroup.AddListener<UserEventDefine.UserTryInitialize>(OnHandleEventMessage);
+            _eventGroup.AddListener<UserEventDefine.UserBeginDownloadWebFiles>(OnHandleEventMessage);
+            _eventGroup.AddListener<UserEventDefine.UserTryRequestPackageVersion>(OnHandleEventMessage);
+            _eventGroup.AddListener<UserEventDefine.UserTryUpdatePackageManifest>(OnHandleEventMessage);
+            _eventGroup.AddListener<UserEventDefine.UserTryDownloadWebFiles>(OnHandleEventMessage);
 
             // 创建状态机
             _machine = new StateMachine(this);
@@ -38,8 +40,8 @@ namespace LccModel
             _machine.AddNode<FsmClearCacheBundle>();
             _machine.AddNode<FsmStartGame>();
 
-            _machine.SetBlackboardValue("PackageName", Launcher.DefaultPackage);
-            _machine.SetBlackboardValue("TotalDownloadCount", 0);
+            _machine.SetBlackboardValue("PackageName", packageName);
+            _machine.SetBlackboardValue("PlayMode", playMode);
         }
 
         protected override void OnStart()
@@ -79,29 +81,29 @@ namespace LccModel
         /// </summary>
         private void OnHandleEventMessage(IEventMessage message)
         {
-            if (message is UserTryInitialize)
+            if (message is UserEventDefine.UserTryInitialize)
             {
                 _machine.ChangeState<FsmInitializePackage>();
             }
-            else if (message is UserBeginDownloadWebFiles)
+            else if (message is UserEventDefine.UserBeginDownloadWebFiles)
             {
                 _machine.ChangeState<FsmDownloadPackageFiles>();
             }
-            else if (message is UserTryUpdatePackageVersion)
+            else if (message is UserEventDefine.UserTryRequestPackageVersion)
             {
                 _machine.ChangeState<FsmRequestPackageVersion>();
             }
-            else if (message is UserTryUpdatePatchManifest)
+            else if (message is UserEventDefine.UserTryUpdatePackageManifest)
             {
                 _machine.ChangeState<FsmUpdatePackageManifest>();
             }
-            else if (message is UserTryDownloadWebFiles)
+            else if (message is UserEventDefine.UserTryDownloadWebFiles)
             {
                 _machine.ChangeState<FsmCreateDownloader>();
             }
             else
             {
-                throw new NotImplementedException($"{message.GetType()}");
+                throw new System.NotImplementedException($"{message.GetType()}");
             }
         }
     }

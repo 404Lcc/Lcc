@@ -12,20 +12,21 @@ namespace LccModel
     {
         private StateMachine _machine;
 
-        public EPlayMode PlayMode { set; get; } = EPlayMode.HostPlayMode;
-
         public void OnCreate(StateMachine machine)
         {
             _machine = machine;
         }
+
         public void OnEnter()
         {
-            PatchStatesChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_init_resource"));
+            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_init_resource"));
             Launcher.Instance.StartCoroutine(InitPackage());
         }
+
         public void OnUpdate()
         {
         }
+
         public void OnExit()
         {
         }
@@ -34,55 +35,22 @@ namespace LccModel
         {
             UILoadingPanel.Instance.UpdateLoadingPercent(71, 75);
 
-
-            //不检测热更走本地资源
-            if (!Launcher.GameConfig.checkResUpdate)
-            {
-                PlayMode = EPlayMode.OfflinePlayMode;
-            }
-
-
-            //提审包走本地资源
-            if (Launcher.Instance.IsAuditServer())
-            {
-                PlayMode = EPlayMode.OfflinePlayMode;
-            }
-
-            if (Application.isEditor)
-            {
-                PlayMode = EPlayMode.EditorSimulateMode;
-
-#if USE_ASSETBUNDLE
-                PlayMode = EPlayMode.OfflinePlayMode;
-#endif
-            }
-
-            Debug.Log($"FsmInitialize PlayMode = {PlayMode}");
-
-            // 创建默认的资源包
             var packageName = (string)_machine.GetBlackboardValue("PackageName");
-
-            //默认资源包清空
-            YooAssets.SetDefaultPackage(null);
+            var playMode = (EPlayMode)_machine.GetBlackboardValue("PlayMode");
 
             // 创建资源包裹类
             var package = YooAssets.TryGetPackage(packageName);
-            if (package == null)
+            if (package != null)
             {
-                package = YooAssets.CreatePackage(packageName);
-            }
-            else
-            {
-                //如果有上次遗留的先销毁在重建
-                var destroyOperation = package.DestroyAsync();
-                yield return destroyOperation;
-
+                yield return package.DestroyAsync();
                 YooAssets.RemovePackage(packageName);
-                package = YooAssets.CreatePackage(packageName);
             }
+
+            package = YooAssets.CreatePackage(packageName);
+
             // 编辑器下的模拟模式
             InitializationOperation initializationOperation = null;
-            if (PlayMode == EPlayMode.EditorSimulateMode)
+            if (playMode == EPlayMode.EditorSimulateMode)
             {
                 var buildResult = EditorSimulateModeHelper.SimulateBuild(packageName);
                 var packageRoot = buildResult.PackageRootDirectory;
@@ -92,7 +60,7 @@ namespace LccModel
             }
 
             // 单机运行模式
-            if (PlayMode == EPlayMode.OfflinePlayMode)
+            if (playMode == EPlayMode.OfflinePlayMode)
             {
                 var createParameters = new OfflinePlayModeParameters();
                 createParameters.BuildinFileSystemParameters = FileSystemParameters.CreateDefaultBuildinFileSystemParameters();
@@ -100,7 +68,7 @@ namespace LccModel
             }
 
             // 联机运行模式
-            if (PlayMode == EPlayMode.HostPlayMode)
+            if (playMode == EPlayMode.HostPlayMode)
             {
                 Debug.Log($"FsmInitialize 初始化资源包 hostServerURL = {GetHostServerURL()}");
                 string defaultHostServer = GetHostServerURL();
@@ -113,7 +81,7 @@ namespace LccModel
             }
 
             // WebGL运行模式
-            if (PlayMode == EPlayMode.WebPlayMode)
+            if (playMode == EPlayMode.WebPlayMode)
             {
 #if UNITY_WEBGL && WEIXINMINIGAME && !UNITY_EDITOR
                 var createParameters = new WebPlayModeParameters();
@@ -132,16 +100,15 @@ namespace LccModel
 
             yield return initializationOperation;
 
-
-
-            if (initializationOperation.Status == EOperationStatus.Succeed)
+            // 如果初始化失败弹出提示界面
+            if (initializationOperation.Status != EOperationStatus.Succeed)
             {
-                _machine.ChangeState<FsmRequestPackageVersion>();
+                Debug.LogWarning($"{initializationOperation.Error}");
+                PatchEventDefine.InitializeFailed.SendEventMessage();
             }
             else
             {
-                Debug.LogWarning($"{initializationOperation.Error}");
-                InitializeFailed.SendEventMessage();
+                _machine.ChangeState<FsmRequestPackageVersion>();
             }
         }
 
@@ -193,10 +160,12 @@ namespace LccModel
                 _defaultHostServer = defaultHostServer;
                 _fallbackHostServer = fallbackHostServer;
             }
+
             string IRemoteServices.GetRemoteMainURL(string fileName)
             {
                 return $"{_defaultHostServer}/{fileName}";
             }
+
             string IRemoteServices.GetRemoteFallbackURL(string fileName)
             {
                 return $"{_fallbackHostServer}/{fileName}";
@@ -214,6 +183,7 @@ namespace LccModel
         public BundleStream(string path, FileMode mode, FileAccess access, FileShare share) : base(path, mode, access, share)
         {
         }
+
         public BundleStream(string path, FileMode mode) : base(path, mode)
         {
         }
@@ -225,6 +195,7 @@ namespace LccModel
             {
                 array[i] ^= KEY;
             }
+
             return index;
         }
     }

@@ -4641,12 +4641,13 @@
     <type fullname="LccModel.UISpriteCtrl" preserve="all" />
     <type fullname="LccModel.BlackFadeMask" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel" preserve="all" />
-    <type fullname="LccModel.MessageBox" preserve="all" />
     <type fullname="LccModel.UILoadingPanel" preserve="all" />
     <type fullname="LccModel.UIScreenBackgroundMessage" preserve="all" />
     <type fullname="LccModel.UIAdapt" preserve="all" />
     <type fullname="LccModel.GameConfig" preserve="all" />
     <type fullname="LccModel.LanguageConfig" preserve="all" />
+    <type fullname="LccModel.PatchEventDefine" preserve="all" />
+    <type fullname="LccModel.UserEventDefine" preserve="all" />
     <type fullname="LccModel.Init" preserve="all" />
     <type fullname="LccModel.Launcher" preserve="all" />
     <type fullname="LccModel.GameState" preserve="all" />
@@ -4662,18 +4663,7 @@
     <type fullname="LccModel.FsmUpdatePackageManifest" preserve="all" />
     <type fullname="LccModel.ESteps" preserve="all" />
     <type fullname="LccModel.PatchOperation" preserve="all" />
-    <type fullname="LccModel.InitializeFailed" preserve="all" />
-    <type fullname="LccModel.PatchStatesChange" preserve="all" />
-    <type fullname="LccModel.FoundUpdateFiles" preserve="all" />
-    <type fullname="LccModel.DownloadProgressUpdate" preserve="all" />
-    <type fullname="LccModel.PackageVersionUpdateFailed" preserve="all" />
-    <type fullname="LccModel.PatchManifestUpdateFailed" preserve="all" />
-    <type fullname="LccModel.WebFileDownloadFailed" preserve="all" />
-    <type fullname="LccModel.UserTryInitialize" preserve="all" />
-    <type fullname="LccModel.UserBeginDownloadWebFiles" preserve="all" />
-    <type fullname="LccModel.UserTryUpdatePackageVersion" preserve="all" />
-    <type fullname="LccModel.UserTryUpdatePatchManifest" preserve="all" />
-    <type fullname="LccModel.UserTryDownloadWebFiles" preserve="all" />
+    <type fullname="LccModel.PatchWindow" preserve="all" />
     <type fullname="LccModel.AStaticMethod" preserve="all" />
     <type fullname="LccModel.MonoStaticMethod" preserve="all" />
     <type fullname="LccModel.DirectoryUtility" preserve="all" />
@@ -4711,32 +4701,45 @@
     <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass4_0" preserve="all" />
     <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass5_0" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel+&lt;&gt;c__DisplayClass6_0" preserve="all" />
-    <type fullname="LccModel.UILoadingPanel+&lt;&gt;c" preserve="all" />
+    <type fullname="LccModel.PatchEventDefine+InitializeFailed" preserve="all" />
+    <type fullname="LccModel.PatchEventDefine+PatchStepsChange" preserve="all" />
+    <type fullname="LccModel.PatchEventDefine+FoundUpdateFiles" preserve="all" />
+    <type fullname="LccModel.PatchEventDefine+DownloadUpdate" preserve="all" />
+    <type fullname="LccModel.PatchEventDefine+PackageVersionRequestFailed" preserve="all" />
+    <type fullname="LccModel.PatchEventDefine+PackageManifestUpdateFailed" preserve="all" />
+    <type fullname="LccModel.PatchEventDefine+WebFileDownloadFailed" preserve="all" />
+    <type fullname="LccModel.UserEventDefine+UserTryInitialize" preserve="all" />
+    <type fullname="LccModel.UserEventDefine+UserBeginDownloadWebFiles" preserve="all" />
+    <type fullname="LccModel.UserEventDefine+UserTryRequestPackageVersion" preserve="all" />
+    <type fullname="LccModel.UserEventDefine+UserTryUpdatePackageManifest" preserve="all" />
+    <type fullname="LccModel.UserEventDefine+UserTryDownloadWebFiles" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetNotice&gt;d__104" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetNoticeBoard&gt;d__106" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetNoticeWhiteList&gt;d__107" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;GetNotice&gt;d__102" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;GetNoticeBoard&gt;d__104" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;GetNoticeWhiteList&gt;d__105" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;GetRemoteVersionList&gt;d__47" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;InitGameConfig&gt;d__16" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;InitLanguage&gt;d__80" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;InitLanguage&gt;d__78" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;LoadBuildConfig&gt;d__17" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;LoadCoroutine&gt;d__69" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;LoadCoroutine&gt;d__67" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;LoadLanguageConfig&gt;d__19" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;LoadLocalConfig&gt;d__67" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;LoadLocalConfig&gt;d__65" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;LoadVersionConfig&gt;d__18" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;RequestCenterServer&gt;d__46" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;UpdateLanguage&gt;d__90" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;UpdateLanguage&gt;d__88" preserve="all" />
     <type fullname="LccModel.FsmCreateDownloader+&lt;CreateDownloader&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmDownloadPackageFiles+&lt;BeginDownload&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmGetNotice+&lt;GetNoticeInfo&gt;d__3" preserve="all" />
     <type fullname="LccModel.FsmInitializePackage+RemoteServices" preserve="all" />
-    <type fullname="LccModel.FsmInitializePackage+&lt;InitPackage&gt;d__9" preserve="all" />
+    <type fullname="LccModel.FsmInitializePackage+&lt;InitPackage&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmRequestPackageVersion+&lt;GetStaticVersion&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmStartGame+&lt;LoadInitialize&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmUpdatePackageManifest+&lt;UpdateManifest&gt;d__5" preserve="all" />
+    <type fullname="LccModel.PatchWindow+MessageBox" preserve="all" />
+    <type fullname="LccModel.PatchWindow+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2655" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4200" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2947" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4277" preserve="all" />
   </assembly>
 </linker>

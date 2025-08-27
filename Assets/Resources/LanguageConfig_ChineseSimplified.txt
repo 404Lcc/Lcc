@@ -2,6 +2,7 @@ msg_load = 加载游戏
 msg_clean_cache = 清理缓存文件
 msg_patch_downloader = 准备下载补丁
 msg_download_patch = 开始下载补丁文件
+msg_download_patch_finish = 资源文件下载完毕
 msg_init_resource = 初始化资源
 msg_game_start = 开始游戏
 msg_update_resource = 更新资源列表

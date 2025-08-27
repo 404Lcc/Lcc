@@ -15,7 +15,7 @@ namespace LccModel
         }
         public void OnEnter()
         {
-            PatchStatesChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_clean_cache"));
+            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_clean_cache"));
             var packageName = (string)_machine.GetBlackboardValue("PackageName");
             var package = YooAssets.GetPackage(packageName);
             var operation = package.ClearCacheFilesAsync(EFileClearMode.ClearUnusedBundleFiles);

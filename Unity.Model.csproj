@@ -48,10 +48,12 @@
     <Compile Include="Assets\Launcher\Utility\Directory\DirectoryUtility.cs" />
     <Compile Include="Assets\Launcher\Utility\Extension\String\StringExtension.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UI\Loading\UILoadingPanel.cs" />
+    <Compile Include="Assets\Launcher\Launcher\EventDefine\PatchEventDefine.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmDownloadPackageFiles.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UGUIExpand\RightClickButton.cs" />
     <Compile Include="Assets\Launcher\Ctrl\ScrollerPro\ScrollerPro.cs" />
     <Compile Include="Assets\Launcher\Utility\MD5\MD5Utility.cs" />
+    <Compile Include="Assets\Launcher\Launcher\Patch\PatchWindow.cs" />
     <Compile Include="Assets\Launcher\Utility\Protobuf\ProtobufUtility.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\PatchOperation.cs" />
     <Compile Include="Assets\Launcher\Utility\Event\EventDriver.cs" />
@@ -76,7 +78,6 @@
     <Compile Include="Assets\Launcher\Utility\Rijndael\RijndaelUtility.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UGUIExpand\DoubleClickButton.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmUpdatePackageManifest.cs" />
-    <Compile Include="Assets\Launcher\Launcher\Patch\UserEvent.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UI\ScreenBackgroundMessage\UIScreenBackgroundMessage.cs" />
     <Compile Include="Assets\Launcher\Launcher\StaticMethod\MonoStaticMethod.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.Action.cs" />
@@ -86,7 +87,6 @@
     <Compile Include="Assets\Launcher\Asset\ResALLObject.cs" />
     <Compile Include="Assets\Launcher\Ctrl\ScrollerPro\ScrollerProEx.cs" />
     <Compile Include="Assets\Launcher\Ctrl\LccView\LccView.cs" />
-    <Compile Include="Assets\Launcher\Launcher\Patch\UpdateEvent.cs" />
     <Compile Include="Assets\Launcher\Utility\System\LocalDialog.cs" />
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.cs" />
     <Compile Include="Assets\Launcher\Utility\Event\Event.cs" />
@@ -115,6 +115,7 @@
     <Compile Include="Assets\Launcher\Utility\Event\IEventMessage.cs" />
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.Language.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.Language.cs" />
+    <Compile Include="Assets\Launcher\Launcher\EventDefine\UserEventDefine.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UI\UIAdapt\UIAdapt.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.GameStart.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.GameControl.cs" />

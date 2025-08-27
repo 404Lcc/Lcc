@@ -60,8 +60,8 @@
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamNetworkingTypes\SteamNetworkingIPAddr.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\autogen\isteamtimeline.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\autogen\isteamgameserverhttp.cs" />
-    <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamDatagramTickets\SteamDatagramRelayAuthTicket.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamNetworkingSockets\ISteamNetworkingConnectionSignaling.cs" />
+    <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamDatagramTickets\SteamDatagramRelayAuthTicket.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\Steam.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamNetworkingTypes\SteamNetworkingPOPID.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\autogen\isteamgameserverstats.cs" />
@@ -94,13 +94,13 @@
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamNetworkingTypes\HSteamListenSocket.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamNetworkingTypes\FSteamNetworkingSocketsDebugOutput.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamRemoteStorage\UGCFileWriteStreamHandle_t.cs" />
-    <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamNetworking\SNetListenSocket_t.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\autogen\isteamutils.cs" />
+    <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamNetworking\SNetListenSocket_t.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamInventory\SteamInventoryUpdateHandle_t.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\autogen\isteamgameservernetworkingsockets.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\autogen\isteamvideo.cs" />
-    <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamInventory\SteamInventoryResult_t.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamClientPublic\CGameID.cs" />
+    <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamInventory\SteamInventoryResult_t.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamInput\InputAnalogActionHandle_t.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamNetworkingTypes\SteamNetworkingErrMsg.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\autogen\isteamgameserverinventory.cs" />
@@ -150,8 +150,8 @@
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\autogen\isteamgameservernetworking.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamMatchmaking\HServerListRequest.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamNetworkingSockets\ISteamNetworkingSignalingRecvContext.cs" />
-    <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamNetworking\SNetSocket_t.cs" />
     <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamInput\InputActionSetHandle_t.cs" />
+    <Compile Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\types\SteamNetworking\SNetSocket_t.cs" />
     <None Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\Runtime\com.rlabrecque.steamworks.net.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

@@ -17,7 +17,7 @@ namespace LccModel
         }
         public void OnEnter()
         {
-            PatchStatesChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_download_patch"));
+            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_download_patch"));
             Launcher.Instance.StartCoroutine(BeginDownload());
         }
         public void OnUpdate()
@@ -34,8 +34,8 @@ namespace LccModel
             var downloader = (ResourceDownloaderOperation)_machine.GetBlackboardValue("Downloader");
 
             // 注册下载回调
-            downloader.DownloadErrorCallback = WebFileDownloadFailed.SendEventMessage;
-            downloader.DownloadUpdateCallback = DownloadProgressUpdate.SendEventMessage;
+            downloader.DownloadErrorCallback = PatchEventDefine.WebFileDownloadFailed.SendEventMessage;
+            downloader.DownloadUpdateCallback = PatchEventDefine.DownloadUpdate.SendEventMessage;
             downloader.BeginDownload();
 
             yield return downloader;
@@ -45,7 +45,7 @@ namespace LccModel
                 yield break;
 
 
-            _machine.ChangeState<FsmStartGame>();
+            _machine.ChangeState<FsmDownloadPackageOver>();
         }
     }
 }

@@ -117,8 +117,8 @@
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Buff\ComBuffs.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Download\DownloadManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\SkillData.cs" />
-    <Compile Include="Assets\Hotfix\Utility\ProtobufObject\ProtobufObject.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComView\ActorView.cs" />
+    <Compile Include="Assets\Hotfix\Utility\ProtobufObject\ProtobufObject.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\Service\IService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Orca\RVO\Obstacle.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\DictionaryList.cs" />
@@ -135,8 +135,8 @@
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\SkillSpellType.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\Data\DamageSource.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\DamageBase.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\Interface\IProcedureService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\TcpConnection.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\Interface\IProcedureService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\UI\UILogin\UILoginPanel.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Timer\TimerManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\Dev\DevPlatform.cs" />
@@ -194,9 +194,9 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\IVibrationManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Coroutine\CoroutineHandler.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Asset\AssetManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBTexture.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\HotfixBridge\HotfixBridge.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\FX\FXManager.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBTexture.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\GameObjectPoolObject.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\System\SysControl.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\RedDot\RedDotBind.cs" />
@@ -305,9 +305,9 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventPool\EventArgs.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysDebug.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\WindowRoot\UIRootBase.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\SteamLobby\SteamLobbyManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\UI\UIMain\UIMainPanel.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\ECSWorld.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\SteamLobby\SteamLobbyManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Camera\Interface\ICameraService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBLanguage.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniCameraBlender\ICameraBlender.cs" />
@@ -336,8 +336,8 @@
     <Compile Include="Assets\Hotfix\Framework\Utility\Marshal\MarshalUtility.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Main\Module.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Subobject.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Main\FrameworkMain.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\EmptyGoTo.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\Main\FrameworkMain.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\System\SysSkillCD.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComControl\IControl.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysViewTransform.cs" />

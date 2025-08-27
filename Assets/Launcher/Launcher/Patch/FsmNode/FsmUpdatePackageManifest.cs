@@ -5,9 +5,6 @@ using YooAsset;
 
 namespace LccModel
 {
-    /// <summary>
-    /// 更新资源清单
-    /// </summary>
     public class FsmUpdatePackageManifest : IStateNode
     {
         private StateMachine _machine;
@@ -16,14 +13,17 @@ namespace LccModel
         {
             _machine = machine;
         }
+
         public void OnEnter()
         {
-            PatchStatesChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_update_resource"));
+            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_update_resource"));
             Launcher.Instance.StartCoroutine(UpdateManifest());
         }
+
         public void OnUpdate()
         {
         }
+
         public void OnExit()
         {
         }
@@ -37,7 +37,7 @@ namespace LccModel
             var package = YooAssets.GetPackage(packageName);
             var operation = package.UpdatePackageManifestAsync(packageVersion);
 
-            Debug.Log($"FsmUpdateManifest UpdatePackageManifestAsync PackageVersion = {packageVersion}");
+            Debug.Log($"PackageVersion = {packageVersion}");
 
             yield return operation;
 
@@ -45,7 +45,7 @@ namespace LccModel
             if (operation.Status != EOperationStatus.Succeed)
             {
                 Debug.LogWarning(operation.Error);
-                PatchManifestUpdateFailed.SendEventMessage();
+                PatchEventDefine.PackageManifestUpdateFailed.SendEventMessage();
                 yield break;
             }
             else
