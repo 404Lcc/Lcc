@@ -106,9 +106,8 @@ public class NetworkManager : Module, INetworkService
 
         if (_tcp != null && _tcp.Socket.Connected)
         {
-            var tcp = _tcp;
+            _tcp.Dispose();
             _tcp = null;
-            tcp.Dispose();
 
             _onDisconnectedCallback?.Invoke();
         }
@@ -123,9 +122,8 @@ public class NetworkManager : Module, INetworkService
 
         if (_tcp != null)
         {
-            var tcp = _tcp;
+            _tcp.Dispose();
             _tcp = null;
-            tcp.Dispose();
         }
     }
 
@@ -172,14 +170,15 @@ public class NetworkManager : Module, INetworkService
     {
         Main.ThreadSyncService.Post(() =>
         {
-            if (_tcp != null)
-            {
-                _tcp = null;
-            }
-
             lock (_lockQueue)
             {
                 _reciveQueue.Clear();
+            }
+            
+            if (_tcp != null)
+            {
+                _tcp.Dispose();
+                _tcp = null;
             }
 
             _onDisconnectedCallback?.Invoke();

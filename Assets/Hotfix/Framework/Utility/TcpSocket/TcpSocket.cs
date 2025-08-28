@@ -232,6 +232,7 @@ namespace HiSocket.Tcp
         public void Dispose()
         {
             Disconnect();
+            _isSending = false;
             SendBuffer.Dispose();
             SendBuffer = null;
             ReceiveBuffer.Dispose();
