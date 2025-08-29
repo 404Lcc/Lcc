@@ -16,47 +16,37 @@ public class NetworkManager : Module, INetworkService
     private Action<NetworkMessage> _onReceiveMessageCallback;
 
     private int _timeOut = 5000;
-    private object _lockQueue = new object();
     private Queue<byte[]> _reciveQueue; //接收协议队列
     private IPackageHelper _packageHelper;
     private IMessageHelper _messageHelper;
 
-    public bool IsConnected => _tcp != null && _tcp.Socket.Connected;
+    public bool IsConnected => _tcp != null && _tcp.Socket != null && _tcp.Socket.Connected;
 
 
     public NetworkManager()
     {
-        lock (_lockQueue)
-        {
-            _reciveQueue = new Queue<byte[]>();
-        }
+        _reciveQueue = new Queue<byte[]>();
     }
 
     internal override void Update(float elapseSeconds, float realElapseSeconds)
     {
-        lock (_lockQueue)
+        int idx = 0;
+        while (_reciveQueue.Count > 0 && idx <= MaxExecuteCount) //小于单帧执行数才分发协议
         {
-            int idx = 0;
-            while (_reciveQueue.Count > 0 && idx <= MaxExecuteCount) //小于单帧执行数才分发协议
-            {
-                var bytes = _reciveQueue.Dequeue();
-                var message = _messageHelper.MessageParse(bytes);
-                _onReceiveMessageCallback?.Invoke(message);
-                idx++;
-            }
+            var bytes = _reciveQueue.Dequeue();
+            var message = _messageHelper.MessageParse(bytes);
+            _onReceiveMessageCallback?.Invoke(message);
+            idx++;
         }
     }
 
 
     internal override void Shutdown()
     {
-        ForceDisconnect();
-
-        _onConnectedCallback = null;
-        _onDisconnectedCallback = null;
-        _onReceiveMessageCallback = null;
         _packageHelper = null;
         _messageHelper = null;
+
+        Disconnect();
     }
 
     public void SetPackageHelper(IPackageHelper packageHelper)
@@ -67,6 +57,26 @@ public class NetworkManager : Module, INetworkService
     public void SetMessageHelper(IMessageHelper messageHelper)
     {
         _messageHelper = messageHelper;
+    }
+
+    private void InitTimeout()
+    {
+        if (_tcp != null && _tcp.Socket != null)
+        {
+            _tcp.Socket.ReceiveTimeout = _timeOut;
+            _tcp.Socket.SendTimeout = _timeOut;
+        }
+    }
+
+    private void InitSocket()
+    {
+        Debug.Assert(_tcp == null);
+        var package = new DefaultPackage();
+        package.SetPackageHelper(_packageHelper);
+        _tcp = new TcpConnection(package);
+        _tcp.OnConnected += OnConnected;
+        _tcp.OnReceiveMessage += OnReceive;
+        _tcp.OnDisconnected += OnDisconnected;
     }
 
     public void Connect(string ip, int port, Action onConnectedCallback, Action onDisconnectedCallback, Action<NetworkMessage> onReceiveMessageCallback)
@@ -99,52 +109,21 @@ public class NetworkManager : Module, INetworkService
 
     public void Disconnect()
     {
-        lock (_lockQueue)
-        {
-            _reciveQueue.Clear();
-        }
+        _onConnectedCallback = null;
+        _onDisconnectedCallback = null;
+        _onReceiveMessageCallback = null;
 
-        if (_tcp != null && _tcp.Socket.Connected)
+        _reciveQueue.Clear();
+
+        if (IsConnected)
         {
+            _tcp.OnConnected -= OnConnected;
+            _tcp.OnReceiveMessage -= OnReceive;
+            _tcp.OnDisconnected -= OnDisconnected;
             _tcp.Dispose();
-            _tcp = null;
-
-            _onDisconnectedCallback?.Invoke();
-        }
-    }
-
-    public void ForceDisconnect()
-    {
-        lock (_lockQueue)
-        {
-            _reciveQueue.Clear();
         }
 
-        if (_tcp != null)
-        {
-            _tcp.Dispose();
-            _tcp = null;
-        }
-    }
-
-    private void InitSocket()
-    {
-        Debug.Assert(_tcp == null);
-        var package = new DefaultPackage();
-        package.SetPackageHelper(_packageHelper);
-        _tcp = new TcpConnection(package);
-        _tcp.OnConnected += OnConnected;
-        _tcp.OnReceiveMessage += OnReceive;
-        _tcp.OnDisconnected += OnDisconnected;
-    }
-
-    private void InitTimeout()
-    {
-        if (_tcp != null && _tcp.Socket != null)
-        {
-            _tcp.Socket.ReceiveTimeout = _timeOut;
-            _tcp.Socket.SendTimeout = _timeOut;
-        }
+        _tcp = null;
     }
 
 
@@ -157,29 +136,22 @@ public class NetworkManager : Module, INetworkService
 
     private void OnReceive(byte[] message)
     {
-        lock (_lockQueue)
+        Main.ThreadSyncService.Post(() =>
         {
             if (message.Length > 0)
             {
                 _reciveQueue.Enqueue(message);
             }
-        }
+        });
     }
 
     private void OnDisconnected()
     {
         Main.ThreadSyncService.Post(() =>
         {
-            lock (_lockQueue)
-            {
-                _reciveQueue.Clear();
-            }
-            
-            if (_tcp != null)
-            {
-                _tcp.Dispose();
-                _tcp = null;
-            }
+            _reciveQueue.Clear();
+
+            _tcp = null;
 
             _onDisconnectedCallback?.Invoke();
         });

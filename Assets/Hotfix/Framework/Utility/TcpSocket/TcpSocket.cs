@@ -140,7 +140,7 @@ namespace HiSocket.Tcp
         {
             try
             {
-                if (_isSending || SendBuffer.Index == 0)
+                if (_isSending)
                 {
                     return;
                 }
@@ -204,7 +204,7 @@ namespace HiSocket.Tcp
                 }
                 else
                 {
-                    DisconnectedEvent();
+                    Dispose();
                 }
                 _isSending = false;
             }
@@ -269,7 +269,7 @@ namespace HiSocket.Tcp
                 }
                 else
                 {
-                    DisconnectedEvent();
+                    Dispose();
                 }
             }
             catch (Exception e)

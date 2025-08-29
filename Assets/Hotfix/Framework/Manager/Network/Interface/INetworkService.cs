@@ -10,6 +10,5 @@ namespace LccHotfix
         void Connect(string ip, int port, Action onConnectedCallback, Action onDisconnectedCallback, Action<NetworkMessage> onReciveMessageCallback);
         void Send(object message);
         void Disconnect();
-        void ForceDisconnect();
     }
 }
