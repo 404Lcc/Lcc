@@ -12,11 +12,11 @@ namespace LccHotfix
             
             try
             {
-                Launcher.Instance.actionFixedUpdate += FixedUpdate;
-                Launcher.Instance.actionUpdate += Update;
-                Launcher.Instance.actionLateUpdate += LateUpdate;
-                Launcher.Instance.actionClose += Close;
-                Launcher.Instance.actionOnDrawGizmos += DrawGizmos;
+                Launcher.Instance.GameAction.OnFixedUpdate += FixedUpdate;
+                Launcher.Instance.GameAction.OnUpdate += Update;
+                Launcher.Instance.GameAction.OnLateUpdate += LateUpdate;
+                Launcher.Instance.GameAction.OnClose += Close;
+                Launcher.Instance.GameAction.OnDrawGizmos += DrawGizmos;
 
                 Launcher.Instance.LoadFinish();
                 
@@ -52,11 +52,11 @@ namespace LccHotfix
         }
         private static void Close()
         {
-            Launcher.Instance.actionFixedUpdate -= FixedUpdate;
-            Launcher.Instance.actionUpdate -= Update;
-            Launcher.Instance.actionLateUpdate -= LateUpdate;
-            Launcher.Instance.actionClose -= Close;
-            Launcher.Instance.actionOnDrawGizmos -= DrawGizmos;
+            Launcher.Instance.GameAction.OnFixedUpdate -= FixedUpdate;
+            Launcher.Instance.GameAction.OnUpdate -= Update;
+            Launcher.Instance.GameAction.OnLateUpdate -= LateUpdate;
+            Launcher.Instance.GameAction.OnClose -= Close;
+            Launcher.Instance.GameAction.OnDrawGizmos -= DrawGizmos;
             Main.Current.Shutdown();
         }
     }

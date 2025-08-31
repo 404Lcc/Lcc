@@ -140,7 +140,7 @@ namespace LccHotfix
             Launcher.Instance.reCheckVersionUpdate = false;
 
 
-            Launcher.Instance.actionClose?.Invoke();
+            Launcher.Instance.GameAction.ExecuteOnClose();
             yield return null;
 
             yield return new WaitForSeconds(0.3f);

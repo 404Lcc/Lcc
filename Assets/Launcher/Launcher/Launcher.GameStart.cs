@@ -16,6 +16,7 @@ namespace LccModel
     {
         public Coroutine coroutine;
         public GameControl GameControl { get; private set; } = new GameControl();
+        public GameAction GameAction { get; private set; } = new GameAction();
 
         public GameState GameState { set; get; } = GameState.Official;
 

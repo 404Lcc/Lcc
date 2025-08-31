@@ -45,6 +45,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Launcher\Launcher\GameAction.cs" />
     <Compile Include="Assets\Launcher\Utility\Directory\DirectoryUtility.cs" />
     <Compile Include="Assets\Launcher\Utility\Extension\String\StringExtension.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UI\Loading\UILoadingPanel.cs" />
@@ -80,7 +81,6 @@
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmUpdatePackageManifest.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UI\ScreenBackgroundMessage\UIScreenBackgroundMessage.cs" />
     <Compile Include="Assets\Launcher\Launcher\StaticMethod\MonoStaticMethod.cs" />
-    <Compile Include="Assets\Launcher\Launcher\Launcher.Action.cs" />
     <Compile Include="Assets\Launcher\Asset\ResShader.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UI\ForeGround\BlackFadeMask.cs" />
     <Compile Include="Assets\Launcher\Utility\Math\OBB.cs" />
