@@ -15,6 +15,7 @@ namespace LccModel
     public partial class Launcher : SingletonMono<Launcher>
     {
         public Coroutine coroutine;
+        public GameControl GameControl { get; private set; } = new GameControl();
 
         public GameState GameState { set; get; } = GameState.Official;
 
@@ -29,8 +30,8 @@ namespace LccModel
                 DateTime dt_1970 = new DateTime(1970, 1, 1);
                 long tricks_1970 = dt_1970.Ticks;//1970年1月1日刻度    
 
-                ChangeFPS();
-                SetGameSpeed(1);
+                GameControl.ChangeFPS();
+                GameControl.SetGameSpeed(1);
 
                 YooAssets.Initialize();
                 Event.Initalize();
@@ -121,7 +122,7 @@ namespace LccModel
         private IEnumerator LoadCoroutine()
         {
             UILoadingPanel.Instance.Show(GetLanguage("msg_retrieve_server_data"));
-            ChangeFPS();
+            GameControl.ChangeFPS();
             UILoadingPanel.Instance.UpdateLoadingPercent(0, 3);
             yield return null;
 
@@ -188,7 +189,7 @@ namespace LccModel
         public void LoadFinish()
         {
             GameStarted = true;
-            ChangeFPS();
+            GameControl.ChangeFPS();
             coroutine = null;
             UILoadingPanel.Instance.Hide();
         }

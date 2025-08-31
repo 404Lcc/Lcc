@@ -18,8 +18,8 @@ public class DefaultProcedureHelper : IProcedureHelper
     }
     public void ResetSpeed()
     {
-        Launcher.Instance.SetGameSpeed(1);
-        Launcher.Instance.ChangeFPS();
+        Launcher.Instance.GameControl.SetGameSpeed(1);
+        Launcher.Instance.GameControl.ChangeFPS();
     }
     public void UnloadAllPanel(LoadProcedureHandler last, LoadProcedureHandler cur)
     {

@@ -23,9 +23,9 @@ namespace LccHotfix
             UILoadingPanel.Instance.Hide();
 
             //重置速度
-            Launcher.Instance.SetGameSlow(false);
-            Launcher.Instance.SetGameSpeed(1);
-            Launcher.Instance.Resume();
+            Launcher.Instance.GameControl.SetGameSlow(false);
+            Launcher.Instance.GameControl.SetGameSpeed(1);
+            Launcher.Instance.GameControl.Resume();
 
             //清理上个玩家数据
             ClearLastUserData();
@@ -54,9 +54,9 @@ namespace LccHotfix
             UILoadingPanel.Instance.Hide();
 
             //重置速度
-            Launcher.Instance.SetGameSlow(false);
-            Launcher.Instance.SetGameSpeed(1);
-            Launcher.Instance.Resume();
+            Launcher.Instance.GameControl.SetGameSlow(false);
+            Launcher.Instance.GameControl.SetGameSpeed(1);
+            Launcher.Instance.GameControl.Resume();
 
             //清理上个玩家数据
             ClearLastUserData();
@@ -101,7 +101,7 @@ namespace LccHotfix
 
         private static IEnumerator ReCheckVersionCoroutine()
         {
-            Launcher.Instance.ChangeFPS();
+            Launcher.Instance.GameControl.ChangeFPS();
 
             UILoadingPanel.Instance.UpdateLoadingPercent(0, 18);
             //连接中心服，请求失败重新请求

@@ -4648,6 +4648,7 @@
     <type fullname="LccModel.LanguageConfig" preserve="all" />
     <type fullname="LccModel.PatchEventDefine" preserve="all" />
     <type fullname="LccModel.UserEventDefine" preserve="all" />
+    <type fullname="LccModel.GameControl" preserve="all" />
     <type fullname="LccModel.Init" preserve="all" />
     <type fullname="LccModel.Launcher" preserve="all" />
     <type fullname="LccModel.GameState" preserve="all" />
@@ -4714,19 +4715,19 @@
     <type fullname="LccModel.UserEventDefine+UserTryUpdatePackageManifest" preserve="all" />
     <type fullname="LccModel.UserEventDefine+UserTryDownloadWebFiles" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetNotice&gt;d__102" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetNoticeBoard&gt;d__104" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetNoticeWhiteList&gt;d__105" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetRemoteVersionList&gt;d__47" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;GetNotice&gt;d__90" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;GetNoticeBoard&gt;d__92" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;GetNoticeWhiteList&gt;d__93" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;GetRemoteVersionList&gt;d__31" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;InitGameConfig&gt;d__16" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;InitLanguage&gt;d__78" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;InitLanguage&gt;d__66" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;LoadBuildConfig&gt;d__17" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;LoadCoroutine&gt;d__67" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;LoadCoroutine&gt;d__55" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;LoadLanguageConfig&gt;d__19" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;LoadLocalConfig&gt;d__65" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;LoadLocalConfig&gt;d__53" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;LoadVersionConfig&gt;d__18" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;RequestCenterServer&gt;d__46" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;UpdateLanguage&gt;d__88" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;RequestCenterServer&gt;d__30" preserve="all" />
+    <type fullname="LccModel.Launcher+&lt;UpdateLanguage&gt;d__76" preserve="all" />
     <type fullname="LccModel.FsmCreateDownloader+&lt;CreateDownloader&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmDownloadPackageFiles+&lt;BeginDownload&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmGetNotice+&lt;GetNoticeInfo&gt;d__3" preserve="all" />
@@ -4739,7 +4740,7 @@
     <type fullname="LccModel.PatchWindow+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2947" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4277" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2950" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4268" preserve="all" />
   </assembly>
 </linker>

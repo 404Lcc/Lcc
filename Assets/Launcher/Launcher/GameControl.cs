@@ -3,36 +3,36 @@ using UnityEngine;
 
 namespace LccModel
 {
-    public partial class Launcher
+    public class GameControl
     {
         public const int FPS_HIGH = 60;
         public const int FPS_DEFAULT = 60;
         public const int FPS_PVE = 30;
         public const int FPS_LOADING = 15;
 
-        public bool isPause;
+        private bool _isPause;
+        private float _standardDeltaTime = 0.033f;
+        private float _gameTimeScale = 1f;
+        private float _slowTimeScale = 1f;
 
         public void Pause()
         {
-            if (!isPause)
+            if (!_isPause)
             {
                 Time.timeScale = 0;
-                isPause = true;
+                _isPause = true;
             }
         }
 
         public void Resume()
         {
-            if (isPause)
+            if (_isPause)
             {
                 Time.timeScale = _gameTimeScale * _slowTimeScale;
-                isPause = false;
+                _isPause = false;
             }
         }
 
-
-
-        private float _standardDeltaTime = 0.033f;
         public void ChangeFPS()
         {
             Application.targetFrameRate = FPS_DEFAULT;
@@ -45,7 +45,6 @@ namespace LccModel
             _standardDeltaTime = 1f / Application.targetFrameRate;
         }
 
-        private float _gameTimeScale = 1f;
         public void SetGameSpeed(float timeScale)
         {
             if (timeScale < 1)
@@ -53,11 +52,11 @@ namespace LccModel
                 Debug.LogError("SetGameSpeed = " + timeScale);
                 return;
             }
+
             _gameTimeScale = timeScale;
             Time.timeScale = _gameTimeScale * _slowTimeScale;
         }
 
-        private float _slowTimeScale = 1f;
         public void SetGameSlow(bool slow, float timeScale = 1f)
         {
             if (slow)
@@ -67,12 +66,14 @@ namespace LccModel
                     Debug.LogError("SetGameSpeed = " + timeScale);
                     return;
                 }
+
                 _slowTimeScale = timeScale;
             }
             else
             {
                 _slowTimeScale = 1f;
             }
+
             Time.timeScale = _gameTimeScale * _slowTimeScale;
         }
 
@@ -80,10 +81,10 @@ namespace LccModel
         {
             return _gameTimeScale;
         }
+
         public float GetSlowTimeScale()
         {
             return _slowTimeScale;
         }
-
     }
 }

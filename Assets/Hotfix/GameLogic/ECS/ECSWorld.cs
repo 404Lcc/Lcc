@@ -65,7 +65,7 @@ namespace LccHotfix
         public virtual void Pause()
         {
             _pause = true;
-            Launcher.Instance.Pause();
+            Launcher.Instance.GameControl.Pause();
         }
 
         public virtual void Resume()
@@ -73,7 +73,7 @@ namespace LccHotfix
             if (_pause)
             {
                 _pause = false;
-                Launcher.Instance.Resume();
+                Launcher.Instance.GameControl.Resume();
             }
         }
 
