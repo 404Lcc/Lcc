@@ -26,7 +26,10 @@ namespace LccModel
         //这里提前拿一下停服公告
         public IEnumerator GetNoticeInfo()
         {
+#if !Offline
             yield return Launcher.Instance.GameNotice.GetNoticeBoard();
+#endif
+            yield return null;
 
             NextState();
         }

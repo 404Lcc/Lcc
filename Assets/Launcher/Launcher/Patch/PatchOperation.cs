@@ -30,6 +30,10 @@ namespace LccModel
 
             // 创建状态机
             _machine = new StateMachine(this);
+            _machine.AddNode<FsmStartSplash>();
+            _machine.AddNode<FsmLoadGameConfig>();
+            _machine.AddNode<FsmLoadLanguage>();
+            _machine.AddNode<FsmRequestServer>();
             _machine.AddNode<FsmGetNotice>();
             _machine.AddNode<FsmInitializePackage>();
             _machine.AddNode<FsmRequestPackageVersion>();
@@ -46,11 +50,7 @@ namespace LccModel
         protected override void OnStart()
         {
             _steps = ESteps.Update;
-#if Offline
-            _machine.Run<FsmInitializePackage>();
-#else
-            _machine.Run<FsmGetNotice>();
-#endif
+            _machine.Run<FsmStartSplash>();
         }
 
         protected override void OnUpdate()
