@@ -67,6 +67,7 @@
     <Compile Include="Assets\Launcher\Utility\HotfixFunc\HotfixFunc.cs" />
     <Compile Include="Assets\Launcher\Utility\Event\EventGroup.cs" />
     <Compile Include="Assets\Launcher\Utility\System\OpenFileName.cs" />
+    <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmStartSplash.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UGUIExpand\LongClickButton.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UI\CustomControl\UISpriteCtrl.cs" />
     <Compile Include="Assets\Launcher\Utility\File\FileUtility.cs" />

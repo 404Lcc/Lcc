@@ -7,8 +7,8 @@ namespace LccModel
 {
     public enum GameState
     {
-        Official,//正式
-        Fetch,//提审
+        Official, //正式
+        Fetch, //提审
     }
 
     public class Launcher : SingletonMono<Launcher>
@@ -26,16 +26,11 @@ namespace LccModel
         {
             try
             {
-                AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
-                {
-                    Debug.LogError(e.ExceptionObject.ToString());
-                };
-                
-                GameControl.ChangeFPS();
-                GameControl.SetGameSpeed(1);
+                AppDomain.CurrentDomain.UnhandledException += (sender, e) => { Debug.LogError(e.ExceptionObject.ToString()); };
 
                 YooAssets.Initialize();
                 Event.Initalize();
+                ResPath.InitPath();
                 YooAssets.SetOperationSystemMaxTimeSlice(30);
 
                 DontDestroyOnLoad(this.gameObject);
@@ -48,19 +43,33 @@ namespace LccModel
             }
 
         }
-        
+
+        public void StartLauncher()
+        {
+            Debug.Log("开启启动流程...");
+
+            var operation = new PatchOperation("DefaultPackage");
+            YooAssets.StartOperation(operation);
+        }
+
+        public void LauncherFinish()
+        {
+            Debug.Log("启动流程完成");
+            UILoadingPanel.Instance.Hide();
+        }
+
         public string GetClientVersion()
         {
             var showApp = int.Parse(Application.version.Split('.')[0]);
 
             string clientVersion = string.Empty;
 #if !UNITY_EDITOR
-            clientVersion = "version " + showApp + "." + Launcher.Instance.GameConfig.appVersion + "." + Launcher.Instance.GameConfig.channel + "." + GameServerConfig.svrResVersion;
+            clientVersion = "version " + showApp + "." + GameConfig.appVersion + "." + GameConfig.channel + "." + GameServerConfig.svrResVersion;
 #else
-            if (IsAuditServer() || !Launcher.Instance.GameConfig.checkResUpdate)
-                clientVersion = "version " + showApp + "." + Launcher.Instance.GameConfig.appVersion + "." + Launcher.Instance.GameConfig.channel + "." + GameServerConfig.svrResVersion;
+            if (IsAuditServer() || !GameConfig.checkResUpdate)
+                clientVersion = "version " + showApp + "." + GameConfig.appVersion + "." + GameConfig.channel + "." + GameServerConfig.svrResVersion;
             else
-                clientVersion = "version " + showApp + "." + Launcher.Instance.GameConfig.appVersion + "." + Launcher.Instance.GameConfig.channel + "." + Launcher.Instance.GameConfig.resVersion;
+                clientVersion = "version " + showApp + "." + GameConfig.appVersion + "." + GameConfig.channel + "." + GameConfig.resVersion;
 #endif
             return clientVersion;
         }
@@ -68,7 +77,7 @@ namespace LccModel
         public bool IsAuditServer()
         {
 #if !UNITY_EDITOR
-            if (Launcher.Instance.GameState == GameState.Official)
+            if (GameState == GameState.Official)
             {
                 return false;
             }
@@ -79,56 +88,6 @@ namespace LccModel
             }
 #endif
             return false;
-        }
-        
-        public void StartLoad()
-        {
-            ResPath.InitPath();
-            LoadLocalConfig();
-        }
-
-        public void LoadLocalConfig()
-        {
-            UIForeGroundPanel.Instance.FadeIn(0, null, false, 1, false);
-
-        }
-
-
-        public void StartLauncher()
-        {
-            Debug.Log("开启启动流程...");
-
-            EPlayMode playMode = EPlayMode.HostPlayMode;
-            //不检测热更走本地资源
-            if (!Launcher.Instance.GameConfig.checkResUpdate)
-            {
-                playMode = EPlayMode.OfflinePlayMode;
-            }
-
-            //提审包走本地资源
-            if (Launcher.Instance.IsAuditServer())
-            {
-                playMode = EPlayMode.OfflinePlayMode;
-            }
-
-            if (Application.isEditor)
-            {
-                playMode = EPlayMode.EditorSimulateMode;
-
-#if USE_ASSETBUNDLE
-                playMode = EPlayMode.OfflinePlayMode;
-#endif
-            }
-
-            // 开始补丁更新流程
-            var operation = new PatchOperation("DefaultPackage", playMode);
-            YooAssets.StartOperation(operation);
-        }
-
-        public void LoadFinish()
-        {
-            GameControl.ChangeFPS();
-            UILoadingPanel.Instance.Hide();
         }
     }
 }

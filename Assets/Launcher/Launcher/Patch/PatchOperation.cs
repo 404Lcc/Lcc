@@ -17,7 +17,7 @@ namespace LccModel
         private string _packageName;
         private ESteps _steps = ESteps.None;
 
-        public PatchOperation(string packageName, EPlayMode playMode)
+        public PatchOperation(string packageName)
         {
             _packageName = packageName;
 
@@ -41,7 +41,6 @@ namespace LccModel
             _machine.AddNode<FsmStartGame>();
 
             _machine.SetBlackboardValue("PackageName", packageName);
-            _machine.SetBlackboardValue("PlayMode", playMode);
         }
 
         protected override void OnStart()

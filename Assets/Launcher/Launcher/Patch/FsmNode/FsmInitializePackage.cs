@@ -33,10 +33,31 @@ namespace LccModel
 
         private IEnumerator InitPackage()
         {
+            EPlayMode playMode = EPlayMode.HostPlayMode;
+            //不检测热更走本地资源
+            if (!Launcher.Instance.GameConfig.checkResUpdate)
+            {
+                playMode = EPlayMode.OfflinePlayMode;
+            }
+
+            //提审包走本地资源
+            if (Launcher.Instance.IsAuditServer())
+            {
+                playMode = EPlayMode.OfflinePlayMode;
+            }
+
+            if (Application.isEditor)
+            {
+                playMode = EPlayMode.EditorSimulateMode;
+
+#if USE_ASSETBUNDLE
+                playMode = EPlayMode.OfflinePlayMode;
+#endif
+            }
+            
             UILoadingPanel.Instance.UpdateLoadingPercent(71, 75);
 
             var packageName = (string)_machine.GetBlackboardValue("PackageName");
-            var playMode = (EPlayMode)_machine.GetBlackboardValue("PlayMode");
 
             // 创建资源包裹类
             var package = YooAssets.TryGetPackage(packageName);

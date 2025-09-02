@@ -18,7 +18,7 @@ namespace LccHotfix
                 Launcher.Instance.GameAction.OnClose += Close;
                 Launcher.Instance.GameAction.OnDrawGizmos += DrawGizmos;
 
-                Launcher.Instance.LoadFinish();
+                Launcher.Instance.LauncherFinish();
                 
                 Main.ProcedureService.ChangeProcedure(ProcedureType.Login);
             }

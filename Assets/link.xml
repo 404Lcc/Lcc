@@ -4669,6 +4669,7 @@
     <type fullname="LccModel.FsmRequestPackageVersion" preserve="all" />
     <type fullname="LccModel.FsmRequestServer" preserve="all" />
     <type fullname="LccModel.FsmStartGame" preserve="all" />
+    <type fullname="LccModel.FsmStartSplash" preserve="all" />
     <type fullname="LccModel.FsmUpdatePackageManifest" preserve="all" />
     <type fullname="LccModel.ESteps" preserve="all" />
     <type fullname="LccModel.PatchOperation" preserve="all" />
@@ -4747,7 +4748,7 @@
     <type fullname="LccModel.PatchWindow+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2990" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4272" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3018" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4337" preserve="all" />
   </assembly>
 </linker>
