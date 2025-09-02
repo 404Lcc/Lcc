@@ -74,7 +74,7 @@
     <Compile Include="Assets\Launcher\Utility\Path\ResPath.cs" />
     <Compile Include="Assets\Launcher\Launcher\Init.cs" />
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.Version.cs" />
-    <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmGetNotice.cs" />
+    <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmRequestNotice.cs" />
     <Compile Include="Assets\Launcher\Launcher\StaticMethod\AStaticMethod.cs" />
     <Compile Include="Assets\Launcher\Utility\Extension\Byte\ByteExtension.cs" />
     <Compile Include="Assets\Launcher\Utility\Rijndael\RijndaelUtility.cs" />

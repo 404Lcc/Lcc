@@ -35,7 +35,7 @@ namespace LccModel
             _machine.AddNode<FsmLoadGameConfig>();
             _machine.AddNode<FsmLoadLanguage>();
             _machine.AddNode<FsmRequestServer>();
-            _machine.AddNode<FsmGetNotice>();
+            _machine.AddNode<FsmRequestNotice>();
             _machine.AddNode<FsmInitializePackage>();
             _machine.AddNode<FsmRequestPackageVersion>();
             _machine.AddNode<FsmUpdatePackageManifest>();

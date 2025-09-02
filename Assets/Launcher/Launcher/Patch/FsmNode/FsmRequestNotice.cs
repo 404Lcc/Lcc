@@ -6,7 +6,7 @@ using LitJson;
 
 namespace LccModel
 {
-    public class FsmGetNotice : IStateNode
+    public class FsmRequestNotice : IStateNode
     {
         private StateMachine _machine;
 
@@ -16,7 +16,7 @@ namespace LccModel
         }
         public void OnEnter()
         {
-            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GameLanguage.GetLanguage("msg_load"));
+            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GameLanguage.GetLanguage("msg_request_notice"));
 
             UILoadingPanel.Instance.UpdateLoadingPercent(51, 70);
             Launcher.Instance.StartCoroutine(GetNoticeInfo());

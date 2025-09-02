@@ -51,7 +51,7 @@ namespace LccModel
             UILoadingPanel.Instance.UpdateLoadingPercent(41, 50);
             yield return null;
             
-            _machine.ChangeState<FsmGetNotice>();
+            _machine.ChangeState<FsmRequestNotice>();
         }
 
         public IEnumerator RequestCenterServer()
@@ -273,7 +273,7 @@ namespace LccModel
 
         public void ForceUpdate()
         {
-            UILoadingPanel.Instance.ShowMessageBox(Launcher.Instance.GameLanguage.GetLanguage("msg_update"), () =>
+            UILoadingPanel.Instance.ShowMessageBox(Launcher.Instance.GameLanguage.GetLanguage("msg_force_update"), () =>
             {
                 UpdateNewVersion();
             }, false);
