@@ -4651,6 +4651,7 @@
     <type fullname="LccModel.GameAction" preserve="all" />
     <type fullname="LccModel.GameControl" preserve="all" />
     <type fullname="LccModel.GameLanguage" preserve="all" />
+    <type fullname="LccModel.GameNotice" preserve="all" />
     <type fullname="LccModel.RequestServerStatus" preserve="all" />
     <type fullname="LccModel.GameServerConfig" preserve="all" />
     <type fullname="LccModel.Init" preserve="all" />
@@ -4722,10 +4723,10 @@
     <type fullname="LccModel.UserEventDefine+UserTryUpdatePackageManifest" preserve="all" />
     <type fullname="LccModel.UserEventDefine+UserTryDownloadWebFiles" preserve="all" />
     <type fullname="LccModel.GameLanguage+&lt;UpdateLanguage&gt;d__16" preserve="all" />
+    <type fullname="LccModel.GameNotice+&lt;GetNotice&gt;d__8" preserve="all" />
+    <type fullname="LccModel.GameNotice+&lt;GetNoticeBoard&gt;d__10" preserve="all" />
+    <type fullname="LccModel.GameNotice+&lt;GetNoticeWhiteList&gt;d__11" preserve="all" />
     <type fullname="LccModel.Launcher+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetNotice&gt;d__50" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetNoticeBoard&gt;d__52" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;GetNoticeWhiteList&gt;d__53" preserve="all" />
     <type fullname="LccModel.FsmCreateDownloader+&lt;CreateDownloader&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmDownloadPackageFiles+&lt;BeginDownload&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmGetNotice+&lt;GetNoticeInfo&gt;d__3" preserve="all" />
@@ -4746,7 +4747,7 @@
     <type fullname="LccModel.PatchWindow+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2988" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4277" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2990" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4272" preserve="all" />
   </assembly>
 </linker>

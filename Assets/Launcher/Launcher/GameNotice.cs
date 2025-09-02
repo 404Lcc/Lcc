@@ -7,9 +7,8 @@ using UnityEngine.Networking;
 
 namespace LccModel
 {
-    public partial class Launcher
+    public class GameNotice
     {
-
         ////下载公告内容，string类型，需要解析出来
         ////一条公告：标题&内容&索引&类型
         ////多条公告用|连接
@@ -31,7 +30,7 @@ namespace LccModel
             {
                 return;
             }
-            StartCoroutine(GetNotice(callback));
+            Launcher.Instance.StartCoroutine(GetNotice(callback));
         }
 
         public void OpenGameNoticeBoard(Action callback)
@@ -104,7 +103,7 @@ namespace LccModel
                     }
                 }
             }
-            if (!string.IsNullOrEmpty(Launcher.Instance.noticeBoardSave) && Launcher.Instance.noticeBoardSucc)
+            if (!string.IsNullOrEmpty(noticeBoardSave) && noticeBoardSucc)
             {
                 //停服了
                 return true;

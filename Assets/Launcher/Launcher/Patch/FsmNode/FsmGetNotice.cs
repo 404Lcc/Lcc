@@ -26,7 +26,7 @@ namespace LccModel
         //这里提前拿一下停服公告
         public IEnumerator GetNoticeInfo()
         {
-            yield return Launcher.Instance.GetNoticeBoard();
+            yield return Launcher.Instance.GameNotice.GetNoticeBoard();
 
             NextState();
         }

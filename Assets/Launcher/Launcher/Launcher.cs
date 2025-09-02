@@ -20,6 +20,7 @@ namespace LccModel
         public GameConfig GameConfig { get; private set; } = new GameConfig();
         public GameLanguage GameLanguage { get; private set; } = new GameLanguage();
         public GameServerConfig GameServerConfig { get; private set; } = new GameServerConfig();
+        public GameNotice GameNotice { get; private set; } = new GameNotice();
         public GameState GameState { set; get; } = GameState.Official;
 
         public bool GameStarted { set; get; } = false;

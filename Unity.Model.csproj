@@ -65,7 +65,6 @@
     <Compile Include="Assets\Launcher\Utility\Machine\IStateNode.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UI\CustomControl\UIImageCtrl.cs" />
     <Compile Include="Assets\Launcher\Utility\HotfixFunc\HotfixFunc.cs" />
-    <Compile Include="Assets\Launcher\Launcher\Launcher.Notice.cs" />
     <Compile Include="Assets\Launcher\Utility\Event\EventGroup.cs" />
     <Compile Include="Assets\Launcher\Utility\System\OpenFileName.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UGUIExpand\LongClickButton.cs" />
@@ -107,6 +106,7 @@
     <Compile Include="Assets\Launcher\Ctrl\UGUIExpand\EnterClickButton.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmRequestPackageVersion.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UI\ForeGround\UIForeGroundPanel.cs" />
+    <Compile Include="Assets\Launcher\Launcher\GameNotice.cs" />
     <Compile Include="Assets\Launcher\Ctrl\ScrollerPro\GroupBase.cs" />
     <Compile Include="Assets\Launcher\Utility\Extension\Transform\TransformExtension.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmLoadGameConfig.cs" />
