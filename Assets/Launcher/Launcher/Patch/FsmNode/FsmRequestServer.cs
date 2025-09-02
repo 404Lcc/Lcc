@@ -31,7 +31,7 @@ namespace LccModel
             UILoadingPanel.Instance.UpdateLoadingPercent(4, 20, 0.5f);
             yield return RequestCenterServer();
 
-            if (Launcher.Instance.GameServerConfig.Status != RequestServerStatus.Succeed)
+            if (Launcher.Instance.GameServerConfig.status != RequestServerStatus.Succeed)
             {
                 yield break;
             }
@@ -61,10 +61,10 @@ namespace LccModel
         public IEnumerator RequestCenterServer()
         {
 #if Offline
-            Launcher.Instance.GameServerConfig.Status = RequestServerStatus.Succeed;
+            Launcher.Instance.GameServerConfig.status = RequestServerStatus.Succeed;
             yield break;
 #endif
-            Launcher.Instance.GameServerConfig.Status = RequestServerStatus.None;
+            Launcher.Instance.GameServerConfig.status = RequestServerStatus.None;
 
             string url = $"{Launcher.Instance.GameConfig.centerServerAddress}/{(Launcher.Instance.GameConfig.isRelease ? "Release" : "Dev")}/{ResPath.PlatformDirectory}/channelList.txt";
             Debug.Log("RequestCenterServer=" + url);
@@ -136,7 +136,7 @@ namespace LccModel
 
                 ReadVersionListConfig(response);
                 
-                Launcher.Instance.GameServerConfig.Status = RequestServerStatus.Succeed;
+                Launcher.Instance.GameServerConfig.status = RequestServerStatus.Succeed;
             }
 
         }

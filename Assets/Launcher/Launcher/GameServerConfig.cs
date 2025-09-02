@@ -31,6 +31,7 @@ namespace LccModel
         //公告地址
         public string noticeUrl;
 
-        public RequestServerStatus Status { get; set; } = RequestServerStatus.None;
+        //请求状态
+        public RequestServerStatus status;
     }
 }
