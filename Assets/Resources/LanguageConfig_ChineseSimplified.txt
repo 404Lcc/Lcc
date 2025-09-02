@@ -7,6 +7,7 @@ msg_init_resource = 初始化资源
 msg_game_start = 开始游戏
 msg_update_resource = 更新资源列表
 msg_get_latest = 获取最新的资源版本
+msg_request_server_failed = 请求服务器失败
 msg_init_failed = 初始化包失败
 msg_found_update = 发现更新补丁文件总数计数{0}总大小{1}MB
 msg_update_failed_static = 更新版本失败，请检查网络状态

@@ -111,7 +111,6 @@
     <Compile Include="Assets\Launcher\Launcher\Launcher.GameServer.cs" />
     <Compile Include="Assets\Launcher\Asset\ResObject.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UGUIExpand\EventTriggerListener.cs" />
-    <Compile Include="Assets\Launcher\Launcher\Launcher.Resource.cs" />
     <Compile Include="Assets\Launcher\Utility\Math\AABB.cs" />
     <Compile Include="Assets\Launcher\Utility\Event\IEventMessage.cs" />
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.Language.cs" />

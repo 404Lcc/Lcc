@@ -7,6 +7,7 @@ msg_init_resource = Initializing Resource Packs
 msg_game_start = Start Game
 msg_update_resource = Updating Resource List
 msg_get_latest = Getting the latest resource version
+msg_request_server_failed = Request to Server Failed
 msg_init_failed = Failed to Initialize Package
 msg_found_update = Found Update Patch Files Total Count {0} Total Size {1} MB
 msg_update_failed_static = Failed to Update Static Version Please Check the Network Status
