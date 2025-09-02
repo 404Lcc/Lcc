@@ -92,7 +92,7 @@ namespace LccModel
             if (message is PatchEventDefine.InitializeFailed)
             {
                 System.Action callback = () => { UserEventDefine.UserTryInitialize.SendEventMessage(); };
-                ShowMessageBox(Launcher.Instance.GetLanguage("msg_init_failed"), callback);
+                ShowMessageBox(Launcher.Instance.GameLanguage.GetLanguage("msg_init_failed"), callback);
             }
             else if (message is PatchEventDefine.PatchStepsChange)
             {
@@ -107,7 +107,7 @@ namespace LccModel
                 float sizeMB = msg.TotalSizeBytes / 1048576f;
                 sizeMB = Mathf.Clamp(sizeMB, 0.1f, float.MaxValue);
                 string totalSizeMB = sizeMB.ToString("f1");
-                ShowMessageBox(Launcher.Instance.GetLanguage("msg_found_update", msg.TotalCount.ToString(), totalSizeMB), callback);
+                ShowMessageBox(Launcher.Instance.GameLanguage.GetLanguage("msg_found_update", msg.TotalCount.ToString(), totalSizeMB), callback);
             }
             else if (message is PatchEventDefine.DownloadUpdate)
             {
@@ -120,18 +120,18 @@ namespace LccModel
             else if (message is PatchEventDefine.PackageVersionRequestFailed)
             {
                 System.Action callback = () => { UserEventDefine.UserTryRequestPackageVersion.SendEventMessage(); };
-                ShowMessageBox(Launcher.Instance.GetLanguage("msg_update_failed_static"), callback);
+                ShowMessageBox(Launcher.Instance.GameLanguage.GetLanguage("msg_update_failed_static"), callback);
             }
             else if (message is PatchEventDefine.PackageManifestUpdateFailed)
             {
                 System.Action callback = () => { UserEventDefine.UserTryUpdatePackageManifest.SendEventMessage(); };
-                ShowMessageBox(Launcher.Instance.GetLanguage("msg_update_failed_patch"), callback);
+                ShowMessageBox(Launcher.Instance.GameLanguage.GetLanguage("msg_update_failed_patch"), callback);
             }
             else if (message is PatchEventDefine.WebFileDownloadFailed)
             {
                 var msg = message as PatchEventDefine.WebFileDownloadFailed;
                 System.Action callback = () => { UserEventDefine.UserTryDownloadWebFiles.SendEventMessage(); };
-                ShowMessageBox(Launcher.Instance.GetLanguage("msg_download_failed", msg.FileName), callback);
+                ShowMessageBox(Launcher.Instance.GameLanguage.GetLanguage("msg_download_failed", msg.FileName), callback);
             }
             else
             {

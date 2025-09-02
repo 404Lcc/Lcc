@@ -19,7 +19,7 @@ namespace LccModel
 
         public void OnEnter()
         {
-            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_init_resource"));
+            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GameLanguage.GetLanguage("msg_init_resource"));
             Launcher.Instance.StartCoroutine(InitPackage());
         }
 

@@ -83,7 +83,7 @@ namespace LccHotfix
             yield return null;
             GC.Collect();
             UILoadingPanel.Instance.SetStartLoadingBg();
-            UILoadingPanel.Instance.Show(Launcher.Instance.GetLanguage("msg_retrieve_server_data"));
+            UILoadingPanel.Instance.Show(Launcher.Instance.GameLanguage.GetLanguage("msg_retrieve_server_data"));
             UILoadingPanel.Instance.SetVersion(string.Empty);
             yield return new WaitForSeconds(0.1f);
             yield return Launcher.Instance.StartCoroutine(ReCheckVersionCoroutine());

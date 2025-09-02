@@ -18,6 +18,7 @@ namespace LccModel
         public GameControl GameControl { get; private set; } = new GameControl();
         public GameAction GameAction { get; private set; } = new GameAction();
         public GameConfig GameConfig { get; private set; } = new GameConfig();
+        public GameLanguage GameLanguage { get; private set; } = new GameLanguage();
         public GameState GameState { set; get; } = GameState.Official;
 
         public bool GameStarted { set; get; } = false;
@@ -71,19 +72,14 @@ namespace LccModel
         public void StartLoad()
         {
             ResPath.InitPath();
-            StartCoroutine(LoadLocalConfig());
+            LoadLocalConfig();
         }
 
-        public IEnumerator LoadLocalConfig()
+        public void LoadLocalConfig()
         {
             UIForeGroundPanel.Instance.FadeIn(0, null, false, 1, false);
-            
-            //初始化多语言
-            yield return InitLanguage();
 
-            UIForeGroundPanel.Instance.FadeOut(0.5f, null, false);
 
-            UILoadingPanel.Instance.SetStartLoadingBg();
 
             StartServerLoad();
         }
@@ -98,7 +94,7 @@ namespace LccModel
 
         private IEnumerator LoadCoroutine()
         {
-            UILoadingPanel.Instance.Show(GetLanguage("msg_retrieve_server_data"));
+            UILoadingPanel.Instance.Show(GameLanguage.GetLanguage("msg_retrieve_server_data"));
             GameControl.ChangeFPS();
             UILoadingPanel.Instance.UpdateLoadingPercent(0, 3);
             yield return null;

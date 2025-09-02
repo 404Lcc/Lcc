@@ -90,6 +90,7 @@
     <Compile Include="Assets\Launcher\Ctrl\LccView\LccView.cs" />
     <Compile Include="Assets\Launcher\Utility\System\LocalDialog.cs" />
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.cs" />
+    <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmLoadLanguage.cs" />
     <Compile Include="Assets\Launcher\Utility\Event\Event.cs" />
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.Build.cs" />
     <Compile Include="Assets\Launcher\Utility\Singleton\Singleton.cs" />
@@ -115,9 +116,9 @@
     <Compile Include="Assets\Launcher\Utility\Math\AABB.cs" />
     <Compile Include="Assets\Launcher\Utility\Event\IEventMessage.cs" />
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.Language.cs" />
-    <Compile Include="Assets\Launcher\Launcher\Launcher.Language.cs" />
     <Compile Include="Assets\Launcher\Launcher\EventDefine\UserEventDefine.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UI\UIAdapt\UIAdapt.cs" />
+    <Compile Include="Assets\Launcher\Launcher\GameLanguage.cs" />
     <None Include="Assets\Launcher\Unity.Model.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

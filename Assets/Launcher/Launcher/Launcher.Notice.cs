@@ -52,7 +52,7 @@ namespace LccModel
         {
             noticeSucc = false;
             announcementSave = "";
-            string url = $"{Launcher.Instance.noticeUrl}/{Launcher.Instance.GameConfig.channel}/{Launcher.Instance.curLanguage}/notice.txt";
+            string url = $"{Launcher.Instance.noticeUrl}/{Launcher.Instance.GameConfig.channel}/{Launcher.Instance.GameLanguage.curLanguage}/notice.txt";
             Debug.Log("GetNoticeBoard url=" + url);
 
             UnityWebRequest web = UnityWebRequest.Get(url);
@@ -118,7 +118,7 @@ namespace LccModel
 
             noticeBoardSucc = false;
             noticeBoardSave = "";
-            string url = $"{Launcher.Instance.noticeUrl}/{Launcher.Instance.GameConfig.channel}/{Launcher.Instance.curLanguage}/noticeBoard.txt";
+            string url = $"{Launcher.Instance.noticeUrl}/{Launcher.Instance.GameConfig.channel}/{Launcher.Instance.GameLanguage.curLanguage}/noticeBoard.txt";
             Debug.Log("GetNoticeBoard url=" + url);
 
             UnityWebRequest web = UnityWebRequest.Get(url);

@@ -16,7 +16,7 @@ namespace LccModel
 
         public void OnEnter()
         {
-            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_patch_downloader"));
+            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GameLanguage.GetLanguage("msg_patch_downloader"));
             Launcher.Instance.StartCoroutine(CreateDownloader());
         }
 

@@ -6,13 +6,11 @@ using UnityEngine;
 
 namespace LccModel
 {
-    public partial class Launcher
+    public class GameLanguage
     {
         public const string ALLLanguageKey = "ALLLanguage";
         public const string CacheLanguageKey = "MutiLanguage";
         public const string DefaultFont = "Font SDF";  // 默认字体资源
-
-        private string _languageTxt = null;
 
         private bool _localizationHasBeenSet = false;
         private Dictionary<string, string> _languageDict = new Dictionary<string, string>();
@@ -20,34 +18,6 @@ namespace LccModel
         private string _curLanguage;
 
         public List<string> languages;
-
-        //游戏启动时第一次初始化语言
-        private IEnumerator InitLanguage()
-        {
-            curLanguage = GetSelectedLanguage();
-
-            // 加载多语言文本
-            var txtRes = Resources.LoadAsync<TextAsset>("LanguageConfig_" + curLanguage);
-            while (!txtRes.isDone)
-                yield return null;
-            TextAsset txtAsset = txtRes.asset as TextAsset;
-            if (txtAsset != null)
-            {
-                _languageTxt = txtAsset.text;
-                Resources.UnloadAsset(txtAsset);
-            }
-
-            yield return null;
-            // 加载字体
-            InitFontAsset();
-            yield return null;
-            OnLanguageAssetLoad(_languageTxt);
-            Set(curLanguage);
-
-            Debug.Log("完成多语言初始化加载");
-
-
-        }
 
         public string curLanguage
         {
@@ -115,21 +85,21 @@ namespace LccModel
                 }
                 if (string.IsNullOrEmpty(lang))
                 {
-                    return GameConfig.defaultLanguage;
+                    return Launcher.Instance.GameConfig.defaultLanguage;
                 }
-                if (GameConfig.languageNameList.Count <= 0)
+                if (Launcher.Instance.GameConfig.languageNameList.Count <= 0)
                 {
-                    return GameConfig.defaultLanguage;
+                    return Launcher.Instance.GameConfig.defaultLanguage;
                 }
-                if (GameConfig.languageNameList.Contains(lang))
+                if (Launcher.Instance.GameConfig.languageNameList.Contains(lang))
                 {
                     return lang;
                 }
-                return GameConfig.defaultLanguage;
+                return Launcher.Instance.GameConfig.defaultLanguage;
             }
             catch
             {
-                return GameConfig.defaultLanguage;
+                return Launcher.Instance.GameConfig.defaultLanguage;
             }
         }
 
@@ -154,15 +124,15 @@ namespace LccModel
         {
             if (!string.IsNullOrEmpty(curLanguage) && newLanguage == curLanguage)
                 return true;
-            for (int i = 0; i < GameConfig.languageNameList.Count; i++)
+            for (int i = 0; i < Launcher.Instance.GameConfig.languageNameList.Count; i++)
             {
-                if (newLanguage == GameConfig.languageNameList[i])
+                if (newLanguage == Launcher.Instance.GameConfig.languageNameList[i])
                 {
                     //判断目标语言文件是否下载了
                     if (languages.Contains(newLanguage))
                     {
                         PlayerPrefs.SetString(CacheLanguageKey, newLanguage);
-                        StartCoroutine(UpdateLanguage(newLanguage));
+                        Launcher.Instance.StartCoroutine(UpdateLanguage(newLanguage));
                     }
                     return true;
                 }
@@ -188,9 +158,10 @@ namespace LccModel
                 Debug.LogError("[language update] 加载多语言失败 " + txtBundle);
                 yield break;
             }
-            _languageTxt = txtAsset.text;
+            
+            var languageTxt = txtAsset.text;
 
-            if (string.IsNullOrEmpty(_languageTxt))
+            if (string.IsNullOrEmpty(languageTxt))
                 yield break;
             yield return null;
 
@@ -200,7 +171,7 @@ namespace LccModel
             InitFontAsset();
 
             GetALLLanguages();
-            OnLanguageAssetLoad(_languageTxt);
+            OnLanguageAssetLoad(languageTxt);
 
             Set(curLanguage);
         }
@@ -230,7 +201,8 @@ namespace LccModel
             {
             }
         }
-        void Set(string languageName)
+        
+        public void Set(string languageName)
         {
             _localizationHasBeenSet = true;
             //ok 了 如果有本地回调可以在重新触发
@@ -301,9 +273,9 @@ namespace LccModel
         {
             TMP_FontAsset defaultFontAsset = Resources.Load<TMP_FontAsset>("Fonts/" + DefaultFont);
 
-            if (GameConfig.languageDict != null && GameConfig.languageDict.ContainsKey(curLanguage))
+            if (Launcher.Instance.GameConfig.languageDict != null && Launcher.Instance.GameConfig.languageDict.ContainsKey(curLanguage))
             {
-                var font = GameConfig.languageDict[curLanguage].font;
+                var font = Launcher.Instance.GameConfig.languageDict[curLanguage].font;
                 Font fontAssetCur = Resources.Load<Font>("Fonts/" + font);
 
                 //清除之前用的字体资源数据和字符，使fallback略过该字体

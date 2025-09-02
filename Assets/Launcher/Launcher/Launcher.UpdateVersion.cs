@@ -23,7 +23,7 @@ namespace LccModel
 
         public void ForceUpdate()
         {
-            UILoadingPanel.Instance.ShowMessageBox(Launcher.Instance.GetLanguage("msg_update"), () =>
+            UILoadingPanel.Instance.ShowMessageBox(Launcher.Instance.GameLanguage.GetLanguage("msg_update"), () =>
             {
                 UpdateNewVersion();
             }, false);

@@ -40,8 +40,8 @@ namespace LccModel
             var packageName = (string)_machine.GetBlackboardValue("PackageName");
             
             // 更新多语言
-            string languageName = Launcher.Instance.GetSelectedLanguage();
-            yield return Launcher.Instance.UpdateLanguage(languageName);
+            string languageName = Launcher.Instance.GameLanguage.GetSelectedLanguage();
+            yield return Launcher.Instance.GameLanguage.UpdateLanguage(languageName);
 
             UILoadingPanel.Instance.SetVersion(Launcher.Instance.GetClientVersion());
 
@@ -51,7 +51,7 @@ namespace LccModel
             var gamePackage = YooAssets.GetPackage(packageName);
             YooAssets.SetDefaultPackage(gamePackage);
 
-            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_game_start"));
+            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GameLanguage.GetLanguage("msg_game_start"));
 
             bool haveHotfixAssembly = Launcher.Instance.HotfixAssembly != null;
             ResourceDownloaderOperation downloader = (ResourceDownloaderOperation)_machine.GetBlackboardValue("Downloader");
@@ -67,7 +67,7 @@ namespace LccModel
                 else
                 {
                     //下载过资源就得重启游戏了
-                    UILoadingPanel.Instance.ShowMessageBox(Launcher.Instance.GetLanguage("msg_need_restart"), RestartApplication);
+                    UILoadingPanel.Instance.ShowMessageBox(Launcher.Instance.GameLanguage.GetLanguage("msg_need_restart"), RestartApplication);
                 }
             }
             else
@@ -147,7 +147,7 @@ namespace LccModel
             catch (Exception e)
             {
                 Debug.LogError("加载程序集崩溃了 提示玩家重启游戏了" + e.ToString());
-                UILoadingPanel.Instance.ShowMessageBox(Launcher.Instance.GetLanguage("msg_need_restart"), RestartApplication);
+                UILoadingPanel.Instance.ShowMessageBox(Launcher.Instance.GameLanguage.GetLanguage("msg_need_restart"), RestartApplication);
                 return;
             }
 

@@ -18,7 +18,7 @@ namespace LccModel
 
         public void OnEnter()
         {
-            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_get_latest"));
+            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GameLanguage.GetLanguage("msg_get_latest"));
             Launcher.Instance.StartCoroutine(GetStaticVersion());
         }
 

@@ -85,7 +85,7 @@ namespace LccModel
 #if UNITY_EDITOR
             if (Application.isPlaying)
             {
-                lang = Launcher.Instance.curLanguage;
+                lang = Launcher.Instance.GameLanguage.curLanguage;
             }
             else
             {
@@ -115,7 +115,7 @@ namespace LccModel
 
             if (localSprite)
             {
-                string lang = Launcher.Instance.curLanguage;
+                string lang = Launcher.Instance.GameLanguage.curLanguage;
                 if (!string.IsNullOrEmpty(lang))
                 {
                     int index = spriteName.LastIndexOf('_');

@@ -49,7 +49,7 @@ namespace LccModel
             var showApp = int.Parse(Application.version.Split('.')[0]);
             UILoadingPanel.Instance.SetVersion("version " + showApp + "." + Launcher.Instance.GameConfig.appVersion + "." + Launcher.Instance.GameConfig.channel + "." + Launcher.Instance.GameConfig.resVersion);
 
-            // _machine.ChangeState<FsmLoadLanguage>();
+            _machine.ChangeState<FsmLoadLanguage>();
         }
         private IEnumerator LoadBuildConfig()
         {
