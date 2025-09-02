@@ -107,6 +107,11 @@ namespace LccHotfix
 			CloseAllWindow();
 			_commonRoot.Remove();
 			ReleaseAllWindow(ReleaseType.NEVER);
+			if (_releaseRoot != null)
+			{
+				GameObject.DestroyImmediate(_releaseRoot.gameObject);
+				_releaseRoot = null;
+			}
 		}
 
 		//根据一个窗口打开一个新窗口
