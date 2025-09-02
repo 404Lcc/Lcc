@@ -53,7 +53,7 @@ namespace LccModel
 
             PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GetLanguage("msg_game_start"));
 
-            bool haveHotfixAssembly = Launcher.Instance.hotfixAssembly != null;
+            bool haveHotfixAssembly = Launcher.Instance.HotfixAssembly != null;
             ResourceDownloaderOperation downloader = (ResourceDownloaderOperation)_machine.GetBlackboardValue("Downloader");
             
             Debug.Log("是否加载过程序集了 haveHotfixAssembly=" + haveHotfixAssembly + "  " + "下载资源数量=" + downloader.TotalDownloadCount);
@@ -142,7 +142,7 @@ namespace LccModel
             //加个保底
             try
             {
-                Launcher.Instance.hotfixAssembly = Assembly.Load(assetDll.bytes, assetPdb.bytes);
+                Launcher.Instance.HotfixAssembly = Assembly.Load(assetDll.bytes, assetPdb.bytes);
             }
             catch (Exception e)
             {
@@ -158,9 +158,9 @@ namespace LccModel
 
         private void Run()
         {
-            if (Launcher.Instance.hotfixAssembly == null)
+            if (Launcher.Instance.HotfixAssembly == null)
                 return;
-            AStaticMethod start = new MonoStaticMethod(Launcher.Instance.hotfixAssembly, "LccHotfix.Init", "Start");
+            AStaticMethod start = new MonoStaticMethod(Launcher.Instance.HotfixAssembly, "LccHotfix.Init", "Start");
             start.Run();
             
             var patchOperation = _machine.Owner as PatchOperation;

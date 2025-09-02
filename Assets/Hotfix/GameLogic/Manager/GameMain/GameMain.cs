@@ -16,7 +16,7 @@ namespace LccHotfix
             base.OnInstall();
 
             CodeTypesService = Current.AddModule<CodeTypesManager>();
-            CodeTypesService.LoadTypes(new Assembly[] { Launcher.Instance.hotfixAssembly });
+            CodeTypesService.LoadTypes(new Assembly[] { Launcher.Instance.HotfixAssembly });
             GameObjectPoolService = Current.AddModule<GameObjectPoolManager>();
             GameObjectPoolService.SetLoader((location, root) =>
             {

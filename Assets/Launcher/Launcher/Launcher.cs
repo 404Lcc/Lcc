@@ -22,8 +22,8 @@ namespace LccModel
 
         public bool GameStarted { set; get; } = false;
 
-        public Assembly hotfixAssembly;
-        
+        public Assembly HotfixAssembly { get; set; }
+
         public void Init()
         {
             try

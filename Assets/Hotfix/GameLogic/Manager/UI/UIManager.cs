@@ -77,7 +77,7 @@ namespace LccHotfix
                 Main.AssetService.LoadGameObject(asset, keepHierar, out var res);
                 return res;
             };
-            Main.WindowService.InitializeForAssembly(Launcher.Instance.hotfixAssembly);
+            Main.WindowService.InitializeForAssembly(Launcher.Instance.HotfixAssembly);
         }
 
         public IUILogic GetMonoLogic(Window window, Type monoType)
