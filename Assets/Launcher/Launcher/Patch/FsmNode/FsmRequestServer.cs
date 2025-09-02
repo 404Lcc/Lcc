@@ -18,17 +18,13 @@ namespace LccModel
 
         public void OnEnter()
         {
+            PatchEventDefine.PatchStepsChange.SendEventMessage(Launcher.Instance.GameLanguage.GetLanguage("msg_retrieve_server_data"));
             Launcher.Instance.StartCoroutine(RequestServer());
         }
 
         private IEnumerator RequestServer()
         {
-            UILoadingPanel.Instance.Show(Launcher.Instance.GameLanguage.GetLanguage("msg_retrieve_server_data"));
-            Launcher.Instance.GameControl.ChangeFPS();
-            UILoadingPanel.Instance.UpdateLoadingPercent(0, 3);
-            yield return null;
-
-            UILoadingPanel.Instance.UpdateLoadingPercent(4, 20, 0.5f);
+            UILoadingPanel.Instance.UpdateLoadingPercent(0, 20, 0.5f);
             yield return RequestCenterServer();
 
             if (Launcher.Instance.GameServerConfig.status != RequestServerStatus.Succeed)
