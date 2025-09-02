@@ -1,49 +1,72 @@
-using LitJson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using LitJson;
 using UnityEngine;
 using UnityEngine.Networking;
 
 namespace LccModel
 {
-    public partial class Launcher
+    public class FsmRequestServer : IStateNode
     {
-        //需要重新校验热更数据
-        public bool reCheckVersionUpdate = false;
+        private StateMachine _machine;
+        
+        public void OnCreate(StateMachine machine)
+        {
+            _machine = machine;
+        }
 
-        //远程渠道
-        public int svrChannel;
-        //远程版本
-        public int svrVersion;
+        public void OnEnter()
+        {
+            Launcher.Instance.StartCoroutine(RequestServer());
+        }
 
-        //远程推荐服
-        public string svrLoginServer;
-        //远程服务器列表
-        public List<string> svrLoginServerList;
-        //远程资源服
-        public string svrResourceServerUrl;
-        //远程资源版本号
-        public int svrResVersion;
-        //远程更包地址
-        public string svrAppForceUpdateUrl;
+        private IEnumerator RequestServer()
+        {
+            UILoadingPanel.Instance.Show(Launcher.Instance.GameLanguage.GetLanguage("msg_retrieve_server_data"));
+            Launcher.Instance.GameControl.ChangeFPS();
+            UILoadingPanel.Instance.UpdateLoadingPercent(0, 3);
+            yield return null;
 
-        //公告地址
-        public string noticeUrl;
+            UILoadingPanel.Instance.UpdateLoadingPercent(4, 20, 0.5f);
+            yield return RequestCenterServer();
 
-        /// <summary>
-        /// 是否成功请求中心服地址
-        /// </summary>
-        public bool requestCenterServerSucc;
+            if (Launcher.Instance.GameServerConfig.Status != RequestServerStatus.Succeed)
+            {
+                yield break;
+            }
+
+            UILoadingPanel.Instance.UpdateLoadingPercent(19, 20);
+
+            //检测是否需要重新下载安装包
+            if (Launcher.Instance.CheckIfAppShouldUpdate())
+            {
+                Debug.Log($"初始化 需要重新下载安装包 GameConfig.appVersion:{Launcher.Instance.GameConfig.appVersion}, svrVersion:{Launcher.Instance.GameServerConfig.svrVersion}");
+                Launcher.Instance.ForceUpdate();
+                yield break;
+            }
+
+            UILoadingPanel.Instance.UpdateLoadingPercent(21, 40);
+            //读取本地版本信息
+            if (Launcher.Instance.GameConfig.checkResUpdate && !Launcher.Instance.IsAuditServer())
+            {
+                Launcher.Instance.GameConfig.AddConfig("resVersion", Launcher.Instance.GameServerConfig.svrResVersion);
+            }
+            UILoadingPanel.Instance.UpdateLoadingPercent(41, 50);
+            yield return null;
+            
+            _machine.ChangeState<FsmGetNotice>();
+        }
+
         public IEnumerator RequestCenterServer(bool restart = false)
         {
 #if Offline
-            requestCenterServerSucc = true;
+            Launcher.Instance.GameServerConfig.Status = RequestServerStatus.Succeed;
             yield break;
 #endif
-            requestCenterServerSucc = false;
+            Launcher.Instance.GameServerConfig.Status = RequestServerStatus.None;
 
-            string url = $"{GameConfig.centerServerAddress}/{(Launcher.Instance.GameConfig.isRelease ? "Release" : "Dev")}/{ResPath.PlatformDirectory}/channelList.txt";
+            string url = $"{Launcher.Instance.GameConfig.centerServerAddress}/{(Launcher.Instance.GameConfig.isRelease ? "Release" : "Dev")}/{ResPath.PlatformDirectory}/channelList.txt";
             Debug.Log("RequestCenterServer=" + url);
 
             UnityWebRequest web = UnityWebRequest.Get(url);
@@ -68,7 +91,7 @@ namespace LccModel
                 Debug.LogError($"RequestCenterServer 请求中心服 失败url= {url}");
                 if (!restart)
                 {
-                    StartServerLoad();
+                    Launcher.Instance.StartServerLoad();
                 }
             }
             else
@@ -83,9 +106,7 @@ namespace LccModel
 
         private IEnumerator GetRemoteVersionList(bool restart = false)
         {
-            requestCenterServerSucc = false;
-
-            string url = $"{GameConfig.centerServerAddress}/{(Launcher.Instance.GameConfig.isRelease ? "Release" : "Dev")}/{ResPath.PlatformDirectory}/versionList.txt";
+            string url = $"{Launcher.Instance.GameConfig.centerServerAddress}/{(Launcher.Instance.GameConfig.isRelease ? "Release" : "Dev")}/{ResPath.PlatformDirectory}/versionList.txt";
             Debug.Log("GetRemoteVersionList=" + url);
 
             UnityWebRequest web = UnityWebRequest.Get(url);
@@ -112,7 +133,7 @@ namespace LccModel
                 Debug.LogError($"GetRemoteVersionList 请求VersionList 失败url= {url}");
                 if (!restart)
                 {
-                    StartServerLoad();
+                    Launcher.Instance.StartServerLoad();
                 }
             }
             else
@@ -120,11 +141,8 @@ namespace LccModel
                 string response = web.downloadHandler.text;
 
                 ReadVersionListConfig(response);
-
-
-
-
-                requestCenterServerSucc = true;
+                
+                Launcher.Instance.GameServerConfig.Status = RequestServerStatus.Succeed;
             }
 
         }
@@ -144,9 +162,9 @@ namespace LccModel
                             if (channelConfigList[i].ContainsKey("channel"))
                             {
                                 var channel = int.Parse(channelConfigList[i]["channel"].ToString());
-                                if (GameConfig.channel == channel)
+                                if (Launcher.Instance.GameConfig.channel == channel)
                                 {
-                                    this.svrChannel = channel;
+                                    Launcher.Instance.GameServerConfig.svrChannel = channel;
                                     int defaultVersion = 0;
                                     int fetchVersion = 0;
 
@@ -166,13 +184,13 @@ namespace LccModel
                                     if (appVersion == fetchVersion)
                                     {
                                         Debug.Log($"GetRemoteVersionList 判定走提审包 svrVersion = 远端版本={fetchVersion}");
-                                        this.svrVersion = fetchVersion;
+                                        Launcher.Instance.GameServerConfig.svrVersion = fetchVersion;
                                         Launcher.Instance.GameState = GameState.Fetch;
                                     }
                                     else
                                     {
                                         Debug.Log($"GetRemoteVersionList 判走普通包 svrVersion = 远端版本={defaultVersion}");
-                                        this.svrVersion = defaultVersion;
+                                        Launcher.Instance.GameServerConfig.svrVersion = defaultVersion;
                                         Launcher.Instance.GameState = GameState.Official;
                                     }
 
@@ -213,36 +231,36 @@ namespace LccModel
                     if (versionConfigList[i].ContainsKey("clientVersion"))
                     {
                         var clientVersion = int.Parse(versionConfigList[i]["clientVersion"].ToString());
-                        if (svrVersion == clientVersion)
+                        if (Launcher.Instance.GameServerConfig.svrVersion == clientVersion)
                         {
                             findClientVersion = true;
 
                             if (versionConfigList[i].ContainsKey("loginServer"))
                             {
-                                svrLoginServer = versionConfigList[i]["loginServer"].ToString();
+                                Launcher.Instance.GameServerConfig.svrLoginServer = versionConfigList[i]["loginServer"].ToString();
                             }
                             if (versionConfigList[i].ContainsKey("loginServerList"))
                             {
-                                svrLoginServerList = JsonMapper.ToObject<List<string>>(versionConfigList[i]["loginServerList"].ToJson());
+                                Launcher.Instance.GameServerConfig.svrLoginServerList = JsonMapper.ToObject<List<string>>(versionConfigList[i]["loginServerList"].ToJson());
                             }
                             if (versionConfigList[i].ContainsKey("resourceServerUrl"))
                             {
-                                svrResourceServerUrl = versionConfigList[i]["resourceServerUrl"].ToString();
+                                Launcher.Instance.GameServerConfig.svrResourceServerUrl = versionConfigList[i]["resourceServerUrl"].ToString();
                             }
                             if (versionConfigList[i].ContainsKey("resourceVersion"))
                             {
-                                svrResVersion = int.Parse(versionConfigList[i]["resourceVersion"].ToString());
+                                Launcher.Instance.GameServerConfig.svrResVersion = int.Parse(versionConfigList[i]["resourceVersion"].ToString());
                             }
                             if (versionConfigList[i].ContainsKey("appForceUpdateUrl"))
                             {
-                                svrAppForceUpdateUrl = versionConfigList[i]["appForceUpdateUrl"].ToString();
+                                Launcher.Instance.GameServerConfig.svrAppForceUpdateUrl = versionConfigList[i]["appForceUpdateUrl"].ToString();
                             }
                             if (versionConfigList[i].ContainsKey("noticeUrl"))
                             {
-                                noticeUrl = versionConfigList[i]["noticeUrl"].ToString();
+                                Launcher.Instance.GameServerConfig.noticeUrl = versionConfigList[i]["noticeUrl"].ToString();
                             }
 
-                            Launcher.Instance.SetUpdateInfo(svrVersion, svrAppForceUpdateUrl, "");
+                            Launcher.Instance.SetUpdateInfo(Launcher.Instance.GameServerConfig.svrVersion, Launcher.Instance.GameServerConfig.svrAppForceUpdateUrl, "");
 
                             break;
                         }
@@ -251,7 +269,7 @@ namespace LccModel
 
                 if (!findClientVersion)
                 {
-                    Debug.LogError($"ReadVersionListConfig !findClientVersion svrVersion={svrVersion}");
+                    Debug.LogError($"ReadVersionListConfig !findClientVersion svrVersion={Launcher.Instance.GameServerConfig.svrVersion}");
                 }
             }
             catch (Exception ex)
@@ -260,36 +278,12 @@ namespace LccModel
             }
         }
 
-        public string GetClientVersion()
+        public void OnUpdate()
         {
-            var showApp = int.Parse(Application.version.Split('.')[0]);
-
-            string clientVersion = string.Empty;
-#if !UNITY_EDITOR
-            clientVersion = "version " + showApp + "." + GameConfig.appVersion + "." + GameConfig.channel + "." + svrResVersion;
-#else
-            if (IsAuditServer() || !GameConfig.checkResUpdate)
-                clientVersion = "version " + showApp + "." + GameConfig.appVersion + "." + GameConfig.channel + "." + svrResVersion;
-            else
-                clientVersion = "version " + showApp + "." + GameConfig.appVersion + "." + GameConfig.channel + "." + GameConfig.resVersion;
-#endif
-            return clientVersion;
         }
 
-        public bool IsAuditServer()
+        public void OnExit()
         {
-#if !UNITY_EDITOR
-            if (Launcher.Instance.GameState == GameState.Official)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-
-            }
-#endif
-            return false;
         }
     }
 }

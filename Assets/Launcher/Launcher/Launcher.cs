@@ -19,6 +19,7 @@ namespace LccModel
         public GameAction GameAction { get; private set; } = new GameAction();
         public GameConfig GameConfig { get; private set; } = new GameConfig();
         public GameLanguage GameLanguage { get; private set; } = new GameLanguage();
+        public GameServerConfig GameServerConfig { get; private set; } = new GameServerConfig();
         public GameState GameState { set; get; } = GameState.Official;
 
         public bool GameStarted { set; get; } = false;
@@ -62,7 +63,38 @@ namespace LccModel
             }
 
         }
+        
+        public string GetClientVersion()
+        {
+            var showApp = int.Parse(Application.version.Split('.')[0]);
 
+            string clientVersion = string.Empty;
+#if !UNITY_EDITOR
+            clientVersion = "version " + showApp + "." + Launcher.Instance.GameConfig.appVersion + "." + Launcher.Instance.GameConfig.channel + "." + GameServerConfig.svrResVersion;
+#else
+            if (IsAuditServer() || !Launcher.Instance.GameConfig.checkResUpdate)
+                clientVersion = "version " + showApp + "." + Launcher.Instance.GameConfig.appVersion + "." + Launcher.Instance.GameConfig.channel + "." + GameServerConfig.svrResVersion;
+            else
+                clientVersion = "version " + showApp + "." + Launcher.Instance.GameConfig.appVersion + "." + Launcher.Instance.GameConfig.channel + "." + Launcher.Instance.GameConfig.resVersion;
+#endif
+            return clientVersion;
+        }
+
+        public bool IsAuditServer()
+        {
+#if !UNITY_EDITOR
+            if (Launcher.Instance.GameState == GameState.Official)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+
+            }
+#endif
+            return false;
+        }
 
 
         public void StartSplash()
@@ -88,45 +120,9 @@ namespace LccModel
         public void StartServerLoad()
         {
             if (coroutine != null) StopCoroutine(coroutine);
-            coroutine = StartCoroutine(LoadCoroutine());
+            // coroutine = StartCoroutine(LoadCoroutine());
         }
 
-
-        private IEnumerator LoadCoroutine()
-        {
-            UILoadingPanel.Instance.Show(GameLanguage.GetLanguage("msg_retrieve_server_data"));
-            GameControl.ChangeFPS();
-            UILoadingPanel.Instance.UpdateLoadingPercent(0, 3);
-            yield return null;
-
-            UILoadingPanel.Instance.UpdateLoadingPercent(4, 20, 0.5f);
-            yield return Launcher.Instance.RequestCenterServer();
-
-            if (!Launcher.Instance.requestCenterServerSucc)
-            {
-                yield break;
-            }
-
-            UILoadingPanel.Instance.UpdateLoadingPercent(19, 20);
-
-            //检测是否需要重新下载安装包
-            if (CheckIfAppShouldUpdate())
-            {
-                Debug.Log($"初始化 需要重新下载安装包 GameConfig.appVersion:{GameConfig.appVersion}, svrVersion:{svrVersion}");
-                ForceUpdate();
-                yield break;
-            }
-
-            UILoadingPanel.Instance.UpdateLoadingPercent(21, 40);
-            //读取本地版本信息
-            if (GameConfig.checkResUpdate && !IsAuditServer())
-            {
-                Launcher.Instance.GameConfig.AddConfig("resVersion", svrResVersion);
-            }
-            UILoadingPanel.Instance.UpdateLoadingPercent(41, 50);
-            yield return null;
-            StartDownloadUpdate();
-        }
 
         public void StartDownloadUpdate()
         {

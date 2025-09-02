@@ -48,7 +48,7 @@ namespace LccModel
 
             UILoadingPanel.Instance.SetStartLoadingBg();
             
-            // _machine.ChangeState<FsmRequestServer>();
+            _machine.ChangeState<FsmRequestServer>();
         }
 
         public void OnUpdate()

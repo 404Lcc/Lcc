@@ -86,7 +86,7 @@ namespace LccHotfix
             UILoadingPanel.Instance.Show(Launcher.Instance.GameLanguage.GetLanguage("msg_retrieve_server_data"));
             UILoadingPanel.Instance.SetVersion(string.Empty);
             yield return new WaitForSeconds(0.1f);
-            yield return Launcher.Instance.StartCoroutine(ReCheckVersionCoroutine());
+            // yield return Launcher.Instance.StartCoroutine(ReCheckVersionCoroutine());
 
             // 中途结束
             if (restartOver)
@@ -99,57 +99,57 @@ namespace LccHotfix
             }
         }
 
-        private static IEnumerator ReCheckVersionCoroutine()
-        {
-            Launcher.Instance.GameControl.ChangeFPS();
-
-            UILoadingPanel.Instance.UpdateLoadingPercent(0, 18);
-            //连接中心服，请求失败重新请求
-            yield return Launcher.Instance.StartCoroutine(Launcher.Instance.RequestCenterServer(true));
-            if (!Launcher.Instance.requestCenterServerSucc)
-            {
-                //请求中心服如果失败了
-                restartOver = true;
-                yield break;
-            }
-
-            UILoadingPanel.Instance.UpdateLoadingPercent(19, 20);
-
-            //检测是否需要重新下载安装包
-            if (Launcher.Instance.CheckIfAppShouldUpdate())
-            {
-                Debug.Log($"重启 需要重新下载安装包 GameConfig.appVersion:{Launcher.Instance.GameConfig.appVersion}, svrVersion:{Launcher.Instance.svrVersion}");
-                Launcher.Instance.ForceUpdate();
-                yield break;
-            }
-
-            //读取Package的版本信息
-            if (!Launcher.Instance.reCheckVersionUpdate && Launcher.Instance.GameConfig.resVersion == Launcher.Instance.svrResVersion)
-            {
-                restartOver = true;
-                yield break;
-            }
-
-            //读取本地版本信息
-            if (Launcher.Instance.GameConfig.checkResUpdate && !Launcher.Instance.IsAuditServer())
-            {
-                Launcher.Instance.GameConfig.AddConfig("resVersion", Launcher.Instance.svrResVersion);
-            }
-
-            UILoadingPanel.Instance.UpdateLoadingPercent(21, 48);
-            Launcher.Instance.reCheckVersionUpdate = false;
-
-
-            Launcher.Instance.GameAction.ExecuteOnClose();
-            yield return null;
-
-            yield return new WaitForSeconds(0.3f);
-            UILoadingPanel.Instance.UpdateLoadingPercent(49, 50);
-            yield return null;
-
-
-            Launcher.Instance.StartDownloadUpdate();
-        }
+        // private static IEnumerator ReCheckVersionCoroutine()
+        // {
+        //     Launcher.Instance.GameControl.ChangeFPS();
+        //
+        //     UILoadingPanel.Instance.UpdateLoadingPercent(0, 18);
+        //     //连接中心服，请求失败重新请求
+        //     yield return Launcher.Instance.StartCoroutine(Launcher.Instance.RequestCenterServer(true));
+        //     if (!Launcher.Instance.requestCenterServerSucc)
+        //     {
+        //         //请求中心服如果失败了
+        //         restartOver = true;
+        //         yield break;
+        //     }
+        //
+        //     UILoadingPanel.Instance.UpdateLoadingPercent(19, 20);
+        //
+        //     //检测是否需要重新下载安装包
+        //     if (Launcher.Instance.CheckIfAppShouldUpdate())
+        //     {
+        //         Debug.Log($"重启 需要重新下载安装包 GameConfig.appVersion:{Launcher.Instance.GameConfig.appVersion}, svrVersion:{Launcher.Instance.svrVersion}");
+        //         Launcher.Instance.ForceUpdate();
+        //         yield break;
+        //     }
+        //
+        //     //读取Package的版本信息
+        //     if (!Launcher.Instance.reCheckVersionUpdate && Launcher.Instance.GameConfig.resVersion == Launcher.Instance.svrResVersion)
+        //     {
+        //         restartOver = true;
+        //         yield break;
+        //     }
+        //
+        //     //读取本地版本信息
+        //     if (Launcher.Instance.GameConfig.checkResUpdate && !Launcher.Instance.IsAuditServer())
+        //     {
+        //         Launcher.Instance.GameConfig.AddConfig("resVersion", Launcher.Instance.svrResVersion);
+        //     }
+        //
+        //     UILoadingPanel.Instance.UpdateLoadingPercent(21, 48);
+        //     Launcher.Instance.reCheckVersionUpdate = false;
+        //
+        //
+        //     Launcher.Instance.GameAction.ExecuteOnClose();
+        //     yield return null;
+        //
+        //     yield return new WaitForSeconds(0.3f);
+        //     UILoadingPanel.Instance.UpdateLoadingPercent(49, 50);
+        //     yield return null;
+        //
+        //
+        //     Launcher.Instance.StartDownloadUpdate();
+        // }
 
         #endregion
     }

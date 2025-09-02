@@ -52,7 +52,7 @@ namespace LccModel
         {
             noticeSucc = false;
             announcementSave = "";
-            string url = $"{Launcher.Instance.noticeUrl}/{Launcher.Instance.GameConfig.channel}/{Launcher.Instance.GameLanguage.curLanguage}/notice.txt";
+            string url = $"{Launcher.Instance.GameServerConfig.noticeUrl}/{Launcher.Instance.GameConfig.channel}/{Launcher.Instance.GameLanguage.curLanguage}/notice.txt";
             Debug.Log("GetNoticeBoard url=" + url);
 
             UnityWebRequest web = UnityWebRequest.Get(url);
@@ -118,7 +118,7 @@ namespace LccModel
 
             noticeBoardSucc = false;
             noticeBoardSave = "";
-            string url = $"{Launcher.Instance.noticeUrl}/{Launcher.Instance.GameConfig.channel}/{Launcher.Instance.GameLanguage.curLanguage}/noticeBoard.txt";
+            string url = $"{Launcher.Instance.GameServerConfig.noticeUrl}/{Launcher.Instance.GameConfig.channel}/{Launcher.Instance.GameLanguage.curLanguage}/noticeBoard.txt";
             Debug.Log("GetNoticeBoard url=" + url);
 
             UnityWebRequest web = UnityWebRequest.Get(url);
@@ -155,7 +155,7 @@ namespace LccModel
         {
             noticeWhiteListSucc = false;
             noticeWhiteListSave = "";
-            string url = $"{Launcher.Instance.noticeUrl}/{Launcher.Instance.GameConfig.channel}/noticeWhiteList.txt";
+            string url = $"{Launcher.Instance.GameServerConfig.noticeUrl}/{Launcher.Instance.GameConfig.channel}/noticeWhiteList.txt";
             Debug.Log("GetNoticeWhiteList url=" + url);
 
             UnityWebRequest web = UnityWebRequest.Get(url);

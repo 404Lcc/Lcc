@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Launcher\Launcher\GameAction.cs" />
+    <Compile Include="Assets\Launcher\Launcher\GameServerConfig.cs" />
     <Compile Include="Assets\Launcher\Utility\Directory\DirectoryUtility.cs" />
     <Compile Include="Assets\Launcher\Utility\Extension\String\StringExtension.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UI\Loading\UILoadingPanel.cs" />
@@ -110,10 +111,10 @@
     <Compile Include="Assets\Launcher\Ctrl\ScrollerPro\GroupBase.cs" />
     <Compile Include="Assets\Launcher\Utility\Extension\Transform\TransformExtension.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmLoadGameConfig.cs" />
-    <Compile Include="Assets\Launcher\Launcher\Launcher.GameServer.cs" />
     <Compile Include="Assets\Launcher\Asset\ResObject.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UGUIExpand\EventTriggerListener.cs" />
     <Compile Include="Assets\Launcher\Utility\Math\AABB.cs" />
+    <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmRequestServer.cs" />
     <Compile Include="Assets\Launcher\Utility\Event\IEventMessage.cs" />
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.Language.cs" />
     <Compile Include="Assets\Launcher\Launcher\EventDefine\UserEventDefine.cs" />

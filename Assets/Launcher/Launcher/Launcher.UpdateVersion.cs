@@ -18,7 +18,7 @@ namespace LccModel
         }
         private void UpdateNewVersion()
         {
-            Application.OpenURL(svrAppForceUpdateUrl);
+            Application.OpenURL(Launcher.Instance.GameServerConfig.svrAppForceUpdateUrl);
         }
 
         public void ForceUpdate()
@@ -36,10 +36,10 @@ namespace LccModel
         /// <returns></returns>
         public bool CheckIfAppShouldUpdate()
         {
-            if (string.IsNullOrEmpty(svrAppForceUpdateUrl))
+            if (string.IsNullOrEmpty(Launcher.Instance.GameServerConfig.svrAppForceUpdateUrl))
                 return false;
 
-            return GameConfig.appVersion != svrVersion;
+            return GameConfig.appVersion != Launcher.Instance.GameServerConfig.svrVersion;
         }
     }
 }

@@ -10,15 +10,15 @@ namespace LccHotfix
 
         public string RequestServer()
         {
-            return Launcher.Instance.svrLoginServer;
+            return Launcher.Instance.GameServerConfig.svrLoginServer;
         }
         public List<string> RequestServerList()
         {
-            if (Launcher.Instance.svrLoginServerList == null)
+            if (Launcher.Instance.GameServerConfig.svrLoginServerList == null)
             {
                 return new List<string>();
             }
-            return Launcher.Instance.svrLoginServerList;
+            return Launcher.Instance.GameServerConfig.svrLoginServerList;
         }
         public void SetServerCurrent(string server)
         {
