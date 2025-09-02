@@ -4746,7 +4746,7 @@
     <type fullname="LccModel.PatchWindow+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3010" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4336" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2988" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4277" preserve="all" />
   </assembly>
 </linker>

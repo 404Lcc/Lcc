@@ -104,7 +104,6 @@
     <Compile Include="Assets\Launcher\Utility\Json\JsonUtility.cs" />
     <Compile Include="Assets\Launcher\Utility\Serialize\SerializeUtility.cs" />
     <Compile Include="Assets\Launcher\Utility\Machine\StateMachine.cs" />
-    <Compile Include="Assets\Launcher\Launcher\Launcher.UpdateVersion.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UGUIExpand\EnterClickButton.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmRequestPackageVersion.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UI\ForeGround\UIForeGroundPanel.cs" />

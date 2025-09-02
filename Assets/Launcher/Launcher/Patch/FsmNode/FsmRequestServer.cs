@@ -39,10 +39,10 @@ namespace LccModel
             UILoadingPanel.Instance.UpdateLoadingPercent(19, 20);
 
             //检测是否需要重新下载安装包
-            if (Launcher.Instance.CheckIfAppShouldUpdate())
+            if (CheckIfAppShouldUpdate())
             {
                 Debug.Log($"初始化 需要重新下载安装包 GameConfig.appVersion:{Launcher.Instance.GameConfig.appVersion}, svrVersion:{Launcher.Instance.GameServerConfig.svrVersion}");
-                Launcher.Instance.ForceUpdate();
+                ForceUpdate();
                 yield break;
             }
 
@@ -260,8 +260,6 @@ namespace LccModel
                                 Launcher.Instance.GameServerConfig.noticeUrl = versionConfigList[i]["noticeUrl"].ToString();
                             }
 
-                            Launcher.Instance.SetUpdateInfo(Launcher.Instance.GameServerConfig.svrVersion, Launcher.Instance.GameServerConfig.svrAppForceUpdateUrl, "");
-
                             break;
                         }
                     }
@@ -276,6 +274,32 @@ namespace LccModel
             {
                 Debug.LogError("读取VersionListConfig配置失败" + ex.ToString());
             }
+        }
+        
+        private void UpdateNewVersion()
+        {
+            Application.OpenURL(Launcher.Instance.GameServerConfig.svrAppForceUpdateUrl);
+        }
+
+        public void ForceUpdate()
+        {
+            UILoadingPanel.Instance.ShowMessageBox(Launcher.Instance.GameLanguage.GetLanguage("msg_update"), () =>
+            {
+                UpdateNewVersion();
+            }, false);
+        }
+
+
+        /// <summary>
+        /// 判断是否要重新安装
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckIfAppShouldUpdate()
+        {
+            if (string.IsNullOrEmpty(Launcher.Instance.GameServerConfig.svrAppForceUpdateUrl))
+                return false;
+
+            return Launcher.Instance.GameConfig.appVersion != Launcher.Instance.GameServerConfig.svrVersion;
         }
 
         public void OnUpdate()
