@@ -1,3 +1,4 @@
+msg_request_server = Attempting to Retrieve Server Info
 msg_load = Loading
 msg_clean_cache = Cleaning Unused Cache Files
 msg_patch_downloader = Creating Patch Downloader
@@ -14,6 +15,5 @@ msg_update_failed_static = Failed to Update Static Version Please Check the Netw
 msg_update_failed_patch = Failed to Update Patch Manifest Please Check the Network Status
 msg_download_failed = Failed to Download file : {0}
 msg_update = New Update Released! Please Go To The Store and Update To The Latest Version
-msg_retrieve_server_data = Attempting to Retrieve Server Info
 msg_retry_after_internet = Please Try Again After Connecting to the Network
 msg_need_restart = There is a new resource update, please restart the game
