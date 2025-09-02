@@ -11,13 +11,11 @@ namespace LccModel
         public const string ALLLanguageKey = "ALLLanguage";
         public const string CacheLanguageKey = "MutiLanguage";
         public const string DefaultFont = "Font SDF";  // 默认字体资源
-
-        private bool _localizationHasBeenSet = false;
+        
         private Dictionary<string, string> _languageDict = new Dictionary<string, string>();
-
+        private List<string> _languages;
         private string _curLanguage;
-
-        public List<string> languages;
+        private bool _localizationHasBeenSet = false;
 
         public string curLanguage
         {
@@ -55,22 +53,22 @@ namespace LccModel
                 string lang = PlayerPrefs.GetString(ALLLanguageKey);
                 if (!string.IsNullOrEmpty(lang))
                 {
-                    languages = JsonUtility.ToObject<List<string>>(lang);
-                    if (!languages.Contains(curLanguage))
+                    _languages = JsonUtility.ToObject<List<string>>(lang);
+                    if (!_languages.Contains(curLanguage))
                     {
-                        languages.Add(curLanguage);
+                        _languages.Add(curLanguage);
                     }
                 }
                 else
                 {
-                    languages = new List<string>() { curLanguage };
+                    _languages = new List<string>() { curLanguage };
                 }
-                PlayerPrefs.SetString(ALLLanguageKey, JsonUtility.ToJson(languages));
+                PlayerPrefs.SetString(ALLLanguageKey, JsonUtility.ToJson(_languages));
             }
             catch
             {
-                languages = new List<string>() { curLanguage };
-                PlayerPrefs.SetString(ALLLanguageKey, JsonUtility.ToJson(languages));
+                _languages = new List<string>() { curLanguage };
+                PlayerPrefs.SetString(ALLLanguageKey, JsonUtility.ToJson(_languages));
             }
         }
 
@@ -129,7 +127,7 @@ namespace LccModel
                 if (newLanguage == Launcher.Instance.GameConfig.languageNameList[i])
                 {
                     //判断目标语言文件是否下载了
-                    if (languages.Contains(newLanguage))
+                    if (_languages.Contains(newLanguage))
                     {
                         PlayerPrefs.SetString(CacheLanguageKey, newLanguage);
                         Launcher.Instance.StartCoroutine(UpdateLanguage(newLanguage));
