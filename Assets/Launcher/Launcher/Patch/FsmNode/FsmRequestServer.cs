@@ -58,7 +58,7 @@ namespace LccModel
             _machine.ChangeState<FsmGetNotice>();
         }
 
-        public IEnumerator RequestCenterServer(bool restart = false)
+        public IEnumerator RequestCenterServer()
         {
 #if Offline
             Launcher.Instance.GameServerConfig.Status = RequestServerStatus.Succeed;
@@ -89,10 +89,7 @@ namespace LccModel
             if (!string.IsNullOrEmpty(web.error))
             {
                 Debug.LogError($"RequestCenterServer 请求中心服 失败url= {url}");
-                if (!restart)
-                {
-                    // Launcher.Instance.StartServerLoad();
-                }
+                PatchEventDefine.RequestServerFailed.SendEventMessage();
             }
             else
             {
@@ -100,11 +97,11 @@ namespace LccModel
 
                 ReadChannelListConfig(response);
 
-                yield return GetRemoteVersionList(restart);
+                yield return GetRemoteVersionList();
             }
         }
 
-        private IEnumerator GetRemoteVersionList(bool restart = false)
+        private IEnumerator GetRemoteVersionList()
         {
             string url = $"{Launcher.Instance.GameConfig.centerServerAddress}/{(Launcher.Instance.GameConfig.isRelease ? "Release" : "Dev")}/{ResPath.PlatformDirectory}/versionList.txt";
             Debug.Log("GetRemoteVersionList=" + url);
@@ -131,10 +128,7 @@ namespace LccModel
             if (!string.IsNullOrEmpty(web.error))
             {
                 Debug.LogError($"GetRemoteVersionList 请求VersionList 失败url= {url}");
-                if (!restart)
-                {
-                    // Launcher.Instance.StartServerLoad();
-                }
+                PatchEventDefine.RequestServerFailed.SendEventMessage();
             }
             else
             {

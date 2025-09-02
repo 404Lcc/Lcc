@@ -22,6 +22,7 @@ namespace LccModel
             _packageName = packageName;
 
             // 注册监听事件
+            _eventGroup.AddListener<UserEventDefine.UserTryRequestServer>(OnHandleEventMessage);
             _eventGroup.AddListener<UserEventDefine.UserTryInitialize>(OnHandleEventMessage);
             _eventGroup.AddListener<UserEventDefine.UserBeginDownloadWebFiles>(OnHandleEventMessage);
             _eventGroup.AddListener<UserEventDefine.UserTryRequestPackageVersion>(OnHandleEventMessage);
@@ -80,7 +81,11 @@ namespace LccModel
         /// </summary>
         private void OnHandleEventMessage(IEventMessage message)
         {
-            if (message is UserEventDefine.UserTryInitialize)
+            if (message is UserEventDefine.UserTryRequestServer)
+            {
+                _machine.ChangeState<FsmRequestServer>();
+            }
+            else if (message is UserEventDefine.UserTryInitialize)
             {
                 _machine.ChangeState<FsmInitializePackage>();
             }

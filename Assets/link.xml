@@ -4711,6 +4711,7 @@
     <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass4_0" preserve="all" />
     <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass5_0" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel+&lt;&gt;c__DisplayClass6_0" preserve="all" />
+    <type fullname="LccModel.PatchEventDefine+RequestServerFailed" preserve="all" />
     <type fullname="LccModel.PatchEventDefine+InitializeFailed" preserve="all" />
     <type fullname="LccModel.PatchEventDefine+PatchStepsChange" preserve="all" />
     <type fullname="LccModel.PatchEventDefine+FoundUpdateFiles" preserve="all" />
@@ -4718,6 +4719,7 @@
     <type fullname="LccModel.PatchEventDefine+PackageVersionRequestFailed" preserve="all" />
     <type fullname="LccModel.PatchEventDefine+PackageManifestUpdateFailed" preserve="all" />
     <type fullname="LccModel.PatchEventDefine+WebFileDownloadFailed" preserve="all" />
+    <type fullname="LccModel.UserEventDefine+UserTryRequestServer" preserve="all" />
     <type fullname="LccModel.UserEventDefine+UserTryInitialize" preserve="all" />
     <type fullname="LccModel.UserEventDefine+UserBeginDownloadWebFiles" preserve="all" />
     <type fullname="LccModel.UserEventDefine+UserTryRequestPackageVersion" preserve="all" />
@@ -4748,7 +4750,7 @@
     <type fullname="LccModel.PatchWindow+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3018" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3118" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4337" preserve="all" />
   </assembly>
 </linker>

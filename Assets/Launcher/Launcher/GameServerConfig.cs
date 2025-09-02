@@ -12,9 +12,6 @@ namespace LccModel
     
     public class GameServerConfig
     {
-        //需要重新校验热更数据
-        public bool reCheckVersionUpdate = false;
-
         //远程渠道
         public int svrChannel;
         //远程版本

@@ -70,6 +70,7 @@ namespace LccModel
             _messageBoxObj = messageBoxObj;
             _messageBoxObj.SetActive(false);
 
+            _eventGroup.AddListener<PatchEventDefine.RequestServerFailed>(OnHandleEventMessage);
             _eventGroup.AddListener<PatchEventDefine.InitializeFailed>(OnHandleEventMessage);
             _eventGroup.AddListener<PatchEventDefine.PatchStepsChange>(OnHandleEventMessage);
             _eventGroup.AddListener<PatchEventDefine.FoundUpdateFiles>(OnHandleEventMessage);
@@ -89,7 +90,12 @@ namespace LccModel
         /// </summary>
         private void OnHandleEventMessage(IEventMessage message)
         {
-            if (message is PatchEventDefine.InitializeFailed)
+            if (message is PatchEventDefine.RequestServerFailed)
+            {
+                System.Action callback = () => { UserEventDefine.UserTryRequestServer.SendEventMessage(); };
+                ShowMessageBox(Launcher.Instance.GameLanguage.GetLanguage("msg_request_server_failed"), callback);
+            }
+            else if (message is PatchEventDefine.InitializeFailed)
             {
                 System.Action callback = () => { UserEventDefine.UserTryInitialize.SendEventMessage(); };
                 ShowMessageBox(Launcher.Instance.GameLanguage.GetLanguage("msg_init_failed"), callback);

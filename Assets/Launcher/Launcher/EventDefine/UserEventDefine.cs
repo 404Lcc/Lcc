@@ -3,6 +3,18 @@
     public class UserEventDefine
     {
         /// <summary>
+        /// 用户尝试再次请求服务器
+        /// </summary>
+        public class UserTryRequestServer : IEventMessage
+        {
+            public static void SendEventMessage()
+            {
+                var msg = new UserTryRequestServer();
+                Event.SendMessage(msg);
+            }
+        }
+        
+        /// <summary>
         /// 用户尝试再次初始化资源包
         /// </summary>
         public class UserTryInitialize : IEventMessage
