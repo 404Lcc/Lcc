@@ -125,9 +125,9 @@
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3.cs" />
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3QueueType.cs" />
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Sprite.cs" />
+    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_RectTransform.cs" />
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Save Slots\ES3Slot.cs" />
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Collection Types\ES3TupleType.cs" />
-    <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_RectTransform.cs" />
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\ES3ReferenceMgrBase.cs" />
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Types\Unity Types\ES3Type_Vector3Int.cs" />
     <Compile Include="Assets\3rdPlugins\Easy Save 3\Scripts\Streams\ES3Stream.cs" />
