@@ -32,7 +32,7 @@ namespace LccHotfix
             //清理流程
             Main.ProcedureService.CleanProcedure();
             //重启
-            Restart();
+            // Restart();
         }
 
         /// <summary>
@@ -69,35 +69,35 @@ namespace LccHotfix
         }
 
         #region 重启游戏
-        public static void Restart()
-        {
-            if (Launcher.Instance.coroutine != null)
-                Launcher.Instance.StopCoroutine(Launcher.Instance.coroutine);
-            Launcher.Instance.coroutine = Launcher.Instance.StartCoroutine(ReStartCoroutine());
-        }
-        private static IEnumerator ReStartCoroutine()
-        {
-            restartOver = false;
-            Launcher.Instance.GameStarted = false;
-            UIForeGroundPanel.Instance.FadeOut(0.3f);
-            yield return null;
-            GC.Collect();
-            UILoadingPanel.Instance.SetStartLoadingBg();
-            UILoadingPanel.Instance.Show(Launcher.Instance.GameLanguage.GetLanguage("msg_retrieve_server_data"));
-            UILoadingPanel.Instance.SetVersion(string.Empty);
-            yield return new WaitForSeconds(0.1f);
-            // yield return Launcher.Instance.StartCoroutine(ReCheckVersionCoroutine());
-
-            // 中途结束
-            if (restartOver)
-            {
-                UILoadingPanel.Instance.UpdateLoadingPercent(91, 98);
-                //切换流程
-                Main.ProcedureService.ChangeProcedure(ProcedureType.Login);
-                yield return null;
-                Launcher.Instance.LoadFinish();
-            }
-        }
+        // public static void Restart()
+        // {
+        //     if (Launcher.Instance.coroutine != null)
+        //         Launcher.Instance.StopCoroutine(Launcher.Instance.coroutine);
+        //     Launcher.Instance.coroutine = Launcher.Instance.StartCoroutine(ReStartCoroutine());
+        // }
+        // private static IEnumerator ReStartCoroutine()
+        // {
+        //     restartOver = false;
+        //     Launcher.Instance.GameStarted = false;
+        //     UIForeGroundPanel.Instance.FadeOut(0.3f);
+        //     yield return null;
+        //     GC.Collect();
+        //     UILoadingPanel.Instance.SetStartLoadingBg();
+        //     UILoadingPanel.Instance.Show(Launcher.Instance.GameLanguage.GetLanguage("msg_retrieve_server_data"));
+        //     UILoadingPanel.Instance.SetVersion(string.Empty);
+        //     yield return new WaitForSeconds(0.1f);
+        //     // yield return Launcher.Instance.StartCoroutine(ReCheckVersionCoroutine());
+        //
+        //     // 中途结束
+        //     if (restartOver)
+        //     {
+        //         UILoadingPanel.Instance.UpdateLoadingPercent(91, 98);
+        //         //切换流程
+        //         Main.ProcedureService.ChangeProcedure(ProcedureType.Login);
+        //         yield return null;
+        //         Launcher.Instance.LoadFinish();
+        //     }
+        // }
 
         // private static IEnumerator ReCheckVersionCoroutine()
         // {

@@ -91,7 +91,7 @@ namespace LccModel
                 Debug.LogError($"RequestCenterServer 请求中心服 失败url= {url}");
                 if (!restart)
                 {
-                    Launcher.Instance.StartServerLoad();
+                    // Launcher.Instance.StartServerLoad();
                 }
             }
             else
@@ -133,7 +133,7 @@ namespace LccModel
                 Debug.LogError($"GetRemoteVersionList 请求VersionList 失败url= {url}");
                 if (!restart)
                 {
-                    Launcher.Instance.StartServerLoad();
+                    // Launcher.Instance.StartServerLoad();
                 }
             }
             else

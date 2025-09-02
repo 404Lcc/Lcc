@@ -29,25 +29,17 @@ namespace LccHotfix
         }
         private static void FixedUpdate()
         {
-            if (!Launcher.Instance.GameStarted)
-                return;
         }
         private static void Update()
         {
-            if (!Launcher.Instance.GameStarted)
-                return;
             Main.Current.Update(Time.deltaTime, Time.unscaledDeltaTime);
         }
         private static void LateUpdate()
         {
-            if (!Launcher.Instance.GameStarted)
-                return;
             Main.Current.LateUpdate();
         }
         private static void DrawGizmos()
         {
-            if (!Launcher.Instance.GameStarted)
-                return;
             Main.GizmoService.OnDrawGizmos();
         }
         private static void Close()

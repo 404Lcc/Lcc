@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Reflection;
 using UnityEngine;
 using YooAsset;
@@ -12,9 +11,8 @@ namespace LccModel
         Fetch,//提审
     }
 
-    public partial class Launcher : SingletonMono<Launcher>
+    public class Launcher : SingletonMono<Launcher>
     {
-        public Coroutine coroutine;
         public GameControl GameControl { get; private set; } = new GameControl();
         public GameAction GameAction { get; private set; } = new GameAction();
         public GameConfig GameConfig { get; private set; } = new GameConfig();
@@ -22,18 +20,17 @@ namespace LccModel
         public GameServerConfig GameServerConfig { get; private set; } = new GameServerConfig();
         public GameNotice GameNotice { get; private set; } = new GameNotice();
         public GameState GameState { set; get; } = GameState.Official;
-
-        public bool GameStarted { set; get; } = false;
-
         public Assembly HotfixAssembly { get; set; }
 
         public void Init()
         {
             try
             {
-                DateTime dt_1970 = new DateTime(1970, 1, 1);
-                long tricks_1970 = dt_1970.Ticks;//1970年1月1日刻度    
-
+                AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+                {
+                    Debug.LogError(e.ExceptionObject.ToString());
+                };
+                
                 GameControl.ChangeFPS();
                 GameControl.SetGameSpeed(1);
 
@@ -41,22 +38,9 @@ namespace LccModel
                 Event.Initalize();
                 YooAssets.SetOperationSystemMaxTimeSlice(30);
 
-                System.Globalization.CultureInfo cul = System.Globalization.CultureInfo.GetCultureInfo("en-us");
-                System.Threading.Thread.CurrentThread.CurrentCulture = cul;
-
-                Input.multiTouchEnabled = false;
-
-                Application.targetFrameRate = 60;
-
                 DontDestroyOnLoad(this.gameObject);
-                AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
-                {
-                    Debug.LogError(e.ExceptionObject.ToString());
-                };
 
-                StartSplash();
-
-
+                StartLauncher();
             }
             catch (Exception e)
             {
@@ -96,12 +80,7 @@ namespace LccModel
 #endif
             return false;
         }
-
-
-        public void StartSplash()
-        {
-            StartLoad();
-        }
+        
         public void StartLoad()
         {
             ResPath.InitPath();
@@ -112,22 +91,12 @@ namespace LccModel
         {
             UIForeGroundPanel.Instance.FadeIn(0, null, false, 1, false);
 
-
-
-            StartServerLoad();
-        }
-
-        //出问题就走这个重来一遍
-        public void StartServerLoad()
-        {
-            if (coroutine != null) StopCoroutine(coroutine);
-            // coroutine = StartCoroutine(LoadCoroutine());
         }
 
 
-        public void StartDownloadUpdate()
+        public void StartLauncher()
         {
-            Debug.Log("Launcher 开启补丁更新流程...");
+            Debug.Log("开启启动流程...");
 
             EPlayMode playMode = EPlayMode.HostPlayMode;
             //不检测热更走本地资源
@@ -158,9 +127,7 @@ namespace LccModel
 
         public void LoadFinish()
         {
-            GameStarted = true;
             GameControl.ChangeFPS();
-            coroutine = null;
             UILoadingPanel.Instance.Hide();
         }
     }
