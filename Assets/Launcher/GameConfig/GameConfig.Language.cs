@@ -163,13 +163,13 @@ namespace LccModel
         {
             string region = "";
 
-            var regions = Launcher.GameConfig.regionList;
+            var regions = Launcher.Instance.GameConfig.regionList;
 
             if (string.IsNullOrEmpty(region) || !regions.Contains(region))
             {
                 region = "US";
             }
-            Launcher.GameConfig.AddConfig("region", region);
+            Launcher.Instance.GameConfig.AddConfig("region", region);
         }
     }
 }

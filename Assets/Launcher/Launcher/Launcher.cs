@@ -17,7 +17,7 @@ namespace LccModel
         public Coroutine coroutine;
         public GameControl GameControl { get; private set; } = new GameControl();
         public GameAction GameAction { get; private set; } = new GameAction();
-
+        public GameConfig GameConfig { get; private set; } = new GameConfig();
         public GameState GameState { set; get; } = GameState.Official;
 
         public bool GameStarted { set; get; } = false;
@@ -77,37 +77,13 @@ namespace LccModel
         public IEnumerator LoadLocalConfig()
         {
             UIForeGroundPanel.Instance.FadeIn(0, null, false, 1, false);
-
-            //初始化游戏配置
-            yield return InitGameConfig();
+            
             //初始化多语言
             yield return InitLanguage();
 
             UIForeGroundPanel.Instance.FadeOut(0.5f, null, false);
 
             UILoadingPanel.Instance.SetStartLoadingBg();
-
-            if (GameConfig.isReleaseCenterServer && GameConfig.isRelease)
-            {
-                //走sdk渠道号
-                GameConfig.AddConfig("channel", GameConfig.channel);//todo 重新设置渠道 通过sdk获取
-            }
-
-            Debug.Log("Local GameConfig.appVersion:" + GameConfig.appVersion);
-            Debug.Log("Local GameConfig.channel:" + GameConfig.channel);
-            Debug.Log("Local GameConfig.resVersion:" + GameConfig.resVersion);
-            Debug.Log("Local GameConfig.centerServerAddress:" + GameConfig.centerServerAddress);
-            Debug.Log("Local GameConfig.isReleaseCenterServer:" + GameConfig.isReleaseCenterServer);
-            Debug.Log("Local GameConfig.isRelease:" + GameConfig.isRelease);
-            Debug.Log("Local GameConfig.chargeDirect:" + GameConfig.chargeDirect);
-            Debug.Log("Local GameConfig.selectServer:" + GameConfig.selectServer);
-            Debug.Log("Local GameConfig.checkResUpdate:" + GameConfig.checkResUpdate);
-            Debug.Log("Local GameConfig.useSDK:" + GameConfig.useSDK);
-
-            //本地版本
-            var showApp = int.Parse(Application.version.Split('.')[0]);
-            UILoadingPanel.Instance.SetVersion("version " + showApp + "." + Launcher.GameConfig.appVersion + "." + Launcher.GameConfig.channel + "." + Launcher.GameConfig.resVersion);
-
 
             StartServerLoad();
         }
@@ -149,7 +125,7 @@ namespace LccModel
             //读取本地版本信息
             if (GameConfig.checkResUpdate && !IsAuditServer())
             {
-                Launcher.GameConfig.AddConfig("resVersion", svrResVersion);
+                Launcher.Instance.GameConfig.AddConfig("resVersion", svrResVersion);
             }
             UILoadingPanel.Instance.UpdateLoadingPercent(41, 50);
             yield return null;
@@ -162,7 +138,7 @@ namespace LccModel
 
             EPlayMode playMode = EPlayMode.HostPlayMode;
             //不检测热更走本地资源
-            if (!Launcher.GameConfig.checkResUpdate)
+            if (!Launcher.Instance.GameConfig.checkResUpdate)
             {
                 playMode = EPlayMode.OfflinePlayMode;
             }

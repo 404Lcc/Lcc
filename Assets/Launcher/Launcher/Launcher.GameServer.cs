@@ -43,7 +43,7 @@ namespace LccModel
 #endif
             requestCenterServerSucc = false;
 
-            string url = $"{GameConfig.centerServerAddress}/{(Launcher.GameConfig.isRelease ? "Release" : "Dev")}/{ResPath.PlatformDirectory}/channelList.txt";
+            string url = $"{GameConfig.centerServerAddress}/{(Launcher.Instance.GameConfig.isRelease ? "Release" : "Dev")}/{ResPath.PlatformDirectory}/channelList.txt";
             Debug.Log("RequestCenterServer=" + url);
 
             UnityWebRequest web = UnityWebRequest.Get(url);
@@ -85,7 +85,7 @@ namespace LccModel
         {
             requestCenterServerSucc = false;
 
-            string url = $"{GameConfig.centerServerAddress}/{(Launcher.GameConfig.isRelease ? "Release" : "Dev")}/{ResPath.PlatformDirectory}/versionList.txt";
+            string url = $"{GameConfig.centerServerAddress}/{(Launcher.Instance.GameConfig.isRelease ? "Release" : "Dev")}/{ResPath.PlatformDirectory}/versionList.txt";
             Debug.Log("GetRemoteVersionList=" + url);
 
             UnityWebRequest web = UnityWebRequest.Get(url);
@@ -150,8 +150,8 @@ namespace LccModel
                                     int defaultVersion = 0;
                                     int fetchVersion = 0;
 
-                                    int appVersion = Launcher.GameConfig.appVersion;
-                                    int resVersion = Launcher.GameConfig.resVersion;
+                                    int appVersion = Launcher.Instance.GameConfig.appVersion;
+                                    int resVersion = Launcher.Instance.GameConfig.resVersion;
 
                                     if (channelConfigList[i].ContainsKey("defaultVersion"))
                                     {

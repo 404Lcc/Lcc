@@ -118,22 +118,22 @@ namespace LccHotfix
             //检测是否需要重新下载安装包
             if (Launcher.Instance.CheckIfAppShouldUpdate())
             {
-                Debug.Log($"重启 需要重新下载安装包 GameConfig.appVersion:{Launcher.GameConfig.appVersion}, svrVersion:{Launcher.Instance.svrVersion}");
+                Debug.Log($"重启 需要重新下载安装包 GameConfig.appVersion:{Launcher.Instance.GameConfig.appVersion}, svrVersion:{Launcher.Instance.svrVersion}");
                 Launcher.Instance.ForceUpdate();
                 yield break;
             }
 
             //读取Package的版本信息
-            if (!Launcher.Instance.reCheckVersionUpdate && Launcher.GameConfig.resVersion == Launcher.Instance.svrResVersion)
+            if (!Launcher.Instance.reCheckVersionUpdate && Launcher.Instance.GameConfig.resVersion == Launcher.Instance.svrResVersion)
             {
                 restartOver = true;
                 yield break;
             }
 
             //读取本地版本信息
-            if (Launcher.GameConfig.checkResUpdate && !Launcher.Instance.IsAuditServer())
+            if (Launcher.Instance.GameConfig.checkResUpdate && !Launcher.Instance.IsAuditServer())
             {
-                Launcher.GameConfig.AddConfig("resVersion", Launcher.Instance.svrResVersion);
+                Launcher.Instance.GameConfig.AddConfig("resVersion", Launcher.Instance.svrResVersion);
             }
 
             UILoadingPanel.Instance.UpdateLoadingPercent(21, 48);

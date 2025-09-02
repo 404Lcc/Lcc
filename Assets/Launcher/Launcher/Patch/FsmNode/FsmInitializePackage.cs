@@ -117,7 +117,7 @@ namespace LccModel
         /// </summary>
         private string GetHostServerURL()
         {
-            var GameConfig = Launcher.GameConfig;
+            var GameConfig = Launcher.Instance.GameConfig;
 
             string release = GameConfig.isRelease == true ? "Release" : "Dev";
             int appVersion = GameConfig.appVersion;

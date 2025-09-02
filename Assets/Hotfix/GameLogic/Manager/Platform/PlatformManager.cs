@@ -53,7 +53,7 @@ namespace LccHotfix
             }
             else
             {
-                if (Launcher.GameConfig.useSDK)
+                if (Launcher.Instance.GameConfig.useSDK)
                 {
                     baseCallbackMessage = new DevCallbackMessage();
                 }
@@ -73,7 +73,7 @@ namespace LccHotfix
             }
             else
             {
-                if (Launcher.GameConfig.useSDK)
+                if (Launcher.Instance.GameConfig.useSDK)
                 {
                     basePlatform = new DevPlatform();
                 }
@@ -92,7 +92,7 @@ namespace LccHotfix
             }
             else
             {
-                if (Launcher.GameConfig.useSDK)
+                if (Launcher.Instance.GameConfig.useSDK)
                 {
                     baseAccount = new DevAccount();
                 }

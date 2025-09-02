@@ -93,7 +93,6 @@
     <Compile Include="Assets\Launcher\Utility\Event\Event.cs" />
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.Build.cs" />
     <Compile Include="Assets\Launcher\Utility\Singleton\Singleton.cs" />
-    <Compile Include="Assets\Launcher\Launcher\Launcher.GameConfig.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmStartGame.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmClearCacheBundle.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmDownloadPackageOver.cs" />
@@ -109,6 +108,7 @@
     <Compile Include="Assets\Launcher\Ctrl\UI\ForeGround\UIForeGroundPanel.cs" />
     <Compile Include="Assets\Launcher\Ctrl\ScrollerPro\GroupBase.cs" />
     <Compile Include="Assets\Launcher\Utility\Extension\Transform\TransformExtension.cs" />
+    <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmLoadGameConfig.cs" />
     <Compile Include="Assets\Launcher\Launcher\Launcher.GameServer.cs" />
     <Compile Include="Assets\Launcher\Asset\ResObject.cs" />
     <Compile Include="Assets\Launcher\Ctrl\UGUIExpand\EventTriggerListener.cs" />
