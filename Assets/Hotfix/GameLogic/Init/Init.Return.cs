@@ -1,15 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using LccModel;
-using UnityEngine;
 
 namespace LccHotfix
 {
     public partial class Init
     {
-        public static bool restartOver = false;
-        
         /// <summary>
         /// 重新启动游戏
         /// </summary>
@@ -29,10 +23,13 @@ namespace LccHotfix
 
             //清理上个玩家数据
             ClearLastUserData();
+            
             //清理流程
             Main.ProcedureService.CleanProcedure();
+            
             //重启
-            // Restart();
+            Launcher.Instance.GameAction.ExecuteOnClose();
+            Launcher.Instance.StartLauncher();
         }
 
         /// <summary>
@@ -67,90 +64,5 @@ namespace LccHotfix
         private static void ClearLastUserData()
         {
         }
-
-        #region 重启游戏
-        // public static void Restart()
-        // {
-        //     if (Launcher.Instance.coroutine != null)
-        //         Launcher.Instance.StopCoroutine(Launcher.Instance.coroutine);
-        //     Launcher.Instance.coroutine = Launcher.Instance.StartCoroutine(ReStartCoroutine());
-        // }
-        // private static IEnumerator ReStartCoroutine()
-        // {
-        //     restartOver = false;
-        //     Launcher.Instance.GameStarted = false;
-        //     UIForeGroundPanel.Instance.FadeOut(0.3f);
-        //     yield return null;
-        //     GC.Collect();
-        //     UILoadingPanel.Instance.SetStartLoadingBg();
-        //     UILoadingPanel.Instance.Show(Launcher.Instance.GameLanguage.GetLanguage("msg_retrieve_server_data"));
-        //     UILoadingPanel.Instance.SetVersion(string.Empty);
-        //     yield return new WaitForSeconds(0.1f);
-        //     // yield return Launcher.Instance.StartCoroutine(ReCheckVersionCoroutine());
-        //
-        //     // 中途结束
-        //     if (restartOver)
-        //     {
-        //         UILoadingPanel.Instance.UpdateLoadingPercent(91, 98);
-        //         //切换流程
-        //         Main.ProcedureService.ChangeProcedure(ProcedureType.Login);
-        //         yield return null;
-        //         Launcher.Instance.LoadFinish();
-        //     }
-        // }
-
-        // private static IEnumerator ReCheckVersionCoroutine()
-        // {
-        //     Launcher.Instance.GameControl.ChangeFPS();
-        //
-        //     UILoadingPanel.Instance.UpdateLoadingPercent(0, 18);
-        //     //连接中心服，请求失败重新请求
-        //     yield return Launcher.Instance.StartCoroutine(Launcher.Instance.RequestCenterServer(true));
-        //     if (!Launcher.Instance.requestCenterServerSucc)
-        //     {
-        //         //请求中心服如果失败了
-        //         restartOver = true;
-        //         yield break;
-        //     }
-        //
-        //     UILoadingPanel.Instance.UpdateLoadingPercent(19, 20);
-        //
-        //     //检测是否需要重新下载安装包
-        //     if (Launcher.Instance.CheckIfAppShouldUpdate())
-        //     {
-        //         Debug.Log($"重启 需要重新下载安装包 GameConfig.appVersion:{Launcher.Instance.GameConfig.appVersion}, svrVersion:{Launcher.Instance.svrVersion}");
-        //         Launcher.Instance.ForceUpdate();
-        //         yield break;
-        //     }
-        //
-        //     //读取Package的版本信息
-        //     if (!Launcher.Instance.reCheckVersionUpdate && Launcher.Instance.GameConfig.resVersion == Launcher.Instance.svrResVersion)
-        //     {
-        //         restartOver = true;
-        //         yield break;
-        //     }
-        //
-        //     //读取本地版本信息
-        //     if (Launcher.Instance.GameConfig.checkResUpdate && !Launcher.Instance.IsAuditServer())
-        //     {
-        //         Launcher.Instance.GameConfig.AddConfig("resVersion", Launcher.Instance.svrResVersion);
-        //     }
-        //
-        //     UILoadingPanel.Instance.UpdateLoadingPercent(21, 48);
-        //     Launcher.Instance.reCheckVersionUpdate = false;
-        //
-        //
-        //     Launcher.Instance.GameAction.ExecuteOnClose();
-        //     yield return null;
-        //
-        //     yield return new WaitForSeconds(0.3f);
-        //     UILoadingPanel.Instance.UpdateLoadingPercent(49, 50);
-        //     yield return null;
-        //
-        //
-        //     Launcher.Instance.StartDownloadUpdate();
-        // }
-
-        #endregion
     }
 }
