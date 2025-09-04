@@ -171,5 +171,43 @@ namespace LccHotfix
             Main.GameObjectPoolService.ReleaseObject(poolObject);
             poolObject = null;
         }
+
+        #region 动画工具
+
+        /// <summary>
+        /// 得到动画长度 匹配部分字符串 比如Hero_Hit 查找Hit返回第一个匹配的动画
+        /// </summary>
+        public static float GetAnimationClipLengthByNameMatched(Animator animator, string matchString)
+        {
+            if (animator == null)
+            {
+                return 0;
+            }
+
+            if (animator.runtimeAnimatorController == null)
+            {
+                return 0;
+            }
+
+            AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+            if (clips == null)
+            {
+                return 0;
+            }
+
+            foreach (AnimationClip clip in clips)
+            {
+                if (clip.name.Contains(matchString))
+                {
+                    return clip.length;
+                }
+            }
+
+            Debug.LogError($"找不到包含字符串 {matchString} 的动画片段，animator挂载的物体：{animator.name}");
+
+            return 0;
+        }
+
+        #endregion
     }
 }

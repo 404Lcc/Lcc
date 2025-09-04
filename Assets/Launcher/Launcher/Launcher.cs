@@ -89,5 +89,30 @@ namespace LccModel
 #endif
             return false;
         }
+        
+        public void FixedUpdate()
+        {
+            GameAction.ExecuteOnFixedUpdate();
+        }
+        
+        public void Update()
+        {
+            GameAction.ExecuteOnUpdate();
+        }
+        
+        public void LateUpdate()
+        {
+            GameAction.ExecuteOnLateUpdate();
+        }
+        
+        public void OnApplicationQuit()
+        {
+            GameAction.ExecuteOnClose();
+        }
+        
+        public void OnDrawGizmos()
+        {
+            GameAction.ExecuteOnDrawGizmos();
+        }
     }
 }
