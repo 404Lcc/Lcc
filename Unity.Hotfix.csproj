@@ -375,6 +375,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\UI.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\BehavoirTree\Utility\Extension\BTAgentExtension.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\BTScriptManager.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComAABBCollider\ComAABBCollider.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\BTScript\Skill\SkillBTScript.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\ReferencePool\IReference.cs" />
@@ -407,6 +408,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Audio\Interface\IAudioService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\SkillCD.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Event\GameEvent.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysAABBCollision.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\LogicContext\LogicComponentsLookup.cs" />
     <Compile Include="Assets\Hotfix\Utility\Extension\Vector2\Vector2Extension.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Command\CommandManager.cs" />

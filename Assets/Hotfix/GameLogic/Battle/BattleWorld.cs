@@ -119,6 +119,7 @@ namespace LccHotfix
             LogicComponentsLookup.ComHero = 21;
             LogicComponentsLookup.ComMonster = 22;
             LogicComponentsLookup.ComConfig = 23;
+            LogicComponentsLookup.ComAABBCollider = 24;
             LogicComponentsLookup.componentTypeList.Add(typeof(ComLocomotion));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComCollider));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComView));
@@ -138,6 +139,7 @@ namespace LccHotfix
             LogicComponentsLookup.componentTypeList.Add(typeof(ComHero));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComMonster));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComConfig));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComAABBCollider));
 
             //自定义
         }
@@ -160,7 +162,7 @@ namespace LccHotfix
             var mode = new BattleMode();
             mode.Init(_gameModeState);
             MetaContext.SetComUniGameMode(mode);
-            // MetaContext.SetComUniCameraBlender(new SmoothFoolow2D());
+            MetaContext.SetComUniCameraBlender(new SmoothFoolow2D());
             MetaContext.SetComUniDamage(new DamageBase());
             MetaContext.SetComUniInGamePlayers(new List<InGamePlayerInfo>());
         }
