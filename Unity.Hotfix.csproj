@@ -248,6 +248,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Interface\IGameObjectPoolService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Audio\AudioManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Save\Interface\ISaveHelper.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniCameraBlender\SmoothFoolow3D.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Asset\DefaultAssetHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\PlatformManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\UILogic\IUILogic.cs" />
@@ -384,6 +385,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\BTScriptAttribute.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\Window\WNode.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Utility\GameUtility.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniCameraBlender\SmoothFoolow2D.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\ThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Orca\OrcaManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Orca\Interface\IOrcaService.cs" />
