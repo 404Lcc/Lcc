@@ -67,6 +67,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\CodeTypes\Interface\ICodeTypesService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\ThreadPoolScheduler.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\Data\CalcDamageInfo.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysAStar.cs" />
     <Compile Include="Assets\Hotfix\Utility\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Decorators\SetParentDecorator.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaEntity.cs" />
@@ -395,6 +396,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\UILogic\UILogicBase.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\ComSkills.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Save\SaveManager.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComAStar\ComAStar.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\WindowEnum.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Orca\RVO\RVOMath.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\Locomotion\ComLocomotion.cs" />
@@ -1216,6 +1218,18 @@
     <ProjectReference Include="com.rlabrecque.steamworks.net.csproj">
       <Project>{0c7ea933-8e4d-a7a9-a4de-3f7ce8b00b70}</Project>
       <Name>com.rlabrecque.steamworks.net</Name>
+    </ProjectReference>
+    <ProjectReference Include="AstarPathfindingProject.csproj">
+      <Project>{16bf34f2-7864-80b8-6b0b-73ff0b2d61fd}</Project>
+      <Name>AstarPathfindingProject</Name>
+    </ProjectReference>
+    <ProjectReference Include="PackageTools.csproj">
+      <Project>{c6da4199-a174-7950-0a0e-20f88c36a31a}</Project>
+      <Name>PackageTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="Drawing.csproj">
+      <Project>{1feb9f36-e409-4785-dc1e-1d3812fea555}</Project>
+      <Name>Drawing</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

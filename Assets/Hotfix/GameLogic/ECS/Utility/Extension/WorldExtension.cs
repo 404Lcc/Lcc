@@ -56,6 +56,9 @@ namespace LccHotfix
             //碰撞
             System.Add(new SysCollision(world));
             System.Add(new SysAABBCollision(world));
+            
+            //寻路
+            System.Add(new SysAStar(world));
 
             //游戏模式
             System.Add(new SysGameMode(world));

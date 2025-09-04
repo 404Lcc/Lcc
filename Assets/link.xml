@@ -4620,6 +4620,7 @@
     <type fullname="LccModel.ResGameObject" preserve="all" />
     <type fullname="LccModel.ResObject" preserve="all" />
     <type fullname="LccModel.ResShader" preserve="all" />
+    <type fullname="LccModel.AStarCtrl" preserve="all" />
     <type fullname="LccModel.LccView" preserve="all" />
     <type fullname="LccModel.GroupBase" preserve="all" />
     <type fullname="LccModel.PivotHorizontal" preserve="all" />
@@ -4750,7 +4751,7 @@
     <type fullname="LccModel.PatchWindow+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
     <type fullname="LccModel.DisplayMode+&lt;SetNoFrame&gt;d__7" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3122" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4341" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3145" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4393" preserve="all" />
   </assembly>
 </linker>

@@ -96,6 +96,7 @@
     <Compile Include="Assets\Launcher\GameConfig\GameConfig.Build.cs" />
     <Compile Include="Assets\Launcher\Utility\Singleton\Singleton.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmStartGame.cs" />
+    <Compile Include="Assets\Launcher\Ctrl\AStarCtrl\AStarCtrl.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmClearCacheBundle.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmDownloadPackageOver.cs" />
     <Compile Include="Assets\Launcher\Launcher\Patch\FsmNode\FsmInitializePackage.cs" />
@@ -887,6 +888,18 @@
     <ProjectReference Include="EnhancedScroller_asmdef.csproj">
       <Project>{dcdda450-1210-cad6-5d95-34ec1c8959a2}</Project>
       <Name>EnhancedScroller_asmdef</Name>
+    </ProjectReference>
+    <ProjectReference Include="AstarPathfindingProject.csproj">
+      <Project>{16bf34f2-7864-80b8-6b0b-73ff0b2d61fd}</Project>
+      <Name>AstarPathfindingProject</Name>
+    </ProjectReference>
+    <ProjectReference Include="PackageTools.csproj">
+      <Project>{c6da4199-a174-7950-0a0e-20f88c36a31a}</Project>
+      <Name>PackageTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="Drawing.csproj">
+      <Project>{1feb9f36-e409-4785-dc1e-1d3812fea555}</Project>
+      <Name>Drawing</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
