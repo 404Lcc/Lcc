@@ -1,0 +1,83 @@
+{
+    "name": "AstarPathfindingProject",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2bafac87e7f4b9b418d9448d219b01ab",
+        "GUID:f4059aaf6c60a4a58a177a2609feb769",
+        "GUID:2665a8d13d1b3f18800f46e256720795",
+        "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:e0cd26848372d4e5c891c569017e11f1",
+        "GUID:8a2eafa29b15f444eb6d74f94a930e1d",
+        "GUID:de4e6084e6d474788bb8c799d6b461eb",
+        "GUID:734d92eba21c94caba915361bd5ac177",
+        "GUID:a5baed0c9693541a5bd947d336ec7659",
+        "GUID:db11b4b5d7520bc479416b48c98206cb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Pathfinding.Ionic.Zip.Reduced.dll",
+        "Clipper2Lib.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "MODULE_BURST",
+        "MODULE_MATHEMATICS",
+        "MODULE_COLLECTIONS"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.burst",
+            "expression": "1.8.7",
+            "define": "MODULE_BURST"
+        },
+        {
+            "name": "com.unity.mathematics",
+            "expression": "1.2.6",
+            "define": "MODULE_MATHEMATICS"
+        },
+        {
+            "name": "com.unity.collections",
+            "expression": "1.5.1",
+            "define": "MODULE_COLLECTIONS"
+        },
+        {
+            "name": "com.unity.collections",
+            "expression": "0.11-preview",
+            "define": "MODULE_COLLECTIONS_0_11_0_OR_NEWER"
+        },
+        {
+            "name": "com.unity.collections",
+            "expression": "2.0.0",
+            "define": "MODULE_COLLECTIONS_2_0_0_OR_NEWER"
+        },
+        {
+            "name": "com.unity.collections",
+            "expression": "2.1.0",
+            "define": "MODULE_COLLECTIONS_2_1_0_OR_NEWER"
+        },
+        {
+            "name": "com.unity.collections",
+            "expression": "2.2.0",
+            "define": "MODULE_COLLECTIONS_2_2_0_OR_NEWER"
+        },
+        {
+            "name": "com.unity.entities",
+            "expression": "1.1.0-pre.3",
+            "define": "MODULE_ENTITIES"
+        },
+        {
+            "name": "com.unity.entities",
+            "expression": "1.0.8",
+            "define": "MODULE_ENTITIES_1_0_8_OR_NEWER"
+        },
+        {
+            "name": "com.unity.test-framework",
+            "expression": "2.0.0",
+            "define": "MODULE_TEST_FRAMEWORK"
+        }
+    ],
+    "noEngineReferences": false
+}

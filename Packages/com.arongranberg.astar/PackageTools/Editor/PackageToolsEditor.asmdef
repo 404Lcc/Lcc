@@ -1,0 +1,44 @@
+{
+    "name": "AstarPackageToolsEditor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f4059aaf6c60a4a58a177a2609feb769"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.burst",
+            "expression": "1.8.7",
+            "define": "MODULE_BURST"
+        },
+        {
+            "name": "com.unity.mathematics",
+            "expression": "1.2.6",
+            "define": "MODULE_MATHEMATICS"
+        },
+        {
+            "name": "com.unity.collections",
+            "expression": "1.5.1",
+            "define": "MODULE_COLLECTIONS"
+        },
+        {
+            "name": "com.unity.collections",
+            "expression": "0.11-preview",
+            "define": "MODULE_COLLECTIONS_0_11_0_OR_NEWER"
+        },
+        {
+            "name": "com.unity.entities",
+            "expression": "1.1.0-pre.3",
+            "define": "MODULE_ENTITIES"
+        }
+    ],
+    "noEngineReferences": false
+}

@@ -1,0 +1,112 @@
+.largeIcon {
+    width: 200px;
+    height: 200px;
+    background-image: url('EditorAssets/ComponentIcons/d_AstarPath@256.png?fileID=2800000&guid=1620f833be5302149a071c06944d3e9b&type=3#d_AstarPath@256');
+    flex-shrink: 0;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    transition-property: scale;
+    transition-duration: 0.6s;
+    scale: 1 1;
+    transition-timing-function: ease-out-back;
+}
+
+.welcomeWindow {
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    -unity-background-image-tint-color: rgb(34, 34, 34);
+    background-color: rgb(34, 34, 34);
+    position: relative;
+    flex-basis: 100%;
+}
+
+.welcomeButton {
+    align-self: stretch;
+    opacity: 1;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    height: 40px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-left-color: rgba(224, 224, 224, 0);
+    border-right-color: rgba(224, 224, 224, 0);
+    border-top-color: rgba(224, 224, 224, 0);
+    border-bottom-color: rgba(224, 224, 224, 0);
+    background-color: rgb(89, 89, 89);
+    margin-bottom: 10px;
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    font-size: 14px;
+    -unity-text-align: middle-left;
+    padding-left: 30px;
+    transition-property: padding-left, background-color;
+    transition-duration: 0.1s, 0.1s;
+}
+
+:root {
+    flex-basis: 100%;
+}
+
+.welcomeButton:hover {
+    padding-left: 40px;
+    background-color: rgb(231, 122, 14);
+}
+
+.buttonIcon {
+    flex-grow: 0;
+    right: auto;
+    position: relative;
+    height: 28px;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    width: 28px;
+    flex-shrink: 0;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.buttonIconRight {
+    flex-grow: 0;
+    right: auto;
+    position: relative;
+    background-image: url('EditorAssets/images/check_icon.png?fileID=2800000&guid=25a6bf057fb4ad5438e3fa0aa1b45789&type=3#check_icon');
+    height: 28px;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    width: 28px;
+    flex-shrink: 0;
+}
+
+.welcomeButton Label {
+    padding-left: 8px;
+}
+
+.largeIconEntry {
+    scale: 0.7 0.7;
+}
+
+.buttonIcon.samples {
+    background-image: url('EditorAssets/images/samples_icon.png?fileID=2800000&guid=e10d07f341fb69b42acf8f2b2971270f&type=3#samples_icon');
+}
+
+.buttonIcon.education {
+    background-image: url('EditorAssets/images/educate_icon.png?fileID=2800000&guid=d49de811c1b5cbb449d74fda55ad6adc&type=3#educate_icon');
+}
+
+.buttonIcon.changelog {
+    background-image: url('EditorAssets/images/changelog_icon.png?fileID=2800000&guid=aac6bbff2ba09084f96968aa0649198f&type=3#changelog_icon');
+}
+
+.buttonIcon.documentation {
+    background-image: url('EditorAssets/images/documentation_icon.png?fileID=2800000&guid=2af1390027808444db42d140d1d437ae&type=3#documentation_icon');
+}
+
+#logo {
+    background-image: url('EditorAssets/images/astar_logo.png?fileID=2800000&guid=1603401e2a100ba44b299ce8f603b5eb&type=3#astar_logo');
+}

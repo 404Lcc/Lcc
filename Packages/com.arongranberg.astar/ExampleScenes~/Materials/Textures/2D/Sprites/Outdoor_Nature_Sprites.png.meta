@@ -1,0 +1,387 @@
+fileFormatVersion: 2
+guid: 3a19141f63f27bf4eab685b87ebb21b5
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 50
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Outdoor_Nature_Sprites_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1750
+        width: 3517
+        height: 1391
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 460fbff7dff1ae846941cb687dcfcc35
+      internalID: 2096918448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outdoor_Nature_Sprites_2
+      rect:
+        serializedVersion: 2
+        x: 3745
+        y: 2305
+        width: 1243
+        height: 840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a314b3622fa7995428e9cd797f796f66
+      internalID: -1313094547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outdoor_Nature_Sprites_12
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 1115
+        width: 673
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e306d781c2bf74f4a9b705afff3ea2ee
+      internalID: -1680181817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outdoor_Nature_Sprites_13
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 1107
+        width: 604
+        height: 385
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3a532981fa0a6045a91bff105ed8d65
+      internalID: -157625050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outdoor_Nature_Sprites_14
+      rect:
+        serializedVersion: 2
+        x: 1756
+        y: 930
+        width: 604
+        height: 388
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7f29ea156924604bb4ca73a9d225f89
+      internalID: -2421303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outdoor_Nature_Sprites_15
+      rect:
+        serializedVersion: 2
+        x: 3090
+        y: 45
+        width: 1228
+        height: 1649
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef612824ad47fa445a5047cda6177e4c
+      internalID: 1527091839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outdoor_Nature_Sprites_16
+      rect:
+        serializedVersion: 2
+        x: 4585
+        y: 981
+        width: 683
+        height: 530
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da7eca5b8a05dbd4dbaf2d71d4e4a9b1
+      internalID: 372743005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outdoor_Nature_Sprites_20
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 664
+        width: 425
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09eb4906a648a474aabf999412e46e8a
+      internalID: -262221991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outdoor_Nature_Sprites_22
+      rect:
+        serializedVersion: 2
+        x: 1011
+        y: 602
+        width: 584
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30fa50cdec64fde47b799b9b48e3e9fc
+      internalID: -1106103938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outdoor_Nature_Sprites_25
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 2748
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 877c4334f662a09428a73b0f95743d69
+      internalID: -127321684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outdoor_Nature_Sprites_26
+      rect:
+        serializedVersion: 2
+        x: 4669
+        y: 251
+        width: 576
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a113d795409b2d41aec6ab2c1048192
+      internalID: 449317731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e8a761afbc817e47a33d388ae784bd3
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Outdoor_Nature_Sprites_0: 2096918448
+      Outdoor_Nature_Sprites_1: -1885647699
+      Outdoor_Nature_Sprites_10: -2067573036
+      Outdoor_Nature_Sprites_11: -1992660268
+      Outdoor_Nature_Sprites_12: -1680181817
+      Outdoor_Nature_Sprites_13: -157625050
+      Outdoor_Nature_Sprites_14: -2421303
+      Outdoor_Nature_Sprites_15: 1527091839
+      Outdoor_Nature_Sprites_16: 372743005
+      Outdoor_Nature_Sprites_17: -318386303
+      Outdoor_Nature_Sprites_18: 1623152607
+      Outdoor_Nature_Sprites_19: 1478964076
+      Outdoor_Nature_Sprites_2: -1313094547
+      Outdoor_Nature_Sprites_20: -262221991
+      Outdoor_Nature_Sprites_21: 1271558195
+      Outdoor_Nature_Sprites_22: -1106103938
+      Outdoor_Nature_Sprites_23: -785988119
+      Outdoor_Nature_Sprites_24: 823996669
+      Outdoor_Nature_Sprites_25: -127321684
+      Outdoor_Nature_Sprites_26: 449317731
+      Outdoor_Nature_Sprites_27: 1166395281
+      Outdoor_Nature_Sprites_28: 1052563399
+      Outdoor_Nature_Sprites_3: 1645729089
+      Outdoor_Nature_Sprites_4: 402783478
+      Outdoor_Nature_Sprites_5: 769670893
+      Outdoor_Nature_Sprites_6: -629988660
+      Outdoor_Nature_Sprites_7: 672779275
+      Outdoor_Nature_Sprites_8: -1134196976
+      Outdoor_Nature_Sprites_9: -1123134686
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

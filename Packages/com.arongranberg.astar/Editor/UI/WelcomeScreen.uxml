@@ -1,0 +1,29 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/AstarPathfindingProject/Editor/AstarPathfindingProjectEditor.uss?fileID=7433441132597879392&amp;guid=f1e4e8798274ca7448321794e89178b9&amp;type=3#AstarPathfindingProjectEditor" />
+    <ui:VisualElement name="VisualElement" class="welcomeWindow">
+        <ui:VisualElement name="logo" class="largeIcon largeIconEntry" />
+        <ui:Label text="&lt;b&gt;Welcome to the A* Pathfinding Project!&lt;/b&gt;&#10;Here are some things to help you get started." style="color: rgb(255, 255, 255); -unity-text-align: upper-center; font-size: 16px; -unity-font-style: normal; margin-bottom: 30px; -unity-paragraph-spacing: 32px;" />
+        <ui:Button name="importSamples" enable-rich-text="true" emoji-fallback-support="true" class="welcomeButton" style="flex-direction: row; align-items: center; justify-content: flex-end; padding-left: 10px;">
+            <ui:VisualElement class="buttonIcon samples" />
+            <ui:Label text="Import Examples" emoji-fallback-support="false" class="blah" />
+            <ui:VisualElement style="flex-grow: 1;" />
+            <ui:VisualElement name="samplesImported" class="buttonIconRight" />
+        </ui:Button>
+        <ui:Button name="getStarted" enable-rich-text="true" emoji-fallback-support="true" class="welcomeButton" style="flex-direction: row; align-items: center; justify-content: flex-end; padding-left: 10px;">
+            <ui:VisualElement class="buttonIcon education" />
+            <ui:Label text="Get Started Guide" emoji-fallback-support="false" class="blah" />
+            <ui:VisualElement style="flex-grow: 1;" />
+        </ui:Button>
+        <ui:Button name="changelog" enable-rich-text="true" emoji-fallback-support="true" class="welcomeButton" style="flex-direction: row; align-items: center; justify-content: flex-end; padding-left: 10px;">
+            <ui:VisualElement class="buttonIcon changelog" />
+            <ui:Label text="Changelog" emoji-fallback-support="false" class="blah" />
+            <ui:VisualElement style="flex-grow: 1;" />
+        </ui:Button>
+        <ui:Button name="documentation" enable-rich-text="true" emoji-fallback-support="true" class="welcomeButton" style="flex-direction: row; align-items: center; justify-content: flex-end; padding-left: 10px;">
+            <ui:VisualElement class="buttonIcon documentation" />
+            <ui:Label text="Documentation" emoji-fallback-support="false" class="blah" />
+            <ui:VisualElement style="flex-grow: 1;" />
+        </ui:Button>
+        <ui:Label text="Version X.Y.Z" name="version" style="margin-top: auto; margin-bottom: 10px; color: rgb(103, 103, 103);" />
+    </ui:VisualElement>
+</ui:UXML>

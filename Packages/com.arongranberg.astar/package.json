@@ -1,0 +1,50 @@
+{
+    "author": {
+        "email": "aron.granberg+astar@gmail.com",
+        "name": "Aron Granberg",
+        "url": "https://www.arongranberg.com"
+    },
+    "changelogUrl": "https://arongranberg.com/astar/documentation/stable/changelog.html",
+    "dependencies": {
+        "com.unity.burst": "1.8.7",
+        "com.unity.collections": "1.5.1",
+        "com.unity.mathematics": "1.2.6",
+        "com.unity.modules.animation": "1.0.0",
+        "com.unity.modules.assetbundle": "1.0.0",
+        "com.unity.modules.audio": "1.0.0",
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.modules.particlesystem": "1.0.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.physics2d": "1.0.0",
+        "com.unity.modules.terrain": "1.0.0",
+        "com.unity.modules.terrainphysics": "1.0.0",
+        "com.unity.modules.tilemap": "1.0.0",
+        "com.unity.modules.ui": "1.0.0",
+        "com.unity.modules.uielements": "1.0.0",
+        "com.unity.ugui": "1.0.0"
+    },
+    "description": "The A* Pathfinding Project is a powerful and easy to use pathfinding system for Unity. With blazing fast pathfinding your AIs will be able to find the player in complex mazes in no time at all.\nPerfect for TD, FPS and RTS games.\nFeatures:\nSupports grid, navmesh, point and hexagonal graphs. Automatic navmesh generation to save you from doing it manually. Fully multithreaded so it will barely affect the frame rate. Path post-processing using raycasting, smoothing and using the funnel algorithm. A single line of code for a pathfinding call. Graphs can be saved to files. Local Avoidance both in the XZ and XY plane. Source code included. Supports updating graphs during runtime.",
+    "displayName": "A* Pathfinding Project",
+    "documentationUrl": "https://arongranberg.com/astar/documentation/stable",
+    "keywords": [
+        "pathfinding",
+        "ai",
+        "navigation",
+        "planning",
+        "a*"
+    ],
+    "name": "com.arongranberg.astar",
+    "publishConfig": {
+        "registry": "https://arongranberg.com/packages_forward/"
+    },
+    "samples": [
+        {
+            "description": "Additional examples",
+            "displayName": "Example scenes",
+            "path": "ExampleScenes~"
+        }
+    ],
+    "unity": "2021.3",
+    "unityRelease": "35f1",
+    "version": "5.3.8"
+}
