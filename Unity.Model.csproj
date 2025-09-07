@@ -386,6 +386,9 @@
     <Reference Include="NPOI.OpenXmlFormats">
       <HintPath>D:\Lcc\Assets\3rdPlugins\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>D:\Lcc\Library\PackageCache\com.unity.collections@1.5.1\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+    </Reference>
     <Reference Include="BouncyCastle.Crypto">
       <HintPath>D:\Lcc\Assets\3rdPlugins\BouncyCastle\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
@@ -461,6 +464,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>D:\Lcc\Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>D:\Lcc\Library\PackageCache\com.unity.nuget.mono-cecil@1.11.4\Mono.Cecil.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI">
       <HintPath>D:\Lcc\Assets\3rdPlugins\NPOI\NPOI.dll</HintPath>
     </Reference>
@@ -469,12 +475,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>D:\Lcc\Library\PackageCache\com.unity.analytics@3.8.1\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Collections.LowLevel.ILSupport">
-      <HintPath>D:\Lcc\Library\PackageCache\com.unity.collections@1.5.1\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>D:\Lcc\Library\PackageCache\com.unity.nuget.mono-cecil@1.11.4\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>

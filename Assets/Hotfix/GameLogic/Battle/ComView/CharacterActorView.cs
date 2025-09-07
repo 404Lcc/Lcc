@@ -7,7 +7,6 @@ namespace LccHotfix
     {
         public Vector2 size;
         public AABB bounds;
-        public string curAnimName;
 
         public override void Init(GameObjectPoolObject poolObject)
         {
@@ -29,7 +28,7 @@ namespace LccHotfix
             UpdateBounds();
         }
 
-        public void OnGizmos()
+        public virtual void OnGizmos()
         {
             if (bounds == null)
                 return;
@@ -42,18 +41,23 @@ namespace LccHotfix
             Gizmos.DrawCube(center, size);
         }
 
-        public void SetSize(Vector2 size)
+        public virtual void SetSize(Vector2 size)
         {
             this.size = size;
             this.bounds = new AABB(-size / 2, size / 2);
             UpdateBounds();
         }
         
-        public void UpdateBounds()
+        public virtual void UpdateBounds()
         {
             var selfPos = new Vector2(GameObject.transform.position.x, GameObject.transform.position.z);
             bounds.minPoint = selfPos - size / 2;
             bounds.maxPoint = bounds.minPoint + size;
+        }
+        
+        public virtual void ApplyDamage()
+        {
+            
         }
 
         public float PlayAnim(string animName, bool isForce = false)
@@ -62,7 +66,7 @@ namespace LccHotfix
             {
                 //相同动画不播放
                 var normalizedTime = Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-                if (curAnimName == animName && normalizedTime <= 1)
+                if (normalizedTime <= 1)
                 {
                     return GameUtility.GetAnimationClipLengthByNameMatched(Animator, animName);
                 }
