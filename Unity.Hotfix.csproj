@@ -97,6 +97,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBReward.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\Interface\IBTScriptService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Interface\IConfigService.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniFloatingText\IFloatingText.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\Interface\IFiberService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Gizmo\Interface\IGizmoService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysViewUpdate.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComView\ActorView.cs" />
     <Compile Include="Assets\Hotfix\Utility\ProtobufObject\ProtobufObject.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\Service\IService.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniFloatingText\DNPFloatingText.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Orca\RVO\Obstacle.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\DictionaryList.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\VibrationData.cs" />
@@ -187,6 +189,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Base\IDispose.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Easing\Interface\IEasingService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Event\Interface\IEventService.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniFloatingText\ComUniFloatingText.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Module\Setting\ResolutionType.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\Dev\DevCallbackMessage.cs" />
     <Compile Include="Assets\Hotfix\Utility\Extension\Awaiter\AwaiterExtension.cs" />

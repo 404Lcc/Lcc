@@ -94,10 +94,12 @@ namespace LccHotfix
             MetaComponentsLookup.ComUniCameraBlender = 1;
             MetaComponentsLookup.ComUniDamage = 2;
             MetaComponentsLookup.ComUniInGamePlayers = 3;
+            MetaComponentsLookup.ComUniFloatingText = 4;
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniGameMode));
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniCameraBlender));
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniDamage));
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniInGamePlayers));
+            MetaComponentsLookup.componentTypeList.Add(typeof(ComUniFloatingText));
 
             //战斗部分
             LogicComponentsLookup.ComLocomotion = 5;
@@ -167,6 +169,7 @@ namespace LccHotfix
             MetaContext.SetComUniCameraBlender(new SmoothFoolow2D());
             MetaContext.SetComUniDamage(new DamageBase());
             MetaContext.SetComUniInGamePlayers(new List<InGamePlayerInfo>());
+            MetaContext.SetComUniFloatingText(new DNPFloatingText());
         }
 
         protected override void InitSystem()
