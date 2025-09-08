@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace LccHotfix
 {
     public class ComUniFloatingText : MetaComponent
@@ -16,6 +18,11 @@ namespace LccHotfix
             base.Dispose();
 
             FloatingText.Dispose();
+        }
+
+        public void Spawn(string text, Vector3 position)
+        {
+            FloatingText.Spawn(text, position);
         }
     }
 

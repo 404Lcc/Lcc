@@ -5,6 +5,38 @@ using UnityEngine;
 
 public static class EntityUtility
 {
+    public static bool IsValid(LogicEntity entity)
+    {
+        if (entity == null)
+        {
+            return false;
+        }
+
+        if (entity.IsEmpty())
+        {
+            return false;
+        }
+
+        if (entity.hasComLife)
+        {
+            return false;
+        }
+
+        // 属性判断
+        if (!entity.hasComProperty)
+        {
+            return false;
+        }
+
+        // view判断
+        if (!entity.hasComView)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     public static LogicEntity GetEntity(long id)
     {
         return Main.WorldService.GetWorld().GetEntityWithComID(id);

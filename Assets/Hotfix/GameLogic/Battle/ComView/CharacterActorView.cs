@@ -66,7 +66,7 @@ namespace LccHotfix
             {
                 //相同动画不播放
                 var normalizedTime = Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-                if (normalizedTime <= 1)
+                if (Animator.GetCurrentAnimatorStateInfo(0).IsName(animName) && normalizedTime <= 1)
                 {
                     return GameUtility.GetAnimationClipLengthByNameMatched(Animator, animName);
                 }

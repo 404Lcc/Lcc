@@ -25,7 +25,7 @@ public class DNPFloatingText : IFloatingText
         }
     }
 
-    public void Spawn(float text, Vector3 position)
+    public void Spawn(string text, Vector3 position)
     {
         // var obj = damageNumberMesh.Spawn(position, text);
     }

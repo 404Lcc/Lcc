@@ -4,5 +4,5 @@ public interface IFloatingText
 {
     void PostInitialize();
     void Dispose();
-    void Spawn(float text, Vector3 position);
+    void Spawn(string text, Vector3 position);
 }

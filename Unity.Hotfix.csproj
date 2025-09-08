@@ -96,8 +96,8 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Coroutine\Interface\ICoroutineService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBReward.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\Interface\IBTScriptService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Interface\IConfigService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniFloatingText\IFloatingText.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Interface\IConfigService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\Interface\IFiberService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Gizmo\Interface\IGizmoService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysViewUpdate.cs" />
