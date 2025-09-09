@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class EntityUtility
 {
-    public static bool IsValid(LogicEntity entity)
+    public static bool IsValid(this LogicEntity entity)
     {
         if (entity == null)
         {
