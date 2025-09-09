@@ -123,6 +123,7 @@ namespace LccHotfix
             LogicComponentsLookup.ComConfig = 23;
             LogicComponentsLookup.ComAABBCollider = 24;
             LogicComponentsLookup.ComAStar = 25;
+            LogicComponentsLookup.ComORCA = 26;
             LogicComponentsLookup.componentTypeList.Add(typeof(ComLocomotion));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComCollider));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComView));
@@ -144,6 +145,7 @@ namespace LccHotfix
             LogicComponentsLookup.componentTypeList.Add(typeof(ComConfig));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComAABBCollider));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComAStar));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComORCA));
 
             //自定义
         }

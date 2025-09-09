@@ -59,6 +59,9 @@ namespace LccHotfix
             
             //寻路
             System.Add(new SysAStar(world));
+            
+            //避障
+            System.Add(new SysORCA(world));
 
             //游戏模式
             System.Add(new SysGameMode(world));

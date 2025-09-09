@@ -72,6 +72,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Decorators\SetParentDecorator.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaEntity.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\ParallelBTScript.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComORCA\ComORCA.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBIcon.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\RedDot\Interface\IRedDotService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Main\Interface\IMainService.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\ProcedureManager.cs" />
     <Compile Include="Assets\Hotfix\Utility\Extension\UnityWebRequest\UnityWebRequestExtension.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Global\Interface\IGlobalService.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComORCA\ORCA3D.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Buff\BuffState.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\FX\Interface\IFXService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\UIHelper.cs" />
@@ -205,6 +207,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Battle\System\SysControl.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\RedDot\RedDotBind.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Collider\SubobjectColliderHandlerBase.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComORCA\IORCA.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Item.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\Id\IdUtility.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\ReferencePool\ReferencePool.cs" />
@@ -355,6 +358,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Utility\IconUtility.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Camera\CameraManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Utility\WorldUtility.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysORCA.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Module\Setting\DisplayModeType.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\BehavoirTree\BTAgent\BTAgent.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Module\Character\ModCharacter.cs" />
