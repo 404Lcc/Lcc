@@ -13,7 +13,7 @@ public class DNPFloatingText : IFloatingText
         // damageNumberMesh = loader.GetComponent<DamageNumberMesh>();
         // damageNumberMesh.cameraOverride = Main.CameraService.CurrentCamera.transform;
 
-        loader.SetActive(false);
+        // loader.SetActive(false);
     }
 
     public void Dispose()
