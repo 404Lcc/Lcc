@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageTools", "PackageTool
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawingEditor", "DrawingEditor.csproj", "{416eea65-f9bb-ecb6-bb56-433e7454026b}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVO2", "RVO2.csproj", "{90143b16-cf06-6fcb-65d8-0018bee0375d}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.rlabrecque.steamworks.net.editor", "com.rlabrecque.steamworks.net.editor.csproj", "{bd9b8627-abca-04f8-9e66-deea03c8003a}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawingPackageToolsEditor", "DrawingPackageToolsEditor.csproj", "{97659027-479c-8eb4-69b2-7d727ff9e1d9}"
@@ -84,6 +86,8 @@ Global
 		{c6da4199-a174-7950-0a0e-20f88c36a31a}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{416eea65-f9bb-ecb6-bb56-433e7454026b}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{416eea65-f9bb-ecb6-bb56-433e7454026b}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90143b16-cf06-6fcb-65d8-0018bee0375d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90143b16-cf06-6fcb-65d8-0018bee0375d}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{bd9b8627-abca-04f8-9e66-deea03c8003a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{bd9b8627-abca-04f8-9e66-deea03c8003a}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97659027-479c-8eb4-69b2-7d727ff9e1d9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

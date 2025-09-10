@@ -61,7 +61,8 @@ namespace LccHotfix
             System.Add(new SysAStar(world));
             
             //避障
-            System.Add(new SysORCA(world));
+            System.Add(new SysOrca(world));
+            System.Add(new SysOrcaAgent(world));
 
             //游戏模式
             System.Add(new SysGameMode(world));

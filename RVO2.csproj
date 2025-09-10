@@ -12,11 +12,11 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{6fbc4385-c6fe-fcbd-0bd5-ab0b4e96c57b}</ProjectGuid>
+    <ProjectGuid>{90143b16-cf06-6fcb-65d8-0018bee0375d}</ProjectGuid>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Unity.Hotfix</AssemblyName>
+    <AssemblyName>RVO2</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -25,7 +25,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>Temp\Bin\Debug\Unity.Hotfix\</OutputPath>
+    <OutputPath>Temp\Bin\Debug\RVO2\</OutputPath>
     <DefineConstants>UNITY_2022_3_34;UNITY_2022_3;UNITY_2022;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;ENABLE_NAVIGATION_PACKAGE_DEBUG_VISUALIZATION;ENABLE_NAVIGATION_HEIGHTMESH_RUNTIME_SUPPORT;ENABLE_NAVIGATION_UI_REQUIRES_PACKAGE;PLATFORM_STANDALONE;TEXTCORE_1_0_OR_NEWER;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;UNITY_UGP_API;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_INITIALIZES_MEMORY_MANAGER_EXPLICITLY;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;Offline;Horizontal;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;ES3_TMPRO;ES3_UGUI;STEAMWORKS_NET;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -45,400 +45,16 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComFaction.cs" />
-    <Compile Include="Assets\Hotfix\Utility\LoopScroll\LoopScroll.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\Variable\Variable.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Steam\SteamManager.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventPool\BaseEventArgs.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Window\WindowMode.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Window\WBlackboard.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\Death\DeathProcess.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Icon.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\Bag\ModBag.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\SkillProcess\ISkillProcess.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\IDamage.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\LinkedList.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Extension\GameObject\GameObjectExtension.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\AStarMap\AStarNodeData.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\UI\UIRoot\UIRootCommon.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComOwnerPlayer.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Timer\Interface\ITimerService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Video\VideoManager.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\CodeTypes\Interface\ICodeTypesService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\ThreadPoolScheduler.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\Data\CalcDamageInfo.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysAStar.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Awaiter\AssetBundleCreateRequestAwaiter.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Decorators\SetParentDecorator.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaEntity.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\ParallelBTScript.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBIcon.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\RedDot\Interface\IRedDotService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Main\Interface\IMainService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Steam\Interface\ISteamService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\LogicContext\LogicMatcher.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Coroutine\Interface\ICoroutineHelper.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Event\GameEventType.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\FSM\FSM.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Utility\EntityUtility.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\UIManager.FunctionTurn.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBSkill.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\Ping.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\Interface\IVibrationService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Video\Interface\IVideoService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\BehavoirTree\KVContext\KVContext.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComTag.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\IBlockBuffer.cs" />
-    <Compile Include="Assets\Hotfix\Utility\MVVM\View\Binding\Binding.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Window\Window\Window.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\IScheduler.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Window\Window\WRootNode.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Coroutine\Interface\ICoroutineService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBReward.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\Interface\IBTScriptService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniFloatingText\IFloatingText.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Interface\IConfigService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\Interface\IFiberService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Gizmo\Interface\IGizmoService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysViewUpdate.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Utility\Extension\WorldExtension.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\MultiDictionary.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Awaiter\Action\ActionWrap.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\Aes.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\BaseAccount.cs" />
-    <Compile Include="Assets\Hotfix\Utility\MVVM\View\ViewModel\ViewModelBase.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Utility\Network\NetworkUtility.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Network\Interface\INetworkService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Utility\Assembly\AssemblyUtility.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\Data\DamageType.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Save\Interface\ISaveService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Utility\TargetUtility.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Event\GameEventArgs.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\PopupPanel.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaComponentsLookup.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Buff\ComBuffs.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Download\DownloadManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\SkillData.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComView\ActorView.cs" />
-    <Compile Include="Assets\Hotfix\Utility\ProtobufObject\ProtobufObject.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\Service\IService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniFloatingText\DNPFloatingText.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniOrca\ComUniOrca.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\DictionaryList.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\VibrationData.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysCollision.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\BlockBuffer.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Procedure\LoginProcedure.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\RewardTemplate.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\EquipmentType.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Property\ComProperty.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\Data\DamageProp.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\Log\ILogHelper.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComOwnerEntity.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\SkillSpellType.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\Data\DamageSource.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\DamageBase.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\TcpConnection.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\Interface\IProcedureService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\UI\UILogin\UILoginPanel.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Timer\TimerManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\Dev\DevPlatform.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\Log\LogLevel.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Window\WindowManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComSubobject.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\LogicContext\LogicComponent.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Command\CommandData.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Decorators\AutoReleaseDecorator.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBRewardTemplate.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Gizmo\GizmoManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Save\DefaultSaveHelper.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\Log\DefaultLogHelper.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComTransform.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Base\EntityIndexEnum.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\BTAction.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\ProcedureManager.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Extension\UnityWebRequest\UnityWebRequestExtension.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Global\Interface\IGlobalService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Buff\BuffState.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\FX\Interface\IFXService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\UIHelper.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Model\Interface\IModelService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Model\ModelAttribute.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\System\SysSkillProcess.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Coroutine\DefaultCoroutineHelper.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Input\Interface\IInputService.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Resolution\ResolutionUtility.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysLife.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\ComUniDamage.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\System\SysSubobject.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Procedure\MainProcedure.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Procedure\DefaultProcedureHelper.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\Locomotion\LocomotionBase.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Decorators\GameObjectPoolDecorator.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Awaiter\UnityWebRequestAsyncOperationAwaiter.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Texture.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\SteamLobby\Interface\ISteamLobbyService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Model\ModelTemplate.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\ThreadSync\Interface\IThreadSyncService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComView\ComView.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Random\RandomUtility.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\StackType.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\ConfigManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Base\IDispose.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Easing\Interface\IEasingService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Event\Interface\IEventService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniFloatingText\ComUniFloatingText.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\Setting\ResolutionType.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\Dev\DevCallbackMessage.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Extension\Awaiter\AwaiterExtension.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Extension\Image\ImageExtension.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\IVibrationManager.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Coroutine\CoroutineHandler.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Asset\AssetManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\HotfixBridge\HotfixBridge.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\FX\FXManager.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\GameObjectPoolObject.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBTexture.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\System\SysControl.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\RedDot\RedDotBind.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Collider\SubobjectColliderHandlerBase.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Item.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Utility\Id\IdUtility.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\ReferencePool\ReferencePool.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventPool\EventPool.Event.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\VibrationManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\UI\UIRoot\UIRootLogin.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\ValuePropertyType.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\BattleWorld.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Download\DownloadFile.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\LogicSystems.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\CodeTypes\CodeTypesManager.cs" />
-    <Compile Include="Assets\Hotfix\Utility\MVVM\View\View\IView.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\UI\UITipsBase\UITipsBase.cs" />
-    <Compile Include="Assets\Hotfix\Utility\ScreenAdaptation\ScreenAdaptationUtility.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\AStarMap\AStarMapManager.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Main\MainPartial.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\LoadProcedureHandler.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\BoolPropertyType.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\IPackage.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBItem.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\TypeNamePair.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\Interface\IPlatformService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\Fiber.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBEquipment.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Easing\EasingExtensions.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\CodeTypes\AttributeBase.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Download\DownloadData.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBPopupPanel.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\BehavoirTree\KVContext\KVType.cs" />
-    <Compile Include="Assets\Hotfix\Utility\LoopScroll\LoopScrollItem.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Buff.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaContext.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Init\Init.Return.cs" />
-    <Compile Include="Assets\Hotfix\Utility\ClientTools\ClientTools.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\TcpSocket.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\System\SysBuffs.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Awaiter\AssetBundleRequestAwaiter.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysCameraBlender.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\Death\ComDeath.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Extension\Vector3\Vector3Extension.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\FSM\StateNode.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\ThreadSync\ThreadSyncManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\MultiLanguageTexture.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Interface\IGameObjectPoolService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Audio\AudioManager.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Save\Interface\ISaveHelper.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniCameraBlender\SmoothFoolow3D.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Asset\DefaultAssetHelper.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\PlatformManager.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Window\UILogic\IUILogic.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\LogicContext\LogicContext.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\GameObjectPoolManager.cs" />
-    <Compile Include="Assets\Hotfix\Utility\AutoReference\AutoReferenceUtility.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Download\Interface\IDownloadService.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Extension\Transform\TransformExtension.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\IUIHelper.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\UnOrderMultiMapSet.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\Interface\IUIService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Window\WindowManager.Action.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Awaiter\AsyncOperationAwaiter.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\Bag\ItemData.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Extension\SpriteRenderer\SpriteRendererExtension.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\LinkedListRange.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\HotfixBridge\Interface\IHotfixBridgeService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComID.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBMultiLanguageTexture.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Language\LanguageManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBPanel.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\UIPanelDefine.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Network\NetworkManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComControl\ComControl.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\BTScript.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\QualityType.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBEmptyGoTo.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\Player\ModPlayer.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Model\ModelManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\Setting\ModSetting.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBBuff.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\StackList.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Command\Interface\ICommandService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Icon\Interface\IIconService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Window\WindowManager.Types.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComConfig.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\ReferencePool\ReferencePoolInfo.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\LogicContext\LogicEntity.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Language.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComHero.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Download\DownloadState.cs" />
-    <Compile Include="Assets\Hotfix\Utility\MVVM\View\Binding\ViewModelBinding.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\SkillProcess\SkillProcess.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniInGamePlayers.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Coroutine\CoroutineManager.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\Log\Log.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Init\Init.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Decorators\MaxActiveDecorator.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Network\DefaultPackageHelper.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysLocomotion.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\BasePlatform.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysOrcaAgent.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\GameMain\GameMain.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Extension\Task\TaskExtension.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Easing\EasingType.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventPool\EventArgs.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysDebug.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\WindowRoot\UIRootBase.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\SteamLobby\SteamLobbyManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\UI\UIMain\UIMainPanel.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\ECSWorld.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Camera\Interface\ICameraService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBLanguage.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniCameraBlender\ICameraBlender.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Network\DefaultMessageHelper.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\World\Interface\IWorldService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Property\EntityProperty.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Main\Main.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Network\IMessageHelper.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysGameMode.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Buff\BuffProperty.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaComponent.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\Equipment\ModEquipment.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\SkillAbility.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\FunctionOpen\ModFunctionOpen.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\ReferencePool\ReferencePool.ReferenceCollection.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\Collider\ColliderHandler.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Network\DefaultPackage.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventPool\EventPoolMode.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\SimpleVibrationHandler.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\ThreadSync\ThreadSynchronizationContext.cs" />
-    <Compile Include="Assets\Hotfix\Utility\LoopScroll\LoopScrollPool.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Command\CommandDataType.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Network\NetworkMessage.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Window\Interface\IWindowService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\UIManager.Popup.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Utility\Marshal\MarshalUtility.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Main\Module.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Subobject.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\EmptyGoTo.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Main\FrameworkMain.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\System\SysSkillCD.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComControl\IControl.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysViewTransform.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComOrcaAgent\ComOrcaAgent.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Icon\IconManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\RedDot\RedDotManager.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Asset\IAssetHelper.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\AStarMap\Interface\IAStarMapService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\ItemType.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\UI\UIRoot\UIRootMain.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Utility\IconUtility.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Camera\CameraManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Utility\WorldUtility.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\Setting\DisplayModeType.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\BehavoirTree\BTAgent\BTAgent.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\Character\ModCharacter.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBSubobject.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Icon\IconBase.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniGameMode.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComTimer.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Utility\Extension\EntityExtension.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\GameMode\GameModeBase.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\World\WorldManager.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventPool\EventPool.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Joystick\Joystick.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Easing\EasingFunctions.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\FSM\ComFSM.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\ProcedureType.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\ITcpConnection.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\SkillProcess\ComSkillProcess.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\GameObjectPool.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBBuffValue.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Asset\Interface\IAssetService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\FiberManager.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Window\UI.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysOrca.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\BehavoirTree\Utility\Extension\BTAgentExtension.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComOrcaAgent\IOrcaAgent.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\BTScriptManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComAABBCollider\ComAABBCollider.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\ComView\CharacterActorView.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\BTScript\Skill\SkillBTScript.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventManager.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\ReferencePool\IReference.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Equipment.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Base\GroupEntityIndex.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Command\CommandType.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Network\IPackageHelper.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\BTScriptAttribute.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Window\Window\WNode.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Utility\GameUtility.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniCameraBlender\SmoothFoolow2D.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\ThreadScheduler.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Tables.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\UILogic\UILogicBase.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\ComSkills.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Save\SaveManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComAStar\ComAStar.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Window\WindowEnum.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\Locomotion\ComLocomotion.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\UIManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniCameraBlender\ComUniCameraBlender.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\IProcedureHelper.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComMonster.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComLife.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Base\Variable\GenericVariable.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysFSM.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Audio\Interface\IAudioService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\SkillCD.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Event\GameEvent.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysAABBCollision.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\LogicContext\LogicComponentsLookup.cs" />
-    <Compile Include="Assets\Hotfix\Utility\Extension\Vector2\Vector2Extension.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Command\CommandManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Panel.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\Bag\RewardItemData.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Window\WindowManager.Res.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\ITcpSocket.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Input\InputManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Skill.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\BaseCallbackMessage.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\MainThreadScheduler.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaMatcher.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\Dev\DevAccount.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Icon\UIRewardNormal.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Decorators\PreloadDecorator.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\ItemSmallType.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Language\Interface\ILanguageService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\CollisionType.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Global\GlobalManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUnityObjectRelated.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComHP.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Easing\EasingManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysDeathProcess.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\ProcedureAttribute.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Coroutine\CoroutineCompletedHandler.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\Collider\ComCollider.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComOrcaAgent\OrcaAgent3D.cs" />
-    <None Include="Assets\Hotfix\Unity.Hotfix.asmdef" />
+    <Compile Include="Assets\3rdPlugins\RVO2\JobHandleExtensions.cs" />
+    <Compile Include="Assets\3rdPlugins\RVO2\KdTree.cs" />
+    <Compile Include="Assets\3rdPlugins\RVO2\Simulator.cs" />
+    <Compile Include="Assets\3rdPlugins\RVO2\Obstacle.cs" />
+    <Compile Include="Assets\3rdPlugins\RVO2\Line.cs" />
+    <Compile Include="Assets\3rdPlugins\RVO2\NativeArrayExtensions.cs" />
+    <Compile Include="Assets\3rdPlugins\RVO2\NativeParallelMultiHashMapExtensions.cs" />
+    <Compile Include="Assets\3rdPlugins\RVO2\RVOMath.cs" />
+    <Compile Include="Assets\3rdPlugins\RVO2\Agent.cs" />
+    <None Include="Assets\3rdPlugins\RVO2\RVO2.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -1177,17 +793,14 @@
     <Reference Include="System.Xml.XPath.XDocument">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:\Lcc\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="YooAsset">
-      <HintPath>D:\Lcc\Library\ScriptAssemblies\YooAsset.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Runtime">
-      <HintPath>D:\Lcc\Library\ScriptAssemblies\Luban.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Collections">
+      <HintPath>D:\Lcc\Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>D:\Lcc\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
@@ -1197,46 +810,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.3rdPlugin.csproj">
-      <Project>{bdd9070e-1884-a46f-7a89-7f6cb0e9c8b1}</Project>
-      <Name>Unity.3rdPlugin</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Model.csproj">
-      <Project>{b411d157-b422-a16c-c350-5090ebf41dc0}</Project>
-      <Name>Unity.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="LoopScrollRect.Runtime.csproj">
-      <Project>{4b5c50e9-f92d-b3c2-f3e2-ecb7df3b049e}</Project>
-      <Name>LoopScrollRect.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="EnhancedScroller_asmdef.csproj">
-      <Project>{dcdda450-1210-cad6-5d95-34ec1c8959a2}</Project>
-      <Name>EnhancedScroller_asmdef</Name>
-    </ProjectReference>
-    <ProjectReference Include="EasySave3.csproj">
-      <Project>{fb6f6069-4e18-ef9a-c267-baf5686cd98b}</Project>
-      <Name>EasySave3</Name>
-    </ProjectReference>
-    <ProjectReference Include="com.rlabrecque.steamworks.net.csproj">
-      <Project>{0c7ea933-8e4d-a7a9-a4de-3f7ce8b00b70}</Project>
-      <Name>com.rlabrecque.steamworks.net</Name>
-    </ProjectReference>
-    <ProjectReference Include="AstarPathfindingProject.csproj">
-      <Project>{16bf34f2-7864-80b8-6b0b-73ff0b2d61fd}</Project>
-      <Name>AstarPathfindingProject</Name>
-    </ProjectReference>
-    <ProjectReference Include="PackageTools.csproj">
-      <Project>{c6da4199-a174-7950-0a0e-20f88c36a31a}</Project>
-      <Name>PackageTools</Name>
-    </ProjectReference>
-    <ProjectReference Include="Drawing.csproj">
-      <Project>{1feb9f36-e409-4785-dc1e-1d3812fea555}</Project>
-      <Name>Drawing</Name>
-    </ProjectReference>
-    <ProjectReference Include="RVO2.csproj">
-      <Project>{90143b16-cf06-6fcb-65d8-0018bee0375d}</Project>
-      <Name>RVO2</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

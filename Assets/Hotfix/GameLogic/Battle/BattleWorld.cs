@@ -95,11 +95,13 @@ namespace LccHotfix
             MetaComponentsLookup.ComUniDamage = 2;
             MetaComponentsLookup.ComUniInGamePlayers = 3;
             MetaComponentsLookup.ComUniFloatingText = 4;
+            MetaComponentsLookup.ComUniOrca = 5;
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniGameMode));
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniCameraBlender));
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniDamage));
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniInGamePlayers));
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniFloatingText));
+            MetaComponentsLookup.componentTypeList.Add(typeof(ComUniOrca));
 
             //战斗部分
             LogicComponentsLookup.ComLocomotion = 5;
@@ -123,7 +125,7 @@ namespace LccHotfix
             LogicComponentsLookup.ComConfig = 23;
             LogicComponentsLookup.ComAABBCollider = 24;
             LogicComponentsLookup.ComAStar = 25;
-            LogicComponentsLookup.ComORCA = 26;
+            LogicComponentsLookup.ComOrcaAgent = 26;
             LogicComponentsLookup.componentTypeList.Add(typeof(ComLocomotion));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComCollider));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComView));
@@ -145,7 +147,7 @@ namespace LccHotfix
             LogicComponentsLookup.componentTypeList.Add(typeof(ComConfig));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComAABBCollider));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComAStar));
-            LogicComponentsLookup.componentTypeList.Add(typeof(ComORCA));
+            LogicComponentsLookup.componentTypeList.Add(typeof(ComOrcaAgent));
 
             //自定义
         }
@@ -172,6 +174,7 @@ namespace LccHotfix
             MetaContext.SetComUniDamage(new DamageBase());
             MetaContext.SetComUniInGamePlayers(new List<InGamePlayerInfo>());
             MetaContext.SetComUniFloatingText(new DNPFloatingText());
+            MetaContext.SetComUniOrca();
         }
 
         protected override void InitSystem()

@@ -1,33 +1,21 @@
 using Entitas;
-using RVO;
+using LccHotfix;
 
 namespace LccHotfix
 {
-    public class SysORCA : IInitializeSystem, IExecuteSystem
+    public class SysOrca : IExecuteSystem
     {
-        private IGroup<LogicEntity> _group;
+        private ComUniOrca comUniOrca;
 
-        public SysORCA(ECSWorld world)
+        public SysOrca(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComORCA));
-        }
-
-        public void Initialize()
-        {
-            Simulator.Instance.setAgentDefaults(15f, 10, 10.0f, 10.0f, 3, 10, new RVO.Vector2(0.0f, 0.0f));
-            Simulator.Instance.setTimeStep(0.02f);
+            comUniOrca = world.MetaContext.ComUniOrca;
         }
 
         public void Execute()
         {
-            Simulator.Instance.doStep();
-
-            foreach (var entity in _group.GetEntities())
-            {
-                var comORCA = entity.ComORCA;
-
-                comORCA.Update();
-            }
+            comUniOrca.DoStep();
+            comUniOrca.EnsureCompleted();
         }
     }
 }
