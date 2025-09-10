@@ -13,7 +13,7 @@ public class SmoothFoolow3D : ICameraBlender
     public float distance = 20;
 
     //阻尼
-    public float damping = 45;
+    public float damping = 3;
 
     //相机的距离比例
     public float proportion = 1;
@@ -22,7 +22,7 @@ public class SmoothFoolow3D : ICameraBlender
     public bool isNeedDamping = true;
 
     //相机偏移
-    public Vector3 offset = new Vector3(0, 5f, 0);
+    public Vector3 offset = new Vector3(0, 0, 0);
 
     //震动相关
     public float shakeIntensity;
@@ -32,15 +32,15 @@ public class SmoothFoolow3D : ICameraBlender
     public Transform Target { get; set; }
     public Camera Camera => Main.CameraService.CurrentCamera;
 
-    public void PostInitialize()
+    public virtual void PostInitialize()
     {
     }
 
-    public void Update()
+    public virtual void Update()
     {
     }
 
-    public void LateUpdate()
+    public virtual void LateUpdate()
     {
         if (Target != null)
         {
@@ -74,12 +74,12 @@ public class SmoothFoolow3D : ICameraBlender
         }
     }
 
-    public void ChangeTarget(Transform target)
+    public virtual void ChangeTarget(Transform target)
     {
         Target = target;
     }
 
-    public void ShakeCamera(float intensity = 0.5f, float duration = 0.5f)
+    public virtual void ShakeCamera(float intensity = 0.5f, float duration = 0.5f)
     {
         if (intensity <= 0 || duration <= 0)
             return;
@@ -89,7 +89,7 @@ public class SmoothFoolow3D : ICameraBlender
         isShaking = true;
     }
 
-    public void Dispose()
+    public virtual void Dispose()
     {
     }
 }

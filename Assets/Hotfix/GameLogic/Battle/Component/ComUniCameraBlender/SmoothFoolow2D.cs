@@ -10,7 +10,7 @@ namespace LccHotfix
         public Transform Target { get; set; }
         public Camera Camera => Main.CameraService.CurrentCamera;
 
-        public void PostInitialize()
+        public virtual void PostInitialize()
         {
             smoothTime = 0.1f;
             bounds = new Bounds();
@@ -18,21 +18,21 @@ namespace LccHotfix
             bounds.size = new Vector3(50, 50, 0);
         }
 
-        public void Update()
+        public virtual void Update()
         {
         }
 
-        public void LateUpdate()
+        public virtual void LateUpdate()
         {
             MoveCamera();
         }
 
-        public void ChangeTarget(Transform target)
+        public virtual void ChangeTarget(Transform target)
         {
             Target = target;
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
         }
 

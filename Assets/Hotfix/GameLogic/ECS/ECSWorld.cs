@@ -108,7 +108,6 @@ namespace LccHotfix
 
             foreach (var item in ContextList)
             {
-                item.DestroyAllEntities();
                 item.Reset();
             }
         }
