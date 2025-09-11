@@ -6,10 +6,10 @@ using FileUtility = LccModel.FileUtility;
 
 namespace LccEditor
 {
-    public class Build
+    public class BuildHotfix
     {
         [InitializeOnLoadMethod]
-        public static void BuildHotfix()
+        public static void Build()
         {
             if (File.Exists("Assets/Hotfix/Unity.Hotfix.asmdef"))
             {

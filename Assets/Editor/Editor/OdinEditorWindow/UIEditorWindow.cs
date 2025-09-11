@@ -20,34 +20,7 @@ namespace LccEditor
         public UIEditorWindow(EditorWindow editorWindow) : base(editorWindow)
         {
         }
-
-
-
-        [PropertySpace(10)]
-        [LabelText("UIDev"), Button(ButtonSizes.Gigantic, Name = "UIDev")]
-        public void UIDev()
-        {
-            var defaultFontAsset = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Resources/Fonts/Font SDF.asset");
-
-            Font fontAssetCur = Resources.Load<Font>("Fonts/font_default");
-
-            //清除之前用的字体资源数据和字符，使fallback略过该字体
-            //删除texture至一张， 且将尺寸置为0
-            defaultFontAsset.ClearFontAssetData(true);
-            defaultFontAsset.characterLookupTable.Clear();
-
-            //设置目标字体为静态生成，阻止新的字符生成
-            defaultFontAsset.atlasPopulationMode = AtlasPopulationMode.Static;
-
-
-
-            TMP_FontAsset fontAsset = TMP_FontAsset.CreateFontAsset(fontAssetCur, 50, 8, UnityEngine.TextCore.LowLevel.GlyphRenderMode.SDFAA, 2048, 2048, AtlasPopulationMode.Dynamic);
-            defaultFontAsset.fallbackFontAssetTable.Clear();
-            defaultFontAsset.fallbackFontAssetTable.Add(fontAsset);
-        }
-
-
-
+        
         [PropertySpace(10)]
         [LabelText("UI/清理UI内容"), Button(ButtonSizes.Gigantic, Name = "清理UI内容")]
         public void ReplaceAllTxt()

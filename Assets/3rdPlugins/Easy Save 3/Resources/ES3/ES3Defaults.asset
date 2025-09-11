@@ -46,6 +46,7 @@ MonoBehaviour:
     - Luban.Runtime
     - PackageTools
     - Purchasing.Common
+    - RVO2
     - Unity.3rdPlugin
     - Unity.Hotfix
     - Unity.Model
