@@ -5,6 +5,6 @@ namespace LccHotfix
         None,
         Login = 1 << 0,
         Main = 1 << 1,
-        Robot = 1 << 2,
+        Battle = 1 << 2,
     }
 }

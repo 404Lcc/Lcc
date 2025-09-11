@@ -16,11 +16,13 @@ public class DefaultProcedureHelper : IProcedureHelper
             }
         }
     }
+
     public void ResetSpeed()
     {
         Launcher.Instance.GameControl.SetGameSpeed(1);
         Launcher.Instance.GameControl.ChangeFPS();
     }
+
     public void UnloadAllPanel(LoadProcedureHandler last, LoadProcedureHandler cur)
     {
         UI.ShowMaskBox((int)MaskType.WINDOW_ANIM, false);
@@ -35,7 +37,7 @@ public class DefaultProcedureHelper : IProcedureHelper
             UI.Release(ReleaseType.CHANGE_PROCEDURE);
         }
     }
-    
+
     public void OpenChangeProcedurePanel(LoadProcedureHandler handler)
     {
         if (handler == null || handler.turnNode == null)
@@ -59,7 +61,7 @@ public class DefaultProcedureHelper : IProcedureHelper
 
         handler.turnNode = null;
     }
-    
+
     public IEnumerator ShowProcedureLoading(LoadingType loadType)
     {
         UILoadingPanel loadingPanel = null;

@@ -7,11 +7,11 @@ namespace LccHotfix
         bool IsLoading { get; }
 
         void SetProcedureHelper(IProcedureHelper procedureHelper);
-        
+
         LoadProcedureHandler GetProcedure(int type);
 
         void ChangeProcedure(int type);
-        
+
         void CleanProcedure();
 
         #region 切流程界面
