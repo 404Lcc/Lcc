@@ -48,7 +48,7 @@ namespace LccHotfix
             this.Map = map;
         }
     }
-    
+
     public class BattleStart : IStateNode
     {
         public BattleMode mode;
@@ -60,6 +60,25 @@ namespace LccHotfix
 
         public void OnEnter()
         {
+        }
+
+        public void CreatePlayer()
+        {
+            var obj = GameUtility.GetObj("Player");
+            var entity = EntityUtility.AddEntity<CharacterActorView>(obj);
+            var player = entity.GetView<CharacterActorView>(ViewCategory.Actor);
+            player.SetSize(new Vector2(1, 1));
+
+            entity.AddComTag(TagType.Hero);
+            entity.AddComFaction(FactionType.Friend);
+            entity.AddComHP(int.MaxValue);
+            entity.AddComHero();
+            entity.AddComProperty();
+            entity.comProperty.Init(int.MaxValue, 100, 3);
+
+            HPView hpView = new HPView();
+            hpView.Init(entity, HeadbarType.NormalHP, 0);
+            entity.AddView(hpView, ViewCategory.UI);
         }
 
         public void OnUpdate()
