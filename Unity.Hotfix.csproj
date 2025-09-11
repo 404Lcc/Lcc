@@ -198,6 +198,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\IVibrationManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Coroutine\CoroutineHandler.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Asset\AssetManager.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComView\HPView.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\HotfixBridge\HotfixBridge.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\FX\FXManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\GameObjectPoolObject.cs" />
@@ -251,6 +252,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\MultiLanguageTexture.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\Interface\IGameObjectPoolService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComView\CharacterActorView.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Save\Interface\ISaveHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniCameraBlender\SmoothFoolow3D.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Asset\DefaultAssetHelper.cs" />
@@ -271,6 +273,7 @@
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\LinkedListRange.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\HotfixBridge\Interface\IHotfixBridgeService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComID.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\UI\UIHeadbar\UIHeadbarPanel.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBMultiLanguageTexture.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Language\LanguageManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBPanel.cs" />
@@ -384,7 +387,6 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComOrcaAgent\IOrcaAgent.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\BTScript\BTScriptManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComAABBCollider\ComAABBCollider.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\ComView\CharacterActorView.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\BTScript\Skill\SkillBTScript.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\ReferencePool\IReference.cs" />
