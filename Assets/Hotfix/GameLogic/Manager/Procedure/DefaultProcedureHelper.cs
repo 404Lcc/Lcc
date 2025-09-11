@@ -1,82 +1,83 @@
 using System.Collections;
-using LccHotfix;
 using LccModel;
 using UnityEngine;
-using Init = LccHotfix.Init;
 
-public class DefaultProcedureHelper : IProcedureHelper
+namespace LccHotfix
 {
-    public void UpdateLoadingTime(LoadProcedureHandler handler)
+    public class DefaultProcedureHelper : IProcedureHelper
     {
-        if (handler.IsLoading)
+        public void UpdateLoadingTime(LoadProcedureHandler handler)
         {
-            if (Time.realtimeSinceStartup - handler.startLoadTime > 150)
+            if (handler.IsLoading)
             {
-                Init.ReturnToStart();
+                if (Time.realtimeSinceStartup - handler.startLoadTime > 150)
+                {
+                    Init.ReturnToStart();
+                }
             }
         }
-    }
 
-    public void ResetSpeed()
-    {
-        Launcher.Instance.GameControl.SetGameSpeed(1);
-        Launcher.Instance.GameControl.ChangeFPS();
-    }
-
-    public void UnloadAllPanel(LoadProcedureHandler last, LoadProcedureHandler cur)
-    {
-        UI.ShowMaskBox((int)MaskType.WINDOW_ANIM, false);
-        UI.CloseAll();
-
-        if (cur.deepClean || (last != null && last.deepClean))
+        public void ResetSpeed()
         {
-            UI.Release(ReleaseType.DEEPLY);
-        }
-        else
-        {
-            UI.Release(ReleaseType.CHANGE_PROCEDURE);
-        }
-    }
-
-    public void OpenChangeProcedurePanel(LoadProcedureHandler handler)
-    {
-        if (handler == null || handler.turnNode == null)
-            return;
-
-        WNode.TurnNode node = handler.turnNode;
-        if (string.IsNullOrEmpty(node.nodeName))
-            return;
-
-        if (Main.UIService.OpenSpecialPanel(node))
-            return;
-
-        if (node.nodeType == NodeType.ROOT)
-        {
-            UI.OpenRoot(node.nodeName, node.nodeParam);
-        }
-        else
-        {
-            UI.OpenWindow(node.nodeName, node.nodeParam);
+            Launcher.Instance.GameControl.SetGameSpeed(1);
+            Launcher.Instance.GameControl.ChangeFPS();
         }
 
-        handler.turnNode = null;
-    }
-
-    public IEnumerator ShowProcedureLoading(LoadingType loadType)
-    {
-        UILoadingPanel loadingPanel = null;
-        switch (loadType)
+        public void UnloadAllPanel(LoadProcedureHandler last, LoadProcedureHandler cur)
         {
-            case LoadingType.Normal:
-                loadingPanel = UILoadingPanel.Instance;
-                loadingPanel.Show(string.Empty);
-                loadingPanel.UpdateLoadingPercent(0, 5);
-                yield return null;
-                break;
-            case LoadingType.Fast:
-                UIForeGroundPanel.Instance.FadeOut(1.5f);
-                yield return null;
-                break;
+            UI.ShowMaskBox((int)MaskType.WINDOW_ANIM, false);
+            UI.CloseAll();
+
+            if (cur.deepClean || (last != null && last.deepClean))
+            {
+                UI.Release(ReleaseType.DEEPLY);
+            }
+            else
+            {
+                UI.Release(ReleaseType.CHANGE_PROCEDURE);
+            }
+        }
+
+        public void OpenChangeProcedurePanel(LoadProcedureHandler handler)
+        {
+            if (handler == null || handler.turnNode == null)
+                return;
+
+            WNode.TurnNode node = handler.turnNode;
+            if (string.IsNullOrEmpty(node.nodeName))
+                return;
+
+            if (Main.UIService.OpenSpecialPanel(node))
+                return;
+
+            if (node.nodeType == NodeType.ROOT)
+            {
+                UI.OpenRoot(node.nodeName, node.nodeParam);
+            }
+            else
+            {
+                UI.OpenWindow(node.nodeName, node.nodeParam);
+            }
+
+            handler.turnNode = null;
+        }
+
+        public IEnumerator ShowProcedureLoading(LoadingType loadType)
+        {
+            UILoadingPanel loadingPanel = null;
+            switch (loadType)
+            {
+                case LoadingType.Normal:
+                    loadingPanel = UILoadingPanel.Instance;
+                    loadingPanel.Show(string.Empty);
+                    loadingPanel.UpdateLoadingPercent(0, 5);
+                    yield return null;
+                    break;
+                case LoadingType.Fast:
+                    UIForeGroundPanel.Instance.FadeOut(1.5f);
+                    yield return null;
+                    break;
+            }
         }
     }
 }
