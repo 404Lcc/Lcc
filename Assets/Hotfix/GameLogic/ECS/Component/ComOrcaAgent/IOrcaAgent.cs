@@ -10,7 +10,6 @@ namespace LccHotfix
         void InitAgent(LogicEntity entity);
         void SetSpeed(float speed);
         void SetVelocity(Vector3 dir);
-        void SetTarget(Vector3 target);
 
         void Stop();
 

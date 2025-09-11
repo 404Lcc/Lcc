@@ -22,12 +22,7 @@ namespace LccHotfix
         {
             _agent.SetVelocity(dir);
         }
-
-        public void SetTarget(Vector3 target)
-        {
-            _agent.SetTarget(target);
-        }
-
+        
         public void Stop()
         {
             _agent.Stop();

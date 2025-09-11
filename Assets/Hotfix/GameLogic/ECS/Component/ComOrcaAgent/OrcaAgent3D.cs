@@ -51,18 +51,6 @@ namespace LccHotfix
             SetVelocity(dir);
         }
 
-        public void SetTarget(Vector3 targetPos)
-        {
-            if (AgentId < 0)
-            {
-                return;
-            }
-
-            float2 target = new float2(targetPos.x, targetPos.z);
-            float2 dir = target - Simulator.GetAgentPosition(AgentId);
-            SetVelocity(dir);
-        }
-
         private void SetVelocity(float2 dir)
         {
             if (AgentId < 0)
@@ -100,6 +88,12 @@ namespace LccHotfix
             }
 
             var pos = Simulator.GetAgentPosition(AgentId);
+
+            if (float.IsNaN(pos.x) || float.IsNaN(pos.y))
+            {
+                return;
+            }
+
             var prevPosition = Entity.comTransform.position;
             Entity.SetPosition(new Vector3(pos.x, prevPosition.y, pos.y));
         }
