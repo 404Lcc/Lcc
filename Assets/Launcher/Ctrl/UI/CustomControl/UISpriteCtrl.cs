@@ -92,7 +92,7 @@ namespace LccModel
                 lang = "English";
             }
 #else
-            lang = Launcher.Instance.curLanguage;
+            lang = Launcher.Instance.GameLanguage.curLanguage;
 #endif
             if (string.IsNullOrEmpty(lang))
             {
