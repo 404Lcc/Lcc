@@ -88,6 +88,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Video\Interface\IVideoService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\BehavoirTree\KVContext\KVContext.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComTag.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\UIHeadbarTemplate\HP\NormalTemplate.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\IBlockBuffer.cs" />
     <Compile Include="Assets\Hotfix\Utility\MVVM\View\Binding\Binding.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\Window\Window.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Assets\Hotfix\Framework\Utility\Network\NetworkUtility.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Network\Interface\INetworkService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\Assembly\AssemblyUtility.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\UIHeadbarTemplate\UIHeadbarTemplate.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\Data\DamageType.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Save\Interface\ISaveService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Utility\TargetUtility.cs" />
@@ -338,6 +340,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\Interface\IWindowService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\UIManager.Popup.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\Marshal\MarshalUtility.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\UIHeadbarTemplate\HP\HPBase.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Main\Module.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Subobject.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\EmptyGoTo.cs" />
