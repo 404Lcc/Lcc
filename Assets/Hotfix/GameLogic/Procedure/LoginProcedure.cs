@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    [Procedure(ProcedureType.Login)]
+    [Procedure]
     public class LoginProcedure : LoadProcedureHandler, ICoroutine
     {
         public LoginProcedure()
         {
-            procedureType = ProcedureType.Login;
+            procedureType = ProcedureType.Login.ToInt();
             loadType = LoadingType.Fast;
         }
 

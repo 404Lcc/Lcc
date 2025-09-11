@@ -158,7 +158,7 @@ namespace LccHotfix
 
 		private bool CheckProcedure()
 		{
-			return Main.ProcedureService.CurState == ProcedureType.Main;
+			return Main.ProcedureService.CurState == ProcedureType.Main.ToInt();
 		}
 
 

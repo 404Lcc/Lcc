@@ -48,7 +48,7 @@ namespace LccHotfix
         }
         public void OnStartBtn()
         {
-            Main.ProcedureService.ChangeProcedure(ProcedureType.Main);
+            Main.ProcedureService.ChangeProcedure(ProcedureType.Main.ToInt());
         }
     }
 }

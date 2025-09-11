@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    [Procedure(ProcedureType.Main)]
+    [Procedure]
     public class MainProcedure : LoadProcedureHandler, ICoroutine
     {
         public GameObject map;
@@ -12,7 +12,7 @@ namespace LccHotfix
         
         public MainProcedure()
         {
-            procedureType = ProcedureType.Main;
+            procedureType = ProcedureType.Main.ToInt();
             loadType = LoadingType.Normal;
         }
         public override void ProcedureStartHandler()

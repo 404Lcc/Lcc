@@ -2,15 +2,15 @@ namespace LccHotfix
 {
     public interface IProcedureService : IService
     {
-        ProcedureType CurState { get; }
+        int CurState { get; }
 
         bool IsLoading { get; }
 
         void SetProcedureHelper(IProcedureHelper procedureHelper);
         
-        LoadProcedureHandler GetProcedure(ProcedureType type);
+        LoadProcedureHandler GetProcedure(int type);
 
-        void ChangeProcedure(ProcedureType type);
+        void ChangeProcedure(int type);
         
         void CleanProcedure();
 

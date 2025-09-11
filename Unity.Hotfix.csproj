@@ -137,6 +137,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComOwnerEntity.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\SkillSpellType.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\Data\DamageSource.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Procedure\ProcedureType.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\DamageBase.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\TcpConnection.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\Interface\IProcedureService.cs" />
@@ -215,6 +216,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\CodeTypes\CodeTypesManager.cs" />
     <Compile Include="Assets\Hotfix\Utility\MVVM\View\View\IView.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\UI\UITipsBase\UITipsBase.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Procedure\ProcedureExtension.cs" />
     <Compile Include="Assets\Hotfix\Utility\ScreenAdaptation\ScreenAdaptationUtility.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\AStarMap\AStarMapManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Main\MainPartial.cs" />
@@ -367,7 +369,6 @@
     <Compile Include="Assets\Hotfix\Utility\Joystick\Joystick.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Easing\EasingFunctions.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\FSM\ComFSM.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\ProcedureType.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\ITcpConnection.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\SkillProcess\ComSkillProcess.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\GameObjectPool.cs" />

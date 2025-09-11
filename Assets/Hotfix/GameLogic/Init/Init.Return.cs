@@ -37,7 +37,7 @@ namespace LccHotfix
         /// </summary>
         public static void ReturnToLogin()
         {
-            if (Main.ProcedureService.CurState == ProcedureType.None || Main.ProcedureService.CurState == ProcedureType.Login)
+            if (Main.ProcedureService.CurState == ProcedureType.None.ToInt() || Main.ProcedureService.CurState == ProcedureType.Login.ToInt())
             {
                 ReturnToStart();
                 return;
@@ -58,7 +58,7 @@ namespace LccHotfix
             //清理上个玩家数据
             ClearLastUserData();
 
-            Main.ProcedureService.ChangeProcedure(ProcedureType.Login);
+            Main.ProcedureService.ChangeProcedure(ProcedureType.Login.ToInt());
         }
 
         private static void ClearLastUserData()

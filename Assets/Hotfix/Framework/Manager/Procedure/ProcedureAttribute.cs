@@ -2,10 +2,8 @@ namespace LccHotfix
 {
     public class ProcedureAttribute : AttributeBase
     {
-        public ProcedureType type;
-        public ProcedureAttribute(ProcedureType type)
+        public ProcedureAttribute()
         {
-            this.type = type;
         }
     }
 }

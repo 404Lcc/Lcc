@@ -10,7 +10,7 @@ namespace LccHotfix
 
     public abstract class LoadProcedureHandler : ICoroutine
     {
-        public ProcedureType procedureType;
+        public int procedureType;
 
         /// <summary>
         /// 加载方式

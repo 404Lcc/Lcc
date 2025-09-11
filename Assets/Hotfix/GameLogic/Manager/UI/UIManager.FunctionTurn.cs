@@ -89,8 +89,8 @@ namespace LccHotfix
             //目前只能跳主流程
             if ((procedure & (int)ProcedureType.Main) > 0)
             {
-                Main.ProcedureService.GetProcedure(ProcedureType.Main).turnNode = turn;
-                Main.ProcedureService.ChangeProcedure(ProcedureType.Main);
+                Main.ProcedureService.GetProcedure(ProcedureType.Main.ToInt()).turnNode = turn;
+                Main.ProcedureService.ChangeProcedure(ProcedureType.Main.ToInt());
                 return true;
             }
 

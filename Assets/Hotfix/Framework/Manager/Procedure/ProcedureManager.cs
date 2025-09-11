@@ -7,18 +7,18 @@ namespace LccHotfix
 {
     internal class ProcedureManager : Module, IProcedureService, ICoroutine
     {
-        private Dictionary<ProcedureType, LoadProcedureHandler> _loadProcedureHandlerDict = new Dictionary<ProcedureType, LoadProcedureHandler>();
+        private Dictionary<int, LoadProcedureHandler> _loadProcedureHandlerDict = new Dictionary<int, LoadProcedureHandler>();
         private bool _inLoading;
         private LoadProcedureHandler _curProcedureHandler;
         private IProcedureHelper _procedureHelper;
 
-        public ProcedureType CurState
+        public int CurState
         {
             get
             {
                 if (_curProcedureHandler != null)
                     return _curProcedureHandler.procedureType;
-                return ProcedureType.None;
+                return 0;
             }
         }
 
@@ -42,11 +42,14 @@ namespace LccHotfix
                 if (atts != null && atts.Length > 0)
                 {
                     ProcedureAttribute procedureAttribute = (ProcedureAttribute)atts[0];
-
                     LoadProcedureHandler handler = (LoadProcedureHandler)Activator.CreateInstance(item);
-                    handler.procedureType = procedureAttribute.type;
+                    if (handler.procedureType == 0)
+                    {
+                        Debug.LogError("流程类型不能为0 " + item.Name);
+                        continue;
+                    }
 
-                    _loadProcedureHandlerDict.Add(procedureAttribute.type, handler);
+                    _loadProcedureHandlerDict.Add(handler.procedureType, handler);
                 }
             }
         }
@@ -67,10 +70,10 @@ namespace LccHotfix
         internal override void LateUpdate()
         {
             base.LateUpdate();
-            
+
             if (_curProcedureHandler == null)
                 return;
-            
+
             if (!_curProcedureHandler.IsLoading)
             {
                 _curProcedureHandler.LateUpdate();
@@ -89,10 +92,10 @@ namespace LccHotfix
         {
             this._procedureHelper = procedureHelper;
         }
-        
-        public LoadProcedureHandler GetProcedure(ProcedureType type)
+
+        public LoadProcedureHandler GetProcedure(int type)
         {
-            if (type == ProcedureType.None)
+            if (type == 0)
             {
                 return null;
             }
@@ -100,10 +103,10 @@ namespace LccHotfix
             LoadProcedureHandler handler = _loadProcedureHandlerDict[type];
             return handler;
         }
-        
-        public void ChangeProcedure(ProcedureType type)
+
+        public void ChangeProcedure(int type)
         {
-            if (type == ProcedureType.None)
+            if (type == 0)
             {
                 return;
             }
@@ -116,7 +119,7 @@ namespace LccHotfix
 
             ChangeProcedure(handler);
         }
-        
+
         private void ChangeProcedure(LoadProcedureHandler handler)
         {
             if (handler == null)
@@ -145,7 +148,7 @@ namespace LccHotfix
             handler.IsCleanup = false;
             handler.startLoadTime = Time.realtimeSinceStartup;
             handler.ProcedureLoadHandler();
-            
+
             Log.Info($"BeginLoad： procedure type === {_curProcedureHandler.procedureType.ToString()} loading type ==== {_curProcedureHandler.loadType.ToString()}");
             this.StartCoroutine(UnloadProcedureCoroutine(last));
         }
@@ -164,7 +167,7 @@ namespace LccHotfix
             }
 
             _procedureHelper.UnloadAllPanel(last, _curProcedureHandler);
-            
+
             yield return null;
 
             GC.Collect();

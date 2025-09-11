@@ -20,7 +20,7 @@ namespace LccHotfix
 
                 Launcher.Instance.LauncherFinish();
                 
-                Main.ProcedureService.ChangeProcedure(ProcedureType.Login);
+                Main.ProcedureService.ChangeProcedure(ProcedureType.Login.ToInt());
             }
             catch (System.Exception e)
             {
