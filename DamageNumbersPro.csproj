@@ -45,50 +45,48 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Internal\DNPPreset.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Settings\PushSettings.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Internal\Editor\DNPPresetEditor.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Utility\DamageNumberSprite.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\DamageNumberGUI.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_UIArea.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Settings\ShakeSettings.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Settings\VelocitySettings.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_DemoManager.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Settings\LerpSettings.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Settings\DistanceScalingSettings.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_GUI.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\DamageNumberMesh.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_CursorHint.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_CubeSpawner.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Utility\Editor\DamageNumberSpriteEditor.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_CubeHighlight.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_UIMove.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo C#\DNP_ExampleMesh.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_PrefabSettings.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_InputHandler.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Settings\CollisionSettings.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_Camera.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_SineFadeText.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Settings\TextSettings.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_2DDemo.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Internal\Editor\DamageNumberEditor.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_Target.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Internal\DNPType.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Settings\CombinationSettings.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Internal\Editor\DNPEditorInternal.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_Crosshair.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Settings\ScaleByNumberSettings.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo C#\DNP_ExampleGUI.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Internal\DNPUpdater.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Settings\DigitSettings.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Settings\ColorByNumberSettings.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Settings\FollowSettings.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Demo\Scripts\DNP_FallingCube.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Settings\DestructionSettings.cs" />
-    <Compile Include="Assets\DamageNumbersPro\Scripts\Internal\DamageNumber.cs" />
-    <None Include="Assets\DamageNumbersPro\Shaders\Sprite Overlay.shader" />
-    <None Include="Assets\DamageNumbersPro\Demo\Shaders\Target.shader" />
-    <None Include="Assets\DamageNumbersPro\DamageNumbersPro.asmdef" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_Camera.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_Target.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Settings\ColorByNumberSettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Internal\DNPPreset.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_DemoManager.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_SineFadeText.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_UIArea.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_Crosshair.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Settings\PushSettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Internal\DamageNumber.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Settings\TextSettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Settings\DestructionSettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_CursorHint.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Settings\FollowSettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Settings\CombinationSettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_CubeSpawner.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Internal\DNPType.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_UIMove.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_PrefabSettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo C#\DNP_ExampleMesh.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\DamageNumberGUI.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Settings\CollisionSettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo C#\DNP_ExampleGUI.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Settings\LerpSettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\DamageNumberMesh.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Settings\ShakeSettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Internal\Editor\DNPPresetEditor.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Internal\DNPUpdater.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_FallingCube.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Settings\DigitSettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Settings\ScaleByNumberSettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Internal\Editor\DamageNumberEditor.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Settings\DistanceScalingSettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_InputHandler.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_CubeHighlight.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_2DDemo.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Settings\VelocitySettings.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_GUI.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Internal\Editor\DNPEditorInternal.cs" />
+    <None Include="Assets\3rdPlugins\DamageNumbersPro\Shaders\Sprite Overlay.shader" />
+    <None Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Shaders\Target.shader" />
+    <None Include="Assets\3rdPlugins\DamageNumbersPro\DamageNumbersPro.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -353,6 +351,9 @@
     <Reference Include="NPOI.OpenXmlFormats">
       <HintPath>D:\Lcc\Assets\3rdPlugins\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>D:\Lcc\Library\PackageCache\com.unity.collections@1.5.1\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+    </Reference>
     <Reference Include="BouncyCastle.Crypto">
       <HintPath>D:\Lcc\Assets\3rdPlugins\BouncyCastle\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
@@ -427,6 +428,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>D:\Lcc\Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>D:\Lcc\Library\PackageCache\com.unity.nuget.mono-cecil@1.11.4\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
       <HintPath>D:\Lcc\Assets\3rdPlugins\NPOI\NPOI.dll</HintPath>

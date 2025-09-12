@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Editor", "Unity.Edito
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstarPackageToolsEditor", "AstarPackageToolsEditor.csproj", "{c63b2dcb-0181-1b4a-1d9c-0a1411af6046}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DamageNumbersPro", "DamageNumbersPro.csproj", "{0a9c9933-ab9e-71f3-dd7d-30b5c2e4d54b}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstarPathfindingProjectEditor", "AstarPathfindingProjectEditor.csproj", "{6aa997b1-34c4-e7cb-821c-ac2bf5eb5fc3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.rlabrecque.steamworks.net", "com.rlabrecque.steamworks.net.csproj", "{0c7ea933-8e4d-a7a9-a4de-3f7ce8b00b70}"
@@ -70,6 +72,8 @@ Global
 		{3448a308-c3d4-dd53-6264-ccc1f0737645}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{c63b2dcb-0181-1b4a-1d9c-0a1411af6046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{c63b2dcb-0181-1b4a-1d9c-0a1411af6046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0a9c9933-ab9e-71f3-dd7d-30b5c2e4d54b}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0a9c9933-ab9e-71f3-dd7d-30b5c2e4d54b}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6aa997b1-34c4-e7cb-821c-ac2bf5eb5fc3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6aa997b1-34c4-e7cb-821c-ac2bf5eb5fc3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0c7ea933-8e4d-a7a9-a4de-3f7ce8b00b70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

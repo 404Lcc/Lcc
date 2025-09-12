@@ -37,6 +37,7 @@ MonoBehaviour:
     assemblyNames:
     - andywiecko.BurstTriangulator
     - AstarPathfindingProject
+    - DamageNumbersPro
     - Drawing
     - EasySave3
     - EnhancedScroller_asmdef

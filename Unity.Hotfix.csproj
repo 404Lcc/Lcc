@@ -1243,6 +1243,10 @@
       <Project>{90143b16-cf06-6fcb-65d8-0018bee0375d}</Project>
       <Name>RVO2</Name>
     </ProjectReference>
+    <ProjectReference Include="DamageNumbersPro.csproj">
+      <Project>{0a9c9933-ab9e-71f3-dd7d-30b5c2e4d54b}</Project>
+      <Name>DamageNumbersPro</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
