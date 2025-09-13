@@ -78,7 +78,7 @@ namespace LccHotfix
 
             HPView hpView = new HPView();
             hpView.Init(entity, HeadbarType.NormalHP, 0);
-            entity.AddView(hpView, ViewCategory.UI);
+            entity.AddView(hpView, ViewCategory.HP);
         }
 
         public void OnUpdate()

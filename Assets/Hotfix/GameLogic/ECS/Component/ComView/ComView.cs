@@ -11,8 +11,9 @@ namespace LccHotfix
         Fx,//主要表现是特效
 
         //下面属于附属逻辑
-        //生命周期不跟随Main
+        //生命周期不跟随Actor
         //可以随时增加或者删除
+        HP
     }
     public interface IViewUpdate
     {
@@ -44,11 +45,11 @@ namespace LccHotfix
 
     public class ComView : LogicComponent
     {
-        private DictionaryList<ViewCategory, IViewWrapper> _viewDict = new DictionaryList<ViewCategory, IViewWrapper>();
+        private Dictionary<ViewCategory, IViewWrapper> _viewDict = new Dictionary<ViewCategory, IViewWrapper>();
         private ViewCache _cache = new ViewCache();
 
-        public DictionaryList<ViewCategory, IViewWrapper> ViewDict => _viewDict;
-        public List<IViewWrapper> ViewList => _viewDict.ValueList;
+        public Dictionary<ViewCategory, IViewWrapper> ViewDict => _viewDict;
+        public List<IViewWrapper> ViewList => _viewDict.Values.ToList();
         public int ViewCount => _viewDict.Count;
         public ViewCache Cache => _cache;
 
@@ -59,7 +60,7 @@ namespace LccHotfix
         {
             base.Dispose();
 
-            var viewList = _viewDict.ValueList;
+            var viewList = _viewDict.Values.ToList();
             for (int i = 0; i < viewList.Count; i++)
             {
                 viewList[i].Dispose();
