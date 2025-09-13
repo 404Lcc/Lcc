@@ -10,9 +10,9 @@ namespace LccHotfix
 
     public class UIHeadbarPanel : UILogicBase, ICoroutine
     {
+        public int maxCount = 20;
+        
         public List<NormalHPBase> normalList = new List<NormalHPBase>();
-
-        public int maxNormalHPCount = 20;
 
         public GameObject normalTemplate;
 
@@ -22,7 +22,7 @@ namespace LccHotfix
 
             ClientTools.SetCachedItemHide(normalList);
 
-            for (int i = 0; i < maxNormalHPCount; i++)
+            for (int i = 0; i < maxCount; i++)
             {
                 ClientTools.GetOneCached(normalList, transform.gameObject, normalTemplate);
             }
