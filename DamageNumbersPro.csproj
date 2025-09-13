@@ -63,8 +63,8 @@
     <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_CubeSpawner.cs" />
     <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Internal\DNPType.cs" />
     <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_UIMove.cs" />
-    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_PrefabSettings.cs" />
     <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo C#\DNP_ExampleMesh.cs" />
+    <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo\Scripts\DNP_PrefabSettings.cs" />
     <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\DamageNumberGUI.cs" />
     <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Scripts\Settings\CollisionSettings.cs" />
     <Compile Include="Assets\3rdPlugins\DamageNumbersPro\Demo C#\DNP_ExampleGUI.cs" />

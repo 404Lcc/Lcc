@@ -124,8 +124,8 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Meta\MetaType.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\BclHelpers.cs" />
     <Compile Include="Assets\3rdPlugins\LitJson\JsonMockWrapper.cs" />
-    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\IProtoSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ImmutableCollectionDecorator.cs" />
+    <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\IProtoSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Context\Exceptions\ContextInfoException.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Collector\CollectorContextExtension.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\TimeSpanSerializer.cs" />

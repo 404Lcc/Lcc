@@ -57,6 +57,7 @@
     <Compile Include="Assets\Editor\OpenAsset\LogConfig\LogConfig.cs" />
     <Compile Include="Assets\Editor\Editor\OdinEditorWindow\LayerEditorWindow.cs" />
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\Vector2ObjectType.cs" />
+    <Compile Include="Assets\Editor\Utility\LeakDetectionMode\LeakDetectionMode.cs" />
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\BoolObjectType.cs" />
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\Vector2IntObjectType.cs" />
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\ObjectObjectType.cs" />
