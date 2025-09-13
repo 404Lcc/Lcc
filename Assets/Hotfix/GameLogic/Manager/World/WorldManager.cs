@@ -5,6 +5,7 @@ namespace LccHotfix
     internal class WorldManager : Module, IWorldService
     {
         private ECSWorld _world;
+
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
             if (_world == null)
@@ -23,6 +24,10 @@ namespace LccHotfix
 
         internal override void Shutdown()
         {
+            if (_world == null)
+                return;
+
+            _world.Exit();
             _world = null;
         }
 
