@@ -44,11 +44,11 @@ namespace LccHotfix
 
     public class ComView : LogicComponent
     {
-        private Dictionary<ViewCategory, IViewWrapper> _viewDict = new Dictionary<ViewCategory, IViewWrapper>();
+        private DictionaryList<ViewCategory, IViewWrapper> _viewDict = new DictionaryList<ViewCategory, IViewWrapper>();
         private ViewCache _cache = new ViewCache();
 
-        public Dictionary<ViewCategory, IViewWrapper> ViewDict => _viewDict;
-        public List<IViewWrapper> ViewList => _viewDict.Values.ToList();
+        public DictionaryList<ViewCategory, IViewWrapper> ViewDict => _viewDict;
+        public List<IViewWrapper> ViewList => _viewDict.ValueList;
         public int ViewCount => _viewDict.Count;
         public ViewCache Cache => _cache;
 
@@ -59,7 +59,7 @@ namespace LccHotfix
         {
             base.Dispose();
 
-            var viewList = _viewDict.Values.ToList();
+            var viewList = _viewDict.ValueList;
             for (int i = 0; i < viewList.Count; i++)
             {
                 viewList[i].Dispose();
