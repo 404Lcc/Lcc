@@ -74,6 +74,7 @@ namespace LccHotfix
         public LoopScroll(ScrollerPro scrollerPro, Action<int, Data> selectAction = null)
         {
             _scrollerPro = scrollerPro;
+            _scrollerPro.Init();
             _itemPrefab = scrollerPro.transform.Find("item").gameObject;
             _pool = new LoopScrollPool(scrollerPro, this, _itemPrefab);
 
@@ -82,8 +83,7 @@ namespace LccHotfix
             _scrollerPro.ProvideDataHandler = ProvideData;
             _scrollerPro.GetGroupSizeHandler = GetGroupSize;
             _scrollerPro.GetDataCountHandler = GetDataCount;
-
-
+            
             InitGroup(_itemPrefab);
             if (selectAction != null)
             {

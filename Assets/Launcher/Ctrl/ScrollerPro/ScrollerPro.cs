@@ -55,7 +55,7 @@ namespace LccModel
         //NumberOfCellsPerRow一排or一行有几个
         public int NumberOfCellsPerRow => groupPrefab.gridCount;
 
-        public void Start()
+        public void Init()
         {
             Delegate = this;
             cellViewVisibilityChanged = CellViewVisibilityChanged;
