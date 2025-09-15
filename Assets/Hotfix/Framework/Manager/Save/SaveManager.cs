@@ -261,7 +261,7 @@ namespace LccHotfix
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TSave"></typeparam>
         /// <returns></returns>
-        public T GetSaveData<T, TSave>() where T : ISaveConverter<TSave>, new() where TSave : ISave
+        public T GetSaveConverterData<T, TSave>() where T : ISaveConverter<TSave>, new() where TSave : ISave
         {
             if (!IsSaveLoaded)
             {

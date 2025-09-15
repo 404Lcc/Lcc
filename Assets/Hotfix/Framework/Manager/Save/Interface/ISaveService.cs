@@ -45,6 +45,6 @@ namespace LccHotfix
         /// </summary>
         void Save();
 
-        T GetSaveData<T, TSave>() where T : ISaveConverter<TSave>, new() where TSave : ISave;
+        T GetSaveConverterData<T, TSave>() where T : ISaveConverter<TSave>, new() where TSave : ISave;
     }
 }
