@@ -4,6 +4,7 @@ namespace LccHotfix
 {
     public class VibrationSaveData : ISave
     {
+        public string TypeName => GetType().FullName;
         public bool IsVibrationEnabled { get; set; }
 
         public void Init()
@@ -17,9 +18,10 @@ namespace LccHotfix
         public VibrationSaveData Save { get; set; }
         public bool IsVibrationEnabled { get; set; }
 
-        public void Flush()
+        public ISave Flush()
         {
             Save.IsVibrationEnabled = IsVibrationEnabled;
+            return Save;
         }
 
         public void Init()

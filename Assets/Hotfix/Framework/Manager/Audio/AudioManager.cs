@@ -9,6 +9,7 @@ namespace LccHotfix
 {
     public class AudioSaveData : ISave
     {
+        public string TypeName => GetType().FullName;
         public float SoundVolume { get; set; } = 1;
         public float MusicVolume { get; set; } = 1;
 
@@ -23,10 +24,11 @@ namespace LccHotfix
         public float SoundVolume { get; set; }
         public float MusicVolume { get; set; }
 
-        public void Flush()
+        public ISave Flush()
         {
             Save.SoundVolume = SoundVolume;
             Save.MusicVolume = MusicVolume;
+            return Save;
         }
 
         public void Init()
@@ -188,7 +190,7 @@ namespace LccHotfix
             _rootLoader = new GameObject("AudioLoader");
             GameObject.DontDestroyOnLoad(_rootLoader);
 
-            save = Main.SaveService.GetSaveData<AudioData, AudioSaveData>();
+            save = Main.SaveService.GetSaveConverterData<AudioData, AudioSaveData>();
         }
 
         /// <summary>

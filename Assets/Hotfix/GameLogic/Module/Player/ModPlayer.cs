@@ -2,6 +2,7 @@ namespace LccHotfix
 {
     public class PlayerSimpleSaveData : ISave
     {
+        public string TypeName => GetType().FullName;
         public long UID { get; set; } // 角色id
         public string Name { get; set; } // 昵称
 
@@ -19,10 +20,11 @@ namespace LccHotfix
         public long UID { get; private set; } // 角色id
         public string Name { get; private set; } // 昵称
 
-        public void Flush()
+        public ISave Flush()
         {
             Save.UID = UID;
             Save.Name = Name;
+            return Save;
         }
 
         public void Init()
@@ -39,7 +41,7 @@ namespace LccHotfix
 
         public void InitData(GameSaveData gameSaveData)
         {
-            PlayerSimpleData = gameSaveData.GetSaveData<PlayerSimpleData, PlayerSimpleSaveData>();
+            PlayerSimpleData = gameSaveData.GetSaveConverterData<PlayerSimpleData, PlayerSimpleSaveData>();
         }
     }
 }

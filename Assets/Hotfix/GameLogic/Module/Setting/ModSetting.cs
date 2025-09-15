@@ -2,6 +2,7 @@ namespace LccHotfix
 {
     public class SettingSaveData : ISave
     {
+        public string TypeName => GetType().FullName;
         public DisplayModeType DisplayModeType { get; set; }
         public ResolutionType ResolutionType { get; set; }
 
@@ -20,10 +21,11 @@ namespace LccHotfix
         public DisplayModeType DisplayModeType { get; private set; }
         public ResolutionType ResolutionType { get; private set; }
 
-        public void Flush()
+        public ISave Flush()
         {
             Save.DisplayModeType = DisplayModeType;
             Save.ResolutionType = ResolutionType;
+            return Save;
         }
 
         public void Init()
@@ -40,7 +42,7 @@ namespace LccHotfix
 
         public void InitData(GameSaveData gameSaveData)
         {
-            SettingData = gameSaveData.GetSaveData<SettingData, SettingSaveData>();
+            SettingData = gameSaveData.GetSaveConverterData<SettingData, SettingSaveData>();
         }
     }
 }

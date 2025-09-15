@@ -36,6 +36,7 @@ namespace LccHotfix
 
     public class CurrentEquipmentSaveData : ISave
     {
+        public string TypeName => GetType().FullName;
         public List<EquipmentData> CurrentDataList { get; set; }
 
         public void Init()
@@ -49,10 +50,11 @@ namespace LccHotfix
         public CurrentEquipmentSaveData Save { get; set; }
         public List<EquipmentData> CurrentDataList { get; set; }
 
-        public void Flush()
+        public ISave Flush()
         {
             Save.CurrentDataList = new List<EquipmentData>();
             Save.CurrentDataList.AddRange(Save.CurrentDataList);
+            return Save;
         }
 
         public void Init()
@@ -75,7 +77,7 @@ namespace LccHotfix
 
         public void InitData(GameSaveData gameSaveData)
         {
-            CurrentEquipmentData = gameSaveData.GetSaveData<CurrentEquipmentData, CurrentEquipmentSaveData>();
+            CurrentEquipmentData = gameSaveData.GetSaveConverterData<CurrentEquipmentData, CurrentEquipmentSaveData>();
         }
     }
 }
