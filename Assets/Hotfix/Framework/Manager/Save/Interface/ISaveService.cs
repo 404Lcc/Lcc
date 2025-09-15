@@ -5,6 +5,7 @@ namespace LccHotfix
         bool IsSaveLoaded { get; }
 
         void SetSaveHelper(ISaveHelper saveHelper);
+
         /// <summary>
         /// 设置全局加密方式
         /// </summary>
