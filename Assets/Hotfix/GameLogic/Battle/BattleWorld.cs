@@ -67,6 +67,7 @@ namespace LccHotfix
             var obj = GameUtility.GetObj("Player");
             var entity = EntityUtility.AddEntity<CharacterActorView>(obj);
             var player = entity.GetView<CharacterActorView>(ViewCategory.Actor);
+            player.SetPlane(CharacterPlane.XZ);
             player.SetSize(new Vector2(1, 1));
 
             entity.AddComTag(TagType.Hero);
