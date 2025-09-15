@@ -202,7 +202,7 @@ namespace LccHotfix
         /// <returns></returns>
         public bool CheckHaveSaveData()
         {
-            return _saveHelper.KeyExists("GameSaveData");
+            return _saveHelper.FileExists();
         }
 
         /// <summary>
@@ -228,7 +228,7 @@ namespace LccHotfix
         {
             if (CheckHaveSaveData())
             {
-                _gameSaveData = _saveHelper.Load("GameSaveData");
+                _gameSaveData = _saveHelper.Load();
                 IsSaveLoaded = true;
                 foreach (var item in saveDict.Values)
                 {
@@ -252,7 +252,7 @@ namespace LccHotfix
                 _gameSaveData.saveList.Add(save);
             }
 
-            _saveHelper.Save("GameSaveData", _gameSaveData);
+            _saveHelper.Save(_gameSaveData);
         }
 
         /// <summary>

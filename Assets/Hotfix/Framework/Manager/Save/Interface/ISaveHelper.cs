@@ -12,13 +12,13 @@ public interface ISaveHelper
     /// </summary>
     void SetStorePath(StoreMode mode);
 
-    void Save(string key, GameSaveData value);
+    void Save(GameSaveData value);
 
-    GameSaveData Load(string key);
+    GameSaveData Load();
 
     GameSaveData ReadGameSaveData(string json);
 
-    void DeleteKey(string key);
+    bool FileExists();
 
-    bool KeyExists(string key);
+    void Delete();
 }

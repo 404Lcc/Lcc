@@ -1,15 +1,19 @@
+using System;
 using LccHotfix;
+using LitJson;
 
 public class DefaultSaveHelper : ISaveHelper
 {
+    public const string SavePath = "./SaveDatas/";
+    public const string FileName = "saveData.lcc";
+    public const string Key = "GameSaveData";
+
     private ES3Settings _settings;
-    private readonly string SavePath = "../SaveDatas/";
-    private readonly string FileName = "saveData.lcc";
 
     public DefaultSaveHelper()
     {
         _settings = new ES3Settings();
-        SetEncryption(true);
+        SetEncryption(false);
         SetStorePath(StoreMode.Official);
     }
 
@@ -40,71 +44,58 @@ public class DefaultSaveHelper : ISaveHelper
         }
     }
 
-    public void Save<T>(string key, T value)
+    public void Save(GameSaveData value)
     {
-        ES3.Save<T>(key, value, _settings);
+        var json = JsonMapper.ToJson(value);
+        ES3.Save(Key, json, _settings);
     }
 
-    public T Load<T>(string key)
+    public GameSaveData Load()
     {
-        return ES3.Load<T>(key, _settings);
+        var text = ES3.Load<string>(Key, _settings);
+        return ReadGameSaveData(text);
     }
 
-    public void DeleteKey(string key)
+    public GameSaveData ReadGameSaveData(string text)
     {
-        ES3.DeleteKey(key, _settings);
+        GameSaveData gameSaveData = new GameSaveData();
+        var jsonData = JsonMapper.ToObject(text);
+        if (jsonData.ContainsKey("saveTime"))
+        {
+            gameSaveData.saveTime = DateTime.Parse(jsonData["saveTime"].ToString());
+        }
+
+        if (jsonData.ContainsKey("saveVersion"))
+        {
+            gameSaveData.saveVersion = int.Parse(jsonData["saveVersion"].ToString());
+        }
+
+        var saveListData = jsonData["saveList"];
+        if (saveListData.IsArray)
+        {
+            for (int i = 0; i < saveListData.Count; i++)
+            {
+                var itemData = saveListData[i];
+                if (itemData.ContainsKey("TypeName"))
+                {
+                    var typeName = itemData["TypeName"].ToString();
+                    var type = Main.CodeTypesService.GetType(typeName);
+                    var itemObject = JsonMapper.ToObject(itemData.ToJson(), type) as ISave;
+                    gameSaveData.saveList.Add(itemObject);
+                }
+            }
+        }
+
+        return gameSaveData;
     }
-
-    public bool KeyExists(string key)
-    {
-        return ES3.KeyExists(key, _settings);
-    }
-
-    public T Load<T>(string key, T defaultValue)
-    {
-        return ES3.Load<T>(key, defaultValue, _settings);
-    }
-
-    //加载到
-    public void LoadInto<T>(string key, T obj) where T : class
-    {
-        ES3.LoadInto<T>(key, obj, _settings);
-    }
-
-
-    public void DeleteFile()
-    {
-        ES3.DeleteFile(_settings);
-    }
-
-    public void DeleteDirectory()
-    {
-        ES3.DeleteDirectory(_settings);
-    }
-
 
     public bool FileExists()
     {
         return ES3.FileExists(_settings);
     }
 
-    public bool DirectoryExists()
+    public void Delete()
     {
-        return ES3.DirectoryExists(_settings);
-    }
-
-    public string[] GetKeys()
-    {
-        return ES3.GetKeys(_settings);
-    }
-
-    public string[] GetFiles()
-    {
-        return ES3.GetFiles(_settings);
-    }
-
-    public string[] GetDirectories()
-    {
-        return ES3.GetDirectories(_settings);
+        ES3.DeleteFile(_settings);
     }
 }
