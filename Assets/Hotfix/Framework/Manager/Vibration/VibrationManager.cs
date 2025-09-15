@@ -16,7 +16,7 @@ namespace LccHotfix
 
         public VibrationManager()
         {
-            save = Main.SaveService.GetSaveData<VibrationData, VibrationSaveData>();
+            save = Main.SaveService.GetSaveConverterData<VibrationData, VibrationSaveData>();
             IsVibrationEnabled = true;
             vibrationHandler = new SimpleVibrationHandler();
         }
