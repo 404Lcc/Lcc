@@ -70,18 +70,21 @@ public class DefaultSaveHelper : ISaveHelper
             gameSaveData.saveVersion = int.Parse(jsonData["saveVersion"].ToString());
         }
 
-        var saveListData = jsonData["saveList"];
-        if (saveListData.IsArray)
+        if (jsonData.ContainsKey("saveList"))
         {
-            for (int i = 0; i < saveListData.Count; i++)
+            var saveListData = jsonData["saveList"];
+            if (saveListData.IsArray)
             {
-                var itemData = saveListData[i];
-                if (itemData.ContainsKey("TypeName"))
+                for (int i = 0; i < saveListData.Count; i++)
                 {
-                    var typeName = itemData["TypeName"].ToString();
-                    var type = Main.CodeTypesService.GetType(typeName);
-                    var itemObject = JsonMapper.ToObject(itemData.ToJson(), type) as ISave;
-                    gameSaveData.saveList.Add(itemObject);
+                    var itemData = saveListData[i];
+                    if (itemData.ContainsKey("TypeName"))
+                    {
+                        var typeName = itemData["TypeName"].ToString();
+                        var type = Main.CodeTypesService.GetType(typeName);
+                        var itemObject = JsonMapper.ToObject(itemData.ToJson(), type) as ISave;
+                        gameSaveData.saveList.Add(itemObject);
+                    }
                 }
             }
         }

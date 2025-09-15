@@ -16,7 +16,7 @@ public interface ISaveHelper
 
     GameSaveData Load();
 
-    GameSaveData ReadGameSaveData(string json);
+    GameSaveData ReadGameSaveData(string text);
 
     bool FileExists();
 
