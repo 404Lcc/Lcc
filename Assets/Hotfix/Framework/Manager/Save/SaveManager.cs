@@ -131,7 +131,8 @@ namespace LccHotfix
         public Dictionary<Type, ISavePipeline> saveDict = new Dictionary<Type, ISavePipeline>();
 
         private ISaveHelper _saveHelper;
-        private GameSaveData _gameSaveData;
+        private string _currentGameSaveName;
+        private GameSaveData _currentGameSaveData;
 
         public bool IsSaveLoaded { get; private set; }
 
@@ -176,9 +177,8 @@ namespace LccHotfix
             _saveHelper.SetEncryption(isAES);
         }
 
-
         /// <summary>
-        /// 设置存储路径 游戏启动时修改
+        /// 设置存储路径
         /// </summary>
         public void SetStorePath(StoreMode mode)
         {
@@ -197,25 +197,35 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 检测有没有存档
+        /// 获取本地所有存档文件
         /// </summary>
         /// <returns></returns>
-        public bool CheckHaveSaveData()
+        public List<string> GetAllSaveFiles()
         {
-            return _saveHelper.FileExists();
+            return _saveHelper.GetFiles();
+        }
+
+        /// <summary>
+        /// 检测有没有某个存档
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckHaveSaveData(string name)
+        {
+            return _saveHelper.CheckHaveSaveData(name);
         }
 
         /// <summary>
         /// 创建新存档
         /// </summary>
-        public void CreateNewSaveData()
+        public void CreateNewSaveData(string name)
         {
-            _gameSaveData = new GameSaveData();
-            _gameSaveData.CreateNewSaveData();
+            _currentGameSaveName = name;
+            _currentGameSaveData = new GameSaveData();
+            _currentGameSaveData.CreateNewSaveData();
             IsSaveLoaded = true;
             foreach (var item in saveDict.Values)
             {
-                item.InitData(_gameSaveData);
+                item.InitData(_currentGameSaveData);
             }
 
             Save();
@@ -224,15 +234,15 @@ namespace LccHotfix
         /// <summary>
         /// 读取存档
         /// </summary>
-        public void Load()
+        public void Load(string name)
         {
-            if (CheckHaveSaveData())
+            if (CheckHaveSaveData(name))
             {
-                _gameSaveData = _saveHelper.Load();
+                _currentGameSaveData = _saveHelper.Load(name);
                 IsSaveLoaded = true;
                 foreach (var item in saveDict.Values)
                 {
-                    item.InitData(_gameSaveData);
+                    item.InitData(_currentGameSaveData);
                 }
             }
         }
@@ -242,17 +252,19 @@ namespace LccHotfix
         /// </summary>
         public void Save()
         {
-            _gameSaveData.saveTime = DateTime.Now;
+            if (!IsSaveLoaded)
+                return;
+            _currentGameSaveData.saveTime = DateTime.Now;
 
-            _gameSaveData.saveList.Clear();
+            _currentGameSaveData.saveList.Clear();
 
-            foreach (var item in _gameSaveData.GetRunDataDict().Values)
+            foreach (var item in _currentGameSaveData.GetRunDataDict().Values)
             {
                 var save = item.Flush();
-                _gameSaveData.saveList.Add(save);
+                _currentGameSaveData.saveList.Add(save);
             }
 
-            _saveHelper.Save(_gameSaveData);
+            _saveHelper.Save(_currentGameSaveName, _currentGameSaveData);
         }
 
         /// <summary>
@@ -269,7 +281,7 @@ namespace LccHotfix
                 return default;
             }
 
-            return _gameSaveData.GetSaveConverterData<T, TSave>();
+            return _currentGameSaveData.GetSaveConverterData<T, TSave>();
         }
     }
 }

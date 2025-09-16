@@ -1,61 +1,162 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using ES3Internal;
 using LccHotfix;
 using LitJson;
+using UnityEngine;
 
 public class DefaultSaveHelper : ISaveHelper
 {
-    public const string SavePath = "./SaveDatas/";
-    public const string FileName = "saveData.lcc";
+    public const string SavePath = "SaveDatas/";
     public const string Key = "GameSaveData";
 
-    private ES3Settings _settings;
+
+    private bool _isAES;
+    private StoreMode _mode;
 
     public DefaultSaveHelper()
     {
-        _settings = new ES3Settings();
         SetEncryption(false);
         SetStorePath(StoreMode.Official);
     }
 
+    /// <summary>
+    /// 设置全局加密方式
+    /// </summary>
+    /// <param name="isAES"></param>
     public void SetEncryption(bool isAES)
     {
-        if (isAES)
+        this._isAES = isAES;
+    }
+
+    /// <summary>
+    /// 设置存储路径
+    /// </summary>
+    /// <param name="mode"></param>
+    public void SetStorePath(StoreMode mode)
+    {
+        this._mode = mode;
+    }
+
+
+    /// <summary>
+    /// 获取本地所有存档文件
+    /// </summary>
+    /// <returns></returns>
+    public List<string> GetFiles()
+    {
+        var settings = new ES3Settings();
+        if (_mode == StoreMode.Beta)
         {
-            _settings.encryptionType = ES3.EncryptionType.AES;
-            _settings.encryptionPassword = "xxxxxxxxxxxxxxxx";
+            settings.directory = ES3.Directory.DataPath;
+            settings.path = SavePath;
+        }
+        else if (_mode == StoreMode.Official)
+        {
+            settings.directory = ES3.Directory.PersistentDataPath;
+            settings.path = SavePath;
+        }
+
+        if (ES3.DirectoryExists(settings))
+        {
+            return ES3.GetFiles(settings).ToList();
+        }
+
+        return new List<string>();
+    }
+
+    /// <summary>
+    /// 检测有没有某个存档
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public bool CheckHaveSaveData(string name)
+    {
+        var names = GetFiles();
+        foreach (var item in names)
+        {
+            if (item == name)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 保存当前加载的存档
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="value"></param>
+    public void Save(string name, GameSaveData value)
+    {
+        var json = JsonMapper.ToJson(value);
+        var settings = new ES3Settings();
+        if (_mode == StoreMode.Beta)
+        {
+            settings.directory = ES3.Directory.DataPath;
+            settings.path = SavePath + name;
+        }
+        else if (_mode == StoreMode.Official)
+        {
+            settings.directory = ES3.Directory.PersistentDataPath;
+            settings.path = SavePath + name;
+        }
+
+        if (_isAES)
+        {
+            settings.encryptionType = ES3.EncryptionType.AES;
+            settings.encryptionPassword = "xxxxxxxxxxxxxxxx";
         }
         else
         {
-            _settings.encryptionType = ES3.EncryptionType.None;
+            settings.encryptionType = ES3.EncryptionType.None;
         }
+
+        ES3.Save(Key, json, settings);
     }
 
-    public void SetStorePath(StoreMode mode)
+    /// <summary>
+    /// 加载某个存档
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public GameSaveData Load(string name)
     {
-        if (mode == StoreMode.Beta)
+        var settings = new ES3Settings();
+
+        if (_mode == StoreMode.Beta)
         {
-            _settings.directory = ES3.Directory.DataPath;
-            _settings.path = SavePath + FileName;
+            settings.directory = ES3.Directory.DataPath;
+            settings.path = SavePath + name;
         }
-        else if (mode == StoreMode.Official)
+        else if (_mode == StoreMode.Official)
         {
-            _settings.directory = ES3.Directory.PersistentDataPath;
-            _settings.path = SavePath + FileName;
+            settings.directory = ES3.Directory.PersistentDataPath;
+            settings.path = SavePath + name;
         }
-    }
 
-    public void Save(GameSaveData value)
-    {
-        var json = JsonMapper.ToJson(value);
-        ES3.Save(Key, json, _settings);
-    }
+        if (_isAES)
+        {
+            settings.encryptionType = ES3.EncryptionType.AES;
+            settings.encryptionPassword = "xxxxxxxxxxxxxxxx";
+        }
+        else
+        {
+            settings.encryptionType = ES3.EncryptionType.None;
+        }
 
-    public GameSaveData Load()
-    {
-        var text = ES3.Load<string>(Key, _settings);
+        var text = ES3.Load<string>(Key, settings);
         return ReadGameSaveData(text);
     }
 
+    /// <summary>
+    /// 解析存档数据
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
     public GameSaveData ReadGameSaveData(string text)
     {
         GameSaveData gameSaveData = new GameSaveData();
@@ -92,13 +193,25 @@ public class DefaultSaveHelper : ISaveHelper
         return gameSaveData;
     }
 
-    public bool FileExists()
+    /// <summary>
+    /// 删除某个存档
+    /// </summary>
+    /// <param name="name"></param>
+    public void Delete(string name)
     {
-        return ES3.FileExists(_settings);
-    }
+        var settings = new ES3Settings();
 
-    public void Delete()
-    {
-        ES3.DeleteFile(_settings);
+        if (_mode == StoreMode.Beta)
+        {
+            settings.directory = ES3.Directory.DataPath;
+            settings.path = SavePath + name;
+        }
+        else if (_mode == StoreMode.Official)
+        {
+            settings.directory = ES3.Directory.PersistentDataPath;
+            settings.path = SavePath + name;
+        }
+
+        ES3.DeleteFile(settings);
     }
 }
