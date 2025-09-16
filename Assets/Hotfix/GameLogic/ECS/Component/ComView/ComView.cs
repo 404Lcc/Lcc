@@ -6,19 +6,21 @@ namespace LccHotfix
 {
     public enum ViewCategory
     {
-        Actor,//主GameObject对象
-        UI,//主要表现是UI
-        Fx,//主要表现是特效
+        Actor, //主GameObject对象
+        UI, //主要表现是UI
+        Fx, //主要表现是特效
 
         //下面属于附属逻辑
         //生命周期不跟随Actor
         //可以随时增加或者删除
         HP
     }
+
     public interface IViewUpdate
     {
         void Update(float dt);
     }
+
     public interface IViewWrapper : IDispose
     {
         void SyncTransform(Vector3 position, Quaternion rotation, Vector3 scale);
@@ -76,6 +78,7 @@ namespace LccHotfix
             {
                 return view;
             }
+
             return null;
         }
 
@@ -86,6 +89,7 @@ namespace LccHotfix
             {
                 return view as T;
             }
+
             return null;
         }
 
@@ -95,6 +99,7 @@ namespace LccHotfix
             {
                 _viewDict.Remove(newViewCategory);
             }
+
             _viewDict.Add(newViewCategory, newView);
             //更新缓存
             _cache.CheckViewCache(newView, newViewCategory);
@@ -120,16 +125,25 @@ namespace LccHotfix
                 {
                     Owner.ReplaceComponent(LogicComponentsLookup.ComView, this);
                 }
+
                 return true;
             }
+
             return false;
         }
     }
 
     public partial class LogicEntity
     {
-        public ComView comView { get { return (ComView)GetComponent(LogicComponentsLookup.ComView); } }
-        public bool hasComView { get { return HasComponent(LogicComponentsLookup.ComView); } }
+        public ComView comView
+        {
+            get { return (ComView)GetComponent(LogicComponentsLookup.ComView); }
+        }
+
+        public bool hasComView
+        {
+            get { return HasComponent(LogicComponentsLookup.ComView); }
+        }
 
         public void AddView(IViewWrapper newView, ViewCategory newViewCategory)
         {
@@ -159,6 +173,7 @@ namespace LccHotfix
             {
                 return null;
             }
+
             return comView.GetView<T>(newViewCategory);
         }
 
@@ -187,6 +202,7 @@ namespace LccHotfix
             }
         }
     }
+
     public static partial class LogicComponentsLookup
     {
         public static int ComView;

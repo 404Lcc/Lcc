@@ -2,19 +2,11 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class HPView : IViewWrapper, IViewUpdate
+    public class HPView : HUDView
     {
-        private UIHeadbarPanel _panel;
+        public HPBase HP => _headbar as HPBase;
 
-        private LogicEntity _entity;
-        private HeadbarType _type;
-        private float _offsetY;
-
-        private UIHeadbarTemplate _hp;
-
-        public HPBase HP => _hp as HPBase;
-
-        public virtual void Init(LogicEntity entity, HeadbarType type, float offsetY)
+        public override void Init(LogicEntity entity, HeadbarType type, float offsetY)
         {
             _entity = entity;
             _type = type;
@@ -23,46 +15,10 @@ namespace LccHotfix
         }
 
 
-        public void Show(bool show)
+
+        public override void Update(float dt)
         {
-            if (show)
-            {
-                if (_hp == null)
-                {
-                    _hp = _panel.GetHeadbar(_type, _entity, _offsetY);
-                }
-
-                if (_hp == null)
-                    return;
-
-                HP.SetHp(_entity.comHP.HP, _entity.comProperty.maxHP);
-            }
-            else
-            {
-                if (_hp == null)
-                {
-                    return;
-                }
-
-                _panel.RemoveHeadbar(_hp);
-                _hp = null;
-            }
-        }
-
-
-        public void Dispose()
-        {
-            Show(false);
-        }
-
-        public void SyncTransform(Vector3 position, Quaternion rotation, Vector3 scale)
-        {
-        }
-
-
-        public void Update(float dt)
-        {
-            if (_hp == null)
+            if (_headbar == null)
                 return;
 
             if (!_entity.hasComProperty)
@@ -77,7 +33,34 @@ namespace LccHotfix
             var hp = comHp.HP;
 
             HP.SetHp(hp, maxHp);
-            _hp.Update();
+            _headbar.Update();
+        }
+
+
+        public void Show(bool show)
+        {
+            if (show)
+            {
+                if (_headbar == null)
+                {
+                    _headbar = _panel.GetHeadbar(_type, _entity, _offsetY);
+                }
+
+                if (HP == null)
+                    return;
+
+                HP.SetHp(_entity.comHP.HP, _entity.comProperty.maxHP);
+            }
+            else
+            {
+                if (_headbar == null)
+                {
+                    return;
+                }
+
+                _panel.RemoveHeadbar(_headbar);
+                _headbar = null;
+            }
         }
     }
 }
