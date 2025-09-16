@@ -46,7 +46,7 @@ namespace LccHotfix
                     _headbar = _panel.GetHeadbar(_type, _entity, _offsetY);
                 }
 
-                if (HP == null)
+                if (_headbar == null)
                     return;
 
                 HP.SetHp(_entity.comHP.HP, _entity.comProperty.maxHP);
