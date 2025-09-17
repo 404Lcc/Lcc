@@ -12,7 +12,7 @@ namespace LccHotfix
     public class FXObject : IReference
     {
         public bool active;
-        public long id;
+        public int id;
         public float during;
         public bool loop;
         public bool ignoreTimeScale;
@@ -30,7 +30,7 @@ namespace LccHotfix
         public Transform fromTrans;
         public Transform toTrans;
 
-        public void Init(long id, float during, bool ignoreTimeScale, GameObjectPoolObject res, FXType type)
+        public void Init(int id, float during, bool ignoreTimeScale, GameObjectPoolObject res, FXType type)
         {
             active = true;
             this.id = id;
@@ -199,7 +199,7 @@ namespace LccHotfix
             _fxList.Clear();
         }
 
-        public long PlayNormal(string path, Vector3 pos, Quaternion rot, Vector3 scale, float during, bool ignoreTimeScale = false)
+        public int PlayNormal(string path, Vector3 pos, Quaternion rot, Vector3 scale, float during, bool ignoreTimeScale = false)
         {
             if (string.IsNullOrEmpty(path))
                 return -1;
@@ -220,7 +220,7 @@ namespace LccHotfix
             return fx.id;
         }
 
-        public long PlayNormal(string path, Transform followTrans, float during, bool unit, bool ignoreTimeScale = false)
+        public int PlayNormal(string path, Transform followTrans, float during, bool unit, bool ignoreTimeScale = false)
         {
             if (string.IsNullOrEmpty(path))
                 return -1;
@@ -257,7 +257,7 @@ namespace LccHotfix
         }
 
 
-        public long PlayLineRender(string path, Transform fromTrans, Transform toTrans, float during, bool follow, bool ignoreTimeScale = false)
+        public int PlayLineRender(string path, Transform fromTrans, Transform toTrans, float during, bool follow, bool ignoreTimeScale = false)
         {
             if (string.IsNullOrEmpty(path))
                 return -1;
