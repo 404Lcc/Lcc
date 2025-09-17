@@ -232,6 +232,7 @@
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\TypeNamePair.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\Interface\IPlatformService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\Fiber.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\UI\UIBattle\UIBattlePanel.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBEquipment.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Easing\EasingExtensions.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\CodeTypes\AttributeBase.cs" />

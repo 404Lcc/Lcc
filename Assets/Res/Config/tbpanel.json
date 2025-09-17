@@ -66,5 +66,22 @@
     "returnNodeType": 0,
     "returnNodeName": "",
     "returnNodeParam": 0
+  },
+  {
+    "prefabName": "UIBattlePanel",
+    "depth": 0,
+    "rootName": "UIRootBattle",
+    "logicName": "UIBattlePanel",
+    "bgTex": "",
+    "sound": 0,
+    "openAnim": false,
+    "showScreenMask": 0,
+    "windowFlag": 1,
+    "rejectFlag": 0,
+    "escapeType": 0,
+    "releaseType": 0,
+    "returnNodeType": 0,
+    "returnNodeName": "",
+    "returnNodeParam": 0
   }
 ]
