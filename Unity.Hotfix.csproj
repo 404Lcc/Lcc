@@ -147,8 +147,8 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Timer\TimerManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\Dev\DevPlatform.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\Log\LogLevel.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Window\WindowManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\UI\UIRoot\UIRootBattle.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\Window\WindowManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComSubobject.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\LogicContext\LogicComponent.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Command\CommandData.cs" />
@@ -173,6 +173,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Input\Interface\IInputService.cs" />
     <Compile Include="Assets\Hotfix\Utility\Resolution\ResolutionUtility.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysLife.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Procedure\BattleProcedure.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniDamage\ComUniDamage.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\System\SysSubobject.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Procedure\MainProcedure.cs" />
@@ -231,8 +232,8 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBItem.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\TypeNamePair.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\Interface\IPlatformService.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\Fiber.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\UI\UIBattle\UIBattlePanel.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\Fiber.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBEquipment.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Easing\EasingExtensions.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\CodeTypes\AttributeBase.cs" />

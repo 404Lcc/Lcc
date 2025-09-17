@@ -10,4 +10,5 @@ public class UIPanelDefine
     public const string UILoginPanel = "UILoginPanel";
     public const string UIMainPanel = "UIMainPanel";
     public const string UIHeadbarPanel = "UIHeadbarPanel";
+    public const string UIBattlePanel = "UIBattlePanel";
 }
