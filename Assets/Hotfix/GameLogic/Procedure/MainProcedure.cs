@@ -7,23 +7,21 @@ namespace LccHotfix
     [Procedure]
     public class MainProcedure : LoadProcedureHandler, ICoroutine
     {
-        public GameObject map;
-        public Camera currentCamera;
-        
         public MainProcedure()
         {
             procedureType = ProcedureType.Main.ToInt();
             loadType = LoadingType.Normal;
         }
+
         public override void ProcedureStartHandler()
         {
             base.ProcedureStartHandler();
+
             //进入
 
             Log.Debug("进入main");
 
             this.StartCoroutine(LoadProcedureCoroutine());
-
         }
 
         // 初始化显示
@@ -31,12 +29,6 @@ namespace LccHotfix
         {
             UILoadingPanel.Instance.UpdateLoadingPercent(10, 98, 2f);
 
-            Main.AssetService.LoadGameObject("Map", true, out map);
-            SetBattleCamera();
-            BattleModeState state = new BattleModeState();
-            state.Init(map);
-            Main.WorldService.CreateWorld<BattleWorld>(state);
-            
             Main.UIService.OpenPanel(UIPanelDefine.UIMainPanel);
 
             yield return new WaitForSeconds(1f);
@@ -49,7 +41,7 @@ namespace LccHotfix
 
             this.StartCoroutine(LevelStartWaiting());
         }
-        
+
         // 开启流程后屏蔽操作，等待0.5秒钟弹出弹窗
         IEnumerator LevelStartWaiting()
         {
@@ -60,18 +52,11 @@ namespace LccHotfix
             ProcedureLoadEndHandler();
             Main.UIService.TryPopupPanel();
         }
-        
-        public void SetBattleCamera()
-        {
-            currentCamera = map.transform.Find("Camera").GetComponent<Camera>();
-            Main.CameraService.CurrentCamera = currentCamera;
-            Main.CameraService.AddOverlayCamera(currentCamera);
-        }
-        
+
         public override void Tick()
         {
             base.Tick();
-            
+
             if (IsLoading)
             {
                 return;
@@ -81,7 +66,7 @@ namespace LccHotfix
         public override void LateUpdate()
         {
             base.LateUpdate();
-            
+
             if (IsLoading)
             {
                 return;
@@ -92,9 +77,6 @@ namespace LccHotfix
         {
             base.ProcedureExitHandler();
 
-            Main.CameraService.CurrentCamera = null;
-            Main.WorldService.ExitWorld();
-            
             Log.Debug("退出main");
         }
     }
