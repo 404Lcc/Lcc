@@ -5,13 +5,13 @@ namespace LccHotfix
     public class ActorView : IViewWrapper
     {
         private GameObjectPoolObject _poolObject;
-        private GameObject _gameObject;
+        protected GameObject _gameObject;
         public GameObject GameObject => _gameObject;
 
-        private Transform _transform;
+        protected Transform _transform;
         public Transform Transform => _transform;
 
-        private Animator _animator;
+        protected Animator _animator;
         public Animator Animator => _animator;
 
         public virtual void Init(GameObjectPoolObject poolObject)

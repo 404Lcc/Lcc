@@ -195,9 +195,9 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\Dev\DevCallbackMessage.cs" />
     <Compile Include="Assets\Hotfix\Utility\Extension\Awaiter\AwaiterExtension.cs" />
     <Compile Include="Assets\Hotfix\Utility\Extension\Image\ImageExtension.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComView\HUDView.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\IVibrationManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Coroutine\CoroutineHandler.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComView\HUDView.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Asset\AssetManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComView\HPView.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\HotfixBridge\HotfixBridge.cs" />
