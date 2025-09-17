@@ -148,6 +148,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\Dev\DevPlatform.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\Log\LogLevel.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\WindowManager.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\UI\UIRoot\UIRootBattle.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComSubobject.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\LogicContext\LogicComponent.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Command\CommandData.cs" />
