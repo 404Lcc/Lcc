@@ -112,18 +112,16 @@ namespace LccHotfix
 
             MetaComponentsLookup.ComUniGameMode = 0;
             MetaComponentsLookup.ComUniCameraBlender = 1;
-            MetaComponentsLookup.ComUniDamage = 2;
-            MetaComponentsLookup.ComUniInGamePlayers = 3;
-            MetaComponentsLookup.ComUniFloatingText = 4;
-            MetaComponentsLookup.ComUniOrca = 5;
+            MetaComponentsLookup.ComUniInGamePlayers = 2;
+            MetaComponentsLookup.ComUniOrca = 3;
+
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniGameMode));
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniCameraBlender));
-            MetaComponentsLookup.componentTypeList.Add(typeof(ComUniDamage));
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniInGamePlayers));
-            MetaComponentsLookup.componentTypeList.Add(typeof(ComUniFloatingText));
             MetaComponentsLookup.componentTypeList.Add(typeof(ComUniOrca));
 
             //战斗部分
+
             LogicComponentsLookup.ComLocomotion = 5;
             LogicComponentsLookup.ComCollider = 6;
             LogicComponentsLookup.ComView = 7;
@@ -168,6 +166,11 @@ namespace LccHotfix
             LogicComponentsLookup.componentTypeList.Add(typeof(ComAABBCollider));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComAStar));
             LogicComponentsLookup.componentTypeList.Add(typeof(ComOrcaAgent));
+
+            MetaComponentsLookup.ComUniDamage = 4;
+            MetaComponentsLookup.ComUniFloatingText = 5;
+            MetaComponentsLookup.componentTypeList.Add(typeof(ComUniDamage));
+            MetaComponentsLookup.componentTypeList.Add(typeof(ComUniFloatingText));
 
             //自定义
         }
