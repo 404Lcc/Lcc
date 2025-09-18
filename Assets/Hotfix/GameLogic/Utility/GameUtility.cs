@@ -56,6 +56,11 @@ namespace LccHotfix
             return Main.LanguageService.GetKey(id);
         }
 
+        public static T GetModel<T>() where T : ModelTemplate
+        {
+            return Main.ModelService.GetModel<T>();
+        }
+
         /// <summary>
         /// 打乱一个list
         /// </summary>
