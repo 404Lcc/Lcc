@@ -126,19 +126,19 @@ namespace LccHotfix
         private HashSet<AudioSource> _activeSources = new HashSet<AudioSource>();
         private List<AudioSource> _removeList = new List<AudioSource>(10);
 
-        private AudioData save;
+        // private AudioData save;
 
-        public float SoundVolume
-        {
-            get => save.SoundVolume;
-            set { save.SoundVolume = value; }
-        }
-
-        public float MusicVolume
-        {
-            get => save.MusicVolume;
-            set { save.MusicVolume = value; }
-        }
+        // public float SoundVolume
+        // {
+        //     get => save.SoundVolume;
+        //     set { save.SoundVolume = value; }
+        // }
+        //
+        // public float MusicVolume
+        // {
+        //     get => save.MusicVolume;
+        //     set { save.MusicVolume = value; }
+        // }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
@@ -190,7 +190,7 @@ namespace LccHotfix
             _rootLoader = new GameObject("AudioLoader");
             GameObject.DontDestroyOnLoad(_rootLoader);
 
-            save = Main.SaveService.GetSaveConverterData<AudioData, AudioSaveData>();
+            // save = Main.SaveService.GetSaveConverterData<AudioData, AudioSaveData>();
         }
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace LccHotfix
             var clip = LoadAudio(audio);
             var source = _audioPool.Get();
             source.clip = clip;
-            source.volume = volume * save.SoundVolume;
+            source.volume = volume;// * save.SoundVolume;
             source.pitch = pitch;
             source.loop = loop;
             source.Play();
@@ -254,7 +254,7 @@ namespace LccHotfix
             var clip = LoadAudio(audio);
             var source = _audioPool.Get();
             source.clip = clip;
-            source.volume = volume * save.MusicVolume;
+            source.volume = volume;// * save.MusicVolume;
             source.pitch = pitch;
             source.loop = loop;
             source.Play();

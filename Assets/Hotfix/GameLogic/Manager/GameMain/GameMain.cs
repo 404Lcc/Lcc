@@ -17,6 +17,8 @@ namespace LccHotfix
 
             CodeTypesService = Current.AddModule<CodeTypesManager>();
             CodeTypesService.LoadTypes(new Assembly[] { Launcher.Instance.HotfixAssembly });
+            AssetService = Current.AddModule<AssetManager>();
+            AssetService.SetHelper(new DefaultAssetHelper());
             GameObjectPoolService = Current.AddModule<GameObjectPoolManager>();
             GameObjectPoolService.SetLoader((location, root) =>
             {
@@ -29,6 +31,7 @@ namespace LccHotfix
             ModelService = Current.AddModule<ModelManager>();
             SaveService = Current.AddModule<SaveManager>();
             SaveService.SetSaveHelper(new DefaultSaveHelper());
+            AudioService = Current.AddModule<AudioManager>();
             FXService = Current.AddModule<FXManager>();
             EventService = Current.AddModule<EventManager>();
             CameraService = Current.AddModule<CameraManager>();
@@ -37,8 +40,6 @@ namespace LccHotfix
             ProcedureService.SetProcedureHelper(new DefaultProcedureHelper());
             WindowService = Current.AddModule<WindowManager>();
             ThreadSyncService = Current.AddModule<ThreadSyncManager>();
-            AssetService = Current.AddModule<AssetManager>();
-            AssetService.SetHelper(new DefaultAssetHelper());
             NetworkService = Current.AddModule<NetworkManager>();
             NetworkService.SetPackageHelper(new DefaultPackageHelper());
             NetworkService.SetMessageHelper(new DefaultMessageHelper());

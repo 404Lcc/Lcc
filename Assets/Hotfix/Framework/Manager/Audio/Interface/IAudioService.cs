@@ -8,8 +8,8 @@ namespace LccHotfix
 
     public interface IAudioService : IService
     {
-        float SoundVolume { get; set; }
-        float MusicVolume{ get; set; }
+        // float SoundVolume { get; set; }
+        // float MusicVolume{ get; set; }
         /// <summary>
         /// 播放声音
         /// </summary>
