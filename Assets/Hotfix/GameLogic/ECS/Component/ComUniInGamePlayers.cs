@@ -44,21 +44,27 @@ namespace LccHotfix
             }
         }
 
-        public void UpdatePlayer(PlayerSimpleData data)
+        public void UpdatePlayer(InGamePlayerData data)
         {
-            bool update = false;
+            InGamePlayerData updateData = null;
             foreach (var item in PlayerList)
             {
-                if (item.PlayerUID == data.UID)
+                if (item.PlayerUID == data.PlayerUID)
                 {
-                    item.InitData(data);
-                    update = true;
+                    updateData = item;
+                    break;
                 }
             }
 
-            if (update)
+            if (updateData != null)
             {
+                PlayerList.Remove(updateData);
+                PlayerList.Add(data);
                 Owner.ReplaceComUniInGamePlayers(PlayerList);
+            }
+            else
+            {
+                AddPlayer(data);
             }
         }
 
