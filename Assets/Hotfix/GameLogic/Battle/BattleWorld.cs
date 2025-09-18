@@ -41,11 +41,13 @@ namespace LccHotfix
 
     public class BattleModeState : GameModeState
     {
+        public List<InGamePlayerData> PlayerList { get; private set; }
         public GameObject Map { get; private set; }
 
-        public void Init(GameObject map)
+        public void Init(GameObject map, List<InGamePlayerData> playerList)
         {
             this.Map = map;
+            this.PlayerList = playerList;
         }
     }
 
@@ -64,22 +66,26 @@ namespace LccHotfix
 
         public void CreatePlayer()
         {
-            var obj = GameUtility.GetObj("Player");
-            var entity = EntityUtility.AddEntity<CharacterActorView>(obj);
-            var player = entity.GetView<CharacterActorView>(ViewCategory.Actor);
-            player.SetPlane(CharacterPlane.XZ);
-            player.SetSize(new Vector2(1, 1));
+            foreach (var item in mode.data.PlayerList)
+            {
+                var obj = GameUtility.GetObj("Player");
+                var entity = EntityUtility.AddEntityWithID<CharacterActorView>(item.PlayerUID, obj);
+                var player = entity.GetView<CharacterActorView>(ViewCategory.Actor);
+                player.SetPlane(CharacterPlane.XZ);
+                player.SetSize(new Vector2(1, 1));
 
-            entity.AddComTag(TagType.Hero);
-            entity.AddComFaction(FactionType.Friend);
-            entity.AddComHP(int.MaxValue);
-            entity.AddComHero();
-            entity.AddComProperty();
-            entity.comProperty.Init(int.MaxValue, 100, 3);
+                entity.AddComOwnerPlayer(item);
+                entity.AddComTag(TagType.Hero);
+                entity.AddComFaction(FactionType.Friend);
+                entity.AddComHP(int.MaxValue);
+                entity.AddComHero();
+                entity.AddComProperty();
+                entity.comProperty.Init(int.MaxValue, 100, 3);
 
-            HPView hpView = new HPView();
-            hpView.Init(entity, HeadbarType.NormalHP, 0);
-            entity.AddView(hpView, ViewCategory.HP);
+                HPView hpView = new HPView();
+                hpView.Init(entity, HeadbarType.NormalHP, 0);
+                entity.AddView(hpView, ViewCategory.HP);
+            }
         }
 
         public void OnUpdate()

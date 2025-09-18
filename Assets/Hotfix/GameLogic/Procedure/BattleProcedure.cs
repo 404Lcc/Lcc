@@ -1,5 +1,6 @@
 using LccModel;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LccHotfix
@@ -40,8 +41,12 @@ namespace LccHotfix
             Main.UIService.OpenPanel(UIPanelDefine.UIBattlePanel);
             Main.UIService.OpenPanel(UIPanelDefine.UIHeadbarPanel);
 
+            var mod = Main.ModelService.GetModel<ModPlayer>();
+            var data = new InGamePlayerData();
+            data.InitData(mod.GetLocalPlayerSimpleData());
+
             BattleModeState state = new BattleModeState();
-            state.Init(map);
+            state.Init(map, new List<InGamePlayerData>() { data });
             Main.WorldService.CreateWorld<BattleWorld>(state);
 
             yield return new WaitForSeconds(1f);
