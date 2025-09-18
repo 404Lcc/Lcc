@@ -93,13 +93,13 @@ namespace LccHotfix
         {
         }
 
-        public float PlayAnim(string animName, bool isForce = false)
+        public float PlayAnim(string animName, bool isForce = false, int layer = 0)
         {
             if (!isForce)
             {
                 //相同动画不播放
-                var normalizedTime = Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-                if (Animator.GetCurrentAnimatorStateInfo(0).IsName(animName) && normalizedTime <= 1)
+                var normalizedTime = Animator.GetCurrentAnimatorStateInfo(layer).normalizedTime;
+                if (Animator.GetCurrentAnimatorStateInfo(layer).IsName(animName) && normalizedTime <= 1)
                 {
                     return GameUtility.GetAnimationClipLengthByNameMatched(Animator, animName);
                 }
@@ -110,7 +110,7 @@ namespace LccHotfix
                 Animator.StopPlayback();
             }
 
-            Animator.Play(animName, 0, 0);
+            Animator.Play(animName, layer, 0);
 
             return GameUtility.GetAnimationClipLengthByNameMatched(Animator, animName);
         }
