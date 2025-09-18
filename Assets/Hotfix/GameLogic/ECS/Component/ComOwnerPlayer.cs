@@ -5,12 +5,12 @@ namespace LccHotfix
     public class ComOwnerPlayer : LogicComponent
     {
         public long UID { get; private set; }
-        public InGamePlayerInfo PlayerInfo { get; private set; }
+        public InGamePlayerData PlayerData { get; private set; }
 
-        public void Init(InGamePlayerInfo playerInfo)
+        public void Init(InGamePlayerData data)
         {
-            PlayerInfo = playerInfo;
-            UID = playerInfo.PlayerUID;
+            PlayerData = data;
+            UID = data.PlayerUID;
         }
     }
 
@@ -27,11 +27,11 @@ namespace LccHotfix
             get { return HasComponent(LogicComponentsLookup.ComOwnerPlayer); }
         }
 
-        public void AddComOwnerPlayer(InGamePlayerInfo playerInfo)
+        public void AddComOwnerPlayer(InGamePlayerData data)
         {
             var index = LogicComponentsLookup.ComOwnerPlayer;
             var component = (ComOwnerPlayer)CreateComponent(index, typeof(ComOwnerPlayer));
-            component.Init(playerInfo);
+            component.Init(data);
             AddComponent(index, component);
         }
     }

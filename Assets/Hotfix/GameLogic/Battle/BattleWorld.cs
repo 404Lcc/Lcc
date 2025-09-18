@@ -195,7 +195,7 @@ namespace LccHotfix
             MetaContext.SetComUniGameMode(mode);
             MetaContext.SetComUniCameraBlender(new SmoothFoolow2D());
             MetaContext.SetComUniDamage(new DamageBase());
-            MetaContext.SetComUniInGamePlayers(new List<InGamePlayerInfo>());
+            MetaContext.SetComUniInGamePlayers(new List<InGamePlayerData>());
             MetaContext.SetComUniFloatingText(new DNPFloatingText());
             MetaContext.SetComUniOrca();
         }

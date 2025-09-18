@@ -2,53 +2,51 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public class InGamePlayerInfo
+    public class InGamePlayerData
     {
         public long PlayerUID { get; set; }
-        public int PlayerIndex { get; set; }
         public bool IsLocalPlayer { get; set; }
-        public KVContext PlayerContext { get; set; } = new KVContext();
-        public List<CharacterData> CharacterDataList { get; set; } = new List<CharacterData>();
         public PlayerSimpleData PlayerSimpleData { get; set; }
-    }
 
+        public void InitData(PlayerSimpleData data)
+        {
+            var mod = Main.ModelService.GetModel<ModPlayer>();
+            PlayerUID = data.UID;
+            IsLocalPlayer = mod.PlayerData.UID == PlayerUID;
+            PlayerSimpleData = data;
+        }
+    }
 
     public class ComUniInGamePlayers : MetaComponent
     {
-        public List<InGamePlayerInfo> PlayerInfoList { get; private set; } = new List<InGamePlayerInfo>();
-        public InGamePlayerInfo LocalPlayerInfo { get; private set; }
+        public List<InGamePlayerData> PlayerList { get; private set; } = new List<InGamePlayerData>();
+        public InGamePlayerData LocalPlayer { get; private set; }
 
-        public void InitPlayerInfoList(List<InGamePlayerInfo> playerInfoList)
+        public void InitPlayerList(List<InGamePlayerData> list)
         {
-            if (playerInfoList == null || playerInfoList.Count == 0)
+            if (list == null || list.Count == 0)
             {
                 return;
             }
 
-            PlayerInfoList.AddRange(playerInfoList);
-            LocalPlayerInfo = null;
+            PlayerList.Clear();
+            PlayerList.AddRange(list);
 
-            for (int i = 0; i < PlayerInfoList.Count; i++)
+            LocalPlayer = null;
+
+            for (int i = 0; i < PlayerList.Count; i++)
             {
-                var info = PlayerInfoList[i];
-                if (info.IsLocalPlayer)
+                var data = PlayerList[i];
+                if (data.IsLocalPlayer)
                 {
-                    LocalPlayerInfo = info;
+                    LocalPlayer = data;
                 }
             }
         }
 
-        public override void Dispose()
+        public InGamePlayerData GetPlayer(long playerUID)
         {
-            base.Dispose();
-
-            PlayerInfoList.Clear();
-            LocalPlayerInfo = null;
-        }
-
-        public InGamePlayerInfo GetPlayerInfo(long playerUID)
-        {
-            foreach (var item in PlayerInfoList)
+            foreach (var item in PlayerList)
             {
                 if (item.PlayerUID == playerUID)
                 {
@@ -57,6 +55,46 @@ namespace LccHotfix
             }
 
             return null;
+        }
+
+        public void AddPlayer(InGamePlayerData data)
+        {
+            foreach (var item in PlayerList)
+            {
+                if (item.PlayerUID == data.PlayerUID)
+                {
+                    return;
+                }
+            }
+
+            List<InGamePlayerData> list = new List<InGamePlayerData>();
+            list.Add(data);
+
+            Owner.ReplaceComUniInGamePlayers(list);
+        }
+
+        public void RemovePlayer(InGamePlayerData data)
+        {
+            List<InGamePlayerData> list = new List<InGamePlayerData>();
+            list.AddRange(PlayerList);
+
+            foreach (var item in PlayerList)
+            {
+                if (item.PlayerUID == data.PlayerUID)
+                {
+                    list.Remove(item);
+                }
+            }
+
+            Owner.ReplaceComUniInGamePlayers(list);
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+
+            PlayerList.Clear();
+            LocalPlayer = null;
         }
     }
 
@@ -77,42 +115,31 @@ namespace LccHotfix
             get { return comUniInGamePlayersEntity != null; }
         }
 
-        public MetaEntity SetComUniInGamePlayers(List<InGamePlayerInfo> playerInfoList)
+        public MetaEntity SetComUniInGamePlayers(List<InGamePlayerData> list)
         {
             if (hasComUniInGamePlayers)
             {
                 var entity = comUniInGamePlayersEntity;
-                entity.ReplaceComUniInGamePlayers(playerInfoList);
+                entity.ReplaceComUniInGamePlayers(list);
                 return entity;
             }
             else
             {
                 var entity = CreateEntity();
-                entity.AddComUniInGamePlayers(playerInfoList);
+                entity.AddComUniInGamePlayers(list);
                 return entity;
             }
         }
 
-        public InGamePlayerInfo GetPlayerInfo(long playerUID)
+        public InGamePlayerData GetPlayer(long playerUID)
         {
             if (hasComUniInGamePlayers)
             {
                 var entity = comUniInGamePlayersEntity;
-                return entity.comUniInGamePlayers.GetPlayerInfo(playerUID);
+                return entity.comUniInGamePlayers.GetPlayer(playerUID);
             }
 
             return null;
-        }
-
-        public KVContext GetPlayerContext(long playerUID)
-        {
-            var playerInfo = GetPlayerInfo(playerUID);
-            if (playerInfo == null)
-            {
-                return null;
-            }
-
-            return playerInfo.PlayerContext;
         }
     }
 
@@ -128,27 +155,20 @@ namespace LccHotfix
             get { return HasComponent(MetaComponentsLookup.ComUniInGamePlayers); }
         }
 
-        public void AddComUniInGamePlayers(List<InGamePlayerInfo> playerInfoList)
+        public void AddComUniInGamePlayers(List<InGamePlayerData> list)
         {
             var index = MetaComponentsLookup.ComUniInGamePlayers;
             var component = (ComUniInGamePlayers)CreateComponent(index, typeof(ComUniInGamePlayers));
-            component.InitPlayerInfoList(playerInfoList);
+            component.InitPlayerList(list);
             AddComponent(index, component);
         }
 
-        public void ReplaceComUniInGamePlayers(List<InGamePlayerInfo> playerInfoList)
+        public void ReplaceComUniInGamePlayers(List<InGamePlayerData> list)
         {
             var index = MetaComponentsLookup.ComUniInGamePlayers;
             var component = (ComUniInGamePlayers)CreateComponent(index, typeof(ComUniInGamePlayers));
-            component.InitPlayerInfoList(playerInfoList);
+            component.InitPlayerList(list);
             ReplaceComponent(index, component);
-        }
-
-        public void RemoveComUniInGamePlayers()
-        {
-            var index = MetaComponentsLookup.ComUniInGamePlayers;
-            var component = (ComUniInGamePlayers)CreateComponent(index, typeof(ComUniInGamePlayers));
-            RemoveComponent(MetaComponentsLookup.ComUniInGamePlayers);
         }
     }
 
