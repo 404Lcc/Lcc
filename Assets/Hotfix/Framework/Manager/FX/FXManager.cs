@@ -114,6 +114,14 @@ namespace LccHotfix
             ignoreTimeScale = false;
             if (res != null)
             {
+                var obj = res.GameObject;
+                //清理一下拖尾
+                var renderers = obj.GetComponentsInChildren<TrailRenderer>();
+                foreach (var item in renderers)
+                {
+                    item.Clear();
+                }
+
                 Main.GameObjectPoolService.ReleaseObject(res);
             }
 
