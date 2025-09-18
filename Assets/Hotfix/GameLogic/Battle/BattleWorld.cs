@@ -200,10 +200,10 @@ namespace LccHotfix
             mode.Init(_gameModeState);
             MetaContext.SetComUniGameMode(mode);
             MetaContext.SetComUniCameraBlender(new SmoothFoolow2D());
-            MetaContext.SetComUniDamage(new DamageBase());
-            MetaContext.SetComUniInGamePlayers(new List<InGamePlayerData>());
-            MetaContext.SetComUniFloatingText(new DNPFloatingText());
+            MetaContext.SetComUniInGamePlayers(mode.data.PlayerList);
             MetaContext.SetComUniOrca();
+            MetaContext.SetComUniDamage(new DamageBase());
+            MetaContext.SetComUniFloatingText(new DNPFloatingText());
         }
 
         protected override void InitSystem()
