@@ -41,7 +41,7 @@ namespace LccHotfix
             Main.UIService.OpenPanel(UIPanelDefine.UIBattlePanel);
             Main.UIService.OpenPanel(UIPanelDefine.UIHeadbarPanel);
 
-            var mod = Main.ModelService.GetModel<ModPlayer>();
+            var mod = GameUtility.GetModel<ModPlayer>();
             var data = new InGamePlayerData();
             data.InitData(mod.GetLocalPlayerSimpleData());
 

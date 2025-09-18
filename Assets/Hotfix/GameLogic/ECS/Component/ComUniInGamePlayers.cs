@@ -10,7 +10,7 @@ namespace LccHotfix
 
         public void InitData(PlayerSimpleData data)
         {
-            var mod = Main.ModelService.GetModel<ModPlayer>();
+            var mod = GameUtility.GetModel<ModPlayer>();
             PlayerUID = data.UID;
             IsLocalPlayer = mod.PlayerData.UID == PlayerUID;
             PlayerSimpleData = data;
