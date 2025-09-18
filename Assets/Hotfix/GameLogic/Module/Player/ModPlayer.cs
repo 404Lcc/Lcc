@@ -1,6 +1,6 @@
 namespace LccHotfix
 {
-    public class PlayerSimpleSaveData : ISave
+    public class PlayerSaveData : ISave
     {
         public string TypeName => GetType().FullName;
         public long UID { get; set; } // 角色id
@@ -13,12 +13,11 @@ namespace LccHotfix
         }
     }
 
-    //简易信息
-    public class PlayerSimpleData : ISaveConverter<PlayerSimpleSaveData>
+    public class PlayerData : ISaveConverter<PlayerSaveData>
     {
-        public PlayerSimpleSaveData Save { get; set; }
-        public long UID { get; private set; } // 角色id
-        public string Name { get; private set; } // 昵称
+        public PlayerSaveData Save { get; set; }
+        public long UID { get; set; } // 角色id
+        public string Name { get; set; } // 昵称
 
         public ISave Flush()
         {
@@ -34,14 +33,37 @@ namespace LccHotfix
         }
     }
 
+    //简易信息
+    public class PlayerSimpleData
+    {
+        public long UID { get; set; } // 角色id
+        public string Name { get; set; } // 昵称
+
+        public void InitData(long uid, string name)
+        {
+            UID = uid;
+            Name = name;
+        }
+    }
+
     [Model]
     public class ModPlayer : ModelTemplate, ISavePipeline
     {
-        public PlayerSimpleData PlayerSimpleData { get; private set; }
+        public PlayerData PlayerData { get; set; }
 
         public void InitData(GameSaveData gameSaveData)
         {
-            PlayerSimpleData = gameSaveData.GetSaveConverterData<PlayerSimpleData, PlayerSimpleSaveData>();
+            PlayerData = gameSaveData.GetSaveConverterData<PlayerData, PlayerSaveData>();
+        }
+
+        /// <summary>
+        /// 获取本地玩家简易数据
+        /// </summary>
+        public PlayerSimpleData GetLocalPlayerSimpleData()
+        {
+            PlayerSimpleData simpleData = new PlayerSimpleData();
+            simpleData.InitData(PlayerData.UID, PlayerData.Name);
+            return simpleData;
         }
     }
 }
