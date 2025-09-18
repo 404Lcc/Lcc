@@ -64,6 +64,24 @@ public static class EntityUtility
         entity.AddComUnityObjectRelated(dict);
         return entity;
     }
+    
+    public static LogicEntity AddEntityWithID<T>(long id, GameObjectPoolObject poolObject) where T : ActorView, new()
+    {
+        var entity = Main.WorldService.GetWorld().LogicContext.CreateEntity();
+
+        entity.AddComID(id);
+
+        T viewWrapper = new T();
+        viewWrapper.Init(poolObject);
+        entity.AddView(viewWrapper, ViewCategory.Actor);
+
+        entity.AddComTransform(poolObject.Transform.position, poolObject.Transform.rotation, poolObject.Transform.localScale);
+
+        var dict = new Dictionary<int, GameObjectType>();
+        dict.Add(poolObject.GameObject.GetInstanceID(), GameObjectType.Self);
+        entity.AddComUnityObjectRelated(dict);
+        return entity;
+    }
 
     public static List<LogicEntity> GetHeroList()
     {
