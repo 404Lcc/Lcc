@@ -7,6 +7,14 @@ namespace LccHotfix
         public float smoothTime;
         public Bounds bounds;
 
+        //相机偏移
+        public Vector3 offset = new Vector3(0, 6, 0);
+
+        //震动相关
+        public float shakeIntensity;
+        public float shakeTimer;
+        public bool isShaking;
+
         public Transform Target { get; set; }
         public Camera Camera => Main.CameraService.CurrentCamera;
 
@@ -32,8 +40,19 @@ namespace LccHotfix
             Target = target;
         }
 
+        public virtual void ShakeCamera(float intensity = 0.5f, float duration = 0.5f)
+        {
+            if (intensity <= 0 || duration <= 0)
+                return;
+
+            shakeIntensity = intensity;
+            shakeTimer = duration;
+            isShaking = true;
+        }
+
         public virtual void Dispose()
         {
+
         }
 
         private void MoveCamera()
@@ -45,9 +64,22 @@ namespace LccHotfix
             targetPos.z = Camera.transform.position.z;
             targetPos = GetClampedPosition(targetPos);
             Vector3 velocity = Vector3.zero;
-            Camera.transform.position = Vector3.SmoothDamp(Camera.transform.position, targetPos, ref velocity, smoothTime);
-        }
 
+            //应用震动偏移
+            Vector3 currentOffset = isShaking ? offset + Random.insideUnitSphere * shakeIntensity : offset;
+
+
+            Camera.transform.position = Vector3.SmoothDamp(Camera.transform.position, targetPos + currentOffset, ref velocity, smoothTime);
+
+            if (isShaking)
+            {
+                shakeTimer -= Time.deltaTime;
+                if (shakeTimer <= 0)
+                {
+                    isShaking = false;
+                }
+            }
+        }
 
         private Vector3 GetClampedPosition(Vector3 targetPosition)
         {
@@ -78,8 +110,6 @@ namespace LccHotfix
 
             return new Vector3(targetPosition.x, targetPosition.y, Camera.transform.position.z);
         }
-
-
 
         private Rect GetCameraRect(Vector3 camPos, float size)
         {
