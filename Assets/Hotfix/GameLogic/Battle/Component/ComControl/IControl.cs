@@ -8,5 +8,6 @@ namespace LccHotfix
     {
         public LogicEntity Entity { get; set; }
         public void Update();
+        public void LateUpdate();
     }
 }

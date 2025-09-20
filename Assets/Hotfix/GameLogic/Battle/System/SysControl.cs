@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class SysControl : IExecuteSystem
+    public class SysControl : IExecuteSystem, ILateUpdateSystem
     {
         private IGroup<LogicEntity> _group;
 
@@ -18,6 +18,15 @@ namespace LccHotfix
             {
                 var comControl = entity.comControl;
                 comControl.GetControl<IControl>().Update();
+            }
+        }
+
+        public void LateUpdate()
+        {
+            foreach (var entity in _group.GetEntities())
+            {
+                var comControl = entity.comControl;
+                comControl.GetControl<IControl>().LateUpdate();
             }
         }
     }
