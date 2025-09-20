@@ -219,7 +219,7 @@ namespace LccHotfix
             var clip = LoadAudio(audio);
             var source = _audioPool.Get();
             source.clip = clip;
-            source.volume = volume; // * save.SoundVolume;
+            source.volume = volume * save.SoundVolume;
             source.pitch = pitch;
             source.loop = loop;
             source.Play();
@@ -237,7 +237,7 @@ namespace LccHotfix
             var clip = LoadAudio(audio);
             var source = _audioPool.Get();
             source.clip = clip;
-            source.volume = volume; // * save.MusicVolume;
+            source.volume = volume * save.MusicVolume;
             source.pitch = pitch;
             source.loop = loop;
             source.Play();
