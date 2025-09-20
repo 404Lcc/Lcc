@@ -16,8 +16,6 @@ namespace LccHotfix
     public class SettingData : ISaveConverter<SettingSaveData>
     {
         public SettingSaveData Save { get; set; }
-        public int MusicVolume { get; private set; }
-        public int SoundFXVolume { get; private set; }
         public DisplayModeType DisplayModeType { get; private set; }
         public ResolutionType ResolutionType { get; private set; }
 

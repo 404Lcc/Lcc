@@ -332,7 +332,6 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysGameMode.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Buff\BuffProperty.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\MetaContext\MetaComponent.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\Equipment\ModEquipment.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\SkillAbility.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Module\FunctionOpen\ModFunctionOpen.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\ReferencePool\ReferencePool.ReferenceCollection.cs" />
@@ -367,7 +366,6 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Utility\WorldUtility.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Module\Setting\DisplayModeType.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\BehavoirTree\BTAgent\BTAgent.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\Character\ModCharacter.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBSubobject.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Icon\IconBase.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniGameMode.cs" />
