@@ -16,7 +16,6 @@ namespace LccHotfix
 
         public VibrationManager()
         {
-            IsVibrationEnabled = true;
             vibrationHandler = new SimpleVibrationHandler();
         }
 

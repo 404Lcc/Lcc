@@ -127,7 +127,6 @@
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniFloatingText\DNPFloatingText.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniOrca\ComUniOrca.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\DictionaryList.cs" />
-    <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\VibrationData.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysCollision.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\BlockBuffer.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Procedure\LoginProcedure.cs" />
@@ -227,6 +226,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\AStarMap\AStarMapManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Main\MainPartial.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Procedure\LoadProcedureHandler.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\Vibration\VibrationSaveData.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\BoolPropertyType.cs" />
     <Compile Include="Assets\Hotfix\Framework\Utility\TcpSocket\IPackage.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBItem.cs" />
