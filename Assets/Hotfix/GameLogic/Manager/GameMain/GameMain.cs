@@ -31,6 +31,7 @@ namespace LccHotfix
             ModelService = Current.AddModule<ModelManager>();
             SaveService = Current.AddModule<SaveManager>();
             SaveService.SetSaveHelper(new DefaultSaveHelper());
+            SettingService = Current.AddModule<SettingManager>();
             AudioService = Current.AddModule<AudioManager>();
             VibrationService = Current.AddModule<VibrationManager>();
             FXService = Current.AddModule<FXManager>();
@@ -57,6 +58,7 @@ namespace LccHotfix
             UIService.SetUIHelper(new UIHelper());
             
             //最后初始化
+            SaveService.Init();
             SaveService.Init();
             AudioService.Init();
             VibrationService.Init();

@@ -51,6 +51,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Steam\SteamManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Event\EventPool\BaseEventArgs.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\WindowMode.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\Setting\SettingManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\WBlackboard.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\Death\DeathProcess.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Icon.cs" />
@@ -192,7 +193,6 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Easing\Interface\IEasingService.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Event\Interface\IEventService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\ComUniFloatingText\ComUniFloatingText.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\Setting\ResolutionType.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\Dev\DevCallbackMessage.cs" />
     <Compile Include="Assets\Hotfix\Utility\Extension\Awaiter\AwaiterExtension.cs" />
     <Compile Include="Assets\Hotfix\Utility\Extension\Image\ImageExtension.cs" />
@@ -273,6 +273,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\WindowManager.Action.cs" />
     <Compile Include="Assets\Hotfix\Utility\Awaiter\AsyncOperationAwaiter.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Module\Bag\ItemData.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\Setting\DisplayModeType.cs" />
     <Compile Include="Assets\Hotfix\Utility\Extension\SpriteRenderer\SpriteRendererExtension.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\LinkedListRange.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\HotfixBridge\Interface\IHotfixBridgeService.cs" />
@@ -289,7 +290,6 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBEmptyGoTo.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Module\Player\ModPlayer.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Model\ModelManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\Setting\ModSetting.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBBuff.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\StackList.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Command\Interface\ICommandService.cs" />
@@ -327,6 +327,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Network\DefaultMessageHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\World\Interface\IWorldService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Property\EntityProperty.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\Setting\ResolutionType.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Main\Main.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Network\IMessageHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysGameMode.cs" />
@@ -364,7 +365,6 @@
     <Compile Include="Assets\Hotfix\GameLogic\Utility\IconUtility.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Camera\CameraManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Utility\WorldUtility.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Module\Setting\DisplayModeType.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\BehavoirTree\BTAgent\BTAgent.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBSubobject.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Icon\IconBase.cs" />
@@ -403,6 +403,7 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Fiber\ThreadScheduler.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Tables.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\UI\UILogic\UILogicBase.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\Setting\SettingSaveData.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\ComSkills.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Save\SaveManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComAStar\ComAStar.cs" />
@@ -420,6 +421,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Event\GameEvent.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysAABBCollision.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\LogicContext\LogicComponentsLookup.cs" />
+    <Compile Include="Assets\Hotfix\Framework\Manager\Setting\Interface\ISettingService.cs" />
     <Compile Include="Assets\Hotfix\Utility\Extension\Vector2\Vector2Extension.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Command\CommandManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Panel.cs" />
