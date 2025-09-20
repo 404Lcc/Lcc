@@ -59,7 +59,7 @@ namespace LccHotfix
             
             //最后初始化
             SaveService.Init();
-            SaveService.Init();
+            SettingService.Init();
             AudioService.Init();
             VibrationService.Init();
             HotfixBridgeService.Init();
