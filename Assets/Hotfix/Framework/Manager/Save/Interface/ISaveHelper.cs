@@ -26,7 +26,7 @@ public interface ISaveHelper
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    bool CheckHaveSaveData(string name);
+    bool CheckHaveSaveFile(string name);
 
     /// <summary>
     /// 保存当前加载的存档

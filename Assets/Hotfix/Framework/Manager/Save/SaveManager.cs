@@ -241,7 +241,7 @@ namespace LccHotfix
         /// <returns></returns>
         public bool CheckHaveSaveFile(string name)
         {
-            return _saveHelper.CheckHaveSaveData(name);
+            return _saveHelper.CheckHaveSaveFile(name);
         }
 
         /// <summary>
@@ -261,8 +261,6 @@ namespace LccHotfix
             }
         }
 
-        #region 全局存档
-
         /// <summary>
         /// 获取全局存档的某个存档数据
         /// </summary>
@@ -272,10 +270,6 @@ namespace LccHotfix
         {
             return _globalGameSaveData.GetSave<T>();
         }
-
-        #endregion
-
-        #region 游戏存档
 
         /// <summary>
         /// 创建新存档
@@ -348,7 +342,5 @@ namespace LccHotfix
 
             return _currentGameSaveData.GetSaveConverterData<TRunData, TSave>();
         }
-
-        #endregion
     }
 }

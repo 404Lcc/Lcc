@@ -71,7 +71,7 @@ public class DefaultSaveHelper : ISaveHelper
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public bool CheckHaveSaveData(string name)
+    public bool CheckHaveSaveFile(string name)
     {
         var names = GetFiles();
         foreach (var item in names)
