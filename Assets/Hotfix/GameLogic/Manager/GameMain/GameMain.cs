@@ -56,6 +56,7 @@ namespace LccHotfix
             UIService.SetUIHelper(new UIHelper());
             
             //最后初始化
+            SaveService.Init();
             HotfixBridgeService.Init();
             LanguageService.Init();
             UIService.Init();
