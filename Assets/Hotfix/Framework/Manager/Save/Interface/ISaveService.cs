@@ -23,34 +23,46 @@ namespace LccHotfix
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        bool ValidateSaveData(GameSaveData data);
+        bool ValidateSaveFile(SaveData data);
 
         /// <summary>
         /// 获取本地所有存档文件
         /// </summary>
         /// <returns></returns>
-        List<string> GetAllSaveFiles();
+        List<string> GetAllSaveFile();
 
         /// <summary>
         /// 检测有没有某个存档
         /// </summary>
         /// <returns></returns>
-        bool CheckHaveSaveData(string name);
+        bool CheckHaveSaveFile(string name);
+
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        void Init();
+
+        /// <summary>
+        /// 获取全局存档的某个存档数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        T GetGlobalGameSaveFileSave<T>() where T : ISave;
 
         /// <summary>
         /// 创建新存档
         /// </summary>
-        void CreateNewSaveData(string name);
+        void CreateSaveFile(string name);
 
         /// <summary>
         /// 读取存档
         /// </summary>
-        void Load(string name);
+        void LoadSaveFile(string name);
 
         /// <summary>
         /// 保存存档
         /// </summary>
-        void Save();
+        void SaveFile();
 
         /// <summary>
         /// 获取存档转化数据

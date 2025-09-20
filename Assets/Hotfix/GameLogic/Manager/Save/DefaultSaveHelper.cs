@@ -90,7 +90,7 @@ public class DefaultSaveHelper : ISaveHelper
     /// </summary>
     /// <param name="name"></param>
     /// <param name="value"></param>
-    public void Save(string name, GameSaveData value)
+    public void Save(string name, SaveData value)
     {
         var json = JsonMapper.ToJson(value);
         var settings = new ES3Settings();
@@ -123,7 +123,7 @@ public class DefaultSaveHelper : ISaveHelper
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public GameSaveData Load(string name)
+    public SaveData Load(string name)
     {
         var settings = new ES3Settings();
 
@@ -157,18 +157,18 @@ public class DefaultSaveHelper : ISaveHelper
     /// </summary>
     /// <param name="text"></param>
     /// <returns></returns>
-    public GameSaveData ReadGameSaveData(string text)
+    public SaveData ReadGameSaveData(string text)
     {
-        GameSaveData gameSaveData = new GameSaveData();
+        SaveData saveData = new SaveData();
         var jsonData = JsonMapper.ToObject(text);
         if (jsonData.ContainsKey("saveTime"))
         {
-            gameSaveData.saveTime = DateTime.Parse(jsonData["saveTime"].ToString());
+            saveData.saveTime = DateTime.Parse(jsonData["saveTime"].ToString());
         }
 
         if (jsonData.ContainsKey("saveVersion"))
         {
-            gameSaveData.saveVersion = int.Parse(jsonData["saveVersion"].ToString());
+            saveData.saveVersion = int.Parse(jsonData["saveVersion"].ToString());
         }
 
         if (jsonData.ContainsKey("saveList"))
@@ -184,13 +184,13 @@ public class DefaultSaveHelper : ISaveHelper
                         var typeName = itemData["TypeName"].ToString();
                         var type = Main.CodeTypesService.GetType(typeName);
                         var itemObject = JsonMapper.ToObject(itemData.ToJson(), type) as ISave;
-                        gameSaveData.saveList.Add(itemObject);
+                        saveData.saveList.Add(itemObject);
                     }
                 }
             }
         }
 
-        return gameSaveData;
+        return saveData;
     }
 
     /// <summary>

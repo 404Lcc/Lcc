@@ -33,21 +33,21 @@ public interface ISaveHelper
     /// </summary>
     /// <param name="name"></param>
     /// <param name="data"></param>
-    void Save(string name, GameSaveData data);
+    void Save(string name, SaveData data);
 
     /// <summary>
     /// 加载某个存档
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    GameSaveData Load(string name);
+    SaveData Load(string name);
 
     /// <summary>
     /// 解析存档数据
     /// </summary>
     /// <param name="text"></param>
     /// <returns></returns>
-    GameSaveData ReadGameSaveData(string text);
+    SaveData ReadGameSaveData(string text);
 
     /// <summary>
     /// 删除某个存档

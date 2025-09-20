@@ -43,8 +43,7 @@ namespace LccHotfix
         T Save { get; set; }
     }
 
-    [Serializable]
-    public class GameSaveData
+    public class SaveData
     {
         //元数据
         public DateTime saveTime;
@@ -53,13 +52,9 @@ namespace LccHotfix
         //存档数据
         public List<ISave> saveList;
 
-        //运行时数据
-        private Dictionary<Type, ISaveData> _dataDict;
-
-        public GameSaveData()
+        public SaveData()
         {
             saveList = new List<ISave>();
-            _dataDict = new Dictionary<Type, ISaveData>();
         }
 
         /// <summary>
@@ -72,26 +67,14 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 获取存档转化数据
+        /// 加载存档数据
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <typeparam name="TSave"></typeparam>
-        /// <returns></returns>
-        public T GetSaveConverterData<T, TSave>() where T : ISaveConverter<TSave>, new() where TSave : ISave
+        /// <param name="data"></param>
+        public void LoadSaveData(SaveData data)
         {
-            Type type = typeof(T);
-            if (_dataDict.ContainsKey(type))
-            {
-                return (T)_dataDict[type];
-            }
-            else
-            {
-                T data = new T();
-                data.Save = GetSave<TSave>();
-                data.Init();
-                _dataDict.Add(data.GetType(), data);
-                return data;
-            }
+            saveTime = data.saveTime;
+            saveVersion = data.saveVersion;
+            saveList = data.saveList;
         }
 
         /// <summary>
@@ -99,7 +82,7 @@ namespace LccHotfix
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        private T GetSave<T>() where T : ISave
+        public T GetSave<T>() where T : ISave
         {
             ISave save = null;
             foreach (var item in saveList)
@@ -119,11 +102,51 @@ namespace LccHotfix
 
             return (T)save;
         }
+    }
+
+    [Serializable]
+    public class GameSaveData : SaveData
+    {
+        //运行时数据
+        private Dictionary<Type, ISaveData> _runDataDict; //运行时类型-运行时数据
+
+        public GameSaveData() : base()
+        {
+            _runDataDict = new Dictionary<Type, ISaveData>();
+        }
+
+        /// <summary>
+        /// 获取存档转化数据
+        /// </summary>
+        /// <typeparam name="TRunData"></typeparam>
+        /// <typeparam name="TSave"></typeparam>
+        /// <returns></returns>
+        public TRunData GetSaveConverterData<TRunData, TSave>() where TRunData : ISaveConverter<TSave>, new() where TSave : ISave
+        {
+            Type type = typeof(TRunData);
+            if (_runDataDict.ContainsKey(type))
+            {
+                return (TRunData)_runDataDict[type];
+            }
+            else
+            {
+                TRunData data = new TRunData();
+                data.Save = GetSave<TSave>();
+                data.Init();
+                _runDataDict.Add(data.GetType(), data);
+                return data;
+            }
+        }
 
         public Dictionary<Type, ISaveData> GetRunDataDict()
         {
-            return _dataDict;
+            return _runDataDict;
         }
+    }
+
+    [Serializable]
+    public class GlobalGameSaveData : SaveData
+    {
     }
 
     internal class SaveManager : Module, ISaveService
@@ -131,8 +154,15 @@ namespace LccHotfix
         public Dictionary<Type, ISavePipeline> saveDict = new Dictionary<Type, ISavePipeline>();
 
         private ISaveHelper _saveHelper;
+
+        //当前加载存档
         private string _currentGameSaveName;
+
         private GameSaveData _currentGameSaveData;
+
+        //通用默认存档 一般是游戏设置之类的
+        private const string GlobalGameSaveName = "globalSave.dat";
+        private GlobalGameSaveData _globalGameSaveData;
 
         public bool IsSaveLoaded { get; private set; }
 
@@ -190,7 +220,7 @@ namespace LccHotfix
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public bool ValidateSaveData(GameSaveData data)
+        public bool ValidateSaveFile(SaveData data)
         {
             //校验逻辑示例
             return data != null && data.saveTime < DateTime.Now.AddDays(1) && data.saveList.Count > 0;
@@ -200,7 +230,7 @@ namespace LccHotfix
         /// 获取本地所有存档文件
         /// </summary>
         /// <returns></returns>
-        public List<string> GetAllSaveFiles()
+        public List<string> GetAllSaveFile()
         {
             return _saveHelper.GetFiles();
         }
@@ -209,15 +239,48 @@ namespace LccHotfix
         /// 检测有没有某个存档
         /// </summary>
         /// <returns></returns>
-        public bool CheckHaveSaveData(string name)
+        public bool CheckHaveSaveFile(string name)
         {
             return _saveHelper.CheckHaveSaveData(name);
         }
 
         /// <summary>
+        /// 初始化
+        /// </summary>
+        public void Init()
+        {
+            if (CheckHaveSaveFile(GlobalGameSaveName))
+            {
+                _globalGameSaveData = new GlobalGameSaveData();
+                _globalGameSaveData.LoadSaveData(_saveHelper.Load(GlobalGameSaveName));
+            }
+            else
+            {
+                _globalGameSaveData = new GlobalGameSaveData();
+                _globalGameSaveData.CreateNewSaveData();
+            }
+        }
+
+        #region 全局存档
+
+        /// <summary>
+        /// 获取全局存档的某个存档数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T GetGlobalGameSaveFileSave<T>() where T : ISave
+        {
+            return _globalGameSaveData.GetSave<T>();
+        }
+
+        #endregion
+
+        #region 游戏存档
+
+        /// <summary>
         /// 创建新存档
         /// </summary>
-        public void CreateNewSaveData(string name)
+        public void CreateSaveFile(string name)
         {
             _currentGameSaveName = name;
             _currentGameSaveData = new GameSaveData();
@@ -228,17 +291,19 @@ namespace LccHotfix
                 item.InitData(_currentGameSaveData);
             }
 
-            Save();
+            SaveFile();
         }
 
         /// <summary>
         /// 读取存档
         /// </summary>
-        public void Load(string name)
+        public void LoadSaveFile(string name)
         {
-            if (CheckHaveSaveData(name))
+            if (CheckHaveSaveFile(name))
             {
-                _currentGameSaveData = _saveHelper.Load(name);
+                _currentGameSaveName = name;
+                _currentGameSaveData = new GameSaveData();
+                _currentGameSaveData.LoadSaveData(_saveHelper.Load(name));
                 IsSaveLoaded = true;
                 foreach (var item in saveDict.Values)
                 {
@@ -248,14 +313,14 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 保存存档
+        /// 保存当前存档
         /// </summary>
-        public void Save()
+        public void SaveFile()
         {
             if (!IsSaveLoaded)
                 return;
-            _currentGameSaveData.saveTime = DateTime.Now;
 
+            _currentGameSaveData.saveTime = DateTime.Now;
             _currentGameSaveData.saveList.Clear();
 
             foreach (var item in _currentGameSaveData.GetRunDataDict().Values)
@@ -270,10 +335,10 @@ namespace LccHotfix
         /// <summary>
         /// 获取存档转化数据
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TRunData"></typeparam>
         /// <typeparam name="TSave"></typeparam>
         /// <returns></returns>
-        public T GetSaveConverterData<T, TSave>() where T : ISaveConverter<TSave>, new() where TSave : ISave
+        public TRunData GetSaveConverterData<TRunData, TSave>() where TRunData : ISaveConverter<TSave>, new() where TSave : ISave
         {
             if (!IsSaveLoaded)
             {
@@ -281,7 +346,9 @@ namespace LccHotfix
                 return default;
             }
 
-            return _currentGameSaveData.GetSaveConverterData<T, TSave>();
+            return _currentGameSaveData.GetSaveConverterData<TRunData, TSave>();
         }
+
+        #endregion
     }
 }
