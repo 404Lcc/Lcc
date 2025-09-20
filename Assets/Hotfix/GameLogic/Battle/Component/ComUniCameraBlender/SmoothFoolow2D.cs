@@ -8,7 +8,7 @@ namespace LccHotfix
         public Bounds bounds;
 
         //相机偏移
-        public Vector3 offset = new Vector3(0, 6, 0);
+        public Vector3 offset = new Vector3(0, 0, 0);
 
         //震动相关
         public float shakeIntensity;
