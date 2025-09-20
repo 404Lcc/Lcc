@@ -12,6 +12,7 @@ namespace LccHotfix
         public static IModelService ModelService { get; set; }
         public static ISaveService SaveService { get; set; }
         public static IAudioService AudioService { get; set; }
+        public static IVibrationService VibrationService { get; set; }
         public static IFXService FXService { get; set; }
         public static IEventService EventService { get; set; }
         public static ICameraService CameraService { get; set; }

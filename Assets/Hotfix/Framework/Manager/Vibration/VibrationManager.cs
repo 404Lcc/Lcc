@@ -4,7 +4,7 @@ namespace LccHotfix
 {
     internal class VibrationManager : Module, IVibrationService
     {
-        private VibrationData save;
+        private VibrationSaveData save;
 
         private SimpleVibrationHandler vibrationHandler;
 
@@ -16,9 +16,13 @@ namespace LccHotfix
 
         public VibrationManager()
         {
-            save = Main.SaveService.GetSaveConverterData<VibrationData, VibrationSaveData>();
             IsVibrationEnabled = true;
             vibrationHandler = new SimpleVibrationHandler();
+        }
+
+        public void Init()
+        {
+            save = Main.SaveService.GetGlobalGameSaveFileSave<VibrationSaveData>();
         }
 
         public void Vibrate(float duration, float intensity = 1.0f)

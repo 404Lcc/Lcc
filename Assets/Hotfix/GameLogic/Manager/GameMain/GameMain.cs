@@ -32,6 +32,7 @@ namespace LccHotfix
             SaveService = Current.AddModule<SaveManager>();
             SaveService.SetSaveHelper(new DefaultSaveHelper());
             AudioService = Current.AddModule<AudioManager>();
+            VibrationService = Current.AddModule<VibrationManager>();
             FXService = Current.AddModule<FXManager>();
             EventService = Current.AddModule<EventManager>();
             CameraService = Current.AddModule<CameraManager>();
@@ -58,6 +59,7 @@ namespace LccHotfix
             //最后初始化
             SaveService.Init();
             AudioService.Init();
+            VibrationService.Init();
             HotfixBridgeService.Init();
             LanguageService.Init();
             UIService.Init();
