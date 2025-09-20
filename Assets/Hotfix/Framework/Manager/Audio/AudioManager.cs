@@ -18,33 +18,13 @@ namespace LccHotfix
         }
     }
 
-    public class AudioData : ISaveConverter<AudioSaveData>
-    {
-        public AudioSaveData Save { get; set; }
-        public float SoundVolume { get; set; }
-        public float MusicVolume { get; set; }
-
-        public ISave Flush()
-        {
-            Save.SoundVolume = SoundVolume;
-            Save.MusicVolume = MusicVolume;
-            return Save;
-        }
-
-        public void Init()
-        {
-            this.SoundVolume = Save.SoundVolume;
-            this.MusicVolume = Save.MusicVolume;
-        }
-    }
-
     public class AudioAsset
     {
         public Object Handle { get; set; }
         public AudioClip Clip { get; set; }
         public int RefCount { get; set; }
         public DateTime LastUsedTime { get; set; }
-        
+
         public void Release()
         {
             if (Handle != null)
@@ -126,19 +106,19 @@ namespace LccHotfix
         private HashSet<AudioSource> _activeSources = new HashSet<AudioSource>();
         private List<AudioSource> _removeList = new List<AudioSource>(10);
 
-        // private AudioData save;
+        private AudioSaveData save;
 
-        // public float SoundVolume
-        // {
-        //     get => save.SoundVolume;
-        //     set { save.SoundVolume = value; }
-        // }
-        //
-        // public float MusicVolume
-        // {
-        //     get => save.MusicVolume;
-        //     set { save.MusicVolume = value; }
-        // }
+        public float SoundVolume
+        {
+            get => save.SoundVolume;
+            set { save.SoundVolume = value; }
+        }
+
+        public float MusicVolume
+        {
+            get => save.MusicVolume;
+            set { save.MusicVolume = value; }
+        }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
@@ -189,8 +169,11 @@ namespace LccHotfix
             _audioPool = new AudioSourcePool(10);
             _rootLoader = new GameObject("AudioLoader");
             GameObject.DontDestroyOnLoad(_rootLoader);
+        }
 
-            // save = Main.SaveService.GetSaveConverterData<AudioData, AudioSaveData>();
+        public void Init()
+        {
+            save = Main.SaveService.GetGlobalGameSaveFileSave<AudioSaveData>();
         }
 
         /// <summary>
@@ -206,7 +189,7 @@ namespace LccHotfix
                 asset.LastUsedTime = DateTime.Now;
                 return asset.Clip;
             }
-            
+
             var handle = Main.AssetService.LoadRes<AudioClip>(_rootLoader, audio, out var res);
             if (handle == null)
             {
@@ -236,7 +219,7 @@ namespace LccHotfix
             var clip = LoadAudio(audio);
             var source = _audioPool.Get();
             source.clip = clip;
-            source.volume = volume;// * save.SoundVolume;
+            source.volume = volume; // * save.SoundVolume;
             source.pitch = pitch;
             source.loop = loop;
             source.Play();
@@ -254,7 +237,7 @@ namespace LccHotfix
             var clip = LoadAudio(audio);
             var source = _audioPool.Get();
             source.clip = clip;
-            source.volume = volume;// * save.MusicVolume;
+            source.volume = volume; // * save.MusicVolume;
             source.pitch = pitch;
             source.loop = loop;
             source.Play();

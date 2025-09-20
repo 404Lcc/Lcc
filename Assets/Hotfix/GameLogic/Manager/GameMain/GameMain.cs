@@ -57,6 +57,7 @@ namespace LccHotfix
             
             //最后初始化
             SaveService.Init();
+            AudioService.Init();
             HotfixBridgeService.Init();
             LanguageService.Init();
             UIService.Init();
