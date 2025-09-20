@@ -232,7 +232,7 @@ namespace LccHotfix
         /// <returns></returns>
         public List<string> GetAllSaveFile()
         {
-            return _saveHelper.GetFiles();
+            return _saveHelper.GetAllSaveFile();
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace LccHotfix
             if (CheckHaveSaveFile(GlobalGameSaveName))
             {
                 _globalGameSaveData = new GlobalGameSaveData();
-                _globalGameSaveData.LoadSaveData(_saveHelper.Load(GlobalGameSaveName));
+                _globalGameSaveData.LoadSaveData(_saveHelper.LoadSaveFile(GlobalGameSaveName));
             }
             else
             {
@@ -297,7 +297,7 @@ namespace LccHotfix
             {
                 _currentGameSaveName = name;
                 _currentGameSaveData = new GameSaveData();
-                _currentGameSaveData.LoadSaveData(_saveHelper.Load(name));
+                _currentGameSaveData.LoadSaveData(_saveHelper.LoadSaveFile(name));
                 IsSaveLoaded = true;
                 foreach (var item in saveDict.Values)
                 {
@@ -323,7 +323,7 @@ namespace LccHotfix
                 _currentGameSaveData.saveList.Add(save);
             }
 
-            _saveHelper.Save(_currentGameSaveName, _currentGameSaveData);
+            _saveHelper.SaveFile(_currentGameSaveName, _currentGameSaveData);
         }
 
         /// <summary>

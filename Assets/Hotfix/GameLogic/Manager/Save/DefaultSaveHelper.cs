@@ -44,7 +44,7 @@ public class DefaultSaveHelper : ISaveHelper
     /// 获取本地所有存档文件
     /// </summary>
     /// <returns></returns>
-    public List<string> GetFiles()
+    public List<string> GetAllSaveFile()
     {
         var settings = new ES3Settings();
         if (_mode == StoreMode.Beta)
@@ -73,7 +73,7 @@ public class DefaultSaveHelper : ISaveHelper
     /// <returns></returns>
     public bool CheckHaveSaveFile(string name)
     {
-        var names = GetFiles();
+        var names = GetAllSaveFile();
         foreach (var item in names)
         {
             if (item == name)
@@ -90,7 +90,7 @@ public class DefaultSaveHelper : ISaveHelper
     /// </summary>
     /// <param name="name"></param>
     /// <param name="value"></param>
-    public void Save(string name, SaveData value)
+    public void SaveFile(string name, SaveData value)
     {
         var json = JsonMapper.ToJson(value);
         var settings = new ES3Settings();
@@ -123,7 +123,7 @@ public class DefaultSaveHelper : ISaveHelper
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public SaveData Load(string name)
+    public SaveData LoadSaveFile(string name)
     {
         var settings = new ES3Settings();
 

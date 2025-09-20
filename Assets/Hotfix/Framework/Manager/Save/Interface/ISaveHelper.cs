@@ -19,7 +19,7 @@ public interface ISaveHelper
     /// 获取本地所有存档文件
     /// </summary>
     /// <returns></returns>
-    List<string> GetFiles();
+    List<string> GetAllSaveFile();
 
     /// <summary>
     /// 检测有没有某个存档
@@ -33,14 +33,14 @@ public interface ISaveHelper
     /// </summary>
     /// <param name="name"></param>
     /// <param name="data"></param>
-    void Save(string name, SaveData data);
+    void SaveFile(string name, SaveData data);
 
     /// <summary>
     /// 加载某个存档
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    SaveData Load(string name);
+    SaveData LoadSaveFile(string name);
 
     /// <summary>
     /// 解析存档数据
