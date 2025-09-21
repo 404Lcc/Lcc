@@ -43,6 +43,11 @@ namespace LccHotfix
         void Init();
 
         /// <summary>
+        /// 保存全局存档
+        /// </summary>
+        void SaveGlobalGameSaveFile();
+
+        /// <summary>
         /// 获取全局存档的某个存档数据
         /// </summary>
         /// <typeparam name="T"></typeparam>

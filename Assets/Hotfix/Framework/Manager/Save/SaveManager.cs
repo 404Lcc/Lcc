@@ -251,14 +251,43 @@ namespace LccHotfix
         {
             if (CheckHaveSaveFile(GlobalGameSaveName))
             {
-                _globalGameSaveData = new GlobalGameSaveData();
-                _globalGameSaveData.LoadSaveData(_saveHelper.LoadSaveFile(GlobalGameSaveName));
+                LoadGlobalGameSaveFile();
             }
             else
             {
-                _globalGameSaveData = new GlobalGameSaveData();
-                _globalGameSaveData.CreateNewSaveData();
+                CreateGlobalGameSaveFile();
             }
+        }
+
+        /// <summary>
+        /// 创建全局存档
+        /// </summary>
+        private void CreateGlobalGameSaveFile()
+        {
+            _globalGameSaveData = new GlobalGameSaveData();
+            _globalGameSaveData.CreateNewSaveData();
+            SaveGlobalGameSaveFile();
+        }
+
+        /// <summary>
+        /// 读取全局存档
+        /// </summary>
+        private void LoadGlobalGameSaveFile()
+        {
+            if (CheckHaveSaveFile(GlobalGameSaveName))
+            {
+                _globalGameSaveData = new GlobalGameSaveData();
+                _globalGameSaveData.LoadSaveData(_saveHelper.LoadSaveFile(GlobalGameSaveName));
+            }
+        }
+
+        /// <summary>
+        /// 保存全局存档
+        /// </summary>
+        public void SaveGlobalGameSaveFile()
+        {
+            _globalGameSaveData.saveTime = DateTime.Now;
+            _saveHelper.SaveFile(GlobalGameSaveName, _globalGameSaveData);
         }
 
         /// <summary>
