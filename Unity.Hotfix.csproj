@@ -391,9 +391,9 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\SteamLobby\SteamLobbyManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\ECSWorld.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Camera\Interface\ICameraService.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniCameraBlender\ICameraBlender.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Network\DefaultMessageHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Property\EntityProperty.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniCameraBlender\ICameraBlender.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Buff\BuffProperty.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\SkillAbility.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Module\FunctionOpen\ModFunctionOpen.cs" />
