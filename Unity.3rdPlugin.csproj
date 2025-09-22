@@ -43,10 +43,6 @@
   <ItemGroup>
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Rocks.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Pdb.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Mdb.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\UInt32Serializer.cs" />
@@ -219,22 +215,18 @@
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\EnumSerializer.cs" />
     <Compile Include="Assets\3rdPlugins\protobuf-net\Serializers\ReflectedUriDecorator.cs" />
     <Compile Include="Assets\3rdPlugins\Entitas\Context\Exceptions\ContextEntityIndexDoesNotExistException.cs" />
-    <None Include="Assets\3rdPlugins\Mirror\version.txt" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.Config.xml" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.xml" />
-    <None Include="Assets\3rdPlugins\Mirror\Readme.txt" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.xml" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.xml" />
     <None Include="Assets\3rdPlugins\Unity.3rdPlugin.asmdef" />
     <None Include="Assets\3rdPlugins\Sirenix\Readme.txt" />
     <None Include="Assets\3rdPlugins\com.rlabrecque.steamworks.net\package.json" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\link.xml" />
-    <None Include="Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\License.txt" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.xml" />
     <None Include="Assets\3rdPlugins\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\3rdPlugins\Sirenix\Odin Inspector\Assets\Editor\Bootstrap License.txt" />
     <None Include="Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.xml" />
-    <None Include="Assets\3rdPlugins\Mirror\Hosting\Readme.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -588,21 +580,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>D:\Lcc\Library\PackageCache\com.unity.analytics@3.8.1\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Mdb">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Pdb">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Rocks">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Mirror.BouncyCastle.Cryptography">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Transports\Encryption\Plugins\BouncyCastle\Mirror.BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>

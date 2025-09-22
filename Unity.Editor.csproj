@@ -43,10 +43,6 @@
   <ItemGroup>
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Rocks.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Pdb.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Mdb.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\Utility\ObjectType\ObjectType\RectObjectType.cs" />
@@ -458,21 +454,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>D:\Lcc\Library\PackageCache\com.unity.analytics@3.8.1\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Mdb">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Pdb">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Rocks">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Mirror.BouncyCastle.Cryptography">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Transports\Encryption\Plugins\BouncyCastle\Mirror.BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>D:\Lcc\Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>

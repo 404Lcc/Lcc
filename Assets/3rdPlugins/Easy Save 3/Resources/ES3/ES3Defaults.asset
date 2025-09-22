@@ -35,33 +35,8 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
-    - andywiecko.BurstTriangulator
-    - AstarPathfindingProject
-    - DamageNumbersPro
-    - Drawing
-    - EasySave3
-    - EnhancedScroller_asmdef
-    - HybridCLR.Runtime
-    - IngameDebugConsole.Runtime
-    - kcp2k
-    - LitMotion
-    - LitMotion.Extensions
-    - LoopScrollRect.Runtime
-    - Luban.Runtime
-    - Mirror
-    - Mirror.Authenticators
-    - Mirror.Components
-    - Mirror.Examples
-    - Mirror.Transports
-    - PackageTools
-    - Purchasing.Common
-    - RVO2
-    - SimpleWebTransport
-    - Telepathy
-    - Unity.3rdPlugin
-    - Unity.Hotfix
-    - Unity.Model
-    - YooAsset
+    - Assembly-CSharp-firstpass
+    - Assembly-CSharp
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

@@ -43,7 +43,6 @@
   <ItemGroup>
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Transports\Encryption\Plugins\BouncyCastle\Mirror.BouncyCastle.Cryptography.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\Room\Scripts\NetworkRoomManagerExt.cs" />
@@ -61,8 +60,8 @@
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\_Common\Controllers\TankController\TankTurretUnreliable.cs" />
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\CharacterSelection\Scripts\CanvasReferencer.cs" />
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\RigidbodyBenchmark\Scripts\AutoForce.cs" />
-    <Compile Include="Assets\3rdPlugins\Mirror\Examples\_Common\Controllers\FlyerController\FlyerControllerBase.cs" />
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\SyncDirection\Player.cs" />
+    <Compile Include="Assets\3rdPlugins\Mirror\Examples\_Common\Controllers\FlyerController\FlyerControllerBase.cs" />
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\StackedPrediction\PlayerForce.cs" />
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\CCU\Player.cs" />
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\Room\Scripts\PlayerScore.cs" />
@@ -131,8 +130,8 @@
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\AdditiveLevels\Scripts\AdditiveLevelsNetworkManager.cs" />
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\RigidbodyBenchmark\Scripts\RigidbodyBenchmarkNetworkManager.cs" />
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\BilliardsPredicted\Player\PlayerPredicted.cs" />
-    <Compile Include="Assets\3rdPlugins\Mirror\Examples\MultipleAdditiveScenes\Scripts\MultiSceneNetManager.cs" />
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\HexSpatialHash\Scripts\Hex2DPlayerCamera.cs" />
+    <Compile Include="Assets\3rdPlugins\Mirror\Examples\MultipleAdditiveScenes\Scripts\MultiSceneNetManager.cs" />
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\_Common\Controllers\PlayerController\PlayerControllerBase.cs" />
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\BenchmarkStinkySteak\Dependencies\netcode-benchmarker-util\Runtime\Scripts\BehaviourWrapper\WanderMoveWrapper.cs" />
     <Compile Include="Assets\3rdPlugins\Mirror\Examples\_Common\Controllers\TankController\TankTurretReliable.cs" />
@@ -496,6 +495,12 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.CecilX">
+      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.CecilX.Mdb">
+      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Mdb.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
       <HintPath>D:\Lcc\Assets\3rdPlugins\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
@@ -517,6 +522,12 @@
     <Reference Include="Sirenix.Serialization">
       <HintPath>D:\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Mirror.BouncyCastle.Cryptography">
+      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Transports\Encryption\Plugins\BouncyCastle\Mirror.BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.CecilX.Pdb">
+      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Pdb.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI.OOXML">
       <HintPath>D:\Lcc\Assets\3rdPlugins\NPOI\NPOI.OOXML.dll</HintPath>
     </Reference>
@@ -534,6 +545,9 @@
     </Reference>
     <Reference Include="DOTweenEditor">
       <HintPath>D:\Lcc\Assets\3rdPlugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.CecilX.Rocks">
+      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>D:\Lcc\Library\PackageCache\com.unity.collab-proxy@2.3.1\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
@@ -588,21 +602,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>D:\Lcc\Library\PackageCache\com.unity.analytics@3.8.1\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Mdb">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Pdb">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Rocks">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Mirror.BouncyCastle.Cryptography">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Transports\Encryption\Plugins\BouncyCastle\Mirror.BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>

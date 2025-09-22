@@ -43,11 +43,6 @@
   <ItemGroup>
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Transports\Encryption\Plugins\BouncyCastle\Mirror.BouncyCastle.Cryptography.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Rocks.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Pdb.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Mdb.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ScriptTemplates\Editor\MoveToAssetsFolder.cs" />
@@ -315,6 +310,12 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.CecilX">
+      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.CecilX.Mdb">
+      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Mdb.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
       <HintPath>D:\Lcc\Assets\3rdPlugins\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
@@ -336,6 +337,12 @@
     <Reference Include="Sirenix.Serialization">
       <HintPath>D:\Lcc\Assets\3rdPlugins\Sirenix\Assemblies\Sirenix.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Mirror.BouncyCastle.Cryptography">
+      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Transports\Encryption\Plugins\BouncyCastle\Mirror.BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.CecilX.Pdb">
+      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Pdb.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI.OOXML">
       <HintPath>D:\Lcc\Assets\3rdPlugins\NPOI\NPOI.OOXML.dll</HintPath>
     </Reference>
@@ -353,6 +360,9 @@
     </Reference>
     <Reference Include="DOTweenEditor">
       <HintPath>D:\Lcc\Assets\3rdPlugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.CecilX.Rocks">
+      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>D:\Lcc\Library\PackageCache\com.unity.collab-proxy@2.3.1\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
@@ -407,21 +417,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>D:\Lcc\Library\PackageCache\com.unity.analytics@3.8.1\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Mdb">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Pdb">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Rocks">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Mirror.BouncyCastle.Cryptography">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Transports\Encryption\Plugins\BouncyCastle\Mirror.BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>D:\Lcc\Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
@@ -828,6 +823,9 @@
     <Reference Include="Unity.Burst.Editor">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="LitMotion.Editor">
+      <HintPath>D:\Lcc\Library\ScriptAssemblies\LitMotion.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="YooAsset">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\YooAsset.dll</HintPath>
     </Reference>
@@ -885,6 +883,9 @@
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
+    <Reference Include="LitMotion.Extensions">
+      <HintPath>D:\Lcc\Library\ScriptAssemblies\LitMotion.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
@@ -896,9 +897,6 @@
     </Reference>
     <Reference Include="UnityEngine.Purchasing.SecurityStub">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\UnityEngine.Purchasing.SecurityStub.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Runtime">
-      <HintPath>D:\Lcc\Library\ScriptAssemblies\Luban.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
@@ -924,11 +922,14 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements.Editor">
-      <HintPath>D:\Lcc\Library\ScriptAssemblies\UnityEngine.Advertisements.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Luban.Runtime">
+      <HintPath>D:\Lcc\Library\ScriptAssemblies\Luban.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Advertisements.Editor">
+      <HintPath>D:\Lcc\Library\ScriptAssemblies\UnityEngine.Advertisements.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Purchasing.Common">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\Purchasing.Common.dll</HintPath>
@@ -947,6 +948,9 @@
     </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="LitMotion">
+      <HintPath>D:\Lcc\Library\ScriptAssemblies\LitMotion.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:\Lcc\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
@@ -1022,6 +1026,10 @@
       <Project>{c6da4199-a174-7950-0a0e-20f88c36a31a}</Project>
       <Name>PackageTools</Name>
     </ProjectReference>
+    <ProjectReference Include="Mirror.Transports.csproj">
+      <Project>{9f1b18f8-175c-a09f-0d65-d30266cc3d32}</Project>
+      <Name>Mirror.Transports</Name>
+    </ProjectReference>
     <ProjectReference Include="RVO2.csproj">
       <Project>{90143b16-cf06-6fcb-65d8-0018bee0375d}</Project>
       <Name>RVO2</Name>
@@ -1034,17 +1042,13 @@
       <Project>{6fbc4385-c6fe-fcbd-0bd5-ab0b4e96c57b}</Project>
       <Name>Unity.Hotfix</Name>
     </ProjectReference>
-    <ProjectReference Include="Mirror.Transports.csproj">
-      <Project>{9f1b18f8-175c-a09f-0d65-d30266cc3d32}</Project>
-      <Name>Mirror.Transports</Name>
+    <ProjectReference Include="Mirror.CompilerSymbols.csproj">
+      <Project>{1564580a-1bac-2c93-323f-bcf1f03fd9f9}</Project>
+      <Name>Mirror.CompilerSymbols</Name>
     </ProjectReference>
     <ProjectReference Include="andywiecko.BurstTriangulator.csproj">
       <Project>{5f06f182-5bd7-7e5a-e5a6-a6b2da4f4321}</Project>
       <Name>andywiecko.BurstTriangulator</Name>
-    </ProjectReference>
-    <ProjectReference Include="Mirror.CompilerSymbols.csproj">
-      <Project>{1564580a-1bac-2c93-323f-bcf1f03fd9f9}</Project>
-      <Name>Mirror.CompilerSymbols</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Model.csproj">
       <Project>{b411d157-b422-a16c-c350-5090ebf41dc0}</Project>

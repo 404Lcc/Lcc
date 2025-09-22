@@ -43,10 +43,6 @@
   <ItemGroup>
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Rocks.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Pdb.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />
-    <Analyzer Include="D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Mdb.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Hotfix\Utility\LoopScroll\LoopScroll.cs" />
@@ -80,8 +76,8 @@
     <Compile Include="Assets\Hotfix\Framework\Manager\Event\GameEventArgs.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\PopupPanel.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Download\DownloadManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComView\ActorView.cs" />
     <Compile Include="Assets\Hotfix\Utility\ProtobufObject\ProtobufObject.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComView\ActorView.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\Service\IService.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniOrca\ComUniOrca.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\DictionaryList.cs" />
@@ -395,9 +391,9 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\SteamLobby\SteamLobbyManager.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\ECSWorld.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Camera\Interface\ICameraService.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniCameraBlender\ICameraBlender.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Network\DefaultMessageHelper.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Property\EntityProperty.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniCameraBlender\ICameraBlender.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Buff\BuffProperty.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\Skill\SkillAbility.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Module\FunctionOpen\ModFunctionOpen.cs" />
@@ -807,21 +803,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>D:\Lcc\Library\PackageCache\com.unity.analytics@3.8.1\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Mdb">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Pdb">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Rocks">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Mirror.BouncyCastle.Cryptography">
-      <HintPath>D:\Lcc\Assets\3rdPlugins\Mirror\Transports\Encryption\Plugins\BouncyCastle\Mirror.BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.34f1c1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
