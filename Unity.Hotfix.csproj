@@ -263,6 +263,7 @@
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\PlatformManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Window\UILogic\IUILogic.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\LogicContext\LogicContext.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComOrcaAgent\OrcaAgent2D.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\GameObjectPool\GameObjectPoolManager.cs" />
     <Compile Include="Assets\Hotfix\Utility\AutoReference\AutoReferenceUtility.cs" />
     <Compile Include="Assets\Hotfix\Framework\Manager\Download\Interface\IDownloadService.cs" />

@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace LccHotfix
 {
-    public class OrcaAgent3D : IOrcaAgent
+    public class OrcaAgent2D : IOrcaAgent
     {
         private float _stoppingDistance = 5f;
 
@@ -21,11 +21,11 @@ namespace LccHotfix
         {
             Entity = entity;
 
-            var position = new float2(Entity.comTransform.position.x, Entity.comTransform.position.z);
+            var position = new float2(Entity.comTransform.position.x, Entity.comTransform.position.y);
             AgentId = Simulator.AddAgent(position);
 
             var radius = Entity.comTransform.scale.x;
-            Simulator.SetAgentRadius(AgentId, radius);
+            SetRadius(radius);
 
             SetVelocity(Vector3.zero);
         }
@@ -57,7 +57,7 @@ namespace LccHotfix
                 return;
             }
 
-            float2 dir = new float2(velocity.x, velocity.z);
+            float2 dir = new float2(velocity.x, velocity.y);
             SetVelocity(dir);
         }
 
@@ -86,7 +86,7 @@ namespace LccHotfix
             }
 
             SetVelocity(Vector3.zero);
-            float2 pos = new float2(Entity.comTransform.position.x, Entity.comTransform.position.z);
+            float2 pos = new float2(Entity.comTransform.position.x, Entity.comTransform.position.y);
             Simulator.SetAgentPosition(AgentId, pos);
         }
 
@@ -105,7 +105,7 @@ namespace LccHotfix
             }
 
             var prevPosition = Entity.comTransform.position;
-            Entity.SetPosition(new Vector3(pos.x, prevPosition.y, pos.y));
+            Entity.SetPosition(new Vector3(pos.x, pos.y, prevPosition.z));
         }
 
         public void Dispose()

@@ -13,6 +13,11 @@ namespace LccHotfix
             this._agent = agent;
         }
 
+        public void SetRadius(float radius)
+        {
+            _agent.SetRadius(radius);
+        }
+
         public void SetSpeed(float speed)
         {
             _agent.SetSpeed(speed);
@@ -22,7 +27,7 @@ namespace LccHotfix
         {
             _agent.SetVelocity(dir);
         }
-        
+
         public void Stop()
         {
             _agent.Stop();
