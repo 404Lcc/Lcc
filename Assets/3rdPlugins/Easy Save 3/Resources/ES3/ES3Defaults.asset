@@ -35,23 +35,8 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
-    - andywiecko.BurstTriangulator
-    - AstarPathfindingProject
-    - DamageNumbersPro
-    - Drawing
-    - EasySave3
-    - EnhancedScroller_asmdef
-    - HybridCLR.Runtime
-    - IngameDebugConsole.Runtime
-    - LoopScrollRect.Runtime
-    - Luban.Runtime
-    - PackageTools
-    - Purchasing.Common
-    - RVO2
-    - Unity.3rdPlugin
-    - Unity.Hotfix
-    - Unity.Model
-    - YooAsset
+    - Assembly-CSharp-firstpass
+    - Assembly-CSharp
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
