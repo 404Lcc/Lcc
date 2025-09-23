@@ -25,7 +25,6 @@ namespace LccHotfix
                 Main.AssetService.LoadRes<GameObject>(root, location, out var res);
                 return res;
             });
-            EasingService = Current.AddModule<EasingManager>();
             CoroutineService = Current.AddModule<CoroutineManager>();
             CoroutineService.SetCoroutineHelper(new DefaultCoroutineHelper());
             ModelService = Current.AddModule<ModelManager>();

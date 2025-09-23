@@ -7,7 +7,6 @@ namespace LccHotfix
         public static ICodeTypesService CodeTypesService { get; set; }
         public static IAssetService AssetService { get; set; }
         public static IGameObjectPoolService GameObjectPoolService { get; set; }
-        public static IEasingService EasingService { get; set; }
         public static ICoroutineService CoroutineService { get; set; }
         public static IModelService ModelService { get; set; }
         public static ISaveService SaveService { get; set; }

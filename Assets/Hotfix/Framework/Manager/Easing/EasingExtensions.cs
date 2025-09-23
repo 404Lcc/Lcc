@@ -29,13 +29,7 @@ namespace LccHotfix
         public static IEasingCoroutine DoPosition(this Transform transform, Transform targetTransform, float duration, float delay = 0)
         {
             Vector3 startPosition = transform.position;
-
-            IEasingCoroutine coroutine = Main.EasingService.DoFloat(0, 1, duration, (value) =>
-            {
-                transform.position = Vector3.LerpUnclamped(startPosition, targetTransform.position, value);
-            }, delay);
-
-            return coroutine;
+            return new FloatEasingCoroutine(0, 1, duration, delay, (value) => { transform.position = Vector3.LerpUnclamped(startPosition, targetTransform.position, value); });
         }
 
         public static IEasingCoroutine DoLocalScale(this Transform transform, Vector3 targetScale, float duration, float delay = 0)
@@ -47,7 +41,7 @@ namespace LccHotfix
 
         public static void StopIfExists(this IEasingCoroutine coroutine)
         {
-            if(coroutine != null && coroutine.IsActive) coroutine.Stop();
+            if (coroutine != null && coroutine.IsActive) coroutine.Stop();
         }
 
         public static bool ExistsAndActive(this IEasingCoroutine coroutine)
