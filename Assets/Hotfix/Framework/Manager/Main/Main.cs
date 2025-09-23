@@ -92,25 +92,7 @@ namespace LccHotfix
                     throw new Exception(string.Format("Can not create module '{0}'.", moduleType.FullName));
                 }
 
-                LinkedListNode<Module> current = _modules.First;
-                while (current != null)
-                {
-                    if (module.Priority > current.Value.Priority)
-                    {
-                        break;
-                    }
-
-                    current = current.Next;
-                }
-
-                if (current != null)
-                {
-                    _modules.AddBefore(current, module);
-                }
-                else
-                {
-                    _modules.AddLast(module);
-                }
+                _modules.AddLast(module);
 
                 return module;
             }
