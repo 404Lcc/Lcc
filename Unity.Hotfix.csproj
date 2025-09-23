@@ -134,8 +134,8 @@
     <Compile Include="Assets\Hotfix\Framework\CorePackage\Asset\IAssetHelper.cs" />
     <Compile Include="Assets\Hotfix\Framework\CorePackage\Save\Interface\ISaveHelper.cs" />
     <Compile Include="Assets\Hotfix\Framework\CorePackage\Setting\SettingSaveData.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\PlatformManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\ExpansionPackage\Fiber\ThreadScheduler.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Platform\PlatformManager.cs" />
     <Compile Include="Assets\Hotfix\Framework\CorePackage\Audio\Interface\IAudioService.cs" />
     <Compile Include="Assets\Hotfix\Utility\Extension\Transform\TransformExtension.cs" />
     <Compile Include="Assets\Hotfix\Framework\CorePackage\Window\WBlackboard.cs" />
@@ -182,8 +182,8 @@
     <Compile Include="Assets\Hotfix\GameLogic\UI\UIRoot\UIRootMain.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Utility\IconUtility.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Utility\WorldUtility.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBSubobject.cs" />
     <Compile Include="Assets\Hotfix\Framework\CorePackage\Vibration\VibrationManager.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\TBSubobject.cs" />
     <Compile Include="Assets\Hotfix\Framework\CorePackage\Procedure\LoadProcedureHandler.cs" />
     <Compile Include="Assets\Hotfix\Framework\CorePackage\Window\WindowManager.Types.cs" />
     <Compile Include="Assets\Hotfix\Framework\ExpansionPackage\Video\VideoManager.cs" />
@@ -235,8 +235,8 @@
     <Compile Include="Assets\Hotfix\Framework\CorePackage\Camera\Interface\ICameraService.cs" />
     <Compile Include="Assets\Hotfix\Framework\CorePackage\GameObjectPool\Decorators\PreloadDecorator.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Steam\SteamManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\SkillProcess\ISkillProcess.cs" />
     <Compile Include="Assets\Hotfix\Framework\CorePackage\Global\GlobalManager.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\Battle\Component\SkillProcess\ISkillProcess.cs" />
     <Compile Include="Assets\Hotfix\Framework\Base\DataStruct\LinkedList.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\UI\UIRoot\UIRootCommon.cs" />
     <Compile Include="Assets\Hotfix\Framework\CorePackage\Coroutine\CoroutineManager.cs" />
@@ -429,8 +429,8 @@
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComUniCameraBlender\ComUniCameraBlender.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\ECS\Component\ComMonster.cs" />
     <Compile Include="Assets\Hotfix\Framework\CorePackage\Camera\CameraManager.cs" />
-    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysAABBCollision.cs" />
     <Compile Include="Assets\Hotfix\Framework\CorePackage\Main\MainPartial.cs" />
+    <Compile Include="Assets\Hotfix\GameLogic\ECS\System\SysAABBCollision.cs" />
     <Compile Include="Assets\Hotfix\Framework\ExpansionPackage\Command\CommandData.cs" />
     <Compile Include="Assets\Hotfix\Framework\CorePackage\Model\ModelTemplate.cs" />
     <Compile Include="Assets\Hotfix\GameLogic\Manager\Config\Gen\Panel.cs" />
