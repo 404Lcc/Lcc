@@ -43,8 +43,6 @@ MonoBehaviour:
     - EnhancedScroller_asmdef
     - HybridCLR.Runtime
     - IngameDebugConsole.Runtime
-    - LitMotion
-    - LitMotion.Extensions
     - LoopScrollRect.Runtime
     - Luban.Runtime
     - PackageTools
