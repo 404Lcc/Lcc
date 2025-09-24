@@ -1,9 +1,12 @@
 .vs
 .vsconfig
 .idea
+.csproj
+.sln
 Library
 Logs
 obj
 Temp
 HybridCLRData
 Bundles
+UserSettings
