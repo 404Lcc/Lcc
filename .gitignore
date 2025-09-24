@@ -1,8 +1,8 @@
 .vs
 .vsconfig
 .idea
-.csproj
-.sln
+*.csproj
+*.sln
 Library
 Logs
 obj
