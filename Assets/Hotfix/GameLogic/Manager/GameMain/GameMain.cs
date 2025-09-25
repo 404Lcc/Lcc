@@ -27,6 +27,10 @@ namespace LccHotfix
             });
             CoroutineService = Current.AddModule<CoroutineManager>();
             CoroutineService.SetCoroutineHelper(new DefaultCoroutineHelper());
+            NetworkService = Current.AddModule<NetworkManager>();
+            NetworkService.SetPackageHelper(new DefaultPackageHelper());
+            NetworkService.SetMessageHelper(new DefaultMessageHelper());
+            NetworkService.SetMessageDispatcherHelper(new DefaultMessageDispatcherHelper());
             ModelService = Current.AddModule<ModelManager>();
             SaveService = Current.AddModule<SaveManager>();
             SaveService.SetSaveHelper(new DefaultSaveHelper());
@@ -41,9 +45,6 @@ namespace LccHotfix
             ProcedureService.SetProcedureHelper(new DefaultProcedureHelper());
             WindowService = Current.AddModule<WindowManager>();
             ThreadSyncService = Current.AddModule<ThreadSyncManager>();
-            NetworkService = Current.AddModule<NetworkManager>();
-            NetworkService.SetPackageHelper(new DefaultPackageHelper());
-            NetworkService.SetMessageHelper(new DefaultMessageHelper());
             GizmoService = Current.AddModule<GizmoManager>();
             
             PlatformService = Current.AddModule<PlatformManager>();

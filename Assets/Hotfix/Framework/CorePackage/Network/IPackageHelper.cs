@@ -1,7 +1,10 @@
 using System.IO;
 using HiSocket.Tcp;
 
-public interface IPackageHelper
+namespace LccHotfix
 {
-     bool Parse(IBlockBuffer<byte> buffer, out byte[] bytes);
+    public interface IPackageHelper
+    {
+        bool Parse(IBlockBuffer<byte> buffer, out byte[] bytes);
+    }
 }

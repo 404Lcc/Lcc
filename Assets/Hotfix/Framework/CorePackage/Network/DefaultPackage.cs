@@ -1,27 +1,30 @@
 using System.IO;
 using HiSocket.Tcp;
 
-public class DefaultPackage : IPackage
+namespace LccHotfix
 {
-    private IPackageHelper _packageHelper;
-
-    public void SetPackageHelper(IPackageHelper packageHelper)
+    public class DefaultPackage : IPackage
     {
-        _packageHelper = packageHelper;
-    }
+        private IPackageHelper _packageHelper;
 
-    public void Pack(byte[] message, IBlockBuffer<byte> sendBuffer)
-    {
-        sendBuffer.WriteAtEnd(message);
-    }
-
-    public bool Unpack(IBlockBuffer<byte> receiveBuffer, out byte[] message)
-    {
-        if (_packageHelper.Parse(receiveBuffer, out message))
+        public void SetPackageHelper(IPackageHelper packageHelper)
         {
-            return true;
+            _packageHelper = packageHelper;
         }
-        
-        return false;
+
+        public void Pack(byte[] message, IBlockBuffer<byte> sendBuffer)
+        {
+            sendBuffer.WriteAtEnd(message);
+        }
+
+        public bool Unpack(IBlockBuffer<byte> receiveBuffer, out byte[] message)
+        {
+            if (_packageHelper.Parse(receiveBuffer, out message))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

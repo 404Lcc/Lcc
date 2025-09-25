@@ -1,54 +1,57 @@
 using System;
 using HiSocket.Tcp;
 
-public class DefaultPackageHelper : IPackageHelper
+namespace LccHotfix
 {
-    public enum ParserState
+    public class DefaultPackageHelper : IPackageHelper
     {
-        PacketSize,
-        PacketBody
-    }
-
-    private IBlockBuffer<byte> buffer;
-    private ParserState state;
-    private int packetSize;
-
-    //消息拆包处理
-    public bool Parse(IBlockBuffer<byte> buffer, out byte[] bytes)
-    {
-        this.buffer = buffer;
-        bytes = new byte[] { };
-        while (true)
+        public enum ParserState
         {
-            switch (state)
+            PacketSize,
+            PacketBody
+        }
+
+        private IBlockBuffer<byte> buffer;
+        private ParserState state;
+        private int packetSize;
+
+        //消息拆包处理
+        public bool Parse(IBlockBuffer<byte> buffer, out byte[] bytes)
+        {
+            this.buffer = buffer;
+            bytes = new byte[] { };
+            while (true)
             {
-                case ParserState.PacketSize:
+                switch (state)
                 {
-                    if (this.buffer.Index < 4)
+                    case ParserState.PacketSize:
                     {
-                        return false;
+                        if (this.buffer.Index < 4)
+                        {
+                            return false;
+                        }
+
+                        //消息号长度+消息体长度
+                        this.packetSize = BitConverter.ToInt32(buffer.ReadFromHead(4));
+                        this.state = ParserState.PacketBody;
+                        break;
                     }
-                    
-                    //消息号长度+消息体长度
-                    this.packetSize = BitConverter.ToInt32(buffer.ReadFromHead(4));
-                    this.state = ParserState.PacketBody;
-                    break;
-                }
-                case ParserState.PacketBody:
-                {
-                    if (this.buffer.Index < this.packetSize)
+                    case ParserState.PacketBody:
                     {
-                        return false;
+                        if (this.buffer.Index < this.packetSize)
+                        {
+                            return false;
+                        }
+
+                        //消息号+消息体
+                        bytes = buffer.ReadFromHead(packetSize);
+                        this.state = ParserState.PacketSize;
+                        return true;
                     }
 
-                    //消息号+消息体
-                    bytes = buffer.ReadFromHead(packetSize);
-                    this.state = ParserState.PacketSize;
-                    return true;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
-
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
     }
