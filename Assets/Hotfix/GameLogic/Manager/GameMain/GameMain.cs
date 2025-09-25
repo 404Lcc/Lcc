@@ -31,6 +31,10 @@ namespace LccHotfix
             NetworkService.SetPackageHelper(new DefaultPackageHelper());
             NetworkService.SetMessageHelper(new DefaultMessageHelper());
             NetworkService.SetMessageDispatcherHelper(new DefaultMessageDispatcherHelper());
+            //这里提前初始化是因为ModelService依赖网络分发
+            MirrorService = Current.AddModule<MirrorManager>();
+            MirrorService.SetServerMessageDispatcherHelper(new MirrorServerPBMessageDispatcherHelper());
+            MirrorService.SetClientMessageDispatcherHelper(new PBMessageDispatcherHelper());
             ModelService = Current.AddModule<ModelManager>();
             SaveService = Current.AddModule<SaveManager>();
             SaveService.SetSaveHelper(new DefaultSaveHelper());
@@ -72,6 +76,7 @@ namespace LccHotfix
 
     internal partial class Main : Module
     {
+        public static IMirrorService MirrorService { get; set; }
         public static IPlatformService PlatformService { get; set; }
         public static IIconService IconService { get; set; }
         public static IHotfixBridgeService HotfixBridgeService { get; set; }
