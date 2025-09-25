@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+enum MessageType
+{
+  DEFAULT = 0;
+  CG_Test = 1001;
+  GC_Test = 1002;
+}

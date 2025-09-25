@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+message CGTestInfo
+{
+  int32 id = 1;
+}
+
+message GCTestInfo
+{
+  int32 id = 1;
+}
