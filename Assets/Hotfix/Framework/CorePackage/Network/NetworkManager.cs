@@ -13,12 +13,12 @@ public class NetworkManager : Module, INetworkService
     private TcpConnection _tcp;
     private Action _onConnectedCallback;
     private Action _onDisconnectedCallback;
-    private Action<NetworkMessage> _onReceiveMessageCallback;
 
     private int _timeOut = 5000;
     private Queue<byte[]> _reciveQueue; //接收协议队列
     private IPackageHelper _packageHelper;
     private IMessageHelper _messageHelper;
+    private IMessageDispatcherHelper _messageDispatcherHelper;
 
     public bool IsConnected => _tcp != null && _tcp.Socket != null && _tcp.Socket.Connected;
 
@@ -35,7 +35,7 @@ public class NetworkManager : Module, INetworkService
         {
             var bytes = _reciveQueue.Dequeue();
             var message = _messageHelper.MessageParse(bytes);
-            _onReceiveMessageCallback?.Invoke(message);
+            _messageDispatcherHelper.DispatcherMessage(message);
             idx++;
         }
     }
@@ -59,6 +59,11 @@ public class NetworkManager : Module, INetworkService
         _messageHelper = messageHelper;
     }
 
+    public void SetMessageDispatcherHelper(IMessageDispatcherHelper messageDispatcherHelper)
+    {
+        _messageDispatcherHelper = messageDispatcherHelper;
+    }
+
     private void InitTimeout()
     {
         if (_tcp != null && _tcp.Socket != null)
@@ -79,7 +84,7 @@ public class NetworkManager : Module, INetworkService
         _tcp.OnDisconnected += OnDisconnected;
     }
 
-    public void Connect(string ip, int port, Action onConnectedCallback, Action onDisconnectedCallback, Action<NetworkMessage> onReceiveMessageCallback)
+    public void Connect(string ip, int port, Action onConnectedCallback, Action onDisconnectedCallback)
     {
         Debug.Assert(!IsConnected);
 
@@ -88,14 +93,13 @@ public class NetworkManager : Module, INetworkService
 
         _onConnectedCallback = onConnectedCallback;
         _onDisconnectedCallback = onDisconnectedCallback;
-        _onReceiveMessageCallback = onReceiveMessageCallback;
 
         InitSocket();
         _tcp.Connect(ip, port);
         InitTimeout();
     }
 
-    public void Send(object message)
+    public void Send(int code, object message)
     {
         if (!IsConnected)
         {
@@ -103,7 +107,7 @@ public class NetworkManager : Module, INetworkService
             return;
         }
 
-        var bytes = _messageHelper.GetBytes(message);
+        var bytes = _messageHelper.GetBytes(code, message);
         _tcp.Send(bytes);
     }
 
@@ -111,7 +115,6 @@ public class NetworkManager : Module, INetworkService
     {
         _onConnectedCallback = null;
         _onDisconnectedCallback = null;
-        _onReceiveMessageCallback = null;
 
         _reciveQueue.Clear();
 

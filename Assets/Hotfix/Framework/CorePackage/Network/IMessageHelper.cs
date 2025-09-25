@@ -1,5 +1,5 @@
 public interface IMessageHelper
 {
-    byte[] GetBytes(object message);
-    NetworkMessage MessageParse(byte[] bytes);
+    byte[] GetBytes(int code, object message);
+    LccHotfix.NetworkMessage MessageParse(byte[] bytes);
 }

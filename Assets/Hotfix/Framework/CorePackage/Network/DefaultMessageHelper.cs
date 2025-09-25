@@ -5,15 +5,14 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class DefaultMessageHelper : IMessageHelper
 {
     //消息粘包处理
-    public byte[] GetBytes(object message)
+    public byte[] GetBytes(int code, object message)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         
         MemoryStream stream = new MemoryStream();
         formatter.Serialize(stream, message);
         stream.Seek(0, SeekOrigin.Begin);
-
-        var code = message.GetType().GetHashCode();
+        
         //消息号
         var codeBytes = BitConverter.GetBytes(code);
         
@@ -40,7 +39,7 @@ public class DefaultMessageHelper : IMessageHelper
     }
 
     //消息号+消息体 字节数组解析
-    public NetworkMessage MessageParse(byte[] bytes)
+    public LccHotfix.NetworkMessage MessageParse(byte[] bytes)
     {
         //消息号
         byte[] codeBytes = new byte[4];
@@ -62,7 +61,7 @@ public class DefaultMessageHelper : IMessageHelper
         //消息体
         object obj = formatter.Deserialize(stream);
 
-        NetworkMessage message = new NetworkMessage();
+        LccHotfix.NetworkMessage message = new LccHotfix.NetworkMessage();
         message.code = code;
         message.message = obj;
         return message;

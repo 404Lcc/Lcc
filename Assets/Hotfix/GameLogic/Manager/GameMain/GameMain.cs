@@ -55,7 +55,6 @@ namespace LccHotfix
             BTScriptService = Current.AddModule<BTScriptManager>();
             UIService = Current.AddModule<UIManager>();
             UIService.SetUIHelper(new UIHelper());
-            MessageDispatcherService = Current.AddModule<MessageDispatcherManager>();
             
             //最后初始化
             SaveService.Init();
@@ -80,6 +79,5 @@ namespace LccHotfix
         public static IWorldService WorldService { get; set; }
         public static IBTScriptService BTScriptService { get; set; }
         public static IUIService UIService { get; set; }
-        public static IMessageDispatcherService MessageDispatcherService { get; set; }
     }
 }
