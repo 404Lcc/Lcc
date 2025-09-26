@@ -30,7 +30,7 @@ namespace LccHotfix
             Main.MirrorService.ClientSendMessage(cg);
         }
 
-        void OnClientGCTest(MessageObject info)
+        public void OnClientGCTest(MessageObject info)
         {
             var gc = info as GCTestInfo;
 
