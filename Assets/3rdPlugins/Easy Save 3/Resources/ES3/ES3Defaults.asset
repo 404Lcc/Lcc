@@ -43,13 +43,20 @@ MonoBehaviour:
     - EnhancedScroller_asmdef
     - HybridCLR.Runtime
     - IngameDebugConsole.Runtime
+    - kcp2k
     - LitMotion
     - LitMotion.Extensions
     - LoopScrollRect.Runtime
     - Luban.Runtime
+    - Mirror
+    - Mirror.Authenticators
+    - Mirror.Components
+    - Mirror.Transports
     - PackageTools
     - Purchasing.Common
     - RVO2
+    - SimpleWebTransport
+    - Telepathy
     - Unity.3rdPlugin
     - Unity.Hotfix
     - Unity.Model

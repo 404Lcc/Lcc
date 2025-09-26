@@ -1,5 +1,24 @@
 syntax = "proto3";
 
+/*
+ * 定义消息类型,规则如下:
+ * <pre>
+ * 1.所有消息类型均为enum类型，消息类型保证惟一
+ * 2.系统内部消息以SYS_开头
+ * 3.客户端发往Server的以CG_开头
+ * 4.Server发往客户端的以GC_开头
+ * 5.保留消息类型1-100,给系统内部一些特殊消息使用
+ * </pre>
+ */
+
+/*
+ * 每个子系统或模块的消息类型定义应放在一起
+ * 创建协议规则
+ * 1.name为消息模块分类,例如：player.proto
+ * 2.更新messageType枚举类型,按照上面规则编写CG_,GC_命名,例如:CG_Login
+ * 3.创建对应proto文件,文件名为${name},name小写,例如：player.proto
+ * 4.编写${message}Info,message采用(除了CG和GC)头部大写,其他驼峰命名连起来,要和MessageType枚举对应起来，例如：CGLoginInfo对应CG_Login枚举,例子可以仿照test.proto文件编写
+*/
 enum MessageType
 {
   DEFAULT = 0;
