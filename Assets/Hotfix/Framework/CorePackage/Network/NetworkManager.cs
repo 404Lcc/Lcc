@@ -134,10 +134,7 @@ namespace LccHotfix
         {
             Debug.LogWarningFormat("网络连接成功。IP={0},Port={1}", _ip, _port.ToString());
 
-            Main.ThreadSyncService.Post(() =>
-            {
-                _networkCallbackHelper.OnConnectedCallback();
-            });
+            Main.ThreadSyncService.Post(() => { _networkCallbackHelper.OnConnectedCallback(); });
         }
 
         private void OnReceive(byte[] message)
