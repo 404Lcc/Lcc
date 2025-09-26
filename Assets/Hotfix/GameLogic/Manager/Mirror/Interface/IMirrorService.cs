@@ -27,13 +27,13 @@ namespace LccHotfix
         /// </summary>
         /// <param name="messageDispatcherHelper"></param>
         public void SetClientMessageDispatcherHelper(IMessageDispatcherHelper messageDispatcherHelper);
-        
+
         /// <summary>
         /// 设置回调
         /// </summary>
         /// <param name="mirrorHelper"></param>
         public void SetMirrorCallbackHelper(IMirrorCallbackHelper mirrorCallbackHelper);
-        
+
         /// <summary>
         /// 判断网络是否连接
         /// </summary>

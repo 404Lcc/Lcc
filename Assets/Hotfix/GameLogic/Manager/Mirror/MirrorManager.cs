@@ -60,7 +60,7 @@ namespace LccHotfix
 
         public void Init()
         {
-            if(_init)
+            if (_init)
                 return;
             GameObject obj = new GameObject("MirrorManager");
             _transportHelper.SetupTransport(obj);
