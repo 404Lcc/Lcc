@@ -6,6 +6,10 @@ namespace LccHotfix
 {
     public interface IMirrorService : IService
     {
+        void Init();
+
+        void SetTransportHelper(ITransportHelper transportHelper);
+
         /// <summary>
         /// 设置IP
         /// </summary>
@@ -13,13 +17,27 @@ namespace LccHotfix
         public void SetNetworkAddress(string networkAddress = "");
 
         /// <summary>
-        /// 设置端口
+        /// 设置服务器消息分发器
         /// </summary>
-        /// <param name="port"></param>
-        public void SetPort(int port = 7788);
+        /// <param name="messageDispatcherHelper"></param>
+        public void SetServerMessageDispatcherHelper(IMirrorServerMessageDispatcherHelper messageDispatcherHelper);
 
-        void SetServerMessageDispatcherHelper(IMirrorServerMessageDispatcherHelper messageDispatcherHelper);
-        void SetClientMessageDispatcherHelper(IMessageDispatcherHelper messageDispatcherHelper);
+        /// <summary>
+        /// 设置客户端消息分发器
+        /// </summary>
+        /// <param name="messageDispatcherHelper"></param>
+        public void SetClientMessageDispatcherHelper(IMessageDispatcherHelper messageDispatcherHelper);
+        
+        /// <summary>
+        /// 设置回调
+        /// </summary>
+        /// <param name="mirrorHelper"></param>
+        public void SetMirrorCallbackHelper(IMirrorCallbackHelper mirrorCallbackHelper);
+        
+        /// <summary>
+        /// 判断网络是否连接
+        /// </summary>
+        /// <returns></returns>
         public bool IsNetworkActive();
 
         /// <summary>

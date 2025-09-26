@@ -26,10 +26,13 @@ namespace LccHotfix
         //服务器才使用的列表
         private DictionaryList<uint, MirrorUnitCtrl> _unitDict = new DictionaryList<uint, MirrorUnitCtrl>();
 
+        private bool _init;
         private Mirror.NetworkManager _networkManager;
         private NetworkUnit _localUnit;
+        private ITransportHelper _transportHelper;
         private IMirrorServerMessageDispatcherHelper _serverMessageDispatcherHelper;
         private IMessageDispatcherHelper _clientMessageDispatcherHelper;
+        private IMirrorCallbackHelper _mirrorCallbackHelper;
 
         public uint LocalNetId => _localUnit.NetId;
 
@@ -40,10 +43,27 @@ namespace LccHotfix
         public bool IsHost => NetworkServer.activeHost;
 
 
-        public MirrorManager()
+        internal override void Shutdown()
         {
+            if (!_init)
+                return;
+            _init = false;
+            NetworkServer.UnregisterHandler<MirrorMessage>();
+            NetworkClient.UnregisterHandler<MirrorMessage>();
+
+            GameObject.Destroy(_networkManager);
+        }
+
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
+        {
+        }
+
+        public void Init()
+        {
+            if(_init)
+                return;
             GameObject obj = new GameObject("MirrorManager");
-            obj.AddComponent<KcpTransport>();
+            _transportHelper.SetupTransport(obj);
             _networkManager = obj.AddComponent<Mirror.NetworkManager>();
 
             Main.AssetService.LoadRes<GameObject>(obj, "MirrorUnit", out var res);
@@ -54,6 +74,15 @@ namespace LccHotfix
 
             NetworkServer.RegisterHandler<MirrorMessage>(MirrorServerMessage);
             NetworkClient.RegisterHandler<MirrorMessage>(MirrorClientMessage);
+
+
+
+            _init = true;
+        }
+
+        public void SetTransportHelper(ITransportHelper transportHelper)
+        {
+            _transportHelper = transportHelper;
         }
 
         private void MirrorServerMessage(NetworkConnectionToClient client, MirrorMessage message)
@@ -88,18 +117,6 @@ namespace LccHotfix
             _clientMessageDispatcherHelper.DispatcherMessage(networkMessage);
         }
 
-        internal override void Shutdown()
-        {
-            NetworkServer.UnregisterHandler<MirrorMessage>();
-            NetworkClient.UnregisterHandler<MirrorMessage>();
-
-            GameObject.Destroy(_networkManager);
-        }
-
-        internal override void Update(float elapseSeconds, float realElapseSeconds)
-        {
-        }
-
         /// <summary>
         /// 获取本地IP地址
         /// </summary>
@@ -124,6 +141,8 @@ namespace LccHotfix
         /// <param name="networkAddress"></param>
         public void SetNetworkAddress(string networkAddress = "")
         {
+            if (!_init)
+                return;
             if (string.IsNullOrEmpty(networkAddress))
             {
                 networkAddress = GetLocalIPAddress();
@@ -132,30 +151,41 @@ namespace LccHotfix
             _networkManager.networkAddress = networkAddress;
         }
 
-
         /// <summary>
-        /// 设置端口
+        /// 设置服务器消息分发器
         /// </summary>
-        /// <param name="port"></param>
-        public void SetPort(int port = 7788)
-        {
-            KcpTransport transport = _networkManager.gameObject.GetComponent<KcpTransport>();
-            transport.Port = (ushort)port;
-        }
-
+        /// <param name="messageDispatcherHelper"></param>
         public void SetServerMessageDispatcherHelper(IMirrorServerMessageDispatcherHelper messageDispatcherHelper)
         {
             _serverMessageDispatcherHelper = messageDispatcherHelper;
         }
 
+        /// <summary>
+        /// 设置客户端消息分发器
+        /// </summary>
+        /// <param name="messageDispatcherHelper"></param>
         public void SetClientMessageDispatcherHelper(IMessageDispatcherHelper messageDispatcherHelper)
         {
             _clientMessageDispatcherHelper = messageDispatcherHelper;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mirrorHelper"></param>
+        public void SetMirrorCallbackHelper(IMirrorCallbackHelper mirrorCallbackHelper)
+        {
+            _mirrorCallbackHelper = mirrorCallbackHelper;
+        }
 
+        /// <summary>
+        /// 判断网络是否连接
+        /// </summary>
+        /// <returns></returns>
         public bool IsNetworkActive()
         {
+            if (!_init)
+                return false;
             return _networkManager.isNetworkActive;
         }
 
@@ -165,8 +195,12 @@ namespace LccHotfix
         /// </summary>
         public void StartHost()
         {
+            if (!_init)
+                return;
+
             if (_networkManager.isNetworkActive)
                 return;
+
             _networkManager.StartHost();
         }
 
@@ -175,6 +209,9 @@ namespace LccHotfix
         /// </summary>
         public void StopHost()
         {
+            if (!_init)
+                return;
+
             if (!_networkManager.isNetworkActive)
                 return;
             _networkManager.StopHost();
@@ -185,6 +222,9 @@ namespace LccHotfix
         /// </summary>
         public void Connect()
         {
+            if (!_init)
+                return;
+
             if (_networkManager.isNetworkActive)
                 return;
 
@@ -196,6 +236,9 @@ namespace LccHotfix
         /// </summary>
         public void Disconnect()
         {
+            if (!_init)
+                return;
+
             if (!_networkManager.isNetworkActive)
                 return;
             _networkManager.StopClient();
@@ -318,6 +361,16 @@ namespace LccHotfix
             {
                 _localUnit = new NetworkUnit();
                 _localUnit.Init(unit);
+
+                if (IsServer)
+                {
+                    _mirrorCallbackHelper.OnServerStartCallback();
+                }
+
+                if (IsClient)
+                {
+                    _mirrorCallbackHelper.OnClientConnectedCallback();
+                }
             }
         }
 
@@ -341,6 +394,16 @@ namespace LccHotfix
 
             if (unit.isLocalPlayer)
             {
+                if (IsServer)
+                {
+                    _mirrorCallbackHelper.OnServerStopCallback();
+                }
+
+                if (IsClient)
+                {
+                    _mirrorCallbackHelper.OnClientDisconnectedCallback();
+                }
+
                 _localUnit = null;
             }
         }
