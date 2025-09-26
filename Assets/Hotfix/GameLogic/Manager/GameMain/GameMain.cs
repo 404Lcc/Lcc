@@ -78,8 +78,6 @@ namespace LccHotfix
             UIService.Init();
             MirrorService.Init();
             SteamService.Init();
-            
-            SteamLobbyService.CreateLobby();
         }
     }
 
