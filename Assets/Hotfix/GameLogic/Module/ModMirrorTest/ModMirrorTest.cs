@@ -24,6 +24,7 @@ namespace LccHotfix
 
         public void ClientSendCGTestInfo()
         {
+            Debug.LogError("客户端发送登录");
             CGTestInfo cg = new CGTestInfo();
             cg.id = 1000;
             Main.MirrorService.ClientSendMessage(cg);
@@ -32,13 +33,15 @@ namespace LccHotfix
         void OnClientGCTest(MessageObject info)
         {
             var gc = info as GCTestInfo;
-            Debug.Log("客户端收到消息" + gc.id);
+
+            Debug.Log("收到服务器消息" + gc.id);
         }
 
         public void OnServerCGTest(NetworkConnectionToClient client, MessageObject info)
         {
             var cg = info as CGTestInfo;
-            Debug.Log("服务器收到消息" + cg.id);
+
+            Debug.Log("收到客户端消息" + cg.id);
 
             GCTestInfo gc = new GCTestInfo();
             gc.id = 1001;
