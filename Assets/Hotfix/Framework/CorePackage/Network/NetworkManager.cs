@@ -13,14 +13,13 @@ namespace LccHotfix
         private string _ip;
         private int _port;
         private TcpConnection _tcp;
-        private Action _onConnectedCallback;
-        private Action _onDisconnectedCallback;
 
         private int _timeOut = 5000;
         private Queue<byte[]> _reciveQueue; //接收协议队列
         private IPackageHelper _packageHelper;
         private IMessageHelper _messageHelper;
         private IMessageDispatcherHelper _messageDispatcherHelper;
+        private INetworkCallbackHelper _networkCallbackHelper;
 
         public bool IsConnected => _tcp != null && _tcp.Socket != null && _tcp.Socket.Connected;
 
@@ -66,6 +65,11 @@ namespace LccHotfix
             _messageDispatcherHelper = messageDispatcherHelper;
         }
 
+        public void SetNetworkCallbackHelper(INetworkCallbackHelper networkCallbackHelper)
+        {
+            _networkCallbackHelper = networkCallbackHelper;
+        }
+
         private void InitTimeout()
         {
             if (_tcp != null && _tcp.Socket != null)
@@ -86,15 +90,12 @@ namespace LccHotfix
             _tcp.OnDisconnected += OnDisconnected;
         }
 
-        public void Connect(string ip, int port, Action onConnectedCallback, Action onDisconnectedCallback)
+        public void Connect(string ip, int port)
         {
             Debug.Assert(!IsConnected);
 
             _ip = ip;
             _port = port;
-
-            _onConnectedCallback = onConnectedCallback;
-            _onDisconnectedCallback = onDisconnectedCallback;
 
             InitSocket();
             _tcp.Connect(ip, port);
@@ -115,9 +116,6 @@ namespace LccHotfix
 
         public void Disconnect()
         {
-            _onConnectedCallback = null;
-            _onDisconnectedCallback = null;
-
             _reciveQueue.Clear();
 
             if (IsConnected)
@@ -136,7 +134,10 @@ namespace LccHotfix
         {
             Debug.LogWarningFormat("网络连接成功。IP={0},Port={1}", _ip, _port.ToString());
 
-            Main.ThreadSyncService.Post(() => { _onConnectedCallback?.Invoke(); });
+            Main.ThreadSyncService.Post(() =>
+            {
+                _networkCallbackHelper.OnConnectedCallback();
+            });
         }
 
         private void OnReceive(byte[] message)
@@ -158,7 +159,7 @@ namespace LccHotfix
 
                 _tcp = null;
 
-                _onDisconnectedCallback?.Invoke();
+                _networkCallbackHelper.OnDisconnectedCallback();
             });
         }
     }
