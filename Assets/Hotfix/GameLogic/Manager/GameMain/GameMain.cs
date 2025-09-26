@@ -31,10 +31,7 @@ namespace LccHotfix
             NetworkService.SetPackageHelper(new DefaultPackageHelper());
             NetworkService.SetMessageHelper(new DefaultMessageHelper());
             NetworkService.SetMessageDispatcherHelper(new DefaultMessageDispatcherHelper());
-            //这里提前初始化是因为ModelService依赖网络分发
-            MirrorService = Current.AddModule<MirrorManager>();
-            MirrorService.SetServerMessageDispatcherHelper(new MirrorServerPBMessageDispatcherHelper());
-            MirrorService.SetClientMessageDispatcherHelper(new PBMessageDispatcherHelper());
+            NetworkService.SetNetworkCallbackHelper(new DefaultNetworkCallbackHelper());
             ModelService = Current.AddModule<ModelManager>();
             SaveService = Current.AddModule<SaveManager>();
             SaveService.SetSaveHelper(new DefaultSaveHelper());
@@ -60,8 +57,17 @@ namespace LccHotfix
             BTScriptService = Current.AddModule<BTScriptManager>();
             UIService = Current.AddModule<UIManager>();
             UIService.SetUIHelper(new UIHelper());
+            MirrorService = Current.AddModule<MirrorManager>();
+            MirrorService.SetTransportHelper(new SteamTransportHelper());
+            MirrorService.SetServerMessageDispatcherHelper(new MirrorServerPBMessageDispatcherHelper());
+            MirrorService.SetClientMessageDispatcherHelper(new PBMessageDispatcherHelper());
+            MirrorService.SetMirrorCallbackHelper(new DefaultMirrorCallbackHelper());
+            SteamService = Current.AddModule<SteamManager>();
+            SteamLobbyService = Current.AddModule<SteamLobbyManager>();
+            SteamLobbyService.SetLobbyCallbackHelper(new MirrorLobbyCallbackHelper());
             
             //最后初始化
+            WindowService.Init();
             SaveService.Init();
             SettingService.Init();
             AudioService.Init();
@@ -69,14 +75,16 @@ namespace LccHotfix
             HotfixBridgeService.Init();
             LanguageService.Init();
             UIService.Init();
-            WindowService.Init();
+            MirrorService.Init();
+            SteamService.Init();
             ModelService.Init();
+            
+            SteamLobbyService.CreateLobby();
         }
     }
 
     internal partial class Main : Module
     {
-        public static IMirrorService MirrorService { get; set; }
         public static IPlatformService PlatformService { get; set; }
         public static IIconService IconService { get; set; }
         public static IHotfixBridgeService HotfixBridgeService { get; set; }
@@ -85,5 +93,8 @@ namespace LccHotfix
         public static IWorldService WorldService { get; set; }
         public static IBTScriptService BTScriptService { get; set; }
         public static IUIService UIService { get; set; }
+        public static IMirrorService MirrorService { get; set; }
+        public static ISteamService SteamService { get; set; }
+        public static ISteamLobbyService SteamLobbyService { get; set; }
     }
 }
