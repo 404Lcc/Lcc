@@ -5,5 +5,6 @@ namespace LccHotfix
 {
     public interface ISteamService : IService
     {
+        void Init();
     }
 }

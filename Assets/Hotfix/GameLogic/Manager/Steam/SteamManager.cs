@@ -18,7 +18,28 @@ namespace LccHotfix
             Debug.LogWarning(pchDebugText);
         }
     
-        public SteamManager()
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
+        {
+            if (!_init)
+            {
+                return;
+            }
+    
+            SteamAPI.RunCallbacks();
+        }
+    
+        internal override void Shutdown()
+        {
+            if (!_init)
+            {
+                return;
+            }
+    
+            _steamAPIWarningMessageHook = null;
+            SteamAPI.Shutdown();
+        }
+
+        public void Init()
         {
             try
             {
@@ -47,27 +68,6 @@ namespace LccHotfix
                 _steamAPIWarningMessageHook = new SteamAPIWarningMessageHook_t(SteamAPIDebugTextHook);
                 SteamClient.SetWarningMessageHook(_steamAPIWarningMessageHook);
             }
-        }
-    
-        internal override void Update(float elapseSeconds, float realElapseSeconds)
-        {
-            if (!_init)
-            {
-                return;
-            }
-    
-            SteamAPI.RunCallbacks();
-        }
-    
-        internal override void Shutdown()
-        {
-            if (!_init)
-            {
-                return;
-            }
-    
-            _steamAPIWarningMessageHook = null;
-            SteamAPI.Shutdown();
         }
     }
 }
