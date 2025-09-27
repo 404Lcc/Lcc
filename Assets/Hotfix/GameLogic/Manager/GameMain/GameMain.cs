@@ -32,9 +32,9 @@ namespace LccHotfix
             NetworkService.SetMessageHelper(new DefaultMessageHelper());
             NetworkService.SetMessageDispatcherHelper(new DefaultMessageDispatcherHelper());
             NetworkService.SetNetworkCallbackHelper(new DefaultNetworkCallbackHelper());
+            ModelService = Current.AddModule<ModelManager>();
             SaveService = Current.AddModule<SaveManager>();
             SaveService.SetSaveHelper(new DefaultSaveHelper());
-            ModelService = Current.AddModule<ModelManager>();
             SettingService = Current.AddModule<SettingManager>();
             AudioService = Current.AddModule<AudioManager>();
             VibrationService = Current.AddModule<VibrationManager>();
@@ -67,8 +67,8 @@ namespace LccHotfix
             SteamLobbyService.SetLobbyCallbackHelper(new MirrorLobbyCallbackHelper());
             
             //最后初始化
-            SaveService.Init();
             ModelService.Init();
+            SaveService.Init();
             SettingService.Init();
             AudioService.Init();
             VibrationService.Init();

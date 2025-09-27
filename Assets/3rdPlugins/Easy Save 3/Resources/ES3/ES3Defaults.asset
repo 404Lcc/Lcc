@@ -41,6 +41,7 @@ MonoBehaviour:
     - Drawing
     - EasySave3
     - EnhancedScroller_asmdef
+    - FizzySteamworks
     - HybridCLR.Runtime
     - IngameDebugConsole.Runtime
     - kcp2k
