@@ -5,6 +5,7 @@ namespace LccHotfix
 {
     public static partial class MetaComponentsLookup
     {
+        public static List<ComponentTypeIndex> typeIndexList = new List<ComponentTypeIndex>();
         public static int TotalComponents => componentTypes.Length;
         public static List<string> componentNameList;
         public static List<Type> componentTypeList;

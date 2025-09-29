@@ -2,6 +2,9 @@ using Entitas;
 using LccModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using UnityEngine;
 
 namespace LccHotfix
 {
@@ -28,6 +31,7 @@ namespace LccHotfix
             {
                 LogicComponentsLookup.componentNameList.Add(item.Name);
             }
+
             foreach (var item in MetaComponentsLookup.componentTypes)
             {
                 MetaComponentsLookup.componentNameList.Add(item.Name);
@@ -116,9 +120,49 @@ namespace LccHotfix
         {
             return LogicContext.GetEntityIndex(typeof(T).Name);
         }
+
         public TIndex GetEntityIndex<TComponent, TIndex>()
         {
             return (TIndex)GetEntityIndex<TComponent>();
+        }
+
+        protected virtual void RebuildComponentsLookup(Type lookupType, List<ComponentTypeIndex> typeIndexList, out List<Type> componentTypeList, out List<string> componentNameList)
+        {
+            List<FieldInfo> componentTypeIndexList = new List<FieldInfo>();
+            foreach (FieldInfo item in lookupType.GetFields(BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy))
+            {
+                if (item.FieldType == typeof(ComponentTypeIndex))
+                {
+                    componentTypeIndexList.Add(item);
+                }
+            }
+
+            //按字段名排序 确保顺序可预测
+            componentTypeIndexList = componentTypeIndexList.OrderBy(x => x.Name).ToList();
+
+            componentTypeList = new List<Type>();
+            componentNameList = new List<string>();
+
+            //为每个ComponentTypeIndex实例的index字段赋值
+            for (int i = 0; i < componentTypeIndexList.Count; i++)
+            {
+                ComponentTypeIndex obj = componentTypeIndexList[i].GetValue(null) as ComponentTypeIndex;
+                if (obj != null)
+                {
+                    var type = obj.componentType;
+                    var name = type.Name;
+                    obj.index = i;
+                    typeIndexList.Add(obj);
+                    componentTypeList.Add(type);
+                    componentNameList.Add(name);
+
+                    Debug.Log($"重设组件index typeName={name} index={obj.index}");
+                }
+                else
+                {
+                    Debug.LogError("RebuildComponentsLookup出错");
+                }
+            }
         }
     }
 }
