@@ -10,19 +10,19 @@ namespace LccHotfix
     {
         public const long CSHARP_1970_TIME = 621355968000000000; //C#中1970年的时间，用于处理java时间戳
 
-        public static void FireNow(object sender, GameEventArgs e)
+        public static void Dispatch<T>(T value) where T : struct, IValueEvent
         {
-            Main.EventService.FireNow(sender, e);
+            Main.ValueEventService.Dispatch(value);
         }
 
-        public static void Subscribe(GameEventType type, EventHandler<GameEventArgs> handler)
+        public static void AddHandle<T>(Action<T> handle) where T : struct, IValueEvent
         {
-            Main.EventService.Subscribe((int)type, handler);
+            Main.ValueEventService.AddHandle(handle);
         }
 
-        public static void Unsubscribe(GameEventType type, EventHandler<GameEventArgs> handler)
+        public static void RemoveHandle<T>(Action<T> handle) where T : struct, IValueEvent
         {
-            Main.EventService.Unsubscribe((int)type, handler);
+            Main.ValueEventService.RemoveHandle(handle);
         }
 
         public static string GetLanguageText(string key, params object[] args)

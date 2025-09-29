@@ -39,7 +39,7 @@ namespace LccHotfix
             AudioService = Current.AddModule<AudioManager>();
             VibrationService = Current.AddModule<VibrationManager>();
             FXService = Current.AddModule<FXManager>();
-            EventService = Current.AddModule<EventManager>();
+            ValueEventService = Current.AddModule<ValueEventManager>();
             CameraService = Current.AddModule<CameraManager>();
             TimerService = Current.AddModule<TimerManager>();
             ProcedureService = Current.AddModule<ProcedureManager>();
