@@ -8,22 +8,22 @@ namespace LccHotfix
     {
         protected BTScript _rootScript;
 
-        protected long _entityId;
+        protected long _id;
         protected int _logicId;
         protected bool _isFinish;
         protected KVContext _context;
         protected List<TimerTask> _timerList;
 
-        public long EntityId => _entityId;
+        public long Id => _id;
         public int LogicId => _logicId;
         public bool IsFinish => _isFinish;
         public KVContext Context => _context;
 
-        public void Init(string rootName, long entityId, int logicId, KVContext preContext = null)
+        public void Init(string rootName, long id, int logicId, KVContext preContext = null)
         {
             _rootScript = Main.BTScriptService.GetScript(rootName);
 
-            _entityId = entityId;
+            _id = id;
             _logicId = logicId;
 
             _context = preContext;
@@ -83,24 +83,8 @@ namespace LccHotfix
                 return;
             }
 
-            var entity = this.GetSelfEntity();
-            if (entity == null)
-            {
-                return;
-            }
+            var timer = Main.TimerService.Register(delay, TimerUnitType.Second, 1, false, null, () => { action(this, args); });
 
-
-            var timer = Main.TimerService.Register(delay, TimerUnitType.Millisecond, 1, false, null, () =>
-            {
-                if (entity == null)
-                    return;
-                if (!entity.hasComTimer)
-                    return;
-
-                action(this, args);
-            });
-
-            entity.AddTimer(timer);
             _timerList.Add(timer);
         }
 
