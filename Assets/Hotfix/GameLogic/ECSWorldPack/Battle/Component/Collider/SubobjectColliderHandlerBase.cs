@@ -278,7 +278,7 @@ namespace LccHotfix
                 }
 
                 //排除碰撞白名单
-                var list = ownerEntity.comSubobject.Agent.Context.GetObject<List<int>>(KVType.HitWhiteList);
+                var list = ownerEntity.comSubobject.Agent.Context.GetObject<List<int>>(KVType.HitWhiteList.ToInt());
                 foreach (var item in list)
                 {
                     if (item == hitEntity.comID.id)

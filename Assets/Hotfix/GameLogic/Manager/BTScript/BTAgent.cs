@@ -34,19 +34,17 @@ namespace LccHotfix
 
             _timerList = new List<TimerTask>();
 
-            _context.SetObject(KVType.RootScript, _rootScript);
+            _context.SetObject(KVType.RootScript.ToInt(), _rootScript);
             _rootScript.InitAgent(this);
         }
 
         public virtual void Update()
         {
-            var entity = this.GetSelfEntity();
             _rootScript.Update(this, Time.deltaTime);
         }
 
         public virtual void LateUpdate()
         {
-            var entity = this.GetSelfEntity();
             _rootScript.LateUpdate(this, Time.deltaTime);
         }
 

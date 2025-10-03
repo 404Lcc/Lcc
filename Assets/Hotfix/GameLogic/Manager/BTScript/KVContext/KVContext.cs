@@ -5,14 +5,14 @@ namespace LccHotfix
 {
     public class KVContext
     {
-        protected Dictionary<KVType, int> _intDict = new Dictionary<KVType, int>();
-        protected Dictionary<KVType, float> _floatDict = new Dictionary<KVType, float>();
+        protected Dictionary<int, int> _intDict = new Dictionary<int, int>();
+        protected Dictionary<int, float> _floatDict = new Dictionary<int, float>();
 
-        protected Dictionary<KVType, string> _stringDict = new Dictionary<KVType, string>();
-        protected Dictionary<KVType, bool> _boolDict = new Dictionary<KVType, bool>();
-        protected Dictionary<KVType, object> _objectDict = new Dictionary<KVType, object>();
+        protected Dictionary<int, string> _stringDict = new Dictionary<int, string>();
+        protected Dictionary<int, bool> _boolDict = new Dictionary<int, bool>();
+        protected Dictionary<int, object> _objectDict = new Dictionary<int, object>();
 
-        protected Dictionary<KVType, Vector3> _vectorDict = new Dictionary<KVType, Vector3>();
+        protected Dictionary<int, Vector3> _vectorDict = new Dictionary<int, Vector3>();
 
         public void Clear()
         {
@@ -24,7 +24,7 @@ namespace LccHotfix
             _vectorDict.Clear();
         }
 
-        public int GetInt(KVType key, int defaultValue = 0)
+        public int GetInt(int key, int defaultValue = 0)
         {
             if (_intDict.TryGetValue(key, out var value))
             {
@@ -35,13 +35,13 @@ namespace LccHotfix
             return value;
         }
 
-        public void AddInt(KVType key, int value, int defaultValue = 0)
+        public void AddInt(int key, int value, int defaultValue = 0)
         {
             var oldValue = GetInt(key, defaultValue);
             _intDict[key] = oldValue + value;
         }
 
-        public void MinusInt(KVType key, int value)
+        public void MinusInt(int key, int value)
         {
             if (_intDict.TryGetValue(key, out var oldValue))
             {
@@ -53,7 +53,7 @@ namespace LccHotfix
 
 
 
-        public float GetFloat(KVType key, float defaultValue = 0)
+        public float GetFloat(int key, float defaultValue = 0)
         {
             if (_floatDict.TryGetValue(key, out var value))
             {
@@ -64,13 +64,13 @@ namespace LccHotfix
             return value;
         }
 
-        public void AddFloat(KVType key, float value, float defaultValue = 0)
+        public void AddFloat(int key, float value, float defaultValue = 0)
         {
             var oldValue = GetFloat(key, defaultValue);
             _floatDict[key] = oldValue + value;
         }
 
-        public void MinusFloat(KVType key, float value)
+        public void MinusFloat(int key, float value)
         {
             if (_floatDict.TryGetValue(key, out var oldValue))
             {
@@ -78,11 +78,7 @@ namespace LccHotfix
             }
         }
 
-
-
-
-
-        public string GetString(KVType key, string defaultValue = "")
+        public string GetString(int key, string defaultValue = "")
         {
             if (_stringDict.TryGetValue(key, out var value))
             {
@@ -93,17 +89,13 @@ namespace LccHotfix
             return value;
         }
 
-        public string SetString(KVType key, string value)
+        public string SetString(int key, string value)
         {
             _stringDict[key] = value;
             return value;
         }
 
-
-
-
-
-        public bool GetBool(KVType key, bool defaultValue = false)
+        public bool GetBool(int key, bool defaultValue = false)
         {
             if (_boolDict.TryGetValue(key, out var value))
             {
@@ -114,7 +106,7 @@ namespace LccHotfix
             return value;
         }
 
-        public void SetBool(KVType key, bool value)
+        public void SetBool(int key, bool value)
         {
             _boolDict[key] = value;
 
@@ -122,7 +114,7 @@ namespace LccHotfix
 
 
 
-        public T GetObject<T>(KVType key, T defaultValue = null) where T : class
+        public T GetObject<T>(int key, T defaultValue = null) where T : class
         {
             if (_objectDict.TryGetValue(key, out var value))
             {
@@ -132,14 +124,14 @@ namespace LccHotfix
             return defaultValue;
         }
 
-        public void SetObject(KVType key, object value)
+        public void SetObject(int key, object value)
         {
             _objectDict[key] = value;
 
         }
 
 
-        public Vector3 GetVector(KVType key)
+        public Vector3 GetVector(int key)
         {
             if (_vectorDict.TryGetValue(key, out var value))
             {
@@ -150,18 +142,14 @@ namespace LccHotfix
             return value;
         }
 
-        public void SetVector(KVType key, Vector3 value)
+        public void SetVector(int key, Vector3 value)
         {
             _vectorDict[key] = value;
 
         }
 
 
-
-
-
-
-        public bool HasKey(KVType key)
+        public bool HasKey(int key)
         {
             if (_intDict.ContainsKey(key))
                 return true;
@@ -179,7 +167,7 @@ namespace LccHotfix
             return false;
         }
 
-        public void RemoveKey(KVType key)
+        public void RemoveKey(int key)
         {
             if (_intDict.ContainsKey(key))
             {
@@ -288,7 +276,7 @@ namespace LccHotfix
         }
 
 
-        public void Copy(KVContext target, KVType key, bool overlap = false)
+        public void Copy(KVContext target, int key, bool overlap = false)
         {
             if (target._intDict.ContainsKey(key))
             {

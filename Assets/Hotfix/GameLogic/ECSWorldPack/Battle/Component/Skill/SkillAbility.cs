@@ -132,8 +132,8 @@ namespace LccHotfix
                 context = new KVContext();
             }
 
-            context.SetObject(KVType.SourceSkillAbility, this);
-            context.SetObject(KVType.SkillOwnerEntity, owner);
+            context.SetObject(KVType.SourceSkillAbility.ToInt(), this);
+            context.SetObject(KVType.SkillOwnerEntity.ToInt(), owner);
 
 
             BTAgent agent = new BTAgent();
