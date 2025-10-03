@@ -9,7 +9,7 @@ namespace LccHotfix
         {
             Log.SetLogHelper(new DefaultLogHelper());
             Main.SetMain(new GameMain());
-            
+
             try
             {
                 Launcher.Instance.GameAction.OnFixedUpdate += FixedUpdate;
@@ -19,7 +19,9 @@ namespace LccHotfix
                 Launcher.Instance.GameAction.OnDrawGizmos += DrawGizmos;
 
                 Launcher.Instance.LauncherFinish();
-                
+
+                Main.SaveService.CreateSaveFile("default.sav");
+
                 Main.ProcedureService.ChangeProcedure(ProcedureType.Login.ToInt());
             }
             catch (System.Exception e)
@@ -27,21 +29,26 @@ namespace LccHotfix
                 Log.Error(e);
             }
         }
+
         private static void FixedUpdate()
         {
         }
+
         private static void Update()
         {
             Main.Current.Update(Time.deltaTime, Time.unscaledDeltaTime);
         }
+
         private static void LateUpdate()
         {
             Main.Current.LateUpdate();
         }
+
         private static void DrawGizmos()
         {
             Main.GizmoService.OnDrawGizmos();
         }
+
         private static void Close()
         {
             Launcher.Instance.GameAction.OnFixedUpdate -= FixedUpdate;
