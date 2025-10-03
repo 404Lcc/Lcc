@@ -9,7 +9,7 @@ namespace LccHotfix
 
         public SysAStar(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComAStar, LogicMatcher.ComTransform));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComAStar, LogicComponentsLookup.ComTransform));
         }
 
         public void Execute()

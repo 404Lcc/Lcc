@@ -8,7 +8,7 @@ namespace LccHotfix
 
         public SysCollision(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComCollider, LogicMatcher.ComTransform));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComCollider, LogicComponentsLookup.ComTransform));
         }
 
         public void Execute()
@@ -20,12 +20,14 @@ namespace LccHotfix
                 {
                     continue;
                 }
+
                 var handler = entity.comCollider.handler;
                 bool hasHits = handler.CheckRawHits(entity, dt);
                 if (hasHits)
                 {
                     handler.HandleRawHits(entity, dt);
                 }
+
                 handler.Cleanup();
             }
         }

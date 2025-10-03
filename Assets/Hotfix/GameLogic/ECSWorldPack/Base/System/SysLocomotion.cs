@@ -6,9 +6,10 @@ namespace LccHotfix
     public class SysLocomotion : IExecuteSystem
     {
         private IGroup<LogicEntity> _group;
+
         public SysLocomotion(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComLocomotion, LogicMatcher.ComTransform));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComLocomotion, LogicComponentsLookup.ComTransform));
         }
 
         public void Execute()

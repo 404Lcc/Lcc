@@ -5,17 +5,17 @@ namespace LccHotfix
 {
     public class SysOrca : IExecuteSystem
     {
-        private ComUniOrca comUniOrca;
+        private MetaContext _metaContext;
 
         public SysOrca(ECSWorld world)
         {
-            comUniOrca = world.MetaContext.ComUniOrca;
+            _metaContext = world.MetaContext;
         }
 
         public void Execute()
         {
-            comUniOrca.DoStep();
-            comUniOrca.EnsureCompleted();
+            _metaContext.ComUniOrca.DoStep();
+            _metaContext.ComUniOrca.EnsureCompleted();
         }
     }
 }

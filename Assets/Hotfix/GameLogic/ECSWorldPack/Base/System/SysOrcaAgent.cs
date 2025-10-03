@@ -9,7 +9,7 @@ namespace LccHotfix
 
         public SysOrcaAgent(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComOrcaAgent));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComOrcaAgent));
         }
 
         public void Execute()

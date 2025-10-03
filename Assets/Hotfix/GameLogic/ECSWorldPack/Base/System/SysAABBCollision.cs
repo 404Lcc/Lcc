@@ -11,7 +11,7 @@ namespace LccHotfix
 
         public SysAABBCollision(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComAABBCollider, LogicMatcher.ComTransform));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComAABBCollider, LogicComponentsLookup.ComTransform));
         }
 
 

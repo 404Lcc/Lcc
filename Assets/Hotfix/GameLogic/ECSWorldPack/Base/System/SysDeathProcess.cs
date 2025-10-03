@@ -8,7 +8,7 @@ namespace LccHotfix
 
         public SysDeathProcess(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComDeath));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComDeath));
         }
 
         void IExecuteSystem.Execute()

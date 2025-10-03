@@ -16,7 +16,7 @@ namespace LccHotfix
             return new Collector<LogicEntity>(
                 new IGroup<LogicEntity>[]
                 {
-                    context.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComView, LogicMatcher.ComTransform))
+                    context.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComView, LogicComponentsLookup.ComTransform))
                 },
                 new GroupEvent[]
                 {

@@ -9,7 +9,7 @@ namespace LccHotfix
 
         public SysFSM(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComFSM));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComFSM));
         }
 
         public void Execute()

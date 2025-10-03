@@ -4,27 +4,27 @@ namespace LccHotfix
 {
     public class SysGameMode : IExecuteSystem, IInitializeSystem, ITearDownSystem
     {
-        private GameModeBase _gameMode;
+        private MetaContext _metaContext;
 
         public SysGameMode(ECSWorld world)
         {
-            _gameMode = world.MetaContext.comUniGameMode.mode;
+            _metaContext = world.MetaContext;
         }
 
         public void Initialize()
         {
-            _gameMode.Start();
+            _metaContext.ComUniGameMode.mode.Start();
         }
 
         public void TearDown()
         {
-            _gameMode.Release();
+            _metaContext.ComUniGameMode.mode.Release();
         }
 
 
         public void Execute()
         {
-            _gameMode.Update();
+            _metaContext.ComUniGameMode.mode.Update();
         }
     }
 }

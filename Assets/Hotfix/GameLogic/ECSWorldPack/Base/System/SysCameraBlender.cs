@@ -15,7 +15,7 @@ namespace LccHotfix
         {
             if (_metaContext.hasComUniCameraBlender)
             {
-                _metaContext.comUniCameraBlender.CameraBlender.Update();
+                _metaContext.ComUniCameraBlender.CameraBlender.Update();
             }
         }
 
@@ -23,7 +23,7 @@ namespace LccHotfix
         {
             if (_metaContext.hasComUniCameraBlender)
             {
-                _metaContext.comUniCameraBlender.CameraBlender.LateUpdate();
+                _metaContext.ComUniCameraBlender.CameraBlender.LateUpdate();
             }
         }
     }

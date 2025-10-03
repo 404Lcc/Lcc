@@ -6,9 +6,10 @@ namespace LccHotfix
     public class SysViewUpdate : IExecuteSystem
     {
         private IGroup<LogicEntity> _group;
+
         public SysViewUpdate(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComView));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComView));
         }
 
 

@@ -6,9 +6,10 @@ namespace LccHotfix
     public class SysLife : IExecuteSystem
     {
         private IGroup<LogicEntity> _group;
+
         public SysLife(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComID, LogicMatcher.ComLife));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComID, LogicComponentsLookup.ComLife));
         }
 
         public void Execute()
