@@ -31,6 +31,7 @@ namespace LccHotfix
             {
                 _context = new KVContext();
             }
+
             _timerList = new List<TimerTask>();
 
             _context.SetObject(KVType.RootScript, _rootScript);
@@ -42,6 +43,7 @@ namespace LccHotfix
             var entity = this.GetSelfEntity();
             _rootScript.Update(this, Time.deltaTime);
         }
+
         public virtual void LateUpdate()
         {
             var entity = this.GetSelfEntity();
@@ -55,6 +57,7 @@ namespace LccHotfix
             {
                 item.Dispose();
             }
+
             _timerList.Clear();
             _rootScript.DestroyAgent(this);
             _context.Clear();
@@ -102,7 +105,7 @@ namespace LccHotfix
             entity.AddTimer(timer);
             _timerList.Add(timer);
         }
-        
+
         public void SetFinish()
         {
             _isFinish = true;

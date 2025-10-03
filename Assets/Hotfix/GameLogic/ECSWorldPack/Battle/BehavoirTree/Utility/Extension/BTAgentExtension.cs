@@ -6,7 +6,7 @@ namespace LccHotfix
         {
             return EntityUtility.GetEntity(agent.EntityId);
         }
-        
+
         public static LogicEntity GetOwnerPlayerHero(this BTAgent agent)
         {
             var entity = agent.GetSelfEntity();

@@ -30,6 +30,7 @@ namespace LccHotfix
             {
                 return value;
             }
+
             value = defaultValue;
             return value;
         }
@@ -58,6 +59,7 @@ namespace LccHotfix
             {
                 return value;
             }
+
             value = defaultValue;
             return value;
         }
@@ -86,6 +88,7 @@ namespace LccHotfix
             {
                 return value;
             }
+
             value = defaultValue;
             return value;
         }
@@ -106,9 +109,11 @@ namespace LccHotfix
             {
                 return value;
             }
+
             value = defaultValue;
             return value;
         }
+
         public void SetBool(KVType key, bool value)
         {
             _boolDict[key] = value;
@@ -123,8 +128,10 @@ namespace LccHotfix
             {
                 return value as T;
             }
+
             return defaultValue;
         }
+
         public void SetObject(KVType key, object value)
         {
             _objectDict[key] = value;
@@ -138,6 +145,7 @@ namespace LccHotfix
             {
                 return value;
             }
+
             value = Vector3.zero;
             return value;
         }
@@ -177,22 +185,27 @@ namespace LccHotfix
             {
                 _intDict.Remove(key);
             }
+
             if (_floatDict.ContainsKey(key))
             {
                 _floatDict.Remove(key);
             }
+
             if (_stringDict.ContainsKey(key))
             {
                 _stringDict.Remove(key);
             }
+
             if (_boolDict.ContainsKey(key))
             {
                 _boolDict.Remove(key);
             }
+
             if (_objectDict.ContainsKey(key))
             {
                 _objectDict.Remove(key);
             }
+
             if (_vectorDict.ContainsKey(key))
             {
                 _vectorDict.Remove(key);
