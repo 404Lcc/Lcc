@@ -64,7 +64,7 @@ public static class EntityUtility
         entity.AddComUnityObjectRelated(dict);
         return entity;
     }
-    
+
     public static LogicEntity AddEntityWithID<T>(long id, GameObjectPoolObject poolObject) where T : ActorView, new()
     {
         var entity = Main.WorldService.GetWorld().LogicContext.CreateEntity();
