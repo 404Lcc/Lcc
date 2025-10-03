@@ -19,11 +19,13 @@ namespace LccHotfix
                     {
                         continue;
                     }
+
                     obj.Init();
                     _scriptDict.Add(item.Name, obj);
                 }
             }
         }
+
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
         }
@@ -34,6 +36,7 @@ namespace LccHotfix
             {
                 item.Dispose();
             }
+
             _scriptDict.Clear();
         }
 

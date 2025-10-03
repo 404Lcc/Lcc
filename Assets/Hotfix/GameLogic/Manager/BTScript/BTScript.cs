@@ -9,7 +9,7 @@ namespace LccHotfix
         void Trigger(BTAction trigger, BTAgent agent, params object[] args);
         Action<BTAgent, object[]> GetTrigger(BTAction trigger);
     }
-    
+
     public interface IBTScript
     {
         void Init();
@@ -31,6 +31,7 @@ namespace LccHotfix
         {
             _trigger = new Dictionary<BTAction, Action<BTAgent, object[]>>();
         }
+
         public virtual void Dispose()
         {
             _trigger.Clear();
@@ -44,9 +45,11 @@ namespace LccHotfix
         public virtual void Update(BTAgent agent, float dt)
         {
         }
+
         public virtual void LateUpdate(BTAgent agent, float dt)
         {
         }
+
         public virtual void DestroyAgent(BTAgent agent)
         {
         }
@@ -59,6 +62,7 @@ namespace LccHotfix
                 return;
             _trigger.Add(trigger, callback);
         }
+
         public virtual void Trigger(BTAction trigger, BTAgent agent, params object[] args)
         {
             if (!_trigger.ContainsKey(trigger))
