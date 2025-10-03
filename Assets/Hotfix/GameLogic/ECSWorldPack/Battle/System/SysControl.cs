@@ -9,7 +9,7 @@ namespace LccHotfix
 
         public SysControl(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComControl, LogicMatcher.ComTransform));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComControl, LogicComponentsLookup.ComTransform));
         }
 
         public void Execute()

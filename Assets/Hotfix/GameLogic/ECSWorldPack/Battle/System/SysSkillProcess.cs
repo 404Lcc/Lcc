@@ -8,7 +8,7 @@ namespace LccHotfix
 
         public SysSkillProcess(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComSkillProcess));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComSkillProcess));
         }
 
         public void LateUpdate()

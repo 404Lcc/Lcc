@@ -9,7 +9,7 @@ namespace LccHotfix
 
         public SysSkillCD(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComSkills, LogicMatcher.ComProperty, LogicMatcher.ComTransform));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComSkills, LogicComponentsLookup.ComProperty, LogicComponentsLookup.ComTransform));
         }
 
         public void Execute()

@@ -9,9 +9,10 @@ namespace LccHotfix
         private IGroup<LogicEntity> _group;
 
         private List<int> _removeList = new List<int>();
+
         public SysBuffs(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComBuffs));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComBuffs));
         }
 
         public void TearDown()
@@ -44,6 +45,7 @@ namespace LccHotfix
                         comBuffs.BuffDict.Remove(buffId);
                     }
                 }
+
                 _removeList.Clear();
             }
         }

@@ -8,7 +8,7 @@ namespace LccHotfix
 
         public SysSubobject(ECSWorld world)
         {
-            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComSubobject, LogicMatcher.ComTransform));
+            _group = world.LogicContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComSubobject, LogicComponentsLookup.ComTransform));
         }
 
 
