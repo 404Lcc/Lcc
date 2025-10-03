@@ -82,12 +82,15 @@ namespace LccHotfix
         protected virtual void OnSet(int key, T value)
         {
         }
+
         protected virtual void OnClear(int key)
         {
         }
+
         protected virtual void OnAdd(int key, T value)
         {
         }
+
         protected virtual void OnMinus(int key, T value)
         {
         }
@@ -159,6 +162,7 @@ namespace LccHotfix
                 {
                     ret &= v.Value;
                 }
+
                 _sum = ret;
             }
         }
@@ -173,6 +177,7 @@ namespace LccHotfix
                 {
                     ret &= v.Value;
                 }
+
                 _sum = ret;
             }
         }

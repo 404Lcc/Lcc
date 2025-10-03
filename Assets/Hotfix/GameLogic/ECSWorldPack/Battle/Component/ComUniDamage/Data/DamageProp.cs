@@ -8,11 +8,11 @@ namespace LccHotfix
     public struct DamageProp
     {
         public long entityId;
-        public float atk;//攻击力
-        public float def;//防御力
-        public float criticalDamage;//暴击伤害
-        public float criticalRate;//暴击率
-        public float maxHP;//最大血量
+        public float atk; //攻击力
+        public float def; //防御力
+        public float criticalDamage; //暴击伤害
+        public float criticalRate; //暴击率
+        public float maxHP; //最大血量
 
         public void Init(long attackerId)
         {

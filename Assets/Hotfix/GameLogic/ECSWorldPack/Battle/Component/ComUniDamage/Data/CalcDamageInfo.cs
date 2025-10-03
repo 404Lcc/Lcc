@@ -4,7 +4,7 @@ namespace LccHotfix
     {
         public DamageProp damageProp;
         public long defenderId;
-        public float baseValue;//正数是伤害，负数是回复
+        public float baseValue; //正数是伤害，负数是回复
         public float damageRate;
         public DamageSource source;
         public KVContext context;

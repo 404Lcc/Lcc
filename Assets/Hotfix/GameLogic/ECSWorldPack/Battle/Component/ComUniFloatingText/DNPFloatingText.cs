@@ -10,7 +10,7 @@ public class DNPFloatingText : IFloatingText
     public void PostInitialize()
     {
         Main.AssetService.LoadGameObject("DNP", true, out loader);
-        
+
         damageNumberMesh = loader.GetComponent<DamageNumberMesh>();
         damageNumberMesh.cameraOverride = Main.CameraService.CurrentCamera.transform;
 

@@ -18,8 +18,15 @@ namespace LccHotfix
 
     public partial class LogicEntity
     {
-        public ComHP comHP { get { return (ComHP)GetComponent(LogicComponentsLookup.ComHP); } }
-        public bool hasComHP { get { return HasComponent(LogicComponentsLookup.ComHP); } }
+        public ComHP comHP
+        {
+            get { return (ComHP)GetComponent(LogicComponentsLookup.ComHP); }
+        }
+
+        public bool hasComHP
+        {
+            get { return HasComponent(LogicComponentsLookup.ComHP); }
+        }
 
         public void AddComHP(float newHP)
         {
@@ -35,27 +42,9 @@ namespace LccHotfix
         }
     }
 
-    public sealed partial class LogicMatcher
-    {
-        private static Entitas.IMatcher<LogicEntity> _matcherComHp;
-
-        public static Entitas.IMatcher<LogicEntity> ComHp
-        {
-            get
-            {
-                if (_matcherComHp == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComHP);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComHp = matcher;
-                }
-
-                return _matcherComHp;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComHP;
+        private static ComponentTypeIndex ComHPIndex = new ComponentTypeIndex(typeof(ComHP));
+        public static int ComHP => ComHPIndex.index;
     }
 }

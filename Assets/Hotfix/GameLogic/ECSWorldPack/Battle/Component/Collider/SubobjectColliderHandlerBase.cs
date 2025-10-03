@@ -10,6 +10,7 @@ namespace LccHotfix
         Obstacle,
         EntityPart,
     }
+
     public struct HitInfo
     {
         public long ownerEntityID;
@@ -23,9 +24,9 @@ namespace LccHotfix
     public class SubobjectColliderHandlerBase : ColliderHandler
     {
         private Subobject _subobject;
-        private Dictionary<long, int> _hitCount;//碰撞者id 次数
-        private int _currentHitCount;//当前碰撞次数
-        private float _hitIntervalTimer;//碰撞计时器
+        private Dictionary<long, int> _hitCount; //碰撞者id 次数
+        private int _currentHitCount; //当前碰撞次数
+        private float _hitIntervalTimer; //碰撞计时器
 
 
         protected bool HitWithLife => _subobject.HitWithLife;
@@ -35,9 +36,9 @@ namespace LccHotfix
 
 
 
-        protected bool IsHitObstacle;//是否碰撞阻挡物
-        protected bool IsHitObstacleCounted;//碰撞阻挡物是否计算到次数中
-        protected bool IgnoreHitSelf;//是否忽略碰撞自己
+        protected bool IsHitObstacle; //是否碰撞阻挡物
+        protected bool IsHitObstacleCounted; //碰撞阻挡物是否计算到次数中
+        protected bool IgnoreHitSelf; //是否忽略碰撞自己
 
 
         public virtual void Init(Subobject subObjCfg)
@@ -183,6 +184,7 @@ namespace LccHotfix
                 {
                     _hitCount.Add(hitEntityID, 1);
                 }
+
                 _currentHitCount++;
             }
 

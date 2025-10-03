@@ -45,6 +45,7 @@ namespace LccHotfix
             ApplyChange(info);
             info.context.Clear();
         }
+
         public void ApplyDamageByFixed(long attackerId, long defenderId, float fixedValue, DamageSource source, KVContext context = null)
         {
             DamageProp prop = new DamageProp();
@@ -94,9 +95,11 @@ namespace LccHotfix
             {
                 info.context = context;
             }
+
             ApplyChange(info);
             info.context.Clear();
         }
+
         public void ApplyRecoverByFixed(long attackerId, long defenderId, float fixedValue, DamageSource source, KVContext context = null)
         {
             DamageProp prop = new DamageProp();
@@ -118,6 +121,7 @@ namespace LccHotfix
             {
                 info.context = context;
             }
+
             ApplyChange(info);
             info.context.Clear();
         }
@@ -158,6 +162,7 @@ namespace LccHotfix
                     resultValue = ApplyRecoverChange(info);
                     break;
             }
+
             return resultValue;
         }
 
@@ -198,6 +203,7 @@ namespace LccHotfix
 
             return resultValue;
         }
+
         public virtual void PreDamageChange(CalcDamageInfo info)
         {
             var defenderId = info.defenderId;
@@ -213,6 +219,7 @@ namespace LccHotfix
 
 
         }
+
         public virtual void PostDamageChange(CalcDamageInfo info)
         {
             var defenderId = info.defenderId;
@@ -293,10 +300,12 @@ namespace LccHotfix
 
             return resultValue;
         }
+
         public virtual void PreRecoverChange(CalcDamageInfo info)
         {
 
         }
+
         public virtual void PostRecoverChange(CalcDamageInfo info)
         {
             var defenderId = info.defenderId;
@@ -353,10 +362,12 @@ namespace LccHotfix
         {
             return 1;
         }
+
         public virtual bool CalcCrit(DamageProp prop)
         {
             return false;
         }
+
         public virtual float CalcCritDamageRate(DamageProp prop)
         {
             return 1 + (prop.criticalDamage / 100f);

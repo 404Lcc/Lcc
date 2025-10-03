@@ -4,78 +4,31 @@ namespace LccHotfix
     {
         public DamageBase damage;
     }
+
     public partial class MetaContext
     {
-
-        public MetaEntity comUniDamageEntity { get { return GetGroup(MetaMatcher.ComUniDamage).GetSingleEntity(); } }
-        public ComUniDamage comUniDamage { get { return comUniDamageEntity.comUniDamage; } }
-        public bool hasComUniDamage { get { return comUniDamageEntity != null; } }
-
-        public MetaEntity SetComUniDamage(DamageBase damage)
+        public ComUniDamage ComUniDamage
         {
-            if (hasComUniDamage)
-            {
-                throw new Entitas.EntitasException("Could not set ComUniDamage!\n" + this + " already has an entity with ComUniDamage!",
-                    "You should check if the context already has a ComUniDamageEntity before setting it or use context.ReplaceComUniDamage().");
-            }
-            var entity = CreateEntity();
-            entity.AddComUniDamage(damage);
-            return entity;
+            get { return GetUniqueComponent<ComUniDamage>(MetaComponentsLookup.ComUniDamage); }
         }
 
+        public bool hasComUniDamage
+        {
+            get { return HasUniqueComponent(MetaComponentsLookup.ComUniDamage); }
+        }
 
-
-
-    }
-    public partial class MetaEntity
-    {
-
-        public ComUniDamage comUniDamage { get { return (ComUniDamage)GetComponent(MetaComponentsLookup.ComUniDamage); } }
-        public bool hasComUniDamage { get { return HasComponent(MetaComponentsLookup.ComUniDamage); } }
-
-        public void AddComUniDamage(DamageBase damage)
+        public void SetComUniDamage(DamageBase damage)
         {
             var index = MetaComponentsLookup.ComUniDamage;
-            var component = (ComUniDamage)CreateComponent(index, typeof(ComUniDamage));
+            var component = (ComUniDamage)UniqueEntity.CreateComponent(index, typeof(ComUniDamage));
             component.damage = damage;
-            AddComponent(index, component);
-        }
-
-        public void ReplaceComUniDamage(DamageBase damage)
-        {
-            var index = MetaComponentsLookup.ComUniDamage;
-            var component = (ComUniDamage)CreateComponent(index, typeof(ComUniDamage));
-            component.damage = damage;
-            ReplaceComponent(index, component);
-        }
-
-        public void RemoveComUniDamage()
-        {
-            RemoveComponent(MetaComponentsLookup.ComUniDamage);
+            SetUniqueComponent(index, component);
         }
     }
-    public sealed partial class MetaMatcher
-    {
 
-        static Entitas.IMatcher<MetaEntity> _matcherComUniDamage;
-
-        public static Entitas.IMatcher<MetaEntity> ComUniDamage
-        {
-            get
-            {
-                if (_matcherComUniDamage == null)
-                {
-                    var matcher = (Entitas.Matcher<MetaEntity>)Entitas.Matcher<MetaEntity>.AllOf(MetaComponentsLookup.ComUniDamage);
-                    matcher.ComponentNames = MetaComponentsLookup.componentNames;
-                    _matcherComUniDamage = matcher;
-                }
-
-                return _matcherComUniDamage;
-            }
-        }
-    }
     public static partial class MetaComponentsLookup
     {
-        public static int ComUniDamage;
+        private static ComponentTypeIndex ComUniDamageIndex = new ComponentTypeIndex(typeof(ComUniDamage));
+        public static int ComUniDamage => ComUniDamageIndex.index;
     }
 }

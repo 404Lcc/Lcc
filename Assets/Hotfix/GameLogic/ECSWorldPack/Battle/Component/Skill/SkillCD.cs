@@ -11,16 +11,11 @@ namespace LccHotfix
 
 
         public int SkillId => _data.SkillId;
+
         public float ColdTime
         {
-            get
-            {
-                return _coldTime;
-            }
-            set
-            {
-                _coldTime = value;
-            }
+            get { return _coldTime; }
+            set { _coldTime = value; }
         }
 
         public void Init(SkillData data)

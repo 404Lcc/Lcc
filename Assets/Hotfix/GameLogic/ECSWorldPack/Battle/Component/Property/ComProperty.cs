@@ -49,6 +49,7 @@ namespace LccHotfix
             {
                 return prop.Get(0);
             }
+
             return 0;
         }
 
@@ -84,6 +85,7 @@ namespace LccHotfix
             {
                 return prop.Get();
             }
+
             return 0;
         }
 
@@ -96,6 +98,7 @@ namespace LccHotfix
 
             _floatDict[key].Add(subKey, value);
         }
+
         public void ClearSubFloat(ValuePropertyType key, int subKey)
         {
             if (_floatDict.TryGetValue(key, out var prop))
@@ -114,6 +117,7 @@ namespace LccHotfix
             {
                 return prop.Get(0);
             }
+
             return false;
         }
 
@@ -123,6 +127,7 @@ namespace LccHotfix
             {
                 _boolDict.Add(key, new BoolProperty());
             }
+
             _boolDict[key].Set(value);
         }
 
@@ -132,6 +137,7 @@ namespace LccHotfix
             {
                 return prop.Get();
             }
+
             return false;
         }
 
@@ -146,6 +152,7 @@ namespace LccHotfix
 
             _boolDict[key].Set(subKey, value);
         }
+
         public void ClearBool(BoolPropertyType key, int subKey)
         {
             if (_boolDict.TryGetValue(key, out var prop))
@@ -190,8 +197,15 @@ namespace LccHotfix
     public partial class LogicEntity
     {
 
-        public ComProperty comProperty { get { return (ComProperty)GetComponent(LogicComponentsLookup.ComProperty); } }
-        public bool hasComProperty { get { return HasComponent(LogicComponentsLookup.ComProperty); } }
+        public ComProperty comProperty
+        {
+            get { return (ComProperty)GetComponent(LogicComponentsLookup.ComProperty); }
+        }
+
+        public bool hasComProperty
+        {
+            get { return HasComponent(LogicComponentsLookup.ComProperty); }
+        }
 
         public ComProperty AddComProperty()
         {
@@ -200,6 +214,7 @@ namespace LccHotfix
             AddComponent(index, component);
             return component;
         }
+
         public void ReplaceComProperty()
         {
             var index = LogicComponentsLookup.ComProperty;
@@ -213,6 +228,7 @@ namespace LccHotfix
             {
                 AddComProperty();
             }
+
             comProperty.SetSubFloat(key, subKey, newValue);
         }
 
@@ -222,33 +238,15 @@ namespace LccHotfix
             {
                 AddComProperty();
             }
+
             comProperty.SetSubBool(key, subKey, newValue);
         }
     }
 
 
-    public sealed partial class LogicMatcher
-    {
-
-        private static Entitas.IMatcher<LogicEntity> _matcherComProperty;
-
-        public static Entitas.IMatcher<LogicEntity> ComProperty
-        {
-            get
-            {
-                if (_matcherComProperty == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComProperty);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComProperty = matcher;
-                }
-
-                return _matcherComProperty;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComProperty;
+        private static ComponentTypeIndex ComPropertyIndex = new ComponentTypeIndex(typeof(ComProperty));
+        public static int ComProperty => ComPropertyIndex.index;
     }
 }

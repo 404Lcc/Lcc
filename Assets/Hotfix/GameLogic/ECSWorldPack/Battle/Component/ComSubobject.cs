@@ -4,13 +4,14 @@ namespace LccHotfix
 {
     public class ComSubobject : LogicComponent
     {
-        public long OwnerId { get; set; }//施法者id
-        public int SkillId { get; set; }//技能id
-        public int ConfigId { get; set; }//子物体id
+        public long OwnerId { get; set; } //施法者id
+        public int SkillId { get; set; } //技能id
+        public int ConfigId { get; set; } //子物体id
         public BTAgent Agent { get; set; }
 
 
         private Subobject _subobject = null;
+
         public Subobject Subobject
         {
             get
@@ -19,6 +20,7 @@ namespace LccHotfix
                 {
                     _subobject = Main.ConfigService.Tables.TBSubobject.Get(ConfigId);
                 }
+
                 return _subobject;
             }
         }
@@ -38,11 +40,19 @@ namespace LccHotfix
         }
 
     }
+
     public partial class LogicEntity
     {
 
-        public ComSubobject comSubobject { get { return (ComSubobject)GetComponent(LogicComponentsLookup.ComSubobject); } }
-        public bool hasComSubobject { get { return HasComponent(LogicComponentsLookup.ComSubobject); } }
+        public ComSubobject comSubobject
+        {
+            get { return (ComSubobject)GetComponent(LogicComponentsLookup.ComSubobject); }
+        }
+
+        public bool hasComSubobject
+        {
+            get { return HasComponent(LogicComponentsLookup.ComSubobject); }
+        }
 
         public void AddComSubobject(long newOwnerId, int newSkillId, int newConfigId, BTAgent newAgent)
         {
@@ -56,28 +66,9 @@ namespace LccHotfix
         }
     }
 
-    public sealed partial class LogicMatcher
-    {
-
-        private static Entitas.IMatcher<LogicEntity> _matcherComSubobject;
-
-        public static Entitas.IMatcher<LogicEntity> ComSubobject
-        {
-            get
-            {
-                if (_matcherComSubobject == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComSubobject);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComSubobject = matcher;
-                }
-
-                return _matcherComSubobject;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComSubobject;
+        private static ComponentTypeIndex ComSubobjectIndex = new ComponentTypeIndex(typeof(ComSubobject));
+        public static int ComSubobject => ComSubobjectIndex.index;
     }
 }

@@ -26,6 +26,7 @@ namespace LccHotfix
                 //手动走一下，以防sys也删了
                 item.LeaveState();
             }
+
             _buffDict.Clear();
 
         }
@@ -50,6 +51,7 @@ namespace LccHotfix
             {
                 return buffState.IsActive;
             }
+
             return false;
         }
 
@@ -62,6 +64,7 @@ namespace LccHotfix
                     return buffState;
                 }
             }
+
             return null;
         }
 
@@ -119,6 +122,7 @@ namespace LccHotfix
             {
                 buffState = _buffDict[buffId];
             }
+
             if (buffState != null)
             {
                 level = buffState.Level;
@@ -202,6 +206,7 @@ namespace LccHotfix
                 }
             }
         }
+
         public void RemoveBuff(int buffId)
         {
             if (_buffDict.TryGetValue(buffId, out var buffState))
@@ -214,8 +219,15 @@ namespace LccHotfix
 
     public partial class LogicEntity
     {
-        public ComBuffs comBuffs { get { return (ComBuffs)GetComponent(LogicComponentsLookup.ComBuffs); } }
-        public bool hasComBuffs { get { return HasComponent(LogicComponentsLookup.ComBuffs); } }
+        public ComBuffs comBuffs
+        {
+            get { return (ComBuffs)GetComponent(LogicComponentsLookup.ComBuffs); }
+        }
+
+        public bool hasComBuffs
+        {
+            get { return HasComponent(LogicComponentsLookup.ComBuffs); }
+        }
 
         public void AddComBuffs()
         {
@@ -225,29 +237,9 @@ namespace LccHotfix
         }
     }
 
-
-
-    public partial class LogicMatcher
-    {
-        private static Entitas.IMatcher<LogicEntity> _matcherComBuffs;
-
-        public static Entitas.IMatcher<LogicEntity> ComBuffs
-        {
-            get
-            {
-                if (_matcherComBuffs == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComBuffs);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComBuffs = matcher;
-                }
-
-                return _matcherComBuffs;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComBuffs;
+        private static ComponentTypeIndex ComBuffsIndex = new ComponentTypeIndex(typeof(ComBuffs));
+        public static int ComBuffs => ComBuffsIndex.index;
     }
 }

@@ -28,98 +28,28 @@ namespace LccHotfix
 
     public partial class MetaContext
     {
-
-        public MetaEntity ComUniFloatingTextEntity
-        {
-            get { return GetGroup(MetaMatcher.ComUniFloatingText).GetSingleEntity(); }
-        }
-
         public ComUniFloatingText ComUniFloatingText
         {
-            get { return ComUniFloatingTextEntity.ComUniFloatingText; }
+            get { return GetUniqueComponent<ComUniFloatingText>(MetaComponentsLookup.ComUniFloatingText); }
         }
 
         public bool hasComUniFloatingText
         {
-            get { return ComUniFloatingTextEntity != null; }
+            get { return HasUniqueComponent(MetaComponentsLookup.ComUniFloatingText); }
         }
 
-        public MetaEntity SetComUniFloatingText(IFloatingText newFloatingText)
-        {
-            if (hasComUniFloatingText)
-            {
-                var entity = ComUniFloatingTextEntity;
-                entity.ReplaceComUniFloatingText(newFloatingText);
-                return entity;
-            }
-            else
-            {
-                var entity = CreateEntity();
-                entity.AddComUniFloatingText(newFloatingText);
-                return entity;
-            }
-        }
-    }
-
-    public partial class MetaEntity
-    {
-        public ComUniFloatingText ComUniFloatingText
-        {
-            get { return (ComUniFloatingText)GetComponent(MetaComponentsLookup.ComUniFloatingText); }
-        }
-
-        public bool hasComUniFloatingText
-        {
-            get { return HasComponent(MetaComponentsLookup.ComUniFloatingText); }
-        }
-
-        public void AddComUniFloatingText(IFloatingText newFloatingText)
+        public void SetComUniFloatingText(IFloatingText floatingText)
         {
             var index = MetaComponentsLookup.ComUniFloatingText;
-            var component = (ComUniFloatingText)CreateComponent(index, typeof(ComUniFloatingText));
-            component.FloatingText = newFloatingText;
-            AddComponent(index, component);
-        }
-
-        public void ReplaceComUniFloatingText(IFloatingText newFloatingText)
-        {
-            var index = MetaComponentsLookup.ComUniFloatingText;
-            var component = (ComUniFloatingText)CreateComponent(index, typeof(ComUniFloatingText));
-            component.FloatingText = newFloatingText;
-            ReplaceComponent(index, component);
-        }
-
-        public void RemoveComUniFloatingText()
-        {
-            var index = MetaComponentsLookup.ComUniFloatingText;
-            var component = (ComUniFloatingText)CreateComponent(index, typeof(ComUniFloatingText));
-            RemoveComponent(MetaComponentsLookup.ComUniFloatingText);
-        }
-    }
-
-    public sealed partial class MetaMatcher
-    {
-
-        static Entitas.IMatcher<MetaEntity> _matcherComUniFloatingText;
-
-        public static Entitas.IMatcher<MetaEntity> ComUniFloatingText
-        {
-            get
-            {
-                if (_matcherComUniFloatingText == null)
-                {
-                    var matcher = (Entitas.Matcher<MetaEntity>)Entitas.Matcher<MetaEntity>.AllOf(MetaComponentsLookup.ComUniFloatingText);
-                    matcher.ComponentNames = MetaComponentsLookup.componentNames;
-                    _matcherComUniFloatingText = matcher;
-                }
-
-                return _matcherComUniFloatingText;
-            }
+            var component = (ComUniFloatingText)UniqueEntity.CreateComponent(index, typeof(ComUniFloatingText));
+            component.FloatingText = floatingText;
+            SetUniqueComponent(index, component);
         }
     }
 
     public static partial class MetaComponentsLookup
     {
-        public static int ComUniFloatingText;
+        private static ComponentTypeIndex ComUniFloatingTextIndex = new ComponentTypeIndex(typeof(ComUniFloatingText));
+        public static int ComUniFloatingText => ComUniFloatingTextIndex.index;
     }
 }

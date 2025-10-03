@@ -29,6 +29,7 @@ namespace LccHotfix
             {
                 return skillDict[skillId];
             }
+
             return null;
         }
 
@@ -47,6 +48,7 @@ namespace LccHotfix
             {
                 return skill.CanSpellSkill();
             }
+
             return false;
         }
 
@@ -77,6 +79,7 @@ namespace LccHotfix
             int i = GetWeightIndex(skillWeight);
             FastSpellSkill(type, i, context);
         }
+
         private List<int> GetSkillWeightByType(SkillSpellType type)
         {
             List<int> list = new List<int>();
@@ -87,8 +90,10 @@ namespace LccHotfix
                     list.Add(item.skillData.Weight);
                 }
             }
+
             return list;
         }
+
         private int GetWeightIndex(List<int> weight)
         {
             int weightAll = 0;
@@ -101,8 +106,10 @@ namespace LccHotfix
                     Log.Error("随机出错");
                     return 0;
                 }
+
                 weightAll += item;
             }
+
             randNum = UnityEngine.Random.Range(1, weightAll + 1);
             for (int i = 0; i < weight.Count; i++)
             {
@@ -112,8 +119,10 @@ namespace LccHotfix
                     return i;
                 }
             }
+
             return 0;
         }
+
         public void FastSpellSkill(SkillSpellType type, int index, KVContext context = null)
         {
             var skill = GetSkillIdByType(type, index);
@@ -132,9 +141,11 @@ namespace LccHotfix
                     {
                         return item.skillId;
                     }
+
                     i++;
                 }
             }
+
             return skillId;
         }
     }
@@ -143,8 +154,15 @@ namespace LccHotfix
     public partial class LogicEntity
     {
 
-        public ComSkills comSkills { get { return (ComSkills)GetComponent(LogicComponentsLookup.ComSkills); } }
-        public bool hasComSkills { get { return HasComponent(LogicComponentsLookup.ComSkills); } }
+        public ComSkills comSkills
+        {
+            get { return (ComSkills)GetComponent(LogicComponentsLookup.ComSkills); }
+        }
+
+        public bool hasComSkills
+        {
+            get { return HasComponent(LogicComponentsLookup.ComSkills); }
+        }
 
         public void AddComSkills(Dictionary<int, SkillAbility> newSkillDict)
         {
@@ -167,28 +185,10 @@ namespace LccHotfix
             RemoveComponent(LogicComponentsLookup.ComSkills);
         }
     }
-    public sealed partial class LogicMatcher
-    {
 
-        static Entitas.IMatcher<LogicEntity> _matcherComSkills;
-
-        public static Entitas.IMatcher<LogicEntity> ComSkills
-        {
-            get
-            {
-                if (_matcherComSkills == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComSkills);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComSkills = matcher;
-                }
-
-                return _matcherComSkills;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComSkills;
+        private static ComponentTypeIndex ComSkillsIndex = new ComponentTypeIndex(typeof(ComSkills));
+        public static int ComSkills => ComSkillsIndex.index;
     }
 }

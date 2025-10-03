@@ -28,6 +28,7 @@ namespace LccHotfix
         {
             Agent.Update();
         }
+
         public void LateUpdate()
         {
             Agent.LateUpdate();
@@ -46,6 +47,7 @@ namespace LccHotfix
                     }
                 }
             }
+
             return Agent.IsFinish;
         }
 
@@ -63,7 +65,7 @@ namespace LccHotfix
 
 
             //清理特效
-            var entities = Owner.OwnerContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComOwnerEntity, LogicMatcher.ComTag)).GetEntities();
+            var entities = Owner.OwnerContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComOwnerEntity, LogicComponentsLookup.ComTag)).GetEntities();
             foreach (var entity in entities)
             {
                 if (entity.comOwnerEntity.ownerEntityID == Owner.comID.id)
@@ -71,6 +73,7 @@ namespace LccHotfix
                     entity.ReplaceComLife(0);
                 }
             }
+
             //开启移动
             Owner.comProperty.SetSubBool(BoolPropertyType.Moveable, SkillAbility.skillId, true);
 
@@ -79,7 +82,7 @@ namespace LccHotfix
             {
                 Owner.comProperty.SetSubBool(BoolPropertyType.Stunable, SkillAbility.skillId, true);
             }
-            
+
             Agent.Dispose();
         }
     }

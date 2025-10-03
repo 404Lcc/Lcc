@@ -96,6 +96,7 @@ namespace LccHotfix
             {
                 return false;
             }
+
             return true;
         }
 
@@ -116,6 +117,7 @@ namespace LccHotfix
                     context.Clear();
                 }
             }
+
             return false;
         }
 
@@ -148,6 +150,7 @@ namespace LccHotfix
             {
                 owner.RemoveComSkillProcess();
             }
+
             owner.AddComSkillProcess(process);
         }
 
@@ -158,6 +161,7 @@ namespace LccHotfix
             {
                 return null;
             }
+
             SkillData data = new SkillData();
             data.Init(config);
             return data;

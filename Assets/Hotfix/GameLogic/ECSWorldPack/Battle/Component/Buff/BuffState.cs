@@ -43,14 +43,8 @@ namespace LccHotfix
 
         public bool IsActive
         {
-            get
-            {
-                return _isActive;
-            }
-            set
-            {
-                _isActive = value;
-            }
+            get { return _isActive; }
+            set { _isActive = value; }
         }
 
         public void Init(BuffInfo info)
@@ -135,6 +129,7 @@ namespace LccHotfix
             {
                 item.OnDeactive();
             }
+
             _agent?.Trigger(BTAction.OnDeactiveBuff);
 
             _aliveTime = 0;
@@ -192,6 +187,7 @@ namespace LccHotfix
         {
             return Main.FXService.GetFX(_fxId);
         }
+
         private void PlayFX()
         {
         }

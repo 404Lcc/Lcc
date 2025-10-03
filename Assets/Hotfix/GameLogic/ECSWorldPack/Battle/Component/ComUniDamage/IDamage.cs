@@ -7,12 +7,14 @@ namespace LccHotfix
         /// 伤害
         /// </summary>
         void ApplyDamageByRate(long attackerId, long defenderId, float rate, DamageSource source, KVContext context = null);
+
         void ApplyDamageByFixed(long attackerId, long defenderId, float fixedValue, DamageSource source, KVContext context = null);
 
         /// <summary>
         /// 恢复
         /// </summary>
         void ApplyRecoverByRate(long attackerId, long defenderId, float rate, DamageSource source, KVContext context = null);
+
         void ApplyRecoverByFixed(long attackerId, long defenderId, float fixedValue, DamageSource source, KVContext context = null);
 
 
@@ -29,6 +31,7 @@ namespace LccHotfix
         /// <param name="data"></param>
         /// <returns></returns>
         float ApplyDamageChange(CalcDamageInfo info);
+
         void PreDamageChange(CalcDamageInfo info);
         void PostDamageChange(CalcDamageInfo info);
 
@@ -38,6 +41,7 @@ namespace LccHotfix
         /// <param name="data"></param>
         /// <returns></returns>
         float ApplyRecoverChange(CalcDamageInfo info);
+
         void PreRecoverChange(CalcDamageInfo info);
         void PostRecoverChange(CalcDamageInfo info);
 

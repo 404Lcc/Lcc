@@ -10,8 +10,15 @@ namespace LccHotfix
     public partial class LogicEntity
     {
 
-        public ComSkillProcess comSkillProcess { get { return (ComSkillProcess)GetComponent(LogicComponentsLookup.ComSkillProcess); } }
-        public bool hasComSkillProcess { get { return HasComponent(LogicComponentsLookup.ComSkillProcess); } }
+        public ComSkillProcess comSkillProcess
+        {
+            get { return (ComSkillProcess)GetComponent(LogicComponentsLookup.ComSkillProcess); }
+        }
+
+        public bool hasComSkillProcess
+        {
+            get { return HasComponent(LogicComponentsLookup.ComSkillProcess); }
+        }
 
         public void AddComSkillProcess(ISkillProcess newSkillProcess)
         {
@@ -35,28 +42,10 @@ namespace LccHotfix
             RemoveComponent(LogicComponentsLookup.ComSkillProcess);
         }
     }
-    public sealed partial class LogicMatcher
-    {
 
-        private static Entitas.IMatcher<LogicEntity> _matcherComSkillProcess;
-
-        public static Entitas.IMatcher<LogicEntity> ComSkillProcess
-        {
-            get
-            {
-                if (_matcherComSkillProcess == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComSkillProcess);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComSkillProcess = matcher;
-                }
-
-                return _matcherComSkillProcess;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComSkillProcess;
+        private static ComponentTypeIndex ComSkillProcessIndex = new ComponentTypeIndex(typeof(ComSkillProcess));
+        public static int ComSkillProcess => ComSkillProcessIndex.index;
     }
 }
