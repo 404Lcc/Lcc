@@ -45,9 +45,9 @@ namespace LccHotfix
             var data = new InGamePlayerData();
             data.InitData(mod.GetLocalPlayerSimpleData());
 
-            // BattleModeState state = new BattleModeState();
-            // state.Init(map, new List<InGamePlayerData>() { data });
-            // Main.WorldService.CreateWorld<BattleWorld>(state);
+            BattleWorldData worldData = new BattleWorldData();
+            worldData.Init(map, new List<InGamePlayerData>() { data });
+            Main.WorldService.CreateWorld<BattleWorld>(worldData);
 
             yield return new WaitForSeconds(1f);
 
