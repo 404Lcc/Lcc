@@ -42,8 +42,15 @@ namespace LccHotfix
     public partial class LogicEntity
     {
 
-        public ComCollider comCollider { get { return (ComCollider)GetComponent(LogicComponentsLookup.ComCollider); } }
-        public bool hasComCollider { get { return HasComponent(LogicComponentsLookup.ComCollider); } }
+        public ComCollider comCollider
+        {
+            get { return (ComCollider)GetComponent(LogicComponentsLookup.ComCollider); }
+        }
+
+        public bool hasComCollider
+        {
+            get { return HasComponent(LogicComponentsLookup.ComCollider); }
+        }
 
         public void AddComCollider(IEntityColliderHandler newHandler)
         {
@@ -68,28 +75,10 @@ namespace LccHotfix
             RemoveComponent(LogicComponentsLookup.ComCollider);
         }
     }
-    public sealed partial class LogicMatcher
-    {
 
-        private static Entitas.IMatcher<LogicEntity> _matcherComCollider;
-
-        public static Entitas.IMatcher<LogicEntity> ComCollider
-        {
-            get
-            {
-                if (_matcherComCollider == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComCollider);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComCollider = matcher;
-                }
-
-                return _matcherComCollider;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComCollider;
+        private static ComponentTypeIndex ComColliderIndex = new ComponentTypeIndex(typeof(ComCollider));
+        public static int ComCollider => ComColliderIndex.index;
     }
 }

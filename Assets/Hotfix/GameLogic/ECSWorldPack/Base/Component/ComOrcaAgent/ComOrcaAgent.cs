@@ -70,28 +70,9 @@ namespace LccHotfix
 
     }
 
-    public sealed partial class LogicMatcher
-    {
-        private static Entitas.IMatcher<LogicEntity> _matcherComOrcaAgent;
-
-        public static Entitas.IMatcher<LogicEntity> ComOrcaAgent
-        {
-            get
-            {
-                if (_matcherComOrcaAgent == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComOrcaAgent);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComOrcaAgent = matcher;
-                }
-
-                return _matcherComOrcaAgent;
-            }
-        }
-    }
-
     public static partial class LogicComponentsLookup
     {
-        public static int ComOrcaAgent;
+        private static ComponentTypeIndex ComOrcaAgentIndex = new ComponentTypeIndex(typeof(ComOrcaAgent));
+        public static int ComOrcaAgent => ComOrcaAgentIndex.index;
     }
 }

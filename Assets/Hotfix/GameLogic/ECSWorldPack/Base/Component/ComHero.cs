@@ -28,7 +28,7 @@ namespace LccHotfix
             AddComponent(index, component);
             return component;
         }
-        
+
         public void RemoveComHero()
         {
             RemoveComponent(LogicComponentsLookup.ComHero);
@@ -36,29 +36,9 @@ namespace LccHotfix
 
     }
 
-    public sealed partial class LogicMatcher
-    {
-
-        static Entitas.IMatcher<LogicEntity> _matcherComHero;
-
-        public static Entitas.IMatcher<LogicEntity> ComHero
-        {
-            get
-            {
-                if (_matcherComHero == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComHero);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComHero = matcher;
-                }
-
-                return _matcherComHero;
-            }
-        }
-    }
-
     public static partial class LogicComponentsLookup
     {
-        public static int ComHero;
+        private static ComponentTypeIndex ComHeroIndex = new ComponentTypeIndex(typeof(ComHero));
+        public static int ComHero => ComHeroIndex.index;
     }
 }

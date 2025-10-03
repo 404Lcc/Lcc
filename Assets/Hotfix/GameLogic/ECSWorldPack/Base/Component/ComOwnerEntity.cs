@@ -7,8 +7,15 @@ namespace LccHotfix
 
     public partial class LogicEntity
     {
-        public ComOwnerEntity comOwnerEntity { get { return (ComOwnerEntity)GetComponent(LogicComponentsLookup.ComOwnerEntity); } }
-        public bool hasComOwnerEntity { get { return HasComponent(LogicComponentsLookup.ComOwnerEntity); } }
+        public ComOwnerEntity comOwnerEntity
+        {
+            get { return (ComOwnerEntity)GetComponent(LogicComponentsLookup.ComOwnerEntity); }
+        }
+
+        public bool hasComOwnerEntity
+        {
+            get { return HasComponent(LogicComponentsLookup.ComOwnerEntity); }
+        }
 
         public void AddComOwnerEntity(long newOwnerEntityID)
         {
@@ -27,27 +34,9 @@ namespace LccHotfix
         }
     }
 
-    public sealed partial class LogicMatcher
-    {
-        private static Entitas.IMatcher<LogicEntity> _matcherComOwnerEntity;
-
-        public static Entitas.IMatcher<LogicEntity> ComOwnerEntity
-        {
-            get
-            {
-                if (_matcherComOwnerEntity == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComOwnerEntity);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComOwnerEntity = matcher;
-                }
-
-                return _matcherComOwnerEntity;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComOwnerEntity;
+        private static ComponentTypeIndex ComOwnerEntityIndex = new ComponentTypeIndex(typeof(ComOwnerEntity));
+        public static int ComOwnerEntity => ComOwnerEntityIndex.index;
     }
 }

@@ -20,8 +20,15 @@ namespace LccHotfix
 
     public partial class LogicEntity
     {
-        public ComTag comTag { get { return (ComTag)GetComponent(LogicComponentsLookup.ComTag); } }
-        public bool hasComTag { get { return HasComponent(LogicComponentsLookup.ComTag); } }
+        public ComTag comTag
+        {
+            get { return (ComTag)GetComponent(LogicComponentsLookup.ComTag); }
+        }
+
+        public bool hasComTag
+        {
+            get { return HasComponent(LogicComponentsLookup.ComTag); }
+        }
 
         public void AddComTag(TagType newTag)
         {
@@ -45,27 +52,9 @@ namespace LccHotfix
         }
     }
 
-    public sealed partial class LogicMatcher
-    {
-        private static Entitas.IMatcher<LogicEntity> _matcherComTag;
-
-        public static Entitas.IMatcher<LogicEntity> ComTag
-        {
-            get
-            {
-                if (_matcherComTag == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComTag);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComTag = matcher;
-                }
-
-                return _matcherComTag;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComTag;
+        private static ComponentTypeIndex ComTagIndex = new ComponentTypeIndex(typeof(ComTag));
+        public static int ComTag => ComTagIndex.index;
     }
 }

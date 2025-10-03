@@ -15,7 +15,7 @@ namespace LccHotfix
         public LogicEntity Entity { get; private set; }
 
         public int AgentId { get; set; }
-        public Simulator Simulator => WorldUtility.GetMetaContext().ComUniOrca.Simulator;
+        public Simulator Simulator => WorldUtility.GetMetaContext().ComUniOrca.simulator;
 
         public void InitAgent(LogicEntity entity)
         {

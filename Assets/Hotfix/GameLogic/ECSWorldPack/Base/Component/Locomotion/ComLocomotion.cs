@@ -18,16 +18,11 @@ namespace LccHotfix
     public class ComLocomotion : LogicComponent
     {
         private ILocomotion _locomotion;
+
         public ILocomotion Locomotion
         {
-            get
-            {
-                return _locomotion;
-            }
-            set
-            {
-                _locomotion = value;
-            }
+            get { return _locomotion; }
+            set { _locomotion = value; }
         }
 
         public override void Dispose()
@@ -40,19 +35,26 @@ namespace LccHotfix
 
     public partial class LogicEntity
     {
-        public ComLocomotion comLocomotion { get { return (ComLocomotion)GetComponent(LogicComponentsLookup.ComLocomotion); } }
-        public bool hasComLocomotion { get { return HasComponent(LogicComponentsLookup.ComLocomotion); } }
+        public ComLocomotion comLocomotion
+        {
+            get { return (ComLocomotion)GetComponent(LogicComponentsLookup.ComLocomotion); }
+        }
+
+        public bool hasComLocomotion
+        {
+            get { return HasComponent(LogicComponentsLookup.ComLocomotion); }
+        }
 
 
         public void ChangeLocomotion(ILocomotion locomotion)
         {
-            if(!hasComTransform)
+            if (!hasComTransform)
                 return;
-            
+
             locomotion.CurPosition = comTransform.position;
             locomotion.CurRotation = comTransform.rotation;
             locomotion.CurScale = comTransform.scale;
-            
+
             if (hasComLocomotion)
             {
                 var index = LogicComponentsLookup.ComLocomotion;
@@ -78,27 +80,10 @@ namespace LccHotfix
             }
         }
     }
-    public sealed partial class LogicMatcher
-    {
-        private static Entitas.IMatcher<LogicEntity> _matcherComLocomotion;
 
-        public static Entitas.IMatcher<LogicEntity> ComLocomotion
-        {
-            get
-            {
-                if (_matcherComLocomotion == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComLocomotion);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComLocomotion = matcher;
-                }
-
-                return _matcherComLocomotion;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComLocomotion;
+        private static ComponentTypeIndex ComLocomotionIndex = new ComponentTypeIndex(typeof(ComLocomotion));
+        public static int ComLocomotion => ComLocomotionIndex.index;
     }
 }

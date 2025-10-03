@@ -15,12 +15,14 @@ namespace LccHotfix
 
             timerList.Add(timerTask);
         }
+
         public override void Dispose()
         {
             foreach (var item in timerList)
             {
                 item.Dispose();
             }
+
             timerList.Clear();
 
             base.Dispose();
@@ -85,28 +87,9 @@ namespace LccHotfix
         }
     }
 
-    public sealed partial class LogicMatcher
-    {
-
-        private static Entitas.IMatcher<LogicEntity> _matcherComTimer;
-
-        public static Entitas.IMatcher<LogicEntity> ComTimer
-        {
-            get
-            {
-                if (_matcherComTimer == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComTimer);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComTimer = matcher;
-                }
-
-                return _matcherComTimer;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComTimer;
+        private static ComponentTypeIndex ComTimerIndex = new ComponentTypeIndex(typeof(ComTimer));
+        public static int ComTimer => ComTimerIndex.index;
     }
 }

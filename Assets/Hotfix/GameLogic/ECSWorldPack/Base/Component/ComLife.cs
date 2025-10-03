@@ -12,8 +12,15 @@ namespace LccHotfix
 
     public partial class LogicEntity
     {
-        public ComLife comLife { get { return (ComLife)GetComponent(LogicComponentsLookup.ComLife); } }
-        public bool hasComLife { get { return HasComponent(LogicComponentsLookup.ComLife); } }
+        public ComLife comLife
+        {
+            get { return (ComLife)GetComponent(LogicComponentsLookup.ComLife); }
+        }
+
+        public bool hasComLife
+        {
+            get { return HasComponent(LogicComponentsLookup.ComLife); }
+        }
 
         public void AddComLife(float newDuration)
         {
@@ -37,27 +44,9 @@ namespace LccHotfix
         }
     }
 
-    public sealed partial class LogicMatcher
-    {
-        private static Entitas.IMatcher<LogicEntity> _matcherComLife;
-
-        public static Entitas.IMatcher<LogicEntity> ComLife
-        {
-            get
-            {
-                if (_matcherComLife == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComLife);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComLife = matcher;
-                }
-
-                return _matcherComLife;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComLife;
+        private static ComponentTypeIndex ComLifeIndex = new ComponentTypeIndex(typeof(ComLife));
+        public static int ComLife => ComLifeIndex.index;
     }
 }

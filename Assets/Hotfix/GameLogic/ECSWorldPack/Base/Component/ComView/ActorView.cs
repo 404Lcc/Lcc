@@ -35,7 +35,7 @@ namespace LccHotfix
 
             _gameObject = null;
             _animator = null;
-            
+
             GameUtility.PutObj(ref _poolObject);
         }
 

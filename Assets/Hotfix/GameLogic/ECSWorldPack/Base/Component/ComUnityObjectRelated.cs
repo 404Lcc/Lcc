@@ -19,8 +19,10 @@ namespace LccHotfix
             {
                 return type;
             }
+
             return GameObjectType.None;
         }
+
         public override void Dispose()
         {
             base.Dispose();
@@ -31,8 +33,15 @@ namespace LccHotfix
 
     public partial class LogicEntity
     {
-        public ComUnityObjectRelated comUnityObjectRelated { get { return (ComUnityObjectRelated)GetComponent(LogicComponentsLookup.ComUnityObjectRelated); } }
-        public bool hasComUnityObjectRelated { get { return HasComponent(LogicComponentsLookup.ComUnityObjectRelated); } }
+        public ComUnityObjectRelated comUnityObjectRelated
+        {
+            get { return (ComUnityObjectRelated)GetComponent(LogicComponentsLookup.ComUnityObjectRelated); }
+        }
+
+        public bool hasComUnityObjectRelated
+        {
+            get { return HasComponent(LogicComponentsLookup.ComUnityObjectRelated); }
+        }
 
         public void AddComUnityObjectRelated(Dictionary<int, GameObjectType> newGameObjectInstanceID)
         {
@@ -56,26 +65,9 @@ namespace LccHotfix
         }
     }
 
-    public sealed partial class LogicMatcher
-    {
-        private static Entitas.IMatcher<LogicEntity> _matcherComUnityObjectRelated;
-        public static Entitas.IMatcher<LogicEntity> ComUnityObjectRelated
-        {
-            get
-            {
-                if (_matcherComUnityObjectRelated == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComUnityObjectRelated);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComUnityObjectRelated = matcher;
-                }
-
-                return _matcherComUnityObjectRelated;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComUnityObjectRelated;
+        private static ComponentTypeIndex ComUnityObjectRelatedIndex = new ComponentTypeIndex(typeof(ComUnityObjectRelated));
+        public static int ComUnityObjectRelated => ComUnityObjectRelatedIndex.index;
     }
 }

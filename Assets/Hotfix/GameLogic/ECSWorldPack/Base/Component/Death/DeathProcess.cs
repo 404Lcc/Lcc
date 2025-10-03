@@ -8,7 +8,7 @@ namespace LccHotfix
 
         public void Start()
         {
-            var list = Entity.OwnerContext.GetGroup(LogicMatcher.AllOf(LogicMatcher.ComID, LogicMatcher.ComOwnerEntity, LogicMatcher.ComTag)).GetEntities();
+            var list = Entity.OwnerContext.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComID, LogicComponentsLookup.ComOwnerEntity, LogicComponentsLookup.ComTag)).GetEntities();
             foreach (var entity in list)
             {
                 if (entity.comOwnerEntity.ownerEntityID == Entity.comID.id)
@@ -20,9 +20,11 @@ namespace LccHotfix
             _isFinish = true;
 
         }
+
         public void Update()
         {
         }
+
         public bool IsFinished()
         {
             return _isFinish;

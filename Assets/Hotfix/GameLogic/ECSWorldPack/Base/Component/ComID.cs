@@ -7,8 +7,15 @@ namespace LccHotfix
 
     public partial class LogicEntity
     {
-        public ComID comID { get { return (ComID)GetComponent(LogicComponentsLookup.ComID); } }
-        public bool hasComID { get { return HasComponent(LogicComponentsLookup.ComID); } }
+        public ComID comID
+        {
+            get { return (ComID)GetComponent(LogicComponentsLookup.ComID); }
+        }
+
+        public bool hasComID
+        {
+            get { return HasComponent(LogicComponentsLookup.ComID); }
+        }
 
         public void AddComID(long newId)
         {
@@ -19,27 +26,9 @@ namespace LccHotfix
         }
     }
 
-    public sealed partial class LogicMatcher
-    {
-        private static Entitas.IMatcher<LogicEntity> _matcherComID;
-
-        public static Entitas.IMatcher<LogicEntity> ComID
-        {
-            get
-            {
-                if (_matcherComID == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComID);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComID = matcher;
-                }
-
-                return _matcherComID;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComID;
+        private static ComponentTypeIndex ComIDIndex = new ComponentTypeIndex(typeof(ComID));
+        public static int ComID => ComIDIndex.index;
     }
 }

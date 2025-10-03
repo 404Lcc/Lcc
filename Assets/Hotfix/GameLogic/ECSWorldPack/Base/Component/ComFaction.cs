@@ -3,8 +3,8 @@ namespace LccHotfix
     public enum FactionType
     {
         None = 0,
-        Friend = 1,//友方
-        Enemy = 2,//敌方
+        Friend = 1, //友方
+        Enemy = 2, //敌方
     }
 
     public class ComFaction : LogicComponent
@@ -14,8 +14,15 @@ namespace LccHotfix
 
     public partial class LogicEntity
     {
-        public ComFaction comFaction { get { return (ComFaction)GetComponent(LogicComponentsLookup.ComFaction); } }
-        public bool hasComFaction { get { return HasComponent(LogicComponentsLookup.ComFaction); } }
+        public ComFaction comFaction
+        {
+            get { return (ComFaction)GetComponent(LogicComponentsLookup.ComFaction); }
+        }
+
+        public bool hasComFaction
+        {
+            get { return HasComponent(LogicComponentsLookup.ComFaction); }
+        }
 
         public void AddComFaction(FactionType newFaction)
         {
@@ -39,27 +46,9 @@ namespace LccHotfix
         }
     }
 
-    public sealed partial class LogicMatcher
-    {
-        private static Entitas.IMatcher<LogicEntity> _matcherComFaction;
-
-        public static Entitas.IMatcher<LogicEntity> ComFaction
-        {
-            get
-            {
-                if (_matcherComFaction == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComFaction);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComFaction = matcher;
-                }
-
-                return _matcherComFaction;
-            }
-        }
-    }
     public static partial class LogicComponentsLookup
     {
-        public static int ComFaction;
+        private static ComponentTypeIndex ComFactionIndex = new ComponentTypeIndex(typeof(ComFaction));
+        public static int ComFaction => ComFactionIndex.index;
     }
 }

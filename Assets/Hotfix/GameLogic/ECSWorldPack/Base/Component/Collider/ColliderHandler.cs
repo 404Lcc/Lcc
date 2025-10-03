@@ -17,6 +17,7 @@ namespace LccHotfix
             this._point = point;
         }
     }
+
     public abstract class ColliderHandler : IEntityColliderHandler
     {
         private ContactFilter2D _contactFilter2D;

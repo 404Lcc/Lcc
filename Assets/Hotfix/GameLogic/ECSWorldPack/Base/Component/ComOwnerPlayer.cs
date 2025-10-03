@@ -36,29 +36,9 @@ namespace LccHotfix
         }
     }
 
-    public sealed partial class LogicMatcher
-    {
-
-        static Entitas.IMatcher<LogicEntity> _matcherComOwnerPlayer;
-
-        public static Entitas.IMatcher<LogicEntity> ComOwnerPlayer
-        {
-            get
-            {
-                if (_matcherComOwnerPlayer == null)
-                {
-                    var matcher = (Entitas.Matcher<LogicEntity>)Entitas.Matcher<LogicEntity>.AllOf(LogicComponentsLookup.ComOwnerPlayer);
-                    matcher.ComponentNames = LogicComponentsLookup.componentNames;
-                    _matcherComOwnerPlayer = matcher;
-                }
-
-                return _matcherComOwnerPlayer;
-            }
-        }
-    }
-
     public static partial class LogicComponentsLookup
     {
-        public static int ComOwnerPlayer;
+        private static ComponentTypeIndex ComOwnerPlayerIndex = new ComponentTypeIndex(typeof(ComOwnerPlayer));
+        public static int ComOwnerPlayer => ComOwnerPlayerIndex.index;
     }
 }

@@ -60,7 +60,8 @@ namespace LccHotfix
             {
                 PlayerList.Remove(updateData);
                 PlayerList.Add(data);
-                Owner.ReplaceComUniInGamePlayers(PlayerList);
+
+                Owner.ReplaceComponent(MetaComponentsLookup.ComUniInGamePlayers, this);
             }
             else
             {
@@ -91,26 +92,23 @@ namespace LccHotfix
                 }
             }
 
-            List<InGamePlayerData> list = new List<InGamePlayerData>();
-            list.Add(data);
+            PlayerList.Add(data);
 
-            Owner.ReplaceComUniInGamePlayers(list);
+            Owner.ReplaceComponent(MetaComponentsLookup.ComUniInGamePlayers, this);
         }
 
         public void RemovePlayer(InGamePlayerData data)
         {
-            List<InGamePlayerData> list = new List<InGamePlayerData>();
-            list.AddRange(PlayerList);
-
-            foreach (var item in PlayerList)
+            for (int i = PlayerList.Count - 1; i >= 0; i--)
             {
+                var item = PlayerList[i];
                 if (item.PlayerUID == data.PlayerUID)
                 {
-                    list.Remove(item);
+                    PlayerList.Remove(item);
                 }
             }
 
-            Owner.ReplaceComUniInGamePlayers(list);
+            Owner.ReplaceComponent(MetaComponentsLookup.ComUniInGamePlayers, this);
         }
 
         public override void Dispose()
@@ -124,100 +122,38 @@ namespace LccHotfix
 
     public partial class MetaContext
     {
-        public MetaEntity comUniInGamePlayersEntity
+        public ComUniInGamePlayers ComUniInGamePlayers
         {
-            get { return GetGroup(MetaMatcher.ComUniInGamePlayers).GetSingleEntity(); }
-        }
-
-        public ComUniInGamePlayers comUniInGamePlayers
-        {
-            get { return comUniInGamePlayersEntity.comUniInGamePlayers; }
+            get { return GetUniqueComponent<ComUniInGamePlayers>(MetaComponentsLookup.ComUniInGamePlayers); }
         }
 
         public bool hasComUniInGamePlayers
         {
-            get { return comUniInGamePlayersEntity != null; }
+            get { return HasUniqueComponent(MetaComponentsLookup.ComUniInGamePlayers); }
         }
 
-        public MetaEntity SetComUniInGamePlayers(List<InGamePlayerData> list)
+        public void SetComUniInGamePlayers(List<InGamePlayerData> list)
         {
-            if (hasComUniInGamePlayers)
-            {
-                var entity = comUniInGamePlayersEntity;
-                entity.ReplaceComUniInGamePlayers(list);
-                return entity;
-            }
-            else
-            {
-                var entity = CreateEntity();
-                entity.AddComUniInGamePlayers(list);
-                return entity;
-            }
+            var index = MetaComponentsLookup.ComUniInGamePlayers;
+            var component = (ComUniInGamePlayers)UniqueEntity.CreateComponent(index, typeof(ComUniInGamePlayers));
+            component.InitPlayerList(list);
+            SetUniqueComponent(index, component);
         }
 
         public InGamePlayerData GetPlayer(long playerUID)
         {
             if (hasComUniInGamePlayers)
             {
-                var entity = comUniInGamePlayersEntity;
-                return entity.comUniInGamePlayers.GetPlayer(playerUID);
+                return ComUniInGamePlayers.GetPlayer(playerUID);
             }
 
             return null;
         }
     }
 
-    public partial class MetaEntity
-    {
-        public ComUniInGamePlayers comUniInGamePlayers
-        {
-            get { return (ComUniInGamePlayers)GetComponent(MetaComponentsLookup.ComUniInGamePlayers); }
-        }
-
-        public bool hasComUniInGamePlayers
-        {
-            get { return HasComponent(MetaComponentsLookup.ComUniInGamePlayers); }
-        }
-
-        public void AddComUniInGamePlayers(List<InGamePlayerData> list)
-        {
-            var index = MetaComponentsLookup.ComUniInGamePlayers;
-            var component = (ComUniInGamePlayers)CreateComponent(index, typeof(ComUniInGamePlayers));
-            component.InitPlayerList(list);
-            AddComponent(index, component);
-        }
-
-        public void ReplaceComUniInGamePlayers(List<InGamePlayerData> list)
-        {
-            var index = MetaComponentsLookup.ComUniInGamePlayers;
-            var component = (ComUniInGamePlayers)CreateComponent(index, typeof(ComUniInGamePlayers));
-            component.InitPlayerList(list);
-            ReplaceComponent(index, component);
-        }
-    }
-
-    public sealed partial class MetaMatcher
-    {
-        static Entitas.IMatcher<MetaEntity> _matcherComUniInGamePlayers;
-
-        public static Entitas.IMatcher<MetaEntity> ComUniInGamePlayers
-        {
-            get
-            {
-                if (_matcherComUniInGamePlayers == null)
-                {
-                    var matcher = (Entitas.Matcher<MetaEntity>)Entitas.Matcher<MetaEntity>.AllOf(MetaComponentsLookup.ComUniInGamePlayers);
-                    matcher.ComponentNames = MetaComponentsLookup.componentNames;
-                    _matcherComUniInGamePlayers = matcher;
-                }
-
-                return _matcherComUniInGamePlayers;
-            }
-        }
-    }
-
     public static partial class MetaComponentsLookup
     {
-        public static int ComUniInGamePlayers;
+        private static ComponentTypeIndex ComUniInGamePlayersIndex = new ComponentTypeIndex(typeof(ComUniInGamePlayers));
+        public static int ComUniInGamePlayers => ComUniInGamePlayersIndex.index;
     }
 }
