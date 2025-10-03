@@ -111,28 +111,6 @@ public static class EntityUtility
         return null;
     }
 
-    public static LogicEntity GetOwnerPlayerHero(BTAgent agent)
-    {
-        var entity = agent.GetSelfEntity();
-        if (entity == null)
-        {
-            return null;
-        }
-
-        if (entity.hasComHero)
-        {
-            return entity;
-        }
-
-        if (entity.hasComOwnerPlayer)
-        {
-            return GetHero(entity.comOwnerPlayer.UID);
-        }
-
-        return null;
-    }
-
-
     public static LogicEntity GetOwnerEntity(LogicEntity entity)
     {
         if (!entity.hasComOwnerEntity)

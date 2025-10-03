@@ -17,15 +17,15 @@ namespace LccHotfix
             var metaContext = GetMetaContext();
             if (metaContext.hasComUniGameMode)
             {
-                return metaContext.comUniGameMode.mode as T;
+                return metaContext.ComUniGameMode.mode as T;
             }
 
             return null;
         }
 
-        public static IGroup<LogicEntity> GetLogicGroup(params IMatcher<LogicEntity>[] matchers)
+        public static IGroup<LogicEntity> GetLogicGroup(params int[] indices)
         {
-            var matcher = LogicMatcher.AllOf(matchers);
+            var matcher = LogicMatcher.AllOf(indices);
             var world = Main.WorldService.GetWorld();
             if (world == null)
                 return new Group<LogicEntity>(matcher);
@@ -35,19 +35,19 @@ namespace LccHotfix
 
         public static IGroup<LogicEntity> GetLogicGroup_Faction_Property_Transform()
         {
-            return GetLogicGroup(LogicMatcher.ComFaction, LogicMatcher.ComProperty, LogicMatcher.ComTransform);
+            return GetLogicGroup(LogicComponentsLookup.ComFaction, LogicComponentsLookup.ComProperty, LogicComponentsLookup.ComTransform);
         }
 
         public static IGroup<LogicEntity> GetLogicGroup_Subobject_Faction_Transform()
         {
 
-            return GetLogicGroup(LogicMatcher.ComSubobject, LogicMatcher.ComFaction, LogicMatcher.ComTransform);
+            return GetLogicGroup(LogicComponentsLookup.ComSubobject, LogicComponentsLookup.ComFaction, LogicComponentsLookup.ComTransform);
         }
 
         public static IGroup<LogicEntity> GetLogicGroup_OwnerEntity_Tag()
         {
 
-            return GetLogicGroup(LogicMatcher.ComOwnerEntity, LogicMatcher.ComTag);
+            return GetLogicGroup(LogicComponentsLookup.ComOwnerEntity, LogicComponentsLookup.ComTag);
         }
     }
 }

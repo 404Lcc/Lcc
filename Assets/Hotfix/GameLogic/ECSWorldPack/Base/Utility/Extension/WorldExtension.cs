@@ -32,7 +32,7 @@ namespace LccHotfix
 
         public static void AddBattle(this ECSWorld world)
         {
-            LogicSystems System = world.System;
+            ECSSystems System = world.System;
 
             //控制
             System.Add(new SysControl(world));
@@ -70,7 +70,7 @@ namespace LccHotfix
 
         public static void AddRender(this ECSWorld world)
         {
-            LogicSystems System = world.System;
+            ECSSystems System = world.System;
             //显示
             System.Add(new SysSyncViewTransform(world));
             System.Add(new SysViewUpdate(world));
@@ -81,7 +81,7 @@ namespace LccHotfix
 
         public static void AddDeath(this ECSWorld world)
         {
-            LogicSystems System = world.System;
+            ECSSystems System = world.System;
             //生命周期
             System.Add(new SysLife(world));
             System.Add(new SysDeathProcess(world));
