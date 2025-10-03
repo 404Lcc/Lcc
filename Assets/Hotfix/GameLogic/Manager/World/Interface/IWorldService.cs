@@ -17,17 +17,12 @@ namespace LccHotfix
 {
     public interface IWorldService : IService
     {
-        void CreateWorld<T>(GameModeState gameModeState) where T : ECSWorld;
+        void CreateWorld<T>(IWorldData data) where T : ECSWorld;
 
         ECSWorld GetWorld();
 
         T GetWorld<T>() where T : ECSWorld;
 
         void ExitWorld();
-
-
-        void PauseWorld();
-
-        void ResumeWorld();
     }
 }

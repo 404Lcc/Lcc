@@ -27,14 +27,14 @@ namespace LccHotfix
             if (_world == null)
                 return;
 
-            _world.Exit();
+            _world.DestroyWorld();
             _world = null;
         }
 
-        public void CreateWorld<T>(GameModeState gameModeState) where T : ECSWorld
+        public void CreateWorld<T>(IWorldData data) where T : ECSWorld
         {
             _world = Activator.CreateInstance<T>();
-            _world.InitWorld(gameModeState);
+            _world.InitWorld(data);
         }
 
         public ECSWorld GetWorld()
@@ -55,23 +55,8 @@ namespace LccHotfix
         {
             if (_world == null)
                 return;
-            _world.Exit();
+            _world.DestroyWorld();
             _world = null;
-        }
-
-
-        public void PauseWorld()
-        {
-            if (_world == null)
-                return;
-            _world.Pause();
-        }
-
-        public void ResumeWorld()
-        {
-            if (_world == null)
-                return;
-            _world.Resume();
         }
     }
 }
