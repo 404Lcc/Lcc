@@ -7,7 +7,18 @@ namespace LccHotfix
     {
         protected MetaEntity _uniqueEntity;
 
-        public MetaEntity UniqueEntity => _uniqueEntity;
+        public MetaEntity UniqueEntity
+        {
+            get
+            {
+                if (_uniqueEntity == null)
+                {
+                    _uniqueEntity = CreateEntity();
+                }
+
+                return _uniqueEntity;
+            }
+        }
 
         public MetaContext(int totalComponents, int startCreationIndex, ContextInfo contextInfo, Func<Entity, IAERC> aercFactory, Func<MetaEntity> entityFactory) : base(totalComponents, startCreationIndex, contextInfo, aercFactory, entityFactory)
         {
