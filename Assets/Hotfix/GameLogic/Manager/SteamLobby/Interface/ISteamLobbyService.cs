@@ -8,12 +8,15 @@ namespace LccHotfix
         LobbyData CurrentLobbyData { get; set; }
 
         void SetLobbyCallbackHelper(ILobbyCallbackHelper lobbyCallbackHelper);
-        
+
         // 创建大厅
         void CreateLobby();
 
         // 加入大厅
         void JoinLobby(ulong lobbyID);
+
+        // 邀请加入大厅
+        void InviteJoinLobby();
 
         // 离开大厅
         void LeaveLobby();

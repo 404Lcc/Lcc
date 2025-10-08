@@ -142,12 +142,20 @@ namespace LccHotfix
             SteamMatchmaking.JoinLobby(id);
         }
 
+        // 邀请加入大厅
+        public void InviteJoinLobby()
+        {
+            if (CurrentLobbyData == null)
+                return;
+
+            SteamFriends.ActivateGameOverlayInviteDialog(CurrentLobbyData.LobbyID);
+        }
+
         // 离开大厅
         public void LeaveLobby()
         {
             if (CurrentLobbyData == null)
                 return;
-
             var lobbyId = CurrentLobbyData.LobbyID;
             CurrentLobbyData = null;
 
