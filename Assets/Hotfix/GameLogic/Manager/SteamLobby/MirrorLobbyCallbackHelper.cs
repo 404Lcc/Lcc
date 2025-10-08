@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using Steamworks;
 using UnityEngine;
 
@@ -27,6 +28,17 @@ namespace LccHotfix
             string hostAddress = lobbyData.GetLobbyCustomData("HostAddress");
             Main.MirrorService.SetNetworkAddress(hostAddress);
             Main.MirrorService.Connect();
+        }
+
+        /// <summary>
+        /// 离开大厅完成
+        /// </summary>
+        public void OnLeaveLobby()
+        {
+            if (Main.MirrorService.IsNetworkActive())
+            {
+                Main.MirrorService.StopHost();
+            }
         }
 
         /// <summary>

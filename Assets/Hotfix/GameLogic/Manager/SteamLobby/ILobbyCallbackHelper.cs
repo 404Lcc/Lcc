@@ -10,6 +10,8 @@ namespace LccHotfix
 
         void OnLobbyEnter(LobbyData lobbyData);
 
+        void OnLeaveLobby();
+
         void OnLobbyMatchListCallback(List<LobbyData> lobbyDataList);
     }
 }

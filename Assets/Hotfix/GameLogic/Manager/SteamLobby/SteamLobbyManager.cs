@@ -90,6 +90,9 @@ namespace LccHotfix
         // 创建大厅的回调
         private Callback<LobbyCreated_t> _lobbyCreatedCallResult;
 
+        // 收到大厅变动
+        private Callback<LobbyChatUpdate_t> _lobbyChatUpdateCallResult;
+
         // 收到加入大厅申请的回调
         private Callback<GameLobbyJoinRequested_t> _lobbyJoinRequested;
 
@@ -105,6 +108,7 @@ namespace LccHotfix
         public SteamLobbyManager()
         {
             _lobbyCreatedCallResult = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
+            _lobbyChatUpdateCallResult = Callback<LobbyChatUpdate_t>.Create(OnLobbyChatUpdate);
             _lobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnLobbyJoinRequested);
             _lobbyEnterCallResult = Callback<LobbyEnter_t>.Create(OnLobbyEnter);
             _lobbyMatchListCallResult = Callback<LobbyMatchList_t>.Create(OnLobbyMatchList);
@@ -144,7 +148,12 @@ namespace LccHotfix
             if (CurrentLobbyData == null)
                 return;
 
-            SteamMatchmaking.LeaveLobby(CurrentLobbyData.LobbyID);
+            var lobbyId = CurrentLobbyData.LobbyID;
+            CurrentLobbyData = null;
+
+            _lobbyCallbackHelper.OnLeaveLobby();
+
+            SteamMatchmaking.LeaveLobby(lobbyId);
         }
 
         // 查找大厅列表
@@ -190,6 +199,29 @@ namespace LccHotfix
             else
             {
                 Debug.LogError("创建大厅失败" + param.m_eResult);
+            }
+        }
+
+        /// <summary>
+        /// 收到大厅变动的回调
+        /// </summary>
+        /// <param name="callback"></param>
+        private void OnLobbyChatUpdate(LobbyChatUpdate_t callback)
+        {
+            Debug.Log("收到大厅变动");
+            EChatMemberStateChange type = (EChatMemberStateChange)callback.m_rgfChatMemberStateChange;
+            switch (type)
+            {
+                case EChatMemberStateChange.k_EChatMemberStateChangeEntered:
+                    break;
+                case EChatMemberStateChange.k_EChatMemberStateChangeLeft:
+                    break;
+                case EChatMemberStateChange.k_EChatMemberStateChangeDisconnected:
+                    break;
+                case EChatMemberStateChange.k_EChatMemberStateChangeKicked:
+                    break;
+                case EChatMemberStateChange.k_EChatMemberStateChangeBanned:
+                    break;
             }
         }
 
