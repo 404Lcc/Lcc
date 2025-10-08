@@ -14,7 +14,7 @@ namespace LccHotfix
         /// <param name="data"></param>
         public void OnLobbyCreated(LobbyData lobbyData)
         {
-            lobbyData.SetLobbyCustomData("HostAddress", SteamUser.GetSteamID().ToString());
+            lobbyData.SetLobbyCustomData("HostAddress", lobbyData.LobbyID.ToString());
             Main.MirrorService.SetNetworkAddress();
             Main.MirrorService.StartHost();
         }
