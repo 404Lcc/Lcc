@@ -47,8 +47,6 @@ namespace LccHotfix
             if (!_init)
                 return;
             _init = false;
-            NetworkServer.UnregisterHandler<MirrorMessage>();
-            NetworkClient.UnregisterHandler<MirrorMessage>();
 
             GameObject.Destroy(_networkManager);
         }
@@ -71,9 +69,6 @@ namespace LccHotfix
             _networkManager.playerPrefab = res;
 
             GameObject.DontDestroyOnLoad(obj);
-
-            NetworkServer.RegisterHandler<MirrorMessage>(MirrorServerMessage);
-            NetworkClient.RegisterHandler<MirrorMessage>(MirrorClientMessage);
 
             _init = true;
         }
@@ -203,6 +198,9 @@ namespace LccHotfix
                 return;
 
             _networkManager.StartHost();
+
+            NetworkServer.RegisterHandler<MirrorMessage>(MirrorServerMessage);
+            NetworkClient.RegisterHandler<MirrorMessage>(MirrorClientMessage);
         }
 
         /// <summary>
@@ -216,6 +214,9 @@ namespace LccHotfix
             if (!_networkManager.isNetworkActive)
                 return;
             _networkManager.StopHost();
+
+            NetworkServer.UnregisterHandler<MirrorMessage>();
+            NetworkClient.UnregisterHandler<MirrorMessage>();
         }
 
         /// <summary>
@@ -230,6 +231,9 @@ namespace LccHotfix
                 return;
 
             _networkManager.StartClient();
+
+            NetworkServer.RegisterHandler<MirrorMessage>(MirrorServerMessage);
+            NetworkClient.RegisterHandler<MirrorMessage>(MirrorClientMessage);
         }
 
         /// <summary>
@@ -243,6 +247,9 @@ namespace LccHotfix
             if (!_networkManager.isNetworkActive)
                 return;
             _networkManager.StopClient();
+
+            NetworkServer.UnregisterHandler<MirrorMessage>();
+            NetworkClient.UnregisterHandler<MirrorMessage>();
         }
 
         #region 服务器接口
