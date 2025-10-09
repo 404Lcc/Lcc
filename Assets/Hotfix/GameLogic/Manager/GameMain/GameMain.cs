@@ -57,8 +57,13 @@ namespace LccHotfix
             BTScriptService = Current.AddModule<BTScriptManager>();
             UIService = Current.AddModule<UIManager>();
             UIService.SetUIHelper(new UIHelper());
+            FishNetService = Current.AddModule<FishNetManager>();
+            FishNetService.SetTransportHelper(new DefaultFishNetTransportHelper());
+            FishNetService.SetServerMessageDispatcherHelper(new FishNetServerPBMessageDispatcherHelper());
+            FishNetService.SetClientMessageDispatcherHelper(new PBMessageDispatcherHelper());
+            FishNetService.SetCallbackHelper(new DefaultFishNetCallbackHelper());
             MirrorService = Current.AddModule<MirrorManager>();
-            MirrorService.SetTransportHelper(new SteamTransportHelper());
+            MirrorService.SetTransportHelper(new SteamMirrorTransportHelper());
             MirrorService.SetServerMessageDispatcherHelper(new MirrorServerPBMessageDispatcherHelper());
             MirrorService.SetClientMessageDispatcherHelper(new PBMessageDispatcherHelper());
             MirrorService.SetCallbackHelper(new DefaultMirrorCallbackHelper());
@@ -76,6 +81,7 @@ namespace LccHotfix
             HotfixBridgeService.Init();
             LanguageService.Init();
             UIService.Init();
+            FishNetService.Init();
             MirrorService.Init();
             SteamService.Init();
         }
@@ -91,6 +97,7 @@ namespace LccHotfix
         public static IWorldService WorldService { get; set; }
         public static IBTScriptService BTScriptService { get; set; }
         public static IUIService UIService { get; set; }
+        public static IFishNetService FishNetService { get; set; }
         public static IMirrorService MirrorService { get; set; }
         public static ISteamService SteamService { get; set; }
         public static ISteamLobbyService SteamLobbyService { get; set; }

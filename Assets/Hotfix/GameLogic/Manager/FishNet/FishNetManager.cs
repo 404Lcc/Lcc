@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using FishNet.Managing.Object;
 using FishNet.Transporting;
 using LccModel;
 using UnityEngine;
@@ -52,11 +53,10 @@ namespace LccHotfix
             if (_init)
                 return;
 
-            GameObject obj = new GameObject("FishNetManager");
-            _transportHelper.SetupTransport(obj);
-            _networkManager = obj.AddComponent<FishNet.Managing.NetworkManager>();
+            Main.AssetService.LoadGameObject("FishNetManager", true, out var res);
+            _transportHelper.SetupTransport(res);
 
-            GameObject.DontDestroyOnLoad(obj);
+            GameObject.DontDestroyOnLoad(res);
 
             _init = true;
         }
