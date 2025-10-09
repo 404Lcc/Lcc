@@ -4614,6 +4614,7 @@
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=7232" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Model">
+    <type fullname="MirrorNetworkManager" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1+MonoScriptData" preserve="all" />
     <type fullname="LccModel.AssetManager" preserve="all" />
@@ -4626,7 +4627,6 @@
     <type fullname="LccModel.AStarCtrl" preserve="all" />
     <type fullname="LccModel.LccView" preserve="all" />
     <type fullname="LccModel.MirrorMessage" preserve="all" />
-    <type fullname="LccModel.MirrorUnitCtrl" preserve="all" />
     <type fullname="LccModel.GroupBase" preserve="all" />
     <type fullname="LccModel.PivotHorizontal" preserve="all" />
     <type fullname="LccModel.PivotVerticle" preserve="all" />
@@ -4753,8 +4753,8 @@
     <type fullname="LccModel.LocalDialog" preserve="all" />
     <type fullname="LccModel.OpenFileName" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3200" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4500" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3198" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4506" preserve="all" />
     <type fullname="Mirror.GeneratedNetworkCode" preserve="all" />
   </assembly>
 </linker>

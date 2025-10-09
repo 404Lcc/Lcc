@@ -1,5 +1,4 @@
 using System;
-using LccModel;
 using Mirror;
 
 namespace LccHotfix
@@ -12,7 +11,7 @@ namespace LccHotfix
         /// 设置传输器
         /// </summary>
         /// <param name="transportHelper"></param>
-        void SetTransportHelper(ITransportHelper transportHelper);
+        void SetTransportHelper(IMirrorTransportHelper transportHelper);
 
         /// <summary>
         /// 设置IP
@@ -81,16 +80,6 @@ namespace LccHotfix
         /// </summary>
         public void ClientSendMessage<T>(T message) where T : MessageObject;
 
-        /// <summary>
-        /// 客户端连接
-        /// </summary>
-        public void AddUnit(MirrorUnitCtrl unit);
-
-        /// <summary>
-        /// 客户端断开连接
-        /// </summary>
-        public void RemoveUnit(MirrorUnitCtrl unit);
-
         #endregion
 
         #region 服务器接口
@@ -113,7 +102,7 @@ namespace LccHotfix
         /// <summary>
         /// 服务器广播消息
         /// </summary>
-        public void ServerBroadcastMessage<T>(T message) where T : MessageObject;
+        public void ServerBroadcastMessage<T>(T message, NetworkConnectionToClient exclusionClient = null) where T : MessageObject;
 
         #endregion
     }

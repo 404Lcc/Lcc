@@ -8,38 +8,17 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class NetworkUnit
-    {
-        private MirrorUnitCtrl networkUnitCtrl;
-        public uint NetId => networkUnitCtrl.netId;
-        public bool IsLocalPlayer => networkUnitCtrl.isLocalPlayer;
-
-        public void Init(MirrorUnitCtrl ctrl)
-        {
-            this.networkUnitCtrl = ctrl;
-        }
-    }
-
     internal class MirrorManager : Module, IMirrorService
     {
-        //服务器才使用的列表
-        private DictionaryList<uint, MirrorUnitCtrl> _unitDict = new DictionaryList<uint, MirrorUnitCtrl>();
-
         private bool _init;
         private Mirror.NetworkManager _networkManager;
-        private NetworkUnit _localUnit;
-        private ITransportHelper _transportHelper;
+        private IMirrorTransportHelper _transportHelper;
         private IMirrorServerMessageDispatcherHelper _serverMessageDispatcherHelper;
         private IMessageDispatcherHelper _clientMessageDispatcherHelper;
         private IMirrorCallbackHelper _mirrorCallbackHelper;
 
-        public uint LocalNetId => _localUnit.NetId;
-
-        public bool IsLocalPlayer => _localUnit.IsLocalPlayer;
         public bool IsClient => NetworkClient.active;
         public bool IsServer => NetworkServer.active;
-
-        public bool IsHost => NetworkServer.activeHost;
 
 
         internal override void Shutdown()
@@ -62,7 +41,7 @@ namespace LccHotfix
 
             GameObject obj = new GameObject("MirrorManager");
             _transportHelper.SetupTransport(obj);
-            _networkManager = obj.AddComponent<Mirror.NetworkManager>();
+            _networkManager = obj.AddComponent<MirrorNetworkManager>();
 
             Main.AssetService.LoadRes<GameObject>(obj, "MirrorUnit", out var res);
 
@@ -77,7 +56,7 @@ namespace LccHotfix
         /// 设置传输器
         /// </summary>
         /// <param name="transportHelper"></param>
-        public void SetTransportHelper(ITransportHelper transportHelper)
+        public void SetTransportHelper(IMirrorTransportHelper transportHelper)
         {
             _transportHelper = transportHelper;
         }
@@ -182,7 +161,7 @@ namespace LccHotfix
         {
             if (!_init)
                 return false;
-            return _networkManager.isNetworkActive;
+            return IsClient || IsServer;
         }
 
 
@@ -194,7 +173,7 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (_networkManager.isNetworkActive)
+            if (IsNetworkActive())
                 return;
 
             _networkManager.StartHost();
@@ -211,8 +190,9 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (!_networkManager.isNetworkActive)
+            if (!IsNetworkActive())
                 return;
+
             _networkManager.StopHost();
 
             NetworkServer.UnregisterHandler<MirrorMessage>();
@@ -227,7 +207,7 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (_networkManager.isNetworkActive)
+            if (IsNetworkActive())
                 return;
 
             _networkManager.StartClient();
@@ -244,8 +224,9 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (!_networkManager.isNetworkActive)
+            if (!IsNetworkActive())
                 return;
+
             _networkManager.StopClient();
 
             NetworkServer.UnregisterHandler<MirrorMessage>();
@@ -291,7 +272,7 @@ namespace LccHotfix
         /// <summary>
         /// 服务器广播消息
         /// </summary>
-        public void ServerBroadcastMessage<T>(T message) where T : MessageObject
+        public void ServerBroadcastMessage<T>(T message, NetworkConnectionToClient exclusionClient = null) where T : MessageObject
         {
             if (IsServer)
             {
@@ -302,7 +283,13 @@ namespace LccHotfix
                 MirrorMessage msg = new MirrorMessage();
                 msg.code = code;
                 msg.bytes = ProtobufUtility.Serialize(message);
-                NetworkServer.SendToAll(msg);
+
+                foreach (NetworkConnectionToClient conn in NetworkServer.connections.Values)
+                {
+                    if (exclusionClient != null && conn.connectionId == exclusionClient.connectionId)
+                        continue;
+                    conn.Send(msg);
+                }
             }
         }
 
@@ -344,66 +331,31 @@ namespace LccHotfix
             }
         }
 
-        /// <summary>
-        /// 客户端连接
-        /// </summary>
-        public void AddUnit(MirrorUnitCtrl unit)
-        {
-            if (IsServer)
-            {
-                _unitDict.Add(unit.netId, unit);
-            }
-
-            if (unit.isLocalPlayer)
-            {
-                _localUnit = new NetworkUnit();
-                _localUnit.Init(unit);
-
-                if (IsServer)
-                {
-                    _mirrorCallbackHelper.OnServerStartCallback();
-                }
-
-                if (IsClient)
-                {
-                    _mirrorCallbackHelper.OnClientConnectedCallback();
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// 客户端断开连接
-        /// </summary>
-        public void RemoveUnit(MirrorUnitCtrl unit)
-        {
-            if (IsServer)
-            {
-                _unitDict.Remove(unit.netId);
-
-                //如果是主机
-                if (unit.isLocalPlayer)
-                {
-                    _unitDict.Clear();
-                }
-            }
-
-            if (unit.isLocalPlayer)
-            {
-                if (IsServer)
-                {
-                    _mirrorCallbackHelper.OnServerStopCallback();
-                }
-
-                if (IsClient)
-                {
-                    _mirrorCallbackHelper.OnClientDisconnectedCallback();
-                }
-
-                _localUnit = null;
-            }
-        }
-
         #endregion
+
+        private void OnStartServer()
+        {
+            _mirrorCallbackHelper.OnServerStartCallback();
+        }
+
+        private void OnStopServer()
+        {
+            _mirrorCallbackHelper.OnServerStopCallback();
+        }
+
+        private void OnClientConnect()
+        {
+            _mirrorCallbackHelper.OnClientConnectedCallback();
+        }
+
+        private void OnClientDisconnect()
+        {
+            _mirrorCallbackHelper.OnClientDisconnectedCallback();
+        }
+
+        private void OnServerRemoteClientDisconnected(int connectionId)
+        {
+            _mirrorCallbackHelper.OnServerRemoteClientDisconnectedCallback(connectionId);
+        }
     }
 }

@@ -1,5 +1,3 @@
-using System;
-
 namespace LccHotfix
 {
     public interface IMirrorCallbackHelper
@@ -23,5 +21,10 @@ namespace LccHotfix
         /// 客户端连接断开
         /// </summary>
         void OnClientDisconnectedCallback();
+
+        /// <summary>
+        /// 远程客户端连接断开
+        /// </summary>
+        void OnServerRemoteClientDisconnectedCallback(int connectionId);
     }
 }

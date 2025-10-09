@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public interface ITransportHelper
+    public interface IMirrorTransportHelper
     {
         /// <summary>
         /// 安装传输器

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class KCPTransportHelper : ITransportHelper
+    public class KCPTransportHelper : IMirrorTransportHelper
     {
         public void SetupTransport(GameObject networkManager)
         {
