@@ -5,6 +5,8 @@ namespace LccHotfix
 {
     public interface IFishNetService : IService
     {
+        bool IsNetworkActive { get; }
+
         void Init();
 
         /// <summary>
@@ -35,13 +37,7 @@ namespace LccHotfix
         /// 设置回调
         /// </summary>
         /// <param name="callbackHelper"></param>
-        public void SetCallbackHelper(IMirrorCallbackHelper callbackHelper);
-
-        /// <summary>
-        /// 判断网络是否连接
-        /// </summary>
-        /// <returns></returns>
-        public bool IsNetworkActive();
+        public void SetCallbackHelper(IFishNetCallbackHelper callbackHelper);
 
         /// <summary>
         /// 开启主机

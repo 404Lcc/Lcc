@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Net;
-using System.Net.Sockets;
 using FishNet.Transporting;
 using LccModel;
 using UnityEngine;
@@ -9,7 +7,7 @@ using NetworkConnection = FishNet.Connection.NetworkConnection;
 
 namespace LccHotfix
 {
-    internal class FishNetManager : Module
+    internal class FishNetManager : Module, IFishNetService
     {
         private bool _init;
         private FishNet.Managing.NetworkManager _networkManager;
@@ -70,6 +68,15 @@ namespace LccHotfix
         public void SetTransportHelper(IFishNetTransportHelper transportHelper)
         {
             _transportHelper = transportHelper;
+        }
+
+        /// <summary>
+        /// 设置IP
+        /// </summary>
+        /// <param name="networkAddress"></param>
+        public void SetNetworkAddress(string networkAddress = "")
+        {
+
         }
 
         /// <summary>
