@@ -9,7 +9,7 @@ public class MirrorNetworkManager : NetworkManager
         base.OnStartServer();
 
         var obj = HotfixFunc.CallProperty("LccHotfix", "Main", "MirrorService", BindingFlags.Static | BindingFlags.Public);
-        HotfixFunc.CallMethod("LccHotfix", "MirrorManager", "OnStartServer", BindingFlags.NonPublic | BindingFlags.Instance, new object[] { }, obj);
+        HotfixFunc.CallMethod("LccHotfix", "MirrorManager", "OnServerStart", BindingFlags.NonPublic | BindingFlags.Instance, new object[] { }, obj);
     }
 
     public override void OnStopServer()
@@ -17,7 +17,7 @@ public class MirrorNetworkManager : NetworkManager
         base.OnStopServer();
 
         var obj = HotfixFunc.CallProperty("LccHotfix", "Main", "MirrorService", BindingFlags.Static | BindingFlags.Public);
-        HotfixFunc.CallMethod("LccHotfix", "MirrorManager", "OnStopServer", BindingFlags.NonPublic | BindingFlags.Instance, new object[] { }, obj);
+        HotfixFunc.CallMethod("LccHotfix", "MirrorManager", "OnServerStop", BindingFlags.NonPublic | BindingFlags.Instance, new object[] { }, obj);
     }
 
     public override void OnClientConnect()
@@ -25,7 +25,7 @@ public class MirrorNetworkManager : NetworkManager
         base.OnClientConnect();
 
         var obj = HotfixFunc.CallProperty("LccHotfix", "Main", "MirrorService", BindingFlags.Static | BindingFlags.Public);
-        HotfixFunc.CallMethod("LccHotfix", "MirrorManager", "OnClientConnect", BindingFlags.NonPublic | BindingFlags.Instance, new object[] { }, obj);
+        HotfixFunc.CallMethod("LccHotfix", "MirrorManager", "OnClientConnected", BindingFlags.NonPublic | BindingFlags.Instance, new object[] { }, obj);
     }
 
     public override void OnClientDisconnect()
@@ -33,7 +33,7 @@ public class MirrorNetworkManager : NetworkManager
         base.OnClientDisconnect();
 
         var obj = HotfixFunc.CallProperty("LccHotfix", "Main", "MirrorService", BindingFlags.Static | BindingFlags.Public);
-        HotfixFunc.CallMethod("LccHotfix", "MirrorManager", "OnClientDisconnect", BindingFlags.NonPublic | BindingFlags.Instance, new object[] { }, obj);
+        HotfixFunc.CallMethod("LccHotfix", "MirrorManager", "OnClientDisconnected", BindingFlags.NonPublic | BindingFlags.Instance, new object[] { }, obj);
     }
 
     public override void OnServerDisconnect(NetworkConnectionToClient conn)

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Net;
-using System.Net.Sockets;
 using LccModel;
 using Mirror;
 using UnityEngine;
@@ -11,7 +9,7 @@ namespace LccHotfix
     internal class MirrorManager : Module, IMirrorService
     {
         private bool _init;
-        private Mirror.NetworkManager _networkManager;
+        private MirrorNetworkManager _networkManager;
         private IMirrorTransportHelper _transportHelper;
         private IMirrorServerMessageDispatcherHelper _serverMessageDispatcherHelper;
         private IMessageDispatcherHelper _clientMessageDispatcherHelper;
@@ -39,7 +37,7 @@ namespace LccHotfix
             if (_init)
                 return;
 
-            GameObject obj = new GameObject("MirrorManager");
+            GameObject obj = new GameObject("MirrorNetworkManager");
             _transportHelper.SetupTransport(obj);
             _networkManager = obj.AddComponent<MirrorNetworkManager>();
 
@@ -94,24 +92,6 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 获取本地IP地址
-        /// </summary>
-        /// <returns></returns>
-        private string GetLocalIPAddress()
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip.ToString();
-                }
-            }
-
-            return "127.0.0.1";
-        }
-
-        /// <summary>
         /// 设置IP
         /// </summary>
         /// <param name="networkAddress"></param>
@@ -121,7 +101,7 @@ namespace LccHotfix
                 return;
             if (string.IsNullOrEmpty(networkAddress))
             {
-                networkAddress = GetLocalIPAddress();
+                networkAddress = GameUtility.GetLocalIPAddress();
             }
 
             _networkManager.networkAddress = networkAddress;
@@ -333,22 +313,22 @@ namespace LccHotfix
 
         #endregion
 
-        private void OnStartServer()
+        private void OnServerStart()
         {
             _mirrorCallbackHelper.OnServerStartCallback();
         }
 
-        private void OnStopServer()
+        private void OnServerStop()
         {
             _mirrorCallbackHelper.OnServerStopCallback();
         }
 
-        private void OnClientConnect()
+        private void OnClientConnected()
         {
             _mirrorCallbackHelper.OnClientConnectedCallback();
         }
 
-        private void OnClientDisconnect()
+        private void OnClientDisconnected()
         {
             _mirrorCallbackHelper.OnClientDisconnectedCallback();
         }
