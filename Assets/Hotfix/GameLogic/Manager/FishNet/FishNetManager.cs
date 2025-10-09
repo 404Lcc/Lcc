@@ -17,11 +17,24 @@ namespace LccHotfix
         private IFishNetTransportHelper _transportHelper;
         private IFishNetServerMessageDispatcherHelper _serverMessageDispatcherHelper;
         private IMessageDispatcherHelper _clientMessageDispatcherHelper;
-        private IFishNetCallbackHelper _fishNetCallbackHelper;
+        private IFishNetCallbackHelper _callbackHelper;
 
         public bool IsClient => _networkManager.IsClientStarted;
         public bool IsServer => _networkManager.IsServerStarted;
 
+        /// <summary>
+        /// 判断网络是否连接
+        /// </summary>
+        /// <returns></returns>
+        public bool IsNetworkActive
+        {
+            get
+            {
+                if (!_init)
+                    return false;
+                return IsClient || IsServer;
+            }
+        }
 
         internal override void Shutdown()
         {
@@ -42,9 +55,9 @@ namespace LccHotfix
                 return;
 
             GameObject obj = new GameObject("FishNetManager");
-
-            _networkManager = obj.AddComponent<FishNet.Managing.NetworkManager>();
             _transportHelper.SetupTransport(obj);
+            _networkManager = obj.AddComponent<FishNet.Managing.NetworkManager>();
+
             GameObject.DontDestroyOnLoad(obj);
 
             _init = true;
@@ -57,56 +70,6 @@ namespace LccHotfix
         public void SetTransportHelper(IFishNetTransportHelper transportHelper)
         {
             _transportHelper = transportHelper;
-        }
-
-        private void FishNetServerMessage(NetworkConnection client, FishNetMessage message, Channel channel)
-        {
-            NetworkMessage networkMessage = new NetworkMessage();
-            networkMessage.code = message.code;
-
-            MemoryStream stream = new MemoryStream();
-            stream.Write(message.bytes, 0, message.bytes.Length);
-            stream.Seek(0, SeekOrigin.Begin);
-
-            string typeName = "LccHotfix." + Enum.GetName(typeof(MessageType), (MessageType)message.code) + "Info";
-            object obj = ProtobufUtility.Deserialize(Main.CodeTypesService.GetType(typeName), stream);
-            networkMessage.message = obj;
-
-            _serverMessageDispatcherHelper.DispatcherMessage(client, networkMessage);
-        }
-
-        private void FishNetClientMessage(FishNetMessage message, Channel channel)
-        {
-            NetworkMessage networkMessage = new NetworkMessage();
-            networkMessage.code = message.code;
-
-            MemoryStream stream = new MemoryStream();
-            stream.Write(message.bytes, 0, message.bytes.Length);
-            stream.Seek(0, SeekOrigin.Begin);
-
-            string typeName = "LccHotfix." + Enum.GetName(typeof(MessageType), (MessageType)message.code) + "Info";
-            object obj = ProtobufUtility.Deserialize(Main.CodeTypesService.GetType(typeName), stream);
-            networkMessage.message = obj;
-
-            _clientMessageDispatcherHelper.DispatcherMessage(networkMessage);
-        }
-
-        /// <summary>
-        /// 获取本地IP地址
-        /// </summary>
-        /// <returns></returns>
-        private string GetLocalIPAddress()
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip.ToString();
-                }
-            }
-
-            return "127.0.0.1";
         }
 
         /// <summary>
@@ -130,20 +93,9 @@ namespace LccHotfix
         /// <summary>
         /// 设置回调
         /// </summary>
-        public void SetFishNetCallbackHelper(IFishNetCallbackHelper fishNetCallbackHelper)
+        public void SetCallbackHelper(IFishNetCallbackHelper callbackHelper)
         {
-            _fishNetCallbackHelper = fishNetCallbackHelper;
-        }
-
-        /// <summary>
-        /// 判断网络是否连接
-        /// </summary>
-        /// <returns></returns>
-        public bool IsNetworkActive()
-        {
-            if (!_init)
-                return false;
-            return IsClient || IsServer;
+            _callbackHelper = callbackHelper;
         }
 
 
@@ -155,15 +107,15 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (IsNetworkActive())
+            if (IsNetworkActive)
                 return;
 
             _networkManager.ClientManager.OnClientConnectionState += OnClientConnectionState;
             _networkManager.ServerManager.OnServerConnectionState += OnServerConnectionState;
             _networkManager.ServerManager.OnRemoteConnectionState += OnServerRemoteConnectionState;
 
-            _networkManager.ServerManager.RegisterBroadcast<FishNetMessage>(FishNetServerMessage);
-            _networkManager.ClientManager.RegisterBroadcast<FishNetMessage>(FishNetClientMessage);
+            _networkManager.ServerManager.RegisterBroadcast<FishNetMessage>(ServerMessage);
+            _networkManager.ClientManager.RegisterBroadcast<FishNetMessage>(ClientMessage);
 
             _networkManager.ServerManager.StartConnection();
             _networkManager.ClientManager.StartConnection();
@@ -177,15 +129,15 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (!IsNetworkActive())
+            if (!IsNetworkActive)
                 return;
 
             _networkManager.ClientManager.OnClientConnectionState -= OnClientConnectionState;
             _networkManager.ServerManager.OnServerConnectionState -= OnServerConnectionState;
             _networkManager.ServerManager.OnRemoteConnectionState -= OnServerRemoteConnectionState;
 
-            _networkManager.ServerManager.UnregisterBroadcast<FishNetMessage>(FishNetServerMessage);
-            _networkManager.ClientManager.UnregisterBroadcast<FishNetMessage>(FishNetClientMessage);
+            _networkManager.ServerManager.UnregisterBroadcast<FishNetMessage>(ServerMessage);
+            _networkManager.ClientManager.UnregisterBroadcast<FishNetMessage>(ClientMessage);
 
             _networkManager.ClientManager.StopConnection();
             _networkManager.ServerManager.StopConnection(true);
@@ -199,13 +151,13 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (IsNetworkActive())
+            if (IsNetworkActive)
                 return;
 
             _networkManager.ClientManager.OnClientConnectionState += OnClientConnectionState;
 
-            _networkManager.ServerManager.RegisterBroadcast<FishNetMessage>(FishNetServerMessage);
-            _networkManager.ClientManager.RegisterBroadcast<FishNetMessage>(FishNetClientMessage);
+            _networkManager.ServerManager.RegisterBroadcast<FishNetMessage>(ServerMessage);
+            _networkManager.ClientManager.RegisterBroadcast<FishNetMessage>(ClientMessage);
 
             _networkManager.ClientManager.StartConnection();
         }
@@ -218,13 +170,13 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (!IsNetworkActive())
+            if (!IsNetworkActive)
                 return;
 
             _networkManager.ClientManager.OnClientConnectionState -= OnClientConnectionState;
 
-            _networkManager.ServerManager.UnregisterBroadcast<FishNetMessage>(FishNetServerMessage);
-            _networkManager.ClientManager.UnregisterBroadcast<FishNetMessage>(FishNetClientMessage);
+            _networkManager.ServerManager.UnregisterBroadcast<FishNetMessage>(ServerMessage);
+            _networkManager.ClientManager.UnregisterBroadcast<FishNetMessage>(ClientMessage);
 
             _networkManager.ClientManager.StopConnection();
         }
@@ -329,17 +281,48 @@ namespace LccHotfix
 
         #endregion
 
+        private void ServerMessage(NetworkConnection client, FishNetMessage message, Channel channel)
+        {
+            NetworkMessage networkMessage = new NetworkMessage();
+            networkMessage.code = message.code;
+
+            MemoryStream stream = new MemoryStream();
+            stream.Write(message.bytes, 0, message.bytes.Length);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            string typeName = "LccHotfix." + Enum.GetName(typeof(MessageType), (MessageType)message.code) + "Info";
+            object obj = ProtobufUtility.Deserialize(Main.CodeTypesService.GetType(typeName), stream);
+            networkMessage.message = obj;
+
+            _serverMessageDispatcherHelper.DispatcherMessage(client, networkMessage);
+        }
+
+        private void ClientMessage(FishNetMessage message, Channel channel)
+        {
+            NetworkMessage networkMessage = new NetworkMessage();
+            networkMessage.code = message.code;
+
+            MemoryStream stream = new MemoryStream();
+            stream.Write(message.bytes, 0, message.bytes.Length);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            string typeName = "LccHotfix." + Enum.GetName(typeof(MessageType), (MessageType)message.code) + "Info";
+            object obj = ProtobufUtility.Deserialize(Main.CodeTypesService.GetType(typeName), stream);
+            networkMessage.message = obj;
+
+            _clientMessageDispatcherHelper.DispatcherMessage(networkMessage);
+        }
 
         private void OnClientConnectionState(ClientConnectionStateArgs args)
         {
             if (args.ConnectionState == LocalConnectionState.Started)
             {
-                _fishNetCallbackHelper.OnClientConnectedCallback();
+                _callbackHelper.OnClientConnectedCallback();
             }
 
             if (args.ConnectionState == LocalConnectionState.Stopped)
             {
-                _fishNetCallbackHelper.OnClientDisconnectedCallback();
+                _callbackHelper.OnClientDisconnectedCallback();
             }
         }
 
@@ -347,12 +330,12 @@ namespace LccHotfix
         {
             if (args.ConnectionState == LocalConnectionState.Started)
             {
-                _fishNetCallbackHelper.OnServerStartCallback();
+                _callbackHelper.OnServerStartCallback();
             }
 
             if (args.ConnectionState == LocalConnectionState.Stopped)
             {
-                _fishNetCallbackHelper.OnServerStopCallback();
+                _callbackHelper.OnServerStopCallback();
             }
         }
 
@@ -360,7 +343,7 @@ namespace LccHotfix
         {
             if (args.ConnectionState == RemoteConnectionState.Stopped)
             {
-                _fishNetCallbackHelper.OnServerRemoteClientDisconnectedCallback(connection.ClientId);
+                _callbackHelper.OnServerRemoteClientDisconnectedCallback(connection.ClientId);
             }
         }
     }

@@ -34,8 +34,8 @@ namespace LccHotfix
         /// <summary>
         /// 设置回调
         /// </summary>
-        /// <param name="mirrorCallbackHelper"></param>
-        public void SetMirrorCallbackHelper(IMirrorCallbackHelper mirrorCallbackHelper);
+        /// <param name="callbackHelper"></param>
+        public void SetCallbackHelper(IMirrorCallbackHelper callbackHelper);
 
         /// <summary>
         /// 判断网络是否连接

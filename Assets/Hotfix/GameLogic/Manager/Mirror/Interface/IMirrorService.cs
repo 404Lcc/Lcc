@@ -5,6 +5,8 @@ namespace LccHotfix
 {
     public interface IMirrorService : IService
     {
+        bool IsNetworkActive { get; }
+
         void Init();
 
         /// <summary>
@@ -34,14 +36,8 @@ namespace LccHotfix
         /// <summary>
         /// 设置回调
         /// </summary>
-        /// <param name="mirrorCallbackHelper"></param>
-        public void SetMirrorCallbackHelper(IMirrorCallbackHelper mirrorCallbackHelper);
-
-        /// <summary>
-        /// 判断网络是否连接
-        /// </summary>
-        /// <returns></returns>
-        public bool IsNetworkActive();
+        /// <param name="callbackHelper"></param>
+        public void SetCallbackHelper(IMirrorCallbackHelper callbackHelper);
 
         /// <summary>
         /// 开启主机

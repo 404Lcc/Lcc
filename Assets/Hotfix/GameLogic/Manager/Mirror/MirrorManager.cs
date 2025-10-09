@@ -13,11 +13,20 @@ namespace LccHotfix
         private IMirrorTransportHelper _transportHelper;
         private IMirrorServerMessageDispatcherHelper _serverMessageDispatcherHelper;
         private IMessageDispatcherHelper _clientMessageDispatcherHelper;
-        private IMirrorCallbackHelper _mirrorCallbackHelper;
+        private IMirrorCallbackHelper _callbackHelper;
 
         public bool IsClient => NetworkClient.active;
         public bool IsServer => NetworkServer.active;
 
+        public bool IsNetworkActive
+        {
+            get
+            {
+                if (!_init)
+                    return false;
+                return IsClient || IsServer;
+            }
+        }
 
         internal override void Shutdown()
         {
@@ -59,38 +68,6 @@ namespace LccHotfix
             _transportHelper = transportHelper;
         }
 
-        private void MirrorServerMessage(NetworkConnectionToClient client, MirrorMessage message)
-        {
-            NetworkMessage networkMessage = new NetworkMessage();
-            networkMessage.code = message.code;
-
-            MemoryStream stream = new MemoryStream();
-            stream.Write(message.bytes, 0, message.bytes.Length);
-            stream.Seek(0, SeekOrigin.Begin);
-
-            string typeName = "LccHotfix." + Enum.GetName(typeof(MessageType), (MessageType)message.code) + "Info";
-            object obj = ProtobufUtility.Deserialize(Main.CodeTypesService.GetType(typeName), stream);
-            networkMessage.message = obj;
-
-            _serverMessageDispatcherHelper.DispatcherMessage(client, networkMessage);
-        }
-
-        private void MirrorClientMessage(MirrorMessage message)
-        {
-            NetworkMessage networkMessage = new NetworkMessage();
-            networkMessage.code = message.code;
-
-            MemoryStream stream = new MemoryStream();
-            stream.Write(message.bytes, 0, message.bytes.Length);
-            stream.Seek(0, SeekOrigin.Begin);
-
-            string typeName = "LccHotfix." + Enum.GetName(typeof(MessageType), (MessageType)message.code) + "Info";
-            object obj = ProtobufUtility.Deserialize(Main.CodeTypesService.GetType(typeName), stream);
-            networkMessage.message = obj;
-
-            _clientMessageDispatcherHelper.DispatcherMessage(networkMessage);
-        }
-
         /// <summary>
         /// 设置IP
         /// </summary>
@@ -128,22 +105,10 @@ namespace LccHotfix
         /// <summary>
         /// 设置回调
         /// </summary>
-        public void SetMirrorCallbackHelper(IMirrorCallbackHelper mirrorCallbackHelper)
+        public void SetCallbackHelper(IMirrorCallbackHelper callbackHelper)
         {
-            _mirrorCallbackHelper = mirrorCallbackHelper;
+            _callbackHelper = callbackHelper;
         }
-
-        /// <summary>
-        /// 判断网络是否连接
-        /// </summary>
-        /// <returns></returns>
-        public bool IsNetworkActive()
-        {
-            if (!_init)
-                return false;
-            return IsClient || IsServer;
-        }
-
 
         /// <summary>
         /// 开启主机
@@ -153,13 +118,14 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (IsNetworkActive())
+            if (IsNetworkActive)
                 return;
 
-            _networkManager.StartHost();
+            NetworkServer.RegisterHandler<MirrorMessage>(ServerMessage);
+            NetworkClient.RegisterHandler<MirrorMessage>(ClientMessage);
 
-            NetworkServer.RegisterHandler<MirrorMessage>(MirrorServerMessage);
-            NetworkClient.RegisterHandler<MirrorMessage>(MirrorClientMessage);
+            _networkManager.StartServer();
+            _networkManager.StartClient();
         }
 
         /// <summary>
@@ -170,13 +136,14 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (!IsNetworkActive())
+            if (!IsNetworkActive)
                 return;
-
-            _networkManager.StopHost();
 
             NetworkServer.UnregisterHandler<MirrorMessage>();
             NetworkClient.UnregisterHandler<MirrorMessage>();
+
+            _networkManager.StopClient();
+            _networkManager.StopServer();
         }
 
         /// <summary>
@@ -187,13 +154,13 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (IsNetworkActive())
+            if (IsNetworkActive)
                 return;
 
-            _networkManager.StartClient();
+            NetworkServer.RegisterHandler<MirrorMessage>(ServerMessage);
+            NetworkClient.RegisterHandler<MirrorMessage>(ClientMessage);
 
-            NetworkServer.RegisterHandler<MirrorMessage>(MirrorServerMessage);
-            NetworkClient.RegisterHandler<MirrorMessage>(MirrorClientMessage);
+            _networkManager.StartClient();
         }
 
         /// <summary>
@@ -204,13 +171,13 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (!IsNetworkActive())
+            if (!IsNetworkActive)
                 return;
-
-            _networkManager.StopClient();
 
             NetworkServer.UnregisterHandler<MirrorMessage>();
             NetworkClient.UnregisterHandler<MirrorMessage>();
+
+            _networkManager.StopClient();
         }
 
         #region 服务器接口
@@ -313,29 +280,61 @@ namespace LccHotfix
 
         #endregion
 
+        private void ServerMessage(NetworkConnectionToClient client, MirrorMessage message)
+        {
+            NetworkMessage networkMessage = new NetworkMessage();
+            networkMessage.code = message.code;
+
+            MemoryStream stream = new MemoryStream();
+            stream.Write(message.bytes, 0, message.bytes.Length);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            string typeName = "LccHotfix." + Enum.GetName(typeof(MessageType), (MessageType)message.code) + "Info";
+            object obj = ProtobufUtility.Deserialize(Main.CodeTypesService.GetType(typeName), stream);
+            networkMessage.message = obj;
+
+            _serverMessageDispatcherHelper.DispatcherMessage(client, networkMessage);
+        }
+
+        private void ClientMessage(MirrorMessage message)
+        {
+            NetworkMessage networkMessage = new NetworkMessage();
+            networkMessage.code = message.code;
+
+            MemoryStream stream = new MemoryStream();
+            stream.Write(message.bytes, 0, message.bytes.Length);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            string typeName = "LccHotfix." + Enum.GetName(typeof(MessageType), (MessageType)message.code) + "Info";
+            object obj = ProtobufUtility.Deserialize(Main.CodeTypesService.GetType(typeName), stream);
+            networkMessage.message = obj;
+
+            _clientMessageDispatcherHelper.DispatcherMessage(networkMessage);
+        }
+
         private void OnServerStart()
         {
-            _mirrorCallbackHelper.OnServerStartCallback();
+            _callbackHelper.OnServerStartCallback();
         }
 
         private void OnServerStop()
         {
-            _mirrorCallbackHelper.OnServerStopCallback();
+            _callbackHelper.OnServerStopCallback();
         }
 
         private void OnClientConnected()
         {
-            _mirrorCallbackHelper.OnClientConnectedCallback();
+            _callbackHelper.OnClientConnectedCallback();
         }
 
         private void OnClientDisconnected()
         {
-            _mirrorCallbackHelper.OnClientDisconnectedCallback();
+            _callbackHelper.OnClientDisconnectedCallback();
         }
 
         private void OnServerRemoteClientDisconnected(int connectionId)
         {
-            _mirrorCallbackHelper.OnServerRemoteClientDisconnectedCallback(connectionId);
+            _callbackHelper.OnServerRemoteClientDisconnectedCallback(connectionId);
         }
     }
 }

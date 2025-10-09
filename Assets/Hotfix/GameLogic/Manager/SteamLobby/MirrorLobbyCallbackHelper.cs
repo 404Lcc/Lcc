@@ -35,7 +35,7 @@ namespace LccHotfix
         /// </summary>
         public void OnLeaveLobby()
         {
-            if (Main.MirrorService.IsNetworkActive())
+            if (Main.MirrorService.IsNetworkActive)
             {
                 Main.MirrorService.StopHost();
             }

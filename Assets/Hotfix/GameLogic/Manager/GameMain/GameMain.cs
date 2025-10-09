@@ -61,7 +61,7 @@ namespace LccHotfix
             MirrorService.SetTransportHelper(new SteamTransportHelper());
             MirrorService.SetServerMessageDispatcherHelper(new MirrorServerPBMessageDispatcherHelper());
             MirrorService.SetClientMessageDispatcherHelper(new PBMessageDispatcherHelper());
-            MirrorService.SetMirrorCallbackHelper(new DefaultMirrorCallbackHelper());
+            MirrorService.SetCallbackHelper(new DefaultMirrorCallbackHelper());
             SteamService = Current.AddModule<SteamManager>();
             SteamLobbyService = Current.AddModule<SteamLobbyManager>();
             SteamLobbyService.SetLobbyCallbackHelper(new MirrorLobbyCallbackHelper());
