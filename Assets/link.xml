@@ -4625,6 +4625,7 @@
     <type fullname="LccModel.ResShader" preserve="all" />
     <type fullname="LccModel.ResShader+&lt;WarmUp&gt;d__5" preserve="all" />
     <type fullname="LccModel.AStarCtrl" preserve="all" />
+    <type fullname="LccModel.FishNetMessage" preserve="all" />
     <type fullname="LccModel.LccView" preserve="all" />
     <type fullname="LccModel.MirrorMessage" preserve="all" />
     <type fullname="LccModel.GroupBase" preserve="all" />
@@ -4753,8 +4754,8 @@
     <type fullname="LccModel.LocalDialog" preserve="all" />
     <type fullname="LccModel.OpenFileName" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3198" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4506" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3226" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4561" preserve="all" />
     <type fullname="Mirror.GeneratedNetworkCode" preserve="all" />
   </assembly>
 </linker>
