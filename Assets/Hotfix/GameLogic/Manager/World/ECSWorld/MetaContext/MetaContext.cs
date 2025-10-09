@@ -22,8 +22,6 @@ namespace LccHotfix
 
         public MetaContext(int totalComponents, int startCreationIndex, ContextInfo contextInfo, Func<Entity, IAERC> aercFactory, Func<MetaEntity> entityFactory) : base(totalComponents, startCreationIndex, contextInfo, aercFactory, entityFactory)
         {
-            _uniqueEntity = CreateEntity();
-
             OnEntityCreated += EntityCreated;
             OnEntityDestroyed += EntityDestroyed;
             OnEntityWillBeDestroyed += EntityWillBeDestroyed;
