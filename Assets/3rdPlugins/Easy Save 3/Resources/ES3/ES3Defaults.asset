@@ -41,7 +41,10 @@ MonoBehaviour:
     - Drawing
     - EasySave3
     - EnhancedScroller_asmdef
+    - FishNet.Demos
+    - FishNet.Runtime
     - FizzySteamworks
+    - GameKit.Dependencies
     - HybridCLR.Runtime
     - IngameDebugConsole.Runtime
     - kcp2k
