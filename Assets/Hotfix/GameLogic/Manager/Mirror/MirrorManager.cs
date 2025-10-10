@@ -10,7 +10,7 @@ namespace LccHotfix
     {
         private bool _init;
         private MirrorNetworkManager _networkManager;
-        private IMirrorTransportHelper _transportHelper;
+        private IMirrorHelper _helper;
         private IMirrorServerMessageDispatcherHelper _serverMessageDispatcherHelper;
         private IMessageDispatcherHelper _clientMessageDispatcherHelper;
         private IMirrorCallbackHelper _callbackHelper;
@@ -46,26 +46,18 @@ namespace LccHotfix
             if (_init)
                 return;
 
-            GameObject obj = new GameObject("MirrorNetworkManager");
-            _transportHelper.SetupTransport(obj);
-            _networkManager = obj.AddComponent<MirrorNetworkManager>();
-
-            Main.AssetService.LoadRes<GameObject>(obj, "MirrorUnit", out var res);
-
-            _networkManager.playerPrefab = res;
-
-            GameObject.DontDestroyOnLoad(obj);
+            _networkManager = _helper.Setup();
 
             _init = true;
         }
 
         /// <summary>
-        /// 设置传输器
+        /// 设置辅助器
         /// </summary>
-        /// <param name="transportHelper"></param>
-        public void SetTransportHelper(IMirrorTransportHelper transportHelper)
+        /// <param name="helper"></param>
+        public void SetHelper(IMirrorHelper helper)
         {
-            _transportHelper = transportHelper;
+            _helper = helper;
         }
 
         /// <summary>
@@ -74,14 +66,7 @@ namespace LccHotfix
         /// <param name="networkAddress"></param>
         public void SetNetworkAddress(string networkAddress = "")
         {
-            if (!_init)
-                return;
-            if (string.IsNullOrEmpty(networkAddress))
-            {
-                networkAddress = GameUtility.GetLocalIPAddress();
-            }
-
-            _networkManager.networkAddress = networkAddress;
+            _helper.SetNetworkAddress(_networkManager.gameObject, networkAddress);
         }
 
         /// <summary>
@@ -111,39 +96,37 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 开启主机
+        /// 开启服务器
         /// </summary>
-        public void StartHost()
+        public void StartServer()
         {
             if (!_init)
                 return;
 
-            if (IsNetworkActive)
+            if (IsServer)
                 return;
 
             NetworkServer.RegisterHandler<MirrorMessage>(ServerMessage);
             NetworkClient.RegisterHandler<MirrorMessage>(ClientMessage);
 
-            _networkManager.StartServer();
-            _networkManager.StartClient();
+            _networkManager.StartHost();
         }
 
         /// <summary>
-        /// 停止主机
+        /// 停止服务器
         /// </summary>
-        public void StopHost()
+        public void StopServer()
         {
             if (!_init)
                 return;
 
-            if (!IsNetworkActive)
+            if (!IsServer)
                 return;
 
             NetworkServer.UnregisterHandler<MirrorMessage>();
             NetworkClient.UnregisterHandler<MirrorMessage>();
 
-            _networkManager.StopClient();
-            _networkManager.StopServer();
+            _networkManager.StopHost();
         }
 
         /// <summary>
@@ -154,10 +137,9 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (IsNetworkActive)
+            if (IsClient)
                 return;
 
-            NetworkServer.RegisterHandler<MirrorMessage>(ServerMessage);
             NetworkClient.RegisterHandler<MirrorMessage>(ClientMessage);
 
             _networkManager.StartClient();
@@ -171,10 +153,9 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (!IsNetworkActive)
+            if (!IsClient)
                 return;
 
-            NetworkServer.UnregisterHandler<MirrorMessage>();
             NetworkClient.UnregisterHandler<MirrorMessage>();
 
             _networkManager.StopClient();

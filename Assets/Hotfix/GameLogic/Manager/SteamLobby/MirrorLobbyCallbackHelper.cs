@@ -16,7 +16,6 @@ namespace LccHotfix
         {
             lobbyData.SetLobbyCustomData("HostAddress", lobbyData.LobbyID.ToString());
             Main.MirrorService.SetNetworkAddress();
-            Main.MirrorService.StartHost();
         }
 
         /// <summary>
@@ -37,7 +36,6 @@ namespace LccHotfix
         {
             if (Main.MirrorService.IsNetworkActive)
             {
-                Main.MirrorService.StopHost();
             }
         }
 

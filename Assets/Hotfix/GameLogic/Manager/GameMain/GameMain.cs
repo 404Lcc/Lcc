@@ -63,7 +63,7 @@ namespace LccHotfix
             FishNetService.SetClientMessageDispatcherHelper(new PBMessageDispatcherHelper());
             FishNetService.SetCallbackHelper(new DefaultFishNetCallbackHelper());
             MirrorService = Current.AddModule<MirrorManager>();
-            MirrorService.SetTransportHelper(new SteamMirrorTransportHelper());
+            MirrorService.SetHelper(new SteamMirrorTransportHelper());
             MirrorService.SetServerMessageDispatcherHelper(new MirrorServerPBMessageDispatcherHelper());
             MirrorService.SetClientMessageDispatcherHelper(new PBMessageDispatcherHelper());
             MirrorService.SetCallbackHelper(new DefaultMirrorCallbackHelper());
