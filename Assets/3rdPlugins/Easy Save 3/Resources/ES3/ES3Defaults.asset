@@ -43,6 +43,7 @@ MonoBehaviour:
     - EnhancedScroller_asmdef
     - FishNet.Demos
     - FishNet.Runtime
+    - FishySteamworks
     - FizzySteamworks
     - GameKit.Dependencies
     - HybridCLR.Runtime
