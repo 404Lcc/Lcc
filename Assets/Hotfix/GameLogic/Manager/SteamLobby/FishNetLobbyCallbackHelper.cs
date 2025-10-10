@@ -1,12 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-using Mirror;
 using Steamworks;
 using UnityEngine;
 
 namespace LccHotfix
 {
-    public class MirrorLobbyCallbackHelper : ILobbyCallbackHelper
+    public class FishNetLobbyCallbackHelper : ILobbyCallbackHelper
     {
         /// <summary>
         /// 大厅创建完成
@@ -15,8 +13,8 @@ namespace LccHotfix
         public void OnLobbyCreated(LobbyData lobbyData)
         {
             lobbyData.SetLobbyCustomData("HostAddress", SteamUser.GetSteamID().ToString());
-            Main.MirrorService.SetNetworkAddress();
-            Main.MirrorService.StartServer();
+            Main.FishNetService.SetNetworkAddress();
+            Main.FishNetService.StartServer();
         }
 
         /// <summary>
@@ -26,8 +24,8 @@ namespace LccHotfix
         public void OnLobbyEnter(LobbyData lobbyData)
         {
             string hostAddress = lobbyData.GetLobbyCustomData("HostAddress");
-            Main.MirrorService.SetNetworkAddress(hostAddress);
-            Main.MirrorService.Connect();
+            Main.FishNetService.SetNetworkAddress(hostAddress);
+            Main.FishNetService.Connect();
         }
 
         /// <summary>
@@ -35,10 +33,10 @@ namespace LccHotfix
         /// </summary>
         public void OnLeaveLobby()
         {
-            if (Main.MirrorService.IsNetworkActive)
+            if (Main.FishNetService.IsNetworkActive)
             {
-                Main.MirrorService.Disconnect();
-                Main.MirrorService.StopServer();
+                Main.FishNetService.Disconnect();
+                Main.FishNetService.StopServer();
             }
         }
 

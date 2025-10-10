@@ -216,8 +216,8 @@ namespace LccHotfix
         /// <param name="callback"></param>
         private void OnLobbyChatUpdate(LobbyChatUpdate_t callback)
         {
-            Debug.Log("收到大厅变动");
             EChatMemberStateChange type = (EChatMemberStateChange)callback.m_rgfChatMemberStateChange;
+            Debug.Log("收到大厅变动" + type);
             switch (type)
             {
                 case EChatMemberStateChange.k_EChatMemberStateChangeEntered:
