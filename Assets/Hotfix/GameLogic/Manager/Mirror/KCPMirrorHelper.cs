@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class KCPMirrorTransportHelper : IMirrorHelper
+    public class KCPMirrorHelper : IMirrorHelper
     {
         public MirrorNetworkManager Setup()
         {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class SteamMirrorTransportHelper : IMirrorHelper
+    public class SteamMirrorHelper : IMirrorHelper
     {
         public MirrorNetworkManager Setup()
         {
