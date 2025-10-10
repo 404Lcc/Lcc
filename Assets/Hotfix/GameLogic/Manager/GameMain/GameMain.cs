@@ -58,7 +58,7 @@ namespace LccHotfix
             UIService = Current.AddModule<UIManager>();
             UIService.SetUIHelper(new UIHelper());
             FishNetService = Current.AddModule<FishNetManager>();
-            FishNetService.SetTransportHelper(new DefaultFishNetTransportHelper());
+            FishNetService.SetHelper(new SteamFishNetHelper());
             FishNetService.SetServerMessageDispatcherHelper(new FishNetServerPBMessageDispatcherHelper());
             FishNetService.SetClientMessageDispatcherHelper(new PBMessageDispatcherHelper());
             FishNetService.SetCallbackHelper(new DefaultFishNetCallbackHelper());

@@ -10,10 +10,10 @@ namespace LccHotfix
         void Init();
 
         /// <summary>
-        /// 设置传输器
+        /// 设置辅助器
         /// </summary>
-        /// <param name="transportHelper"></param>
-        void SetTransportHelper(IFishNetTransportHelper transportHelper);
+        /// <param name="helper"></param>
+        void SetHelper(IFishNetHelper helper);
 
         /// <summary>
         /// 设置IP
@@ -40,14 +40,14 @@ namespace LccHotfix
         public void SetCallbackHelper(IFishNetCallbackHelper callbackHelper);
 
         /// <summary>
-        /// 开启主机
+        /// 开启服务器
         /// </summary>
-        public void StartHost();
+        public void StartServer();
 
         /// <summary>
-        /// 停止主机
+        /// 停止服务器
         /// </summary>
-        public void StopHost();
+        public void StopServer();
 
         /// <summary>
         /// 客户端开始连接

@@ -13,7 +13,7 @@ namespace LccHotfix
         private bool _init;
         private FishNet.Managing.NetworkManager _networkManager;
 
-        private IFishNetTransportHelper _transportHelper;
+        private IFishNetHelper _helper;
         private IFishNetServerMessageDispatcherHelper _serverMessageDispatcherHelper;
         private IMessageDispatcherHelper _clientMessageDispatcherHelper;
         private IFishNetCallbackHelper _callbackHelper;
@@ -53,21 +53,18 @@ namespace LccHotfix
             if (_init)
                 return;
 
-            Main.AssetService.LoadGameObject("FishNetManager", true, out var res);
-            _transportHelper.SetupTransport(res);
-
-            GameObject.DontDestroyOnLoad(res);
+            _networkManager = _helper.Setup();
 
             _init = true;
         }
 
         /// <summary>
-        /// 设置传输器
+        /// 设置辅助器
         /// </summary>
-        /// <param name="transportHelper"></param>
-        public void SetTransportHelper(IFishNetTransportHelper transportHelper)
+        /// <param name="helper"></param>
+        public void SetHelper(IFishNetHelper helper)
         {
-            _transportHelper = transportHelper;
+            _helper = helper;
         }
 
         /// <summary>
@@ -76,7 +73,7 @@ namespace LccHotfix
         /// <param name="networkAddress"></param>
         public void SetNetworkAddress(string networkAddress = "")
         {
-
+            _helper.SetNetworkAddress(_networkManager.gameObject, networkAddress);
         }
 
         /// <summary>
@@ -107,46 +104,41 @@ namespace LccHotfix
 
 
         /// <summary>
-        /// 开启主机
+        /// 开启服务器
         /// </summary>
-        public void StartHost()
+        public void StartServer()
         {
             if (!_init)
                 return;
 
-            if (IsNetworkActive)
+            if (IsServer)
                 return;
 
-            _networkManager.ClientManager.OnClientConnectionState += OnClientConnectionState;
             _networkManager.ServerManager.OnServerConnectionState += OnServerConnectionState;
             _networkManager.ServerManager.OnRemoteConnectionState += OnServerRemoteConnectionState;
 
             _networkManager.ServerManager.RegisterBroadcast<FishNetMessage>(ServerMessage);
-            _networkManager.ClientManager.RegisterBroadcast<FishNetMessage>(ClientMessage);
 
             _networkManager.ServerManager.StartConnection();
-            _networkManager.ClientManager.StartConnection();
+
         }
 
         /// <summary>
-        /// 停止主机
+        /// 停止服务器
         /// </summary>
-        public void StopHost()
+        public void StopServer()
         {
             if (!_init)
                 return;
 
-            if (!IsNetworkActive)
+            if (!IsServer)
                 return;
 
-            _networkManager.ClientManager.OnClientConnectionState -= OnClientConnectionState;
             _networkManager.ServerManager.OnServerConnectionState -= OnServerConnectionState;
             _networkManager.ServerManager.OnRemoteConnectionState -= OnServerRemoteConnectionState;
 
             _networkManager.ServerManager.UnregisterBroadcast<FishNetMessage>(ServerMessage);
-            _networkManager.ClientManager.UnregisterBroadcast<FishNetMessage>(ClientMessage);
 
-            _networkManager.ClientManager.StopConnection();
             _networkManager.ServerManager.StopConnection(true);
         }
 
@@ -158,12 +150,11 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (IsNetworkActive)
+            if (IsClient)
                 return;
 
             _networkManager.ClientManager.OnClientConnectionState += OnClientConnectionState;
 
-            _networkManager.ServerManager.RegisterBroadcast<FishNetMessage>(ServerMessage);
             _networkManager.ClientManager.RegisterBroadcast<FishNetMessage>(ClientMessage);
 
             _networkManager.ClientManager.StartConnection();
@@ -177,12 +168,11 @@ namespace LccHotfix
             if (!_init)
                 return;
 
-            if (!IsNetworkActive)
+            if (!IsClient)
                 return;
 
             _networkManager.ClientManager.OnClientConnectionState -= OnClientConnectionState;
 
-            _networkManager.ServerManager.UnregisterBroadcast<FishNetMessage>(ServerMessage);
             _networkManager.ClientManager.UnregisterBroadcast<FishNetMessage>(ClientMessage);
 
             _networkManager.ClientManager.StopConnection();
