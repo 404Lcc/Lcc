@@ -40,6 +40,16 @@ namespace LccHotfix
         public void SetCallbackHelper(IFishNetCallbackHelper callbackHelper);
 
         /// <summary>
+        /// 注册
+        /// </summary>
+        public void Register();
+
+        /// <summary>
+        /// 反注册
+        /// </summary>
+        public void Unregister();
+
+        /// <summary>
         /// 开启服务器
         /// </summary>
         public void StartServer();

@@ -96,6 +96,24 @@ namespace LccHotfix
         }
 
         /// <summary>
+        /// 注册
+        /// </summary>
+        public void Register()
+        {
+            NetworkServer.RegisterHandler<MirrorMessage>(ServerMessage);
+            NetworkClient.RegisterHandler<MirrorMessage>(ClientMessage);
+        }
+
+        /// <summary>
+        /// 反注册
+        /// </summary>
+        public void Unregister()
+        {
+            NetworkServer.UnregisterHandler<MirrorMessage>();
+            NetworkClient.UnregisterHandler<MirrorMessage>();
+        }
+
+        /// <summary>
         /// 开启服务器
         /// </summary>
         public void StartServer()
@@ -105,9 +123,6 @@ namespace LccHotfix
 
             if (IsServer)
                 return;
-
-            NetworkServer.RegisterHandler<MirrorMessage>(ServerMessage);
-            NetworkClient.RegisterHandler<MirrorMessage>(ClientMessage);
 
             _networkManager.StartHost();
         }
@@ -123,9 +138,6 @@ namespace LccHotfix
             if (!IsServer)
                 return;
 
-            NetworkServer.UnregisterHandler<MirrorMessage>();
-            NetworkClient.UnregisterHandler<MirrorMessage>();
-
             _networkManager.StopHost();
         }
 
@@ -140,8 +152,6 @@ namespace LccHotfix
             if (IsClient)
                 return;
 
-            NetworkClient.RegisterHandler<MirrorMessage>(ClientMessage);
-
             _networkManager.StartClient();
         }
 
@@ -155,8 +165,6 @@ namespace LccHotfix
 
             if (!IsClient)
                 return;
-
-            NetworkClient.UnregisterHandler<MirrorMessage>();
 
             _networkManager.StopClient();
         }

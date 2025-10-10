@@ -102,6 +102,31 @@ namespace LccHotfix
             _callbackHelper = callbackHelper;
         }
 
+        /// <summary>
+        /// 注册
+        /// </summary>
+        public void Register()
+        {
+            _networkManager.ServerManager.OnServerConnectionState += OnServerConnectionState;
+            _networkManager.ServerManager.OnRemoteConnectionState += OnServerRemoteConnectionState;
+            _networkManager.ClientManager.OnClientConnectionState += OnClientConnectionState;
+
+            _networkManager.ServerManager.RegisterBroadcast<FishNetMessage>(ServerMessage);
+            _networkManager.ClientManager.RegisterBroadcast<FishNetMessage>(ClientMessage);
+        }
+
+        /// <summary>
+        /// 反注册
+        /// </summary>
+        public void Unregister()
+        {
+            _networkManager.ServerManager.OnServerConnectionState -= OnServerConnectionState;
+            _networkManager.ServerManager.OnRemoteConnectionState -= OnServerRemoteConnectionState;
+            _networkManager.ClientManager.OnClientConnectionState -= OnClientConnectionState;
+
+            _networkManager.ServerManager.UnregisterBroadcast<FishNetMessage>(ServerMessage);
+            _networkManager.ClientManager.UnregisterBroadcast<FishNetMessage>(ClientMessage);
+        }
 
         /// <summary>
         /// 开启服务器
@@ -113,11 +138,6 @@ namespace LccHotfix
 
             if (IsServer)
                 return;
-
-            _networkManager.ServerManager.OnServerConnectionState += OnServerConnectionState;
-            _networkManager.ServerManager.OnRemoteConnectionState += OnServerRemoteConnectionState;
-
-            _networkManager.ServerManager.RegisterBroadcast<FishNetMessage>(ServerMessage);
 
             _networkManager.ServerManager.StartConnection();
 
@@ -134,11 +154,6 @@ namespace LccHotfix
             if (!IsServer)
                 return;
 
-            _networkManager.ServerManager.OnServerConnectionState -= OnServerConnectionState;
-            _networkManager.ServerManager.OnRemoteConnectionState -= OnServerRemoteConnectionState;
-
-            _networkManager.ServerManager.UnregisterBroadcast<FishNetMessage>(ServerMessage);
-
             _networkManager.ServerManager.StopConnection(true);
         }
 
@@ -153,10 +168,6 @@ namespace LccHotfix
             if (IsClient)
                 return;
 
-            _networkManager.ClientManager.OnClientConnectionState += OnClientConnectionState;
-
-            _networkManager.ClientManager.RegisterBroadcast<FishNetMessage>(ClientMessage);
-
             _networkManager.ClientManager.StartConnection();
         }
 
@@ -170,10 +181,6 @@ namespace LccHotfix
 
             if (!IsClient)
                 return;
-
-            _networkManager.ClientManager.OnClientConnectionState -= OnClientConnectionState;
-
-            _networkManager.ClientManager.UnregisterBroadcast<FishNetMessage>(ClientMessage);
 
             _networkManager.ClientManager.StopConnection();
         }

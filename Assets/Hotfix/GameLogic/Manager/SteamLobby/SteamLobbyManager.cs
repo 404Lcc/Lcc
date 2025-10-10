@@ -157,9 +157,10 @@ namespace LccHotfix
             if (CurrentLobbyData == null)
                 return;
             var lobbyId = CurrentLobbyData.LobbyID;
-            CurrentLobbyData = null;
 
-            _lobbyCallbackHelper.OnLeaveLobby();
+            _lobbyCallbackHelper.OnLeaveLobby(CurrentLobbyData);
+
+            CurrentLobbyData = null;
 
             SteamMatchmaking.LeaveLobby(lobbyId);
         }

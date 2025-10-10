@@ -15,8 +15,6 @@ namespace LccHotfix
         public void OnLobbyCreated(LobbyData lobbyData)
         {
             lobbyData.SetLobbyCustomData("HostAddress", SteamUser.GetSteamID().ToString());
-            Main.MirrorService.SetNetworkAddress();
-            Main.MirrorService.StartServer();
         }
 
         /// <summary>
@@ -26,18 +24,30 @@ namespace LccHotfix
         public void OnLobbyEnter(LobbyData lobbyData)
         {
             string hostAddress = lobbyData.GetLobbyCustomData("HostAddress");
+            Main.MirrorService.Register();
             Main.MirrorService.SetNetworkAddress(hostAddress);
-            Main.MirrorService.Connect();
+            // 自己是房主
+            if (SteamUser.GetSteamID().m_SteamID.ToString() == hostAddress)
+            {
+                Main.MirrorService.StartServer();
+            }
+            else
+            {
+                Main.MirrorService.Connect();
+            }
         }
 
         /// <summary>
         /// 离开大厅完成
         /// </summary>
-        public void OnLeaveLobby()
+        public void OnLeaveLobby(LobbyData lobbyData)
         {
-            if (Main.MirrorService.IsNetworkActive)
+            string hostAddress = lobbyData.GetLobbyCustomData("HostAddress");
+            Main.MirrorService.Unregister();
+            Main.MirrorService.Disconnect();
+            // 自己是房主
+            if (SteamUser.GetSteamID().m_SteamID.ToString() == hostAddress)
             {
-                Main.MirrorService.Disconnect();
                 Main.MirrorService.StopServer();
             }
         }

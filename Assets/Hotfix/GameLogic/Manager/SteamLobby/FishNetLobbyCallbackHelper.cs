@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Steamworks;
-using UnityEngine;
 
 namespace LccHotfix
 {
@@ -13,8 +12,6 @@ namespace LccHotfix
         public void OnLobbyCreated(LobbyData lobbyData)
         {
             lobbyData.SetLobbyCustomData("HostAddress", SteamUser.GetSteamID().ToString());
-            Main.FishNetService.SetNetworkAddress();
-            Main.FishNetService.StartServer();
         }
 
         /// <summary>
@@ -24,18 +21,28 @@ namespace LccHotfix
         public void OnLobbyEnter(LobbyData lobbyData)
         {
             string hostAddress = lobbyData.GetLobbyCustomData("HostAddress");
+            Main.FishNetService.Register();
             Main.FishNetService.SetNetworkAddress(hostAddress);
+            // 自己是房主
+            if (SteamUser.GetSteamID().m_SteamID.ToString() == hostAddress)
+            {
+                Main.FishNetService.StartServer();
+            }
+
             Main.FishNetService.Connect();
         }
 
         /// <summary>
         /// 离开大厅完成
         /// </summary>
-        public void OnLeaveLobby()
+        public void OnLeaveLobby(LobbyData lobbyData)
         {
-            if (Main.FishNetService.IsNetworkActive)
+            string hostAddress = lobbyData.GetLobbyCustomData("HostAddress");
+            Main.FishNetService.Unregister();
+            Main.FishNetService.Disconnect();
+            // 自己是房主
+            if (SteamUser.GetSteamID().m_SteamID.ToString() == hostAddress)
             {
-                Main.FishNetService.Disconnect();
                 Main.FishNetService.StopServer();
             }
         }
