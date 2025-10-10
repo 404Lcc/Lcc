@@ -23,8 +23,5 @@ namespace LccHotfix
 
         // 查找大厅列表
         void RequestLobbyList(int maxResults);
-
-        // 获取大厅数据
-        LobbyData GetLobbyData(ulong lobbyID);
     }
 }

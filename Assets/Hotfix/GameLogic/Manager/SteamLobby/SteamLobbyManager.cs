@@ -5,6 +5,76 @@ using UnityEngine;
 
 namespace LccHotfix
 {
+    public class SteamPlayerData
+    {
+        public CSteamID steamID;
+        public string PlayerName => SteamFriends.GetFriendPersonaName(steamID);
+
+        public void InitData(CSteamID steamID)
+        {
+            this.steamID = steamID;
+        }
+
+        public Texture2D GetAvatar()
+        {
+            // 获取头像句柄
+            int avatarHandle = SteamFriends.GetMediumFriendAvatar(steamID);
+
+            bool success = SteamUtils.GetImageSize(avatarHandle, out var width, out var height);
+
+            if (!success || width == 0 || height == 0)
+            {
+                Debug.LogError($"获取头像尺寸失败 {steamID}");
+                return null;
+            }
+
+            byte[] imageData = new byte[width * height * 4];
+            success = SteamUtils.GetImageRGBA(avatarHandle, imageData, (int)(width * height * 4));
+
+            if (!success)
+            {
+                Debug.LogError($"获取头像数据失败 {steamID}");
+                return null;
+            }
+
+            // 翻转图像数据以解决颠倒问题
+            byte[] flippedData = FlipImageVertically(imageData, (int)width, (int)height);
+
+            Texture2D texture = new Texture2D((int)width, (int)height, TextureFormat.RGBA32, false);
+            texture.LoadRawTextureData(flippedData);
+            texture.Apply();
+            return texture;
+        }
+
+        // 垂直翻转图像数据
+        private byte[] FlipImageVertically(byte[] original, int width, int height)
+        {
+            byte[] flipped = new byte[original.Length];
+            // 每行的字节数 (RGBA)
+            int stride = width * 4;
+
+            for (int y = 0; y < height; y++)
+            {
+                int sourceIndex = y * stride;
+                int targetIndex = (height - 1 - y) * stride;
+                Buffer.BlockCopy(original, sourceIndex, flipped, targetIndex, stride);
+            }
+
+            return flipped;
+        }
+
+        public Sprite GetAvatarSprite()
+        {
+            var texture = GetAvatar();
+            if (texture == null)
+            {
+                return null;
+            }
+
+            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        }
+    }
+
     public class LobbyData
     {
         private ulong _lobbyID;
@@ -44,6 +114,18 @@ namespace LccHotfix
         }
 
         /// <summary>
+        /// 获取房主信息
+        /// </summary>
+        /// <returns></returns>
+        public SteamPlayerData GetLobbyOwnerSteamPlayerData()
+        {
+            var steamID = SteamMatchmaking.GetLobbyOwner(LobbyID);
+            SteamPlayerData data = new SteamPlayerData();
+            data.InitData(steamID);
+            return data;
+        }
+
+        /// <summary>
         /// 获取大厅内成员数量
         /// </summary>
         /// <returns></returns>
@@ -53,10 +135,10 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 获取所有成员
+        /// 获取大厅内所有成员id
         /// </summary>
         /// <returns></returns>
-        public List<CSteamID> GetLobbyMemberList()
+        private List<CSteamID> GetLobbyMemberList()
         {
             List<CSteamID> list = new List<CSteamID>();
             for (int i = 0; i < GetLobbyMemberCount(); i++)
@@ -68,15 +150,17 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 获取成员列表的名字
+        /// 获取大厅内所有成员数据
         /// </summary>
         /// <returns></returns>
-        public List<string> GetLobbyMemberNameList()
+        public List<SteamPlayerData> GetLobbySteamPlayerDataList()
         {
-            List<string> list = new List<string>();
+            List<SteamPlayerData> list = new List<SteamPlayerData>();
             foreach (var item in GetLobbyMemberList())
             {
-                list.Add(SteamFriends.GetFriendPersonaName(item));
+                SteamPlayerData data = new SteamPlayerData();
+                data.InitData(item);
+                list.Add(data);
             }
 
             return list;
@@ -175,7 +259,7 @@ namespace LccHotfix
         }
 
         // 获取大厅数据
-        public LobbyData GetLobbyData(ulong lobbyID)
+        private LobbyData GetLobbyData(ulong lobbyID)
         {
             CSteamID id = new CSteamID(lobbyID);
             if (id.IsValid())
