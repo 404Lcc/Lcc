@@ -44,11 +44,14 @@ namespace LccHotfix
         {
             string hostAddress = lobbyData.GetLobbyCustomData("HostAddress");
             Main.MirrorService.Unregister();
-            Main.MirrorService.Disconnect();
             // 自己是房主
             if (SteamUser.GetSteamID().m_SteamID.ToString() == hostAddress)
             {
                 Main.MirrorService.StopServer();
+            }
+            else
+            {
+                Main.MirrorService.Disconnect();
             }
         }
 

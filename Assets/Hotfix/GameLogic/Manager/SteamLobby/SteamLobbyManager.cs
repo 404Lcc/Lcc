@@ -156,13 +156,15 @@ namespace LccHotfix
         {
             if (CurrentLobbyData == null)
                 return;
-            var lobbyId = CurrentLobbyData.LobbyID;
 
-            _lobbyCallbackHelper.OnLeaveLobby(CurrentLobbyData);
+            var tempLobbyData = CurrentLobbyData;
 
+            //先置空，避免OnLeaveLobby的时候继续调用LeaveLobby，导致无限调用的情况
             CurrentLobbyData = null;
 
-            SteamMatchmaking.LeaveLobby(lobbyId);
+            _lobbyCallbackHelper.OnLeaveLobby(tempLobbyData);
+
+            SteamMatchmaking.LeaveLobby(tempLobbyData.LobbyID);
         }
 
         // 查找大厅列表
