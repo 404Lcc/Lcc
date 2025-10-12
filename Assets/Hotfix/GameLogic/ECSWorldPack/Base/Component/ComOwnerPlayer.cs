@@ -34,6 +34,14 @@ namespace LccHotfix
             component.Init(data);
             AddComponent(index, component);
         }
+
+        public void ReplaceComOwnerPlayer(InGamePlayerData data)
+        {
+            var index = LogicComponentsLookup.ComOwnerPlayer;
+            var component = (ComOwnerPlayer)CreateComponent(index, typeof(ComOwnerPlayer));
+            component.Init(data);
+            ReplaceComponent(index, component);
+        }
     }
 
     public static partial class LogicComponentsLookup
