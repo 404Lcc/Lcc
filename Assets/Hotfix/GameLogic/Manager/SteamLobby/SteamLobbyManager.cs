@@ -5,6 +5,11 @@ using UnityEngine;
 
 namespace LccHotfix
 {
+    public struct LobbyMemberStateChangeValueEvent : IValueEvent
+    {
+        public EChatMemberStateChange type;
+    }
+
     public class SteamPlayerData
     {
         public CSteamID steamID;
@@ -246,7 +251,7 @@ namespace LccHotfix
             //先置空，避免OnLeaveLobby的时候继续调用LeaveLobby，导致无限调用的情况
             CurrentLobbyData = null;
 
-            _lobbyCallbackHelper.OnLeaveLobby(tempLobbyData);
+            _lobbyCallbackHelper.OnLobbyLeave(tempLobbyData);
 
             SteamMatchmaking.LeaveLobby(tempLobbyData.LobbyID);
         }
@@ -304,20 +309,11 @@ namespace LccHotfix
         private void OnLobbyChatUpdate(LobbyChatUpdate_t callback)
         {
             EChatMemberStateChange type = (EChatMemberStateChange)callback.m_rgfChatMemberStateChange;
-            Debug.Log("收到大厅变动" + type);
-            switch (type)
-            {
-                case EChatMemberStateChange.k_EChatMemberStateChangeEntered:
-                    break;
-                case EChatMemberStateChange.k_EChatMemberStateChangeLeft:
-                    break;
-                case EChatMemberStateChange.k_EChatMemberStateChangeDisconnected:
-                    break;
-                case EChatMemberStateChange.k_EChatMemberStateChangeKicked:
-                    break;
-                case EChatMemberStateChange.k_EChatMemberStateChangeBanned:
-                    break;
-            }
+            _lobbyCallbackHelper.OnLobbyMemberStateChange(type);
+
+            LobbyMemberStateChangeValueEvent evt = new LobbyMemberStateChangeValueEvent();
+            evt.type = type;
+            GameUtility.Dispatch(evt);
         }
 
         /// <summary>

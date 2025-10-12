@@ -40,7 +40,7 @@ namespace LccHotfix
         /// <summary>
         /// 离开大厅完成
         /// </summary>
-        public void OnLeaveLobby(LobbyData lobbyData)
+        public void OnLobbyLeave(LobbyData lobbyData)
         {
             string hostAddress = lobbyData.GetLobbyCustomData("HostAddress");
             Main.MirrorService.Unregister();
@@ -52,6 +52,28 @@ namespace LccHotfix
             else
             {
                 Main.MirrorService.Disconnect();
+            }
+        }
+
+        /// <summary>
+        /// 收到大厅变动
+        /// </summary>
+        /// <param name="type"></param>
+        public void OnLobbyMemberStateChange(EChatMemberStateChange type)
+        {
+            Debug.Log("收到大厅变动" + type);
+            switch (type)
+            {
+                case EChatMemberStateChange.k_EChatMemberStateChangeEntered:
+                    break;
+                case EChatMemberStateChange.k_EChatMemberStateChangeLeft:
+                    break;
+                case EChatMemberStateChange.k_EChatMemberStateChangeDisconnected:
+                    break;
+                case EChatMemberStateChange.k_EChatMemberStateChangeKicked:
+                    break;
+                case EChatMemberStateChange.k_EChatMemberStateChangeBanned:
+                    break;
             }
         }
 
