@@ -41,6 +41,7 @@ namespace LccHotfix
             _world.MetaContext.SetComUniOrca();
             _world.MetaContext.SetComUniDamage(new DamageBase());
             _world.MetaContext.SetComUniFloatingText(new DNPFloatingText());
+            _world.MetaContext.SetComUniJob();
         }
     }
 }

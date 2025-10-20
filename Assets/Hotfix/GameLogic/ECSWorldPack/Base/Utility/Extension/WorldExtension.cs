@@ -63,6 +63,9 @@ namespace LccHotfix
             //避障
             System.Add(new SysOrca(world));
             System.Add(new SysOrcaAgent(world));
+            
+            //job
+            System.Add(new SysJobUpdate(world));
 
             //游戏模式
             System.Add(new SysGameMode(world));
