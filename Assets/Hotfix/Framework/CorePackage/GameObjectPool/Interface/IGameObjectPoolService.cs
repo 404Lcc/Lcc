@@ -14,7 +14,7 @@ namespace LccHotfix
         void SetAsyncLoader(Action<string, GameObject, Action<string, Object>> asyncLoader);
 
         GameObjectPoolObject GetObject(string poolName);
-        GameObjectPoolAsyncOperation GetObjectAsync(string poolName, Action<GameObjectPoolObject> onComplete);
+        GameObjectPoolAsyncOperation GetObjectAsync(string poolName, Action<GameObjectPoolAsyncOperation> onComplete);
         void CancelAsyncOperation(GameObjectPoolAsyncOperation operation);
 
         void ReleaseObject(GameObjectPoolObject poolObject);

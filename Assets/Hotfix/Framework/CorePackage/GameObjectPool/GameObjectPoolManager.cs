@@ -21,12 +21,42 @@ namespace LccHotfix
 
     public class GameObjectPoolAsyncOperation
     {
-        public string Location { get; internal set; }
-        public Action<GameObjectPoolObject> Callback { get; set; }
+        private IGameObjectPoolService _service;
+        private Action<GameObjectPoolAsyncOperation> _callback;
+        public string Location { get; private set; }
+        public GameObjectPoolObject Result { get; private set; }
+        public bool IsDone { get; private set; }
 
-        internal void Complete(GameObjectPoolObject result)
+        public void Init(IGameObjectPoolService service, Action<GameObjectPoolAsyncOperation> callback, string location)
         {
-            Callback?.Invoke(result);
+            _service = service;
+            _callback = callback;
+            Location = location;
+        }
+
+        public void Complete(GameObjectPoolObject result)
+        {
+            Result = result;
+            IsDone = true;
+            _callback?.Invoke(this);
+        }
+
+        public void Release(ref GameObjectPoolAsyncOperation operation)
+        {
+            if (IsDone)
+            {
+                if (Result != null)
+                {
+                    Result.Release();
+                    Result = null;
+                }
+            }
+            else
+            {
+                _service.CancelAsyncOperation(this);
+            }
+
+            operation = null;
         }
     }
 
@@ -136,7 +166,7 @@ namespace LccHotfix
         /// <param name="location"></param>
         /// <param name="onComplete"></param>
         /// <returns></returns>
-        public GameObjectPoolAsyncOperation GetObjectAsync(string location, Action<GameObjectPoolObject> onComplete)
+        public GameObjectPoolAsyncOperation GetObjectAsync(string location, Action<GameObjectPoolAsyncOperation> onComplete)
         {
             if (_asyncLoaderHandle == null)
             {
@@ -145,8 +175,7 @@ namespace LccHotfix
             }
 
             var operation = new GameObjectPoolAsyncOperation();
-            operation.Location = location;
-            operation.Callback = onComplete;
+            operation.Init(this, onComplete, location);
 
             if (_poolDict.TryGetValue(location, out var pool))
             {
