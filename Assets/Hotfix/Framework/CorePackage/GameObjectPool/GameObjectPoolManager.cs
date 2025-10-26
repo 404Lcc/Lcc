@@ -22,40 +22,11 @@ namespace LccHotfix
     public class GameObjectPoolAsyncOperation
     {
         public string Location { get; internal set; }
-        public bool IsDone { get; internal set; }
-        public bool IsCancelled { get; internal set; }
-        public Action<GameObjectPoolObject> Callback { get; internal set; }
-        public List<GameObjectPoolAsyncOperation> OperationList { get; set; }
+        public Action<GameObjectPoolObject> Callback { get; set; }
 
         internal void Complete(GameObjectPoolObject result)
         {
-            if (IsDone)
-                return;
-
-            IsDone = true;
-
             Callback?.Invoke(result);
-
-            RemoveSelf();
-
-        }
-
-        internal void Cancel()
-        {
-            if (IsDone)
-                return;
-
-            IsDone = true;
-
-            IsCancelled = true;
-
-            RemoveSelf();
-        }
-
-        public void RemoveSelf()
-        {
-            //从操作列表中移除
-            OperationList?.Remove(this);
         }
     }
 
@@ -189,7 +160,6 @@ namespace LccHotfix
             {
                 operationList = new List<GameObjectPoolAsyncOperation>();
                 operationList.Add(operation);
-                operation.OperationList = operationList;
                 _pendingOperations.Add(location, operationList);
 
                 //开始异步加载池
@@ -200,7 +170,6 @@ namespace LccHotfix
             else
             {
                 operationList.Add(operation);
-                operation.OperationList = operationList;
             }
 
             return operation;
@@ -214,45 +183,34 @@ namespace LccHotfix
         /// <param name="root"></param>
         private void OnAsyncLoadComplete(string location, GameObject original, GameObject root)
         {
-            //管理器要是被删除了_pendingOperations就会没有location
+            //检查是否还有等待的操作
             if (!_pendingOperations.ContainsKey(location))
             {
+                //直接把root删除资源就会被卸载
+                GameObject.Destroy(root);
                 return;
-            }
-
-            if (_pendingOperations.TryGetValue(location, out var list))
-            {
-                //如果没有其他等待的操作，从等待列表中移除出去
-                bool hasPending = list.Any(op => !op.IsDone);
-                if (!hasPending)
-                {
-                    _pendingOperations.Remove(location);
-                    //直接把root删除资源就会被卸载
-                    GameObject.Destroy(root);
-                    return;
-                }
             }
 
             if (original == null)
             {
                 Debug.LogError($"加载资源失败 {location}");
                 GameObject.Destroy(root);
-                AsyncLoadEnd(location, null);
+                CompletePendingOperations(location, null);
                 return;
             }
 
             //创建对象池
             var pool = CreateDecoratedPool(original, root, location);
             _poolDict.Add(location, pool);
-            AsyncLoadEnd(location, pool);
+            CompletePendingOperations(location, pool);
         }
 
         /// <summary>
-        /// 异步加载资源结束
+        /// 完成所有等待的操作
         /// </summary>
         /// <param name="location"></param>
         /// <param name="pool"></param>
-        private void AsyncLoadEnd(string location, IGameObjectPool pool)
+        private void CompletePendingOperations(string location, IGameObjectPool pool)
         {
             //复制列表以避免在迭代时修改
             var list = new List<GameObjectPoolAsyncOperation>(_pendingOperations[location]);
@@ -261,9 +219,6 @@ namespace LccHotfix
 
             foreach (var item in list)
             {
-                if (item.IsCancelled)
-                    continue;
-
                 if (pool != null)
                 {
                     item.Complete(pool.Get());
@@ -281,10 +236,20 @@ namespace LccHotfix
         /// <param name="operation"></param>
         public void CancelAsyncOperation(GameObjectPoolAsyncOperation operation)
         {
-            if (operation.IsDone)
-                return;
+            //从等待列表中移除
+            if (_pendingOperations.TryGetValue(operation.Location, out var list))
+            {
+                if (list.Contains(operation))
+                {
+                    list.Remove(operation);
+                }
 
-            operation.Cancel();
+                //如果列表为空，清理等待列表
+                if (list.Count == 0)
+                {
+                    _pendingOperations.Remove(operation.Location);
+                }
+            }
         }
 
         /// <summary>
