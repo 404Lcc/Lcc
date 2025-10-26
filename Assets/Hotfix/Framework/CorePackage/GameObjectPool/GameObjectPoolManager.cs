@@ -21,11 +21,11 @@ namespace LccHotfix
 
     public class GameObjectPoolAsyncOperation
     {
-        public string PoolName { get; internal set; }
+        public string Location { get; internal set; }
         public bool IsDone { get; internal set; }
         public bool IsCancelled { get; internal set; }
         public Action<GameObjectPoolObject> Callback { get; internal set; }
-        internal List<GameObjectPoolAsyncOperation> OperationList { get; set; }
+        public List<GameObjectPoolAsyncOperation> OperationList { get; set; }
 
         internal void Complete(GameObjectPoolObject result)
         {
@@ -34,17 +34,10 @@ namespace LccHotfix
 
             IsDone = true;
 
-            try
-            {
-                Callback?.Invoke(result);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"Error in async operation callback: {e}");
-            }
+            Callback?.Invoke(result);
 
-            // 从操作列表中移除
-            OperationList?.Remove(this);
+            RemoveSelf();
+
         }
 
         internal void Cancel()
@@ -52,10 +45,16 @@ namespace LccHotfix
             if (IsDone)
                 return;
 
-            IsCancelled = true;
             IsDone = true;
 
-            // 从操作列表中移除
+            IsCancelled = true;
+
+            RemoveSelf();
+        }
+
+        public void RemoveSelf()
+        {
+            //从操作列表中移除
             OperationList?.Remove(this);
         }
     }
@@ -102,12 +101,6 @@ namespace LccHotfix
 
         internal override void Shutdown()
         {
-            // 取消所有异步操作
-            foreach (var poolName in new List<string>(_pendingOperations.Keys))
-            {
-                CancelAllAsyncOperations(poolName);
-            }
-
             foreach (var item in _poolDict.Values)
             {
                 item.ReleaseAll();
@@ -130,43 +123,79 @@ namespace LccHotfix
             _asyncLoaderHandle = asyncLoader;
         }
 
-        public GameObjectPoolObject GetObject(string poolName)
+        /// <summary>
+        /// 同步获取对象
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        public GameObjectPoolObject GetObject(string location)
         {
-            if (_poolDict.TryGetValue(poolName, out var pool))
+            if (_poolDict.TryGetValue(location, out var pool))
             {
                 return pool.Get();
             }
             else
             {
-                return CreatePoolSync(poolName);
+                if (_loaderHandle == null)
+                {
+                    Debug.LogError("对象池没有设置同步加载器");
+                    return null;
+                }
+
+                var root = new GameObject(location + "Pool");
+                root.transform.SetParent(Root);
+
+                var original = _loaderHandle(location, root);
+                if (original == null)
+                {
+                    Debug.LogError($"加载资源失败 {location}");
+                    GameObject.Destroy(root);
+                    return null;
+                }
+
+                pool = CreateDecoratedPool(original, root, location);
+                _poolDict.Add(location, pool);
+                return pool.Get();
             }
         }
 
-        public GameObjectPoolAsyncOperation GetObjectAsync(string poolName, Action<GameObjectPoolObject> onComplete)
+        /// <summary>
+        /// 异步获取对象
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="onComplete"></param>
+        /// <returns></returns>
+        public GameObjectPoolAsyncOperation GetObjectAsync(string location, Action<GameObjectPoolObject> onComplete)
         {
-            var operation = new GameObjectPoolAsyncOperation
+            if (_asyncLoaderHandle == null)
             {
-                PoolName = poolName,
-                Callback = onComplete
-            };
+                Debug.LogError("对象池没有设置异步加载器");
+                return null;
+            }
 
-            if (_poolDict.TryGetValue(poolName, out var pool))
+            var operation = new GameObjectPoolAsyncOperation();
+            operation.Location = location;
+            operation.Callback = onComplete;
+
+            if (_poolDict.TryGetValue(location, out var pool))
             {
-                // 如果池已经存在，直接完成操作
+                //池已经存在，直接完成操作
                 operation.Complete(pool.Get());
                 return operation;
             }
 
-            // 添加到等待列表
-            if (!_pendingOperations.TryGetValue(poolName, out var operationList))
+            //添加到等待列表
+            if (!_pendingOperations.TryGetValue(location, out var operationList))
             {
                 operationList = new List<GameObjectPoolAsyncOperation>();
                 operationList.Add(operation);
                 operation.OperationList = operationList;
-                _pendingOperations.Add(poolName, operationList);
+                _pendingOperations.Add(location, operationList);
 
-                // 开始异步加载池
-                StartAsyncLoadPool(poolName);
+                //开始异步加载池
+                var root = new GameObject(location + "Pool");
+                root.transform.SetParent(Root);
+                _asyncLoaderHandle(location, root, (assetName, obj) => { OnAsyncLoadComplete(assetName, obj as GameObject, root); });
             }
             else
             {
@@ -177,139 +206,97 @@ namespace LccHotfix
             return operation;
         }
 
+        /// <summary>
+        /// 异步加载对象完成
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="original"></param>
+        /// <param name="root"></param>
+        private void OnAsyncLoadComplete(string location, GameObject original, GameObject root)
+        {
+            //管理器要是被删除了_pendingOperations就会没有location
+            if (!_pendingOperations.ContainsKey(location))
+            {
+                return;
+            }
+
+            if (_pendingOperations.TryGetValue(location, out var list))
+            {
+                //如果没有其他等待的操作，从等待列表中移除出去
+                bool hasPending = list.Any(op => !op.IsDone);
+                if (!hasPending)
+                {
+                    _pendingOperations.Remove(location);
+                    //直接把root删除资源就会被卸载
+                    GameObject.Destroy(root);
+                    return;
+                }
+            }
+
+            if (original == null)
+            {
+                Debug.LogError($"加载资源失败 {location}");
+                GameObject.Destroy(root);
+                AsyncLoadEnd(location, null);
+                return;
+            }
+
+            //创建对象池
+            var pool = CreateDecoratedPool(original, root, location);
+            _poolDict.Add(location, pool);
+            AsyncLoadEnd(location, pool);
+        }
+
+        /// <summary>
+        /// 异步加载资源结束
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="pool"></param>
+        private void AsyncLoadEnd(string location, IGameObjectPool pool)
+        {
+            //复制列表以避免在迭代时修改
+            var list = new List<GameObjectPoolAsyncOperation>(_pendingOperations[location]);
+
+            _pendingOperations.Remove(location);
+
+            foreach (var item in list)
+            {
+                if (item.IsCancelled)
+                    continue;
+
+                if (pool != null)
+                {
+                    item.Complete(pool.Get());
+                }
+                else
+                {
+                    item.Complete(null);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 取消异步操作
+        /// </summary>
+        /// <param name="operation"></param>
         public void CancelAsyncOperation(GameObjectPoolAsyncOperation operation)
         {
             if (operation.IsDone)
                 return;
 
             operation.Cancel();
-
-            // 如果该池没有其他等待的操作，取消资源加载
-            if (_pendingOperations.TryGetValue(operation.PoolName, out var operationList))
-            {
-                bool hasPendingOperations = operationList.Any(op => !op.IsDone);
-                if (!hasPendingOperations)
-                {
-                    CancelPoolLoading(operation.PoolName);
-                }
-            }
         }
 
-        private void CancelAllAsyncOperations(string poolName)
+        /// <summary>
+        /// 创建修饰器
+        /// </summary>
+        /// <param name="original"></param>
+        /// <param name="root"></param>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        private IGameObjectPool CreateDecoratedPool(GameObject original, GameObject root, string location)
         {
-            if (_pendingOperations.TryGetValue(poolName, out var operationList))
-            {
-                CancelPoolLoading(poolName);
-            }
-        }
-
-        private void CancelPoolLoading(string poolName)
-        {
-            _pendingOperations.Remove(poolName);
-
-            // 清理临时创建的根节点
-            var rootName = poolName + "Pool";
-            var rootObj = GameObject.Find(rootName);
-            if (rootObj != null && rootObj.transform.parent == _root)
-            {
-                GameObject.Destroy(rootObj);
-            }
-        }
-
-        private GameObjectPoolObject CreatePoolSync(string poolName)
-        {
-            if (_loaderHandle == null)
-            {
-                Debug.LogError("Sync loader is not set!");
-                return null;
-            }
-
-            var root = new GameObject(poolName + "Pool");
-            root.transform.SetParent(Root);
-            var original = _loaderHandle(poolName, root);
-
-            if (original == null)
-            {
-                Debug.LogError($"Failed to load GameObject: {poolName}");
-                GameObject.Destroy(root);
-                return null;
-            }
-
-            var pool = CreateDecoratedPool(original, root, poolName);
-            _poolDict.Add(poolName, pool);
-            return pool.Get();
-        }
-
-        private void StartAsyncLoadPool(string poolName)
-        {
-            if (_asyncLoaderHandle == null)
-            {
-                Debug.LogError("Async loader is not set!");
-                CompleteAsyncLoad(poolName, null);
-                return;
-            }
-
-            var root = new GameObject(poolName + "Pool");
-            root.transform.SetParent(Root);
-
-            // 开始异步加载
-            _asyncLoaderHandle(poolName, root, (assetName, loadedObject) => { OnAsyncLoadComplete(poolName, loadedObject as GameObject, root); });
-        }
-
-        private void OnAsyncLoadComplete(string poolName, GameObject loadedObject, GameObject root)
-        {
-            if (!_pendingOperations.TryGetValue(poolName, out var operationList))
-            {
-                //todo
-                // 所有操作都已被取消
-                GameObject.Destroy(root);
-                return;
-            }
-
-            if (loadedObject == null)
-            {
-                Debug.LogError($"Async load failed for: {poolName}");
-                GameObject.Destroy(root);
-                CompleteAsyncLoad(poolName, null);
-                return;
-            }
-
-            // 创建对象池
-            var pool = CreateDecoratedPool(loadedObject, root, poolName);
-            _poolDict.Add(poolName, pool);
-
-            CompleteAsyncLoad(poolName, pool);
-        }
-
-        private void CompleteAsyncLoad(string poolName, IGameObjectPool pool)
-        {
-            if (!_pendingOperations.TryGetValue(poolName, out var operationList))
-                return;
-
-            // 复制列表以避免在迭代时修改
-            var operationsToComplete = new List<GameObjectPoolAsyncOperation>(operationList);
-            _pendingOperations.Remove(poolName);
-
-            foreach (var operation in operationsToComplete)
-            {
-                if (operation.IsCancelled)
-                    continue;
-
-                if (pool != null)
-                {
-                    var poolObject = pool?.Get();
-                    operation.Complete(poolObject);
-                }
-                else
-                {
-                    operation.Complete(null);
-                }
-            }
-        }
-
-        private IGameObjectPool CreateDecoratedPool(GameObject original, GameObject root, string poolName)
-        {
-            IGameObjectPool pool = new GameObjectPool(original, root, PoolSetting, poolName);
+            IGameObjectPool pool = new GameObjectPool(original, root, PoolSetting, location);
             IGameObjectPool decorator = new SetParentDecorator(pool);
 
             if (PoolSetting.preloadCount > 0)
@@ -337,12 +324,12 @@ namespace LccHotfix
             poolObject.Release();
         }
 
-        public void ReleasePool(string poolName)
+        public void ReleasePool(string location)
         {
-            if (_poolDict.TryGetValue(poolName, out var pool))
+            if (_poolDict.TryGetValue(location, out var pool))
             {
                 pool.ReleaseAll();
-                _poolDict.Remove(poolName);
+                _poolDict.Remove(location);
             }
         }
     }

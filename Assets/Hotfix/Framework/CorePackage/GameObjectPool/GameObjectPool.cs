@@ -30,13 +30,13 @@ namespace LccHotfix
         public string Name { get; private set; }
         public int Count => _cachedStack.Count;
 
-        public GameObjectPool(GameObject original, GameObject root, GameObjectPoolSetting poolSetting, string poolName)
+        public GameObjectPool(GameObject original, GameObject root, GameObjectPoolSetting poolSetting, string location)
         {
             Debug.Assert(original != null);
             _original = original;
             _root = root;
             _poolSetting = poolSetting;
-            Name = poolName;
+            Name = location;
             _cachedStack = new Stack<GameObjectPoolObject>();
         }
 

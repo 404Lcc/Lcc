@@ -25,6 +25,10 @@ namespace LccHotfix
                 Main.AssetService.LoadRes<GameObject>(root, location, out var res);
                 return res;
             });
+            GameObjectPoolService.SetAsyncLoader((location, root, onComplete) =>
+            {
+                AssetService.StartLoadRes<GameObject>(root, location, onComplete);
+            });
             CoroutineService = Current.AddModule<CoroutineManager>();
             CoroutineService.SetCoroutineHelper(new DefaultCoroutineHelper());
             NetworkService = Current.AddModule<NetworkManager>();
@@ -47,7 +51,7 @@ namespace LccHotfix
             WindowService = Current.AddModule<WindowManager>();
             ThreadSyncService = Current.AddModule<ThreadSyncManager>();
             GizmoService = Current.AddModule<GizmoManager>();
-            
+
             PlatformService = Current.AddModule<PlatformManager>();
             IconService = Current.AddModule<IconManager>();
             HotfixBridgeService = Current.AddModule<HotfixBridge>();
@@ -70,7 +74,7 @@ namespace LccHotfix
             SteamService = Current.AddModule<SteamManager>();
             SteamLobbyService = Current.AddModule<SteamLobbyManager>();
             SteamLobbyService.SetLobbyCallbackHelper(new MirrorLobbyCallbackHelper());
-            
+
             //最后初始化
             ModelService.Init();
             SaveService.Init();
