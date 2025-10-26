@@ -3,6 +3,7 @@
     public class PreloadDecorator : GameObjectPoolDecorator
     {
         private int _preloaded = 0;
+
         public PreloadDecorator(IGameObjectPool pool) : base(pool)
         {
 

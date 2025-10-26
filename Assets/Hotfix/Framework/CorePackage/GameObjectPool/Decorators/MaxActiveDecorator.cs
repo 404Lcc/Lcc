@@ -1,4 +1,6 @@
-﻿namespace LccHotfix
+﻿using System.Collections.Generic;
+
+namespace LccHotfix
 {
     /// <summary>
     /// 有最大数量限制的对象池
@@ -19,6 +21,7 @@
             {
                 _activeList.First.Value.Release();
             }
+
             var target = base.Get();
             _activeList.AddLast(target);
             return target;

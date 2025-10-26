@@ -56,6 +56,7 @@ namespace LccHotfix
             {
                 poolObject = ForceSpawm();
             }
+
             return poolObject;
         }
 
@@ -74,6 +75,7 @@ namespace LccHotfix
             {
                 GameObject.Destroy(_cachedStack.Pop().GameObject);
             }
+
             GameObject.Destroy(_root);
         }
 

@@ -9,15 +9,10 @@ namespace LccHotfix
 
         public IGameObjectPool Pool
         {
-            get
-            {
-                return _pool;
-            }
-            set
-            {
-                _pool = value;
-            }
+            get { return _pool; }
+            set { _pool = value; }
         }
+
         public GameObject GameObject => _gameObject;
         public Transform Transform => GameObject.transform;
 
