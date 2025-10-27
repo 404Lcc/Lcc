@@ -25,8 +25,32 @@ namespace LccHotfix
         private GameObjectPoolObject _result;
         public string Location { get; private set; }
         public bool IsDone { get; private set; }
-        public GameObject GameObject => _result.GameObject;
-        public Transform Transform => GameObject.transform;
+
+        public GameObject GameObject
+        {
+            get
+            {
+                if (IsDone)
+                {
+                    return _result.GameObject;
+                }
+
+                return null;
+            }
+        }
+
+        public Transform Transform
+        {
+            get
+            {
+                if (IsDone)
+                {
+                    return _result.Transform;
+                }
+
+                return null;
+            }
+        }
 
         public void Init(IGameObjectPoolService service, Action<GameObjectPoolAsyncOperation> callback, string location)
         {

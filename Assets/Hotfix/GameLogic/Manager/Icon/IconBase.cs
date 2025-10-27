@@ -17,6 +17,7 @@ namespace LccHotfix
         private UIImageCtrl _iconImage;
 
         public GameObject GameObject => _asyncOperation.GameObject;
+        public Transform Transform => _asyncOperation.Transform;
 
         public void InitIcon(IconType iconType, Transform parent, IconSize size)
         {
@@ -29,11 +30,11 @@ namespace LccHotfix
 
         private void OnComplete(GameObjectPoolAsyncOperation obj)
         {
-            ClientTools.ResetTransform(GameObject.transform, _parent);
-            ClientTools.ResetRectTransfrom(obj.GameObject.transform as RectTransform);
+            ClientTools.ResetTransform(Transform, _parent);
+            ClientTools.ResetRectTransfrom(Transform as RectTransform);
             SetSize(_size);
 
-            ClientTools.AutoReference(GameObject.transform, this);
+            ClientTools.AutoReference(Transform, this);
             ClientTools.ForceGetComponent<Button>(GameObject).onClick.AddListener(OnClick);
 
             OnInit();
