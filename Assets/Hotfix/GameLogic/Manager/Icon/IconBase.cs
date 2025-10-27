@@ -8,28 +8,79 @@ namespace LccHotfix
     public class IconBase : IReference
     {
         private IconType _iconType;
+        private Transform _parent;
+        private IconSize _size;
+
+        private GameObjectPoolAsyncOperation _asyncOperation;
         private bool _clickShowTips;
-
-        private GameObject _gameObject;
         private Action _onClick;
-
         private UIImageCtrl _iconImage;
 
-        public GameObject GameObject => _gameObject;
+        public GameObject GameObject => _asyncOperation.GameObject;
 
-        public void InitIcon(GameObject gameObject, IconType iconType)
+        public void InitIcon(IconType iconType, Transform parent, IconSize size)
         {
-            this._gameObject = gameObject;
             this._iconType = iconType;
-            ClientTools.AutoReference(gameObject.transform, this);
-            ClientTools.ForceGetComponent<Button>(gameObject).onClick.AddListener(OnClick);
+            this._parent = parent;
+            _size = size;
+
+            _asyncOperation = Main.GameObjectPoolService.GetObjectAsync(iconType.ToString(), OnComplete);
+        }
+
+        private void OnComplete(GameObjectPoolAsyncOperation obj)
+        {
+            ClientTools.ResetTransform(GameObject.transform, _parent);
+            ClientTools.ResetRectTransfrom(obj.GameObject.transform as RectTransform);
+            SetSize(_size);
+
+            ClientTools.AutoReference(GameObject.transform, this);
+            ClientTools.ForceGetComponent<Button>(GameObject).onClick.AddListener(OnClick);
 
             OnInit();
         }
 
         public virtual void OnInit()
         {
+        }
 
+        public void OnRecycle()
+        {
+            _onClick = null;
+            _clickShowTips = true;
+
+            OnReset();
+
+            _asyncOperation.Release(ref _asyncOperation);
+        }
+
+        protected virtual void OnShowClickTips()
+        {
+        }
+
+        protected virtual void OnReset()
+        {
+        }
+
+        private void OnClick()
+        {
+            _onClick?.Invoke();
+
+            if (_clickShowTips)
+            {
+                OnShowClickTips();
+            }
+        }
+
+        /// <summary>
+        /// 回收
+        /// </summary>
+        public void Release<T>(ref T iconBase) where T : IconBase
+        {
+            if (iconBase == null)
+                return;
+
+            ReferencePool.Release(iconBase);
+            iconBase = null;
         }
 
         public virtual void SetInfo(int newImageID)
@@ -47,78 +98,25 @@ namespace LccHotfix
             _iconImage.SetImage(newImageID);
         }
 
-        public virtual void ShowClickTips()
-        {
-
-        }
-
-        public virtual void OnReset()
-        {
-
-        }
-
         public void SetClickShowTips(bool clickShowTips)
         {
             _clickShowTips = clickShowTips;
         }
-        
+
         public void SetClick(Action action)
         {
             _onClick = action;
         }
 
-
-
-        // 0: 没有流光 1: icon流光 2：背景框流光 3：icon+背景框流光
-        public void SetIconFlow(int iconEffect)
-        {
-            if (iconEffect == 1 || iconEffect == 3)
-            {
-                if (_iconImage != null)
-                {
-                    _iconImage.SpriteCtrl.SetFlow(true);
-                }
-            }
-            else if (_iconImage != null)
-            {
-                _iconImage.SpriteCtrl.SetFlow(false);
-            }
-        }
-
-        public void SetGray(bool toGray)
-        {
-            _iconImage.SpriteCtrl.SetGray(toGray);
-        }
-
         public void SetSize(IconSize size = IconSize.Size_100)
         {
-            var scale = Main.IconService.GetIconScale(size);
-            _gameObject.transform.localScale = scale;
-        }
-
-
-        public void OnClick()
-        {
-            _onClick?.Invoke();
-
-            if (_clickShowTips)
+            if (_asyncOperation == null || !_asyncOperation.IsDone)
             {
-                ShowClickTips();
+                return;
             }
-        }
 
-
-        public void OnRecycle()
-        {
-            //重置点击
-            //重置置灰
-
-            SetClick(null);
-            SetClickShowTips(true);
-            SetIconFlow(0);
-            SetGray(false);
-
-            OnReset();
+            var scale = Main.IconService.GetIconScale(size);
+            GameObject.transform.localScale = scale;
         }
     }
 }

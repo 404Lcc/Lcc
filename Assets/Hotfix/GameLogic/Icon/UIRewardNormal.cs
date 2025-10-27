@@ -58,14 +58,14 @@ namespace LccHotfix
             base.SetIcon(newImageID);
         }
 
-        public override void OnReset()
+        protected override void OnReset()
         {
             base.OnReset();
         }
 
-        public override void ShowClickTips()
+        protected override void OnShowClickTips()
         {
-            base.ShowClickTips();
+            base.OnShowClickTips();
 
             if (data == null)
                 return;

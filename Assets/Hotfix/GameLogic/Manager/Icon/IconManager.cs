@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using LccModel;
 using UnityEngine;
 
 namespace LccHotfix
@@ -32,17 +31,10 @@ namespace LccHotfix
 
     internal class IconManager : Module, IIconService
     {
-
         private Dictionary<IconType, Type> iconTypeDict = new Dictionary<IconType, Type>();
-
-        private GameObject root;
-
 
         public IconManager()
         {
-            root = new GameObject("IconRoot");
-            GameObject.DontDestroyOnLoad(root);
-
             foreach (Type item in Main.CodeTypesService.GetTypes(typeof(IconAttribute)))
             {
                 object[] atts = item.GetCustomAttributes(typeof(IconAttribute), false);
@@ -56,6 +48,7 @@ namespace LccHotfix
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
+
         }
 
         internal override void Shutdown()
@@ -66,9 +59,6 @@ namespace LccHotfix
             }
 
             iconTypeDict.Clear();
-
-            GameObject.Destroy(root);
-            root = null;
         }
 
         public IconBase GetIcon(IconType type, Transform parent, IconSize size = IconSize.Size_100)
@@ -76,51 +66,9 @@ namespace LccHotfix
             if (parent == null)
                 return null;
 
-            IconBase icon = GetCacheIcon(type);
-
-            if (icon == null)
-                return null;
-
-            ClientTools.ResetTransform(icon.GameObject.transform, parent);
-            ClientTools.ResetRectTransfrom(icon.GameObject.transform as RectTransform);
-            var scale = GetIconScale(size);
-            icon.GameObject.transform.localScale = scale;
-            icon.GameObject.SetActive(true);
-            return icon;
-        }
-
-
-        private IconBase GetCacheIcon(IconType iconType)
-        {
-            IconBase iconBase = ReferencePool.Acquire(iconTypeDict[iconType]) as IconBase;
-            if (iconBase.GameObject == null)
-            {
-                Main.AssetService.LoadGameObject(iconType.ToString(), true, out var res);
-                iconBase.InitIcon(res, iconType);
-            }
-
+            IconBase iconBase = ReferencePool.Acquire(iconTypeDict[type]) as IconBase;
+            iconBase.InitIcon(type, parent, size);
             return iconBase;
-        }
-
-        /// <summary>
-        /// icon回收接口
-        /// </summary>
-        public void RecycleIcon<T>(T iconBase) where T : IconBase
-        {
-            if (iconBase == null)
-                return;
-
-            ReferencePool.Release(iconBase);
-
-            var go = iconBase.GameObject;
-            if (go != null)
-            {
-                go.SetActive(false);
-                if (root != null)
-                {
-                    go.transform.SetParent(root.transform);
-                }
-            }
         }
 
         public Vector3 GetIconScale(IconSize size)
