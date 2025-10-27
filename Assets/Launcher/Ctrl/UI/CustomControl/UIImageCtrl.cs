@@ -46,19 +46,6 @@ namespace LccModel
             }
         }
 
-        public bool Gray
-        {
-            set
-            {
-                if (SpriteCtrl != null)
-                {
-                    SpriteCtrl.SetGray(value);
-                    //支持一下mask
-                    Image.RecalculateMasking();
-                }
-            }
-        }
-
         public void SetImage(int newImageID)
         {
             string imageName = string.Empty;

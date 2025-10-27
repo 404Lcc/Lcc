@@ -16,15 +16,10 @@ namespace LccModel
         [Tooltip("适应图片大小")]
         public bool perfectSpirte;
 
-        public bool isGray;//灰色图集
-        public bool isFlow;//流光图集
-
         private bool _isStarted = false;//被复制时不会再走一次start
 
         private Dictionary<string, Sprite> _spriteDict = new Dictionary<string, Sprite>();
         private Image _image;
-
-        private Material _material;
 
         public Image CacheImage
         {
@@ -38,23 +33,9 @@ namespace LccModel
             }
         }
 
-        public Material CacheMaterial
-        {
-            get
-            {
-                if (_material == null)
-                {
-                    _material = ResObject.LoadRes<Material>(gameObject, "Actor_RGBA_Flow").GetAsset<Material>();
-                    _image.material = _material;
-                }
-                return _material;
-            }
-        }
-
         private void Awake()
         {
             _image = null;
-            _material = null;
         }
 
         private void Start()
@@ -187,17 +168,6 @@ namespace LccModel
             {
                 Debug.LogError("load atlas failed : " + assetName + " with error: " + ex);
             }
-        }
-
-        public void SetGray(bool toGray)
-        {
-            isGray = toGray;
-            CacheMaterial.SetFloat("_IsGray", isGray ? 1 : 0);
-        }
-        public void SetFlow(bool toFlow)
-        {
-            isFlow = toFlow;
-            CacheMaterial.SetFloat("_IsFlow", isFlow ? 1 : 0);
         }
 
         private void SetPerfect()
