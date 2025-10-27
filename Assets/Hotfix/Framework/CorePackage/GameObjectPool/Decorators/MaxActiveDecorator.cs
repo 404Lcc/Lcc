@@ -19,7 +19,8 @@ namespace LccHotfix
             //这里的实现逻辑是先强制回收第一个,再取
             if (_activeList.Count >= PoolSetting.maxActiveObjects)
             {
-                _activeList.First.Value.Release();
+                var obj = _activeList.First.Value;
+                obj.Release(ref obj);
             }
 
             var target = base.Get();

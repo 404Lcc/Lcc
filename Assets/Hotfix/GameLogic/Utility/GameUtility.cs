@@ -175,8 +175,7 @@ namespace LccHotfix
             if (poolObject == null)
                 return;
 
-            Main.GameObjectPoolService.ReleaseObject(poolObject);
-            poolObject = null;
+            poolObject.Release(ref poolObject);
         }
 
         #region 动画工具

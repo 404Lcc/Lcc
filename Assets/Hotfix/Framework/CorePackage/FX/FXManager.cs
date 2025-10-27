@@ -44,6 +44,7 @@ namespace LccHotfix
                 loop = true;
             }
         }
+
         public void SetNormal(Transform followTrans)
         {
             this.followTrans = followTrans;
@@ -122,10 +123,8 @@ namespace LccHotfix
                     item.Clear();
                 }
 
-                Main.GameObjectPoolService.ReleaseObject(res);
+                res.Release(ref res);
             }
-
-            res = null;
 
             type = FXType.Normal;
 
@@ -141,8 +140,6 @@ namespace LccHotfix
 
     internal class FXManager : Module, IFXService
     {
-
-
         private List<FXObject> _fxList = new List<FXObject>();
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
@@ -180,6 +177,7 @@ namespace LccHotfix
                     return item;
                 }
             }
+
             return null;
         }
 
@@ -204,6 +202,7 @@ namespace LccHotfix
             {
                 Release(_fxList[i]);
             }
+
             _fxList.Clear();
         }
 
@@ -261,6 +260,7 @@ namespace LccHotfix
             {
                 fx.SetNormal(followTrans);
             }
+
             return fx.id;
         }
 

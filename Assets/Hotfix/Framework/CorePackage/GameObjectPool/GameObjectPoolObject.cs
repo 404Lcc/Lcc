@@ -21,9 +21,10 @@ namespace LccHotfix
             _gameObject = gameObject;
         }
 
-        public void Release()
+        public void Release(ref GameObjectPoolObject obj)
         {
             _pool.Release(this);
+            obj = null;
         }
 
         public void OnReset()

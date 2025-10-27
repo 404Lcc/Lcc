@@ -16,8 +16,6 @@ namespace LccHotfix
         GameObjectPoolObject GetObject(string poolName);
         GameObjectPoolAsyncOperation GetObjectAsync(string poolName, Action<GameObjectPoolAsyncOperation> onComplete);
         void CancelAsyncOperation(GameObjectPoolAsyncOperation operation);
-
-        void ReleaseObject(GameObjectPoolObject poolObject);
         void ReleasePool(string poolName);
     }
 }

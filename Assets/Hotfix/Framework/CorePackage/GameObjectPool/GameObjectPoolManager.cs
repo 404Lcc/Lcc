@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -23,9 +22,11 @@ namespace LccHotfix
     {
         private IGameObjectPoolService _service;
         private Action<GameObjectPoolAsyncOperation> _callback;
+        private GameObjectPoolObject _result;
         public string Location { get; private set; }
-        public GameObjectPoolObject Result { get; private set; }
         public bool IsDone { get; private set; }
+        public GameObject GameObject => _result.GameObject;
+        public Transform Transform => GameObject.transform;
 
         public void Init(IGameObjectPoolService service, Action<GameObjectPoolAsyncOperation> callback, string location)
         {
@@ -36,7 +37,7 @@ namespace LccHotfix
 
         public void Complete(GameObjectPoolObject result)
         {
-            Result = result;
+            _result = result;
             IsDone = true;
             _callback?.Invoke(this);
         }
@@ -45,10 +46,9 @@ namespace LccHotfix
         {
             if (IsDone)
             {
-                if (Result != null)
+                if (_result != null)
                 {
-                    Result.Release();
-                    Result = null;
+                    _result.Release(ref _result);
                 }
             }
             else
@@ -215,7 +215,7 @@ namespace LccHotfix
             //检查是否还有等待的操作
             if (!_pendingOperations.ContainsKey(location))
             {
-                //直接把root删除资源就会被卸载
+                //卸载资源
                 GameObject.Destroy(root);
                 return;
             }
@@ -309,13 +309,6 @@ namespace LccHotfix
             }
 
             return decorator;
-        }
-
-        public void ReleaseObject(GameObjectPoolObject poolObject)
-        {
-            if (poolObject == null)
-                return;
-            poolObject.Release();
         }
 
         public void ReleasePool(string location)
