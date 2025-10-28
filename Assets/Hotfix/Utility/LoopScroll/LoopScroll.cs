@@ -1,7 +1,7 @@
 using EnhancedUI.EnhancedScroller;
-using LccModel;
 using System;
 using System.Collections.Generic;
+using LccModel;
 using UnityEngine;
 using static EnhancedUI.EnhancedScroller.EnhancedScroller;
 
@@ -19,10 +19,10 @@ namespace LccHotfix
         void SetSizeX(int index, int x);
         void SetSizeY(int index, int y);
     }
+
     public class LoopScroll<Data, Item> : ILoopScroll where Data : new() where Item : LoopScrollItem, new()
     {
         private ScrollerPro _scrollerPro;
-
         private LoopScrollPool _pool;
 
         private Dictionary<int, Item> _itemDict = new Dictionary<int, Item>();
@@ -34,6 +34,7 @@ namespace LccHotfix
         /// 点击事件
         /// </summary>
         private Action<object> _clickFunc;
+
         /// <summary>
         /// 选择事件
         /// </summary>
@@ -54,18 +55,12 @@ namespace LccHotfix
 
         public ScrollerSnappedDelegate ScrollerSnapped
         {
-            set
-            {
-                _scrollerPro.scrollerSnapped = value;
-            }
+            set { _scrollerPro.scrollerSnapped = value; }
         }
 
         public ScrollerScrolledDelegate ScrollerScrolled
         {
-            set
-            {
-                _scrollerPro.scrollerScrolled = value;
-            }
+            set { _scrollerPro.scrollerScrolled = value; }
         }
 
 
@@ -75,34 +70,37 @@ namespace LccHotfix
         {
             _scrollerPro = scrollerPro;
             _scrollerPro.Init();
+
             _itemPrefab = scrollerPro.transform.Find("item").gameObject;
-            _pool = new LoopScrollPool(scrollerPro, this, _itemPrefab);
+            _itemPrefab.gameObject.SetActive(false);
+
+            _pool = new LoopScrollPool();
 
             _scrollerPro.GetObjectHandler = GetObject;
             _scrollerPro.ReturnObjectHandler = ReturnObject;
             _scrollerPro.ProvideDataHandler = ProvideData;
             _scrollerPro.GetGroupSizeHandler = GetGroupSize;
             _scrollerPro.GetDataCountHandler = GetDataCount;
-            
-            InitGroup(_itemPrefab);
+
             if (selectAction != null)
             {
                 this._selectAction = selectAction;
             }
         }
 
-        public void InitGroup(GameObject itemPrefab)
+        public void SetGroupPrefab()
         {
-            itemPrefab.gameObject.SetActive(false);
+            if (_scrollerPro.groupPrefab != null)
+            {
+                return;
+            }
 
-            _groupPrefab = new GameObject("groupPrefab");
+            _groupPrefab = new GameObject("groupPrefab", typeof(RectTransform));
             _groupPrefab.SetActive(false);
             _groupPrefab.transform.SetParent(_scrollerPro.transform);
-            _groupPrefab.AddComponent<RectTransform>();
-
 
             RectTransform groupRect = _groupPrefab.transform as RectTransform;
-            RectTransform itemRect = itemPrefab.transform as RectTransform;
+            RectTransform itemRect = _itemPrefab.transform as RectTransform;
 
             if (_scrollerPro.isGrid)
             {
@@ -122,8 +120,7 @@ namespace LccHotfix
             }
 
             GroupBase groupBase = _groupPrefab.AddComponent<GroupBase>();
-
-            groupBase.InitGroup(_scrollerPro, itemPrefab.transform);
+            groupBase.InitGroup(_scrollerPro, _itemPrefab.transform);
             _scrollerPro.groupPrefab = groupBase;
         }
 
@@ -156,26 +153,35 @@ namespace LccHotfix
         }
 
         #region 回调注册
+
         public void GetObject(GroupBase groupBase, int index, int currentLength)
         {
             if (!_itemDict.ContainsKey(index))
             {
                 Item item = _pool.Get<Item>();
+                if (item.gameObject == null)
+                {
+                    GameObject obj = GameObject.Instantiate(_itemPrefab);
+                    RectTransform objRect = obj.transform as RectTransform;
+                    objRect.anchoredPosition = Vector3.zero;
+                    objRect.localPosition = Vector3.zero;
+                    objRect.localRotation = Quaternion.identity;
+                    objRect.localScale = Vector3.one;
+                    item.Init(this, obj);
+                }
 
-
-
+                item.gameObject.SetActive(true);
                 item.index = index;
                 item.gameObject.name = index.ToString();
-
                 item.groupBase = groupBase;
 
+                //重置位置
                 RectTransform rect = item.gameObject.transform as RectTransform;
                 rect.anchorMin = new Vector2(0, 1);
                 rect.anchorMax = new Vector2(0, 1);
                 rect.pivot = new Vector2(0, 1);
                 rect.sizeDelta = _sizeDict[index];
                 rect.SetParent(groupBase.transform);
-
 
                 rect.localRotation = Quaternion.identity;
                 rect.localScale = Vector3.one;
@@ -211,6 +217,7 @@ namespace LccHotfix
                             {
                                 endPos.x += (_sizeDict[i].x + _scrollerPro.Scroller.spacing);
                             }
+
                             sizeX = (_scrollerPro.Container.SizeDelta().x - (endPos.x + _sizeDict[maxIndex].x)); //左上对齐
                             halfSizeX = sizeX / 2;
                             rect.anchoredPosition = new Vector2((_sizeDict[index].x + _scrollerPro.Scroller.spacing) * currentIndex + halfSizeX, 0);
@@ -220,6 +227,7 @@ namespace LccHotfix
                             break;
                     }
                 }
+
                 if (_scrollerPro.scrollDirection == ScrollDirectionEnum.Horizontal)
                 {
                     //先只考虑item大小都一样的情况，直接用第0个当默认大小
@@ -243,6 +251,7 @@ namespace LccHotfix
                             {
                                 endPos.y += (_sizeDict[i].y + _scrollerPro.Scroller.spacing);
                             }
+
                             sizeY = (_scrollerPro.Container.SizeDelta().y - (endPos.y + _sizeDict[maxIndex].y)); //左上对齐
                             halfSizeY = sizeY / 2;
 
@@ -254,23 +263,20 @@ namespace LccHotfix
                     }
                 }
 
-
-
                 item.OnShow();
                 _itemDict.Add(index, item);
-
-
             }
         }
+
         private void ReturnObject(int index)
         {
             if (_itemDict.ContainsKey(index))
             {
-                _itemDict[index].OnHide();
                 _pool.Release(_itemDict[index]);
                 _itemDict.Remove(index);
             }
         }
+
         private void ProvideData(int index)
         {
             if (_itemDict.ContainsKey(index))
@@ -301,19 +307,23 @@ namespace LccHotfix
                     {
                         maxSize.x = temp.x;
                     }
+
                     if (temp.y > maxSize.y)
                     {
                         maxSize.y = temp.y;
                     }
                 }
             }
+
             var groupSize = _scrollerPro.Scroller.scrollDirection == ScrollDirectionEnum.Vertical ? maxSize.y : maxSize.x;
             return (int)groupSize;
         }
+
         public int GetDataCount()
         {
             return _dataList.Count;
         }
+
         #endregion
 
 
@@ -321,6 +331,7 @@ namespace LccHotfix
         {
             return _dataList;
         }
+
         public Dictionary<int, Item> GetItemDict()
         {
             return _itemDict;
@@ -337,6 +348,7 @@ namespace LccHotfix
             {
                 return item;
             }
+
             return null;
         }
 
@@ -346,8 +358,10 @@ namespace LccHotfix
             {
                 return item as T;
             }
+
             return null;
         }
+
         public T GetItemByScrollPosition<T>(float scrollPosition) where T : LoopScrollItem
         {
             var index = _scrollerPro.GetCellViewIndexAtPosition(scrollPosition);
@@ -355,6 +369,7 @@ namespace LccHotfix
             {
                 return item as T;
             }
+
             return null;
         }
 
@@ -364,6 +379,7 @@ namespace LccHotfix
             {
                 return item as T;
             }
+
             return null;
         }
 
@@ -412,6 +428,7 @@ namespace LccHotfix
                 {
                     _selectAction(index, _dataList[index]);
                 }
+
                 if (_itemDict.Count > 0)
                 {
                     foreach (var item in _itemDict.Values)
@@ -423,12 +440,14 @@ namespace LccHotfix
         }
 
         #region 设置大小
+
         public void SetSize(int index, Vector2 size)
         {
             if (_sizeDict.ContainsKey(index))
             {
                 _sizeDict[index] = size;
             }
+
             var groupIndex = index / _scrollerPro.NumberOfCellsPerRow;
 
             var cellPosition = _scrollerPro.Scroller.GetScrollPositionForCellViewIndex(groupIndex, CellViewPositionEnum.Before);
@@ -439,6 +458,7 @@ namespace LccHotfix
             _scrollerPro.Scroller.SetScrollPositionImmediately(cellPosition - tweenCellOffset);
             _scrollerPro.IgnoreLoopJump(false);
         }
+
         public void SetSizeX(int index, int x)
         {
             if (_sizeDict.ContainsKey(index))
@@ -448,6 +468,7 @@ namespace LccHotfix
                 SetSize(index, size);
             }
         }
+
         public void SetSizeY(int index, int y)
         {
             if (_sizeDict.ContainsKey(index))
@@ -461,6 +482,7 @@ namespace LccHotfix
         #endregion
 
         #region 预加载大小
+
         public void PreloadSize(int index, Vector2 size)
         {
             if (_sizeDict.ContainsKey(index))
@@ -472,6 +494,7 @@ namespace LccHotfix
                 _sizeDict.Add(index, size);
             }
         }
+
         public void PreloadSizeX(int index, int x)
         {
             if (_sizeDict.ContainsKey(index))
@@ -483,6 +506,7 @@ namespace LccHotfix
                 _sizeDict.Add(index, new Vector2(x, ItemSize.y));
             }
         }
+
         public void PreloadSizeY(int index, int y)
         {
             if (_sizeDict.ContainsKey(index))
@@ -494,6 +518,7 @@ namespace LccHotfix
                 _sizeDict.Add(index, new Vector2(ItemSize.x, y));
             }
         }
+
         #endregion
 
 
@@ -505,9 +530,11 @@ namespace LccHotfix
         {
             foreach (var item in _itemDict.Values)
             {
-                item.OnHide();
                 _pool.Release(item);
             }
+
+            GameObject.Destroy(_groupPrefab);
+            _scrollerPro.groupPrefab = null;
 
             _pool.Clear<Item>();
             _scrollerPro.ClearAll();
@@ -525,6 +552,7 @@ namespace LccHotfix
         /// <param name="loopJumpDirectionEnum"></param>
         public void Refill(List<Data> datas, int startItem = -1, LoopJumpDirectionEnum loopJumpDirectionEnum = LoopJumpDirectionEnum.Closest)
         {
+            SetGroupPrefab();
             var oldCount = _dataList.Count;
 
             _dataList.Clear();
@@ -538,10 +566,12 @@ namespace LccHotfix
                     {
                         _pool.Release(item);
                     }
+
                     _scrollerPro.ClearAll();
                     _itemDict.Clear();
                     _scrollerPro.ReloadData();
                 }
+
                 return;
             }
 
@@ -554,7 +584,6 @@ namespace LccHotfix
                     _sizeDict.Add(i, ItemSize);
                 }
             }
-
 
             if (oldCount == datas.Count)
             {
@@ -570,6 +599,7 @@ namespace LccHotfix
                 {
                     _pool.Release(item);
                 }
+
                 _scrollerPro.ClearAll();
                 _itemDict.Clear();
                 _scrollerPro.ReloadData();
@@ -601,6 +631,7 @@ namespace LccHotfix
                 {
                     jumpComplete?.Invoke();
                 }
+
                 _scrollerPro.JumpToDataIndex(startItem / _scrollerPro.NumberOfCellsPerRow, jumpComplete: Complete, tweenType: tweenType, tweenTime: tweenTime, loopJumpDirection: loopJumpDirectionEnum, scrollerOffset: scrollerOffset, cellOffset: cellOffset);
             }
         }
@@ -613,8 +644,5 @@ namespace LccHotfix
         {
             _scrollerPro.SetScroll(enable);
         }
-
-
-
     }
 }

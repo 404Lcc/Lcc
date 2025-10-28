@@ -8,12 +8,9 @@ namespace LccHotfix
     {
         public int index = -1;
 
-
         public GroupBase groupBase;
         public int GroupIndex => groupBase.groupIndex;
         public int GroupStart => groupBase.groupStart;
-
-
 
         public GameObject gameObject;
 
@@ -44,14 +41,11 @@ namespace LccHotfix
         {
         }
 
-        public virtual void OnHide()
-        {
-        }
-
         public virtual void UpdateData(object obj)
         {
             OnItemSelect(loopScroll.CurSelect);
         }
+
         public virtual void OnItemClick()
         {
             loopScroll.OnItemSelect(index);
@@ -69,6 +63,7 @@ namespace LccHotfix
             {
                 selectGo.SetActive(visible);
             }
+
             if (normalGo != null && normalGo.activeSelf == visible)
             {
                 normalGo.SetActive(!visible);
@@ -79,10 +74,12 @@ namespace LccHotfix
         {
             loopScroll.SetSize(index, size);
         }
+
         public void SetSizeX(int x)
         {
             loopScroll.SetSizeX(index, x);
         }
+
         public void SetSizeY(int y)
         {
             loopScroll.SetSizeY(index, y);
@@ -90,12 +87,6 @@ namespace LccHotfix
 
         public virtual void OnRecycle()
         {
-            RectTransform rect = gameObject.transform as RectTransform;
-            gameObject.SetActive(false);
-            rect.SetParent(groupBase.scrollerPro.transform);
-            rect.localPosition = Vector3.zero;
-            rect.localRotation = Quaternion.identity;
-            rect.localScale = Vector3.one;
         }
     }
 }
