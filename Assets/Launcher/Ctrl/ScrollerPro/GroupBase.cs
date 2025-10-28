@@ -38,6 +38,7 @@ namespace LccModel
             {
                 gridCount = 1;
             }
+
             cellIdentifier = "GroupBase";
         }
 

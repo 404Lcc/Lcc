@@ -8,7 +8,6 @@ using Component = UnityEngine.Component;
 
 namespace LccModel
 {
-
     public class ScrollerProEx : ScrollRect
     {
 
@@ -28,6 +27,7 @@ namespace LccModel
                     if (component is T)
                         action((T)(IEventSystemHandler)component);
                 }
+
                 parent = parent.parent;
             }
         }

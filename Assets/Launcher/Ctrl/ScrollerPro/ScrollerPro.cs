@@ -9,27 +9,21 @@ namespace LccModel
     //垂直列表对其方式  左中右对其
     public enum PivotHorizontal
     {
-        [LabelText("左对齐")]
-        Left,
-        [LabelText("单个item居中对齐")]
-        Center,//根据每组固定item数量居中
-        [LabelText("居中对齐")]
-        Middle,//根据真实的item数量居中
-        [LabelText("右对齐")]
-        Right,
+        [LabelText("左对齐")] Left,
+        [LabelText("单个item居中对齐")] Center, //根据每组固定item数量居中
+        [LabelText("居中对齐")] Middle, //根据真实的item数量居中
+        [LabelText("右对齐")] Right,
     }
+
     //水平列表对其方式  上中下对其
     public enum PivotVerticle
     {
-        [LabelText("上对齐")]
-        Top,
-        [LabelText("单个item居中对齐")]
-        Center,
-        [LabelText("居中对齐")]
-        Middle,
-        [LabelText("下对齐")]
-        Bottom,
+        [LabelText("上对齐")] Top,
+        [LabelText("单个item居中对齐")] Center,
+        [LabelText("居中对齐")] Middle,
+        [LabelText("下对齐")] Bottom,
     }
+
     public class ScrollerPro : EnhancedScroller, IEnhancedScrollerDelegate
     {
         public Action<GroupBase, int, int> GetObjectHandler;
@@ -41,11 +35,12 @@ namespace LccModel
         //垂直列表对其方式  左中右对其
         [ShowIf("@this.scrollDirection == ScrollDirectionEnum.Vertical")]
         public PivotHorizontal pivotHorizontal;
+
         //水平列表对其方式  上中下对其
         [ShowIf("@this.scrollDirection == ScrollDirectionEnum.Horizontal")]
         public PivotVerticle pivotVertical;
-        [LabelText("是否需要滚动")]
-        public bool needScroller = true;
+
+        [LabelText("是否需要滚动")] public bool needScroller = true;
 
         public GroupBase groupPrefab;
 
@@ -60,7 +55,7 @@ namespace LccModel
             Delegate = this;
             cellViewVisibilityChanged = CellViewVisibilityChanged;
             cellViewInstantiated = CellViewInstantiated;
-            
+
             SetScroll(needScroller);
         }
 
@@ -111,6 +106,7 @@ namespace LccModel
 
             group.RefreshCellView();
         }
+
         public void CellViewInstantiated(EnhancedScroller scroller, EnhancedScrollerCellView cellView)
         {
             cellView.gameObject.SetActive(true);
