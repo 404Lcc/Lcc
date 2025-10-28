@@ -4,7 +4,6 @@ namespace LccHotfix
 {
     public interface IIconService : IService
     {
-        IconBase GetIcon(IconType type, Transform parent, IconSize size = IconSize.Size_100);
-        Vector3 GetIconScale(IconSize size);
+        T GetIcon<T>(Transform parent, float size = 1) where T : IconBase, new();
     }
 }

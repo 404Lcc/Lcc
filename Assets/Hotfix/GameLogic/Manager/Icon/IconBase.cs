@@ -7,9 +7,8 @@ namespace LccHotfix
 {
     public class IconBase : IReference
     {
-        private IconType _iconType;
         private Transform _parent;
-        private IconSize _size;
+        private float _size;
 
         private GameObjectPoolAsyncOperation _asyncOperation;
         private bool _clickShowTips;
@@ -19,19 +18,19 @@ namespace LccHotfix
         public GameObject GameObject => _asyncOperation.GameObject;
         public Transform Transform => _asyncOperation.Transform;
 
-        public void InitIcon(IconType iconType, Transform parent, IconSize size)
+        public void InitIcon(Transform parent, float size)
         {
-            this._iconType = iconType;
             this._parent = parent;
             _size = size;
 
-            _asyncOperation = Main.GameObjectPoolService.GetObjectAsync(iconType.ToString(), OnComplete);
+            _asyncOperation = Main.GameObjectPoolService.GetObjectAsync(GetType().Name, OnComplete);
         }
 
         private void OnComplete(GameObjectPoolAsyncOperation obj)
         {
+            _asyncOperation = obj;
             ClientTools.ResetTransform(Transform, _parent);
-            ClientTools.ResetRectTransfrom(Transform as RectTransform);
+            ClientTools.ResetRectTransform(Transform as RectTransform);
             SetSize(_size);
 
             ClientTools.AutoReference(Transform, this);
@@ -84,16 +83,6 @@ namespace LccHotfix
             iconBase = null;
         }
 
-        public virtual void SetInfo(int newImageID)
-        {
-            SetIcon(newImageID);
-        }
-
-        public virtual void SetInfo(int newImageID, long count)
-        {
-            SetIcon(newImageID);
-        }
-
         public virtual void SetIcon(int newImageID)
         {
             _iconImage.SetImage(newImageID);
@@ -109,14 +98,14 @@ namespace LccHotfix
             _onClick = action;
         }
 
-        public void SetSize(IconSize size = IconSize.Size_100)
+        public void SetSize(float size)
         {
             if (_asyncOperation == null || !_asyncOperation.IsDone)
             {
                 return;
             }
 
-            var scale = Main.IconService.GetIconScale(size);
+            var scale = Vector3.one * size;
             GameObject.transform.localScale = scale;
         }
     }

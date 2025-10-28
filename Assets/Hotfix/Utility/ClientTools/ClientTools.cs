@@ -322,7 +322,7 @@ public class ClientTools
         trans.localPosition = pos;
     }
 
-    public static void ResetRectTransfrom(RectTransform rectTransform)
+    public static void ResetRectTransform(RectTransform rectTransform)
     {
         if (rectTransform == null)
             return;
@@ -332,6 +332,7 @@ public class ClientTools
         rectTransform.localScale = Vector3.one;
         rectTransform.localRotation = Quaternion.identity;
         rectTransform.localPosition = Vector3.zero;
+        rectTransform.anchoredPosition = Vector2.zero;
     }
 
     #endregion

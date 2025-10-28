@@ -9,7 +9,6 @@ namespace LccHotfix
     /// <summary>
     /// 通用奖励item
     /// </summary>
-    [Icon(IconType.RewardNormal)]
     public class UIRewardNormal : IconBase
     {
         public bool showName;
