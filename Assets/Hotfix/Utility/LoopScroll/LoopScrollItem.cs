@@ -48,8 +48,7 @@ namespace LccHotfix
 
         public virtual void OnItemClick()
         {
-            loopScroll.OnItemSelect(index);
-            loopScroll.OnItemClick(index);
+            loopScroll.SetSelect(index);
         }
 
         public virtual void OnItemSelect(int index)

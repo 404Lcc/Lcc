@@ -10,11 +10,7 @@ namespace LccHotfix
     public interface ILoopScroll
     {
         int CurSelect { get; set; }
-
         void SetSelect(int index);
-        void OnItemSelect(int index);
-        void OnItemClick(int index);
-
         void SetSize(int index, Vector2 size);
         void SetSizeX(int index, int x);
         void SetSizeY(int index, int y);
@@ -388,14 +384,6 @@ namespace LccHotfix
             this._clickFunc = func;
         }
 
-        public void OnItemClick(int index)
-        {
-            if (_clickFunc != null)
-            {
-                _clickFunc(_dataList[index]);
-            }
-        }
-
 
         /// <summary>
         /// 设置选择某个item
@@ -406,36 +394,30 @@ namespace LccHotfix
             if (_itemDict.Count == 0 || _dataList.Count == 0)
                 return;
             CurSelect = index;
-            if (CurSelect < _dataList.Count)
+            if (CurSelect >= _dataList.Count)
             {
-                OnItemSelect(index);
-                OnItemClick(index);
+                CurSelect = 0;
             }
-            else
-            {
-                OnItemSelect(0);
-                OnItemClick(0);
-            }
-        }
 
-
-        public void OnItemSelect(int index)
-        {
             if (_needSelectWithClick)
             {
-                CurSelect = index;
-                if (_selectAction != null && index >= 0)
+                if (_selectAction != null && CurSelect >= 0)
                 {
-                    _selectAction(index, _dataList[index]);
+                    _selectAction(CurSelect, _dataList[CurSelect]);
                 }
 
                 if (_itemDict.Count > 0)
                 {
                     foreach (var item in _itemDict.Values)
                     {
-                        item.OnItemSelect(index);
+                        item.OnItemSelect(CurSelect);
                     }
                 }
+            }
+
+            if (_clickFunc != null)
+            {
+                _clickFunc(_dataList[CurSelect]);
             }
         }
 
