@@ -11,8 +11,6 @@ namespace LccHotfix
         private float _size;
 
         private GameObjectPoolAsyncOperation _asyncOperation;
-        private bool _clickShowTips;
-        private Action _onClick;
         private UIImageCtrl _iconImage;
 
         public GameObject GameObject => _asyncOperation.GameObject;
@@ -34,7 +32,6 @@ namespace LccHotfix
             SetSize(_size);
 
             ClientTools.AutoReference(Transform, this);
-            ClientTools.ForceGetComponent<Button>(GameObject).onClick.AddListener(OnClick);
 
             OnInit();
         }
@@ -45,30 +42,13 @@ namespace LccHotfix
 
         public void OnRecycle()
         {
-            _onClick = null;
-            _clickShowTips = true;
-
-            OnReset();
+            OnReset(_asyncOperation.IsDone);
 
             _asyncOperation.Release(ref _asyncOperation);
         }
 
-        protected virtual void OnShowClickTips()
+        protected virtual void OnReset(bool isDone)
         {
-        }
-
-        protected virtual void OnReset()
-        {
-        }
-
-        private void OnClick()
-        {
-            _onClick?.Invoke();
-
-            if (_clickShowTips)
-            {
-                OnShowClickTips();
-            }
         }
 
         /// <summary>
@@ -86,16 +66,6 @@ namespace LccHotfix
         public virtual void SetIcon(int newImageID)
         {
             _iconImage.SetImage(newImageID);
-        }
-
-        public void SetClickShowTips(bool clickShowTips)
-        {
-            _clickShowTips = clickShowTips;
-        }
-
-        public void SetClick(Action action)
-        {
-            _onClick = action;
         }
 
         public void SetSize(float size)

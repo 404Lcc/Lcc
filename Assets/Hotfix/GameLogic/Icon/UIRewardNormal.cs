@@ -57,17 +57,9 @@ namespace LccHotfix
             base.SetIcon(newImageID);
         }
 
-        protected override void OnReset()
+        protected override void OnReset(bool isDone)
         {
-            base.OnReset();
-        }
-
-        protected override void OnShowClickTips()
-        {
-            base.OnShowClickTips();
-
-            if (data == null)
-                return;
+            base.OnReset(isDone);
         }
 
         public int GetFrame(QualityType itemQuality)
