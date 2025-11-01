@@ -11,7 +11,6 @@ namespace LccHotfix
         private float _size;
 
         private GameObjectPoolAsyncOperation _asyncOperation;
-        private UIImageCtrl _iconImage;
 
         public GameObject GameObject => _asyncOperation.GameObject;
         public Transform Transform => _asyncOperation.Transform;
@@ -63,9 +62,9 @@ namespace LccHotfix
             iconBase = null;
         }
 
-        public virtual void SetIcon(int newImageID)
+        public void SetIcon(UIImageCtrl image, int newImageID)
         {
-            _iconImage.SetImage(newImageID);
+            image.SetImage(newImageID);
         }
 
         public void SetSize(float size)

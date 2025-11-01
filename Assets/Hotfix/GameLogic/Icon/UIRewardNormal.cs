@@ -18,6 +18,7 @@ namespace LccHotfix
 
         public RewardItemData data;
 
+        public UIImageCtrl iconImage;
         public UIImageCtrl frameImage;
         public GameObject newGO;
         public TextMeshProUGUI count;
@@ -31,7 +32,7 @@ namespace LccHotfix
             this.showCount = showCount;
             this.showPreview = showPreview;
             showQuality = data.GetQuality();
-            SetIcon(data.GetIconId());
+            SetIcon();
         }
 
         public void SetInfo(RewardItemData data, bool showName, bool showCount, bool showPreview, QualityType quality)
@@ -41,11 +42,12 @@ namespace LccHotfix
             this.showCount = showCount;
             this.showPreview = showPreview;
             this.showQuality = quality;
-            SetIcon(data.GetIconId());
+            SetIcon();
         }
 
-        public override void SetIcon(int newImageID)
+        public void SetIcon()
         {
+            iconImage.SetImage(data.GetIconId());
             frameImage.SetImage(GetFrame(showQuality));
             count.text = "x" + GameUtility.FormatCurrency(data.Count);
             name.text = data.GetName();
@@ -53,8 +55,6 @@ namespace LccHotfix
             count.gameObject.SetActive(data.IsShowCount() && showCount && data.Count > 0);
             name.gameObject.SetActive(data.IsShowName() && showName);
             previewBtn.gameObject.SetActive(data.IsShowPreview() && showPreview);
-
-            base.SetIcon(newImageID);
         }
 
         protected override void OnReset(bool isDone)

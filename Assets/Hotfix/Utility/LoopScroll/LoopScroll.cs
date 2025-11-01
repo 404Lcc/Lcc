@@ -515,7 +515,12 @@ namespace LccHotfix
                 _pool.Release(item);
             }
 
-            GameObject.Destroy(_groupPrefab);
+            if (_groupPrefab != null)
+            {
+                GameObject.Destroy(_groupPrefab);
+                _groupPrefab = null;
+            }
+
             _scrollerPro.groupPrefab = null;
 
             _pool.Clear<Item>();
