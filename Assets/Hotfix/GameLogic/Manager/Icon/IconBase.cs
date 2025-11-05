@@ -14,6 +14,7 @@ namespace LccHotfix
 
         public GameObject GameObject => _asyncOperation.GameObject;
         public Transform Transform => _asyncOperation.Transform;
+        public bool IsDone => _asyncOperation.IsDone;
 
         public void InitIcon(Transform parent, float size)
         {

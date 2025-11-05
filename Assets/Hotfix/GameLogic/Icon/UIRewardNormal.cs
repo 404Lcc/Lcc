@@ -25,23 +25,44 @@ namespace LccHotfix
         public TextMeshProUGUI name;
         public Button previewBtn;
 
+        public override void OnInit()
+        {
+            base.OnInit();
+
+            SetInfo(data, showName, showCount, showPreview, showQuality);
+        }
+
         public void SetInfo(RewardItemData data, bool showName = true, bool showCount = true, bool showPreview = false)
         {
+            if (data == null)
+                return;
+
             this.data = data;
             this.showName = showName;
             this.showCount = showCount;
             this.showPreview = showPreview;
             showQuality = data.GetQuality();
+
+            if (!IsDone)
+                return;
+
             SetIcon();
         }
 
         public void SetInfo(RewardItemData data, bool showName, bool showCount, bool showPreview, QualityType quality)
         {
+            if (data == null)
+                return;
+
             this.data = data;
             this.showName = showName;
             this.showCount = showCount;
             this.showPreview = showPreview;
             this.showQuality = quality;
+
+            if (!IsDone)
+                return;
+
             SetIcon();
         }
 
@@ -55,11 +76,6 @@ namespace LccHotfix
             count.gameObject.SetActive(data.IsShowCount() && showCount && data.Count > 0);
             name.gameObject.SetActive(data.IsShowName() && showName);
             previewBtn.gameObject.SetActive(data.IsShowPreview() && showPreview);
-        }
-
-        protected override void OnReset(bool isDone)
-        {
-            base.OnReset(isDone);
         }
 
         public int GetFrame(QualityType itemQuality)
