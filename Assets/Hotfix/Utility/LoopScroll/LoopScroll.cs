@@ -82,12 +82,21 @@ namespace LccHotfix
             {
                 this._selectAction = selectAction;
             }
+
+            SetGroupPrefab();
         }
 
         public void SetGroupPrefab()
         {
             if (_scrollerPro.groupPrefab != null)
             {
+                return;
+            }
+
+            var obj = _scrollerPro.transform.Find("groupPrefab");
+            if (obj != null)
+            {
+                _scrollerPro.groupPrefab = obj.GetComponent<GroupBase>();
                 return;
             }
 
@@ -515,14 +524,6 @@ namespace LccHotfix
                 _pool.Release(item);
             }
 
-            if (_groupPrefab != null)
-            {
-                GameObject.Destroy(_groupPrefab);
-                _groupPrefab = null;
-            }
-
-            _scrollerPro.groupPrefab = null;
-
             _pool.Clear<Item>();
             _scrollerPro.ClearAll();
             _itemDict.Clear();
@@ -539,7 +540,6 @@ namespace LccHotfix
         /// <param name="loopJumpDirectionEnum"></param>
         public void Refill(List<Data> datas, int startItem = -1, LoopJumpDirectionEnum loopJumpDirectionEnum = LoopJumpDirectionEnum.Closest)
         {
-            SetGroupPrefab();
             var oldCount = _dataList.Count;
 
             _dataList.Clear();
