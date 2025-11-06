@@ -13,7 +13,7 @@ namespace LccModel
     [RequireComponent(typeof(UISpriteCtrl))]
     public class UIImageCtrl : MonoBehaviour
     {
-        public EmImageType imageType = EmImageType.None;
+        public EmImageType imageType = EmImageType.Icon;
         public int imageID = -1;
         private Image _image;
         public Image Image

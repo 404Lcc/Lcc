@@ -22,6 +22,8 @@ namespace LccHotfix
             _size = size;
 
             _asyncOperation = Main.GameObjectPoolService.GetObjectAsync(GetType().Name, OnComplete);
+
+            OnShow(_asyncOperation.IsDone);
         }
 
         private void OnComplete(GameObjectPoolAsyncOperation obj)
@@ -42,12 +44,17 @@ namespace LccHotfix
 
         public void OnRecycle()
         {
-            OnReset(_asyncOperation.IsDone);
+            OnHide(_asyncOperation.IsDone);
 
             _asyncOperation.Release(ref _asyncOperation);
         }
 
-        protected virtual void OnReset(bool isDone)
+        protected virtual void OnShow(bool isDone)
+        {
+
+        }
+
+        protected virtual void OnHide(bool isDone)
         {
         }
 
