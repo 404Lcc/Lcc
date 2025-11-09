@@ -25,7 +25,7 @@ public class UIAnimCtrl : MonoBehaviour
             {
                 IsPlayOver = true;
                 _callBack?.Invoke();
-                ClearAnim();
+                Clear();
             }
             else
             {
@@ -34,7 +34,7 @@ public class UIAnimCtrl : MonoBehaviour
         }
     }
 
-    public void PlayAnim(UIAnimInfo animInfo, bool isForward, Action callBack = null)
+    public void PlayAnim(UIAnimInfo animInfo, bool isForward = true, Action callBack = null)
     {
         _animInfo = animInfo;
 
@@ -51,8 +51,8 @@ public class UIAnimCtrl : MonoBehaviour
                 var clip = TryGetClip();
                 if (clip == null)
                     break;
-
-                SetupClip(clip, isForward);
+                _duration = clip.length;
+                SetupState(isForward);
                 _animation.Play(_animInfo.AniName);
                 break;
         }
@@ -82,22 +82,20 @@ public class UIAnimCtrl : MonoBehaviour
         return clip;
     }
 
-    private void SetupClip(AnimationClip clip, bool isForward)
+    private void SetupState(bool isForward)
     {
-        _duration = clip.length;
-
         var animationState = _animation[_animInfo.AniName];
         animationState.time = isForward ? 0f : _duration;
         animationState.speed = isForward ? 1f : -1f;
         _animation.wrapMode = _animInfo.isLoop ? WrapMode.Loop : WrapMode.Once;
     }
 
-    public void ResetAnim(bool isForward)
+    public void StopAnim(bool isForward = true)
     {
-        IsPlayOver = false;
-
         if (_animation == null)
             return;
+
+        Clear();
 
         var animationState = _animation[_animInfo.AniName];
         _animation.Stop(_animInfo.AniName);
@@ -105,7 +103,7 @@ public class UIAnimCtrl : MonoBehaviour
         _animation.Sample();
     }
 
-    public void ClearAnim()
+    private void Clear()
     {
         IsPlayOver = false;
         _callBack = null;

@@ -55,12 +55,7 @@ public class UIAnimManager : MonoBehaviour
 
     void OnDestroy()
     {
-        for (int i = 0; i < animList.Count; i++)
-        {
-            animList[i].ClearAnim();
-        }
-
-        animList.Clear();
+        ClearAnim();
     }
 
 
@@ -102,7 +97,7 @@ public class UIAnimManager : MonoBehaviour
         gameObject.SetActive(true);
 
         var animInfo = animList[index];
-        animInfo.ResetAnim(isForward);
+        animInfo.StopAnim(true);
         animInfo.PlayAnim(isForward, callBack);
     }
 
@@ -116,7 +111,7 @@ public class UIAnimManager : MonoBehaviour
         foreach (var item in animList)
         {
             item.isLoop = false;
-            item.ResetAnim(isForward);
+            item.StopAnim(true);
         }
 
         _seqCurIndex = 0;
@@ -168,7 +163,7 @@ public class UIAnimManager : MonoBehaviour
         }
     }
 
-    public void ResetAnim(int index = 0, bool isForward = true)
+    public void StopAnim(int index = 0, bool isForward = true)
     {
         if (animList.Count == 0)
             return;
@@ -177,18 +172,17 @@ public class UIAnimManager : MonoBehaviour
             return;
 
         var animInfo = animList[index];
-        animInfo.ResetAnim(isForward);
+        animInfo.StopAnim(isForward);
     }
 
-    public void StopAnim(int index = 0)
+    public void ClearAnim()
     {
         if (animList.Count == 0)
             return;
 
-        if (index < 0 || index >= animList.Count)
-            return;
-
-        var animInfo = animList[index];
-        animInfo.ClearAnim();
+        foreach (var item in animList)
+        {
+            item.StopAnim(true);
+        }
     }
 }

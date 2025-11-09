@@ -46,7 +46,7 @@ public class UIAnimInfo
         }
     }
 
-    public void ResetAnim(bool isForward)
+    public void StopAnim(bool isForward)
     {
         switch (animType)
         {
@@ -55,20 +55,7 @@ public class UIAnimInfo
                 if (_animCtrl == null)
                     break;
 
-                _animCtrl.ResetAnim(isForward);
-                break;
-        }
-    }
-
-    public void ClearAnim()
-    {
-        switch (animType)
-        {
-            case UIAnimType.Animation:
-                if (_animCtrl == null)
-                    break;
-
-                _animCtrl.ClearAnim();
+                _animCtrl.StopAnim(isForward);
                 break;
         }
     }
