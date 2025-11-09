@@ -28,7 +28,6 @@ public class UIAnimInfo
 
     public void PlayAnim(bool isForward, Action callBack)
     {
-        transTarget.gameObject.SetActive(true);
         switch (animType)
         {
             case UIAnimType.Animation:

@@ -11,8 +11,23 @@ public class UIAnimCtrl : MonoBehaviour
 
     public bool IsPlayOver { get; private set; }
 
+    void OnEnable()
+    {
+        _animation = gameObject.GetComponent<Animation>();
+        if (_animation == null)
+        {
+            _animation = gameObject.gameObject.AddComponent<Animation>();
+        }
+    }
+
     void Update()
     {
+        if (_animation == null)
+            return;
+
+        if (_animInfo == null)
+            return;
+
         if (_duration <= 0)
             return;
 
@@ -36,10 +51,9 @@ public class UIAnimCtrl : MonoBehaviour
 
     public void PlayAnim(UIAnimInfo animInfo, bool isForward = true, Action callBack = null)
     {
-        _animInfo = animInfo;
+        gameObject.SetActive(true);
 
-        if (!TrySetupAnimation(animInfo.transTarget))
-            return;
+        _animInfo = animInfo;
 
         IsPlayOver = false;
         _callBack = callBack;
@@ -48,42 +62,22 @@ public class UIAnimCtrl : MonoBehaviour
         switch (_animInfo.animType)
         {
             case UIAnimType.Animation:
-                var clip = TryGetClip();
-                if (clip == null)
-                    break;
-                _duration = clip.length;
                 SetupState(isForward);
                 _animation.Play(_animInfo.AniName);
                 break;
         }
     }
 
-
-    private bool TrySetupAnimation(Transform target)
-    {
-        _animation = target.GetComponent<Animation>();
-        if (_animation == null)
-        {
-            _animation = target.gameObject.AddComponent<Animation>();
-        }
-
-        return _animation != null;
-    }
-
-    private AnimationClip TryGetClip()
+    private void SetupState(bool isForward)
     {
         var clip = _animInfo.anim;
         clip.legacy = true;
-        if (_animation.GetClip(clip.name) == null)
+        if (_animation.GetClip(_animInfo.AniName) == null)
         {
-            _animation.AddClip(clip, clip.name);
+            _animation.AddClip(clip, _animInfo.AniName);
         }
 
-        return clip;
-    }
-
-    private void SetupState(bool isForward)
-    {
+        _duration = clip.length;
         var animationState = _animation[_animInfo.AniName];
         animationState.time = isForward ? 0f : _duration;
         animationState.speed = isForward ? 1f : -1f;
@@ -95,12 +89,21 @@ public class UIAnimCtrl : MonoBehaviour
         if (_animation == null)
             return;
 
-        Clear();
+        if (_animInfo == null)
+            return;
+
+        if (_duration <= 0)
+            return;
 
         var animationState = _animation[_animInfo.AniName];
+        if (animationState == null)
+            return;
+
         _animation.Stop(_animInfo.AniName);
         animationState.time = isForward ? 0f : animationState.clip.length;
         _animation.Sample();
+
+        Clear();
     }
 
     private void Clear()
@@ -109,6 +112,11 @@ public class UIAnimCtrl : MonoBehaviour
         _callBack = null;
         _timer = 0;
         _duration = 0;
-        _animation.wrapMode = WrapMode.Once;
+        if (_animation != null)
+        {
+            _animation.wrapMode = WrapMode.Once;
+        }
+
+        _animInfo = null;
     }
 }
