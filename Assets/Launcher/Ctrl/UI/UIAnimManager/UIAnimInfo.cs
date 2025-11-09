@@ -26,16 +26,6 @@ public class UIAnimInfo
         }
     }
 
-    public bool IsPlayOver
-    {
-        get
-        {
-            if (_animCtrl == null)
-                return false;
-            return _animCtrl.IsPlayOver;
-        }
-    }
-
     public void PlayAnim(bool isForward, Action callBack)
     {
         transTarget.gameObject.SetActive(true);
