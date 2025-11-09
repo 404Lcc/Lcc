@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
-using System;
 using Sirenix.OdinInspector;
 
 public enum UIAnimType
@@ -64,9 +64,13 @@ public class UIAnimManager : MonoBehaviour
     }
 
 
+
     private void AutoPlay()
     {
         if (!isAutoPlay)
+            return;
+
+        if (animList.Count == 0)
             return;
 
         if (animList.Count > 1)
@@ -102,7 +106,6 @@ public class UIAnimManager : MonoBehaviour
         animInfo.PlayAnim(isForward, callBack);
     }
 
-
     public void PlaySequential(bool isForward = true, Action callBack = null)
     {
         if (animList.Count == 0)
@@ -135,7 +138,6 @@ public class UIAnimManager : MonoBehaviour
 
         PlaySingle(_seqCurIndex, isForward, () => OnSequentialComplete(isForward));
     }
-
 
     public void PlayParallel(bool isForward = true, Action callBack = null)
     {
