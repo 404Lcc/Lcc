@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Sirenix.OdinInspector;
 
 [System.Serializable]
 public class UIAnimInfo
 {
-    [LabelText("等待上一个动画结束")] public bool isWaitForLast;
     [LabelText("延迟时间（毫秒）")] public float delayTime;
     [LabelText("目标")] public Transform transTarget;
     [LabelText("效果类型")] public UIAnimType animType;
@@ -13,7 +13,6 @@ public class UIAnimInfo
     public AnimationClip anim;
 
     [LabelText("循环")] public bool isLoop;
-    [LabelText("单独播放")] public bool isPlaySingle;
 
     private UIAnimCtrl _animCtrl;
 
@@ -37,7 +36,7 @@ public class UIAnimInfo
         }
     }
 
-    public void PlayAnim(bool isForward)
+    public void PlayAnim(bool isForward, Action callBack)
     {
         transTarget.gameObject.SetActive(true);
         switch (animType)
@@ -52,7 +51,7 @@ public class UIAnimInfo
                     _animCtrl = transTarget.gameObject.AddComponent<UIAnimCtrl>();
                 }
 
-                _animCtrl.PlayAnim(this, isForward);
+                _animCtrl.PlayAnim(this, isForward, callBack);
                 break;
         }
     }
