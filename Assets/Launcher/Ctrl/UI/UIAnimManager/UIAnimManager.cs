@@ -8,22 +8,27 @@ public enum UIAnimType
     [LabelText("动画片段")] Animation = 0,
 }
 
+public enum UIAnimMultiAutoPlayMode
+{
+    [LabelText("顺序播放")] Sequential = 0,
+    [LabelText("并行播放")] Parallel = 1,
+}
+
 public class UIAnimManager : MonoBehaviour
 {
-    private bool _isForward = true;
-    private float _timer;
-    private int _curIndex;
-    private bool _canUpdate;
-    private UIAnimInfo _animInfo;
-    private UIAnimInfo _lastAnimInfo;
-
     [LabelText("开启自动播放")] public bool isAutoPlay;
 
+    [LabelText("多动画自动播放模式")] [ShowIf("@animList.Count > 1")]
+    public UIAnimMultiAutoPlayMode multiAutoPlayMode;
+
     [LabelText("自定义动画列表")] [ListDrawerSettings(ShowIndexLabels = true, OnBeginListElementGUI = "OnBeginListElementGUI", OnEndListElementGUI = "OnEndListElementGUI")] [OnValueChanged("OnChangeAnimList", true)]
-    public List<UIAnimInfo> animSenquenceList = new List<UIAnimInfo>();
+    public List<UIAnimInfo> animList = new List<UIAnimInfo>();
 
-    public Action PlayOverCallBack { get; set; }
+    private int _seqCurIndex;
+    private Action _sequentialCallback;
 
+    private Action _parallelCallback;
+    private List<int> _parallelIndex = new List<int>();
 
     private void OnBeginListElementGUI(int index)
     {
@@ -41,28 +46,6 @@ public class UIAnimManager : MonoBehaviour
 
     private void OnChangeAnimList()
     {
-        for (int i = 0; i < animSenquenceList.Count; i++)
-        {
-            UIAnimInfo info = animSenquenceList[i];
-            if (i > 0)
-            {
-                UIAnimInfo lastInfo = animSenquenceList[i - 1];
-                if (lastInfo.isLoop && info.isWaitForLast)
-                {
-                    info.isWaitForLast = false;
-#if UNITY_EDITOR
-                    UnityEditor.EditorUtility.DisplayDialog("提醒", "上一个动画循环，当前动画无法选择等待结束", "确定");
-#endif
-                }
-            }
-            else if (i == 0 && info.isWaitForLast)
-            {
-                info.isWaitForLast = false;
-#if UNITY_EDITOR
-                UnityEditor.EditorUtility.DisplayDialog("提醒", "第一个动画无法使用等待结束", "确定");
-#endif
-            }
-        }
     }
 
     void OnEnable()
@@ -72,144 +55,138 @@ public class UIAnimManager : MonoBehaviour
 
     void OnDestroy()
     {
-        for (int i = 0; i < animSenquenceList.Count; i++)
+        for (int i = 0; i < animList.Count; i++)
         {
-            animSenquenceList[i].ClearAnim();
+            animList[i].ClearAnim();
         }
 
-        animSenquenceList.Clear();
+        animList.Clear();
     }
 
-    void Update()
-    {
-        if (!_canUpdate)
-            return;
-
-        if (TryPlayAnim())
-        {
-            _animInfo.PlayAnim(_isForward);
-
-            if (!_animInfo.isPlaySingle)
-            {
-                SetAnimInfo(_curIndex + 1);
-            }
-            else
-            {
-                _lastAnimInfo = _animInfo;
-                _animInfo = null;
-            }
-        }
-    }
 
     private void AutoPlay()
     {
         if (!isAutoPlay)
             return;
 
-        if (animSenquenceList.Count == 0)
-            return;
-
-        PlayAnim();
-    }
-
-    public void PlayAnim(int index = 0, bool isForward = true)
-    {
-        gameObject.SetActive(true);
-
-        _isForward = isForward;
-        _timer = 0;
-
-        _animInfo = null;
-        _lastAnimInfo = null;
-
-        SetAnimInfo(index);
-        ResetAnim(index, isForward);
-        _canUpdate = true;
-    }
-
-    private void SetAnimInfo(int index)
-    {
-        _curIndex = index;
-        _lastAnimInfo = _animInfo;
-
-        if (_curIndex < animSenquenceList.Count)
+        if (animList.Count > 1)
         {
-            _animInfo = animSenquenceList[_curIndex];
+            switch (multiAutoPlayMode)
+            {
+                case UIAnimMultiAutoPlayMode.Sequential:
+                    PlaySequential();
+                    break;
+                case UIAnimMultiAutoPlayMode.Parallel:
+                    PlayParallel();
+                    break;
+            }
         }
         else
         {
-            _animInfo = null;
+            PlaySingle();
+        }
+    }
+
+    public void PlaySingle(int index = 0, bool isForward = true, Action callBack = null)
+    {
+        if (animList.Count == 0)
+            return;
+
+        if (index < 0 || index >= animList.Count)
+            return;
+
+        gameObject.SetActive(true);
+
+        var animInfo = animList[index];
+        animInfo.ResetAnim(isForward);
+        animInfo.PlayAnim(isForward, callBack);
+    }
+
+
+    public void PlaySequential(bool isForward = true, Action callBack = null)
+    {
+        if (animList.Count == 0)
+            return;
+
+        gameObject.SetActive(true);
+
+        foreach (var item in animList)
+        {
+            item.isLoop = false;
+            item.ResetAnim(isForward);
+        }
+
+        _seqCurIndex = 0;
+        _sequentialCallback = callBack;
+
+        PlaySingle(_seqCurIndex, isForward, () => OnSequentialComplete(isForward));
+    }
+
+    private void OnSequentialComplete(bool isForward)
+    {
+        _seqCurIndex++;
+        if (_seqCurIndex >= animList.Count)
+        {
+            _seqCurIndex = 0;
+            _sequentialCallback?.Invoke();
+            _sequentialCallback = null;
+            return;
+        }
+
+        PlaySingle(_seqCurIndex, isForward, () => OnSequentialComplete(isForward));
+    }
+
+
+    public void PlayParallel(bool isForward = true, Action callBack = null)
+    {
+        if (animList.Count == 0)
+            return;
+
+        gameObject.SetActive(true);
+
+        _parallelCallback = callBack;
+        _parallelIndex.Clear();
+
+        for (int i = 0; i < animList.Count; i++)
+        {
+            int index = i;
+            PlaySingle(index, isForward, () => OnParallelComplete(index));
+            _parallelIndex.Add(index);
+        }
+    }
+
+    private void OnParallelComplete(int index)
+    {
+        _parallelIndex.Remove(index);
+
+        if (_parallelIndex.Count == 0)
+        {
+            _parallelCallback?.Invoke();
+            _parallelCallback = null;
         }
     }
 
     public void ResetAnim(int index = 0, bool isForward = true)
     {
-        if (animSenquenceList.Count == 0)
+        if (animList.Count == 0)
             return;
 
-        if (index < 0 || index >= animSenquenceList.Count)
-        {
-            foreach (var item in animSenquenceList)
-            {
-                item.ResetAnim(isForward);
-            }
-
+        if (index < 0 || index >= animList.Count)
             return;
-        }
 
-        animSenquenceList[index].ResetAnim(isForward);
+        var animInfo = animList[index];
+        animInfo.ResetAnim(isForward);
     }
 
-    public void StopAnim()
+    public void StopAnim(int index = 0)
     {
-        _canUpdate = false;
+        if (animList.Count == 0)
+            return;
 
-        if (_animInfo != null)
-        {
-            _animInfo.ClearAnim();
-            _animInfo = null;
-        }
+        if (index < 0 || index >= animList.Count)
+            return;
 
-        if (_lastAnimInfo != null)
-        {
-            _lastAnimInfo.ClearAnim();
-            _lastAnimInfo = null;
-        }
-    }
-
-
-    private bool TryPlayAnim()
-    {
-        float deltaTime = Time.deltaTime > 0.04f ? 0.04f : Time.deltaTime;
-        _timer += deltaTime;
-
-        if (_animInfo == null)
-        {
-            if (_lastAnimInfo != null && _lastAnimInfo.IsPlayOver)
-            {
-                PlayOverCallBack?.Invoke();
-                StopAnim();
-            }
-
-            return false;
-        }
-
-        if (_animInfo.isWaitForLast)
-        {
-            if (_lastAnimInfo != null && !_lastAnimInfo.IsPlayOver)
-            {
-                _timer = 0;
-                return false;
-            }
-        }
-
-
-        if (_timer > _animInfo.delayTime)
-        {
-            _timer -= _animInfo.delayTime;
-            return true;
-        }
-
-        return false;
+        var animInfo = animList[index];
+        animInfo.ClearAnim();
     }
 }
