@@ -37,6 +37,7 @@ namespace LccHotfix
             NetworkService.SetMessageDispatcherHelper(new DefaultMessageDispatcherHelper());
             NetworkService.SetNetworkCallbackHelper(new DefaultNetworkCallbackHelper());
             ModelService = Current.AddModule<ModelManager>();
+            ClientConfigService = Current.AddModule<ClientConfigService>();
             SaveService = Current.AddModule<SaveManager>();
             SaveService.SetSaveHelper(new DefaultSaveHelper());
             SettingService = Current.AddModule<SettingManager>();

@@ -10,6 +10,7 @@ namespace LccHotfix
         public static ICoroutineService CoroutineService { get; set; }
         public static INetworkService NetworkService { get; set; }
         public static IModelService ModelService { get; set; }
+        public static IClientConfigService ClientConfigService { get; set; }
         public static ISaveService SaveService { get; set; }
         public static ISettingService SettingService { get; set; }
         public static IAudioService AudioService { get; set; }
