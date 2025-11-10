@@ -11,11 +11,6 @@ namespace LccHotfix
     /// </summary>
     public class UIRewardNormal : IconBase
     {
-        public bool showName;
-        public bool showCount;
-        public bool showPreview;
-        public QualityType showQuality;
-
         public RewardItemData data;
 
         public UIImageCtrl iconImage;
@@ -25,57 +20,20 @@ namespace LccHotfix
         public TextMeshProUGUI name;
         public Button previewBtn;
 
-        public override void OnInit()
+        protected override void UpdateData(object info)
         {
-            base.OnInit();
+            base.UpdateData(info);
 
-            SetInfo(data, showName, showCount, showPreview, showQuality);
-        }
+            data = (RewardItemData)info;
 
-        public void SetInfo(RewardItemData data, bool showName = true, bool showCount = true, bool showPreview = false)
-        {
-            if (data == null)
-                return;
-
-            this.data = data;
-            this.showName = showName;
-            this.showCount = showCount;
-            this.showPreview = showPreview;
-            showQuality = data.GetQuality();
-
-            if (!IsDone)
-                return;
-
-            SetIcon();
-        }
-
-        public void SetInfo(RewardItemData data, bool showName, bool showCount, bool showPreview, QualityType quality)
-        {
-            if (data == null)
-                return;
-
-            this.data = data;
-            this.showName = showName;
-            this.showCount = showCount;
-            this.showPreview = showPreview;
-            this.showQuality = quality;
-
-            if (!IsDone)
-                return;
-
-            SetIcon();
-        }
-
-        public void SetIcon()
-        {
             iconImage.SetImage(data.GetIconId());
-            frameImage.SetImage(GetFrame(showQuality));
+            frameImage.SetImage(GetFrame(data.GetQuality()));
             count.text = "x" + GameUtility.FormatCurrency(data.Count);
             name.text = data.GetName();
             newGO.SetActive(data.IsNew);
-            count.gameObject.SetActive(data.IsShowCount() && showCount && data.Count > 0);
-            name.gameObject.SetActive(data.IsShowName() && showName);
-            previewBtn.gameObject.SetActive(data.IsShowPreview() && showPreview);
+            count.gameObject.SetActive(data.IsShowCount() && data.Count > 0);
+            name.gameObject.SetActive(data.IsShowName());
+            previewBtn.gameObject.SetActive(data.IsShowPreview());
         }
 
         public int GetFrame(QualityType itemQuality)

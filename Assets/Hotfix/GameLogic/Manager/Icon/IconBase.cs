@@ -1,7 +1,5 @@
-using System;
 using LccModel;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace LccHotfix
 {
@@ -9,6 +7,7 @@ namespace LccHotfix
     {
         private Transform _parent;
         private float _size;
+        private object _info;
 
         private GameObjectPoolAsyncOperation _asyncOperation;
 
@@ -16,14 +15,13 @@ namespace LccHotfix
         public Transform Transform => _asyncOperation.Transform;
         public bool IsDone => _asyncOperation.IsDone;
 
-        public void InitIcon(Transform parent, float size)
+        public void InitIcon(Transform parent, float size, object info = null)
         {
             this._parent = parent;
             _size = size;
+            _info = info;
 
             _asyncOperation = Main.GameObjectPoolService.GetObjectAsync(GetType().Name, OnComplete);
-
-            OnShow(_asyncOperation.IsDone);
         }
 
         private void OnComplete(GameObjectPoolAsyncOperation obj)
@@ -35,27 +33,60 @@ namespace LccHotfix
 
             ClientTools.AutoReference(Transform, this);
 
-            OnInit();
-        }
-
-        public virtual void OnInit()
-        {
+            OnShow();
         }
 
         public void OnRecycle()
         {
-            OnHide(_asyncOperation.IsDone);
+            if (IsDone)
+            {
+                OnHide();
+            }
 
+            _info = null;
             _asyncOperation.Release(ref _asyncOperation);
         }
 
-        protected virtual void OnShow(bool isDone)
+        /// <summary>
+        /// go加载出来之后调用（可以在这里add事件）
+        /// </summary>
+        protected virtual void OnShow()
+        {
+            if (_info != null)
+            {
+                UpdateData(_info);
+            }
+        }
+
+        /// <summary>
+        /// 更新数据（每次SetInfo会触发）
+        /// </summary>
+        /// <param name="info"></param>
+        protected virtual void UpdateData(object info)
         {
 
         }
 
-        protected virtual void OnHide(bool isDone)
+        /// <summary>
+        /// 如果OnShow调用过，则Release的时候会触发（可以在这里remove事件）
+        /// </summary>
+        protected virtual void OnHide()
         {
+
+        }
+
+        /// <summary>
+        /// 设置数据
+        /// </summary>
+        /// <param name="info"></param>
+        public void SetInfo(object info)
+        {
+            _info = info;
+
+            if (IsDone)
+            {
+                UpdateData(info);
+            }
         }
 
         /// <summary>
