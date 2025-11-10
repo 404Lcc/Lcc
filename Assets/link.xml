@@ -4618,7 +4618,11 @@
     <type fullname="UIAnimCtrl" preserve="all" />
     <type fullname="UIAnimInfo" preserve="all" />
     <type fullname="UIAnimType" preserve="all" />
+    <type fullname="UIAnimMultiAutoPlayMode" preserve="all" />
     <type fullname="UIAnimManager" preserve="all" />
+    <type fullname="UIAnimManager+&lt;&gt;c__DisplayClass14_0" preserve="all" />
+    <type fullname="UIAnimManager+&lt;&gt;c__DisplayClass15_0" preserve="all" />
+    <type fullname="UIAnimManager+&lt;&gt;c__DisplayClass16_0" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1+MonoScriptData" preserve="all" />
     <type fullname="LccModel.AssetManager" preserve="all" />

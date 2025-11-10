@@ -40,7 +40,7 @@ namespace LccHotfix
             SaveService = Current.AddModule<SaveManager>();
             SaveService.SetSaveHelper(new DefaultSaveHelper());
             SettingService = Current.AddModule<SettingManager>();
-            AudioService = Current.AddModule<AudioManager>();
+            // AudioService = Current.AddModule<AudioManager>();
             VibrationService = Current.AddModule<VibrationManager>();
             FXService = Current.AddModule<FXManager>();
             ValueEventService = Current.AddModule<ValueEventManager>();
