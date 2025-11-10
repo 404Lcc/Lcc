@@ -117,7 +117,7 @@ namespace LccHotfix
 
             _agent?.Trigger(BTAction.OnDeactiveBuff);
             _agent.Dispose();
-            Main.FXService.Release(_fxId);
+            // Main.FXService.Release(_fxId);
         }
 
         /// <summary>
@@ -183,10 +183,10 @@ namespace LccHotfix
             _aliveTime = 0;
         }
 
-        public FXObject GetFX()
-        {
-            return Main.FXService.GetFX(_fxId);
-        }
+        // public FXObject GetFX()
+        // {
+        //     return Main.FXService.GetFX(_fxId);
+        // }
 
         private void PlayFX()
         {

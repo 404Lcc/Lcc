@@ -42,7 +42,7 @@ namespace LccHotfix
             SettingService = Current.AddModule<SettingManager>();
             // AudioService = Current.AddModule<AudioManager>();
             VibrationService = Current.AddModule<VibrationManager>();
-            FXService = Current.AddModule<FXManager>();
+            // FXService = Current.AddModule<FXManager>();
             ValueEventService = Current.AddModule<ValueEventManager>();
             CameraService = Current.AddModule<CameraManager>();
             TimerService = Current.AddModule<TimerManager>();
@@ -79,7 +79,7 @@ namespace LccHotfix
             ModelService.Init();
             SaveService.Init();
             SettingService.Init();
-            AudioService.Init();
+            // AudioService.Init();
             VibrationService.Init();
             HotfixBridgeService.Init();
             LanguageService.Init();
