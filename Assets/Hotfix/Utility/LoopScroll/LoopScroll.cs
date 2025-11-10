@@ -554,9 +554,9 @@ namespace LccHotfix
                         _pool.Release(item);
                     }
 
+                    _pool.Clear<Item>();
                     _scrollerPro.ClearAll();
                     _itemDict.Clear();
-                    _scrollerPro.ReloadData();
                 }
 
                 return;
@@ -577,7 +577,6 @@ namespace LccHotfix
                 var pos = _scrollerPro.ScrollPosition;
                 _scrollerPro.RefreshActiveCellViews();
 
-
                 _scrollerPro.ScrollPosition = pos;
             }
             else if (oldCount > 0)
@@ -587,6 +586,7 @@ namespace LccHotfix
                     _pool.Release(item);
                 }
 
+                _pool.Clear<Item>();
                 _scrollerPro.ClearAll();
                 _itemDict.Clear();
                 _scrollerPro.ReloadData();
