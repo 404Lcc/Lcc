@@ -78,6 +78,7 @@ namespace LccHotfix
                 return res;
             };
             Main.WindowService.InitializeForAssembly(Launcher.Instance.HotfixAssembly);
+            Main.WindowService.Init();
         }
 
         public IUILogic GetMonoLogic(Window window, Type monoType)

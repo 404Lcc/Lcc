@@ -50,7 +50,6 @@ namespace LccHotfix
         public override void Tick()
         {
             base.Tick();
-            Log.Debug("login update");
         }
 
         public override void ProcedureExitHandler()

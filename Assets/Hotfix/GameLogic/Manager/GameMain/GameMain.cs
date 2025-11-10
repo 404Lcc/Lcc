@@ -81,7 +81,6 @@ namespace LccHotfix
             SettingService.Init();
             AudioService.Init();
             VibrationService.Init();
-            WindowService.Init();
             HotfixBridgeService.Init();
             LanguageService.Init();
             UIService.Init();
