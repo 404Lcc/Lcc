@@ -522,13 +522,13 @@ namespace LccHotfix
             foreach (var item in _itemDict.Values)
             {
                 _pool.Release(item);
+                item.gameObject = null;
             }
 
-            _pool.Clear<Item>();
-            _scrollerPro.ClearAll();
             _itemDict.Clear();
             _dataList.Clear();
             _sizeDict.Clear();
+            _scrollerPro.ClearAll();
         }
 
 
@@ -552,11 +552,11 @@ namespace LccHotfix
                     foreach (var item in _itemDict.Values)
                     {
                         _pool.Release(item);
+                        item.gameObject = null;
                     }
 
-                    _pool.Clear<Item>();
-                    _scrollerPro.ClearAll();
                     _itemDict.Clear();
+                    _scrollerPro.ClearAll();
                 }
 
                 return;
@@ -576,7 +576,6 @@ namespace LccHotfix
             {
                 var pos = _scrollerPro.ScrollPosition;
                 _scrollerPro.RefreshActiveCellViews();
-
                 _scrollerPro.ScrollPosition = pos;
             }
             else if (oldCount > 0)
@@ -584,11 +583,11 @@ namespace LccHotfix
                 foreach (var item in _itemDict.Values)
                 {
                     _pool.Release(item);
+                    item.gameObject = null;
                 }
 
-                _pool.Clear<Item>();
-                _scrollerPro.ClearAll();
                 _itemDict.Clear();
+                _scrollerPro.ClearAll();
                 _scrollerPro.ReloadData();
             }
             else

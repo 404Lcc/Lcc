@@ -44,6 +44,12 @@ namespace LccModel
 
         }
 
+        public void OnDestroy()
+        {
+            Event.ClearAll();
+            Event.Destroy();
+        }
+
         public void StartLauncher()
         {
             Debug.Log("开启启动流程...");
