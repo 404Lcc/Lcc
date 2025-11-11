@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using HybridCLR;
 using UnityEngine;
@@ -142,7 +143,14 @@ namespace LccModel
             //加个保底
             try
             {
-                Launcher.Instance.HotfixAssembly = Assembly.Load(assetDll.bytes, assetPdb.bytes);
+                if (Application.isEditor)
+                {
+                    Launcher.Instance.HotfixAssembly = AppDomain.CurrentDomain.GetAssemblies().First(x => x.GetName().Name == "Unity.Hotfix");
+                }
+                else
+                {
+                    Launcher.Instance.HotfixAssembly = Assembly.Load(assetDll.bytes, assetPdb.bytes);
+                }
             }
             catch (Exception e)
             {
