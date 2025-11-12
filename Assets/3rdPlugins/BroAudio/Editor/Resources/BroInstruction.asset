@@ -1,0 +1,181 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e3d9656167abb84bbe211433938026f, type: 3}
+  m_Name: BroInstruction
+  m_EditorClassIdentifier: 
+  DemoScene: {fileID: 102900000, guid: 05a9e41d79251594aad6850fbdf49b6f, type: 3}
+  URPDemoScene: {fileID: 102900000, guid: 70510791fa9fafc448d4f1e7ea030cab, type: 3}
+  _dictionary:
+  - Key: 0
+    Value: Everything works great!
+  - Key: 1
+    Value: Select BroAudio auto-generated asset file's output folder
+  - Key: 10
+    Value: "If the same sound is played repeatedly in a very short period. It may
+      cause a quality loss or unexpected behavior due to the nature of Comb Filtering.
+      \n\nBro will automatically prevent this issue, but if you do not need it, you
+      can set it to 0 or any other shorter value as needed."
+  - Key: 11
+    Value: The {0} track count should be greater than the sum of BroVirtual and the
+      Max Real Voices! Click the button below to match them, or set it back to 32
+      (Unity's default setting) in {1}
+  - Key: 12
+    Value: 'This action cannot be undone! Please check the following instructions
+      before you proceed.
+
+
+      1. Backup the BroAudioMixer.asset file if you''ve
+      modified it for your own needs
+
+      2. The process will duplicate the last
+      generic track of the BroAudioMixer. Make sure it''s at its original setting.'
+  - Key: 13
+    Value: Max Real Voices will determine how many sounds can be heard simultaneously
+      by Unity's Audio Engine. The track count of BroAudioMixer should be greater
+      than Max Real Voices in order to effectively control all the voices.
+  - Key: 14
+    Value: Sounds exceeding Max Real Voices will turn into Virtual Voices and become
+      inaudible until a Real Voice becomes available. BroVirtual tracks ensure that
+      the voices returning from Virtual Voices can be controlled again.
+  - Key: 15
+    Value: "There are 2 places to set audio pitch, each with different ranges and
+      sound characteristics. \n[AudioMixer] is recommended for all platforms except
+      WebGL."
+  - Key: 16
+    Value: The attenuation per octave that the HighPass/LowPass Filter applies to.
+      The higher value it set, the more frequencies are attenuated by the filter.
+  - Key: 30
+    Value: Changes will be saved to the file permanently, and they cannot be undone.
+      Would you like to proceed?
+  - Key: 100
+    Value: 'There are some empty name in asset: {0}!'
+  - Key: 101
+    Value: 'Name:{0} is duplicated in asset: {1}'
+  - Key: 102
+    Value: 'Name:{0} in asset: {1} has invalid word!'
+  - Key: 200
+    Value: Please enter an asset name
+  - Key: 201
+    Value: Name with whitespace is not recommended
+  - Key: 202
+    Value: Name already exists!
+  - Key: 203
+    Value: Contains invalid words!
+  - Key: 204
+    Value: Name starts with number is not recommended
+  - Key: 205
+    Value: '[{0}] has been reserved for temp asset'
+  - Key: 300
+    Value: Add AudioClip to create AudioEntity
+  - Key: 301
+    Value: Double-click on an asset to edit its content.
+  - Key: 302
+    Value: Multiple audio clips import confirmation
+  - Key: 303
+    Value: Do you want to create multiple AudioEntities for each clip, or a single
+      AudioEntity that contains all the clips in its clip list?
+  - Key: 304
+    Value: Choose an AudioType to create an asset
+  - Key: 305
+    Value: Change current AudioType to ...
+  - Key: 306
+    Value: Click to name
+  - Key: 307
+    Value: Choose an AudioType to properly create the asset
+  - Key: 308
+    Value: Please name the temp asset
+  - Key: 309
+    Value: 'Do you want to convert the clips from  {0} and {1} addressables?
+
+
+      *For
+      more option, please check out Tools/BroAudio/Preferences - Misc'
+  - Key: 310
+    Value: 'Set how would you like to handle with the current references when switching
+      the [Addressables] option in Library Manager.
+
+
+      [Only Convert]
+
+      Convert
+      the list to the target reference type without changing the Addressables state
+      of the clip assets.
+
+
+      [Convert And Set Addressables]
+
+      Convert the
+      list to the target reference type and mark/unmark Addressables on the clip
+      assets.
+
+
+      [Convert And Clear All References]
+
+      Convert the list
+      to the target reference type and clear all the references in the list.'
+  - Key: 17
+    Value: If enabled, all [Music] will be played as BGM and trigger a transtion
+      from one the other automatically.
+  - Key: 2
+    Value: Whether to log a warning when trying to access an AudioPlayer that has
+      finished playing and has been recycled into the Object Pool.
+  - Key: 3
+    Value: "The maximum number of unused Audio Players the pool will keep around.
+      If more than this number are unused, the extra ones will be destroyed instead
+      of pooled. You usually don\u2019t need to tweak this unless you\u2019re running
+      into performance issues."
+  - Key: 4
+    Value: Click here to add more Dominator tracks to avoid exceeding the maximum
+      number of tracks and losing their functionality
+  - Key: 5
+    Value: "Click here if you failed to generate the user data when importing BroAudio
+      or if you accidentally deleted them. The user data files are as follows:\n   
+      BroAudioData.asset\n    BroRuntimeSetting.asset\n    BroEditorSetting.asset"
+  - Key: 400
+    Value: Apply the volume to both the slider and the system when the GameObject
+      is enabled
+  - Key: 401
+    Value: Resets both the volume and the slider to its value before the component
+      was enabled
+  - Key: 402
+    Value: Determine if the slider can support a range beyond volume 1 (to boost
+      the original audio)
+  - Key: 403
+    Value: How long it will take to reach the target volume
+  - Key: 404
+    Value: Dynamically set both the volume and the slider in Play Mode
+  - Key: 18
+    Value: If no PlaybackGroup is specified in the AudioEntity, this group will be
+      used
+  - Key: 500
+    Value: '[Override Option]
+
+      When enabled, playback will be verified using
+      the value of this group; otherwise, the Default Playback Group''s value will
+      be used'
+  - Key: 19
+    Value: Determines whether audio changes, such as volume adjustments, pitch shifts,
+      fade-in/out, etc., are affected by Time.timeScale
+  - Key: 311
+    Value: No loop option set for Chained Play Mode! It'll default to {0} with a
+      {1}s transition at runtime.
+  - Key: 312
+    Value: Apply the default Chained Play Mode loop and transition settings to clear
+      this message
+  - Key: 1000
+    Value: The demo not only shows all of the features, but also how to use the API
+      and how they're implemented
+  - Key: 6
+    Value: Toggle the scripting define symbol to enable/disable manual initialization
+      of BroAudio
+  - Key: 7
+    Value: Please specify a default output path.

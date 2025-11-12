@@ -4722,6 +4722,7 @@
     <type fullname="LccModel.FsmRequestServer+&lt;RequestCenterServer&gt;d__4" preserve="all" />
     <type fullname="LccModel.FsmRequestServer+&lt;RequestServer&gt;d__3" preserve="all" />
     <type fullname="LccModel.FsmStartGame" preserve="all" />
+    <type fullname="LccModel.FsmStartGame+&lt;&gt;c" preserve="all" />
     <type fullname="LccModel.FsmStartGame+&lt;LoadInitialize&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmStartSplash" preserve="all" />
     <type fullname="LccModel.FsmUpdatePackageManifest" preserve="all" />

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cab1494eb378e4a8acf946c91c668a, type: 3}
+  m_Name: BroRuntimeSetting
+  m_EditorClassIdentifier: 
+  CombFilteringPreventionInSeconds: 0.04
+  LogAccessRecycledPlayerWarning: 1
+  DefaultFadeInEase: 2
+  DefaultFadeOutEase: 11
+  SeamlessFadeInEase: 8
+  SeamlessFadeOutEase: 11
+  AudioFilterSlope: 1
+  UpdateMode: 0
+  DefaultAudioPlayerPoolSize: 5
+  PitchSetting: 1
+  AlwaysPlayMusicAsBGM: 1
+  DefaultBGMTransition: 4
+  DefaultBGMTransitionTime: 2
+  DefaultChainedPlayModeLoop: 2
+  DefaultChainedPlayModeTransitionTime: 0.1
+  GlobalPlaybackGroup: {fileID: 11400000, guid: 07f2b900b5f8a7c49afe6a4b561e4055, type: 2}

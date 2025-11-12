@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.ami.broaudio": "https://github.com/man572142/Bro_Audio.git?path=/Assets/BroAudio",
     "com.annulusgames.lit-motion": "https://github.com/annulusgames/LitMotion.git?path=src/LitMotion/Assets/LitMotion",
     "com.code-philosophy.hybridclr": "https://github.com/focus-creative-games/hybridclr_unity.git",
     "com.code-philosophy.luban": "https://github.com/focus-creative-games/luban_unity.git",

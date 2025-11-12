@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5837b41054f254c9322a262f546dea, type: 3}
+  m_Name: BroEditorSetting
+  m_EditorClassIdentifier: 
+  AssetOutputPath: Assets/BroAudio/AudioAssets
+  ShowAudioTypeOnSoundID: 1
+  ShowVUColorOnVolumeSlider: 1
+  ShowMasterVolumeOnClipListHeader: 0
+  ShowPlayButtonWhenEntityCollapsed: 0
+  ShowWarningWhenEntityHasNoLoopInChainedMode: 1
+  OpenLastEditAudioAsset: 0
+  LastEditAudioAsset: 
+  DirectReferenceDecision: 0
+  AddressableDecision: 0
+  EditTheNewClipAfterSaveAs: 1
+  PingTheNewClipAfterSaveAs: 1
+  PromptForPathOnAssetCreation: 0
+  HasSetupWizardAutoLaunched: 0
+  VirtualTrackCount: 4
+  AudioTypeSettings:
+  - AudioType: 1
+    Color: {r: 0.003921569, g: 0.18431373, b: 0.5294118, a: 0.29803923}
+    DrawedProperty: 3087
+  - AudioType: 2
+    Color: {r: 0.05490196, g: 0.6117647, b: 0.53333336, a: 0.29803923}
+    DrawedProperty: 33807
+  - AudioType: 4
+    Color: {r: 0, g: 0.6901961, b: 0.15686275, a: 0.29803923}
+    DrawedProperty: 11279
+  - AudioType: 8
+    Color: {r: 0.99215686, g: 0.5019608, b: 0.23921569, a: 0.5882353}
+    DrawedProperty: 60431
+  - AudioType: 16
+    Color: {r: 0.93333334, g: 0.7764706, b: 0.21568628, a: 0.29803923}
+    DrawedProperty: 33807
+  SpectrumBandColors:
+  - {r: 0.4862745, g: 0.68235296, b: 1, a: 0.5859375}
+  - {r: 0.38431373, g: 0.92156863, b: 0.98039216, a: 0.5859375}
+  - {r: 0.46666667, g: 1, b: 0.654902, a: 0.5859375}
+  - {r: 0.77254903, g: 1, b: 0.47058824, a: 0.5859375}
+  - {r: 1, g: 0.39215687, b: 0.43137255, a: 0.5859375}
+  - {r: 1, g: 0.39215687, b: 0.77254903, a: 0.5859375}
+  - {r: 0.8, g: 0.49411765, b: 1, a: 0.5859375}
+  - {r: 0.35686275, g: 0.22352941, b: 1, a: 0.5859375}
+  - {r: 0.42745098, g: 0.7411765, b: 1, a: 0.5859375}
+  - {r: 0.42352942, g: 1, b: 0.45882353, a: 0.5859375}
