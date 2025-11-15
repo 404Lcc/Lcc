@@ -20,7 +20,7 @@ public class UIBadgeConfig : IClientConfig
     }
 
     /// <summary>
-    /// 根据配置名获取红点配置
+    /// 根据配置名获取配置
     /// </summary>
     /// <param name="badgeName"></param>
     /// <returns></returns>
@@ -35,10 +35,10 @@ public class UIBadgeConfig : IClientConfig
     }
 
     /// <summary>
-    /// 创建红点配置
+    /// 创建配置
     /// </summary>
     /// <param name="badgeName">配置名</param>
-    /// <param name="resolve">获取红点值的委托（需返回int）</param>
+    /// <param name="resolve">获取数量的委托（需返回int）</param>
     /// <param name="listeners">监听事件</param>
     /// <param name="listenerCheckDict">监听事件过滤器</param>
     private void CreateConfig(string badgeName, Delegate resolve, Type[] listeners = null, Dictionary<Type, Func<IEventMessage, bool>> listenerCheckDict = null)
@@ -57,10 +57,10 @@ public class UIBadgeConfig : IClientConfig
     }
 
     /// <summary>
-    /// 创建红点配置（支持通过已注册的配置名获取监听事件）
+    /// 创建配置（支持通过已注册的配置名获取监听事件）
     /// </summary>
     /// <param name="badgeName">配置名</param>
-    /// <param name="resolve">获取红点值的委托（需返回int）</param>
+    /// <param name="resolve">获取数量的委托（需返回int）</param>
     /// <param name="listeners">监听事件</param>
     /// <param name="listenerCheckDict">监听事件过滤器</param>
     /// <param name="badgeNames">已注册的配置名</param>
@@ -94,49 +94,23 @@ public class UIBadgeConfig : IClientConfig
     }
 
     /// <summary>
-    /// 获取badge的数量
+    /// 获取配置的数量
     /// </summary>
     /// <param name="badgeName">配置名</param>
     /// <param name="param">参数</param>
     /// <returns></returns>
-    private int GetBadgeCount(string badgeName, params object[] param)
+    private int GetBadgeCount(string badgeName, params object[] args)
     {
         if (!_badgeConfig.TryGetValue(badgeName, out var config))
         {
             return TraceBadgeCount(badgeName, 0);
         }
 
-        return TraceBadgeCount(badgeName, Convert.ToInt32(config.Resolve.DynamicInvoke(param)));
-    }
-
-    private int TraceBadgeCount(string badgeName, int count)
-    {
-        Debug.LogWarning($"[Badge] Badge 数量 {badgeName}: {count.ToString()}");
-        return count;
-    }
-
-    public void DebugTraceBadge(string badgeName, params object[] args)
-    {
-        var config = Main.ClientConfigService.GetConfig<UIBadgeConfig>();
-        if (config is not UIBadgeConfig uiBadgeConfig)
-            return;
-
-        var badgeConfig = uiBadgeConfig.GetConfig(badgeName);
-        if (badgeConfig == null)
-            return;
-
-        var resolve = badgeConfig.Resolve;
-        if (resolve == null)
-        {
-            Debug.LogWarning($"[Badge] 始终返回0：resolve解析器为null，BadgeName = {badgeName}");
-            return;
-        }
-
         try
         {
             var resolveParamTypes = Array.Empty<Type>();
 
-            var parameters = resolve.Method.GetParameters();
+            var parameters = config.Resolve.Method.GetParameters();
 
             if (parameters.Length > 0)
             {
@@ -161,7 +135,7 @@ public class UIBadgeConfig : IClientConfig
                     if (args.Length != resolveParamTypes.Length)
                     {
                         Debug.LogError($"[Badge] 参数长度不匹配：需要{resolveParamTypes.Length}个参数，但实际传入{args.Length}个，BadgeName = {badgeName}");
-                        return;
+                        return TraceBadgeCount(badgeName, 0);
                     }
 
                     for (int i = 0; i < resolveParamTypes.Length; ++i)
@@ -174,7 +148,7 @@ public class UIBadgeConfig : IClientConfig
                             if (type.IsValueType && Nullable.GetUnderlyingType(type) == null)
                             {
                                 Debug.LogError($"[Badge] 第{i}个参数不能为null，期望类型为{type.Name}，BadgeName = {badgeName}");
-                                return;
+                                return TraceBadgeCount(badgeName, 0);
                             }
                         }
                         else
@@ -182,18 +156,26 @@ public class UIBadgeConfig : IClientConfig
                             if (!type.IsInstanceOfType(arg))
                             {
                                 Debug.LogError($"[Badge] 第{i}个参数类型不匹配：期望为{type.Name}类型，但实际为{arg.GetType().Name}类型，BadgeName = {badgeName}");
-                                return;
+                                return TraceBadgeCount(badgeName, 0);
                             }
                         }
                     }
                 }
             }
 
-            resolve.DynamicInvoke(args);
+            return TraceBadgeCount(badgeName, Convert.ToInt32(config.Resolve.DynamicInvoke(args)));
         }
         catch (Exception ex)
         {
             Debug.LogWarning($"[Badge] 解析时发生异常，BadgeName = {badgeName}: {ex.Message}, \n{ex.StackTrace}");
         }
+
+        return TraceBadgeCount(badgeName, 0);
+    }
+
+    private int TraceBadgeCount(string badgeName, int count)
+    {
+        Debug.LogWarning($"[Badge] Badge 数量 {badgeName}: {count.ToString()}");
+        return count;
     }
 }

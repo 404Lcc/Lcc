@@ -57,10 +57,10 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 根据配置名获取红点配置
+        /// 根据配置名获取配置
         /// </summary>
         /// <param name="badgeName">配置名</param>
-        /// <returns>配置名对应的红点配置</returns>
+        /// <returns>配置名对应的配置</returns>
         protected abstract BadgeConfig GetConfig(string badgeName);
 
         /// <summary>
@@ -69,11 +69,11 @@ namespace LccHotfix
         protected abstract void RefreshDisplay();
 
         /// <summary>
-        /// 设置红点配置
+        /// 设置配置
         /// </summary>
         /// <param name="badgeName">配置名</param>
         /// <param name="refresh">是否立刻刷新</param>
-        public void SetBadgeName(string badgeName, bool refresh = true)
+        public void SetBadge(string badgeName, bool refresh = true)
         {
             if (_badgeName == badgeName)
                 return;
@@ -101,15 +101,15 @@ namespace LccHotfix
         {
             if (_getCount == null)
             {
-                SetBadge(0);
+                SetCount(0);
                 return;
             }
 
-            SetBadge(_getCount());
+            SetCount(_getCount());
         }
 
         /// <summary>
-        /// 设置获取红点数量的委托
+        /// 设置获取数量的委托
         /// </summary>
         /// <param name="resolve"></param>
         private void SetResolveDelegate(Delegate resolve)
@@ -167,7 +167,7 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 添加红点监听
+        /// 添加监听
         /// </summary>
         /// <param name="listeners">监听事件列表</param>
         /// <param name="listenerCheckDict">监听事件过滤器</param>
@@ -267,10 +267,10 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 设置红点值
+        /// 设置数量
         /// </summary>
         /// <param name="count"></param>
-        public void SetBadge(int count)
+        public void SetCount(int count)
         {
             if (count == Count)
                 return;
