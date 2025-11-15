@@ -22,9 +22,9 @@ namespace LccHotfix
         protected bool _dirty;
 
         /// <summary>
-        /// 当前红点数量
+        /// 当前数量
         /// </summary>
-        public int Badge { get; protected set; } = -1;
+        public int Count { get; protected set; } = -1;
 
         public BadgeHandler()
         {
@@ -53,15 +53,15 @@ namespace LccHotfix
             SetListeners(null);
             _getCount = null;
             _dirty = false;
-            Badge = 0;
+            Count = 0;
         }
 
         /// <summary>
         /// 根据配置名获取红点配置
         /// </summary>
-        /// <param name="badge">配置名</param>
+        /// <param name="badgeName">配置名</param>
         /// <returns>配置名对应的红点配置</returns>
-        protected abstract BadgeConfig GetConfig(string badge);
+        protected abstract BadgeConfig GetConfig(string badgeName);
 
         /// <summary>
         /// 刷新显示
@@ -71,15 +71,15 @@ namespace LccHotfix
         /// <summary>
         /// 设置红点配置
         /// </summary>
-        /// <param name="badge">配置名</param>
+        /// <param name="badgeName">配置名</param>
         /// <param name="refresh">是否立刻刷新</param>
-        public void SetBadgeName(string badge, bool refresh = true)
+        public void SetBadgeName(string badgeName, bool refresh = true)
         {
-            if (_badgeName == badge)
+            if (_badgeName == badgeName)
                 return;
 
-            _badgeName = badge;
-            _config = GetConfig(badge);
+            _badgeName = badgeName;
+            _config = GetConfig(badgeName);
             if (_config != null)
             {
                 SetResolveDelegate(_config.Resolve);
@@ -255,7 +255,7 @@ namespace LccHotfix
                 {
                     if (!type.IsInstanceOfType(arg))
                     {
-                        Debug.LogError($"[Badge] 第{i}个参数类型不匹配：期望为{type.Name}类型，但实际为{arg.GetType().Name}类型");
+                        Debug.LogError($"[Badge] 第{i}个参数类型不匹配：期望为{type.Name}类型，但实际为{arg.GetType().Name}类型，BadgeName = {_badgeName}");
                         return;
                     }
                 }
@@ -272,10 +272,10 @@ namespace LccHotfix
         /// <param name="count"></param>
         public void SetBadge(int count)
         {
-            if (count == Badge)
+            if (count == Count)
                 return;
 
-            Badge = count;
+            Count = count;
             RefreshDisplay();
         }
 

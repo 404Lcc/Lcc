@@ -23,6 +23,7 @@ namespace LccHotfix
         public static IWindowService WindowService { get; set; }
         public static IThreadSyncService ThreadSyncService { get; set; }
         public static IGizmoService GizmoService { get; set; }
+        public static IBadgeService BadgeService { get; set; }
         
         public static void SetMain(Main main)
         {
