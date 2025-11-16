@@ -20,11 +20,11 @@ namespace LccHotfix
         public TextMeshProUGUI name;
         public Button previewBtn;
 
-        protected override void UpdateData(object info)
+        protected override void UpdateData(object[] args)
         {
-            base.UpdateData(info);
+            base.UpdateData(args);
 
-            data = (RewardItemData)info;
+            data = (RewardItemData)args[0];
 
             iconImage.SetImage(data.GetIconId());
             frameImage.SetImage(GetFrame(data.GetQuality()));
