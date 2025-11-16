@@ -25,7 +25,7 @@ MonoBehaviour:
   EditTheNewClipAfterSaveAs: 1
   PingTheNewClipAfterSaveAs: 1
   PromptForPathOnAssetCreation: 0
-  HasSetupWizardAutoLaunched: 0
+  HasSetupWizardAutoLaunched: 1
   VirtualTrackCount: 4
   AudioTypeSettings:
   - AudioType: 1
