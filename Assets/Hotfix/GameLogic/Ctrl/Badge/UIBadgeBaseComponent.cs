@@ -18,6 +18,11 @@ namespace LccHotfix
         /// </summary>
         public int Count => _handler.Count;
 
+        public BadgeConfig GetConfig(string badgeName)
+        {
+            return Main.ClientConfigService.GetConfig<UIBadgeConfig>().GetConfig(badgeName);
+        }
+
         public abstract void RefreshDisplay();
 
         protected override void Awake()
