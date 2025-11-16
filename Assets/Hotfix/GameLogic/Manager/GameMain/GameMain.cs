@@ -52,6 +52,7 @@ namespace LccHotfix
             WindowService = Current.AddModule<WindowManager>();
             ThreadSyncService = Current.AddModule<ThreadSyncManager>();
             GizmoService = Current.AddModule<GizmoManager>();
+            BadgeService = Current.AddModule<BadgeManager>();
 
             PlatformService = Current.AddModule<PlatformManager>();
             IconService = Current.AddModule<IconManager>();
