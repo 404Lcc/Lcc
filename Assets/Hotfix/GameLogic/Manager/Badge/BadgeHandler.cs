@@ -57,16 +57,19 @@ namespace LccHotfix
         }
 
         /// <summary>
+        /// 刷新显示
+        /// </summary>
+        protected abstract void RefreshDisplay();
+
+        /// <summary>
         /// 根据配置名获取配置
         /// </summary>
         /// <param name="badgeName">配置名</param>
         /// <returns>配置名对应的配置</returns>
-        protected abstract BadgeConfig GetConfig(string badgeName);
-
-        /// <summary>
-        /// 刷新显示
-        /// </summary>
-        protected abstract void RefreshDisplay();
+        protected virtual BadgeConfig GetConfig(string badgeName)
+        {
+            return Main.ClientConfigService.GetConfig<UIBadgeConfig>().GetConfig(badgeName);
+        }
 
         /// <summary>
         /// 设置配置
