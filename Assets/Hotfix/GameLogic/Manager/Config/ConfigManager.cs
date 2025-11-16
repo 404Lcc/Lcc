@@ -11,17 +11,52 @@ namespace LccHotfix
         private Dictionary<string, JSONNode> _configDict = new Dictionary<string, JSONNode>();
         public Tables Tables { get; set; }
 
+        private int _totalConfigCount;
+        private int _loadedConfigCount;
+        private bool _allConfigsLoaded;
 
         public ConfigManager()
         {
             _loader = new AssetLoader();
-            // Tables = new Tables(Load);
-            //todo 代办
-            // _loader.LoadAssetAsync<TextAsset>(file, (x) =>
-            // {
-            //     var res = x.AssetObject as TextAsset;
-            //     var node = JSON.Parse(res.text);
-            // });
+            var infos = Main.AssetService.DefaultPackage.GetAssetInfos("luban");
+            _totalConfigCount = infos.Length;
+            _loadedConfigCount = 0;
+            _allConfigsLoaded = false;
+
+            if (_totalConfigCount == 0)
+            {
+                InitializeTables();
+                return;
+            }
+
+            foreach (var item in infos)
+            {
+                _loader.LoadAssetAsync<TextAsset>(item.Address, (x) =>
+                {
+                    var text = x.AssetObject as TextAsset;
+                    var node = JSON.Parse(text.text);
+                    _configDict.Add(item.Address, node);
+
+                    OnConfigLoaded();
+                });
+            }
+        }
+
+        private void OnConfigLoaded()
+        {
+            _loadedConfigCount++;
+
+            // 检查是否所有配置都已加载完成
+            if (_loadedConfigCount >= _totalConfigCount && !_allConfigsLoaded)
+            {
+                _allConfigsLoaded = true;
+                InitializeTables();
+            }
+        }
+
+        private void InitializeTables()
+        {
+            Tables = new Tables(Load);
         }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)

@@ -43,7 +43,7 @@ MonoBehaviour:
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
         FilterRuleName: CollectAll
-        AssetTags: 
+        AssetTags: luban
         UserData: 
       - CollectPath: Assets/Res/DLL
         CollectorGUID: 59291aea2effad245bb7b8190da3f1fc
