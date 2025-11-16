@@ -54,6 +54,7 @@ namespace LccHotfix
             }
 
             _loader.Release();
+            _loader = null;
         }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
@@ -65,6 +66,7 @@ namespace LccHotfix
             if (_state != FishNetState.None)
                 return;
             _state = FishNetState.Loading;
+            _loader = new AssetLoader();
             _helper.Setup(_loader, (x) =>
             {
                 _networkManager = x;
