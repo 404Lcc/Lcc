@@ -8,8 +8,10 @@ namespace LccHotfix
     [Procedure]
     public class BattleProcedure : LoadProcedureHandler, ICoroutine
     {
-        public GameObject map;
+        public GameObjectPoolAsyncOperation operation;
+
         public Camera currentCamera;
+        public GameObject Map => operation.GameObject;
 
         public BattleProcedure()
         {
@@ -22,33 +24,36 @@ namespace LccHotfix
             base.ProcedureStartHandler();
 
             //进入
-
             Log.Debug("进入Battle");
 
-            this.StartCoroutine(LoadProcedureCoroutine());
+            UILoadingPanel.Instance.UpdateLoadingPercent(10, 98, 2f);
+
+            operation = Main.GameObjectPoolService.GetObjectAsync("Map", (x) =>
+            {
+                operation = x;
+
+                SetBattleCamera();
+
+                Main.UIService.OpenPanel(UIPanelDefine.UIBattlePanel);
+                Main.UIService.OpenPanel(UIPanelDefine.UIHeadbarPanel);
+
+                var mod = GameUtility.GetModel<ModPlayer>();
+                var data = new InGamePlayerData();
+                data.InitData(mod.GetLocalPlayerSimpleData());
+
+                BattleWorldData worldData = new BattleWorldData();
+                worldData.Init(new List<InGamePlayerData>() { data });
+                Main.WorldService.CreateWorld<BattleWorld>(worldData);
+
+                this.StartCoroutine(LoadProcedureCoroutine());
+
+            });
 
         }
 
         // 初始化显示
         public IEnumerator LoadProcedureCoroutine()
         {
-            UILoadingPanel.Instance.UpdateLoadingPercent(10, 98, 2f);
-
-            Main.AssetService.LoadGameObject("Map", true, out map);
-
-            SetBattleCamera();
-
-            Main.UIService.OpenPanel(UIPanelDefine.UIBattlePanel);
-            Main.UIService.OpenPanel(UIPanelDefine.UIHeadbarPanel);
-
-            var mod = GameUtility.GetModel<ModPlayer>();
-            var data = new InGamePlayerData();
-            data.InitData(mod.GetLocalPlayerSimpleData());
-
-            BattleWorldData worldData = new BattleWorldData();
-            worldData.Init(map, new List<InGamePlayerData>() { data });
-            Main.WorldService.CreateWorld<BattleWorld>(worldData);
-
             yield return new WaitForSeconds(1f);
 
             UIForeGroundPanel.Instance.FadeOut(0.5f);
@@ -73,7 +78,7 @@ namespace LccHotfix
 
         public void SetBattleCamera()
         {
-            currentCamera = map.transform.Find("Camera").GetComponent<Camera>();
+            currentCamera = Map.transform.Find("Camera").GetComponent<Camera>();
             Main.CameraService.CurrentCamera = currentCamera;
             Main.CameraService.AddOverlayCamera(currentCamera);
         }
@@ -101,6 +106,8 @@ namespace LccHotfix
         public override void ProcedureExitHandler()
         {
             base.ProcedureExitHandler();
+
+            operation.Release(ref operation);
 
             Main.CameraService.CurrentCamera = null;
             Main.WorldService.ExitWorld();

@@ -35,24 +35,18 @@ namespace LccHotfix
         {
             base.Release();
 
-            GameObject.Destroy(world.GetWorldData<BattleWorldData>().Map);
-
             if (_fsm == null)
                 return;
             _fsm = null;
-
-
         }
     }
 
     public class BattleWorldData : IWorldData
     {
         public List<InGamePlayerData> PlayerList { get; private set; }
-        public GameObject Map { get; private set; }
 
-        public void Init(GameObject map, List<InGamePlayerData> playerList)
+        public void Init(List<InGamePlayerData> playerList)
         {
-            this.Map = map;
             this.PlayerList = playerList;
         }
     }
