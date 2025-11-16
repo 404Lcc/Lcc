@@ -120,7 +120,6 @@ namespace LccHotfix
 
         public void LoadAssetRawFileAsync(string location, System.Action<RawFileHandle> onCompleted, uint priority = 0)
         {
-            _rawFileHandles ??= new Dictionary<string, RawFileHandle>();
             if (_rawFileHandles.TryGetValue(location, out var handle))
             {
                 if (handle.IsDone)
@@ -203,7 +202,6 @@ namespace LccHotfix
 
         public RawFileHandle LoadAssetRawFileSync(string location)
         {
-            _rawFileHandles ??= new Dictionary<string, RawFileHandle>();
             if (_rawFileHandles.TryGetValue(location, out var handle))
             {
                 return handle;
