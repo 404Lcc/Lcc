@@ -26,8 +26,8 @@ namespace LccHotfix
 
     internal class AssetManager : Module, IAssetService
     {
-        public const string DefaultPackageName = "";
-        public const string RawFilePackageName = "";
+        public const string DefaultPackageName = "DefaultPackage";
+        public const string RawFilePackageName = "RawFilePackage";
 
         public ResourcePackage DefaultPackage { get; private set; }
         public ResourcePackage RawFilePackage { get; private set; }
