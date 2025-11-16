@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using FishNet.Managing.Object;
 using FishNet.Transporting;
 using LccModel;
 using UnityEngine;
@@ -8,10 +7,18 @@ using NetworkConnection = FishNet.Connection.NetworkConnection;
 
 namespace LccHotfix
 {
+    [Flags]
+    public enum FishNetState
+    {
+        None = 0,
+        Loading = 1,
+        Initialized = 2,
+    }
+
     internal class FishNetManager : Module, IFishNetService
     {
         private AssetLoader _loader;
-        private bool _init;
+        private FishNetState _state;
         private FishNet.Managing.NetworkManager _networkManager;
 
         private IFishNetHelper _helper;
@@ -21,6 +28,7 @@ namespace LccHotfix
 
         public bool IsClient => _networkManager.IsClientStarted;
         public bool IsServer => _networkManager.IsServerStarted;
+        public bool Finished => _state == FishNetState.Initialized;
 
         /// <summary>
         /// 判断网络是否连接
@@ -30,7 +38,7 @@ namespace LccHotfix
         {
             get
             {
-                if (!_init)
+                if (!Finished)
                     return false;
                 return IsClient || IsServer;
             }
@@ -38,11 +46,13 @@ namespace LccHotfix
 
         internal override void Shutdown()
         {
-            if (!_init)
-                return;
-            _init = false;
+            _state = FishNetState.None;
 
-            GameObject.Destroy(_networkManager);
+            if (_networkManager != null)
+            {
+                GameObject.Destroy(_networkManager);
+            }
+
             _loader.Release();
         }
 
@@ -52,13 +62,13 @@ namespace LccHotfix
 
         public void Init()
         {
-            if (_init)
+            if (_state != FishNetState.None)
                 return;
-
+            _state = FishNetState.Loading;
             _helper.Setup(_loader, (x) =>
             {
                 _networkManager = x;
-                _init = true;
+                _state = FishNetState.Initialized;
             });
         }
 
@@ -137,7 +147,7 @@ namespace LccHotfix
         /// </summary>
         public void StartServer()
         {
-            if (!_init)
+            if (!Finished)
                 return;
 
             if (IsServer)
@@ -152,7 +162,7 @@ namespace LccHotfix
         /// </summary>
         public void StopServer()
         {
-            if (!_init)
+            if (!Finished)
                 return;
 
             if (!IsServer)
@@ -166,7 +176,7 @@ namespace LccHotfix
         /// </summary>
         public void Connect()
         {
-            if (!_init)
+            if (!Finished)
                 return;
 
             if (IsClient)
@@ -180,7 +190,7 @@ namespace LccHotfix
         /// </summary>
         public void Disconnect()
         {
-            if (!_init)
+            if (!Finished)
                 return;
 
             if (!IsClient)
