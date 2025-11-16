@@ -74,8 +74,9 @@ namespace LccHotfix
             Main.WindowService.ShowSelectFunc = ShowSelect;
             Main.WindowService.LoadGameObject = (asset, keepHierar) =>
             {
-                Main.AssetService.LoadGameObject(asset, keepHierar, out var res);
-                return res;
+                // Main.AssetService.LoadGameObject(asset, keepHierar, out var res);
+                // return res;
+                return null;
             };
             Main.WindowService.InitializeForAssembly(Launcher.Instance.HotfixAssembly);
             Main.WindowService.Init();
