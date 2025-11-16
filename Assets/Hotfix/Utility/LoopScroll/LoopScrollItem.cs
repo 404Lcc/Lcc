@@ -33,14 +33,31 @@ namespace LccHotfix
 
         }
 
+        /// <summary>
+        /// 第一次创建game object的时候触发
+        /// </summary>
         public virtual void OnInit()
         {
         }
 
+        /// <summary>
+        /// 每次item被激活时触发
+        /// </summary>
         public virtual void OnShow()
         {
         }
 
+        /// <summary>
+        /// 每次item被隐藏时触发
+        /// </summary>
+        public virtual void OnRecycle()
+        {
+        }
+
+        /// <summary>
+        /// 更新数据时触发
+        /// </summary>
+        /// <param name="obj"></param>
         public virtual void UpdateData(object obj)
         {
             OnItemSelect(loopScroll.CurSelect);
@@ -82,10 +99,6 @@ namespace LccHotfix
         public void SetSizeY(int y)
         {
             loopScroll.SetSizeY(index, y);
-        }
-
-        public virtual void OnRecycle()
-        {
         }
     }
 }
