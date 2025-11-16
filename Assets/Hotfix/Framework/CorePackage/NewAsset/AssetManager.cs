@@ -17,13 +17,6 @@ namespace LccHotfix
         }
     }
 
-    public interface IAssetService : IService
-    {
-        public ResourcePackage DefaultPackage { get; }
-
-        public ResourcePackage RawFilePackage { get; }
-    }
-
     internal class AssetManager : Module, IAssetService
     {
         public const string DefaultPackageName = "DefaultPackage";
@@ -73,6 +66,11 @@ namespace LccHotfix
         public void LoadAssetAsync<T>(string location, System.Action<AssetHandle> callback, EAssetGroup group = EAssetGroup.Default, uint priority = 0) where T : UnityEngine.Object
         {
             GetOrCreateLoader(group).LoadAssetAsync<T>(location, callback, priority);
+        }
+
+        public void LoadAssetRawFileAsync(string location, System.Action<RawFileHandle> callback, EAssetGroup group = EAssetGroup.Default, uint priority = 0)
+        {
+            GetOrCreateLoader(group).LoadAssetRawFileAsync(location, callback, priority);
         }
 
         public IEnumerator LoadAssetAsync(string location, EAssetGroup group = EAssetGroup.Default, System.Action<AssetHandle> onBegin = null, uint priority = 0)

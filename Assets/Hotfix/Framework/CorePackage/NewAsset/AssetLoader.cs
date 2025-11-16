@@ -15,6 +15,7 @@ namespace LccHotfix
         public AssetHandle TryGetAsset(string location) => _loader.TryGetAsset(location);
         public void LoadAssetAsync(string location, System.Action<AssetHandle> callback, uint priority = 0) => _loader.LoadAssetAsync(location, callback, priority);
         public void LoadAssetAsync<T>(string location, System.Action<AssetHandle> callback, uint priority = 0) where T : UnityEngine.Object => _loader.LoadAssetAsync<T>(location, callback, priority);
+        public void LoadAssetRawFileAsync(string location, System.Action<RawFileHandle> onCompleted, uint priority = 0) => _loader.LoadAssetRawFileAsync(location, onCompleted, priority);
         public IEnumerator LoadAssetCoro(string location, System.Action<AssetHandle> onBegin = null, uint priority = 0) => _loader.LoadAssetCoro(location, onBegin, priority);
         public IEnumerator LoadAssetCoro<T>(string location, System.Action<AssetHandle> onBegin = null, uint priority = 0) where T : UnityEngine.Object => _loader.LoadAssetCoro<T>(location, onBegin, priority);
         public AssetHandle LoadAssetSync(string location) => _loader.LoadAssetSync(location);
@@ -22,17 +23,15 @@ namespace LccHotfix
         public RawFileHandle LoadAssetRawFileSync(string location) => _loader.LoadAssetRawFileSync(location);
     }
 
-    public class AssetLoader : IAssetLoader, IDisposable
+    public class AssetLoader : IAssetLoader
     {
-        private readonly Dictionary<string, AssetHandle> _assetHandles = new();
-        private Dictionary<string, RawFileHandle> _rawFileHandles;
+        private Dictionary<string, AssetHandle> _assetHandles = new Dictionary<string, AssetHandle>();
+        private Dictionary<string, RawFileHandle> _rawFileHandles = new Dictionary<string, RawFileHandle>();
 
         public static IAssetLoader Create()
         {
             return new AssetLoader();
         }
-
-        public virtual void Dispose() => Release();
 
         public void Release()
         {
@@ -66,9 +65,11 @@ namespace LccHotfix
             }
             else
             {
-                if (_rawFileHandles == null || !_rawFileHandles.TryGetValue(location, out var _handle)) return;
-                _handle.Release();
-                _rawFileHandles.Remove(location);
+                if (_rawFileHandles != null && _rawFileHandles.TryGetValue(location, out var rawFileHandle))
+                {
+                    rawFileHandle.Release();
+                    _rawFileHandles.Remove(location);
+                }
             }
         }
 
@@ -113,6 +114,27 @@ namespace LccHotfix
             {
                 handle = Main.AssetService.DefaultPackage.LoadAssetAsync(location, typeof(T), priority);
                 _assetHandles.Add(location, handle);
+                handle.Completed += onCompleted;
+            }
+        }
+
+        public void LoadAssetRawFileAsync(string location, System.Action<RawFileHandle> onCompleted, uint priority = 0)
+        {
+            _rawFileHandles ??= new Dictionary<string, RawFileHandle>();
+            if (_rawFileHandles.TryGetValue(location, out var handle))
+            {
+                if (handle.IsDone)
+                {
+                    onCompleted.Invoke(handle);
+                    return;
+                }
+
+                handle.Completed += onCompleted;
+            }
+            else
+            {
+                handle = Main.AssetService.RawFilePackage.LoadRawFileAsync(location, priority);
+                _rawFileHandles.Add(location, handle);
                 handle.Completed += onCompleted;
             }
         }
@@ -190,27 +212,6 @@ namespace LccHotfix
             handle = Main.AssetService.RawFilePackage.LoadRawFileSync(location);
             _rawFileHandles.Add(location, handle);
             return handle;
-        }
-
-        public void LoadAssetRawFileAsync(string location, System.Action<RawFileHandle> onCompleted, uint priority = 0)
-        {
-            _rawFileHandles ??= new Dictionary<string, RawFileHandle>();
-            if (_rawFileHandles.TryGetValue(location, out var handle))
-            {
-                if (handle.IsDone)
-                {
-                    onCompleted.Invoke(handle);
-                    return;
-                }
-
-                handle.Completed += onCompleted;
-            }
-            else
-            {
-                handle = Main.AssetService.RawFilePackage.LoadRawFileAsync(location, priority);
-                _rawFileHandles.Add(location, handle);
-                handle.Completed += onCompleted;
-            }
         }
     }
 }

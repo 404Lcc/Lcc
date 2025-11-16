@@ -33,6 +33,8 @@ namespace LccHotfix
         /// </summary>
         void LoadAssetAsync<T>(string location, System.Action<AssetHandle> onCompleted, uint priority = 0) where T : UnityEngine.Object;
 
+        void LoadAssetRawFileAsync(string location, System.Action<RawFileHandle> onCompleted, uint priority = 0);
+
         #endregion
 
         #region 协程加载方法
