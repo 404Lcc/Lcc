@@ -18,16 +18,14 @@ namespace LccHotfix
             CodeTypesService = Current.AddModule<CodeTypesManager>();
             CodeTypesService.LoadTypes(new Assembly[] { Launcher.Instance.HotfixAssembly });
             AssetService = Current.AddModule<AssetManager>();
-            AssetService.SetHelper(new DefaultAssetHelper());
             GameObjectPoolService = Current.AddModule<GameObjectPoolManager>();
-            GameObjectPoolService.SetLoader((location, root) =>
+            GameObjectPoolService.SetAsyncLoader((location, assetLoader, onComplete) =>
             {
-                Main.AssetService.LoadRes<GameObject>(root, location, out var res);
-                return res;
-            });
-            GameObjectPoolService.SetAsyncLoader((location, root, onComplete) =>
-            {
-                AssetService.StartLoadRes<GameObject>(root, location, onComplete);
+                assetLoader.LoadAssetAsync<GameObject>(location, (handle) =>
+                {
+                    var prefab = handle.AssetObject as GameObject;
+                    onComplete(location, prefab);
+                });
             });
             CoroutineService = Current.AddModule<CoroutineManager>();
             CoroutineService.SetCoroutineHelper(new DefaultCoroutineHelper());
@@ -61,8 +59,8 @@ namespace LccHotfix
             LanguageService = Current.AddModule<LanguageManager>();
             WorldService = Current.AddModule<WorldManager>();
             BTScriptService = Current.AddModule<BTScriptManager>();
-            UIService = Current.AddModule<UIManager>();
-            UIService.SetUIHelper(new UIHelper());
+            // UIService = Current.AddModule<UIManager>();
+            // UIService.SetUIHelper(new UIHelper());
             FishNetService = Current.AddModule<FishNetManager>();
             FishNetService.SetHelper(new SteamFishNetHelper());
             FishNetService.SetServerMessageDispatcherHelper(new FishNetServerPBMessageDispatcherHelper());
@@ -84,8 +82,8 @@ namespace LccHotfix
             // AudioService.Init();
             VibrationService.Init();
             HotfixBridgeService.Init();
-            LanguageService.Init();
-            UIService.Init();
+            // LanguageService.Init();
+            // UIService.Init();
             FishNetService.Init();
             MirrorService.Init();
             SteamService.Init();
