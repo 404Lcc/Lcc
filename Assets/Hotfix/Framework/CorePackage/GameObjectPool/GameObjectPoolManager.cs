@@ -88,10 +88,11 @@ namespace LccHotfix
     {
         private GameObjectPoolSetting _poolSetting;
         private Func<string, GameObject, GameObject> _loaderHandle;
-        private Action<string, GameObject, Action<string, Object>> _asyncLoaderHandle;
+        private Action<string, AssetLoader, Action<string, Object>> _asyncLoaderHandle;
         private Dictionary<string, IGameObjectPool> _poolDict;
         private Dictionary<string, List<GameObjectPoolAsyncOperation>> _pendingOperations;
         private Transform _root;
+        private AssetLoader _assetLoader;
 
         public GameObjectPoolSetting PoolSetting => _poolSetting;
         public Transform Root => _root;
@@ -104,6 +105,7 @@ namespace LccHotfix
             _pendingOperations = new Dictionary<string, List<GameObjectPoolAsyncOperation>>();
             _root = new GameObject("GameObjectPoolRoot").transform;
             GameObject.DontDestroyOnLoad(_root);
+            _assetLoader = new AssetLoader();
 
             //预加载
             _poolSetting.preloadCount = 0;
@@ -143,7 +145,7 @@ namespace LccHotfix
             _loaderHandle = loader;
         }
 
-        public void SetAsyncLoader(Action<string, GameObject, Action<string, Object>> asyncLoader)
+        public void SetAsyncLoader(Action<string, AssetLoader, Action<string, Object>> asyncLoader)
         {
             _asyncLoaderHandle = asyncLoader;
         }
@@ -218,7 +220,7 @@ namespace LccHotfix
                 //开始异步加载池
                 var root = new GameObject(location + "Pool");
                 root.transform.SetParent(Root);
-                _asyncLoaderHandle(location, root, (assetName, obj) => { OnAsyncLoadComplete(assetName, obj as GameObject, root); });
+                _asyncLoaderHandle(location, _assetLoader, (assetName, obj) => { OnAsyncLoadComplete(assetName, obj as GameObject, root); });
             }
             else
             {
@@ -240,6 +242,7 @@ namespace LccHotfix
             if (!_pendingOperations.ContainsKey(location))
             {
                 //卸载资源
+                _assetLoader.Release(location);
                 GameObject.Destroy(root);
                 return;
             }

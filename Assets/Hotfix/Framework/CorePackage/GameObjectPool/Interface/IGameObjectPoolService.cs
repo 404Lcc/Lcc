@@ -11,7 +11,7 @@ namespace LccHotfix
         int PoolCount { get; }
 
         void SetLoader(Func<string, GameObject, GameObject> loader);
-        void SetAsyncLoader(Action<string, GameObject, Action<string, Object>> asyncLoader);
+        void SetAsyncLoader(Action<string, AssetLoader, Action<string, Object>> asyncLoader);
 
         GameObjectPoolObject GetObject(string poolName);
         GameObjectPoolAsyncOperation GetObjectAsync(string poolName, Action<GameObjectPoolAsyncOperation> onComplete);
