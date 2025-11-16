@@ -150,29 +150,24 @@ namespace LccHotfix
             handler.ProcedureLoadHandler();
 
             Log.Info($"BeginLoad： procedure type === {_curProcedureHandler.procedureType.ToString()} loading type ==== {_curProcedureHandler.loadType.ToString()}");
-            this.StartCoroutine(UnloadProcedureCoroutine(last));
+            UnloadProcedureCoroutine(last);
         }
 
-        private IEnumerator UnloadProcedureCoroutine(LoadProcedureHandler last)
+        private void UnloadProcedureCoroutine(LoadProcedureHandler last)
         {
             if (_curProcedureHandler == null)
-                yield break;
+                return;
 
             //移除旧的
             if (last != null)
             {
                 last.ProcedureExitHandler();
                 last.IsCleanup = true;
-                yield return null;
             }
 
             _procedureHelper.UnloadAllPanel(last, _curProcedureHandler);
 
-            yield return null;
-
             GC.Collect();
-
-            yield return null;
 
             Log.Info($"UnloadProcedureCoroutine： procedure type === {_curProcedureHandler.procedureType.ToString()} loading type ==== {((LoadingType)_curProcedureHandler.loadType).ToString()}");
             _curProcedureHandler.ProcedureStartHandler();
