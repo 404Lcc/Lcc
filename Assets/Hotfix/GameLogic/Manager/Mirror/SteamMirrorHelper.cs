@@ -1,3 +1,4 @@
+using System;
 using Mirror.FizzySteam;
 using UnityEngine;
 
@@ -5,17 +6,16 @@ namespace LccHotfix
 {
     public class SteamMirrorHelper : IMirrorHelper
     {
-        public MirrorNetworkManager Setup()
+        public void Setup(AssetLoader loader, Action<MirrorNetworkManager> onFinished)
         {
-            GameObject obj = new GameObject();
-            obj.SetActive(false);
-            obj.name = "MirrorNetworkManagerSteam";
-            GameObject.DontDestroyOnLoad(obj);
-            var networkManager = obj.AddComponent<MirrorNetworkManager>();
-            var transport = obj.AddComponent<FizzySteamworks>();
-            networkManager.transport = transport;
-            obj.SetActive(true);
-            return networkManager;
+            loader.LoadAssetAsync<GameObject>("MirrorNetworkManagerSteam", (x) =>
+            {
+                var obj = x.AssetObject as GameObject;
+                GameObject.DontDestroyOnLoad(obj);
+                var networkManager = obj.GetComponent<MirrorNetworkManager>();
+                onFinished(networkManager);
+            });
+
         }
 
         public void SetNetworkAddress(GameObject networkManager, string networkAddress)

@@ -6,10 +6,18 @@ using UnityEngine;
 
 namespace LccHotfix
 {
+    [Flags]
+    public enum MirrorState
+    {
+        None = 0,
+        Loading = 1,
+        Initialized = 2,
+    }
+
     internal class MirrorManager : Module, IMirrorService
     {
         private AssetLoader _loader;
-        private bool _init;
+        private MirrorState _state;
         private MirrorNetworkManager _networkManager;
         private IMirrorHelper _helper;
         private IMirrorServerMessageDispatcherHelper _serverMessageDispatcherHelper;
@@ -18,12 +26,13 @@ namespace LccHotfix
 
         public bool IsClient => NetworkClient.active;
         public bool IsServer => NetworkServer.active;
+        public bool Finished => _state == MirrorState.Initialized;
 
         public bool IsNetworkActive
         {
             get
             {
-                if (!_init)
+                if (!Finished)
                     return false;
                 return IsClient || IsServer;
             }
@@ -31,12 +40,15 @@ namespace LccHotfix
 
         internal override void Shutdown()
         {
-            if (!_init)
-                return;
-            _init = false;
+            _state = MirrorState.None;
 
-            GameObject.Destroy(_networkManager);
+            if (_networkManager != null)
+            {
+                GameObject.Destroy(_networkManager);
+            }
+
             _loader.Release();
+            _loader = null;
         }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
@@ -45,14 +57,14 @@ namespace LccHotfix
 
         public void Init()
         {
-            if (_init)
+            if (_state != MirrorState.None)
                 return;
+            _state = MirrorState.Loading;
             _loader = new AssetLoader();
-            _networkManager = _helper.Setup();
-            _loader.LoadAssetAsync<GameObject>("MirrorUnit", (x) =>
+            _helper.Setup(_loader, (x) =>
             {
-                _networkManager.playerPrefab = x.AssetObject as GameObject;
-                _init = true;
+                _networkManager = x;
+                _state = MirrorState.Initialized;
             });
         }
 
@@ -123,7 +135,7 @@ namespace LccHotfix
         /// </summary>
         public void StartServer()
         {
-            if (!_init)
+            if (!Finished)
                 return;
 
             if (IsServer)
@@ -137,7 +149,7 @@ namespace LccHotfix
         /// </summary>
         public void StopServer()
         {
-            if (!_init)
+            if (!Finished)
                 return;
 
             if (!IsServer)
@@ -151,7 +163,7 @@ namespace LccHotfix
         /// </summary>
         public void Connect()
         {
-            if (!_init)
+            if (!Finished)
                 return;
 
             if (IsClient)
@@ -165,7 +177,7 @@ namespace LccHotfix
         /// </summary>
         public void Disconnect()
         {
-            if (!_init)
+            if (!Finished)
                 return;
 
             if (!IsClient)
