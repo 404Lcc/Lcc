@@ -1,3 +1,4 @@
+using System;
 using FishNet.Managing.Transporting;
 using FishNet.Transporting.Tugboat;
 using UnityEngine;
@@ -6,14 +7,16 @@ namespace LccHotfix
 {
     public class TugboatFishNetHelper : IFishNetHelper
     {
-        public FishNet.Managing.NetworkManager Setup()
+        public void Setup(AssetLoader loader, Action<FishNet.Managing.NetworkManager> onFinished)
         {
-            Main.AssetService.LoadGameObject("FishNetManagerTugboat", true, out var res);
-            GameObject.DontDestroyOnLoad(res);
-            var networkManager = res.GetComponent<FishNet.Managing.NetworkManager>();
-            var transport = networkManager.GetComponent<Tugboat>();
-            transport.SetPort(7788);
-            return networkManager;
+            loader.LoadAssetAsync<GameObject>("FishNetManagerTugboat", (x) =>
+            {
+                var obj = x.AssetObject as GameObject;
+                GameObject.DontDestroyOnLoad(obj);
+                var networkManager = obj.GetComponent<FishNet.Managing.NetworkManager>();
+                var transport = networkManager.GetComponent<Tugboat>();
+                transport.SetPort(7788);
+            });
         }
 
         public void SetNetworkAddress(GameObject networkManager, string networkAddress)

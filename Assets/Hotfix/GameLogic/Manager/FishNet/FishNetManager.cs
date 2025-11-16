@@ -10,6 +10,7 @@ namespace LccHotfix
 {
     internal class FishNetManager : Module, IFishNetService
     {
+        private AssetLoader _loader;
         private bool _init;
         private FishNet.Managing.NetworkManager _networkManager;
 
@@ -42,6 +43,7 @@ namespace LccHotfix
             _init = false;
 
             GameObject.Destroy(_networkManager);
+            _loader.Release();
         }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
@@ -53,9 +55,11 @@ namespace LccHotfix
             if (_init)
                 return;
 
-            _networkManager = _helper.Setup();
-
-            _init = true;
+            _helper.Setup(_loader, (x) =>
+            {
+                _networkManager = x;
+                _init = true;
+            });
         }
 
         /// <summary>

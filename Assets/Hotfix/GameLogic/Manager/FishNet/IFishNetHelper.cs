@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace LccHotfix
@@ -7,7 +8,7 @@ namespace LccHotfix
         /// <summary>
         /// 安装
         /// </summary>
-        FishNet.Managing.NetworkManager Setup();
+        void Setup(AssetLoader loader, Action<FishNet.Managing.NetworkManager> onFinished);
 
         void SetNetworkAddress(GameObject networkManager, string networkAddress);
     }
