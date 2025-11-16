@@ -7,11 +7,15 @@ namespace LccHotfix
     {
         public MirrorNetworkManager Setup()
         {
-            Main.AssetService.LoadGameObject("MirrorNetworkManagerKCP", true, out var res);
-            GameObject.DontDestroyOnLoad(res);
-            var networkManager = res.GetComponent<MirrorNetworkManager>();
-            var transport = networkManager.GetComponent<KcpTransport>();
+            GameObject obj = new GameObject();
+            obj.SetActive(false);
+            obj.name = "MirrorNetworkManagerKCP";
+            GameObject.DontDestroyOnLoad(obj);
+            var networkManager = obj.AddComponent<MirrorNetworkManager>();
+            var transport = obj.AddComponent<KcpTransport>();
             transport.Port = 7788;
+            networkManager.transport = transport;
+            obj.SetActive(true);
             return networkManager;
         }
 

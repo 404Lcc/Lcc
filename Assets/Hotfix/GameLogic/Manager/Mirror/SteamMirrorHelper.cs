@@ -1,3 +1,4 @@
+using Mirror.FizzySteam;
 using UnityEngine;
 
 namespace LccHotfix
@@ -6,9 +7,14 @@ namespace LccHotfix
     {
         public MirrorNetworkManager Setup()
         {
-            Main.AssetService.LoadGameObject("MirrorNetworkManagerSteam", true, out var res);
-            GameObject.DontDestroyOnLoad(res);
-            var networkManager = res.GetComponent<MirrorNetworkManager>();
+            GameObject obj = new GameObject();
+            obj.SetActive(false);
+            obj.name = "MirrorNetworkManagerSteam";
+            GameObject.DontDestroyOnLoad(obj);
+            var networkManager = obj.AddComponent<MirrorNetworkManager>();
+            var transport = obj.AddComponent<FizzySteamworks>();
+            networkManager.transport = transport;
+            obj.SetActive(true);
             return networkManager;
         }
 

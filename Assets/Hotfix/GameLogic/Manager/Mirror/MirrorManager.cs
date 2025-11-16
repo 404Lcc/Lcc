@@ -8,6 +8,7 @@ namespace LccHotfix
 {
     internal class MirrorManager : Module, IMirrorService
     {
+        private AssetLoader _loader;
         private bool _init;
         private MirrorNetworkManager _networkManager;
         private IMirrorHelper _helper;
@@ -35,6 +36,7 @@ namespace LccHotfix
             _init = false;
 
             GameObject.Destroy(_networkManager);
+            _loader.Release();
         }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
@@ -45,10 +47,13 @@ namespace LccHotfix
         {
             if (_init)
                 return;
-
+            _loader = new AssetLoader();
             _networkManager = _helper.Setup();
-
-            _init = true;
+            _loader.LoadAssetAsync<GameObject>("MirrorUnit", (x) =>
+            {
+                _networkManager.playerPrefab = x.AssetObject as GameObject;
+                _init = true;
+            });
         }
 
         /// <summary>
