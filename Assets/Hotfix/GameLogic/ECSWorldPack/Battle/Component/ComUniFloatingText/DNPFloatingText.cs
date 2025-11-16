@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class DNPFloatingText : IFloatingText
 {
-    private GameObject loader;
+    private AssetLoader loader;
     private DamageNumberMesh damageNumberMesh;
 
     public void PostInitialize()
     {
-        Main.AssetService.LoadGameObject("DNP", true, out loader);
+        loader = new AssetLoader();
+        loader.LoadAssetAsync<GameObject>("DNP", x =>
+        {
+            var obj = x.AssetObject as GameObject;
+            damageNumberMesh = obj.GetComponent<DamageNumberMesh>();
+            damageNumberMesh.cameraOverride = Main.CameraService.CurrentCamera.transform;
+        });
 
-        damageNumberMesh = loader.GetComponent<DamageNumberMesh>();
-        damageNumberMesh.cameraOverride = Main.CameraService.CurrentCamera.transform;
-
-        loader.SetActive(false);
     }
 
     public void Dispose()
     {
         if (loader != null)
         {
-            GameObject.Destroy(loader);
+            loader.Release();
             loader = null;
         }
     }
