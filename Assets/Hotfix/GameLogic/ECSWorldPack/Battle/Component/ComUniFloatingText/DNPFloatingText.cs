@@ -30,6 +30,8 @@ public class DNPFloatingText : IFloatingText
 
     public void Spawn(string text, Vector3 position)
     {
+        if (damageNumberMesh == null)
+            return;
         var obj = damageNumberMesh.Spawn(position, text);
     }
 }
