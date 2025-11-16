@@ -8,7 +8,7 @@ namespace LccHotfix
     {
         public void Setup(AssetLoader loader, Action<MirrorNetworkManager> onFinished)
         {
-            loader.LoadAssetAsync<GameObject>("MirrorNetworkManagerSteam", (x) =>
+            loader.LoadAssetAsync<GameObject>("MirrorNetworkManagerKCP", (x) =>
             {
                 var obj = x.AssetObject as GameObject;
                 GameObject.DontDestroyOnLoad(obj);
