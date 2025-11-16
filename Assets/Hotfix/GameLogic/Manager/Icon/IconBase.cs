@@ -7,7 +7,7 @@ namespace LccHotfix
     {
         private Transform _parent;
         private float _size;
-        private object _info;
+        private object[] _args;
 
         private GameObjectPoolAsyncOperation _asyncOperation;
 
@@ -15,11 +15,10 @@ namespace LccHotfix
         public Transform Transform => _asyncOperation.Transform;
         public bool IsDone => _asyncOperation.IsDone;
 
-        public void InitIcon(Transform parent, float size, object info = null)
+        public void InitIcon(Transform parent, float size)
         {
             this._parent = parent;
             _size = size;
-            _info = info;
 
             _asyncOperation = Main.GameObjectPoolService.GetObjectAsync(GetType().Name, OnComplete);
         }
@@ -34,6 +33,10 @@ namespace LccHotfix
             ClientTools.AutoReference(Transform, this);
 
             OnShow();
+            if (_args != null)
+            {
+                UpdateData(_args);
+            }
         }
 
         public void OnRecycle()
@@ -43,7 +46,7 @@ namespace LccHotfix
                 OnHide();
             }
 
-            _info = null;
+            _args = null;
             _asyncOperation.Release(ref _asyncOperation);
         }
 
@@ -52,19 +55,14 @@ namespace LccHotfix
         /// </summary>
         protected virtual void OnShow()
         {
-            if (_info != null)
-            {
-                UpdateData(_info);
-            }
         }
 
         /// <summary>
         /// 更新数据（每次SetInfo会触发）
         /// </summary>
         /// <param name="info"></param>
-        protected virtual void UpdateData(object info)
+        protected virtual void UpdateData(object[] args)
         {
-
         }
 
         /// <summary>
@@ -72,20 +70,18 @@ namespace LccHotfix
         /// </summary>
         protected virtual void OnHide()
         {
-
         }
 
         /// <summary>
         /// 设置数据
         /// </summary>
         /// <param name="info"></param>
-        public void SetInfo(object info)
+        public void SetInfo(params object[] args)
         {
-            _info = info;
-
+            _args = args;
             if (IsDone)
             {
-                UpdateData(info);
+                UpdateData(args);
             }
         }
 
@@ -101,9 +97,9 @@ namespace LccHotfix
             iconBase = null;
         }
 
-        public void SetIcon(UIImageCtrl image, int newImageID)
+        public void SetIcon(UIImageCtrl iconImage, int newImageID)
         {
-            image.SetImage(newImageID);
+            iconImage.SetImage(newImageID);
         }
 
         public void SetSize(float size)
