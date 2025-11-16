@@ -2,12 +2,6 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public interface IBadgeService : IService
-    {
-        void RegisterHandler(BadgeHandler handler);
-        void UnRegisterHandler(BadgeHandler handler);
-    }
-
     internal class BadgeManager : Module, IBadgeService
     {
         private HashSet<BadgeHandler> _handlers = new HashSet<BadgeHandler>();

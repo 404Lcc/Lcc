@@ -97,7 +97,7 @@ public class UIBadgeConfig : IClientConfig
     /// 获取配置的数量
     /// </summary>
     /// <param name="badgeName">配置名</param>
-    /// <param name="param">参数</param>
+    /// <param name="args">参数</param>
     /// <returns></returns>
     private int GetBadgeCount(string badgeName, params object[] args)
     {
@@ -108,13 +108,11 @@ public class UIBadgeConfig : IClientConfig
 
         try
         {
-            var resolveParamTypes = Array.Empty<Type>();
-
             var parameters = config.Resolve.Method.GetParameters();
 
             if (parameters.Length > 0)
             {
-                resolveParamTypes = new Type[parameters.Length];
+                var resolveParamTypes = new Type[parameters.Length];
                 for (int i = 0; i < parameters.Length; ++i)
                 {
                     var type = parameters[i].ParameterType;
