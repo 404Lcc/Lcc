@@ -1,27 +1,26 @@
 ﻿using cfg;
-using LccModel;
-using Luban;
 using SimpleJSON;
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LccHotfix
 {
     internal class ConfigManager : Module, IConfigService
     {
+        private AssetLoader _loader;
         public Tables Tables { get; set; }
+        public Dictionary<string, JSONNode> ConfigDict { get; set; }
 
-        public GameObject loader;
         public ConfigManager()
         {
-            loader = new GameObject("loader");
-            GameObject.DontDestroyOnLoad(loader);
-
-            var tablesCtor = typeof(Tables).GetConstructors()[0];
-            var loaderReturnType = tablesCtor.GetParameters()[0].ParameterType.GetGenericArguments()[1];
-            // 根据cfg.Tables的构造函数的Loader的返回值类型决定使用json还是ByteBuf Loader
-            Delegate loaderFun = loaderReturnType == typeof(ByteBuf) ? new Func<string, ByteBuf>(LoadByteBuf) : (Delegate)new Func<string, JSONNode>(LoadJson);
-            Tables = (Tables)tablesCtor.Invoke(new object[] { loaderFun });
+            _loader = new AssetLoader();
+            Tables = new Tables(Load);
+            //todo 代办
+            // _loader.LoadAssetAsync<TextAsset>(file, (x) =>
+            // {
+            //     var res = x.AssetObject as TextAsset;
+            //     var node = JSON.Parse(res.text);
+            // });
         }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
@@ -30,22 +29,13 @@ namespace LccHotfix
 
         internal override void Shutdown()
         {
-            GameObject.Destroy(loader);
+            _loader.Release();
         }
 
-
-
-        private JSONNode LoadJson(string file)
+        public JSONNode Load(string name)
         {
-            Main.AssetService.LoadRes<TextAsset>(loader, file, out var res);
-            return JSON.Parse(res.text);
+            ConfigDict.TryGetValue(name, out JSONNode config);
+            return config;
         }
-
-        private ByteBuf LoadByteBuf(string file)
-        {
-            Main.AssetService.LoadRes<TextAsset>(loader, file, out var res);
-            return new ByteBuf(res.bytes);
-        }
-
     }
 }
