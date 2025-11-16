@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace LccHotfix
 {
-    public abstract class UIBadgeBaseComponent<THandler> : UIBehaviour, IBadgeComponent where THandler : BadgeComponentHandler, new()
+    public abstract class UIBadgeBaseCtrl<THandler> : UIBehaviour, IBadgeComponent where THandler : BadgeComponentHandler, new()
     {
         private THandler _handler;
 
@@ -20,7 +20,7 @@ namespace LccHotfix
 
         public BadgeConfig GetConfig(string badgeName)
         {
-            return Main.ClientConfigService.GetConfig<UIBadgeConfig>().GetConfig(badgeName);
+            return Main.ClientConfigService.GetConfig<BadgeClientConfig>().GetConfig(badgeName);
         }
 
         public abstract void RefreshDisplay();

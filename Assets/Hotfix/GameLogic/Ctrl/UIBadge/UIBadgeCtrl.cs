@@ -1,6 +1,6 @@
 namespace LccHotfix
 {
-    public class UIBadge : UIBadgeBaseComponent<BadgeComponentHandler>
+    public class UIBadgeCtrl : UIBadgeBaseCtrl<BadgeComponentHandler>
     {
         private GameObjectPoolAsyncOperation _operation;
 

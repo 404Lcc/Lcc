@@ -6,7 +6,7 @@ using LccModel;
 using UnityEngine;
 
 [ClientConfig]
-public class UIBadgeConfig : IClientConfig
+public class BadgeClientConfig : IClientConfig
 {
     private Dictionary<string, BadgeConfig> _badgeConfig = new Dictionary<string, BadgeConfig>();
 
