@@ -16,7 +16,18 @@ namespace LccHotfix
         /// <summary>
         /// 当前数量
         /// </summary>
-        public int Count => _handler.Count;
+        public int Count
+        {
+            get
+            {
+                if (_handler == null)
+                {
+                    return 0;
+                }
+
+                return _handler.Count;
+            }
+        }
 
         public BadgeConfig GetConfig(string badgeName)
         {

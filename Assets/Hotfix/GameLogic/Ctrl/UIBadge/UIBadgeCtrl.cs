@@ -30,7 +30,9 @@ namespace LccHotfix
 
         private void OnEnd(GameObjectPoolAsyncOperation obj)
         {
-            _badgeObject = obj.GameObject;
+            _operation = obj;
+            _badgeObject = _operation.GameObject;
+            ClientTools.ResetTransform(_badgeObject.transform, transform);
             RefreshDisplay();
         }
 
