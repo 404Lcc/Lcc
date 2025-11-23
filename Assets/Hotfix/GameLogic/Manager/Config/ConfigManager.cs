@@ -9,15 +9,22 @@ namespace LccHotfix
     {
         private AssetLoader _loader;
         private Dictionary<string, JSONNode> _configDict = new Dictionary<string, JSONNode>();
-        public Tables Tables { get; set; }
 
         private int _totalConfigCount;
         private int _loadedConfigCount;
         private bool _allConfigsLoaded;
 
+        public Tables Tables { get; set; }
+
+        public bool Initialized => Tables != null;
+
         public ConfigManager()
         {
             _loader = new AssetLoader();
+        }
+
+        public void Init()
+        {
             var infos = Main.AssetService.DefaultPackage.GetAssetInfos("luban");
             _totalConfigCount = infos.Length;
             _loadedConfigCount = 0;
@@ -25,7 +32,6 @@ namespace LccHotfix
 
             if (_totalConfigCount == 0)
             {
-                InitializeTables();
                 return;
             }
 
@@ -50,13 +56,8 @@ namespace LccHotfix
             if (_loadedConfigCount >= _totalConfigCount && !_allConfigsLoaded)
             {
                 _allConfigsLoaded = true;
-                InitializeTables();
+                Tables = new Tables(Load);
             }
-        }
-
-        private void InitializeTables()
-        {
-            Tables = new Tables(Load);
         }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)

@@ -1,10 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using LccModel;
 using UnityEngine;
 
 namespace LccHotfix
 {
-    internal class GameMain : FrameworkMain
+    internal class GameMain : Main, ICoroutine
     {
         public override void OnInstall()
         {
@@ -75,18 +77,82 @@ namespace LccHotfix
             SteamLobbyService = Current.AddModule<SteamLobbyManager>();
             SteamLobbyService.SetLobbyCallbackHelper(new MirrorLobbyCallbackHelper());
 
+            this.StartCoroutine(Initialize());
+        }
+
+        public override bool IsInstalled()
+        {
+            return ConfigService.Initialized;
+        }
+
+        public IEnumerator Initialize()
+        {
+            Launcher.Instance.GameAction.OnFixedUpdate += FixedUpdate;
+            Launcher.Instance.GameAction.OnUpdate += Update;
+            Launcher.Instance.GameAction.OnLateUpdate += LateUpdate;
+            Launcher.Instance.GameAction.OnClose += Close;
+            Launcher.Instance.GameAction.OnDrawGizmos += DrawGizmos;
+
             //最后初始化
-            ModelService.Init();
-            SaveService.Init();
-            SettingService.Init();
-            // AudioService.Init();
-            VibrationService.Init();
-            HotfixBridgeService.Init();
-            // LanguageService.Init();
-            // UIService.Init();
-            FishNetService.Init();
-            MirrorService.Init();
-            SteamService.Init();
+            Main.ModelService.Init();
+            Main.SaveService.Init();
+            Main.SettingService.Init();
+            //Main.AudioService.Init();
+            Main.VibrationService.Init();
+            Main.HotfixBridgeService.Init();
+            Main.ConfigService.Init();
+            Main.LanguageService.Init();
+            //Main.UIService.Init();
+            Main.FishNetService.Init();
+            Main.MirrorService.Init();
+            Main.SteamService.Init();
+
+            while (!IsInstalled())
+            {
+                yield return 0;
+            }
+
+            try
+            {
+                Launcher.Instance.LauncherFinish();
+
+                Main.SaveService.CreateSaveFile("default.sav");
+
+                Main.ProcedureService.ChangeProcedure(ProcedureType.Login.ToInt());
+            }
+            catch (System.Exception e)
+            {
+                Log.Error(e);
+            }
+        }
+
+        private static void FixedUpdate()
+        {
+        }
+
+        private static void Update()
+        {
+            Main.Current.Update(Time.deltaTime, Time.unscaledDeltaTime);
+        }
+
+        private static void LateUpdate()
+        {
+            Main.Current.LateUpdate();
+        }
+
+        private static void DrawGizmos()
+        {
+            Main.GizmoService.OnDrawGizmos();
+        }
+
+        private static void Close()
+        {
+            Launcher.Instance.GameAction.OnFixedUpdate -= FixedUpdate;
+            Launcher.Instance.GameAction.OnUpdate -= Update;
+            Launcher.Instance.GameAction.OnLateUpdate -= LateUpdate;
+            Launcher.Instance.GameAction.OnClose -= Close;
+            Launcher.Instance.GameAction.OnDrawGizmos -= DrawGizmos;
+            Main.Current.Shutdown();
         }
     }
 

@@ -1,15 +1,15 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace LccHotfix
 {
-    internal partial class Main : Module, IMainService
+    internal abstract partial class Main : Module, IMainService
     {
+        public static Main Current { get; set; }
+
         private readonly LinkedList<Module> _modules = new LinkedList<Module>();
         private readonly object _lock = new object();
-        
+
         /// <summary>
         /// 所有游戏框架模块轮询。
         /// </summary>
@@ -25,6 +25,7 @@ namespace LccHotfix
                 }
             }
         }
+
         internal override void LateUpdate()
         {
             lock (_lock) // 加锁
@@ -53,11 +54,16 @@ namespace LccHotfix
                 MarshalUtility.FreeCachedHGlobal();
                 Log.SetLogHelper(null);
             }
+
+            Current = null;
         }
 
         public virtual void OnInstall()
         {
+            Current = this;
         }
+
+        public abstract bool IsInstalled();
 
         /// <summary>
         /// 增加游戏框架模块。
@@ -72,7 +78,7 @@ namespace LccHotfix
                 {
                     throw new Exception(string.Format("Can not find Game Framework module type '{0}'.", moduleName));
                 }
-                
+
                 return CreateModule(moduleType) as T;
             }
         }
@@ -96,6 +102,11 @@ namespace LccHotfix
 
                 return module;
             }
+        }
+
+        public static void SetMain(Main main)
+        {
+            main.OnInstall();
         }
     }
 }
