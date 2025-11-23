@@ -1,14 +1,16 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace LccHotfix
 {
-    internal abstract partial class Main : Module, IMainService
+    internal abstract partial class Main : Module, IMainService, ICoroutine
     {
-        public static Main Current { get; set; }
-
         private readonly LinkedList<Module> _modules = new LinkedList<Module>();
         private readonly object _lock = new object();
+
+        public static Main Current { get; set; }
 
         /// <summary>
         /// 所有游戏框架模块轮询。
@@ -44,6 +46,7 @@ namespace LccHotfix
         {
             lock (_lock) // 加锁
             {
+                this.StopAllCoroutines();
                 for (LinkedListNode<Module> current = _modules.Last; current != null; current = current.Previous)
                 {
                     current.Value.Shutdown();
@@ -53,17 +56,15 @@ namespace LccHotfix
                 ReferencePool.ClearAll();
                 MarshalUtility.FreeCachedHGlobal();
                 Log.SetLogHelper(null);
+                Current = null;
             }
-
-            Current = null;
         }
 
-        public virtual void OnInstall()
-        {
-            Current = this;
-        }
+        public abstract void OnInstall();
 
-        public abstract bool IsInstalled();
+        public abstract IEnumerator OnInitialize();
+
+        public abstract bool IsInitialized();
 
         /// <summary>
         /// 增加游戏框架模块。
@@ -106,7 +107,15 @@ namespace LccHotfix
 
         public static void SetMain(Main main)
         {
+            if (Main.Current != null)
+            {
+                Debug.LogError("SetMain，已经存在Current");
+                return;
+            }
+
+            Main.Current = main;
             main.OnInstall();
+            main.StartCoroutine(main.OnInitialize());
         }
     }
 }

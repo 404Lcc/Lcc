@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using LccModel;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using UnityEngine;
 
 namespace LccHotfix
 {
-    internal class GameMain : Main, ICoroutine
+    internal class GameMain : Main
     {
         public override void OnInstall()
         {
-            if (Current != null)
-            {
-                return;
-            }
-
-            base.OnInstall();
+            Launcher.Instance.GameAction.OnFixedUpdate += OnFixedUpdate;
+            Launcher.Instance.GameAction.OnUpdate += OnUpdate;
+            Launcher.Instance.GameAction.OnLateUpdate += OnLateUpdate;
+            Launcher.Instance.GameAction.OnClose += OnClose;
+            Launcher.Instance.GameAction.OnDrawGizmos += OnDrawGizmos;
 
             CodeTypesService = Current.AddModule<CodeTypesManager>();
             CodeTypesService.LoadTypes(new Assembly[] { Launcher.Instance.HotfixAssembly });
@@ -54,10 +54,10 @@ namespace LccHotfix
             GizmoService = Current.AddModule<GizmoManager>();
             BadgeService = Current.AddModule<BadgeManager>();
 
+            ConfigService = Current.AddModule<ConfigManager>();
             PlatformService = Current.AddModule<PlatformManager>();
             IconService = Current.AddModule<IconManager>();
             HotfixBridgeService = Current.AddModule<HotfixBridge>();
-            ConfigService = Current.AddModule<ConfigManager>();
             LanguageService = Current.AddModule<LanguageManager>();
             WorldService = Current.AddModule<WorldManager>();
             BTScriptService = Current.AddModule<BTScriptManager>();
@@ -76,49 +76,41 @@ namespace LccHotfix
             SteamService = Current.AddModule<SteamManager>();
             SteamLobbyService = Current.AddModule<SteamLobbyManager>();
             SteamLobbyService.SetLobbyCallbackHelper(new MirrorLobbyCallbackHelper());
-
-            this.StartCoroutine(Initialize());
         }
 
-        public override bool IsInstalled()
+        public override bool IsInitialized()
         {
             return ConfigService.Initialized;
         }
 
-        public IEnumerator Initialize()
+        public override IEnumerator OnInitialize()
         {
-            Launcher.Instance.GameAction.OnFixedUpdate += FixedUpdate;
-            Launcher.Instance.GameAction.OnUpdate += Update;
-            Launcher.Instance.GameAction.OnLateUpdate += LateUpdate;
-            Launcher.Instance.GameAction.OnClose += Close;
-            Launcher.Instance.GameAction.OnDrawGizmos += DrawGizmos;
+            ModelService.Init();
+            SaveService.Init();
+            SettingService.Init();
+            //AudioService.Init();
+            VibrationService.Init();
 
-            //最后初始化
-            Main.ModelService.Init();
-            Main.SaveService.Init();
-            Main.SettingService.Init();
-            //Main.AudioService.Init();
-            Main.VibrationService.Init();
-            Main.HotfixBridgeService.Init();
-            Main.ConfigService.Init();
-            Main.LanguageService.Init();
-            //Main.UIService.Init();
-            Main.FishNetService.Init();
-            Main.MirrorService.Init();
-            Main.SteamService.Init();
-
-            while (!IsInstalled())
+            ConfigService.Init();
+            while (!IsInitialized())
             {
                 yield return 0;
             }
+
+            HotfixBridgeService.Init();
+            LanguageService.Init();
+            //UIService.Init();
+            FishNetService.Init();
+            MirrorService.Init();
+            SteamService.Init();
 
             try
             {
                 Launcher.Instance.LauncherFinish();
 
-                Main.SaveService.CreateSaveFile("default.sav");
+                SaveService.CreateSaveFile("default.sav");
 
-                Main.ProcedureService.ChangeProcedure(ProcedureType.Login.ToInt());
+                ProcedureService.ChangeProcedure(ProcedureType.Login.ToInt());
             }
             catch (System.Exception e)
             {
@@ -126,42 +118,42 @@ namespace LccHotfix
             }
         }
 
-        private static void FixedUpdate()
+        private static void OnFixedUpdate()
         {
         }
 
-        private static void Update()
+        private static void OnUpdate()
         {
             Main.Current.Update(Time.deltaTime, Time.unscaledDeltaTime);
         }
 
-        private static void LateUpdate()
+        private static void OnLateUpdate()
         {
             Main.Current.LateUpdate();
         }
 
-        private static void DrawGizmos()
+        private static void OnDrawGizmos()
         {
             Main.GizmoService.OnDrawGizmos();
         }
 
-        private static void Close()
+        private static void OnClose()
         {
-            Launcher.Instance.GameAction.OnFixedUpdate -= FixedUpdate;
-            Launcher.Instance.GameAction.OnUpdate -= Update;
-            Launcher.Instance.GameAction.OnLateUpdate -= LateUpdate;
-            Launcher.Instance.GameAction.OnClose -= Close;
-            Launcher.Instance.GameAction.OnDrawGizmos -= DrawGizmos;
-            Main.Current.Shutdown();
+            Launcher.Instance.GameAction.OnFixedUpdate -= OnFixedUpdate;
+            Launcher.Instance.GameAction.OnUpdate -= OnUpdate;
+            Launcher.Instance.GameAction.OnLateUpdate -= OnLateUpdate;
+            Launcher.Instance.GameAction.OnClose -= OnClose;
+            Launcher.Instance.GameAction.OnDrawGizmos -= OnDrawGizmos;
+            Current.Shutdown();
         }
     }
 
-    internal partial class Main : Module
+    internal partial class Main
     {
+        public static IConfigService ConfigService { get; set; }
         public static IPlatformService PlatformService { get; set; }
         public static IIconService IconService { get; set; }
         public static IHotfixBridgeService HotfixBridgeService { get; set; }
-        public static IConfigService ConfigService { get; set; }
         public static ILanguageService LanguageService { get; set; }
         public static IWorldService WorldService { get; set; }
         public static IBTScriptService BTScriptService { get; set; }

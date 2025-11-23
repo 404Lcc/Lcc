@@ -44,6 +44,11 @@ namespace LccHotfix
             }
         }
 
+        public FishNetManager()
+        {
+            _loader = new AssetLoader();
+        }
+
         internal override void Shutdown()
         {
             _state = FishNetState.None;
@@ -66,7 +71,6 @@ namespace LccHotfix
             if (_state != FishNetState.None)
                 return;
             _state = FishNetState.Loading;
-            _loader = new AssetLoader();
             _helper.Setup(_loader, (x) =>
             {
                 _networkManager = x;

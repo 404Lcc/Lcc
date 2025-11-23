@@ -38,6 +38,11 @@ namespace LccHotfix
             }
         }
 
+        public MirrorManager()
+        {
+            _loader = new AssetLoader();
+        }
+
         internal override void Shutdown()
         {
             _state = MirrorState.None;
@@ -60,7 +65,6 @@ namespace LccHotfix
             if (_state != MirrorState.None)
                 return;
             _state = MirrorState.Loading;
-            _loader = new AssetLoader();
             _helper.Setup(_loader, (x) =>
             {
                 _networkManager = x;
