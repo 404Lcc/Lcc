@@ -12,25 +12,31 @@ namespace LccHotfix
 		/// 每个窗口的作用域是自己和从属于自己的子窗口，不能跨域修改其它窗口
 		/// </summary>
 		private Stack<WRootNode> _rootStack = new Stack<WRootNode>();
+
 		/// <summary>
 		/// 当前活动的通用窗口
 		/// 这些特殊窗口不受栈的限制，可以用任意方式唤醒和关闭
 		/// </summary>
 		private WRootNode _commonRoot;
+
 		public WRootNode CommonRoot => _commonRoot;
+
 		/// <summary>
 		/// 等待释放的窗口
 		/// </summary>
 		private List<WNode> _waitReleaseWindow = new List<WNode>();
+
 		/// <summary>
 		/// 缓存窗口配置
 		/// </summary>
 		private Dictionary<string, WindowMode> _windowModeDic = new Dictionary<string, WindowMode>();
+
 		/// <summary>
 		/// 被关闭界面会自动缓存多少帧然后释放
 		/// 30s
 		/// </summary>
 		public int autoCacheTime = 900;
+
 		/// <summary>
 		/// 窗口父节点
 		/// </summary>
@@ -42,6 +48,7 @@ namespace LccHotfix
 
 		//当前切换中的窗口
 		private WNode _switchingNode;
+
 		//初始化通用节点
 		public void Init()
 		{
@@ -50,6 +57,7 @@ namespace LccHotfix
 			_commonRoot.Open(null);
 			_commonRoot.Resume();
 		}
+
 		//需要更新的节点列表
 		List<WNode> _updateNodes = new List<WNode>();
 
@@ -78,8 +86,10 @@ namespace LccHotfix
 				}
 			}
 		}
+
 		//是否可以回退值
 		private bool _escaped = false;
+
 		internal override void LateUpdate()
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
@@ -91,6 +101,7 @@ namespace LccHotfix
 					{
 						EscapeTopWindow();
 					}
+
 					_escaped = true;
 				}
 
@@ -99,8 +110,10 @@ namespace LccHotfix
 			{
 				_escaped = false;
 			}
+
 			AutoReleaseWindow();
 		}
+
 		//关闭
 		internal override void Shutdown()
 		{
@@ -115,21 +128,25 @@ namespace LccHotfix
 		}
 
 		//根据一个窗口打开一个新窗口
-		public Window OpenWindow(WNode openBy, string windowName, object[] param)
+		public void OpenWindow(WNode openBy, string windowName, object[] param)
 		{
 			if (_switchingNode != null)
 			{
 				Log.Error($"request open window {windowName} during switch one other window {_switchingNode.NodeName}");
-				return null;
+				return;
 			}
+
 			if (openBy == null)
-				return OpenWindow(windowName, param);
+			{
+				OpenWindow(windowName, param);
+				return;
+			}
 
 			// 打开一个与自己同名的界面
 			if (openBy.NodeName == windowName)
 			{
 				Log.Error($"request open a same name child window {windowName}");
-				return null;
+				return;
 			}
 
 			if (!openBy.TryGetNode(windowName, out WNode openedWindow))
@@ -139,19 +156,24 @@ namespace LccHotfix
 					mode = GetModeFunc.Invoke(windowName);
 					_windowModeDic.Add(windowName, mode);
 				}
+
 				//创建窗口
-				openedWindow = CreateWindow(windowName, mode);
-				openedWindow.rootNode = openBy.rootNode;
-				openedWindow.transform.SetParent(openBy.rootNode.transform);
-				openedWindow.transform.localPosition = Vector3.zero;
-				openedWindow.transform.localRotation = Quaternion.identity;
-				openedWindow.transform.localScale = Vector3.one;
-
+				CreateWindow(windowName, mode, (openedWindow) =>
+				{
+					openedWindow.rootNode = openBy.rootNode;
+					openedWindow.transform.SetParent(openBy.rootNode.transform);
+					openedWindow.transform.localPosition = Vector3.zero;
+					openedWindow.transform.localRotation = Quaternion.identity;
+					openedWindow.transform.localScale = Vector3.one;
+					//切换窗口
+					SwitchWindow(openedWindow, openBy, param);
+				});
 			}
-			//切换窗口
-			SwitchWindow(openedWindow, openBy, param);
-
-			return openedWindow as Window;
+			else
+			{
+				//切换窗口
+				SwitchWindow(openedWindow, openBy, param);
+			}
 		}
 
 		/// <summary>
@@ -162,12 +184,12 @@ namespace LccHotfix
 		/// <param name="windowName"></param>
 		/// <param name="param"></param>
 		/// <returns></returns>
-		public Window OpenWindow(string windowName, object[] param)
+		public void OpenWindow(string windowName, object[] param)
 		{
 			if (_switchingNode != null)
 			{
 				Log.Error($"request open window {windowName} during switch one other window {_switchingNode.NodeName}");
-				return null;
+				return;
 			}
 
 			Log.Debug($"open window {windowName}");
@@ -177,29 +199,37 @@ namespace LccHotfix
 				mode = GetModeFunc.Invoke(windowName);
 				_windowModeDic.Add(windowName, mode);
 			}
+
 			//找root节点，如果没有就新建一个
 			WRootNode root = GetAndCreateRoot(mode.rootName);
 
-			WNode window = null;
-			if (!root.TryGetNode(windowName, out window))
+
+			if (!root.TryGetNode(windowName, out var window))
 			{
 				//创建窗口
-				window = CreateWindow(windowName, mode);
-				window.rootNode = root;
-				window.transform.SetParent(root.transform);
-				window.transform.localPosition = Vector3.zero;
-				window.transform.localRotation = Quaternion.identity;
-				window.transform.localScale = Vector3.one;
-				//归一
-				window.transform.anchorMin = Vector3.zero;
-				window.transform.anchorMax = Vector3.one;
-				window.transform.sizeDelta = Vector3.zero;
-			}
-			//切换窗口
-			SwitchWindow(window, root, param);
+				CreateWindow(windowName, mode, (window) =>
+				{
+					window.rootNode = root;
+					window.transform.SetParent(root.transform);
+					window.transform.localPosition = Vector3.zero;
+					window.transform.localRotation = Quaternion.identity;
+					window.transform.localScale = Vector3.one;
+					//归一
+					window.transform.anchorMin = Vector3.zero;
+					window.transform.anchorMax = Vector3.one;
+					window.transform.sizeDelta = Vector3.zero;
 
-			return window as Window;
+					//切换窗口
+					SwitchWindow(window, root, param);
+				});
+			}
+			else
+			{
+				//切换窗口
+				SwitchWindow(window, root, param);
+			}
 		}
+
 		//打开根节点
 		public WRootNode OpenRoot(string rootName, object[] param)
 		{
@@ -211,13 +241,14 @@ namespace LccHotfix
 
 			if (string.IsNullOrEmpty(rootName)) return null;
 
-            //找root节点，如果没有就新建一个
-            WRootNode root = GetAndCreateRoot(rootName);
+			//找root节点，如果没有就新建一个
+			WRootNode root = GetAndCreateRoot(rootName);
 			//切换窗口
 			SwitchWindow(root, null, param);
 
 			return root;
 		}
+
 		//切换窗口
 		private void SwitchWindow(WNode window, WNode parentNode, object[] param)
 		{
@@ -227,6 +258,7 @@ namespace LccHotfix
 			//准备切换
 			window.Switch((canOpen) => SwitchEnd(window, parentNode, canOpen, param));
 		}
+
 		//窗口切换结束
 		private void SwitchEnd(WNode window, WNode parentNode, bool canOpen, object[] param)
 		{
@@ -236,8 +268,8 @@ namespace LccHotfix
 				return;
 			if (_switchingNode != window)
 				return;
-            //切换中的窗口设为空
-            _switchingNode = null;
+			//切换中的窗口设为空
+			_switchingNode = null;
 			// 打开失败
 			if (!canOpen)
 			{
@@ -245,24 +277,25 @@ namespace LccHotfix
 				AddToReleaseQueue(window);
 				return;
 			}
+
 			//是否需要屏幕遮罩
 			bool switchScreen = false;
 			var root = window.rootNode;
 
-            //不是通用节点
-            if (root != CommonRoot)
+			//不是通用节点
+			if (root != CommonRoot)
 			{
-                //如果是新创建的一个root
-                if (root.stackIndex < 0)
+				//如果是新创建的一个root
+				if (root.stackIndex < 0)
 				{
 					switchScreen = true;
-                    //把栈顶的节点暂停
-                    if (_rootStack.Count > 0)
+					//把栈顶的节点暂停
+					if (_rootStack.Count > 0)
 						_rootStack.Peek().Pause();
 					root.stackIndex = _rootStack.Count;
 					_rootStack.Push(root);
-                    //打开的window就是root就把参数传进去，当前window不是root就只需要把root打开
-                    if (window == root)
+					//打开的window就是root就把参数传进去，当前window不是root就只需要把root打开
+					if (window == root)
 					{
 						root.Open(param);
 					}
@@ -270,15 +303,16 @@ namespace LccHotfix
 					{
 						root.Open(null);
 					}
+
 					root.Resume();
 				}
-                //如果root不是新创建的，是之前的
-                else
-                {
-                    //判断当前window的root在不在栈顶
-                    bool isTop = _rootStack.Count == window.rootNode.stackIndex + 1;
-                    //如果不在按照顺序把后面的root都关掉
-                    if (!isTop)
+				//如果root不是新创建的，是之前的
+				else
+				{
+					//判断当前window的root在不在栈顶
+					bool isTop = _rootStack.Count == window.rootNode.stackIndex + 1;
+					//如果不在按照顺序把后面的root都关掉
+					if (!isTop)
 					{
 						switchScreen = true;
 						while (_rootStack.Peek() != root)
@@ -287,24 +321,26 @@ namespace LccHotfix
 							top.Close();
 						}
 					}
-                    //如果当前的window就是root
-                    if (window == root)
+
+					//如果当前的window就是root
+					if (window == root)
 					{
 						root.Reset(param);
 					}
+
 					root.Resume();
 				}
 			}
 
-            //如果window是窗口,不是root节点
-            if (window is Window)
+			//如果window是窗口,不是root节点
+			if (window is Window)
 			{
-                //如果root里存在这个窗口
-                if (root.Contains(window))
+				//如果root里存在这个窗口
+				if (root.Contains(window))
 				{
-                    //如果窗口的父级是root节点，并且窗口是关键节点或者是全屏的，则关闭root节点下除了window以外的所有节点
-                    // 保持队列的顺序不变,不能循环打开
-                    if (window.parentNode == root && (window.IsFullScreen || window.IsMainNode))
+					//如果窗口的父级是root节点，并且窗口是关键节点或者是全屏的，则关闭root节点下除了window以外的所有节点
+					// 保持队列的顺序不变,不能循环打开
+					if (window.parentNode == root && (window.IsFullScreen || window.IsMainNode))
 					{
 						for (int i = root.ChildNode.Count - 1; i >= 0; i--)
 						{
@@ -314,35 +350,37 @@ namespace LccHotfix
 							root.ChildNode[i].Close();
 						}
 					}
-                    //设置父级，重置窗口
-                    window.parentNode = parentNode;
+
+					//设置父级，重置窗口
+					window.parentNode = parentNode;
 					window.Reset(param);
 					window.Resume();
 				}
-                //如果不存在这个窗口
-                else
-                {
-                    //设置遮罩
-                    int mask = ((Window)window).WindowMode.showScreenMask;
+				//如果不存在这个窗口
+				else
+				{
+					//设置遮罩
+					int mask = ((Window)window).WindowMode.showScreenMask;
 					if (mask == 2)
 						switchScreen = true;
 					else if (mask == 1 && window.newCreate)
 						switchScreen = true;
 
-                    //设置父级，打开窗口
-                    window.parentNode = parentNode;
+					//设置父级，打开窗口
+					window.parentNode = parentNode;
 					window.Open(param);
 					window.Resume();
 				}
 			}
+
 			if (switchScreen)
 			{
 				ShowScreenMask();
 			}
 		}
 
-        //找root节点，如果没有就新建一个
-        private WRootNode GetAndCreateRoot(string rootName)
+		//找root节点，如果没有就新建一个
+		private WRootNode GetAndCreateRoot(string rootName)
 		{
 			if (string.IsNullOrEmpty(rootName))
 			{
@@ -350,6 +388,7 @@ namespace LccHotfix
 				//返回栈顶
 				return _rootStack.Peek();
 			}
+
 			//如果是通用节点
 			if (_commonRoot != null && rootName == _commonRoot.NodeName)
 				return _commonRoot;
@@ -362,6 +401,7 @@ namespace LccHotfix
 					return item;
 				}
 			}
+
 			//从释放列表里找回来根节点
 			WRootNode root = null;
 			for (int i = 0; i < _waitReleaseWindow.Count; i++)
@@ -373,6 +413,7 @@ namespace LccHotfix
 					break;
 				}
 			}
+
 			//创建根节点
 			if (root == null)
 			{
@@ -386,40 +427,46 @@ namespace LccHotfix
 			root.transform.localPosition = Vector3.zero;
 			root.transform.localScale = Vector3.one;
 			root.transform.localRotation = Quaternion.identity;
-            //归一
-            root.transform.anchorMin = Vector3.zero;
-            root.transform.anchorMax = Vector3.one;
-            root.transform.sizeDelta = Vector3.zero;
+			//归一
+			root.transform.anchorMin = Vector3.zero;
+			root.transform.anchorMax = Vector3.one;
+			root.transform.sizeDelta = Vector3.zero;
 
-            //新建的根节点 索引一定要设置-1
-            root.stackIndex = -1;
+			//新建的根节点 索引一定要设置-1
+			root.stackIndex = -1;
 			return root;
 		}
 
+		AssetLoader _assetLoader = new AssetLoader();
+
 		//创建窗口
-		private Window CreateWindow(string windowName, WindowMode mode)
+		private void CreateWindow(string windowName, WindowMode mode, Action<Window> callback)
 		{
-            //从释放列表里找回来窗口
-            Window window = null;
+			//从释放列表里找回来窗口
+			Window window = null;
 			for (int i = 0; i < _waitReleaseWindow.Count; i++)
 			{
 				if (_waitReleaseWindow[i].NodeName.Equals(windowName))
 				{
 					window = _waitReleaseWindow[i] as Window;
 					_waitReleaseWindow.RemoveAt(i);
+					callback?.Invoke(window);
 					break;
 				}
 			}
+
 			//创建窗口
 			if (window == null)
 			{
 				window = new Window(windowName, mode);
-				window.CreateWindowView();
-				SortDepthFunc?.Invoke(window.gameObject, mode.depth);
-				CreateUILogic(window);
-				window.Start();
+				window.CreateWindowView(_assetLoader, (window) =>
+				{
+					SortDepthFunc?.Invoke(window.gameObject, window.WindowMode.depth);
+					CreateUILogic(window);
+					window.Start();
+					callback?.Invoke(window);
+				});
 			}
-			return window;
 		}
 
 
@@ -451,11 +498,12 @@ namespace LccHotfix
 			{
 				return val;
 			}
+
 			return null;
 		}
 
-        //栈顶节点关闭互斥子节点
-        public void CloseWindow(int windowFlag)
+		//栈顶节点关闭互斥子节点
+		public void CloseWindow(int windowFlag)
 		{
 			if (_rootStack.Count == 0) return;
 			if (0 == windowFlag) return;
@@ -474,6 +522,7 @@ namespace LccHotfix
 				AddToReleaseQueue(_switchingNode);
 				_switchingNode = null;
 			}
+
 			//清理通用根节点的子节点
 			CommonRoot.CloseAllChild();
 			//清理栈
@@ -482,8 +531,9 @@ namespace LccHotfix
 				_rootStack.Pop().Close();
 			}
 		}
-        //返回键请求关闭窗口处理
-        public void EscapeTopWindow()
+
+		//返回键请求关闭窗口处理
+		public void EscapeTopWindow()
 		{
 			EscapeType escape = EscapeType.AUTO_CLOSE;
 			//处理通用节点
@@ -505,17 +555,17 @@ namespace LccHotfix
 		{
 			if (_rootStack.Count == 0) return;
 
-            //如果当前root是栈顶，则移出去
-            if (root == _rootStack.Peek())
+			//如果当前root是栈顶，则移出去
+			if (root == _rootStack.Peek())
 			{
 				_rootStack.Pop();
 
 				if (_rootStack.Count > 0)
 					_rootStack.Peek().Resume();
 			}
-            //如果不是栈顶
-            else
-            {
+			//如果不是栈顶
+			else
+			{
 				var index = 0;
 				foreach (var node in _rootStack)
 				{
@@ -524,15 +574,15 @@ namespace LccHotfix
 					index++;
 				}
 
-                //如果相等说明这个root不在栈里管理，不需要重新计算栈，直接return
-                if (index == _rootStack.Count)
+				//如果相等说明这个root不在栈里管理，不需要重新计算栈，直接return
+				if (index == _rootStack.Count)
 					return;
 				Stack<WRootNode> tempStack = new Stack<WRootNode>();
 
 				while (index >= 0)
 				{
-                    //这里会提前pop出来，index==0之后不会把这个塞进去（index==0这个是要移除的）
-                    var top = _rootStack.Pop();
+					//这里会提前pop出来，index==0之后不会把这个塞进去（index==0这个是要移除的）
+					var top = _rootStack.Pop();
 					if (index-- == 0)
 					{
 
@@ -541,8 +591,8 @@ namespace LccHotfix
 						tempStack.Push(top);
 				}
 
-                //按照原来栈顺序重新塞回来，并且重新计算stackIndex
-                while (tempStack.Count > 0)
+				//按照原来栈顺序重新塞回来，并且重新计算stackIndex
+				while (tempStack.Count > 0)
 				{
 					var temp = tempStack.Pop();
 					temp.stackIndex = _rootStack.Count;
@@ -550,13 +600,16 @@ namespace LccHotfix
 				}
 
 			}
+
 			if (_rootStack.Count == 0)
 			{
 				OnClosedLastRootFunc?.Invoke();
 			}
 		}
+
 		//释放节点
 		private RectTransform _releaseRoot;
+
 		//增加到释放队列
 		public void AddToReleaseQueue(WNode node)
 		{
@@ -571,6 +624,7 @@ namespace LccHotfix
 				{
 					node.releaseTimer = 0;
 				}
+
 				//创建释放节点
 				if (_releaseRoot == null)
 				{
@@ -579,15 +633,16 @@ namespace LccHotfix
 					_releaseRoot.localScale = Vector3.one;
 					_releaseRoot.localPosition = new Vector3(30000, 0, 0);
 					//归一
-                    _releaseRoot.anchorMin = Vector3.zero;
-                    _releaseRoot.anchorMax = Vector3.one;
-                    _releaseRoot.sizeDelta = Vector3.zero;
-                }
+					_releaseRoot.anchorMin = Vector3.zero;
+					_releaseRoot.anchorMax = Vector3.one;
+					_releaseRoot.sizeDelta = Vector3.zero;
+				}
 
 				if (node.transform != null)
 				{
 					node.transform.parent = _releaseRoot;
 				}
+
 				//增加进去
 				_waitReleaseWindow.Add(node);
 			}
@@ -621,6 +676,7 @@ namespace LccHotfix
 				}
 			}
 		}
+
 		//增加节点关闭回调
 		public void AddCloseCallback(string windowName, Action<object> callback)
 		{
@@ -634,6 +690,7 @@ namespace LccHotfix
 				_windowCloseCallback.Add(windowName, callback);
 			}
 		}
+
 		//移除节点关闭回调
 		public void RemoveCloseCallback(string windowName, Action<object> callback)
 		{
@@ -642,6 +699,7 @@ namespace LccHotfix
 				action -= callback;
 			}
 		}
+
 		//触发节点关闭回调
 		public void OnWindowClose(string windowName, object backValue)
 		{
@@ -650,6 +708,7 @@ namespace LccHotfix
 				action?.Invoke(backValue);
 			}
 		}
+
 		//获取窗口，根据窗口名称
 		public Window GetWindow(string windowName)
 		{
@@ -663,6 +722,7 @@ namespace LccHotfix
 
 			return null;
 		}
+
 		//获取根节点，根据根节点名称
 		public WRootNode GetRoot(string rootName)
 		{
@@ -676,6 +736,7 @@ namespace LccHotfix
 
 			return null;
 		}
+
 		//获取栈顶的根节点
 		public WRootNode GetTopRoot()
 		{
@@ -683,6 +744,7 @@ namespace LccHotfix
 
 			return _rootStack.Peek();
 		}
+
 		//获取栈顶的最新窗口
 		public Window GetTopWindow()
 		{

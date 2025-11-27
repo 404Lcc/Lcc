@@ -21,7 +21,7 @@ namespace LccHotfix
 
         #region 打开面板
 
-        UILogicBase OpenPanel(string panelID, params object[] paramsList);
+        void OpenPanel(string panelID, params object[] paramsList);
 
         void BuildPanelDepth(GameObject obj, int depth);
 

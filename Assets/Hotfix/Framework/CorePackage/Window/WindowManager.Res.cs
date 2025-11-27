@@ -8,6 +8,6 @@ namespace LccHotfix
 		/// <summary>
 		/// 同步加载GameObject
 		/// </summary>
-		public Func<string, bool, GameObject> LoadGameObject { get; set; }
+		public Action<AssetLoader, string, Action<GameObject>> LoadGameObject { get; set; }
 	}
 }

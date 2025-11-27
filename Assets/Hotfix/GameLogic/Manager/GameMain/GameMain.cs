@@ -61,8 +61,7 @@ namespace LccHotfix
             LanguageService = Current.AddModule<LanguageManager>();
             WorldService = Current.AddModule<WorldManager>();
             BTScriptService = Current.AddModule<BTScriptManager>();
-            // UIService = Current.AddModule<UIManager>();
-            // UIService.SetUIHelper(new UIHelper());
+            UIService = Current.AddModule<UIManager>();
             FishNetService = Current.AddModule<FishNetManager>();
             FishNetService.SetHelper(new SteamFishNetHelper());
             FishNetService.SetServerMessageDispatcherHelper(new FishNetServerPBMessageDispatcherHelper());
@@ -99,7 +98,8 @@ namespace LccHotfix
 
             HotfixBridgeService.Init();
             LanguageService.Init();
-            //UIService.Init();
+            UIService.SetUIHelper(new UIHelper());
+            UIService.Init();
             FishNetService.Init();
             MirrorService.Init();
             SteamService.Init();

@@ -12,7 +12,7 @@ public interface IWindowService : IService
     /// <summary>
     /// 同步加载GameObject
     /// </summary>
-    Func<string, bool, GameObject> LoadGameObject { get; set; }
+    Action<AssetLoader, string, Action<GameObject>> LoadGameObject { get; set; }
 
     #endregion
 
@@ -25,7 +25,7 @@ public interface IWindowService : IService
     void CreateUILogic(Window window);
 
     IUILogic CreateLogic(string logicName, Window window);
-    
+
     #endregion
 
     #region Action
@@ -115,7 +115,7 @@ public interface IWindowService : IService
     void Init();
 
     //根据一个窗口打开一个新窗口
-    Window OpenWindow(WNode openBy, string windowName, object[] param);
+    void OpenWindow(WNode openBy, string windowName, object[] param);
 
     /// <summary>
     /// 打开一个界面
@@ -125,7 +125,7 @@ public interface IWindowService : IService
     /// <param name="windowName"></param>
     /// <param name="param"></param>
     /// <returns></returns>
-    Window OpenWindow(string windowName, object[] param);
+    void OpenWindow(string windowName, object[] param);
 
     //打开根节点
     WRootNode OpenRoot(string rootName, object[] param);

@@ -40,10 +40,10 @@ namespace LccHotfix
             _uiMask = ClientTools.GetChild(_uiRoot, "WindowRoot/UIMask/image");
             _uiMask.SetActive(false);
         }
-        
+
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            
+
         }
 
         internal override void Shutdown()
@@ -72,12 +72,7 @@ namespace LccHotfix
             Main.WindowService.GetMaskBoxStateFunc = GetMaskState;
             Main.WindowService.ShowNoticeFunc = ShowNotice;
             Main.WindowService.ShowSelectFunc = ShowSelect;
-            Main.WindowService.LoadGameObject = (asset, keepHierar) =>
-            {
-                // Main.AssetService.LoadGameObject(asset, keepHierar, out var res);
-                // return res;
-                return null;
-            };
+            Main.WindowService.LoadGameObject = (loader, asset, end) => { loader.LoadAssetAsync<GameObject>(asset, handle => { end?.Invoke(handle.AssetObject as GameObject); }); };
             Main.WindowService.InitializeForAssembly(Launcher.Instance.HotfixAssembly);
             Main.WindowService.Init();
         }
@@ -128,11 +123,13 @@ namespace LccHotfix
 
         #region 打开面板
 
-        public UILogicBase OpenPanel(string panelID, params object[] paramsList)
+        public void OpenPanel(string panelID, params object[] paramsList)
         {
-            var window = UI.OpenWindow(panelID, paramsList);
-            if (window != null) return window.Logic as UILogicBase;
-            return null;
+            // var window = 
+            UI.OpenWindow(panelID, paramsList);
+            // if (window != null)
+            //     return window.Logic as UILogicBase;
+            // return null;
         }
 
         public void BuildPanelDepth(GameObject obj, int depth)

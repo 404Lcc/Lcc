@@ -10,12 +10,14 @@ namespace LccHotfix
 		Advance,
 		Special,
 	}
+
 	public class PopupPanelData
 	{
 		public PopupPanelType type;
 		public string panelName;
 		public int sortValue;
 		public object[] param;
+
 		public PopupPanelData(PopupPanel popup, object[] param)
 		{
 			this.panelName = popup.PanelName;
@@ -29,14 +31,15 @@ namespace LccHotfix
 	{
 		private List<PopupPanelData> _popList = new List<PopupPanelData>();
 
-        /// <summary>
-        /// 当前普通弹窗
-        /// </summary>
-        private string _normalPanel = null;
-        /// <summary>
-        /// 当前高级弹窗
-        /// </summary>
-        private string _advancePanel = null;
+		/// <summary>
+		/// 当前普通弹窗
+		/// </summary>
+		private string _normalPanel = null;
+
+		/// <summary>
+		/// 当前高级弹窗
+		/// </summary>
+		private string _advancePanel = null;
 
 
 		/// <summary>
@@ -44,7 +47,7 @@ namespace LccHotfix
 		/// </summary>
 		public bool isAutoPop = true;
 
-        private List<string> _preventPopupPanel = new List<string>();
+		private List<string> _preventPopupPanel = new List<string>();
 
 		bool HaveAnyPreventPopupPanelOpened()
 		{
@@ -77,14 +80,17 @@ namespace LccHotfix
 			if (isAutoPop)
 				TryPopupPanel();
 		}
+
 		public void StackPanel(string panelName)
 		{
 			StackPanel(panelName, null);
 		}
+
 		public void StackPanel(string panelName, object param)
 		{
 			StackPanel(panelName, new object[] { param });
 		}
+
 		/// <summary>
 		/// 判断是否压入了某种类型的弹窗
 		/// </summary>
@@ -100,6 +106,7 @@ namespace LccHotfix
 				if (_popList[i].panelName == panelName)
 					return true;
 			}
+
 			return false;
 		}
 
@@ -140,20 +147,20 @@ namespace LccHotfix
 			_popList.RemoveAt(0);
 			string popPanelName = popData.panelName;
 
-			var currentPanel = UI.OpenWindow(popPanelName, popData.param);
-			if (currentPanel == null)
-			{
-				TryPopupPanel();
-			}
-			else if (currentPanel.Active)
-			{
-				if (isAdvance)
-					_advancePanel = popPanelName;
-				else
-					_normalPanel = popPanelName;
-
-				UI.AddCloseCallback(popPanelName, (o) => OnPopPanelClose(popPanelName));
-			}
+			// var currentPanel = UI.OpenWindow(popPanelName, popData.param);
+			// if (currentPanel == null)
+			// {
+			// 	TryPopupPanel();
+			// }
+			// else if (currentPanel.Active)
+			// {
+			// 	if (isAdvance)
+			// 		_advancePanel = popPanelName;
+			// 	else
+			// 		_normalPanel = popPanelName;
+			//
+			// 	UI.AddCloseCallback(popPanelName, (o) => OnPopPanelClose(popPanelName));
+			// }
 		}
 
 		private bool CheckProcedure()

@@ -4,9 +4,9 @@ namespace LccHotfix
 {
     public static class UI
     {
-        public static Window OpenWindow(string windowName, object[] param = null)
+        public static void OpenWindow(string windowName, object[] param = null)
         {
-            return Main.WindowService.OpenWindow(windowName, param);
+            Main.WindowService.OpenWindow(windowName, param);
         }
 
         public static WRootNode OpenRoot(string rootName, object[] param = null)
@@ -14,14 +14,14 @@ namespace LccHotfix
             return Main.WindowService.OpenRoot(rootName, param);
         }
 
-        public static Window OpenChild(this IUILogic logic, string windowName, object[] param = null)
+        public static void OpenChild(this IUILogic logic, string windowName, object[] param = null)
         {
-            return Main.WindowService.OpenWindow(logic.WNode, windowName, param);
+            Main.WindowService.OpenWindow(logic.WNode, windowName, param);
         }
 
-        public static Window OpenChild(this WNode openBy, string windowName, object[] param = null)
+        public static void OpenChild(this WNode openBy, string windowName, object[] param = null)
         {
-            return Main.WindowService.OpenWindow(openBy, windowName, param);
+            Main.WindowService.OpenWindow(openBy, windowName, param);
         }
 
         public static object Close(string windowName)
