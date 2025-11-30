@@ -141,7 +141,6 @@ namespace LccHotfix
                 }
 
                 _childNode = null;
-                returnNode = null;
                 //设置关闭状态
                 NodePhase = NodePhase.DEACTIVE;
                 var returnValue = DoClose();
@@ -258,7 +257,7 @@ namespace LccHotfix
             //如果根节点激活
             if (Active)
             {
-                TurnNode turn = child.returnNode;
+                TurnNode turn = child.ReturnNode;
 
                 //如果有关闭后返回窗口，尝试打开
                 if (turn != null)

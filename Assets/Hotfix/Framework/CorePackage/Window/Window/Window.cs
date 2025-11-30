@@ -19,8 +19,13 @@ namespace LccHotfix
 		protected WindowMode _mode;
 		protected GameObject _gameObject;
 		protected RectTransform _transform;
-
+		
 		public bool IsFullScreen { get; protected set; }
+		
+		/// <summary>
+		/// 关闭后会返回的界面
+		/// </summary>
+		public TurnNode ReturnNode{ get; protected set; }
 
 		public WindowMode WindowMode => _mode;
 		public GameObject gameObject => _gameObject;
@@ -108,7 +113,7 @@ namespace LccHotfix
 					rootNode.ChildClosed(this);
 				}
 
-				returnNode = null;
+				ReturnNode = null;
 				//设置关闭状态
 				NodePhase = NodePhase.DEACTIVE;
 				var returnValue = DoClose();
@@ -150,16 +155,16 @@ namespace LccHotfix
 		protected override void DoOpen(object[] param)
 		{
 			// 重置下返回节点
-			if (!string.IsNullOrEmpty(WindowMode.returnNodeName) && returnNode == null)
+			if (!string.IsNullOrEmpty(WindowMode.returnNodeName) && ReturnNode == null)
 			{
-				returnNode = new TurnNode()
+				ReturnNode = new TurnNode()
 				{
 					nodeName = WindowMode.returnNodeName,
 					nodeType = (NodeType)WindowMode.returnNodeType,
 				};
 				if (WindowMode.returnNodeParam >= 0)
 				{
-					returnNode.nodeParam = new object[] { WindowMode.returnNodeParam };
+					ReturnNode.nodeParam = new object[] { WindowMode.returnNodeParam };
 				}
 			}
 

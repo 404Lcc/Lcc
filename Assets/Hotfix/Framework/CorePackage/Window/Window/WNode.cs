@@ -11,11 +11,6 @@ namespace LccHotfix
 		//窗口逻辑
 		protected IUILogic _logic;
 
-		/// <summary>
-		/// 关闭后会返回的界面
-		/// </summary>
-		public TurnNode returnNode;
-
 		//根节点
 		public WRootNode rootNode;
 
