@@ -345,7 +345,7 @@ namespace LccHotfix
 					}
 
 					//设置父级，重置窗口
-					window.parentNode = parentNode;
+					window.parentNode = parentNode as WRootNode;
 					window.SetCovered(false);
 					window.Reset(param);
 				}
@@ -353,7 +353,7 @@ namespace LccHotfix
 				else
 				{
 					//设置父级，打开窗口
-					window.parentNode = parentNode;
+					window.parentNode = parentNode as WRootNode;
 					window.SetCovered(false);
 					window.Open(param);
 				}

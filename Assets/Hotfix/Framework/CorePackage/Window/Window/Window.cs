@@ -32,13 +32,111 @@ namespace LccHotfix
 			set => _transform = value;
 		}
 
+		
 		/// <summary>
 		/// window的配置数据
 		/// </summary>
 		private WindowMode _mode;
 
 		public WindowMode WindowMode => _mode;
+		
+		
+		public override void Open(object[] param)
+		{
+			if (_nodePhase == NodePhase.DEACTIVE)
+			{
+				if (parentNode != null && parentNode._nodePhase < NodePhase.ACTIVE)
+					return;
 
+				Log.Debug($"ui open window {NodeName}");
+
+				newCreate = false;
+				//把自己节点状态设置为激活
+				_nodePhase = NodePhase.ACTIVE;
+				//如果有父节点则把自己加进父级的子节点
+				if (parentNode != null)
+				{
+					parentNode.ChildOpened(this);
+				}
+
+				DoOpen(param);
+
+			}
+            
+            
+		}
+		
+		//判断是否包含节点（包含自身）
+		public override bool Contains(WNode node)
+		{
+			if (node == this)
+				return true;
+
+			return false;
+		}
+
+		/// <summary>
+		/// 返回键请求关闭窗口处理
+		/// </summary>
+		/// <param name="escape"></param>
+		/// <returns></returns>
+		public override bool Escape(ref EscapeType escape)
+		{
+			// 处理自己的返回
+			return DoEscape(ref escape);
+		}
+
+		public override object Close()
+		{
+			//如果是暂停状态
+			if (_nodePhase == NodePhase.ACTIVE)
+			{
+				Log.Debug($"ui close window {NodeName}");
+				//如果有父级
+				// 由下向上
+				if (parentNode != null)
+				{
+					//移除从父级移除当前节点
+					parentNode.ChildClosed(this);
+				}
+		
+				returnNode = null;
+				//设置关闭状态
+				_nodePhase = NodePhase.DEACTIVE;
+				var returnValue = DoClose();
+
+				return returnValue;
+			}
+
+			return null;
+		}
+
+		public override void SetCovered(bool covered)
+		{
+			if (_isCovered == covered)
+				return;
+
+			_isCovered = covered;
+
+			if (covered)
+			{
+				Log.Debug($"ui pause window {NodeName}");
+				DoCovered(covered);
+
+			}
+			else
+			{
+				if (parentNode != null && parentNode._isCovered)
+					return;
+
+				Log.Debug($"ui resume window {NodeName}");
+
+				DoCovered(covered);
+			}
+
+			
+			
+		}
 
 		public Window(string windowName, WindowMode mode)
 		{
@@ -121,61 +219,61 @@ namespace LccHotfix
 			return backValue;
 		}
 
-		protected override void DoChildClosed(WNode child)
-		{
-			//如果根节点激活
-			if (rootNode.Active)
-			{
-				TurnNode turn = child.returnNode;
-
-				//如果有关闭后返回窗口，尝试打开
-				if (turn != null)
-				{
-					//如果没有父节点，尝试根据类型打开窗口
-					if (!TryGetNodeForward(turn.nodeName, out WNode node))
-					{
-						switch (turn.nodeType)
-						{
-							case NodeType.ROOT:
-								Main.WindowService.OpenRoot(turn.nodeName, turn.nodeParam);
-								break;
-							case NodeType.WINDOW:
-								Main.WindowService.OpenWindow(turn.nodeName, turn.nodeParam);
-								break;
-						}
-					}
-				}
-			}
-
-			//如果当前节点激活并且关闭的子节点是全屏窗口
-			//这个时候_childNode里已经没有要移除的child了
-			if (Active && child.IsFullScreen)
-			{
-				if (_childNode != null && _childNode.Count > 0)
-				{
-					//找到最新的全屏窗口索引
-					int fullIndex = _childNode.Count;
-					for (int i = _childNode.Count - 1; i >= 0; i--)
-					{
-						fullIndex = i;
-						if (_childNode[i].IsFullScreen)
-						{
-							break;
-						}
-					}
-
-					//找到全屏窗口后面的节点，包含这个全屏窗口
-					if (fullIndex < _childNode.Count)
-					{
-						//恢复全屏界面和后面的节点（假如_childNode.count是10个节点，fullIndex是5，则恢复5到9）
-						for (int i = _childNode.Count - 1; i >= fullIndex; i--)
-						{
-							_childNode[i].SetCovered(false);
-						}
-					}
-				}
-			}
-		}
+		// protected override void DoChildClosed(WNode child)
+		// {
+		// 	//如果根节点激活
+		// 	if (rootNode.Active)
+		// 	{
+		// 		TurnNode turn = child.returnNode;
+		//
+		// 		//如果有关闭后返回窗口，尝试打开
+		// 		if (turn != null)
+		// 		{
+		// 			// //如果没有父节点，尝试根据类型打开窗口
+		// 			// if (!TryGetNodeForward(turn.nodeName, out WNode node))
+		// 			// {
+		// 			// 	switch (turn.nodeType)
+		// 			// 	{
+		// 			// 		case NodeType.ROOT:
+		// 			// 			Main.WindowService.OpenRoot(turn.nodeName, turn.nodeParam);
+		// 			// 			break;
+		// 			// 		case NodeType.WINDOW:
+		// 			// 			Main.WindowService.OpenWindow(turn.nodeName, turn.nodeParam);
+		// 			// 			break;
+		// 			// 	}
+		// 			// }
+		// 		}
+		// 	}
+		//
+		// 	//如果当前节点激活并且关闭的子节点是全屏窗口
+		// 	//这个时候_childNode里已经没有要移除的child了
+		// 	// if (Active && child.IsFullScreen)
+		// 	// {
+		// 	// 	if (_childNode != null && _childNode.Count > 0)
+		// 	// 	{
+		// 	// 		//找到最新的全屏窗口索引
+		// 	// 		int fullIndex = _childNode.Count;
+		// 	// 		for (int i = _childNode.Count - 1; i >= 0; i--)
+		// 	// 		{
+		// 	// 			fullIndex = i;
+		// 	// 			if (_childNode[i].IsFullScreen)
+		// 	// 			{
+		// 	// 				break;
+		// 	// 			}
+		// 	// 		}
+		// 	//
+		// 	// 		//找到全屏窗口后面的节点，包含这个全屏窗口
+		// 	// 		if (fullIndex < _childNode.Count)
+		// 	// 		{
+		// 	// 			//恢复全屏界面和后面的节点（假如_childNode.count是10个节点，fullIndex是5，则恢复5到9）
+		// 	// 			for (int i = _childNode.Count - 1; i >= fullIndex; i--)
+		// 	// 			{
+		// 	// 				_childNode[i].SetCovered(false);
+		// 	// 			}
+		// 	// 		}
+		// 	// 	}
+		// 	// }
+		// }
 
 		//处理窗口返回
 		protected override bool DoEscape(ref EscapeType escape)
@@ -197,16 +295,16 @@ namespace LccHotfix
 			return true;
 		}
 
-		//子节点请求退出
-		protected override bool DoChildRequireEscape(WNode child)
-		{
-			if (_logic != null)
-			{
-				return _logic.OnChildRequireEscape(child);
-			}
-
-			return true;
-		}
+		// //子节点请求退出
+		// protected override bool DoChildRequireEscape(WNode child)
+		// {
+		// 	if (_logic != null)
+		// 	{
+		// 		return _logic.OnChildRequireEscape(child);
+		// 	}
+		//
+		// 	return true;
+		// }
 
 		//移除
 		protected override void DoRemove()
