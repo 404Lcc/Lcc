@@ -7,16 +7,6 @@ namespace LccHotfix
 	internal partial class WindowManager : Module, IWindowService
 	{
 		/// <summary>
-		/// 获取窗口的父节点
-		/// </summary>
-		public Transform WindowRoot { get; set; }
-
-		/// <summary>
-		/// ui相机
-		/// </summary>
-		public Camera UICamera { get; set; }
-
-		/// <summary>
 		/// 当前活动窗口的栈
 		/// 栈里的每个窗口实际是一个全屏窗口和从属于这个全屏窗口的子窗口
 		/// 每个窗口的作用域是自己和从属于自己的子窗口，不能跨域修改其它窗口
@@ -57,6 +47,22 @@ namespace LccHotfix
 
 		private AssetLoader _assetLoader = new AssetLoader();
 
+		//需要更新的节点列表
+		private List<WNode> _updateNodes = new List<WNode>();
+
+		//释放节点
+		private RectTransform _releaseRoot;
+
+		/// <summary>
+		/// 获取窗口的父节点
+		/// </summary>
+		public Transform WindowRoot { get; set; }
+
+		/// <summary>
+		/// ui相机
+		/// </summary>
+		public Camera UICamera { get; set; }
+
 		//初始化通用节点
 		public void Init()
 		{
@@ -65,8 +71,7 @@ namespace LccHotfix
 			_commonRoot.Open(null);
 		}
 
-		//需要更新的节点列表
-		private List<WNode> _updateNodes = new List<WNode>();
+
 
 		internal override void Update(float elapseSeconds, float realElapseSeconds)
 		{
@@ -118,81 +123,6 @@ namespace LccHotfix
 			}
 		}
 
-		/// <summary>
-		/// 打开一个界面
-		/// 这里只是创建，并不会改变当前栈结构
-		/// 确认界面可打开后才会继续
-		/// </summary>
-		/// <param name="windowName"></param>
-		/// <param name="param"></param>
-		/// <returns></returns>
-		public void OpenWindow(string windowName, object[] param)
-		{
-			if (_switchingNode != null)
-			{
-				Log.Error($"request open window {windowName} during switch one other window {_switchingNode.NodeName}");
-				return;
-			}
-
-			Log.Debug($"open window {windowName}");
-
-			if (!_windowModeDic.TryGetValue(windowName, out WindowMode mode))
-			{
-				mode = GetModeFunc.Invoke(windowName);
-				_windowModeDic.Add(windowName, mode);
-			}
-
-			//找root节点，如果没有就新建一个
-			WRootNode root = GetAndCreateRoot(mode.rootName);
-
-			if (!root.TryGetNode(windowName, out var window))
-			{
-				//创建窗口
-				window = CreateWindow(windowName, mode, (window) =>
-				{
-					window.rootNode = root;
-					window.transform.SetParent(WindowRoot);
-					window.transform.localPosition = Vector3.zero;
-					window.transform.localRotation = Quaternion.identity;
-					window.transform.localScale = Vector3.one;
-					//归一
-					window.transform.anchorMin = Vector3.zero;
-					window.transform.anchorMax = Vector3.one;
-					window.transform.sizeDelta = Vector3.zero;
-
-					//切换窗口
-					SwitchWindow(window, param);
-				});
-				_switchingNode = window;
-			}
-			else
-			{
-				_switchingNode = window;
-				//切换窗口
-				SwitchWindow(window, param);
-			}
-		}
-
-		//打开根节点
-		public WRootNode OpenRoot(string rootName, object[] param)
-		{
-			if (_switchingNode != null)
-			{
-				Log.Error($"request open window {rootName} during switch one other window {_switchingNode.NodeName}");
-				return null;
-			}
-
-			if (string.IsNullOrEmpty(rootName))
-				return null;
-
-			//找root节点，如果没有就新建一个
-			WRootNode root = GetAndCreateRoot(rootName);
-			_switchingNode = root;
-			//切换窗口
-			SwitchWindow(root, param);
-
-			return root;
-		}
 
 		//切换窗口
 		private void SwitchWindow(WNode window, object[] param)
@@ -356,8 +286,6 @@ namespace LccHotfix
 			return root;
 		}
 
-
-
 		//创建窗口
 		private Window CreateWindow(string windowName, WindowMode mode, Action<Window> callback)
 		{
@@ -387,6 +315,97 @@ namespace LccHotfix
 			}
 
 			return window;
+		}
+
+		//遍历释放列表
+		private void AutoReleaseWindow()
+		{
+			for (int i = _waitReleaseWindow.Count - 1; i >= 0; i--)
+			{
+				//如果可以移除
+				if (_waitReleaseWindow[i].AutoRemove())
+				{
+					_waitReleaseWindow.RemoveAt(i);
+				}
+			}
+		}
+
+		
+		
+		/// <summary>
+		/// 打开一个界面
+		/// 这里只是创建，并不会改变当前栈结构
+		/// 确认界面可打开后才会继续
+		/// </summary>
+		/// <param name="windowName"></param>
+		/// <param name="param"></param>
+		/// <returns></returns>
+		public void OpenWindow(string windowName, object[] param)
+		{
+			if (_switchingNode != null)
+			{
+				Log.Error($"request open window {windowName} during switch one other window {_switchingNode.NodeName}");
+				return;
+			}
+
+			Log.Debug($"open window {windowName}");
+
+			if (!_windowModeDic.TryGetValue(windowName, out WindowMode mode))
+			{
+				mode = GetModeFunc.Invoke(windowName);
+				_windowModeDic.Add(windowName, mode);
+			}
+
+			//找root节点，如果没有就新建一个
+			WRootNode root = GetAndCreateRoot(mode.rootName);
+
+			if (!root.TryGetNode(windowName, out var window))
+			{
+				//创建窗口
+				window = CreateWindow(windowName, mode, (window) =>
+				{
+					window.rootNode = root;
+					window.transform.SetParent(WindowRoot);
+					window.transform.localPosition = Vector3.zero;
+					window.transform.localRotation = Quaternion.identity;
+					window.transform.localScale = Vector3.one;
+					//归一
+					window.transform.anchorMin = Vector3.zero;
+					window.transform.anchorMax = Vector3.one;
+					window.transform.sizeDelta = Vector3.zero;
+
+					//切换窗口
+					SwitchWindow(window, param);
+				});
+				_switchingNode = window;
+			}
+			else
+			{
+				_switchingNode = window;
+				//切换窗口
+				SwitchWindow(window, param);
+			}
+		}
+
+		//打开根节点
+		public WRootNode OpenRoot(string rootName, object[] param)
+		{
+			if (_switchingNode != null)
+			{
+				Log.Error($"request open window {rootName} during switch one other window {_switchingNode.NodeName}");
+				return null;
+			}
+
+			if (string.IsNullOrEmpty(rootName))
+				return null;
+
+			//找root节点，如果没有就新建一个
+			WRootNode root = GetAndCreateRoot(rootName);
+			_switchingNode = root;
+			//切换窗口
+			SwitchWindow(root, param);
+
+			return root;
 		}
 
 
@@ -457,8 +476,7 @@ namespace LccHotfix
 			var top = _rootStack.Peek();
 			top.Escape(ref escape);
 		}
-
-
+		
 		/// <summary>
 		/// 关闭root时从栈内移除
 		/// </summary>
@@ -518,10 +536,7 @@ namespace LccHotfix
 
 			}
 		}
-
-		//释放节点
-		private RectTransform _releaseRoot;
-
+		
 		//增加到释放队列
 		public void AddToReleaseQueue(WNode node)
 		{
@@ -562,20 +577,7 @@ namespace LccHotfix
 				_waitReleaseWindow.Add(node);
 			}
 		}
-
-		//遍历释放列表
-		private void AutoReleaseWindow()
-		{
-			for (int i = _waitReleaseWindow.Count - 1; i >= 0; i--)
-			{
-				//如果可以移除
-				if (_waitReleaseWindow[i].AutoRemove())
-				{
-					_waitReleaseWindow.RemoveAt(i);
-				}
-			}
-		}
-
+		
 		/// <summary>
 		/// 释放全部window资源
 		/// </summary>
