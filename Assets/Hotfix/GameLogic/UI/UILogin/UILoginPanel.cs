@@ -22,8 +22,8 @@ namespace LccHotfix
         public override void OnOpen(object[] paramsList)
         {
             base.OnOpen(paramsList);
-            Main.WindowService.OpenWindow(UIPanelDefine.UIMainPanel, null);
-            // Main.WindowService.OpenRoot(UIRootDefine.UIRootBattle, null);
+            // Main.WindowService.OpenWindow(UIPanelDefine.UIMainPanel, null);
+            Main.WindowService.OpenRoot(UIRootDefine.UIRootBattle, null);
         }
 
 

@@ -34,13 +34,9 @@ namespace LccHotfix
 		//根节点
 		public WRootNode rootNode;
 
-		//父节点
-		public WRootNode parentNode;
+		// //父节点
+		// public WRootNode parentNode;
 
-		public bool newCreate = true;
-
-		//是否全屏窗口
-		public bool IsFullScreen;
 
 		//回退类型
 		public EscapeType escapeType;
@@ -76,11 +72,6 @@ namespace LccHotfix
 			set => _logicName = value;
 		}
 
-		//判断是否包含节点（包含自身）
-		public virtual bool Contains(WNode node)
-		{
-			return false;
-		}
 
 
 

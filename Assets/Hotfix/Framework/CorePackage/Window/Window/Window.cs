@@ -16,6 +16,9 @@ namespace LccHotfix
 
 	public class Window : WNode
 	{
+		//是否全屏窗口
+		public bool IsFullScreen;
+		
 		protected GameObject _gameObject;
 
 		public GameObject gameObject
@@ -45,18 +48,17 @@ namespace LccHotfix
 		{
 			if (_nodePhase == NodePhase.DEACTIVE)
 			{
-				if (parentNode != null && parentNode._nodePhase < NodePhase.ACTIVE)
+				if (rootNode != null && rootNode._nodePhase < NodePhase.ACTIVE)
 					return;
 
 				Log.Debug($"ui open window {NodeName}");
 
-				newCreate = false;
 				//把自己节点状态设置为激活
 				_nodePhase = NodePhase.ACTIVE;
 				//如果有父节点则把自己加进父级的子节点
-				if (parentNode != null)
+				if (rootNode != null)
 				{
-					parentNode.ChildOpened(this);
+					rootNode.ChildOpened(this);
 				}
 
 				DoOpen(param);
@@ -66,14 +68,7 @@ namespace LccHotfix
             
 		}
 		
-		//判断是否包含节点（包含自身）
-		public override bool Contains(WNode node)
-		{
-			if (node == this)
-				return true;
 
-			return false;
-		}
 
 		/// <summary>
 		/// 返回键请求关闭窗口处理
@@ -94,10 +89,10 @@ namespace LccHotfix
 				Log.Debug($"ui close window {NodeName}");
 				//如果有父级
 				// 由下向上
-				if (parentNode != null)
+				if (rootNode != null)
 				{
 					//移除从父级移除当前节点
-					parentNode.ChildClosed(this);
+					rootNode.ChildClosed(this);
 				}
 		
 				returnNode = null;
@@ -126,7 +121,7 @@ namespace LccHotfix
 			}
 			else
 			{
-				if (parentNode != null && parentNode._isCovered)
+				if (rootNode != null && rootNode._isCovered)
 					return;
 
 				Log.Debug($"ui resume window {NodeName}");
@@ -283,9 +278,9 @@ namespace LccHotfix
 				return false;
 			if (!_logic.OnEscape(ref escape))
 				return false;
-			if (escape == EscapeType.AUTO_CLOSE && parentNode != null)
+			if (escape == EscapeType.AUTO_CLOSE && rootNode != null)
 			{
-				if (!parentNode.ChildRequireEscape(this))
+				if (!rootNode.ChildRequireEscape(this))
 				{
 					escape = EscapeType.REFUSE_AND_BREAK;
 					return false;

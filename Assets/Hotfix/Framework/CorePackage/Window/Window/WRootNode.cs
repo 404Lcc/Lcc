@@ -36,7 +36,6 @@ namespace LccHotfix
 
                 Log.Debug($"ui open window {NodeName}");
 
-                newCreate = false;
                 //把自己节点状态设置为激活
                 _nodePhase = NodePhase.ACTIVE;
 
@@ -48,7 +47,8 @@ namespace LccHotfix
             
         }
 
-        public override bool Contains(WNode node)
+        //判断是否包含节点（包含自身）
+        public  bool Contains(WNode node)
         {
             if (node == this)
                 return true;
@@ -58,7 +58,7 @@ namespace LccHotfix
 
             foreach (WNode childNode in _childNode)
             {
-                if (childNode.Contains(node))
+                if (childNode == node)
                 {
                     return true;
                 }
@@ -66,6 +66,8 @@ namespace LccHotfix
 
             return false;
         }
+        
+
         
         //获取节点（包含自身）
         public bool TryGetNode(string windowName, out WNode node)
@@ -184,7 +186,6 @@ namespace LccHotfix
                 return;
             //移除节点
             _childNode.Remove(child);
-            child.parentNode = null;
             child.rootNode = null;
 
             DoChildClosed(child);
@@ -309,7 +310,7 @@ namespace LccHotfix
                 {
                     var child = _childNode[_childNode.Count - 1];
                     _childNode.RemoveAt(_childNode.Count - 1);
-                    child.parentNode = null;
+                    child.rootNode = null;
                     child.Close();
                 }
 
@@ -477,7 +478,7 @@ namespace LccHotfix
         /// 子节点关闭
         /// </summary>
         /// <param name="child"></param>
-        protected void DoChildClosed(WNode child)
+        protected void DoChildClosed(Window child)
         {
             //如果根节点激活
             if (Active)

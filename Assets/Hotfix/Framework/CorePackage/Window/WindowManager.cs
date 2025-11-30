@@ -212,7 +212,7 @@ namespace LccHotfix
 					window.transform.sizeDelta = Vector3.zero;
 
 					//切换窗口
-					SwitchWindow(window, root, param);
+					SwitchWindow(window, param);
 				});
 				_switchingNode = window;
 			}
@@ -220,7 +220,7 @@ namespace LccHotfix
 			{
 				_switchingNode = window;
 				//切换窗口
-				SwitchWindow(window, root, param);
+				SwitchWindow(window, param);
 			}
 		}
 
@@ -240,20 +240,20 @@ namespace LccHotfix
 			WRootNode root = GetAndCreateRoot(rootName);
 			_switchingNode = root;
 			//切换窗口
-			SwitchWindow(root, null, param);
+			SwitchWindow(root, param);
 
 			return root;
 		}
 
 		//切换窗口
-		private void SwitchWindow(WNode window, WNode parentNode, object[] param)
+		private void SwitchWindow(WNode window, object[] param)
 		{
 			//准备切换
-			window.Switch((canOpen) => SwitchEnd(window, parentNode, canOpen, param));
+			window.Switch((canOpen) => SwitchEnd(window, canOpen, param));
 		}
 
 		//窗口切换结束
-		private void SwitchEnd(WNode window, WNode parentNode, bool canOpen, object[] param)
+		private void SwitchEnd(WNode window, bool canOpen, object[] param)
 		{
 			if (_switchingNode == null)
 				return;
@@ -326,14 +326,14 @@ namespace LccHotfix
 			}
 
 			//如果window是窗口,不是root节点
-			if (window is Window)
+			if (window is Window w)
 			{
 				//如果root里存在这个窗口
 				if (root.Contains(window))
 				{
 					//如果窗口的父级是root节点，并且窗口是关键节点或者是全屏的，则关闭root节点下除了window以外的所有节点
 					// 保持队列的顺序不变,不能循环打开
-					if (window.parentNode == root && (window.IsFullScreen))
+					if (w.IsFullScreen)
 					{
 						for (int i = root.ChildNode.Count - 1; i >= 0; i--)
 						{
@@ -345,7 +345,6 @@ namespace LccHotfix
 					}
 
 					//设置父级，重置窗口
-					window.parentNode = parentNode as WRootNode;
 					window.SetCovered(false);
 					window.Reset(param);
 				}
@@ -353,7 +352,6 @@ namespace LccHotfix
 				else
 				{
 					//设置父级，打开窗口
-					window.parentNode = parentNode as WRootNode;
 					window.SetCovered(false);
 					window.Open(param);
 				}
