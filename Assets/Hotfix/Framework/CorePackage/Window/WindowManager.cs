@@ -61,7 +61,7 @@ namespace LccHotfix
 		public void Init()
 		{
 			_commonRoot = GetAndCreateRoot("UIRootCommon");
-			_commonRoot.stackIndex = 0;
+			_commonRoot.StackIndex = 0;
 			_commonRoot.Open(null);
 		}
 
@@ -224,7 +224,7 @@ namespace LccHotfix
 			if (root != CommonRoot)
 			{
 				//如果是新创建的一个root
-				if (root.stackIndex < 0)
+				if (root.StackIndex < 0)
 				{
 					//把栈顶的节点暂停
 					if (_rootStack.Count > 0)
@@ -232,7 +232,7 @@ namespace LccHotfix
 						_rootStack.Peek().SetCovered(true);
 					}
 
-					root.stackIndex = _rootStack.Count;
+					root.StackIndex = _rootStack.Count;
 					_rootStack.Push(root);
 
 					root.SetCovered(false);
@@ -251,7 +251,7 @@ namespace LccHotfix
 				else
 				{
 					//判断当前window的root在不在栈顶
-					bool isTop = _rootStack.Count == window.rootNode.stackIndex + 1;
+					bool isTop = _rootStack.Count == window.rootNode.StackIndex + 1;
 					//如果不在按照顺序把后面的root都关掉
 					if (!isTop)
 					{
@@ -352,7 +352,7 @@ namespace LccHotfix
 			}
 
 			//新建的根节点 索引一定要设置-1
-			root.stackIndex = -1;
+			root.StackIndex = -1;
 			return root;
 		}
 
@@ -512,7 +512,7 @@ namespace LccHotfix
 				while (tempStack.Count > 0)
 				{
 					var temp = tempStack.Pop();
-					temp.stackIndex = _rootStack.Count;
+					temp.StackIndex = _rootStack.Count;
 					_rootStack.Push(temp);
 				}
 

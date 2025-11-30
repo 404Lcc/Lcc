@@ -16,20 +16,15 @@ namespace LccHotfix
 
 	public class Window : WNode
 	{
-		//是否全屏窗口
-		public bool IsFullScreen;
-
+		protected WindowMode _mode;
 		protected GameObject _gameObject;
-
-		public GameObject gameObject => _gameObject;
-
 		protected RectTransform _transform;
 
-		public RectTransform transform => _transform;
-
-		private WindowMode _mode;
+		public bool IsFullScreen { get; protected set; }
 
 		public WindowMode WindowMode => _mode;
+		public GameObject gameObject => _gameObject;
+		public RectTransform transform => _transform;
 
 		public Window(string windowName, WindowMode mode)
 		{
@@ -124,8 +119,6 @@ namespace LccHotfix
 			return null;
 		}
 
-
-
 		#endregion
 
 		#region 接口
@@ -204,7 +197,9 @@ namespace LccHotfix
 		{
 			_logic.OnRemove();
 			if (gameObject != null)
+			{
 				Object.Destroy(gameObject);
+			}
 		}
 
 
@@ -230,11 +225,6 @@ namespace LccHotfix
 
 		#endregion
 
-		/// <summary>
-		/// 创建窗口
-		/// </summary>
-		/// <param name="loader"></param>
-		/// <param name="callback"></param>
 		public void CreateWindowView(AssetLoader loader, Action<Window> callback)
 		{
 			Main.WindowService.LoadAsyncGameObject?.Invoke(loader, _mode.prefabName, (obj) =>
@@ -251,6 +241,5 @@ namespace LccHotfix
 				callback?.Invoke(this);
 			});
 		}
-
 	}
 }

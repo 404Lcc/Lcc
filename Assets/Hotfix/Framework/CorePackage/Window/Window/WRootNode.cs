@@ -6,14 +6,14 @@ namespace LccHotfix
     public class WRootNode : WNode
     {
         /// <summary>
-        /// 在栈里的位置
-        /// </summary>
-        public int stackIndex;
-
-        /// <summary>
         /// 子界面
         /// </summary>
         protected List<Window> _childNode;
+
+        /// <summary>
+        /// 在栈里的位置
+        /// </summary>
+        public int StackIndex { get; set; }
 
         public List<Window> ChildNode => _childNode;
 
