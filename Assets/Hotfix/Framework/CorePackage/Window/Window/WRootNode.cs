@@ -8,11 +8,8 @@ namespace LccHotfix
         /// 在栈里的位置
         /// </summary>
         public int stackIndex;
-        /// <summary>
-        /// 每个根节点用于向下广播的黑板
-        /// </summary>
-        private WBlackboard _blackboard;
-        public WBlackboard Blackboard => _blackboard;
+
+
         public WRootNode(string rootName)
         {
             this._nodeName = rootName;
@@ -20,7 +17,6 @@ namespace LccHotfix
             this.rootNode = this;
             this.escapeType = EscapeType.AUTO_CLOSE;
             this.releaseType = ReleaseType.AUTO;
-            this._blackboard = new WBlackboard();
             this._logic = Main.WindowService.CreateLogic(rootName, null);
             if (_logic != null)
                 _logic.WNode = this;
@@ -30,11 +26,12 @@ namespace LccHotfix
         {
             _logic?.OnStart();
         }
+
         protected override void DoUpdate()
         {
             _logic?.OnUpdate();
-            _blackboard?.Update();
         }
+
         protected override void DoSwitch(Action<bool> callback)
         {
             if (_logic != null)
@@ -46,31 +43,33 @@ namespace LccHotfix
                 callback(true);
             }
         }
+
         protected override void DoOpen(object[] param)
         {
-            gameObject?.SetActive(true);
+            // gameObject?.SetActive(true);
             _logic?.OnOpen(param);
         }
+
         protected override void DoReset(object[] param)
         {
             _logic?.OnReset(param);
         }
 
-        protected override void DoResume()
+        protected override void DoCovered(bool covered)
         {
-            _logic?.OnResume();
+            _logic?.DoCovered(covered);
         }
-        protected override void DoPause()
-        {
-            _logic?.OnPause();
-        }
+
 
         protected override object DoClose()
         {
-            gameObject?.SetActive(false);
+            // gameObject?.SetActive(false);
             object backValue = null;
             if (_logic != null)
+            {
                 backValue = _logic.OnClose();
+            }
+
             //触发关闭节点回调
             Main.WindowService.OnWindowClose(NodeName, backValue);
             //加入到释放列表
@@ -81,20 +80,28 @@ namespace LccHotfix
         protected override bool DoEscape(ref EscapeType escape)
         {
             if (_logic != null)
+            {
                 return _logic.OnEscape(ref escape);
+            }
+
             return base.DoEscape(ref escape);
         }
+
         //移除
         protected override void DoRemove()
         {
             _logic?.OnRemove();
-            if (gameObject != null)
-                UnityEngine.Object.Destroy(gameObject);
+            // if (gameObject != null)
+            // {
+            //     UnityEngine.Object.Destroy(gameObject);
+            // }
         }
+
         protected override void DoChildOpened(WNode child)
         {
             _logic?.OnChildOpened(child);
         }
+
         protected override void DoChildClosed(WNode child)
         {
             //如果根节点激活
@@ -121,20 +128,16 @@ namespace LccHotfix
                 }
             }
 
-
             if (_logic != null)
             {
-                if (_logic.OnChildClosed(child))
-                    return;
+                _logic.OnChildClosed(child);
             }
-            else
+
+            //根据子节点状态，检查是否需要关闭根节点
+            if (DefaultChildCheck())
             {
-                //根据子节点状态，检查是否需要关闭根节点
-                if (DefaultChildCheck())
-                {
-                    Close();
-                    return;
-                }
+                Close();
+                return;
             }
 
             //如果当前节点激活并且关闭的子节点是全屏窗口
@@ -161,13 +164,14 @@ namespace LccHotfix
                         for (int i = _childNode.Count - 1; i >= fullIndex; i--)
                         {
                             //给子节点恢复
-                            _childNode[i].Resume();
+                            _childNode[i].SetCovered(false);
                         }
                     }
                 }
             }
 
         }
+
         //子节点请求退出
         protected override bool DoChildRequireEscape(WNode child)
         {
@@ -192,16 +196,7 @@ namespace LccHotfix
                 return true;
             }
 
-            foreach (WNode wNode in _childNode)
-            {
-                //如果有主要节点，则不关闭
-                if (wNode.IsMainNode)
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return false;
         }
 
 

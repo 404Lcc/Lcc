@@ -44,11 +44,12 @@ namespace LccHotfix
             {
                 list.AddRange(args);
             }
+
             object[] nowArg = list.Count > 0 ? list.ToArray() : null;
 
             int procedure = config.ProcedureID;
 
-            WNode.TurnNode turn = new WNode.TurnNode
+            TurnNode turn = new TurnNode
             {
                 nodeName = config.PanelName,
                 nodeParam = nowArg,
@@ -65,16 +66,19 @@ namespace LccHotfix
                 {
                     return true;
                 }
+
                 if (turn.nodeType == NodeType.ROOT)
                 {
-                    UI.OpenRoot(turn.nodeName, turn.nodeParam);
+                    Main.WindowService.OpenRoot(turn.nodeName, turn.nodeParam);
                 }
                 else
                 {
-                    UI.OpenWindow(turn.nodeName, turn.nodeParam);
+                    Main.WindowService.OpenWindow(turn.nodeName, turn.nodeParam);
                 }
+
                 return true;
             }
+
             return JumpPanelCrossProcedure(procedure, turn);
 
         }
@@ -84,7 +88,7 @@ namespace LccHotfix
         /// </summary>
         /// <param name="procedure"></param>
         /// <returns></returns>
-        private bool JumpPanelCrossProcedure(int procedure, WNode.TurnNode turn)
+        private bool JumpPanelCrossProcedure(int procedure, TurnNode turn)
         {
             //目前只能跳主流程
             if ((procedure & (int)ProcedureType.Main) > 0)
@@ -101,7 +105,7 @@ namespace LccHotfix
         /// 调整界面和参数
         /// </summary>
         /// <param name="turnNode"></param>
-        private void ChangePanelNode(WNode.TurnNode turnNode)
+        private void ChangePanelNode(TurnNode turnNode)
         {
             switch (turnNode.nodeName)
             {
@@ -109,18 +113,20 @@ namespace LccHotfix
                     break;
             }
         }
+
         /// <summary>
         /// 有些面板不能直接打开，打开方式比较特殊
         /// </summary>
         /// <param name="turnNode"></param>
         /// <returns></returns>
-        public bool OpenSpecialPanel(WNode.TurnNode turnNode)
+        public bool OpenSpecialPanel(TurnNode turnNode)
         {
             switch (turnNode.nodeName)
             {
                 default:
                     break;
             }
+
             return false;
         }
 
@@ -132,6 +138,7 @@ namespace LccHotfix
             {
                 //判断功能是否开启
             }
+
             return true;
         }
     }

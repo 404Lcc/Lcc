@@ -4,8 +4,34 @@ using Object = UnityEngine.Object;
 
 namespace LccHotfix
 {
+	/// <summary>
+	/// 用于保存关闭时的处理
+	/// </summary>
+	public class TurnNode
+	{
+		public string nodeName;
+		public NodeType nodeType;
+		public object[] nodeParam;
+	}
+
 	public class Window : WNode
 	{
+		protected GameObject _gameObject;
+
+		public GameObject gameObject
+		{
+			get => _gameObject;
+			set => _gameObject = value;
+		}
+
+		protected RectTransform _transform;
+
+		public RectTransform transform
+		{
+			get => _transform;
+			set => _transform = value;
+		}
+
 		/// <summary>
 		/// window的配置数据
 		/// </summary>
@@ -18,12 +44,13 @@ namespace LccHotfix
 		{
 			_nodeName = windowName;
 			_mode = mode;
-			RejectFlag = mode.rejectFlag;
-			NodeFlag = mode.windowFlag;
-			escapeType = (EscapeType)mode.escapeType;
-			releaseType = (ReleaseType)mode.releaseType;
+			IsFullScreen = true; //todo 11.29
+			escapeType = mode.escapeType;
+			releaseType = mode.releaseType;
 			_logicName = mode.logicName;
 		}
+
+
 
 		protected override void DoStart()
 		{
@@ -45,13 +72,15 @@ namespace LccHotfix
 			// 重置下返回节点
 			if (!string.IsNullOrEmpty(WindowMode.returnNodeName) && returnNode == null)
 			{
-				returnNode = new WNode.TurnNode()
+				returnNode = new TurnNode()
 				{
 					nodeName = WindowMode.returnNodeName,
 					nodeType = (NodeType)WindowMode.returnNodeType,
 				};
 				if (WindowMode.returnNodeParam >= 0)
+				{
 					returnNode.nodeParam = new object[] { WindowMode.returnNodeParam };
+				}
 			}
 
 			//内部打开
@@ -64,20 +93,21 @@ namespace LccHotfix
 			_logic.OnReset(param);
 		}
 
-		protected override void DoResume()
+		protected override void DoCovered(bool covered)
 		{
-			//内部恢复
-			InternalResume(true);
+			if (covered)
+			{
+				gameObject?.SetActive(false);
+			}
+			else
+			{
+				gameObject?.SetActive(true);
+			}
 
-			_logic.OnResume();
+			_logic.DoCovered(covered);
 		}
 
-		protected override void DoPause()
-		{
-			//内部暂停
-			InternalResume(false);
-			_logic.OnPause();
-		}
+
 
 		protected override object DoClose()
 		{
@@ -140,7 +170,7 @@ namespace LccHotfix
 						//恢复全屏界面和后面的节点（假如_childNode.count是10个节点，fullIndex是5，则恢复5到9）
 						for (int i = _childNode.Count - 1; i >= fullIndex; i--)
 						{
-							_childNode[i].Resume();
+							_childNode[i].SetCovered(false);
 						}
 					}
 				}
@@ -189,9 +219,10 @@ namespace LccHotfix
 		//创建窗口
 		public void CreateWindowView(AssetLoader loader, Action<Window> callback)
 		{
-			Main.WindowService.LoadGameObject?.Invoke(loader, _mode.prefabName, (obj) =>
+			Main.WindowService.LoadAsyncGameObject?.Invoke(loader, _mode.prefabName, (obj) =>
 			{
 				_gameObject = GameObject.Instantiate(obj);
+				_gameObject.name = _mode.prefabName;
 				if (_gameObject != null)
 				{
 					_transform = _gameObject.transform as RectTransform;
@@ -213,15 +244,7 @@ namespace LccHotfix
 		//内部恢复暂停
 		private void InternalResume(bool enable)
 		{
-			Main.WindowService.PauseWindowFunc?.Invoke(transform, enable);
-
-			if (enable)
-			{
-				if (!string.IsNullOrEmpty(_mode.bgTex))
-					Main.WindowService.RefreshBackgroundFunc?.Invoke(this, _mode.bgTex);
-				if (_mode.sound > 0)
-					Main.WindowService.PlayWindowSoundFunc?.Invoke(_mode.sound);
-			}
+			gameObject?.SetActive(enable);
 		}
 
 	}

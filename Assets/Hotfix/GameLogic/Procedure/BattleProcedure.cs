@@ -68,9 +68,7 @@ namespace LccHotfix
         // 开启流程后屏蔽操作，等待0.5秒钟弹出弹窗
         IEnumerator LevelStartWaiting()
         {
-            UI.ShowMaskBox((int)MaskType.CHANGE_PROCEDURE, true);
             yield return new WaitForSecondsRealtime(1f);
-            UI.ShowMaskBox((int)MaskType.CHANGE_PROCEDURE, false);
 
             ProcedureLoadEndHandler();
             Main.UIService.TryPopupPanel();

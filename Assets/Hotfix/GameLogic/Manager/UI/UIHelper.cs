@@ -12,15 +12,8 @@ namespace LccHotfix
             {
                 WindowMode mode = new WindowMode();
                 mode.prefabName = item.PrefabName;
-                mode.depth = item.Depth;
                 mode.rootName = item.RootName;
                 mode.logicName = item.LogicName;
-                mode.bgTex = item.BgTex;
-                mode.sound = item.Sound;
-                mode.openAnim = item.OpenAnim;
-                mode.showScreenMask = item.ShowScreenMask;
-                mode.windowFlag = item.WindowFlag;
-                mode.rejectFlag = item.RejectFlag;
                 mode.escapeType = (EscapeType)item.EscapeType;
                 mode.releaseType = (ReleaseType)item.ReleaseType;
                 mode.returnNodeType = item.ReturnNodeType;

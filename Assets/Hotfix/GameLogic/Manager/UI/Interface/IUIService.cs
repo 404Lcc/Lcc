@@ -12,18 +12,14 @@ namespace LccHotfix
 
         void Init();
 
-        IUILogic GetMonoLogic(Window window, Type monoType);
+
 
         WindowMode GetWindowMode(string windowName);
-
-        bool IsEscapeEnable();
 
 
         #region 打开面板
 
         void OpenPanel(string panelID, params object[] paramsList);
-
-        void BuildPanelDepth(GameObject obj, int depth);
 
 
         /// <summary>
@@ -41,7 +37,6 @@ namespace LccHotfix
 
         #region 关闭面板
 
-        void ClosePanel(int rejectFlag);
 
         object ClosePanel(string panelID);
 
@@ -70,17 +65,7 @@ namespace LccHotfix
         #endregion
 
 
-        #region UI辅助管理方法
 
-        /// <summary>
-        /// 显示一个全屏遮罩，用于业务处理
-        /// </summary>
-        /// <param name="state"></param>
-        void ShowMask(int maskType, bool enable);
-
-        bool GetMaskState();
-
-        #endregion
 
         #region Turn
 
@@ -98,7 +83,7 @@ namespace LccHotfix
         /// </summary>
         /// <param name="turnNode"></param>
         /// <returns></returns>
-        bool OpenSpecialPanel(WNode.TurnNode turnNode);
+        bool OpenSpecialPanel(TurnNode turnNode);
 
         #endregion
 

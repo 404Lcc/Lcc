@@ -6,13 +6,37 @@ namespace LccHotfix
 {
     public abstract class UILogicBase : IUILogic
     {
-        public GameObject gameObject { get { return WNode.gameObject; } }
-        public Transform transform { get { return WNode.transform; } }
+        public GameObject gameObject
+        {
+            get
+            {
+                if (WNode is Window window)
+                {
+                    return window.gameObject;
+                }
+
+                return null;
+            }
+        }
+
+        public RectTransform transform
+        {
+            get
+            {
+                if (WNode is Window window)
+                {
+                    return window.transform;
+                }
+
+                return null;
+            }
+        }
 
         public virtual void CloseWithAni()
         {
             Close();
         }
+
         private object Close()
         {
             return WNode.Close();
@@ -24,8 +48,11 @@ namespace LccHotfix
 
         public virtual void OnStart()
         {
-            AutoReferenceUtility.AutoReference(this, transform);
-            ShowView(gameObject);
+            if (WNode is Window)
+            {
+                AutoReferenceUtility.AutoReference(this, transform);
+                ShowView(gameObject);
+            }
         }
 
         public virtual void OnUpdate()
@@ -43,15 +70,7 @@ namespace LccHotfix
 
         }
 
-        public virtual void OnResume()
-        {
 
-        }
-
-        public virtual void OnPause()
-        {
-
-        }
 
         public virtual object OnClose()
         {
@@ -61,6 +80,10 @@ namespace LccHotfix
         public virtual void OnReset(object[] paramsList)
         {
 
+        }
+
+        public virtual void DoCovered(bool covered)
+        {
         }
 
         public virtual void OnRemove()
@@ -87,17 +110,17 @@ namespace LccHotfix
 
         }
 
-        public virtual bool OnChildClosed(WNode child)
+        public virtual void OnChildClosed(WNode child)
         {
-            return false;
         }
 
         public virtual bool OnChildRequireEscape(WNode child)
         {
             return true;
         }
+
         #endregion
-        
+
         public void ShowView(GameObject gameObject, GameObject parent = null)
         {
             LccView view = gameObject.AddComponent<LccView>();

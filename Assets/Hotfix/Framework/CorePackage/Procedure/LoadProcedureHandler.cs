@@ -77,7 +77,7 @@ namespace LccHotfix
         /// <summary>
         /// 开启流程后跳转到界面
         /// </summary>
-        public WNode.TurnNode turnNode;
+        public TurnNode turnNode;
 
         /// <summary>
         /// 更新

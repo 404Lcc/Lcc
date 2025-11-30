@@ -7,12 +7,22 @@ using UnityEngine;
 
 public interface IWindowService : IService
 {
+    /// <summary>
+    /// 获取窗口的父节点
+    /// </summary>
+    Transform WindowRoot { get; set; }
+
+    /// <summary>
+    /// ui相机
+    /// </summary>
+    Camera UICamera { get; set; }
+
     #region Res
 
     /// <summary>
     /// 同步加载GameObject
     /// </summary>
-    Action<AssetLoader, string, Action<GameObject>> LoadGameObject { get; set; }
+    Action<AssetLoader, string, Action<GameObject>> LoadAsyncGameObject { get; set; }
 
     #endregion
 
@@ -30,82 +40,11 @@ public interface IWindowService : IService
 
     #region Action
 
-    /// <summary>
-    /// 从prefab上获取mono对象
-    /// </summary>
-    Func<Window, Type, IUILogic> GetUILogicMonoFunc { get; set; }
 
     /// <summary>
     /// 从表里获取窗口的配置
     /// </summary>
     Func<string, WindowMode> GetModeFunc { get; set; }
-
-    /// <summary>
-    /// 获取窗口的父节点
-    /// </summary>
-    Transform WindowRoot { get; set; }
-
-    /// <summary>
-    /// ui相机
-    /// </summary>
-    Camera UICamera { get; set; }
-
-    /// <summary>
-    /// 深度排序方法
-    /// </summary>
-    Action<GameObject, int> SortDepthFunc { get; set; }
-
-    /// <summary>
-    /// 获取当前返回键是否生效
-    /// </summary>
-    Func<bool> EscapeJudgeFunc { get; set; }
-
-    /// <summary>
-    /// 暂停一个window的方式
-    /// </summary>
-    Action<Transform, bool> PauseWindowFunc { get; set; }
-
-    /// <summary>
-    /// 刷新背景图
-    /// </summary>
-    Action<Window, string> RefreshBackgroundFunc { get; set; }
-
-    /// <summary>
-    /// 播放界面音效
-    /// </summary>
-    Action<int> PlayWindowSoundFunc { get; set; }
-
-    /// <summary>
-    /// 确认弹窗
-    /// </summary>
-    Action<string, Action> ShowNoticeFunc { get; set; }
-
-    /// <summary>
-    /// 选择弹窗
-    /// </summary>
-    Action<string, Action, Action> ShowSelectFunc { get; set; }
-
-    /// <summary>
-    /// 显示屏幕遮罩
-    /// </summary>
-    /// <returns></returns>
-    Action ShowScreenMaskFunc { get; set; }
-
-    /// <summary>
-    /// 显示屏幕遮挡碰撞框
-    /// </summary>
-    /// <returns></returns>
-    Action<int, bool> ShowMaskBoxFunc { get; set; }
-
-    /// <summary>
-    /// 获取屏幕遮挡状态
-    /// </summary>
-    Func<bool> GetMaskBoxStateFunc { get; set; }
-
-    /// <summary>
-    /// 关闭最后一个root
-    /// </summary>
-    Action OnClosedLastRootFunc { get; set; }
 
     #endregion
 
@@ -114,8 +53,8 @@ public interface IWindowService : IService
     //初始化通用节点
     void Init();
 
-    //根据一个窗口打开一个新窗口
-    void OpenWindow(WNode openBy, string windowName, object[] param);
+    // //根据一个窗口打开一个新窗口
+    // void OpenWindow(WNode openBy, string windowName, object[] param);
 
     /// <summary>
     /// 打开一个界面
@@ -139,9 +78,6 @@ public interface IWindowService : IService
     /// <param name="windowClose"></param>
     /// <returns></returns>
     object CloseWindow(string windowClose);
-
-    //栈顶节点关闭互斥子节点
-    void CloseWindow(int windowFlag);
 
     //关闭全部窗口
     void CloseAllWindow();
@@ -185,16 +121,4 @@ public interface IWindowService : IService
 
     //获取栈顶的最新窗口
     Window GetTopWindow();
-
-    /// <summary>
-    /// 显示一个碰撞框，不能再次点击
-    /// </summary>
-    /// <param name="maskType"></param>
-    void ShowMaskBox(int maskType, bool enable);
-
-    /// <summary>
-    /// 屏幕遮黑淡入
-    /// 替换以前的截屏操作，这个更快，不需要等待一帧
-    /// </summary>
-    void ShowScreenMask();
 }

@@ -2,10 +2,6 @@
 {
     public class UIRootCommon : UIRootBase
     {
-        public override bool OnChildClosed(WNode child)
-        {
-            return false;
-        }
         public override bool OnEscape(ref EscapeType escapeType)
         {
             escapeType = EscapeType.SKIP_OVER;
@@ -17,15 +13,6 @@
             return true;
         }
 
-        public override void OnResume()
-        {
-            base.OnResume();
-        }
-
-        public override void OnPause()
-        {
-            base.OnPause();
-        }
 
         public override void OnUpdate()
         {

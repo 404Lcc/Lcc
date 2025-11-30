@@ -11,7 +11,6 @@ namespace LccHotfix
         {
             //关闭所有协程，如果patchOperation的状态机在运行，这里会杀掉
             Main.CoroutineService.StopAllTypeCoroutines();
-            Main.UIService.ShowMask(0xFF, false);
             //todo清理菊花界面
             //清理加载界面
             UILoadingPanel.Instance.Hide();
@@ -23,10 +22,10 @@ namespace LccHotfix
 
             //清理上个玩家数据
             ClearLastUserData();
-            
+
             //清理流程
             Main.ProcedureService.CleanProcedure();
-            
+
             //重启
             Launcher.Instance.GameAction.ExecuteOnClose();
             Launcher.Instance.StartLauncher();
@@ -45,7 +44,6 @@ namespace LccHotfix
 
             //关闭所有协程
             Main.CoroutineService.StopAllTypeCoroutines();
-            Main.UIService.ShowMask(0xFF, false);
             //todo清理菊花界面
             //清理加载界面
             UILoadingPanel.Instance.Hide();

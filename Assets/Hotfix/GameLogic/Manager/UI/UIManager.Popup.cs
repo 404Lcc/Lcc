@@ -171,7 +171,7 @@ namespace LccHotfix
 
 		public void OnPopPanelClose(string panelName)
 		{
-			UI.RemoveCloseCallback(panelName, (o) => OnPopPanelClose(panelName));
+			Main.WindowService.RemoveCloseCallback(panelName, (o) => OnPopPanelClose(panelName));
 			if (panelName == _normalPanel)
 				_normalPanel = null;
 			else if (panelName == _advancePanel)

@@ -1,5 +1,6 @@
 using LccModel;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace LccHotfix
@@ -7,13 +8,25 @@ namespace LccHotfix
     public class UILoginPanel : UILogicBase, ICoroutine
     {
         public Button startBtn;
+
         public override void OnStart()
         {
             base.OnStart();
             startBtn.onClick.AddListener(OnStartBtn);
 
-            this.StartCoroutine(Open());
+            //this.StartCoroutine(Open());
+            // Main.WindowService.OpenWindow(UIPanelDefine.UIMainPanel, null);
+
         }
+
+        public override void OnOpen(object[] paramsList)
+        {
+            base.OnOpen(paramsList);
+
+            Main.WindowService.OpenRoot(UIRootDefine.UIRootBattle, null);
+        }
+
+
 
         public IEnumerator Open()
         {
@@ -22,7 +35,10 @@ namespace LccHotfix
             //如果不在提审状态
             if (!Launcher.Instance.IsAuditServer())
             {
-                Launcher.Instance.GameNotice.OpenGameNoticeBoard(() => { /*WindowManager.Instance.OpenWindow<UINoticeBoardPanel>(UIWindowDefine.UINoticeBoardPanel);*/ });
+                Launcher.Instance.GameNotice.OpenGameNoticeBoard(() =>
+                {
+                    /*WindowManager.Instance.OpenWindow<UINoticeBoardPanel>(UIWindowDefine.UINoticeBoardPanel);*/
+                });
 
                 var isNoticeBoard = Launcher.Instance.GameNotice.CheckNoticeBoard();
                 if (isNoticeBoard)
@@ -40,12 +56,7 @@ namespace LccHotfix
             yield return Launcher.Instance.GameNotice.GetNoticeBoard();
         }
 
-        public override void OnPause()
-        {
-            base.OnPause();
 
-
-        }
         public void OnStartBtn()
         {
             Main.ProcedureService.ChangeProcedure(ProcedureType.Main.ToInt());

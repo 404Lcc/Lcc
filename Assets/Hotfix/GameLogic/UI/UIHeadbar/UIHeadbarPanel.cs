@@ -11,14 +11,14 @@ namespace LccHotfix
     public class UIHeadbarPanel : UILogicBase, ICoroutine
     {
         public int maxCount = 20;
-        
+
         public List<NormalHPBase> normalList = new List<NormalHPBase>();
 
         public GameObject normalTemplate;
 
-        public override void OnStart()
+        public override void OnOpen(object[] paramsList)
         {
-            base.OnStart();
+            base.OnOpen(paramsList);
 
             ClientTools.SetCachedItemHide(normalList);
 
@@ -28,7 +28,10 @@ namespace LccHotfix
             }
 
             ClientTools.SetCachedItemHide(normalList);
+
         }
+
+
 
         public UIHeadbarTemplate GetHeadbar(HeadbarType type, LogicEntity entity, float offsetY)
         {
@@ -49,12 +52,13 @@ namespace LccHotfix
             hud.Hide();
         }
 
-        public override void OnPause()
+        public override object OnClose()
         {
-            base.OnPause();
-
+            return base.OnClose();
 
             ClientTools.SetCachedItemHide(normalList);
         }
+
+
     }
 }
