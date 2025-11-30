@@ -1,21 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace LccHotfix
 {
 	public abstract class WNode
 	{
-		/// <summary>
-		/// 窗口的状态
-		/// </summary>
-		public NodePhase _nodePhase;
-
-		/// <summary>
-		/// 是否被遮挡
-		/// </summary>
-		public bool _isCovered;
-
 		protected string _nodeName;
 
 		protected string _logicName;
@@ -34,9 +22,6 @@ namespace LccHotfix
 		//根节点
 		public WRootNode rootNode;
 
-		// //父节点
-		// public WRootNode parentNode;
-
 
 		//回退类型
 		public EscapeType escapeType;
@@ -48,13 +33,23 @@ namespace LccHotfix
 
 
 
+		/// <summary>
+		/// 是否被遮挡
+		/// </summary>
+		public bool IsCovered { get; protected set; }
+
+		/// <summary>
+		/// 窗口的状态
+		/// </summary>
+		public NodePhase NodePhase { get; protected set; }
+
 		//是否激活
-		public bool Active => _nodePhase == NodePhase.ACTIVE;
+		public bool Active => NodePhase == NodePhase.ACTIVE;
 
 		public string NodeName => _nodeName;
 
 
-	
+
 
 
 
@@ -77,13 +72,13 @@ namespace LccHotfix
 
 		public void Start()
 		{
-			_nodePhase = NodePhase.DEACTIVE;
+			NodePhase = NodePhase.DEACTIVE;
 			DoStart();
 		}
 
 		public void Update()
 		{
-			if (_nodePhase == NodePhase.ACTIVE)
+			if (NodePhase == NodePhase.ACTIVE)
 			{
 				DoUpdate();
 			}
@@ -96,7 +91,7 @@ namespace LccHotfix
 
 		public void Reset(object[] param)
 		{
-			if (_nodePhase >= NodePhase.ACTIVE)
+			if (NodePhase >= NodePhase.ACTIVE)
 			{
 				DoReset(param);
 			}
@@ -111,7 +106,7 @@ namespace LccHotfix
 		/// <param name="covered"></param>
 		public virtual void SetCovered(bool covered)
 		{
-		
+
 		}
 
 		public virtual object Close()
@@ -196,20 +191,12 @@ namespace LccHotfix
 		{
 
 		}
-		
-
-
-
-
 
 		//处理窗口返回
 		protected virtual bool DoEscape(ref EscapeType escape)
 		{
 			return false;
 		}
-
-
-
 
 		//更新移除
 		public bool AutoRemove()
@@ -224,9 +211,5 @@ namespace LccHotfix
 
 			return false;
 		}
-
-
-
-
 	}
 }

@@ -46,15 +46,15 @@ namespace LccHotfix
 		
 		public override void Open(object[] param)
 		{
-			if (_nodePhase == NodePhase.DEACTIVE)
+			if (NodePhase == NodePhase.DEACTIVE)
 			{
-				if (rootNode != null && rootNode._nodePhase < NodePhase.ACTIVE)
+				if (rootNode != null && rootNode.NodePhase < NodePhase.ACTIVE)
 					return;
 
 				Log.Debug($"ui open window {NodeName}");
 
 				//把自己节点状态设置为激活
-				_nodePhase = NodePhase.ACTIVE;
+				NodePhase = NodePhase.ACTIVE;
 				//如果有父节点则把自己加进父级的子节点
 				if (rootNode != null)
 				{
@@ -84,7 +84,7 @@ namespace LccHotfix
 		public override object Close()
 		{
 			//如果是暂停状态
-			if (_nodePhase == NodePhase.ACTIVE)
+			if (NodePhase == NodePhase.ACTIVE)
 			{
 				Log.Debug($"ui close window {NodeName}");
 				//如果有父级
@@ -97,7 +97,7 @@ namespace LccHotfix
 		
 				returnNode = null;
 				//设置关闭状态
-				_nodePhase = NodePhase.DEACTIVE;
+				NodePhase = NodePhase.DEACTIVE;
 				var returnValue = DoClose();
 
 				return returnValue;
@@ -108,10 +108,10 @@ namespace LccHotfix
 
 		public override void SetCovered(bool covered)
 		{
-			if (_isCovered == covered)
+			if (IsCovered == covered)
 				return;
 
-			_isCovered = covered;
+			IsCovered = covered;
 
 			if (covered)
 			{
@@ -121,7 +121,7 @@ namespace LccHotfix
 			}
 			else
 			{
-				if (rootNode != null && rootNode._isCovered)
+				if (rootNode != null && rootNode.IsCovered)
 					return;
 
 				Log.Debug($"ui resume window {NodeName}");

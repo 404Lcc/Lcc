@@ -31,13 +31,13 @@ namespace LccHotfix
 
         public override void Open(object[] param)
         {
-            if (_nodePhase == NodePhase.DEACTIVE)
+            if (NodePhase == NodePhase.DEACTIVE)
             {
 
                 Log.Debug($"ui open window {NodeName}");
 
                 //把自己节点状态设置为激活
-                _nodePhase = NodePhase.ACTIVE;
+                NodePhase = NodePhase.ACTIVE;
 
 
                 DoOpen(param);
@@ -289,7 +289,7 @@ namespace LccHotfix
         public override object Close()
         {
             //如果是暂停状态
-            if (_nodePhase == NodePhase.ACTIVE)
+            if (NodePhase == NodePhase.ACTIVE)
             {
                 Log.Debug($"ui close window {NodeName}");
                 
@@ -317,7 +317,7 @@ namespace LccHotfix
                 _childNode = null;
                 returnNode = null;
                 //设置关闭状态
-                _nodePhase = NodePhase.DEACTIVE;
+                NodePhase = NodePhase.DEACTIVE;
                 var returnValue = DoClose();
 
                 return returnValue;
@@ -331,10 +331,10 @@ namespace LccHotfix
 
         public override void SetCovered(bool covered)
         {
-            if (_isCovered == covered)
+            if (IsCovered == covered)
                 return;
 
-            _isCovered = covered;
+            IsCovered = covered;
 
             if (covered)
             {
