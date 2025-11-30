@@ -118,57 +118,6 @@ namespace LccHotfix
 			}
 		}
 
-		// //根据一个窗口打开一个新窗口
-		// public void OpenWindow(WNode openBy, string windowName, object[] param)
-		// {
-		// 	if (_switchingNode != null)
-		// 	{
-		// 		Log.Error($"request open window {windowName} during switch one other window {_switchingNode.NodeName}");
-		// 		return;
-		// 	}
-		//
-		// 	if (openBy == null)
-		// 	{
-		// 		OpenWindow(windowName, param);
-		// 		return;
-		// 	}
-		//
-		// 	// 打开一个与自己同名的界面
-		// 	if (openBy.NodeName == windowName)
-		// 	{
-		// 		Log.Error($"request open a same name child window {windowName}");
-		// 		return;
-		// 	}
-		//
-		// 	if (!openBy.TryGetNode(windowName, out WNode openedWindow))
-		// 	{
-		// 		if (!_windowModeDic.TryGetValue(windowName, out WindowMode mode))
-		// 		{
-		// 			mode = GetModeFunc.Invoke(windowName);
-		// 			_windowModeDic.Add(windowName, mode);
-		// 		}
-		//
-		// 		//创建窗口
-		// 		openedWindow = CreateWindow(windowName, mode, (openedWindow) =>
-		// 		{
-		// 			openedWindow.rootNode = openBy.rootNode;
-		// 			openedWindow.transform.SetParent(WindowRoot);
-		// 			openedWindow.transform.localPosition = Vector3.zero;
-		// 			openedWindow.transform.localRotation = Quaternion.identity;
-		// 			openedWindow.transform.localScale = Vector3.one;
-		// 			//切换窗口
-		// 			SwitchWindow(openedWindow, openBy, param);
-		// 		});
-		// 		_switchingNode = openedWindow;
-		// 	}
-		// 	else
-		// 	{
-		// 		_switchingNode = openedWindow;
-		// 		//切换窗口
-		// 		SwitchWindow(openedWindow, openBy, param);
-		// 	}
-		// }
-
 		/// <summary>
 		/// 打开一个界面
 		/// 这里只是创建，并不会改变当前栈结构

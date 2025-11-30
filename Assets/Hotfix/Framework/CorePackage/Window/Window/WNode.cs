@@ -11,9 +11,6 @@ namespace LccHotfix
 		//窗口逻辑
 		protected IUILogic _logic;
 
-
-
-
 		/// <summary>
 		/// 关闭后会返回的界面
 		/// </summary>
@@ -31,8 +28,7 @@ namespace LccHotfix
 
 		public int releaseTimer;
 
-
-
+		
 		/// <summary>
 		/// 是否被遮挡
 		/// </summary>
@@ -49,154 +45,14 @@ namespace LccHotfix
 		public string NodeName => _nodeName;
 
 
-
-
-
-
 		public IUILogic Logic
 		{
 			get => _logic;
 			set => _logic = value;
 		}
 
+		public string LogicName => _logicName;
 
-
-		public string LogicName
-		{
-			get => _logicName;
-			set => _logicName = value;
-		}
-
-
-
-
-		public void Start()
-		{
-			NodePhase = NodePhase.DEACTIVE;
-			DoStart();
-		}
-
-		public void Update()
-		{
-			if (NodePhase == NodePhase.ACTIVE)
-			{
-				DoUpdate();
-			}
-		}
-
-		public virtual void Open(object[] param)
-		{
-
-		}
-
-		public void Reset(object[] param)
-		{
-			if (NodePhase >= NodePhase.ACTIVE)
-			{
-				DoReset(param);
-			}
-		}
-
-
-
-
-		/// <summary>
-		/// 设置覆盖
-		/// </summary>
-		/// <param name="covered"></param>
-		public virtual void SetCovered(bool covered)
-		{
-
-		}
-
-		public virtual object Close()
-		{
-			return null;
-		}
-
-
-
-		/// <summary>
-		/// 从内存中移除
-		/// </summary>
-		public void Remove()
-		{
-			DoRemove();
-		}
-
-		public void Switch(Action<bool> callback)
-		{
-			DoSwitch(callback);
-		}
-
-		/// <summary>
-		/// 返回键请求关闭窗口处理
-		/// </summary>
-		/// <param name="escape"></param>
-		/// <returns></returns>
-		public virtual bool Escape(ref EscapeType escape)
-		{
-			return false;
-		}
-
-
-
-		//开始
-		protected virtual void DoStart()
-		{
-
-		}
-
-		//更新
-		protected virtual void DoUpdate()
-		{
-
-		}
-
-		//打开
-		protected virtual void DoOpen(object[] param)
-		{
-
-		}
-
-		//重置
-		protected virtual void DoReset(object[] param)
-		{
-
-		}
-
-		/// <summary>
-		/// 覆盖
-		/// </summary>
-		/// <param name="covered"></param>
-		protected virtual void DoCovered(bool covered)
-		{
-
-		}
-
-		//关闭
-		protected virtual object DoClose()
-		{
-			return null;
-		}
-
-		//移除（彻底关闭）
-		protected virtual void DoRemove()
-		{
-
-		}
-
-		//切换窗口
-		protected virtual void DoSwitch(Action<bool> callback)
-		{
-
-		}
-
-		//处理窗口返回
-		protected virtual bool DoEscape(ref EscapeType escape)
-		{
-			return false;
-		}
 
 		//更新移除
 		public bool AutoRemove()
@@ -211,5 +67,90 @@ namespace LccHotfix
 
 			return false;
 		}
+
+		#region 必要流程
+
+		public void Start()
+		{
+			NodePhase = NodePhase.DEACTIVE;
+			DoStart();
+		}
+
+		public void Switch(Action<bool> callback)
+		{
+			DoSwitch(callback);
+		}
+
+		public abstract void SetCovered(bool covered);
+
+		public abstract void Open(object[] param);
+
+		public void Reset(object[] param)
+		{
+			if (NodePhase == NodePhase.ACTIVE)
+			{
+				DoReset(param);
+			}
+		}
+
+		public void Update()
+		{
+			if (NodePhase == NodePhase.ACTIVE)
+			{
+				DoUpdate();
+			}
+		}
+
+		/// <summary>
+		/// 返回键请求关闭窗口处理
+		/// </summary>
+		/// <param name="escape"></param>
+		/// <returns></returns>
+		public abstract bool Escape(ref EscapeType escape);
+
+		public abstract object Close();
+
+		/// <summary>
+		/// 从内存中移除
+		/// </summary>
+		public void Remove()
+		{
+			DoRemove();
+		}
+
+
+		#endregion
+
+		#region 接口
+
+
+		//开始
+		protected abstract void DoStart();
+
+		//切换窗口
+		protected abstract void DoSwitch(Action<bool> callback);
+
+		//覆盖
+		protected abstract void DoCovered(bool covered);
+
+		//打开
+		protected abstract void DoOpen(object[] param);
+
+		//重置
+		protected abstract void DoReset(object[] param);
+
+		//更新
+		protected abstract void DoUpdate();
+
+		//关闭
+		protected abstract object DoClose();
+
+		//移除（彻底关闭）
+		protected abstract void DoRemove();
+
+		//处理窗口返回
+		protected abstract bool DoEscape(ref EscapeType escape);
+
+		#endregion
 	}
 }

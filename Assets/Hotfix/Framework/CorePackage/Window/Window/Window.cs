@@ -18,32 +18,55 @@ namespace LccHotfix
 	{
 		//是否全屏窗口
 		public bool IsFullScreen;
-		
+
 		protected GameObject _gameObject;
 
-		public GameObject gameObject
-		{
-			get => _gameObject;
-			set => _gameObject = value;
-		}
+		public GameObject gameObject => _gameObject;
 
 		protected RectTransform _transform;
 
-		public RectTransform transform
-		{
-			get => _transform;
-			set => _transform = value;
-		}
+		public RectTransform transform => _transform;
 
-		
-		/// <summary>
-		/// window的配置数据
-		/// </summary>
 		private WindowMode _mode;
 
 		public WindowMode WindowMode => _mode;
-		
-		
+
+		public Window(string windowName, WindowMode mode)
+		{
+			_nodeName = windowName;
+			_mode = mode;
+			IsFullScreen = true; //todo 11.29
+			escapeType = mode.escapeType;
+			releaseType = mode.releaseType;
+			_logicName = mode.logicName;
+		}
+
+		#region 必要流程
+
+		public override void SetCovered(bool covered)
+		{
+			if (IsCovered == covered)
+				return;
+
+			IsCovered = covered;
+
+			if (covered)
+			{
+				Log.Debug($"ui pause window {NodeName}");
+				DoCovered(covered);
+
+			}
+			else
+			{
+				if (rootNode != null && rootNode.IsCovered)
+					return;
+
+				Log.Debug($"ui resume window {NodeName}");
+
+				DoCovered(covered);
+			}
+		}
+
 		public override void Open(object[] param)
 		{
 			if (NodePhase == NodePhase.DEACTIVE)
@@ -62,13 +85,8 @@ namespace LccHotfix
 				}
 
 				DoOpen(param);
-
 			}
-            
-            
 		}
-		
-
 
 		/// <summary>
 		/// 返回键请求关闭窗口处理
@@ -94,7 +112,7 @@ namespace LccHotfix
 					//移除从父级移除当前节点
 					rootNode.ChildClosed(this);
 				}
-		
+
 				returnNode = null;
 				//设置关闭状态
 				NodePhase = NodePhase.DEACTIVE;
@@ -106,58 +124,34 @@ namespace LccHotfix
 			return null;
 		}
 
-		public override void SetCovered(bool covered)
-		{
-			if (IsCovered == covered)
-				return;
-
-			IsCovered = covered;
-
-			if (covered)
-			{
-				Log.Debug($"ui pause window {NodeName}");
-				DoCovered(covered);
-
-			}
-			else
-			{
-				if (rootNode != null && rootNode.IsCovered)
-					return;
-
-				Log.Debug($"ui resume window {NodeName}");
-
-				DoCovered(covered);
-			}
-
-			
-			
-		}
-
-		public Window(string windowName, WindowMode mode)
-		{
-			_nodeName = windowName;
-			_mode = mode;
-			IsFullScreen = true; //todo 11.29
-			escapeType = mode.escapeType;
-			releaseType = mode.releaseType;
-			_logicName = mode.logicName;
-		}
 
 
+		#endregion
+
+		#region 接口
 
 		protected override void DoStart()
 		{
 			_logic.OnStart();
 		}
 
-		protected override void DoUpdate()
-		{
-			_logic.OnUpdate();
-		}
-
 		protected override void DoSwitch(Action<bool> callback)
 		{
 			_logic.OnSwitch(callback);
+		}
+
+		protected override void DoCovered(bool covered)
+		{
+			if (covered)
+			{
+				gameObject?.SetActive(false);
+			}
+			else
+			{
+				gameObject?.SetActive(true);
+			}
+
+			_logic.DoCovered(covered);
 		}
 
 		protected override void DoOpen(object[] param)
@@ -177,7 +171,8 @@ namespace LccHotfix
 			}
 
 			//内部打开
-			InternalOpen(true);
+			gameObject?.SetActive(true);
+
 			_logic.OnOpen(param);
 		}
 
@@ -186,26 +181,16 @@ namespace LccHotfix
 			_logic.OnReset(param);
 		}
 
-		protected override void DoCovered(bool covered)
+		protected override void DoUpdate()
 		{
-			if (covered)
-			{
-				gameObject?.SetActive(false);
-			}
-			else
-			{
-				gameObject?.SetActive(true);
-			}
-
-			_logic.DoCovered(covered);
+			_logic.OnUpdate();
 		}
-
-
 
 		protected override object DoClose()
 		{
 			//内部关闭
-			InternalOpen(false);
+			gameObject?.SetActive(false);
+
 			var backValue = _logic.OnClose();
 			//触发关闭节点回调
 			Main.WindowService.OnWindowClose(NodeName, backValue);
@@ -214,61 +199,14 @@ namespace LccHotfix
 			return backValue;
 		}
 
-		// protected override void DoChildClosed(WNode child)
-		// {
-		// 	//如果根节点激活
-		// 	if (rootNode.Active)
-		// 	{
-		// 		TurnNode turn = child.returnNode;
-		//
-		// 		//如果有关闭后返回窗口，尝试打开
-		// 		if (turn != null)
-		// 		{
-		// 			// //如果没有父节点，尝试根据类型打开窗口
-		// 			// if (!TryGetNodeForward(turn.nodeName, out WNode node))
-		// 			// {
-		// 			// 	switch (turn.nodeType)
-		// 			// 	{
-		// 			// 		case NodeType.ROOT:
-		// 			// 			Main.WindowService.OpenRoot(turn.nodeName, turn.nodeParam);
-		// 			// 			break;
-		// 			// 		case NodeType.WINDOW:
-		// 			// 			Main.WindowService.OpenWindow(turn.nodeName, turn.nodeParam);
-		// 			// 			break;
-		// 			// 	}
-		// 			// }
-		// 		}
-		// 	}
-		//
-		// 	//如果当前节点激活并且关闭的子节点是全屏窗口
-		// 	//这个时候_childNode里已经没有要移除的child了
-		// 	// if (Active && child.IsFullScreen)
-		// 	// {
-		// 	// 	if (_childNode != null && _childNode.Count > 0)
-		// 	// 	{
-		// 	// 		//找到最新的全屏窗口索引
-		// 	// 		int fullIndex = _childNode.Count;
-		// 	// 		for (int i = _childNode.Count - 1; i >= 0; i--)
-		// 	// 		{
-		// 	// 			fullIndex = i;
-		// 	// 			if (_childNode[i].IsFullScreen)
-		// 	// 			{
-		// 	// 				break;
-		// 	// 			}
-		// 	// 		}
-		// 	//
-		// 	// 		//找到全屏窗口后面的节点，包含这个全屏窗口
-		// 	// 		if (fullIndex < _childNode.Count)
-		// 	// 		{
-		// 	// 			//恢复全屏界面和后面的节点（假如_childNode.count是10个节点，fullIndex是5，则恢复5到9）
-		// 	// 			for (int i = _childNode.Count - 1; i >= fullIndex; i--)
-		// 	// 			{
-		// 	// 				_childNode[i].SetCovered(false);
-		// 	// 			}
-		// 	// 		}
-		// 	// 	}
-		// 	// }
-		// }
+		//移除
+		protected override void DoRemove()
+		{
+			_logic.OnRemove();
+			if (gameObject != null)
+				Object.Destroy(gameObject);
+		}
+
 
 		//处理窗口返回
 		protected override bool DoEscape(ref EscapeType escape)
@@ -290,26 +228,13 @@ namespace LccHotfix
 			return true;
 		}
 
-		// //子节点请求退出
-		// protected override bool DoChildRequireEscape(WNode child)
-		// {
-		// 	if (_logic != null)
-		// 	{
-		// 		return _logic.OnChildRequireEscape(child);
-		// 	}
-		//
-		// 	return true;
-		// }
+		#endregion
 
-		//移除
-		protected override void DoRemove()
-		{
-			_logic.OnRemove();
-			if (gameObject != null)
-				Object.Destroy(gameObject);
-		}
-
-		//创建窗口
+		/// <summary>
+		/// 创建窗口
+		/// </summary>
+		/// <param name="loader"></param>
+		/// <param name="callback"></param>
 		public void CreateWindowView(AssetLoader loader, Action<Window> callback)
 		{
 			Main.WindowService.LoadAsyncGameObject?.Invoke(loader, _mode.prefabName, (obj) =>
@@ -325,19 +250,6 @@ namespace LccHotfix
 
 				callback?.Invoke(this);
 			});
-		}
-
-
-		//内部打开关闭
-		private void InternalOpen(bool enable)
-		{
-			gameObject?.SetActive(enable);
-		}
-
-		//内部恢复暂停
-		private void InternalResume(bool enable)
-		{
-			gameObject?.SetActive(enable);
 		}
 
 	}
