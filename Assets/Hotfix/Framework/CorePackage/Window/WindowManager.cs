@@ -63,14 +63,32 @@ namespace LccHotfix
 		/// </summary>
 		public Camera UICamera { get; set; }
 
+		private Dictionary<UILayerID, UILayer> _uiLayerDict = new Dictionary<UILayerID, UILayer>();
+
 		//初始化通用节点
 		public void Init()
 		{
 			_commonRoot = GetAndCreateRoot("UIRootCommon");
 			_commonRoot.StackIndex = 0;
 			_commonRoot.Open(null);
+
+			for (UILayerID layerId = UILayerID.HUD; layerId <= UILayerID.Debug; layerId++)
+			{
+				var layer = new UILayer(layerId);
+				layer.Create(WindowRoot);
+				_uiLayerDict[layerId] = layer;
+			}
 		}
 
+		public UILayer GetUILayer(UILayerID layerID)
+		{
+			if (_uiLayerDict.TryGetValue(layerID, out var layer))
+			{
+				return layer;
+			}
+
+			return null;
+		}
 
 
 		internal override void Update(float elapseSeconds, float realElapseSeconds)
@@ -330,8 +348,8 @@ namespace LccHotfix
 			}
 		}
 
-		
-		
+
+
 		/// <summary>
 		/// 打开一个界面
 		/// 这里只是创建，并不会改变当前栈结构
@@ -365,18 +383,12 @@ namespace LccHotfix
 				window = CreateWindow(windowName, mode, (window) =>
 				{
 					window.rootNode = root;
-					window.transform.SetParent(WindowRoot);
-					window.transform.localPosition = Vector3.zero;
-					window.transform.localRotation = Quaternion.identity;
-					window.transform.localScale = Vector3.one;
-					//归一
-					window.transform.anchorMin = Vector3.zero;
-					window.transform.anchorMax = Vector3.one;
-					window.transform.sizeDelta = Vector3.zero;
+					Main.WindowService.GetUILayer(window.LayerID).AttachPanelWidget(window);
 
 					//切换窗口
 					SwitchWindow(window, param);
 				});
+				Main.WindowService.GetUILayer(window.LayerID).AttachPanel(window);
 				_switchingNode = window;
 			}
 			else
@@ -476,7 +488,7 @@ namespace LccHotfix
 			var top = _rootStack.Peek();
 			top.Escape(ref escape);
 		}
-		
+
 		/// <summary>
 		/// 关闭root时从栈内移除
 		/// </summary>
@@ -536,7 +548,7 @@ namespace LccHotfix
 
 			}
 		}
-		
+
 		//增加到释放队列
 		public void AddToReleaseQueue(WNode node)
 		{
@@ -577,7 +589,7 @@ namespace LccHotfix
 				_waitReleaseWindow.Add(node);
 			}
 		}
-		
+
 		/// <summary>
 		/// 释放全部window资源
 		/// </summary>

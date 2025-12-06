@@ -53,8 +53,7 @@ public interface IWindowService : IService
     //初始化通用节点
     void Init();
 
-    // //根据一个窗口打开一个新窗口
-    // void OpenWindow(WNode openBy, string windowName, object[] param);
+    UILayer GetUILayer(UILayerID layerID);
 
     /// <summary>
     /// 打开一个界面

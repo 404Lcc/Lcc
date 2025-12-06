@@ -10,6 +10,8 @@ namespace LccHotfix
         /// </summary>
         protected List<Window> _childNode;
 
+        protected UILayer layer;
+
         /// <summary>
         /// 在栈里的位置
         /// </summary>
@@ -377,15 +379,10 @@ namespace LccHotfix
             }
         }
 
-        //获取节点（包含自身）
-        public bool TryGetNode(string windowName, out WNode node)
+        //获取节点（不包含自身）
+        public bool TryGetNode(string windowName, out Window node)
         {
             node = null;
-            if (_nodeName.Equals(windowName))
-            {
-                node = this;
-                return true;
-            }
 
             if (_childNode == null || _childNode.Count == 0)
                 return false;
