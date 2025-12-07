@@ -1,0 +1,254 @@
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
+using Object = UnityEngine.Object;
+
+namespace LccHotfix
+{
+    /// <summary>
+    /// 保存关闭节点时的处理数据
+    /// </summary>
+    public class TurnNode
+    {
+        public string nodeName;
+        public NodeType nodeType;
+        public object[] nodeParam;
+    }
+
+    public class ElementNode : UINode
+    {
+        //返回节点类型
+        public NodeType ReturnNodeType{ get;  set; }
+        //返回节点名称
+        public string ReturnNodeName{ get;  set; }
+        //返回节点参数
+        public int ReturnNodeParam{ get;  set; }
+        
+        public TurnNode ReturnNode { get; protected set; }
+        public UILayerID LayerID { get;  set; }
+        public bool IsFullScreen { get;  set; }
+        public int SortingOrder { get; set; }
+
+        public Canvas Canvas { get; protected set; }
+        public GraphicRaycaster Raycaster { get; protected set; }
+        public CanvasGroup CanvasGroup { get; protected set; }
+        public GameObject GameObject { get; protected set; }
+        public RectTransform RectTransform { get; protected set; }
+
+        public ElementNode(string nodeName)
+        {
+            NodeName = nodeName;
+        }
+
+        #region 必要流程
+
+        public override void Covered(bool covered)
+        {
+            if (IsCovered == covered)
+                return;
+
+            IsCovered = covered;
+
+            if (covered)
+            {
+                Log.Debug($"[UI] 覆盖 {NodeName}");
+                DoCovered(covered);
+            }
+            else
+            {
+                if (DomainNode != null && DomainNode.IsCovered)
+                    return;
+
+                Log.Debug($"[UI] 取消覆盖 {NodeName}");
+
+                DoCovered(covered);
+            }
+        }
+
+        public override void Show(object[] param)
+        {
+            if (NodePhase == NodePhase.Create)
+            {
+                if (DomainNode != null && DomainNode.NodePhase < NodePhase.Show)
+                    return;
+
+                Log.Debug($"[UI] 显示 {NodeName}");
+
+                //把自己节点状态设置为显示
+                NodePhase = NodePhase.Show;
+                
+                if (DomainNode != null)
+                {
+                    DomainNode.AddChildNode(this);
+                }
+
+                //内部打开
+                GameObject.SetActive(true);
+                
+                DoShow(param);
+            }
+        }
+
+        public override object Hide()
+        {
+            if (NodePhase == NodePhase.Show)
+            {
+                Log.Debug($"[UI] 隐藏 {NodeName}");
+                
+                if (DomainNode != null)
+                {
+                    //从域中移除当前节点
+                    DomainNode.RemoveChildNode(this);
+                }
+
+                ReturnNode = null;
+                NodePhase = NodePhase.Create;
+                var returnValue = DoHide();
+                return returnValue;
+            }
+
+            return null;
+        }
+
+        public override bool Escape(ref EscapeType escape)
+        {
+            return DoEscape(ref escape);
+        }
+
+        #endregion
+
+        #region 接口
+
+        protected override void DoInit()
+        {
+            Logic.OnInit();
+        }
+
+        protected override void DoAttachedToRoot(IUIRoot uiRoot)
+        {
+            UIRoot = uiRoot;
+            Main.WindowService.GetUILayer(LayerID).AttachPanel(this);
+        }
+
+        protected override void DoCreate()
+        {
+            Canvas = GameObject.AddComponent<Canvas>();
+            Raycaster = GameObject.AddComponent<GraphicRaycaster>();
+            CanvasGroup = GameObject.AddComponent<CanvasGroup>();
+            Logic.OnCreate();
+            Main.WindowService.GetUILayer(LayerID).AttachPanelWidget(this);
+        }
+
+        protected override void DoSwitch(Action<bool> callback)
+        {
+            Logic.OnSwitch(callback);
+        }
+
+        protected override void DoCovered(bool covered)
+        {
+            if (covered)
+            {
+                GameObject.SetActive(false);
+            }
+            else
+            {
+                GameObject.SetActive(true);
+            }
+
+            Logic.OnCovered(covered);
+        }
+
+        protected override void DoShow(object[] param)
+        {
+            if (!string.IsNullOrEmpty(ReturnNodeName) && ReturnNode == null)
+            {
+                ReturnNode = new TurnNode()
+                {
+                    nodeName = ReturnNodeName,
+                    nodeType = ReturnNodeType,
+                };
+                if (ReturnNodeParam >= 0)
+                {
+                    ReturnNode.nodeParam = new object[] { ReturnNodeParam };
+                }
+            }
+
+            Logic.OnShow(param);
+        }
+
+        protected override void DoReShow(object[] param)
+        {
+            Logic.OnReShow(param);
+        }
+
+        protected override void DoUpdate()
+        {
+            Logic.OnUpdate();
+        }
+
+        protected override object DoHide()
+        {
+            //内部隐藏
+            GameObject.SetActive(false);
+            
+            var returnValue = Logic.OnHide();
+
+            //触发关闭节点回调
+            Main.WindowService.OnWindowClose(NodeName, returnValue);
+            //加入到释放列表
+            Main.WindowService.AddToReleaseQueue(this);
+            return returnValue;
+        }
+
+        protected override void DoDestroy()
+        {
+            Main.WindowService.GetUILayer(LayerID).DetachPanelWidget(this);
+            Logic.OnDestroy();
+            Object.Destroy(GameObject);
+            GameObject = null;
+        }
+        
+        protected override void DoDetachedFromRoot()
+        {
+            Main.WindowService.GetUILayer(LayerID).DetachPanel(this);
+            UIRoot = null;
+        }
+        
+        protected override bool DoEscape(ref EscapeType escape)
+        {
+            escape = EscapeType;
+
+            if (escape == EscapeType.Skip)
+                return false;
+
+            if (!Logic.OnEscape(ref escape))
+                return false;
+
+            if (DomainNode != null)
+            {
+                if (!DomainNode.RequireEscape(this))
+                    return false;
+            }
+
+            return true;
+        }
+
+        #endregion
+
+        public void CreateElement(AssetLoader loader, Action<ElementNode> callback)
+        {
+            Main.WindowService.LoadAsyncGameObject?.Invoke(loader, NodeName, (obj) =>
+            {
+                GameObject = GameObject.Instantiate(obj);
+                GameObject.name = NodeName;
+
+                if (GameObject != null)
+                {
+                    RectTransform = GameObject.transform as RectTransform;
+                }
+
+                callback?.Invoke(this);
+            });
+        }
+    }
+}

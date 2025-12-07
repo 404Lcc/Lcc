@@ -25,8 +25,7 @@ namespace LccHotfix
 
             //进入游戏
             UILoadingPanel.Instance.SetStartLoadingBg();
-
-            Main.UIService.OpenPanel(UIPanelDefine.UILoginPanel);
+            Main.UIService.OpenPanel(UIPanelDefine.UILoginPanel, UIRootDefine.UIRootLogin);
 
             this.StartCoroutine(LoadProcedureCoroutine());
         }

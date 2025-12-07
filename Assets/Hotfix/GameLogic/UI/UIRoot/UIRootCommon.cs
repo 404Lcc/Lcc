@@ -1,22 +1,16 @@
 ﻿namespace LccHotfix
 {
-    public class UIRootCommon : UIRootBase
+    public class UIRootCommon : UIDomainBase
     {
         public override bool OnEscape(ref EscapeType escapeType)
         {
-            escapeType = EscapeType.SKIP_OVER;
+            escapeType = EscapeType.Skip;
             return false;
         }
 
-        public override bool OnChildRequireEscape(WNode child)
+        public override bool OnRequireEscape(ElementNode child)
         {
             return true;
-        }
-
-
-        public override void OnUpdate()
-        {
-            base.OnUpdate();
         }
     }
 }

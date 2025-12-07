@@ -20,7 +20,7 @@ namespace LccHotfix
         #region 打开面板
 
         void OpenPanel(string panelID, params object[] paramsList);
-
+        void OpenPanel(string panelID, string rootName, params object[] paramsList);
 
         /// <summary>
         /// 延迟打开界面
@@ -51,7 +51,7 @@ namespace LccHotfix
 
         #region 查询方法
 
-        UILogicBase GetPanel(string panelID);
+        UIElementBase GetPanel(string panelID);
 
         IUILogic GetPanelLogic(string panelID);
 
@@ -60,7 +60,7 @@ namespace LccHotfix
 
         string GetTopPanelID();
 
-        UILogicBase GetTopPanel();
+        UIElementBase GetTopPanel();
 
         #endregion
 

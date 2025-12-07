@@ -60,7 +60,6 @@ namespace LccHotfix
         {
             Main.WindowService.UICamera = UICamera;
             Main.WindowService.WindowRoot = _windowRoot;
-            Main.WindowService.GetModeFunc = GetWindowMode;
 
 
 
@@ -90,7 +89,10 @@ namespace LccHotfix
         {
             Main.WindowService.OpenWindow(panelID, paramsList);
         }
-
+        public void OpenPanel(string panelID, string rootName, params object[] paramsList)
+        {
+            Main.WindowService.OpenWindow(panelID, rootName,paramsList);
+        }
 
         /// <summary>
         /// 延迟打开界面
@@ -142,12 +144,12 @@ namespace LccHotfix
 
         #region 查询方法
 
-        public UILogicBase GetPanel(string panelID)
+        public UIElementBase GetPanel(string panelID)
         {
-            Window window = Main.WindowService.GetWindow(panelID);
+            ElementNode window = Main.WindowService.GetWindow(panelID);
             if (window != null)
             {
-                return window.Logic as UILogicBase;
+                return window.Logic as UIElementBase;
             }
 
             return null;
@@ -155,7 +157,7 @@ namespace LccHotfix
 
         public IUILogic GetPanelLogic(string panelID)
         {
-            Window window = Main.WindowService.GetWindow(panelID);
+            ElementNode window = Main.WindowService.GetWindow(panelID);
             if (window != null)
             {
                 return window.Logic;
@@ -166,7 +168,7 @@ namespace LccHotfix
 
         public bool IsPanelActive(string panelID)
         {
-            Window window = Main.WindowService.GetWindow(panelID);
+            ElementNode window = Main.WindowService.GetWindow(panelID);
             if (window != null)
             {
                 return window.Active;
@@ -183,10 +185,11 @@ namespace LccHotfix
             return string.Empty;
         }
 
-        public UILogicBase GetTopPanel()
+        public UIElementBase GetTopPanel()
         {
             var window = Main.WindowService.GetTopWindow();
-            if (window != null) return window.Logic as UILogicBase;
+            if (window != null)
+                return window.Logic as UIElementBase;
             return null;
         }
 

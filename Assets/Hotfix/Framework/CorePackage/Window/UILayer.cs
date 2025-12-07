@@ -33,20 +33,20 @@ public class UILayer
     private const int OrderStep = 16;
 
     public UILayerID LayerID { get; }
-    public List<Window> UIPanels { get; } = new();
+    public List<ElementNode> UIPanels { get; } = new();
 
     private bool _bIsVisible = false;
     private bool _bCovered = false;
 
-    // private readonly UIRoot _uiRoot;
+    private readonly UIRoot _uiRoot;
     private GameObject _root;
     private Transform _trans;
     private CanvasGroup _canvasGroup;
 
 
-    public UILayer( /*UIRoot uiRoot,*/ UILayerID layerID)
+    public UILayer( UIRoot uiRoot, UILayerID layerID)
     {
-        // _uiRoot = uiRoot;
+        _uiRoot = uiRoot;
         LayerID = layerID;
     }
 
@@ -69,7 +69,7 @@ public class UILayer
     {
         foreach (var panel in UIPanels)
         {
-            GameObject.Destroy(panel.gameObject);
+            GameObject.Destroy(panel.GameObject);
         }
 
         SetActive(false);
@@ -79,7 +79,7 @@ public class UILayer
         _canvasGroup = null;
     }
 
-    public void AttachPanel(Window panel)
+    public void AttachPanel(ElementNode panel)
     {
         var sortingOrder = 0 == UIPanels.Count ? LayerStep * (int)LayerID : UIPanels.Last().SortingOrder + OrderStep;
         panel.SortingOrder = sortingOrder;
@@ -87,17 +87,17 @@ public class UILayer
         UIPanels.Sort((l, r) => l.SortingOrder - r.SortingOrder);
     }
 
-    public void AttachPanelWidget(Window panel)
+    public void AttachPanelWidget(ElementNode panel)
     {
         // panel.UserWidget.SetLayerRecursive(LayerID == UILayerID.HUD ? UIConstant.LayerMaskHUD : UIConstant.LayerMaskUI);
 
-        var trans = panel.gameObject.GetComponent<RectTransform>();
+        var trans = panel.GameObject.GetComponent<RectTransform>();
         trans.AttachToParent(_trans);
         trans.pivot = new Vector2(0.5f, 0.5f);
 
         panel.Canvas.overrideSorting = true;
         var sortingOrder = panel.SortingOrder;
-        var childCanvases = panel.gameObject.GetComponentsInChildren<Canvas>();
+        var childCanvases = panel.GameObject.GetComponentsInChildren<Canvas>();
         for (int i = 0; i < childCanvases.Length; i++)
         {
             childCanvases[i].sortingOrder += sortingOrder;
@@ -109,13 +109,13 @@ public class UILayer
         }
     }
 
-    public void DetachPanel(Window panel)
+    public void DetachPanel(ElementNode panel)
     {
         panel.SortingOrder = 0;
         UIPanels.Remove(panel);
     }
 
-    public void DetachPanelWidget(Window panel)
+    public void DetachPanelWidget(ElementNode panel)
     {
         if (panel.IsFullScreen)
         {
@@ -123,7 +123,7 @@ public class UILayer
         }
 
         panel.Canvas.overrideSorting = false;
-        panel.gameObject.transform.SetParent(null);
+        panel.GameObject.transform.SetParent(null);
     }
 
     public void SetActive(bool bVisible)

@@ -11,54 +11,8 @@ namespace LccHotfix
             foreach (var item in Main.ConfigService.Tables.TBPanel.DataList)
             {
                 WindowMode mode = new WindowMode();
-                mode.prefabName = item.PrefabName;
-                mode.rootName = item.RootName;
-                mode.logicName = item.LogicName;
-                mode.escapeType = (EscapeType)item.EscapeType;
-                mode.releaseType = (ReleaseType)item.ReleaseType;
-                mode.returnNodeType = item.ReturnNodeType;
-                mode.returnNodeName = item.ReturnNodeName;
-                mode.returnNodeParam = item.ReturnNodeParam;
                 _dict.Add(item.PrefabName, mode);
             }
-
-            // _dict.Add(UIWindowDefine.UILoginPanel, new WindowMode()
-            // {
-            //     prefabName = UIWindowDefine.UILoginPanel,
-            //     depth = 0,
-            //     logicName = UIWindowDefine.UILoginPanel,
-            //     bgTex = "",
-            //     openAnim = false,
-            //     sound = 0,
-            //     showScreenMask = 0,
-            //     escapeType = EscapeType.AUTO_CLOSE,
-            //     releaseType = ReleaseType.AUTO,
-            //     rejectFlag = (int)RejectFlag.NONE,
-            //     windowFlag = (int)NodeFlag.FULL_SCREEN,
-            //     rootName = UIRootDefine.UIRootLogin,
-            //     returnNodeName = "",
-            //     returnNodeType = (int)NodeType.WINDOW,
-            //     returnNodeParam = 0
-            // });
-            //
-            // _dict.Add(UIWindowDefine.UIMainPanel, new WindowMode()
-            // {
-            //     prefabName = UIWindowDefine.UIMainPanel,
-            //     depth = 0,
-            //     logicName = UIWindowDefine.UIMainPanel,
-            //     bgTex = "",
-            //     openAnim = false,
-            //     sound = 0,
-            //     showScreenMask = 0,
-            //     escapeType = EscapeType.AUTO_CLOSE,
-            //     releaseType = ReleaseType.AUTO,
-            //     rejectFlag = (int)RejectFlag.MAIN,
-            //     windowFlag = (int)NodeFlag.FULL_SCREEN,
-            //     rootName = UIRootDefine.UIRootMain,
-            //     returnNodeName = "",
-            //     returnNodeType = (int)NodeType.WINDOW,
-            //     returnNodeParam = 0
-            // });
         }
 
         public WindowMode GetWindowMode(string windowName)

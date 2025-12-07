@@ -17,38 +17,13 @@ public interface IWindowService : IService
     /// </summary>
     Camera UICamera { get; set; }
 
-    #region Res
-
-    /// <summary>
-    /// 同步加载GameObject
-    /// </summary>
     Action<AssetLoader, string, Action<GameObject>> LoadAsyncGameObject { get; set; }
 
-    #endregion
 
-    #region Types
-
-    //初始化获取logic类
     void InitializeForAssembly(Assembly assembly);
-
-    //根据窗口，创建logic
-    void CreateUILogic(Window window);
-
-    IUILogic CreateLogic(string logicName, Window window);
-
-    #endregion
-
-    #region Action
-
-
-    /// <summary>
-    /// 从表里获取窗口的配置
-    /// </summary>
-    Func<string, WindowMode> GetModeFunc { get; set; }
-
-    #endregion
-
-    WRootNode CommonRoot { get; }
+    IUILogic CreateLogic(string logicName, UINode node);
+    
+    DomainNode CommonRoot { get; }
 
     //初始化通用节点
     void Init();
@@ -64,9 +39,9 @@ public interface IWindowService : IService
     /// <param name="param"></param>
     /// <returns></returns>
     void OpenWindow(string windowName, object[] param);
-
+    void OpenWindow(string windowName, string rootName, object[] param);
     //打开根节点
-    WRootNode OpenRoot(string rootName, object[] param);
+    DomainNode OpenRoot(string rootName, object[] param);
 
     /// <summary>
     /// 关闭一个窗口
@@ -89,10 +64,10 @@ public interface IWindowService : IService
     /// 关闭root时从栈内移除
     /// </summary>
     /// <param name="root"></param>
-    void RemoveRoot(WRootNode root);
+    void RemoveRoot(DomainNode root);
 
     //增加到释放队列
-    void AddToReleaseQueue(WNode node);
+    void AddToReleaseQueue(UINode node);
 
     /// <summary>
     /// 释放全部window资源
@@ -110,14 +85,14 @@ public interface IWindowService : IService
     void OnWindowClose(string windowName, object backValue);
 
     //获取窗口，根据窗口名称
-    Window GetWindow(string windowName);
+    ElementNode GetWindow(string windowName);
 
     //获取根节点，根据根节点名称
-    WRootNode GetRoot(string rootName);
+    DomainNode GetRoot(string rootName);
 
     //获取栈顶的根节点
-    WRootNode GetTopRoot();
+    DomainNode GetTopRoot();
 
     //获取栈顶的最新窗口
-    Window GetTopWindow();
+    ElementNode GetTopWindow();
 }

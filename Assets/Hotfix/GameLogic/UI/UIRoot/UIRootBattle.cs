@@ -1,6 +1,6 @@
 ﻿namespace LccHotfix
 {
-	public class UIRootBattle : UIRootBase
+	public class UIRootBattle : UIDomainBase
 	{
 	}
 }

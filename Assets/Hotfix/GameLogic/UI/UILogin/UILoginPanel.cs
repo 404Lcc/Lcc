@@ -5,13 +5,21 @@ using UnityEngine.UI;
 
 namespace LccHotfix
 {
-    public class UILoginPanel : UILogicBase, ICoroutine
+    public class UILoginPanel : UIElementBase, ICoroutine
     {
         public Button startBtn;
 
-        public override void OnStart()
+        public override void OnInit()
         {
-            base.OnStart();
+            base.OnInit();
+            
+            var e = Node as ElementNode;
+            e.IsFullScreen = true;
+        }
+
+        public override void OnCreate()
+        {
+            base.OnCreate();
             startBtn.onClick.AddListener(OnStartBtn);
 
             //this.StartCoroutine(Open());
@@ -19,11 +27,11 @@ namespace LccHotfix
 
         }
 
-        public override void OnOpen(object[] paramsList)
+        public override void OnShow(object[] paramsList)
         {
-            base.OnOpen(paramsList);
-            // Main.WindowService.OpenWindow(UIPanelDefine.UIMainPanel, null);
-            Main.WindowService.OpenRoot(UIRootDefine.UIRootBattle, null);
+            base.OnShow(paramsList);
+            Main.WindowService.OpenWindow(UIPanelDefine.UIMainPanel, null);
+            // Main.WindowService.OpenRoot(UIRootDefine.UIRootBattle, null);
         }
 
 
@@ -59,7 +67,8 @@ namespace LccHotfix
 
         public void OnStartBtn()
         {
-            Main.ProcedureService.ChangeProcedure(ProcedureType.Main.ToInt());
+            Main.WindowService.OpenWindow(UIPanelDefine.UIBattlePanel, null);
+            // Main.ProcedureService.ChangeProcedure(ProcedureType.Main.ToInt());
         }
     }
 }

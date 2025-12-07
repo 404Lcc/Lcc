@@ -1,6 +1,6 @@
 ﻿namespace LccHotfix
 {
-	public class UIRootLogin : UIRootBase
+	public class UIRootLogin : UIDomainBase
 	{
 
 	}

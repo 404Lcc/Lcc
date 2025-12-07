@@ -14,8 +14,8 @@
     /// </summary>
     public enum NodePhase
     {
-        DEACTIVE, //未激活
-        ACTIVE //激活显示
+        Create, //创建
+        Show //显示
     }
 
     /// <summary>
@@ -23,7 +23,6 @@
     /// </summary>
     public enum ReleaseType
     {
-        IMMEDIATE = -1, //立即销毁
         AUTO = 0, //延时自动销毁
         CHANGE_PROCEDURE = 1, //切换流程
         DEEPLY = 2, //深度清理
@@ -35,8 +34,7 @@
     /// </summary>
     public enum EscapeType
     {
-        SKIP_OVER = 0, //跳过
-        AUTO_CLOSE = 1, //关闭
-        REFUSE_AND_BREAK = 2, //中断
+        Skip = 0, //跳过
+        Hide = 1, //隐藏
     }
 }

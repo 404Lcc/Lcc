@@ -1,10 +1,39 @@
+using System.Collections.Generic;
+using UnityEngine.UI;
+
 namespace LccHotfix
 {
-    public class UIBattlePanel : UILogicBase, ICoroutine
+    public class UIBattlePanel : UIElementBase, ICoroutine
     {
-        public override void OnStart()
+        public Button startBtn;
+        public override void OnInit()
         {
-            base.OnStart();
+            base.OnInit();
+
+            var e = Node as ElementNode;
+            e.IsFullScreen = true;
+        }
+
+        public override void OnCreate()
+        {
+            base.OnCreate();
+            startBtn.onClick.AddListener(OnStartBtn);
+
+        }
+
+        public override void OnShow(object[] paramsList)
+        {
+            base.OnShow(paramsList);
+            Main.WindowService.OpenWindow(UIPanelDefine.UIMainPanel, null);
+            // Main.WindowService.OpenRoot(UIRootDefine.UIRootBattle, null);
+        }
+
+
+
+
+        public void OnStartBtn()
+        {
+            Main.WindowService.OpenWindow(UIPanelDefine.UIMainPanel, null);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace LccHotfix
         NormalHP, //普通血条
     }
 
-    public class UIHeadbarPanel : UILogicBase, ICoroutine
+    public class UIHeadbarPanel : UIElementBase, ICoroutine
     {
         public int maxCount = 20;
 
@@ -16,15 +16,22 @@ namespace LccHotfix
 
         public GameObject normalTemplate;
 
-        public override void OnOpen(object[] paramsList)
+        public override void OnInit()
         {
-            base.OnOpen(paramsList);
+            base.OnInit();
+            
+            
+        }
+
+        public override void OnShow(object[] paramsList)
+        {
+            base.OnShow(paramsList);
 
             ClientTools.SetCachedItemHide(normalList);
 
             for (int i = 0; i < maxCount; i++)
             {
-                ClientTools.GetOneCached(normalList, transform.gameObject, normalTemplate);
+                ClientTools.GetOneCached(normalList, RectTransform.gameObject, normalTemplate);
             }
 
             ClientTools.SetCachedItemHide(normalList);
@@ -38,7 +45,7 @@ namespace LccHotfix
             switch (type)
             {
                 case HeadbarType.NormalHP:
-                    var item = ClientTools.GetOneCached(normalList, transform.gameObject, normalTemplate);
+                    var item = ClientTools.GetOneCached(normalList, RectTransform.gameObject, normalTemplate);
                     item.Init(entity, offsetY);
                     return item;
             }
@@ -52,9 +59,9 @@ namespace LccHotfix
             hud.Hide();
         }
 
-        public override object OnClose()
+        public override object OnHide()
         {
-            return base.OnClose();
+            return base.OnHide();
 
             ClientTools.SetCachedItemHide(normalList);
         }

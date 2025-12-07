@@ -19,7 +19,7 @@ namespace LccHotfix
         Right,
     }
 
-    public class UITipsBase : UILogicBase
+    public class UITipsBase : UIElementBase
     {
         private Camera _uiCamera;
         private RectTransform _maxRect;
@@ -36,14 +36,14 @@ namespace LccHotfix
 
         private bool _isInit;
 
-        public override void OnOpen(object[] paramsList)
+        public override void OnShow(object[] paramsList)
         {
-            base.OnOpen(paramsList);
+            base.OnShow(paramsList);
 
             _uiCamera = Main.CameraService.UICamera;
-            _maxRect = gameObject.transform as RectTransform;
+            _maxRect = GameObject.transform as RectTransform;
 
-            Init(TipsAutoDirType.Auto, gameObject.transform.Find("MaxRect/TipsRect").transform as RectTransform, null);
+            Init(TipsAutoDirType.Auto, GameObject.transform.Find("MaxRect/TipsRect").transform as RectTransform, null);
 
         }
 
