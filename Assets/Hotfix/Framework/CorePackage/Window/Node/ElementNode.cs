@@ -17,27 +17,35 @@ namespace LccHotfix
 
     public class ElementNode : UINode
     {
-        //返回节点类型
-        public NodeType ReturnNodeType{ get;  set; }
-        //返回节点名称
-        public string ReturnNodeName{ get;  set; }
-        //返回节点参数
-        public int ReturnNodeParam{ get;  set; }
-        
-        public TurnNode ReturnNode { get; protected set; }
-        public UILayerID LayerID { get;  set; }
-        public bool IsFullScreen { get;  set; }
-        public int SortingOrder { get; set; }
-
         public Canvas Canvas { get; protected set; }
         public GraphicRaycaster Raycaster { get; protected set; }
         public CanvasGroup CanvasGroup { get; protected set; }
         public GameObject GameObject { get; protected set; }
         public RectTransform RectTransform { get; protected set; }
+        public TurnNode ReturnNode { get; protected set; }
+
+        //返回节点类型
+        public NodeType ReturnNodeType { get; set; }
+
+        //返回节点名称
+        public string ReturnNodeName { get; set; }
+
+        //返回节点参数
+        public int ReturnNodeParam { get; set; }
+
+        //层级ID
+        public UILayerID LayerID { get; set; }
+
+        //是否全屏
+        public bool IsFullScreen { get; set; }
+
+        //渲染顺序
+        public int SortingOrder { get; set; }
 
         public ElementNode(string nodeName)
         {
             NodeName = nodeName;
+            Logic = Main.WindowService.CreateLogic(nodeName, this);
         }
 
         #region 必要流程
@@ -76,7 +84,7 @@ namespace LccHotfix
 
                 //把自己节点状态设置为显示
                 NodePhase = NodePhase.Show;
-                
+
                 if (DomainNode != null)
                 {
                     DomainNode.AddChildNode(this);
@@ -84,7 +92,7 @@ namespace LccHotfix
 
                 //内部打开
                 GameObject.SetActive(true);
-                
+
                 DoShow(param);
             }
         }
@@ -94,7 +102,7 @@ namespace LccHotfix
             if (NodePhase == NodePhase.Show)
             {
                 Log.Debug($"[UI] 隐藏 {NodeName}");
-                
+
                 if (DomainNode != null)
                 {
                     //从域中移除当前节点
@@ -190,7 +198,7 @@ namespace LccHotfix
         {
             //内部隐藏
             GameObject.SetActive(false);
-            
+
             var returnValue = Logic.OnHide();
 
             //触发关闭节点回调
@@ -207,13 +215,13 @@ namespace LccHotfix
             Object.Destroy(GameObject);
             GameObject = null;
         }
-        
+
         protected override void DoDetachedFromRoot()
         {
             Main.WindowService.GetUILayer(LayerID).DetachPanel(this);
             UIRoot = null;
         }
-        
+
         protected override bool DoEscape(ref EscapeType escape)
         {
             escape = EscapeType;

@@ -11,7 +11,6 @@ namespace LccHotfix
         private Transform _windowRoot;
         private GameObject _uiMask;
         private Camera _uiCamera;
-        private IUIHelper _uiHelper;
 
         public Camera UICamera
         {
@@ -43,45 +42,20 @@ namespace LccHotfix
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-
         }
 
         internal override void Shutdown()
         {
-
-        }
-
-        public void SetUIHelper(IUIHelper uiHelper)
-        {
-            _uiHelper = uiHelper;
         }
 
         public void Init()
         {
             Main.WindowService.UICamera = UICamera;
             Main.WindowService.WindowRoot = _windowRoot;
-
-
-
             Main.WindowService.LoadAsyncGameObject = (loader, asset, end) => { loader.LoadAssetAsync<GameObject>(asset, handle => { end?.Invoke(handle.AssetObject as GameObject); }); };
             Main.WindowService.InitializeForAssembly(Launcher.Instance.HotfixAssembly);
             Main.WindowService.Init();
         }
-
-
-
-        public WindowMode GetWindowMode(string windowName)
-        {
-            return _uiHelper.GetWindowMode(windowName);
-        }
-
-
-
-
-
-
-
-
 
         #region 打开面板
 
@@ -89,9 +63,10 @@ namespace LccHotfix
         {
             Main.WindowService.OpenWindow(panelID, paramsList);
         }
+
         public void OpenPanel(string panelID, string rootName, params object[] paramsList)
         {
-            Main.WindowService.OpenWindow(panelID, rootName,paramsList);
+            Main.WindowService.ShowWindow(panelID, rootName, paramsList);
         }
 
         /// <summary>
@@ -122,12 +97,11 @@ namespace LccHotfix
 
         #endregion
 
-
         #region 关闭面板
 
         public object ClosePanel(string panelID)
         {
-            return Main.WindowService.CloseWindow(panelID);
+            return Main.WindowService.HideWindow(panelID);
         }
 
 
@@ -194,7 +168,5 @@ namespace LccHotfix
         }
 
         #endregion
-
-
     }
 }

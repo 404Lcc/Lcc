@@ -69,18 +69,7 @@ namespace LccHotfix
 
 		public UIRoot Root;
 
-		//初始化获取logic类
-		public void InitializeForAssembly(Assembly assembly)
-		{
-			var types = assembly.GetTypes();
-			foreach (Type t in types)
-			{
-				if (typeof(IUILogic).IsAssignableFrom(t))
-				{
-					_uiLogics[t.Name] = t;
-				}
-			}
-		}
+
 		
 
 		//根据logic名称，创建logic
@@ -98,7 +87,19 @@ namespace LccHotfix
 			return logic;
 		}
 
-
+		//初始化获取logic类
+		public void InitializeForAssembly(Assembly assembly)
+		{
+			var types = assembly.GetTypes();
+			foreach (Type t in types)
+			{
+				if (typeof(IUILogic).IsAssignableFrom(t))
+				{
+					_uiLogics[t.Name] = t;
+				}
+			}
+		}
+		
 		//初始化通用节点
 		public void Init()
 		{
@@ -114,7 +115,9 @@ namespace LccHotfix
 				_uiLayerDict[layerId] = layer;
 			}
 		}
+		
 
+		
 		public UILayer GetUILayer(UILayerID layerID)
 		{
 			if (_uiLayerDict.TryGetValue(layerID, out var layer))
@@ -167,7 +170,7 @@ namespace LccHotfix
 		//关闭
 		internal override void Shutdown()
 		{
-			CloseAllWindow();
+			HideAllWindow();
 			_commonRoot.Destroy();
 			Root.Detach(_commonRoot);
 			ReleaseAllWindow(ReleaseType.NEVER);
@@ -333,6 +336,7 @@ namespace LccHotfix
 			if (root == null)
 			{
 				root = new DomainNode(rootName);
+				root.DomainNode = root;
 				root.Init();
 				Root.Attach(rootName, root);
 				root.Create();
@@ -355,7 +359,6 @@ namespace LccHotfix
 			}
 
 			var newWindow = new ElementNode(windowName);
-			newWindow.Logic = CreateLogic(windowName, newWindow);
 			newWindow.Init();
 			Root.Attach(windowName, newWindow);
 			isNewCreate = true;
@@ -446,15 +449,8 @@ namespace LccHotfix
 			}
 		}
 		
-		/// <summary>
-		/// 打开一个界面
-		/// 这里只是创建，并不会改变当前栈结构
-		/// 确认界面可打开后才会继续
-		/// </summary>
-		/// <param name="windowName"></param>
-		/// <param name="param"></param>
-		/// <returns></returns>
-		public void OpenWindow(string windowName, string rootName, object[] param)
+
+		public void ShowWindow(string windowName, string rootName, object[] param)
 		{
 			if (_switchingNode != null)
 			{
@@ -494,16 +490,16 @@ namespace LccHotfix
 		}
 		
 		//打开根节点
-		public DomainNode OpenRoot(string rootName, object[] param)
+		public void OpenRoot(string rootName, object[] param)
 		{
 			if (_switchingNode != null)
 			{
 				Log.Error($"request open window {rootName} during switch one other window {_switchingNode.NodeName}");
-				return null;
+				return;
 			}
 
 			if (string.IsNullOrEmpty(rootName))
-				return null;
+				return ;
 
 			//找root节点，如果没有就新建一个
 			DomainNode root = GetAndCreateRoot(rootName);
@@ -512,7 +508,6 @@ namespace LccHotfix
 			//切换窗口
 			SwitchWindow(root, param);
 
-			return root;
 		}
 
 
@@ -524,7 +519,7 @@ namespace LccHotfix
 		/// </summary>
 		/// <param name="windowClose"></param>
 		/// <returns></returns>
-		public object CloseWindow(string windowClose)
+		public object HideWindow(string windowClose)
 		{
 			if (string.IsNullOrEmpty(windowClose))
 				return null;
@@ -551,7 +546,7 @@ namespace LccHotfix
 		}
 
 		//关闭全部窗口
-		public void CloseAllWindow()
+		public void HideAllWindow()
 		{
 			//todo 判断如果有资源加载完成才能加进去
 			//如果有切换中的节点，则加入释放列表

@@ -31,10 +31,9 @@ namespace LccHotfix
         public DomainNode(string rootName)
         {
             this.NodeName = rootName;
-            this.DomainNode = this;
+            this.Logic = Main.WindowService.CreateLogic(rootName, this);
             this.EscapeType = EscapeType.Hide;
             this.ReleaseType = ReleaseType.AUTO;
-            this.Logic = Main.WindowService.CreateLogic(rootName, this);
         }
 
         #region 必要流程
@@ -99,7 +98,7 @@ namespace LccHotfix
 
                 //把自己节点状态设置为显示
                 NodePhase = NodePhase.Show;
-                
+
                 DoShow(param);
             }
         }
@@ -109,7 +108,7 @@ namespace LccHotfix
             if (NodePhase == NodePhase.Show)
             {
                 Log.Debug($"[UI] 隐藏 {NodeName}");
-                
+
                 //移除当前域
                 Main.WindowService.RemoveRoot(this);
 
@@ -236,12 +235,12 @@ namespace LccHotfix
         {
             Logic?.OnInit();
         }
-        
+
         protected override void DoAttachedToRoot(IUIRoot uiRoot)
         {
             UIRoot = uiRoot;
         }
-        
+
         protected override void DoCreate()
         {
             Logic?.OnCreate();
@@ -298,7 +297,7 @@ namespace LccHotfix
         {
             Logic?.OnDestroy();
         }
-        
+
         protected override void DoDetachedFromRoot()
         {
             UIRoot = null;
@@ -310,7 +309,7 @@ namespace LccHotfix
 
             if (escape == EscapeType.Skip)
                 return false;
-            
+
             if (Logic != null)
             {
                 if (!Logic.OnEscape(ref escape))
@@ -344,10 +343,10 @@ namespace LccHotfix
                 {
                     switch (turn.nodeType)
                     {
-                        case NodeType.ROOT:
+                        case NodeType.Domain:
                             Main.WindowService.OpenRoot(turn.nodeName, turn.nodeParam);
                             break;
-                        case NodeType.WINDOW:
+                        case NodeType.Element:
                             Main.WindowService.OpenWindow(turn.nodeName, turn.nodeParam);
                             break;
                     }
@@ -449,7 +448,7 @@ namespace LccHotfix
                 list.Add(item);
             }
         }
-        
+
         /// <summary>
         /// 尝试获取某个子节点
         /// </summary>
@@ -500,20 +499,6 @@ namespace LccHotfix
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// 隐藏所有子节点
-        /// </summary>
-        public void HideAllChildNode()
-        {
-            if (NodeList == null || NodeList.Count == 0)
-                return;
-
-            for (int i = NodeList.Count - 1; i >= 0; i--)
-            {
-                NodeList[i].Hide();
-            }
         }
 
         /// <summary>

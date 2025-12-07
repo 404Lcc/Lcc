@@ -13,13 +13,11 @@ public static class RectTransformEx
 {
     public static void AttachToParent(this RectTransform transform, Transform parent)
     {
-        // Attached to (0, 0), Scale(1.0, 1.0, 1.0)
         transform.SetParent(parent, false);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
         transform.localScale = Vector3.one;
 
-        // Full adaptive, no padding
         transform.anchoredPosition = Vector2.zero;
         transform.anchorMin = Vector2.zero;
         transform.anchorMax = Vector2.one;

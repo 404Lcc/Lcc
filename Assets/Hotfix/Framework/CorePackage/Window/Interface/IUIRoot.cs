@@ -23,7 +23,7 @@ namespace LccHotfix
         /// UIRoot的布局
         /// </summary>
         public Transform Transform { get; }
-        
+
         /// <summary>
         /// 初始化一张画布，进入可以渲染IUIElement的状态
         /// </summary>
@@ -66,7 +66,5 @@ namespace LccHotfix
         /// 将IUIElement从画布上摘除
         /// </summary>
         public UINode DetachByKey(string elementKey);
-
-
     }
 }

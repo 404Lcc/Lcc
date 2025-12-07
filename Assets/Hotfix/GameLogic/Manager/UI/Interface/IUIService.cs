@@ -8,13 +8,11 @@ namespace LccHotfix
     {
         Camera UICamera { get; }
 
-        void SetUIHelper(IUIHelper uiHelper);
+
 
         void Init();
 
 
-
-        WindowMode GetWindowMode(string windowName);
 
 
         #region 打开面板

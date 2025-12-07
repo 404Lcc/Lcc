@@ -1,64 +1,40 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Reflection;
 using LccHotfix;
 using UnityEngine;
 
 public interface IWindowService : IService
 {
-    /// <summary>
-    /// 获取窗口的父节点
-    /// </summary>
     Transform WindowRoot { get; set; }
-
-    /// <summary>
-    /// ui相机
-    /// </summary>
     Camera UICamera { get; set; }
-
     Action<AssetLoader, string, Action<GameObject>> LoadAsyncGameObject { get; set; }
-
-
+    void Init();
     void InitializeForAssembly(Assembly assembly);
     IUILogic CreateLogic(string logicName, UINode node);
-    
-    DomainNode CommonRoot { get; }
-
-    //初始化通用节点
-    void Init();
 
     UILayer GetUILayer(UILayerID layerID);
 
     /// <summary>
-    /// 打开一个界面
-    /// 这里只是创建，并不会改变当前栈结构
-    /// 确认界面可打开后才会继续
+    /// 打开一个界面，这里只是创建，并不会改变当前栈结构，确认界面可打开后才会继续
     /// </summary>
-    /// <param name="windowName"></param>
-    /// <param name="param"></param>
-    /// <returns></returns>
     void OpenWindow(string windowName, object[] param);
-    void OpenWindow(string windowName, string rootName, object[] param);
-    //打开根节点
-    DomainNode OpenRoot(string rootName, object[] param);
+
+    void ShowWindow(string windowName, string rootName, object[] param);
+
+    void OpenRoot(string rootName, object[] param);
 
     /// <summary>
-    /// 关闭一个窗口
-    /// window是有作用域的
-    /// 通过这个方法默认是关闭一个栈内的全屏窗口或当前栈顶窗口的子窗口
-    /// 不能用来关闭一个不活跃窗口的子窗口
+    /// 关闭一个窗口，通过这个方法默认是关闭一个栈内的一个界面（不能用来关闭一个不活跃窗口的子窗口）
     /// </summary>
     /// <param name="windowClose"></param>
     /// <returns></returns>
-    object CloseWindow(string windowClose);
+    object HideWindow(string windowClose);
 
     //关闭全部窗口
-    void CloseAllWindow();
+    void HideAllWindow();
 
     //返回键请求关闭窗口处理
     void EscapeTopWindow();
-
 
     /// <summary>
     /// 关闭root时从栈内移除

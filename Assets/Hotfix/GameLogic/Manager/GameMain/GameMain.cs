@@ -98,7 +98,6 @@ namespace LccHotfix
 
             HotfixBridgeService.Init();
             LanguageService.Init();
-            UIService.SetUIHelper(new UIHelper());
             UIService.Init();
             FishNetService.Init();
             MirrorService.Init();

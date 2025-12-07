@@ -5,8 +5,8 @@
     /// </summary>
     public enum NodeType
     {
-        WINDOW = 0, //窗口
-        ROOT = 1, //根节点
+        Element = 0, //UI元素
+        Domain = 1, //域
     }
 
     /// <summary>

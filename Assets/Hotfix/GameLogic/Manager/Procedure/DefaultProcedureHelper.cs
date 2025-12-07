@@ -25,7 +25,7 @@ namespace LccHotfix
 
         public void UnloadAllPanel(LoadProcedureHandler last, LoadProcedureHandler cur)
         {
-            Main.WindowService.CloseAllWindow();
+            Main.WindowService.HideAllWindow();
 
             if (cur.deepClean || (last != null && last.deepClean))
             {
@@ -49,7 +49,7 @@ namespace LccHotfix
             if (Main.UIService.OpenSpecialPanel(node))
                 return;
 
-            if (node.nodeType == NodeType.ROOT)
+            if (node.nodeType == NodeType.Domain)
             {
                 Main.WindowService.OpenRoot(node.nodeName, node.nodeParam);
             }

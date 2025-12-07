@@ -1,17 +1,14 @@
 ﻿using System;
-using UnityEngine;
 
 namespace LccHotfix
 {
     public abstract class UINode
     {
+        //UI根
+        public IUIRoot UIRoot { get; protected set; }
+
         //节点名
         public string NodeName { get; protected set; }
-        //回退类型
-        public EscapeType EscapeType { get; set; }
-
-        //释放类型
-        public ReleaseType ReleaseType { get; set; } = ReleaseType.AUTO;
 
         //是否被遮挡
         public bool IsCovered { get; protected set; }
@@ -25,12 +22,18 @@ namespace LccHotfix
         //逻辑接口
         public IUILogic Logic { get; set; }
 
-        public IUIRoot UIRoot { get; set; }
         //域
         public DomainNode DomainNode { get; set; }
 
+        //回退类型
+        public EscapeType EscapeType { get; set; }
+
+        //释放类型
+        public ReleaseType ReleaseType { get; set; } = ReleaseType.AUTO;
+
         //释放计时器
         public int ReleaseTimer { get; set; }
+
 
         public bool AutoRemove()
         {
@@ -56,7 +59,7 @@ namespace LccHotfix
         {
             DoAttachedToRoot(uiRoot);
         }
-        
+
         public void Create()
         {
             NodePhase = NodePhase.Create;
@@ -93,7 +96,7 @@ namespace LccHotfix
         {
             DoDestroy();
         }
-        
+
         public void DetachedFromRoot()
         {
             DoDetachedFromRoot();
@@ -105,13 +108,15 @@ namespace LccHotfix
 
         #region 接口
 
+        //初始化
         protected abstract void DoInit();
-        
+
+        //挂载到UI根
         protected abstract void DoAttachedToRoot(IUIRoot uiRoot);
-        
+
         //创建
         protected abstract void DoCreate();
-        
+
         //切换窗口
         protected abstract void DoSwitch(Action<bool> callback);
 
@@ -132,7 +137,8 @@ namespace LccHotfix
 
         //删除
         protected abstract void DoDestroy();
-        
+
+        //从UI根移除
         protected abstract void DoDetachedFromRoot();
 
         //处理窗口返回
