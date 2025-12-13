@@ -277,6 +277,7 @@ namespace LccHotfix
         {
             if (_itemDict.ContainsKey(index))
             {
+                _itemDict[index].gameObject.SetActive(false);
                 _pool.Release(_itemDict[index]);
                 _itemDict.Remove(index);
             }
