@@ -34,7 +34,7 @@ namespace LccHotfix
             }
         }
 
-        public virtual void OnInit()
+        public virtual void OnConstruct()
         {
             
         }

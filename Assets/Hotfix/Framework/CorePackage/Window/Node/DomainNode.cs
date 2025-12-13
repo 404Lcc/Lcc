@@ -231,9 +231,9 @@ namespace LccHotfix
 
         #region 必要接口
 
-        protected override void DoInit()
+        protected override void DoConstruct()
         {
-            Logic?.OnInit();
+            Logic?.OnConstruct();
         }
 
         protected override void DoAttachedToRoot(IUIRoot uiRoot)
@@ -344,7 +344,7 @@ namespace LccHotfix
                     switch (turn.nodeType)
                     {
                         case NodeType.Domain:
-                            Main.WindowService.OpenRoot(turn.nodeName, turn.nodeParam);
+                            Main.WindowService.ShowRoot(turn.nodeName, turn.nodeParam);
                             break;
                         case NodeType.Element:
                             Main.WindowService.OpenWindow(turn.nodeName, turn.nodeParam);

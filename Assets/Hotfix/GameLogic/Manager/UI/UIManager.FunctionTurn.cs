@@ -69,7 +69,7 @@ namespace LccHotfix
 
                 if (turn.nodeType == NodeType.Domain)
                 {
-                    Main.WindowService.OpenRoot(turn.nodeName, turn.nodeParam);
+                    Main.WindowService.ShowRoot(turn.nodeName, turn.nodeParam);
                 }
                 else
                 {

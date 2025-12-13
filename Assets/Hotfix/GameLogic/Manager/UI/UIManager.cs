@@ -53,7 +53,6 @@ namespace LccHotfix
             Main.WindowService.UICamera = UICamera;
             Main.WindowService.WindowRoot = _windowRoot;
             Main.WindowService.LoadAsyncGameObject = (loader, asset, end) => { loader.LoadAssetAsync<GameObject>(asset, handle => { end?.Invoke(handle.AssetObject as GameObject); }); };
-            Main.WindowService.InitializeForAssembly(Launcher.Instance.HotfixAssembly);
             Main.WindowService.Init();
         }
 

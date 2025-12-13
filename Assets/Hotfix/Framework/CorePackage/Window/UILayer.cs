@@ -6,6 +6,8 @@ using UnityEngine;
 public enum UILayerID
 {
     HUD,
+    Main,
+    Popup,
     Debug
 }
 
@@ -52,7 +54,7 @@ public class UILayer
     {
         var go = new GameObject("Layer_" + LayerID.ToString())
         {
-            // layer = LayerID == UILayerID.HUD ? UIConstant.LayerMaskHUD : UIConstant.LayerMaskUI
+            layer = UIConstant.LayerMaskUI
         };
         var trans = go.AddComponent<RectTransform>();
         trans.AttachToParent(rootTransform);
@@ -119,9 +121,16 @@ public class UILayer
         {
             // _uiRoot?.PanelLeaveFullscreen(panel);
         }
+        
+        var sortingOrder = panel.SortingOrder;
+        var childCanvases = panel.GameObject.GetComponentsInChildren<Canvas>();
+        for (int i = 0; i < childCanvases.Length; i++)
+        {
+            childCanvases[i].sortingOrder -= sortingOrder;
+        }
 
         panel.Canvas.overrideSorting = false;
-        panel.GameObject.transform.SetParent(null);
+        // panel.GameObject.transform.SetParent(null);
     }
 
     public void SetActive(bool bVisible)

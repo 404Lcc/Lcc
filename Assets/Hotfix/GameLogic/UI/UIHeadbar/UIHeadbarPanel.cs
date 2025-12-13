@@ -16,11 +16,13 @@ namespace LccHotfix
 
         public GameObject normalTemplate;
 
-        public override void OnInit()
+        public override void OnConstruct()
         {
-            base.OnInit();
+            base.OnConstruct();
             
-            
+            var e = Node as ElementNode;
+            e.IsFullScreen = true;
+            e.EscapeType = EscapeType.Skip;
         }
 
         public override void OnShow(object[] paramsList)

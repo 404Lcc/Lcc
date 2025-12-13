@@ -6,9 +6,9 @@ namespace LccHotfix
     public class UIBattlePanel : UIElementBase, ICoroutine
     {
         public Button startBtn;
-        public override void OnInit()
+        public override void OnConstruct()
         {
-            base.OnInit();
+            base.OnConstruct();
 
             var e = Node as ElementNode;
             e.IsFullScreen = true;

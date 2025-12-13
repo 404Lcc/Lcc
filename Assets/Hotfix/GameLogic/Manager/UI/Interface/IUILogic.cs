@@ -12,7 +12,7 @@ namespace LccHotfix
         /// <summary>
         /// 初始化参数
         /// </summary>
-        void OnInit();
+        void OnConstruct();
         
         /// <summary>
         /// 创建

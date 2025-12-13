@@ -20,7 +20,7 @@ namespace LccHotfix
 		/// </summary>
 		private DomainNode _commonRoot;
 
-		public DomainNode CommonRoot => _commonRoot;
+		private Dictionary<string, Type> _uiLogics = new Dictionary<string, Type>();
 
 		/// <summary>
 		/// 等待释放的窗口
@@ -31,7 +31,7 @@ namespace LccHotfix
 		/// 被关闭界面会自动缓存多少帧然后释放
 		/// 30s
 		/// </summary>
-		public int autoCacheTime = 900;
+		private int _autoCacheTime = 900;
 
 		/// <summary>
 		/// 窗口关闭回调
@@ -49,6 +49,7 @@ namespace LccHotfix
 		//释放节点
 		private RectTransform _releaseRoot;
 
+		public IUIRoot Root { get; protected set; }
 		/// <summary>
 		/// 获取窗口的父节点
 		/// </summary>
@@ -59,75 +60,31 @@ namespace LccHotfix
 		/// </summary>
 		public Camera UICamera { get; set; }
 
-		private Dictionary<UILayerID, UILayer> _uiLayerDict = new Dictionary<UILayerID, UILayer>();
-
-		private Dictionary<string, Type> _uiLogics = new Dictionary<string, Type>();
+		public DomainNode CommonRoot => _commonRoot;
+		
+		
 		/// <summary>
 		/// 异步加载GameObject
 		/// </summary>
 		public Action<AssetLoader, string, Action<GameObject>> LoadAsyncGameObject { get; set; }
 
-		public UIRoot Root;
-
-
-		
-
-		//根据logic名称，创建logic
-		public IUILogic CreateLogic(string logicName, UINode node)
+		//初始化
+		public void Init()
 		{
-			Debug.Assert(!string.IsNullOrEmpty(logicName));
-
-			IUILogic logic = null;
-			if (_uiLogics.TryGetValue(logicName, out Type monoType))
-			{
-				logic = Activator.CreateInstance(monoType) as IUILogic;
-				logic.Node = node;
-			}
-
-			return logic;
-		}
-
-		//初始化获取logic类
-		public void InitializeForAssembly(Assembly assembly)
-		{
-			var types = assembly.GetTypes();
-			foreach (Type t in types)
+			foreach (Type t in GetType().Assembly.GetTypes())
 			{
 				if (typeof(IUILogic).IsAssignableFrom(t))
 				{
 					_uiLogics[t.Name] = t;
 				}
 			}
-		}
-		
-		//初始化通用节点
-		public void Init()
-		{
+			
 			Root = new UIRoot(WindowRoot.gameObject);
+			Root.Initialize();
 			_commonRoot = GetAndCreateRoot("UIRootCommon");
 			_commonRoot.StackIndex = 0;
 			_commonRoot.Show(null);
-
-			for (UILayerID layerId = UILayerID.HUD; layerId <= UILayerID.Debug; layerId++)
-			{
-				var layer = new UILayer(Root, layerId);
-				layer.Create(WindowRoot);
-				_uiLayerDict[layerId] = layer;
-			}
 		}
-		
-
-		
-		public UILayer GetUILayer(UILayerID layerID)
-		{
-			if (_uiLayerDict.TryGetValue(layerID, out var layer))
-			{
-				return layer;
-			}
-
-			return null;
-		}
-
 
 		internal override void Update(float elapseSeconds, float realElapseSeconds)
 		{
@@ -153,9 +110,9 @@ namespace LccHotfix
 					node.Update();
 				}
 			}
+
 			Debug.LogError(peekWindow.NodeName);
 		}
-
 
 		internal override void LateUpdate()
 		{
@@ -167,21 +124,35 @@ namespace LccHotfix
 			AutoReleaseWindow();
 		}
 
-		//关闭
 		internal override void Shutdown()
 		{
 			HideAllWindow();
+			_commonRoot.Hide();
 			_commonRoot.Destroy();
-			Root.Detach(_commonRoot);
 			ReleaseAllWindow(ReleaseType.NEVER);
 			if (_releaseRoot != null)
 			{
 				GameObject.DestroyImmediate(_releaseRoot.gameObject);
 				_releaseRoot = null;
 			}
+
+			Root.Finalize();
 		}
 
+		public IUILogic CreateLogic(string logicName, UINode node)
+		{
+			Debug.Assert(!string.IsNullOrEmpty(logicName));
 
+			IUILogic logic = null;
+			if (_uiLogics.TryGetValue(logicName, out Type monoType))
+			{
+				logic = Activator.CreateInstance(monoType) as IUILogic;
+				logic.Node = node;
+			}
+
+			return logic;
+		}
+		
 		//切换窗口
 		private void SwitchWindow(UINode window, object[] param)
 		{
@@ -337,7 +308,7 @@ namespace LccHotfix
 			{
 				root = new DomainNode(rootName);
 				root.DomainNode = root;
-				root.Init();
+				root.Construct();
 				Root.Attach(rootName, root);
 				root.Create();
 			}
@@ -347,11 +318,11 @@ namespace LccHotfix
 			return root;
 		}
 
-		
+
 		private ElementNode GetOrCreateWindow(string windowName, out bool isNewCreate)
 		{
 			isNewCreate = false;
-    
+
 			var windowFromWaitList = TryGetWindowFromWaitList(windowName);
 			if (windowFromWaitList != null)
 			{
@@ -359,12 +330,11 @@ namespace LccHotfix
 			}
 
 			var newWindow = new ElementNode(windowName);
-			newWindow.Init();
-			Root.Attach(windowName, newWindow);
+			newWindow.Construct();
 			isNewCreate = true;
 			return newWindow;
 		}
-		
+
 		private ElementNode TryGetWindowFromWaitList(string windowName)
 		{
 			//从释放列表里找回来窗口
@@ -377,11 +347,9 @@ namespace LccHotfix
 					return window;
 				}
 			}
-			
+
 			return null;
 		}
-
-
 
 		//遍历释放列表
 		private void AutoReleaseWindow()
@@ -392,7 +360,6 @@ namespace LccHotfix
 				if (_waitReleaseWindow[i].AutoRemove())
 				{
 					_waitReleaseWindow[i].Destroy();
-					Root.Detach(_waitReleaseWindow[i]);
 					_waitReleaseWindow.RemoveAt(i);
 				}
 			}
@@ -423,11 +390,12 @@ namespace LccHotfix
 			if (!root.TryGetChildNode(windowName, out var window))
 			{
 				window = GetOrCreateWindow(windowName, out var isNewCreate);
+				Root.Attach(windowName, window);
 				_switchingNode = window;
 				window.DomainNode = root;
 				if (isNewCreate)
 				{
-					window.CreateElement(_assetLoader, (window) =>
+					window.CreateElement(_assetLoader, window =>
 					{
 						window.Create();
 						//切换窗口
@@ -442,13 +410,13 @@ namespace LccHotfix
 			}
 			else
 			{
+				//比如当前栈顶界面是弹窗，上一个界面是全屏界面，那全屏界面也在显示中就会在域里，会走到这里
 				_switchingNode = window;
 				window.DomainNode = root;
 				//切换窗口
 				SwitchWindow(window, param);
 			}
 		}
-		
 
 		public void ShowWindow(string windowName, string rootName, object[] param)
 		{
@@ -467,6 +435,7 @@ namespace LccHotfix
 			if (!root.TryGetChildNode(windowName, out var window))
 			{
 				window = GetOrCreateWindow(windowName, out var isNewCreate);
+				Root.Attach(windowName, window);
 				_switchingNode = window;
 				//创建窗口
 				window.DomainNode = root;
@@ -488,9 +457,8 @@ namespace LccHotfix
 				SwitchWindow(window, param);
 			}
 		}
-		
-		//打开根节点
-		public void OpenRoot(string rootName, object[] param)
+
+		public void ShowRoot(string rootName, object[] param)
 		{
 			if (_switchingNode != null)
 			{
@@ -499,7 +467,7 @@ namespace LccHotfix
 			}
 
 			if (string.IsNullOrEmpty(rootName))
-				return ;
+				return;
 
 			//找root节点，如果没有就新建一个
 			DomainNode root = GetAndCreateRoot(rootName);
@@ -509,7 +477,6 @@ namespace LccHotfix
 			SwitchWindow(root, param);
 
 		}
-
 
 		/// <summary>
 		/// 关闭一个窗口
@@ -648,7 +615,7 @@ namespace LccHotfix
 				//如果是自动的，设置时间
 				if (node.ReleaseType == ReleaseType.AUTO)
 				{
-					node.ReleaseTimer = autoCacheTime;
+					node.ReleaseTimer = _autoCacheTime;
 				}
 				else
 				{
@@ -684,7 +651,7 @@ namespace LccHotfix
 		/// <summary>
 		/// 释放全部window资源
 		/// </summary>
-		/// <param name="type">筛选释放window的级别，释放小于这个级别的所有窗口</param>
+		/// <param name="level">筛选释放window的级别，释放小于这个级别的所有窗口</param>
 		public void ReleaseAllWindow(ReleaseType level = ReleaseType.AUTO)
 		{
 			for (int i = _waitReleaseWindow.Count - 1; i >= 0; i--)
@@ -692,7 +659,6 @@ namespace LccHotfix
 				if (_waitReleaseWindow[i].ReleaseType <= level)
 				{
 					_waitReleaseWindow[i].Destroy();
-					Root.Detach(_waitReleaseWindow[i]);
 					_waitReleaseWindow.RemoveAt(i);
 				}
 			}

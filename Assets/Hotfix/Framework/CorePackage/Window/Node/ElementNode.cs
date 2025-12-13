@@ -102,12 +102,16 @@ namespace LccHotfix
             if (NodePhase == NodePhase.Show)
             {
                 Log.Debug($"[UI] 隐藏 {NodeName}");
-
+                
                 if (DomainNode != null)
                 {
                     //从域中移除当前节点
                     DomainNode.RemoveChildNode(this);
                 }
+                
+                GetAttachedLayer().DetachPanelWidget(this);
+                
+                UIRoot.Detach(this);
 
                 ReturnNode = null;
                 NodePhase = NodePhase.Create;
@@ -127,15 +131,15 @@ namespace LccHotfix
 
         #region 接口
 
-        protected override void DoInit()
+        protected override void DoConstruct()
         {
-            Logic.OnInit();
+            Logic.OnConstruct();
         }
 
         protected override void DoAttachedToRoot(IUIRoot uiRoot)
         {
             UIRoot = uiRoot;
-            Main.WindowService.GetUILayer(LayerID).AttachPanel(this);
+            GetAttachedLayer().AttachPanel(this);
         }
 
         protected override void DoCreate()
@@ -144,7 +148,6 @@ namespace LccHotfix
             Raycaster = GameObject.AddComponent<GraphicRaycaster>();
             CanvasGroup = GameObject.AddComponent<CanvasGroup>();
             Logic.OnCreate();
-            Main.WindowService.GetUILayer(LayerID).AttachPanelWidget(this);
         }
 
         protected override void DoSwitch(Action<bool> callback)
@@ -180,7 +183,7 @@ namespace LccHotfix
                     ReturnNode.nodeParam = new object[] { ReturnNodeParam };
                 }
             }
-
+            GetAttachedLayer().AttachPanelWidget(this);
             Logic.OnShow(param);
         }
 
@@ -210,7 +213,6 @@ namespace LccHotfix
 
         protected override void DoDestroy()
         {
-            Main.WindowService.GetUILayer(LayerID).DetachPanelWidget(this);
             Logic.OnDestroy();
             Object.Destroy(GameObject);
             GameObject = null;
@@ -218,7 +220,7 @@ namespace LccHotfix
 
         protected override void DoDetachedFromRoot()
         {
-            Main.WindowService.GetUILayer(LayerID).DetachPanel(this);
+            GetAttachedLayer().DetachPanel(this);
             UIRoot = null;
         }
 
@@ -242,6 +244,8 @@ namespace LccHotfix
         }
 
         #endregion
+
+        public UILayer GetAttachedLayer() => UIRoot.GetLayerByID(LayerID);
 
         public void CreateElement(AssetLoader loader, Action<ElementNode> callback)
         {

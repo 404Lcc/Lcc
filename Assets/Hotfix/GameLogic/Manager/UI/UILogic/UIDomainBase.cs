@@ -6,7 +6,7 @@ namespace LccHotfix
     {
         public UINode Node { get; set; }
 
-        public virtual void OnInit()
+        public virtual void OnConstruct()
         {
             
         }

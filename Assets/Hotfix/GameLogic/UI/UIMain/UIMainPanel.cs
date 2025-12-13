@@ -2,9 +2,9 @@ namespace LccHotfix
 {
     public class UIMainPanel : UIElementBase
     {
-        public override void OnInit()
+        public override void OnConstruct()
         {
-            base.OnInit();
+            base.OnConstruct();
             
             var e = Node as ElementNode;
             e.IsFullScreen = true;

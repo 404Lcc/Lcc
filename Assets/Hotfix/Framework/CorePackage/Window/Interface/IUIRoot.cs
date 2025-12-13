@@ -62,9 +62,7 @@ namespace LccHotfix
         /// </summary>
         public void Detach(UINode element);
 
-        /// <summary>
-        /// 将IUIElement从画布上摘除
-        /// </summary>
-        public UINode DetachByKey(string elementKey);
+
+        public UILayer GetLayerByID(UILayerID layerID);
     }
 }

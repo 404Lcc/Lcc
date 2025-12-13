@@ -51,7 +51,7 @@ namespace LccHotfix
 
             if (node.nodeType == NodeType.Domain)
             {
-                Main.WindowService.OpenRoot(node.nodeName, node.nodeParam);
+                Main.WindowService.ShowRoot(node.nodeName, node.nodeParam);
             }
             else
             {

@@ -50,9 +50,9 @@ namespace LccHotfix
 
         #region 必要流程
 
-        public void Init()
+        public void Construct()
         {
-            DoInit();
+            DoConstruct();
         }
 
         public void AttachedToRoot(IUIRoot uiRoot)
@@ -109,7 +109,7 @@ namespace LccHotfix
         #region 接口
 
         //初始化
-        protected abstract void DoInit();
+        protected abstract void DoConstruct();
 
         //挂载到UI根
         protected abstract void DoAttachedToRoot(IUIRoot uiRoot);

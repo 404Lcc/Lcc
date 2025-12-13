@@ -5,23 +5,19 @@ using UnityEngine;
 
 public interface IWindowService : IService
 {
+    IUIRoot Root { get;  }
     Transform WindowRoot { get; set; }
     Camera UICamera { get; set; }
     Action<AssetLoader, string, Action<GameObject>> LoadAsyncGameObject { get; set; }
     void Init();
-    void InitializeForAssembly(Assembly assembly);
+
     IUILogic CreateLogic(string logicName, UINode node);
-
-    UILayer GetUILayer(UILayerID layerID);
-
-    /// <summary>
-    /// 打开一个界面，这里只是创建，并不会改变当前栈结构，确认界面可打开后才会继续
-    /// </summary>
+    
     void OpenWindow(string windowName, object[] param);
 
     void ShowWindow(string windowName, string rootName, object[] param);
 
-    void OpenRoot(string rootName, object[] param);
+    void ShowRoot(string rootName, object[] param);
 
     /// <summary>
     /// 关闭一个窗口，通过这个方法默认是关闭一个栈内的一个界面（不能用来关闭一个不活跃窗口的子窗口）
