@@ -4,8 +4,8 @@ using System;
 public class UIAnimCtrl : MonoBehaviour
 {
     private Action _callBack;
-    public float _timer;
-    public float _duration;
+    private float _timer;
+    private float _duration;
     private UIAnimInfo _animInfo;
 
     private Animation _animation;
