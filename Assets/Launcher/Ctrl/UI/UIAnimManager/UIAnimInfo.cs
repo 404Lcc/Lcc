@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -13,6 +13,9 @@ public class UIAnimInfo
     public AnimationClip anim;
 
     [LabelText("循环")] public bool isLoop;
+    [LabelText("忽略TimeScale")] public bool ignoreTimeScale;
+
+    [LabelText("备注")] public string desc;
 
     private UIAnimCtrl _animCtrl;
 

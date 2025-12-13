@@ -1,46 +1,58 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 
 public class UIAnimCtrl : MonoBehaviour
 {
     private Action _callBack;
-    private float _timer;
-    private float _duration;
-    private Animation _animation;
+    public float _timer;
+    public float _duration;
     private UIAnimInfo _animInfo;
 
-    public bool IsPlayOver { get; private set; }
+    private Animation _animation;
 
-    void OnEnable()
+    private Animation Animation
     {
-        _animation = gameObject.GetComponent<Animation>();
-        if (_animation == null)
+        get
         {
-            _animation = gameObject.gameObject.AddComponent<Animation>();
+            if (_animation == null)
+            {
+                _animation = gameObject.GetComponent<Animation>();
+                if (_animation == null)
+                {
+                    _animation = gameObject.gameObject.AddComponent<Animation>();
+                }
+            }
+
+            return _animation;
         }
     }
 
     void Update()
     {
-        if (_animation == null)
-            return;
-
         if (_animInfo == null)
             return;
 
         if (_duration <= 0)
             return;
 
-        float deltaTime = Time.deltaTime > 0.04f ? 0.04f : Time.deltaTime;
+        float deltaTime = _animInfo.ignoreTimeScale ? (Time.unscaledDeltaTime > 0.04f ? 0.04f : Time.unscaledDeltaTime) : (Time.deltaTime > 0.04f ? 0.04f : Time.deltaTime);
         _timer += deltaTime;
+
+        //需要忽略TimeScale的动画手动采样一下
+        if (_animInfo.ignoreTimeScale)
+        {
+            Animation[_animInfo.AniName].normalizedTime = _timer / _duration;
+            Animation.Sample();
+        }
 
         if (_timer >= _duration)
         {
             if (!_animInfo.isLoop)
             {
-                IsPlayOver = true;
-                _callBack?.Invoke();
+                //缓存一下
+                var temp = _callBack;
                 Clear();
+                temp?.Invoke();
             }
             else
             {
@@ -53,17 +65,16 @@ public class UIAnimCtrl : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        _animInfo = animInfo;
-
-        IsPlayOver = false;
         _callBack = callBack;
         _timer = 0;
         _duration = 0;
+        _animInfo = animInfo;
+
         switch (_animInfo.animType)
         {
             case UIAnimType.Animation:
                 SetupState(isForward);
-                _animation.Play(_animInfo.AniName);
+                Animation.Play(_animInfo.AniName);
                 break;
         }
     }
@@ -72,51 +83,42 @@ public class UIAnimCtrl : MonoBehaviour
     {
         var clip = _animInfo.anim;
         clip.legacy = true;
-        if (_animation.GetClip(_animInfo.AniName) == null)
+        _duration = clip.length;
+
+        if (Animation.GetClip(_animInfo.AniName) == null)
         {
-            _animation.AddClip(clip, _animInfo.AniName);
+            Animation.AddClip(clip, _animInfo.AniName);
         }
 
-        _duration = clip.length;
-        var animationState = _animation[_animInfo.AniName];
+        var animationState = Animation[_animInfo.AniName];
         animationState.time = isForward ? 0f : _duration;
         animationState.speed = isForward ? 1f : -1f;
-        _animation.wrapMode = _animInfo.isLoop ? WrapMode.Loop : WrapMode.Once;
+        Animation.wrapMode = _animInfo.isLoop ? WrapMode.Loop : WrapMode.Once;
     }
 
     public void StopAnim(bool isForward = true)
     {
-        if (_animation == null)
-            return;
-
         if (_animInfo == null)
             return;
 
         if (_duration <= 0)
             return;
 
-        var animationState = _animation[_animInfo.AniName];
-        if (animationState == null)
-            return;
-
-        _animation.Stop(_animInfo.AniName);
-        animationState.time = isForward ? 0f : animationState.clip.length;
-        _animation.Sample();
+        SetupState(isForward);
+        Animation.Play(_animInfo.AniName);
+        Animation.Sample();
+        Animation.Stop(_animInfo.AniName);
 
         Clear();
     }
 
     private void Clear()
     {
-        IsPlayOver = false;
         _callBack = null;
         _timer = 0;
         _duration = 0;
-        if (_animation != null)
-        {
-            _animation.wrapMode = WrapMode.Once;
-        }
-
         _animInfo = null;
+
+        Animation.wrapMode = WrapMode.Once;
     }
 }
