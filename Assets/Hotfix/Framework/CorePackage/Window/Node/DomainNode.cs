@@ -121,6 +121,7 @@ namespace LccHotfix
                     child.Hide();
                 }
 
+                StackIndex = -1;
                 NodeList = null;
                 NodePhase = NodePhase.Create;
                 var returnValue = DoHide();

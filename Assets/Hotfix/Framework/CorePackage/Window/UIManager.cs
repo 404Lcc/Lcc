@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 namespace LccHotfix
@@ -8,15 +7,15 @@ namespace LccHotfix
     internal class UIManager : Module, IUIService
     {
         /// <summary>
-        /// 当前活动窗口的栈
-        /// 栈里的每个窗口实际是一个全屏窗口和从属于这个全屏窗口的子窗口
-        /// 每个窗口的作用域是自己和从属于自己的子窗口，不能跨域修改其它窗口
+        /// 域的栈
+        /// 栈里的每个域实际是一个全屏界面和n个小窗口
+        /// 作用域是自身，不能跨域修改其它界面
         /// </summary>
         private Stack<DomainNode> _domainStack = new Stack<DomainNode>();
 
         /// <summary>
-        /// 当前活动的通用窗口
-        /// 这些特殊窗口不受栈的限制，可以用任意方式唤醒和关闭
+        /// 当前活动的通用域
+        /// 特殊域不受栈的限制，可以用任意方式唤醒和关闭
         /// </summary>
         private DomainNode _commonDomain;
 
@@ -33,11 +32,11 @@ namespace LccHotfix
         private int _autoCacheTime = 900;
 
         /// <summary>
-        /// 窗口关闭回调
+        /// 节点关闭回调
         /// </summary>
         private Dictionary<string, Action<object>> _hideCallback = new Dictionary<string, Action<object>>();
 
-        //当前切换中的窗口
+        //当前切换中的节点
         private UINode _switchingNode;
         
         private Dictionary<string, Type> _uiLogics = new Dictionary<string, Type>();
@@ -55,7 +54,7 @@ namespace LccHotfix
         public IUIRoot Root { get; protected set; }
 
         /// <summary>
-        /// 获取窗口的父节点
+        /// UI根节点
         /// </summary>
         public Transform UIRoot { get; set; }
 
@@ -713,7 +712,7 @@ namespace LccHotfix
                 //如果是新创建的域
                 if (domain.StackIndex < 0)
                 {
-                    //把栈顶的节点暂停
+                    //把栈顶的节点覆盖
                     if (_domainStack.Count > 0)
                     {
                         _domainStack.Peek().Covered(true);
@@ -734,7 +733,7 @@ namespace LccHotfix
                         domain.Show(null);
                     }
                 }
-                //如果不是新创建的，是从释放队列拿出来的
+                //如果是在栈里的域
                 else
                 {
                     //判断当前node的域在不在栈顶
