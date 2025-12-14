@@ -10,10 +10,10 @@ namespace LccModel
         void Start()
         {
             var mainCamera = GameObject.Find("Global/MainCamera").GetComponent<Camera>();
-            var uiCamera = GameObject.Find("Global/UI Root/UICamera").GetComponent<Camera>();
+            var uiCamera = GameObject.Find("Global/Root/UICamera").GetComponent<Camera>();
             var adaptCamera = GameObject.Find("Global/AdaptCamera").GetComponent<Camera>();
-            var windowRoot = GameObject.Find("Global/UI Root/WindowRoot").GetComponent<Canvas>();
-            var adaptCanvas  = GameObject.Find("Global/UI Root/AdaptCanvas").GetComponent<Canvas>();
+            var windowRoot = GameObject.Find("Global/Root/UIRoot").GetComponent<Canvas>();
+            var adaptCanvas  = GameObject.Find("Global/Root/AdaptCanvas").GetComponent<Canvas>();
             //windowRoot需要在adaptCanvas前面
             windowRoot.planeDistance = 10;
             adaptCanvas.planeDistance = 0;

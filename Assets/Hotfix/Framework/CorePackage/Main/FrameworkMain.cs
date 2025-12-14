@@ -20,7 +20,7 @@ namespace LccHotfix
         public static ICameraService CameraService { get; set; }
         public static ITimerService TimerService { get; set; }
         public static IProcedureService ProcedureService { get; set; }
-        public static IWindowService WindowService { get; set; }
+        public static IUIService WindowService { get; set; }
         public static IThreadSyncService ThreadSyncService { get; set; }
         public static IGizmoService GizmoService { get; set; }
         public static IBadgeService BadgeService { get; set; }

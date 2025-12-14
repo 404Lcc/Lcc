@@ -49,7 +49,7 @@ namespace LccHotfix
             TimerService = Current.AddModule<TimerManager>();
             ProcedureService = Current.AddModule<ProcedureManager>();
             ProcedureService.SetProcedureHelper(new DefaultProcedureHelper());
-            WindowService = Current.AddModule<WindowManager>();
+            WindowService = Current.AddModule<UIManager>();
             ThreadSyncService = Current.AddModule<ThreadSyncManager>();
             GizmoService = Current.AddModule<GizmoManager>();
             BadgeService = Current.AddModule<BadgeManager>();

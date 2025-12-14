@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 535548534}
   - component: {fileID: 535548533}
   m_Layer: 5
-  m_Name: WindowRoot
+  m_Name: UIRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1682,7 +1682,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4790159909910813766}
   m_Layer: 0
-  m_Name: UI Root
+  m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

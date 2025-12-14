@@ -2,7 +2,7 @@ using System;
 using LccHotfix;
 using UnityEngine;
 
-public interface IWindowService : IService
+public interface IUIService : IService
 {
     IUIRoot Root { get; }
     Transform UIRoot { get; set; }

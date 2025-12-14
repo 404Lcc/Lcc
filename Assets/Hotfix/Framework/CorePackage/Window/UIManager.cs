@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    internal class WindowManager : Module, IWindowService
+    internal class UIManager : Module, IUIService
     {
         /// <summary>
         /// 当前活动窗口的栈
@@ -133,11 +133,11 @@ namespace LccHotfix
         /// </summary>
         public void Init()
         {
-            var uiRoot = GameObject.Find("UI Root");
+            var uiRoot = GameObject.Find("Root");
             if (uiRoot != null)
             {
                 UICamera = uiRoot.GetComponentInChildren<Camera>();
-                UIRoot = ClientTools.GetChild(uiRoot, "WindowRoot").transform;
+                UIRoot = ClientTools.GetChild(uiRoot, "UIRoot").transform;
             }
             
             LoadAsyncGameObject = (loader, asset, end) => { loader.LoadAssetAsync<GameObject>(asset, handle => { end?.Invoke(handle.AssetObject as GameObject); }); };

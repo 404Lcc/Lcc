@@ -34,7 +34,7 @@ namespace LccHotfix
 
         public void Initialize()
         {
-            _transform = GameObject.Find("Global/UI Root/WindowRoot").transform;
+            _transform = GameObject.Find("Global/Root/UIRoot").transform;
             _canvas = _transform.GetComponent<Canvas>();
             // _root ??= CreateRootObject();
             // _root.name = "UIRoot";
