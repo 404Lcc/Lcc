@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace LccHotfix
 {
@@ -50,6 +52,8 @@ namespace LccHotfix
                 layer.Create(canvasTransform);
                 _uiLayers[layerId] = layer;
             }
+            
+
         }
 
         public void Finalize()
@@ -71,6 +75,7 @@ namespace LccHotfix
             _root = null;
         }
 
+        
         public UINode Find(string elementKey)
         {
             return _uiElements.TryGetValue(elementKey, out var element) ? element : null;

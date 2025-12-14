@@ -33,7 +33,7 @@ namespace LccHotfix
         /// 销毁一张画布，取消其上所有IUIElement的渲染状态，在再次Create()之前不可再渲染IUIElement
         /// </summary>
         public void Finalize();
-
+        
         /// <summary>
         /// 寻找在画布上渲染的元素
         /// </summary>
@@ -61,8 +61,8 @@ namespace LccHotfix
         /// 将IUIElement从画布上摘除
         /// </summary>
         public void Detach(UINode element);
-
-
+        
         public UILayer GetLayerByID(UILayerID layerID);
+
     }
 }

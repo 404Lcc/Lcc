@@ -31,9 +31,9 @@ namespace LccHotfix
         public DomainNode(string rootName)
         {
             this.NodeName = rootName;
-            this.Logic = Main.WindowService.CreateLogic(rootName, this);
+            this.Logic = Main.WindowService.GetUILogic(rootName, this);
             this.EscapeType = EscapeType.Hide;
-            this.ReleaseType = ReleaseType.AUTO;
+            this.ReleaseType = ReleaseType.Auto;
         }
 
         #region 必要流程
@@ -110,7 +110,7 @@ namespace LccHotfix
                 Log.Debug($"[UI] 隐藏 {NodeName}");
 
                 //移除当前域
-                Main.WindowService.RemoveRoot(this);
+                Main.WindowService.RemoveDomainFromStack(this);
 
                 //由上向下，移除子节点
                 while (NodeList != null && NodeList.Count > 0)
@@ -287,7 +287,7 @@ namespace LccHotfix
             }
 
             //触发关闭节点回调
-            Main.WindowService.OnWindowClose(NodeName, returnValue);
+            Main.WindowService.DispatchNodeHide(NodeName, returnValue);
             //加入到释放列表
             Main.WindowService.AddToReleaseQueue(this);
             return returnValue;
@@ -344,10 +344,10 @@ namespace LccHotfix
                     switch (turn.nodeType)
                     {
                         case NodeType.Domain:
-                            Main.WindowService.ShowRoot(turn.nodeName, turn.nodeParam);
+                            Main.WindowService.ShowDomain(turn.nodeName, turn.nodeParam);
                             break;
                         case NodeType.Element:
-                            Main.WindowService.OpenWindow(turn.nodeName, turn.nodeParam);
+                            Main.WindowService.ShowElement(turn.nodeName, turn.nodeParam);
                             break;
                     }
                 }

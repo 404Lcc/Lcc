@@ -23,10 +23,10 @@
     /// </summary>
     public enum ReleaseType
     {
-        AUTO = 0, //延时自动销毁
-        CHANGE_PROCEDURE = 1, //切换流程
-        DEEPLY = 2, //深度清理
-        NEVER = 3, //永久缓存
+        Auto = 0, //延迟自动销毁
+        ChangeProcedure = 1, //切换流程
+        Deeply = 2, //深度清理
+        Never = 3, //永久缓存
     }
 
     /// <summary>

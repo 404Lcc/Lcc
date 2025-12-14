@@ -29,7 +29,7 @@ namespace LccHotfix
         {
             UILoadingPanel.Instance.UpdateLoadingPercent(10, 98, 2f);
 
-            Main.UIService.OpenPanel(UIPanelDefine.UIMainPanel);
+            Main.WindowService.ShowElement(UIPanelDefine.UIMainPanel);
 
             yield return new WaitForSeconds(1f);
 
@@ -48,7 +48,6 @@ namespace LccHotfix
             yield return new WaitForSecondsRealtime(1f);
 
             ProcedureLoadEndHandler();
-            Main.UIService.TryPopupPanel();
         }
 
         public override void Tick()

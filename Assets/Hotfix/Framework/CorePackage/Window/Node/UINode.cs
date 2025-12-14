@@ -29,15 +29,15 @@ namespace LccHotfix
         public EscapeType EscapeType { get; set; }
 
         //释放类型
-        public ReleaseType ReleaseType { get; set; } = ReleaseType.AUTO;
+        public ReleaseType ReleaseType { get; set; } = ReleaseType.Auto;
 
         //释放计时器
         public int ReleaseTimer { get; set; }
 
 
-        public bool AutoRemove()
+        public bool CanRelease()
         {
-            if (ReleaseType > ReleaseType.AUTO)
+            if (ReleaseType > ReleaseType.Auto)
                 return false;
             ReleaseTimer--;
             if (ReleaseTimer <= 0)

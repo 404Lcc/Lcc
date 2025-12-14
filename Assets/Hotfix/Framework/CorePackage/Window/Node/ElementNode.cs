@@ -45,7 +45,7 @@ namespace LccHotfix
         public ElementNode(string nodeName)
         {
             NodeName = nodeName;
-            Logic = Main.WindowService.CreateLogic(nodeName, this);
+            Logic = Main.WindowService.GetUILogic(nodeName, this);
         }
 
         #region 必要流程
@@ -205,7 +205,7 @@ namespace LccHotfix
             var returnValue = Logic.OnHide();
 
             //触发关闭节点回调
-            Main.WindowService.OnWindowClose(NodeName, returnValue);
+            Main.WindowService.DispatchNodeHide(NodeName, returnValue);
             //加入到释放列表
             Main.WindowService.AddToReleaseQueue(this);
             return returnValue;

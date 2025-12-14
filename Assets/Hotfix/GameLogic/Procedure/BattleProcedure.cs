@@ -34,8 +34,8 @@ namespace LccHotfix
 
                 SetBattleCamera();
 
-                Main.UIService.OpenPanel(UIPanelDefine.UIBattlePanel);
-                Main.UIService.OpenPanel(UIPanelDefine.UIHeadbarPanel);
+                Main.WindowService.ShowElement(UIPanelDefine.UIBattlePanel);
+                Main.WindowService.ShowElement(UIPanelDefine.UIHeadbarPanel);
 
                 var mod = GameUtility.GetModel<ModPlayer>();
                 var data = new InGamePlayerData();
@@ -71,7 +71,6 @@ namespace LccHotfix
             yield return new WaitForSecondsRealtime(1f);
 
             ProcedureLoadEndHandler();
-            Main.UIService.TryPopupPanel();
         }
 
         public void SetBattleCamera()

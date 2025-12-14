@@ -25,15 +25,15 @@ namespace LccHotfix
 
         public void UnloadAllPanel(LoadProcedureHandler last, LoadProcedureHandler cur)
         {
-            Main.WindowService.HideAllWindow();
+            Main.WindowService.HideAllDomain();
 
             if (cur.deepClean || (last != null && last.deepClean))
             {
-                Main.WindowService.ReleaseAllWindow(ReleaseType.DEEPLY);
+                Main.WindowService.ForceClearReleaseQueue(ReleaseType.Deeply);
             }
             else
             {
-                Main.WindowService.ReleaseAllWindow(ReleaseType.CHANGE_PROCEDURE);
+                Main.WindowService.ForceClearReleaseQueue(ReleaseType.ChangeProcedure);
             }
         }
 
@@ -46,16 +46,14 @@ namespace LccHotfix
             if (string.IsNullOrEmpty(node.nodeName))
                 return;
 
-            if (Main.UIService.OpenSpecialPanel(node))
-                return;
 
             if (node.nodeType == NodeType.Domain)
             {
-                Main.WindowService.ShowRoot(node.nodeName, node.nodeParam);
+                Main.WindowService.ShowDomain(node.nodeName, node.nodeParam);
             }
             else
             {
-                Main.WindowService.OpenWindow(node.nodeName, node.nodeParam);
+                Main.WindowService.ShowElement(node.nodeName, node.nodeParam);
             }
 
             handler.turnNode = null;

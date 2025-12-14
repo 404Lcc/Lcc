@@ -1,6 +1,6 @@
 ﻿namespace LccHotfix
 {
-    public class UIRootMain : UIDomainBase
+    public class UIDomainMain : UIDomainBase
     {
         public override bool OnRequireEscape(ElementNode child)
         {

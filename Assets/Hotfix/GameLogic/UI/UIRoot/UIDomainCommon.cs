@@ -1,6 +1,6 @@
 ﻿namespace LccHotfix
 {
-    public class UIRootCommon : UIDomainBase
+    public class UIDomainCommon : UIDomainBase
     {
         public override bool OnEscape(ref EscapeType escapeType)
         {
