@@ -194,7 +194,7 @@ namespace LccHotfix
             if (!domain.TryGetChildNode(elementName, out var element))
             {
                 element = GetOrCreateElement(elementName, out var isNewCreate);
-                element.DomainNode = domain;
+                element.SetDomainNode(domain);
                 _uiRoot.Attach(elementName, element);
                 _switchingNode = element;
                 if (isNewCreate)
@@ -208,7 +208,7 @@ namespace LccHotfix
             }
             else
             {
-                element.DomainNode = domain;
+                element.SetDomainNode(domain);
                 _switchingNode = element;
                 SwitchNode(element, args);
             }
@@ -233,7 +233,7 @@ namespace LccHotfix
             Log.Debug($"[UI] 显示域{name}");
 
             DomainNode domain = GetOrCreateDomain(name);
-            domain.DomainNode = domain;
+            domain.SetDomainNode(domain);
             _switchingNode = domain;
             SwitchNode(domain, args);
         }
@@ -261,7 +261,7 @@ namespace LccHotfix
             if (!domain.TryGetChildNode(name, out var element))
             {
                 element = GetOrCreateElement(name, out var isNewCreate);
-                element.DomainNode = domain;
+                element.SetDomainNode(domain);
                 _uiRoot.Attach(name, element);
                 _switchingNode = element;
                 if (isNewCreate)
@@ -280,7 +280,7 @@ namespace LccHotfix
             else
             {
                 //比如当前栈顶界面是弹窗，上一个界面是全屏界面，那全屏界面也在显示中就会在域里，会走到这里
-                element.DomainNode = domain;
+                element.SetDomainNode(domain);
                 _switchingNode = element;
                 SwitchNode(element, args);
             }
@@ -556,11 +556,11 @@ namespace LccHotfix
                 //如果是自动的，设置时间
                 if (node.ReleaseType == ReleaseType.Auto)
                 {
-                    node.ReleaseTimer = _autoCacheTime;
+                    node.SetRelease(_autoCacheTime);
                 }
                 else
                 {
-                    node.ReleaseTimer = 0;
+                    node.SetRelease(0);
                 }
 
                 //创建释放节点
@@ -835,7 +835,7 @@ namespace LccHotfix
             if (domain == null)
             {
                 domain = new DomainNode(name);
-                domain.DomainNode = domain;
+                domain.SetDomainNode(domain);
                 domain.Construct();
                 domain.Create();
             }

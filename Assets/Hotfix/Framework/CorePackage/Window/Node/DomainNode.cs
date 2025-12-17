@@ -117,7 +117,7 @@ namespace LccHotfix
                 {
                     var child = NodeList[NodeList.Count - 1];
                     NodeList.RemoveAt(NodeList.Count - 1);
-                    child.DomainNode = null;
+                    child.SetDomainNode(null);
                     child.Hide();
                 }
 
@@ -208,7 +208,7 @@ namespace LccHotfix
 
             //移除节点
             NodeList.Remove(node);
-            node.DomainNode = null;
+            node.SetDomainNode(null);
 
             DoRemoveChildNode(node);
         }

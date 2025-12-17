@@ -4,6 +4,9 @@ namespace LccHotfix
 {
     public abstract class UINode
     {
+        //释放计时器
+        private int _releaseTimer;
+
         //节点名
         public string NodeName { get; protected set; }
 
@@ -13,32 +16,41 @@ namespace LccHotfix
         //节点的状态
         public NodePhase NodePhase { get; protected set; }
 
+        //逻辑接口
+        public IUILogic Logic { get; protected set; }
+
+        //域
+        public DomainNode DomainNode { get; protected set; }
+
         //是否激活
         public bool Active => NodePhase == NodePhase.Show;
 
-        //逻辑接口
-        public IUILogic Logic { get; set; }
-
-        //释放计时器
-        public int ReleaseTimer { get; set; }
-        
-        //域
-        public DomainNode DomainNode { get; set; }
-
         #region 可在OnConstruct配置
+
         //回退类型
         public EscapeType EscapeType { get; set; }
 
         //释放类型
         public ReleaseType ReleaseType { get; set; } = ReleaseType.Auto;
+
         #endregion
+
+        public void SetDomainNode(DomainNode domainNode)
+        {
+            DomainNode = domainNode;
+        }
+
+        public void SetRelease(int releaseTimer)
+        {
+            _releaseTimer = releaseTimer;
+        }
 
         public bool CanRelease()
         {
             if (ReleaseType > ReleaseType.Auto)
                 return false;
-            ReleaseTimer--;
-            if (ReleaseTimer <= 0)
+            _releaseTimer--;
+            if (_releaseTimer <= 0)
             {
                 return true;
             }
