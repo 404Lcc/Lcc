@@ -10,7 +10,7 @@ namespace LccHotfix
         //是否被遮挡
         public bool IsCovered { get; protected set; }
 
-        //窗口的状态
+        //节点的状态
         public NodePhase NodePhase { get; protected set; }
 
         //是否激活
@@ -102,7 +102,7 @@ namespace LccHotfix
         //创建
         protected abstract void DoCreate();
 
-        //切换窗口
+        //切换节点
         protected abstract void DoSwitch(Action<bool> callback);
 
         //覆盖
@@ -123,7 +123,7 @@ namespace LccHotfix
         //删除
         protected abstract void DoDestroy();
 
-        //处理窗口返回
+        //处理节点返回
         protected abstract bool DoEscape(ref EscapeType escape);
 
         #endregion

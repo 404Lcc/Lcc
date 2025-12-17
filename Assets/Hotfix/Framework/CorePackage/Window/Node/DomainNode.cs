@@ -67,7 +67,7 @@ namespace LccHotfix
 
                 if (NodeList != null && NodeList.Count > 0)
                 {
-                    //找到最新的全屏窗口索引
+                    //找到最新的全屏界面索引
                     int fullIndex = NodeList.Count;
                     for (int i = NodeList.Count - 1; i >= 0; i--)
                     {
@@ -78,7 +78,7 @@ namespace LccHotfix
                         }
                     }
 
-                    //找到全屏窗口后面的子节点，包含全屏窗口，设置取消覆盖
+                    //找到全屏界面后面的子节点，包含全屏界面，设置取消覆盖
                     if (fullIndex < NodeList.Count)
                     {
                         for (int i = fullIndex; i < NodeList.Count; i++)
@@ -168,7 +168,7 @@ namespace LccHotfix
 
             if (NodeList != null && NodeList.Count > 1)
             {
-                //找到最新的全屏窗口索引
+                //找到最新的全屏界面索引
                 //这里遍历包含刚才加入的节点
                 int fullIndex = NodeList.Count;
                 for (int i = NodeList.Count - 1; i >= 0; i--)
@@ -349,20 +349,19 @@ namespace LccHotfix
                 logic.OnRemoveChildNode(node);
             }
 
-            //根据子节点状态，检查是否需要关闭根节点
-            //todo 还得判断当前准备切换的界面是否是这个域的
-            if (DefaultChildNodeCheck())
+            //根据子节点状态，检查是否需要关闭域
+            if (NodeList == null || NodeList.Count == 0)
             {
                 Hide();
                 return;
             }
 
-            //如果当前节点激活并且关闭的子节点是全屏窗口
+            //如果当前节点激活并且关闭的子节点是全屏界面
             if (Active && node.IsFullScreen)
             {
                 if (NodeList != null && NodeList.Count > 0)
                 {
-                    //找到最新的全屏窗口索引
+                    //找到最新的全屏界面索引
                     int fullIndex = NodeList.Count;
                     for (int i = NodeList.Count - 1; i >= 0; i--)
                     {
@@ -373,7 +372,7 @@ namespace LccHotfix
                         }
                     }
 
-                    //找到全屏窗口后面的子节点，包含全屏窗口，设置取消覆盖（count是10个节点，fullIndex是5，则从5到9）
+                    //找到全屏界面后面的子节点，包含全屏界面，设置取消覆盖（count是10个节点，fullIndex是5，则从5到9）
                     if (fullIndex < NodeList.Count)
                     {
                         for (int i = fullIndex; i < NodeList.Count; i++)
@@ -501,19 +500,6 @@ namespace LccHotfix
                 return this;
 
             return NodeList[NodeList.Count - 1];
-        }
-
-        /// <summary>
-        /// 根据子节点的状态判断域是否需要关闭
-        /// </summary>
-        public bool DefaultChildNodeCheck()
-        {
-            if (NodeList == null || NodeList.Count == 0)
-            {
-                return true;
-            }
-
-            return false;
         }
 
         #endregion
