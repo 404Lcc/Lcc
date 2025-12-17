@@ -112,7 +112,7 @@ namespace LccHotfix
             _commonDomain.Hide();
             _commonDomain.Destroy();
             
-            ForceClearReleaseQueue(ReleaseType.Never);
+            ForceClearReleaseQueue(ReleaseType.Keep);
             
             if (_releaseRoot != null)
             {

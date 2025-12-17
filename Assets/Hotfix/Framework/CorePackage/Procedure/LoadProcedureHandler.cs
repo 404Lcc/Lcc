@@ -70,11 +70,6 @@ namespace LccHotfix
         public float startLoadTime;
 
         /// <summary>
-        ///	深度清理
-        /// </summary>
-        public bool deepClean;
-
-        /// <summary>
         /// 开启流程后跳转到界面
         /// </summary>
         public TurnNode turnNode;

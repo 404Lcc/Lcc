@@ -26,15 +26,8 @@ namespace LccHotfix
         public void UnloadAllPanel(LoadProcedureHandler last, LoadProcedureHandler cur)
         {
             Main.WindowService.HideAllDomain();
-
-            if (cur.deepClean || (last != null && last.deepClean))
-            {
-                Main.WindowService.ForceClearReleaseQueue(ReleaseType.Deeply);
-            }
-            else
-            {
-                Main.WindowService.ForceClearReleaseQueue(ReleaseType.ChangeProcedure);
-            }
+            
+            Main.WindowService.ForceClearReleaseQueue();
         }
 
         public void OpenChangeProcedurePanel(LoadProcedureHandler handler)

@@ -24,9 +24,7 @@
     public enum ReleaseType
     {
         Auto = 0, //延迟自动销毁
-        ChangeProcedure = 1, //切换流程
-        Deeply = 2, //深度清理
-        Never = 3, //永久缓存
+        Keep = 1, //永久缓存
     }
 
     /// <summary>
