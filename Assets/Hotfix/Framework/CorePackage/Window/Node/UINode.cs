@@ -4,9 +4,6 @@ namespace LccHotfix
 {
     public abstract class UINode
     {
-        //UI根
-        public IUIRoot UIRoot { get; protected set; }
-
         //节点名
         public string NodeName { get; protected set; }
 
@@ -22,18 +19,19 @@ namespace LccHotfix
         //逻辑接口
         public IUILogic Logic { get; set; }
 
+        //释放计时器
+        public int ReleaseTimer { get; set; }
+        
         //域
         public DomainNode DomainNode { get; set; }
 
+        #region 可在OnConstruct配置
         //回退类型
         public EscapeType EscapeType { get; set; }
 
         //释放类型
         public ReleaseType ReleaseType { get; set; } = ReleaseType.Auto;
-
-        //释放计时器
-        public int ReleaseTimer { get; set; }
-
+        #endregion
 
         public bool CanRelease()
         {
@@ -53,11 +51,6 @@ namespace LccHotfix
         public void Construct()
         {
             DoConstruct();
-        }
-
-        public void AttachedToRoot(IUIRoot uiRoot)
-        {
-            DoAttachedToRoot(uiRoot);
         }
 
         public void Create()
@@ -97,11 +90,6 @@ namespace LccHotfix
             DoDestroy();
         }
 
-        public void DetachedFromRoot()
-        {
-            DoDetachedFromRoot();
-        }
-
         public abstract bool Escape(ref EscapeType escape);
 
         #endregion
@@ -110,9 +98,6 @@ namespace LccHotfix
 
         //初始化
         protected abstract void DoConstruct();
-
-        //挂载到UI根
-        protected abstract void DoAttachedToRoot(IUIRoot uiRoot);
 
         //创建
         protected abstract void DoCreate();
@@ -137,9 +122,6 @@ namespace LccHotfix
 
         //删除
         protected abstract void DoDestroy();
-
-        //从UI根移除
-        protected abstract void DoDetachedFromRoot();
 
         //处理窗口返回
         protected abstract bool DoEscape(ref EscapeType escape);

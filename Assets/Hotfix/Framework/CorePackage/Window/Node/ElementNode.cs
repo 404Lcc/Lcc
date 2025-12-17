@@ -17,13 +17,25 @@ namespace LccHotfix
 
     public class ElementNode : UINode
     {
+        //UI根
+        public IUIRoot UIRoot { get; protected set; }
+        public GameObject GameObject { get; protected set; }
+        public RectTransform RectTransform { get; protected set; }
         public Canvas Canvas { get; protected set; }
         public GraphicRaycaster Raycaster { get; protected set; }
         public CanvasGroup CanvasGroup { get; protected set; }
-        public GameObject GameObject { get; protected set; }
-        public RectTransform RectTransform { get; protected set; }
         public TurnNode ReturnNode { get; protected set; }
+        //渲染顺序
+        public int SortingOrder { get; protected set; }
 
+        #region 可在OnConstruct配置
+
+        //层级ID
+        public UILayerID LayerID { get; set; }
+
+        //是否全屏
+        public bool IsFullScreen { get; set; }
+        
         //返回节点类型
         public NodeType ReturnNodeType { get; set; }
 
@@ -33,15 +45,8 @@ namespace LccHotfix
         //返回节点参数
         public int ReturnNodeParam { get; set; }
 
-        //层级ID
-        public UILayerID LayerID { get; set; }
-
-        //是否全屏
-        public bool IsFullScreen { get; set; }
-
-        //渲染顺序
-        public int SortingOrder { get; set; }
-
+        #endregion
+        
         public ElementNode(string nodeName)
         {
             NodeName = nodeName;
@@ -109,7 +114,7 @@ namespace LccHotfix
                     DomainNode.RemoveChildNode(this);
                 }
                 
-                GetAttachedLayer().DetachPanelWidget(this);
+                GetAttachedLayer().DetachElementWidget(this);
                 
                 UIRoot.Detach(this);
 
@@ -129,17 +134,27 @@ namespace LccHotfix
 
         #endregion
 
+        #region 元素扩展流程
+
+        //挂载到UI根
+        public void AttachedToRoot(IUIRoot uiRoot)
+        {
+            DoAttachedToRoot(uiRoot);
+        }
+        
+        //从UI根移除
+        public void DetachedFromRoot()
+        {
+            DoDetachedFromRoot();
+        }
+
+        #endregion
+        
         #region 接口
 
         protected override void DoConstruct()
         {
             Logic.OnConstruct();
-        }
-
-        protected override void DoAttachedToRoot(IUIRoot uiRoot)
-        {
-            UIRoot = uiRoot;
-            GetAttachedLayer().AttachPanel(this);
         }
 
         protected override void DoCreate()
@@ -183,7 +198,7 @@ namespace LccHotfix
                     ReturnNode.nodeParam = new object[] { ReturnNodeParam };
                 }
             }
-            GetAttachedLayer().AttachPanelWidget(this);
+            GetAttachedLayer().AttachElementWidget(this);
             Logic.OnShow(param);
         }
 
@@ -218,12 +233,6 @@ namespace LccHotfix
             GameObject = null;
         }
 
-        protected override void DoDetachedFromRoot()
-        {
-            GetAttachedLayer().DetachPanel(this);
-            UIRoot = null;
-        }
-
         protected override bool DoEscape(ref EscapeType escape)
         {
             escape = EscapeType;
@@ -245,7 +254,28 @@ namespace LccHotfix
 
         #endregion
 
-        public UILayer GetAttachedLayer() => UIRoot.GetLayerByID(LayerID);
+        #region 元素扩展接口
+
+        protected virtual void DoAttachedToRoot(IUIRoot uiRoot)
+        {
+            UIRoot = uiRoot;
+            GetAttachedLayer().AttachElement(this);
+        }
+
+        protected virtual void DoDetachedFromRoot()
+        {
+            GetAttachedLayer().DetachElement(this);
+            UIRoot = null;
+        }
+
+        #endregion
+
+        private UILayer GetAttachedLayer()
+        {
+            return UIRoot.GetLayerByID(LayerID);
+        }
+
+        #region 外部调用
 
         public void CreateElement(AssetLoader loader, Action<ElementNode> callback)
         {
@@ -262,5 +292,12 @@ namespace LccHotfix
                 callback?.Invoke(this);
             });
         }
+
+        public void SetSortingOrder(int sortingOrder)
+        {
+            SortingOrder = sortingOrder;
+        }
+
+        #endregion
     }
 }

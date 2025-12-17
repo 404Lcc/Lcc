@@ -4,8 +4,8 @@ using System;
 public class UIAnimCtrl : MonoBehaviour
 {
     private Action _callBack;
-    private float _timer;
-    private float _duration;
+    public float _timer;
+    public float _duration;
     private UIAnimInfo _animInfo;
 
     private Animation _animation;
@@ -61,24 +61,6 @@ public class UIAnimCtrl : MonoBehaviour
         }
     }
 
-    public void PlayAnim(UIAnimInfo animInfo, bool isForward = true, Action callBack = null)
-    {
-        gameObject.SetActive(true);
-
-        _callBack = callBack;
-        _timer = 0;
-        _duration = 0;
-        _animInfo = animInfo;
-
-        switch (_animInfo.animType)
-        {
-            case UIAnimType.Animation:
-                SetupState(isForward);
-                Animation.Play(_animInfo.AniName);
-                break;
-        }
-    }
-
     private void SetupState(bool isForward)
     {
         var clip = _animInfo.anim;
@@ -95,14 +77,27 @@ public class UIAnimCtrl : MonoBehaviour
         animationState.speed = isForward ? 1f : -1f;
         Animation.wrapMode = _animInfo.isLoop ? WrapMode.Loop : WrapMode.Once;
     }
-
-    public void StopAnim(bool isForward = true)
+    
+    public void PlayAnim(UIAnimInfo animInfo, bool isForward = true, Action callBack = null)
     {
-        if (_animInfo == null)
-            return;
+        gameObject.SetActive(true);
 
-        if (_duration <= 0)
-            return;
+        _callBack = callBack;
+        _timer = 0;
+        _duration = 0;
+        _animInfo = animInfo;
+
+        SetupState(isForward);
+        Animation.Play(_animInfo.AniName);
+    }
+
+    public void StopAnim(UIAnimInfo animInfo, bool isForward = true)
+    {
+        gameObject.SetActive(true);
+
+        _timer = 0;
+        _duration = 0;
+        _animInfo = animInfo;
 
         SetupState(isForward);
         Animation.Play(_animInfo.AniName);

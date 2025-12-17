@@ -3,9 +3,7 @@ using UnityEngine;
 namespace LccHotfix
 {
     /// <summary>
-    /// UI渲染的根节点，概念上等于一张逻辑画布。实现应保证：
-    /// - Initialize()调用前不可其上渲染IUIElement对象
-    /// - Finalize()调用时取消其上的所有IUIElement对象的渲染状态，调用后不可在其上渲染IUIElement
+    /// UI渲染的根元素，概念上等于一张逻辑画布
     /// </summary>
     public interface IUIRoot
     {
@@ -25,43 +23,42 @@ namespace LccHotfix
         public Transform Transform { get; }
 
         /// <summary>
-        /// 初始化一张画布，进入可以渲染IUIElement的状态
+        /// 初始化一张画布，进入可以渲染元素的状态
         /// </summary>
         public void Initialize();
 
         /// <summary>
-        /// 销毁一张画布，取消其上所有IUIElement的渲染状态，在再次Create()之前不可再渲染IUIElement
+        /// 销毁一张画布，取消其上所有元素的渲染状态，在再次Initialize之前不可再渲染元素
         /// </summary>
         public void Finalize();
-        
+
         /// <summary>
         /// 寻找在画布上渲染的元素
         /// </summary>
-        /// <param name="elementKey">索引IUIElement用的key</param>
-        /// <returns>根据elementKey查到的IUIElement对象</returns>
-        public UINode Find(string elementKey);
+        /// <param name="name">元素名称</param>
+        /// <returns>根据name查到的元素对象</returns>
+        public ElementNode Find(string name);
 
         /// <summary>
-        /// 查看元素是否在画布上渲染，如果是返回对应的elementKey
+        /// 查看元素是否在画布上渲染
         /// </summary>
-        /// <param name="element">渲染的元素</param>
-        /// <param name="elementKey">渲染元素的key</param>
+        /// <param name="elementNode">渲染的元素</param>
+        /// <param name="name">渲染的元素名称</param>
         /// <returns></returns>
-        public bool Find(UINode element, out string elementKey);
+        public bool Find(ElementNode elementNode, out string name);
 
         /// <summary>
-        /// 将IUIElement渲染到画布上，并返回一个Key
+        /// 将元素渲染到画布上
         /// </summary>
-        /// <param name="elementKey">元素的Key</param>
-        /// <param name="element">需要渲染的IUIElement</param>
-        /// <returns>elementKey</returns>
-        public void Attach(string elementKey, UINode element);
+        /// <param name="name">元素名称</param>
+        /// <param name="elementNode">需要渲染的元素</param>
+        public void Attach(string name, ElementNode elementNode);
 
         /// <summary>
-        /// 将IUIElement从画布上摘除
+        /// 将元素从画布上摘除
         /// </summary>
-        public void Detach(UINode element);
-        
+        public void Detach(ElementNode elementNode);
+
         public UILayer GetLayerByID(UILayerID layerID);
 
     }

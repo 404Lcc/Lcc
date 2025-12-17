@@ -11,170 +11,104 @@ public enum UILayerID
     Debug
 }
 
-public static class RectTransformEx
-{
-    public static void AttachToParent(this RectTransform transform, Transform parent)
-    {
-        transform.SetParent(parent, false);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
-        transform.localScale = Vector3.one;
-
-        transform.anchoredPosition = Vector2.zero;
-        transform.anchorMin = Vector2.zero;
-        transform.anchorMax = Vector2.one;
-        transform.sizeDelta = Vector2.zero;
-    }
-}
-
 public class UILayer
 {
     private const int LayerStep = 2048;
     private const int OrderStep = 16;
 
-    public UILayerID LayerID { get; }
-    public List<ElementNode> UIPanels { get; } = new();
-
-    private bool _bIsVisible = false;
-    private bool _bCovered = false;
-
-    private readonly UIRoot _uiRoot;
-    private GameObject _root;
-    private Transform _trans;
+    private UIRoot _uiRoot;
+    private GameObject _layer;
+    private RectTransform _rectTransform;
     private CanvasGroup _canvasGroup;
+    
+    public UILayerID UILayerID { get; }
+    public List<ElementNode> UIElementList { get; } = new List<ElementNode>();
 
-
-    public UILayer( UIRoot uiRoot, UILayerID layerID)
+    public UILayer(UIRoot uiRoot, UILayerID layerID)
     {
         _uiRoot = uiRoot;
-        LayerID = layerID;
+        UILayerID = layerID;
     }
 
-    public void Create(Transform rootTransform)
+    public void Create(Transform canvasTransform)
     {
-        var go = new GameObject("Layer_" + LayerID.ToString())
+        var go = new GameObject("Layer_" + UILayerID)
         {
             layer = UIConstant.LayerMaskUI
         };
-        var trans = go.AddComponent<RectTransform>();
-        trans.AttachToParent(rootTransform);
+        var rect = go.AddComponent<RectTransform>();
+        AttachToParent(rect, canvasTransform);
 
-        _root = go;
-        _trans = trans;
+        _layer = go;
+        _rectTransform = rect;
         _canvasGroup = go.AddComponent<CanvasGroup>();
-        SetActive(true);
     }
 
     public void Destroy()
     {
-        foreach (var panel in UIPanels)
+        foreach (var item in UIElementList)
         {
-            GameObject.Destroy(panel.GameObject);
+            GameObject.Destroy(item.GameObject);
         }
 
-        SetActive(false);
-        Object.Destroy(_root);
-        _root = null;
-        _trans = null;
+        Object.Destroy(_layer);
+        _layer = null;
+        _rectTransform = null;
         _canvasGroup = null;
     }
 
-    public void AttachPanel(ElementNode panel)
+    public void AttachElement(ElementNode elementNode)
     {
-        var sortingOrder = 0 == UIPanels.Count ? LayerStep * (int)LayerID : UIPanels.Last().SortingOrder + OrderStep;
-        panel.SortingOrder = sortingOrder;
-        UIPanels.Add(panel);
-        UIPanels.Sort((l, r) => l.SortingOrder - r.SortingOrder);
+        var sortingOrder = 0 == UIElementList.Count ? LayerStep * (int)UILayerID : UIElementList.Last().SortingOrder + OrderStep;
+        elementNode.SetSortingOrder(sortingOrder);
+        UIElementList.Add(elementNode);
+        UIElementList.Sort((l, r) => l.SortingOrder - r.SortingOrder);
     }
 
-    public void AttachPanelWidget(ElementNode panel)
+    public void AttachElementWidget(ElementNode elementNode)
     {
-        // panel.UserWidget.SetLayerRecursive(LayerID == UILayerID.HUD ? UIConstant.LayerMaskHUD : UIConstant.LayerMaskUI);
+        var rect = elementNode.RectTransform;
+        AttachToParent(rect, _rectTransform);
+        rect.pivot = new Vector2(0.5f, 0.5f);
 
-        var trans = panel.GameObject.GetComponent<RectTransform>();
-        trans.AttachToParent(_trans);
-        trans.pivot = new Vector2(0.5f, 0.5f);
-
-        panel.Canvas.overrideSorting = true;
-        var sortingOrder = panel.SortingOrder;
-        var childCanvases = panel.GameObject.GetComponentsInChildren<Canvas>();
+        elementNode.Canvas.overrideSorting = true;
+        var sortingOrder = elementNode.SortingOrder;
+        var childCanvases = elementNode.GameObject.GetComponentsInChildren<Canvas>();
         for (int i = 0; i < childCanvases.Length; i++)
         {
             childCanvases[i].sortingOrder += sortingOrder;
         }
-
-        if (panel.IsFullScreen)
-        {
-            // _uiRoot?.PanelEnterFullscreen(panel);
-        }
     }
 
-    public void DetachPanel(ElementNode panel)
+    public void DetachElementWidget(ElementNode elementNode)
     {
-        panel.SortingOrder = 0;
-        UIPanels.Remove(panel);
-    }
+        var sortingOrder = elementNode.SortingOrder;
+        var childCanvases = elementNode.GameObject.GetComponentsInChildren<Canvas>();
 
-    public void DetachPanelWidget(ElementNode panel)
-    {
-        if (panel.IsFullScreen)
-        {
-            // _uiRoot?.PanelLeaveFullscreen(panel);
-        }
-        
-        var sortingOrder = panel.SortingOrder;
-        var childCanvases = panel.GameObject.GetComponentsInChildren<Canvas>();
         for (int i = 0; i < childCanvases.Length; i++)
         {
             childCanvases[i].sortingOrder -= sortingOrder;
         }
 
-        panel.Canvas.overrideSorting = false;
-        // panel.GameObject.transform.SetParent(null);
+        elementNode.Canvas.overrideSorting = false;
+    }
+    
+    public void DetachElement(ElementNode elementNode)
+    {
+        elementNode.SetSortingOrder(0);
+        UIElementList.Remove(elementNode);
     }
 
-    public void SetActive(bool bVisible)
+    public void AttachToParent(RectTransform rect, Transform parent)
     {
-        bVisible = bVisible && !_bCovered;
-        if (_bIsVisible == bVisible)
-            return;
+        rect.SetParent(parent, false);
+        rect.localPosition = Vector3.zero;
+        rect.localRotation = Quaternion.identity;
+        rect.localScale = Vector3.one;
 
-        _bIsVisible = bVisible;
-
-        if (!_root)
-            return;
-
-        _canvasGroup.alpha = bVisible ? 1 : 0;
-        _canvasGroup.blocksRaycasts = bVisible;
-        _canvasGroup.interactable = bVisible;
-    }
-
-    public bool SetCovered(bool bCovered)
-    {
-        if (_bCovered == bCovered)
-            return false;
-
-        _bCovered = bCovered;
-        SetActive(!bCovered);
-
-        foreach (var panel in UIPanels)
-        {
-            // panel?.SetCoveredByLayer(bCovered);
-        }
-
-        return true;
-    }
-
-    public bool ChangeCoverStateBelowOrder(int order, bool bCovered)
-    {
-        for (int index = UIPanels.Count - 1; index >= 0; --index)
-        {
-            var panel = UIPanels[index];
-            // var bIsBelowOrder = panel?.SortingOrder < order;
-            // if (bIsBelowOrder && panel.SetCovered(bCovered))
-            //     return true;
-        }
-
-        return false;
+        rect.anchoredPosition = Vector2.zero;
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.sizeDelta = Vector2.zero;
     }
 }

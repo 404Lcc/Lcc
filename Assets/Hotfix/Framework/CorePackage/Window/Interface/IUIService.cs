@@ -4,9 +4,6 @@ using UnityEngine;
 
 public interface IUIService : IService
 {
-    IUIRoot Root { get; }
-    Transform UIRoot { get; set; }
-    Camera UICamera { get; set; }
     Action<AssetLoader, string, Action<GameObject>> LoadAsyncGameObject { get; set; }
     void Init();
     IUILogic GetUILogic(string name, UINode node);

@@ -14,7 +14,7 @@ public class UIAnimInfo
 
     [LabelText("循环")] public bool isLoop;
     [LabelText("忽略TimeScale")] public bool ignoreTimeScale;
-
+    
     [LabelText("备注")] public string desc;
 
     private UIAnimCtrl _animCtrl;
@@ -53,11 +53,16 @@ public class UIAnimInfo
         switch (animType)
         {
             case UIAnimType.Animation:
-
-                if (_animCtrl == null)
+                if (anim == null)
                     break;
 
-                _animCtrl.StopAnim(isForward);
+                _animCtrl = transTarget.GetComponent<UIAnimCtrl>();
+                if (_animCtrl == null)
+                {
+                    _animCtrl = transTarget.gameObject.AddComponent<UIAnimCtrl>();
+                }
+
+                _animCtrl.StopAnim(this, isForward);
                 break;
         }
     }

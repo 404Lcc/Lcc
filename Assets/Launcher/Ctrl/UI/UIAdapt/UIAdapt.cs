@@ -20,7 +20,7 @@ namespace LccModel
         public float rightOffset;
         
         private int _scalerChangeFrameCount = -1;
-        private RectTransform _uiAdaptCanvasRoot;
+        private RectTransform _adaptRoot;
         private RectTransform _uiUpCanvasRoot;
         private RectTransform _uiDownCanvasRoot;
         private RectTransform _uiLeftCanvasRoot;
@@ -36,16 +36,16 @@ namespace LccModel
         }
         private void Start()
         {
-            _uiAdaptCanvasRoot = (RectTransform)GameObject.Find("Global/Root/AdaptCanvas").transform;
-            _uiUpCanvasRoot = (RectTransform)GameObject.Find("Global/Root/AdaptCanvas/UpCanvas").transform;
-            _uiDownCanvasRoot = (RectTransform)GameObject.Find("Global/Root/AdaptCanvas/DownCanvas").transform;
-            _uiLeftCanvasRoot = (RectTransform)GameObject.Find("Global/Root/AdaptCanvas/LeftCanvas").transform;
-            _uiRightCanvasRoot = (RectTransform)GameObject.Find("Global/Root/AdaptCanvas/RightCanvas").transform;
+            _adaptRoot = (RectTransform)GameObject.Find("Global/AdaptCanvas").transform;
+            _uiUpCanvasRoot = (RectTransform)GameObject.Find("Global/AdaptCanvas/UpCanvas").transform;
+            _uiDownCanvasRoot = (RectTransform)GameObject.Find("Global/AdaptCanvas/DownCanvas").transform;
+            _uiLeftCanvasRoot = (RectTransform)GameObject.Find("Global/AdaptCanvas/LeftCanvas").transform;
+            _uiRightCanvasRoot = (RectTransform)GameObject.Find("Global/AdaptCanvas/RightCanvas").transform;
             //urp下设置主相机 buildin下设置ui相机
 #if URP
             _mainCamera = GameObject.Find("Global/MainCamera").GetComponent<Camera>();
 #else
-            _mainCamera = GameObject.Find("Global/Root/UICamera").GetComponent<Camera>();
+            _mainCamera = GameObject.Find("Global/UIRoot/UICamera").GetComponent<Camera>();
 #endif
             AdaptUIRoot(true, true, leftOffset, rightOffset);
         }
@@ -84,7 +84,7 @@ namespace LccModel
             if (adaptSafeArea)
             {
                 float ratioWidth = maxSafe / Screen.width;
-                tempLeft = _uiAdaptCanvasRoot.rect.width * ratioWidth;
+                tempLeft = _adaptRoot.rect.width * ratioWidth;
                 tempRight = tempLeft;
 
                 tempLeft = leftOffset;
@@ -96,19 +96,19 @@ namespace LccModel
             {
                 if (ScreenRatio < MinAdaptScal)
                 {
-                    var delta = (_uiAdaptCanvasRoot.rect.size.y - (_uiAdaptCanvasRoot.rect.size.x - tempLeft - tempRight) / MinAdaptScal) / 2f;
+                    var delta = (_adaptRoot.rect.size.y - (_adaptRoot.rect.size.x - tempLeft - tempRight) / MinAdaptScal) / 2f;
                     tempUP = tempDown = delta;
                 }
                 else if (ScreenRatio > MaxAdaptScal)//超过了最大适配，填充边
                 {
-                    float width = (_uiAdaptCanvasRoot.rect.size.x - _uiAdaptCanvasRoot.rect.size.y * MaxAdaptScal) / 2;
+                    float width = (_adaptRoot.rect.size.x - _adaptRoot.rect.size.y * MaxAdaptScal) / 2;
                     tempLeft = tempLeft > width ? tempLeft : width;
                     tempRight = tempLeft;
                 }
             }
 
-            Rect realRect = new Rect(tempLeft / _uiAdaptCanvasRoot.rect.size.x, tempDown / _uiAdaptCanvasRoot.rect.size.y, 
-                1 - (tempLeft + tempRight) / _uiAdaptCanvasRoot.rect.size.x, 1 - (tempUP + tempDown) / _uiAdaptCanvasRoot.rect.size.y);
+            Rect realRect = new Rect(tempLeft / _adaptRoot.rect.size.x, tempDown / _adaptRoot.rect.size.y, 
+                1 - (tempLeft + tempRight) / _adaptRoot.rect.size.x, 1 - (tempUP + tempDown) / _adaptRoot.rect.size.y);
 
 
             if (!_mainCamera.rect.Equals(realRect))
@@ -132,13 +132,13 @@ namespace LccModel
         private void SetAdaptUIRoot(float up, float down, float left, float right)
         {
             //-UP
-            SetTransOffset(_uiUpCanvasRoot, 0, _uiAdaptCanvasRoot.rect.height - up, 0, 0);
+            SetTransOffset(_uiUpCanvasRoot, 0, _adaptRoot.rect.height - up, 0, 0);
             //-Down
-            SetTransOffset(_uiDownCanvasRoot, _uiAdaptCanvasRoot.rect.height - down, 0, 0, 0);
+            SetTransOffset(_uiDownCanvasRoot, _adaptRoot.rect.height - down, 0, 0, 0);
             //-Left
-            SetTransOffset(_uiLeftCanvasRoot, 0, 0, 0, _uiAdaptCanvasRoot.rect.width - left);
+            SetTransOffset(_uiLeftCanvasRoot, 0, 0, 0, _adaptRoot.rect.width - left);
             //-Down
-            SetTransOffset(_uiRightCanvasRoot, 0, 0, _uiAdaptCanvasRoot.rect.width - right, 0);
+            SetTransOffset(_uiRightCanvasRoot, 0, 0, _adaptRoot.rect.width - right, 0);
         }
 
         private void SetTransOffset(RectTransform rectTrans, float up, float down, float left, float right)

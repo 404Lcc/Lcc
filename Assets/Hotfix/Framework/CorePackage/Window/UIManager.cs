@@ -7,8 +7,18 @@ namespace LccHotfix
     internal class UIManager : Module, IUIService
     {
         /// <summary>
+        /// 资源加载对象
+        /// </summary>
+        private AssetLoader _assetLoader = new AssetLoader();
+        
+        /// <summary>
+        /// UI渲染的根节点
+        /// </summary>
+        private IUIRoot _uiRoot;
+        
+        /// <summary>
         /// 域的栈
-        /// 栈里的每个域实际是一个全屏界面和n个小窗口
+        /// 栈里的每个域实际是一个全屏界面和n个小弹窗
         /// 作用域是自身，不能跨域修改其它界面
         /// </summary>
         private Stack<DomainNode> _domainStack = new Stack<DomainNode>();
@@ -18,7 +28,16 @@ namespace LccHotfix
         /// 特殊域不受栈的限制，可以用任意方式唤醒和关闭
         /// </summary>
         private DomainNode _commonDomain;
-
+        
+        /// <summary>
+        /// 当前切换中的节点
+        /// </summary>
+        private UINode _switchingNode;
+        
+        /// <summary>
+        /// UI逻辑
+        /// </summary>
+        private Dictionary<string, Type> _uiLogics = new Dictionary<string, Type>();
 
         /// <summary>
         /// 释放队列
@@ -26,8 +45,12 @@ namespace LccHotfix
         private List<UINode> _releaseQueue = new List<UINode>();
 
         /// <summary>
-        /// 被关闭界面会自动缓存多少帧然后释放
-        /// 30s
+        /// 释放根节点
+        /// </summary>
+        private RectTransform _releaseRoot;
+        
+        /// <summary>
+        /// 被关闭界面会自动缓存多少帧然后释放。900帧大概30s
         /// </summary>
         private int _autoCacheTime = 900;
 
@@ -36,42 +59,16 @@ namespace LccHotfix
         /// </summary>
         private Dictionary<string, Action<object>> _hideCallback = new Dictionary<string, Action<object>>();
 
-        //当前切换中的节点
-        private UINode _switchingNode;
-        
-        private Dictionary<string, Type> _uiLogics = new Dictionary<string, Type>();
-        
-        private AssetLoader _assetLoader = new AssetLoader();
-
-        //需要更新的节点列表
+        /// <summary>
+        /// 需要更新的节点列表
+        /// </summary>
         private List<UINode> _updateNodes = new List<UINode>();
-
-        //释放节点
-        private RectTransform _releaseRoot;
-        
-
-        
-        public IUIRoot Root { get; protected set; }
-
-        /// <summary>
-        /// UI根节点
-        /// </summary>
-        public Transform UIRoot { get; set; }
-
-        /// <summary>
-        /// ui相机
-        /// </summary>
-        public Camera UICamera { get; set; }
-
-        public DomainNode CommonDomain => _commonDomain;
-
-
 
         /// <summary>
         /// 异步加载GameObject
         /// </summary>
         public Action<AssetLoader, string, Action<GameObject>> LoadAsyncGameObject { get; set; }
-
+        
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
             if (_commonDomain != null)
@@ -123,7 +120,8 @@ namespace LccHotfix
                 _releaseRoot = null;
             }
 
-            Root.Finalize();
+            _uiRoot.Finalize();
+            _assetLoader.Release();
         }
 
 
@@ -132,16 +130,10 @@ namespace LccHotfix
         /// </summary>
         public void Init()
         {
-            var uiRoot = GameObject.Find("Root");
-            if (uiRoot != null)
-            {
-                UICamera = uiRoot.GetComponentInChildren<Camera>();
-                UIRoot = ClientTools.GetChild(uiRoot, "UIRoot").transform;
-            }
+            _uiRoot = new UIRoot(GameObject.Find("Global/UIRoot"));
+            _uiRoot.Initialize();
             
             LoadAsyncGameObject = (loader, asset, end) => { loader.LoadAssetAsync<GameObject>(asset, handle => { end?.Invoke(handle.AssetObject as GameObject); }); };
-
-            
             foreach (Type item in GetType().Assembly.GetTypes())
             {
                 if (typeof(IUILogic).IsAssignableFrom(item))
@@ -149,9 +141,7 @@ namespace LccHotfix
                     _uiLogics[item.Name] = item;
                 }
             }
-
-            Root = new UIRoot(UIRoot.gameObject);
-            Root.Initialize();
+            
             _commonDomain = GetOrCreateDomain("UIDomainCommon");
             _commonDomain.StackIndex = 0;
             _commonDomain.Show(null);
@@ -205,7 +195,7 @@ namespace LccHotfix
             {
                 element = GetOrCreateElement(elementName, out var isNewCreate);
                 element.DomainNode = domain;
-                Root.Attach(elementName, element);
+                _uiRoot.Attach(elementName, element);
                 _switchingNode = element;
                 if (isNewCreate)
                 {
@@ -272,7 +262,7 @@ namespace LccHotfix
             {
                 element = GetOrCreateElement(name, out var isNewCreate);
                 element.DomainNode = domain;
-                Root.Attach(name, element);
+                _uiRoot.Attach(name, element);
                 _switchingNode = element;
                 if (isNewCreate)
                 {
@@ -347,16 +337,23 @@ namespace LccHotfix
         /// </summary>
         public void HideAllDomain()
         {
-            //todo 判断如果有资源加载完成才能加进去
-            //如果有切换中的节点，则加入释放列表
             if (_switchingNode != null)
             {
+                //有界面正在切换中
+                if (_switchingNode is ElementNode elementNode)
+                {
+                    if (elementNode.GameObject == null)
+                    {
+                        //资源还没加载完，先释放了
+                        _assetLoader.Release(elementNode.NodeName);
+                    }
+                }
                 AddToReleaseQueue(_switchingNode);
                 _switchingNode = null;
             }
 
             //隐藏通用域
-            CommonDomain.Hide();
+            _commonDomain.Hide();
 
             //隐藏栈里的域
             while (_domainStack.Count > 0)
@@ -570,7 +567,7 @@ namespace LccHotfix
                 if (_releaseRoot == null)
                 {
                     _releaseRoot = new GameObject("WaitForRelease").AddComponent<RectTransform>();
-                    _releaseRoot.SetParent(UIRoot);
+                    _releaseRoot.SetParent(_uiRoot.Canvas.transform);
                     _releaseRoot.localScale = Vector3.one;
                     _releaseRoot.localPosition = new Vector3(30000, 0, 0);
                     //归一
@@ -707,7 +704,7 @@ namespace LccHotfix
             var domain = node.DomainNode;
 
             //不是通用域
-            if (domain != CommonDomain)
+            if (domain != _commonDomain)
             {
                 //如果是新创建的域
                 if (domain.StackIndex < 0)
@@ -840,7 +837,6 @@ namespace LccHotfix
                 domain = new DomainNode(name);
                 domain.DomainNode = domain;
                 domain.Construct();
-                Root.Attach(name, domain);
                 domain.Create();
             }
 

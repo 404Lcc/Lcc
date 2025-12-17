@@ -237,11 +237,6 @@ namespace LccHotfix
             Logic?.OnConstruct();
         }
 
-        protected override void DoAttachedToRoot(IUIRoot uiRoot)
-        {
-            UIRoot = uiRoot;
-        }
-
         protected override void DoCreate()
         {
             Logic?.OnCreate();
@@ -297,11 +292,6 @@ namespace LccHotfix
         protected override void DoDestroy()
         {
             Logic?.OnDestroy();
-        }
-
-        protected override void DoDetachedFromRoot()
-        {
-            UIRoot = null;
         }
 
         protected override bool DoEscape(ref EscapeType escape)

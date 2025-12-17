@@ -12,10 +12,10 @@ namespace LccHotfix
         public const int LayerMaskUI = 5;
     }
 
-    public  class UIRoot : IUIRoot
+    public class UIRoot : IUIRoot
     {
-        private  Dictionary<UILayerID, UILayer> _uiLayers = new Dictionary<UILayerID, UILayer>();
-        private  Dictionary<string, UINode> _uiElements = new Dictionary<string, UINode>();
+        private Dictionary<UILayerID, UILayer> _uiLayers = new Dictionary<UILayerID, UILayer>();
+        private Dictionary<string, ElementNode> _elementNodes = new Dictionary<string, ElementNode>();
 
         public UIRoot(GameObject rootObject)
         {
@@ -27,23 +27,21 @@ namespace LccHotfix
         private Transform _transform;
         private Canvas _canvas;
         private Camera _uiCamera;
-        
+
         public Camera RenderCamera => _uiCamera ??= Transform.Find("UICamera").GetComponent<Camera>();
         public Canvas Canvas => _canvas ??= Transform.Find("Canvas").GetComponent<Canvas>();
         public Transform Transform => _transform ??= _root.transform;
 
         public void Initialize()
         {
-            _transform = GameObject.Find("Global/Root/UIRoot").transform;
-            _canvas = _transform.GetComponent<Canvas>();
-            // _root ??= CreateRootObject();
-            // _root.name = "UIRoot";
-            // Object.DontDestroyOnLoad(_root);
-            //
-            // var rootTrans = _root.transform;
-            // rootTrans.localScale = Vector3.one;
-            // rootTrans.localPosition = new Vector3(0, 10000, 0);
-            // rootTrans.localRotation = Quaternion.identity;
+            _root ??= CreateRootObject();
+            _root.name = "UIRoot";
+            Object.DontDestroyOnLoad(_root);
+
+            var rootTrans = _root.transform;
+            rootTrans.localScale = Vector3.one;
+            rootTrans.localPosition = new Vector3(0, 10000, 0);
+            rootTrans.localRotation = Quaternion.identity;
 
             var canvasTransform = Canvas.transform;
             for (UILayerID layerId = UILayerID.HUD; layerId <= UILayerID.Debug; layerId++)
@@ -52,8 +50,6 @@ namespace LccHotfix
                 layer.Create(canvasTransform);
                 _uiLayers[layerId] = layer;
             }
-            
-
         }
 
         public void Finalize()
@@ -64,68 +60,64 @@ namespace LccHotfix
             }
 
             _uiLayers.Clear();
-            _uiElements.Clear();
+            _elementNodes.Clear();
 
             _transform = null;
             _canvas = null;
             _uiCamera = null;
-            
-            _root.transform.SetParent(null);
-            Object.Destroy(_root);
+
+            // _root.transform.SetParent(null);
+            // Object.Destroy(_root);
             _root = null;
         }
 
-        
-        public UINode Find(string elementKey)
+        public ElementNode Find(string name)
         {
-            return _uiElements.TryGetValue(elementKey, out var element) ? element : null;
+            return _elementNodes.TryGetValue(name, out var node) ? node : null;
         }
 
-
-
-        public bool Find(UINode element, out string elementKey)
+        public bool Find(ElementNode elementNode, out string name)
         {
-            foreach (var kv in _uiElements)
+            foreach (var kv in _elementNodes)
             {
-                if (kv.Value.Equals(element))
+                if (kv.Value.Equals(elementNode))
                 {
-                    elementKey = kv.Key;
+                    name = kv.Key;
                     return true;
                 }
             }
 
-            elementKey = null;
+            name = null;
             return false;
         }
 
-        public void Attach(string elementKey, UINode element)
+        public void Attach(string name, ElementNode elementNode)
         {
-            if (_uiElements.ContainsKey(elementKey))
+            if (_elementNodes.ContainsKey(name))
             {
                 return;
             }
 
-            _uiElements[elementKey] = element;
-            element.AttachedToRoot(this);
+            _elementNodes[name] = elementNode;
+            elementNode.AttachedToRoot(this);
         }
 
-        public void Detach(UINode element)
+        public void Detach(ElementNode elementNode)
         {
-            if (element is null)
+            if (elementNode is null)
                 return;
 
-            foreach (var kv in _uiElements)
+            foreach (var kv in _elementNodes)
             {
-                if (kv.Value.Equals(element))
+                if (kv.Value.Equals(elementNode))
                 {
-                    _uiElements.Remove(kv.Key);
+                    _elementNodes.Remove(kv.Key);
                     break;
                 }
             }
-            
-            element.DetachedFromRoot();
-        }
 
+            elementNode.DetachedFromRoot();
+        }
 
         private GameObject CreateRootObject()
         {
@@ -143,7 +135,7 @@ namespace LccHotfix
             cameraComponent.orthographic = true;
             cameraComponent.orthographicSize = 5;
             _uiCamera = cameraComponent;
-            
+
             // 创建UI画布
             var canvas = new GameObject("Canvas", typeof(RectTransform), typeof(Canvas), typeof(GraphicRaycaster))
             {
@@ -154,10 +146,10 @@ namespace LccHotfix
             canvasComponent.additionalShaderChannels = AdditionalCanvasShaderChannels.TexCoord1 | AdditionalCanvasShaderChannels.Normal | AdditionalCanvasShaderChannels.Tangent;
             canvasComponent.worldCamera = cameraComponent;
             _canvas = canvasComponent;
-            
+
             canvas.transform.SetParent(root.transform);
             camera.transform.SetParent(root.transform);
-            
+
             // 创建EventSystem
             if (!EventSystem.current)
             {
@@ -170,10 +162,10 @@ namespace LccHotfix
             {
                 _eventSystem = EventSystem.current.gameObject;
             }
-            
+
             return root;
         }
-        
-        public UILayer GetLayerByID(UILayerID layerID) => _uiLayers[layerID];
+
+        public UILayer GetLayerByID(UILayerID uiLayerId) => _uiLayers[uiLayerId];
     }
 }
