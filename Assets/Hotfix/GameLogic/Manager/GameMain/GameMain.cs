@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Reflection;
 using LccModel;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using UnityEngine;
 
 namespace LccHotfix
@@ -41,9 +39,8 @@ namespace LccHotfix
             SaveService = Current.AddModule<SaveManager>();
             SaveService.SetSaveHelper(new DefaultSaveHelper());
             SettingService = Current.AddModule<SettingManager>();
-            // AudioService = Current.AddModule<AudioManager>();
+            AudioService = Current.AddModule<AudioManager>();
             VibrationService = Current.AddModule<VibrationManager>();
-            // FXService = Current.AddModule<FXManager>();
             ValueEventService = Current.AddModule<ValueEventManager>();
             CameraService = Current.AddModule<CameraManager>();
             TimerService = Current.AddModule<TimerManager>();
@@ -86,7 +83,7 @@ namespace LccHotfix
             ModelService.Init();
             SaveService.Init();
             SettingService.Init();
-            //AudioService.Init();
+            AudioService.Init();
             VibrationService.Init();
 
             ConfigService.Init();

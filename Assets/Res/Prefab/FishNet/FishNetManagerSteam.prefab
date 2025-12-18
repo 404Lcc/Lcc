@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4701522944491396126}
   - component: {fileID: 4754955983729852766}
-  - component: {fileID: 288488159105463297}
+  - component: {fileID: 5959022564902187593}
   m_Layer: 0
   m_Name: FishNetManagerSteam
   m_TagString: Untagged
@@ -52,7 +52,7 @@ MonoBehaviour:
   _persistence: 0
   _logging: {fileID: 0}
   _spawnablePrefabs: {fileID: 11400000, guid: 333071c0c7876d845a263002d8f3c66c, type: 2}
---- !u!114 &288488159105463297
+--- !u!114 &5959022564902187593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,5 +67,5 @@ MonoBehaviour:
   _serverBindAddress: 
   _port: 7770
   _maximumClients: 9001
-  _peerToPeer: 1
+  _peerToPeer: 0
   _clientAddress: 

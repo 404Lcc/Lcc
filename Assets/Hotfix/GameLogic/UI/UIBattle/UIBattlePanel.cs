@@ -10,8 +10,7 @@ namespace LccHotfix
         {
             base.OnConstruct();
 
-            var e = Node as ElementNode;
-            e.IsFullScreen = true;
+            IsFullScreen = true;
         }
 
         public override void OnCreate()

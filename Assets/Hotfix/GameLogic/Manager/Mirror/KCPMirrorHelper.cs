@@ -10,8 +10,11 @@ namespace LccHotfix
         {
             loader.LoadAssetAsync<GameObject>("MirrorNetworkManagerKCP", (x) =>
             {
-                var obj = x.AssetObject as GameObject;
-                GameObject.DontDestroyOnLoad(obj);
+                GameObject root = new GameObject("MirrorRoot");
+                var obj = GameObject.Instantiate(x.AssetObject as GameObject);
+                obj.transform.SetParent(root.transform);
+                GameObject.DontDestroyOnLoad(root);
+                
                 var networkManager = obj.GetComponent<MirrorNetworkManager>();
                 var transport = networkManager.GetComponent<KcpTransport>();
                 transport.Port = 7788;

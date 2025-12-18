@@ -8,6 +8,16 @@ namespace LccHotfix
         /// 访问所属node
         /// </summary>
         UINode Node { get; set; }
+        
+        /// <summary>
+        /// 回退类型
+        /// </summary>
+        public EscapeType EscapeType { get; }
+
+        /// <summary>
+        /// 释放类型
+        /// </summary>
+        public ReleaseType ReleaseType { get; }
 
         /// <summary>
         /// 初始化参数

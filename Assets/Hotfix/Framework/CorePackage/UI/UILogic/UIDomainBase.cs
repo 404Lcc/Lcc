@@ -5,7 +5,9 @@ namespace LccHotfix
     public abstract class UIDomainBase : IUIDomainLogic
     {
         public UINode Node { get; set; }
-
+        public EscapeType EscapeType { get; protected set; }
+        public ReleaseType ReleaseType { get; protected set; }
+        
         public virtual void OnConstruct()
         {
             

@@ -24,29 +24,31 @@ namespace LccHotfix
         public Canvas Canvas { get; protected set; }
         public GraphicRaycaster Raycaster { get; protected set; }
         public CanvasGroup CanvasGroup { get; protected set; }
+
         public TurnNode ReturnNode { get; protected set; }
+
         //渲染顺序
         public int SortingOrder { get; protected set; }
 
-        #region 可在OnConstruct配置
+        #region 配置字段
 
         //层级ID
-        public UILayerID LayerID { get; set; }
+        public UILayerID LayerID { get; protected set; }
 
         //是否全屏
-        public bool IsFullScreen { get; set; }
-        
+        public bool IsFullScreen { get; protected set; }
+
         //返回节点类型
-        public NodeType ReturnNodeType { get; set; }
+        public NodeType ReturnNodeType { get; protected set; }
 
         //返回节点名称
-        public string ReturnNodeName { get; set; }
+        public string ReturnNodeName { get; protected set; }
 
         //返回节点参数
-        public int ReturnNodeParam { get; set; }
+        public int ReturnNodeParam { get; protected set; }
 
         #endregion
-        
+
         public ElementNode(string nodeName)
         {
             NodeName = nodeName;
@@ -107,15 +109,15 @@ namespace LccHotfix
             if (NodePhase == NodePhase.Show)
             {
                 Log.Debug($"[UI] 隐藏 {NodeName}");
-                
+
                 if (DomainNode != null)
                 {
                     //从域中移除当前节点
                     DomainNode.RemoveChildNode(this);
                 }
-                
+
                 GetAttachedLayer().DetachElementWidget(this);
-                
+
                 UIRoot.Detach(this);
 
                 ReturnNode = null;
@@ -141,7 +143,7 @@ namespace LccHotfix
         {
             DoAttachedToRoot(uiRoot);
         }
-        
+
         //从UI根移除
         public void DetachedFromRoot()
         {
@@ -149,12 +151,22 @@ namespace LccHotfix
         }
 
         #endregion
-        
+
         #region 接口
 
         protected override void DoConstruct()
         {
             Logic.OnConstruct();
+            if (Logic is IUIElementLogic logic)
+            {
+                EscapeType = logic.EscapeType;
+                ReleaseType = logic.ReleaseType;
+                LayerID = logic.LayerID;
+                IsFullScreen = logic.IsFullScreen;
+                ReturnNodeType = logic.ReturnNodeType;
+                ReturnNodeName = logic.ReturnNodeName;
+                ReturnNodeParam = logic.ReturnNodeParam;
+            }
         }
 
         protected override void DoCreate()
@@ -198,6 +210,7 @@ namespace LccHotfix
                     ReturnNode.nodeParam = new object[] { ReturnNodeParam };
                 }
             }
+
             GetAttachedLayer().AttachElementWidget(this);
             Logic.OnShow(param);
         }

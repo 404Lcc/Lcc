@@ -47,7 +47,7 @@ public static class EntityUtility
         return Main.WorldService.GetWorld().GetEntitiesWithComUnityObjectRelated(go.GetInstanceID());
     }
 
-    public static LogicEntity AddEntity<T>(GameObjectPoolObject poolObject) where T : ActorView, new()
+    public static LogicEntity AddEntity<T>(GameObjectPoolAsyncOperation poolObject) where T : ActorView, new()
     {
         var entity = Main.WorldService.GetWorld().LogicContext.CreateEntity();
 
@@ -65,7 +65,7 @@ public static class EntityUtility
         return entity;
     }
 
-    public static LogicEntity AddEntityWithID<T>(long id, GameObjectPoolObject poolObject) where T : ActorView, new()
+    public static LogicEntity AddEntityWithID<T>(long id, GameObjectPoolAsyncOperation poolObject) where T : ActorView, new()
     {
         var entity = Main.WorldService.GetWorld().LogicContext.CreateEntity();
 

@@ -25,13 +25,13 @@ namespace LccHotfix
         //是否激活
         public bool Active => NodePhase == NodePhase.Show;
 
-        #region 可在OnConstruct配置
+        #region 配置字段
 
         //回退类型
-        public EscapeType EscapeType { get; set; }
+        public EscapeType EscapeType { get; protected set; }
 
         //释放类型
-        public ReleaseType ReleaseType { get; set; } = ReleaseType.Auto;
+        public ReleaseType ReleaseType { get; protected set; }
 
         #endregion
 

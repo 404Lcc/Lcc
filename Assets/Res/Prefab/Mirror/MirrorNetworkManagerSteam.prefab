@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1964355380178904560}
-  - component: {fileID: 182389039420972603}
-  - component: {fileID: 1419246617931571453}
+  - component: {fileID: 2928593911666063354}
+  - component: {fileID: 1839879652065786663}
   m_Layer: 0
   m_Name: MirrorNetworkManagerSteam
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &182389039420972603
+--- !u!114 &2928593911666063354
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53,7 +53,7 @@ MonoBehaviour:
   offlineScene: 
   onlineScene: 
   offlineSceneLoadDelay: 0
-  transport: {fileID: 1419246617931571453}
+  transport: {fileID: 1839879652065786663}
   networkAddress: localhost
   maxConnections: 100
   disconnectInactiveConnections: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   evaluationMethod: 0
   evaluationInterval: 3
   timeInterpolationGui: 0
---- !u!114 &1419246617931571453
+--- !u!114 &1839879652065786663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

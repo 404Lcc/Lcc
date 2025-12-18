@@ -55,7 +55,8 @@ namespace LccHotfix
 
             if (_networkManager != null)
             {
-                GameObject.Destroy(_networkManager);
+                GameObject.Destroy(_networkManager.transform.parent.gameObject);
+                _networkManager = null;
             }
 
             _loader.Release();

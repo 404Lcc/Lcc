@@ -132,7 +132,7 @@ namespace LccModel
             }
 #endif
 
-            TextAsset assetDll = ResObject.LoadRes<TextAsset>(loader, "Unity.Hotfix.dll").GetAsset<TextAsset>();
+            var assetDll = ResObject.LoadRes<TextAsset>(loader, "Unity.Hotfix.dll").GetAsset<TextAsset>();
             TextAsset assetPdb = ResObject.LoadRes<TextAsset>(loader, "Unity.Hotfix.pdb").GetAsset<TextAsset>();
 
             if (assetDll == null || assetPdb == null)

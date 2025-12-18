@@ -4,7 +4,7 @@ using LccModel;
 
 namespace LccHotfix
 {
-    public abstract class UIElementBase : IUILogic
+    public abstract class UIElementBase : IUIElementLogic
     {
         public UINode Node { get; set; }
 
@@ -34,9 +34,16 @@ namespace LccHotfix
             }
         }
 
+        public EscapeType EscapeType { get; protected set; }
+        public ReleaseType ReleaseType { get; protected set; }
+        public UILayerID LayerID { get; protected set; }
+        public bool IsFullScreen { get; protected set; }
+        public NodeType ReturnNodeType { get; protected set; }
+        public string ReturnNodeName { get; protected set; }
+        public int ReturnNodeParam { get; protected set; }
+
         public virtual void OnConstruct()
         {
-            
         }
 
         public virtual void OnCreate()

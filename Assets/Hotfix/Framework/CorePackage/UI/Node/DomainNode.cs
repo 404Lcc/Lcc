@@ -26,14 +26,12 @@ namespace LccHotfix
     {
         public List<ElementNode> NodeList { get; protected set; }
 
-        public int StackIndex { get; set; }
+        public int StackIndex { get; protected set; }
 
         public DomainNode(string rootName)
         {
             this.NodeName = rootName;
             this.Logic = Main.WindowService.GetUILogic(rootName, this);
-            this.EscapeType = EscapeType.Hide;
-            this.ReleaseType = ReleaseType.Auto;
         }
 
         #region 必要流程
@@ -121,7 +119,7 @@ namespace LccHotfix
                     child.Hide();
                 }
 
-                StackIndex = -1;
+                SetStackIndex(-1);
                 NodeList = null;
                 NodePhase = NodePhase.Create;
                 var returnValue = DoHide();
@@ -235,6 +233,16 @@ namespace LccHotfix
         protected override void DoConstruct()
         {
             Logic?.OnConstruct();
+            if (Logic != null && Logic is IUIDomainLogic logic)
+            {
+                EscapeType = logic.EscapeType;
+                ReleaseType = logic.ReleaseType;
+            }
+            else
+            {
+                EscapeType = EscapeType.Hide;
+                ReleaseType = ReleaseType.Auto;
+            }
         }
 
         protected override void DoCreate()
@@ -398,6 +406,11 @@ namespace LccHotfix
         #endregion
 
         #region 外部调用
+
+        public void SetStackIndex(int index)
+        {
+            StackIndex = index;
+        }
 
         /// <summary>
         /// 判断是否包含某个子节点

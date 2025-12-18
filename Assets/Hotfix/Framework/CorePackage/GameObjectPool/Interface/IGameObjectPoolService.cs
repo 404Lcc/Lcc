@@ -13,7 +13,7 @@ namespace LccHotfix
         void SetLoader(Func<string, GameObject, GameObject> loader);
         void SetAsyncLoader(Action<string, AssetLoader, Action<string, Object>> asyncLoader);
 
-        GameObjectPoolObject GetObject(string poolName);
+        // GameObjectPoolObject GetObject(string poolName);
         GameObjectPoolAsyncOperation GetObjectAsync(string poolName, Action<GameObjectPoolAsyncOperation> onComplete);
         void CancelAsyncOperation(GameObjectPoolAsyncOperation operation);
         void ReleasePool(string poolName);

@@ -68,23 +68,25 @@ namespace LccHotfix
         {
             foreach (var item in mode.world.GetWorldData<BattleWorldData>().PlayerList)
             {
-                var obj = GameUtility.GetObj("Player");
-                var entity = EntityUtility.AddEntityWithID<CharacterActorView>(item.PlayerUID, obj);
-                var player = entity.GetView<CharacterActorView>(ViewCategory.Actor);
-                player.SetPlane(CharacterPlane.XZ);
-                player.SetSize(new Vector2(1, 1));
-
-                entity.AddComOwnerPlayer(item);
-                entity.AddComTag(TagType.Hero);
-                entity.AddComFaction(FactionType.Friend);
-                entity.AddComHP(int.MaxValue);
-                entity.AddComHero();
-                entity.AddComProperty();
-                entity.comProperty.Init(int.MaxValue, 100, 3);
-
-                HPView hpView = new HPView();
-                hpView.Init(entity, HeadbarType.NormalHP, 0);
-                entity.AddView(hpView, ViewCategory.HP);
+                GameUtility.GetObj("Player", (x) =>
+                {
+                    var entity = EntityUtility.AddEntityWithID<CharacterActorView>(item.PlayerUID, x);
+                    var player = entity.GetView<CharacterActorView>(ViewCategory.Actor);
+                    player.SetPlane(CharacterPlane.XZ);
+                    player.SetSize(new Vector2(1, 1));
+            
+                    entity.AddComOwnerPlayer(item);
+                    entity.AddComTag(TagType.Hero);
+                    entity.AddComFaction(FactionType.Friend);
+                    entity.AddComHP(int.MaxValue);
+                    entity.AddComHero();
+                    entity.AddComProperty();
+                    entity.comProperty.Init(int.MaxValue, 100, 3);
+            
+                    HPView hpView = new HPView();
+                    hpView.Init(entity, HeadbarType.NormalHP, 0);
+                    entity.AddView(hpView, ViewCategory.HP);
+                });
             }
         }
 

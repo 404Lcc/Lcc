@@ -15,7 +15,7 @@ namespace LccHotfix
         public Vector2 size;
         public AABB bounds;
 
-        public override void Init(GameObjectPoolObject poolObject)
+        public override void Init(GameObjectPoolAsyncOperation poolObject)
         {
             base.Init(poolObject);
 

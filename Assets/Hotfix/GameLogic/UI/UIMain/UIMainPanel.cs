@@ -6,10 +6,9 @@ namespace LccHotfix
         {
             base.OnConstruct();
             
-            var e = Node as ElementNode;
-            e.LayerID = UILayerID.Main;
-            e.IsFullScreen = true;
-            e.EscapeType = EscapeType.Hide;
+            LayerID = UILayerID.Main;
+            IsFullScreen = true;
+            EscapeType = EscapeType.Hide;
         }
     }
 }

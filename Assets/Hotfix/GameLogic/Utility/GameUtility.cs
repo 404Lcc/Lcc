@@ -164,18 +164,17 @@ namespace LccHotfix
             return 0;
         }
 
-        public static GameObjectPoolObject GetObj(string poolKey)
+        public static GameObjectPoolAsyncOperation GetObj(string name, Action<GameObjectPoolAsyncOperation> onComplete)
         {
-            var obj = Main.GameObjectPoolService.GetObject(poolKey);
-            return obj;
+            return Main.GameObjectPoolService.GetObjectAsync(name, onComplete);
         }
 
-        public static void PutObj(ref GameObjectPoolObject poolObject)
+        public static void PutObj(ref GameObjectPoolAsyncOperation obj)
         {
-            if (poolObject == null)
+            if (obj == null)
                 return;
 
-            poolObject.Release(ref poolObject);
+            obj.Release(ref obj);
         }
 
         #region 动画工具

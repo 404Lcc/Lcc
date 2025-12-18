@@ -4,7 +4,7 @@ namespace LccHotfix
 {
     public class ActorView : IViewWrapper
     {
-        private GameObjectPoolObject _poolObject;
+        private GameObjectPoolAsyncOperation _poolObject;
         protected GameObject _gameObject;
         public GameObject GameObject => _gameObject;
 
@@ -14,7 +14,7 @@ namespace LccHotfix
         protected Animator _animator;
         public Animator Animator => _animator;
 
-        public virtual void Init(GameObjectPoolObject poolObject)
+        public virtual void Init(GameObjectPoolAsyncOperation poolObject)
         {
             _poolObject = poolObject;
             _gameObject = _poolObject.GameObject;

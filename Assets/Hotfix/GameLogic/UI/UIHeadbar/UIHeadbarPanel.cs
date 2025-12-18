@@ -20,9 +20,8 @@ namespace LccHotfix
         {
             base.OnConstruct();
             
-            var e = Node as ElementNode;
-            e.IsFullScreen = true;
-            e.EscapeType = EscapeType.Skip;
+            IsFullScreen = true;
+            EscapeType = EscapeType.Skip;
         }
 
         public override void OnShow(object[] paramsList)

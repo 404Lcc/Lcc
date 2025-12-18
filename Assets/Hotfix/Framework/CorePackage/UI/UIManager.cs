@@ -143,7 +143,7 @@ namespace LccHotfix
             }
             
             _commonDomain = GetOrCreateDomain("UIDomainCommon");
-            _commonDomain.StackIndex = 0;
+            _commonDomain.SetStackIndex(0);
             _commonDomain.Show(null);
         }
 
@@ -539,7 +539,7 @@ namespace LccHotfix
                 while (tempStack.Count > 0)
                 {
                     var temp = tempStack.Pop();
-                    temp.StackIndex = _domainStack.Count;
+                    temp.SetStackIndex(_domainStack.Count);
                     _domainStack.Push(temp);
                 }
             }
@@ -715,7 +715,7 @@ namespace LccHotfix
                         _domainStack.Peek().Covered(true);
                     }
 
-                    domain.StackIndex = _domainStack.Count;
+                    domain.SetStackIndex(_domainStack.Count);
                     _domainStack.Push(domain);
 
                     domain.Covered(false);
@@ -841,7 +841,7 @@ namespace LccHotfix
             }
 
             //新建的域索引一定要设置-1
-            domain.StackIndex = -1;
+            domain.SetStackIndex(-1);
             return domain;
         }
 

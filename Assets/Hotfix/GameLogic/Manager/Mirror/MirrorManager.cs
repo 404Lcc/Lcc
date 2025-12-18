@@ -19,6 +19,7 @@ namespace LccHotfix
         private AssetLoader _loader;
         private MirrorState _state;
         private MirrorNetworkManager _networkManager;
+        
         private IMirrorHelper _helper;
         private IMirrorServerMessageDispatcherHelper _serverMessageDispatcherHelper;
         private IMessageDispatcherHelper _clientMessageDispatcherHelper;
@@ -49,7 +50,8 @@ namespace LccHotfix
 
             if (_networkManager != null)
             {
-                GameObject.Destroy(_networkManager);
+                GameObject.Destroy(_networkManager.transform.parent.gameObject);
+                _networkManager = null;
             }
 
             _loader.Release();

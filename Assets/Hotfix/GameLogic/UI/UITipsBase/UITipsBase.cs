@@ -35,6 +35,15 @@ namespace LccHotfix
         private float _offset;
 
         private bool _isInit;
+        
+        public override void OnConstruct()
+        {
+            base.OnConstruct();
+            
+            LayerID = UILayerID.Popup;
+            IsFullScreen = false;
+            EscapeType = EscapeType.Skip;
+        }
 
         public override void OnShow(object[] paramsList)
         {
