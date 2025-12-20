@@ -1,5 +1,5 @@
-﻿using LccModel;
-using System.IO;
+﻿using System.IO;
+using LccHotfix;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ namespace LccEditor
                 switch (Path.GetFileNameWithoutExtension(lccView.type.GetType().Assembly.ManifestModule.Name))
                 {
                     case "Unity.Model":
-                        directoryName = "Framework";
+                        directoryName = "Launcher";
                         break;
                     case "Unity.Hotfix":
                         directoryName = "Hotfix";

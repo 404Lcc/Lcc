@@ -39,6 +39,7 @@ namespace LccHotfix
             SaveService = Current.AddModule<SaveManager>();
             SaveService.SetSaveHelper(new DefaultSaveHelper());
             SettingService = Current.AddModule<SettingManager>();
+            FxService = Current.AddModule<FxCacheManager>();
             AudioService = Current.AddModule<AudioManager>();
             VibrationService = Current.AddModule<VibrationManager>();
             ValueEventService = Current.AddModule<ValueEventManager>();
@@ -46,7 +47,7 @@ namespace LccHotfix
             TimerService = Current.AddModule<TimerManager>();
             ProcedureService = Current.AddModule<ProcedureManager>();
             ProcedureService.SetProcedureHelper(new DefaultProcedureHelper());
-            WindowService = Current.AddModule<UIManager>();
+            UIService = Current.AddModule<UIManager>();
             ThreadSyncService = Current.AddModule<ThreadSyncManager>();
             GizmoService = Current.AddModule<GizmoManager>();
             BadgeService = Current.AddModule<BadgeManager>();
@@ -94,7 +95,7 @@ namespace LccHotfix
 
             HotfixBridgeService.Init();
             LanguageService.Init();
-            WindowService.Init();
+            UIService.Init();
             FishNetService.Init();
             MirrorService.Init();
             SteamService.Init();

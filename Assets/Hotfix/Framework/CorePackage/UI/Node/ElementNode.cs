@@ -52,7 +52,7 @@ namespace LccHotfix
         public ElementNode(string nodeName)
         {
             NodeName = nodeName;
-            Logic = Main.WindowService.GetUILogic(nodeName, this);
+            Logic = Main.UIService.GetUILogic(nodeName, this);
         }
 
         #region 必要流程
@@ -233,9 +233,9 @@ namespace LccHotfix
             var returnValue = Logic.OnHide();
 
             //触发关闭节点回调
-            Main.WindowService.DispatchNodeHide(NodeName, returnValue);
+            Main.UIService.DispatchNodeHide(NodeName, returnValue);
             //加入到释放列表
-            Main.WindowService.AddToReleaseQueue(this);
+            Main.UIService.AddToReleaseQueue(this);
             return returnValue;
         }
 
@@ -292,7 +292,7 @@ namespace LccHotfix
 
         public void CreateElement(AssetLoader loader, Action<ElementNode> callback)
         {
-            Main.WindowService.LoadAsyncGameObject?.Invoke(loader, NodeName, (obj) =>
+            Main.UIService.LoadAsyncGameObject?.Invoke(loader, NodeName, (obj) =>
             {
                 GameObject = GameObject.Instantiate(obj);
                 GameObject.name = NodeName;

@@ -25,9 +25,9 @@ namespace LccHotfix
 
         public void UnloadAllPanel(LoadProcedureHandler last, LoadProcedureHandler cur)
         {
-            Main.WindowService.HideAllDomain();
+            Main.UIService.HideAllDomain();
             
-            Main.WindowService.ForceClearReleaseQueue();
+            Main.UIService.ForceClearReleaseQueue();
         }
 
         public void OpenChangeProcedurePanel(LoadProcedureHandler handler)
@@ -42,11 +42,11 @@ namespace LccHotfix
 
             if (node.nodeType == NodeType.Domain)
             {
-                Main.WindowService.ShowDomain(node.nodeName, node.nodeParam);
+                Main.UIService.ShowDomain(node.nodeName, node.nodeParam);
             }
             else
             {
-                Main.WindowService.ShowElement(node.nodeName, node.nodeParam);
+                Main.UIService.ShowElement(node.nodeName, node.nodeParam);
             }
 
             handler.turnNode = null;

@@ -29,7 +29,7 @@ namespace LccHotfix
         {
             UILoadingPanel.Instance.UpdateLoadingPercent(10, 98, 2f);
 
-            Main.WindowService.ShowElement(UIPanelDefine.UIMainPanel);
+            Main.UIService.ShowElement(UIPanelDefine.UIMainPanel);
 
             yield return new WaitForSeconds(1f);
 

@@ -11,7 +11,7 @@ namespace LccHotfix
             _entity = entity;
             _type = type;
             _offsetY = offsetY;
-            _panel = Main.WindowService.GetElement<UIHeadbarPanel>(UIPanelDefine.UIHeadbarPanel);
+            _panel = Main.UIService.GetElement<UIHeadbarPanel>(UIPanelDefine.UIHeadbarPanel);
         }
 
 

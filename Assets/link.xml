@@ -3241,6 +3241,7 @@
     <type fullname="JetBrains.Annotations.InstantHandleAttribute" preserve="all" />
     <type fullname="JetBrains.Annotations.PureAttribute" preserve="all" />
     <type fullname="JetBrains.Annotations.MustUseReturnValueAttribute" preserve="all" />
+    <type fullname="JetBrains.Annotations.MustDisposeResourceAttribute" preserve="all" />
     <type fullname="JetBrains.Annotations.ProvidesContextAttribute" preserve="all" />
     <type fullname="JetBrains.Annotations.PathReferenceAttribute" preserve="all" />
     <type fullname="JetBrains.Annotations.SourceTemplateAttribute" preserve="all" />
@@ -3309,7 +3310,6 @@
     <type fullname="UnityEngine.ReflectionProbe+ReflectionProbeEvent" preserve="all" />
     <type fullname="UnityEngine.ReflectionProbe+&lt;&gt;c__DisplayClass95_0" preserve="all" />
     <type fullname="UnityEngine.ReflectionProbe+&lt;&gt;c__DisplayClass98_0" preserve="all" />
-    <type fullname="UnityEngine.CloudStreaming" preserve="all" />
     <type fullname="UnityEngine.CrashReport" preserve="all" />
     <type fullname="UnityEngine.DebugLogHandler" preserve="all" />
     <type fullname="UnityEngine.Debug" preserve="all" />
@@ -3628,6 +3628,8 @@
     <type fullname="UnityEngine.IconAttribute" preserve="all" />
     <type fullname="UnityEngine.ResourceRequest" preserve="all" />
     <type fullname="UnityEngine.ResourcesAPIInternal" preserve="all" />
+    <type fullname="UnityEngine.ResourcesAPIInternal+EntitiesAssetGC" preserve="all" />
+    <type fullname="UnityEngine.ResourcesAPIInternal+EntitiesAssetGC+AdditionalRootsHandlerDelegate" preserve="all" />
     <type fullname="UnityEngine.ResourcesAPI" preserve="all" />
     <type fullname="UnityEngine.Resources" preserve="all" />
     <type fullname="UnityEngine.AsyncInstantiateOperation" preserve="all" />
@@ -3700,6 +3702,7 @@
     <type fullname="UnityEngine.HideFlags" preserve="all" />
     <type fullname="UnityEngine.FindObjectsSortMode" preserve="all" />
     <type fullname="UnityEngine.FindObjectsInactive" preserve="all" />
+    <type fullname="UnityEngine.InstantiateParameters" preserve="all" />
     <type fullname="UnityEngine.Object" preserve="all" />
     <type fullname="UnityEngine.UnitySynchronizationContext" preserve="all" />
     <type fullname="UnityEngine.UnitySynchronizationContext+WorkRequest" preserve="all" />
@@ -4072,10 +4075,12 @@
     <type fullname="UnityEngine.Pool.GenericPool`1" preserve="all" />
     <type fullname="UnityEngine.Pool.GenericPool`1+&lt;&gt;c" preserve="all" />
     <type fullname="UnityEngine.Pool.IObjectPool`1" preserve="all" />
+    <type fullname="UnityEngine.Pool.IPool" preserve="all" />
     <type fullname="UnityEngine.Pool.LinkedPool`1" preserve="all" />
     <type fullname="UnityEngine.Pool.LinkedPool`1+LinkedPoolItem" preserve="all" />
     <type fullname="UnityEngine.Pool.ObjectPool`1" preserve="all" />
     <type fullname="UnityEngine.Pool.PooledObject`1" preserve="all" />
+    <type fullname="UnityEngine.Pool.PoolManager" preserve="all" />
     <type fullname="UnityEngine.Pool.UnsafeGenericPool`1" preserve="all" />
     <type fullname="UnityEngine.Pool.UnsafeGenericPool`1+&lt;&gt;c" preserve="all" />
     <type fullname="UnityEngine.Networking.PlayerConnection.ConnectionTarget" preserve="all" />
@@ -4614,7 +4619,6 @@
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=7232" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Model">
-    <type fullname="MirrorNetworkManager" preserve="all" />
     <type fullname="UIAnimCtrl" preserve="all" />
     <type fullname="UIAnimInfo" preserve="all" />
     <type fullname="UIAnimType" preserve="all" />
@@ -4625,45 +4629,15 @@
     <type fullname="UIAnimManager+&lt;&gt;c__DisplayClass16_0" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1+MonoScriptData" preserve="all" />
-    <type fullname="LccModel.AssetManager" preserve="all" />
-    <type fullname="LccModel.ResALLObject" preserve="all" />
-    <type fullname="LccModel.ResGameObject" preserve="all" />
-    <type fullname="LccModel.ResObject" preserve="all" />
-    <type fullname="LccModel.ResObject+LoadState" preserve="all" />
-    <type fullname="LccModel.ResShader" preserve="all" />
-    <type fullname="LccModel.ResShader+&lt;WarmUp&gt;d__5" preserve="all" />
-    <type fullname="LccModel.AStarCtrl" preserve="all" />
     <type fullname="LccModel.FishNetMessage" preserve="all" />
-    <type fullname="LccModel.LccView" preserve="all" />
+    <type fullname="LccModel.FishNetMessageSerializers" preserve="all" />
     <type fullname="LccModel.MirrorMessage" preserve="all" />
-    <type fullname="LccModel.GroupBase" preserve="all" />
-    <type fullname="LccModel.PivotHorizontal" preserve="all" />
-    <type fullname="LccModel.PivotVerticle" preserve="all" />
-    <type fullname="LccModel.ScrollerPro" preserve="all" />
-    <type fullname="LccModel.ScrollerProEx" preserve="all" />
-    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass2_0" preserve="all" />
-    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass3_0" preserve="all" />
-    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass4_0" preserve="all" />
-    <type fullname="LccModel.ScrollerProEx+&lt;&gt;c__DisplayClass5_0" preserve="all" />
-    <type fullname="LccModel.DoubleClickEvent" preserve="all" />
-    <type fullname="LccModel.DoubleClickButton" preserve="all" />
-    <type fullname="LccModel.EnterClickEvent" preserve="all" />
-    <type fullname="LccModel.ExitClickEvent" preserve="all" />
-    <type fullname="LccModel.EnterClickButton" preserve="all" />
-    <type fullname="LccModel.EventTriggerListener" preserve="all" />
-    <type fullname="LccModel.LongClickEvent" preserve="all" />
-    <type fullname="LccModel.LongClickButton" preserve="all" />
-    <type fullname="LccModel.RightClickEvent" preserve="all" />
-    <type fullname="LccModel.RightClickButton" preserve="all" />
-    <type fullname="LccModel.EmImageType" preserve="all" />
-    <type fullname="LccModel.UIImageCtrl" preserve="all" />
-    <type fullname="LccModel.UISpriteCtrl" preserve="all" />
+    <type fullname="LccModel.UIAdapt" preserve="all" />
     <type fullname="LccModel.BlackFadeMask" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel+&lt;&gt;c__DisplayClass6_0" preserve="all" />
     <type fullname="LccModel.UILoadingPanel" preserve="all" />
     <type fullname="LccModel.UIScreenBackgroundMessage" preserve="all" />
-    <type fullname="LccModel.UIAdapt" preserve="all" />
     <type fullname="LccModel.GameConfig" preserve="all" />
     <type fullname="LccModel.LanguageConfig" preserve="all" />
     <type fullname="LccModel.PatchEventDefine" preserve="all" />
@@ -4723,6 +4697,7 @@
     <type fullname="LccModel.FsmRequestServer+&lt;RequestServer&gt;d__3" preserve="all" />
     <type fullname="LccModel.FsmStartGame" preserve="all" />
     <type fullname="LccModel.FsmStartGame+&lt;&gt;c" preserve="all" />
+    <type fullname="LccModel.FsmStartGame+&lt;LoadAndRun&gt;d__7" preserve="all" />
     <type fullname="LccModel.FsmStartGame+&lt;LoadInitialize&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmStartSplash" preserve="all" />
     <type fullname="LccModel.FsmUpdatePackageManifest" preserve="all" />
@@ -4763,8 +4738,8 @@
     <type fullname="LccModel.LocalDialog" preserve="all" />
     <type fullname="LccModel.OpenFileName" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3277" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=4744" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2697" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3827" preserve="all" />
     <type fullname="Mirror.GeneratedNetworkCode" preserve="all" />
   </assembly>
 </linker>

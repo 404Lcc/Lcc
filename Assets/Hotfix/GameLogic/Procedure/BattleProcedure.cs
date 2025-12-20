@@ -34,8 +34,8 @@ namespace LccHotfix
 
                 SetBattleCamera();
 
-                Main.WindowService.ShowElement(UIPanelDefine.UIBattlePanel);
-                Main.WindowService.ShowElement(UIPanelDefine.UIHeadbarPanel);
+                Main.UIService.ShowElement(UIPanelDefine.UIBattlePanel);
+                Main.UIService.ShowElement(UIPanelDefine.UIHeadbarPanel);
 
                 var mod = GameUtility.GetModel<ModPlayer>();
                 var data = new InGamePlayerData();

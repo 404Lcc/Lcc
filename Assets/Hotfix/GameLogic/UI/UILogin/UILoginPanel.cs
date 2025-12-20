@@ -29,7 +29,7 @@ namespace LccHotfix
         public override void OnShow(object[] paramsList)
         {
             base.OnShow(paramsList);
-            Main.WindowService.ShowElement(UIPanelDefine.UIMainPanel, null);
+            Main.UIService.ShowElement(UIPanelDefine.UIMainPanel, null);
             // Main.WindowService.OpenRoot(UIRootDefine.UIRootBattle, null);
         }
 
@@ -66,7 +66,7 @@ namespace LccHotfix
 
         public void OnStartBtn()
         {
-            Main.WindowService.ShowElement(UIPanelDefine.UIBattlePanel, null);
+            Main.UIService.ShowElement(UIPanelDefine.UIBattlePanel, null);
             // Main.ProcedureService.ChangeProcedure(ProcedureType.Main.ToInt());
         }
     }

@@ -11,13 +11,14 @@ namespace LccHotfix
         public static IClientConfigService ClientConfigService { get; set; }
         public static ISaveService SaveService { get; set; }
         public static ISettingService SettingService { get; set; }
+        public static IFxService FxService { get; set; }
         public static IAudioService AudioService { get; set; }
         public static IVibrationService VibrationService { get; set; }
         public static IValueEventService ValueEventService { get; set; }
         public static ICameraService CameraService { get; set; }
         public static ITimerService TimerService { get; set; }
         public static IProcedureService ProcedureService { get; set; }
-        public static IUIService WindowService { get; set; }
+        public static IUIService UIService { get; set; }
         public static IThreadSyncService ThreadSyncService { get; set; }
         public static IGizmoService GizmoService { get; set; }
         public static IBadgeService BadgeService { get; set; }
