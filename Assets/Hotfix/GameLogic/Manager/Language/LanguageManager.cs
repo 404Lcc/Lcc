@@ -44,7 +44,7 @@ namespace LccHotfix
 
             var config = languageDict[key];
             string value = string.Empty;
-            switch (Launcher.Instance.GameLanguage.curLanguage)
+            switch (GameConfig.AppLanguage)
             {
                 case "ChineseSimplified":
                     value = config.Chinese;

@@ -9,11 +9,11 @@ namespace LccHotfix
     {
         public override void OnInstall()
         {
-            Launcher.Instance.GameAction.OnFixedUpdate += OnFixedUpdate;
-            Launcher.Instance.GameAction.OnUpdate += OnUpdate;
-            Launcher.Instance.GameAction.OnLateUpdate += OnLateUpdate;
-            Launcher.Instance.GameAction.OnClose += OnClose;
-            Launcher.Instance.GameAction.OnDrawGizmos += OnDrawGizmos;
+            Launcher.Instance.OnFixedUpdate += OnFixedUpdate;
+            Launcher.Instance.OnUpdate += OnUpdate;
+            Launcher.Instance.OnLateUpdate += OnLateUpdate;
+            Launcher.Instance.OnClose += OnClose;
+            Launcher.Instance.OnDrawGizmos += OnDrawGizmos;
 
             CodeTypesService = Current.AddModule<CodeTypesManager>();
             CodeTypesService.LoadTypes(new Assembly[] { Launcher.Instance.HotfixAssembly });
@@ -102,7 +102,7 @@ namespace LccHotfix
 
             try
             {
-                Launcher.Instance.LauncherFinish();
+                // Launcher.Instance.LauncherFinish();
 
                 SaveService.CreateSaveFile("default.sav");
 
@@ -135,11 +135,11 @@ namespace LccHotfix
 
         private static void OnClose()
         {
-            Launcher.Instance.GameAction.OnFixedUpdate -= OnFixedUpdate;
-            Launcher.Instance.GameAction.OnUpdate -= OnUpdate;
-            Launcher.Instance.GameAction.OnLateUpdate -= OnLateUpdate;
-            Launcher.Instance.GameAction.OnClose -= OnClose;
-            Launcher.Instance.GameAction.OnDrawGizmos -= OnDrawGizmos;
+            Launcher.Instance.OnFixedUpdate -= OnFixedUpdate;
+            Launcher.Instance.OnUpdate -= OnUpdate;
+            Launcher.Instance.OnLateUpdate -= OnLateUpdate;
+            Launcher.Instance.OnClose -= OnClose;
+            Launcher.Instance.OnDrawGizmos -= OnDrawGizmos;
             Current.Shutdown();
         }
     }

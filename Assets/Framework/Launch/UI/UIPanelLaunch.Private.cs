@@ -28,6 +28,7 @@ namespace LccModel
             private Text _Text_Content;
             private readonly List<Transform> _btnList = new();
             public bool ActiveSelf => _gameObject.activeSelf;
+
             public void Create(GameObject gameObject)
             {
                 _gameObject = gameObject;
@@ -35,15 +36,16 @@ namespace LccModel
 
                 for (var i = 0; i <= 1; i++)
                 {
-                    var trans = gameObject.transform.Find($"HLG_Buttons/Btn_{i+1}");
+                    var trans = gameObject.transform.Find($"HLG_Buttons/Btn_{i + 1}");
                     _btnList.Add(trans);
                 }
             }
+
             public void Show(MessageBoxParams @params)
             {
                 _params = @params;
                 _Text_Content.text = _params.Content;
-                
+
                 for (int i = 0; i < _btnList.Count; i++)
                 {
                     var trans = _btnList[i];
@@ -61,6 +63,7 @@ namespace LccModel
                         trans.gameObject.SetActive(false);
                     }
                 }
+
                 _gameObject.SetActive(true);
                 _gameObject.transform.SetAsLastSibling();
             }
@@ -76,6 +79,7 @@ namespace LccModel
                     btn.onClick.RemoveAllListeners();
                 }
             }
+
             private void OnClickOptionBtn(int index)
             {
                 if (index < _params.btnOptionList.Count)
@@ -85,16 +89,16 @@ namespace LccModel
                 }
             }
         }
-        
+
         private readonly EventGroup _uniEventGroup = new();
-        private readonly List<MessageBox> _msgBoxList = new ();
+        private readonly List<MessageBox> _msgBoxList = new();
         private GameObject _messageBoxObj;
         private Text _Text_Version;
         private Text _Text_Desc;
         private Text _Text_Progress;
         private Slider _Slider_Progress;
         private float _desiredProgress = 0f;
-        
+
         private void Init()
         {
             _Text_Version = transform.Find("Canvas/Text_Version").GetComponent<Text>();
@@ -104,21 +108,21 @@ namespace LccModel
             _messageBoxObj = transform.Find("Canvas/MessageBox").gameObject;
             _messageBoxObj.SetActive(false);
             SetHint(string.Empty);
-            
+
             _Slider_Progress.value = _desiredProgress;
             _Text_Progress.text = string.Empty;
         }
-        
+
         void Update()
         {
             _Slider_Progress.value = Mathf.Lerp(_Slider_Progress.value, _desiredProgress, 0.1f);
         }
-        
+
         private void SetVersion(string version)
         {
             _Text_Version.text = version;
         }
-        
+
         private void SetHint(string hint)
         {
             _Text_Desc.text = hint;
@@ -131,10 +135,11 @@ namespace LccModel
             {
                 _Slider_Progress.value = progress;
             }
+
             _desiredProgress = progress;
             _Text_Progress.text = progressText;
         }
-        
+
         private void ShowMessageBox(MessageBoxParams @params)
         {
             MessageBox msgBox = null;
@@ -147,6 +152,7 @@ namespace LccModel
                     break;
                 }
             }
+
             if (msgBox == null)
             {
                 msgBox = new MessageBox();
@@ -154,6 +160,7 @@ namespace LccModel
                 msgBox.Create(cloneObject);
                 _msgBoxList.Add(msgBox);
             }
+
             msgBox.Show(@params);
         }
     }

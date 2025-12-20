@@ -2,44 +2,44 @@ using System.Collections.Generic;
 
 namespace LccModel
 {
-    public partial class GameConfig
+    public static partial class GameConfig
     {
-        private Dictionary<string, object> configDict = new Dictionary<string, object>();
+        private static Dictionary<string, object> _configDict = new Dictionary<string, object>();
 
-        public void AddConfig(string configName, object configValue)
+        public static void AddConfig(string configName, object configValue)
         {
-            if (configDict.TryGetValue(configName, out var var))
+            if (_configDict.TryGetValue(configName, out var var))
             {
                 var = configValue;
             }
             else
             {
-                configDict[configName] = configValue;
+                _configDict[configName] = configValue;
             }
         }
 
 
-        public T GetConfig<T>(string configName)
+        public static T GetConfig<T>(string configName)
         {
-            if (configDict.TryGetValue(configName, out var var))
+            if (_configDict.TryGetValue(configName, out var var))
             {
                 return (T)var;
             }
             return default(T);
         }
 
-        public T GetConfig<T>(string configName, T defaultValue = default(T))
+        public static T GetConfig<T>(string configName, T defaultValue = default(T))
         {
-            if (configDict.TryGetValue(configName, out var var))
+            if (_configDict.TryGetValue(configName, out var var))
             {
                 return (T)var;
             }
             return defaultValue;
         }
 
-        public bool HasConfig(string configName)
+        public static bool HasConfig(string configName)
         {
-            return configDict.ContainsKey(configName);
+            return _configDict.ContainsKey(configName);
         }
     }
 }

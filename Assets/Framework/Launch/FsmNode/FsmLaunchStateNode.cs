@@ -5,14 +5,8 @@ namespace LccModel
 {
     public abstract class FsmLaunchStateNode : IStateNode
     {
-        private int _nodeIndex;
         protected StateMachine _machine;
         protected LauncherOperation _launcherOperation;
-
-        public void Initialize(params object[] args)
-        {
-            _nodeIndex = (int)args[0];
-        }
 
         public virtual void OnCreate(StateMachine machine)
         {
@@ -22,13 +16,16 @@ namespace LccModel
 
         public virtual void OnEnter()
         {
-            Debug.LogWarning($"[Launch]OnEnter {GetType().Name}");
+            Debug.LogWarning($"[Launch] OnEnter {GetType().Name}");
 
             LaunchEvent.StateChanged.Broadcast(_machine.PreviousNode, _machine.CurrentNode);
-            
-            var total = _machine.NodeCount;
-            var progress = (float)_nodeIndex / total;
-            LaunchEvent.ShowProgress.Broadcast(progress, $"{_nodeIndex}/{total}");
+        }
+
+        public void BroadcastShowProgress(int index)
+        {
+            var total = (int)_machine.GetBlackboardValue("total");
+            var progress = (float)index / total;
+            LaunchEvent.ShowProgress.Broadcast(progress, $"{index}/{total}");
         }
 
         public virtual void OnUpdate()
@@ -37,12 +34,11 @@ namespace LccModel
 
         public virtual void OnExit()
         {
-            Debug.LogWarning($"[Launch]OnExit {GetType().Name}");
+            Debug.LogWarning($"[Launch] OnExit {GetType().Name}");
         }
 
-        protected void ChangeToNextState()
+        protected virtual void ChangeToNextState()
         {
-            _machine.ChangeToNextState();
         }
 
         protected Coroutine StartCoroutine(IEnumerator routine)

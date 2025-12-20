@@ -11,10 +11,15 @@ namespace LccModel
         public override void OnEnter()
         {
             base.OnEnter();
+            BroadcastShowProgress(5);
             _lastError = null;
             StartCoroutine(InitAllPackage());
         }
-
+        protected override void ChangeToNextState()
+        {
+            base.ChangeToNextState();
+            _machine.ChangeState<FsmRequestPackageVersion>();
+        }
         private IEnumerator InitAllPackage()
         {
             foreach (var packageName in AssetConfig.BPackageList)
@@ -67,7 +72,7 @@ namespace LccModel
             }
             else if (playMode == EPlayMode.HostPlayMode)
             {
-                string defaultHostServer = GameConfig.versionConfig.PatchesAddresses[0];
+                string defaultHostServer = PatchConfig.versionConfig.PatchesAddresses[0];
                 string fallbackHostServer = PatchConfig.versionConfig.PatchesAddresses.Count > 1 ? PatchConfig.versionConfig.PatchesAddresses[1] : defaultHostServer;
                 IRemoteServices remoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
                 var createParameters = new HostPlayModeParameters

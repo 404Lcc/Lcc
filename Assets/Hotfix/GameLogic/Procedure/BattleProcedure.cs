@@ -26,8 +26,6 @@ namespace LccHotfix
             //进入
             Log.Debug("进入Battle");
 
-            UILoadingPanel.Instance.UpdateLoadingPercent(10, 98, 2f);
-
             operation = Main.GameObjectPoolService.GetObjectAsync("Map", (x) =>
             {
                 operation = x;
@@ -56,11 +54,7 @@ namespace LccHotfix
         {
             yield return new WaitForSeconds(1f);
 
-            UIForeGroundPanel.Instance.FadeOut(0.5f);
-
             yield return null;
-
-            UILoadingPanel.Instance.Hide();
 
             this.StartCoroutine(LevelStartWaiting());
         }

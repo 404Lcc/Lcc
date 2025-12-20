@@ -6,6 +6,6 @@ public class DefaultCoroutineHelper : ICoroutineHelper
 {
     public void StartCoroutine(IEnumerator coroutine)
     {
-        Object.FindObjectOfType<LccModel.Launcher>().StartCoroutine(coroutine);
+        Object.FindObjectOfType<Launcher>().StartCoroutine(coroutine);
     }
 }

@@ -1,8 +1,12 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using HybridCLR;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using YooAsset;
 
 namespace LccModel
 {
@@ -11,7 +15,12 @@ namespace LccModel
         public override void OnEnter()
         {
             base.OnEnter();
+            BroadcastShowProgress(11);
             StartCoroutine(LoadDlls());
+        }
+        protected override void ChangeToNextState()
+        {
+            base.ChangeToNextState();
         }
         public override void OnUpdate()
         {

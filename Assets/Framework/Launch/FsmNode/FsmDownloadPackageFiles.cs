@@ -12,10 +12,15 @@ namespace LccModel
         public override void OnEnter()
         {
             base.OnEnter();
+            BroadcastShowProgress(9);
             DownloadPackageFinishCount = 0;
             StartCoroutine(DownloadAllPackage());
         }
-
+        protected override void ChangeToNextState()
+        {
+            base.ChangeToNextState();
+            _machine.ChangeState<FsmClearCacheBundle>();
+        }
         private IEnumerator DownloadAllPackage()
         {
             foreach (var packageName in AssetConfig.BPackageList)
@@ -27,8 +32,8 @@ namespace LccModel
                 Debug.LogWarning("[Launch] FsmDownloadPackageFiles: download all package finish");
                 
                 var defaultPackage = YooAssets.TryGetPackage(AssetConfig.DefaultPackageName);
-                AppConfig.LocalPackageVersion = defaultPackage.GetPackageVersion();
-                LaunchEvent.ShowVersion.Broadcast(AppConfig.GetVersionStr());
+                GameConfig.LocalPackageVersion = defaultPackage.GetPackageVersion();
+                LaunchEvent.ShowVersion.Broadcast(GameConfig.GetVersionStr());
                 
                 ChangeToNextState();
             }

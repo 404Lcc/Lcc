@@ -9,9 +9,15 @@ namespace LccModel
         public override void OnEnter()
         {
             base.OnEnter();
+            BroadcastShowProgress(10);
             StartCoroutine(ClearCacheFiles());
         }
+        protected override void ChangeToNextState()
+        {
+            base.ChangeToNextState();
+            _machine.ChangeState<FsmStartGame>();
 
+        }
         private IEnumerator ClearCacheFiles()
         {
             foreach (var packageName in AssetConfig.BPackageList)

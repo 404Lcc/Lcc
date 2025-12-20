@@ -12,15 +12,9 @@ namespace LccModel
             Update,
             Done,
         }
-        
-        private readonly StateMachine _machine;
+
+        private StateMachine _machine;
         private ESteps _steps = ESteps.None;
-        
-        public GameAction GameAction { get; private set; } = new GameAction();
-        public GameConfig GameConfig { get; private set; } = new GameConfig();
-        public GameLanguage GameLanguage { get; private set; } = new GameLanguage();
-        public GameServerConfig GameServerConfig { get; private set; } = new GameServerConfig();
-        public Assembly HotfixAssembly { get; set; }
 
         public LauncherOperation()
         {
@@ -36,14 +30,15 @@ namespace LccModel
             _machine.AddNode<FsmDownloadPackageFiles>();
             _machine.AddNode<FsmClearCacheBundle>();
             _machine.AddNode<FsmStartGame>();
+            _machine.SetBlackboardValue("total", 11);
         }
-        
+
         protected override void OnStart()
         {
             _steps = ESteps.Update;
-            _machine.Run();
+            _machine.Run<FsmInitializeApp>();
         }
-        
+
         protected override void OnUpdate()
         {
             switch (_steps)
@@ -54,18 +49,15 @@ namespace LccModel
                 case ESteps.Update:
                     _machine.Update();
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
-        
+
         protected override void OnAbort()
         {
         }
-        
+
         public void SetFinish()
         {
-            _machine.Stop();
             Status = EOperationStatus.Succeed;
             _steps = ESteps.Done;
         }

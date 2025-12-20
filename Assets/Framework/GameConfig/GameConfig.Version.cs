@@ -4,96 +4,62 @@ using UnityEngine;
 
 namespace LccModel
 {
-    public partial class GameConfig
+    public static partial class GameConfig
     {
-        public int appVersion
+        public static string AppVersion
         {
-            get
-            {
-                return GetConfig<int>("appVersion");
-            }
-        }
-        public int channel
-        {
-            get
-            {
-                return GetConfig<int>("channel");
-            }
+            get { return GetConfig<string>("appVersion"); }
+            set { AddConfig("appVersion", value); }
         }
 
-        public int resVersion
+        public static int Channel
         {
-            get
-            {
-                return GetConfig<int>("resVersion");
-            }
+            get { return GetConfig<int>("channel"); }
+            set { AddConfig("channel", value); }
+        }
+
+        public static string LocalPackageVersion
+        {
+            get { return GetConfig<string>("localPackageVersion"); }
+            set { AddConfig("localPackageVersion", value); }
         }
 
 
-        public string centerServerAddress
+        public static string CenterServerAddress
         {
-            get
-            {
-                return GetConfig<string>("centerServerAddress");
-            }
+            get { return GetConfig<string>("centerServerAddress"); }
         }
 
 
-        public bool isReleaseCenterServer
+        public static bool IsReleaseCenterServer
         {
-            get
-            {
-                return GetConfig<bool>("isReleaseCenterServer");
-            }
+            get { return GetConfig<bool>("isReleaseCenterServer"); }
         }
 
-        public bool isRelease
+        public static bool IsRelease
         {
-            get
-            {
-
-                return GetConfig<bool>("isRelease");
-            }
+            get { return GetConfig<bool>("isRelease"); }
         }
 
-        public bool chargeDirect
+        public static bool IsEnablePatcher
         {
-            get
-            {
-                return GetConfig<bool>("chargeDirect");
-            }
+            get { return GetConfig<bool>("isEnablePatcher"); }
         }
 
-        public bool selectServer
-        {
-            get
-            {
-                return GetConfig<bool>("selectServer");
-            }
-        }
-
-        public bool checkResUpdate
-        {
-            get
-            {
-                return GetConfig<bool>("checkResUpdate");
-            }
-        }
-
-        public bool useSDK
+        public static bool IsEnableSDK
         {
             get
             {
 #if UNITY_EDITOR
                 return false;
 #else
-                return GetConfig<bool>("useSDK");
+                return GetConfig<bool>("isEnableSDK");
 #endif
             }
         }
 
 
-        public void ReadVersion(string text)
+        public static void ReadVersion(string text)
         {
             if (!string.IsNullOrEmpty(text))
             {
@@ -102,43 +68,42 @@ namespace LccModel
                     JsonData data = JsonMapper.ToObject(text);
                     if (data.ContainsKey("appVersion"))
                     {
-                        AddConfig("appVersion", int.Parse(data["appVersion"].ToString()));
+                        AddConfig("appVersion", data["appVersion"].ToString());
                     }
+
                     if (data.ContainsKey("channel"))
                     {
                         AddConfig("channel", int.Parse(data["channel"].ToString()));
                     }
-                    if (data.ContainsKey("resVersion"))
+
+                    if (data.ContainsKey("localPackageVersion"))
                     {
-                        AddConfig("resVersion", int.Parse(data["resVersion"].ToString()));
+                        AddConfig("localPackageVersion", data["localPackageVersion"].ToString());
                     }
+
                     if (data.ContainsKey("centerServerAddress"))
                     {
                         AddConfig("centerServerAddress", data["centerServerAddress"].ToString());
                     }
+
                     if (data.ContainsKey("isReleaseCenterServer"))
                     {
                         AddConfig("isReleaseCenterServer", bool.Parse(data["isReleaseCenterServer"].ToString()));
                     }
+
                     if (data.ContainsKey("isRelease"))
                     {
                         AddConfig("isRelease", bool.Parse(data["isRelease"].ToString()));
                     }
-                    if (data.ContainsKey("chargeDirect"))
+
+                    if (data.ContainsKey("isEnablePatcher"))
                     {
-                        AddConfig("chargeDirect", bool.Parse(data["chargeDirect"].ToString()));
+                        AddConfig("isEnablePatcher", bool.Parse(data["isEnablePatcher"].ToString()));
                     }
-                    if (data.ContainsKey("selectServer"))
+
+                    if (data.ContainsKey("isEnableSDK"))
                     {
-                        AddConfig("selectServer", bool.Parse(data["selectServer"].ToString()));
-                    }
-                    if (data.ContainsKey("checkResUpdate"))
-                    {
-                        AddConfig("checkResUpdate", bool.Parse(data["checkResUpdate"].ToString()));
-                    }
-                    if (data.ContainsKey("useSDK"))
-                    {
-                        AddConfig("useSDK", bool.Parse(data["useSDK"].ToString()));
+                        AddConfig("isEnableSDK", bool.Parse(data["isEnableSDK"].ToString()));
                     }
                 }
                 catch (Exception ex)
@@ -146,9 +111,11 @@ namespace LccModel
                     Debug.LogError("读取版本配置失败：" + ex.ToString());
                 }
             }
-            else
-            {
-            }
+        }
+        
+        public static string GetVersionStr()
+        {
+            return $"{AppVersion}.{LocalPackageVersion}";
         }
     }
 }

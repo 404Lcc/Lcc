@@ -9,12 +9,17 @@ namespace LccModel
         public override void OnEnter()
         {
             base.OnEnter();
+            BroadcastShowProgress(6);
             StartCoroutine(RequestPackageVersion());
         }
-
+        protected override void ChangeToNextState()
+        {
+            base.ChangeToNextState();
+            _machine.ChangeState<FsmUpdatePackageManifest>();
+        }
         private IEnumerator RequestPackageVersion()
         {
-            if (PatchConfig.IsEnablePatcher)
+            if (!GameConfig.IsEnablePatcher)
             {
                 ChangeToNextState();
                 yield break;

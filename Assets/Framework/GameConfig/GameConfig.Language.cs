@@ -9,109 +9,59 @@ namespace LccModel
     {
         public string name;
         public string font;
-        public string setName;
         public string shortName;
     }
 
-    public partial class GameConfig
+    public static partial class GameConfig
     {
         /// <summary>
         /// 默认语言
         /// </summary>
-        public string defaultLanguage
+        public static string AppLanguage
         {
-            get
-            {
-                return GetConfig<string>("defaultLanguage", "English");
-            }
-        }
-
-        /// <summary>
-        /// 当前平台支持的多语言
-        /// </summary>
-        public List<string> languageNameList
-        {
-            get
-            {
-                return GetConfig<List<string>>("languageNameList");
-            }
+            get { return GetConfig<string>("appLanguage", "English"); }
+            set { AddConfig("appLanguage", "English"); }
         }
 
         /// <summary>
         /// 语言显示信息
         /// </summary>
-        public Dictionary<string, LanguageConfig> languageDict
+        public static Dictionary<string, LanguageConfig> LanguageDict
         {
-            get
-            {
-                return GetConfig<Dictionary<string, LanguageConfig>>("languageDict");
-            }
+            get { return GetConfig<Dictionary<string, LanguageConfig>>("languageDict"); }
         }
 
-
-        public Dictionary<string, SystemLanguage> languageShortNameDict
+        public static Dictionary<string, SystemLanguage> LanguageShortNameDict
         {
-            get
-            {
-                return GetConfig<Dictionary<string, SystemLanguage>>("languageShortNameDict");
-            }
+            get { return GetConfig<Dictionary<string, SystemLanguage>>("languageShortNameDict"); }
         }
+
         /// <summary>
-        /// 当前地区
+        /// 当前平台支持的多语言
         /// </summary>
-        public string region
+        public static List<string> LanguageNameList
         {
-            get
-            {
-                return GetConfig<string>("region");
-            }
-        }
-        /// <summary>
-        /// 当前平台支持的地区货币
-        /// </summary>
-        public List<string> regionList
-        {
-            get
-            {
-                return GetConfig<List<string>>("regionList");
-            }
-        }
-        public string GetLanguageShortName(SystemLanguage lang)
-        {
-            if (languageDict.TryGetValue(lang.ToString(), out var langData))
-            {
-                return langData.shortName;
-            }
-            return null;
-        }
-        public SystemLanguage GetLanguageName(string shortName)
-        {
-            if (languageShortNameDict.TryGetValue(shortName.ToString(), out var lang))
-            {
-                return lang;
-            }
-            return SystemLanguage.Unknown;
+            get { return GetConfig<List<string>>("languageNameList"); }
         }
 
-
-
-        public void ReadLanguage(string text)
+        public static void ReadLanguage(string text)
         {
             if (!string.IsNullOrEmpty(text))
             {
                 try
                 {
-                    List<string> languageNameList = null;
                     Dictionary<string, LanguageConfig> languageDict = new Dictionary<string, LanguageConfig>();
                     Dictionary<string, SystemLanguage> languageShortNameDict = new Dictionary<string, SystemLanguage>();
+                    List<string> languageNameList = null;
+
 
                     JsonData data = JsonMapper.ToObject(text);
                     if (data.ContainsKey("language"))
                     {
                         JsonData languageData = data["language"];
-                        if (languageData.ContainsKey("defaultLanguage"))
+                        if (languageData.ContainsKey("appLanguage"))
                         {
-                            AddConfig("defaultLanguage", languageData["defaultLanguage"].ToString());
+                            AddConfig("appLanguage", languageData["appLanguage"].ToString());
                         }
 
                         if (languageData.ContainsKey("languageList"))
@@ -141,13 +91,6 @@ namespace LccModel
                         }
 
                         AddConfig("languageNameList", languageNameList);
-
-                    }
-                    if (data.ContainsKey("regionList"))
-                    {
-                        var regionList = JsonMapper.ToObject<List<string>>(data["regionList"].ToJson());
-                        AddConfig("regionList", regionList);
-                        ReadUserRegion();
                     }
                 }
                 catch (Exception ex)
@@ -155,21 +98,26 @@ namespace LccModel
                     Debug.LogError("读取语言配置失败：" + ex.ToString());
                 }
             }
-            else
-            {
-            }
         }
-        private static void ReadUserRegion()
+
+        public static string GetLanguageShortName(SystemLanguage lang)
         {
-            string region = "";
-
-            var regions = Launcher.Instance.GameConfig.regionList;
-
-            if (string.IsNullOrEmpty(region) || !regions.Contains(region))
+            if (LanguageDict.TryGetValue(lang.ToString(), out var langData))
             {
-                region = "US";
+                return langData.shortName;
             }
-            Launcher.Instance.GameConfig.AddConfig("region", region);
+
+            return null;
+        }
+
+        public static SystemLanguage GetLanguageName(string shortName)
+        {
+            if (LanguageShortNameDict.TryGetValue(shortName.ToString(), out var lang))
+            {
+                return lang;
+            }
+
+            return SystemLanguage.Unknown;
         }
     }
 }

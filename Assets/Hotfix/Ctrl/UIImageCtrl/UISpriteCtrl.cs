@@ -58,34 +58,34 @@ namespace LccHotfix
 
         public void OnLocalize()
         {
-            if (!localSprite) return;
-            if (string.IsNullOrEmpty(spriteName)) return;
-
-            if (CacheImage == null) return;
-
-            string lang = null;
-#if UNITY_EDITOR
-            if (Application.isPlaying)
-            {
-                lang = Launcher.Instance.GameLanguage.curLanguage;
-            }
-            else
-            {
-                lang = "English";
-            }
-#else
-            lang = Launcher.Instance.GameLanguage.curLanguage;
-#endif
-            if (string.IsNullOrEmpty(lang))
-            {
-                Debug.LogError("storm not inited");
-                return;
-            }
-            int index = spriteName.LastIndexOf('_');
-            if (index < 0) return;
-            spriteName = spriteName.Substring(0, index + 1);
-
-            SetSpriteName(spriteName + lang);
+//             if (!localSprite) return;
+//             if (string.IsNullOrEmpty(spriteName)) return;
+//
+//             if (CacheImage == null) return;
+//
+//             string lang = null;
+// #if UNITY_EDITOR
+//             if (Application.isPlaying)
+//             {
+//                 lang = Launcher.Instance.GameLanguage.curLanguage;
+//             }
+//             else
+//             {
+//                 lang = "English";
+//             }
+// #else
+//             lang = Launcher.Instance.GameLanguage.curLanguage;
+// #endif
+//             if (string.IsNullOrEmpty(lang))
+//             {
+//                 Debug.LogError("storm not inited");
+//                 return;
+//             }
+//             int index = spriteName.LastIndexOf('_');
+//             if (index < 0) return;
+//             spriteName = spriteName.Substring(0, index + 1);
+//
+//             SetSpriteName(spriteName + lang);
         }
 
 
@@ -95,19 +95,19 @@ namespace LccHotfix
             _isStarted = true;
             spriteName = newSpriteName;
 
-            if (localSprite)
-            {
-                string lang = Launcher.Instance.GameLanguage.curLanguage;
-                if (!string.IsNullOrEmpty(lang))
-                {
-                    int index = spriteName.LastIndexOf('_');
-                    if (index >= 0)
-                    {
-                        spriteName = spriteName.Substring(0, index + 1);
-                        spriteName += lang;
-                    }
-                }
-            }
+            // if (localSprite)
+            // {
+            //     string lang = Launcher.Instance.GameLanguage.curLanguage;
+            //     if (!string.IsNullOrEmpty(lang))
+            //     {
+            //         int index = spriteName.LastIndexOf('_');
+            //         if (index >= 0)
+            //         {
+            //             spriteName = spriteName.Substring(0, index + 1);
+            //             spriteName += lang;
+            //         }
+            //     }
+            // }
 
             SetSprite();
         }

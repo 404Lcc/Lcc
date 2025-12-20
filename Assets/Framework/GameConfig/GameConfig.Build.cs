@@ -1,11 +1,11 @@
 namespace LccModel
 {
-    public partial class GameConfig
+    public static partial class GameConfig
     {
         /// <summary>
         /// 打包时间戳
         /// </summary>
-        public long buildTime
+        public static long BuildTime
         {
             get
             {
@@ -14,7 +14,7 @@ namespace LccModel
         }
 
 
-        public void ReadBuild(string text)
+        public static void ReadBuild(string text)
         {
             long time = long.Parse(text);
             AddConfig("buildTime", time);

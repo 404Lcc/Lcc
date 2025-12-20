@@ -11,10 +11,15 @@ namespace LccModel
         public override void OnEnter()
         {
             base.OnEnter();
+            BroadcastShowProgress(7);
             _lastError = null;
             StartCoroutine(UpdateAllPackageManifest());
         }
-
+        protected override void ChangeToNextState()
+        {
+            base.ChangeToNextState();
+            _machine.ChangeState<FsmCreateDownloader>();
+        }
         private IEnumerator UpdateAllPackageManifest()
         {
             foreach (var packageName in AssetConfig.BPackageList)
@@ -39,8 +44,8 @@ namespace LccModel
             }
 
             var defaultPackage = YooAssets.TryGetPackage(AssetConfig.DefaultPackageName);
-            AppConfig.LocalPackageVersion = defaultPackage.GetPackageVersion();
-            LaunchEvent.ShowVersion.Broadcast(AppConfig.GetVersionStr());
+            GameConfig.LocalPackageVersion = defaultPackage.GetPackageVersion();
+            LaunchEvent.ShowVersion.Broadcast(GameConfig.GetVersionStr());
             
             ChangeToNextState();
         }
@@ -48,7 +53,7 @@ namespace LccModel
         private IEnumerator UpdatePackageManifest(string packageName)
         {
             string packageVersion = null;
-            if (!PatchConfig.IsEnablePatcher)
+            if (!GameConfig.IsEnablePatcher)
             {
                 packageVersion = (string)_machine.GetBlackboardValue("BV_PackageVersion_" + packageName);
                 if (packageVersion == null)

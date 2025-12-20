@@ -4,6 +4,7 @@ namespace LccModel
 {
     public partial class UIPanelLaunch : MonoBehaviour
     {
+
         void Awake()
         {
             Init();
@@ -20,7 +21,7 @@ namespace LccModel
                 SetHint(StringTable.Get(message.To));
             }
         }
-        
+
         public static string FormatBytes(long bytes, double min = 0.01f)
         {
             var megabytes = bytes / (1024.0 * 1024.0);
@@ -28,7 +29,7 @@ namespace LccModel
                 megabytes = min;
             return $"{megabytes:F2}M";
         }
-        
+
         private void OnShowMessageBox(IEventMessage obj)
         {
             if (obj is LaunchEvent.ShowMessageBox message)

@@ -83,21 +83,21 @@ namespace LccModel
                 }
                 if (string.IsNullOrEmpty(lang))
                 {
-                    return Launcher.Instance.GameConfig.defaultLanguage;
+                    return GameConfig.DefaultLanguage;
                 }
-                if (Launcher.Instance.GameConfig.languageNameList.Count <= 0)
+                if (GameConfig.LanguageNameList.Count <= 0)
                 {
-                    return Launcher.Instance.GameConfig.defaultLanguage;
+                    return GameConfig.DefaultLanguage;
                 }
-                if (Launcher.Instance.GameConfig.languageNameList.Contains(lang))
+                if (GameConfig.LanguageNameList.Contains(lang))
                 {
                     return lang;
                 }
-                return Launcher.Instance.GameConfig.defaultLanguage;
+                return GameConfig.DefaultLanguage;
             }
             catch
             {
-                return Launcher.Instance.GameConfig.defaultLanguage;
+                return GameConfig.DefaultLanguage;
             }
         }
 
@@ -122,9 +122,9 @@ namespace LccModel
         {
             if (!string.IsNullOrEmpty(curLanguage) && newLanguage == curLanguage)
                 return true;
-            for (int i = 0; i < Launcher.Instance.GameConfig.languageNameList.Count; i++)
+            for (int i = 0; i < GameConfig.LanguageNameList.Count; i++)
             {
-                if (newLanguage == Launcher.Instance.GameConfig.languageNameList[i])
+                if (newLanguage == GameConfig.LanguageNameList[i])
                 {
                     //判断目标语言文件是否下载了
                     if (_languages.Contains(newLanguage))
@@ -271,9 +271,9 @@ namespace LccModel
         {
             TMP_FontAsset defaultFontAsset = Resources.Load<TMP_FontAsset>("Fonts/" + DefaultFont);
 
-            if (Launcher.Instance.GameConfig.languageDict != null && Launcher.Instance.GameConfig.languageDict.ContainsKey(curLanguage))
+            if (GameConfig.LanguageDict != null && GameConfig.LanguageDict.ContainsKey(curLanguage))
             {
-                var font = Launcher.Instance.GameConfig.languageDict[curLanguage].font;
+                var font = GameConfig.LanguageDict[curLanguage].font;
                 Font fontAssetCur = Resources.Load<Font>("Fonts/" + font);
 
                 //清除之前用的字体资源数据和字符，使fallback略过该字体

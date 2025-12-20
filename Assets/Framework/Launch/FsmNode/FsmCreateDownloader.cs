@@ -9,9 +9,14 @@ namespace LccModel
         public override void OnEnter()
         {
             base.OnEnter();
+            BroadcastShowProgress(8);
             CreateAllDownloader();
         }
-
+        protected override void ChangeToNextState()
+        {
+            base.ChangeToNextState();
+            _machine.ChangeState<FsmDownloadPackageFiles>();
+        }
         void CreateAllDownloader()
         {
             int totalDownloadCount = 0;
@@ -57,7 +62,7 @@ namespace LccModel
 
         private void OnConfirmDownloadPatchFiles()
         {
-            _machine.ChangeToNextState();
+            ChangeToNextState();
         }
     }
 }

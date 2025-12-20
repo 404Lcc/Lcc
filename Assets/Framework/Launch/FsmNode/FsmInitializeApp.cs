@@ -9,34 +9,23 @@ namespace LccModel
         public override void OnEnter()
         {
             base.OnEnter();
+            BroadcastShowProgress(1);
 
-            {
-                Screen.autorotateToLandscapeLeft = false;
-                Screen.autorotateToLandscapeRight = false;
-                Screen.autorotateToPortrait = false;
-                Screen.autorotateToPortraitUpsideDown = false;
-                Screen.orientation = ScreenOrientation.Portrait;
-            }
-            
+            if (Application.isEditor)
+                AssetConfig.PlayMode = GameConfig.IsEnablePatcher ? EPlayMode.HostPlayMode : EPlayMode.EditorSimulateMode;
+            else
+                AssetConfig.PlayMode = GameConfig.IsEnablePatcher ? EPlayMode.HostPlayMode : EPlayMode.OfflinePlayMode;
 
-            {
-                AppConfig.AppVersion = Application.version;
-            }
-
-
-            {
-                if (Application.isEditor)
-                    AssetConfig.PlayMode = PatchConfig.IsEnablePatcher ? EPlayMode.HostPlayMode : EPlayMode.EditorSimulateMode;
-                else
-                    AssetConfig.PlayMode = PatchConfig.IsEnablePatcher ? EPlayMode.HostPlayMode : EPlayMode.OfflinePlayMode;
-            }
-
-            {
-                TextAsset jStr = Resources.Load<TextAsset>($"Launch/Strings/launch_strings_{"todo 语言"}");
-                StringTable.Strings = JsonUtility.ToObject<Dictionary<string, string>>(jStr.text);
-            }
+            TextAsset jStr = Resources.Load<TextAsset>($"Launch/Strings/launch_strings_{GameConfig.AppLanguage}");
+            StringTable.Strings = JsonUtility.ToObject<Dictionary<string, string>>(jStr.text);
 
             ChangeToNextState();
+        }
+
+        protected override void ChangeToNextState()
+        {
+            base.ChangeToNextState();
+            _machine.ChangeState<FsmStartSplash>();
         }
     }
 }

@@ -27,17 +27,11 @@ namespace LccHotfix
         // 初始化显示
         public IEnumerator LoadProcedureCoroutine()
         {
-            UILoadingPanel.Instance.UpdateLoadingPercent(10, 98, 2f);
-
             Main.UIService.ShowElement(UIPanelDefine.UIMainPanel);
 
             yield return new WaitForSeconds(1f);
 
-            UIForeGroundPanel.Instance.FadeOut(0.5f);
-
             yield return null;
-
-            UILoadingPanel.Instance.Hide();
 
             this.StartCoroutine(LevelStartWaiting());
         }

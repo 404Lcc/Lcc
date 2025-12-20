@@ -3241,7 +3241,6 @@
     <type fullname="JetBrains.Annotations.InstantHandleAttribute" preserve="all" />
     <type fullname="JetBrains.Annotations.PureAttribute" preserve="all" />
     <type fullname="JetBrains.Annotations.MustUseReturnValueAttribute" preserve="all" />
-    <type fullname="JetBrains.Annotations.MustDisposeResourceAttribute" preserve="all" />
     <type fullname="JetBrains.Annotations.ProvidesContextAttribute" preserve="all" />
     <type fullname="JetBrains.Annotations.PathReferenceAttribute" preserve="all" />
     <type fullname="JetBrains.Annotations.SourceTemplateAttribute" preserve="all" />
@@ -3310,6 +3309,7 @@
     <type fullname="UnityEngine.ReflectionProbe+ReflectionProbeEvent" preserve="all" />
     <type fullname="UnityEngine.ReflectionProbe+&lt;&gt;c__DisplayClass95_0" preserve="all" />
     <type fullname="UnityEngine.ReflectionProbe+&lt;&gt;c__DisplayClass98_0" preserve="all" />
+    <type fullname="UnityEngine.CloudStreaming" preserve="all" />
     <type fullname="UnityEngine.CrashReport" preserve="all" />
     <type fullname="UnityEngine.DebugLogHandler" preserve="all" />
     <type fullname="UnityEngine.Debug" preserve="all" />
@@ -3628,8 +3628,6 @@
     <type fullname="UnityEngine.IconAttribute" preserve="all" />
     <type fullname="UnityEngine.ResourceRequest" preserve="all" />
     <type fullname="UnityEngine.ResourcesAPIInternal" preserve="all" />
-    <type fullname="UnityEngine.ResourcesAPIInternal+EntitiesAssetGC" preserve="all" />
-    <type fullname="UnityEngine.ResourcesAPIInternal+EntitiesAssetGC+AdditionalRootsHandlerDelegate" preserve="all" />
     <type fullname="UnityEngine.ResourcesAPI" preserve="all" />
     <type fullname="UnityEngine.Resources" preserve="all" />
     <type fullname="UnityEngine.AsyncInstantiateOperation" preserve="all" />
@@ -3702,7 +3700,6 @@
     <type fullname="UnityEngine.HideFlags" preserve="all" />
     <type fullname="UnityEngine.FindObjectsSortMode" preserve="all" />
     <type fullname="UnityEngine.FindObjectsInactive" preserve="all" />
-    <type fullname="UnityEngine.InstantiateParameters" preserve="all" />
     <type fullname="UnityEngine.Object" preserve="all" />
     <type fullname="UnityEngine.UnitySynchronizationContext" preserve="all" />
     <type fullname="UnityEngine.UnitySynchronizationContext+WorkRequest" preserve="all" />
@@ -4075,12 +4072,10 @@
     <type fullname="UnityEngine.Pool.GenericPool`1" preserve="all" />
     <type fullname="UnityEngine.Pool.GenericPool`1+&lt;&gt;c" preserve="all" />
     <type fullname="UnityEngine.Pool.IObjectPool`1" preserve="all" />
-    <type fullname="UnityEngine.Pool.IPool" preserve="all" />
     <type fullname="UnityEngine.Pool.LinkedPool`1" preserve="all" />
     <type fullname="UnityEngine.Pool.LinkedPool`1+LinkedPoolItem" preserve="all" />
     <type fullname="UnityEngine.Pool.ObjectPool`1" preserve="all" />
     <type fullname="UnityEngine.Pool.PooledObject`1" preserve="all" />
-    <type fullname="UnityEngine.Pool.PoolManager" preserve="all" />
     <type fullname="UnityEngine.Pool.UnsafeGenericPool`1" preserve="all" />
     <type fullname="UnityEngine.Pool.UnsafeGenericPool`1+&lt;&gt;c" preserve="all" />
     <type fullname="UnityEngine.Networking.PlayerConnection.ConnectionTarget" preserve="all" />
@@ -4627,6 +4622,8 @@
     <type fullname="UIAnimManager+&lt;&gt;c__DisplayClass14_0" preserve="all" />
     <type fullname="UIAnimManager+&lt;&gt;c__DisplayClass15_0" preserve="all" />
     <type fullname="UIAnimManager+&lt;&gt;c__DisplayClass16_0" preserve="all" />
+    <type fullname="Launcher" preserve="all" />
+    <type fullname="Launcher+&lt;RunLaunch&gt;d__27" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1+MonoScriptData" preserve="all" />
     <type fullname="LccModel.FishNetMessage" preserve="all" />
@@ -4636,79 +4633,54 @@
     <type fullname="LccModel.BlackFadeMask" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel" preserve="all" />
     <type fullname="LccModel.UIForeGroundPanel+&lt;&gt;c__DisplayClass6_0" preserve="all" />
-    <type fullname="LccModel.UILoadingPanel" preserve="all" />
     <type fullname="LccModel.UIScreenBackgroundMessage" preserve="all" />
     <type fullname="LccModel.GameConfig" preserve="all" />
     <type fullname="LccModel.LanguageConfig" preserve="all" />
-    <type fullname="LccModel.PatchEventDefine" preserve="all" />
-    <type fullname="LccModel.PatchEventDefine+RequestServerFailed" preserve="all" />
-    <type fullname="LccModel.PatchEventDefine+InitializeFailed" preserve="all" />
-    <type fullname="LccModel.PatchEventDefine+PatchStepsChange" preserve="all" />
-    <type fullname="LccModel.PatchEventDefine+FoundUpdateFiles" preserve="all" />
-    <type fullname="LccModel.PatchEventDefine+DownloadUpdate" preserve="all" />
-    <type fullname="LccModel.PatchEventDefine+PackageVersionRequestFailed" preserve="all" />
-    <type fullname="LccModel.PatchEventDefine+PackageManifestUpdateFailed" preserve="all" />
-    <type fullname="LccModel.PatchEventDefine+WebFileDownloadFailed" preserve="all" />
-    <type fullname="LccModel.UserEventDefine" preserve="all" />
-    <type fullname="LccModel.UserEventDefine+UserTryRequestServer" preserve="all" />
-    <type fullname="LccModel.UserEventDefine+UserTryInitialize" preserve="all" />
-    <type fullname="LccModel.UserEventDefine+UserBeginDownloadWebFiles" preserve="all" />
-    <type fullname="LccModel.UserEventDefine+UserTryRequestPackageVersion" preserve="all" />
-    <type fullname="LccModel.UserEventDefine+UserTryUpdatePackageManifest" preserve="all" />
-    <type fullname="LccModel.UserEventDefine+UserTryDownloadWebFiles" preserve="all" />
-    <type fullname="LccModel.GameAction" preserve="all" />
-    <type fullname="LccModel.GameControl" preserve="all" />
-    <type fullname="LccModel.GameLanguage" preserve="all" />
-    <type fullname="LccModel.GameLanguage+&lt;UpdateLanguage&gt;d__16" preserve="all" />
-    <type fullname="LccModel.GameNotice" preserve="all" />
-    <type fullname="LccModel.GameNotice+&lt;GetNotice&gt;d__8" preserve="all" />
-    <type fullname="LccModel.GameNotice+&lt;GetNoticeBoard&gt;d__10" preserve="all" />
-    <type fullname="LccModel.GameNotice+&lt;GetNoticeWhiteList&gt;d__11" preserve="all" />
-    <type fullname="LccModel.RequestServerStatus" preserve="all" />
-    <type fullname="LccModel.GameServerConfig" preserve="all" />
-    <type fullname="LccModel.Init" preserve="all" />
-    <type fullname="LccModel.GameState" preserve="all" />
-    <type fullname="LccModel.Launcher" preserve="all" />
-    <type fullname="LccModel.Launcher+&lt;&gt;c" preserve="all" />
+    <type fullname="LccModel.StringTable" preserve="all" />
+    <type fullname="LccModel.Version" preserve="all" />
+    <type fullname="LccModel.VersionConfig" preserve="all" />
+    <type fullname="LccModel.PatchConfig" preserve="all" />
+    <type fullname="LccModel.AssetConfig" preserve="all" />
+    <type fullname="LccModel.LaunchEvent" preserve="all" />
+    <type fullname="LccModel.LaunchEvent+StateChanged" preserve="all" />
+    <type fullname="LccModel.LaunchEvent+ShowVersion" preserve="all" />
+    <type fullname="LccModel.LaunchEvent+ShowMessageBox" preserve="all" />
+    <type fullname="LccModel.LaunchEvent+ShowProgress" preserve="all" />
     <type fullname="LccModel.FsmClearCacheBundle" preserve="all" />
+    <type fullname="LccModel.FsmClearCacheBundle+&lt;ClearCacheFiles&gt;d__2" preserve="all" />
+    <type fullname="LccModel.FsmClearCacheBundle+&lt;ClearCacheFiles&gt;d__3" preserve="all" />
     <type fullname="LccModel.FsmCreateDownloader" preserve="all" />
-    <type fullname="LccModel.FsmCreateDownloader+&lt;CreateDownloader&gt;d__5" preserve="all" />
     <type fullname="LccModel.FsmDownloadPackageFiles" preserve="all" />
     <type fullname="LccModel.FsmDownloadPackageFiles+&lt;BeginDownload&gt;d__5" preserve="all" />
-    <type fullname="LccModel.FsmDownloadPackageOver" preserve="all" />
+    <type fullname="LccModel.FsmDownloadPackageFiles+&lt;DownloadAllPackage&gt;d__4" preserve="all" />
+    <type fullname="LccModel.FsmInitializeApp" preserve="all" />
     <type fullname="LccModel.FsmInitializePackage" preserve="all" />
     <type fullname="LccModel.FsmInitializePackage+RemoteServices" preserve="all" />
-    <type fullname="LccModel.FsmInitializePackage+&lt;InitPackage&gt;d__5" preserve="all" />
-    <type fullname="LccModel.BundleStream" preserve="all" />
-    <type fullname="LccModel.FsmLoadGameConfig" preserve="all" />
-    <type fullname="LccModel.FsmLoadGameConfig+&lt;InitGameConfig&gt;d__6" preserve="all" />
-    <type fullname="LccModel.FsmLoadGameConfig+&lt;LoadBuildConfig&gt;d__7" preserve="all" />
-    <type fullname="LccModel.FsmLoadGameConfig+&lt;LoadLanguageConfig&gt;d__9" preserve="all" />
-    <type fullname="LccModel.FsmLoadGameConfig+&lt;LoadVersionConfig&gt;d__8" preserve="all" />
-    <type fullname="LccModel.FsmLoadLanguage" preserve="all" />
-    <type fullname="LccModel.FsmLoadLanguage+&lt;InitLanguage&gt;d__3" preserve="all" />
-    <type fullname="LccModel.FsmRequestNotice" preserve="all" />
-    <type fullname="LccModel.FsmRequestNotice+&lt;GetNoticeInfo&gt;d__3" preserve="all" />
+    <type fullname="LccModel.FsmInitializePackage+&lt;InitAllPackage&gt;d__3" preserve="all" />
+    <type fullname="LccModel.FsmInitializePackage+&lt;InitPackage&gt;d__4" preserve="all" />
+    <type fullname="LccModel.FsmLaunchStateNode" preserve="all" />
     <type fullname="LccModel.FsmRequestPackageVersion" preserve="all" />
-    <type fullname="LccModel.FsmRequestPackageVersion+&lt;GetStaticVersion&gt;d__5" preserve="all" />
-    <type fullname="LccModel.FsmRequestServer" preserve="all" />
-    <type fullname="LccModel.FsmRequestServer+&lt;GetRemoteVersionList&gt;d__5" preserve="all" />
-    <type fullname="LccModel.FsmRequestServer+&lt;RequestCenterServer&gt;d__4" preserve="all" />
-    <type fullname="LccModel.FsmRequestServer+&lt;RequestServer&gt;d__3" preserve="all" />
+    <type fullname="LccModel.FsmRequestPackageVersion+&lt;RequestPackageVersion&gt;d__2" preserve="all" />
+    <type fullname="LccModel.FsmRequestPackageVersion+&lt;RequestPackageVersion&gt;d__3" preserve="all" />
+    <type fullname="LccModel.FsmRequestVersion" preserve="all" />
+    <type fullname="LccModel.FsmRequestVersion+&lt;Request&gt;d__2" preserve="all" />
+    <type fullname="LccModel.FsmRequestVersion+&lt;RequestVersion&gt;d__3" preserve="all" />
+    <type fullname="LccModel.FsmRequestVersion+&lt;RequestVersionConfig&gt;d__4" preserve="all" />
+    <type fullname="LccModel.FsmShowLaunchUI" preserve="all" />
     <type fullname="LccModel.FsmStartGame" preserve="all" />
     <type fullname="LccModel.FsmStartGame+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.FsmStartGame+&lt;LoadAndRun&gt;d__7" preserve="all" />
-    <type fullname="LccModel.FsmStartGame+&lt;LoadInitialize&gt;d__5" preserve="all" />
+    <type fullname="LccModel.FsmStartGame+&lt;LoadDlls&gt;d__4" preserve="all" />
     <type fullname="LccModel.FsmStartSplash" preserve="all" />
     <type fullname="LccModel.FsmUpdatePackageManifest" preserve="all" />
-    <type fullname="LccModel.FsmUpdatePackageManifest+&lt;UpdateManifest&gt;d__5" preserve="all" />
-    <type fullname="LccModel.ESteps" preserve="all" />
-    <type fullname="LccModel.PatchOperation" preserve="all" />
-    <type fullname="LccModel.PatchWindow" preserve="all" />
-    <type fullname="LccModel.PatchWindow+MessageBox" preserve="all" />
-    <type fullname="LccModel.PatchWindow+&lt;&gt;c" preserve="all" />
-    <type fullname="LccModel.AStaticMethod" preserve="all" />
-    <type fullname="LccModel.MonoStaticMethod" preserve="all" />
+    <type fullname="LccModel.FsmUpdatePackageManifest+&lt;UpdateAllPackageManifest&gt;d__3" preserve="all" />
+    <type fullname="LccModel.FsmUpdatePackageManifest+&lt;UpdatePackageManifest&gt;d__4" preserve="all" />
+    <type fullname="LccModel.LauncherOperation" preserve="all" />
+    <type fullname="LccModel.LauncherOperation+ESteps" preserve="all" />
+    <type fullname="LccModel.UIPanelLaunch" preserve="all" />
+    <type fullname="LccModel.UIPanelLaunch+MessageBoxOption" preserve="all" />
+    <type fullname="LccModel.UIPanelLaunch+MessageBoxParams" preserve="all" />
+    <type fullname="LccModel.UIPanelLaunch+MessageBox" preserve="all" />
+    <type fullname="LccModel.UIPanelLaunch+MessageBox+&lt;&gt;c__DisplayClass7_0" preserve="all" />
     <type fullname="LccModel.DirectoryUtility" preserve="all" />
     <type fullname="LccModel.Event" preserve="all" />
     <type fullname="LccModel.Event+PostWrapper" preserve="all" />
@@ -4738,8 +4710,8 @@
     <type fullname="LccModel.LocalDialog" preserve="all" />
     <type fullname="LccModel.OpenFileName" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2697" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3827" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2050" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3242" preserve="all" />
     <type fullname="Mirror.GeneratedNetworkCode" preserve="all" />
   </assembly>
 </linker>

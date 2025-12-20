@@ -19,8 +19,6 @@ namespace LccHotfix
 
         public void ResetSpeed()
         {
-            Launcher.Instance.GameControl.SetGameSpeed(1);
-            Launcher.Instance.GameControl.ChangeFPS();
         }
 
         public void UnloadAllPanel(LoadProcedureHandler last, LoadProcedureHandler cur)
@@ -54,17 +52,13 @@ namespace LccHotfix
 
         public IEnumerator ShowProcedureLoading(LoadingType loadType)
         {
-            UILoadingPanel loadingPanel = null;
             switch (loadType)
             {
                 case LoadingType.Normal:
-                    loadingPanel = UILoadingPanel.Instance;
-                    loadingPanel.Show(string.Empty);
-                    loadingPanel.UpdateLoadingPercent(0, 5);
+
                     yield return null;
                     break;
                 case LoadingType.Fast:
-                    UIForeGroundPanel.Instance.FadeOut(1.5f);
                     yield return null;
                     break;
             }
