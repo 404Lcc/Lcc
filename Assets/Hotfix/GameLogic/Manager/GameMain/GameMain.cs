@@ -16,7 +16,7 @@ namespace LccHotfix
             Launcher.Instance.OnDrawGizmos += OnDrawGizmos;
 
             CodeTypesService = Current.AddModule<CodeTypesManager>();
-            CodeTypesService.LoadTypes(new Assembly[] { Launcher.Instance.HotfixAssembly });
+            CodeTypesService.LoadTypes(new Assembly[] { GetType().Assembly });
             AssetService = Current.AddModule<AssetManager>();
             GameObjectPoolService = Current.AddModule<GameObjectPoolManager>();
             GameObjectPoolService.SetAsyncLoader((location, assetLoader, onComplete) =>
@@ -74,11 +74,6 @@ namespace LccHotfix
             SteamLobbyService.SetLobbyCallbackHelper(new MirrorLobbyCallbackHelper());
         }
 
-        public override bool IsInitialized()
-        {
-            return ConfigService.Initialized;
-        }
-
         public override IEnumerator OnInitialize()
         {
             ModelService.Init();
@@ -88,22 +83,22 @@ namespace LccHotfix
             VibrationService.Init();
 
             ConfigService.Init();
-            while (!IsInitialized())
+            while (!ConfigService.Initialized)
             {
-                yield return 0;
+                yield return null;
             }
-
             HotfixBridgeService.Init();
             LanguageService.Init();
-            UIService.Init();
+            var uiRootAsset = AssetService.LoadAssetAsync<GameObject>("UIRoot");
+            yield return uiRootAsset;
+            var uiRoot = new UIRoot(GameObject.Instantiate(uiRootAsset.AssetHandle().AssetObject as GameObject));
+            UIService.Init(uiRoot);
             FishNetService.Init();
             MirrorService.Init();
             SteamService.Init();
 
             try
             {
-                // Launcher.Instance.LauncherFinish();
-
                 SaveService.CreateSaveFile("default.sav");
 
                 ProcedureService.ChangeProcedure(ProcedureType.Login.ToInt());

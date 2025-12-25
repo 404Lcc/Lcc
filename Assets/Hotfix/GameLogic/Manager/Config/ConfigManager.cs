@@ -57,6 +57,8 @@ namespace LccHotfix
             {
                 _allConfigsLoaded = true;
                 Tables = new Tables(Load);
+                
+                _loader.Release();
             }
         }
 
@@ -66,7 +68,6 @@ namespace LccHotfix
 
         internal override void Shutdown()
         {
-            _loader.Release();
         }
 
         public JSONNode Load(string name)

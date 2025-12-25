@@ -18,10 +18,6 @@ namespace LccModel
             BroadcastShowProgress(11);
             StartCoroutine(LoadDlls());
         }
-        protected override void ChangeToNextState()
-        {
-            base.ChangeToNextState();
-        }
         public override void OnUpdate()
         {
         }
@@ -48,24 +44,25 @@ namespace LccModel
                 LoadImageErrorCode errorCode = RuntimeApi.LoadMetadataForAOTAssembly(aotAssetObj.bytes, HomologousImageMode.SuperSet);
                 if (errorCode != LoadImageErrorCode.OK)
                 {
-                    KLogger.LogError($"LoadMetadataForAOTAssembly failed : {errorCode}");
+                    Debug.LogError($"LoadMetadataForAOTAssembly failed : {errorCode}");
                 }
                 aotHandle.Release();
             }
-            var handle = package.LoadAssetAsync<TextAsset>("HotUpdate.dll");
+            var handle = package.LoadAssetAsync<TextAsset>("Unity.Hotfix.dll");
             yield return handle;
             var assetObj = handle.AssetObject as TextAsset;
-            Assembly hotUpdateAss = Assembly.Load(assetObj.bytes);
+            Assembly hotfixAss = Assembly.Load(assetObj.bytes);
             handle.Release();
 #else
-            Assembly hotUpdateAss = AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == "HotUpdate");
+            Assembly hotfixAss = AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == "Unity.Hotfix");
 #endif
-            Type type = hotUpdateAss.GetType("HotUpdate.StartGame");
+            Type type = hotfixAss.GetType("LccHotfix.Init");
             type.GetMethod("Start").Invoke(null, null);
 
             yield return null;
             
             _launcherOperation.SetFinish();
+            OnExit();
         }
     }
 }

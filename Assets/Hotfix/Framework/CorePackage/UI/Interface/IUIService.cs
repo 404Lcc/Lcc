@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IUIService : IService
 {
     Action<AssetLoader, string, Action<GameObject>> LoadAsyncGameObject { get; set; }
-    void Init();
+    void Init(IUIRoot uiRoot);
     IUILogic GetUILogic(string name, UINode node);
 
     void ShowDomain(string domainName, string elementName, params object[] args);

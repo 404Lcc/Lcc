@@ -19,7 +19,7 @@ namespace LccModel
         }
         private IEnumerator RequestPackageVersion()
         {
-            if (!GameConfig.IsEnablePatcher)
+            if (GameConfig.IsEnablePatcher)
             {
                 ChangeToNextState();
                 yield break;

@@ -1,0 +1,20 @@
+{
+	"Launch.FsmNode.FsmRequestVersion":"正在请求版本信息...",
+	"Launch.FsmNode.FsmInitializePackage":"正在初始化资源包...",
+	"Launch.FsmNode.FsmRequestPackageVersion":"正在初始化版本信息...",
+	"Launch.FsmNode.FsmUpdatePackageManifest":"正在更新资源清单...",
+	"Launch.FsmNode.FsmCreateDownloader":"正在创建资源下载器...",
+	"Launch.FsmNode.FsmDownloadPackageFiles":"正在下载资源文件...",
+	"Launch.FsmNode.FsmClearCacheBundle":"正在清理未使用的缓存文件...",
+	"Launch.FsmNode.FsmStartGame":"正在启动游戏...",
+	"Hint.FoundPatchFiles":"检测到{0}更新文件，点击确认更新。",
+	"Hint.InitializePackageFailed":"初始化文件系统失败，点击重试。{0}",
+	"Hint.UpdatePackageManifestFailed":"更新资源清单失败，点击重试。{0}",
+	"Hint.DownloadPackageFilesFailed":"下载更新资源失败，点击重试。{0}",
+	"Hint.RequestVersionFailed":"获取版本信息失败，点击重试。{0}",
+	"Hint.BaseVersionTooLow":"当前版本过低，需要更新应用程序。",
+	"Op.Confirm":"确认",
+	"Op.Cancel":"取消",
+	"Op.Retry":"重试",
+	"Op.Quit":"退出"
+}

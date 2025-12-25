@@ -1,13 +1,11 @@
 using UnityEngine;
 using System.Collections;
-using System.Reflection;
 using LccModel;
 using YooAsset;
 
 public partial class Launcher : SingletonMono<Launcher>
 {
     private LauncherOperation _launcherOperation;
-    public Assembly HotfixAssembly { get; set; }
 
     void Start()
     {

@@ -108,6 +108,9 @@ namespace LccHotfix
 
         internal override void Shutdown()
         {
+            if (_uiRoot == null)
+                return;
+            
             HideAllDomain();
             _commonDomain.Hide();
             _commonDomain.Destroy();
@@ -128,9 +131,9 @@ namespace LccHotfix
         /// <summary>
         /// 初始化
         /// </summary>
-        public void Init()
+        public void Init(IUIRoot uiRoot)
         {
-            _uiRoot = new UIRoot(GameObject.Find("Global/UIRoot"));
+            _uiRoot = uiRoot;
             _uiRoot.Initialize();
             
             LoadAsyncGameObject = (loader, asset, end) => { loader.LoadAssetAsync<GameObject>(asset, handle => { end?.Invoke(handle.AssetObject as GameObject); }); };

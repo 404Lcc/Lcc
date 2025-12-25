@@ -5,9 +5,17 @@ using UnityEngine.Networking;
 
 namespace LccModel
 {
+    public enum RequestState
+    {
+        None = 0,
+        RequestVersionError,
+        RequestVersionSuccess,
+        RequestVersionConfigError,
+        RequestVersionConfigSuccess,
+    }
     public class FsmRequestVersion : FsmLaunchStateNode
     {
-
+        private RequestState _state = RequestState.None;
         public override void OnEnter()
         {
             base.OnEnter();
@@ -17,7 +25,7 @@ namespace LccModel
                 ChangeToNextState();
                 return;
             }
-
+            _state = RequestState.None;
             StartCoroutine(Request());
         }
         protected override void ChangeToNextState()
@@ -29,7 +37,17 @@ namespace LccModel
         public IEnumerator Request()
         {
             yield return RequestVersion();
+            if (_state == RequestState.RequestVersionError)
+            {
+                yield break;
+            }
+
             yield return RequestVersionConfig();
+            if (_state == RequestState.RequestVersionConfigError)
+            {
+                yield break;
+            }
+            
             ChangeToNextState();
         }
 
@@ -45,6 +63,7 @@ namespace LccModel
 
             if (!string.IsNullOrEmpty(web.error))
             {
+                _state = RequestState.RequestVersionError;
                 Debug.LogError($"RequestVersion 失败 url = {url}");
                 LaunchEvent.ShowMessageBox.Broadcast(new UIPanelLaunch.MessageBoxParams
                 {
@@ -60,6 +79,7 @@ namespace LccModel
             }
             else
             {
+                _state = RequestState.RequestVersionSuccess;
                 string content = web.downloadHandler.text;
                 PatchConfig.version = JsonUtility.ToObject<Version>(content);
             }
@@ -77,6 +97,7 @@ namespace LccModel
 
             if (!string.IsNullOrEmpty(web.error))
             {
+                _state = RequestState.RequestVersionConfigError;
                 Debug.LogError($"RequestVersionConfig 失败 url = {url}");
                 LaunchEvent.ShowMessageBox.Broadcast(new UIPanelLaunch.MessageBoxParams
                 {
@@ -92,6 +113,7 @@ namespace LccModel
             }
             else
             {
+                _state = RequestState.RequestVersionConfigSuccess;
                 string content = web.downloadHandler.text;
                 PatchConfig.versionConfig = JsonUtility.ToObject<VersionConfig>(content);
             }

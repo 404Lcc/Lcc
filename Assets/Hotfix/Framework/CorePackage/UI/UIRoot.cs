@@ -66,8 +66,8 @@ namespace LccHotfix
             _canvas = null;
             _uiCamera = null;
 
-            // _root.transform.SetParent(null);
-            // Object.Destroy(_root);
+            _root.transform.SetParent(null);
+            Object.Destroy(_root);
             _root = null;
         }
 

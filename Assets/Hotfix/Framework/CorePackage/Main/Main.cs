@@ -64,8 +64,6 @@ namespace LccHotfix
 
         public abstract IEnumerator OnInitialize();
 
-        public abstract bool IsInitialized();
-
         /// <summary>
         /// 增加游戏框架模块。
         /// </summary>
