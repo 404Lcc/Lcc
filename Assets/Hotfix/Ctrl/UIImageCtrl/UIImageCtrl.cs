@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace LccHotfix
@@ -14,34 +14,44 @@ namespace LccHotfix
     public class UIImageCtrl : MonoBehaviour
     {
         public EmImageType imageType = EmImageType.Icon;
-        public int imageID = -1;
+        [Tooltip("适应图片大小")] public bool perfect;
+
         private Image _image;
+        private UISpriteCtrl _spriteCtrl;
+
         public Image Image
         {
             get
             {
-                if (null == _image)
+                if (_image == null)
+                {
                     _image = gameObject.GetComponent<Image>();
-                if (null == _image)
+                }
+
+                if (_image == null)
+                {
                     _image = gameObject.AddComponent<Image>();
+                }
+
                 return _image;
             }
-            set
-            {
-                _image = value;
-            }
+            set { _image = value; }
         }
 
-        private UISpriteCtrl _spriteCtrl;
         public UISpriteCtrl SpriteCtrl
         {
             get
             {
                 if (_spriteCtrl == null)
                 {
-                    if (Image == null) return null;
                     _spriteCtrl = Image.GetComponent<UISpriteCtrl>();
                 }
+
+                if (_spriteCtrl == null)
+                {
+                    _spriteCtrl = gameObject.AddComponent<UISpriteCtrl>();
+                }
+
                 return _spriteCtrl;
             }
         }
@@ -57,35 +67,39 @@ namespace LccHotfix
                     imageName = IconUtility.GetIcon(newImageID);
                     break;
             }
-            //这里加一个图集对比，图集不同，强行加载一次
-            bool isSameSprite = SpriteCtrl.spriteName.Equals(imageName);
-            if (imageID == newImageID && isSameSprite)
-                return;
+
+            SetImage(imageName);
+        }
+
+        public void SetImage(string imageName)
+        {
             if (!string.IsNullOrEmpty(imageName))
             {
-                imageID = newImageID;
                 gameObject.SetActive(true);
                 Image.enabled = true;
                 SetSprite(imageName);
             }
             else
             {
-                HideImage();
+                ClearImage();
             }
         }
 
-        public void HideImage()
+        private void ClearImage()
         {
-            SetSprite("");
-            imageID = -1;
+            Image.sprite = null;
         }
 
-        private void SetSprite(string newSpriteName)
+        private void SetSprite(string imageName)
         {
-            if (!string.IsNullOrEmpty(newSpriteName) && SpriteCtrl != null)
+            SpriteCtrl.GetSprite(imageName, (x) =>
             {
-                SpriteCtrl.SetSpriteName(newSpriteName);
-            }
+                Image.sprite = x;
+                if (perfect)
+                {
+                    Image.SetNativeSize();
+                }
+            });
         }
     }
 }

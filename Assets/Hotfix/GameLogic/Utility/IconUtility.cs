@@ -1,3 +1,6 @@
+using System;
+using UnityEngine;
+
 namespace LccHotfix
 {
     public static class IconUtility
@@ -10,7 +13,13 @@ namespace LccHotfix
                 Log.Error("Icon不存在 id = " + imageId);
                 return string.Empty;
             }
+
             return config.ImageName;
+        }
+
+        public static void GetSprite(string spriteName, Action<Sprite> callback)
+        {
+            Main.AtlasService.GetSprite(spriteName, callback);
         }
     }
 }

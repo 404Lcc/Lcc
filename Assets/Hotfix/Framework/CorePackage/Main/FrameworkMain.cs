@@ -18,6 +18,7 @@ namespace LccHotfix
         public static ICameraService CameraService { get; set; }
         public static ITimerService TimerService { get; set; }
         public static IProcedureService ProcedureService { get; set; }
+        public static IAtlasService AtlasService { get; set; }
         public static IUIService UIService { get; set; }
         public static IThreadSyncService ThreadSyncService { get; set; }
         public static IGizmoService GizmoService { get; set; }

@@ -47,6 +47,7 @@ namespace LccHotfix
             TimerService = Current.AddModule<TimerManager>();
             ProcedureService = Current.AddModule<ProcedureManager>();
             ProcedureService.SetProcedureHelper(new DefaultProcedureHelper());
+            AtlasService = Current.AddModule<AtlasManager>();
             UIService = Current.AddModule<UIManager>();
             ThreadSyncService = Current.AddModule<ThreadSyncManager>();
             GizmoService = Current.AddModule<GizmoManager>();
