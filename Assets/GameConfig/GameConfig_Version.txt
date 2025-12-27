@@ -2,7 +2,7 @@
     "appVersion"            : "1",
     "channel"               : 1,
     "localPackageVersion"   : "1",
-    "centerServerAddress"   : "file:///D/Assets/StreamingAssets",
+    "centerServerAddress"   : "file:///D:/Lcc/Assets/StreamingAssets",
     "isReleaseCenterServer" : false,
     "isRelease"             : false,
     "isEnablePatcher"       : false,

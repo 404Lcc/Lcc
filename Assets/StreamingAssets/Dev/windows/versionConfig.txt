@@ -1,6 +1,6 @@
 {
     "PatchesAddresses" :
     [
-        "D:/Lcc/Bundles/StandaloneWindows/Packages/1"
+        "file:///D:/Lcc/Bundles/StandaloneWindows/Packages/1"
     ]
 }
