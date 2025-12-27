@@ -1,0 +1,11 @@
+{
+    "FileVersion": "1.0.0",
+    "PackageName": "RawFilePackage",
+    "PackageVersion": "1",
+    "Wrappers": [
+        {
+            "BundleGUID": "098f6bcd4621d373cade4e832627b4f6",
+            "FileName": "098f6bcd4621d373cade4e832627b4f6.rawfile"
+        }
+    ]
+}

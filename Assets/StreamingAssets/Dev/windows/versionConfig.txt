@@ -1,0 +1,6 @@
+{
+    "PatchesAddresses" :
+    [
+        "C:/Users/kaboom/Downloads/Lcc-master/Lcc-master/Bundles/StandaloneWindows/Packages/1"
+    ]
+}

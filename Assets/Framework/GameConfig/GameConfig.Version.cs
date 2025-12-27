@@ -6,6 +6,7 @@ namespace LccModel
 {
     public static partial class GameConfig
     {
+        //打包的时候把当前资源号写到App版本里
         public static string AppVersion
         {
             get { return GetConfig<string>("appVersion"); }

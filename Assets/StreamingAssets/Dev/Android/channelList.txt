@@ -1,7 +1,0 @@
-{
-    "list":[{
-        "channel":"1",
-        "defaultVersion":"1",
-        "fetchVersion":"2"
-    }]
-}

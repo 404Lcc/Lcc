@@ -21,6 +21,7 @@ namespace LccModel
 
     public class Version
     {
+        public int MinVersion;
         public int MaxVersion;
     }
 

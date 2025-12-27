@@ -13,9 +13,11 @@ namespace LccModel
         RequestVersionConfigError,
         RequestVersionConfigSuccess,
     }
+
     public class FsmRequestVersion : FsmLaunchStateNode
     {
         private RequestState _state = RequestState.None;
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -25,9 +27,11 @@ namespace LccModel
                 ChangeToNextState();
                 return;
             }
+
             _state = RequestState.None;
             StartCoroutine(Request());
         }
+
         protected override void ChangeToNextState()
         {
             base.ChangeToNextState();
@@ -47,7 +51,23 @@ namespace LccModel
             {
                 yield break;
             }
-            
+
+            if (int.Parse(GameConfig.AppVersion) < PatchConfig.version.MinVersion)
+            {
+                LaunchEvent.ShowMessageBox.Broadcast(new UIPanelLaunch.MessageBoxParams
+                {
+                    Content = StringTable.Get("Hint.BaseVersionTooLow"),
+                    btnOptionList = new List<UIPanelLaunch.MessageBoxOption>
+                    {
+                        new()
+                        {
+                            name = StringTable.Get("Op.Quit"),
+                            action = OnQuit,
+                        }
+                    },
+                });
+            }
+
             ChangeToNextState();
         }
 
@@ -68,8 +88,9 @@ namespace LccModel
                 LaunchEvent.ShowMessageBox.Broadcast(new UIPanelLaunch.MessageBoxParams
                 {
                     Content = StringTable.Get("Hint.RequestVersionFailed"),
-                    btnOptionList = new List<UIPanelLaunch.MessageBoxOption> {
-                        new ()
+                    btnOptionList = new List<UIPanelLaunch.MessageBoxOption>
+                    {
+                        new()
                         {
                             name = StringTable.Get("Op.Retry"),
                             action = OnRetry,
@@ -84,7 +105,7 @@ namespace LccModel
                 PatchConfig.version = JsonUtility.ToObject<Version>(content);
             }
         }
-        
+
         public IEnumerator RequestVersionConfig()
         {
             string url = $"{GameConfig.CenterServerAddress}/{(GameConfig.IsRelease ? "Release" : "Dev")}/{ResPath.PlatformDirectory}/versionConfig.txt";
@@ -102,8 +123,9 @@ namespace LccModel
                 LaunchEvent.ShowMessageBox.Broadcast(new UIPanelLaunch.MessageBoxParams
                 {
                     Content = StringTable.Get("Hint.RequestVersionFailed"),
-                    btnOptionList = new List<UIPanelLaunch.MessageBoxOption> {
-                        new ()
+                    btnOptionList = new List<UIPanelLaunch.MessageBoxOption>
+                    {
+                        new()
                         {
                             name = StringTable.Get("Op.Retry"),
                             action = OnRetry,
@@ -118,7 +140,16 @@ namespace LccModel
                 PatchConfig.versionConfig = JsonUtility.ToObject<VersionConfig>(content);
             }
         }
-        
+
+        private void OnQuit()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
+
         private void OnRetry()
         {
             _machine.ChangeState<FsmRequestVersion>();

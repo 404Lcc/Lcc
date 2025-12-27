@@ -32,7 +32,7 @@ namespace LccHotfix
             gizmoActions.Remove(action);
         }
 
-        public void OnDrawGizmos()
+        public void OnGizmos()
         {
             if (gizmoActions == null)
                 return;

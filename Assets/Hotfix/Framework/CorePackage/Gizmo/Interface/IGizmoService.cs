@@ -8,6 +8,6 @@ namespace LccHotfix
 
         void RemoveGizmo(Action action);
 
-        void OnDrawGizmos();
+        void OnGizmos();
     }
 }

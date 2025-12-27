@@ -13,7 +13,7 @@ namespace LccHotfix
             Launcher.Instance.OnUpdate += OnUpdate;
             Launcher.Instance.OnLateUpdate += OnLateUpdate;
             Launcher.Instance.OnClose += OnClose;
-            Launcher.Instance.OnDrawGizmos += OnDrawGizmos;
+            Launcher.Instance.OnGizmos += OnGizmos;
 
             CodeTypesService = Current.AddModule<CodeTypesManager>();
             CodeTypesService.LoadTypes(new Assembly[] { GetType().Assembly });
@@ -124,9 +124,9 @@ namespace LccHotfix
             Main.Current.LateUpdate();
         }
 
-        private static void OnDrawGizmos()
+        private static void OnGizmos()
         {
-            Main.GizmoService.OnDrawGizmos();
+            Main.GizmoService.OnGizmos();
         }
 
         private static void OnClose()
@@ -135,7 +135,7 @@ namespace LccHotfix
             Launcher.Instance.OnUpdate -= OnUpdate;
             Launcher.Instance.OnLateUpdate -= OnLateUpdate;
             Launcher.Instance.OnClose -= OnClose;
-            Launcher.Instance.OnDrawGizmos -= OnDrawGizmos;
+            Launcher.Instance.OnGizmos -= OnGizmos;
             Current.Shutdown();
         }
     }

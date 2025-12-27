@@ -1,13 +1,10 @@
-
 {
-    "appVersion" : 1,
-    "channel"    : 1,
-    "resVersion" : 1,
-    "centerServerAddress"   : "file:///D:/Lcc/Assets/StreamingAssets",
+    "appVersion"            : "1",
+    "channel"               : 1,
+    "localPackageVersion"   : "1",
+    "centerServerAddress"   : "file:///C:/Users/kaboom/Downloads/Lcc-master/Lcc-master/Assets/StreamingAssets",
     "isReleaseCenterServer" : false,
     "isRelease"             : false,
-    "chargeDirect"          : true,
-    "selectServer"          : true,
-    "checkResUpdate"        : false,
-    "useSDK"                : false
+    "isEnablePatcher"       : true,
+    "isEnableSDK"           : false
 }

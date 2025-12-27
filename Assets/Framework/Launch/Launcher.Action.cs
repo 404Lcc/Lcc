@@ -6,7 +6,7 @@ public partial class Launcher
     public event Action OnUpdate;
     public event Action OnLateUpdate;
     public event Action OnClose;
-    public event Action OnDrawGizmos;
+    public event Action OnGizmos;
 
     private void FixedUpdate()
     {
@@ -29,6 +29,14 @@ public partial class Launcher
         if (OnLateUpdate != null)
         {
             OnLateUpdate();
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (OnGizmos != null)
+        {
+            OnGizmos();
         }
     }
 

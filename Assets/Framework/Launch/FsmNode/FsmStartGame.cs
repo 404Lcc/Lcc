@@ -34,7 +34,7 @@ namespace LccModel
 
         private IEnumerator LoadDlls()
         {
-#if !UNITY_EDITOR
+#if HybridCLR && !UNITY_EDITOR
             var package = YooAssets.GetPackage(AssetConfig.DefaultPackageName);
             foreach (var aotDllName in AOTGenericReferences.PatchedAOTAssemblyList)
             {

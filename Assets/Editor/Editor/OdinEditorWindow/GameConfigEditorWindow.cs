@@ -25,16 +25,16 @@ namespace LccEditor
         public void GameConfig()
         {
             var dtNow = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
-            FileUtility.SaveAsset("Assets/StreamingAssets/GameConfig_Build.txt", dtNow.ToString());
+            FileUtility.SaveAsset("Assets/Resources/GameConfig_Build.txt", dtNow.ToString());
 
-            var time = long.Parse(Encoding.UTF8.GetString(FileUtility.GetAsset("Assets/StreamingAssets/GameConfig_Build.txt")));
+            var time = long.Parse(Encoding.UTF8.GetString(FileUtility.GetAsset("Assets/Resources/GameConfig_Build.txt")));
             var bytes = BitConverter.GetBytes(time);
 
             TextAsset version = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/GameConfig/GameConfig_Version.txt");
-            FileUtility.SaveAsset("Assets/StreamingAssets/GameConfig_Version.txt", version.bytes.ByteXOR(bytes));
+            FileUtility.SaveAsset("Assets/Resources/GameConfig_Version.txt", version.bytes.ByteXOR(bytes));
 
             TextAsset language = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/GameConfig/GameConfig_Language.txt");
-            FileUtility.SaveAsset("Assets/StreamingAssets/GameConfig_Language.txt", language.bytes.ByteXOR(bytes));
+            FileUtility.SaveAsset("Assets/Resources/GameConfig_Language.txt", language.bytes.ByteXOR(bytes));
             AssetDatabase.SaveAssets();
         }
 
@@ -42,12 +42,12 @@ namespace LccEditor
         [LabelText("解密GameConfig"), Button(ButtonSizes.Gigantic, Name = "解密GameConfig")]
         public void DecryptGameConfig()
         {
-            var time = long.Parse(Encoding.UTF8.GetString(FileUtility.GetAsset("Assets/StreamingAssets/GameConfig_Build.txt")));
+            var time = long.Parse(Encoding.UTF8.GetString(FileUtility.GetAsset("Assets/Resources/GameConfig_Build.txt")));
             var bytes = BitConverter.GetBytes(time);
 
-            var version = FileUtility.GetAsset("Assets/StreamingAssets/GameConfig_Version.txt").ByteXOR(bytes).Utf8ToStr();
+            var version = FileUtility.GetAsset("Assets/Resources/GameConfig_Version.txt").ByteXOR(bytes).Utf8ToStr();
             Debug.Log("version=" + version);
-            var language = FileUtility.GetAsset("Assets/StreamingAssets/GameConfig_Language.txt").ByteXOR(bytes).Utf8ToStr();
+            var language = FileUtility.GetAsset("Assets/Resources/GameConfig_Language.txt").ByteXOR(bytes).Utf8ToStr();
             Debug.Log("language=" + language);
 
         }

@@ -8,8 +8,9 @@ namespace LccModel
     public class LanguageConfig
     {
         public string name;
-        public string font;
         public string shortName;
+        public string font;
+        public string desc;
     }
 
     public static partial class GameConfig
