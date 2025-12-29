@@ -1,6 +1,4 @@
-using LccModel;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace LccHotfix
@@ -36,12 +34,7 @@ namespace LccHotfix
                 Main.UIService.ShowElement(UIPanelDefine.UIHeadbarPanel);
 
                 var mod = GameUtility.GetModel<ModPlayer>();
-                var data = new InGamePlayerData();
-                data.InitData(mod.GetLocalPlayerSimpleData());
 
-                BattleWorldData worldData = new BattleWorldData();
-                worldData.Init(new List<InGamePlayerData>() { data });
-                Main.WorldService.CreateWorld<BattleWorld>(worldData);
 
                 this.StartCoroutine(LoadProcedureCoroutine());
 
@@ -101,7 +94,6 @@ namespace LccHotfix
             operation.Release(ref operation);
 
             Main.CameraService.CurrentCamera = null;
-            Main.WorldService.ExitWorld();
 
             Log.Debug("退出Battle");
         }

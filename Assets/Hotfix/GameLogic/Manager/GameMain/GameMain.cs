@@ -58,8 +58,8 @@ namespace LccHotfix
             IconService = Current.AddModule<IconManager>();
             HotfixBridgeService = Current.AddModule<HotfixBridge>();
             LanguageService = Current.AddModule<LanguageManager>();
-            WorldService = Current.AddModule<WorldManager>();
-            BTScriptService = Current.AddModule<BTScriptManager>();
+            // WorldService = Current.AddModule<WorldManager>();
+            // BTScriptService = Current.AddModule<BTScriptManager>();
             FishNetService = Current.AddModule<FishNetManager>();
             FishNetService.SetHelper(new SteamFishNetHelper());
             FishNetService.SetServerMessageDispatcherHelper(new FishNetServerPBMessageDispatcherHelper());
@@ -147,8 +147,8 @@ namespace LccHotfix
         public static IIconService IconService { get; set; }
         public static IHotfixBridgeService HotfixBridgeService { get; set; }
         public static ILanguageService LanguageService { get; set; }
-        public static IWorldService WorldService { get; set; }
-        public static IBTScriptService BTScriptService { get; set; }
+        // public static IWorldService WorldService { get; set; }
+        // public static IBTScriptService BTScriptService { get; set; }
         public static IFishNetService FishNetService { get; set; }
         public static IMirrorService MirrorService { get; set; }
         public static ISteamService SteamService { get; set; }
