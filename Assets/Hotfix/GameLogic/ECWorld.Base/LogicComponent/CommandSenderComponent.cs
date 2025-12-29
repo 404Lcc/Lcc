@@ -7,7 +7,6 @@ namespace LccHotfix
         private List<EntityCommand> _sendQueue = new(4);
         private IEntityCommandPreHandler _preHandler;
 
-
         public List<EntityCommand> SendQueue
         {
             get { return _sendQueue; }

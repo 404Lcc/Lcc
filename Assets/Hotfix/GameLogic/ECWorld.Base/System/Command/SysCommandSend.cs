@@ -5,11 +5,11 @@ namespace LccHotfix
 {
     public sealed class SysCommandSend : ReactiveSystem<LogicEntity>
     {
-        private LogicWorld _world;
+        private LogicWorld _logicWorld;
 
-        public SysCommandSend(LogicWorld world) : base(world)
+        public SysCommandSend(LogicWorld logicWorld) : base(logicWorld)
         {
-            _world = world;
+            _logicWorld = logicWorld;
         }
 
         protected override ICollector<LogicEntity> GetTrigger(IContext<LogicEntity> context)

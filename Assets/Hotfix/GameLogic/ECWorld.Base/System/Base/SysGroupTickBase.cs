@@ -6,7 +6,7 @@ namespace LccHotfix
 {
     public abstract class SysGroupTickBase : IExecuteSystem, ITearDownSystem, IInitializeSystem, ILateUpdateSystem
     {
-        protected readonly LogicWorld _logicWorld;
+        protected LogicWorld _logicWorld;
         protected IGroup<LogicEntity> _group;
 
         //Group.GetEntities 2种接口都会 new一个临时数组，这里针对GC优化一下

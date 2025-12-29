@@ -4,24 +4,24 @@ namespace LccHotfix
 {
     public class TimerComponent : LogicComponent
     {
-        private List<TimerTask> mTimerList = new List<TimerTask>();
-        public List<TimerTask> TimerList => mTimerList;
+        private List<TimerTask> _timerList = new List<TimerTask>();
+        public List<TimerTask> TimerList => _timerList;
 
         public override void DisposeOnRemove()
         {
-            foreach (var item in mTimerList)
+            foreach (var item in _timerList)
             {
                 item.Dispose();
             }
 
-            mTimerList.Clear();
+            _timerList.Clear();
 
             base.DisposeOnRemove();
         }
 
         public void Init()
         {
-            mTimerList.Clear();
+            _timerList.Clear();
         }
     }
 

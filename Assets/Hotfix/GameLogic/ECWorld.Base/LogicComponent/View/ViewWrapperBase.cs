@@ -20,18 +20,28 @@ namespace LccHotfix
     public class SimpleGameObjectView : IViewWrapper
     {
         protected GameObjectPoolAsyncOperation _gameObject;
+        protected Transform _transform;
 
         public GameObject GameObject
         {
             get { return _gameObject.GameObject; }
         }
 
-        protected Transform _transform;
-
         public Transform Transform
         {
             get { return _transform; }
         }
+
+        public int Category { get; private set; }
+        public bool IsActive { get; set; }
+        public string ViewName { get; set; }
+        public string BindPointName { get; set; }
+
+        public bool ClearFx { get; set; }
+
+        public MultChangeBool_AND IsVisible { get; set; }
+
+        private Dictionary<string, Transform> _bpName2Transform = new Dictionary<string, Transform>();
 
         public SimpleGameObjectView(GameObjectPoolAsyncOperation gameObject, int category)
         {
@@ -42,19 +52,6 @@ namespace LccHotfix
             IsVisible = new MultChangeBool_AND(true);
         }
 
-
-        public int Category { get; private set; }
-
-        public bool IsActive { get; set; }
-        public string ViewName { get; set; }
-        public string BindPointName { get; set; }
-
-        public bool ClearFx { get; set; }
-
-        public MultChangeBool_AND IsVisible { get; set; }
-
-        private Dictionary<string, Transform> mBpName2Transform = new Dictionary<string, Transform>();
-
         public virtual void DisposeView()
         {
             if (_gameObject == null)
@@ -64,7 +61,7 @@ namespace LccHotfix
 
             _gameObject?.Release(ref _gameObject);
             _gameObject = null;
-            mBpName2Transform.Clear();
+            _bpName2Transform.Clear();
         }
 
         public virtual void SyncTransform(long entityId, Vector3 position, Quaternion rotation, Vector3 scale)
@@ -76,7 +73,7 @@ namespace LccHotfix
 
         public Transform GetBindPoint(string bpName)
         {
-            if (mBpName2Transform.TryGetValue(bpName, out var value))
+            if (_bpName2Transform.TryGetValue(bpName, out var value))
             {
                 return value;
             }
@@ -84,7 +81,7 @@ namespace LccHotfix
             var bpTrans = ModelBindPointGetter.GetBindPoint(Transform, bpName);
             if (bpTrans == null)
                 return Transform;
-            mBpName2Transform.Add(bpName, bpTrans);
+            _bpName2Transform.Add(bpName, bpTrans);
             return bpTrans;
         }
 
