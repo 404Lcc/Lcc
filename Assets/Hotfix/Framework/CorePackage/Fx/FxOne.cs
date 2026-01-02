@@ -12,24 +12,33 @@ namespace LccHotfix
 
         public FxCache fxCache = null;
         public EFxOneType fxType;
-        
+
         float fxLifetime = -1;
         GameObject fxGameObject = null;
         ParticleSystem fxParticleSystem = null;
         FxInstance fxInstance = null;
 
+        private Color? _cacheColor;
+
         public void SetFxGameObject(GameObject _fxGameObject)
         {
             fxGameObject = _fxGameObject;
 
-            if (_fxGameObject.TryGetComponent(out fxParticleSystem))
-            {
-                fxParticleSystem = _fxGameObject.GetComponent<ParticleSystem>();
-                fxInstance = _fxGameObject.AddComponent<FxInstance>();
+            fxParticleSystem = _fxGameObject.GetComponentInChildren<ParticleSystem>();
 
+            if (fxParticleSystem)
+            {
                 var main = fxParticleSystem.main;
-                main.stopAction = ParticleSystemStopAction.Callback;
-                fxInstance.SetFxStopCallback(OnParticleSystemStopped);
+                if (main.stopAction == ParticleSystemStopAction.Callback)
+                {
+                    fxInstance = fxParticleSystem.gameObject.AddComponent<FxInstance>();
+                    fxInstance.SetFxStopCallback(OnParticleSystemStopped);
+                }
+
+                if (_cacheColor != null)
+                {
+                    SetColor(_cacheColor);
+                }
             }
         }
 
@@ -61,6 +70,22 @@ namespace LccHotfix
 
             fxLifetime = inLifetime;
             bPlaying = true;
+            fxParticleSystem?.Play();
+        }
+
+        public void SetColor(Color? color)
+        {
+            if (fxParticleSystem == null)
+            {
+                _cacheColor = color;
+                return;
+            }
+
+            if (color != null)
+            {
+                var main = fxParticleSystem.main;
+                main.startColor = color.Value;
+            }
         }
 
         void OnParticleSystemStopped()
@@ -93,6 +118,19 @@ namespace LccHotfix
             {
                 SetHiddenInGame(true);
             }
+        }
+
+        /// <summary>
+        /// 用来停止 Particle System 的内容，并附着延迟回收逻辑
+        /// 目前用于处理特效 Stop 但是不会立马销毁的情况
+        /// </summary>
+        public void StopParticleSystem(float delayReleaseTime = 1.0f)
+        {
+            // 立即停止播放
+            fxParticleSystem?.Stop();
+
+            // 设置剩余生命周期
+            fxLifetime = delayReleaseTime;
         }
     }
 }
