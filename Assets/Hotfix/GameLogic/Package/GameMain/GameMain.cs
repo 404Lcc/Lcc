@@ -52,6 +52,8 @@ namespace LccHotfix
             ThreadSyncService = Current.AddModule<ThreadSyncManager>();
             GizmoService = Current.AddModule<GizmoManager>();
             BadgeService = Current.AddModule<BadgeManager>();
+            CustomLogicService = Current.AddModule<CustomLogicManager>();
+            CustomLogicService.SetRegister(new LogicCfgContainerRegister());
 
             ConfigService = Current.AddModule<ConfigManager>();
             PlatformService = Current.AddModule<PlatformManager>();

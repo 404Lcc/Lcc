@@ -23,5 +23,6 @@ namespace LccHotfix
         public static IThreadSyncService ThreadSyncService { get; set; }
         public static IGizmoService GizmoService { get; set; }
         public static IBadgeService BadgeService { get; set; }
+        public static ICustomLogicService CustomLogicService { get; set; }
     }
 }
