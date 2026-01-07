@@ -10,7 +10,7 @@ namespace LccHotfix
 {
     public class CustomLogicFactory
     {
-        protected Dictionary<string, ILogicConfigContainer> mConfigContainerDic = new();
+        protected Dictionary<string, ILogicConfigContainer> _configContainerDic = new();
 
         //缓存
         protected CLNodesPool<ICustomNode> _nodesPool = new();
@@ -19,25 +19,28 @@ namespace LccHotfix
         public CLNodesPool<ICanRecycle> PartsPool => _partsPool;
 
 
-        public virtual ILogicConfigContainer AddConfigContainer(ILogicConfigContainer cfgContainer)
-        {
-            mConfigContainerDic.Add(cfgContainer.ContainerName, cfgContainer);
-            return cfgContainer;
-        }
-        public Dictionary<string, ILogicConfigContainer> ConfigContainer
-        {
-            get { return mConfigContainerDic; }
+        public void AddConfigContainer(ILogicConfigContainer cfgContainer)
+        {            
+            _configContainerDic.Add(cfgContainer.ContainerName, cfgContainer);
         }
 
-        public virtual void DoCache()
+        public bool TryGetConfigContainer(string containerName, out ILogicConfigContainer container)
         {
+            return _configContainerDic.TryGetValue(containerName, out container);
+        }
+        
+        public void Dispose()
+        {
+            _nodesPool.Clear();
+            _partsPool.Clear();
+            _configContainerDic.Clear();
         }
 
         //主方法：创建并装配一个自定义逻辑
         public CustomLogic CreateLogic(ICustomLogicGenInfo genInfo)
         {
             var cfgContainerName = genInfo.ConfigContainerName;
-            if (!mConfigContainerDic.TryGetValue(cfgContainerName, out var cfgContainer))
+            if (!_configContainerDic.TryGetValue(cfgContainerName, out var cfgContainer))
             {
                 CLHelper.Assert(false, $"CreateCustomLogic ConfigContainer = null, cfgContainerName={cfgContainerName}");
                 return null;
