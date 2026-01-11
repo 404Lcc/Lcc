@@ -5,11 +5,14 @@ namespace LccHotfix
 {
     public sealed class SysCommandSend : ReactiveSystem<LogicEntity>
     {
-        private LogicWorld _logicWorld;
+        private LogicWorld m_world;
+        //private INetworkService m_netService;
 
-        public SysCommandSend(LogicWorld logicWorld) : base(logicWorld)
+        public SysCommandSend(LogicWorld world)
+            : base(world)
         {
-            _logicWorld = logicWorld;
+            m_world = world;
+            //m_netService = m_world.Services.Network;
         }
 
         protected override ICollector<LogicEntity> GetTrigger(IContext<LogicEntity> context)
@@ -27,8 +30,10 @@ namespace LccHotfix
             foreach (var e in entities)
             {
                 e.comCommandSender.PreHandleCommand();
+                //m_netService.SendCommandsMessage(e.ID, e.CommandSender.SendQueue);
                 e.comCommandSender.SendQueue.Clear();
             }
         }
+
     }
 }

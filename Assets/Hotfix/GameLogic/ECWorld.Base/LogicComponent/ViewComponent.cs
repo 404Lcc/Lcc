@@ -1,5 +1,5 @@
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 
@@ -18,8 +18,8 @@ namespace LccHotfix
 
     public class ViewComponent : LogicComponent
     {
-        private Dictionary<int, IViewWrapper> mViewDict = new();
-        public List<IViewWrapper> ViewList => mViewDict.Values.ToList();
+        private ListDictionary<int, IViewWrapper> mViewDict = new();
+        public List<IViewWrapper> ViewList => mViewDict.List;
         public int ViewCount => ViewList.Count;
 
 
@@ -71,7 +71,7 @@ namespace LccHotfix
             {
                 Debug.LogWarning($"AddView existView, newCategory={newCategory}");
             }
-
+            
             mViewDict.Add(newView.Category, newView);
             if (!silently)
             {
@@ -112,7 +112,7 @@ namespace LccHotfix
 
         public void RemoveAllView()
         {
-            foreach (var iViewWrapper in mViewDict.Values)
+            foreach (var iViewWrapper in mViewDict)
             {
                 RemoveView(iViewWrapper.Category);
             }

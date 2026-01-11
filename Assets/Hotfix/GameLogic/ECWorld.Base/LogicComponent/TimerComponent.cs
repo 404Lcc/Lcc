@@ -1,27 +1,28 @@
+using System;
 using System.Collections.Generic;
 
 namespace LccHotfix
 {
     public class TimerComponent : LogicComponent
     {
-        private List<TimerTask> _timerList = new List<TimerTask>();
-        public List<TimerTask> TimerList => _timerList;
+        private List<TimerTask> mTimerList = new List<TimerTask>();
+        public List<TimerTask> TimerList => mTimerList;
 
         public override void DisposeOnRemove()
         {
-            foreach (var item in _timerList)
+            foreach (var item in mTimerList)
             {
                 item.Dispose();
             }
 
-            _timerList.Clear();
+            mTimerList.Clear();
 
             base.DisposeOnRemove();
         }
 
         public void Init()
         {
-            _timerList.Clear();
+            mTimerList.Clear();
         }
     }
 
@@ -62,6 +63,7 @@ namespace LccHotfix
             RemoveComponent(LogicComponentsLookup.ComTimer);
         }
     }
+
 
     public static partial class LogicComponentsLookup
     {

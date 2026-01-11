@@ -2,7 +2,7 @@ namespace LccHotfix
 {
     public class OwnerEntityComponent : LogicComponent
     {
-        public int OwnerEntityID { get; set; }
+        public long OwnerEntityID { get; set; }
     }
 
     public partial class LogicEntity
@@ -17,7 +17,7 @@ namespace LccHotfix
             get { return HasComponent(LogicComponentsLookup.ComOwnerEntity); }
         }
 
-        public void AddComOwnerEntity(int newOwnerEntityID)
+        public void AddComOwnerEntity(long newOwnerEntityID)
         {
             var index = LogicComponentsLookup.ComOwnerEntity;
             var component = (OwnerEntityComponent)CreateComponent(index, typeof(OwnerEntityComponent));
@@ -25,7 +25,7 @@ namespace LccHotfix
             AddComponent(index, component);
         }
 
-        public void ReplaceComOwnerEntity(int newOwnerEntityID)
+        public void ReplaceComOwnerEntity(long newOwnerEntityID)
         {
             var index = LogicComponentsLookup.ComOwnerEntity;
             var component = (OwnerEntityComponent)CreateComponent(index, typeof(OwnerEntityComponent));
@@ -33,6 +33,7 @@ namespace LccHotfix
             ReplaceComponent(index, component);
         }
     }
+
 
     public static partial class LogicComponentsLookup
     {

@@ -2,39 +2,44 @@ using Entitas;
 using System.Collections;
 using System.Collections.Generic;
 
+
 namespace LccHotfix
 {
     //////////////////////////////////////////////////////////////////////////
     /*
-        SysCoroutine 可以分成多个世界： 比如 Meta、Logic
+        SysCoroutine 可以分成多个世界： 比如 Meta、Logic，
     */
 
     public class SysCoroutine_Meta : IExecuteSystem
     {
-        private readonly MetaWorld _metaWorld;
-        private readonly CoroutineMapExecute<MetaEntity> _coroutine;
+        private readonly ECWorlds mECWorlds;
+        private readonly MetaWorld mMetaWorld;
+        private readonly CoroutineMapExecute<MetaEntity> m_modeCoroutine;
 
-        public SysCoroutine_Meta(MetaWorld metaWorld)
+        public SysCoroutine_Meta(ECWorlds ecWorlds)
         {
-            _metaWorld = metaWorld;
-            _coroutine = new CoroutineMapExecute<MetaEntity>(_metaWorld, _metaWorld.GetGroup(MetaMatcher.AllOf(MetaComponentsLookup.ComCoroutineMap)), MetaComponentsLookup.ComCoroutineMap);
+            mECWorlds = ecWorlds;
+            mMetaWorld = mECWorlds.MetaWorld;
+            m_modeCoroutine = new CoroutineMapExecute<MetaEntity>(mMetaWorld, mMetaWorld.GetGroup(MetaMatcher.AllOf(MetaComponentsLookup.ComCoroutineMap)), MetaComponentsLookup.ComCoroutineMap);
         }
 
         void IExecuteSystem.Execute()
         {
-            _coroutine.Execute();
+            m_modeCoroutine.Execute();
         }
     }
 
     public class SysCoroutine_Logic : IExecuteSystem
     {
-        private readonly LogicWorld _logicWorld;
+        private readonly ECWorlds mECWorlds;
+        private readonly LogicWorld mLogicWorld;
         private readonly CoroutineMapExecute<LogicEntity> m_gameCoroutine;
 
-        public SysCoroutine_Logic(LogicWorld logicWorld)
+        public SysCoroutine_Logic(ECWorlds ecWorlds)
         {
-            _logicWorld = logicWorld;
-            m_gameCoroutine = new CoroutineMapExecute<LogicEntity>(_logicWorld, _logicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComCoroutineMap)), LogicComponentsLookup.ComCoroutineMap);
+            mECWorlds = ecWorlds;
+            mLogicWorld = ecWorlds.LogicWorld;
+            m_gameCoroutine = new CoroutineMapExecute<LogicEntity>(mLogicWorld, mLogicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComCoroutineMap)), LogicComponentsLookup.ComCoroutineMap);
         }
 
         void IExecuteSystem.Execute()
@@ -43,8 +48,9 @@ namespace LccHotfix
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////
     //MetaWorld 和 LogicWorld 复用的系统
-    public class CoroutineMapExecute<TEntity> where TEntity : Entity, new()
+    public class CoroutineMapExecute<TEntity> where TEntity : class, Entitas.IEntity, new()
     {
         private readonly Context<TEntity> m_context;
         private readonly IGroup<TEntity> m_group;

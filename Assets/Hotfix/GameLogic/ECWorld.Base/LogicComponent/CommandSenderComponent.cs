@@ -1,42 +1,43 @@
+using Entitas;
 using System.Collections.Generic;
 
 namespace LccHotfix
 {
     public sealed class CommandSenderComponent : LogicComponent
     {
-        private List<EntityCommand> _sendQueue = new(4);
-        private IEntityCommandPreHandler _preHandler;
+        private List<EntityCommand> m_sendQueue = new(4);
 
         public List<EntityCommand> SendQueue
         {
-            get { return _sendQueue; }
-            set { _sendQueue = value; }
+            get { return m_sendQueue; }
+            set { m_sendQueue = value; }
         }
 
+        private IEntityCommandPreHandler m_preHandler;
 
         public void Initialize(IEntityCommandPreHandler preHandler = null)
         {
-            _preHandler = preHandler;
+            m_preHandler = preHandler;
         }
-
+        
         //预处理命令
         //常见的处理有：服务器确认前 先做预测性表现、RTS低级指令转高级指令、连续指令输入型出招表
         public void PreHandleCommand()
         {
-            if (_preHandler == null)
+            if (m_preHandler == null)
                 return;
 
-            for (int i = 0; i < _sendQueue.Count; i++)
+            for (int i = 0; i < m_sendQueue.Count; i++)
             {
-                var cmd = _sendQueue[i];
-                _preHandler.PreHandleCommand(_owner, cmd);
+                var cmd = m_sendQueue[i];
+                m_preHandler.PreHandleCommand(_owner, cmd);
             }
         }
 
         public override void DisposeOnRemove()
         {
-            _preHandler = null;
-            _sendQueue.Clear();
+            m_preHandler = null;
+            m_sendQueue.Clear();
             base.DisposeOnRemove();
         }
     }

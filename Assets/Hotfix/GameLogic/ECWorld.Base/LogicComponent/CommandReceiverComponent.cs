@@ -4,41 +4,42 @@ namespace LccHotfix
 {
     public sealed class CommandReceiverComponent : LogicComponent
     {
-        private List<EntityCommand> _receiveQueue = new(4);
-        private IEntityCommandDispatcher _dispatcher;
+        private List<EntityCommand> m_receiveQueue = new(4);
 
         public List<EntityCommand> ReceiveQueue
         {
-            get { return _receiveQueue; }
-            set { _receiveQueue = value; }
+            get { return m_receiveQueue; }
+            set { m_receiveQueue = value; }
         }
+
+        private IEntityCommandDispatcher m_dispatcher;
 
         public void Initialize(IEntityCommandDispatcher dispatcher)
         {
-            _dispatcher = dispatcher;
+            m_dispatcher = dispatcher;
         }
 
         public void Dispatch()
         {
-            foreach (var cmd in _receiveQueue)
+            foreach (var cmd in m_receiveQueue)
             {
-                _dispatcher.HandleEntityCommand(_owner, cmd);
+                m_dispatcher.HandleEntityCommand(_owner, cmd);
             }
 
-            _receiveQueue.Clear();
+            m_receiveQueue.Clear();
         }
 
         public override void PostInitialize(LogicEntity owner)
         {
             base.PostInitialize(owner);
-            _dispatcher.BindOwner(owner);
+            m_dispatcher.BindOwner(owner);
         }
 
         public override void DisposeOnRemove()
         {
-            _dispatcher.UnBindOwner();
-            _dispatcher = null;
-            _receiveQueue.Clear();
+            m_dispatcher.UnBindOwner();
+            m_dispatcher = null;
+            m_receiveQueue.Clear();
             base.DisposeOnRemove();
         }
     }

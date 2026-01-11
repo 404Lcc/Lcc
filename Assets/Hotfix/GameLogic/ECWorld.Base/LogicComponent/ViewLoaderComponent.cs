@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace LccHotfix
 {
@@ -27,12 +29,14 @@ namespace LccHotfix
             base.DisposeOnRemove();
             ViewDataList.Clear();
         }
-
+        
         public void AddData(ViewData data)
         {
             ViewDataList.Add(data);
         }
+        
     }
+
 
     public partial class LogicEntity
     {
@@ -92,7 +96,7 @@ namespace LccHotfix
                 {
                     component.AddData(data);
                 }
-
+                
                 ReplaceComponent(index, component);
             }
         }

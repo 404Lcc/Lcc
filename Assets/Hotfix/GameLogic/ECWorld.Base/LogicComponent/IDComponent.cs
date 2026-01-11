@@ -1,3 +1,4 @@
+using Entitas;
 using UnityEngine;
 
 namespace LccHotfix
@@ -14,15 +15,8 @@ namespace LccHotfix
 
     public partial class LogicEntity
     {
-        public IDComponent comID
-        {
-            get { return (IDComponent)GetComponent(LogicComponentsLookup.ComID); }
-        }
-
-        public bool hasComID
-        {
-            get { return HasComponent(LogicComponentsLookup.ComID); }
-        }
+        public IDComponent comID { get { return (IDComponent)GetComponent(LogicComponentsLookup.ComID); } }
+        public bool hasComID { get { return HasComponent(LogicComponentsLookup.ComID); } }
 
         public void AddComID(long newId)
         {
@@ -32,7 +26,6 @@ namespace LccHotfix
                 Debug.LogError("AddComID 未初始化的组件索引 LogicComponentsLookup.ComID");
                 return;
             }
-
             var component = (IDComponent)CreateComponent(index, typeof(IDComponent));
             component.Init(newId);
             AddComponent(index, component);
@@ -46,15 +39,16 @@ namespace LccHotfix
                 {
                     return comID.id;
                 }
-
-                return this.Id;
+                return creationIndex;
             }
-        }
+        } 
     }
+
 
     public static partial class LogicComponentsLookup
     {
-        private static ComponentTypeIndex _ComIDIndex = new(typeof(IDComponent));
+        private static ComponentTypeIndex _ComIDIndex = new (typeof(IDComponent));
         public static int ComID => _ComIDIndex.Index;
     }
+
 }
