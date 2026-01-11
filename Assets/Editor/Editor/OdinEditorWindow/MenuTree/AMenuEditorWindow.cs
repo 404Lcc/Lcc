@@ -102,12 +102,12 @@ namespace LccEditor
             aEditorWindowBaseList.Clear();
         }
 
-        protected override void OnGUI()
+        protected override void OnImGUI()
         {
-            base.OnGUI();
+            base.OnImGUI();
 
             if (current != null)
-                current.OnGUI();
+                current.OnImGUI();
         }
     }
 }
