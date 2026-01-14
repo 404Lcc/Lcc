@@ -6,10 +6,10 @@ namespace LccHotfix
     [Procedure]
     public class BattleProcedure : LoadProcedureHandler, ICoroutine
     {
-        public GameObjectPoolAsyncOperation operation;
+        public GameObjectHandle handle;
 
         public Camera currentCamera;
-        public GameObject Map => operation.GameObject;
+        public GameObject Map => handle.GameObject;
 
         public BattleProcedure()
         {
@@ -24,10 +24,8 @@ namespace LccHotfix
             //进入
             Log.Debug("进入Battle");
 
-            operation = Main.GameObjectPoolService.GetObjectAsync("Map", (x) =>
+            handle = Main.GameObjectPoolService.GetObjectAsync("Map", (x) =>
             {
-                operation = x;
-
                 SetBattleCamera();
 
                 Main.UIService.ShowElement(UIPanelDefine.UIBattlePanel);
@@ -91,7 +89,7 @@ namespace LccHotfix
         {
             base.ProcedureExitHandler();
 
-            operation.Release(ref operation);
+            handle.Release(ref handle);
 
             Main.CameraService.CurrentCamera = null;
 

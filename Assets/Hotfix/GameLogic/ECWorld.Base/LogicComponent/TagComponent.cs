@@ -1,5 +1,3 @@
-using System;
-
 namespace LccHotfix
 {
     public class TagComponent : LogicComponent
@@ -56,12 +54,12 @@ namespace LccHotfix
                 ReplaceComponent(index, component);
             }
         }
-        
+
         public void RemoveComTag()
         {
             RemoveComponent(LogicComponentsLookup.ComTag);
         }
-        
+
         public void RemoveTags(uint tags)
         {
             if (!hasComTag)

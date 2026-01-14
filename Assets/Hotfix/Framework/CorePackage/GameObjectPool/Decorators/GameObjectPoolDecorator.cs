@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace LccHotfix
 {
@@ -14,11 +14,11 @@ namespace LccHotfix
 
         public GameObjectPoolDecorator(IGameObjectPool pool)
         {
-            Debug.Assert(pool != null);
+            UnityEngine.Debug.Assert(pool != null);
             _pool = pool;
         }
 
-        public virtual GameObjectPoolObject Get()
+        public virtual GameObjectObject Get()
         {
             var target = Pool.Get();
             if (target != null)
@@ -29,9 +29,9 @@ namespace LccHotfix
             return target;
         }
 
-        public virtual void Release(GameObjectPoolObject poolObject)
+        public virtual void Release(GameObjectObject obj)
         {
-            Pool.Release(poolObject);
+            Pool.Release(obj);
         }
 
         public virtual void ReleaseAll()
@@ -44,7 +44,7 @@ namespace LccHotfix
             Pool.Update();
         }
 
-        public GameObjectPoolObject ForceSpawm()
+        public GameObjectObject ForceSpawm()
         {
             return Pool.ForceSpawm();
         }

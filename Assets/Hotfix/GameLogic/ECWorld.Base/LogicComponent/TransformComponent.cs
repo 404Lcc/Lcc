@@ -1,5 +1,4 @@
 using UnityEngine;
-using Entitas;
 
 namespace LccHotfix
 {
@@ -110,7 +109,7 @@ namespace LccHotfix
             get { return comTransform.rotation * Vector3.right; }
         }
 
-        
+
         public Vector3 scale
         {
             get { return comTransform.scale; }

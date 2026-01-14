@@ -16,12 +16,9 @@ namespace LccHotfix
     {
     }
 
-
-    //////////////////////////////////////////////////////////////////////////
     /*  CoroutineMapComponent:
         Entity 生命周期安全的协程， 有关于Entity的异步过程可以挂这个组件
     */
-    //////////////////////////////////////////////////////////////////////////
     public class CoroutineMapComponent : LogicComponent
     {
         //外部不可直接操作map

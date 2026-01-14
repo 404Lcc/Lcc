@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace LccHotfix
 {
@@ -12,14 +10,12 @@ namespace LccHotfix
         public bool ClearFx;
     }
 
-    //////////////////////////////////////////////////////////////////////////
     /*  ViewLoaderComponent: View资源加载组件
     不关联渲染对象，但渲染对象构建，依赖于其中存放的信息。服务器Entity也可以挂
 
     客户端：用AssetDetail提供的信息，来创建View组件（模型等引擎渲染对象）
     服务器：用它存放关于渲染对象的配置描述、状态细节，用于同步
     */
-    //////////////////////////////////////////////////////////////////////////
     public class ViewLoaderComponent : LogicComponent
     {
         public List<ViewData> ViewDataList { get; protected set; } = new();
@@ -29,14 +25,12 @@ namespace LccHotfix
             base.DisposeOnRemove();
             ViewDataList.Clear();
         }
-        
+
         public void AddData(ViewData data)
         {
             ViewDataList.Add(data);
         }
-        
     }
-
 
     public partial class LogicEntity
     {
@@ -68,6 +62,14 @@ namespace LccHotfix
             }
         }
 
+        public void RemoveComViewLoader()
+        {
+            if (!hasComViewLoader)
+            {
+                RemoveComponent(LogicComponentsLookup.ComViewLoader);
+            }
+        }
+
         public void ChangeViewLoad(ViewData data)
         {
             var index = LogicComponentsLookup.ComViewLoader;
@@ -96,7 +98,7 @@ namespace LccHotfix
                 {
                     component.AddData(data);
                 }
-                
+
                 ReplaceComponent(index, component);
             }
         }

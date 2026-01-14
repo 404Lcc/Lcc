@@ -6,7 +6,6 @@ namespace LccHotfix
     {
         None,
         Self,
-        Part,
     }
 
     public class UnityObjectRelatedComponent : LogicComponent

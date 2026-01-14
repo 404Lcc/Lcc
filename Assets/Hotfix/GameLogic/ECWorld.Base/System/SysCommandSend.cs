@@ -5,13 +5,12 @@ namespace LccHotfix
 {
     public sealed class SysCommandSend : ReactiveSystem<LogicEntity>
     {
-        private LogicWorld m_world;
+        private ECWorlds _world;
         //private INetworkService m_netService;
 
-        public SysCommandSend(LogicWorld world)
-            : base(world)
+        public SysCommandSend(ECWorlds world) : base(world.LogicWorld)
         {
-            m_world = world;
+            _world = world;
             //m_netService = m_world.Services.Network;
         }
 
@@ -34,6 +33,5 @@ namespace LccHotfix
                 e.comCommandSender.SendQueue.Clear();
             }
         }
-
     }
 }

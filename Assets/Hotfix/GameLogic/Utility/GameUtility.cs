@@ -164,12 +164,12 @@ namespace LccHotfix
             return 0;
         }
 
-        public static GameObjectPoolAsyncOperation GetObj(string name, Action<GameObjectPoolAsyncOperation> onComplete)
+        public static GameObjectHandle GetObj(string name, Action<GameObjectHandle> onComplete)
         {
             return Main.GameObjectPoolService.GetObjectAsync(name, onComplete);
         }
 
-        public static void PutObj(ref GameObjectPoolAsyncOperation obj)
+        public static void PutObj(ref GameObjectHandle obj)
         {
             if (obj == null)
                 return;

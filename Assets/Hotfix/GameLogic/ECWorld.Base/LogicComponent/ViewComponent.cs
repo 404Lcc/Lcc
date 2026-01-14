@@ -1,18 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 
 namespace LccHotfix
 {
     public interface IViewWrapper
     {
         int Category { get; }
-        bool IsActive { get; set; }
         string ViewName { get; set; }
-        string BindPointName { get; set; }
         void SyncTransform(long entityId, Vector3 position, Quaternion rotation, Vector3 scale);
         void ModifyVisible(bool visible, int flag);
+        void RemoveVisible(int flag);
         void DisposeView();
     }
 
@@ -58,7 +55,7 @@ namespace LccHotfix
             var theView = view as T;
             if (theView == null)
             {
-                Debug.LogError($"GetComView theView == null, newCategory={category}");
+                UnityEngine.Debug.LogWarning($"GetComView theView == null, newCategory={category}");
             }
 
             return theView;
@@ -69,9 +66,9 @@ namespace LccHotfix
             var newCategory = newView.Category;
             if (RemoveView(newCategory))
             {
-                Debug.LogWarning($"AddView existView, newCategory={newCategory}");
+                UnityEngine.Debug.LogWarning($"AddView existView, newCategory={newCategory}");
             }
-            
+
             mViewDict.Add(newView.Category, newView);
             if (!silently)
             {

@@ -6,18 +6,19 @@ namespace LccHotfix
 {
     public class SysSyncViewTransform : ReactiveSystem<LogicEntity>
     {
-        public SysSyncViewTransform(LogicWorld logicWorld)
-            : base(logicWorld)
+        public SysSyncViewTransform(LogicWorld logicWorld) : base(logicWorld)
         {
         }
 
         protected override ICollector<LogicEntity> GetTrigger(IContext<LogicEntity> context)
         {
             return new Collector<LogicEntity>(
-                new IGroup<LogicEntity>[] {
+                new IGroup<LogicEntity>[]
+                {
                     context.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComView, LogicComponentsLookup.ComTransform))
                 },
-                new GroupEvent[] {
+                new GroupEvent[]
+                {
                     GroupEvent.AddedOrRemoved,
                 }
             );
@@ -36,15 +37,16 @@ namespace LccHotfix
                 var rotation = entity.rotation;
                 var scale = entity.scale;
 
-            
+
                 if (float.IsNaN(position.x))
                 {
-                    Debug.LogError($"SysSyncViewTransform: entityID={entity.ID} position X is NaN");
+                    UnityEngine.Debug.LogWarning($"SysSyncViewTransform: entityID={entity.ID} position X is NaN");
                     continue;
                 }
+
                 if (float.IsNaN(position.z))
                 {
-                    Debug.LogError($"SysSyncViewTransform: entityID={entity.ID} position Z is NaN");
+                    UnityEngine.Debug.LogWarning($"SysSyncViewTransform: entityID={entity.ID} position Z is NaN");
                     continue;
                 }
 

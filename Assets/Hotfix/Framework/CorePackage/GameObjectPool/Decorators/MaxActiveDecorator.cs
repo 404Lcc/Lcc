@@ -1,5 +1,3 @@
-﻿using System.Collections.Generic;
-
 namespace LccHotfix
 {
     /// <summary>
@@ -8,13 +6,13 @@ namespace LccHotfix
     /// </summary>
     public class MaxActiveDecorator : GameObjectPoolDecorator
     {
-        private LinkedList<GameObjectPoolObject> _activeList = new LinkedList<GameObjectPoolObject>();
+        private System.Collections.Generic.LinkedList<GameObjectObject> _activeList = new System.Collections.Generic.LinkedList<GameObjectObject>();
 
         public MaxActiveDecorator(IGameObjectPool pool) : base(pool)
         {
         }
 
-        public override GameObjectPoolObject Get()
+        public override GameObjectObject Get()
         {
             //这里的实现逻辑是先强制回收第一个,再取
             if (_activeList.Count >= PoolSetting.maxActiveObjects)
@@ -28,10 +26,10 @@ namespace LccHotfix
             return target;
         }
 
-        public override void Release(GameObjectPoolObject poolObject)
+        public override void Release(GameObjectObject obj)
         {
-            _activeList.Remove(poolObject);
-            base.Release(poolObject);
+            _activeList.Remove(obj);
+            base.Release(obj);
         }
     }
 }

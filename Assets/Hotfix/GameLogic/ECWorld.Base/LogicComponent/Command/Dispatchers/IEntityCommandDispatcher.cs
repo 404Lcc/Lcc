@@ -5,5 +5,4 @@ namespace LccHotfix
         void BindOwner(LogicEntity owner);
         void UnBindOwner();
     }
-
 }

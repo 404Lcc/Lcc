@@ -4,7 +4,7 @@ namespace LccHotfix
     {
         bool HandleEntityCommand(LogicEntity entity, EntityCommand cmd);
     }
-    
+
     public static partial class EntityCmdType
     {
         public const int Op_None = 0;
@@ -15,7 +15,5 @@ namespace LccHotfix
     {
         public int CmdType { get; set; }
         public long EntityID { get; set; }
-        
     }
 }
-

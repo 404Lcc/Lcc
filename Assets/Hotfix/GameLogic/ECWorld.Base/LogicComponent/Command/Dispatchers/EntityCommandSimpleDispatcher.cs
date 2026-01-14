@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Entitas;
 
 namespace LccHotfix
@@ -16,6 +15,7 @@ namespace LccHotfix
             {
                 OnHandleCommand(entity, cmd);
             }
+
             return true;
         }
 
@@ -29,6 +29,7 @@ namespace LccHotfix
                     OnHandleCommand += commandHandler.HandleEntityCommand;
                 }
             }
+
             owner.OnComponentAdded += _onComponentAdded;
             owner.OnComponentRemoved += _onComponentRemoved;
         }
@@ -48,6 +49,7 @@ namespace LccHotfix
                 OnHandleCommand += commandHandler.HandleEntityCommand;
             }
         }
+
         private void _onComponentRemoved(IEntity entity, int index, IComponent component)
         {
             if (component is IEntityCommandHandler commandHandler)

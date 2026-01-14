@@ -2,14 +2,9 @@ using Entitas;
 using System.Collections;
 using System.Collections.Generic;
 
-
 namespace LccHotfix
 {
-    //////////////////////////////////////////////////////////////////////////
-    /*
-        SysCoroutine 可以分成多个世界： 比如 Meta、Logic，
-    */
-
+    //SysCoroutine 可以分成多个世界： 比如 Meta、Logic
     public class SysCoroutine_Meta : IExecuteSystem
     {
         private readonly ECWorlds mECWorlds;
@@ -48,7 +43,6 @@ namespace LccHotfix
         }
     }
 
-    //////////////////////////////////////////////////////////////////////////
     //MetaWorld 和 LogicWorld 复用的系统
     public class CoroutineMapExecute<TEntity> where TEntity : class, Entitas.IEntity, new()
     {

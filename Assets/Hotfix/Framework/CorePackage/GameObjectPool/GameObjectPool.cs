@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LccHotfix
@@ -11,10 +11,10 @@ namespace LccHotfix
         int Count { get; }
 
         void Update();
-        GameObjectPoolObject Get();
-        void Release(GameObjectPoolObject poolObject);
+        GameObjectObject Get();
+        void Release(GameObjectObject obj);
         void ReleaseAll();
-        GameObjectPoolObject ForceSpawm();
+        GameObjectObject ForceSpawm();
         void ForceRelease();
     }
 
@@ -23,7 +23,7 @@ namespace LccHotfix
         private GameObject _original;
         private GameObject _root;
         private GameObjectPoolSetting _poolSetting;
-        private Stack<GameObjectPoolObject> _cachedStack;
+        private Stack<GameObjectObject> _cachedStack;
 
         public GameObject Root => _root;
         public GameObjectPoolSetting PoolSetting => _poolSetting;
@@ -32,40 +32,40 @@ namespace LccHotfix
 
         public GameObjectPool(GameObject original, GameObject root, GameObjectPoolSetting poolSetting, string location)
         {
-            Debug.Assert(original != null);
+            UnityEngine.Debug.Assert(original != null);
             _original = original;
             _root = root;
             _poolSetting = poolSetting;
             Name = location;
-            _cachedStack = new Stack<GameObjectPoolObject>();
+            _cachedStack = new Stack<GameObjectObject>();
         }
 
-        public virtual GameObjectPoolObject Get()
+        public virtual GameObjectObject Get()
         {
-            GameObjectPoolObject poolObject = null;
+            GameObjectObject obj = null;
             if (_cachedStack.Count > 0)
             {
-                poolObject = _cachedStack.Pop();
-                poolObject.GameObject.transform.SetParent(null);
-                poolObject.GameObject.SetActive(true);
+                obj = _cachedStack.Pop();
+                obj.GameObject.transform.SetParent(null);
+                obj.GameObject.SetActive(true);
 
-                poolObject.OnReset();
-                poolObject.Pool = this;
+                obj.OnReset();
+                obj.Pool = this;
             }
             else
             {
-                poolObject = ForceSpawm();
+                obj = ForceSpawm();
             }
 
-            return poolObject;
+            return obj;
         }
 
-        public void Release(GameObjectPoolObject poolObject)
+        public void Release(GameObjectObject obj)
         {
-            if (poolObject != null)
+            if (obj != null)
             {
-                poolObject.GameObject.SetActive(false);
-                _cachedStack.Push(poolObject);
+                obj.GameObject.SetActive(false);
+                _cachedStack.Push(obj);
             }
         }
 
@@ -83,17 +83,17 @@ namespace LccHotfix
         {
         }
 
-        public GameObjectPoolObject ForceSpawm()
+        public GameObjectObject ForceSpawm()
         {
-            var obj = Object.Instantiate(_original.gameObject, _root.transform);
-            var poolObject = new GameObjectPoolObject(obj);
-            poolObject.GameObject.name = Name;
-            poolObject.GameObject.transform.SetParent(null);
-            poolObject.GameObject.SetActive(true);
+            var go = Object.Instantiate(_original.gameObject, _root.transform);
+            var obj = new GameObjectObject(go);
+            obj.GameObject.name = Name;
+            obj.GameObject.transform.SetParent(null);
+            obj.GameObject.SetActive(true);
 
-            poolObject.OnReset();
-            poolObject.Pool = this;
-            return poolObject;
+            obj.OnReset();
+            obj.Pool = this;
+            return obj;
         }
 
         public void ForceRelease()

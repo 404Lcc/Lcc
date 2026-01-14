@@ -87,7 +87,6 @@ namespace LccHotfix
         }
     }
 
-
     public static partial class LogicComponentsLookup
     {
         private static ComponentTypeIndex _ComCommandReceiverIndex = new(typeof(CommandReceiverComponent));

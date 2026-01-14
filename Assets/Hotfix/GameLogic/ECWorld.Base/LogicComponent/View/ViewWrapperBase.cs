@@ -1,28 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace LccHotfix
 {
-    //////////////////////////////////////////////////////////////////////////
     // As: EViewCategory：View分类, 由项目定义维度和内容
     public static class EViewCategory
     {
         public const int MainGameObject = 0; // 主场景GameObject对象
         public const int MainUI = 1; // 主UI，Entity的主要表现是UI
         public const int MainFx = 2; // 主特效，主要表现是特效
-        public const int Hp = 3;     // 血条
+        public const int Hp = 3; // 血条
         public const int AddedGameObject = 4; // 附加的GameObject
+        public const int RecordSubObjrct = 5; // 只为了单独入池
+        public const int RadarIcon = 6; // 雷达图标
 
         // 下面属于附属逻辑，生命周期不跟随Main，可以随时增加或者删除
-        public const int Range = 100;  // 范围
+        public const int Range = 100; // 范围
     }
 
-    //////////////////////////////////////////////////////////////////////////
     /// 测试最简 View
     public class SimpleGameObjectView : IViewWrapper
     {
-        protected GameObjectPoolAsyncOperation m_gameObject;
+        protected GameObjectHandle m_gameObject;
 
         public GameObject GameObject
         {
@@ -36,20 +35,16 @@ namespace LccHotfix
             get { return m_transform; }
         }
 
-        public SimpleGameObjectView(GameObjectPoolAsyncOperation gameObject, int category)
+        public SimpleGameObjectView(GameObjectHandle gameObject, int category)
         {
             m_gameObject = gameObject;
             m_transform = m_gameObject.Transform;
             Category = category;
-            IsActive = true;
             IsVisible = new MultChangeBool_AND(true);
         }
 
-        //////////////////////////////////////////////////////////////////////////
-        /// IViewWrapper
         public int Category { get; private set; }
 
-        public bool IsActive { get; set; }
         public string ViewName { get; set; }
         public string BindPointName { get; set; }
 
@@ -57,15 +52,15 @@ namespace LccHotfix
 
         public MultChangeBool_AND IsVisible { get; set; }
 
-        private Dictionary<string, Transform> mBpName2Transform = 
-            new Dictionary<string, Transform>();
+        private Dictionary<string, Transform> mBpName2Transform = new Dictionary<string, Transform>();
 
         public virtual void DisposeView()
         {
             if (m_gameObject == null)
             {
-                Debug.LogError($"DisposeView m_gameObject == null: ViewName={ViewName}");
+                UnityEngine.Debug.LogError($"DisposeView m_gameObject == null: ViewName={ViewName}");
             }
+
             m_gameObject?.Release(ref m_gameObject);
             m_gameObject = null;
             mBpName2Transform.Clear();
@@ -77,7 +72,7 @@ namespace LccHotfix
             m_transform.rotation = rotation;
             m_transform.localScale = scale;
         }
-        
+
         public Transform GetBindPoint(string bpName)
         {
             if (mBpName2Transform.TryGetValue(bpName, out var value))
@@ -114,9 +109,8 @@ namespace LccHotfix
     public class MainUIView : IViewWrapper
     {
         public string UIName;
-        
+
         public int Category { get; }
-        public bool IsActive { get; set; }
         public string ViewName { get; set; }
         public string BindPointName { get; set; }
 
@@ -124,7 +118,6 @@ namespace LccHotfix
         {
             UIName = uiName;
             Category = category;
-            IsActive = true;
         }
 
         public void SyncTransform(long entityId, Vector3 position, Quaternion rotation, Vector3 scale)
@@ -133,12 +126,17 @@ namespace LccHotfix
 
         public void ModifyVisible(bool visible, int flag)
         {
-            
+
+        }
+
+        public void RemoveVisible(int flag)
+        {
+
         }
 
         public void HideView()
         {
-            
+
         }
 
         public void DisposeView()

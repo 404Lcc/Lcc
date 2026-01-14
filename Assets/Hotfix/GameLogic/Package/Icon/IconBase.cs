@@ -9,23 +9,22 @@ namespace LccHotfix
         private float _size;
         private object[] _args;
 
-        private GameObjectPoolAsyncOperation _asyncOperation;
+        private GameObjectHandle _handle;
 
-        public GameObject GameObject => _asyncOperation.GameObject;
-        public Transform Transform => _asyncOperation.Transform;
-        public bool IsDone => _asyncOperation.IsDone;
+        public GameObject GameObject => _handle.GameObject;
+        public Transform Transform => _handle.Transform;
+        public bool IsDone => _handle.IsDone;
 
         public void InitIcon(Transform parent, float size)
         {
             this._parent = parent;
             _size = size;
 
-            _asyncOperation = Main.GameObjectPoolService.GetObjectAsync(GetType().Name, OnComplete);
+            _handle = Main.GameObjectPoolService.GetObjectAsync(GetType().Name, OnComplete);
         }
 
-        private void OnComplete(GameObjectPoolAsyncOperation obj)
+        private void OnComplete(GameObjectHandle obj)
         {
-            _asyncOperation = obj;
             ClientTools.ResetTransform(Transform, _parent);
             ClientTools.ResetRectTransform(Transform as RectTransform);
             SetSize(_size);
@@ -47,7 +46,7 @@ namespace LccHotfix
             }
 
             _args = null;
-            _asyncOperation.Release(ref _asyncOperation);
+            _handle.Release(ref _handle);
         }
 
         /// <summary>
@@ -104,7 +103,7 @@ namespace LccHotfix
 
         public void SetSize(float size)
         {
-            if (_asyncOperation == null || !_asyncOperation.IsDone)
+            if (_handle == null || !_handle.IsDone)
             {
                 return;
             }

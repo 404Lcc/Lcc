@@ -1,4 +1,3 @@
-
 using Entitas;
 using System.Collections.Generic;
 
@@ -6,12 +5,11 @@ namespace LccHotfix
 {
     public sealed class SysCommandReceive : ReactiveSystem<LogicEntity>
     {
-        private LogicWorld m_world;
+        private ECWorlds _world;
 
-        public SysCommandReceive(LogicWorld world)
-            : base(world)
+        public SysCommandReceive(ECWorlds world) : base(world.LogicWorld)
         {
-            m_world = world;
+            _world = world;
         }
 
         protected override ICollector<LogicEntity> GetTrigger(IContext<LogicEntity> context)
@@ -31,6 +29,5 @@ namespace LccHotfix
                 e.comCommandReceiver.Dispatch();
             }
         }
-
     }
 }

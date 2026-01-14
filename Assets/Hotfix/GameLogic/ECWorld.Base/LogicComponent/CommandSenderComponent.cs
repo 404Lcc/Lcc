@@ -1,4 +1,3 @@
-using Entitas;
 using System.Collections.Generic;
 
 namespace LccHotfix
@@ -19,7 +18,7 @@ namespace LccHotfix
         {
             m_preHandler = preHandler;
         }
-        
+
         //预处理命令
         //常见的处理有：服务器确认前 先做预测性表现、RTS低级指令转高级指令、连续指令输入型出招表
         public void PreHandleCommand()
@@ -72,7 +71,6 @@ namespace LccHotfix
             ReplaceComponent(index, comCommandSender);
         }
     }
-
 
     public static partial class LogicComponentsLookup
     {

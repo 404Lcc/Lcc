@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace LccHotfix
 {
-    public class GameObjectPoolObject
+    public class GameObjectObject
     {
         private IGameObjectPool _pool;
         private GameObject _gameObject;
@@ -16,12 +16,12 @@ namespace LccHotfix
         public GameObject GameObject => _gameObject;
         public Transform Transform => GameObject.transform;
 
-        public GameObjectPoolObject(GameObject gameObject)
+        public GameObjectObject(GameObject gameObject)
         {
             _gameObject = gameObject;
         }
 
-        public void Release(ref GameObjectPoolObject obj)
+        public void Release(ref GameObjectObject obj)
         {
             _pool.Release(this);
             obj = null;
@@ -29,6 +29,7 @@ namespace LccHotfix
 
         public void OnReset()
         {
+            Transform.position = new Vector3(30000, 0, 0);
         }
     }
 }

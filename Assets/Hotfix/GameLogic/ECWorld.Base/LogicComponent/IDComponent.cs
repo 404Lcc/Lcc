@@ -1,6 +1,3 @@
-using Entitas;
-using UnityEngine;
-
 namespace LccHotfix
 {
     public class IDComponent : LogicComponent
@@ -23,7 +20,7 @@ namespace LccHotfix
             var index = LogicComponentsLookup.ComID;
             if (index < 0)
             {
-                Debug.LogError("AddComID 未初始化的组件索引 LogicComponentsLookup.ComID");
+                UnityEngine.Debug.LogError("AddComID 未初始化的组件索引 LogicComponentsLookup.ComID");
                 return;
             }
             var component = (IDComponent)CreateComponent(index, typeof(IDComponent));

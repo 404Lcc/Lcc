@@ -34,7 +34,6 @@ namespace LccHotfix
         }
     }
 
-
     public static partial class LogicComponentsLookup
     {
         private static ComponentTypeIndex _ComOwnerEntityIndex = new(typeof(OwnerEntityComponent));

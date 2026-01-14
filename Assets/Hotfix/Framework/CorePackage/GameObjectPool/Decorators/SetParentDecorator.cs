@@ -1,4 +1,4 @@
-﻿namespace LccHotfix
+namespace LccHotfix
 {
     public class SetParentDecorator : GameObjectPoolDecorator
     {
@@ -7,12 +7,12 @@
 
         }
 
-        public override void Release(GameObjectPoolObject poolObject)
+        public override void Release(GameObjectObject obj)
         {
-            base.Release(poolObject);
-            if (poolObject != null)
+            base.Release(obj);
+            if (obj != null)
             {
-                poolObject.GameObject.transform.SetParent(Root.transform);
+                obj.GameObject.transform.SetParent(Root.transform);
             }
         }
     }

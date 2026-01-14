@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace LccHotfix
 {
@@ -13,7 +13,7 @@ namespace LccHotfix
         {
         }
 
-        public override GameObjectPoolObject Get()
+        public override GameObjectObject Get()
         {
             _lastAutoReleaseTime = Time.unscaledTime;
             return base.Get();
