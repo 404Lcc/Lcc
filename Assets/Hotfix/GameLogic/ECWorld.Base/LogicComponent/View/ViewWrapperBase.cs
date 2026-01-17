@@ -13,6 +13,7 @@ namespace LccHotfix
         public const int AddedGameObject = 4; // 附加的GameObject
         public const int RecordSubObjrct = 5; // 只为了单独入池
         public const int RadarIcon = 6; // 雷达图标
+        public const int DataUI = 7;    // 数据层UI
 
         // 下面属于附属逻辑，生命周期不跟随Main，可以随时增加或者删除
         public const int Range = 100; // 范围

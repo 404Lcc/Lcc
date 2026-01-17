@@ -2,12 +2,14 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public struct ViewData
+    public struct ViewLoaderData
     {
         public int Category;
         public string ObjName;
         public string BindPointName;
         public bool ClearFx;
+        public System.Type CategoryType;
+        public List<ViewLoaderData> SubViewList;
     }
 
     /*  ViewLoaderComponent: View资源加载组件
@@ -18,7 +20,7 @@ namespace LccHotfix
     */
     public class ViewLoaderComponent : LogicComponent
     {
-        public List<ViewData> ViewDataList { get; protected set; } = new();
+        public List<ViewLoaderData> ViewDataList { get; protected set; } = new();
 
         public override void DisposeOnRemove()
         {
@@ -26,9 +28,9 @@ namespace LccHotfix
             ViewDataList.Clear();
         }
 
-        public void AddData(ViewData data)
+        public void AddData(ViewLoaderData loaderData)
         {
-            ViewDataList.Add(data);
+            ViewDataList.Add(loaderData);
         }
     }
 
@@ -44,20 +46,20 @@ namespace LccHotfix
             get { return HasComponent(LogicComponentsLookup.ComViewLoader); }
         }
 
-        public void AddComViewLoader(ViewData data)
+        public void AddComViewLoader(ViewLoaderData loaderData)
         {
             var index = LogicComponentsLookup.ComViewLoader;
             if (!hasComViewLoader)
             {
                 var component = (ViewLoaderComponent)CreateComponent(index, typeof(ViewLoaderComponent));
                 component.ViewDataList.Clear();
-                component.AddData(data);
+                component.AddData(loaderData);
                 AddComponent(index, component);
             }
             else
             {
                 var component = (ViewLoaderComponent)GetComponent(index);
-                component.AddData(data);
+                component.AddData(loaderData);
                 ReplaceComponent(index, component);
             }
         }
@@ -70,14 +72,14 @@ namespace LccHotfix
             }
         }
 
-        public void ChangeViewLoad(ViewData data)
+        public void ChangeViewLoad(ViewLoaderData loaderData)
         {
             var index = LogicComponentsLookup.ComViewLoader;
             if (!hasComViewLoader)
             {
                 var component = (ViewLoaderComponent)CreateComponent(index, typeof(ViewLoaderComponent));
                 component.ViewDataList.Clear();
-                component.AddData(data);
+                component.AddData(loaderData);
                 AddComponent(index, component);
             }
             else
@@ -86,17 +88,17 @@ namespace LccHotfix
                 bool finded = false;
                 for (int i = 0; i < component.ViewDataList.Count; i++)
                 {
-                    if (component.ViewDataList[i].Category == data.Category)
+                    if (component.ViewDataList[i].Category == loaderData.Category)
                     {
                         finded = true;
-                        component.ViewDataList[i] = data;
+                        component.ViewDataList[i] = loaderData;
                         break;
                     }
                 }
 
                 if (!finded)
                 {
-                    component.AddData(data);
+                    component.AddData(loaderData);
                 }
 
                 ReplaceComponent(index, component);

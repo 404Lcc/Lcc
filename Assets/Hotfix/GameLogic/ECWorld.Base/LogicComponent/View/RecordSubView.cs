@@ -8,10 +8,10 @@ namespace LccHotfix
         public int Category { get; set; }
         public string ViewName { get; set; }
 
-        public RecordSubView(GameObjectHandle poolobj)
+        public RecordSubView(GameObjectHandle poolobj, int category) //EViewCategory.AddedGameObject
         {
             _poolobj = poolobj;
-            Category = EViewCategory.AddedGameObject;
+            Category = category;
         }
 
         public void SyncTransform(long entityId, Vector3 position, Quaternion rotation, Vector3 scale)
