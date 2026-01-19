@@ -54,14 +54,13 @@ namespace LccHotfix
             BadgeService = Current.AddModule<BadgeManager>();
             CustomLogicService = Current.AddModule<CustomLogicManager>();
             CustomLogicService.SetRegister(new LogicCfgContainerRegister());
+            GuideService = Current.AddModule<GuideManager>();
 
             ConfigService = Current.AddModule<ConfigManager>();
             PlatformService = Current.AddModule<PlatformManager>();
             IconService = Current.AddModule<IconManager>();
             HotfixBridgeService = Current.AddModule<HotfixBridge>();
             LanguageService = Current.AddModule<LanguageManager>();
-            // WorldService = Current.AddModule<WorldManager>();
-            // BTScriptService = Current.AddModule<BTScriptManager>();
             FishNetService = Current.AddModule<FishNetManager>();
             FishNetService.SetHelper(new SteamFishNetHelper());
             FishNetService.SetServerMessageDispatcherHelper(new FishNetServerPBMessageDispatcherHelper());
@@ -84,12 +83,27 @@ namespace LccHotfix
             SettingService.Init();
             AudioService.Init();
             VibrationService.Init();
+            var text = AssetService.LoadAssetAsync<TextAsset>("ForceGuideConfig");
+            yield return text;
+            GuideService.LoadForceGuideConfig(LccModel.JsonUtility.ToObject<GuideConfigList>((text.AssetHandle().AssetObject as TextAsset).text));
+            text = AssetService.LoadAssetAsync<TextAsset>("ForceGuideSeq");
+            yield return text;
+            GuideService.LoadForceGuideSeqTriggerConfig(LccModel.JsonUtility.ToObject<GuideSeqConfig>((text.AssetHandle().AssetObject as TextAsset).text));
+            text = AssetService.LoadAssetAsync<TextAsset>("NoForceGuideConfig");
+            yield return text;
+            GuideService.LoadNoForceGuideConfig(LccModel.JsonUtility.ToObject<GuideConfigList>((text.AssetHandle().AssetObject as TextAsset).text));
+            text = AssetService.LoadAssetAsync<TextAsset>("NoForceGuideSeq");
+            yield return text;
+            GuideService.LoadNoForceGuideSeqTriggerConfig(LccModel.JsonUtility.ToObject<GuideSeqConfig>((text.AssetHandle().AssetObject as TextAsset).text));
+            GuideService.InitGuide();
+            GuideService.InitGuideTrigger();
 
             ConfigService.Init();
             while (!ConfigService.Initialized)
             {
                 yield return null;
             }
+
             HotfixBridgeService.Init();
             LanguageService.Init();
             var uiRootAsset = AssetService.LoadAssetAsync<GameObject>("UIRoot");
@@ -149,8 +163,6 @@ namespace LccHotfix
         public static IIconService IconService { get; set; }
         public static IHotfixBridgeService HotfixBridgeService { get; set; }
         public static ILanguageService LanguageService { get; set; }
-        // public static IWorldService WorldService { get; set; }
-        // public static IBTScriptService BTScriptService { get; set; }
         public static IFishNetService FishNetService { get; set; }
         public static IMirrorService MirrorService { get; set; }
         public static ISteamService SteamService { get; set; }
