@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Object = System.Object;
 
 namespace LccHotfix
@@ -70,7 +69,14 @@ namespace LccHotfix
                 _curNode.OnExit();
             }
 
-            _data.IsRunning = false;
+            _blackboard.Clear();
+            _nodes.Clear();
+
+            _data.Reset();
+
+            _curNode = null;
+            _preNode = null;
+            _data = null;
         }
 
         /// <summary>

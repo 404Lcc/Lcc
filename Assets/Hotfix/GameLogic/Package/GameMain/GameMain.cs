@@ -83,18 +83,18 @@ namespace LccHotfix
             SettingService.Init();
             AudioService.Init();
             VibrationService.Init();
-            var text = AssetService.LoadAssetAsync<TextAsset>("ForceGuideConfig");
+            var text = AssetService.LoadAssetAsync<TextAsset>("ForceGuideConfigList");
             yield return text;
-            GuideService.LoadForceGuideConfig(LccModel.JsonUtility.ToObject<GuideConfigList>((text.AssetHandle().AssetObject as TextAsset).text));
-            text = AssetService.LoadAssetAsync<TextAsset>("ForceGuideSeq");
+            GuideService.LoadForceGuideConfigList(LccModel.JsonUtility.ToObject<GuideConfigList>((text.AssetHandle().AssetObject as TextAsset).text));
+            text = AssetService.LoadAssetAsync<TextAsset>("ForceGuideTriggerConfigList");
             yield return text;
-            GuideService.LoadForceGuideSeqTriggerConfig(LccModel.JsonUtility.ToObject<GuideSeqConfig>((text.AssetHandle().AssetObject as TextAsset).text));
-            text = AssetService.LoadAssetAsync<TextAsset>("NoForceGuideConfig");
+            GuideService.LoadForceGuideTriggerConfigList(LccModel.JsonUtility.ToObject<GuideTriggerConfigList>((text.AssetHandle().AssetObject as TextAsset).text));
+            text = AssetService.LoadAssetAsync<TextAsset>("NoForceGuideConfigList");
             yield return text;
-            GuideService.LoadNoForceGuideConfig(LccModel.JsonUtility.ToObject<GuideConfigList>((text.AssetHandle().AssetObject as TextAsset).text));
-            text = AssetService.LoadAssetAsync<TextAsset>("NoForceGuideSeq");
+            GuideService.LoadNoForceGuideConfigList(LccModel.JsonUtility.ToObject<GuideConfigList>((text.AssetHandle().AssetObject as TextAsset).text));
+            text = AssetService.LoadAssetAsync<TextAsset>("NoForceGuideTriggerConfigList");
             yield return text;
-            GuideService.LoadNoForceGuideSeqTriggerConfig(LccModel.JsonUtility.ToObject<GuideSeqConfig>((text.AssetHandle().AssetObject as TextAsset).text));
+            GuideService.LoadNoForceGuideTriggerConfigList(LccModel.JsonUtility.ToObject<GuideTriggerConfigList>((text.AssetHandle().AssetObject as TextAsset).text));
             GuideService.InitGuide();
             GuideService.InitGuideTrigger();
 

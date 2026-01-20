@@ -2,14 +2,15 @@ namespace LccHotfix
 {
     public interface IGuideService : IService
     {
+        void SetIsActive(bool isActive);
         void SetGuideCheckFinish(IGuideCheckFinish guideCheckFinish);
-        void LoadForceGuideConfig(GuideConfigList config);
+        void LoadForceGuideConfigList(GuideConfigList config);
 
-        void LoadForceGuideSeqTriggerConfig(GuideSeqConfig seqConfig);
+        void LoadForceGuideTriggerConfigList(GuideTriggerConfigList seqConfig);
 
-        void LoadNoForceGuideConfig(GuideConfigList config);
+        void LoadNoForceGuideConfigList(GuideConfigList config);
 
-        void LoadNoForceGuideSeqTriggerConfig(GuideSeqConfig seqConfig);
+        void LoadNoForceGuideTriggerConfigList(GuideTriggerConfigList seqConfig);
 
         void InitGuide();
 

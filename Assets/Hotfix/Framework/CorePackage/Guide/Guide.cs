@@ -9,13 +9,13 @@ namespace LccHotfix
     public class Guide
     {
         private GuideConfig _config;
-        private GuideTriggerBase _trigger;
+        private GuideTriggerCondBase _triggerCond;
 
         //逐步骤的新手引导
         private List<GuideStep> _guideStepList = new List<GuideStep>();
 
         //完成条件
-        private GuideCondBase _finishCond;
+        private GuideFinishCondBase _finishCond;
 
         private int _curIndex = -1;
         private GuideStep _curStep;
@@ -25,23 +25,21 @@ namespace LccHotfix
         public int Id => _config.id;
         public int Type => _config.type;
         public int Priority => _config.priority;
-        public GuideTriggerBase Trigger => _trigger;
+        public GuideTriggerCondBase TriggerCond => _triggerCond;
         public bool IsRunning => _isRunning;
         public bool IsFinish => _isFinish;
 
-        public Guide(GuideConfig guideCfg)
+        public Guide(GuideConfig config)
         {
-            _config = guideCfg;
-            var stateList = _config.stateList;
+            _config = config;
             _guideStepList.Clear();
-            for (int i = 0; i < stateList.Count; i++)
+            for (int i = 0; i < _config.stepList.Count; i++)
             {
-                GuideStep step = new GuideStep(this, stateList[i]);
+                GuideStep step = new GuideStep(this, _config.stepList[i]);
                 _guideStepList.Add(step);
             }
 
-            GuideCondFactory factory = new GuideCondFactory();
-            _finishCond = factory.CreateCond(this, _config.finishCond, _config.finishArgs);
+            _finishCond = GuideFinishCondFactory.CreateCond(this, _config.finishCond, _config.finishArgs);
         }
 
 
@@ -55,7 +53,7 @@ namespace LccHotfix
 
             _curStep.Update();
 
-            if (_curStep.Finish)
+            if (_curStep.IsFinish)
             {
                 //出现异常了
                 if (_curStep.IsExceptionQuit || _curStep.IsForceQuit)
@@ -82,7 +80,7 @@ namespace LccHotfix
             {
                 _curIndex = _guideStepList.Count;
 
-                if (_finishCond.Trigger())
+                if (_finishCond.IsFinish())
                 {
                     SetGuideFinish();
                 }
@@ -133,9 +131,9 @@ namespace LccHotfix
                 _curStep.Release();
             }
 
-            if (_trigger != null)
+            if (_triggerCond != null)
             {
-                _trigger.Release();
+                _triggerCond.Release();
             }
         }
 

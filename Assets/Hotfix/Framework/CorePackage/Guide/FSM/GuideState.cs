@@ -20,14 +20,14 @@ namespace LccHotfix
 
         public virtual void OnUpdate()
         {
-            if (_data.StateConfig.timeout != -1)
+            if (_data.Config.timeout != -1)
             {
                 if (_data.IsPause)
                 {
                     return;
                 }
 
-                if (_curTime >= _data.StateConfig.timeout)
+                if (_curTime >= _data.Config.timeout)
                 {
                     _data.IsTimeout = true;
                     return;

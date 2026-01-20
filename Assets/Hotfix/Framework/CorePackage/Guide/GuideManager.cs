@@ -11,14 +11,14 @@ namespace LccHotfix
     internal class GuideManager : Module, IGuideService
     {
         //原生配置数据
-        private GuideConfigList _forceGuideConfig;
-        private GuideConfigList _noForceGuideConfig;
-        private GuideSeqConfig _forceGuideSeqTriggerConfig;
-        private GuideSeqConfig _noForceGuideSeqTriggerConfig;
+        private GuideConfigList _forceGuideConfigList;
+        private GuideConfigList _noForceGuideConfigList;
+        private GuideTriggerConfigList _forceGuideTriggerConfigList;
+        private GuideTriggerConfigList _noForceGuideTriggerConfigList;
         private List<GuideTriggerConfig> _triggerConfigList = new List<GuideTriggerConfig>();
 
         //根据GuideTrigger配置生成的触发列表
-        private List<GuideTriggerBase> _guideTriggerList = new List<GuideTriggerBase>();
+        private List<GuideTriggerCondBase> _guideTriggerList = new List<GuideTriggerCondBase>();
 
         //根据配置生成引导字典 key=引导id
         private Dictionary<int, Guide> _guideDict = new Dictionary<int, Guide>();
@@ -33,29 +33,36 @@ namespace LccHotfix
         private bool HasForceGuide => _runTriggerForceGuideList.Count > 0;
         private bool HasNoForceGuide => _runTriggerNoForceGuideList.Count > 0;
 
+        //检测引导是否完成
         private IGuideCheckFinish _guideCheckFinish;
+        private bool _isActive;
+
         private AssetLoader _loader;
 
         public GuideManager()
         {
+            _isActive = false;
             _loader = new AssetLoader();
         }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
+            if (!_isActive)
+                return;
+            
             for (int i = 0; i < _guideTriggerList.Count; i++)
             {
-                if (_guideTriggerList[i].Trigger() && _runTriggerForceGuideList.Count <= 0)
+                if (_guideTriggerList[i].CheckTrigger() && _runTriggerForceGuideList.Count <= 0)
                 {
                     var guideId = _guideTriggerList[i].Config.guideId;
                     if (_guideDict.TryGetValue(guideId, out var guide))
                     {
                         switch (guide.Type)
                         {
-                            case (int)EGuideType.Force:
+                            case (int)GuideType.Force:
                                 _runTriggerForceGuideList.Add(guide);
                                 break;
-                            case (int)EGuideType.NoForce:
+                            case (int)GuideType.NoForce:
                                 _runTriggerNoForceGuideList.Add(guide);
                                 break;
                         }
@@ -69,9 +76,9 @@ namespace LccHotfix
             for (int i = 1; i < _runTriggerForceGuideList.Count; i++)
             {
                 var guide = _runTriggerForceGuideList[i];
-                if (guide.Trigger == null)
+                if (guide.TriggerCond == null)
                     continue;
-                if (guide.Trigger.Trigger())
+                if (guide.TriggerCond.CheckTrigger())
                 {
                     _guideDict.Add(guide.Id, guide);
                     _runTriggerForceGuideList.RemoveAt(i);
@@ -91,6 +98,8 @@ namespace LccHotfix
 
         internal override void Shutdown()
         {
+            _loader.Release();
+
             foreach (var guide in _guideDict)
             {
                 guide.Value.Release();
@@ -113,52 +122,57 @@ namespace LccHotfix
             _runTriggerForceGuideList.Clear();
         }
 
+        public void SetIsActive(bool isActive)
+        {
+            _isActive = isActive;
+        }
+
         public void SetGuideCheckFinish(IGuideCheckFinish guideCheckFinish)
         {
             _guideCheckFinish = guideCheckFinish;
         }
 
-        public void LoadForceGuideConfig(GuideConfigList config)
+        public void LoadForceGuideConfigList(GuideConfigList config)
         {
-            _forceGuideConfig = config;
+            _forceGuideConfigList = config;
         }
 
-        public void LoadForceGuideSeqTriggerConfig(GuideSeqConfig seqConfig)
+        public void LoadForceGuideTriggerConfigList(GuideTriggerConfigList config)
         {
-            _forceGuideSeqTriggerConfig = seqConfig;
-            _triggerConfigList.AddRange(seqConfig.triggerList);
+            _forceGuideTriggerConfigList = config;
+            _triggerConfigList.AddRange(config.triggerList);
         }
 
-        public void LoadNoForceGuideConfig(GuideConfigList config)
+        public void LoadNoForceGuideConfigList(GuideConfigList config)
         {
-            _noForceGuideConfig = config;
+            _noForceGuideConfigList = config;
         }
 
-        public void LoadNoForceGuideSeqTriggerConfig(GuideSeqConfig seqConfig)
+        public void LoadNoForceGuideTriggerConfigList(GuideTriggerConfigList config)
         {
-            _noForceGuideSeqTriggerConfig = seqConfig;
-            _triggerConfigList.AddRange(seqConfig.triggerList);
+            _noForceGuideTriggerConfigList = config;
+            _triggerConfigList.AddRange(config.triggerList);
         }
 
         public void InitGuide()
         {
             _guideDict.Clear();
 
-            if (_forceGuideConfig != null)
+            if (_forceGuideConfigList != null)
             {
-                for (int i = 0; i < _forceGuideConfig.configList.Count; i++)
+                for (int i = 0; i < _forceGuideConfigList.configList.Count; i++)
                 {
-                    Guide newGuide = new Guide(_forceGuideConfig.configList[i]);
-                    _guideDict.Add(_forceGuideConfig.configList[i].id, newGuide);
+                    Guide newGuide = new Guide(_forceGuideConfigList.configList[i]);
+                    _guideDict.Add(_forceGuideConfigList.configList[i].id, newGuide);
                 }
             }
 
-            if (_noForceGuideConfig != null)
+            if (_noForceGuideConfigList != null)
             {
-                for (int i = 0; i < _noForceGuideConfig.configList.Count; i++)
+                for (int i = 0; i < _noForceGuideConfigList.configList.Count; i++)
                 {
-                    Guide newGuide = new Guide(_noForceGuideConfig.configList[i]);
-                    _guideDict.Add(_noForceGuideConfig.configList[i].id, newGuide);
+                    Guide newGuide = new Guide(_noForceGuideConfigList.configList[i]);
+                    _guideDict.Add(_noForceGuideConfigList.configList[i].id, newGuide);
                 }
             }
         }
@@ -166,7 +180,6 @@ namespace LccHotfix
         public void InitGuideTrigger()
         {
             _guideTriggerList.Clear();
-            GuideTriggerFactory triggerFactory = new GuideTriggerFactory();
 
             for (int i = 0; i < _triggerConfigList.Count; i++)
             {
@@ -182,7 +195,7 @@ namespace LccHotfix
                     continue;
                 }
 
-                var trigger = triggerFactory.CreateTriggerByType(_triggerConfigList[i]);
+                var trigger = GuideTriggerCondFactory.CreateCond(_triggerConfigList[i]);
                 if (trigger != null)
                 {
                     _guideTriggerList.Add(trigger);

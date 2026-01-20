@@ -8,34 +8,33 @@ namespace LccHotfix
         {
             base.OnEnter();
             
-            _data.IsFsmOver = true;
+            _data.IsFsmFinish = true;
         }
     }
     
     public class GuideStep
     {
         private int _guideId;
-        private GuideStateNode _stateConfig;
-        private GuideCondBase _overCond;
+        private GuideStepConfig _config;
+        private GuideFinishCondBase _finishCond;
         private GuideFSM _fsm;
         private GuideStateData _data;
-        private bool _finish;
+        private bool _isFinish;
         public bool IsExceptionQuit => _data.IsExceptionQuit;
         public bool IsForceQuit => _data.IsForceQuit;
-        public bool Finish => _finish;
+        public bool IsFinish => _isFinish;
 
         /// <summary>
         /// 初始化
         /// </summary>
-        public GuideStep(Guide guide, GuideStateNode stateNode)
+        public GuideStep(Guide guide, GuideStepConfig config)
         {
             _guideId = guide.Id;
-            _stateConfig = stateNode;
+            _config = config;
 
-            if (!string.IsNullOrEmpty(_stateConfig.overCond))
+            if (!string.IsNullOrEmpty(config.finishCond))
             {
-                GuideCondFactory factory = new GuideCondFactory();
-                _overCond = factory.CreateCond(guide, _stateConfig.overCond, _stateConfig.overArgs);
+                _finishCond = GuideFinishCondFactory.CreateCond(guide, config.finishCond, config.finishArgs);
             }
 
             InitFSM();
@@ -43,17 +42,16 @@ namespace LccHotfix
 
         private void InitFSM()
         {
-            _data = new GuideStateData(_guideId, _stateConfig);
+            _data = new GuideStateData(_guideId, _config);
             _fsm = new GuideFSM(_data);
             _fsm.SetBlackboardValue("data", _data);
 
-            GuideStateFactory stateFactory = new GuideStateFactory();
-            var stateName = _data.StateConfig.stateName;
-            string stateType = stateFactory.CreateState(_fsm, stateName);
+            var stateName = _data.Config.stateName;
+            bool succ = GuideStateFactory.CreateState(_fsm, stateName);
 
-            if (string.IsNullOrEmpty(stateType))
+            if (!succ)
             {
-                UnityEngine.Debug.LogError("[新手引导] GuideStep为空 引导id = " + _guideId);
+                UnityEngine.Debug.LogError($"[新手引导] 引导步骤状态机初始化异常 引导id = {_guideId} 状态名 = {stateName}");
                 return;
             }
 
@@ -67,29 +65,29 @@ namespace LccHotfix
 
         public void Update()
         {
-            if (_finish)
+            if (_isFinish)
                 return;
             
-            if (_data.IsFsmOver)
+            if (_data.IsFsmFinish)
             {
                 if (_data.IsExceptionQuit || _data.IsForceQuit)
                 {
-                    _finish = true;
+                    _isFinish = true;
 
                     _data.IsExceptionQuit = false;
                     _data.IsForceQuit = false;
                     return;
                 }
 
-                if (_overCond == null)
+                if (_finishCond == null)
                 {
-                    _finish = true;
+                    _isFinish = true;
                 }
                 else
                 {
-                    if (_overCond.Trigger())
+                    if (_finishCond.IsFinish())
                     {
-                        _finish = true;
+                        _isFinish = true;
                         return;
                     }
                 }
@@ -102,7 +100,7 @@ namespace LccHotfix
         public void Reset()
         {
             _fsm.Reset();
-            _finish = false;
+            _isFinish = false;
         }
 
         public void Release()
