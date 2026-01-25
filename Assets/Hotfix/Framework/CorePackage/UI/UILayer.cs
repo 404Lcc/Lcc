@@ -8,6 +8,7 @@ public enum UILayerID
     HUD,
     Main,
     Popup,
+    Guide,
     Debug
 }
 
