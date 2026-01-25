@@ -34,10 +34,12 @@ namespace LccHotfix
     /// </summary>
     public class GuideStepConfig
     {
-        //状态机名称
-        public string stateName;
-        //状态参数
-        public List<string> stateArgs;
+        //通用状态列表
+        public List<string> generalStateList;
+        //默认状态名称
+        public string defaultStateName;
+        //默认状态参数
+        public List<string> defaultStateArgs;
         
         //超时时间
         public int timeout;

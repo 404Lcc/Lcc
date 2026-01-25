@@ -1,4 +1,22 @@
 {
   "configList": [
+    {
+      "id": 1,
+      "type": 0,
+      "stepList": [
+        {
+          "generalStateList": [
+            "HotUpdate.Framework.GuideFinishState"
+          ],
+          "defaultStateName": "HotUpdate.Framework.GuideShowForceUIState",
+          "defaultStateArgs": [
+            "UIRoot/Canvas/layer-Panel/UIMain/v_UIChapter/DownRoot/StartBtnbg/t_startBtn"
+          ],
+          "finishCond": ""
+        }
+      ],
+      "finishCond": "",
+      "priority": 1
+    }
   ]
 }

@@ -4,11 +4,13 @@ namespace LccHotfix
 {
     public class GuideState : IGuideStateNode
     {
+        protected GuideFSM _fsm;
         protected GuideStateData _data;
         private float _curTime = 0;
 
         public virtual void OnCreate(GuideFSM machine)
         {
+            _fsm = machine;
             _data = machine.GetBlackboardValue("data") as GuideStateData;
             _curTime = 0;
         }
@@ -38,11 +40,6 @@ namespace LccHotfix
         }
 
         public virtual void OnExit()
-        {
-            _curTime = 0;
-        }
-
-        public virtual void OnReset()
         {
             _curTime = 0;
         }

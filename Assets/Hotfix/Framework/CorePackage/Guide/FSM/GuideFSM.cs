@@ -10,7 +10,6 @@ namespace LccHotfix
         void OnEnter();
         void OnUpdate();
         void OnExit();
-        void OnReset();
     }
 
     public class GuideFSM
@@ -42,7 +41,6 @@ namespace LccHotfix
         public GuideFSM(GuideStateData data)
         {
             _data = data;
-            _data.IsRunning = true;
         }
 
         public void SetDefaultState(string name)
@@ -52,11 +50,11 @@ namespace LccHotfix
 
         public void Reset()
         {
-            ChangeState(_defaultState);
-            var node = TryGetNode(_defaultState);
-            if (node != null)
+            _preNode = null;
+            if (_curNode != null)
             {
-                node.OnReset();
+                _curNode.OnExit();
+                _curNode = null;
             }
 
             _data.Reset();
@@ -122,6 +120,7 @@ namespace LccHotfix
             if (string.IsNullOrEmpty(_defaultState))
                 return;
             Run(_defaultState);
+            _data.IsRunning = true;
         }
 
         /// <summary>

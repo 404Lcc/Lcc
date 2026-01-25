@@ -7,9 +7,8 @@ namespace LccHotfix
 
         public bool IsRunning { get; set; } = false;
         public bool IsTimeout { get; set; } = false;
-        public bool IsExceptionQuit { get; set; } = false;
+        public bool IsFsmException { get; set; } = false;
         public bool IsFsmFinish { get; set; } = false;
-        public bool IsForceQuit { get; set; } = false;
         public bool IsPause { get; set; } = false;
 
         public GuideStateData(int guideId, GuideStepConfig config)
@@ -22,9 +21,8 @@ namespace LccHotfix
         {
             IsRunning = false;
             IsTimeout = false;
-            IsExceptionQuit = false;
+            IsFsmException = false;
             IsFsmFinish = false;
-            IsForceQuit = false;
             IsPause = false;
         }
     }

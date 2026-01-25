@@ -35,21 +35,16 @@ namespace LccHotfix
 
         //检测引导是否完成
         private IGuideCheckFinish _guideCheckFinish;
-        private bool _isActive;
 
         private AssetLoader _loader;
 
         public GuideManager()
         {
-            _isActive = false;
             _loader = new AssetLoader();
         }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            if (!_isActive)
-                return;
-            
             for (int i = 0; i < _guideTriggerList.Count; i++)
             {
                 if (_guideTriggerList[i].CheckTrigger() && _runTriggerForceGuideList.Count <= 0)
@@ -98,33 +93,8 @@ namespace LccHotfix
 
         internal override void Shutdown()
         {
+            ResetGuide();
             _loader.Release();
-
-            foreach (var guide in _guideDict)
-            {
-                guide.Value.Release();
-            }
-
-            _guideDict.Clear();
-
-            for (int i = 0; i < _guideTriggerList.Count; i++)
-            {
-                _guideTriggerList[i].Release();
-            }
-
-            _guideTriggerList.Clear();
-
-            for (int i = 0; i < _runTriggerForceGuideList.Count; i++)
-            {
-                _runTriggerForceGuideList[i].Release();
-            }
-
-            _runTriggerForceGuideList.Clear();
-        }
-
-        public void SetIsActive(bool isActive)
-        {
-            _isActive = isActive;
         }
 
         public void SetGuideCheckFinish(IGuideCheckFinish guideCheckFinish)
@@ -154,6 +124,9 @@ namespace LccHotfix
             _triggerConfigList.AddRange(config.triggerList);
         }
 
+        /// <summary>
+        /// 初始化引导配置 账号登录完成时候初始化
+        /// </summary>
         public void InitGuide()
         {
             _guideDict.Clear();
@@ -177,6 +150,9 @@ namespace LccHotfix
             }
         }
 
+        /// <summary>
+        /// 初始化引导触发器 账号登录完成时候初始化
+        /// </summary>
         public void InitGuideTrigger()
         {
             _guideTriggerList.Clear();
@@ -213,6 +189,39 @@ namespace LccHotfix
             }).ToList();
         }
 
+        /// <summary>
+        /// 重置引导数据 账号退出时需要重置
+        /// </summary>
+        public void ResetGuide()
+        {
+            foreach (var guide in _guideDict)
+            {
+                guide.Value.Release();
+            }
+
+            _guideDict.Clear();
+
+            for (int i = 0; i < _guideTriggerList.Count; i++)
+            {
+                _guideTriggerList[i].Release();
+            }
+
+            _guideTriggerList.Clear();
+
+            for (int i = 0; i < _runTriggerForceGuideList.Count; i++)
+            {
+                _runTriggerForceGuideList[i].Release();
+            }
+
+            _runTriggerForceGuideList.Clear();
+            
+            for (int i = 0; i < _runTriggerNoForceGuideList.Count; i++)
+            {
+                _runTriggerNoForceGuideList[i].Release();
+            }
+
+            _runTriggerNoForceGuideList.Clear();
+        }
 
         /// <summary>
         /// 触发弱引导

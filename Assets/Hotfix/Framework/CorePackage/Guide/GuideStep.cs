@@ -1,17 +1,5 @@
-using UnityEngine;
-
 namespace LccHotfix
 {
-    public class GuideFinishState : GuideState
-    {
-        public override void OnEnter()
-        {
-            base.OnEnter();
-            
-            _data.IsFsmFinish = true;
-        }
-    }
-    
     public class GuideStep
     {
         private int _guideId;
@@ -19,9 +7,9 @@ namespace LccHotfix
         private GuideFinishCondBase _finishCond;
         private GuideFSM _fsm;
         private GuideStateData _data;
+        private bool _isException;
         private bool _isFinish;
-        public bool IsExceptionQuit => _data.IsExceptionQuit;
-        public bool IsForceQuit => _data.IsForceQuit;
+        public bool IsException => _isException;
         public bool IsFinish => _isFinish;
 
         /// <summary>
@@ -46,16 +34,30 @@ namespace LccHotfix
             _fsm = new GuideFSM(_data);
             _fsm.SetBlackboardValue("data", _data);
 
-            var stateName = _data.Config.stateName;
-            bool succ = GuideStateFactory.CreateState(_fsm, stateName);
+            var stateName = _data.Config.defaultStateName;
+            var node = GuideStateFactory.CreateState(stateName);
 
-            if (!succ)
+            if (node == null)
             {
-                UnityEngine.Debug.LogError($"[新手引导] 引导步骤状态机初始化异常 引导id = {_guideId} 状态名 = {stateName}");
+                UnityEngine.Debug.LogError($"[新手引导] 引导步骤状态机初始化异常 引导id = {_guideId} 默认状态名 = {stateName}");
                 return;
             }
 
-            _fsm.AddNode<GuideFinishState>();
+            _fsm.AddNode(node);
+
+            foreach (var item in _data.Config.generalStateList)
+            {
+                var generalNode = GuideStateFactory.CreateState(item);
+                if (generalNode == null)
+                {
+                    UnityEngine.Debug.LogError($"[新手引导] 引导步骤状态机初始化异常 引导id = {_guideId} 通用状态名 = {item}");
+                    continue;
+                }
+
+                _fsm.AddNode(generalNode);
+            }
+
+            _fsm.SetDefaultState(stateName);
         }
 
         public void Run()
@@ -70,18 +72,17 @@ namespace LccHotfix
             
             if (_data.IsFsmFinish)
             {
-                if (_data.IsExceptionQuit || _data.IsForceQuit)
+                if (_data.IsFsmException)
                 {
+                    _isException = true;
                     _isFinish = true;
-
-                    _data.IsExceptionQuit = false;
-                    _data.IsForceQuit = false;
                     return;
                 }
 
                 if (_finishCond == null)
                 {
                     _isFinish = true;
+                    return;
                 }
                 else
                 {
@@ -100,11 +101,14 @@ namespace LccHotfix
         public void Reset()
         {
             _fsm.Reset();
+            _isException = false;
             _isFinish = false;
         }
 
         public void Release()
         {
+            _isException = false;
+            _isFinish = false;
             _fsm.Release();
             _data.Reset();
         }

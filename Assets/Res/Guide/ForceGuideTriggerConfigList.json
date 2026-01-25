@@ -1,4 +1,10 @@
 {
   "triggerList": [
+    {
+      "guideId": 1,
+      "guideTriggerName": "TestTrigger",
+      "args": [
+      ]
+    }
   ]
 }

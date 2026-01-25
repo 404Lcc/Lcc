@@ -2,7 +2,6 @@ namespace LccHotfix
 {
     public interface IGuideService : IService
     {
-        void SetIsActive(bool isActive);
         void SetGuideCheckFinish(IGuideCheckFinish guideCheckFinish);
         void LoadForceGuideConfigList(GuideConfigList config);
 
@@ -15,5 +14,7 @@ namespace LccHotfix
         void InitGuide();
 
         void InitGuideTrigger();
+
+        void ResetGuide();
     }
 }

@@ -39,7 +39,10 @@ namespace LccHotfix
                 _guideStepList.Add(step);
             }
 
-            _finishCond = GuideFinishCondFactory.CreateCond(this, _config.finishCond, _config.finishArgs);
+            if (!string.IsNullOrEmpty(config.finishCond))
+            {
+                _finishCond = GuideFinishCondFactory.CreateCond(this, config.finishCond, config.finishArgs);
+            }
         }
 
 
@@ -56,7 +59,7 @@ namespace LccHotfix
             if (_curStep.IsFinish)
             {
                 //出现异常了
-                if (_curStep.IsExceptionQuit || _curStep.IsForceQuit)
+                if (_curStep.IsException)
                 {
                     SetGuideFinish();
                     return;
@@ -80,9 +83,16 @@ namespace LccHotfix
             {
                 _curIndex = _guideStepList.Count;
 
-                if (_finishCond.IsFinish())
+                if (_finishCond == null)
                 {
                     SetGuideFinish();
+                }
+                else
+                {
+                    if (_finishCond.IsFinish())
+                    {
+                        SetGuideFinish();
+                    }
                 }
 
                 return;
@@ -114,9 +124,9 @@ namespace LccHotfix
             {
                 return;
             }
-
-            _isRunning = false;
+            
             _curIndex = -1;
+            _isRunning = false;
             _isFinish = false;
             for (int i = 0; i < _guideStepList.Count; i++)
             {
