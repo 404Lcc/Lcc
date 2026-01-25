@@ -2,7 +2,7 @@
   "triggerList": [
     {
       "guideId": 1,
-      "guideTriggerName": "TestTrigger",
+      "guideTriggerName": "LccHotfix.TestTrigger",
       "args": [
       ]
     }

@@ -6,11 +6,11 @@
       "stepList": [
         {
           "generalStateList": [
-            "HotUpdate.Framework.GuideFinishState"
+            "LccHotfix.GuideFinishState"
           ],
-          "defaultStateName": "HotUpdate.Framework.GuideShowForceUIState",
+          "defaultStateName": "LccHotfix.GuideShowForceUIState",
           "defaultStateArgs": [
-            "UIRoot/Canvas/layer-Panel/UIMain/v_UIChapter/DownRoot/StartBtnbg/t_startBtn"
+            ""
           ],
           "finishCond": ""
         }

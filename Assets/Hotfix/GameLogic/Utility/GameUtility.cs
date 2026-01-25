@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using cfg;
+using LccModel;
 using UnityEngine;
 using Random = System.Random;
 
@@ -12,11 +12,6 @@ namespace LccHotfix
     {
         public const long CSHARP_1970_TIME = 621355968000000000; //C#中1970年的时间，用于处理java时间戳
 
-        public static void Dispatch<T>(T value) where T : struct, IValueEvent
-        {
-            Main.ValueEventService.Dispatch(value);
-        }
-
         public static void AddHandle<T>(Action<T> handle) where T : struct, IValueEvent
         {
             Main.ValueEventService.AddHandle(handle);
@@ -25,6 +20,36 @@ namespace LccHotfix
         public static void RemoveHandle<T>(Action<T> handle) where T : struct, IValueEvent
         {
             Main.ValueEventService.RemoveHandle(handle);
+        }
+
+        public static void Dispatch<T>(T value) where T : struct, IValueEvent
+        {
+            Main.ValueEventService.Dispatch(value);
+        }
+
+        public static void AddHandle<T>(Action<IEventMessage> handle) where T : IEventMessage
+        {
+            LccModel.Event.AddListener<T>(handle);
+        }
+
+        public static void RemoveHandle<T>(Action<IEventMessage> handle) where T : IEventMessage
+        {
+            LccModel.Event.RemoveListener<T>(handle);
+        }
+
+        public static void Dispatch(IEventMessage value)
+        {
+            LccModel.Event.SendMessage(value);
+        }
+
+        public static void AddHandle(Type type, Action<IEventMessage> handle)
+        {
+            LccModel.Event.AddListener(type, handle);
+        }
+
+        public static void RemoveHandle(Type type, Action<IEventMessage> handle)
+        {
+            LccModel.Event.RemoveListener(type, handle);
         }
 
         public static string GetLanguageText(string key, params object[] args)
@@ -97,19 +122,19 @@ namespace LccHotfix
             return tempValue / multiple;
         }
 
-        public static string FormatCurrency(float num)
+        public static string FormatNumber(float amount)
         {
             string[] units = new string[] { "", "K", "M", "B", "T" };
             string str = "";
 
             // 4位数之后才管理
-            if (num < 1000)
+            if (amount < 1000)
             {
-                str = num.ToString();
+                str = amount.ToString();
                 return str;
             }
 
-            float tempNum = num;
+            float tempNum = amount;
             long step = 1000;
             int unitIndex = 0;
 
@@ -122,7 +147,7 @@ namespace LccHotfix
             if (unitIndex >= units.Length)
             {
                 Debug.LogError("数字太大了，不知道后面要用什么了");
-                str = num.ToString();
+                str = amount.ToString();
             }
             else
             {
@@ -133,6 +158,39 @@ namespace LccHotfix
             }
 
             return str;
+        }
+
+        /// <summary>
+        /// 格式为最大99999999，如果不满足前面补0，例子500显示为00000500
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="zeroColorHex"></param>
+        /// <param name="numberColorHex"></param>
+        /// <returns></returns>
+        public static string FormatCurrency(long amount, string zeroColorHex = "646464", string numberColorHex = "FFFFFF")
+        {
+            long clampedAmount = (long)Mathf.Clamp(amount, 0, 99999999);
+            string formatted = clampedAmount.ToString("D8");
+
+            if (clampedAmount == 0)
+            {
+                return $"<color=#{zeroColorHex}>{formatted}</color>";
+            }
+
+            int firstNonZeroIndex = 0;
+            for (int i = 0; i < formatted.Length; i++)
+            {
+                if (formatted[i] != '0')
+                {
+                    firstNonZeroIndex = i;
+                    break;
+                }
+            }
+
+            string leadingZeros = formatted.Substring(0, firstNonZeroIndex);
+            string significantDigits = formatted.Substring(firstNonZeroIndex);
+
+            return $"<color=#{zeroColorHex}>{leadingZeros}</color><color=#{numberColorHex}>{significantDigits}</color>";
         }
 
         public static int GetWeightIndex(List<int> weight)
@@ -162,6 +220,15 @@ namespace LccHotfix
             }
 
             return 0;
+        }
+
+        public static int GetRandomIndex<T>(List<T> list)
+        {
+            if (list == null || list.Count == 0)
+                return -1;
+
+            Random random = new Random();
+            return random.Next(list.Count);
         }
 
         public static GameObjectHandle GetObj(string name, Action<GameObjectHandle> onComplete)
