@@ -13,7 +13,7 @@ namespace LccHotfix
                 return;
             }
 
-            // GameUtility.ShowForceGuide(args[0]);
+            GameUtility.ShowForceGuide(args[0]);
             GameUtility.AddHandle<EvtClickForceGuideFinish>(OnEvtClickForceGuideFinish);
         }
 

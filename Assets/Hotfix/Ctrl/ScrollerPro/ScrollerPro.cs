@@ -82,7 +82,7 @@ namespace LccHotfix
         {
             GroupBase group = scroller.GetCellView(groupPrefab) as GroupBase;
 
-            group.name = "Group " + (dataIndex * NumberOfCellsPerRow).ToString() + " to " + ((dataIndex * NumberOfCellsPerRow) + NumberOfCellsPerRow - 1).ToString();
+            group.name = "Group" + cellIndex; //(dataIndex * NumberOfCellsPerRow).ToString() + " to " + ((dataIndex * NumberOfCellsPerRow) + NumberOfCellsPerRow - 1).ToString();
             group.SetGroup(dataIndex / NumberOfCellsPerRow, dataIndex * NumberOfCellsPerRow, ((dataIndex * NumberOfCellsPerRow) + NumberOfCellsPerRow - 1));
 
             return group;

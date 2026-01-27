@@ -299,5 +299,25 @@ namespace LccHotfix
 
             return "127.0.0.1";
         }
+
+        /// <summary>
+        /// 拷贝字符串到粘贴板
+        /// </summary>
+        /// <param name="text"></param>
+        public static void CopyToClipboard(string text)
+        {
+            GUIUtility.systemCopyBuffer = text;
+        }
+
+        /// <summary>
+        /// 显示强制引导
+        /// </summary>
+        /// <param name="guidePath"></param>
+        /// <param name="type"></param>
+        /// <param name="handOffsetPos"></param>
+        public static void ShowForceGuide(string guidePath, GuideMaskType type = GuideMaskType.Rectangle, Vector2 handOffsetPos = new Vector2())
+        {
+            EvtShowForceGuide.Broadcast(guidePath, type, handOffsetPos);
+        }
     }
 }

@@ -1,20 +1,22 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public class PanerateMask : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IDragHandler
+    public class PanerateMask : MonoBehaviour, IPointerClickHandler
     {
         private List<GameObject> _targetList = new List<GameObject>();
         private List<RaycastResult> _rawRaycastList = new List<RaycastResult>();
+        private Action _clickMask;
 
         public void OnPointerClick(PointerEventData eventData)
         {
             Raycast(eventData);
         }
 
-        public void AddTarget(GameObject item, UIEventListener.VoidDelegate callback)
+        public void AddTarget(GameObject item, UIEventListener.VoidDelegate clickTarget)
         {
             if (item == null)
                 return;
@@ -22,17 +24,22 @@ namespace LccHotfix
                 return;
 
             _targetList.Add(item);
-            UIEventListener.OnClick(item).AddListener(callback);
+            UIEventListener.OnClick(item).AddListener(clickTarget);
         }
 
-        public void ClearTarget(UIEventListener.VoidDelegate callback)
+        public void ClearTarget(UIEventListener.VoidDelegate clickTarget)
         {
             foreach (var item in _targetList)
             {
-                UIEventListener.OnClick(item).RemoveListener(callback);
+                UIEventListener.OnClick(item).RemoveListener(clickTarget);
             }
 
             _targetList.Clear();
+        }
+
+        public void SetClickMask(Action clickMask)
+        {
+            _clickMask = clickMask;
         }
 
         private void Raycast(PointerEventData eventData)
@@ -44,61 +51,16 @@ namespace LccHotfix
 
             foreach (var item in _rawRaycastList)
             {
-                //Debug.Log(item.gameObject);
                 //遮罩层自身需要添加该脚本，否则会导致ExecuteEvents.Execute再次触发遮罩层自身的IPointerClickHandler导致死循环
                 if (item.gameObject.GetComponent<IgnoreEventRaycast>())
                 {
+                    _clickMask?.Invoke();
                     continue;
                 }
 
                 if (_targetList.Contains(item.gameObject))
                 {
                     ExecuteEvents.ExecuteHierarchy(item.gameObject, eventData, ExecuteEvents.pointerClickHandler);
-                }
-            }
-        }
-
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            _rawRaycastList.Clear();
-            EventSystem.current.RaycastAll(eventData, _rawRaycastList);
-            if (_targetList.Count == 0)
-                return;
-            foreach (var item in _rawRaycastList)
-            {
-                //Debug.Log(item.gameObject);
-                //遮罩层自身需要添加该脚本，否则会导致ExecuteEvents.Execute再次触发遮罩层自身的IPointerClickHandler导致死循环
-                if (item.gameObject.GetComponent<IgnoreEventRaycast>())
-                {
-                    continue;
-                }
-
-                if (_targetList.Contains(item.gameObject))
-                {
-                    ExecuteEvents.ExecuteHierarchy(item.gameObject, eventData, ExecuteEvents.pointerDownHandler);
-                    ExecuteEvents.ExecuteHierarchy(item.gameObject, eventData, ExecuteEvents.pointerUpHandler);
-                }
-            }
-        }
-
-        public void OnDrag(PointerEventData eventData)
-        {
-            _rawRaycastList.Clear();
-            EventSystem.current.RaycastAll(eventData, _rawRaycastList);
-            if (_targetList.Count == 0)
-                return;
-            foreach (var item in _rawRaycastList)
-            {
-                //Debug.Log(item.gameObject);
-                //遮罩层自身需要添加该脚本，否则会导致ExecuteEvents.Execute再次触发遮罩层自身的IPointerClickHandler导致死循环
-                if (item.gameObject.GetComponent<IgnoreEventRaycast>())
-                {
-                    continue;
-                }
-
-                if (_targetList.Contains(item.gameObject))
-                {
-                    ExecuteEvents.ExecuteHierarchy(item.gameObject, eventData, ExecuteEvents.dragHandler);
                 }
             }
         }

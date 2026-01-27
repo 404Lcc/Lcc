@@ -164,6 +164,8 @@ namespace LccHotfix
 
         internal override void Shutdown()
         {
+            CancelAll();
+
             foreach (var item in _poolDict.Values)
             {
                 item.ReleaseAll();
@@ -395,6 +397,32 @@ namespace LccHotfix
                 pool.ReleaseAll();
                 _poolDict.Remove(location);
             }
+        }
+
+        public void CancelAll()
+        {
+            //取消加载中的资源
+            Dictionary<string, List<GameObjectHandle>> tempDict = new Dictionary<string, List<GameObjectHandle>>(_loadList);
+            foreach (var item in tempDict.Values)
+            {
+                foreach (var item1 in item)
+                {
+                    var handle = item1;
+                    handle.Release(ref handle);
+                }
+            }
+
+            _loadList.Clear();
+
+            //在取消已经加载完成等待下一帧回调的
+            List<GameObjectHandle> tempList = new List<GameObjectHandle>(_completeList);
+            foreach (var item in tempList)
+            {
+                var handle = item;
+                handle.Release(ref handle);
+            }
+
+            _completeList.Clear();
         }
     }
 }

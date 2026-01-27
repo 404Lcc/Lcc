@@ -7,6 +7,7 @@ namespace LccHotfix
     {
         int Category { get; }
         string ViewName { get; set; }
+        void Init(long entityId, IViewLoader loader, IViewWrapper parent);
         void SyncTransform(long entityId, Vector3 position, Quaternion rotation, Vector3 scale);
         void ModifyVisible(bool visible, int flag);
         void RemoveVisible(int flag);

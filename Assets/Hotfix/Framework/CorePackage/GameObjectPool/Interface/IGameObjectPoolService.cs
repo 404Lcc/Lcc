@@ -19,5 +19,6 @@ namespace LccHotfix
         void CancelLoad(GameObjectHandle handle);
         void CancelComplete(GameObjectHandle handle);
         void ReleasePool(string poolName);
+        void CancelAll();
     }
 }

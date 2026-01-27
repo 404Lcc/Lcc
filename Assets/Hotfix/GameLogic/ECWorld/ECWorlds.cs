@@ -15,8 +15,6 @@ namespace LccHotfix
         protected List<IContext> _worldList = new List<IContext>();
         protected ECSystems mRootSystem;
         protected IWorldCreationInfo _creationInfo;
-        public float DeltaTime { get; private set; }
-        public float UnscaledDeltaTime { get; private set; }
 
         //逻辑世界（游戏实体）
         public LogicWorld LogicWorld { get; protected set; }
@@ -62,8 +60,6 @@ namespace LccHotfix
 
         public virtual void Update(float deltaTime, float unscaledDeltaTime)
         {
-            DeltaTime = deltaTime;
-            UnscaledDeltaTime = unscaledDeltaTime;
             if (mRootSystem != null)
             {
                 mRootSystem.Execute();

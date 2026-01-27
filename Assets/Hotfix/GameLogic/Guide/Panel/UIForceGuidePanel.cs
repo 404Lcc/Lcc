@@ -17,17 +17,15 @@ namespace LccHotfix
 
     public enum GuideStateType
     {
-        StartGuide = 0,
-        Guiding = 1,
-        GuideFinish = 2,
-        GuideClose = 3,
+        StartGuideMask = 1, //开始引导遮罩
+        GuideMaskFinish = 2, //引导遮罩完成
+        GuideFinish = 3, //引导完成
     }
 
     public class UIForceGuidePanel : UIElementBase, ICoroutine
     {
         public GameObject hand;
-        public Image maskImg;
-        public Button breakBtn;
+        public Image mask;
 
         //===参数
         public string guidePath;
@@ -35,22 +33,26 @@ namespace LccHotfix
         public Vector2 handOffsetPos;
         //===
 
-        //遮罩
+        //遮罩穿透
         public PanerateMask panerateMask;
 
         //引导的obj
         public GameObject guideObj;
 
         //引导状态
-        public GuideStateType guideState;
+        public GuideStateType guideStateType;
 
-        //初始化参数
+        //遮罩初始化参数
         public Vector4 maskParams = new Vector4(-1000, -1000, 1000, 1000);
 
         //结果
         public Vector4 maskResultParams = new Vector4(0, 0, 0, 0);
 
-        public float maskProcess;
+        //点击计数
+        public int clickMaskNum;
+
+        //是否异常
+        public bool isException;
 
         public override void OnConstruct()
         {
@@ -74,14 +76,14 @@ namespace LccHotfix
             if (guideObj == null)
                 return;
 
-            if (guideState == GuideStateType.Guiding)
+            if (guideStateType == GuideStateType.StartGuideMask)
             {
                 UpdateMask();
             }
 
-            if (guideState == GuideStateType.GuideFinish)
+            if (guideStateType == GuideStateType.GuideMaskFinish)
             {
-                HideGuide();
+                CheckGuideException();
             }
         }
 
@@ -90,6 +92,50 @@ namespace LccHotfix
             GameUtility.RemoveHandle<EvtShowForceGuide>(OnEvtShowForceGuide);
 
             return base.OnHide();
+        }
+
+        /// <summary>
+        /// 比较两个 Vector4 是否近似相等
+        /// </summary>
+        private bool Approximately(Vector4 a, Vector4 b, float epsilon = 0.01f)
+        {
+            return Mathf.Abs(a.x - b.x) < epsilon &&
+                   Mathf.Abs(a.y - b.y) < epsilon &&
+                   Mathf.Abs(a.z - b.z) < epsilon &&
+                   Mathf.Abs(a.w - b.w) < epsilon;
+        }
+
+        /// <summary>
+        /// 更新遮罩
+        /// </summary>
+        private void UpdateMask()
+        {
+            if (!Approximately(maskParams, maskResultParams))
+            {
+                maskParams = Vector4.Lerp(maskParams, maskResultParams, 0.1f);
+
+                //如果非常接近目标值，直接设置为目标值
+                if (Approximately(maskParams, maskResultParams, 0.001f))
+                {
+                    maskParams = maskResultParams;
+                }
+
+                SetMaskParam(guideMaskType, maskParams);
+            }
+            else
+            {
+                SetMaskParam(guideMaskType, maskResultParams);
+                guideStateType = GuideStateType.GuideMaskFinish;
+            }
+        }
+
+        public void CheckGuideException()
+        {
+            if (clickMaskNum >= 20 && !isException)
+            {
+                isException = true;
+                //todo
+            }
         }
 
         // 第1个参数：裁剪类型
@@ -110,13 +156,16 @@ namespace LccHotfix
             StartGuide();
         }
 
-        public void StartGuide()
+        /// <summary>
+        /// 开始引导
+        /// </summary>
+        private void StartGuide()
         {
             HideGuide();
 
-            var obj = GameObject.Find(guidePath);
+            guideObj = GameObject.Find(guidePath);
 
-            if (obj == null)
+            if (guideObj == null)
             {
                 Debug.LogError("路径未找到" + guidePath);
                 return;
@@ -132,35 +181,24 @@ namespace LccHotfix
                     break;
             }
 
-            maskResultParams = new Vector4(0, 0, 0, 0);
-            maskProcess = 0;
-
-            ShowGuide(obj);
-
             maskResultParams = GetMaskResultParams(guideMaskType, 0);
+
+            clickMaskNum = 0;
+            isException = false;
+            mask.gameObject.SetActive(true);
+            panerateMask.SetClickMask(() => { clickMaskNum++; });
+            panerateMask.AddTarget(guideObj, OnClickGuide);
             SetMaskParam(guideMaskType, new Vector4(-1000, -1000, 1000, 1000));
             SetHand(new Vector3(handOffsetPos.x, handOffsetPos.y, 0), Quaternion.identity);
-            guideState = GuideStateType.Guiding;
+            guideStateType = GuideStateType.StartGuideMask;
         }
 
-        public void ShowGuide(GameObject obj)
-        {
-            guideObj = obj;
-            maskImg.gameObject.SetActive(true);
-            panerateMask.AddTarget(guideObj, OnClickGuide);
-            guideState = GuideStateType.StartGuide;
-        }
-
-        public void HideGuide()
-        {
-            panerateMask.ClearTarget(OnClickGuide);
-            maskImg.gameObject.SetActive(false);
-            guideObj = null;
-            guideState = GuideStateType.GuideClose;
-
-            EvtClickForceGuideFinish.Broadcast();
-        }
-
+        /// <summary>
+        /// 获取遮罩结果
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="radius"></param>
+        /// <returns></returns>
         private Vector4 GetMaskResultParams(GuideMaskType type, float radius)
         {
             Vector4 res = new Vector4(0, 0, 0, 0);
@@ -195,33 +233,22 @@ namespace LccHotfix
             return res;
         }
 
-        private void UpdateMask()
-        {
-            if (maskParams != maskResultParams)
-            {
-                maskParams = Vector4.Lerp(maskParams, maskResultParams, maskProcess);
-                maskProcess += 0.5f * Time.unscaledDeltaTime;
-
-                if (maskProcess >= 1)
-                {
-                    maskProcess = 1;
-                }
-
-                SetMaskParam(guideMaskType, maskParams);
-            }
-            else
-            {
-                SetMaskParam(guideMaskType, maskResultParams);
-                guideState = GuideStateType.GuideFinish;
-            }
-        }
-
+        /// <summary>
+        /// 设置遮罩参数
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="param"></param>
         private void SetMaskParam(GuideMaskType type, Vector4 param)
         {
-            maskImg.material.SetInt("_MaskType", (int)type - 1);
-            maskImg.material.SetVector("_Origin", param);
+            mask.material.SetInt("_MaskType", (int)type - 1);
+            mask.material.SetVector("_Origin", param);
         }
 
+        /// <summary>
+        /// 设置引导手位置
+        /// </summary>
+        /// <param name="handPos"></param>
+        /// <param name="handRot"></param>
         private void SetHand(Vector3 handPos, Quaternion handRot)
         {
             RectTransform rectTrans = guideObj.GetComponent<RectTransform>();
@@ -238,6 +265,22 @@ namespace LccHotfix
             }
 
             hand.transform.localRotation = handRot;
+        }
+
+        /// <summary>
+        /// 隐藏引导
+        /// </summary>
+        private void HideGuide()
+        {
+            clickMaskNum = 0;
+            isException = false;
+            mask.gameObject.SetActive(false);
+            panerateMask.SetClickMask(null);
+            panerateMask.ClearTarget(OnClickGuide);
+            guideObj = null;
+            guideStateType = GuideStateType.GuideFinish;
+
+            EvtClickForceGuideFinish.Broadcast();
         }
 
         public void OnClickGuide(GameObject obj)

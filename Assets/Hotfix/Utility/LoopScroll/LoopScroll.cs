@@ -603,6 +603,27 @@ namespace LccHotfix
         }
 
         /// <summary>
+        /// 追加数据
+        /// </summary>
+        /// <param name="datas"></param>
+        public void Append(List<Data> datas)
+        {
+            _dataList.AddRange(datas);
+
+            for (int i = 0; i < _dataList.Count; i++)
+            {
+                if (!_sizeDict.ContainsKey(i))
+                {
+                    _sizeDict.Add(i, ItemSize);
+                }
+            }
+
+            var pos = _scrollerPro.ScrollPosition;
+            _scrollerPro.ReloadData();
+            _scrollerPro.ScrollPosition = pos;
+        }
+
+        /// <summary>
         /// 跳转
         /// </summary>
         /// <param name="startItem"></param>

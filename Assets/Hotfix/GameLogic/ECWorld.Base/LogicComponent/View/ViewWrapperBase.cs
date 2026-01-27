@@ -14,6 +14,7 @@ namespace LccHotfix
         public const int RecordSubObjrct = 5; // 只为了单独入池
         public const int RadarIcon = 6; // 雷达图标
         public const int DataUI = 7;    // 数据层UI
+        public const int MainInstance = 8;    // Instance View
 
         // 下面属于附属逻辑，生命周期不跟随Main，可以随时增加或者删除
         public const int Range = 100; // 范围
@@ -22,11 +23,11 @@ namespace LccHotfix
     /// 测试最简 View
     public class SimpleGameObjectView : IViewWrapper
     {
-        protected GameObjectHandle m_gameObject;
+        protected ObjReceiveLoaded MLoader;
 
         public GameObject GameObject
         {
-            get { return m_gameObject.GameObject; }
+            get { return MLoader.GetHandle().GameObject; }
         }
 
         protected Transform m_transform;
@@ -36,10 +37,10 @@ namespace LccHotfix
             get { return m_transform; }
         }
 
-        public SimpleGameObjectView(GameObjectHandle gameObject, int category)
+        public SimpleGameObjectView(ObjReceiveLoaded loader, int category)
         {
-            m_gameObject = gameObject;
-            m_transform = m_gameObject.Transform;
+            MLoader = loader;
+            m_transform = MLoader.GetHandle().Transform;
             Category = category;
             IsVisible = new MultChangeBool_AND(true);
         }
@@ -57,14 +58,19 @@ namespace LccHotfix
 
         public virtual void DisposeView()
         {
-            if (m_gameObject == null)
+            if (MLoader.GetHandle() == null)
             {
                 UnityEngine.Debug.LogError($"DisposeView m_gameObject == null: ViewName={ViewName}");
             }
 
-            m_gameObject?.Release(ref m_gameObject);
-            m_gameObject = null;
+            MLoader.Dispose();
+            // m_gameObject = null;
             mBpName2Transform.Clear();
+        }
+
+        public virtual void Init(long entityId, IViewLoader loader, IViewWrapper parent)
+        {
+            
         }
 
         public virtual void SyncTransform(long entityId, Vector3 position, Quaternion rotation, Vector3 scale)
@@ -91,7 +97,7 @@ namespace LccHotfix
         public void ModifyVisible(bool visible, int flag)
         {
             IsVisible.AddChange(visible, flag);
-            if (m_gameObject.IsDone)
+            if (MLoader.GetHandle().IsDone)
             {
                 GameObject.SetActive(IsVisible.Value);
             }
@@ -100,7 +106,7 @@ namespace LccHotfix
         public void RemoveVisible(int flag)
         {
             IsVisible.RemoveChange(flag);
-            if (m_gameObject.IsDone)
+            if (MLoader.GetHandle().IsDone)
             {
                 GameObject.SetActive(IsVisible.Value);
             }
@@ -119,6 +125,11 @@ namespace LccHotfix
         {
             UIName = uiName;
             Category = category;
+        }
+
+        public void Init(long entityId, IViewLoader loader, IViewWrapper parent)
+        {
+            
         }
 
         public void SyncTransform(long entityId, Vector3 position, Quaternion rotation, Vector3 scale)
