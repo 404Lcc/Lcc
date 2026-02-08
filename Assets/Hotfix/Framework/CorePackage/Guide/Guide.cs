@@ -9,6 +9,7 @@ namespace LccHotfix
     public class Guide
     {
         private GuideConfig _config;
+        private IGuideMessage _guideMessage;
         private GuideTriggerCondBase _triggerCond;
 
         //逐步骤的新手引导
@@ -29,9 +30,10 @@ namespace LccHotfix
         public bool IsRunning => _isRunning;
         public bool IsFinish => _isFinish;
 
-        public Guide(GuideConfig config)
+        public Guide(GuideConfig config, IGuideMessage guideMessage)
         {
             _config = config;
+            _guideMessage = guideMessage;
             _guideStepList.Clear();
             for (int i = 0; i < _config.stepList.Count; i++)
             {
@@ -41,10 +43,14 @@ namespace LccHotfix
 
             if (!string.IsNullOrEmpty(config.finishCond))
             {
+                if (config.finishArgs == null)
+                {
+                    config.finishArgs = new List<string>();
+                }
+
                 _finishCond = GuideFinishCondFactory.CreateCond(this, config.finishCond, config.finishArgs);
             }
         }
-
 
         /// <summary>
         /// 步骤Update
@@ -61,7 +67,7 @@ namespace LccHotfix
                 //出现异常了
                 if (_curStep.IsException)
                 {
-                    SetGuideFinish();
+                    SetGuideFinish(true);
                     return;
                 }
 
@@ -75,6 +81,10 @@ namespace LccHotfix
             {
                 _isRunning = true;
                 UnityEngine.Debug.Log("[新手引导] 开始引导步骤" + _config.id);
+                if (_guideMessage != null)
+                {
+                    _guideMessage.GuideStart(_config.id);
+                }
             }
 
             _curIndex++;
@@ -85,13 +95,13 @@ namespace LccHotfix
 
                 if (_finishCond == null)
                 {
-                    SetGuideFinish();
+                    SetGuideFinish(false);
                 }
                 else
                 {
                     if (_finishCond.IsFinish())
                     {
-                        SetGuideFinish();
+                        SetGuideFinish(false);
                     }
                 }
 
@@ -105,9 +115,13 @@ namespace LccHotfix
         /// <summary>
         /// 设置引导完成
         /// </summary>
-        private void SetGuideFinish()
+        private void SetGuideFinish(bool isException)
         {
             _isFinish = true;
+            if (_guideMessage != null)
+            {
+                _guideMessage.GuideEnd(_config.id, isException);
+            }
         }
 
         /// <summary>
@@ -115,7 +129,7 @@ namespace LccHotfix
         /// </summary>
         public void SetJumpGuide()
         {
-            SetGuideFinish();
+            SetGuideFinish(false);
         }
 
         public void Reset()
@@ -124,7 +138,7 @@ namespace LccHotfix
             {
                 return;
             }
-            
+
             _curIndex = -1;
             _isRunning = false;
             _isFinish = false;
@@ -144,6 +158,11 @@ namespace LccHotfix
             if (_triggerCond != null)
             {
                 _triggerCond.Release();
+            }
+
+            if (_finishCond != null)
+            {
+                _finishCond.Release();
             }
         }
 

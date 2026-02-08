@@ -83,6 +83,9 @@ namespace LccHotfix
             SettingService.Init();
             AudioService.Init();
             VibrationService.Init();
+            GuideService.SetGuideCheckFinish(new GuideCheckFinish());
+            GuideService.SetGuidePersistence(new GuidePersistence());
+            GuideService.SetGuideMessage(new GuideMessage());
             var text = AssetService.LoadAssetAsync<TextAsset>("ForceGuideConfigList");
             yield return text;
             GuideService.LoadForceGuideConfigList(LccModel.JsonUtility.ToObject<GuideConfigList>((text.AssetHandle().AssetObject as TextAsset).text));

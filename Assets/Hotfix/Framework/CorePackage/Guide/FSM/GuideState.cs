@@ -22,7 +22,7 @@ namespace LccHotfix
 
         public virtual void OnUpdate()
         {
-            if (_data.Config.timeout != -1)
+            if (_data.Config.timeout != 0)
             {
                 if (_data.IsPause)
                 {

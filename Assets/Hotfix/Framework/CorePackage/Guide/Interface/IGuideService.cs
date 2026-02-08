@@ -3,6 +3,8 @@ namespace LccHotfix
     public interface IGuideService : IService
     {
         void SetGuideCheckFinish(IGuideCheckFinish guideCheckFinish);
+        void SetGuidePersistence(IGuidePersistence guidePersistence);
+        void SetGuideMessage(IGuideMessage guideMessage);
         void LoadForceGuideConfigList(GuideConfigList config);
 
         void LoadForceGuideTriggerConfigList(GuideTriggerConfigList seqConfig);

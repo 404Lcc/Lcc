@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace LccHotfix
 {
     public class GuideStep
@@ -22,6 +24,11 @@ namespace LccHotfix
 
             if (!string.IsNullOrEmpty(config.finishCond))
             {
+                if (config.finishArgs == null)
+                {
+                    config.finishArgs = new List<string>();
+                }
+
                 _finishCond = GuideFinishCondFactory.CreateCond(guide, config.finishCond, config.finishArgs);
             }
 
@@ -44,6 +51,11 @@ namespace LccHotfix
             }
 
             _fsm.AddNode(node);
+
+            if (_data.Config.generalStateList == null)
+            {
+                _data.Config.generalStateList = new List<string>();
+            }
 
             foreach (var item in _data.Config.generalStateList)
             {
@@ -69,7 +81,7 @@ namespace LccHotfix
         {
             if (_isFinish)
                 return;
-            
+
             if (_data.IsFsmFinish)
             {
                 if (_data.IsFsmException)
@@ -107,6 +119,11 @@ namespace LccHotfix
 
         public void Release()
         {
+            if (_finishCond != null)
+            {
+                _finishCond.Release();
+            }
+
             _isException = false;
             _isFinish = false;
             _fsm.Release();

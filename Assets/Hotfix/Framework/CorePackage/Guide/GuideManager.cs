@@ -8,6 +8,17 @@ namespace LccHotfix
         bool CheckGuideFinish(int guideId);
     }
 
+    public interface IGuidePersistence
+    {
+        void Save(int guideId);
+    }
+
+    public interface IGuideMessage
+    {
+        void GuideStart(int id);
+        void GuideEnd(int id, bool isException);
+    }
+
     internal class GuideManager : Module, IGuideService
     {
         //原生配置数据
@@ -35,6 +46,12 @@ namespace LccHotfix
 
         //检测引导是否完成
         private IGuideCheckFinish _guideCheckFinish;
+
+        //引导持久化
+        private IGuidePersistence _guidePersistence;
+
+        //引导消息
+        private IGuideMessage _guideMessage;
 
         private AssetLoader _loader;
 
@@ -102,6 +119,16 @@ namespace LccHotfix
             _guideCheckFinish = guideCheckFinish;
         }
 
+        public void SetGuidePersistence(IGuidePersistence guidePersistence)
+        {
+            _guidePersistence = guidePersistence;
+        }
+
+        public void SetGuideMessage(IGuideMessage guideMessage)
+        {
+            _guideMessage = guideMessage;
+        }
+
         public void LoadForceGuideConfigList(GuideConfigList config)
         {
             _forceGuideConfigList = config;
@@ -135,7 +162,7 @@ namespace LccHotfix
             {
                 for (int i = 0; i < _forceGuideConfigList.configList.Count; i++)
                 {
-                    Guide newGuide = new Guide(_forceGuideConfigList.configList[i]);
+                    Guide newGuide = new Guide(_forceGuideConfigList.configList[i], _guideMessage);
                     _guideDict.Add(_forceGuideConfigList.configList[i].id, newGuide);
                 }
             }
@@ -144,7 +171,7 @@ namespace LccHotfix
             {
                 for (int i = 0; i < _noForceGuideConfigList.configList.Count; i++)
                 {
-                    Guide newGuide = new Guide(_noForceGuideConfigList.configList[i]);
+                    Guide newGuide = new Guide(_noForceGuideConfigList.configList[i], _guideMessage);
                     _guideDict.Add(_noForceGuideConfigList.configList[i].id, newGuide);
                 }
             }
@@ -214,7 +241,7 @@ namespace LccHotfix
             }
 
             _runTriggerForceGuideList.Clear();
-            
+
             for (int i = 0; i < _runTriggerNoForceGuideList.Count; i++)
             {
                 _runTriggerNoForceGuideList[i].Release();
@@ -251,6 +278,11 @@ namespace LccHotfix
             //引导完成
             if (_runTriggerNoForceGuideList[0].IsFinish)
             {
+                if (_guidePersistence != null)
+                {
+                    _guidePersistence.Save(_runTriggerNoForceGuideList[0].Id);
+                }
+
                 _runTriggerNoForceGuideList[0].Release();
                 _runTriggerNoForceGuideList.RemoveAt(0);
             }
@@ -282,6 +314,11 @@ namespace LccHotfix
             //引导完成
             if (_runTriggerForceGuideList[0].IsFinish)
             {
+                if (_guidePersistence != null)
+                {
+                    _guidePersistence.Save(_runTriggerForceGuideList[0].Id);
+                }
+
                 _runTriggerForceGuideList[0].Release();
                 _runTriggerForceGuideList.RemoveAt(0);
             }

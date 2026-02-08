@@ -43,8 +43,6 @@ namespace LccHotfix
         
         //超时时间
         public int timeout;
-        //最大点击次数
-        public int maxInvalidClickTimes;
         
         //完成条件
         public string finishCond;

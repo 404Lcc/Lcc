@@ -60,10 +60,10 @@ namespace LccHotfix
                 mAllDoneViewDict.Remove(loaderData.Category);
             }
 
-            _changeLoaderInternal(MainViewData, loaderData);
+            _changeLoaderInternal(ref MainViewData, loaderData);
         }
 
-        private void _changeLoaderInternal(IViewLoader curLoaderData, IViewLoader loaderData)
+        private void _changeLoaderInternal(ref IViewLoader curLoaderData, IViewLoader loaderData)
         {
             if (curLoaderData.Category == loaderData.Category)
             {
@@ -71,13 +71,15 @@ namespace LccHotfix
                 return;
             }
             
-            var subLoaderList = loaderData.SubLoaderList;
+            var subLoaderList = curLoaderData.SubLoaderList;
 
             if (subLoaderList != null)
             {
                 for (int i = 0; i < subLoaderList.Count; i++)
                 {
-                    _changeLoaderInternal(subLoaderList[i], loaderData);
+                    var data = subLoaderList[i];
+                    _changeLoaderInternal(ref data, loaderData);
+                    subLoaderList[i] = data;
                 }
             }
         }
@@ -316,7 +318,7 @@ namespace LccHotfix
                 var viewLoader = component.MainViewData;
                 bool finded = TryFindLoader(viewLoader, loaderData);
 
-                if (!finded)
+                if (!finded || loaderData.IsForce)
                 {
                     component.ChangeLoader(loaderData);
                 }

@@ -24,6 +24,7 @@ namespace LccHotfix
         public int Category { get; set; }
         public Type CategoryType { get; set; }
         public bool IsAsync { get; set; }
+        public bool IsForce { get; set; }
         public List<IViewLoader> SubLoaderList { get; set; }
         public bool IsPrepare { get; set; }
         public bool IsDeploy { get; set; }
