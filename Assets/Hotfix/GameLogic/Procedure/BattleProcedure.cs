@@ -1,15 +1,16 @@
-using System.Collections;
 using UnityEngine;
 
 namespace LccHotfix
 {
+    public class BattleWorldCreationInfo : IWorldCreationInfo
+    {
+
+    }
+
     [Procedure]
     public class BattleProcedure : LoadProcedureHandler, ICoroutine
     {
-        public GameObjectHandle handle;
-
-        public Camera currentCamera;
-        public GameObject Map => handle.GameObject;
+        private ECGameWorld _world;
 
         public BattleProcedure()
         {
@@ -24,45 +25,8 @@ namespace LccHotfix
             //进入
             Log.Debug("进入Battle");
 
-            handle = Main.GameObjectPoolService.GetObjectAsync("Map", (x) =>
-            {
-                SetBattleCamera();
-
-                Main.UIService.ShowElement(UIPanelDefine.UIBattlePanel);
-                Main.UIService.ShowElement(UIPanelDefine.UIHeadbarPanel);
-
-                var mod = GameUtility.GetModel<ModPlayer>();
-
-
-                this.StartCoroutine(LoadProcedureCoroutine());
-
-            });
-
-        }
-
-        // 初始化显示
-        public IEnumerator LoadProcedureCoroutine()
-        {
-            yield return new WaitForSeconds(1f);
-
-            yield return null;
-
-            this.StartCoroutine(LevelStartWaiting());
-        }
-
-        // 开启流程后屏蔽操作，等待0.5秒钟弹出弹窗
-        IEnumerator LevelStartWaiting()
-        {
-            yield return new WaitForSecondsRealtime(1f);
-
+            _world = ECGameWorld.CreateWorld(new BattleWorldCreationInfo());
             ProcedureLoadEndHandler();
-        }
-
-        public void SetBattleCamera()
-        {
-            currentCamera = Map.transform.Find("Camera").GetComponent<Camera>();
-            Main.CameraService.CurrentCamera = currentCamera;
-            Main.CameraService.AddOverlayCamera(currentCamera);
         }
 
         public override void Tick()
@@ -73,6 +37,8 @@ namespace LccHotfix
             {
                 return;
             }
+
+            _world?.Update(Time.deltaTime, Time.unscaledDeltaTime);
         }
 
         public override void LateUpdate()
@@ -83,16 +49,15 @@ namespace LccHotfix
             {
                 return;
             }
+
+            _world?.LateUpdate();
         }
 
         public override void ProcedureExitHandler()
         {
             base.ProcedureExitHandler();
 
-            handle.Release(ref handle);
-
-            Main.CameraService.CurrentCamera = null;
-
+            _world.DestroyWorlds();
             Log.Debug("退出Battle");
         }
     }

@@ -56,6 +56,8 @@ namespace LccHotfix
             {
                 item.Reset();
             }
+
+            _worldList.Clear();
         }
 
         public virtual void Update(float deltaTime, float unscaledDeltaTime)
@@ -156,6 +158,11 @@ namespace LccHotfix
             var contextInfo = new ContextInfo("MetaWorld", cmptNames.ToArray(), cmptTypes.ToArray());
             MetaWorld = new MetaWorld(contextInfo, cmptTypes.Count, GetMetaEntityFactory(), 12300001);
             _worldList.Add(MetaWorld);
+        }
+
+        public T GetCreationInfo<T>() where T : IWorldCreationInfo
+        {
+            return (T)_creationInfo;
         }
     }
 }

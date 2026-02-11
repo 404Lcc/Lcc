@@ -36,7 +36,7 @@ namespace LccHotfix
                 return _uiCamera;
             }
         }
-        
+
         private Camera _adaptCamera = null;
 
         public Camera AdaptCamera
@@ -60,12 +60,12 @@ namespace LccHotfix
             {
                 if (_currentCamera == null)
                 {
-                    return null;
+                    //当前没相机就返回主相机
+                    return MainCamera;
                 }
 
                 return _currentCamera;
             }
-            set { _currentCamera = value; }
         }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
@@ -105,6 +105,11 @@ namespace LccHotfix
             var cameraData = MainCamera.GetComponent<UniversalAdditionalCameraData>();
             cameraData.cameraStack.Remove(camera);
 #endif
+        }
+
+        public void SetCurrentCamera(Camera camera)
+        {
+            _currentCamera = camera;
         }
     }
 }

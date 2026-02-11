@@ -56,7 +56,7 @@ namespace LccHotfix
 
             if (mAllDoneViewDict.TryGetValue(loaderData.Category, out var receiveLoaded))
             {
-                receiveLoaded.Dispose();
+                // receiveLoaded.Dispose();
                 mAllDoneViewDict.Remove(loaderData.Category);
             }
 

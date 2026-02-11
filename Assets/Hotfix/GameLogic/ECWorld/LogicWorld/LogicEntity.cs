@@ -1,3 +1,4 @@
+using System;
 using Entitas;
 
 namespace LccHotfix
@@ -38,9 +39,9 @@ namespace LccHotfix
 
         protected void OnAddComponent(IEntity entity, int index, IComponent component)
         {
-            if (component is LogicComponent)
+            if (component is LogicComponent theCmpt)
             {
-                ((LogicComponent)component).PostInitialize(this);
+                SafePostInitialize(theCmpt);
             }
         }
 
@@ -48,26 +49,50 @@ namespace LccHotfix
         {
             if (component is IComponentDispose dispose)
             {
-                dispose.DisposeOnRemove();
+                SafeDisposeOnRemove(dispose);
             }
         }
-
+        
         protected void OnReplacedComponent(IEntity entity, int index, IComponent previousComponent, IComponent newComponent)
         {
             if (previousComponent == newComponent)
             {
                 return;
             }
-
             if (previousComponent is IComponentDispose dispose)
+            {
+                SafeDisposeOnRemove(dispose);
+            }
+            if (newComponent is LogicComponent theCmpt)
+            {
+                SafePostInitialize(theCmpt);
+            }
+        }
+        
+        //////////////////////////////////////////////////////////////////////////
+        protected void SafePostInitialize(LogicComponent theCmpt)
+        {
+            try
+            {
+                theCmpt.PostInitialize(this);
+            }
+            catch (Exception e)
+            {
+                UnityEngine.Debug.LogError($"LogicComponent PostInitialize catch Exception:{e}");
+            }
+        }
+        
+        protected void SafeDisposeOnRemove(IComponentDispose dispose)
+        {
+            try
             {
                 dispose.DisposeOnRemove();
             }
-
-            if (newComponent is LogicComponent)
+            catch (Exception e)
             {
-                ((LogicComponent)newComponent).PostInitialize(this);
+                UnityEngine.Debug.LogError($"LogicComponent DisposeOnRemove catch Exception:{e}");
             }
         }
+
     }
 }

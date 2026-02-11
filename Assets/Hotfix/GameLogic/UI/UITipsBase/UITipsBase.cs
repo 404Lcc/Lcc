@@ -35,11 +35,11 @@ namespace LccHotfix
         private float _offset;
 
         private bool _isInit;
-        
+
         public override void OnConstruct()
         {
             base.OnConstruct();
-            
+
             LayerID = UILayerID.Popup;
             IsFullScreen = false;
             EscapeType = EscapeType.Skip;
@@ -62,7 +62,6 @@ namespace LccHotfix
 
             if (!_isInit)
                 return;
-            Main.CameraService.CurrentCamera = Main.CameraService.MainCamera;
             var pos = Main.CameraService.MainCamera.ScreenToWorldPoint(Input.mousePosition);
             SetTipsRectBy3DWorld(pos);
 
@@ -314,7 +313,7 @@ namespace LccHotfix
 
         public void SetTipsRectBy3DWorld(Vector3 pos)
         {
-            Vector2 screenPoint = Main.CameraService.CurrentCamera.WorldToScreenPoint(pos);
+            Vector2 screenPoint = Main.CameraService.MainCamera.WorldToScreenPoint(pos);
             var localPos = ClientTools.Screen2UILocal(screenPoint, _maxRect, _uiCamera);
             _tipsRect.localPosition = localPos;
         }

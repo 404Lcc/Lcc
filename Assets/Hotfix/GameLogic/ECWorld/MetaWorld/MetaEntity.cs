@@ -1,3 +1,4 @@
+using System;
 using Entitas;
 
 namespace LccHotfix
@@ -38,9 +39,9 @@ namespace LccHotfix
 
         private void OnAddComponent(IEntity entity, int index, IComponent component)
         {
-            if (component is MetaComponent)
+            if (component is MetaComponent theCmpt)
             {
-                ((MetaComponent)component).PostInitialize(this);
+                SafePostInitialize(theCmpt);
             }
         }
 
@@ -48,7 +49,7 @@ namespace LccHotfix
         {
             if (component is IComponentDispose dispose)
             {
-                dispose.DisposeOnRemove();
+                SafeDisposeOnRemove(dispose);
             }
         }
 
@@ -61,12 +62,36 @@ namespace LccHotfix
 
             if (previousComponent is IComponentDispose dispose)
             {
-                dispose.DisposeOnRemove();
+                SafeDisposeOnRemove(dispose);
             }
 
-            if (newComponent is MetaComponent)
+            if (newComponent is MetaComponent theCmpt)
             {
-                ((MetaComponent)newComponent).PostInitialize(this);
+                SafePostInitialize(theCmpt);
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////////////
+        protected void SafePostInitialize(MetaComponent theCmpt)
+        {
+            try
+            {
+                theCmpt.PostInitialize(this);
+            }
+            catch (Exception e)
+            {
+                UnityEngine.Debug.LogError($"MetaComponent PostInitialize catch Exception:{e}");
+            }
+        }
+        protected void SafeDisposeOnRemove(IComponentDispose dispose)
+        {
+            try
+            {
+                dispose.DisposeOnRemove();
+            }
+            catch (Exception e)
+            {
+                UnityEngine.Debug.LogError($"MetaComponent DisposeOnRemove catch Exception:{e}");
             }
         }
     }
