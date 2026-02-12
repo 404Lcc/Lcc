@@ -67,6 +67,10 @@ namespace LccHotfix
         {
             if (curLoaderData.Category == loaderData.Category)
             {
+                if (curLoaderData.SubLoaderList != null)
+                {
+                    loaderData.SubLoaderList = curLoaderData.SubLoaderList;
+                }
                 curLoaderData = loaderData;
                 return;
             }
