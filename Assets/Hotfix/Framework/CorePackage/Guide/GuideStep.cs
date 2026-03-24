@@ -4,6 +4,7 @@ namespace LccHotfix
 {
     public class GuideStep
     {
+        private Guide _guide;
         private int _guideId;
         private GuideStepConfig _config;
         private GuideFinishCondBase _finishCond;
@@ -14,28 +15,17 @@ namespace LccHotfix
         public bool IsException => _isException;
         public bool IsFinish => _isFinish;
 
-        /// <summary>
-        /// 初始化
-        /// </summary>
         public GuideStep(Guide guide, GuideStepConfig config)
         {
+            _guide = guide;
             _guideId = guide.Id;
             _config = config;
-
-            if (!string.IsNullOrEmpty(config.finishCond))
-            {
-                if (config.finishArgs == null)
-                {
-                    config.finishArgs = new List<string>();
-                }
-
-                _finishCond = GuideFinishCondFactory.CreateCond(guide, config.finishCond, config.finishArgs);
-            }
-
-            InitFSM();
         }
 
-        private void InitFSM()
+        /// <summary>
+        /// 启动步骤
+        /// </summary>
+        public void Run()
         {
             _data = new GuideStateData(_guideId, _config);
             _fsm = new GuideFSM(_data);
@@ -70,13 +60,26 @@ namespace LccHotfix
             }
 
             _fsm.SetDefaultState(stateName);
-        }
+            
+            
+            ReleaseFinishCond();
 
-        public void Run()
-        {
+            if (!string.IsNullOrEmpty(_config.finishCond))
+            {
+                if (_config.finishArgs == null)
+                {
+                    _config.finishArgs = new List<string>();
+                }
+
+                _finishCond = GuideFinishCondFactory.CreateCond(_guide, _config.finishCond, _config.finishArgs);
+            }
+
             _fsm.RunDefault();
         }
 
+        /// <summary>
+        /// 迭代
+        /// </summary>
         public void Update()
         {
             if (_isFinish)
@@ -106,28 +109,34 @@ namespace LccHotfix
                 }
             }
 
-
             _fsm.Update();
         }
 
-        public void Reset()
-        {
-            _fsm.Reset();
-            _isException = false;
-            _isFinish = false;
-        }
-
+        /// <summary>
+        /// 释放步骤
+        /// </summary>
         public void Release()
         {
-            if (_finishCond != null)
-            {
-                _finishCond.Release();
-            }
-
+            ReleaseFinishCond();
             _isException = false;
             _isFinish = false;
             _fsm.Release();
-            _data.Reset();
+            _fsm = null;
+            _data = null;
+        }
+
+        /// <summary>
+        /// 释放完成条件
+        /// </summary>
+        private void ReleaseFinishCond()
+        {
+            if (_finishCond == null)
+            {
+                return;
+            }
+
+            _finishCond.Release();
+            _finishCond = null;
         }
     }
 }

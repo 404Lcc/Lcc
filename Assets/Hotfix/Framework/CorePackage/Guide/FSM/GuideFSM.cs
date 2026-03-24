@@ -48,18 +48,6 @@ namespace LccHotfix
             _defaultState = name;
         }
 
-        public void Reset()
-        {
-            _preNode = null;
-            if (_curNode != null)
-            {
-                _curNode.OnExit();
-                _curNode = null;
-            }
-
-            _data.Reset();
-        }
-
         public void Release()
         {
             if (_curNode != null)
@@ -69,8 +57,6 @@ namespace LccHotfix
 
             _blackboard.Clear();
             _nodes.Clear();
-
-            _data.Reset();
 
             _curNode = null;
             _preNode = null;

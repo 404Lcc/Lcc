@@ -12,14 +12,14 @@ namespace LccHotfix
     {
         void Save(int guideId);
     }
-
+    
     public interface IGuideMessage
     {
         void GuideStart(int id);
         void GuideEnd(int id, bool isException);
     }
 
-    internal class GuideManager : Module, IGuideService
+    public class GuideManager : Module, IGuideService
     {
         //原生配置数据
         private GuideConfigList _forceGuideConfigList;
@@ -49,7 +49,7 @@ namespace LccHotfix
 
         //引导持久化
         private IGuidePersistence _guidePersistence;
-
+        
         //引导消息
         private IGuideMessage _guideMessage;
 
@@ -84,19 +84,6 @@ namespace LccHotfix
                 }
             }
 
-            //可以运行的多余强制引导先回去，等这个强制引导完成
-            for (int i = 1; i < _runTriggerForceGuideList.Count; i++)
-            {
-                var guide = _runTriggerForceGuideList[i];
-                if (guide.TriggerCond == null)
-                    continue;
-                if (guide.TriggerCond.CheckTrigger())
-                {
-                    _guideDict.Add(guide.Id, guide);
-                    _runTriggerForceGuideList.RemoveAt(i);
-                }
-            }
-
             //检查是否有可触发的弱引导
             if (_runTriggerForceGuideList.Count <= 0)
             {
@@ -123,7 +110,7 @@ namespace LccHotfix
         {
             _guidePersistence = guidePersistence;
         }
-
+        
         public void SetGuideMessage(IGuideMessage guideMessage)
         {
             _guideMessage = guideMessage;
@@ -272,7 +259,7 @@ namespace LccHotfix
             //清理多余的数据
             for (int i = 1; i < _runTriggerNoForceGuideList.Count; i++)
             {
-                _runTriggerNoForceGuideList[i].Reset();
+                _runTriggerNoForceGuideList[i].Release();
             }
 
             //引导完成
@@ -308,7 +295,7 @@ namespace LccHotfix
             //清理多余的数据
             for (int i = 1; i < _runTriggerForceGuideList.Count; i++)
             {
-                _runTriggerForceGuideList[i].Reset();
+                _runTriggerForceGuideList[i].Release();
             }
 
             //引导完成

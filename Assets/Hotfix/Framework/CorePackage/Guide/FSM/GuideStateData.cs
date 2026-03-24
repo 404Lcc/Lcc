@@ -16,14 +16,5 @@ namespace LccHotfix
             GuideId = guideId;
             Config = config;
         }
-
-        public void Reset()
-        {
-            IsRunning = false;
-            IsTimeout = false;
-            IsFsmException = false;
-            IsFsmFinish = false;
-            IsPause = false;
-        }
     }
 }
