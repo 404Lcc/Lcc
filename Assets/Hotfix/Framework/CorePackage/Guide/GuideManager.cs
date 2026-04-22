@@ -12,14 +12,14 @@ namespace LccHotfix
     {
         void Save(int guideId);
     }
-    
+
     public interface IGuideMessage
     {
         void GuideStart(int id);
-        void GuideEnd(int id, bool isException);
+        void GuideEnd(int id, bool isForceFinish);
     }
 
-    public class GuideManager : Module, IGuideService
+    internal class GuideManager : Module, IGuideService
     {
         //原生配置数据
         private GuideConfigList _forceGuideConfigList;
@@ -49,7 +49,7 @@ namespace LccHotfix
 
         //引导持久化
         private IGuidePersistence _guidePersistence;
-        
+
         //引导消息
         private IGuideMessage _guideMessage;
 
@@ -62,9 +62,10 @@ namespace LccHotfix
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
-            for (int i = 0; i < _guideTriggerList.Count; i++)
+            for (int i = _guideTriggerList.Count - 1; i >= 0; i--)
             {
-                if (_guideTriggerList[i].CheckTrigger() && _runTriggerForceGuideList.Count <= 0)
+                var trigger = _guideTriggerList[i];
+                if (trigger.CheckTrigger())
                 {
                     var guideId = _guideTriggerList[i].Config.guideId;
                     if (_guideDict.TryGetValue(guideId, out var guide))
@@ -80,6 +81,8 @@ namespace LccHotfix
                         }
 
                         _guideDict.Remove(guideId);
+                        trigger.Release();
+                        _guideTriggerList.RemoveAt(i);
                     }
                 }
             }
@@ -110,7 +113,7 @@ namespace LccHotfix
         {
             _guidePersistence = guidePersistence;
         }
-        
+
         public void SetGuideMessage(IGuideMessage guideMessage)
         {
             _guideMessage = guideMessage;
@@ -192,6 +195,90 @@ namespace LccHotfix
                 }
             }
 
+            SortGuideTriggerList();
+        }
+
+        public bool CheckGuideFinish(int guideId)
+        {
+            return _guideCheckFinish != null && _guideCheckFinish.CheckGuideFinish(guideId);
+        }
+
+        public void ReAddGuideTrigger(int guideId)
+        {
+            var finished = false;
+
+            if (_guideCheckFinish != null)
+            {
+                finished = _guideCheckFinish.CheckGuideFinish(guideId);
+            }
+
+            if (finished)
+            {
+                return;
+            }
+
+            if (_guideTriggerList.Any(trigger => trigger.Config.guideId == guideId))
+            {
+                return;
+            }
+
+            Guide guide = null;
+
+            for (int i = 0; i < _runTriggerForceGuideList.Count; i++)
+            {
+                if (_runTriggerForceGuideList[i].Id != guideId)
+                {
+                    continue;
+                }
+
+                guide = _runTriggerForceGuideList[i];
+                _runTriggerForceGuideList.RemoveAt(i);
+                break;
+            }
+
+            if (guide == null)
+            {
+                for (int i = 0; i < _runTriggerNoForceGuideList.Count; i++)
+                {
+                    if (_runTriggerNoForceGuideList[i].Id != guideId)
+                    {
+                        continue;
+                    }
+
+                    guide = _runTriggerNoForceGuideList[i];
+                    _runTriggerNoForceGuideList.RemoveAt(i);
+                    break;
+                }
+            }
+
+            if (guide != null && !_guideDict.ContainsKey(guideId))
+            {
+                _guideDict.Add(guideId, guide);
+            }
+
+            if (!_guideDict.TryGetValue(guideId, out guide))
+            {
+                return;
+            }
+
+            var config = _triggerConfigList.FirstOrDefault(triggerConfig => triggerConfig.guideId == guideId);
+            if (config == null)
+            {
+                return;
+            }
+
+            var triggerCond = GuideTriggerCondFactory.CreateCond(config);
+            if (triggerCond == null)
+            {
+                return;
+            }
+
+            _guideTriggerList.Add(triggerCond);
+            SortGuideTriggerList();
+        }
+
+        private void SortGuideTriggerList()
+        {
             _guideTriggerList = _guideTriggerList.OrderByDescending(gt =>
             {
                 if (_guideDict.TryGetValue(gt.Config.guideId, out var guide))
@@ -256,6 +343,11 @@ namespace LccHotfix
             //开始迭代
             _runTriggerNoForceGuideList[0].Update();
 
+            if (_runTriggerNoForceGuideList.Count <= 0)
+            {
+                return;
+            }
+
             //清理多余的数据
             for (int i = 1; i < _runTriggerNoForceGuideList.Count; i++)
             {
@@ -291,6 +383,11 @@ namespace LccHotfix
 
             //开始迭代
             _runTriggerForceGuideList[0].Update();
+
+            if (_runTriggerForceGuideList.Count <= 0)
+            {
+                return;
+            }
 
             //清理多余的数据
             for (int i = 1; i < _runTriggerForceGuideList.Count; i++)

@@ -17,6 +17,10 @@ namespace LccHotfix
 
         void InitGuideTrigger();
 
+        bool CheckGuideFinish(int guideId);
+
+        void ReAddGuideTrigger(int guideId);
+
         void ResetGuide();
     }
 }

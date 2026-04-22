@@ -2,6 +2,21 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
+    public enum GuideStateType
+    {
+        None,
+        Interrupt,//中断
+        ForceFinish,//强制完成
+        Finish,//完成
+    }
+
+    public class GuideStepTempData
+    {
+        public bool IsInterrupt { get; set; } = false;
+        public bool IsForceFinish { get; set; } = false;
+        public bool IsFinish { get; set; } = false;
+    }
+    
     public class GuideStep
     {
         private Guide _guide;
@@ -9,17 +24,19 @@ namespace LccHotfix
         private GuideStepConfig _config;
         private GuideFinishCondBase _finishCond;
         private GuideFSM _fsm;
-        private GuideStateData _data;
-        private bool _isException;
-        private bool _isFinish;
-        public bool IsException => _isException;
-        public bool IsFinish => _isFinish;
+        private GuideStepTempData _tempData;
+        private GuideStateType _stateType;
+        public GuideStateType StateType => _stateType;
 
         public GuideStep(Guide guide, GuideStepConfig config)
         {
             _guide = guide;
             _guideId = guide.Id;
             _config = config;
+            if (_config.generalStateList == null)
+            {
+                _config.generalStateList = new List<string>();
+            }
         }
 
         /// <summary>
@@ -27,11 +44,10 @@ namespace LccHotfix
         /// </summary>
         public void Run()
         {
-            _data = new GuideStateData(_guideId, _config);
-            _fsm = new GuideFSM(_data);
-            _fsm.SetBlackboardValue("data", _data);
+            _tempData = new GuideStepTempData();
+            _fsm = new GuideFSM(_guideId, _config, _tempData);
 
-            var stateName = _data.Config.defaultStateName;
+            var stateName = _config.defaultStateName;
             var node = GuideStateFactory.CreateState(stateName);
 
             if (node == null)
@@ -42,12 +58,7 @@ namespace LccHotfix
 
             _fsm.AddNode(node);
 
-            if (_data.Config.generalStateList == null)
-            {
-                _data.Config.generalStateList = new List<string>();
-            }
-
-            foreach (var item in _data.Config.generalStateList)
+            foreach (var item in _config.generalStateList)
             {
                 var generalNode = GuideStateFactory.CreateState(item);
                 if (generalNode == null)
@@ -82,31 +93,32 @@ namespace LccHotfix
         /// </summary>
         public void Update()
         {
-            if (_isFinish)
-                return;
-
-            if (_data.IsFsmFinish)
+            if (_tempData.IsInterrupt)
             {
-                if (_data.IsFsmException)
-                {
-                    _isException = true;
-                    _isFinish = true;
-                    return;
-                }
-
+                _stateType = GuideStateType.Interrupt;
+                return;
+            }
+            
+            if (_tempData.IsForceFinish)
+            {
+                _stateType = GuideStateType.ForceFinish;
+                return;
+            }
+            
+            if (_tempData.IsFinish)
+            {
                 if (_finishCond == null)
                 {
-                    _isFinish = true;
-                    return;
+                    _stateType = GuideStateType.Finish;
                 }
                 else
                 {
                     if (_finishCond.IsFinish())
                     {
-                        _isFinish = true;
-                        return;
+                        _stateType = GuideStateType.Finish;
                     }
                 }
+                return;
             }
 
             _fsm.Update();
@@ -118,11 +130,10 @@ namespace LccHotfix
         public void Release()
         {
             ReleaseFinishCond();
-            _isException = false;
-            _isFinish = false;
+            _stateType = GuideStateType.None;
             _fsm.Release();
             _fsm = null;
-            _data = null;
+            _tempData = null;
         }
 
         /// <summary>

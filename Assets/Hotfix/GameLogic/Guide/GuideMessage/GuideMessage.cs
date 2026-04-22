@@ -7,9 +7,9 @@ namespace LccHotfix
             EvtGuideStart.Broadcast(id);
         }
 
-        public void GuideEnd(int id, bool isException)
+        public void GuideEnd(int id, bool isForceFinish)
         {
-            EvtGuideEnd.Broadcast(id, isException);
+            EvtGuideEnd.Broadcast(id, isForceFinish);
         }
     }
 }

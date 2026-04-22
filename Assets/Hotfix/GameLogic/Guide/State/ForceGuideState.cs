@@ -2,6 +2,41 @@ using LccModel;
 
 namespace LccHotfix
 {
+    public class GuideShowForceUIState : GuideState
+    {
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            var args = _fsm.Config.defaultStateArgs;
+            if (args == null || args.Count <= 0)
+            {
+                return;
+            }
+
+            GameUtility.ShowForceGuide(args[0]);
+            GameUtility.AddHandle<EvtClickForceGuideFinish>(OnEvtClickForceGuideFinish);
+        }
+
+        private void OnEvtClickForceGuideFinish(IEventMessage obj)
+        {
+            var evt = obj as EvtClickForceGuideFinish;
+            if (evt.isForceFinish)
+            {
+                _fsm.TempData.IsForceFinish = true;
+            }
+            else
+            {
+                _fsm.TempData.IsFinish = true;
+            }
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            GameUtility.RemoveHandle<EvtClickForceGuideFinish>(OnEvtClickForceGuideFinish);
+        }
+    }
+
     public class GuideOpenUIState : GuideState
     {
         public string name;
@@ -10,7 +45,7 @@ namespace LccHotfix
         {
             base.OnEnter();
 
-            var args = _data.Config.defaultStateArgs;
+            var args = _fsm.Config.defaultStateArgs;
             if (args == null || args.Count <= 0)
             {
                 return;
@@ -26,7 +61,7 @@ namespace LccHotfix
 
             if (!string.IsNullOrEmpty(name) && Main.UIService.IsElementActive(name))
             {
-                _fsm.ChangeState<GuideFinishState>();
+                _fsm.TempData.IsFinish = true;
             }
         }
 
@@ -35,33 +70,6 @@ namespace LccHotfix
         {
             base.OnExit();
             name = "";
-        }
-    }
-
-    public class GuideShowForceUIState : GuideState
-    {
-        public override void OnEnter()
-        {
-            base.OnEnter();
-            var args = _data.Config.defaultStateArgs;
-            if (args == null || args.Count <= 0)
-            {
-                return;
-            }
-
-            GameUtility.ShowForceGuide(args[0]);
-            GameUtility.AddHandle<EvtClickForceGuideFinish>(OnEvtClickForceGuideFinish);
-        }
-
-        private void OnEvtClickForceGuideFinish(IEventMessage obj)
-        {
-            _fsm.ChangeState<GuideFinishState>();
-        }
-
-        public override void OnExit()
-        {
-            base.OnExit();
-            GameUtility.RemoveHandle<EvtClickForceGuideFinish>(OnEvtClickForceGuideFinish);
         }
     }
 }

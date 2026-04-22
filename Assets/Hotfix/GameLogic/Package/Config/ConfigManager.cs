@@ -1,6 +1,6 @@
-﻿using cfg;
-using SimpleJSON;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using cfg;
+using Luban.SimpleJSON;
 using UnityEngine;
 
 namespace LccHotfix

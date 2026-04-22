@@ -89,6 +89,24 @@ public class UIAnimCtrl : MonoBehaviour
 
         SetupState(isForward);
         Animation.Play(_animInfo.AniName);
+
+        if (_duration <= 0)
+        {
+            var state = Animation[_animInfo.AniName];
+            state.normalizedTime = isForward ? 0f : 1f;
+            Animation.Sample();
+            Animation.Stop(_animInfo.AniName);
+            if (!_animInfo.isLoop)
+            {
+                var temp = _callBack;
+                Clear();
+                temp?.Invoke();
+            }
+            else
+            {
+                Clear();
+            }
+        }
     }
 
     public void StopAnim(UIAnimInfo animInfo, bool isForward = true)

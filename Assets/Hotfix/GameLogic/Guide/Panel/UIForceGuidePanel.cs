@@ -1,7 +1,6 @@
 using LccModel;
 using UnityEngine;
 using UnityEngine.UI;
-using Time = UnityEngine.Time;
 
 namespace LccHotfix
 {
@@ -15,7 +14,7 @@ namespace LccHotfix
         Rectangle = 2,
     }
 
-    public enum GuideStateType
+    public enum UIGuideStateType
     {
         StartGuideMask = 1, //开始引导遮罩
         GuideMaskFinish = 2, //引导遮罩完成
@@ -25,7 +24,7 @@ namespace LccHotfix
     public class UIForceGuidePanel : UIElementBase, ICoroutine
     {
         public GameObject hand;
-        public Image mask;
+        public Image maskImg;
 
         //===参数
         public string guidePath;
@@ -40,7 +39,7 @@ namespace LccHotfix
         public GameObject guideObj;
 
         //引导状态
-        public GuideStateType guideStateType;
+        public UIGuideStateType guideStateType;
 
         //遮罩初始化参数
         public Vector4 maskParams = new Vector4(-1000, -1000, 1000, 1000);
@@ -51,8 +50,8 @@ namespace LccHotfix
         //点击计数
         public int clickMaskNum;
 
-        //是否异常
-        public bool isException;
+        //是否强制完成
+        public bool isForceFinish;
 
         public override void OnConstruct()
         {
@@ -76,14 +75,14 @@ namespace LccHotfix
             if (guideObj == null)
                 return;
 
-            if (guideStateType == GuideStateType.StartGuideMask)
+            if (guideStateType == UIGuideStateType.StartGuideMask)
             {
                 UpdateMask();
             }
 
-            if (guideStateType == GuideStateType.GuideMaskFinish)
+            if (guideStateType == UIGuideStateType.GuideMaskFinish)
             {
-                CheckGuideException();
+                CheckGuideForceFinish();
             }
         }
 
@@ -125,16 +124,16 @@ namespace LccHotfix
             else
             {
                 SetMaskParam(guideMaskType, maskResultParams);
-                guideStateType = GuideStateType.GuideMaskFinish;
+                guideStateType = UIGuideStateType.GuideMaskFinish;
             }
         }
 
-        public void CheckGuideException()
+        public void CheckGuideForceFinish()
         {
-            if (clickMaskNum >= 20 && !isException)
+            if (clickMaskNum >= 20 && !isForceFinish)
             {
-                isException = true;
-                //todo
+                isForceFinish = true;
+                //todo 提示
             }
         }
 
@@ -184,13 +183,13 @@ namespace LccHotfix
             maskResultParams = GetMaskResultParams(guideMaskType, 0);
 
             clickMaskNum = 0;
-            isException = false;
-            mask.gameObject.SetActive(true);
-            panerateMask.SetClickMask(() => { clickMaskNum++; });
-            panerateMask.AddTarget(guideObj, OnClickGuide);
+            isForceFinish = false;
+            maskImg.gameObject.SetActive(true);
+            panerateMask.SetCallback(() => { clickMaskNum++; }, OnClickGuide);
+            panerateMask.AddTarget(guideObj);
             SetMaskParam(guideMaskType, new Vector4(-1000, -1000, 1000, 1000));
             SetHand(new Vector3(handOffsetPos.x, handOffsetPos.y, 0), Quaternion.identity);
-            guideStateType = GuideStateType.StartGuideMask;
+            guideStateType = UIGuideStateType.StartGuideMask;
         }
 
         /// <summary>
@@ -240,8 +239,8 @@ namespace LccHotfix
         /// <param name="param"></param>
         private void SetMaskParam(GuideMaskType type, Vector4 param)
         {
-            mask.material.SetInt("_MaskType", (int)type - 1);
-            mask.material.SetVector("_Origin", param);
+            maskImg.material.SetInt("_MaskType", (int)type - 1);
+            maskImg.material.SetVector("_Origin", param);
         }
 
         /// <summary>
@@ -272,18 +271,18 @@ namespace LccHotfix
         /// </summary>
         private void HideGuide()
         {
-            clickMaskNum = 0;
-            isException = false;
-            mask.gameObject.SetActive(false);
-            panerateMask.SetClickMask(null);
-            panerateMask.ClearTarget(OnClickGuide);
-            guideObj = null;
-            guideStateType = GuideStateType.GuideFinish;
+            EvtClickForceGuideFinish.Broadcast(isForceFinish);
 
-            EvtClickForceGuideFinish.Broadcast();
+            clickMaskNum = 0;
+            isForceFinish = false;
+            maskImg.gameObject.SetActive(false);
+            panerateMask.SetCallback(null, null);
+            panerateMask.ClearTarget();
+            guideObj = null;
+            guideStateType = UIGuideStateType.GuideFinish;
         }
 
-        public void OnClickGuide(GameObject obj)
+        public void OnClickGuide()
         {
             HideGuide();
         }

@@ -37,22 +37,38 @@ namespace LccHotfix
         public void Update()
         {
             if (_curStep == null)
+            {
+                if (_isRunning && !_isFinish && _curIndex >= _config.stepList.Count)
+                {
+                    if (_finishCond == null)
+                    {
+                        SetGuideFinish(false);
+                    }
+                    else if (_finishCond.IsFinish())
+                    {
+                        SetGuideFinish(false);
+                    }
+                }
+
                 return;
+            }
 
             _curStep.Update();
 
-            if (_curStep.IsFinish)
+            switch (_curStep.StateType)
             {
-                //出现异常了
-                if (_curStep.IsException)
-                {
+                case GuideStateType.Interrupt:
+                    Main.GuideService.ReAddGuideTrigger(_config.id);
+                    Release();
+                    break;
+                case GuideStateType.ForceFinish:
                     _curStep.Release();
                     _curStep  = null;
                     SetGuideFinish(true);
-                    return;
-                }
-
-                NextStep();
+                    break;
+                case GuideStateType.Finish:
+                    NextStep();
+                    break;
             }
         }
 
@@ -92,19 +108,6 @@ namespace LccHotfix
 
                     _finishCond = GuideFinishCondFactory.CreateCond(this, _config.finishCond, _config.finishArgs);
                 }
-
-                if (_finishCond == null)
-                {
-                    SetGuideFinish(false);
-                }
-                else
-                {
-                    if (_finishCond.IsFinish())
-                    {
-                        SetGuideFinish(false);
-                    }
-                }
-
                 return;
             }
 
@@ -115,13 +118,13 @@ namespace LccHotfix
         /// <summary>
         /// 设置引导完成
         /// </summary>
-        private void SetGuideFinish(bool isException)
+        private void SetGuideFinish(bool isForceFinish)
         {
             ReleaseFinishCond();
             _isFinish = true;
             if (_guideMessage != null)
             {
-                _guideMessage.GuideEnd(_config.id, isException);
+                _guideMessage.GuideEnd(_config.id, isForceFinish);
             }
         }
 

@@ -14,13 +14,16 @@ namespace LccHotfix
 
     public class GuideFSM
     {
-        private GuideStateData _data;
         private string _defaultState;
 
         private readonly Dictionary<string, Object> _blackboard = new Dictionary<string, object>(100);
         private readonly Dictionary<string, IGuideStateNode> _nodes = new Dictionary<string, IGuideStateNode>(100);
         private IGuideStateNode _curNode;
         private IGuideStateNode _preNode;
+
+        public int GuideId { get; private set; }
+        public GuideStepConfig Config { get; private set; }
+        public GuideStepTempData TempData { get; private set; }
 
         /// <summary>
         /// 当前运行的节点名称
@@ -38,9 +41,11 @@ namespace LccHotfix
             get { return _preNode != null ? _preNode.GetType().FullName : string.Empty; }
         }
 
-        public GuideFSM(GuideStateData data)
+        public GuideFSM(int guideId, GuideStepConfig config, GuideStepTempData data)
         {
-            _data = data;
+            GuideId = guideId;
+            Config = config;
+            TempData = data;
         }
 
         public void SetDefaultState(string name)
@@ -60,7 +65,10 @@ namespace LccHotfix
 
             _curNode = null;
             _preNode = null;
-            _data = null;
+            
+            GuideId = 0;
+            Config = null;
+            TempData = null;
         }
 
         /// <summary>
@@ -106,7 +114,6 @@ namespace LccHotfix
             if (string.IsNullOrEmpty(_defaultState))
                 return;
             Run(_defaultState);
-            _data.IsRunning = true;
         }
 
         /// <summary>

@@ -12,6 +12,7 @@ public enum UIAnimMultiAutoPlayMode
 {
     [LabelText("顺序播放")] Sequential = 0,
     [LabelText("并行播放")] Parallel = 1,
+    [LabelText("指定播放")] Assign = 2,
 }
 
 public class UIAnimManager : MonoBehaviour
@@ -20,6 +21,9 @@ public class UIAnimManager : MonoBehaviour
 
     [LabelText("多动画自动播放模式")] [ShowIf("@animList.Count > 1")]
     public UIAnimMultiAutoPlayMode multiAutoPlayMode;
+
+    [LabelText("指定播放索引")] [ShowIf("@animList.Count > 1 && multiAutoPlayMode == UIAnimMultiAutoPlayMode.Assign")]
+    public int assignIndex;
 
     [LabelText("自定义动画列表")] [ListDrawerSettings(ShowIndexLabels = true, OnBeginListElementGUI = "OnBeginListElementGUI", OnEndListElementGUI = "OnEndListElementGUI")] [OnValueChanged("OnChangeAnimList", true)]
     public List<UIAnimInfo> animList = new List<UIAnimInfo>();
@@ -46,6 +50,13 @@ public class UIAnimManager : MonoBehaviour
 
     private void OnChangeAnimList()
     {
+        if (animList == null || animList.Count == 0)
+        {
+            assignIndex = 0;
+            return;
+        }
+
+        assignIndex = Mathf.Clamp(assignIndex, 0, animList.Count - 1);
     }
 
     void OnEnable()
@@ -76,6 +87,9 @@ public class UIAnimManager : MonoBehaviour
                     break;
                 case UIAnimMultiAutoPlayMode.Parallel:
                     PlayParallel();
+                    break;
+                case UIAnimMultiAutoPlayMode.Assign:
+                    PlaySingle(Mathf.Clamp(assignIndex, 0, animList.Count - 1));
                     break;
             }
         }

@@ -17,20 +17,20 @@ namespace LccHotfix
             GameUtility.Dispatch(evt);
         }
     }
-
+    
     /// <summary>
     /// 引导结束
     /// </summary>
     public class EvtGuideEnd : IEventMessage
     {
         public int id;
-        public bool isException;
+        public bool isForceFinish;
 
-        public static void Broadcast(int id, bool isException)
+        public static void Broadcast(int id, bool isForceFinish)
         {
             var evt = new EvtGuideEnd();
             evt.id = id;
-            evt.isException = isException;
+            evt.isForceFinish = isForceFinish;
             GameUtility.Dispatch(evt);
         }
     }
@@ -54,15 +54,16 @@ namespace LccHotfix
         }
     }
 
-
     /// <summary>
     /// 点击强制引导完成
     /// </summary>
     public class EvtClickForceGuideFinish : IEventMessage
     {
-        public static void Broadcast()
+        public bool isForceFinish;
+        public static void Broadcast(bool isForceFinish)
         {
             var evt = new EvtClickForceGuideFinish();
+            evt.isForceFinish = isForceFinish;
             GameUtility.Dispatch(evt);
         }
     }
