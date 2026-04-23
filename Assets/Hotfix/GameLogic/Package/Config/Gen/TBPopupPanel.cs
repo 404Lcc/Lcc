@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -20,22 +20,23 @@ public partial class TBPopupPanel
     
     public TBPopupPanel(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<string, PopupPanel>();
-        _dataList = new System.Collections.Generic.List<PopupPanel>();
+        int count = _buf.Count;
+        _dataMap = new System.Collections.Generic.Dictionary<string, PopupPanel>(count);
+        _dataList = new System.Collections.Generic.List<PopupPanel>(count);
         
         foreach(JSONNode _ele in _buf.Children)
         {
             PopupPanel _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = PopupPanel.DeserializePopupPanel(_ele);  }
+            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.PopupPanel.DeserializePopupPanel(_ele);  }
             _dataList.Add(_v);
             _dataMap.Add(_v.PanelName, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<string, PopupPanel> DataMap => _dataMap;
-    public System.Collections.Generic.List<PopupPanel> DataList => _dataList;
+    public System.Collections.Generic.IReadOnlyDictionary<string, PopupPanel> DataMap => _dataMap;
+    public System.Collections.Generic.IReadOnlyList<PopupPanel> DataList => _dataList;
 
-    public PopupPanel GetOrDefault(string key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public PopupPanel GetOrDefault(string key) => _dataMap.TryGetValue(key, out var v) ? v : default;
     public PopupPanel Get(string key) => _dataMap[key];
     public PopupPanel this[string key] => _dataMap[key];
 

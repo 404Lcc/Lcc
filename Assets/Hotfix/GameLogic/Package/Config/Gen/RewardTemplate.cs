@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -18,7 +18,7 @@ public sealed partial class RewardTemplate : Luban.BeanBase
     public RewardTemplate(JSONNode _buf) 
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
-        { var __json0 = _buf["rewards"]; if(!__json0.IsArray) { throw new SerializationException(); } Rewards = new System.Collections.Generic.List<TBReward>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { TBReward __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = TBReward.DeserializeTBReward(__e0);  }  Rewards.Add(__v0); }   }
+        { var __json0 = _buf["rewards"]; if(!__json0.IsArray) { throw new SerializationException(); } Rewards = new System.Collections.Generic.List<TBReward>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { TBReward __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.TBReward.DeserializeTBReward(__e0);  }  Rewards.Add(__v0); }   }
     }
 
     public static RewardTemplate DeserializeRewardTemplate(JSONNode _buf)
@@ -40,7 +40,6 @@ public sealed partial class RewardTemplate : Luban.BeanBase
 
     public  void ResolveRef(Tables tables)
     {
-        
         foreach (var _e in Rewards) { _e?.ResolveRef(tables); }
     }
 
@@ -52,5 +51,5 @@ public sealed partial class RewardTemplate : Luban.BeanBase
         + "}";
     }
 }
-
 }
+

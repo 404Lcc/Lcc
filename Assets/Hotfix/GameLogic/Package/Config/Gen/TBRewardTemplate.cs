@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -20,22 +20,23 @@ public partial class TBRewardTemplate
     
     public TBRewardTemplate(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<int, RewardTemplate>();
-        _dataList = new System.Collections.Generic.List<RewardTemplate>();
+        int count = _buf.Count;
+        _dataMap = new System.Collections.Generic.Dictionary<int, RewardTemplate>(count);
+        _dataList = new System.Collections.Generic.List<RewardTemplate>(count);
         
         foreach(JSONNode _ele in _buf.Children)
         {
             RewardTemplate _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = RewardTemplate.DeserializeRewardTemplate(_ele);  }
+            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.RewardTemplate.DeserializeRewardTemplate(_ele);  }
             _dataList.Add(_v);
             _dataMap.Add(_v.Id, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, RewardTemplate> DataMap => _dataMap;
-    public System.Collections.Generic.List<RewardTemplate> DataList => _dataList;
+    public System.Collections.Generic.IReadOnlyDictionary<int, RewardTemplate> DataMap => _dataMap;
+    public System.Collections.Generic.IReadOnlyList<RewardTemplate> DataList => _dataList;
 
-    public RewardTemplate GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public RewardTemplate GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : default;
     public RewardTemplate Get(int key) => _dataMap[key];
     public RewardTemplate this[int key] => _dataMap[key];
 

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -20,22 +20,23 @@ public partial class TBAssetFx
     
     public TBAssetFx(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<int, AssetFx>();
-        _dataList = new System.Collections.Generic.List<AssetFx>();
+        int count = _buf.Count;
+        _dataMap = new System.Collections.Generic.Dictionary<int, AssetFx>(count);
+        _dataList = new System.Collections.Generic.List<AssetFx>(count);
         
         foreach(JSONNode _ele in _buf.Children)
         {
             AssetFx _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = AssetFx.DeserializeAssetFx(_ele);  }
+            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.AssetFx.DeserializeAssetFx(_ele);  }
             _dataList.Add(_v);
             _dataMap.Add(_v.Id, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, AssetFx> DataMap => _dataMap;
-    public System.Collections.Generic.List<AssetFx> DataList => _dataList;
+    public System.Collections.Generic.IReadOnlyDictionary<int, AssetFx> DataMap => _dataMap;
+    public System.Collections.Generic.IReadOnlyList<AssetFx> DataList => _dataList;
 
-    public AssetFx GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public AssetFx GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : default;
     public AssetFx Get(int key) => _dataMap[key];
     public AssetFx this[int key] => _dataMap[key];
 

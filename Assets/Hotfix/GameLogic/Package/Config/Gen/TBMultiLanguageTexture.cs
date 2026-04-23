@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -20,22 +20,23 @@ public partial class TBMultiLanguageTexture
     
     public TBMultiLanguageTexture(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<int, MultiLanguageTexture>();
-        _dataList = new System.Collections.Generic.List<MultiLanguageTexture>();
+        int count = _buf.Count;
+        _dataMap = new System.Collections.Generic.Dictionary<int, MultiLanguageTexture>(count);
+        _dataList = new System.Collections.Generic.List<MultiLanguageTexture>(count);
         
         foreach(JSONNode _ele in _buf.Children)
         {
             MultiLanguageTexture _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = MultiLanguageTexture.DeserializeMultiLanguageTexture(_ele);  }
+            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.MultiLanguageTexture.DeserializeMultiLanguageTexture(_ele);  }
             _dataList.Add(_v);
             _dataMap.Add(_v.Id, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, MultiLanguageTexture> DataMap => _dataMap;
-    public System.Collections.Generic.List<MultiLanguageTexture> DataList => _dataList;
+    public System.Collections.Generic.IReadOnlyDictionary<int, MultiLanguageTexture> DataMap => _dataMap;
+    public System.Collections.Generic.IReadOnlyList<MultiLanguageTexture> DataList => _dataList;
 
-    public MultiLanguageTexture GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public MultiLanguageTexture GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : default;
     public MultiLanguageTexture Get(int key) => _dataMap[key];
     public MultiLanguageTexture this[int key] => _dataMap[key];
 

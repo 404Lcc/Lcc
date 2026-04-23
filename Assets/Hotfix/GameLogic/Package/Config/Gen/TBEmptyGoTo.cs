@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -20,22 +20,23 @@ public partial class TBEmptyGoTo
     
     public TBEmptyGoTo(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<int, EmptyGoTo>();
-        _dataList = new System.Collections.Generic.List<EmptyGoTo>();
+        int count = _buf.Count;
+        _dataMap = new System.Collections.Generic.Dictionary<int, EmptyGoTo>(count);
+        _dataList = new System.Collections.Generic.List<EmptyGoTo>(count);
         
         foreach(JSONNode _ele in _buf.Children)
         {
             EmptyGoTo _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = EmptyGoTo.DeserializeEmptyGoTo(_ele);  }
+            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.EmptyGoTo.DeserializeEmptyGoTo(_ele);  }
             _dataList.Add(_v);
             _dataMap.Add(_v.Id, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, EmptyGoTo> DataMap => _dataMap;
-    public System.Collections.Generic.List<EmptyGoTo> DataList => _dataList;
+    public System.Collections.Generic.IReadOnlyDictionary<int, EmptyGoTo> DataMap => _dataMap;
+    public System.Collections.Generic.IReadOnlyList<EmptyGoTo> DataList => _dataList;
 
-    public EmptyGoTo GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public EmptyGoTo GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : default;
     public EmptyGoTo Get(int key) => _dataMap[key];
     public EmptyGoTo this[int key] => _dataMap[key];
 

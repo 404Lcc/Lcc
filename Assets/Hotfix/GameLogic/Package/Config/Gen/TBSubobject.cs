@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -20,22 +20,23 @@ public partial class TBSubobject
     
     public TBSubobject(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<int, Subobject>();
-        _dataList = new System.Collections.Generic.List<Subobject>();
+        int count = _buf.Count;
+        _dataMap = new System.Collections.Generic.Dictionary<int, Subobject>(count);
+        _dataList = new System.Collections.Generic.List<Subobject>(count);
         
         foreach(JSONNode _ele in _buf.Children)
         {
             Subobject _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = Subobject.DeserializeSubobject(_ele);  }
+            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.Subobject.DeserializeSubobject(_ele);  }
             _dataList.Add(_v);
             _dataMap.Add(_v.SubobjectId, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, Subobject> DataMap => _dataMap;
-    public System.Collections.Generic.List<Subobject> DataList => _dataList;
+    public System.Collections.Generic.IReadOnlyDictionary<int, Subobject> DataMap => _dataMap;
+    public System.Collections.Generic.IReadOnlyList<Subobject> DataList => _dataList;
 
-    public Subobject GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public Subobject GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : default;
     public Subobject Get(int key) => _dataMap[key];
     public Subobject this[int key] => _dataMap[key];
 

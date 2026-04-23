@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -20,22 +20,23 @@ public partial class TBIcon
     
     public TBIcon(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<int, Icon>();
-        _dataList = new System.Collections.Generic.List<Icon>();
+        int count = _buf.Count;
+        _dataMap = new System.Collections.Generic.Dictionary<int, Icon>(count);
+        _dataList = new System.Collections.Generic.List<Icon>(count);
         
         foreach(JSONNode _ele in _buf.Children)
         {
             Icon _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = Icon.DeserializeIcon(_ele);  }
+            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.Icon.DeserializeIcon(_ele);  }
             _dataList.Add(_v);
             _dataMap.Add(_v.Id, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, Icon> DataMap => _dataMap;
-    public System.Collections.Generic.List<Icon> DataList => _dataList;
+    public System.Collections.Generic.IReadOnlyDictionary<int, Icon> DataMap => _dataMap;
+    public System.Collections.Generic.IReadOnlyList<Icon> DataList => _dataList;
 
-    public Icon GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public Icon GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : default;
     public Icon Get(int key) => _dataMap[key];
     public Icon this[int key] => _dataMap[key];
 

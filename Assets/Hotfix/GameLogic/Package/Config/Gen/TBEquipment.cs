@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -20,22 +20,23 @@ public partial class TBEquipment
     
     public TBEquipment(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<int, Equipment>();
-        _dataList = new System.Collections.Generic.List<Equipment>();
+        int count = _buf.Count;
+        _dataMap = new System.Collections.Generic.Dictionary<int, Equipment>(count);
+        _dataList = new System.Collections.Generic.List<Equipment>(count);
         
         foreach(JSONNode _ele in _buf.Children)
         {
             Equipment _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = Equipment.DeserializeEquipment(_ele);  }
+            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.Equipment.DeserializeEquipment(_ele);  }
             _dataList.Add(_v);
             _dataMap.Add(_v.Id, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, Equipment> DataMap => _dataMap;
-    public System.Collections.Generic.List<Equipment> DataList => _dataList;
+    public System.Collections.Generic.IReadOnlyDictionary<int, Equipment> DataMap => _dataMap;
+    public System.Collections.Generic.IReadOnlyList<Equipment> DataList => _dataList;
 
-    public Equipment GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public Equipment GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : default;
     public Equipment Get(int key) => _dataMap[key];
     public Equipment this[int key] => _dataMap[key];
 

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -20,22 +20,23 @@ public partial class TBSkill
     
     public TBSkill(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<int, Skill>();
-        _dataList = new System.Collections.Generic.List<Skill>();
+        int count = _buf.Count;
+        _dataMap = new System.Collections.Generic.Dictionary<int, Skill>(count);
+        _dataList = new System.Collections.Generic.List<Skill>(count);
         
         foreach(JSONNode _ele in _buf.Children)
         {
             Skill _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = Skill.DeserializeSkill(_ele);  }
+            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.Skill.DeserializeSkill(_ele);  }
             _dataList.Add(_v);
             _dataMap.Add(_v.SkillId, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, Skill> DataMap => _dataMap;
-    public System.Collections.Generic.List<Skill> DataList => _dataList;
+    public System.Collections.Generic.IReadOnlyDictionary<int, Skill> DataMap => _dataMap;
+    public System.Collections.Generic.IReadOnlyList<Skill> DataList => _dataList;
 
-    public Skill GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public Skill GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : default;
     public Skill Get(int key) => _dataMap[key];
     public Skill this[int key] => _dataMap[key];
 

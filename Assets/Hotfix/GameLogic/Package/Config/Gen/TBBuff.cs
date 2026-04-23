@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -20,22 +20,23 @@ public partial class TBBuff
     
     public TBBuff(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<int, Buff>();
-        _dataList = new System.Collections.Generic.List<Buff>();
+        int count = _buf.Count;
+        _dataMap = new System.Collections.Generic.Dictionary<int, Buff>(count);
+        _dataList = new System.Collections.Generic.List<Buff>(count);
         
         foreach(JSONNode _ele in _buf.Children)
         {
             Buff _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = Buff.DeserializeBuff(_ele);  }
+            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.Buff.DeserializeBuff(_ele);  }
             _dataList.Add(_v);
             _dataMap.Add(_v.BuffId, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, Buff> DataMap => _dataMap;
-    public System.Collections.Generic.List<Buff> DataList => _dataList;
+    public System.Collections.Generic.IReadOnlyDictionary<int, Buff> DataMap => _dataMap;
+    public System.Collections.Generic.IReadOnlyList<Buff> DataList => _dataList;
 
-    public Buff GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public Buff GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : default;
     public Buff Get(int key) => _dataMap[key];
     public Buff this[int key] => _dataMap[key];
 

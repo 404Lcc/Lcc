@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -20,22 +20,23 @@ public partial class TBLanguage
     
     public TBLanguage(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<int, Language>();
-        _dataList = new System.Collections.Generic.List<Language>();
+        int count = _buf.Count;
+        _dataMap = new System.Collections.Generic.Dictionary<int, Language>(count);
+        _dataList = new System.Collections.Generic.List<Language>(count);
         
         foreach(JSONNode _ele in _buf.Children)
         {
             Language _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = Language.DeserializeLanguage(_ele);  }
+            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.Language.DeserializeLanguage(_ele);  }
             _dataList.Add(_v);
             _dataMap.Add(_v.Id, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, Language> DataMap => _dataMap;
-    public System.Collections.Generic.List<Language> DataList => _dataList;
+    public System.Collections.Generic.IReadOnlyDictionary<int, Language> DataMap => _dataMap;
+    public System.Collections.Generic.IReadOnlyList<Language> DataList => _dataList;
 
-    public Language GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public Language GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : default;
     public Language Get(int key) => _dataMap[key];
     public Language this[int key] => _dataMap[key];
 

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -27,7 +27,7 @@ public sealed partial class Buff : Luban.BeanBase
         { if(!_buf["maxLevel"].IsNumber) { throw new SerializationException(); }  MaxLevel = _buf["maxLevel"]; }
         { if(!_buf["btScript"].IsString) { throw new SerializationException(); }  BtScript = _buf["btScript"]; }
         { if(!_buf["boolBuffType"].IsNumber) { throw new SerializationException(); }  BoolBuffType = (BoolPropertyType)_buf["boolBuffType"].AsInt; }
-        { var __json0 = _buf["valueBuffType"]; if(!__json0.IsArray) { throw new SerializationException(); } ValueBuffType = new System.Collections.Generic.List<TBBuffValue>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { TBBuffValue __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = TBBuffValue.DeserializeTBBuffValue(__e0);  }  ValueBuffType.Add(__v0); }   }
+        { var __json0 = _buf["valueBuffType"]; if(!__json0.IsArray) { throw new SerializationException(); } ValueBuffType = new System.Collections.Generic.List<TBBuffValue>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { TBBuffValue __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.TBBuffValue.DeserializeTBBuffValue(__e0);  }  ValueBuffType.Add(__v0); }   }
         { if(!_buf["immuneBoolBuffType"].IsNumber) { throw new SerializationException(); }  ImmuneBoolBuffType = (BoolPropertyType)_buf["immuneBoolBuffType"].AsInt; }
         { if(!_buf["disperseBoolBuffType"].IsNumber) { throw new SerializationException(); }  DisperseBoolBuffType = (BoolPropertyType)_buf["disperseBoolBuffType"].AsInt; }
         { var __json0 = _buf["immuneValueBuffTypeList"]; if(!__json0.IsArray) { throw new SerializationException(); } ImmuneValueBuffTypeList = new System.Collections.Generic.List<ValuePropertyType>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { ValuePropertyType __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = (ValuePropertyType)__e0.AsInt; }  ImmuneValueBuffTypeList.Add(__v0); }   }
@@ -125,25 +125,7 @@ public sealed partial class Buff : Luban.BeanBase
 
     public  void ResolveRef(Tables tables)
     {
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         foreach (var _e in ValueBuffType) { _e?.ResolveRef(tables); }
-        
-        
-        
-        
-        
-        
-        
-        
     }
 
     public override string ToString()
@@ -171,5 +153,5 @@ public sealed partial class Buff : Luban.BeanBase
         + "}";
     }
 }
-
 }
+

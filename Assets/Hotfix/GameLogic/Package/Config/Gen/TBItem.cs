@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -20,22 +20,23 @@ public partial class TBItem
     
     public TBItem(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<int, Item>();
-        _dataList = new System.Collections.Generic.List<Item>();
+        int count = _buf.Count;
+        _dataMap = new System.Collections.Generic.Dictionary<int, Item>(count);
+        _dataList = new System.Collections.Generic.List<Item>(count);
         
         foreach(JSONNode _ele in _buf.Children)
         {
             Item _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = Item.DeserializeItem(_ele);  }
+            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.Item.DeserializeItem(_ele);  }
             _dataList.Add(_v);
             _dataMap.Add(_v.Id, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, Item> DataMap => _dataMap;
-    public System.Collections.Generic.List<Item> DataList => _dataList;
+    public System.Collections.Generic.IReadOnlyDictionary<int, Item> DataMap => _dataMap;
+    public System.Collections.Generic.IReadOnlyList<Item> DataList => _dataList;
 
-    public Item GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public Item GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : default;
     public Item Get(int key) => _dataMap[key];
     public Item this[int key] => _dataMap[key];
 

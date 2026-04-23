@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -50,10 +50,6 @@ public sealed partial class Equipment : Luban.BeanBase
 
     public  void ResolveRef(Tables tables)
     {
-        
-        
-        
-        
     }
 
     public override string ToString()
@@ -66,5 +62,5 @@ public sealed partial class Equipment : Luban.BeanBase
         + "}";
     }
 }
-
 }
+

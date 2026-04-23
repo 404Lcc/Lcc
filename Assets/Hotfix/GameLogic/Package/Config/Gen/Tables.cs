@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 namespace cfg
 {
@@ -65,3 +65,4 @@ public partial class Tables
 }
 
 }
+

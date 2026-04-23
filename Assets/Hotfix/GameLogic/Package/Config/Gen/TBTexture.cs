@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 using Luban;
-using SimpleJSON;
+using Luban.SimpleJSON;
 
 
 namespace cfg
@@ -20,22 +20,23 @@ public partial class TBTexture
     
     public TBTexture(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<int, Texture>();
-        _dataList = new System.Collections.Generic.List<Texture>();
+        int count = _buf.Count;
+        _dataMap = new System.Collections.Generic.Dictionary<int, Texture>(count);
+        _dataList = new System.Collections.Generic.List<Texture>(count);
         
         foreach(JSONNode _ele in _buf.Children)
         {
             Texture _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = Texture.DeserializeTexture(_ele);  }
+            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = global::cfg.Texture.DeserializeTexture(_ele);  }
             _dataList.Add(_v);
             _dataMap.Add(_v.Id, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<int, Texture> DataMap => _dataMap;
-    public System.Collections.Generic.List<Texture> DataList => _dataList;
+    public System.Collections.Generic.IReadOnlyDictionary<int, Texture> DataMap => _dataMap;
+    public System.Collections.Generic.IReadOnlyList<Texture> DataList => _dataList;
 
-    public Texture GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public Texture GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : default;
     public Texture Get(int key) => _dataMap[key];
     public Texture this[int key] => _dataMap[key];
 
