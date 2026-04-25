@@ -59,7 +59,6 @@ MonoBehaviour:
     - Mirror.Components
     - Mirror.Transports
     - PackageTools
-    - Purchasing.Common
     - RVO2
     - SimpleWebTransport
     - Telepathy
