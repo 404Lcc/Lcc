@@ -35,7 +35,7 @@ namespace LccHotfix
         }
 
 
-        public HashSet<LogicEntity> GetEntitiesWithComBattleUnitTid(int towerTid)
+        public HashSet<LogicEntity> GetEntitiesWithComBattleUnitTid(int unitTid)
         {
             var index = GetEntityIndex(EntityIndexName.BattleUnitTagComponent) as EntityIndex<LogicEntity, int>;
             if (index == null)
@@ -43,7 +43,7 @@ namespace LccHotfix
                 return null;
             }
 
-            return index.GetEntities(towerTid);
+            return index.GetEntities(unitTid);
         }
 
         public LogicEntity GetEntitiesWithComUnityObjectRelated(int gameObjectInstanceID)

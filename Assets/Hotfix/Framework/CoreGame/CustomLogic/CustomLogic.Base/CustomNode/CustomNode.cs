@@ -37,7 +37,7 @@ namespace LccHotfix
     }
 
     //自定义节点、条件节点、行为节点、结构容器节点，都继承自它
-    public class CustomNode : ICustomNode
+    public partial class CustomNode : ICustomNode
     {
         private bool _isActive = false;
         protected CustomNodeContext _context;

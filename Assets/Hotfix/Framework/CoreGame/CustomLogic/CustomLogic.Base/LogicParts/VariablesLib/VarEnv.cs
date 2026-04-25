@@ -72,7 +72,7 @@ namespace LccHotfix
     }
 
     //Variables Env
-    public class VarEnv : ICanRecycle
+    public partial class VarEnv : ICanRecycle
     {
         private Dictionary<System.Type, IVariables> _varTypeDic;
 
