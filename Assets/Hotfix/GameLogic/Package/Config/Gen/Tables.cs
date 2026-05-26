@@ -16,9 +16,6 @@ public partial class Tables
 {
     public TBEmptyGoTo TBEmptyGoTo {get; }
     public TBPopupPanel TBPopupPanel {get; }
-    public TBSkill TBSkill {get; }
-    public TBBuff TBBuff {get; }
-    public TBSubobject TBSubobject {get; }
     public TBLanguage TBLanguage {get; }
     public TBIcon TBIcon {get; }
     public TBTexture TBTexture {get; }
@@ -32,9 +29,6 @@ public partial class Tables
     {
         TBEmptyGoTo = new TBEmptyGoTo(loader("tbemptygoto"));
         TBPopupPanel = new TBPopupPanel(loader("tbpopuppanel"));
-        TBSkill = new TBSkill(loader("tbskill"));
-        TBBuff = new TBBuff(loader("tbbuff"));
-        TBSubobject = new TBSubobject(loader("tbsubobject"));
         TBLanguage = new TBLanguage(loader("tblanguage"));
         TBIcon = new TBIcon(loader("tbicon"));
         TBTexture = new TBTexture(loader("tbtexture"));
@@ -50,9 +44,6 @@ public partial class Tables
     {
         TBEmptyGoTo.ResolveRef(this);
         TBPopupPanel.ResolveRef(this);
-        TBSkill.ResolveRef(this);
-        TBBuff.ResolveRef(this);
-        TBSubobject.ResolveRef(this);
         TBLanguage.ResolveRef(this);
         TBIcon.ResolveRef(this);
         TBTexture.ResolveRef(this);
