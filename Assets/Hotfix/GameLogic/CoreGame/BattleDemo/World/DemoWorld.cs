@@ -4,7 +4,7 @@ namespace LccHotfix
     {
         protected override void AddExternalInitializeSystems(ECSystems systems)
         {
-            systems.Add(new SysGameplayInitialize(this));
+            systems.Add(new SysDemoInitialize(this));
         }
 
         public static DemoWorld CreateWorld(IWorldCreationInfo creationInfo)
