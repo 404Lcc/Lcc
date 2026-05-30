@@ -9,7 +9,7 @@ namespace LccHotfix
     {
         public static void AssertBreak()
         {
-            LogWrapper.LogError("KaHotUpdate.CoreGameLogic Has ERROR! ");
+            LogWrapper.LogError("CLHelper.AssertBreak");
             UnityEngine.Debug.Break();
         }
 
