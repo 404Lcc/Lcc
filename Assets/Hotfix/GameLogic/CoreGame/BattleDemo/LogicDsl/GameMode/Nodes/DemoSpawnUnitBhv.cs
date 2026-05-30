@@ -24,7 +24,7 @@ namespace LccHotfix
     {
         protected override void OnBegin()
         {
-            var creationInfo = GetVar<ECGameWorldCreationInfo>(CvKey.CV_WorldInfo);
+            var creationInfo = GetVar<DemoWorldCreationInfo>(CvKey.CV_WorldInfo);
             var logicWorld = this.GetLogicWorld();
             if (creationInfo == null || logicWorld == null)
             {

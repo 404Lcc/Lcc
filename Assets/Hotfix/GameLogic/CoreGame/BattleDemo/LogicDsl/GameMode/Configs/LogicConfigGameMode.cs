@@ -13,7 +13,7 @@ namespace LccHotfix
 
         private void InitConfigs()
         {
-            AddConfig(ECGameWorldCreationInfo.DemoModeLogicId, new List<ICustomNodeCfg>
+            AddConfig(DemoWorldCreationInfo.DemoModeLogicId, new List<ICustomNodeCfg>
             {
                 FSM("GST_Start", new List<ICustomNodeCfg>
                 {

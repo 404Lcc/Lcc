@@ -2,20 +2,20 @@ using Entitas;
 
 namespace LccHotfix
 {
-    public class SysGameplayInitialize : SysBase, IInitializeSystem
+    public class SysDemoInitialize : SysBase, IInitializeSystem
     {
-        public SysGameplayInitialize(ECWorlds world) : base(world)
+        public SysDemoInitialize(ECWorlds world) : base(world)
         {
         }
 
         public void Initialize()
         {
-            var creationInfo = _world.GetCreationInfo<ECGameWorldCreationInfo>();
+            var creationInfo = _world.GetCreationInfo<DemoWorldCreationInfo>();
             DemoBattleConfigRegister.Register();
             InitGameModeEnv(creationInfo);
         }
 
-        private void InitGameModeEnv(ECGameWorldCreationInfo creationInfo)
+        private void InitGameModeEnv(DemoWorldCreationInfo creationInfo)
         {
             var genInfo = creationInfo.GameModeGenInfo;
             if (genInfo == null)

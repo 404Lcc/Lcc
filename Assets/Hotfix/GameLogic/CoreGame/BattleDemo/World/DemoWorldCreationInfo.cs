@@ -1,10 +1,10 @@
 namespace LccHotfix
 {
-    public class ECGameWorldCreationInfo : BattleKernelCreationInfo
+    public class DemoWorldCreationInfo : BattleKernelCreationInfo
     {
         public const int DemoModeLogicId = 1;
 
-        public ECGameWorldCreationInfo()
+        public DemoWorldCreationInfo()
         {
             MainObjectViewType = typeof(MainGameObjectView);
             ModeLogicID = DemoModeLogicId;

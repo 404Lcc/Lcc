@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class BattleGameplayDemoMono : MonoBehaviour
+    public class DemoMono : MonoBehaviour
     {
         [SerializeField]
         private bool _autoStart = true;
@@ -13,7 +13,7 @@ namespace LccHotfix
         [SerializeField]
         private bool _autoFinishWhenSideDead = true;
 
-        private ECGameWorld _world;
+        private DemoWorld _world;
 
         private void Start()
         {
@@ -48,13 +48,13 @@ namespace LccHotfix
         {
             StopDemo();
 
-            var creationInfo = new ECGameWorldCreationInfo
+            var creationInfo = new DemoWorldCreationInfo
             {
                 DemoMaxDurationSeconds = _maxDurationSeconds,
                 DemoAutoFinishWhenSideDead = _autoFinishWhenSideDead
             };
 
-            _world = ECGameWorld.CreateWorld(creationInfo);
+            _world = DemoWorld.CreateWorld(creationInfo);
             BattleLog.Debug("BattleGameplayDemoMono started demo world");
         }
 

@@ -9,7 +9,7 @@ namespace LccHotfix
     {
         public BattleModeLogic CreateModeLogic(ICustomLogicGenInfo genInfo)
         {
-            genInfo.PreEnv.ReadVar(CvKey.CV_WorldInfo, out ECGameWorldCreationInfo creationInfo);
+            genInfo.PreEnv.ReadVar(CvKey.CV_WorldInfo, out DemoWorldCreationInfo creationInfo);
             var service = creationInfo.CustomLogicService;
             return service.CreateLogic<BattleModeLogic>(genInfo);
         }

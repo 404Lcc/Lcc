@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
 using HotUpdate.Framework;
 using PBConfig;
 using UnityEngine;
-using Vector2 = PBConfig.TVector2;
 using Vector3 = UnityEngine.Vector3;
 
 namespace LccHotfix

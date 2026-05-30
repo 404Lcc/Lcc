@@ -1,15 +1,15 @@
 namespace LccHotfix
 {
-    public class ECGameWorld : BattleKernelWorld
+    public class DemoWorld : BattleKernelWorld
     {
         protected override void AddExternalInitializeSystems(ECSystems systems)
         {
             systems.Add(new SysGameplayInitialize(this));
         }
 
-        public static ECGameWorld CreateWorld(IWorldCreationInfo creationInfo)
+        public static DemoWorld CreateWorld(IWorldCreationInfo creationInfo)
         {
-            var world = new ECGameWorld();
+            var world = new DemoWorld();
             world.InitWorlds(creationInfo);
             return world;
         }

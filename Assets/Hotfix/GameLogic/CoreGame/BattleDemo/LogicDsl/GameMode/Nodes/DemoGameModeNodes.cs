@@ -54,7 +54,7 @@ namespace LccHotfix
 
         private void CheckFinish()
         {
-            var creationInfo = GetVar<ECGameWorldCreationInfo>(CvKey.CV_WorldInfo);
+            var creationInfo = GetVar<DemoWorldCreationInfo>(CvKey.CV_WorldInfo);
             if (creationInfo != null && creationInfo.DemoMaxDurationSeconds > 0f && GetDuration() >= creationInfo.DemoMaxDurationSeconds)
             {
                 SetResult(DemoGameResult.Timeout);
