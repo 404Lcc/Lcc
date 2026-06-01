@@ -131,7 +131,7 @@ namespace LccHotfix
         /// <summary>
         /// 根据技能配置创建技能逻辑实例，不直接挂载到实体技能流程组件。
         /// </summary>
-        private SkillLogic CreateSkillProcessLogic(LogicEntity entity, int skillTid, VarEnv varEnv = null)
+        public SkillLogic CreateSkillProcessLogic(LogicEntity entity, int skillTid, VarEnv varEnv = null)
         {
             var skillCfg = PbCfg.GetData<TSkillLogic>((uint)skillTid);
             var logicID = skillCfg.LogicID;
