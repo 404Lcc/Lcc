@@ -5,8 +5,11 @@ namespace LccHotfix
 {
     public partial class LogicWorld : Context<LogicEntity>
     {
-        public LogicWorld(ContextInfo contextInfo, int totalComponents, Func<LogicEntity> entityFactory, int startCreationIndex = 0, Func<IEntity, IAERC> aercFactory = null) : base(totalComponents, startCreationIndex, contextInfo, aercFactory, entityFactory)
+        private readonly IWorldCreationInfo _creationInfo;
+
+        public LogicWorld(ContextInfo contextInfo, int totalComponents, Func<LogicEntity> entityFactory, int startCreationIndex = 0, Func<IEntity, IAERC> aercFactory = null, IWorldCreationInfo creationInfo = null) : base(totalComponents, startCreationIndex, contextInfo, aercFactory, entityFactory)
         {
+            _creationInfo = creationInfo;
             OnEntityCreated += EntityCreated;
             OnEntityDestroyed += EntityDestroyed;
             OnEntityWillBeDestroyed += EntityWillBeDestroyed;
@@ -30,6 +33,11 @@ namespace LccHotfix
         public TIndex GetEntityIndex<TComponent, TIndex>()
         {
             return (TIndex)GetEntityIndex(typeof(TComponent).Name);
+        }
+
+        public T GetCreationInfo<T>() where T : IWorldCreationInfo
+        {
+            return (T)_creationInfo;
         }
     }
 }

@@ -3,15 +3,11 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
+    // 驱动 CommandSenderComponent 的本地命令派发。当前项目未接入网络发送或 CommandReceiver 队列。
     public sealed class SysCommandSend : ReactiveSystem<LogicEntity>
     {
-        private ECWorlds _world;
-        //private INetworkService _netService;
-
         public SysCommandSend(ECWorlds world) : base(world.LogicWorld)
         {
-            _world = world;
-            //_netService = _world.Services.Network;
         }
 
         protected override ICollector<LogicEntity> GetTrigger(IContext<LogicEntity> context)
@@ -29,7 +25,6 @@ namespace LccHotfix
             foreach (var e in entities)
             {
                 e.comCommandSender.PreHandleCommand();
-                //_netService.SendCommandsMessage(e.ID, e.CommandSender.SendQueue);
                 e.comCommandSender.SendQueue.Clear();
             }
         }

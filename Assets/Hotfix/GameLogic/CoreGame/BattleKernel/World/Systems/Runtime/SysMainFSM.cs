@@ -16,7 +16,7 @@ namespace LccHotfix
 
         void IExecuteSystem.Execute()
         {
-            var dt = Time.deltaTime;
+            var dt = BattleTime.GetDeltaTime(_world.LogicWorld);
             foreach (var e in _group.GetEntities())
             {
                 e.comFSM.Logic.Update(dt);

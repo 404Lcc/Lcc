@@ -18,25 +18,7 @@ namespace LccHotfix
         private void InitServices()
         {
             var creationInfo = _world.GetCreationInfo<BattleKernelCreationInfo>();
-            _world.LogicWorld.SetTimerService(creationInfo.TimerService);
-            _world.LogicWorld.SetBattleFeedbackSink(creationInfo.BattleFeedbackSink);
-            _world.LogicWorld.SetViewLoadService(creationInfo.ViewLoadService);
-            _world.LogicWorld.SetMainObjectViewType(creationInfo.MainObjectViewType);
-            _world.LogicWorld.SetGizmoService(creationInfo.GizmoService);
-            _world.LogicWorld.SetCustomLogicService(creationInfo.CustomLogicService);
-            _world.LogicWorld.SetDamagePropertyModifier(creationInfo.DamagePropertyModifier);
-            _world.LogicWorld.SetDamageEventService(creationInfo.DamageEventService);
-            _world.LogicWorld.SetDamagePolicyService(creationInfo.DamagePolicyService);
-            _world.LogicWorld.SetUnitOwnerInfoProvider(creationInfo.UnitOwnerInfoProvider);
-            _world.LogicWorld.SetCombatPropertyVolumeProvider(creationInfo.CombatPropertyVolumeProvider);
-            _world.LogicWorld.SetTargetQueryService(creationInfo.TargetQueryService);
-            _world.LogicWorld.SetSubobjectModelOverrideProvider(creationInfo.SubobjectModelOverrideProvider);
-            _world.LogicWorld.SetSkillLogicOverrideProvider(creationInfo.SkillLogicOverrideProvider);
-            _world.LogicWorld.SetBattleEffectService(creationInfo.BattleEffectService);
-            _world.LogicWorld.SetBattleAudioService(creationInfo.BattleAudioService);
-            _world.LogicWorld.SetBattleLogService(creationInfo.BattleLogService);
-            _world.LogicWorld.SetDeathProcessService(creationInfo.DeathProcessService);
-            _world.LogicWorld.SetSubobjectTransferEffectService(creationInfo.SubobjectTransferEffectService);
+            BattleLogger.SetService(creationInfo.BattleLogService);
         }
 
         private void InitEntityIndex()

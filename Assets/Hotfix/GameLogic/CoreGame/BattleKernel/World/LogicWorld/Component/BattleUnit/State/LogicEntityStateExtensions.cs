@@ -95,7 +95,7 @@ namespace LccHotfix
                 return true;
             }
 
-            BattleLog.Error("GetBattleUnitTag !entity.hasComBattleUnitTag");
+            BattleLogger.LogError("GetBattleUnitTag !entity.hasComBattleUnitTag");
             unitTag = default;
             return false;
         }
@@ -130,7 +130,7 @@ namespace LccHotfix
 
             if (!entity.isEnabled)
             {
-                BattleLog.Error($"IsDead found recycled entity, id={(entity.hasComID ? entity.ID : 0)}, creationIndex={entity.creationIndex}");
+                BattleLogger.LogError($"IsDead found recycled entity, id={(entity.hasComID ? entity.ID : 0)}, creationIndex={entity.creationIndex}");
                 return true;
             }
 
@@ -177,7 +177,7 @@ namespace LccHotfix
 
             if (entity.creationIndex != creationIndex)
             {
-                BattleLog.Error($"entity.IsEnabled found entity.creationIndex({entity.creationIndex}) != creationIndex({creationIndex})");
+                BattleLogger.LogError($"entity.IsEnabled found entity.creationIndex({entity.creationIndex}) != creationIndex({creationIndex})");
                 return false;
             }
 

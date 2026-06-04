@@ -16,7 +16,7 @@ namespace LccHotfix
 
         void IExecuteSystem.Execute()
         {
-            float dt = Time.deltaTime;
+            float dt = BattleTime.GetDeltaTime(_world);
             foreach (var entity in _group.GetEntities())
             {
                 var comDeath = entity.comDeath;
@@ -47,7 +47,7 @@ namespace LccHotfix
                 entity.RemoveComSkillProcess();
             }
 
-            _world.DeathProcessService?.RemoveExternalComponentsBeforeDestroy(entity);
+            _world.GetCreationInfo<BattleKernelCreationInfo>().DeathProcessService?.RemoveExternalComponentsBeforeDestroy(entity);
 
             if (entity.isEnabled)
             {

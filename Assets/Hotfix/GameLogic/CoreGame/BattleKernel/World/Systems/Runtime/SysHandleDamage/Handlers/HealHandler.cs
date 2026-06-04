@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace LccHotfix
 {
@@ -12,13 +12,13 @@ namespace LccHotfix
             LogicEntity target = world.GetEntityWithComID(targetId);
             if (target == null)
             {
-                BattleLog.Warning($"HandleHeal target == null, targetId={targetId}");
+                BattleLogger.LogWarning($"HandleHeal target == null, targetId={targetId}");
                 return;
             }
 
             if (!target.hasComHp)
             {
-                BattleLog.Warning($"HandleHeal target do not has comHp, targetId={targetId}");
+                BattleLogger.LogWarning($"HandleHeal target do not has comHp, targetId={targetId}");
                 return;
             }
             //BattleLog.Debug($"HandleDamage entity={entity.ID}, FinalDamage={result.FinalDamage}");
@@ -36,8 +36,8 @@ namespace LccHotfix
             var hitBindPointPos = pos;
             if(target.hasComView) 
                 hitBindPointPos = target.GetMainViewBindPos("Hit");
-            var useTaggedTargetStyle = world.DamagePolicyService?.UseTaggedFeedbackStyle(target) ?? false;
-            world.BattleFeedbackSink?.ShowHealNumber(Mathf.RoundToInt(healing), hitBindPointPos, useTaggedTargetStyle);
+            var useTaggedTargetStyle = world.GetCreationInfo<BattleKernelCreationInfo>().DamagePolicyService?.UseTaggedFeedbackStyle(target) ?? false;
+            world.GetCreationInfo<BattleKernelCreationInfo>().BattleFeedbackSink?.ShowHealNumber(Mathf.RoundToInt(healing), hitBindPointPos, useTaggedTargetStyle);
         }
     }
 }

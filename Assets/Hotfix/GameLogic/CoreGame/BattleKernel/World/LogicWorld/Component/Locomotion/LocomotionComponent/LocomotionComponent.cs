@@ -9,7 +9,6 @@ namespace LccHotfix
         Quaternion DeltaRotation { get; }
         void BeforeUpdate();
         void Update(float dt, LogicEntity entity);
-        void LateUpdate(float dt, LogicEntity entity);
         bool IsEnd();
     }
 
@@ -18,7 +17,7 @@ namespace LccHotfix
         public void SetMoveSpeed(float speed);
     }
 
-    public class LocomotionComponent : LogicComponent
+    public class LocomotionComponent : LogicComponent, IEntityCommandHandler
     {
         private ILocomotion _locomotion;
 
@@ -38,6 +37,16 @@ namespace LccHotfix
                 ReferencePool.Release(Locomotion);
                 Locomotion = null;
             }
+        }
+
+        public bool HandleEntityCommand(LogicEntity entity, EntityCommand cmd)
+        {
+            if (Locomotion is IEntityCommandHandler commandHandler)
+            {
+                return commandHandler.HandleEntityCommand(entity, cmd);
+            }
+
+            return false;
         }
     }
 

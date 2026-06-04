@@ -19,8 +19,7 @@ namespace LccHotfix
             m_preHandler = preHandler;
         }
 
-        //预处理命令
-        //常见的处理有：服务器确认前 先做预测性表现、RTS低级指令转高级指令、连续指令输入型出招表
+        // 本地命令派发入口。当前战斗命令不走 CommandReceiver 队列，由 preHandler 直接分发给本实体组件。
         public void PreHandleCommand()
         {
             if (m_preHandler == null)
@@ -58,6 +57,10 @@ namespace LccHotfix
         {
             var index = LogicComponentsLookup.ComCommandSender;
             var component = (CommandSenderComponent)CreateComponent(index, typeof(CommandSenderComponent));
+            if (preHandler == null)
+            {
+                preHandler = new StandaloneEntityCmdPreHandler();
+            }
             component.Initialize(preHandler);
             AddComponent(index, component);
         }

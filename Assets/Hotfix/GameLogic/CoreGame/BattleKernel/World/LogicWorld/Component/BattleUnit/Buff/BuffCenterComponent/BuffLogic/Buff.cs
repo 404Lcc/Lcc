@@ -119,7 +119,7 @@ namespace LccHotfix
         {
             if (!mIsForever)
             {
-                mDuration -= Time.deltaTime;
+                mDuration -= dt;
                 if (mDuration <= 0)
                     return;
             }

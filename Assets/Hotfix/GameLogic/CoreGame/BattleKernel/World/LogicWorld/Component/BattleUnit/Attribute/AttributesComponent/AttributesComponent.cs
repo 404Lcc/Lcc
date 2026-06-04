@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace LccHotfix
 {
@@ -155,7 +155,7 @@ namespace LccHotfix
             {
                 if (logError)
                 {
-                    BattleLog.Error("getAttributesByType == null  " + typeof(TValue));
+                    BattleLogger.LogError("getAttributesByType == null  " + typeof(TValue));
                 }
 
                 return null;

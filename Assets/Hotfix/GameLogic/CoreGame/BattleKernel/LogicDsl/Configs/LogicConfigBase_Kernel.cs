@@ -53,6 +53,64 @@ namespace LccHotfix
             return new DelegateBhvCfg(node => { node.SetVar(newVar, node.GetVar<T>(var, defaultV)); });
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public SearchEntitiesBhvCfg SearchSingleEnemy(float distance, string varNameID, string varNamePos = null)
+        {
+            return new SearchEntitiesBhvCfg(distance) { SaveEntityIDTo = varNameID, SaveEntityPosTo = varNamePos };
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public SearchEntitiesBhvCfg SearchSingleEnemy(string distanceVar, string varNameID, string varNamePos = null)
+        {
+            return new SearchEntitiesBhvCfg(distanceVar) { SaveEntityIDTo = varNameID, SaveEntityPosTo = varNamePos };
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public PlaySpecAnimBhvCfg PlayAnim_Layer0(string animName, string entityVar = CvKey.CV_OwnerEntity)
+        {
+            return new PlaySpecAnimBhvCfg(animName, entityVar);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public PlaySpecEntityAnimBhvCfg PlayEntityAnim_Layer0(string entityKey, string animName)
+        {
+            return new PlaySpecEntityAnimBhvCfg(entityKey, animName);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public PlaySpecEntityAnimBhvCfg PlayEntityAnim_Layer1(string entityKey, string animName)
+        {
+            return new PlaySpecEntityAnimBhvCfg(entityKey, animName).SetLayer(1);
+        }
+
+        protected DelegateBhvCfg SaveVector3By(string saveVarKey, string varKey)
+        {
+            return BeginCall(node =>
+            {
+                var posCfg = new PosVarCfg(varKey);
+                if (posCfg.GetVector3(node, out var pos, false))
+                {
+                    node.SetVar<Vector3>(saveVarKey, pos);
+                }
+            });
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected DelegateBhvCfg SaveOwnerPosTo(string saveVarKey)
+        {
+            return BeginCall(node =>
+            {
+                var ownerEntity = node.GetOwnerEntity();
+                if (ownerEntity == null)
+                {
+                    CLHelper.LogError(node, "SaveOwnerCurPosTo ownerEntity == null");
+                    return;
+                }
+
+                node.SetVar<Vector3>(saveVarKey, ownerEntity.position);
+            });
+        }
+
         /// <summary>
         /// 创建指定持续时间内每帧执行更新回调的节点。
         /// </summary>
@@ -78,8 +136,69 @@ namespace LccHotfix
                 var target = entityCfg.GetEntity(node, logError);
                 if (target != null)
                 {
-                    node.GetLogicWorld()?.DamageEventService?.DispatchDamage(new EvtDamage(node.RootLogic, target));
+                    node.GetLogicWorld()?.GetCreationInfo<BattleKernelCreationInfo>()?.DamageEventService?.DispatchDamage(new EvtDamage(node.RootLogic, target));
                 }
+            });
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public DelegateConditionCfg IsEntityVaild(string varID)
+        {
+            return new DelegateConditionCfg(node =>
+            {
+                var cfg = new EntityVarCfg(varID);
+                var entity = cfg.GetEntity(node, false);
+                return entity.IsValid();
+            });
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public WaitCheckBhvCfg WaitEnityHasView(string varID = CvKey.CV_OwnerEntity)
+        {
+            return new WaitCheckBhvCfg(node =>
+            {
+                var cfg = new EntityVarCfg(varID);
+                var entity = cfg.GetEntity(node, false);
+                if (entity == null)
+                {
+                    return false;
+                }
+
+                return entity.hasComView;
+            });
+        }
+
+        protected DelegateBhvCfg SetLife(float time)
+        {
+            return new DelegateBhvCfg(node =>
+            {
+                var ownerEntity = node.GetOwnerEntity();
+                if (ownerEntity == null)
+                {
+                    return;
+                }
+
+                ownerEntity.ReplaceComLife(time);
+            });
+        }
+
+        protected DelegateBhvCfg SetLife(string timeVar)
+        {
+            return new DelegateBhvCfg(node =>
+            {
+                var time = node.GetVar<float>(timeVar, -1f);
+                if (time < 0)
+                {
+                    return;
+                }
+
+                var ownerEntity = node.GetOwnerEntity();
+                if (ownerEntity == null)
+                {
+                    return;
+                }
+
+                ownerEntity.ReplaceComLife(time);
             });
         }
 

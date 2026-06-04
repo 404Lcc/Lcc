@@ -20,9 +20,6 @@ namespace LccHotfix
         }
 
         public abstract void Update(float dt, LogicEntity entity);
-        public virtual void LateUpdate(float dt, LogicEntity entity)
-        {
-        }
 
         public virtual bool IsEnd()
         {

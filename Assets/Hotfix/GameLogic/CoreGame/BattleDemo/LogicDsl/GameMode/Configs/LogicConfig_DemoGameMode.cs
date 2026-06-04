@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public partial class LogicConfigs_GameMode : LogicConfigBase
+    public partial class LogicConfigs_DemoGameMode : LogicConfigBase
     {
-        public LogicConfigs_GameMode(string name) : base(name, 8)
+        public LogicConfigs_DemoGameMode(string name) : base(name, 8)
         {
             DefaultLogicType = typeof(BattleModeLogic);
             InitConfigs();

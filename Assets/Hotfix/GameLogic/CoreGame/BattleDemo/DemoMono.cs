@@ -14,6 +14,7 @@ namespace LccHotfix
         private bool _autoFinishWhenSideDead = true;
 
         private DemoWorld _world;
+        private DemoWorldCreationInfo _creationInfo;
 
         private void Start()
         {
@@ -48,26 +49,24 @@ namespace LccHotfix
         {
             StopDemo();
 
-            var creationInfo = new DemoWorldCreationInfo
+            _creationInfo = new DemoWorldCreationInfo
             {
                 DemoMaxDurationSeconds = _maxDurationSeconds,
                 DemoAutoFinishWhenSideDead = _autoFinishWhenSideDead
             };
 
-            _world = DemoWorld.CreateWorld(creationInfo);
-            BattleLog.Debug("BattleGameplayDemoMono started demo world");
+            _world = DemoWorld.CreateWorld(_creationInfo);
+            BattleLogger.LogDebug("BattleGameplayDemoMono started demo world");
         }
 
         [ContextMenu("Stop Demo")]
         public void StopDemo()
         {
-            if (_world == null)
+            if (_world != null)
             {
-                return;
+                _world.DestroyWorlds();
+                _world = null;
             }
-
-            _world.DestroyWorlds();
-            _world = null;
         }
     }
 }

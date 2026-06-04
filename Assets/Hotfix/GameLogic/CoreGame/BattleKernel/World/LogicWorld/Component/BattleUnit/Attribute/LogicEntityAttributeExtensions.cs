@@ -52,14 +52,14 @@ namespace LccHotfix
                 comAttributes.SetAttribute<double>(PropertyFloat.CritDamage, new MultChangeDouble_ADD(addonProp.BaseCritDmgRatio));
                 comAttributes.SetAttribute<double>(PropertyFloat.InGameAmplify, new MultChangeDouble_ADD(addonProp.BaseDmgRatio));
                 comAttributes.SetAttribute<double>(PropertyFloat.InGameResistance, new MultChangeDouble_ADD(addonProp.BaseDmgRatioRes));
-                if (BattleLog.IsDebugEnabled)
+                if (BattleLogger.IsDebugEnabled)
                 {
-                    BattleLog.Debug($"FillAttributes 基础加成属性表: 暴击:{addonProp.BaseCritRatio}, 暴击概率抗:{addonProp.BaseCritRatioRes}, 暴伤加成:{addonProp.BaseCritDmgRatio}, 伤害:{addonProp.BaseDmgRatio}, 伤害抗:{addonProp.BaseDmgRatioRes}");
+                    BattleLogger.LogDebug($"FillAttributes 基础加成属性表: 暴击:{addonProp.BaseCritRatio}, 暴击概率抗:{addonProp.BaseCritRatioRes}, 暴伤加成:{addonProp.BaseCritDmgRatio}, 伤害:{addonProp.BaseDmgRatio}, 伤害抗:{addonProp.BaseDmgRatioRes}");
                 }
             }
-            else if (BattleLog.IsDebugEnabled)
+            else if (BattleLogger.IsDebugEnabled)
             {
-                BattleLog.Debug($"FillAttributes 基础加成属性表 == null,  unitCfg:{unitCfg.Base.Id}, unitCfg.BaseAddonPropId={unitCfg.BaseAddonPropId}");
+                BattleLogger.LogDebug($"FillAttributes 基础加成属性表 == null,  unitCfg:{unitCfg.Base.Id}, unitCfg.BaseAddonPropId={unitCfg.BaseAddonPropId}");
             }
 
             return comAttributes;
@@ -92,7 +92,7 @@ namespace LccHotfix
         /// </summary>
         private static void FillDefaultTeatAttrCom(AttributesComponent comAttributes)
         {
-            BattleLog.Error("FillAttributes 填充属性异常，临时使用缺省属性");
+            BattleLogger.LogError("FillAttributes 填充属性异常，临时使用缺省属性");
             comAttributes.SetAttribute<double>(PropertyFloat.Health, new MultChangeDouble_ADD(1000));
             comAttributes.SetAttribute<double>(PropertyFloat.Attack, new MultChangeDouble_ADD(100));
             comAttributes.SetAttribute<double>(PropertyFloat.Defense, new MultChangeDouble_ADD(50));
@@ -105,7 +105,7 @@ namespace LccHotfix
         {
             if (unitCfg == null)
             {
-                BattleLog.Error("GetBasePropGroup unitCfg == null");
+                BattleLogger.LogError("GetBasePropGroup unitCfg == null");
                 return null;
             }
 
@@ -113,13 +113,13 @@ namespace LccHotfix
             var levelBasePropCfg = GetTLevelBaseProp(unitCfg.LevelBaseProp);
             if (levelBasePropCfg == null)
             {
-                BattleLog.Error($"GetBasePropGroup 等级基础属性表 lvBasePropCfg == null, 战斗单位[{battleUnitTid}] 配置有错误，请策划检查");
+                BattleLogger.LogError($"GetBasePropGroup 等级基础属性表 lvBasePropCfg == null, 战斗单位[{battleUnitTid}] 配置有错误，请策划检查");
                 return null;
             }
 
             if (level >= levelBasePropCfg.Props.Count)
             {
-                BattleLog.Error($"GetBasePropGroup 等级基础属性表={levelBasePropCfg.Base.Id}, 请策划检查 level[{level}] >= Props.Count[{levelBasePropCfg.Props.Count}] ");
+                BattleLogger.LogError($"GetBasePropGroup 等级基础属性表={levelBasePropCfg.Base.Id}, 请策划检查 level[{level}] >= Props.Count[{levelBasePropCfg.Props.Count}] ");
                 return null;
             }
 
@@ -133,7 +133,7 @@ namespace LccHotfix
         {
             if (unitCfg == null)
             {
-                BattleLog.Error("GetBaseAddonProp unitCfg == null");
+                BattleLogger.LogError("GetBaseAddonProp unitCfg == null");
                 return null;
             }
 
@@ -152,14 +152,14 @@ namespace LccHotfix
         {
             if (levelBasePropTid == 0)
             {
-                BattleLog.Error("GetTLevelBaseProp levelBasePropTid == 0");
+                BattleLogger.LogError("GetTLevelBaseProp levelBasePropTid == 0");
                 return null;
             }
 
             var levelBasePropCfg = PbCfg.GetData<TLevelBaseProp>(levelBasePropTid);
             if (levelBasePropCfg == null)
             {
-                BattleLog.Error($"GetTLevelBaseProp 等级基础属性表 == null, 配置有错误，请策划检查 LevelBaseProp={levelBasePropTid}");
+                BattleLogger.LogError($"GetTLevelBaseProp 等级基础属性表 == null, 配置有错误，请策划检查 LevelBaseProp={levelBasePropTid}");
                 return null;
             }
 

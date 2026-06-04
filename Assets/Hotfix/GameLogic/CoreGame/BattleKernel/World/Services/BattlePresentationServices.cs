@@ -11,20 +11,4 @@ namespace LccHotfix
     {
         void PlayEntityAudio(LogicEntity entity, string eventName);
     }
-
-    public partial class LogicWorld
-    {
-        public IBattleEffectService BattleEffectService { get; private set; }
-        public IBattleAudioService BattleAudioService { get; private set; }
-
-        public void SetBattleEffectService(IBattleEffectService service)
-        {
-            BattleEffectService = service;
-        }
-
-        public void SetBattleAudioService(IBattleAudioService service)
-        {
-            BattleAudioService = service;
-        }
-    }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace LccHotfix
 {
@@ -35,9 +35,9 @@ namespace LccHotfix
                 atkRatio = 0f;
             }
 
-            if (BattleLog.IsDebugEnabled)
+            if (BattleLogger.IsDebugEnabled)
             {
-                BattleLog.Debug($"FighterTid={_attacker.FighterTid}, Attack = atk:{atk} * atkRatio:{atkRatio} = {atk * atkRatio}");
+                BattleLogger.LogDebug($"FighterTid={_attacker.FighterTid}, Attack = atk:{atk} * atkRatio:{atkRatio} = {atk * atkRatio}");
             }
             return atk * atkRatio;
         }

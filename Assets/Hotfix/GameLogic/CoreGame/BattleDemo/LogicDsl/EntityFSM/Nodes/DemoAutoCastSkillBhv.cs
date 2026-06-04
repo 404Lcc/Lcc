@@ -17,14 +17,14 @@ namespace LccHotfix
                     continue;
                 }
 
-                var target = GetLogicWorld()?.TargetQueryService?.SearchByDistanceY(entity, skillSlot.Cfg.Range, skillSlot.Cfg.CloakTargeting);
+                var target = GetLogicWorld()?.GetCreationInfo<BattleKernelCreationInfo>()?.TargetQueryService?.SearchByDistanceY(entity, skillSlot.Cfg.Range, skillSlot.Cfg.CloakTargeting);
                 if (target == null || target.IsDead())
                 {
                     continue;
                 }
 
                 CreateSkillProcess(entity, (int)skillSlot.Tid, target, EDamageType.EdtAmmunition, 0);
-                BattleLog.Debug($"DemoAutoCastSkillBhv cast skill={skillSlot.Tid}, caster={entity.ID}, target={target.ID}");
+                BattleLogger.LogDebug($"DemoAutoCastSkillBhv cast skill={skillSlot.Tid}, caster={entity.ID}, target={target.ID}");
                 break;
             }
 

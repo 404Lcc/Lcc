@@ -13,14 +13,14 @@ namespace LccHotfix
         {
             base.PostInitialize(owner);
 
-            _owner?.OwnerWorld?.GizmoService?.AddGizmo(OnGizmos);
+            _owner?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.GizmoService?.AddGizmo(OnGizmos);
         }
 
         public override void DisposeOnRemove()
         {
             base.DisposeOnRemove();
 
-            _owner?.OwnerWorld?.GizmoService?.RemoveGizmo(OnGizmos);
+            _owner?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.GizmoService?.RemoveGizmo(OnGizmos);
         }
 
         public void Init(Vector3 pos, float radius)

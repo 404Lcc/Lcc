@@ -6,15 +6,17 @@ namespace LccHotfix
     public class SysSubobject : IExecuteSystem
     {
         private readonly IGroup<LogicEntity> _group;
+        private readonly LogicWorld _logicWorld;
 
         public SysSubobject(ECWorlds world)
         {
-            _group = world.LogicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComSubobject));
+            _logicWorld = world.LogicWorld;
+            _group = _logicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComSubobject));
         }
 
         public void Execute()
         {
-            var dt = Time.deltaTime;
+            var dt = BattleTime.GetDeltaTime(_logicWorld);
             foreach (var entity in _group.GetEntities())
             {
                 var comSubobject = entity.comSubobject;

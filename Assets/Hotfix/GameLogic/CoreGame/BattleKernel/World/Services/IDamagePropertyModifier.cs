@@ -6,14 +6,4 @@ namespace LccHotfix
 
         double ApplyDamageTypeDamage(in DamageContext context, double baseDamage);
     }
-
-    public partial class LogicWorld
-    {
-        public IDamagePropertyModifier DamagePropertyModifier { get; private set; }
-
-        public void SetDamagePropertyModifier(IDamagePropertyModifier damagePropertyModifier)
-        {
-            DamagePropertyModifier = damagePropertyModifier;
-        }
-    }
 }

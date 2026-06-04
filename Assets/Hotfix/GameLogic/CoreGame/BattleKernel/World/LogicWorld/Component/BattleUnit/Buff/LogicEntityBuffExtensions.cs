@@ -10,10 +10,10 @@ namespace LccHotfix
         /// </summary>
         public static BuffGenInfo CreateBuffGenInfo(this LogicEntity entity, int buffLogicId, int maxLvl = 1)
         {
-            var svc = entity?.OwnerWorld?.CustomLogicService;
+            var svc = entity?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.CustomLogicService;
             if (svc == null)
             {
-                BattleLog.Error("CreateBuffGenInfo CustomLogicService == null");
+                BattleLogger.LogError("CreateBuffGenInfo CustomLogicService == null");
                 return null;
             }
 
@@ -22,7 +22,6 @@ namespace LccHotfix
             varEnv.WriteVar(CvKey.CV_LogicWorld, entity.OwnerWorld);
 
             var genInfo = svc.NewGenInfo<BuffGenInfo>();
-            genInfo.BuffLogicID = buffLogicId;
             genInfo.BuffLevel = 1;
             genInfo.BuffMaxLevel = maxLvl != 0 ? maxLvl : 1;
             genInfo.Owner = entity;

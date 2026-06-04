@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,8 +14,8 @@ namespace LccHotfix
             LogicEntity defender_e = world.GetEntityWithComID(defender_id);
             if (defender_e == null)
             {
-                if (BattleLog.IsDebugEnabled)
-                    BattleLog.Warning($"HandleDamage defender_e == null, defender_e={defender_id}");
+                if (BattleLogger.IsDebugEnabled)
+                    BattleLogger.LogWarning($"HandleDamage defender_e == null, defender_e={defender_id}");
                 return;
             }
             if (defender_e.IsDead())
@@ -48,33 +48,33 @@ namespace LccHotfix
             var hitTextPos = GetHitTextPos(defender_e, hitInfo);
 
             //伤害丢弃 状态飘字:
-            var usePrimaryStateFeedbackStyle = world.DamagePolicyService?.UsePrimaryStateFeedbackStyle(defender_e) ?? false;
+            var usePrimaryStateFeedbackStyle = world.GetCreationInfo<BattleKernelCreationInfo>().DamagePolicyService?.UsePrimaryStateFeedbackStyle(defender_e) ?? false;
             if (result.IsMiss)
             {
-                world.BattleFeedbackSink?.ShowDamageMiss(hitTextPos, usePrimaryStateFeedbackStyle);
+                world.GetCreationInfo<BattleKernelCreationInfo>().BattleFeedbackSink?.ShowDamageMiss(hitTextPos, usePrimaryStateFeedbackStyle);
                 return;
             }
             
             if (result.IsBlock)
             {
-                world.BattleFeedbackSink?.ShowDamageBlock(hitTextPos, usePrimaryStateFeedbackStyle);
+                world.GetCreationInfo<BattleKernelCreationInfo>().BattleFeedbackSink?.ShowDamageBlock(hitTextPos, usePrimaryStateFeedbackStyle);
                 return;
             }
 
             //伤害数字飘字:
             var damage = Mathf.FloorToInt((float)result.FinalDamage);
             defender_e.comHp.ChangeHP(-damage);
-            var useTaggedDefenderStyle = world.DamagePolicyService?.UseTaggedFeedbackStyle(defender_e) ?? false;
+            var useTaggedDefenderStyle = world.GetCreationInfo<BattleKernelCreationInfo>().DamagePolicyService?.UseTaggedFeedbackStyle(defender_e) ?? false;
 
             var displayDamage = damage + Mathf.FloorToInt((float)result.ShieldDeducted);
             if (displayDamage > 0)
             {
-                world.BattleFeedbackSink?.ShowDamageNumber(displayDamage, hitTextPos, useTaggedDefenderStyle, result.IsCritical);
+                world.GetCreationInfo<BattleKernelCreationInfo>().BattleFeedbackSink?.ShowDamageNumber(displayDamage, hitTextPos, useTaggedDefenderStyle, result.IsCritical);
             }
             
             if (defender_e.comHp.Hp <= 0)
             {
-                world.DamagePolicyService?.DispatchTriggerDeath(defender_e);
+                world.GetCreationInfo<BattleKernelCreationInfo>().DamagePolicyService?.DispatchTriggerDeath(defender_e);
                 var cmd = new EntityCommand() { CmdType = EntityCmdType.Nt_Death,};
                 defender_e.SendCmd(cmd);
             }

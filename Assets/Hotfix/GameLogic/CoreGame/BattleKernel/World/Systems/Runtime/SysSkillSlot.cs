@@ -16,7 +16,7 @@ namespace LccHotfix
 
         void IExecuteSystem.Execute()
         {
-            var dt = Time.deltaTime;
+            var dt = BattleTime.GetDeltaTime(_logicWorld);
             foreach (var e in _group.GetEntities())
             {
                 // tick各技能释放cd

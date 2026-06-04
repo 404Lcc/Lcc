@@ -15,7 +15,7 @@ namespace LccHotfix
             if (!string.IsNullOrEmpty(ObjName))
             {
                 IsPrepare = true;
-                entity.OwnerWorld.ViewLoadService.LoadObjectAsync(ObjName, loaded =>
+                entity.OwnerWorld.GetCreationInfo<BattleKernelCreationInfo>().ViewLoadService.LoadObjectAsync(ObjName, loaded =>
                 {
                     callback?.Invoke(entity, Category, loaded);
                 });

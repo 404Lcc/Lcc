@@ -22,7 +22,7 @@ namespace LccHotfix
                 var objView = entity.comView.MainActorView<MainGameObjectView>();
                 if (objView == null)
                 {
-                    BattleLog.Error($"entity.GetMainGameObjectView objView == null, e={entity.GetLogStr()}");
+                    BattleLogger.LogError($"entity.GetMainGameObjectView objView == null, e={entity.GetLogStr()}");
                     return null;
                 }
 
@@ -57,7 +57,7 @@ namespace LccHotfix
             {
                 if (logError)
                 {
-                    BattleLog.Error($"entity.GetMainViewBindTransform bpTrans == null, e={GetEntityLogId(entity)},bindPoint={bindPoint}");
+                    BattleLogger.LogError($"entity.GetMainViewBindTransform bpTrans == null, e={GetEntityLogId(entity)},bindPoint={bindPoint}");
                 }
 
                 return null;
@@ -80,7 +80,7 @@ namespace LccHotfix
             {
                 if (logError)
                 {
-                    BattleLog.Error("entity.GetMainView bindPoint.IsNullOrEmpty");
+                    BattleLogger.LogError("entity.GetMainView bindPoint.IsNullOrEmpty");
                 }
 
                 return null;
@@ -90,7 +90,7 @@ namespace LccHotfix
             {
                 if (logError)
                 {
-                    BattleLog.Error($"entity.GetMainView !entity.hasComView, e={GetEntityLogId(entity)}");
+                    BattleLogger.LogError($"entity.GetMainView !entity.hasComView, e={GetEntityLogId(entity)}");
                 }
 
                 return null;
@@ -99,7 +99,7 @@ namespace LccHotfix
             var objView = entity.comView.MainActorView<MainGameObjectView>();
             if (objView == null && logError)
             {
-                BattleLog.Error($"entity.GetMainView objView == null, e={GetEntityLogId(entity)}, bindPoint={bindPoint}");
+                BattleLogger.LogError($"entity.GetMainView objView == null, e={GetEntityLogId(entity)}, bindPoint={bindPoint}");
             }
 
             return objView;
@@ -147,7 +147,7 @@ namespace LccHotfix
             var collider = targetEntity.comView.MainActorView<MainGameObjectView>()?.GameObject?.GetComponentInChildren<Collider2D>();
             if (collider is null || !collider.gameObject.activeInHierarchy)
             {
-                BattleLog.Warning($"ClosestDistance 找不到碰撞体，EntityId={targetEntity.ID}");
+                BattleLogger.LogWarning($"ClosestDistance 找不到碰撞体，EntityId={targetEntity.ID}");
                 return diff;
             }
 

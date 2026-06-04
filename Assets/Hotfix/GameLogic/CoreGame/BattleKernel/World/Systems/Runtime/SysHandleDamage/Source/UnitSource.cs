@@ -9,7 +9,7 @@ namespace LccHotfix
 
         public UnitSource(LogicEntity e)
         {
-            PlayerInfo = e.OwnerWorld?.UnitOwnerInfoProvider?.GetOwnerInfo(e);
+            PlayerInfo = e.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.UnitOwnerInfoProvider?.GetOwnerInfo(e);
             FighterEnityId = e.ID;
             Properties = new PropertySnapshot();
             Properties.FillFromEntity(e);

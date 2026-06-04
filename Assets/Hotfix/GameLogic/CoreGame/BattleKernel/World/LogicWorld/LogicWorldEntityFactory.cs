@@ -14,16 +14,17 @@ namespace LccHotfix
                 return entity;
             }
 
-            if (MainObjectViewType == null)
+            var mainObjectViewType = GetCreationInfo<BattleKernelCreationInfo>().MainObjectViewType;
+            if (mainObjectViewType == null)
             {
-                BattleLog.Error($"LogicWorld.AddEntity path={path}, MainObjectViewType == null");
+                BattleLogger.LogError($"LogicWorld.AddEntity path={path}, MainObjectViewType == null");
                 return entity;
             }
 
             var objViewLoader = ReferencePool.Acquire<ObjViewLoader>();
             objViewLoader.Category = EViewCategory.MainGameObject;
             objViewLoader.ObjName = path;
-            objViewLoader.ViewClassType = MainObjectViewType;
+            objViewLoader.ViewClassType = mainObjectViewType;
             objViewLoader.IsAsync = true;
             if (entity.hasComViewLoader)
             {

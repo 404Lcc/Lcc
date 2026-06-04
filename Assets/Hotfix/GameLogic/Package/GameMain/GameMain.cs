@@ -53,7 +53,7 @@ namespace LccHotfix
             GizmoService = Current.AddModule<GizmoManager>();
             BadgeService = Current.AddModule<BadgeManager>();
             CustomLogicService = Current.AddModule<CustomLogicManager>();
-            CustomLogicService.SetRegister(new LogicCfgContainerRegister());
+            CustomLogicService.SetRegister(new LogicCfgContainerRegister_Demo());
             GuideService = Current.AddModule<GuideManager>();
 
             ConfigService = Current.AddModule<ConfigManager>();

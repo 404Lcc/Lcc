@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.CompilerServices;
 using Entitas;
 using Random = System.Random;
@@ -47,9 +47,9 @@ namespace LccHotfix
 
             float skillDamageFactor = sourceLogic.GetVar<float>(CvKey.CV_SkillDmageRate, 1f);
 
-            if (BattleLog.IsDebugEnabled)
+            if (BattleLogger.IsDebugEnabled)
             {
-                BattleLog.Debug($"EvtDamage SkillDamageFactor={skillDamageFactor}, sourceLogic={sourceLogic.GenInfo.LogicConfigID}");
+                BattleLogger.LogDebug($"EvtDamage SkillDamageFactor={skillDamageFactor}, sourceLogic={sourceLogic.GenInfo.LogicConfigID}");
             }
 
             EDamageType damageType = EDamageType.EdtNull;
@@ -86,16 +86,16 @@ namespace LccHotfix
 
             Context.SkillDamageFactor = skillDamageFactor;
             Context.StageDamageFactor = 0f;
-            Context.Timestamp = DateTime.UtcNow.Ticks;
+            Context.Timestamp = BattleTime.GetNowTicks(Context.World);
 
-            Context.World.DamagePropertyModifier?.ModifyContextProperties(attackerSum, e_defender, ref Context);
+            Context.World.GetCreationInfo<BattleKernelCreationInfo>().DamagePropertyModifier?.ModifyContextProperties(attackerSum, e_defender, ref Context);
 
-            if (BattleLog.IsDebugEnabled)
+            if (BattleLogger.IsDebugEnabled)
             {
-                BattleLog.Debug($"EvtDamage make damge context SkillDamageFactor = {Context.SkillDamageFactor}");
-                BattleLog.Debug($"EvtDamage make damge context SkillFixedDamage = {Context.SkillFixedDamage}");
-                BattleLog.Debug($"EvtDamage make damge context ExtraCritDamage = {Context.ExtraCritDamage}");
-                BattleLog.Debug($"EvtDamage make damge context RandomFinalDamageRate = {Context.RandomFinalDamageRate}");
+                BattleLogger.LogDebug($"EvtDamage make damge context SkillDamageFactor = {Context.SkillDamageFactor}");
+                BattleLogger.LogDebug($"EvtDamage make damge context SkillFixedDamage = {Context.SkillFixedDamage}");
+                BattleLogger.LogDebug($"EvtDamage make damge context ExtraCritDamage = {Context.ExtraCritDamage}");
+                BattleLogger.LogDebug($"EvtDamage make damge context RandomFinalDamageRate = {Context.RandomFinalDamageRate}");
             }
 
             return Context;
@@ -111,7 +111,7 @@ namespace LccHotfix
         {
             if (healer == null || target == null)
             {
-                BattleLog.Error("new EvtHeal healer == null || target == null");
+                BattleLogger.LogError("new EvtHeal healer == null || target == null");
                 return new EvtHeal();
             }
 
@@ -153,15 +153,15 @@ namespace LccHotfix
 
         public void Initialize()
         {
-            _worlds.LogicWorld.DamageEventService?.AddDamageHandler(HandleEvtDamage);
-            _worlds.LogicWorld.DamageEventService?.AddHealHandler(HandleEvtHeal);
+            _worlds.LogicWorld.GetCreationInfo<BattleKernelCreationInfo>().DamageEventService?.AddDamageHandler(HandleEvtDamage);
+            _worlds.LogicWorld.GetCreationInfo<BattleKernelCreationInfo>().DamageEventService?.AddHealHandler(HandleEvtHeal);
             _recorder = _metaWorld.comUniGameMode.DmgRecorder;
         }
 
         public void TearDown()
         {
-            _worlds.LogicWorld.DamageEventService?.RemoveDamageHandler(HandleEvtDamage);
-            _worlds.LogicWorld.DamageEventService?.RemoveHealHandler(HandleEvtHeal);
+            _worlds.LogicWorld.GetCreationInfo<BattleKernelCreationInfo>().DamageEventService?.RemoveDamageHandler(HandleEvtDamage);
+            _worlds.LogicWorld.GetCreationInfo<BattleKernelCreationInfo>().DamageEventService?.RemoveHealHandler(HandleEvtHeal);
         }
 
 
@@ -194,7 +194,7 @@ namespace LccHotfix
 
         public void ApplyHeal(ref HealContext context)
         {
-            context.World?.DamagePolicyService?.ModifyHeal(ref context);
+            context.World?.GetCreationInfo<BattleKernelCreationInfo>()?.DamagePolicyService?.ModifyHeal(ref context);
 
             // 处理治疗
             _healHandler?.HandleHeal(context);

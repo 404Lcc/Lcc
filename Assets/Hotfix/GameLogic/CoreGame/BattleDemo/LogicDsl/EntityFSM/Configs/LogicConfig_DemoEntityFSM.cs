@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public partial class LogicConfigs_EntityFSM : LogicConfigBase
+    public partial class LogicConfig_DemoEntityFSM : LogicConfigBase
     {
-        public LogicConfigs_EntityFSM(string name) : base(name, 8)
+        public LogicConfig_DemoEntityFSM(string name) : base(name, 8)
         {
             DefaultLogicType = typeof(BattleFSM);
             InitConfigs();

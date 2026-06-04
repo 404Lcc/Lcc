@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LccHotfix
@@ -15,23 +15,23 @@ namespace LccHotfix
             private set { m_buffs = value; }
         }
 
-        public bool HasBuff(int id)
+        public bool HasBuff(int logicConfigId)
         {
-            return m_buffs.Exists(b => b.BuffGenInfo.BuffLogicID == id);
+            return m_buffs.Exists(b => b.BuffGenInfo.LogicConfigID == logicConfigId);
         }
 
         public bool AddNewBuff(BuffGenInfo genInfo)
         {
             //TODO: 基础buff叠加预检测
 
-            var svc = Owner?.OwnerWorld?.CustomLogicService;
+            var svc = Owner?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.CustomLogicService;
             var container = svc?.GetConfigContainer(genInfo.ConfigContainerName);
             var cfg = container?.GetCustomLogicCfg(genInfo.LogicConfigID);
             if (cfg is IEntityBuffCfg entityBuffCfg && entityBuffCfg.TargetChecker != null)
             {
                 if (!entityBuffCfg.TargetChecker(Owner))
                 {
-                    BattleLog.Warning("AddNewBuff 时才发现 TargetChecker 检查不通过");
+                    BattleLogger.LogWarning("AddNewBuff 时才发现 TargetChecker 检查不通过");
                     return false;
                 }
             }
@@ -48,9 +48,9 @@ namespace LccHotfix
                 genInfo.DurationAddRate -= buffImmune / 10000f;
             }
 
-            if (HasBuff(genInfo.BuffLogicID)) //临时Demo，先放个无相同buff规则
+            if (HasBuff(genInfo.LogicConfigID)) //临时Demo，先放个无相同buff规则
             {
-                var buff = GetBuff(genInfo.BuffLogicID);
+                var buff = GetBuff(genInfo.LogicConfigID);
                 if (buff != null)
                 {
                     UpgradeBuff(buff);
@@ -64,14 +64,14 @@ namespace LccHotfix
             return true;
         }
 
-        public BuffLogic GetBuff(int buffId)
+        public BuffLogic GetBuff(int logicConfigId)
         {
             for (int i = m_buffs.Count - 1; i >= 0; --i)
             {
                 var buff = m_buffs[i] as BuffLogic;
                 if (buff == null)
                     continue;
-                if (buff.GenInfo.LogicConfigID == buffId)
+                if (buff.GenInfo.LogicConfigID == logicConfigId)
                 {
                     return buff;
                 }
@@ -80,17 +80,17 @@ namespace LccHotfix
             return null;
         }
 
-        public int GetBuffSumLevel(int buffId)
+        public int GetBuffSumLevel(int logicConfigId)
         {
-            return m_buffs.Where(buff => buff.BuffGenInfo.BuffLogicID == buffId).Sum(buff => buff.Level);
+            return m_buffs.Where(buff => buff.BuffGenInfo.LogicConfigID == logicConfigId).Sum(buff => buff.Level);
         }
 
-        public bool RemoveBuffByID(int buffID)
+        public bool RemoveBuffByID(int logicConfigId)
         {
             for (int i = m_buffs.Count - 1; i >= 0; --i)
             {
                 var buff = m_buffs[i] as BuffLogic;
-                if (buff.GenInfo.LogicConfigID == buffID)
+                if (buff.GenInfo.LogicConfigID == logicConfigId)
                 {
                     DestroyBuff(buff);
                     m_buffs.RemoveAt(i);
@@ -103,7 +103,7 @@ namespace LccHotfix
         private void DestroyBuff(BuffLogic buff)
         {
             buff.OnBuffPreviousRemove();
-            Owner?.OwnerWorld?.CustomLogicService?.DestroyLogic(buff);
+            Owner?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.CustomLogicService?.DestroyLogic(buff);
         }
 
         private void UpgradeBuff(BuffLogic buff)
@@ -124,7 +124,7 @@ namespace LccHotfix
         {
             if (m_creatingList.Count > 0)
             {
-                var svc = Owner?.OwnerWorld?.CustomLogicService;
+                var svc = Owner?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.CustomLogicService;
                 foreach (var genInfo in m_creatingList)
                 {
                     var buffLogic = svc?.CreateLogic<BuffLogic>(genInfo);
@@ -184,7 +184,7 @@ namespace LccHotfix
             {
                 var buff = m_buffs[i] as BuffLogic;
                 buff.OnBuffPreviousRemove();
-                Owner?.OwnerWorld?.CustomLogicService?.DestroyLogic(buff);
+                Owner?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.CustomLogicService?.DestroyLogic(buff);
             }
 
             m_creatingList.Clear();
@@ -219,7 +219,7 @@ namespace LccHotfix
         {
             if (e.hasComBuffCenter)
             {
-                BattleLog.Error("SetBuffCenter Error, has buffCenter already");
+                BattleLogger.LogError("SetBuffCenter Error, has buffCenter already");
                 return;
             }
 
@@ -233,17 +233,17 @@ namespace LccHotfix
         {
             if (!e.hasComBuffCenter)
             {
-                if (BattleLog.IsDebugEnabled)
-                    BattleLog.Debug("AddBuff unusual, cant find buffCenter");
+                if (BattleLogger.IsDebugEnabled)
+                    BattleLogger.LogDebug("AddBuff unusual, cant find buffCenter");
                 e.SetBuffCenter(null);
             }
 
             e.comBuffCenter.AddNewBuff(genInfo);
         }
 
-        static public void RemoveBuffByID(this LogicEntity e, int buffID)
+        static public void RemoveBuffByID(this LogicEntity e, int logicConfigId)
         {
-            e.comBuffCenter.RemoveBuffByID(buffID);
+            e.comBuffCenter.RemoveBuffByID(logicConfigId);
         }
     }
 

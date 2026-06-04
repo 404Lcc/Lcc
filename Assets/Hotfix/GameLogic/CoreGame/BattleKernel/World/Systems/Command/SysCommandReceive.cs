@@ -3,13 +3,11 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
+    // 当前未接入系统流水线；保留给未来需要 CommandReceiver 队列时启用。
     public sealed class SysCommandReceive : ReactiveSystem<LogicEntity>
     {
-        private ECWorlds _world;
-
         public SysCommandReceive(ECWorlds world) : base(world.LogicWorld)
         {
-            _world = world;
         }
 
         protected override ICollector<LogicEntity> GetTrigger(IContext<LogicEntity> context)

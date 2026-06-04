@@ -136,7 +136,7 @@ namespace LccHotfix
         {
             RebuildComponentLookUp(typeof(LogicComponentsLookup), LogicComponentsLookup.TypeIndexList, out var componentTypes, out var componentNames);
             var contextInfo = new ContextInfo("LogicWorld", componentNames.ToArray(), componentTypes.ToArray());
-            LogicWorld = new LogicWorld(contextInfo, componentTypes.Count, GetLogicEntityFactory(), 1, (entity) => new UnsafeAERC());
+            LogicWorld = new LogicWorld(contextInfo, componentTypes.Count, GetLogicEntityFactory(), 1, (entity) => new UnsafeAERC(), _creationInfo);
             _worldList.Add(LogicWorld);
         }
 

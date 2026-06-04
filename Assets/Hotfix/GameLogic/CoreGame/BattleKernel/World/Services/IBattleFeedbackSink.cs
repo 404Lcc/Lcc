@@ -12,14 +12,4 @@ namespace LccHotfix
 
         void ShowHealNumber(int healing, Vector3 position, bool useTaggedTargetStyle);
     }
-
-    public partial class LogicWorld
-    {
-        public IBattleFeedbackSink BattleFeedbackSink { get; private set; }
-
-        public void SetBattleFeedbackSink(IBattleFeedbackSink feedbackSink)
-        {
-            BattleFeedbackSink = feedbackSink;
-        }
-    }
 }

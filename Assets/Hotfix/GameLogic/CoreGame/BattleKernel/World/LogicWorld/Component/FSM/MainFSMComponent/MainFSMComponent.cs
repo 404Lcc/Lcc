@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace LccHotfix
 {
@@ -46,7 +46,7 @@ namespace LccHotfix
         {
             if (Logic != null)
             {
-                Owner?.OwnerWorld?.CustomLogicService?.DestroyLogic(Logic);
+                Owner?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.CustomLogicService?.DestroyLogic(Logic);
                 Logic = null;
             }
 
@@ -80,7 +80,7 @@ namespace LccHotfix
         {
             if (fsm == null)
             {
-                BattleLog.Error("AddComFSM fsm == null");
+                BattleLogger.LogError("AddComFSM fsm == null");
             }
 
             var index = LogicComponentsLookup.ComMainFSM;

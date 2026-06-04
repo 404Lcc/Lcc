@@ -1,4 +1,4 @@
-﻿using Entitas;
+using Entitas;
 using UnityEngine;
 
 namespace LccHotfix
@@ -17,13 +17,13 @@ namespace LccHotfix
 
         void IExecuteSystem.Execute()
         {
-            var dt = Time.deltaTime;
+            var dt = BattleTime.GetDeltaTime(_logicWorld);
             foreach (var e in _group.GetEntities())
             {
                 var process = e.comSkillProcess.SkillProcess;
                 if (process == null)
                 {
-                    BattleLog.Error("SkillProcessSystem SkillProcess == null");
+                    BattleLogger.LogError("SkillProcessSystem SkillProcess == null");
                     e.RemoveComSkillProcess();
                 }
                 else

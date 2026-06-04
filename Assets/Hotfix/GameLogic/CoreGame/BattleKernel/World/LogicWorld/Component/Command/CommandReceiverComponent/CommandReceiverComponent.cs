@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
+    // 保留的接收队列组件。当前战斗命令统一走 CommandSender 本地派发，BattleKernelWorld 不注册 SysCommandReceive。
     public sealed class CommandReceiverComponent : LogicComponent
     {
         private List<EntityCommand> m_receiveQueue = new(4);

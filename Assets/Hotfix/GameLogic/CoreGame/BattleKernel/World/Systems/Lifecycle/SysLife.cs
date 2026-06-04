@@ -6,16 +6,18 @@ namespace LccHotfix
     public class SysLife : IExecuteSystem
     {
         private readonly IGroup<LogicEntity> _group;
+        private readonly LogicWorld _logicWorld;
         
         public SysLife(ECWorlds worlds)
         {
-            _group = worlds.LogicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComLife));
+            _logicWorld = worlds.LogicWorld;
+            _group = _logicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComLife));
         }
 
         private static int acc = 0;
         public void Execute()
         {
-            var dt = Time.deltaTime;
+            var dt = BattleTime.GetDeltaTime(_logicWorld);
             foreach (var e in _group.GetEntities())
             {
                 var comLife = e.comLife;

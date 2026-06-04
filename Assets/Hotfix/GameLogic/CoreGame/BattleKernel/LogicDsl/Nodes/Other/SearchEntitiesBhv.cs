@@ -82,7 +82,7 @@ namespace LccHotfix
 
             if (_cfg.FirstEliteOrBoss)
             {
-                var eliteOrBossTarget = mLogicWorld?.TargetQueryService?.GetEliteOrBossTarget(mLogicWorld, mUserEntity, _cfg.Distance.GetValue(this), _cfg.CloakTargeting);
+                var eliteOrBossTarget = mLogicWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.TargetQueryService?.GetEliteOrBossTarget(mLogicWorld, mUserEntity, _cfg.Distance.GetValue(this), _cfg.CloakTargeting);
                 if (eliteOrBossTarget != null)
                 {
                     SaveTargetVar(eliteOrBossTarget);
@@ -104,7 +104,7 @@ namespace LccHotfix
                 return dt;
             }
 
-            if (!_cfg.CloakTargeting && (mLogicWorld?.TargetQueryService?.IsCloaked(target) ?? false))
+            if (!_cfg.CloakTargeting && (mLogicWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.TargetQueryService?.IsCloaked(target) ?? false))
             {
                 SearchEntity();
                 return dt;
@@ -123,7 +123,7 @@ namespace LccHotfix
                 return;
             }
 
-            var target = mLogicWorld?.TargetQueryService?.SearchByDistanceY(mUserEntity, dis, _cfg.CloakTargeting);
+            var target = mLogicWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.TargetQueryService?.SearchByDistanceY(mUserEntity, dis, _cfg.CloakTargeting);
             SaveTargetVar(target);
         }
 

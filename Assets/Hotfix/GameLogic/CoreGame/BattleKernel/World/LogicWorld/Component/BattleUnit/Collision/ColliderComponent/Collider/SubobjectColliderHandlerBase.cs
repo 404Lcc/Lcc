@@ -279,8 +279,8 @@ public class SubobjectColliderHandlerBase : ColliderHandler, IEntityColliderChec
         }
 
         _hitIntervalTimer = HitInterval - mHitIntervalReduce;
-        if (BattleLog.IsDebugEnabled)
-            BattleLog.Debug($"[碰撞冷却] selfEntity={selfEntity.ID}, hitEntity={hitEntity.ID}, 碰撞间隔={HitInterval}s, 间隔减少={mHitIntervalReduce}s, 实际冷却={_hitIntervalTimer:F3}s, 当前碰撞次数={_currentHitCount}/{MaxHitCount}");
+        if (BattleLogger.IsDebugEnabled)
+            BattleLogger.LogDebug($"[碰撞冷却] selfEntity={selfEntity.ID}, hitEntity={hitEntity.ID}, 碰撞间隔={HitInterval}s, 间隔减少={mHitIntervalReduce}s, 实际冷却={_hitIntervalTimer:F3}s, 当前碰撞次数={_currentHitCount}/{MaxHitCount}");
 
         HitInfo hitInfo = new HitInfo();
         hitInfo.hitPos = hitPoint;

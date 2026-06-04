@@ -1,4 +1,4 @@
-﻿namespace LccHotfix
+namespace LccHotfix
 {
     /// <summary>
     /// LogicEntity 属性读取和修改的快捷扩展。
@@ -12,7 +12,7 @@
         {
             if (e == null || !e.hasComAttributes)
             {
-                BattleLog.Error("e.GetAttribute  !HasAttributes");
+                BattleLogger.LogError("e.GetAttribute  !HasAttributes");
             }
 
             var rv = errorValue;
@@ -29,7 +29,7 @@
         {
             if (e == null || !e.hasComAttributes)
             {
-                BattleLog.Error("e.GetAttribute  !HasAttributes");
+                BattleLogger.LogError("e.GetAttribute  !HasAttributes");
             }
 
             var rv = errorValue;
@@ -46,7 +46,7 @@
         {
             if (e == null || !e.hasComAttributes)
             {
-                BattleLog.Error("e.GetAttribute  !HasAttributes");
+                BattleLogger.LogError("e.GetAttribute  !HasAttributes");
             }
 
             var rv = errorValue;
@@ -63,7 +63,7 @@
         {
             if (e == null || !e.hasComAttributes)
             {
-                BattleLog.Error("e.GetAttribute  !HasAttributes");
+                BattleLogger.LogError("e.GetAttribute  !HasAttributes");
             }
 
             var rv = errorValue;
@@ -81,7 +81,7 @@
             var rv = errorValue;
             if (e == null || !e.hasComAttributes)
             {
-                BattleLog.Error("e.GetAttribute  !HasAttributes");
+                BattleLogger.LogError("e.GetAttribute  !HasAttributes");
                 return rv;
             }
 
@@ -100,7 +100,7 @@
         {
             if (e == null || !e.hasComAttributes)
             {
-                BattleLog.Error("Actor.SetAttribute  !HasAttributes");
+                BattleLogger.LogError("Actor.SetAttribute  !HasAttributes");
             }
 
             e.comAttributes.Modify(key, value, flag);
@@ -113,7 +113,7 @@
         {
             if (e == null || !e.hasComAttributes)
             {
-                BattleLog.Error("Actor.SetAttribute  !HasAttributes");
+                BattleLogger.LogError("Actor.SetAttribute  !HasAttributes");
             }
 
             e.comAttributes.Modify(key, value, flag);
@@ -126,7 +126,7 @@
         {
             if (e == null || !e.hasComAttributes)
             {
-                BattleLog.Error("Actor.SetAttribute  !HasAttributes");
+                BattleLogger.LogError("Actor.SetAttribute  !HasAttributes");
             }
 
             e.comAttributes.Modify(key, value, flag);
@@ -139,7 +139,7 @@
         {
             if (e == null || !e.hasComAttributes)
             {
-                BattleLog.Error("Actor.RemoveAttribute  !HasAttributes");
+                BattleLogger.LogError("Actor.RemoveAttribute  !HasAttributes");
             }
 
             e.comAttributes.RemoveModify<T>(key, flag);

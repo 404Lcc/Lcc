@@ -6,41 +6,79 @@ namespace LccHotfix
 {
     public class SysCollision : IExecuteSystem
     {
-        private IGroup<LogicEntity> enemyGroup;
-        private IGroup<LogicEntity> friendGroup;
-        private readonly AQuadSpace root;
+        private readonly BattleKernelCreationInfo creationInfo;
+        private readonly LogicWorld logicWorld;
+        private readonly IGroup<LogicEntity> enemyGroup;
+        private readonly IGroup<LogicEntity> friendGroup;
+        private AQuadSpace root;
+        private int rootConfigVersion;
         private readonly CollectResult result;
+        private int statFrame;
+        private int statSourceCount;
+        private int statTargetCount;
+        private int statCandidateCount;
+        private int statRawHitCount;
+        private int statOutOfRootCount;
 
         public SysCollision(ECWorlds world)
         {
-            enemyGroup = world.LogicWorld.GetLogicGroup_Bounds_NoneSubobject();
-            friendGroup = world.LogicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComCollider, LogicComponentsLookup.ComTransform));
-            root = SpatialPartition.Create(new AABB(Vector2.zero, 15), 3);
+            creationInfo = world.GetCreationInfo<BattleKernelCreationInfo>();
+            logicWorld = world.LogicWorld;
+            enemyGroup = logicWorld.GetLogicGroup_Bounds_NoneSubobject();
+            friendGroup = logicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComCollider, LogicComponentsLookup.ComTransform, LogicComponentsLookup.ComBounds));
             result = new CollectResult();
+            RebuildSpaceIfNeeded(true);
         }
 
         public void Execute()
         {
-            var dt = Time.deltaTime;
+            RebuildSpaceIfNeeded(false);
+            var dt = BattleTime.GetDeltaTime(logicWorld);
             var enemies = enemyGroup.GetEntities();
             var friends = GetEntities(dt);
             FilterHit(friends, enemies, dt);
-            //FilterHitOrgion(friends, enemies, dt);
             Handle(friends, dt);
+            LogStatsIfNeeded();
         }
 
-        //测试通过后会重构
-        private void FilterHit(IEnumerable<LogicEntity> friends, LogicEntity[] enemies, float dt)
+        private void RebuildSpaceIfNeeded(bool force)
         {
+            var config = creationInfo?.CollisionSpaceConfig;
+            if (config == null)
+            {
+                return;
+            }
+
+            if (!force && root != null && rootConfigVersion == config.Version)
+            {
+                return;
+            }
+
+            root = SpatialPartition.Create(config.FullSpace, config.QuadTreeDepth);
+            rootConfigVersion = config.Version;
+            if (BattleLogger.IsDebugEnabled)
+            {
+                var aabb = config.FullSpace;
+                BattleLogger.LogDebug($"SysCollision rebuild space min=({aabb.minPoint.x:F2},{aabb.minPoint.y:F2}) max=({aabb.maxPoint.x:F2},{aabb.maxPoint.y:F2}) depth={config.QuadTreeDepth} version={config.Version}");
+            }
+        }
+
+        private void FilterHit(List<LogicEntity> friends, LogicEntity[] enemies, float dt)
+        {
+            ResetStats(friends.Count, enemies.Length);
             root.Clear();
             result.result.Clear();
             root.AddObjects(ToSpace(friends, 0));
             root.AddObjects(ToSpace(enemies, 1));
             root.Collect(result);
+            statCandidateCount = result.result.Count;
             foreach (var item in result.result)
             {
-                LogicEntity friend, enemy;
-                FindInfo(item, out friend, out enemy);
+                if (!TryFindInfo(item, out var friend, out var enemy))
+                {
+                    continue;
+                }
+
                 var maker = friend.comCollider.handler.RawHitMaker;
                 if (maker is HitMaker hm)
                 {
@@ -52,24 +90,32 @@ namespace LccHotfix
                     if (hm.IsHit(friend, dt, enemy, out var hit))
                     {
                         hm.Add(hit);
+                        statRawHitCount++;
                     }
                 }
             }
         }
 
-        private void FindInfo(CollectPair item, out LogicEntity friend, out LogicEntity enemy)
+        private bool TryFindInfo(CollectPair item, out LogicEntity friend, out LogicEntity enemy)
         {
             friend = item.obj0 as LogicEntity;
             enemy = item.obj1 as LogicEntity;
+            if (friend == null || enemy == null)
+            {
+                return false;
+            }
+
             if (enemy.hasComCollider)
             {
                 var tem = friend;
                 friend = enemy;
                 enemy = tem;
             }
+
+            return friend.hasComCollider && enemy.hasComBounds;
         }
 
-        private void Handle(IEnumerable<LogicEntity> friends, float dt)
+        private void Handle(List<LogicEntity> friends, float dt)
         {
             foreach (var entity in friends)
             {
@@ -85,49 +131,42 @@ namespace LccHotfix
             }
         }
 
-        private void FilterHitOrgion(IEnumerable<LogicEntity> friends, LogicEntity[] entities, float dt)
-        {
-            foreach (var friend in friends)
-            {
-                for (int i = 0; i < entities.Length; i++)
-                {
-                    var enemy = entities[i];
-                    if (enemy == friend)
-                        continue;
-
-                    var maker = friend.comCollider.handler.RawHitMaker;
-                    if (maker is HitMaker hm)
-                    {
-                        if (hm.IsFull())
-                        {
-                            break;
-                        }
-
-                        if (hm.IsHit(friend, dt, enemy, out var hit))
-                        {
-                            hm.Add(hit);
-                        }
-                    }
-                }
-            }
-        }
-
         private IEnumerable<SpaceObject> ToSpace(IEnumerable<LogicEntity> v, int layer)
         {
             foreach (var item in v)
             {
+                if (item == null || !item.hasComBounds)
+                {
+                    continue;
+                }
+
                 var aabb = item.comBounds.GetBounds();
+                if (aabb == null)
+                {
+                    continue;
+                }
+
+                if (root?.aabb != null && !root.aabb.Intersects(aabb))
+                {
+                    statOutOfRootCount++;
+                }
+
                 yield return new SpaceObject(aabb, item, layer);
             }
         }
 
-        private IEnumerable<LogicEntity> GetEntities(float dt)
+        private List<LogicEntity> GetEntities(float dt)
         {
+            var entities = new List<LogicEntity>();
             foreach (var entity in friendGroup.GetEntities())
             {
                 if (CanCollision(entity, dt))
-                    yield return entity;
+                {
+                    entities.Add(entity);
+                }
             }
+
+            return entities;
         }
 
         private bool CheckRawHits(float dt, LogicEntity ownerEntity, IRawHitMaker maker)
@@ -170,6 +209,37 @@ namespace LccHotfix
             }
 
             return true;
+        }
+
+        private void ResetStats(int sourceCount, int targetCount)
+        {
+            statSourceCount = sourceCount;
+            statTargetCount = targetCount;
+            statCandidateCount = 0;
+            statRawHitCount = 0;
+            statOutOfRootCount = 0;
+        }
+
+        private void LogStatsIfNeeded()
+        {
+            if (creationInfo?.CollisionSpaceConfig == null || !creationInfo.CollisionSpaceConfig.EnableStatsLog)
+            {
+                return;
+            }
+
+            if (!BattleLogger.IsDebugEnabled)
+            {
+                return;
+            }
+
+            statFrame++;
+            if (statFrame < 60)
+            {
+                return;
+            }
+
+            statFrame = 0;
+            BattleLogger.LogDebug($"SysCollision stats source={statSourceCount}, target={statTargetCount}, candidate={statCandidateCount}, rawHit={statRawHitCount}, outOfRoot={statOutOfRootCount}");
         }
     }
 }

@@ -34,7 +34,7 @@ namespace LccHotfix
             SpellEntityId = -1;
             if (Logic != null)
             {
-                Owner?.OwnerWorld?.CustomLogicService?.DestroyLogic(Logic);
+                Owner?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.CustomLogicService?.DestroyLogic(Logic);
                 Logic = null;
             }
 

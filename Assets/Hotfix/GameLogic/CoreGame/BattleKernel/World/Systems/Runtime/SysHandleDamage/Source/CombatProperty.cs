@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace LccHotfix
 {
@@ -88,8 +88,8 @@ namespace LccHotfix
 
         public bool AddPropertyByKey(int key, double valueAdd)
         {
-            if (BattleLog.IsDebugEnabled)
-                BattleLog.Debug($"SetPropertyByAttributeKey key={key}, valueAdd={valueAdd}");
+            if (BattleLogger.IsDebugEnabled)
+                BattleLogger.LogDebug($"SetPropertyByAttributeKey key={key}, valueAdd={valueAdd}");
 
             switch (key)
             {
@@ -154,7 +154,7 @@ namespace LccHotfix
                     FinalAtk += valueAdd;
                     break;
                 default:
-                    BattleLog.Error($"SetPropertyByAttributeKey 无效的 AttributeKey={key}");
+                    BattleLogger.LogError($"SetPropertyByAttributeKey 无效的 AttributeKey={key}");
                     return false;
             }
 
@@ -204,7 +204,7 @@ namespace LccHotfix
 
         public void Add_FromPlayerCategoryVolume(LogicEntity entity)
         {
-            entity?.OwnerWorld?.CombatPropertyVolumeProvider?.AddCategoryVolumes(entity, ref this);
+            entity?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.CombatPropertyVolumeProvider?.AddCategoryVolumes(entity, ref this);
         }
 
         public void FillFromSubobjectVolume(IBattlePlayerInfo playerInfo, uint subobjectTid)
@@ -212,7 +212,7 @@ namespace LccHotfix
             if (playerInfo is ICombatPropertyVolumeInfo volumeInfo)
                 volumeInfo.AddSubobjectVolume(subobjectTid, ref this);
             else
-                BattleLog.Error("叠加 玩家身上记录的集体生效的分类属性 playerInfo == null");
+                BattleLogger.LogError("叠加 玩家身上记录的集体生效的分类属性 playerInfo == null");
         }
 
         public void Add(in PropertySnapshot other)

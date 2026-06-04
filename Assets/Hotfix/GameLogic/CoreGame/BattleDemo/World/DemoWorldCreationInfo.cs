@@ -1,3 +1,5 @@
+using System;
+
 namespace LccHotfix
 {
     public class DemoWorldCreationInfo : BattleKernelCreationInfo

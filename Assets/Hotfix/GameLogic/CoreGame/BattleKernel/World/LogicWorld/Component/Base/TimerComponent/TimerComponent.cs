@@ -26,16 +26,6 @@ namespace LccHotfix
         }
     }
 
-    public partial class LogicWorld
-    {
-        public ITimerService TimerService { get; private set; }
-
-        public void SetTimerService(ITimerService timerService)
-        {
-            TimerService = timerService;
-        }
-    }
-
     public partial class LogicEntity
     {
         public TimerComponent comTimer

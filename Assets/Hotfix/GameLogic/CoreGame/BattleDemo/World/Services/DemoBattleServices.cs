@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HotUpdate.Framework;
 using PBConfig;
 using UnityEngine;
 
@@ -7,16 +8,19 @@ namespace LccHotfix
 {
     public class DemoBattleModeLogicService : IBattleModeLogicService
     {
+        private ICustomLogicService _customLogicService;
+
         public BattleModeLogic CreateModeLogic(ICustomLogicGenInfo genInfo)
         {
             genInfo.PreEnv.ReadVar(CvKey.CV_WorldInfo, out DemoWorldCreationInfo creationInfo);
-            var service = creationInfo.CustomLogicService;
-            return service.CreateLogic<BattleModeLogic>(genInfo);
+            _customLogicService = creationInfo.CustomLogicService;
+            return _customLogicService.CreateLogic<BattleModeLogic>(genInfo);
         }
 
         public void DestroyModeLogic(BattleModeLogic logic)
         {
-            Main.CustomLogicService?.DestroyLogic(logic);
+            _customLogicService?.DestroyLogic(logic);
+            _customLogicService = null;
         }
     }
 
@@ -24,22 +28,22 @@ namespace LccHotfix
     {
         public void ShowDamageMiss(Vector3 position, bool usePrimaryStateFeedbackStyle)
         {
-            BattleLog.Debug($"Damage miss at {position}");
+            BattleLogger.LogDebug($"Damage miss at {position}");
         }
 
         public void ShowDamageBlock(Vector3 position, bool usePrimaryStateFeedbackStyle)
         {
-            BattleLog.Debug($"Damage block at {position}");
+            BattleLogger.LogDebug($"Damage block at {position}");
         }
 
         public void ShowDamageNumber(int damage, Vector3 position, bool useTaggedDefenderStyle, bool isCritical)
         {
-            BattleLog.Debug($"Damage {damage} at {position}, critical={isCritical}");
+            BattleLogger.LogDebug($"Damage {damage} at {position}, critical={isCritical}");
         }
 
         public void ShowHealNumber(int healing, Vector3 position, bool useTaggedTargetStyle)
         {
-            BattleLog.Debug($"Heal {healing} at {position}");
+            BattleLogger.LogDebug($"Heal {healing} at {position}");
         }
     }
 
@@ -47,7 +51,7 @@ namespace LccHotfix
     {
         public void LoadObjectAsync(string objName, Action<IReceiveLoaded> onComplete)
         {
-            BattleLog.Warning($"DemoViewLoadService skipped loading view: {objName}");
+            BattleLogger.LogWarning($"DemoViewLoadService skipped loading view: {objName}");
             onComplete?.Invoke(null);
         }
     }
@@ -161,7 +165,7 @@ namespace LccHotfix
     {
         public int RangeAttackableTargetBatchAction(LogicWorld world, LogicEntity source, Vector3 position, float range, Func<LogicEntity, bool> actionFunc, bool stopOnActionFalse = false, List<LogicEntity> actionEntityList = null)
         {
-            if (world == null || source == null)
+            if (world == null || source == null || actionFunc == null || range <= 0)
             {
                 return 0;
             }
@@ -182,7 +186,39 @@ namespace LccHotfix
 
                 actionEntityList?.Add(target);
                 count++;
-                if (actionFunc != null && !actionFunc(target) && stopOnActionFalse)
+                if (!actionFunc(target) && stopOnActionFalse)
+                {
+                    break;
+                }
+            }
+
+            return count;
+        }
+
+        public int AttackableTargetInAabbBatchAction(LogicWorld world, LogicEntity source, AABB aabb, Func<LogicEntity, bool> actionFunc, bool stopOnActionFalse = false, List<LogicEntity> actionEntityList = null)
+        {
+            if (world == null || source == null || aabb == null || actionFunc == null)
+            {
+                return 0;
+            }
+
+            int count = 0;
+            var group = world.GetLogicGroup_Faction_HP_Transform();
+            foreach (var target in group.GetEntities())
+            {
+                if (target == source || target.Faction == source.Faction || !target.hasComHp || target.comHp.Hp <= 0)
+                {
+                    continue;
+                }
+
+                if (!target.hasComBounds || !aabb.Collision(target.comBounds.GetBounds()))
+                {
+                    continue;
+                }
+
+                actionEntityList?.Add(target);
+                count++;
+                if (!actionFunc(target) && stopOnActionFalse)
                 {
                     break;
                 }
@@ -250,7 +286,7 @@ namespace LccHotfix
     {
         public void PlayEffect(string path, Vector3 position, float duration, float scale = 1f)
         {
-            BattleLog.Debug($"PlayEffect path={path}, position={position}, duration={duration}, scale={scale}");
+            BattleLogger.LogDebug($"PlayEffect path={path}, position={position}, duration={duration}, scale={scale}");
         }
     }
 
@@ -258,7 +294,7 @@ namespace LccHotfix
     {
         public void PlayEntityAudio(LogicEntity entity, string eventName)
         {
-            BattleLog.Debug($"PlayEntityAudio entity={entity?.ID}, event={eventName}");
+            BattleLogger.LogDebug($"PlayEntityAudio entity={entity?.ID}, event={eventName}");
         }
     }
 

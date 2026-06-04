@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-    public partial class LogicConfigs_Skill : LogicConfigBase
+    public partial class LogicConfigs_DemoSkill : LogicConfigBase
     {
-        public LogicConfigs_Skill(string name) : base(name, 8)
+        public LogicConfigs_DemoSkill(string name) : base(name, 8)
         {
             DefaultLogicType = typeof(SkillLogic);
             InitConfigs();

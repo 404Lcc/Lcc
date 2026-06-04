@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using HotUpdate.Framework.PbCfg;
 using PBConfig;
@@ -28,7 +29,7 @@ namespace LccHotfix
             var logicWorld = this.GetLogicWorld();
             if (creationInfo == null || logicWorld == null)
             {
-                BattleLog.Error("DemoSpawnUnitBhv creationInfo == null || logicWorld == null");
+                BattleLogger.LogError("DemoSpawnUnitBhv creationInfo == null || logicWorld == null");
                 return;
             }
 
@@ -56,7 +57,7 @@ namespace LccHotfix
                 SetVar(_cfg.EntityIdVar, entity.ID);
             }
 
-            BattleLog.Debug($"DemoSpawnUnitBhv spawned side={_cfg.PlayerSide}, entityId={entity.ID}, fighterId={_cfg.FighterId}");
+            BattleLogger.LogDebug($"DemoSpawnUnitBhv spawned side={_cfg.PlayerSide}, entityId={entity.ID}, fighterId={_cfg.FighterId}");
         }
 
         private void InitDemoAttributes(LogicEntity entity, double hp)
@@ -73,7 +74,7 @@ namespace LccHotfix
         {
             if (fighterCfg == null || fighterCfg.Skills.Count <= 0)
             {
-                BattleLog.Warning($"DemoSpawnUnitBhv fighter skill config missing, fighterId={_cfg.FighterId}");
+                BattleLogger.LogWarning($"DemoSpawnUnitBhv fighter skill config missing, fighterId={_cfg.FighterId}");
                 return;
             }
 
@@ -84,14 +85,14 @@ namespace LccHotfix
         {
             if (fighterCfg == null || fighterCfg.FsmLogic <= 0)
             {
-                BattleLog.Warning($"DemoSpawnUnitBhv fighter fsm config missing, fighterId={_cfg.FighterId}");
+                BattleLogger.LogWarning($"DemoSpawnUnitBhv fighter fsm config missing, fighterId={_cfg.FighterId}");
                 return;
             }
 
-            var service = GetLogicWorld()?.CustomLogicService;
+            var service = GetLogicWorld()?.GetCreationInfo<BattleKernelCreationInfo>()?.CustomLogicService;
             if (service == null)
             {
-                BattleLog.Error("DemoSpawnUnitBhv CustomLogicService == null");
+                BattleLogger.LogError("DemoSpawnUnitBhv CustomLogicService == null");
                 return;
             }
 

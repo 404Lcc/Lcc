@@ -100,11 +100,11 @@ namespace LccHotfix
             var hitPos = hitInfo.hitPos;
             var hitFxPath = mCfg.FxPath.GetResPath(this);
             var aoeRange = mCfg.AoeRange.GetValue(this);
-            GetLogicWorld()?.BattleEffectService?.PlayEffect(hitFxPath, hitPos, mCfg.During, aoeRange > 0 ? aoeRange : 1f);
+            GetLogicWorld()?.GetCreationInfo<BattleKernelCreationInfo>()?.BattleEffectService?.PlayEffect(hitFxPath, hitPos, mCfg.During, aoeRange > 0 ? aoeRange : 1f);
 
             if (!string.IsNullOrEmpty(mCfg.HitSound))
             {
-                GetLogicWorld()?.BattleAudioService?.PlayEntityAudio(entity, mCfg.HitSound);
+                GetLogicWorld()?.GetCreationInfo<BattleKernelCreationInfo>()?.BattleAudioService?.PlayEntityAudio(entity, mCfg.HitSound);
             }
 
             var target = entity.OwnerWorld.GetEntityWithComID(hitInfo.hitEntityID);
@@ -158,7 +158,7 @@ namespace LccHotfix
 
             var evtDmg = new EvtDamage(node.RootLogic, target, hitInfo);
             mCfg.DamageAdjustAction?.Invoke(this, ref evtDmg);
-            GetLogicWorld()?.DamageEventService?.DispatchDamage(evtDmg);
+            GetLogicWorld()?.GetCreationInfo<BattleKernelCreationInfo>()?.DamageEventService?.DispatchDamage(evtDmg);
             if (target.IsDead())
             {
                 var killCmd = new EntityCommand { CmdType = EntityCmdType.Nt_Kill };

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace LccHotfix
 {
@@ -42,8 +42,8 @@ namespace LccHotfix
             
             // 6. 随机波动
             baseDamage *= (1 + context.RandomFinalDamageRate + (context.Attacker.Properties.FinalAtk / 10000f));
-            if (BattleLog.IsDebugEnabled)
-                BattleLog.Debug($"[伤害计算 6 随机伤害] 最终伤害：{baseDamage} 随机波动：{context.RandomFinalDamageRate}， 点数修正最终伤害{context.Attacker.Properties.FinalAtk / 10000}");
+            if (BattleLogger.IsDebugEnabled)
+                BattleLogger.LogDebug($"[伤害计算 6 随机伤害] 最终伤害：{baseDamage} 随机波动：{context.RandomFinalDamageRate}， 点数修正最终伤害{context.Attacker.Properties.FinalAtk / 10000}");
             result.FinalDamage = baseDamage;
             return result;
         }
@@ -124,8 +124,8 @@ namespace LccHotfix
             
             // 技能修正
             double skillPart = attackDefensePart * context.SkillDamageFactor + context.SkillFixedDamage;
-            if(BattleLog.IsDebugEnabled)
-                BattleLog.Debug($"[子弹:{subobjectTid}] attack={attack}, defense={defense}, skillPart({skillPart}) = attackDefensePart({attackDefensePart}) * SkillDamageFactor({context.SkillDamageFactor}) + SkillFixedDamage({context.SkillFixedDamage})");
+            if(BattleLogger.IsDebugEnabled)
+                BattleLogger.LogDebug($"[子弹:{subobjectTid}] attack={attack}, defense={defense}, skillPart({skillPart}) = attackDefensePart({attackDefensePart}) * SkillDamageFactor({context.SkillDamageFactor}) + SkillFixedDamage({context.SkillFixedDamage})");
             
             // 局外增伤抗性
             double outgameAmplify = context.Attacker.Properties.DamageAmplify / 10000.0;
@@ -148,8 +148,8 @@ namespace LccHotfix
             // 最终伤害
             double finalDamage = skillPart * outgameFactor * ingameFactor * stageFactor + finalAddPart;
             
-            if(BattleLog.IsDebugEnabled)
-                BattleLog.Debug($"[子弹:{subobjectTid}] finalDamage({finalDamage}) = skillPart({skillPart}) * outgameFactor({outgameFactor}) * ingameFactor({ingameFactor}) * stageFactor({stageFactor}) + finalAddPart({finalAddPart})");
+            if(BattleLogger.IsDebugEnabled)
+                BattleLogger.LogDebug($"[子弹:{subobjectTid}] finalDamage({finalDamage}) = skillPart({skillPart}) * outgameFactor({outgameFactor}) * ingameFactor({ingameFactor}) * stageFactor({stageFactor}) + finalAddPart({finalAddPart})");
             return Math.Max(0.0, finalDamage);
         }
         
@@ -157,14 +157,14 @@ namespace LccHotfix
         {
             double critDamageBonus = context.Attacker.Properties.CritDamage / 10000.0;
             var result =  baseDamage * (1.0 + critDamageBonus) + context.ExtraCritDamage;
-            if(BattleLog.IsDebugEnabled)
-                BattleLog.Debug($"暴击 ApplyCriticalDamage result:{result} = baseDamage:{baseDamage} * (1.0 + critDamageBonus:{critDamageBonus}) + ExtraCritDamage:{context.ExtraCritDamage}");
+            if(BattleLogger.IsDebugEnabled)
+                BattleLogger.LogDebug($"暴击 ApplyCriticalDamage result:{result} = baseDamage:{baseDamage} * (1.0 + critDamageBonus:{critDamageBonus}) + ExtraCritDamage:{context.ExtraCritDamage}");
             return result;
         }
 
         private double ApplyDamageTypeDamage(in DamageContext context, double baseDamage)
         {
-            return context.World?.DamagePropertyModifier?.ApplyDamageTypeDamage(context, baseDamage) ?? baseDamage;
+            return context.World?.GetCreationInfo<BattleKernelCreationInfo>()?.DamagePropertyModifier?.ApplyDamageTypeDamage(context, baseDamage) ?? baseDamage;
         }
     }
 }

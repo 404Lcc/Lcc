@@ -15,7 +15,7 @@ namespace LccHotfix
             SetVar(CvKey.CV_DemoGameModeState, DemoGameModeState.Running);
             SetVar(CvKey.CV_DemoGameResult, DemoGameResult.None);
             SetVar(CvKey.CV_DemoLastLogSecond, -1);
-            BattleLog.Debug("Demo game mode started by LogicDsl");
+            BattleLogger.LogDebug("Demo game mode started by LogicDsl");
         }
     }
 
@@ -49,7 +49,7 @@ namespace LccHotfix
             }
 
             SetVar(CvKey.CV_DemoLastLogSecond, second);
-            BattleLog.Debug($"Demo battle running by LogicDsl, duration={second}s, friend={CountAlive(EFaction.Friend)}, enemy={CountAlive(EFaction.Enemy)}");
+            BattleLogger.LogDebug($"Demo battle running by LogicDsl, duration={second}s, friend={CountAlive(EFaction.Friend)}, enemy={CountAlive(EFaction.Enemy)}");
         }
 
         private void CheckFinish()
@@ -85,7 +85,7 @@ namespace LccHotfix
         private void SetResult(DemoGameResult result)
         {
             SetVar(CvKey.CV_DemoGameResult, result);
-            BattleLog.Debug($"Demo game mode result decided by LogicDsl, result={result}");
+            BattleLogger.LogDebug($"Demo game mode result decided by LogicDsl, result={result}");
         }
 
         private float GetDuration()
@@ -128,7 +128,7 @@ namespace LccHotfix
 
             var result = GetVar(CvKey.CV_DemoGameResult, DemoGameResult.None);
             var duration = RootLogic is IGameDuration gameDuration ? gameDuration.GetGameDuration() : 0f;
-            BattleLog.Debug($"Demo game mode finished by LogicDsl, result={result}, duration={duration:0.00}s");
+            BattleLogger.LogDebug($"Demo game mode finished by LogicDsl, result={result}, duration={duration:0.00}s");
         }
     }
 }

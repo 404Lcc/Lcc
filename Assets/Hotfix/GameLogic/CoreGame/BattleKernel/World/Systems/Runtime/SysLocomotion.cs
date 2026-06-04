@@ -1,20 +1,25 @@
 using Entitas;
-using System.Collections.Generic;
+using UnityEngine;
 
 namespace LccHotfix
 {
-    public class SysLocomotion : SysGroupTickBase<LogicEntity>
+    public class SysLocomotion : IExecuteSystem
     {
-        public SysLocomotion(ECWorlds worlds) : base(worlds)
+        private readonly ECWorlds _worlds;
+        private readonly IGroup<LogicEntity> _group;
+
+        public SysLocomotion(ECWorlds worlds)
         {
+            _worlds = worlds;
+            _group = worlds.LogicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComLocomotion, LogicComponentsLookup.ComTransform));
         }
 
-        protected override IGroup<LogicEntity> InnerGetGroup()
+        public void Execute()
         {
-            return _worlds.LogicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComLocomotion, LogicComponentsLookup.ComTransform));
+            UpdateEntities(_group.GetEntities(), BattleTime.GetDeltaTime(_worlds.LogicWorld));
         }
 
-        protected override void UpdateEntities(List<LogicEntity> entities, float dt)
+        private void UpdateEntities(LogicEntity[] entities, float dt)
         {
             if (_worlds.LogicWorld.GameOver)
                 return;
@@ -67,22 +72,7 @@ namespace LccHotfix
                 comTransform.AddRotation(locomotion.DeltaRotation);
             }
         }
-
-        protected override void LateUpdateEntities(List<LogicEntity> entities, float dt)
-        {
-            foreach (var entity in entities)
-            {
-                var comLocomotion = entity.comLocomotion;
-                var locomotion = comLocomotion.Locomotion;
-
-                if (!CheckIsMovable(entity))
-                {
-                    continue;
-                }
-
-                locomotion.LateUpdate(dt, entity);
-            }
-        }
+        
 
         public virtual bool CheckIsMovable(LogicEntity entity)
         {

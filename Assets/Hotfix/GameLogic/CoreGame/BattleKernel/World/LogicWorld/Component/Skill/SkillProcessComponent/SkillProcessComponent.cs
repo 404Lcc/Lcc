@@ -44,7 +44,7 @@ namespace LccHotfix
         {
             if (SkillProcess != null)
             {
-                Owner?.OwnerWorld?.CustomLogicService?.DestroyLogic(SkillProcess);
+                Owner?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.CustomLogicService?.DestroyLogic(SkillProcess);
                 SkillTid = 0;
                 SkillProcess = null;
             }

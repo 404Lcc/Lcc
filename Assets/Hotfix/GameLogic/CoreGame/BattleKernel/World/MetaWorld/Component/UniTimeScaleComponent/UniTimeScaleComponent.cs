@@ -1,4 +1,4 @@
-﻿namespace LccHotfix
+namespace LccHotfix
 {
     public enum ETimeSlowFlag
     {
@@ -35,15 +35,15 @@
         public void SetTimeSlowRatio(ETimeSlowFlag slowFlag, float scale)
         {
             mTimeSlowRatio.AddChange(scale, (int)slowFlag);
-            if(BattleLog.IsDebugEnabled)
-                BattleLog.Debug($"设置TimeScale，来源是{slowFlag}，现在的TimeScale是{TimeScale}");
+            if(BattleLogger.IsDebugEnabled)
+                BattleLogger.LogDebug($"设置TimeScale，来源是{slowFlag}，现在的TimeScale是{TimeScale}");
         }
 
         public void ClearTimeSlowRatio(ETimeSlowFlag slowFlag)
         {
             mTimeSlowRatio.RemoveChange((int)slowFlag);
-            if(BattleLog.IsDebugEnabled)
-                BattleLog.Debug($"清除TimeScale，来源是{slowFlag}，现在的TimeScale是{TimeScale}");
+            if(BattleLogger.IsDebugEnabled)
+                BattleLogger.LogDebug($"清除TimeScale，来源是{slowFlag}，现在的TimeScale是{TimeScale}");
         }
     }
     

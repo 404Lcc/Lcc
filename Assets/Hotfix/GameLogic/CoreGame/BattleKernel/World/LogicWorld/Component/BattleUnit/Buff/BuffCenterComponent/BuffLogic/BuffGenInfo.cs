@@ -4,7 +4,6 @@ namespace LccHotfix
 
     public class BuffGenInfo : UnitLogicGenInfo
     {
-        public int BuffLogicID;
         public int BuffLevel;
         public int BuffMaxLevel;
         public float DurationAddRate; // 额外的持续时间加成比例，用于buff免疫逻辑
@@ -18,7 +17,6 @@ namespace LccHotfix
 
         public void Clear()
         {
-            BuffLogicID = -1;
             BuffLevel = -1;
             BuffMaxLevel = -1;
             DurationAddRate = 0;

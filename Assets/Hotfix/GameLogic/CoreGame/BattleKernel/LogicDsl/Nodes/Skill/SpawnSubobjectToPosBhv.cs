@@ -83,7 +83,7 @@ namespace LccHotfix
 
             for (int i = 0; i < _cfg.Count; i++)
             {
-                var varEnv = GetLogicWorld().CustomLogicService.NewVarEnv();
+                var varEnv = GetLogicWorld().GetCreationInfo<BattleKernelCreationInfo>().CustomLogicService.NewVarEnv();
                 var e = this.CreateSubObject(tid, initPos, varEnv);
             }
 

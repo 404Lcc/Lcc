@@ -10,7 +10,7 @@ namespace LccHotfix
         {
             WriteVar<long>(CvKey.CV_OwnerFighterEntityID, fromEntity.ID);
 
-            var playerInfo = fromEntity.OwnerWorld?.UnitOwnerInfoProvider?.GetOwnerInfo(fromEntity);
+            var playerInfo = fromEntity.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.UnitOwnerInfoProvider?.GetOwnerInfo(fromEntity);
             if (playerInfo != null)
             {
                 WriteVar(CvKey.CV_OwnerPlayerInfo, playerInfo);

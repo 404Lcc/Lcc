@@ -1,4 +1,4 @@
-﻿using Entitas;
+using Entitas;
 
 namespace LccHotfix
 {
@@ -13,13 +13,13 @@ namespace LccHotfix
             var creationInfo = _world.GetCreationInfo<BattleKernelCreationInfo>();
             if (creationInfo.GameModeGenInfo == null)
             {
-                BattleLog.Error("SysKernelGameModeInitialize GameModeGenInfo == null");
+                BattleLogger.LogError("SysKernelGameModeInitialize GameModeGenInfo == null");
                 return;
             }
 
             if (creationInfo.ModeLogicService == null)
             {
-                BattleLog.Error("SysKernelGameModeInitialize ModeLogicService == null");
+                BattleLogger.LogError("SysKernelGameModeInitialize ModeLogicService == null");
                 return;
             }
 

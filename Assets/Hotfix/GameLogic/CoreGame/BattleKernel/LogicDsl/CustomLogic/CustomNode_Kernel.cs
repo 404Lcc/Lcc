@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using HotUpdate.Framework.PbCfg;
 using PBConfig;
@@ -104,7 +104,7 @@ namespace LccHotfix
         /// </summary>
         public void CreateSkillProcess(LogicEntity entity, int skillTid, LogicEntity target, EDamageType damageType, int curAttackTimes)
         {
-            var varEnv = GetLogicWorld().CustomLogicService.NewVarEnv();
+            var varEnv = GetLogicWorld().GetCreationInfo<BattleKernelCreationInfo>().CustomLogicService.NewVarEnv();
             varEnv.WriteVar(CvKey.CV_TargetEid, target.ID);
             varEnv.WriteVar(CvKey.CV_TargetPos, target.position);
             varEnv.WriteVar(CvKey.CV_DamageType, damageType);
@@ -137,7 +137,7 @@ namespace LccHotfix
             var logicID = skillCfg.LogicID;
             logicID = ResolveSkillLogicID(logicID);
 
-            var svc = GetLogicWorld().CustomLogicService;
+            var svc = GetLogicWorld().GetCreationInfo<BattleKernelCreationInfo>().CustomLogicService;
             if (varEnv == null)
             {
                 varEnv = svc.NewVarEnv();
@@ -162,7 +162,7 @@ namespace LccHotfix
             var world = GetLogicWorld();
             var player = GetOwnerBattlePlayerInfo();
             var fighterCfg = GetVar<TFighter>(CvKey.CV_FigherCfg);
-            var newLogicID = world?.SkillLogicOverrideProvider?.ResolveSkillLogicId(player, fighterCfg, logicID) ?? logicID;
+            var newLogicID = world?.GetCreationInfo<BattleKernelCreationInfo>()?.SkillLogicOverrideProvider?.ResolveSkillLogicId(player, fighterCfg, logicID) ?? logicID;
             if (newLogicID != logicID)
             {
                 CLHelper.LogInfo(this, $"ResolveSkillLogicID 特性修正技能ID logicID:{logicID} -> {newLogicID}");
@@ -201,7 +201,7 @@ namespace LccHotfix
 
             var world = GetLogicWorld();
             var playerInfo = GetOwnerBattlePlayerInfo();
-            mainResPath = world?.SubobjectModelOverrideProvider?.ResolveMainModelPath(playerInfo, subobjectTid, mainResPath) ?? mainResPath;
+            mainResPath = world?.GetCreationInfo<BattleKernelCreationInfo>()?.SubobjectModelOverrideProvider?.ResolveMainModelPath(playerInfo, subobjectTid, mainResPath) ?? mainResPath;
 
             int subobjectLogicID = (int)pbCfg.LogicID;
             var lifeTime = pbCfg.During;
@@ -245,7 +245,7 @@ namespace LccHotfix
             e.AddComTransform(initPos, Quaternion.identity, Vector3.one);
             e.AddHolderEntity(ownerFighterEntityID);
 
-            var svc = world.CustomLogicService;
+            var svc = world.GetCreationInfo<BattleKernelCreationInfo>().CustomLogicService;
             if (svc == null)
             {
                 this.LogError("CreateSubobjectEntity CustomLogicService == null");
@@ -264,7 +264,7 @@ namespace LccHotfix
 
             var sourceGenInfo = GetGenInfo<UnitLogicGenInfo>();
             var sumUnitSource = sourceGenInfo?.SkillUnitSource ?? default;
-            world.CombatPropertyVolumeProvider?.AddSubobjectVolume(playerInfo, subobjectTid, ref sumUnitSource.Properties);
+            world.GetCreationInfo<BattleKernelCreationInfo>().CombatPropertyVolumeProvider?.AddSubobjectVolume(playerInfo, subobjectTid, ref sumUnitSource.Properties);
 
             var subobjSource = new SubobjectSource(playerInfo, subobjectTid);
 
@@ -357,7 +357,7 @@ namespace LccHotfix
             newEnv.WriteVar(CvKey.CV_SpawnSbjTid, subTid);
             if (IsDev())
             {
-                BattleLog.Debug($"FillSkillBaseVarEnv damageRate={damageRate}, subTid={subTid}, skillTid={skillTid}, logicID={logicID}");
+                BattleLogger.LogDebug($"FillSkillBaseVarEnv damageRate={damageRate}, subTid={subTid}, skillTid={skillTid}, logicID={logicID}");
             }
 
             env.CopyTo<int>(newEnv, CvKey.CV_SkillLevel, false);
@@ -580,31 +580,16 @@ namespace LccHotfix
         public void MakeAoeEffect_InAABB(LogicEntity entity, AABB aabb, NodeHitEffectFunc executeEffectFunc)
         {
             var world = entity?.OwnerWorld;
-            if (world?.TargetQueryService == null)
+            var targetQueryService = world?.GetCreationInfo<BattleKernelCreationInfo>()?.TargetQueryService;
+            if (targetQueryService == null)
             {
                 return;
             }
 
-            world.TargetQueryService.RangeAttackableTargetBatchAction(world, entity, entity.position, 999f, item =>
+            targetQueryService.AttackableTargetInAabbBatchAction(world, entity, aabb, item =>
             {
-                if (!item.IsValid())
-                {
-                    return true;
-                }
-
-                if (!item.CanCollider())
-                {
-                    return true;
-                }
-
-                var comBounds = item.comBounds;
-                var bounds = comBounds.GetBounds();
-                if (aabb.Collision(bounds))
-                {
-                    var aoeHitInfo = new HitInfo { hitPos = item.position, hitEntityID = item.ID };
-                    executeEffectFunc(this, entity, item, aoeHitInfo);
-                }
-
+                var aoeHitInfo = new HitInfo { hitPos = item.position, hitEntityID = item.ID };
+                executeEffectFunc(this, entity, item, aoeHitInfo);
                 return true;
             });
         }
@@ -760,7 +745,7 @@ namespace LccHotfix
         /// </summary>
         public bool IsDev()
         {
-            return BattleLog.IsDebugEnabled;
+            return BattleLogger.IsDebugEnabled;
         }
 
         #endregion

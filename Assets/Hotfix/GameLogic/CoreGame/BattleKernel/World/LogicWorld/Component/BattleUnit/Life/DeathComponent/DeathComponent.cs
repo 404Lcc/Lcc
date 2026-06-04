@@ -1,4 +1,4 @@
-﻿namespace LccHotfix
+namespace LccHotfix
 {
     public class DeathComponent : LogicComponent
     {
@@ -27,7 +27,7 @@
         {
             if (hasComDeath)
             {
-                BattleLog.Error($"AddComDeath already hasComDeath!");
+                BattleLogger.LogError($"AddComDeath already hasComDeath!");
                 return;
             }
 

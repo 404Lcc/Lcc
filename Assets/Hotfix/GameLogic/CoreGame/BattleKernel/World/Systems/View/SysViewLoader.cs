@@ -5,7 +5,7 @@ namespace LccHotfix
 {
     public class SysViewLoader : ReactiveSystem<LogicEntity>
     {
-        private static ECWorlds _worlds;
+        private ECWorlds _worlds;
 
         public SysViewLoader(ECWorlds world) : base(world.LogicWorld)
         {
