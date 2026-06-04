@@ -147,11 +147,20 @@ namespace LccHotfix
             FxOne lastUsedFx = _cachedFxOneList[_usedCount - 1];
             _cachedFxOneList[index] = lastUsedFx;
             _cachedFxOneList[_usedCount - 1] = toRelease;
-	
+
+            toRelease.transform.localScale = Vector3.one;
             toRelease.SetHiddenInGame(true);
             toRelease.bIsReleased = true;
 
             --_usedCount;
+        }
+        
+        public void ReleaseAllFx()
+        {
+            for (int i = _usedCount - 1; i >= 0; i--)
+            {
+                ReleaseFx(i);
+            }
         }
 
         #region Cost

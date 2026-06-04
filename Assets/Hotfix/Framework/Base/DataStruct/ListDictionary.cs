@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace LccHotfix
 {
@@ -30,7 +29,6 @@ namespace LccHotfix
         {
             if (_dict.ContainsKey(key))
             {
-                Debug.LogError($"Add Repeated key: {key}");
                 return;
             }
 
@@ -140,7 +138,6 @@ namespace LccHotfix
                 int idx = GetIdx(key);
                 if (idx == -1)
                 {
-                    Debug.LogError($"key = {key} not found!");
                     return;
                 }
 

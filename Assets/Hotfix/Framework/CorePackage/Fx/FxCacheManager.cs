@@ -10,19 +10,12 @@ namespace LccHotfix
         GameObject = 2,
     };
 
-    internal class FxCacheManager : Module, IFxService
+    public class FxCacheManager : Module, IFxService
     {
         private List<int> CostLimitArray = new List<int>() { 200, 700, 900, 1000 };
         private Dictionary<string, FxCache> fxCaches = new Dictionary<string, FxCache>();
 
         private uint cacheGuid = 0;
-
-        private Transform _root;
-        public FxCacheManager()
-        {
-            _root = new GameObject("FxCacheRoot").transform;
-            GameObject.DontDestroyOnLoad(_root);
-        }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
         {
@@ -31,8 +24,6 @@ namespace LccHotfix
 
         internal override void Shutdown()
         {
-            GameObject.Destroy(_root.gameObject);
-            _root = null;
         }
         
         #region Preload
@@ -50,13 +41,13 @@ namespace LccHotfix
             else
             {
                 var cacheName = $"FxCache_{path}_{++cacheGuid}";
-                GameObject newCacheObject = new GameObject(cacheName)
-                {
-                    transform =
-                    {
-                        parent = _root
-                    }
-                };
+                GameObject newCacheObject = new GameObject(cacheName);
+                // {
+                //     transform =
+                //     {
+                //         parent = transform
+                //     }
+                // };
 
                 fxCache = newCacheObject.AddComponent<FxCache>();
                 fxCaches[path] = fxCache;
@@ -90,6 +81,29 @@ namespace LccHotfix
 
             return fx;
         }
+        
+        public FxOne Create(string path, Vector3 pos, float during = -999f, int maxCount = 0)
+        {
+            var fxOne = RequestFx_And_Play(EFxOneType.GameObject, path, during, maxCount);
+            if (fxOne == null)
+                return null;
+            fxOne.transform.position = pos;
+            
+            return fxOne;
+        }
+        
+        public FxOne Create(string path, Transform parent, float during = -999f)
+        {
+            var fxOne = RequestFx_And_Play(EFxOneType.GameObject, path, during);
+            var tf = fxOne.transform;
+            if (tf != null)
+            {
+                tf.localRotation = Quaternion.identity;
+                tf.localPosition = Vector3.zero;
+                tf.SetParent(parent, false);
+            }
+            return fxOne;
+        }
 
         public FxOne RequestFx_With_Cost(EFxOneType fxType, string path, int cost, int maxCount,
             int costLimitLevel, bool isAsyncLoad)
@@ -113,6 +127,14 @@ namespace LccHotfix
             }
 
             return null;
+        }
+        
+        public void ClearAll()
+        {
+            foreach (var fxCachePair in fxCaches)
+            {
+                fxCachePair.Value?.ReleaseAllFx();
+            }
         }
 
         private int GetCurCost()

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace LccHotfix
 {
@@ -67,7 +66,6 @@ namespace LccHotfix
                 int index = GetIndex(key);
                 if (index == -1)
                 {
-                    Debug.LogError($"key = {key} not found!");
                     return;
                 }
 
