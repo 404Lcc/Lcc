@@ -140,7 +140,7 @@ namespace LccHotfix
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError(e.ToString());
+                    Log.Error(e.ToString());
                 }
 
                 if (_loopCount == -1)

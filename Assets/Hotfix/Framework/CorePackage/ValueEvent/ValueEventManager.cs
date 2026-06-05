@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace LccHotfix
 {
@@ -34,7 +33,7 @@ namespace LccHotfix
 
             if (!list.Add(handle))
             {
-                Debug.LogError("注册消息重复了");
+                Log.Error("注册消息重复了");
             }
         }
 

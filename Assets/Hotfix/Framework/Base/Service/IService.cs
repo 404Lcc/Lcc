@@ -1,3 +1,6 @@
-public interface IService
+namespace LccHotfix
 {
+    public interface IService
+    {
+    }
 }

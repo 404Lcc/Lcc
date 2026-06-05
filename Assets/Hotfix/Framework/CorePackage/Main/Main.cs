@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace LccHotfix
 {
@@ -107,7 +106,7 @@ namespace LccHotfix
         {
             if (Main.Current != null)
             {
-                Debug.LogError("SetMain，已经存在Current");
+                Log.Error("SetMain，已经存在Current");
                 return;
             }
 
