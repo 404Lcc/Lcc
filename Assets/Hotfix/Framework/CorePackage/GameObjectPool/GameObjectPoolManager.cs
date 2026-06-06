@@ -234,7 +234,7 @@ namespace LccHotfix
         {
             if (_asyncLoader == null)
             {
-                UnityEngine.Debug.LogError("对象池没有设置异步加载器");
+                Log.Error("对象池没有设置异步加载器");
                 return null;
             }
 
@@ -283,7 +283,7 @@ namespace LccHotfix
 
             if (original == null)
             {
-                UnityEngine.Debug.LogError($"加载资源失败 {location}");
+                Log.Error($"加载资源失败 {location}");
                 CompleteAllLoad(location, null);
                 return;
             }
