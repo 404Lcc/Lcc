@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using LccModel;
-using UnityEngine;
-
-namespace LccHotfix
+﻿namespace LccHotfix
 {
     public partial class Init
     {
