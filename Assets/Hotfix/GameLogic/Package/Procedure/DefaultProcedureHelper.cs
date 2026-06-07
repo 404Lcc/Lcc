@@ -1,5 +1,4 @@
 using System.Collections;
-using LccModel;
 using UnityEngine;
 
 namespace LccHotfix

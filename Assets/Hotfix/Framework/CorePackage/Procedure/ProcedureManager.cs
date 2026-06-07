@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,7 +44,7 @@ namespace LccHotfix
                     LoadProcedureHandler handler = (LoadProcedureHandler)Activator.CreateInstance(item);
                     if (handler.procedureType == 0)
                     {
-                        Debug.LogError("流程类型不能为0 " + item.Name);
+                        Log.Error("流程类型不能为0 " + item.Name);
                         continue;
                     }
 

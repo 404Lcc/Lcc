@@ -583,7 +583,7 @@ namespace LccHotfix
                 {
                     if (element.RectTransform != null)
                     {
-                        element.RectTransform.parent = _releaseRoot;
+                        element.RectTransform.SetParent(_releaseRoot);
                     }
                 }
 

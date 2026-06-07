@@ -1,35 +1,37 @@
 using System;
-using LccHotfix;
 using UnityEngine;
 
-public interface IUIService : IService
+namespace LccHotfix
 {
-    Action<AssetLoader, string, Action<GameObject>> LoadAsyncGameObject { get; set; }
-    void Init(IUIRoot uiRoot);
-    IUILogic GetUILogic(string name, UINode node);
+    public interface IUIService : IService
+    {
+        Action<AssetLoader, string, Action<GameObject>> LoadAsyncGameObject { get; set; }
+        void Init(IUIRoot uiRoot);
+        IUILogic GetUILogic(string name, UINode node);
 
-    void ShowDomain(string domainName, string elementName, params object[] args);
-    void ShowDomain(string name, params object[] args);
-    void ShowElement(string name, params object[] args);
+        void ShowDomain(string domainName, string elementName, params object[] args);
+        void ShowDomain(string name, params object[] args);
+        void ShowElement(string name, params object[] args);
 
-    object HideElement(string name);
-    void HideTopNode();
-    void HideAllDomain();
-    
-    DomainNode GetDomain(string name);
-    T GetDomain<T>(string name) where T : UIDomainBase;
-    ElementNode GetElement(string name);
-    T GetElement<T>(string name) where T : UIElementBase;
-    DomainNode GetTopDomain();
-    ElementNode GetTopElement();
+        object HideElement(string name);
+        void HideTopNode();
+        void HideAllDomain();
 
-    bool IsElementActive(string name);
+        DomainNode GetDomain(string name);
+        T GetDomain<T>(string name) where T : UIDomainBase;
+        ElementNode GetElement(string name);
+        T GetElement<T>(string name) where T : UIElementBase;
+        DomainNode GetTopDomain();
+        ElementNode GetTopElement();
 
-    void RemoveDomainFromStack(DomainNode node);
-    void AddToReleaseQueue(UINode node);
-    void ForceClearReleaseQueue(ReleaseType level = ReleaseType.Auto);
+        bool IsElementActive(string name);
 
-    void AddNodeHideCallback(string name, Action<object> callback);
-    void RemoveNodeHideCallback(string name, Action<object> callback);
-    void DispatchNodeHide(string name, object returnValue);
+        void RemoveDomainFromStack(DomainNode node);
+        void AddToReleaseQueue(UINode node);
+        void ForceClearReleaseQueue(ReleaseType level = ReleaseType.Auto);
+
+        void AddNodeHideCallback(string name, Action<object> callback);
+        void RemoveNodeHideCallback(string name, Action<object> callback);
+        void DispatchNodeHide(string name, object returnValue);
+    }
 }
