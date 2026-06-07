@@ -8,6 +8,7 @@ namespace LccHotfix
     public static class AutoReferenceUtility
     {
         #region 自动索引
+
         public static void AutoReference(object obj, Transform transform)
         {
             Dictionary<string, FieldInfo> fieldInfoDict = new Dictionary<string, FieldInfo>();
@@ -26,6 +27,7 @@ namespace LccHotfix
                 AutoReference(obj, transform, fieldInfoDict);
             }
         }
+
         public static void AutoReference(object obj, Transform transform, Dictionary<string, FieldInfo> fieldInfoDict)
         {
             string name = transform.name.ToLower();
@@ -68,10 +70,12 @@ namespace LccHotfix
                 }
             }
         }
+
         public static void AutoReference(object obj, GameObject gameObject)
         {
             AutoReference(obj, gameObject.transform);
         }
+
         #endregion
     }
 }
