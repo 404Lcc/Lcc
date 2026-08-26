@@ -59,7 +59,6 @@ MonoBehaviour:
     - Mirror.Components
     - Mirror.Transports
     - PackageTools
-    - RVO2
     - SimpleWebTransport
     - Telepathy
     - Unity.3rdPlugin
