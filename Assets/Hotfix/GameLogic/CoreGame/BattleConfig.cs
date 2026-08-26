@@ -81,6 +81,22 @@ namespace PBConfig
         ButPet = 6,
     }
 
+    public enum THeroAttackType
+    {
+        ThatAll = 0,
+        ThatAmmo = 1,
+        ThatEnergy = 2,
+        ThatMechanism = 3,
+    }
+
+    public enum TLevelType
+    {
+        LtAll = 0,
+        LtMainline = 1,
+        LtHard = 2,
+        LtChallenge = 23,
+    }
+
     public enum CollisionType
     {
         EhtNone = 0,
@@ -303,6 +319,7 @@ namespace PBConfig
         public uint HitFx { get; set; }
         public uint HitGroundFx { get; set; }
         public uint DisappearFx { get; set; }
+        public TElementType DamageType { get; set; }
         public CollisionType CollisionType { get; set; }
         public bool HitWithLife { get; set; }
         public int MaxHitCount { get; set; }

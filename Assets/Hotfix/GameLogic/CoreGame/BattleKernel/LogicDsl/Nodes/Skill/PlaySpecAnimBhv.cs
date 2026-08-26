@@ -1,4 +1,5 @@
 using System;
+using PBConfig;
 
 namespace LccHotfix
 {
@@ -12,6 +13,9 @@ namespace LccHotfix
         public bool ClearOnDestroy;
 
         public EntityVarCfg EntityCfg = new EntityVarCfg();
+        public int LayerIndex = 0;
+        public FloatCfg AnimationSpeed = new FloatCfg(1f);
+        public bool ForceRestart;
 
         public PlaySpecAnimBhvCfg(string animName, string entityVar)
         {
@@ -28,6 +32,24 @@ namespace LccHotfix
         public void SetEntityVar(string varKey)
         {
             EntityCfg = new EntityVarCfg(varKey);
+        }
+
+        public PlaySpecAnimBhvCfg SetLayer(int layerIndex)
+        {
+            LayerIndex = layerIndex;
+            return this;
+        }
+
+        public PlaySpecAnimBhvCfg WithSpeed(string speedVar)
+        {
+            AnimationSpeed = new FloatCfg(speedVar);
+            return this;
+        }
+
+        public PlaySpecAnimBhvCfg WithForceRestart()
+        {
+            ForceRestart = true;
+            return this;
         }
     }
 
@@ -52,18 +74,27 @@ namespace LccHotfix
             var entity = _cfg.EntityCfg.GetEntity(this);
             var animName = _cfg.AnimName;
             var animStateName = animName.GetValue(this);
-            PlayAnim_Layer0(entity, animStateName);
+            PlayAnim(entity, animStateName, _cfg.LayerIndex);
         }
 
         public static void PlayAnim_Layer0(LogicEntity entity, string animStateName)
         {
-            if (entity.hasComAnimation)
-            {
-                var comAnim = entity.comAnimation;
-                var newData = comAnim.Data;
-                newData.SpecAnim_Layer0 = animStateName;
-                comAnim.SetData(newData);
-            }
+            PlayAnim(entity, animStateName, 0);
         }
+
+        public static void PlayAnim(LogicEntity entity, string animStateName, int layerIndex)
+        {
+            if (entity == null || !entity.hasComAnimation)
+                return;
+            var comAnim = entity.comAnimation;
+            var newData = comAnim.Data;
+            if (layerIndex == 1)
+                newData.SpecAnim_Layer1 = animStateName;
+            else
+                newData.SpecAnim_Layer0 = animStateName;
+            comAnim.SetData(newData);
+        }
+
+
     }
 }

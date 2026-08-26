@@ -56,6 +56,7 @@ namespace LccHotfix
             systems.Add(new SysSkillProcess(this));
             systems.Add(new SysSkillSlot(this));
             systems.Add(new SysLocomotion(this));
+            // systems.Add(new SysAABBCollision(this)); // 原 AABB/四叉树碰撞，保留不调用
             systems.Add(new SysCollision(this));
             systems.Add(new SysCameraBlender(this));
             systems.Add(new SysSubobject(this));

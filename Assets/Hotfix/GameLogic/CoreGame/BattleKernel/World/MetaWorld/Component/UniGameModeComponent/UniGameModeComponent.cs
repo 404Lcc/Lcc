@@ -6,7 +6,7 @@ namespace LccHotfix
         public DamageRecorder DmgRecorder  { get; private set; } 
         private IBattleModeLogicService _modeLogicService;
 
-        public void Init(ICustomLogicGenInfo genInfo, IBattleModeLogicService modeLogicService)
+        public void Init(CustomLogicGenInfo genInfo, IBattleModeLogicService modeLogicService)
         {
             _modeLogicService = modeLogicService;
             GameModeLogic = _modeLogicService.CreateModeLogic(genInfo);
@@ -39,7 +39,7 @@ namespace LccHotfix
             get { return HasUniqueComponent(MetaComponentsLookup.ComUniGameMode); }
         }
         
-        public void SetComUniGameMode(ICustomLogicGenInfo genInfo, IBattleModeLogicService modeLogicService)
+        public void SetComUniGameMode(CustomLogicGenInfo genInfo, IBattleModeLogicService modeLogicService)
         {
             var index = MetaComponentsLookup.ComUniGameMode;
             var component = (UniGameModeComponent)UniqueEntity.CreateComponent(index, typeof(UniGameModeComponent));

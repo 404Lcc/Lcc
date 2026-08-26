@@ -34,5 +34,15 @@ namespace LccHotfix
         /// Buff 逻辑配置容器。
         /// </summary>
         public static string LogicConfigs_Buff = "CCN_Buff";
+
+        /// <summary>
+        /// AI 逻辑配置容器。
+        /// </summary>
+        public static string LogicConfigs_AI = "CCN_AI";
+
+        /// <summary>
+        /// 英雄被动技能逻辑配置容器。
+        /// </summary>
+        public static string LogicConfigs_PassiveSkill = "CCN_PassiveSkill";
     }
 }

@@ -66,6 +66,17 @@ namespace LccHotfix
             _procedureHelper.UpdateLoadingTime(_curProcedureHandler);
         }
 
+        internal override void FixedUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            if (_curProcedureHandler == null)
+                return;
+
+            if (!_curProcedureHandler.IsLoading)
+            {
+                _curProcedureHandler.FixedUpdate(elapseSeconds, realElapseSeconds);
+            }
+        }
+
         internal override void LateUpdate()
         {
             base.LateUpdate();

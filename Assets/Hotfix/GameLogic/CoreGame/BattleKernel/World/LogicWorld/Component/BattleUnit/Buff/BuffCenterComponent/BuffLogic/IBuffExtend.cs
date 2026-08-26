@@ -15,9 +15,9 @@ namespace LccHotfix
         void OnBuffPreviousRemove();
     }
 
-    public interface IBuffUpgrade
+    public interface IBuffStateChanged
     {
-        void OnBuffUpgrade(LogicEntity e, BuffLogic buff);
+        void OnBuffStateChanged(LogicEntity e, BuffLogic buff);
     }
 
     public interface IBuffHandleBeforeDmg

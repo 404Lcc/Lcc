@@ -1,8 +1,5 @@
 namespace LccHotfix
 {
-    /// <summary>
-    /// CustomLogic 黑板变量 Key 集合，用于在 GameMode、FSM、Skill、Subobject、Buff 逻辑之间传递上下文。
-    /// </summary>
     public partial class CvKey
     {
         #region 通用上下文
@@ -12,6 +9,16 @@ namespace LccHotfix
         /// </summary>
         public const string CV_FigherCfg = "CV_FigherCfg";
 
+        /// <summary>
+        /// 当前战斗补给配置的匿名逻辑参数。
+        /// </summary>
+        public const string CV_SupplyLogicParams = "CV_SupplyLogicParams";
+
+        /// <summary>
+        /// 当前补给卡 TID。
+        /// </summary>
+        public const string CV_BattleSupplyId = "CV_BattleSupplyId";
+
         #endregion
 
         #region 战斗单位与属性
@@ -20,6 +27,16 @@ namespace LccHotfix
         /// 战斗单位配置 ID。
         /// </summary>
         public const string CV_BattleUnitTid = "CV_BattleUnitTid";
+
+        /// <summary>
+        /// Whether the enemy FSM should switch to MST_Hit after taking damage.
+        /// </summary>
+        public const string CV_EnableHurtHitState = "CV_EnableHurtHitState";
+
+        /// <summary>
+        /// 最近一次受击的碰撞击中点，用于受击/冒血特效位置。
+        /// </summary>
+        public const string CV_LastHurtHitPos = "CV_LastHurtHitPos";
 
         /// <summary>
         /// 属性修改或读取时使用的浮点属性值。
@@ -71,21 +88,6 @@ namespace LccHotfix
         public const string CV_SpawnSbjTid = "CV_SpawnSbjTid";
 
         /// <summary>
-        /// 技能生成子物体数量。
-        /// </summary>
-        public const string CV_SpawnSbjCount = "CV_SpawnSbjCount";
-
-        /// <summary>
-        /// 并排齐射额外子物体数量。
-        /// </summary>
-        public const string CV_AbreastSbjCount = "CV_AbreastSbjCount";
-
-        /// <summary>
-        /// 散射子物体数量。
-        /// </summary>
-        public const string CV_ScatterSbjCount = "CV_ScatterSbjCount";
-
-        /// <summary>
         /// 技能搜索目标范围。
         /// </summary>
         public const string CV_SearchRange = "CV_SearchRange";
@@ -105,24 +107,19 @@ namespace LccHotfix
         public const string CV_TargetPos = "CV_TargetPos";
 
         /// <summary>
-        /// 当前目标方向。
+        /// 当前目标半径
         /// </summary>
-        public const string CV_TargetDir = "CV_TargetDir";
+        public const string CV_TargetRadius = "CV_TargetRadius";
 
         /// <summary>
-        /// 固定移动方向。
+        /// 当前目标随机半径
         /// </summary>
-        public const string CV_FixedMoveDir = "CV_FixedMoveDir";
+        public const string CV_TargetRandomRange = "CV_TargetRandomRange";
 
         /// <summary>
         /// 命中白名单实体集合。
         /// </summary>
         public const string CV_HitWhiteList = "CV_HitWhiteList";
-
-        /// <summary>
-        /// 手动瞄准或锁定释放时的技能方向。
-        /// </summary>
-        public const string CV_LockedSkillDir = "CV_LockedSkillDir";
 
         /// <summary>
         /// 延迟攻击时间，通常来自动画事件时间或技能前摇。
@@ -133,6 +130,35 @@ namespace LccHotfix
         /// 当前连续攻击次数。
         /// </summary>
         public const string CV_CurAttackTimes = "CV_CurAttackTimes";
+
+        /// <summary>当前普通攻击从本次起手到下次起手的完整周期。</summary>
+        public const string CV_AttackInterval = "CV_AttackInterval";
+
+        /// <summary>当前普通攻击实际使用的前摇时间。</summary>
+        public const string CV_AttackBeforeDelay = "CV_AttackBeforeDelay";
+
+        /// <summary>当前普通攻击 Attack 动画的播放倍率。</summary>
+        public const string CV_AttackAnimationSpeed = "CV_AttackAnimationSpeed";
+
+        /// <summary>
+        /// 当前弹药技能是否使用弹夹最后一发。
+        /// </summary>
+        public const string CV_IsAmmoLastShot = "CV_IsAmmoLastShot";
+
+        public const string CV_AmmoGambleCritAdd = "CV_AmmoGambleCritAdd";
+        public const string CV_AmmoGambleCritDamageAdd = "CV_AmmoGambleCritDamageAdd";
+        public const string CV_AmmoGambleDamageMultiplier = "CV_AmmoGambleDamageMultiplier";
+        public const string CV_AmmoGambleForceCritical = "CV_AmmoGambleForceCritical";
+
+        /// <summary>
+        /// 狙击手本发子弹是否无限穿透。
+        /// </summary>
+        public const string CV_SniperReloadInfinitePierceShot = "CV_SniperReloadInfinitePierceShot";
+
+        /// <summary>
+        /// 狙击手本发子弹是否使用凤凰子弹效果。
+        /// </summary>
+        public const string CV_SniperPhoenixBulletShot = "CV_SniperPhoenixBulletShot";
 
         #endregion
 
@@ -149,11 +175,6 @@ namespace LccHotfix
         public const string CV_SbjTargetPos = "CV_SbjTargetPos";
 
         /// <summary>
-        /// 子物体生成时的初始位置。
-        /// </summary>
-        public const string CV_SbjInitPos = "CV_SbjInitPos";
-
-        /// <summary>
         /// 子物体碰撞特效资源 ID 或路径变量。
         /// </summary>
         public const string CV_SbjHitFxRes = "CV_SbjHitFxRes";
@@ -164,34 +185,19 @@ namespace LccHotfix
         public const string CV_SbjHitFxResOverride = "CV_SbjHitFxResOverride";
 
         /// <summary>
-        /// 子物体边界反弹次数。
-        /// </summary>
-        public const string CV_SbjReboundCount = "CV_SbjReboundCount";
-
-        /// <summary>
-        /// 子物体边界反弹音效。
-        /// </summary>
-        public const string CV_SbjReboundAudio = "CV_SbjReboundAudio";
-
-        /// <summary>
-        /// 子物体连锁弹射次数。
-        /// </summary>
-        public const string CV_ChainBounceCount = "CV_ChainBounceCountAdd";
-
-        /// <summary>
-        /// 子物体持续时间。
-        /// </summary>
-        public const string CV_SbjDuration = "CV_SbjDuration";
-
-        /// <summary>
-        /// 跟随目标实体 ID，用于无人机携带旋转翼等跟随型子物体。
-        /// </summary>
-        public const string CV_FollowEntityId = "CV_FollowEntityId";
-
-        /// <summary>
         /// 子物体直线运动模式方向。
         /// </summary>
         public const string CV_ModeStraightDir = "CV_ModeStraightDir";
+
+        /// <summary>
+        /// 子物体剩余障碍反弹次数。
+        /// </summary>
+        public const string CV_SubobjectReflectLeft = "CV_SubobjectReflectLeft";
+
+        /// <summary>
+        /// 子物体每次障碍反弹后的伤害倍率。
+        /// </summary>
+        public const string CV_SubobjectReflectDamageRate = "CV_SubobjectReflectDamageRate";
 
         /// <summary>
         /// 子物体销毁位置。
@@ -214,25 +220,6 @@ namespace LccHotfix
 
         #endregion
 
-        #region 爆炸与分裂
-
-        /// <summary>
-        /// 爆炸范围。
-        /// </summary>
-        public const string CV_BombRange = "CV_BombRange";
-
-        /// <summary>
-        /// 爆炸次数或爆炸生成数量。
-        /// </summary>
-        public const string CV_BombCount = "CV_BombCount";
-
-        /// <summary>
-        /// 子弹分裂数量。
-        /// </summary>
-        public const string CV_BulletSplitCount = "CV_BulletSplitCount";
-
-        #endregion
-
         #region Buff
 
         /// <summary>
@@ -251,9 +238,9 @@ namespace LccHotfix
         public const string CV_BuffMaxLevel = "CV_BuffMaxLevel";
 
         /// <summary>
-        /// 驱散 Buff 列表。
+        /// 把子物体命中时的HitInfo传给buff
         /// </summary>
-        public const string CV_DisperseBuffList = "CV_DisperseBuffList";
+        public const string CV_SubobjHitInfo = "CV_SubobjHitInfo";
 
         #endregion
     }

@@ -10,9 +10,10 @@ namespace LccHotfix
     /// </summary>
     public class ImmuneComponent : LogicComponent
     {
-        protected readonly Dictionary<int, MultChangeBool_OR> _boolImmunes = new();
-        protected readonly Dictionary<int, MultChangeInt_ADD> _permyriadImmunes = new();
-        protected readonly Dictionary<int, MultChangeInt_ADD> _buffImmunes = new();
+        protected readonly Dictionary<int, MultChangeBool_OR> _boolImmunes = new(); // 布尔类型免疫效果，使用 OR 关系叠加
+        protected readonly Dictionary<int, MultChangeInt_ADD> _permyriadImmunes = new(); // 万分比类型免疫效果，使用加法关系叠加
+        protected readonly Dictionary<int, MultChangeInt_ADD> _buffImmunes = new(); // Buff免疫效果，使用加法关系叠加
+        protected readonly Dictionary<int, MultChangeInt_ADD> _buffTagImmunes = new(); // Buff标签免疫效果，使用加法关系叠加
 
         // 布尔类型免疫效果
         public bool InstantKill => GetBoolImmune(BoolImmune.InstantKill); // 秒杀
@@ -30,48 +31,7 @@ namespace LccHotfix
             _boolImmunes.Clear();
             _permyriadImmunes.Clear();
             _buffImmunes.Clear();
-        }
-
-        public void Init(TImmuneLogic immuneLogic)
-        {
-            AddLogic(immuneLogic, 0);
-        }
-
-        public void AddLogic(TImmuneLogic immuneLogic, int flag)
-        {
-            AddBoolImmune(BoolImmune.InstantKill, immuneLogic.ImmuneInstantKill, flag);
-            AddBoolImmune(BoolImmune.SlowDown, immuneLogic.ImmuneSlowDown, flag);
-            AddBoolImmune(BoolImmune.Stun, immuneLogic.ImmuneStun, flag);
-            AddBoolImmune(BoolImmune.Pull, immuneLogic.ImmunePull, flag);
-            AddBoolImmune(BoolImmune.Teleport, immuneLogic.ImmuneTeleport, flag);
-
-            AddPermyriadImmune(PermyriadImmune.HitBack, immuneLogic.ImmuneHitBack, flag);
-
-            foreach (var immuneBuff in immuneLogic.ImmuneBuff)
-            {
-                var buffCfg = PbCfg.GetData<TBuff>(immuneBuff.BuffId);
-                if (buffCfg == null)
-                {
-                    continue;
-                }
-                AddBuffImmune(buffCfg.LogicID, immuneBuff.ImmuneRatio, flag);
-            }
-        }
-
-        public void RemoveLogic(int flag)
-        {
-            RemoveBoolImmune(BoolImmune.InstantKill, flag);
-            RemoveBoolImmune(BoolImmune.SlowDown, flag);
-            RemoveBoolImmune(BoolImmune.Stun, flag);
-            RemoveBoolImmune(BoolImmune.Pull, flag);
-            RemoveBoolImmune(BoolImmune.Teleport, flag);
-
-            RemovePermyriadImmune(PermyriadImmune.HitBack, flag);
-
-            foreach (var buffId in _buffImmunes.Keys)
-            {
-                RemoveBuffImmune(buffId, flag);
-            }
+            _buffTagImmunes.Clear();
         }
 
         public bool GetBoolImmune(int boolImmuneType)
@@ -101,7 +61,7 @@ namespace LccHotfix
         {
             if (_boolImmunes.TryGetValue(boolImmuneType, out var multChange))
             {
-                _boolImmunes.Remove(boolImmuneType);
+                multChange.RemoveChange(flag);
             }
         }
 
@@ -132,7 +92,7 @@ namespace LccHotfix
         {
             if (_permyriadImmunes.TryGetValue(permyriadImmueType, out var multChange))
             {
-                _permyriadImmunes.Remove(permyriadImmueType);
+                multChange.RemoveChange(flag);
             }
         }
 
@@ -163,7 +123,42 @@ namespace LccHotfix
         {
             if (_buffImmunes.TryGetValue(buffId, out var multChange))
             {
-                _buffImmunes.Remove(buffId);
+                multChange.RemoveChange(flag);
+            }
+        }
+
+        public int GetBuffTagImmune(int buffTag)
+        {
+            var value = 0;
+            foreach (var kv in _buffTagImmunes)
+            {
+                if ((kv.Key & buffTag) == kv.Key)
+                {
+                    value += kv.Value.Value;
+                }
+            }
+            return value;
+        }
+
+        public void AddBuffTagImmune(int buffTag, int value, int flag = 0)
+        {
+            if (!_buffTagImmunes.TryGetValue(buffTag, out var multChange))
+            {
+                if (value == 0)
+                {
+                    return;
+                }
+                multChange = new MultChangeInt_ADD(0);
+                _buffTagImmunes.Add(buffTag, multChange);
+            }
+            multChange.AddChange(value, flag);
+        }
+
+        public void RemoveBuffTagImmune(int buffTag, int flag = 0)
+        {
+            if (_buffTagImmunes.TryGetValue(buffTag, out var multChange))
+            {
+                multChange.RemoveChange(flag);
             }
         }
 
@@ -181,17 +176,12 @@ namespace LccHotfix
             get { return HasComponent(LogicComponentsLookup.ComImmune); }
         }
 
-        public void AddComImmune(TImmuneLogic immuneLogic, int flag = 0)
+        public void AddComImmune()
         {
             var index = LogicComponentsLookup.ComImmune;
-            if (hasComImmune)
-            {
-                comImmune.AddLogic(immuneLogic, flag);
-            }
-            else
+            if (!hasComImmune)
             {
                 var component = (ImmuneComponent)CreateComponent(index, typeof(ImmuneComponent));
-                component.Init(immuneLogic);
                 AddComponent(index, component);
             }
         }
@@ -200,7 +190,7 @@ namespace LccHotfix
         {
             if (hasComImmune)
             {
-                RemoveComponent(LogicComponentsLookup.ComHp);
+                RemoveComponent(LogicComponentsLookup.ComImmune);
             }
         }
 
@@ -217,6 +207,15 @@ namespace LccHotfix
             if (hasComImmune)
             {
                 return comImmune.GetBuffImmune(buffId);
+            }
+            return 0;
+        }
+
+        public int GetBuffTagImmune(int buffTag)
+        {
+            if (hasComImmune)
+            {
+                return comImmune.GetBuffTagImmune(buffTag);
             }
             return 0;
         }

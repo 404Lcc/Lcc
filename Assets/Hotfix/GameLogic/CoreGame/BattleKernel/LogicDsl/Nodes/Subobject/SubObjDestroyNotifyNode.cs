@@ -9,10 +9,10 @@ namespace LccHotfix
     {
         public override void Destroy()
         {
-            var logicEntity = GetOwnerEntity();
+            var logicEntity = this.GetOwnerEntity();
             if (logicEntity != null && logicEntity.hasComTransform)
             {
-                GetLogicWorld()?.SubobjectLifecycleEventService?.DispatchDestroy(new EvtSubObjDestroy
+                this.GetLogicWorld()?.SubobjectLifecycleEventService?.DispatchDestroy(new EvtSubObjDestroy
                 {
                     Where = logicEntity.comTransform.position,
                 });

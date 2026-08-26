@@ -7,7 +7,7 @@ namespace LccHotfix
     //逻辑内流通，接口性质的上下文结构，（不应被修改）
     public struct CustomNodeContext
     {
-        public ICustomLogicGenInfo GenInfo { get; set; }
+        public CustomLogicGenInfo GenInfo { get; set; }
         public CustomLogic Logic { get; set; }
         public VarEnv VarEnvImp { get; set; }
 
@@ -17,7 +17,7 @@ namespace LccHotfix
         //逻辑节点工厂（运行时逻辑节点get）
         public CustomLogicFactory Factory { get; set; }
 
-        public CustomNodeContext(ICustomLogicGenInfo genInfo, CustomLogic logic, VarEnv varEnvImp, ILogicConfigContainer container, CustomLogicFactory factory)
+        public CustomNodeContext(CustomLogicGenInfo genInfo, CustomLogic logic, VarEnv varEnvImp, ILogicConfigContainer container, CustomLogicFactory factory)
         {
             GenInfo = genInfo;
             Logic = logic;
@@ -50,7 +50,7 @@ namespace LccHotfix
         public VarEnv VarEnvRef => _context.VarEnvImp;
 
         //运行时初始数据
-        public ICustomLogicGenInfo GenInfo => _context.GenInfo;
+        public CustomLogicGenInfo GenInfo => _context.GenInfo;
 
         public CustomLogic RootLogic => _context.Logic;
 
@@ -82,7 +82,7 @@ namespace LccHotfix
             return null;
         }
 
-        public T GetGenInfo<T>(bool logError = true) where T : ICustomLogicGenInfo
+        public T GetGenInfo<T>(bool logError = true) where T : class
         {
             if (_context.GenInfo is T theGenInfo)
             {

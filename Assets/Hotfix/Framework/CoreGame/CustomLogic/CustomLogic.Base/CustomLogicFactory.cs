@@ -55,7 +55,7 @@ namespace LccHotfix
         }
 
         //主方法：创建并装配一个自定义逻辑
-        public CustomLogic CreateLogic(ICustomLogicGenInfo genInfo)
+        public CustomLogic CreateLogic(CustomLogicGenInfo genInfo)
         {
             var cfgContainerName = genInfo.ConfigContainerName;
             if (!_configContainerDic.TryGetValue(cfgContainerName, out var cfgContainer))
@@ -75,7 +75,7 @@ namespace LccHotfix
             return customLogic;
         }
 
-        public CustomLogic CreateLogic(ICustomLogicGenInfo genInfo, CustomLogicCfg config, ILogicConfigContainer cfgContainer = null)
+        public CustomLogic CreateLogic(CustomLogicGenInfo genInfo, CustomLogicCfg config, ILogicConfigContainer cfgContainer = null)
         {
             if (config == null)
             {
@@ -94,6 +94,7 @@ namespace LccHotfix
 
             //区别于CreateCustomNode
             VarEnv varEnv = genInfo.PreEnv ?? CreatePart<VarEnv>();
+            varEnv = genInfo.CopyToPreVarEnv(ref varEnv);
             CustomNodeContext context = new CustomNodeContext(genInfo, customLogic, varEnv, cfgContainer, this);
             customLogic.InitializeNode(config, context);
 

@@ -52,7 +52,7 @@ namespace LccHotfix
             GizmoService = Current.AddModule<GizmoManager>();
             BadgeService = Current.AddModule<BadgeManager>();
             CustomLogicService = Current.AddModule<CustomLogicManager>();
-            CustomLogicService.SetRegister(new LogicCfgContainerRegister_Demo());
+            CustomLogicService.SetRegister(new LogicCfgContainerRegister());
             GuideService = Current.AddModule<GuideManager>();
 
             ConfigService = Current.AddModule<ConfigManager>();
@@ -128,13 +128,19 @@ namespace LccHotfix
             }
         }
 
-        private static void OnFixedUpdate()
-        {
-        }
-
         private static void OnUpdate()
         {
             Main.Current.Update(Time.deltaTime, Time.unscaledDeltaTime);
+        }
+        
+        private static void OnFixedUpdate()
+        {
+            if (Main.Current == null)
+            {
+                return;
+            }
+
+            Main.Current.FixedUpdate(Time.fixedDeltaTime, Time.fixedUnscaledDeltaTime);
         }
 
         private static void OnLateUpdate()

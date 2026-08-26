@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,10 @@ namespace LccHotfix
     {
         int Category { get; }
         string ViewName { get; set; }
+        /// <summary>
+        /// 从池取出后绑定 loaded/category/world，替代原构造函数。
+        /// </summary>
+        void Bind(IReceiveLoaded loaded, int category, ECWorlds world);
         void Init(long entityId, IViewLoader loader, IViewWrapper parent);
         void SyncTransform(long entityId, Vector3 position, Quaternion rotation, Vector3 scale);
         void ModifyVisible(bool visible, int flag);
@@ -20,51 +25,32 @@ namespace LccHotfix
         public List<IViewWrapper> ViewList => _viewDict.List;
         public int ViewCount => ViewList.Count;
 
-        private string _currentReplacedMaterialName;
-
-        public void SetReplaceMaterial(string matName, Material mat)
+        public void ReplaceMaterial(int index)
         {
-            if (_currentReplacedMaterialName == matName)
-                return;
-
-            if (_currentReplacedMaterialName != null)
-                RestoreOriginalMaterial();
-
-            if (mat == null)
-                return;
-
             foreach (var view in ViewList)
             {
                 if (view is MainGameObjectView simpleView)
-                    simpleView.ReplaceMaterial(mat);
+                    simpleView.ReplaceMaterial(index);
             }
-
-            _currentReplacedMaterialName = matName;
         }
 
-        public void RestoreOriginalMaterial()
+        public void RestoreMaterial()
         {
-            if (_currentReplacedMaterialName == null)
-                return;
-
-            foreach (var view in ViewList)
-            {
-                if (view is MainGameObjectView simpleView)
-                    simpleView.RestoreMaterial();
-            }
-
-            _currentReplacedMaterialName = null;
+            ReplaceMaterial(0);
         }
 
         public override void DisposeOnRemove()
         {
-            base.DisposeOnRemove();
+            // 须在 base.DisposeOnRemove 之前归还，基类会把 _owner 置空
+            var pool = _owner?.OwnerWorld?.ViewWrapperPool;
             foreach (var view in ViewList)
             {
                 view.DisposeView();
+                pool?.Release(view);
             }
 
             _viewDict.Clear();
+            base.DisposeOnRemove();
         }
 
         public T MainActorView<T>() where T : class, IViewWrapper
@@ -96,7 +82,7 @@ namespace LccHotfix
             var theView = view as T;
             if (theView == null)
             {
-                UnityEngine.Debug.LogWarning($"GetComView theView == null, newCategory={category}");
+                //UnityEngine.Debug.LogWarning($"GetComView theView == null, newCategory={category}");
             }
 
             return theView;
@@ -131,6 +117,7 @@ namespace LccHotfix
                 if (view.Category == category)
                 {
                     view.DisposeView();
+                    _owner?.OwnerWorld?.ViewWrapperPool.Release(view);
                     _viewDict.Remove(category);
                     if (ViewCount == 0)
                     {
@@ -150,7 +137,7 @@ namespace LccHotfix
 
         public void RemoveAllView()
         {
-            RestoreOriginalMaterial();
+            RestoreMaterial();
             foreach (var iViewWrapper in _viewDict)
             {
                 RemoveView(iViewWrapper.Category);

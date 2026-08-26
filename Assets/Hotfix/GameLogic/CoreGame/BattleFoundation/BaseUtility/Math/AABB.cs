@@ -2,6 +2,12 @@ using UnityEngine;
 
 namespace LccHotfix
 {
+    public enum BattlePlane
+    {
+        XY,
+        XZ,
+    }
+
     public class AABB
     {
         public Vector2 minPoint;
@@ -67,6 +73,16 @@ namespace LccHotfix
         public bool HasNegativeVolume()
         {
             return maxPoint.x < minPoint.x || maxPoint.y < minPoint.y;
+        }
+
+        public static Vector2 ToPlanePoint(Vector3 point, BattlePlane plane)
+        {
+            return plane == BattlePlane.XY ? new Vector2(point.x, point.y) : new Vector2(point.x, point.z);
+        }
+
+        public static Vector3 ToWorldPoint(Vector2 point, float fixedAxis, BattlePlane plane)
+        {
+            return plane == BattlePlane.XY ? new Vector3(point.x, point.y, fixedAxis) : new Vector3(point.x, fixedAxis, point.y);
         }
 
         public static bool Intersect(AABB aabb, Vector2 begin, Vector2 end, out Vector2 intersectionPoint)

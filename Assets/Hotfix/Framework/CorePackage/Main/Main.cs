@@ -27,6 +27,17 @@ namespace LccHotfix
             }
         }
 
+        internal override void FixedUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            lock (_lock)
+            {
+                foreach (Module module in _modules)
+                {
+                    module.FixedUpdate(elapseSeconds, realElapseSeconds);
+                }
+            }
+        }
+
         internal override void LateUpdate()
         {
             lock (_lock) // 加锁

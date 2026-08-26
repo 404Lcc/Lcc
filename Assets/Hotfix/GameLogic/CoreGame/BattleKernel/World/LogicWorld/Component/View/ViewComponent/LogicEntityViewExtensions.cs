@@ -1,3 +1,5 @@
+using HotUpdate.Framework.PbCfg;
+using PBConfig;
 using UnityEngine;
 
 namespace LccHotfix
@@ -103,6 +105,18 @@ namespace LccHotfix
             }
 
             return objView;
+        }
+
+        /// <summary>
+        /// 判断实体主 GameObject 视图是否已加载完成。
+        /// </summary>
+        public static bool IsMainGameObjectViewReady(this LogicEntity entity)
+        {
+            if (entity == null || !entity.hasComView)
+                return false;
+
+            var objView = entity.comView.MainActorView<MainGameObjectView>();
+            return objView?.GameObject != null;
         }
 
         /// <summary>

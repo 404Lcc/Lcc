@@ -70,7 +70,7 @@ namespace LccHotfix
                 CLHelper.LogError(this, $"SearchEntitiesBhv mUserEntity == null, mCfg.EntityVar={_cfg.UserEntityVar.VarKey}");
             }
 
-            mLogicWorld = GetLogicWorld();
+            mLogicWorld = this.GetLogicWorld();
         }
 
         protected override float OnUpdate(float dt)

@@ -61,11 +61,13 @@ namespace LccHotfix
     {
         public BattleCollisionSpaceConfig CollisionSpaceConfig { get; set; }
 
+        public BattlePlane BattlePlane { get; set; } = BattlePlane.XY;
+
         public Type MainObjectViewType { get; set; }
 
         public int ModeLogicID { get; set; }
 
-        public ICustomLogicGenInfo GameModeGenInfo { get; set; }
+        public CustomLogicGenInfo GameModeGenInfo { get; set; }
 
         public IBattleModeLogicService ModeLogicService { get; set; }
 

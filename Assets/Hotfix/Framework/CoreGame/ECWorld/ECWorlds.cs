@@ -69,6 +69,14 @@ namespace LccHotfix
             }
         }
 
+        public virtual void FixedUpdate(float deltaTime, float unscaledDeltaTime)
+        {
+            if (_rootSystem != null)
+            {
+                _rootSystem.FixedUpdate(deltaTime, unscaledDeltaTime);
+            }
+        }
+        
         public virtual void LateUpdate()
         {
             if (_rootSystem != null)

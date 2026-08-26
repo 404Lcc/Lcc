@@ -7,12 +7,12 @@ namespace LccHotfix
 {
     public interface IHasSourceEntity
     {
-        Entity SourceEntity { get; }
+        LogicEntity SourceEntity { get; }
     }
 
     public interface IHasOwnerEntity
     {
-        Entity OwnerEntity { get; }
+        LogicEntity OwnerEntity { get; }
     }
     
     public interface IBuff

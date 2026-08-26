@@ -42,7 +42,7 @@ namespace LccHotfix
             return _factory.TryGetConfigContainer(name, out var container) ? container : null;
         }
 
-        public CustomLogic CreateLogic(ICustomLogicGenInfo genInfo)
+        public CustomLogic CreateLogic(CustomLogicGenInfo genInfo)
         {
             if (genInfo == null)
             {
@@ -53,7 +53,7 @@ namespace LccHotfix
             return _factory.CreateLogic(genInfo);
         }
 
-        public T CreateLogic<T>(ICustomLogicGenInfo genInfo) where T : CustomLogic
+        public T CreateLogic<T>(CustomLogicGenInfo genInfo) where T : CustomLogic
         {
             if (genInfo == null)
             {
@@ -79,7 +79,7 @@ namespace LccHotfix
         }
 
 
-        public T NewGenInfo<T>() where T : ICustomLogicGenInfo, new()
+        public T NewGenInfo<T>() where T : CustomLogicGenInfo, new()
         {
             return _factory.CreatePart<T>();
         }

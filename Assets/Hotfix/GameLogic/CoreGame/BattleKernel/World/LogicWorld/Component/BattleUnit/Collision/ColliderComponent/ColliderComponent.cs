@@ -1,25 +1,7 @@
-using HotUpdate.Framework;
 using PBConfig;
 
 namespace LccHotfix
 {
-    /// <summary>
-    /// 判断是否能碰撞
-    /// </summary>
-    public interface IEntityColliderCheckActive
-    {
-        bool IsActiveAsSource(LogicEntity ownerEntity);
-    }
-
-    /// <summary>
-    /// 碰撞到单位
-    /// </summary>
-    public interface IEntityHitEntityHandler
-    {
-        //处理碰撞
-        void HandleHitEntity(LogicEntity ownerEntity, LogicEntity hitEntity, UnityEngine.Vector3 hitPoint, bool isPart);
-    }
-
     public interface IRawHitMaker : IReference
     {
         //生数据
@@ -29,7 +11,7 @@ namespace LccHotfix
         void SetCapacity(int capacity);
 
         //生成生数据 优化后无用，将会移除
-        bool CheckRawHits(LogicEntity ownerEntity, float dt);
+        bool MakeRawHits(LogicEntity ownerEntity, float dt);
 
         //清理当前帧数据
         void Cleanup();
@@ -52,22 +34,34 @@ namespace LccHotfix
 
         //清理当前帧数据
         void Cleanup();
+
+        bool IsActiveAsSource(LogicEntity ownerEntity);
+
+        //处理碰撞
+        void HandleHitEntity(LogicEntity ownerEntity, LogicEntity hitEntity, RawHit rawHit);
     }
 
     public class ColliderComponent : LogicComponent
     {
-        public IEntityColliderHandler handler;
+        public bool isActive { get; set; } = true;
+        public IEntityColliderHandler handler { get; set; }
 
         public override void DisposeOnRemove()
         {
             base.DisposeOnRemove();
-
+            isActive = true;
             if (handler != null)
             {
                 ReferencePool.Release(handler);
                 handler = null;
             }
         }
+
+        public void SetActive(bool active)
+        {
+            isActive = active;
+        }
+
     }
 
 

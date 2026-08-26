@@ -10,12 +10,12 @@ namespace LccHotfix
         public override void InitializeNode(ICustomNodeCfg cfg, in CustomNodeContext context)
         {
             base.InitializeNode(cfg, in context);
-            GetLogicWorld()?.SubobjectLifecycleEventService?.AddDestroyHandler(HandleSubObjDestroy);
+            this.GetLogicWorld()?.SubobjectLifecycleEventService?.AddDestroyHandler(HandleSubObjDestroy);
         }
 
         public override void Destroy()
         {
-            GetLogicWorld()?.SubobjectLifecycleEventService?.RemoveDestroyHandler(HandleSubObjDestroy);
+            this.GetLogicWorld()?.SubobjectLifecycleEventService?.RemoveDestroyHandler(HandleSubObjDestroy);
             base.Destroy();
         }
 

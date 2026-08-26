@@ -1,16 +1,19 @@
 using Entitas;
+using PBConfig;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace LccHotfix
 {
     /// <summary> 对即将承受 Buff 的目标做额外校验；返回 true 表示允许施加，false 表示拒绝（如免疫）。 </summary>
-    public delegate bool TargetEntityCheckerFuc(LogicEntity targetEntity);
+    public delegate bool TargetEntityCheckerFunc(LogicEntity targetEntity);
 
     public interface IEntityBuffCfg
     {
         /// <summary> 非 null 时在 <see cref="BuffCenterComponent.AddNewBuff"/> 中对宿主实体调用；返回 false 则不上 Buff。 </summary>
-        TargetEntityCheckerFuc TargetChecker { get; }
+        int BuffTag { get; }
+        TargetEntityCheckerFunc TargetChecker { get; }
+        IBuffMergeRule MergeRule { get; }
     }
 
     public class BuffCfg : CustomLogicCfg, IEntityBuffCfg
@@ -20,11 +23,25 @@ namespace LccHotfix
             return typeof(BuffLogic);
         }
 
-        public TargetEntityCheckerFuc TargetChecker { get; protected set; }
+        public TargetEntityCheckerFunc TargetChecker { get; protected set; } // buff预加载检查器，用于在buff添加时对目标实体做额外的检查（比如免疫），返回true表示允许添加，false表示拒绝添加
+        public int BuffTag { get; protected set; } // buff标签，mask格式，用于对buff进行批量管理
+        public IBuffMergeRule MergeRule { get; protected set; } // 同类buff合并规则
 
-        public BuffCfg WithTargetChecker(TargetEntityCheckerFuc checkFuc)
+        public BuffCfg WithTargetChecker(TargetEntityCheckerFunc checkFuc)
         {
             TargetChecker = checkFuc;
+            return this;
+        }
+
+        public BuffCfg WithBuffTag(int buffTag)
+        {
+            BuffTag = buffTag;
+            return this;
+        }
+
+        public BuffCfg WithMergeRule(IBuffMergeRule mergeRule)
+        {
+            MergeRule = mergeRule;
             return this;
         }
 
@@ -35,50 +52,68 @@ namespace LccHotfix
 
     public partial class BuffLogic : EntityCmdLogic, IBuff, IHasOwnerEntity, IHasSourceEntity, IForceEnd, IEntityCommandHandler
     {
+        private BuffCfg m_buffCfg;
         private BuffGenInfo m_buffGenInfo;
-        private bool m_isForceEnd;
-        private float mDuration;
-        private bool mIsForever;
 
+        private float m_timeLeft;
+        private float m_timeTotal;
+        private bool m_isForever;
+        private bool m_isForceEnd;
 
         public override void InitializeNode(ICustomNodeCfg cfg, in CustomNodeContext context)
         {
-            PreInitializeNode(context);
+            PreInitializeNode(cfg, context);
             base.InitializeNode(cfg, context);
             m_isForceEnd = false;
+            m_timeTotal = CalcDuration();
+            m_timeLeft = m_timeTotal;
+            m_isForever = m_timeLeft <= 0;
+            SetVar(CvKey.CV_CurBuff, this);
+        }
+
+        private void PreInitializeNode(ICustomNodeCfg cfg, CustomNodeContext context)
+        {
+            m_buffCfg = (BuffCfg)cfg;
+            m_buffGenInfo = (BuffGenInfo)context.GenInfo;
+        }
+
+        private float CalcDuration()
+        {
             var durationCfg = GetVar<FloatCfg>(CvKey.CV_BuffDuration);
-            mDuration = durationCfg.GetValue(this);
-            if (mDuration > 0)
+            var duration = durationCfg.GetValue(this);
+            if (duration > 0)
             {
-                // 来自全局的debuff持续时间加成
+                if (m_buffGenInfo.DurationAddSeconds != 0)
+                {
+                    duration += m_buffGenInfo.DurationAddSeconds;
+                }
+                if (m_buffGenInfo.SourceDurationAddRate != 0)
+                {
+                    duration *= (1 + m_buffGenInfo.SourceDurationAddRate);
+                }
+
+                // 只有负面 Buff 应用全局减益持续时间加成，避免影响正面 Buff。
                 var durationModifier = GetVar<IBuffDurationModifier>(CvKey.CV_OwnerPlayerInfo);
-                if (durationModifier != null)
+                if (HasBuffTag(BuffTag.Negative) && durationModifier != null)
                 {
                     var playerDebuffDurationAdd = durationModifier.DebuffDurationAddRate;
                     if (playerDebuffDurationAdd > 0)
                     {
-                        mDuration *= (1 + playerDebuffDurationAdd);
+                        duration *= (1 + playerDebuffDurationAdd);
                     }
                 }
-
                 // buff生成时的持续时间加成
                 if (m_buffGenInfo.DurationAddRate != 0)
                 {
-                    mDuration *= (1 + m_buffGenInfo.DurationAddRate);
+                    duration *= (1 + m_buffGenInfo.DurationAddRate);
                 }
             }
-
-            //CLHelper.LogInfo(this, $"当前的buff持续时间为:{mDuration}");
-            mIsForever = mDuration <= 0;
-        }
-
-        private void PreInitializeNode(CustomNodeContext context)
-        {
-            m_buffGenInfo = (BuffGenInfo)context.GenInfo;
+            return duration;
         }
 
         public override void Destroy()
         {
+            m_buffCfg = null;
             m_buffGenInfo.Clear();
             m_isForceEnd = false;
 
@@ -86,12 +121,12 @@ namespace LccHotfix
         }
 
 
-        public Entity OwnerEntity
+        public LogicEntity OwnerEntity
         {
             get { return m_buffGenInfo.Owner; }
         }
 
-        public Entity SourceEntity
+        public LogicEntity SourceEntity
         {
             get { return m_buffGenInfo.Sourcer; }
         }
@@ -100,14 +135,29 @@ namespace LccHotfix
         public int Level { get; set; }
         public int MaxLevel { get; set; }
 
-        public float Duration
+        public float TimeLeft
         {
-            get => mDuration;
+            get => m_timeLeft;
+        }
+
+        public float TimeTotal
+        {
+            get => m_timeTotal;
+        }
+
+        public BuffCfg BuffCfg
+        {
+            get { return m_buffCfg; }
         }
 
         public BuffGenInfo BuffGenInfo
         {
             get { return m_buffGenInfo; }
+        }
+
+        public bool HasBuffTag(int buffTag)
+        {
+            return (BuffCfg.BuffTag & buffTag) == buffTag;
         }
 
         public bool IsFinished()
@@ -117,10 +167,10 @@ namespace LccHotfix
 
         public void UpdateBuff(float dt)
         {
-            if (!mIsForever)
+            if (!m_isForever)
             {
-                mDuration -= dt;
-                if (mDuration <= 0)
+                m_timeLeft -= dt;
+                if (m_timeLeft <= 0)
                     return;
             }
 
@@ -137,12 +187,24 @@ namespace LccHotfix
             m_isForceEnd = true;
         }
 
+        public void SetTime(float duration)
+        {
+            m_timeTotal = duration;
+            m_timeLeft = duration;
+        }
+
+        public void ResetTime()
+        {
+            m_timeTotal = CalcDuration();
+            m_timeLeft = m_timeTotal;
+        }
+
         public override bool CanStop()
         {
-            if (mIsForever)
+            if (m_isForever)
                 return false;
 
-            if (mDuration <= 0)
+            if (m_timeLeft <= 0)
             {
                 return true;
             }
@@ -156,7 +218,7 @@ namespace LccHotfix
 
         private List<IBuffPreviousRemove> mBuffPreviousRemoveList = new List<IBuffPreviousRemove>();
 
-        private List<IBuffUpgrade> mBuffUpgradeList = new List<IBuffUpgrade>();
+        private List<IBuffStateChanged> mBuffStateChangedList = new List<IBuffStateChanged>();
 
         private List<IBuffHandleBeforeDmg> mBuffHandleBeforeDmgList = new List<IBuffHandleBeforeDmg>();
 
@@ -165,7 +227,7 @@ namespace LccHotfix
         {
             mBuffAddList.Clear();
             mBuffPreviousRemoveList.Clear();
-            mBuffUpgradeList.Clear();
+            mBuffStateChangedList.Clear();
             mBuffHandleBeforeDmgList.Clear();
             base.ClearInterfaceCache();
         }
@@ -175,7 +237,7 @@ namespace LccHotfix
             base.CacheInterface(node);
             CustomNode.TraverseCollectInterface(ref mBuffAddList, node);
             CustomNode.TraverseCollectInterface(ref mBuffPreviousRemoveList, node);
-            CustomNode.TraverseCollectInterface(ref mBuffUpgradeList, node);
+            CustomNode.TraverseCollectInterface(ref mBuffStateChangedList, node);
             CustomNode.TraverseCollectInterface(ref mBuffHandleBeforeDmgList, node);
         }
 
@@ -191,33 +253,16 @@ namespace LccHotfix
                     c.OnEntityAddBuff(e);
                 }
             }
-
-            // buff驱散逻辑
-            if (HasVar<List<int>>(CvKey.CV_DisperseBuffList))
-            {
-                var disperseBuffList = GetVar<List<int>>(CvKey.CV_DisperseBuffList);
-                foreach (var buffLogicId in disperseBuffList)
-                {
-                    e.RemoveBuffByID(buffLogicId);
-                }
-            }
-            // buff驱散buff的写法：在buffLogic后面写入初始黑板
-            // env.WriteVar<List<int>>(CvKey.CV_DisperseBuffList, new() { buffLogicId });
         }
 
-        public virtual void OnBuffUpgrade(LogicEntity e)
+        public virtual void OnBuffStateChanged(LogicEntity e)
         {
-            MaxLevel = m_buffGenInfo.BuffMaxLevel;
-            if (m_buffGenInfo.BuffMaxLevel > Level)
+            foreach (var c in mBuffStateChangedList)
             {
-                Level++;
-                foreach (var c in mBuffUpgradeList)
+                var node = c as ICustomNode;
+                if (node != null && node.IsActive)
                 {
-                    var node = c as ICustomNode;
-                    if (node != null && node.IsActive)
-                    {
-                        c.OnBuffUpgrade(e, this);
-                    }
+                    c.OnBuffStateChanged(e, this);
                 }
             }
         }

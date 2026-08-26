@@ -29,7 +29,16 @@ namespace LccHotfix
             {
                 return;
             }
+        }
 
+        public override void FixedUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.FixedUpdate(elapseSeconds, realElapseSeconds);
+
+            if (IsLoading)
+            {
+                return;
+            }
         }
 
         public override void LateUpdate()
@@ -40,7 +49,6 @@ namespace LccHotfix
             {
                 return;
             }
-
         }
 
         public override void ProcedureExitHandler()

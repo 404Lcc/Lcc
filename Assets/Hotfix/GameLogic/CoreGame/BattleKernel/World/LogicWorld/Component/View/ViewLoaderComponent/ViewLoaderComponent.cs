@@ -216,9 +216,11 @@ namespace LccHotfix
                 return existView;
             }
 
-            var view = System.Activator.CreateInstance(loader.ViewClassType, loaded, loader.Category, world) as IViewWrapper;
+            // 从本局 ViewWrapperPool 取出包装对象，避免每次 Activator
+            var view = world.LogicWorld.ViewWrapperPool.Acquire(loader.ViewClassType);
             if (view != null)
             {
+                view.Bind(loaded, loader.Category, world);
                 view.Init(_owner.ID, loader, parentView);
                 Owner.AddView(view);
                 loader.IsDeploy = true;

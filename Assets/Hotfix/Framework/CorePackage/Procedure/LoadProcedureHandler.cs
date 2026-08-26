@@ -81,6 +81,10 @@ namespace LccHotfix
         {
         }
 
+        public virtual void FixedUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+        }
+
         public virtual void LateUpdate()
         {
         }

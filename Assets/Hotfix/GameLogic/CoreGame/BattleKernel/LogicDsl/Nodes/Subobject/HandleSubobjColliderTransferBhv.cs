@@ -56,7 +56,7 @@ namespace LccHotfix
             }
 
             Transfer(hitEntity, transferPos);
-            GetLogicWorld()?.GetCreationInfo<BattleKernelCreationInfo>()?.SubobjectTransferEffectService?.OnTransferred(this, hitEntity);
+            this.GetLogicWorld()?.GetCreationInfo<BattleKernelCreationInfo>()?.SubobjectTransferEffectService?.OnTransferred(this, hitEntity);
             return true;
         }
     }
