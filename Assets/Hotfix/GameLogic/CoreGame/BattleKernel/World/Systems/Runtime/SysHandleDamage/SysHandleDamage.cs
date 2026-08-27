@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Entitas;
+using PBConfig;
 using Random = System.Random;
 
 namespace LccHotfix
@@ -30,7 +31,7 @@ namespace LccHotfix
             DefenderEntity = e_defender;
             if (e_defender == null)
             {
-                CLHelper.LogError(sourceLogic, "new EvtDamage e_defender == null");
+                CLogger.LogError(sourceLogic, "new EvtDamage e_defender == null");
                 Context = default;
                 return;
             }
@@ -56,7 +57,22 @@ namespace LccHotfix
             if (sourceLogic.HasVar<EDamageType>(CvKey.CV_DamageType))
                 damageType = sourceLogic.GetVar<EDamageType>(CvKey.CV_DamageType);
 
-            Context = MakeDamageContext(attackerSum, attackerSbj, e_defender, hitInfo, skillDamageFactor, damageType);
+            var skillTid = (uint)sourceLogic.GetVar<int>(CvKey.CV_SkillTid, 0);
+            sourceLogic.GetDamageType(out var elementType);
+            Context = MakeDamageContext(attackerSum, attackerSbj, e_defender, hitInfo, skillDamageFactor, damageType, sourceLogic.GenInfo.LogicConfigID, sourceLogic.TryGetBattleSupplyId(), elementType, skillTid);
+            ApplyAmmoGambleDamage(sourceLogic, ref Context);
+        }
+
+        private static void ApplyAmmoGambleDamage(CustomLogic sourceLogic, ref DamageContext context)
+        {
+            if (sourceLogic.GetVar<bool>(CvKey.CV_AmmoGambleForceCritical, false))
+                context.ForceCritical = true;
+
+            context.Attacker.Properties.Crit += sourceLogic.GetVar<float>(CvKey.CV_AmmoGambleCritAdd, 0f);
+            context.Attacker.Properties.CritDamage += sourceLogic.GetVar<float>(CvKey.CV_AmmoGambleCritDamageAdd, 0f);
+            var damageMultiplier = sourceLogic.GetVar<float>(CvKey.CV_AmmoGambleDamageMultiplier, 0f);
+            if (damageMultiplier > 0f)
+                context.SkillDamageFactor *= damageMultiplier;
         }
 
         public static EvtDamage MakeRealDmgEvt(UnitSource atker, LogicEntity dfder, float realDmg, EDamageType damageType)
@@ -73,16 +89,46 @@ namespace LccHotfix
             return evt;
         }
 
-        private static DamageContext MakeDamageContext(UnitSource attackerSum, SubobjectSource sbjSource, LogicEntity e_defender, HitInfo? hitInfo, float skillDamageFactor, EDamageType damageType)
+        /// <summary>
+        /// 技能系数伤害：与普攻子物体相同，走攻防基准段 × SkillDamageFactor，再乘增伤/暴击等。
+        /// </summary>
+        public static EvtDamage MakeSkillFactorDmgEvt(UnitSource atker, LogicEntity dfder, float skillDamageFactor, EDamageType damageType, uint battleSupplyId = 0, TElementType elementType = TElementType.EetAll)
+        {
+            if (dfder == null)
+            {
+                return new EvtDamage();
+            }
+
+            EvtDamage evt = new EvtDamage();
+            evt.DefenderEntity = dfder;
+            evt.Context = MakeDamageContext(atker, new SubobjectSource(), dfder, null, skillDamageFactor, damageType, 0, battleSupplyId, elementType);
+            return evt;
+        }
+
+        /// <summary>
+        /// 从当前逻辑 GenInfo 读取 TElementType，再走技能系数伤害。
+        /// </summary>
+        public static EvtDamage MakeSkillFactorDmgEvt(CustomNode source, UnitSource atker, LogicEntity dfder, float skillDamageFactor, EDamageType damageType, uint battleSupplyId = 0)
+        {
+            return MakeSkillFactorDmgEvt(atker, dfder, skillDamageFactor, damageType, battleSupplyId, source.ResolveElementType());
+        }
+
+        /// <summary>
+        /// 组装伤害上下文。skillTid 来自黑板 CV_SkillTid，用于英雄集合把普攻伤害归进去。
+        /// </summary>
+        private static DamageContext MakeDamageContext(UnitSource attackerSum, SubobjectSource sbjSource, LogicEntity e_defender, HitInfo? hitInfo, float skillDamageFactor, EDamageType damageType, int sourceLogicConfigId = 0, uint battleSupplyId = 0, TElementType elementType = TElementType.EetAll, uint skillTid = 0)
         {
             var Context = new DamageContext();
             Context.World = e_defender.OwnerWorld;
             Context.Attacker = attackerSum;
             Context.Defender = new UnitSource(e_defender);
-            Context.Skill = new SkillSource();
+            Context.Skill = new SkillSource { SkillTid = skillTid };
             Context.Subobject = sbjSource;
             Context.HitInfo = hitInfo;
+            Context.SourceLogicConfigID = sourceLogicConfigId;
+            Context.BattleSupplyId = battleSupplyId;
             Context.DamageType = damageType;
+            Context.ElementType = elementType;
 
             Context.SkillDamageFactor = skillDamageFactor;
             Context.StageDamageFactor = 0f;
@@ -181,6 +227,7 @@ namespace LccHotfix
         public void ApplyDamage(ref DamageContext context)
         {
             context.Random = _randomMaker;
+            FillBattleSupplySetId(ref context);
 
             // 计算伤害
             var result = _calculator.Calculate(ref context);
@@ -190,6 +237,12 @@ namespace LccHotfix
 
             // 记录伤害
             _recorder?.RecordDamage(context, result);
+            GameUtility.Dispatch(new EvtAfterDamage { Context = context, Result = result });
+        }
+
+        private void FillBattleSupplySetId(ref DamageContext context)
+        {
+            // 保留入口；补给集合映射由产品层接入后再补。
         }
 
         public void ApplyHeal(ref HealContext context)
@@ -200,5 +253,11 @@ namespace LccHotfix
             _healHandler?.HandleHeal(context);
             // TODO ： 记录治疗
         }
+    }
+
+    public struct EvtAfterDamage : IValueEvent
+    {
+        public DamageContext Context;
+        public DamageResult Result;
     }
 }

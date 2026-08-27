@@ -1,4 +1,3 @@
-using HotUpdate.Framework;
 
 namespace LccHotfix
 {

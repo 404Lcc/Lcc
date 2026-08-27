@@ -44,7 +44,7 @@ namespace LccHotfix
                     LoadProcedureHandler handler = (LoadProcedureHandler)Activator.CreateInstance(item);
                     if (handler.procedureType == 0)
                     {
-                        Log.Error("流程类型不能为0 " + item.Name);
+                        KLogger.LogError("流程类型不能为0 " + item.Name);
                         continue;
                     }
 
@@ -149,7 +149,7 @@ namespace LccHotfix
 
             _curProcedureHandler = handler;
 
-            Log.Info($"ChangeProcedure： procedure type === {_curProcedureHandler.procedureType.ToString()} loading type ==== {_curProcedureHandler.loadType.ToString()}");
+            KLogger.Log($"ChangeProcedure： procedure type === {_curProcedureHandler.procedureType.ToString()} loading type ==== {_curProcedureHandler.loadType.ToString()}");
 
             _procedureHelper.ResetSpeed();
 
@@ -159,7 +159,7 @@ namespace LccHotfix
             handler.startLoadTime = Time.realtimeSinceStartup;
             handler.ProcedureLoadHandler();
 
-            Log.Info($"BeginLoad： procedure type === {_curProcedureHandler.procedureType.ToString()} loading type ==== {_curProcedureHandler.loadType.ToString()}");
+            KLogger.Log($"BeginLoad： procedure type === {_curProcedureHandler.procedureType.ToString()} loading type ==== {_curProcedureHandler.loadType.ToString()}");
             UnloadProcedureCoroutine(last);
         }
 
@@ -179,7 +179,7 @@ namespace LccHotfix
 
             GC.Collect();
 
-            Log.Info($"UnloadProcedureCoroutine： procedure type === {_curProcedureHandler.procedureType.ToString()} loading type ==== {((LoadingType)_curProcedureHandler.loadType).ToString()}");
+            KLogger.Log($"UnloadProcedureCoroutine： procedure type === {_curProcedureHandler.procedureType.ToString()} loading type ==== {((LoadingType)_curProcedureHandler.loadType).ToString()}");
             _curProcedureHandler.ProcedureStartHandler();
         }
 

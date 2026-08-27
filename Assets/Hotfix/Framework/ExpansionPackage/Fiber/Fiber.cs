@@ -33,7 +33,7 @@ namespace LccHotfix
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                KLogger.LogException(e);
             }
         }
         public void Dispose()

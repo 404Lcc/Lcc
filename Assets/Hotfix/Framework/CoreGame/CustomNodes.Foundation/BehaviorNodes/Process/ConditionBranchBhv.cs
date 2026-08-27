@@ -67,8 +67,8 @@ namespace LccHotfix
                 _falseBhv.Deactivate();
             }
 
-            CLHelper.Assert(_condition != null);
-            CLHelper.Assert(_trueBhv != null || _falseBhv != null);
+            CLogger.Assert(_condition != null);
+            CLogger.Assert(_trueBhv != null || _falseBhv != null);
 
             _isConditionReached = null;
             _checkOnTick = theCfg.CheckOnTick;

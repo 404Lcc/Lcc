@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace HotUpdate.Framework.PbCfg
+namespace LccHotfix
 {
     public static class PbCfg
     {

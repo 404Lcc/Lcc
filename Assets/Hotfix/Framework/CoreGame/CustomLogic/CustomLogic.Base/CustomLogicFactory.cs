@@ -33,14 +33,14 @@ namespace LccHotfix
         {
             if (!_configContainerDic.TryGetValue(cfgContainerName, out var cfgContainer))
             {
-                CLHelper.Assert(false, $"CreateCustomLogic ConfigContainer = null, cfgContainerName={cfgContainerName}");
+                CLogger.Assert(false, $"CreateCustomLogic ConfigContainer = null, cfgContainerName={cfgContainerName}");
                 return null;
             }
 
             var config = cfgContainer.GetCustomLogicCfg(logicConfigID);
             if (config == null)
             {
-                CLHelper.Assert(false, $"CreateCustomLogic Cant Find Config : ConfigID={logicConfigID}, cfgContainerName={cfgContainerName}");
+                CLogger.Assert(false, $"CreateCustomLogic Cant Find Config : ConfigID={logicConfigID}, cfgContainerName={cfgContainerName}");
                 return null;
             }
 
@@ -60,14 +60,14 @@ namespace LccHotfix
             var cfgContainerName = genInfo.ConfigContainerName;
             if (!_configContainerDic.TryGetValue(cfgContainerName, out var cfgContainer))
             {
-                CLHelper.Assert(false, $"CreateCustomLogic ConfigContainer = null, cfgContainerName={cfgContainerName}");
+                CLogger.Assert(false, $"CreateCustomLogic ConfigContainer = null, cfgContainerName={cfgContainerName}");
                 return null;
             }
 
             var config = cfgContainer.GetCustomLogicCfg(genInfo.LogicConfigID);
             if (config == null)
             {
-                CLHelper.Assert(false, $"CreateCustomLogic Cant Find Config : ConfigID={genInfo.LogicConfigID}, cfgContainerName={cfgContainerName}");
+                CLogger.Assert(false, $"CreateCustomLogic Cant Find Config : ConfigID={genInfo.LogicConfigID}, cfgContainerName={cfgContainerName}");
                 return null;
             }
 
@@ -79,7 +79,7 @@ namespace LccHotfix
         {
             if (config == null)
             {
-                CLHelper.Assert(false, "CreateCustomLogic config == null");
+                CLogger.Assert(false, "CreateCustomLogic config == null");
                 return null;
             }
 
@@ -88,7 +88,7 @@ namespace LccHotfix
 
             if (genInfo.LogicConfigID != config.ID)
             {
-                LogWrapper.LogError($"CreateLogic: genInfo.LogicConfigID({genInfo.LogicConfigID}) != config.ID({config.ID})");
+                CLogger.LogError($"CreateLogic: genInfo.LogicConfigID({genInfo.LogicConfigID}) != config.ID({config.ID})");
                 genInfo.LogicConfigID = config.ID;
             }
 

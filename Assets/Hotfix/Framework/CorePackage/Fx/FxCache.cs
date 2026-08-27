@@ -8,6 +8,8 @@ namespace LccHotfix
     public class FxCache : MonoBehaviour
     {
         string _path;
+        // 池键，与 FxCacheManager 字典 key 一致
+        public string Path => _path;
         int _cost = 1;
         int _maxCount;
         int _usedCount;
@@ -90,12 +92,26 @@ namespace LccHotfix
 
         private void _CreateFxGameObject(FxOne fxOne)
         {
-            if (_assetHandle == null)
+            if (_assetHandle == null || fxOne == null)
                 return;
 
             // 实例化一个特效的 GameObject，并放在 FxOne 下
             GameObject newFxObject = _assetHandle.InstantiateSync(fxOne.transform);
+            if (newFxObject == null)
+                return;
+
             fxOne.SetFxGameObject(newFxObject);
+        }
+
+        /// <summary>
+        /// 内容 GO 被 DestructionEffect Destroy 后，按模板重新实例化。
+        /// </summary>
+        public void RecreateFxGameObject(FxOne fxOne)
+        {
+            if (fxOne == null || _assetHandle == null || _bDestroyed)
+                return;
+
+            _CreateFxGameObject(fxOne);
         }
 
         public void ExpandCache(int newCapacity)
@@ -124,6 +140,9 @@ namespace LccHotfix
             FxOne newFx = _cachedFxOneList[_usedCount];
             newFx.SetHiddenInGame(false);
             newFx.bIsReleased = false;
+            // 防止上一轮残留的分级回调误触发
+            newFx.OnReleased = null;
+            newFx.VfxGradePath = null;
             ++_usedCount;
 
             return newFx;
@@ -157,10 +176,32 @@ namespace LccHotfix
         
         public void ReleaseAllFx()
         {
+            // 走 FxOne.Release，确保 OnReleased（分级占位）被触发
             for (int i = _usedCount - 1; i >= 0; i--)
             {
-                ReleaseFx(i);
+                var fx = _cachedFxOneList[i];
+                if (fx != null && !fx.bIsReleased)
+                    fx.Release();
+                else
+                    ReleaseFx(i);
             }
+        }
+
+        // 销毁本池：归还在用槽位、Destroy 池节点（含 FxOne）
+        // AssetHandle 由 AssetManager/AssetLoader 持有，此处不 Release，避免字典残留已释放句柄导致下局 InstantiateSync 失败
+        public void DisposeCache()
+        {
+            if (_bDestroyed)
+            {
+                return;
+            }
+
+            ReleaseAllFx();
+
+            _bDestroyed = true;
+            _assetHandle = null;
+            _cachedFxOneList?.Clear();
+            Destroy(gameObject);
         }
 
         #region Cost

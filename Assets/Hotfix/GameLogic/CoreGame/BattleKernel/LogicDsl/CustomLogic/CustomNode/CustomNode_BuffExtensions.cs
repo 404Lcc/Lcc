@@ -1,4 +1,4 @@
-﻿using PBConfig;
+using PBConfig;
 
 namespace LccHotfix
 {

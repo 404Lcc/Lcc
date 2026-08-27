@@ -65,7 +65,7 @@ namespace LccHotfix
                 {
                     ICustomNodeCfg bhvCfg = theCfg.Transitions[i];
                     var transNode = _context.Factory.CreateCustomNode(bhvCfg, context) as StateTransitionNode;
-                    if (!CLHelper.Assert(transNode != null))
+                    if (!CLogger.Assert(transNode != null))
                         continue;
                     _transitions.Add(transNode);
                 }

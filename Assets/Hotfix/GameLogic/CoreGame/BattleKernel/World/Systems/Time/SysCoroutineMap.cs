@@ -45,6 +45,7 @@ namespace LccHotfix
         private readonly IGroup<TEntity> _group;
         private readonly int _cmptIndex;
         private List<int> _finishedList;
+        private readonly List<TEntity> _entityBuffer = new(256);
 
         public CoroutineMapExecute(IGroup<TEntity> group, int cmptIndex)
         {
@@ -55,7 +56,8 @@ namespace LccHotfix
 
         public void Execute()
         {
-            foreach (var e in _group.GetEntities())
+            var buffer = _group.GetEntities(_entityBuffer);
+            foreach (var e in buffer)
             {
                 var cmpt = (CoroutineMapComponent)e.GetComponent(_cmptIndex);
                 if (cmpt == null || !cmpt.HasAnyCoroutine())

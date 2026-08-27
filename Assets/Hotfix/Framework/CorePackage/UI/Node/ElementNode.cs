@@ -66,7 +66,7 @@ namespace LccHotfix
 
             if (covered)
             {
-                Log.Debug($"[UI] 覆盖 {NodeName}");
+                KLogger.Log($"[UI] 覆盖 {NodeName}");
                 DoCovered(covered);
             }
             else
@@ -74,7 +74,7 @@ namespace LccHotfix
                 if (DomainNode != null && DomainNode.IsCovered)
                     return;
 
-                Log.Debug($"[UI] 取消覆盖 {NodeName}");
+                KLogger.Log($"[UI] 取消覆盖 {NodeName}");
 
                 DoCovered(covered);
             }
@@ -87,7 +87,7 @@ namespace LccHotfix
                 if (DomainNode != null && DomainNode.NodePhase < NodePhase.Show)
                     return;
 
-                Log.Debug($"[UI] 显示 {NodeName}");
+                KLogger.Log($"[UI] 显示 {NodeName}");
 
                 //把自己节点状态设置为显示
                 NodePhase = NodePhase.Show;
@@ -108,7 +108,7 @@ namespace LccHotfix
         {
             if (NodePhase == NodePhase.Show)
             {
-                Log.Debug($"[UI] 隐藏 {NodeName}");
+                KLogger.Log($"[UI] 隐藏 {NodeName}");
 
                 if (DomainNode != null)
                 {

@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using HotUpdate.Framework.PbCfg;
 using PBConfig;
 using UnityEngine;
 

@@ -52,10 +52,18 @@ namespace LccHotfix
             {
                 var comAnim = entity.comAnimation;
                 var newData = comAnim.Data;
-                if (_cfg.LayerIndex == 1)
-                    newData.SpecAnim_Layer1 = animName.GetValue(this);
-                else
-                    newData.SpecAnim_Layer0 = animName.GetValue(this);
+                switch (_cfg.LayerIndex)
+                {
+                    case 0:
+                        newData.SpecAnim_Layer0 = animName.GetValue(this);
+                        break;
+                    case 1:
+                        newData.SpecAnim_Layer1 = animName.GetValue(this);
+                        break;
+                    case 2:
+                        newData.SpecAnim_Layer2 = animName.GetValue(this);
+                        break;
+                }    
                 comAnim.SetData(newData);
             }
         }

@@ -1,4 +1,3 @@
-using HotUpdate.Framework.PbCfg;
 using PBConfig;
 
 namespace LccHotfix
@@ -31,12 +30,18 @@ namespace LccHotfix
             {
                 var snapshot = new PropertySnapshot();
                 snapshot.Add_FromPlayerCategoryVolume(entity);
+                // Volume 路径：Scale*Base 乘进基础；血量点数必须在此计入 MaxHp（结算不会再叠 Health Volume）
+                // 攻击点数留给 FillFromEntity 叠 Volume.Attack，此处不加，避免双加
+                var baseHp = baseProp.UnitHp * (1 + snapshot.ScaleHpBase / 10000f) + snapshot.Health;
                 var baseAtk = baseProp.Atk * (1 + snapshot.ScaleAtkBase / 10000f);
-                comAttributes.SetAttribute<double>(PropertyFloat.Health, new MultChangeDouble_ADD(fixedHp <= 0 ? baseProp.UnitHp : (float)fixedHp));
-                comAttributes.SetAttribute<double>(PropertyFloat.Attack, new MultChangeDouble_ADD(fixedAtk < 0 ? (float)baseAtk : fixedAtk));
-                comAttributes.SetAttribute<double>(PropertyFloat.Defense, new MultChangeDouble_ADD(fixedDefense < 0 ? baseProp.Def : fixedDefense));
-                comAttributes.SetAttribute<double>(PropertyFloat.Hit, new MultChangeDouble_ADD(baseProp.Hit));
-                comAttributes.SetAttribute<double>(PropertyFloat.Dodge, new MultChangeDouble_ADD(baseProp.Miss));
+                comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.Health, fixedHp < 0 ? (float)baseHp : (float)fixedHp);
+                comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.Attack, fixedAtk < 0 ? (float)baseAtk : fixedAtk);
+                comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.Defense, fixedDefense < 0 ? baseProp.Def : fixedDefense);
+                comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.Hit, baseProp.Hit);
+                comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.Dodge, baseProp.Miss);
+                comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.Crit, baseProp.Crit);
+                comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.CritDamage, baseProp.CritDmg);
+                comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.DamageResistance, baseProp.DmgRes);
             }
             else
             {
@@ -47,11 +52,11 @@ namespace LccHotfix
             var addonProp = GetBaseAddonProp(unitCfg);
             if (addonProp != null)
             {
-                comAttributes.SetAttribute<double>(PropertyFloat.Crit, new MultChangeDouble_ADD(addonProp.BaseCritRatio));
-                comAttributes.SetAttribute<double>(PropertyFloat.CritResist, new MultChangeDouble_ADD(addonProp.BaseCritRatioRes));
-                comAttributes.SetAttribute<double>(PropertyFloat.CritDamage, new MultChangeDouble_ADD(addonProp.BaseCritDmgRatio));
-                comAttributes.SetAttribute<double>(PropertyFloat.InGameAmplify, new MultChangeDouble_ADD(addonProp.BaseDmgRatio));
-                comAttributes.SetAttribute<double>(PropertyFloat.InGameResistance, new MultChangeDouble_ADD(addonProp.BaseDmgRatioRes));
+                comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.Crit, addonProp.BaseCritRatio);
+                comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.CritResist, addonProp.BaseCritRatioRes);
+                comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.CritDamage, addonProp.BaseCritDmgRatio);
+                comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.InGameAmplify, addonProp.BaseDmgRatio);
+                comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.InGameResistance, addonProp.BaseDmgRatioRes);
                 if (BattleLogger.IsDebugEnabled)
                 {
                     BattleLogger.LogDebug($"FillAttributes 基础加成属性表: 暴击:{addonProp.BaseCritRatio}, 暴击概率抗:{addonProp.BaseCritRatioRes}, 暴伤加成:{addonProp.BaseCritDmgRatio}, 伤害:{addonProp.BaseDmgRatio}, 伤害抗:{addonProp.BaseDmgRatioRes}");
@@ -78,7 +83,9 @@ namespace LccHotfix
                 if (parentAttributes != null)
                 {
                     var parentAtk = parentAttributes.GetAttribute<double>(PropertyFloat.Attack);
-                    comAttributes.SetAttribute<double>(PropertyFloat.Attack, parentAtk);
+                    // 独立池实例，复制基值；禁止与父实体共享同一 IModifyValue
+                    var atkValue = parentAtk != null ? parentAtk.DefaultValue : 0;
+                    comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.Attack, atkValue);
                     return comAttributes;
                 }
             }
@@ -93,9 +100,9 @@ namespace LccHotfix
         private static void FillDefaultTeatAttrCom(AttributesComponent comAttributes)
         {
             BattleLogger.LogError("FillAttributes 填充属性异常，临时使用缺省属性");
-            comAttributes.SetAttribute<double>(PropertyFloat.Health, new MultChangeDouble_ADD(1000));
-            comAttributes.SetAttribute<double>(PropertyFloat.Attack, new MultChangeDouble_ADD(100));
-            comAttributes.SetAttribute<double>(PropertyFloat.Defense, new MultChangeDouble_ADD(50));
+            comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.Health, 1000);
+            comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.Attack, 100);
+            comAttributes.SetAttribute<double, MultChangeDouble_ADD>(PropertyFloat.Defense, 50);
         }
 
         /// <summary>

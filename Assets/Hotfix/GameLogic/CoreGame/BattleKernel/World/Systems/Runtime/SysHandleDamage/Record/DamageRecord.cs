@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace LccHotfix
 {
@@ -33,6 +34,7 @@ namespace LccHotfix
         private readonly Dictionary<int, UnitDamageStats> _unitStats = new Dictionary<int, UnitDamageStats>();
         private readonly Dictionary<int, SkillDamageStats> _skillStats = new Dictionary<int, SkillDamageStats>();
         private readonly Dictionary<int, SubobjectDamageStats> _subobjectStats = new Dictionary<int, SubobjectDamageStats>();
+        private readonly Dictionary<uint, SupplyDamageStats> _supplyStats = new Dictionary<uint, SupplyDamageStats>(16);
         private long _nextRecordId = 1;
         
         public void RecordDamage(in DamageContext context, in DamageResult result)
@@ -56,6 +58,7 @@ namespace LccHotfix
             
             _records.Add(record);
             UpdateStatistics(record);
+            UpdateSupplyStatistics(context, result);
         }
         
         private void UpdateStatistics(DamageRecord record)
@@ -67,6 +70,23 @@ namespace LccHotfix
                 
             if (record.SubobjectId != -1)
                 UpdateSubobjectStatistics(record);
+        }
+
+        private void UpdateSupplyStatistics(in DamageContext context, in DamageResult result)
+        {
+            var setId = context.BattleSupplySetId;
+            if (setId == 0)
+                return;
+
+            if (!_supplyStats.TryGetValue(setId, out var stats))
+            {
+                stats = new SupplyDamageStats { SetId = setId };
+                _supplyStats[setId] = stats;
+            }
+
+            stats.TotalDamage += Mathf.FloorToInt((float)result.FinalDamage) + Mathf.FloorToInt((float)result.ShieldDeducted);
+            stats.HitCount++;
+            _supplyStats[setId] = stats;
         }
         
         private void UpdateUnitStatistics(DamageRecord record)
@@ -137,12 +157,18 @@ namespace LccHotfix
             return _unitStats.Values.ToList();
         }
 
+        public SupplyDamageStats GetSupplyDamageStats(uint setId)
+        {
+            return _supplyStats.TryGetValue(setId, out var stats) ? stats : default;
+        }
+
         public void Clear()
         {
             _records.Clear();
             _unitStats.Clear();
             _skillStats.Clear();
             _subobjectStats.Clear();
+            _supplyStats.Clear();
             _nextRecordId = 1;
         }
     }
@@ -177,5 +203,12 @@ namespace LccHotfix
         public int HitCount;
         
         public double AverageDamage => HitCount > 0 ? TotalDamage / HitCount : 0;
+    }
+
+    public struct SupplyDamageStats
+    {
+        public uint SetId;
+        public double TotalDamage;
+        public int HitCount;
     }
 }

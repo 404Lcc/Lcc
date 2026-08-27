@@ -7,7 +7,7 @@ namespace LccHotfix
         XY,
         XZ,
     }
-
+    
     public class AABB
     {
         public Vector2 minPoint;
@@ -15,7 +15,6 @@ namespace LccHotfix
 
         public AABB()
         {
-
         }
 
         public AABB(Vector2 minPoint, Vector2 maxPoint)
@@ -24,17 +23,19 @@ namespace LccHotfix
             this.maxPoint = maxPoint;
         }
 
-        public AABB(Vector3 pos, Vector2 minPoint, Vector2 maxPoint)
+        public AABB(Vector3 pos, Vector2 minPoint, Vector2 maxPoint, BattlePlane plane)
         {
-            this.minPoint = new Vector2(pos.x, pos.y) + minPoint;
-            this.maxPoint = new Vector2(pos.x, pos.y) + maxPoint;
+            var planePoint = ToPlanePoint(pos, plane);
+            this.minPoint = planePoint + minPoint;
+            this.maxPoint = planePoint + maxPoint;
         }
 
-        public AABB(Vector2 pos, float radius)
+        public AABB(Vector3 pos, float radius, BattlePlane plane)
         {
             Vector2 halfSize = new Vector2(radius, radius);
-            this.minPoint = pos - halfSize;
-            this.maxPoint = pos + halfSize;
+            var planePoint = ToPlanePoint(pos, plane);
+            this.minPoint = planePoint - halfSize;
+            this.maxPoint = planePoint + halfSize;
         }
 
         public float Width()
@@ -74,7 +75,7 @@ namespace LccHotfix
         {
             return maxPoint.x < minPoint.x || maxPoint.y < minPoint.y;
         }
-
+        
         public static Vector2 ToPlanePoint(Vector3 point, BattlePlane plane)
         {
             return plane == BattlePlane.XY ? new Vector2(point.x, point.y) : new Vector2(point.x, point.z);
@@ -85,7 +86,32 @@ namespace LccHotfix
             return plane == BattlePlane.XY ? new Vector3(point.x, point.y, fixedAxis) : new Vector3(point.x, fixedAxis, point.y);
         }
 
-        public static bool Intersect(AABB aabb, Vector2 begin, Vector2 end, out Vector2 intersectionPoint)
+        public static bool TryGetNormalizedPlaneDirection(Vector3 direction, BattlePlane plane, out Vector3 planeDirection)
+        {
+            planeDirection = plane == BattlePlane.XY ? new Vector3(direction.x, direction.y, 0f) : new Vector3(direction.x, 0f, direction.z);
+            if (planeDirection.sqrMagnitude <= float.Epsilon)
+            {
+                return false;
+            }
+
+            planeDirection.Normalize();
+            return true;
+        }
+        
+        public static bool Intersect(AABB aabb, Vector3 begin, Vector3 end, BattlePlane plane, out Vector3 intersectionPoint)
+        {
+            intersectionPoint = Vector3.zero;
+            if (!Intersect(aabb, ToPlanePoint(begin, plane), ToPlanePoint(end, plane), out var planePoint))
+            {
+                return false;
+            }
+
+            var fixedAxis = plane == BattlePlane.XY ? end.z : end.y;
+            intersectionPoint = ToWorldPoint(planePoint, fixedAxis, plane);
+            return true;
+        }
+        
+        private static bool Intersect(AABB aabb, Vector2 begin, Vector2 end, out Vector2 intersectionPoint)
         {
             intersectionPoint = Vector2.zero;
 
@@ -104,18 +130,27 @@ namespace LccHotfix
                 return false;
             }
 
-            Vector2 invDirection = new Vector2(1.0f / direction.x, 1.0f / direction.y);
-
             float tMin = 0.0f;
             float tMax = 1.0f;
 
             // 分别检查x和y方向的相交区间
             for (int i = 0; i < 2; i++)
             {
-                float t1 = (aabb.minPoint[i] - begin[i]) * invDirection[i];
-                float t2 = (aabb.maxPoint[i] - begin[i]) * invDirection[i];
+                if (Mathf.Abs(direction[i]) <= float.Epsilon)
+                {
+                    if (begin[i] < aabb.minPoint[i] || begin[i] > aabb.maxPoint[i])
+                    {
+                        return false;
+                    }
 
-                if (invDirection[i] < 0.0f)
+                    continue;
+                }
+
+                float invDirection = 1.0f / direction[i];
+                float t1 = (aabb.minPoint[i] - begin[i]) * invDirection;
+                float t2 = (aabb.maxPoint[i] - begin[i]) * invDirection;
+
+                if (invDirection < 0.0f)
                 {
                     float temp = t1;
                     t1 = t2;
@@ -151,7 +186,7 @@ namespace LccHotfix
         {
             return point.x >= aabb.minPoint.x && point.x <= aabb.maxPoint.x && point.y >= aabb.minPoint.y && point.y <= aabb.maxPoint.y;
         }
-        
+
         public static AABB operator +(AABB aabb, Vector2 point)
         {
             AABB a = new AABB();
@@ -167,12 +202,9 @@ namespace LccHotfix
             a.maxPoint = aabb.maxPoint - point;
             return a;
         }
-        
-        
-        /// <summary>
-        /// 在 XY 平面（世界 Z=0）上绘制轴对齐矩形线框（与 min/max 一致，宽高可不等）。
-        /// </summary>
-        public void DrawGizmo(Color color = default)
+
+
+        public void DrawGizmo(BattlePlane plane, Color color = default)
         {
             if (IsDegenerate() || HasNegativeVolume())
             {
@@ -180,20 +212,42 @@ namespace LccHotfix
             }
 
             Gizmos.color = color.a < 0.001f ? Color.white : color;
+            
+            if (plane == BattlePlane.XY)
+            {
+                DrawXY(minPoint, maxPoint);
+            }
+            else
+            {
+                DrawXZ(minPoint, maxPoint);
+            }
+        }
 
-            const float z = 0f;
-            DrawRectCornersXY(z, minPoint, maxPoint);
+
+        /// <summary>
+        /// 按四个角点绘制XY平面矩形线框。
+        /// </summary>
+        private void DrawXY(Vector2 min, Vector2 max)
+        {
+            var p0 = new Vector3(min.x, min.y, 0);
+            var p1 = new Vector3(max.x, min.y, 0);
+            var p2 = new Vector3(max.x, max.y, 0);
+            var p3 = new Vector3(min.x, max.y, 0);
+            Gizmos.DrawLine(p0, p1);
+            Gizmos.DrawLine(p1, p2);
+            Gizmos.DrawLine(p2, p3);
+            Gizmos.DrawLine(p3, p0);
         }
 
         /// <summary>
-        /// 按四个角点绘制 XY 平面矩形线框。
+        /// 按四个角点绘制XZ平面矩形线框。
         /// </summary>
-        private static void DrawRectCornersXY(float z, Vector2 min, Vector2 max)
+        private void DrawXZ(Vector2 min, Vector2 max)
         {
-            var p0 = new Vector3(min.x, min.y, z);
-            var p1 = new Vector3(max.x, min.y, z);
-            var p2 = new Vector3(max.x, max.y, z);
-            var p3 = new Vector3(min.x, max.y, z);
+            var p0 = new Vector3(min.x, 0, min.y);
+            var p1 = new Vector3(max.x, 0, min.y);
+            var p2 = new Vector3(max.x, 0, max.y);
+            var p3 = new Vector3(min.x, 0, max.y);
             Gizmos.DrawLine(p0, p1);
             Gizmos.DrawLine(p1, p2);
             Gizmos.DrawLine(p2, p3);

@@ -69,19 +69,19 @@ namespace LccHotfix
             }
         }
 
-        public virtual void FixedUpdate(float deltaTime, float unscaledDeltaTime)
-        {
-            if (_rootSystem != null)
-            {
-                _rootSystem.FixedUpdate(deltaTime, unscaledDeltaTime);
-            }
-        }
-        
         public virtual void LateUpdate()
         {
             if (_rootSystem != null)
             {
                 _rootSystem.LateUpdate();
+            }
+        }
+
+        public virtual void FixedUpdate(float deltaTime, float unscaledDeltaTime)
+        {
+            if (_rootSystem != null)
+            {
+                _rootSystem.FixedUpdate(deltaTime, unscaledDeltaTime);
             }
         }
 
@@ -95,6 +95,7 @@ namespace LccHotfix
 
         protected void RebuildComponentLookUp(Type lookupType, List<ComponentTypeIndex> typeIndexList, out List<Type> componentTypes, out List<string> componentNames)
         {
+            typeIndexList.Clear();
             FieldInfo[] fieldInfos = lookupType.GetFields(BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy);
 
             List<FieldInfo> typeIndexFields = new List<FieldInfo>();
@@ -128,6 +129,7 @@ namespace LccHotfix
                     componentNames.Add(name);
                 }
             }
+            KLogger.Log($"RebuildComponentLookUp typeIndexList.Count={typeIndexList.Count}");
         }
 
         protected abstract void CreateSystems();

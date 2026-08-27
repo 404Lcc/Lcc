@@ -257,17 +257,17 @@ namespace LccHotfix
 
         private static void ApplyHitBack(HandleSubobjectHitCmd node, LogicEntity ownerEntity, ref HitInfo hitInfo)
         {
-            var target = ownerEntity.OwnerWorld.GetEntityWithComID(hitInfo.hitEntityID);
-            var cfg = node.mCfg;
-            var effectAdd = cfg.HitBackEffectAddGetter != null ? cfg.HitBackEffectAddGetter(node) : 0f;
-            target.ApplyHitBack(cfg.HitBackDirection.Value, cfg.HitBackDistance, effectAdd);
+            // var target = ownerEntity.OwnerWorld.GetEntityWithComID(hitInfo.hitEntityID);
+            // var cfg = node.mCfg;
+            // var effectAdd = cfg.HitBackEffectAddGetter != null ? cfg.HitBackEffectAddGetter(node) : 0f;
+            // target.ApplyHitBack(cfg.HitBackDirection.Value, cfg.HitBackDistance, effectAdd);
         }
 
         private void ExecuteHitEffect(CustomNode node, LogicEntity entity, LogicEntity target, HitInfo hitInfo)
         {
             if (target == null)
             {
-                CLHelper.LogError(this, "ExecuteHitEffect target == null");
+                CLogger.LogError(this, "ExecuteHitEffect target == null");
                 return;
             }
 
@@ -286,7 +286,6 @@ namespace LccHotfix
                 {
                     buffMaxLvlDict.TryGetValue(buffLogicID, out var maxLvl);
                     var genInfo = node.CreateBuffGenInfoFromUnit(target, buffLogicID, maxLvl);
-
                     mCfg.BuffPreEnvAction?.Invoke(this, genInfo, hitInfo);
                     genInfo.PreEnv.WriteVar(CvKey.CV_SubobjHitInfo, hitInfo);
 

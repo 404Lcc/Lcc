@@ -4,12 +4,14 @@ namespace LccHotfix
 {
     public interface IBattleFeedbackSink
     {
-        void ShowDamageMiss(Vector3 position, bool usePrimaryStateFeedbackStyle);
+        void ShowDamageMiss(Vector3 position);
 
-        void ShowDamageBlock(Vector3 position, bool usePrimaryStateFeedbackStyle);
+        void ShowDamageBlock(Vector3 position);
 
-        void ShowDamageNumber(int damage, Vector3 position, bool useTaggedDefenderStyle, bool isCritical);
+        void ShowDamageImmune(Vector3 position);
 
-        void ShowHealNumber(int healing, Vector3 position, bool useTaggedTargetStyle);
+        void ShowDamageNumber(int damage, Vector3 position, bool isCritical, bool isPoisonDot);
+
+        void ShowHealNumber(int healing, Vector3 position);
     }
 }

@@ -22,7 +22,7 @@ public class MoveTargetLocomotion : LocomotionBase
     }
 
 
-    public override void Update(float dt, LogicEntity curPosition)
+    public override void Update(float dt, LogicEntity curPosition, MetaWorld metaWorld)
     {
         // 计算帧时间
         float deltaTime = Time.deltaTime;

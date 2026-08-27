@@ -28,7 +28,7 @@ namespace LccHotfix
             {
                 if (logError)
                 {
-                    CLHelper.LogError(node, $"EntityCfg.GetEntity entityID=0, VarKey={entityVarKey}");
+                    CLogger.LogError(node, $"EntityCfg.GetEntity entityID=0, VarKey={entityVarKey}");
                 }
 
                 return null;
@@ -37,14 +37,14 @@ namespace LccHotfix
             var world = node.GetLogicWorld();
             if (world == null)
             {
-                CLHelper.LogError(node, $"EntityCfg.GetEntity world != null, VarKey={entityVarKey}");
+                CLogger.LogError(node, $"EntityCfg.GetEntity world != null, VarKey={entityVarKey}");
                 return null;
             }
 
             var entity = world.GetEntityWithComID(entityID);
             if (logError && entity == null)
             {
-                CLHelper.LogError(node, $"EntityCfg.GetEntity entity == null, entityID={entityID}, VarKey={entityVarKey}");
+                CLogger.LogError(node, $"EntityCfg.GetEntity entity == null, entityID={entityID}, VarKey={entityVarKey}");
             }
 
             return entity;

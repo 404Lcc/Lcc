@@ -1,4 +1,3 @@
-using HotUpdate.Framework;
 using UnityEngine;
 
 namespace LccHotfix
@@ -8,7 +7,7 @@ namespace LccHotfix
         Vector3 DeltaPosition { get; }
         Quaternion DeltaRotation { get; }
         void BeforeUpdate();
-        void Update(float dt, LogicEntity entity);
+        void Update(float dt, LogicEntity entity, MetaWorld metaWorld);
         bool IsEnd();
     }
 

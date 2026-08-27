@@ -234,7 +234,7 @@ namespace LccHotfix
         {
             if (_asyncLoader == null)
             {
-                Log.Error("对象池没有设置异步加载器");
+                KLogger.LogError("对象池没有设置异步加载器");
                 return null;
             }
 
@@ -276,14 +276,19 @@ namespace LccHotfix
             //检查是否还在加载列表里
             if (!_loadList.ContainsKey(location))
             {
-                //卸载资源
-                _assetLoader.Release(location);
+                //池已经建好时资源由池持有，这里不能卸载，否则池里的原型会被卸载掉
+                if (!_poolDict.ContainsKey(location))
+                {
+                    //卸载资源
+                    _assetLoader.Release(location);
+                }
+
                 return;
             }
 
             if (original == null)
             {
-                Log.Error($"加载资源失败 {location}");
+                KLogger.LogError($"加载资源失败 {location}");
                 CompleteAllLoad(location, null);
                 return;
             }

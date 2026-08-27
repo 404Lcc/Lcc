@@ -1,4 +1,4 @@
-﻿namespace LccHotfix
+namespace LccHotfix
 {
     public static class CustomNodeVarEnvExtensions
     {

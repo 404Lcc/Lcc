@@ -12,6 +12,7 @@ namespace LccHotfix
         
         public TCampType? Camp;         //我方单位阵营
         public TElementType? Element;   //我方单位元素
+        public THeroAttackType? AttackType; // 我方攻击类型
         public TBattleUnitType? BattleUnitType; //战斗单位类型枚举
 
         public TEnemyAttackType? EnemyAttackType;       //敌方单位攻击
@@ -32,6 +33,8 @@ namespace LccHotfix
                 mask |= (BattleUnitTid.HasValue ? 1 : 0) << bitPosition++;
                 mask |= (Camp.HasValue ? 1 : 0) << bitPosition++;
                 mask |= (Element.HasValue ? 1 : 0) << bitPosition++;
+                mask |= (AttackType.HasValue ? 1 : 0) << bitPosition++;
+                mask |= (BattleUnitType.HasValue ? 1 : 0) << bitPosition++;
                 mask |= (EnemyAttackType.HasValue ? 1 : 0) << bitPosition++;
                 mask |= (EnemyStrengthType.HasValue ? 1 : 0) << bitPosition++;
                 mask |= (EnemyRaceType.HasValue ? 1 : 0) << bitPosition++;

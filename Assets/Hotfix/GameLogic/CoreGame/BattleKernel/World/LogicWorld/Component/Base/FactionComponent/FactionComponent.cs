@@ -1,3 +1,5 @@
+using Entitas;
+
 namespace LccHotfix
 {
     //这里区分的是阵营不是身份类别
@@ -7,10 +9,9 @@ namespace LccHotfix
         Invalid = 0,
         Friend = 1, //友方
         Enemy = 2, //敌方
-        Neutral = 3, //中立
     }
 
-    public class FactionComponent : LogicComponent
+    public class FactionComponent : IComponent
     {
         public EFaction Faction { get; private set; }
 

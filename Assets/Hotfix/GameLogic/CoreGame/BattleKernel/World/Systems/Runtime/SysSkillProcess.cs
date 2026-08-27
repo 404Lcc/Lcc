@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
@@ -6,11 +7,15 @@ namespace LccHotfix
     public class SysSkillProcess : IExecuteSystem
     {
         private readonly IGroup<LogicEntity> _group;
-        private LogicWorld _logicWorld;
+        private readonly LogicWorld _logicWorld;
+        private readonly MetaWorld _metaWorld;
+
+        private readonly List<LogicEntity> _entityBuffer = new(256);
 
         public SysSkillProcess(ECWorlds world)
         {
             _logicWorld = world.LogicWorld;
+            _metaWorld = world.MetaWorld;
             _group = _logicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComSkillProcess));
         }
 
@@ -18,8 +23,11 @@ namespace LccHotfix
         void IExecuteSystem.Execute()
         {
             var dt = BattleTime.GetDeltaTime(_logicWorld);
-            foreach (var e in _group.GetEntities())
+            var buffer = _group.GetEntities(_entityBuffer);
+            foreach (var e in buffer)
             {
+                if (!e.hasComSkillProcess) 
+                    continue;
                 var process = e.comSkillProcess.SkillProcess;
                 if (process == null)
                 {
@@ -28,12 +36,16 @@ namespace LccHotfix
                 }
                 else
                 {
-                    process.Update(dt);
+                    var entityDt = dt * BattleBulletTimeUtility.GetCompensateRatio(e, _metaWorld);
+                    process.Update(entityDt);
+                    if (!e.hasComSkillProcess)
+                        continue;
                     if (process.CanStop())
                     {
                         if (e.hasComSkillSlot)
                         {
                             e.comSkillSlot.ResetCDBySkillTid(e.comSkillProcess.SkillTid);
+                            e.comSkillSlot.ResetCDAfterLast(e.comSkillProcess.SkillTid);
                         }
                         e.RemoveComSkillProcess();
                     }

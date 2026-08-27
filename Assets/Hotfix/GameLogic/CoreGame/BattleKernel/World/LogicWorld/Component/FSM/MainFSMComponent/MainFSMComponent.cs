@@ -48,11 +48,12 @@ namespace LccHotfix
         {
             if (!(context.GenInfo is MainFsmGenInfo))
             {
-                Log.Info($"纯提醒用, 注意修正：BattleFSM InitializeNode GenInfo is not MainFsmGenInfo, GenInfo={context.GenInfo.GetType()}");
+                KLogger.Log($"纯提醒用, 注意修正：BattleFSM InitializeNode GenInfo is not MainFsmGenInfo, GenInfo={context.GenInfo.GetType()}");
             }
             
             base.InitializeNode(cfg, context);
-            Log.Info($"MainFSM LogicConfigID={context.GenInfo.LogicConfigID}");
+            if (KLogger.IsDev)
+                KLogger.Log($"MainFSM LogicConfigID={context.GenInfo.LogicConfigID}");
         }
 
         public override void Destroy()
@@ -80,7 +81,7 @@ namespace LccHotfix
         {
             if (Logic != null)
             {
-                Main.CustomLogicService?.DestroyLogic(Logic);
+                Owner?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.CustomLogicService?.DestroyLogic(Logic);
                 Logic = null;
             }
 

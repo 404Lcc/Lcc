@@ -7,10 +7,13 @@ namespace LccHotfix
     public class SysTimeScale : ReactiveSystem<MetaEntity>, ITearDownSystem
     {
         private ECWorlds _world;
+        private readonly float _defaultFixedDeltaTime;
+        private const float MinFixedTimeScale = 0.0001f;
 
         public SysTimeScale(ECWorlds world) : base(world.MetaWorld)
         {
             _world = world;
+            _defaultFixedDeltaTime = Time.fixedDeltaTime;
         }
 
         protected override ICollector<MetaEntity> GetTrigger(IContext<MetaEntity> context)
@@ -34,12 +37,18 @@ namespace LccHotfix
 
         protected override void Execute(List<MetaEntity> entities)
         {
-            Time.timeScale = _world.MetaWorld.comUniTimeScale.TimeScale;
+            ApplyTimeScale(_world.MetaWorld.comUniTimeScale.TimeScale);
         }
 
         public void TearDown()
         {
-            Time.timeScale = 1;
+            ApplyTimeScale(1f);
+        }
+
+        private void ApplyTimeScale(float timeScale)
+        {
+            Time.timeScale = timeScale;
+            //Time.fixedDeltaTime = _defaultFixedDeltaTime * Mathf.Max(timeScale, MinFixedTimeScale);
         }
     }
 }

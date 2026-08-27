@@ -1,18 +1,17 @@
 using System.Collections.Generic;
-using HotUpdate.Framework;
 
 namespace LccHotfix
 {
     public class TimerComponent : LogicComponent
     {
-        private List<TimerTask> mTimerList = new List<TimerTask>();
-        public List<TimerTask> TimerList => mTimerList;
+        private List<int> mTimerList = new List<int>();
+        public List<int> TimerList => mTimerList;
 
         public override void DisposeOnRemove()
         {
-            foreach (TimerTask item in mTimerList)
+            foreach (int item in mTimerList)
             {
-                item.Dispose();
+                Owner.OwnerWorld.GetCreationInfo<BattleKernelCreationInfo>().TimerService.RemoveTimer(item);
             }
 
             mTimerList.Clear();
@@ -39,7 +38,7 @@ namespace LccHotfix
         }
 
 
-        public void AddComTimer(TimerTask timerID)
+        public void AddComTimer(int timerID)
         {
             var index = LogicComponentsLookup.ComTimer;
             TimerComponent component;

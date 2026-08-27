@@ -1,4 +1,5 @@
 using PBConfig;
+using UnityEngine;
 
 namespace LccHotfix
 {

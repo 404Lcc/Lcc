@@ -1,7 +1,21 @@
+using System.Collections.Generic;
+
 namespace LccHotfix
 {
     public class AILogic : CustomLogic
     {
+    }
+
+    public class AILogicCfg : CustomLogicCfg
+    {
+        public override System.Type NodeType()
+        {
+            return typeof(AILogic);
+        }
+
+        public AILogicCfg(int id, List<ICustomNodeCfg> nodeCfgList, System.Type logicType) : base(id, nodeCfgList, logicType)
+        {
+        }
     }
 
     public class AIComponent : LogicComponent
@@ -12,6 +26,11 @@ namespace LccHotfix
 
         public override void DisposeOnRemove()
         {
+            if (mLogic != null)
+            {
+                Owner?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.CustomLogicService?.DestroyLogic(mLogic);
+                mLogic = null;
+            }
             base.DisposeOnRemove();
         }
 

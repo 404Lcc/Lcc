@@ -6,7 +6,7 @@ namespace LccHotfix
     public static class LogicEntityStateExtensions
     {
         /// <summary>
-        /// 获取实体日志标识，优先输出子物体或战斗单位配置 ID。
+        /// 获取实体日志标识；以 ID 为基准，按组件存在情况逐项追加字段，便于扩展。
         /// </summary>
         public static string GetLogStr(this LogicEntity entity)
         {
@@ -15,17 +15,25 @@ namespace LccHotfix
                 return "null";
             }
 
+            var logStr = $"(ID:{entity.ID}";
+
             if (entity.hasComSubobject)
             {
-                return $"(ID:{entity.ID},Subobj:{entity.comSubobject.ConfigId})";
+                logStr += $",Subobj:{entity.comSubobject.ConfigId}";
             }
 
             if (entity.hasComBattleUnitTag)
             {
-                return $"(ID:{entity.ID},BattleUnit:{entity.comBattleUnitTag.Tag.BattleUnitTid})";
+                logStr += $",BattleUnit:{entity.comBattleUnitTag.Tag.BattleUnitTid}";
             }
 
-            return $"{entity.ID}";
+            if (entity.hasComFSM && entity.comFSM?.Logic != null)
+            {
+                var logic = entity.comFSM.Logic;
+                logStr += $",Fsm:{logic.GenInfo?.LogicConfigID ?? 0},State:{logic.MainFsmNode?.CurrentStateID ?? "null"}";
+            }
+
+            return logStr + ")";
         }
 
         /// <summary>
@@ -33,6 +41,16 @@ namespace LccHotfix
         /// </summary>
         public static bool IsValid(this LogicEntity entity)
         {
+            if (entity == null)
+            {
+                return false;
+            }
+
+            if (!entity.isEnabled)
+            {
+                return false;
+            }
+
             if (entity.IsDead())
             {
                 return false;
@@ -54,7 +72,7 @@ namespace LccHotfix
         /// <summary>
         /// 判断实体是否可作为索敌或技能目标。
         /// </summary>
-        public static bool IsValidTarget(this LogicEntity entity)
+        public static bool IsValidTarget(this LogicEntity entity, bool AA = false)
         {
             if (entity == null)
             {
@@ -71,7 +89,7 @@ namespace LccHotfix
                 return false;
             }
 
-            if (!entity.CanBeTarget())
+            if (!entity.CanBeTarget(AA))
             {
                 return false;
             }
@@ -116,6 +134,24 @@ namespace LccHotfix
             }
 
             return entity.GetAttributeBool(AttributeBool.Cloaked, false) && !entity.GetAttributeBool(AttributeBool.CloakRevealed, false);
+        }
+
+        /// <summary>
+        /// 判断实体是否处于飞行状态
+        /// </summary>
+        public static bool IsFlying(this LogicEntity entity)
+        {
+            if (entity == null)
+            {
+                return false;
+            }
+
+            if (!entity.hasComAttributes)
+            {
+                return false;
+            }
+
+            return entity.GetAttributeBool(AttributeBool.Flying, false);
         }
 
         /// <summary>
@@ -204,12 +240,16 @@ namespace LccHotfix
         /// <summary>
         /// 判断实体是否允许被选为目标。
         /// </summary>
-        public static bool CanBeTarget(this LogicEntity entity)
+        public static bool CanBeTarget(this LogicEntity entity, bool AA = false)
         {
             if (entity.hasComAttributes)
             {
                 var comAttributes = entity.comAttributes;
                 if (!comAttributes.GetValue<bool>(AttributeBool.CanBeTargeted, false))
+                {
+                    return false;
+                }
+                if (!AA && comAttributes.GetValue<bool>(AttributeBool.Flying, false))
                 {
                     return false;
                 }

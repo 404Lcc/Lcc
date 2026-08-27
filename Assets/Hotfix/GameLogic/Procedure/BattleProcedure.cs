@@ -16,7 +16,7 @@ namespace LccHotfix
             base.ProcedureStartHandler();
 
             //进入
-            Log.Debug("进入Battle");
+            KLogger.Log("进入Battle");
 
             ProcedureLoadEndHandler();
         }
@@ -55,7 +55,7 @@ namespace LccHotfix
         {
             base.ProcedureExitHandler();
 
-            Log.Debug("退出Battle");
+            KLogger.Log("退出Battle");
         }
     }
 }

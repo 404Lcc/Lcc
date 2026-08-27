@@ -13,17 +13,28 @@ namespace LccHotfix
         {
             if (OnHandleCommand != null)
             {
-                OnHandleCommand(entity, cmd);
+                foreach (var handler in OnHandleCommand.GetInvocationList())
+                {
+                    if (((ComponentHandleCommand)handler)(entity, cmd))
+                    {
+                        return true;
+                    }
+                }
             }
 
-            return true;
+            return false;
         }
 
         public virtual void BindOwner(LogicEntity owner)
         {
             m_owner = owner;
-            foreach (var component in owner.GetComponents())
+            // 稀疏槽扫描，避免 GetComponents 冷缓存 ToArray 分配
+            for (int i = 0, n = owner.totalComponents; i < n; i++)
             {
+                if (!owner.HasComponent(i))
+                    continue;
+
+                var component = owner.GetComponent(i);
                 if (component is IEntityCommandHandler commandHandler)
                 {
                     OnHandleCommand += commandHandler.HandleEntityCommand;

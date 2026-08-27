@@ -100,7 +100,7 @@ namespace LccHotfix
 
         protected override float OnUpdate(float dt)
         {
-            CLHelper.Assert(_nodeList != null);
+            CLogger.Assert(_nodeList != null);
             if (_nodeList == null)
                 return dt;
 

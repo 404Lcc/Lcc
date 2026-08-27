@@ -105,6 +105,7 @@ namespace PBConfig
         EhtBoxCollider = 3,
         EhtRaycast = 4,
         EhtAabb = 5,
+        EhtRaycast3D = EhtRaycast,
     }
 
     public enum TSkillBuffBenefit
@@ -210,6 +211,22 @@ namespace PBConfig
         public bool HasHit { get; set; }
         public int Miss { get; set; }
         public bool HasMiss { get; set; }
+        public int Dmg { get; set; }
+        public bool HasDmg { get; set; }
+        public float AtkInterval { get; set; }
+        public bool HasAtkInterval { get; set; }
+        public float ReloadTime { get; set; }
+        public bool HasReloadTime { get; set; }
+        public int BulletCount { get; set; }
+        public bool HasBulletCount { get; set; }
+        public float AtkRatio { get; set; }
+        public bool HasAtkRatio { get; set; }
+        public int DmgRes { get; set; }
+        public bool HasDmgRes { get; set; }
+        public int Crit { get; set; }
+        public bool HasCrit { get; set; }
+        public int CritDmg { get; set; }
+        public bool HasCritDmg { get; set; }
     }
 
     public class TLevelBaseProp
@@ -295,6 +312,7 @@ namespace PBConfig
         public int LogicID { get; set; }
         public int LogicParams { get; set; }
         public float Cd { get; set; }
+        public float CdAfterLast { get; set; }
         public float Range { get; set; }
         public float DamageRate { get; set; }
         public int SkillWeight { get; set; }
@@ -349,6 +367,7 @@ namespace PBConfig
     {
         public TBase Base { get; set; } = new TBase();
         public string Name { get; set; } = "";
+        public uint EntityType { get; set; }
         public uint Model { get; set; }
         public uint AiLogic { get; set; }
         public uint FsmLogic { get; set; }
@@ -369,5 +388,9 @@ namespace PBConfig
         public List<uint> HurtFXs { get; } = new List<uint>();
         public uint RadarModel { get; set; }
         public string DieSound { get; set; } = "";
+        public uint DieFxIce { get; set; }
+        public uint DieFxFire { get; set; }
+        // Source proto field name is EletricShockBone (typo kept).
+        public uint EletricShockBone { get; set; }
     }
 }

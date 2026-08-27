@@ -1,4 +1,3 @@
-﻿using HotUpdate.Framework.PbCfg;
 using PBConfig;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -97,18 +96,23 @@ namespace LccHotfix
                 }
                 else
                 {
-                    CLHelper.LogError(node, $"Subobject_SetCollider subobjectCfg != null, tid={tid}");
+                    CLogger.LogError(node, $"Subobject_SetCollider subobjectCfg != null, tid={tid}");
                     return;
                 }
 
                 e.ReplaceComBounds(e.comTransform.position, boundSize);
 
+                //先全走HitMakerUnityPhysics，试运行一段时间没问题看改配置表。ai别动
                 switch (subobjectCfg.CollisionType)
                 {
                     case CollisionType.EhtNone:
                         break;
                     case CollisionType.EhtAabb:
-                        e.AddSubobjectComCollider<SubobjectColliderHandlerBase, UnityPhysicsHitMaker>(e.comSubobject.Cfg, out var hitMakerLogic);
+                        //HitMakerLogicPhysics
+                        e.AddSubobjectComCollider<SubobjectColliderHandlerBase, HitMakerUnityPhysics>(e.comSubobject.Cfg, out var hitMakerLogic);
+                        break;
+                    case CollisionType.EhtRaycast3D:
+                        e.AddSubobjectComCollider<SubobjectColliderHandlerBase, HitMakerUnityPhysics>(e.comSubobject.Cfg, out var hitMakerUnity);
                         break;
                 }
 
@@ -193,6 +197,9 @@ namespace LccHotfix
                         node.SetVar("CV_DanmakuIndex", index + 1);
                     }),
                     FighterSpawnSubobjectTo(tid, "CV_DanmakuTargetPos", bindPoint),
+                    Branch(new DelegateConditionCfg(node => { return audio != null;}),
+                        PlayAudio(audio)
+                    )
 
                 }, count, interval)
             );

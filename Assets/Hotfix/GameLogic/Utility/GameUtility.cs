@@ -56,7 +56,7 @@ namespace LccHotfix
         {
             if (string.IsNullOrEmpty(key))
             {
-                Log.Error("key不能等于空");
+                KLogger.LogError("key不能等于空");
                 return "";
             }
 

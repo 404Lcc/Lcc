@@ -1,4 +1,3 @@
-﻿using HotUpdate.Framework.PbCfg;
 using PBConfig;
 using UnityEngine;
 

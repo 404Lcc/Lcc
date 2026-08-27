@@ -37,7 +37,7 @@ namespace LccHotfix
     }
 
     //自定义节点、条件节点、行为节点、结构容器节点，都继承自它
-    public partial class CustomNode : ICustomNode
+    public class CustomNode : ICustomNode
     {
         private bool _isActive = false;
         protected CustomNodeContext _context;
@@ -78,7 +78,7 @@ namespace LccHotfix
                 return theLogic;
             }
 
-            CLHelper.LogError(this, $"CustomNode.GetOwnerLogic logic({_context.Logic.GetType()}) is not {typeof(T)}");
+            CLogger.LogError(this, $"CustomNode.GetOwnerLogic logic({_context.Logic.GetType()}) is not {typeof(T)}");
             return null;
         }
 
@@ -88,10 +88,10 @@ namespace LccHotfix
             {
                 return theGenInfo;
             }
-
+            
             if (logError)
             {
-                CLHelper.LogError(this, $"CustomNode.GetGenInfo genInfo({_context.GenInfo.GetType()}) is not {typeof(T)}");
+                CLogger.LogError(this, $"CustomNode.GetGenInfo genInfo({_context.GenInfo.GetType()}) is not {typeof(T)}");
             }
 
             return null;

@@ -54,6 +54,20 @@ namespace LccHotfix
             return GetEntityIndex<FactionComponent, EntityIndex<LogicEntity, EFaction>>().GetEntities(faction);
         }
 
+        /// <summary>
+        /// 按阵营取可战斗单位（Faction+Hp+View+Transform、非 Death）。
+        /// </summary>
+        public HashSet<LogicEntity> GetFactionFighters(EFaction faction)
+        {
+            var index = GetEntityIndex(EntityIndexName.FactionFighter) as EntityIndex<LogicEntity, EFaction>;
+            if (index == null)
+            {
+                return null;
+            }
+
+            return index.GetEntities(faction);
+        }
+
         public HashSet<LogicEntity> GetEntitiesWithComOwnerEntity(long ownerEntityID)
         {
             return GetEntityIndex<HolderEntityComponent, EntityIndex<LogicEntity, long>>().GetEntities(ownerEntityID);
@@ -61,6 +75,10 @@ namespace LccHotfix
 
         public LogicEntity GetEntityWithComID(long id)
         {
+            if (id <= 0)
+            {
+                return null;
+            }
             var index = GetEntityIndex(EntityIndexName.IDComponent) as PrimaryEntityIndex<LogicEntity, long>;
             if (index == null)
             {

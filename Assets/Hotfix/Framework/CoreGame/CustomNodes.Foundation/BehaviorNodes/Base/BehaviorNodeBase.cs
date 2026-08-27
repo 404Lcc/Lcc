@@ -8,7 +8,7 @@ namespace LccHotfix
 
         public NoneParamBhvCfg(System.Type bhvType)
         {
-            CLHelper.Assert(bhvType.IsSubclassOf(typeof(BehaviorNodeBase)));
+            CLogger.Assert(bhvType.IsSubclassOf(typeof(BehaviorNodeBase)));
             BhvType = bhvType;
         }
 
@@ -68,7 +68,7 @@ namespace LccHotfix
             _cfg = cfg as T;
             if (_cfg == null)
             {
-                CLHelper.LogError(this, $"BehaviorNode mCfg == null node={this}, T={typeof(T)}");
+                CLogger.LogError(this, $"BehaviorNode mCfg == null node={this}, T={typeof(T)}");
             }
         }
 

@@ -49,7 +49,7 @@ namespace LccHotfix
                 return false;
             }
 
-            return _uniqueEntity.HasComponent(index);
+            return UniqueEntity.HasComponent(index);
         }
 
         public void SetUniqueComponent<T>(int index, T component) where T : MetaComponent
@@ -65,13 +65,13 @@ namespace LccHotfix
                 return;
             }
 
-            if (_uniqueEntity.HasComponent(index))
+            if (UniqueEntity.HasComponent(index))
             {
-                _uniqueEntity.ReplaceComponent(index, component);
+                UniqueEntity.ReplaceComponent(index, component);
             }
             else
             {
-                _uniqueEntity.AddComponent(index, component);
+                UniqueEntity.AddComponent(index, component);
             }
         }
 
@@ -82,7 +82,7 @@ namespace LccHotfix
                 return null;
             }
 
-            return (T)_uniqueEntity.GetComponent(index);
+            return (T)UniqueEntity.GetComponent(index);
         }
     }
 }

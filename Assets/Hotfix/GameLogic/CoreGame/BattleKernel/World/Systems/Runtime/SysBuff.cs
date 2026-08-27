@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
@@ -7,19 +8,25 @@ namespace LccHotfix
     {
         private readonly IGroup<LogicEntity> _group;
         private readonly LogicWorld _logicWorld;
+        private readonly MetaWorld _metaWorld;
+
+        private readonly List<LogicEntity> _entityBuffer = new(256);
 
         public SysBuff(ECWorlds world)
         {
             _logicWorld = world.LogicWorld;
+            _metaWorld = world.MetaWorld;
             _group = _logicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComBuffCenter));
         }
 
         void IExecuteSystem.Execute()
         {
             var dt = BattleTime.GetDeltaTime(_logicWorld);
-            foreach (var e in _group.GetEntities())
+            var buffer = _group.GetEntities(_entityBuffer);
+            foreach (var e in buffer)
             {
-                e.comBuffCenter.Update(dt);
+                var entityDt = dt * BattleBulletTimeUtility.GetCompensateRatio(e, _metaWorld);
+                e.comBuffCenter.Update(entityDt);
             }
         }
 

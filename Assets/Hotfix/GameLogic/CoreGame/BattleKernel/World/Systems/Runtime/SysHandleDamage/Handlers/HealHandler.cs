@@ -25,19 +25,23 @@ namespace LccHotfix
 
             var curHp = target.comHp.Hp;
             var maxHp = target.comHp.MaxHp;
-            var pos = target.comTransform.position;
             var healing = context.Healing;
-            if (healing + curHp >= maxHp)
-                healing = (float)maxHp - (float)curHp;
-            if (healing <= 0)
+            if (curHp >= maxHp || healing <= 0)
                 return;
-            healing = Mathf.RoundToInt(healing);
-            target.comHp.ChangeHP(healing);
-            var hitBindPointPos = pos;
-            if(target.hasComView) 
+
+            var missingHp = (float)(maxHp - curHp);
+            if (healing > missingHp)
+                healing = missingHp;
+            var healAmount = Mathf.RoundToInt(healing);
+            if (healAmount <= 0)
+                return;
+
+            target.comHp.ChangeHP(healAmount);
+            var hitBindPointPos = target.comTransform.position;
+            if (target.hasComView)
                 hitBindPointPos = target.GetMainViewBindPos("Hit");
-            var useTaggedTargetStyle = world.GetCreationInfo<BattleKernelCreationInfo>().DamagePolicyService?.UseTaggedFeedbackStyle(target) ?? false;
-            world.GetCreationInfo<BattleKernelCreationInfo>().BattleFeedbackSink?.ShowHealNumber(Mathf.RoundToInt(healing), hitBindPointPos, useTaggedTargetStyle);
+
+            world.GetCreationInfo<BattleKernelCreationInfo>().BattleFeedbackSink?.ShowHealNumber(healAmount, hitBindPointPos);
         }
     }
 }

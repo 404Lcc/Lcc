@@ -140,25 +140,12 @@ namespace LccHotfix
         /// <summary>当前普通攻击 Attack 动画的播放倍率。</summary>
         public const string CV_AttackAnimationSpeed = "CV_AttackAnimationSpeed";
 
-        /// <summary>
-        /// 当前弹药技能是否使用弹夹最后一发。
-        /// </summary>
-        public const string CV_IsAmmoLastShot = "CV_IsAmmoLastShot";
 
         public const string CV_AmmoGambleCritAdd = "CV_AmmoGambleCritAdd";
         public const string CV_AmmoGambleCritDamageAdd = "CV_AmmoGambleCritDamageAdd";
         public const string CV_AmmoGambleDamageMultiplier = "CV_AmmoGambleDamageMultiplier";
         public const string CV_AmmoGambleForceCritical = "CV_AmmoGambleForceCritical";
 
-        /// <summary>
-        /// 狙击手本发子弹是否无限穿透。
-        /// </summary>
-        public const string CV_SniperReloadInfinitePierceShot = "CV_SniperReloadInfinitePierceShot";
-
-        /// <summary>
-        /// 狙击手本发子弹是否使用凤凰子弹效果。
-        /// </summary>
-        public const string CV_SniperPhoenixBulletShot = "CV_SniperPhoenixBulletShot";
 
         #endregion
 

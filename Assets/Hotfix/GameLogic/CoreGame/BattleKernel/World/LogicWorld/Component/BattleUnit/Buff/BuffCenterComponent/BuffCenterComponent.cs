@@ -36,7 +36,6 @@ namespace LccHotfix
             var svc = Owner?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.CustomLogicService;
             var container = svc?.GetConfigContainer(genInfo.ConfigContainerName);
             var cfg = container?.GetCustomLogicCfg(genInfo.LogicConfigID) as IEntityBuffCfg;
-
             if (cfg == null)
             {
                 BattleLogger.LogWarning("cfg不是 IEntityBuffCfg");

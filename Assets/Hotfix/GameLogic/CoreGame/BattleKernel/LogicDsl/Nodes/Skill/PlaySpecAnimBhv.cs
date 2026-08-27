@@ -74,25 +74,13 @@ namespace LccHotfix
             var entity = _cfg.EntityCfg.GetEntity(this);
             var animName = _cfg.AnimName;
             var animStateName = animName.GetValue(this);
-            PlayAnim(entity, animStateName, _cfg.LayerIndex);
-        }
+            entity.PlayAnimation(animStateName, _cfg.LayerIndex, _cfg.ForceRestart,
+                _cfg.AnimationSpeed.GetValue(this));
 
-        public static void PlayAnim_Layer0(LogicEntity entity, string animStateName)
-        {
-            PlayAnim(entity, animStateName, 0);
-        }
-
-        public static void PlayAnim(LogicEntity entity, string animStateName, int layerIndex)
-        {
-            if (entity == null || !entity.hasComAnimation)
-                return;
-            var comAnim = entity.comAnimation;
-            var newData = comAnim.Data;
-            if (layerIndex == 1)
-                newData.SpecAnim_Layer1 = animStateName;
-            else
-                newData.SpecAnim_Layer0 = animStateName;
-            comAnim.SetData(newData);
+            // if (entity.hasComBattleUnitTag && entity.comBattleUnitTag.Tag.BattleUnitType == TBattleUnitType.ButDefender)
+            // {
+            //     BattleLogger.LogDebug($"Hero PlayAnim: \"{animStateName}\" layer:{_cfg.LayerIndex} entity:{entity.ID}");
+            // }
         }
 
 

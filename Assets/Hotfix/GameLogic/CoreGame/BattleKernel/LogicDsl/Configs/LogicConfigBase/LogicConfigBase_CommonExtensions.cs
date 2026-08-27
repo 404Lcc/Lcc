@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace LccHotfix
@@ -117,6 +117,29 @@ namespace LccHotfix
                 }
 
                 ownerEntity.ReplaceComLife(time);
+            });
+        }
+
+        /// <summary>
+        /// 播放战斗音效；优先 BattleAudioService，否则回退 Main.AudioService。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public DelegateBhvCfg PlayAudio(string eventName, bool isBind = false)
+        {
+            return BeginCall(node =>
+            {
+                if (string.IsNullOrEmpty(eventName))
+                    return;
+
+                var entity = node.GetOwnerEntity();
+                var battleAudio = node.GetLogicWorld()?.GetCreationInfo<BattleKernelCreationInfo>()?.BattleAudioService;
+                if (battleAudio != null && entity != null)
+                {
+                    battleAudio.PlayEntityAudio(entity, eventName);
+                    return;
+                }
+
+                Main.AudioService?.PlaySound(eventName);
             });
         }
     }

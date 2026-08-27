@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using PBConfig;
-using UnityEngine;
 
 namespace LccHotfix
 {
@@ -25,33 +24,8 @@ namespace LccHotfix
         //开局信息
         public GameHeroInfo Hero { get; set; } = new();
 
-        //三选一记录
-        public PlayerBattleSupplyRecord BattleSupplyRecordRef { get; set; } = new();
-
-        //三选一规则（由 ChapterPlayerBattleSupplyCtrl 注入）
-        public PlayerBattleSupplyRule BattleSupplyRuleRef { get; set; }
-
         public PlayerFeaturesContext FeaturesContext = new();
 
-        /// <summary>
-        /// 被动技能累计的全队固定攻击加成（不含 PropDatas 等其它 Attack 来源）。
-        /// </summary>
-        public double PassiveSkillFlatAtkBonus;
-
-        /// <summary>
-        /// 被动技能累计的全队固定生命加成（不含 PropDatas 等其它 Health 来源）。
-        /// </summary>
-        public double PassiveSkillFlatHpBonus;
-
-        /// <summary>
-        /// 开局快照：天赋侧已激活被动的 LogicId 与等级。局内只读，不回写模块。
-        /// </summary>
-        public List<(int LogicId, int Level)> ActivatedPassiveSkills { get; } = new();
-
-        /// <summary>
-        /// 队长出生时是否已应用过 ActivatedPassiveSkills，避免复活/重建队长双加。
-        /// </summary>
-        public bool ActivatedPassiveSkillsApplied;
 
         public float DebuffDurationAddRate => FeaturesContext.PointDebuffDuration;
 
@@ -103,25 +77,34 @@ namespace LccHotfix
 
         // 按局内战斗实体表TID取分类属性，常用于某个战斗实体模板的属性/主技能改写
         public CategoryVolumeInfo_Fighter GetVolume_FighterTid(int fighterTid, bool autoCreate = false) => GetCategory<int, CategoryVolumeInfo_Fighter>(ECategoryVolume.FighterTid, fighterTid, autoCreate);
+
         // 按子物体TID取分类属性，常用于子弹/子物体属性与表现覆盖
         public CategoryVolumeInfo_Subobject GetVolume_SubobjectTid(int tid, bool autoCreate = false) => GetCategory<int, CategoryVolumeInfo_Subobject>(ECategoryVolume.SubobjectTid, tid, autoCreate);
+
         // 按战斗单位属性表TID取分类属性，作用于某类单位属性模板
         public CategoryVolumeInfo GetVolume_BattleUnit(int battleUnitId, bool autoCreate = false) => GetCategory<int, CategoryVolumeInfo>(ECategoryVolume.BattleUnit, battleUnitId, autoCreate);
+
         // 按阵营取分类属性
         public CategoryVolumeInfo GetVolume_Camp(TCampType camp, bool autoCreate = false) => GetCategory<TCampType, CategoryVolumeInfo>(ECategoryVolume.Camp, camp, autoCreate);
+
         // 按元素取分类属性
         public CategoryVolumeInfo GetVolume_Element(TElementType element, bool autoCreate = false) => GetCategory<TElementType, CategoryVolumeInfo>(ECategoryVolume.Element, element, autoCreate);
+
         // 按攻击类型取分类属性
         public CategoryVolumeInfo GetVolume_AttackType(THeroAttackType attackType, bool autoCreate = false) => GetCategory<THeroAttackType, CategoryVolumeInfo>(ECategoryVolume.AttackType, attackType, autoCreate);
+
         // 按战斗单位类型取分类属性
         public CategoryVolumeInfo GetVolume_UnitType(TBattleUnitType unitType, bool autoCreate = false) => GetCategory<TBattleUnitType, CategoryVolumeInfo>(ECategoryVolume.UnitType, unitType, autoCreate);
+
         // 按关卡类型取分类属性
         public CategoryVolumeInfo GetVolume_LevelType(TLevelType levelType, bool autoCreate = false) => GetCategory<TLevelType, CategoryVolumeInfo>(ECategoryVolume.LevelType, levelType, autoCreate);
+
         // 按敌人强度取分类属性
         public CategoryVolumeInfo GetVolume_EnemyStrength(TEnemyStrengthType enemyStrength, bool autoCreate = false) => GetCategory<TEnemyStrengthType, CategoryVolumeInfo>(ECategoryVolume.EnemyStrength, enemyStrength, autoCreate);
 
         // 按技能TID取分类属性，作用于具体技能模板
         public CategoryVolumeInfo GetVolume_Skill(int skillTid, bool autoCreate = false) => GetCategory<int, CategoryVolumeInfo>(ECategoryVolume.Skill, skillTid, autoCreate);
+
         public HeroInfo GetHeroInfo(int index)
         {
             if (Hero?.HeroInfos == null || index < 0 || index >= Hero.HeroInfos.Count)
@@ -136,7 +119,6 @@ namespace LccHotfix
         {
             return GetHeroInfo(0);
         }
-
         //继续增补
     }
 }

@@ -16,8 +16,7 @@ namespace LccHotfix
 
     public interface IDamagePolicyService
     {
-        bool UsePrimaryStateFeedbackStyle(LogicEntity entity);
-        bool UseTaggedFeedbackStyle(LogicEntity entity);
+        void ModifyDamageResult(in DamageContext context, LogicEntity defender, ref DamageResult result);
         void ModifyHeal(ref HealContext context);
         void DispatchTriggerDeath(LogicEntity entity);
     }

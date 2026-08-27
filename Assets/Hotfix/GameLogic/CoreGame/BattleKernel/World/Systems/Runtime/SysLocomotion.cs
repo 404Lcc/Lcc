@@ -1,29 +1,30 @@
+using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
 namespace LccHotfix
 {
-    public class SysLocomotion : IExecuteSystem
+    public class SysLocomotion : IFixedUpdateSystem, IExecuteSystem
     {
-        private readonly ECWorlds _worlds;
+        private readonly LogicWorld _logicWorld;
+        private readonly MetaWorld _metaWorld;
         private readonly IGroup<LogicEntity> _group;
+
+        private readonly List<LogicEntity> _entityBuffer = new(256);
 
         public SysLocomotion(ECWorlds worlds)
         {
-            _worlds = worlds;
+            _logicWorld = worlds.LogicWorld;
+            _metaWorld = worlds.MetaWorld;
             _group = worlds.LogicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComLocomotion, LogicComponentsLookup.ComTransform));
         }
-
-        public void Execute()
+        
+        private void UpdateEntities(List<LogicEntity> entities, float dt)
         {
-            UpdateEntities(_group.GetEntities(), BattleTime.GetDeltaTime(_worlds.LogicWorld));
-        }
+            // B+: 允许 GST_Over 期间实体继续移动,回退恢复此 return
+            // if (logicWorld.GameOver)
+            //     return;
 
-        private void UpdateEntities(LogicEntity[] entities, float dt)
-        {
-            if (_worlds.LogicWorld.GameOver)
-                return;
-            
             foreach (var entity in entities)
             {
                 var comLocomotion = entity.comLocomotion;
@@ -50,25 +51,27 @@ namespace LccHotfix
                     continue;
                 }
 
-                var moveSpeedRatio = 1f;
                 if (entity.hasComAttributes)
                 {
                     if (locomotion is ILocomotionSpeed locomotionSpeed)
                     {
-                        locomotionSpeed.SetMoveSpeed(entity.GetAttributeFloat(PropertyFloat.MoveSpeed));
-                    }
+                        var moveSpeed = entity.GetAttributeFloat(PropertyFloat.MoveSpeed, 0f);
+                        var ratio = entity.GetAttributeFloat(PropertyFloat.MoveSpeedRatio, 1f);
+                        if (ratio <= 0f)
+                        {
+                            ratio = 1f;
+                        }
 
-                    if (entity.comAttributes.Has<float>(PropertyFloat.MoveSpeedRatio))
-                    {
-                        moveSpeedRatio = entity.GetAttributeFloat(PropertyFloat.MoveSpeedRatio);
+                        locomotionSpeed.SetMoveSpeed(moveSpeed * ratio);
                     }
                 }
 
                 locomotion.BeforeUpdate();
-                locomotion.Update(dt, entity);
+                var entityDt = dt * BattleBulletTimeUtility.GetCompensateRatio(entity, _metaWorld);
+                locomotion.Update(entityDt, entity, _metaWorld);
 
                 var comTransform = entity.comTransform;
-                comTransform.AddPosition(locomotion.DeltaPosition * moveSpeedRatio);
+                comTransform.AddPosition(locomotion.DeltaPosition);
                 comTransform.AddRotation(locomotion.DeltaRotation);
             }
         }
@@ -84,6 +87,26 @@ namespace LccHotfix
             }
 
             return true;
+        }
+
+        public void FixedUpdate(float dt, float dt_unscaled)
+        {
+            if (_metaWorld.IsInBulletTime())
+            {
+                return;
+            }
+
+            UpdateEntities(_group.GetEntities(_entityBuffer), dt);
+        }
+
+        public void Execute()
+        {
+            if (!_metaWorld.IsInBulletTime())
+            {
+                return;
+            }
+
+            UpdateEntities(_group.GetEntities(_entityBuffer), BattleTime.GetDeltaTime(_logicWorld));
         }
     }
 }

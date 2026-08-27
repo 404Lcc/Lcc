@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using HotUpdate.Framework.PbCfg;
+using System.Runtime.CompilerServices;
 using PBConfig;
 using UnityEngine;
 
@@ -114,8 +113,7 @@ namespace LccHotfix
             }
             return playerInfo;
         }
-
-
+        
         /// <summary>
         /// 获取当前逻辑节点黑板中的拥有者玩家信息。
         /// </summary>
@@ -124,12 +122,26 @@ namespace LccHotfix
             var playerInfo = self.GetVar<InGamePlayerInfo>(CvKey.CV_OwnerPlayerInfo);
             if (playerInfo == null)
             {
-                CLHelper.LogError(self, "node.GetOwnerPlayerInfo == null");
+                CLogger.LogError(self, "node.GetOwnerPlayerInfo == null");
             }
 
             return playerInfo;
         }
 
+        /// <summary>
+        /// 获取 MetaWorld 中的本地玩家信息。
+        /// </summary>
+        public static InGamePlayerInfo GetLocalPlayerInfo(this CustomNode self)
+        {
+            var metaWorld = self.GetMetaWorld();
+            var localPlayerInfo = metaWorld?.GetLocalPlayerInfo();
+            if (localPlayerInfo == null)
+            {
+                CLogger.LogError(self, "node.GetLocalPlayerInfo  localPlayerInfo == null");
+            }
+
+            return localPlayerInfo;
+        }
 
         /// <summary>
         /// 读取当前逻辑上的补给卡 TID；GenInfo 优先，否则读黑板。

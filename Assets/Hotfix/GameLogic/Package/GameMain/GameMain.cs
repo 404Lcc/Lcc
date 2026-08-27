@@ -124,7 +124,7 @@ namespace LccHotfix
             }
             catch (System.Exception e)
             {
-                Log.Error(e);
+                KLogger.LogException(e);
             }
         }
 

@@ -213,7 +213,7 @@ namespace LccHotfix
 
         private VarEnv NewSubobjVarEnv(Vector3 targetPos, long targetEntityID)
         {
-            var varEnv = Main.CustomLogicService.NewVarEnv();
+            var varEnv = this.GetLogicWorld().GetCreationInfo<BattleKernelCreationInfo>().CustomLogicService.NewVarEnv();
             varEnv.WriteVar(CvKey.CV_SbjTargetPos, targetPos);
             if (targetEntityID != 0)
             {

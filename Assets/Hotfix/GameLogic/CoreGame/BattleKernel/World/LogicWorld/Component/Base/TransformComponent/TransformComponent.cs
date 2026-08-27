@@ -7,14 +7,13 @@ namespace LccHotfix
         public Vector3 position { get; private set; }
         public Quaternion rotation { get; private set; }
         public Vector3 scale { get; private set; }
-        public int dirX { get; private set; }
+        public int dir2D { get; private set; } = 1;
 
-        public void Init(Vector3 position, Quaternion rotation, Vector3 scale, int dirX)
+        public void Init(Vector3 position, Quaternion rotation, Vector3 scale)
         {
             this.position = position;
             this.rotation = rotation;
             this.scale = scale;
-            this.dirX = dirX;
         }
 
         public void SetPosition(Vector3 newPos)
@@ -54,22 +53,22 @@ namespace LccHotfix
             }
         }
 
-        public void SetDirX(int newDirX)
+        public void SetDir2D(int newDir2D)
         {
-            if (dirX != newDirX)
+            if (dir2D != newDir2D)
             {
-                dirX = newDirX;
+                dir2D = newDir2D;
                 Owner.ReplaceComponent(LogicComponentsLookup.ComTransform, this);
             }
         }
 
-        public int GetDir()
+        public int GetDir2D()
         {
-            return dirX;
+            return dir2D;
         }
     }
 
-    public partial class LogicEntity
+    public partial class LogicEntity : IPositionProvider
     {
         public TransformComponent comTransform
         {
@@ -81,17 +80,16 @@ namespace LccHotfix
             get { return HasComponent(LogicComponentsLookup.ComTransform); }
         }
 
-        public void AddComTransform(Vector3 newPosition, Quaternion newRotation, Vector3 newScale, int newDirX = 1)
+        public void AddComTransform(Vector3 newPosition, Quaternion newRotation, Vector3 newScale)
         {
             var index = LogicComponentsLookup.ComTransform;
             var component = (TransformComponent)CreateComponent(index, typeof(TransformComponent));
-            component.Init(newPosition, newRotation, newScale, newDirX);
+            component.Init(newPosition, newRotation, newScale);
             AddComponent(index, component);
 
             comTransform.SetPosition(component.position);
             comTransform.SetRotation(component.rotation);
-            newScale = new Vector3(component.scale.x * newDirX, component.scale.y, component.scale.z);
-            comTransform.SetScale(newScale);
+            comTransform.SetScale(component.scale);
         }
 
         public Vector3 position
@@ -104,6 +102,11 @@ namespace LccHotfix
             get { return comTransform.rotation; }
         }
 
+        public Vector3 forwardDir
+        {
+            get { return comTransform.rotation * Vector3.forward; }
+        }
+        
         public Vector3 rightDir
         {
             get { return comTransform.rotation * Vector3.right; }

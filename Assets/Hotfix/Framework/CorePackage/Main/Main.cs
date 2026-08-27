@@ -65,7 +65,6 @@ namespace LccHotfix
                 _modules.Clear();
                 ReferencePool.ClearAll();
                 MarshalUtility.FreeCachedHGlobal();
-                Log.SetLogHelper(null);
                 Current = null;
             }
         }
@@ -117,7 +116,7 @@ namespace LccHotfix
         {
             if (Main.Current != null)
             {
-                Log.Error("SetMain，已经存在Current");
+                KLogger.LogError("SetMain，已经存在Current");
                 return;
             }
 

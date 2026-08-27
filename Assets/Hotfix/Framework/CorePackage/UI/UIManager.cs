@@ -186,11 +186,11 @@ namespace LccHotfix
 
             if (_switchingNode != null)
             {
-                Log.Error($"[UI] 切换{_switchingNode.NodeName}节点时，请求显示{domainName}域{elementName}界面");
+                KLogger.LogError($"[UI] 切换{_switchingNode.NodeName}节点时，请求显示{domainName}域{elementName}界面");
                 return;
             }
 
-            Log.Debug($"[UI] 显示界面{elementName}");
+            KLogger.Log($"[UI] 显示界面{elementName}");
 
             var domain = GetOrCreateDomain(domainName);
 
@@ -229,11 +229,11 @@ namespace LccHotfix
 
             if (_switchingNode != null)
             {
-                Log.Error($"[UI] 切换{_switchingNode.NodeName}节点时，请求显示{name}域");
+                KLogger.LogError($"[UI] 切换{_switchingNode.NodeName}节点时，请求显示{name}域");
                 return;
             }
 
-            Log.Debug($"[UI] 显示域{name}");
+            KLogger.Log($"[UI] 显示域{name}");
 
             DomainNode domain = GetOrCreateDomain(name);
             domain.SetDomainNode(domain);
@@ -253,11 +253,11 @@ namespace LccHotfix
 
             if (_switchingNode != null)
             {
-                Log.Error($"[UI] 切换{_switchingNode.NodeName}节点时，请求显示{name}域");
+                KLogger.LogError($"[UI] 切换{_switchingNode.NodeName}节点时，请求显示{name}域");
                 return;
             }
 
-            Log.Debug($"[UI] 显示界面{name}");
+            KLogger.Log($"[UI] 显示界面{name}");
 
             var domain = GetOrCreateDomain(string.Empty);
 
@@ -306,7 +306,7 @@ namespace LccHotfix
             if (_domainStack.Count == 0)
                 return null;
 
-            Log.Debug($"[UI] 隐藏界面{name}");
+            KLogger.Log($"[UI] 隐藏界面{name}");
 
             DomainNode domain = _domainStack.Peek();
 

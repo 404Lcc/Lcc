@@ -1,25 +1,31 @@
+using System.Collections.Generic;
 using Entitas;
-using UnityEngine;
 
 namespace LccHotfix
 {
     public sealed class SysMainFSM : IExecuteSystem
     {
-        private readonly ECWorlds _world;
+        private readonly LogicWorld _logicWorld;
+        private readonly MetaWorld _metaWorld;
         private readonly IGroup<LogicEntity> _group;
+
+        private readonly List<LogicEntity> _entityBuffer = new(256);
 
         public SysMainFSM(ECWorlds world)
         {
-            _world = world;
-            _group = _world.LogicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComMainFSM));
+            _logicWorld = world.LogicWorld;
+            _metaWorld = world.MetaWorld;
+            _group = _logicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComMainFSM));
         }
 
         void IExecuteSystem.Execute()
         {
-            var dt = BattleTime.GetDeltaTime(_world.LogicWorld);
-            foreach (var e in _group.GetEntities())
+            var dt = BattleTime.GetDeltaTime(_logicWorld);
+            var buffer = _group.GetEntities(_entityBuffer);
+            foreach (var e in buffer)
             {
-                e.comFSM.Logic.Update(dt);
+                var entityDt = dt * BattleBulletTimeUtility.GetCompensateRatio(e, _metaWorld);
+                e.comFSM.Logic.Update(entityDt);
             }
         }
 

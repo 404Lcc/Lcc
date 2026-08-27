@@ -138,6 +138,13 @@ namespace LccHotfix
                 _exitBhv.Deactivate();
             }
 
+            foreach (var transition in _transitions)
+            {
+                transition.Reset();
+            }
+
+            _isStateBhvEnd = false;
+
             base.Exit();
         }
 

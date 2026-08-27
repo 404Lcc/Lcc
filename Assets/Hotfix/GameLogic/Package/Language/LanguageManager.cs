@@ -26,7 +26,7 @@ namespace LccHotfix
                     continue;
                 if (languageDict.ContainsKey(item.Key))
                 {
-                    Log.Error($"多语言key添加重复 key = {item.Key}");
+                    KLogger.LogError($"多语言key添加重复 key = {item.Key}");
                     continue;
                 }
 
@@ -38,7 +38,7 @@ namespace LccHotfix
         {
             if (!languageDict.ContainsKey(key))
             {
-                Log.Error("多语言配置里不包含key = {0} 请检查", key);
+                KLogger.LogError("多语言配置里不包含key = {0} 请检查", key);
                 return key;
             }
 
@@ -99,12 +99,12 @@ namespace LccHotfix
             }
             catch (Exception e)
             {
-                Log.Error($"多语言有误 key = {key} value = {value}");
+                KLogger.LogError($"多语言有误 key = {key} value = {value}");
             }
 
             if (string.IsNullOrEmpty(value))
             {
-                Log.Error("多语言配置key = {0} value == null", key);
+                KLogger.LogError("多语言配置key = {0} value == null", key);
             }
 
             return value;
@@ -114,7 +114,7 @@ namespace LccHotfix
         {
             if (id == 0)
             {
-                Log.Error("id不能等于0");
+                KLogger.LogError("id不能等于0");
                 return "";
             }
 
@@ -131,7 +131,7 @@ namespace LccHotfix
         {
             if (id == 0)
             {
-                Log.Error("id不能等于0");
+                KLogger.LogError("id不能等于0");
                 return "";
             }
 

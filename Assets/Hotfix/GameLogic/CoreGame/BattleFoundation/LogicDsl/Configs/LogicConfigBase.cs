@@ -22,7 +22,14 @@ namespace LccHotfix
         {
             var logicCfg = new CustomLogicCfg(id, nodes, DefaultLogicType);
             logicCfg.Desc = desc;
-            Add(id, logicCfg);
+            try
+            {
+                Add(id, logicCfg);
+            }
+            catch (Exception e)
+            {
+                KLogger.LogError($"Logic配置异常请检查 {ContainerName}.AddConfig({id}): {e.ToString()}");
+            }
             return logicCfg;
         }
 
@@ -50,20 +57,46 @@ namespace LccHotfix
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DelegateBhvCfg Log(string str)
         {
-            return new DelegateBhvCfg(node => { CLHelper.LogInfo(node, str); });
+            return new DelegateBhvCfg(node => { CLogger.LogInfo(node, str); });
         }
+        
+#if UNITY_EDITOR
+        public static bool IsLogDebugActiveGlobal = false;  // 全局 static 开关
+        public bool IsLogDebugActive { get; set; } = true;  // 实例开关
+#else
+        public static bool IsLogDebugActiveGlobal = false;
+        public bool IsLogDebugActive { get; set; } = true;
+#endif
+        private static NodeParamAction NoneLog = (node => { });
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public DelegateBhvCfg LogDebug(NodeParamAction func)
+        {
+            if (IsLogDebugActiveGlobal && IsLogDebugActive)
+            {
+                return new DelegateBhvCfg(func);
+            }
+            return new DelegateBhvCfg(NoneLog);
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public DelegateBhvCfg Log(NodeParamAction func)
+        {
+            return new DelegateBhvCfg(func);
+        }
+        
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DelegateBhvCfg LogInt(string str, string intVar)
         {
-            return new DelegateBhvCfg(node => { CLHelper.LogInfo(node, string.Format(str, node.GetVar<int>(intVar))); });
+            return new DelegateBhvCfg(node => { CLogger.LogInfo(node, string.Format(str, node.GetVar<int>(intVar))); });
         }
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DelegateBhvCfg Log<VT>(string str, string var)
         {
-            return new DelegateBhvCfg(node => { CLHelper.LogInfo(node, string.Format(str, node.GetVar<VT>(var))); });
+            return new DelegateBhvCfg(node => { CLogger.LogInfo(node, string.Format(str, node.GetVar<VT>(var))); });
         }
 
 
@@ -272,7 +305,7 @@ namespace LccHotfix
             return new DelegateBhvCfg((CustomNode node) =>
             {
                 var v = node.GetVar<T>(varID);
-                CLHelper.LogInfo(node, $"LogVar varID={varID}, v={v}");
+                CLogger.LogInfo(node, $"LogVar varID={varID}, v={v}");
             });
         }
     }

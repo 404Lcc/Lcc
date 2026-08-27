@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using HotUpdate.Framework;
 
 namespace LccHotfix
 {

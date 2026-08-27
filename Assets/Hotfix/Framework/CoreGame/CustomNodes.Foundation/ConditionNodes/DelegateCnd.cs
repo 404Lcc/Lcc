@@ -11,7 +11,6 @@ namespace LccHotfix
             return typeof(DelegateCondition);
         }
 
-
         public DelegateConditionCfg(NodeParamCndFunction cndFunc)
         {
             CndFunc = cndFunc;

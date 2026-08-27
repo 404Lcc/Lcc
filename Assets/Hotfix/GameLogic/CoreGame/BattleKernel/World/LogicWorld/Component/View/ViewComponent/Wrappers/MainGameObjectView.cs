@@ -157,6 +157,9 @@ namespace LccHotfix
             if (GameObject == null)
                 return;
 
+            if (index == 0 && ViewName == "Characters_Girl_03_LingHun")
+                return;
+
             var renderers = GameObject.GetComponentsInChildren<SkinnedMeshRenderer>(true);
             foreach (var r in renderers)
             {

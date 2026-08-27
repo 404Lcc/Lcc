@@ -1,5 +1,4 @@
 using System;
-using HotUpdate.Framework;
 using UnityEngine;
 
 namespace LccHotfix
@@ -19,7 +18,7 @@ namespace LccHotfix
             DeltaRotation = Quaternion.identity;
         }
 
-        public abstract void Update(float dt, LogicEntity entity);
+        public abstract void Update(float dt, LogicEntity entity, MetaWorld metaWorld);
 
         public virtual bool IsEnd()
         {
@@ -34,7 +33,7 @@ namespace LccHotfix
             }
         }
         
-        public void OnRecycle()
+        public virtual void OnRecycle()
         {
             EndNotify = null;
             IsRuning = true;

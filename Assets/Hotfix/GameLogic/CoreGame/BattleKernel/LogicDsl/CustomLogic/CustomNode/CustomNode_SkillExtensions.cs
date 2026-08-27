@@ -1,19 +1,17 @@
-﻿using HotUpdate.Framework.PbCfg;
 using PBConfig;
 
 namespace LccHotfix
 {
-    /// <summary>
-    /// 技能创建流程
-    /// </summary>
     public static class CustomNodeSkillExtensions
     {
-        #region 技能创建
+    #region 技能创建
+
 
         /// <summary>
         /// 创建技能流程黑板，写入目标、伤害类型和攻击次数后挂载技能流程。
         /// </summary>
-        public static bool CreateSkillProcess(this CustomNode self, LogicEntity entity, int skillTid, LogicEntity target, EDamageType damageType, int curAttackTimes, float attackInterval = -1f)
+        public static bool CreateSkillProcess(this CustomNode self, LogicEntity entity, int skillTid, LogicEntity target,
+            EDamageType damageType, int curAttackTimes, float attackInterval = -1f)
         {
             var varEnv = self.GetLogicWorld().GetCreationInfo<BattleKernelCreationInfo>().CustomLogicService.NewVarEnv();
             varEnv.WriteVar(CvKey.CV_TargetEid, target.ID);
@@ -51,12 +49,6 @@ namespace LccHotfix
         public static SkillLogic CreateSkillProcessLogic(this CustomNode self, LogicEntity entity, int skillTid, VarEnv varEnv = null)
         {
             var skillCfg = PbCfg.GetData<TSkillLogic>((uint)skillTid);
-            if (skillCfg == null)
-            {
-                BattleLogger.LogError($"CreateSkillProcessLogic skillCfg == null, skillTid={skillTid}");
-                return null;
-            }
-
             var logicID = skillCfg.LogicID;
             logicID = ResolveSkillLogicID(self, logicID);
 
@@ -77,7 +69,7 @@ namespace LccHotfix
         }
 
         /// <summary>
-        /// 根据外部技能逻辑重写服务修正技能 LogicID。
+        /// 根据外部技能逻辑重写服务修正技能LogicID。
         /// </summary>
         private static int ResolveSkillLogicID(CustomNode self, int logicID)
         {
@@ -87,12 +79,12 @@ namespace LccHotfix
             var newLogicID = world?.GetCreationInfo<BattleKernelCreationInfo>()?.SkillLogicOverrideProvider?.ResolveSkillLogicId(player, fighterCfg, logicID) ?? logicID;
             if (newLogicID != logicID)
             {
-                BattleLogger.LogDebug($"ResolveSkillLogicID 特性修正技能ID logicID:{logicID} -> {newLogicID}");
+                CLogger.LogInfo(self, $"ResolveSkillLogicID 特性修正技能ID logicID:{logicID} -> {newLogicID}");
             }
 
             return newLogicID;
         }
 
-        #endregion
+    #endregion
     }
 }

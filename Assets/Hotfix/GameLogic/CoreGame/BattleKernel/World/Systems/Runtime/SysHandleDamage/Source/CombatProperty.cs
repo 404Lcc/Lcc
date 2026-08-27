@@ -14,34 +14,36 @@ namespace LccHotfix
         public const int Defense = 3;
         public const int MoveSpeed = 6;
         public const int MoveSpeedRatio = 7;
+        public const int BulletTimeRatio = 8;
+        public const int AnimSpeedRatio = 9;
 
         public const int Hit = 10;
         public const int Dodge = 11;
 
-        public const int Crit = 20;
-        public const int CritResist = 21;
-        public const int CritDamage = 22;
+        public const int Crit = 12;
+        public const int CritResist = 13;
+        public const int CritDamage = 14;
 
-        public const int InstantKill = 30;
-        public const int InstantKillResist = 31;
+        public const int InstantKill = 15;
+        public const int InstantKillResist = 16;
 
-        public const int ArmorPierce = 40;
+        public const int ArmorPierce = 17;
 
-        public const int DamageAmplify = 50;
-        public const int DamageResistance = 51;
-        public const int InGameAmplify = 52;
-        public const int InGameResistance = 53;
+        public const int DamageAmplify = 18;
+        public const int DamageResistance = 19;
+        public const int InGameAmplify = 20;
+        public const int InGameResistance = 21;
 
-        public const int Tenacity = 60;
+        public const int Tenacity = 22;
 
-        public const int VsBossAmplify = 101;
+        public const int VsBossAmplify = 23;
 
-        public const int ScaleHpBase = 102;
-        public const int ScaleAtkBase = 103;
-        public const int ScaleHp = 105;
-        public const int ScaleAtk = 106;
-        public const int ScaleDef = 107;
-        public const int FinalAtk = 110;
+        public const int ScaleHpBase = 24;
+        public const int ScaleAtkBase = 25;
+        public const int ScaleHp = 26;
+        public const int ScaleAtk = 27;
+        public const int ScaleDef = 28;
+        public const int FinalAtk = 29;
     }
 
     // 属性快照切片。

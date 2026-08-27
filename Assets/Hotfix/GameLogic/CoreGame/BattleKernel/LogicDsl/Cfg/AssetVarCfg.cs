@@ -1,4 +1,3 @@
-using HotUpdate.Framework.PbCfg;
 using PBConfig;
 
 namespace LccHotfix
@@ -33,10 +32,14 @@ namespace LccHotfix
                 return path;
             }
 
-            var itid = node.GetVar<int>(Var, 0);
+            var itid = node.GetVar<int>(Var, -1);
             if (itid > 0)
             {
                 return GetResPath(node, (uint)itid, logError);
+            }
+            else if (itid == 0)
+            {
+                return "";
             }
 
             return Var;
@@ -49,7 +52,7 @@ namespace LccHotfix
             {
                 if (logError)
                 {
-                    CLHelper.LogError(node, $"GetResPath assetTid={tid} AssetGameObject 配置有错误，请策划检查");
+                    CLogger.LogError(node, $"GetResPath assetTid={tid} AssetGameObject 配置有错误，请策划检查");
                 }
 
                 return null;

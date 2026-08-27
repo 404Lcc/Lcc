@@ -1,4 +1,4 @@
-﻿
+
 namespace LccHotfix
 {
     ////////////////////////////////////////////////////////////////////////
@@ -14,7 +14,7 @@ namespace LccHotfix
         // 元世界引用
         public MetaWorld MetaWorld { get; protected set; }
         // 归属玩家信息
-        public IBattlePlayerInfo OwnerPlayerInfo { get; protected set; }
+        public InGamePlayerInfo OwnerPlayerInfo { get; protected set; }
         // 补给逻辑配置参数（含义由具体 LogicConfig 约定）
         public int SupplyLogicParams { get; protected set; }
         public uint BattleSupplyId { get; set; }
@@ -32,15 +32,15 @@ namespace LccHotfix
         internal void Init(
             LogicWorld logicWorld,
             MetaWorld metaWorld,
-            IBattlePlayerInfo ownerPlayerInfo,
+            InGamePlayerInfo ownerPlayerInfo,
             int supplyLogicParams)
         {
             if (logicWorld == null)
-                BattleLogger.LogError("SupplyLogicGenInfo Init 异常, LogicWorld 为空");
+                KLogger.LogError("SupplyLogicGenInfo Init 异常, LogicWorld 为空");
             if (metaWorld == null)
-                BattleLogger.LogError("SupplyLogicGenInfo Init 异常, MetaWorld 为空");
+                KLogger.LogError("SupplyLogicGenInfo Init 异常, MetaWorld 为空");
             if (ownerPlayerInfo == null)
-                BattleLogger.LogError("SupplyLogicGenInfo Init 异常, OwnerPlayerInfo 为空");
+                KLogger.LogError("SupplyLogicGenInfo Init 异常, OwnerPlayerInfo 为空");
 
             LogicWorld = logicWorld;
             MetaWorld = metaWorld;
@@ -54,14 +54,14 @@ namespace LccHotfix
             if (!varEnv.HasVar<T>(key))
                 varEnv.WriteVar<T>(key, value);
             else
-                BattleLogger.LogError($"SupplyLogicGenInfo CopyToPreVarEnv 出现异常, 外部有冗余 Key={key}");
+                KLogger.LogError($"SupplyLogicGenInfo CopyToPreVarEnv 出现异常, 外部有冗余 Key={key}");
         }
 
         public override VarEnv CopyToPreVarEnv(ref VarEnv varEnv)
         {
             if (OwnerPlayerInfo == null)
             {
-                BattleLogger.LogError("SupplyLogicGenInfo CopyToPreVarEnv 异常, 未调用 Init, OwnerPlayerInfo 为空");
+                KLogger.LogError("SupplyLogicGenInfo CopyToPreVarEnv 异常, 未调用 Init, OwnerPlayerInfo 为空");
                 return base.CopyToPreVarEnv(ref varEnv);
             }
 
@@ -80,7 +80,7 @@ namespace LccHotfix
             ICustomLogicService svc,
             LogicWorld logicWorld,
             MetaWorld metaWorld,
-            IBattlePlayerInfo ownerPlayerInfo,
+            InGamePlayerInfo ownerPlayerInfo,
             int supplyLogicParams)
         {
             var genInfo = svc.NewGenInfo<SupplyLogicGenInfo>();

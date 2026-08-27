@@ -1,4 +1,4 @@
-﻿using PBConfig;
+using PBConfig;
 
 namespace LccHotfix
 {
@@ -13,7 +13,7 @@ namespace LccHotfix
         public MetaWorld MetaWorld { get; protected set; }
         public LogicEntity OwnerEntity { get; protected set; }
         public long OwnerFighterEntityID { get; protected set; }   //当前逻辑适配，晚一些移走
-        public IBattlePlayerInfo OwnerPlayerInfo { get; protected set; }
+        public InGamePlayerInfo OwnerPlayerInfo { get; protected set; }
         
         private TElementType _damageType;
         public ref TElementType DamageType
@@ -34,28 +34,26 @@ namespace LccHotfix
         internal void Init(MetaWorld metaWorld, LogicEntity ownerEntity, TElementType damageType)
         {
             if (metaWorld == null)
-                BattleLogger.LogError("MainFsmGenInfo Init 异常, MetaWorld 为空");
+                KLogger.LogError("MainFsmGenInfo Init 异常, MetaWorld 为空");
             if (ownerEntity == null)
-                BattleLogger.LogError("MainFsmGenInfo Init 异常, OwnerEntity 为空");
+                KLogger.LogError("MainFsmGenInfo Init 异常, OwnerEntity 为空");
 
             var logicWorld = ownerEntity.OwnerWorld;
             if (logicWorld == null)
-                BattleLogger.LogError("MainFsmGenInfo Init 异常, LogicWorld 为空");
+                KLogger.LogError("MainFsmGenInfo Init 异常, LogicWorld 为空");
 
             var ownerFighterEntityID = ownerEntity.ID;
             if (ownerFighterEntityID == 0)
-                BattleLogger.LogError("MainFsmGenInfo Init 异常, OwnerFighterEntityID 为 0");
+                KLogger.LogError("MainFsmGenInfo Init 异常, OwnerFighterEntityID 为 0");
 
             LogicWorld = logicWorld;
             MetaWorld = metaWorld;
             OwnerEntity = ownerEntity;
             OwnerFighterEntityID = ownerFighterEntityID;
-            OwnerPlayerInfo = ownerEntity.hasComOwnerPlayer
-                ? ownerEntity.comOwnerPlayer.PlayerInfoRef
-                : ownerEntity.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.UnitOwnerInfoProvider?.GetOwnerInfo(ownerEntity);
+            OwnerPlayerInfo = ownerEntity.GetPlayerInfo();
             DamageType = damageType;
             if (OwnerPlayerInfo == null)
-                BattleLogger.LogError("MainFsmGenInfo Init 异常, OwnerPlayerInfo 为空 (推导获取失败)");
+                KLogger.LogError("MainFsmGenInfo Init 异常, ownerEntity.GetPlayerInfo() 为空 (推导获取失败)");
         }
 
         // 黑板 key 已存在时跳过写入并打错误日志
@@ -64,14 +62,14 @@ namespace LccHotfix
             if (!varEnv.HasVar<T>(key))
                 varEnv.WriteVar<T>(key, value);
             else
-                BattleLogger.LogError($"MainFsmGenInfo CopyToPreVarEnv 出现异常, 外部有冗余 Key={key}");
+                KLogger.LogError($"MainFsmGenInfo CopyToPreVarEnv 出现异常, 外部有冗余 Key={key}");
         }
 
         public override VarEnv CopyToPreVarEnv(ref VarEnv varEnv)
         {
             if (OwnerEntity == null)
             {
-                BattleLogger.LogError("MainFsmGenInfo CopyToPreVarEnv 异常, 未调用 Init, OwnerEntity 为空");
+                KLogger.LogError("MainFsmGenInfo CopyToPreVarEnv 异常, 未调用 Init, OwnerEntity 为空");
                 return base.CopyToPreVarEnv(ref varEnv);
             }
 
@@ -125,13 +123,13 @@ namespace LccHotfix
 
             var sumUnitSource = new UnitSource(ownerEntity);
             if (sumUnitSource.FighterEnityId == 0)
-                BattleLogger.LogError("FighterMainFsmGenInfo Init 异常, SumUnitSource.FighterEnityId 为 0");
+                KLogger.LogError("FighterMainFsmGenInfo Init 异常, SumUnitSource.FighterEnityId 为 0");
             if (battleUnitTid == 0)
-                BattleLogger.LogError("FighterMainFsmGenInfo Init 异常, BattleUnitTid 为 0");
+                KLogger.LogError("FighterMainFsmGenInfo Init 异常, BattleUnitTid 为 0");
             if (fighterCfg == null)
-                BattleLogger.LogError("FighterMainFsmGenInfo Init 异常, FighterCfg 为空");
+                KLogger.LogError("FighterMainFsmGenInfo Init 异常, FighterCfg 为空");
             if (OwnerPlayerInfo == null)
-                BattleLogger.LogError("FighterMainFsmGenInfo Init 异常, OwnerPlayerInfo 为空");
+                KLogger.LogError("FighterMainFsmGenInfo Init 异常, OwnerPlayerInfo 为空");
 
             SumUnitSource = sumUnitSource;
             BattleUnitTid = battleUnitTid;
@@ -142,7 +140,7 @@ namespace LccHotfix
         {
             if (OwnerEntity == null)
             {
-                BattleLogger.LogError("FighterMainFsmGenInfo CopyToPreVarEnv 异常, 未调用 Init, OwnerEntity 为空");
+                KLogger.LogError("FighterMainFsmGenInfo CopyToPreVarEnv 异常, 未调用 Init, OwnerEntity 为空");
                 return base.CopyToPreVarEnv(ref varEnv);
             }
 

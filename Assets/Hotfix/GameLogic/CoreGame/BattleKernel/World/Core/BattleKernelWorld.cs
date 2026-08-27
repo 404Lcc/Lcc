@@ -45,6 +45,7 @@ namespace LccHotfix
         protected virtual void AddKernelTimeAndInputSystems(ECSystems systems)
         {
             systems.Add(new SysTimeScale(this));
+            systems.Add(new SysBulletTime(this));
             systems.Add(new SysCommandSend(this));
         }
 
@@ -56,12 +57,13 @@ namespace LccHotfix
             systems.Add(new SysSkillProcess(this));
             systems.Add(new SysSkillSlot(this));
             systems.Add(new SysLocomotion(this));
-            // systems.Add(new SysAABBCollision(this)); // 原 AABB/四叉树碰撞，保留不调用
+            systems.Add(new SysViewLoader(this));
+            systems.Add(new SysSyncViewTransform(this));
             systems.Add(new SysCollision(this));
-            systems.Add(new SysCameraBlender(this));
             systems.Add(new SysSubobject(this));
             systems.Add(new SysBuff(this));
             systems.Add(new SysHandleDamage(this));
+            systems.Add(new SysCameraBlender(this));
         }
 
         protected virtual void AddExternalMidSystems(ECSystems systems)
@@ -70,9 +72,8 @@ namespace LccHotfix
 
         protected virtual void AddKernelViewSystems(ECSystems systems)
         {
-            systems.Add(new SysViewLoader(this));
-            systems.Add(new SysSyncViewTransform(this));
             systems.Add(new SysSyncViewAnimator(this));
+            systems.Add(new SysSyncViewAnimatorSpeed(this));
         }
 
         protected virtual void AddKernelLifeSystems(ECSystems systems)

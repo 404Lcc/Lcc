@@ -33,7 +33,7 @@ namespace LccHotfix
 
             if (!list.Add(handle))
             {
-                Log.Error("注册消息重复了");
+                KLogger.LogError("注册消息重复了");
             }
         }
 

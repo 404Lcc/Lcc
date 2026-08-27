@@ -9,7 +9,7 @@ namespace LccHotfix
     {
         public long FollowEntityId { get; set; }
 
-        public override void Update(float dt, LogicEntity entity)
+        public override void Update(float dt, LogicEntity entity, MetaWorld metaWorld)
         {
             var target = entity.OwnerWorld?.GetEntityWithComID(FollowEntityId);
             if (target == null || !target.hasComTransform)

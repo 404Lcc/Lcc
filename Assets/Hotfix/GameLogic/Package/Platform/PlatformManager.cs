@@ -18,7 +18,7 @@ namespace LccHotfix
 
             if (basePlatform.RequestServer() == string.Empty)
             {
-                Log.Debug("推荐服务器是空的");
+                KLogger.Log("推荐服务器是空的");
 
                 var serverList = RequestServerList();
                 if (serverList.Count > 0)
@@ -27,7 +27,7 @@ namespace LccHotfix
                 }
                 else
                 {
-                    Log.Debug("服务器列表是空的");
+                    KLogger.Log("服务器列表是空的");
                 }
             }
             else

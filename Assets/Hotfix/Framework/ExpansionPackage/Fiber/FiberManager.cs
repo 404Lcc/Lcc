@@ -90,7 +90,7 @@ namespace LccHotfix
                     }
                     catch (Exception e)
                     {
-                        Log.Error($"init fiber fail: {e}");
+                        KLogger.LogError($"init fiber fail: {e}");
                     }
                 }
             }

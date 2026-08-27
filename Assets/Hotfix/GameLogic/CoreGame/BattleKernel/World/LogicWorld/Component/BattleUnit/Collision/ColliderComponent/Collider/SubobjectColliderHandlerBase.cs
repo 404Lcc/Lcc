@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using PBConfig;
+using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
 namespace LccHotfix
@@ -45,9 +46,7 @@ namespace LccHotfix
         protected bool IsHitObstacleCounted; //碰撞阻挡物是否计算到次数中
         protected bool IgnoreHitSelf; //是否忽略碰撞自己
 
-        /// <summary>
-        /// 本次命中后是否应销毁子物体（穿透剩余次数 > 0 时不销毁）
-        /// </summary>
+        /// <summary>本次命中后是否应销毁子物体（穿透剩余次数 > 0 时不销毁）。</summary>
         public static bool ShouldDestroySubobjectAfterHit(LogicEntity subobjectEntity)
         {
             if (subobjectEntity == null || !subobjectEntity.hasComCollider)
@@ -278,7 +277,7 @@ namespace LccHotfix
             {
                 var hitEntity = rawHit.HitEntity;
                 var hitPoint = rawHit.Point;
-                if (IsHitObstacle && rawHit.ColliderLayer == UnityPhysicsHitMaker.BlockLayer)
+                if (IsHitObstacle && rawHit.ColliderLayer == HitMakerUnityPhysics.BlockLayer)
                 {
                     HandleHitObstacle(selfEntity, rawHit);
                     continue;

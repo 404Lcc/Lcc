@@ -19,7 +19,7 @@ namespace LccHotfix
 
             //进入
 
-            Log.Debug("进入main");
+            KLogger.Log("进入main");
 
             this.StartCoroutine(LoadProcedureCoroutine());
         }
@@ -68,7 +68,7 @@ namespace LccHotfix
         {
             base.ProcedureExitHandler();
 
-            Log.Debug("退出main");
+            KLogger.Log("退出main");
         }
     }
 }

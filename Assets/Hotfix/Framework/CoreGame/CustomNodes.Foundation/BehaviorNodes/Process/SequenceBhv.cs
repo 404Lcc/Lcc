@@ -39,7 +39,7 @@ namespace LccHotfix
         {
             if (loopCnt == 0)
             {
-                LogWrapper.LogError($"SequenceBhvCfg WithLoopCnt loopCnt == 0");
+                CLogger.LogError($"SequenceBhvCfg WithLoopCnt loopCnt == 0");
                 return this;
             }
 
@@ -109,9 +109,10 @@ namespace LccHotfix
             {
                 ICustomNodeCfg bhvCfg = theCfg.SubCfgList[i];
                 var subbhv = _context.Factory.CreateCustomNode(bhvCfg, context) as BehaviorNodeBase;
-                if (!CLHelper.Assert(subbhv != null))
+                if (!CLogger.Assert(subbhv != null))
                     continue;
                 _behaviorSeq.Add(subbhv);
+                subbhv.Deactivate();
             }
         }
 
@@ -133,7 +134,14 @@ namespace LccHotfix
         public override void Deactivate()
         {
             base.Deactivate();
-            DeactivateCurBhv();
+            for (int i = 0; i < _behaviorSeq.Count; ++i)
+            {
+                var bhv = _behaviorSeq[i];
+                if (bhv.IsActive)
+                {
+                    bhv.Deactivate();
+                }
+            }
         }
 
         public override void Destroy()
@@ -226,6 +234,10 @@ namespace LccHotfix
                 }
 
                 var curBhv = _behaviorSeq[_curBhvIndex];
+                if (!curBhv.IsActive)
+                {
+                    curBhv.Activate();
+                }
                 //过剩的时间片传入后续的更新
                 dt_remain = curBhv.Update(dt_remain);
 

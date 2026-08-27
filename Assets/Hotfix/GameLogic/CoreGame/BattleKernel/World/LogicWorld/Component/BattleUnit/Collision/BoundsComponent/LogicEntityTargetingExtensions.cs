@@ -8,25 +8,34 @@ namespace LccHotfix
     public static class LogicEntityTargetingExtensions
     {
         /// <summary>
-        /// 获取实体到目标的索敌修正距离，目标半径会从距离中扣除。
+        /// 获取实体到目标的索敌修正距离，自身和目标半径会从距离中扣除。
         /// </summary>
         public static float GetTargetingDistance(this LogicEntity entity, LogicEntity target)
         {
-            return entity.comTransform.position.GetTargetingDistance(target);
+            var distance = (target.comTransform.position - entity.position).magnitude;
+            if (entity.hasComBounds)
+            {
+                distance = Mathf.Max(0, distance - entity.comBounds.GetRadius());
+            }
+            if (target.hasComBounds)
+            {
+                distance = Mathf.Max(0, distance - target.comBounds.GetRadius());
+            }
+            return distance;
         }
 
         /// <summary>
-        /// 获取指定位置到目标的索敌修正距离，目标半径会从距离中扣除。
+        /// 获取指定位置到目标的索敌修正距离，自身和目标半径会从距离中扣除。
         /// </summary>
         public static float GetTargetingDistance(this Vector3 pos, LogicEntity target)
         {
-            var dir = target.comTransform.position - pos;
+            var distance = (target.comTransform.position - pos).magnitude;
             if (target.hasComBounds)
             {
-                return Mathf.Max(0, dir.magnitude - target.comBounds.GetRadius());
+                distance = Mathf.Max(0, distance - target.comBounds.GetRadius());
             }
 
-            return dir.magnitude;
+            return distance;
         }
     }
 }

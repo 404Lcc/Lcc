@@ -13,10 +13,12 @@ public interface IModifyValue<T>
 }
 
 //////////////////////////////////////////////////////////////////////////
-//可能同时被多个独立功能模块修改的值, 会记录多个改动，根据定义的计算策略得出当前值
-public abstract class MultChangeValue<T> : IModifyValue<T>
+/// <summary>
+/// 可能同时被多个独立功能模块修改的值；记录多条改动，按子类策略合成当前值；可经 ReferencePool 复用。
+/// </summary>
+public abstract class MultChangeValue<T> : IModifyValue<T>, IReference
 {
-    //标记数值是哪一个功能模块修改的
+    // 标记数值是哪一个功能模块修改的
     protected struct FlagedValue
     {
         public FlagedValue(int flag, T value)
@@ -94,6 +96,27 @@ public abstract class MultChangeValue<T> : IModifyValue<T>
         if (n == null)
             return default(T);
         return n.Value;
+    }
+
+    //////////////////////////////////////////////////////////////////////////
+    // IReference:
+    /// <summary>归还池前清空改动列表并重置基值/当前值。</summary>
+    public void OnRecycle()
+    {
+        mValueChangeList.Clear();
+        mBaseValue = default;
+        mCurValue = default;
+    }
+
+    //////////////////////////////////////////////////////////////////////////
+    // This:
+    /// <summary>从引用池取出具体修改器并设置 DefaultValue。</summary>
+    public static TMod Acquire<TMod>(T defaultValue)
+        where TMod : MultChangeValue<T>, new()
+    {
+        var mod = ReferencePool.Acquire<TMod>();
+        mod.DefaultValue = defaultValue;
+        return mod;
     }
 }
 }

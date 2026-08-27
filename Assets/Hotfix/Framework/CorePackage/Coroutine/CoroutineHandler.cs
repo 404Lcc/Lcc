@@ -47,12 +47,12 @@ namespace LccHotfix
         {
             if (Running)
             {
-                Log.Debug("当前协程未完成");
+                KLogger.Log("当前协程未完成");
                 return;
             }
             if (Coroutine == null)
             {
-                Log.Debug("协程未指定");
+                KLogger.Log("协程未指定");
                 return;
             }
             Running = true;

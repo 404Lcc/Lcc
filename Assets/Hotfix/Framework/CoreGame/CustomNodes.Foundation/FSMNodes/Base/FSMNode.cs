@@ -94,7 +94,7 @@ namespace LccHotfix
                 {
                     ICustomNodeCfg bhvCfg = theCfg.GlobalTransitions[i];
                     var transNode = _context.Factory.CreateCustomNode(bhvCfg, context) as StateTransitionNode;
-                    if (!CLHelper.Assert(transNode != null))
+                    if (!CLogger.Assert(transNode != null))
                         continue;
                     _transitions.Add(transNode);
                 }
@@ -102,7 +102,7 @@ namespace LccHotfix
 
             _cfg = theCfg;
             _currentState = null;
-            CLHelper.Assert(_states.Count > 0);
+            CLogger.Assert(_states.Count > 0);
         }
 
         protected void Inner_InitializeStates(IFSMNodeCfg fsmCfg, CustomNodeContext context, HashSet<int> usedTempLogicSet)

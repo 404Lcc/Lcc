@@ -1,4 +1,3 @@
-using LccHotfix;
 using UnityEngine;
 
 namespace LccHotfix

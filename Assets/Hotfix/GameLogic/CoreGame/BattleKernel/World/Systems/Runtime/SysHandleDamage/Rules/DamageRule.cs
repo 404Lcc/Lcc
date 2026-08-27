@@ -91,6 +91,8 @@ namespace LccHotfix
         
         private bool CheckCritical(in DamageContext context)
         {
+            if (context.ForceCritical)
+                return true;
             double critRate = CalculateCritRate(context);
             return context.Random.NextDouble() <= critRate;
         }
@@ -102,24 +104,28 @@ namespace LccHotfix
             double rate = (crit - critResist) / 10000.0;
             return Math.Clamp(rate, 0.0, 1.0);
         }
-        
+
         private double CalculateBaseDamage(ref DamageContext context)
         {
             // 按照公式计算：((A攻击*A攻击/(A攻击+B防御))*A技能伤害系数+A技能固定值修正)
             // *(1+A局外增伤-B局外伤害抗性)*(1+A局内增伤-B局内伤害抗性)*(1+关卡伤害修正)
-            
+
             // 攻击力计算单元
             var attackCalculator = new AttackCalculCell(context.Attacker, context.Defender);
             double attack = attackCalculator.CalculateTotalAttack();
             double defense = context.Defender.Properties.Defense * (1 + context.Defender.Properties.ScaleDef / 10000f);
             var subobjectTid = context.Subobject.GetValueOrDefault().SubobjectTid;
-            
+
             // 应用破甲
             double armorPierce = context.Attacker.Properties.ArmorPierce / 10000.0;
             armorPierce = Math.Clamp(armorPierce, 0.0, 1.0);
             defense *= (1.0 - armorPierce);
-            
+
             // 基准攻击防御部分
+            if (attack + defense == 0)
+            {
+                BattleLogger.LogError("伤害计算过程中攻击+防御=0了！这会导致伤害产生NaN！！！");
+            }
             double attackDefensePart = (attack * attack) / (attack + defense);
             
             // 技能修正
@@ -143,7 +149,7 @@ namespace LccHotfix
             double stageFactor = 1.0 + context.StageDamageFactor;
 
             // 最终加法修正
-            double finalAddPart = context.FinalFixedDamage - context.FinalFixedReduceDamage;
+            double finalAddPart = context.FinalFixedDamage;
             
             // 最终伤害
             double finalDamage = skillPart * outgameFactor * ingameFactor * stageFactor + finalAddPart;

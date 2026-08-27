@@ -1,4 +1,4 @@
-﻿namespace LccHotfix
+namespace LccHotfix
 {
     public class HandleBuffStateChangedBhvCfg : ICustomNodeCfg
     {

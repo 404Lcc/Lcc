@@ -2,29 +2,29 @@ using Entitas;
 
 namespace LccHotfix
 {
-    public class SysCameraBlender : IExecuteSystem, ILateUpdateSystem
+    public class SysCameraBlender : ILateUpdateSystem
     {
-        private MetaWorld _metaContext;
+        private readonly MetaWorld _metaWorld;
 
         public SysCameraBlender(ECWorlds world)
         {
-            _metaContext = world.MetaWorld;
-        }
-
-        public void Execute()
-        {
-            if (_metaContext.hasComUniCameraBlender)
-            {
-                _metaContext.comUniCameraBlender.CameraBlender.Update();
-            }
+            _metaWorld = world.MetaWorld;
         }
 
         public void LateUpdate()
         {
-            if (_metaContext.hasComUniCameraBlender)
+            TickCamera();
+        }
+
+        private void TickCamera()
+        {
+            if (!_metaWorld.hasComUniCameraBlender)
             {
-                _metaContext.comUniCameraBlender.CameraBlender.LateUpdate();
+                return;
             }
+
+            ICameraBlender cameraBlender = _metaWorld.comUniCameraBlender.CameraBlender;
+            cameraBlender.LateUpdate();
         }
     }
 }

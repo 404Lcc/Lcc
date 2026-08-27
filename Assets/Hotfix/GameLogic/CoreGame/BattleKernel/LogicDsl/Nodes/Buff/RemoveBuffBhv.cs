@@ -1,4 +1,4 @@
-﻿namespace LccHotfix
+namespace LccHotfix
 {
     /// <summary>
     /// 移除buff（驱散buff）

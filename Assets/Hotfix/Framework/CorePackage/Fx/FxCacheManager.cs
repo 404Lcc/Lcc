@@ -24,14 +24,16 @@ namespace LccHotfix
 
         internal override void Shutdown()
         {
+            ClearAll();
         }
-        
+
+
         #region Preload
 
         public FxCache LoadFxCache(EFxOneType fxType, string path, int cost, int capacity, int maxCount,
             bool isAsyncLoad)
         {
-            if (path.Equals(""))
+            if (string.IsNullOrEmpty(path))
                 return null;
 
             if (fxCaches.TryGetValue(path, out FxCache fxCache))
@@ -95,6 +97,9 @@ namespace LccHotfix
         public FxOne Create(string path, Transform parent, float during = -999f)
         {
             var fxOne = RequestFx_And_Play(EFxOneType.GameObject, path, during);
+            if (fxOne == null)
+                return null;
+
             var tf = fxOne.transform;
             if (tf != null)
             {
@@ -108,7 +113,7 @@ namespace LccHotfix
         public FxOne RequestFx_With_Cost(EFxOneType fxType, string path, int cost, int maxCount,
             int costLimitLevel, bool isAsyncLoad)
         {
-            if (path.Equals("") || CostLimitArray.Count <= 0)
+            if (string.IsNullOrEmpty(path) || CostLimitArray.Count <= 0)
                 return null;
 
             if (costLimitLevel >= CostLimitArray.Count)
@@ -133,8 +138,9 @@ namespace LccHotfix
         {
             foreach (var fxCachePair in fxCaches)
             {
-                fxCachePair.Value?.ReleaseAllFx();
+                fxCachePair.Value?.DisposeCache();
             }
+            fxCaches.Clear();
         }
 
         private int GetCurCost()

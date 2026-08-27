@@ -7,6 +7,7 @@ namespace LccHotfix
         public bool IsCritical;
         public bool IsMiss;
         public bool IsBlock;
+        public bool IsImmune;
         public bool IsInstantKill;
         public int HitCount;
         public DamageModifierInfo[] Modifiers;
@@ -18,6 +19,7 @@ namespace LccHotfix
             IsCritical = false, 
             IsMiss = false,
             IsBlock = false,
+            IsImmune = false,
             IsInstantKill = false,
             HitCount = 1 
         };

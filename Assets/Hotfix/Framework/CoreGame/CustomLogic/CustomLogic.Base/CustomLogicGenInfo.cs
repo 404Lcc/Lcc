@@ -1,9 +1,9 @@
 /********************************************************************
- *  CustomLogicGenInfo 外部使用方 构造自定义逻辑的初始数据
- *  创建CustomLogic的运行时初始化信息
- *  接口类，多个项目使用，不要直接修改
- *  业务扩展可以新加一个 CustomLogicGenInfo 的继承类
- *********************************************************************/
+*  CustomLogicGenInfo 外部使用方 构造自定义逻辑的初始数据
+*  创建CustomLogic的运行时初始化信息
+*  接口类，多个项目使用，不要直接修改
+*  业务扩展可以新加一个 CustomLogicGenInfo 的继承类
+*********************************************************************/
 
 namespace LccHotfix
 {
@@ -46,7 +46,7 @@ namespace LccHotfix
         {
             return varEnv;
         }
-
+        
         public void Construct()
         {
             IsInPool = false;

@@ -1,10 +1,9 @@
 using System;
-using HotUpdate.Framework;
 using UnityEngine;
 
 namespace LccHotfix
 {
-    public sealed class BattleCollisionSpaceConfig
+    public class BattleCollisionSpaceConfig
     {
         public AABB FullSpace { get; private set; }
         public int QuadTreeDepth { get; private set; }
@@ -19,7 +18,7 @@ namespace LccHotfix
             BoundsPadding = Mathf.Max(0f, boundsPadding);
             Version = 1;
         }
-        
+
         public void SetFullSpace(AABB fullSpace)
         {
             if (fullSpace == null || fullSpace.IsDegenerate() || fullSpace.HasNegativeVolume())
@@ -39,9 +38,7 @@ namespace LccHotfix
         public void SetScreenBounds(float minX, float minY, float maxX, float maxY)
         {
             var padding = Mathf.Max(0f, BoundsPadding);
-            SetFullSpace(new AABB(
-                new Vector2(minX - padding, minY - padding),
-                new Vector2(maxX + padding, maxY + padding)));
+            SetFullSpace(new AABB(new Vector2(minX - padding, minY - padding), new Vector2(maxX + padding, maxY + padding)));
         }
 
         private static AABB Union(AABB a, AABB b)
@@ -51,9 +48,7 @@ namespace LccHotfix
                 return b;
             }
 
-            return new AABB(
-                new Vector2(Mathf.Min(a.minPoint.x, b.minPoint.x), Mathf.Min(a.minPoint.y, b.minPoint.y)),
-                new Vector2(Mathf.Max(a.maxPoint.x, b.maxPoint.x), Mathf.Max(a.maxPoint.y, b.maxPoint.y)));
+            return new AABB(new Vector2(Mathf.Min(a.minPoint.x, b.minPoint.x), Mathf.Min(a.minPoint.y, b.minPoint.y)), new Vector2(Mathf.Max(a.maxPoint.x, b.maxPoint.x), Mathf.Max(a.maxPoint.y, b.maxPoint.y)));
         }
     }
 
@@ -61,10 +56,7 @@ namespace LccHotfix
     {
         public BattleCollisionSpaceConfig CollisionSpaceConfig { get; set; }
 
-        public BattlePlane BattlePlane { get; set; } = BattlePlane.XY;
-
-        public Type MainObjectViewType { get; set; }
-
+        public BattlePlane BattlePlane { get; set; }
         public int ModeLogicID { get; set; }
 
         public CustomLogicGenInfo GameModeGenInfo { get; set; }
@@ -107,6 +99,7 @@ namespace LccHotfix
 
         public IDeathProcessService DeathProcessService { get; set; }
 
-        public ISubobjectTransferEffectService SubobjectTransferEffectService { get; set; }
+        public IVfxGradeScheduler VfxGradeScheduler { get; set; }
+
     }
 }

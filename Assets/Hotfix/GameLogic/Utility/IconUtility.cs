@@ -10,7 +10,7 @@ namespace LccHotfix
             var config = Main.ConfigService.Tables.TBIcon.Get(imageId);
             if (config == null)
             {
-                Log.Error("Icon不存在 id = " + imageId);
+                KLogger.LogError("Icon不存在 id = " + imageId);
                 return string.Empty;
             }
 

@@ -4,6 +4,8 @@ namespace LccHotfix
 {
     public class MainUIView : IViewWrapper
     {
+        //////////////////////////////////////////////////////////////////////////
+        // IViewWrapper:
         public int Category { get; private set; }
 
         public string ViewName { get; set; }

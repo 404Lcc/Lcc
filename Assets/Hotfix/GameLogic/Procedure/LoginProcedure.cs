@@ -18,10 +18,10 @@ namespace LccHotfix
             base.ProcedureStartHandler();
             //进入
 
-            Log.Debug("进入login");
+            KLogger.Log("进入login");
 
             //设备id
-            Log.Debug("设备id = " + UnityEngine.SystemInfo.deviceUniqueIdentifier);
+            KLogger.Log("设备id = " + UnityEngine.SystemInfo.deviceUniqueIdentifier);
 
             Main.UIService.ShowDomain(UIRootDefine.UIRootLogin, UIPanelDefine.UILoginPanel);
 
@@ -51,7 +51,7 @@ namespace LccHotfix
         {
             base.ProcedureExitHandler();
 
-            Log.Debug("退出login");
+            KLogger.Log("退出login");
         }
     }
 }

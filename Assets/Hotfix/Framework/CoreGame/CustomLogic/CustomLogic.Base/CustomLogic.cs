@@ -50,7 +50,7 @@ namespace LccHotfix
 
                 if (value == null || !value.IsSubclassOf(typeof(CustomLogic)))
                 {
-                    LogWrapper.LogError($"校验：CustomLogicCfg.LogicType set 必须继承自 CustomLogic, v={value}");
+                    CLogger.LogError($"校验：CustomLogicCfg.LogicType set 必须继承自 CustomLogic, v={value}");
                     return;
                 }
 
@@ -233,13 +233,19 @@ namespace LccHotfix
             for (int i = 0; i < _needUpdateList.Count; ++i)
             {
                 var iupdate = _needUpdateList[i];
-                var node = iupdate as ICustomNode;
+                var node = iupdate as CustomNode;
                 if (node != null && node.IsActive)
                 {
-                    iupdate.Update(dt);
+                    try
+                    {
+                        iupdate.Update(dt);
+                    }
+                    catch (Exception e)
+                    {
+                        node.LogError($"CustomLogic.Update[{i}] : {e}");
+                    }
                 }
             }
-
             return dt;
         }
 

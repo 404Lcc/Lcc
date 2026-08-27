@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using Entitas;
-using UnityEngine;
 
 namespace LccHotfix
 {
@@ -7,23 +7,28 @@ namespace LccHotfix
     {
         private readonly IGroup<LogicEntity> _group;
         private readonly LogicWorld _logicWorld;
-        
+        private readonly MetaWorld _metaWorld;
+
+        private readonly List<LogicEntity> _entityBuffer = new(256);
+
         public SysLife(ECWorlds worlds)
         {
             _logicWorld = worlds.LogicWorld;
+            _metaWorld = worlds.MetaWorld;
             _group = _logicWorld.GetGroup(LogicMatcher.AllOf(LogicComponentsLookup.ComLife));
         }
 
-        private static int acc = 0;
         public void Execute()
         {
             var dt = BattleTime.GetDeltaTime(_logicWorld);
-            foreach (var e in _group.GetEntities())
+            var buffer = _group.GetEntities(_entityBuffer);
+            foreach (var e in buffer)
             {
                 var comLife = e.comLife;
                 if (comLife.duration > 0)
                 {
-                    comLife.duration -= dt;
+                    var entityDt = dt * BattleBulletTimeUtility.GetCompensateRatio(e, _metaWorld);
+                    comLife.duration -= entityDt;
                 }
                 else
                 {

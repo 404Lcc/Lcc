@@ -1,4 +1,3 @@
-using HotUpdate.Framework;
 
 namespace LccHotfix
 {
@@ -13,18 +12,38 @@ namespace LccHotfix
             {
                 return entity;
             }
-
-            var mainObjectViewType = GetCreationInfo<BattleKernelCreationInfo>().MainObjectViewType;
-            if (mainObjectViewType == null)
+            
+            var objViewLoader = ReferencePool.Acquire<ObjViewLoader>();
+            objViewLoader.Category = EViewCategory.MainGameObject;
+            objViewLoader.ObjName = path;
+            objViewLoader.ViewClassType = typeof(MainGameObjectView);
+            objViewLoader.IsAsync = true;
+            if (entity.hasComViewLoader)
             {
-                BattleLogger.LogError($"LogicWorld.AddEntity path={path}, MainObjectViewType == null");
+                entity.ChangeViewLoad(objViewLoader);
+            }
+            else
+            {
+                entity.AddComViewLoader(objViewLoader);
+            }
+
+            return entity;
+        }
+        
+        public LogicEntity AddEntity<T>(string path) where T: MainGameObjectView
+        {
+            var entity = CreateEntity();
+            entity.AddComID(entity.creationIndex);
+
+            if (string.IsNullOrEmpty(path))
+            {
                 return entity;
             }
 
             var objViewLoader = ReferencePool.Acquire<ObjViewLoader>();
             objViewLoader.Category = EViewCategory.MainGameObject;
             objViewLoader.ObjName = path;
-            objViewLoader.ViewClassType = mainObjectViewType;
+            objViewLoader.ViewClassType = typeof(T);
             objViewLoader.IsAsync = true;
             if (entity.hasComViewLoader)
             {

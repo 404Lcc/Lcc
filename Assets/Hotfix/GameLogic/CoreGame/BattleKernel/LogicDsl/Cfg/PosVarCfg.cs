@@ -42,9 +42,15 @@ namespace LccHotfix
             var entity = EntityVarCfg.GetEntity(node, VarKey, logError);
             if (entity == null)
             {
+                if (VarKey == CvKey.CV_TargetEid && node.HasVar<Vector3>(CvKey.CV_TargetPos))
+                {
+                    pos = node.GetVar<Vector3>(CvKey.CV_TargetPos);
+                    return true;
+                }
+
                 if (logError)
                 {
-                    CLHelper.LogError(node, $"PosVarCfg.GetVector3 entity == null, VarKey={VarKey}");
+                    CLogger.LogError(node, $"PosVarCfg.GetVector3 entity == null, VarKey={VarKey}");
                 }
 
                 pos = Vector3.zero;
@@ -65,7 +71,7 @@ namespace LccHotfix
             {
                 if (logError)
                 {
-                    CLHelper.LogError(node, $"PosVarCfg.GetVector3 entity.hasComTransform = false, VarKey={VarKey}");
+                    CLogger.LogError(node, $"PosVarCfg.GetVector3 entity.hasComTransform = false, VarKey={VarKey}");
                 }
 
                 pos = Vector3.zero;
@@ -93,7 +99,7 @@ namespace LccHotfix
             {
                 if (logError)
                 {
-                    CLHelper.LogError(node, $"PosVarCfg.GetEntityTF entity == null, VarKey={VarKey}");
+                    CLogger.LogError(node, $"PosVarCfg.GetEntityTF entity == null, VarKey={VarKey}");
                 }
 
                 return null;
@@ -111,7 +117,7 @@ namespace LccHotfix
             var mainTf = entity.GetEntityTf();
             if (mainTf == null && logError)
             {
-                CLHelper.LogError(node, $"PosVarCfg.GetEntityTF mainTf == null, VarKey={VarKey}");
+                CLogger.LogError(node, $"PosVarCfg.GetEntityTF mainTf == null, VarKey={VarKey}");
             }
 
             return mainTf;

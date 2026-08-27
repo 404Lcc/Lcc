@@ -1,7 +1,5 @@
-﻿using System;
+using System;
 using System.Runtime.CompilerServices;
-using HotUpdate.Framework;
-using HotUpdate.Framework.PbCfg;
 using PBConfig;
 using UnityEngine;
 
@@ -20,24 +18,6 @@ namespace LccHotfix
     /// 
     public static class CustomNodeVarEnvFillExtensions
     {
-
-        // /// <summary>
-        // /// 填充战斗单位主状态机所需的基础黑板变量。
-        // /// </summary>
-        // [Obsolete("Use FighterMainFsmGenInfo.New + CopyToPreVarEnv")]
-        // [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        // public static void FillMainFsmVarEnv(this CustomNode self, VarEnv newEnv, LogicEntity e, IBattlePlayerInfo playerInfo, int battleUnitTid, TFighter fighterCfg)
-        // {
-        //     var env = self.VarEnvRef; //levelNode、gameModeNode
-        //     env.CopyTo<LogicWorld>(newEnv, CvKey.CV_LogicWorld);
-        //     env.CopyTo<MetaWorld>(newEnv, CvKey.CV_MetaWorld);
-        //     newEnv.WriteVar<LogicEntity>(CvKey.CV_OwnerEntity, e);
-        //     newEnv.WriteVar<long>(CvKey.CV_OwnerFighterEntityID, e.ID);
-        //     newEnv.WriteVar(CvKey.CV_OwnerPlayerInfo, playerInfo);
-        //     newEnv.WriteVar<int>(CvKey.CV_BattleUnitTid, battleUnitTid);
-        //     newEnv.WriteVar<TFighter>(CvKey.CV_FigherCfg, fighterCfg);
-        // }
-
         /// <summary>
         /// 填充技能逻辑所需的基础黑板变量。
         /// </summary>
@@ -79,13 +59,10 @@ namespace LccHotfix
             env.CopyTo<EDamageType>(newEnv, CvKey.CV_DamageType, false);
             env.CopyTo<float>(newEnv, CvKey.CV_SearchRange, false);
             env.CopyTo<string>(newEnv, CvKey.CV_SbjHitFxResOverride, false);
-            env.CopyTo<bool>(newEnv, CvKey.CV_IsAmmoLastShot, false);
             env.CopyTo<float>(newEnv, CvKey.CV_AmmoGambleCritAdd, false);
             env.CopyTo<float>(newEnv, CvKey.CV_AmmoGambleCritDamageAdd, false);
             env.CopyTo<float>(newEnv, CvKey.CV_AmmoGambleDamageMultiplier, false);
             env.CopyTo<bool>(newEnv, CvKey.CV_AmmoGambleForceCritical, false);
-            env.CopyTo<bool>(newEnv, CvKey.CV_SniperReloadInfinitePierceShot, false);
-            env.CopyTo<bool>(newEnv, CvKey.CV_SniperPhoenixBulletShot, false);
         }
 
         /// <summary>

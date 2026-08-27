@@ -8,6 +8,18 @@ namespace LccHotfix
         public bool UseFixedResult { get; protected set; } = false;
 
         public abstract System.Type NodeType();
+
+        public ConditionBaseCfg WithFixedResult(bool useFixedResult = true)
+        {
+            UseFixedResult = useFixedResult;
+            return this;
+        }
+
+        public ConditionBaseCfg WithUnaryOperationNOT(bool unaryOperationNot = true)
+        {
+            UseUnaryOperationNOT = unaryOperationNot;
+            return this;
+        }
     }
 
     public abstract class ConditionNodeBase : CustomNode, ICondition

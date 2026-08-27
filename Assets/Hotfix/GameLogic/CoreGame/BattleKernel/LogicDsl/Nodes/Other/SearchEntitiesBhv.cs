@@ -67,7 +67,7 @@ namespace LccHotfix
             mUserEntity = _cfg.UserEntityVar.GetEntity(this);
             if (mUserEntity == null)
             {
-                CLHelper.LogError(this, $"SearchEntitiesBhv mUserEntity == null, mCfg.EntityVar={_cfg.UserEntityVar.VarKey}");
+                CLogger.LogError(this, $"SearchEntitiesBhv mUserEntity == null, mCfg.EntityVar={_cfg.UserEntityVar.VarKey}");
             }
 
             mLogicWorld = this.GetLogicWorld();
@@ -118,7 +118,7 @@ namespace LccHotfix
             var dis = _cfg.Distance.GetValue(this);
             if (dis <= 0)
             {
-                CLHelper.LogError(this, $"SearchEntitiesBhv SearchEntity 配置取值异常 Distance={dis}, cfg:{_cfg.Distance.LogStr}");
+                CLogger.LogError(this, $"SearchEntitiesBhv SearchEntity 配置取值异常 Distance={dis}, cfg:{_cfg.Distance.LogStr}");
                 SaveTargetVar(null);
                 return;
             }
@@ -132,7 +132,7 @@ namespace LccHotfix
             var saveTo = _cfg.SaveEntityIDTo;
             if (string.IsNullOrEmpty(saveTo))
             {
-                CLHelper.LogError(this, $"SaveTargetVar mCfg.SaveEidTo = {saveTo}");
+                CLogger.LogError(this, $"SaveTargetVar mCfg.SaveEidTo = {saveTo}");
                 return;
             }
 

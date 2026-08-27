@@ -31,7 +31,7 @@ namespace LccHotfix
         {
             base.InitializeNode(cfg, context);
             var theCfg = cfg as LogBhvCfg;
-            CLHelper.Assert(theCfg != null);
+            CLogger.Assert(theCfg != null);
             _logStr = theCfg.LogStr;
         }
 
@@ -45,7 +45,7 @@ namespace LccHotfix
         {
             if (_logStr == null)
                 return;
-            CLHelper.LogInfo(this, _logStr);
+            CLogger.LogInfo(this, _logStr);
         }
     }
 }

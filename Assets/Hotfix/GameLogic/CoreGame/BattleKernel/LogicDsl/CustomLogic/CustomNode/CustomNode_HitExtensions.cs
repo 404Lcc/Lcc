@@ -1,15 +1,17 @@
-﻿using UnityEngine;
+using PBConfig;
+using UnityEngine;
 
 namespace LccHotfix
 {
     public static class CustomNodeHitExtensions
     {
-        #region AOE命中处理
+    #region AOE命中处理
+
 
         /// <summary>
         /// 以中心点和范围构造 AABB，并对范围内目标执行 AOE 命中效果。
         /// </summary>
-        public static void MakeAoeEffect_InAABB(this CustomNode self, LogicEntity entity, float aoeRange, Vector2 aoeCenterPos, NodeHitEffectFunc executeEffectFunc)
+        public static void MakeAoeEffect_InAABB(this CustomNode self, LogicEntity entity, float aoeRange, Vector3 aoeCenterPos, NodeHitEffectFunc executeEffectFunc)
         {
             if (aoeRange <= 0)
             {
@@ -17,18 +19,15 @@ namespace LccHotfix
                 return;
             }
 
-            var aoeAABB = new AABB(aoeCenterPos, aoeRange);
-            self.MakeAoeEffect_InAABB(entity, aoeAABB, executeEffectFunc);
-        }
+            var creationInfo = entity?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>();
+            if (creationInfo == null)
+            {
+                self.LogError("MakeAoeEffect_InAABB creationInfo == null");
+                return;
+            }
 
-        /// <summary>
-        /// Vector3 中心点重载：按战斗平面投影到 2D。
-        /// </summary>
-        public static void MakeAoeEffect_InAABB(this CustomNode self, LogicEntity entity, float aoeRange, Vector3 aoeCenterPos, NodeHitEffectFunc executeEffectFunc)
-        {
-            var plane = entity?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.BattlePlane ?? BattlePlane.XY;
-            var center2 = AABB.ToPlanePoint(aoeCenterPos, plane);
-            self.MakeAoeEffect_InAABB(entity, aoeRange, center2, executeEffectFunc);
+            var aoeAABB = new AABB(aoeCenterPos, aoeRange, creationInfo.BattlePlane);
+            self.MakeAoeEffect_InAABB(entity, aoeAABB, executeEffectFunc);
         }
 
         /// <summary>
@@ -51,6 +50,6 @@ namespace LccHotfix
             });
         }
 
-        #endregion
+    #endregion
     }
 }

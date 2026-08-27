@@ -1,4 +1,3 @@
-﻿using HotUpdate.Framework.PbCfg;
 using PBConfig;
 using UnityEngine;
 
@@ -82,6 +81,9 @@ namespace LccHotfix
                 return null;
             }
 
+            if (ownerFighterEntity.hasComSquadHeroBattleDead)
+                return null;
+
             var playerInfo = self.GetOwnerBattlePlayerInfo();
             var faction = (playerInfo as InGamePlayerInfo)?.PlayerFaction
                 ?? ownerFighterEntity.comFaction.Faction;
@@ -130,12 +132,6 @@ namespace LccHotfix
                 damageType = subobjectCfg.DamageType;
 
             self.FillSubobjectBaseVarEnv(varEnv, e);
-            if (varEnv.ReadVar<bool>(CvKey.CV_IsAmmoLastShot, out var isAmmoLastShot) && isAmmoLastShot)
-            {
-                var lastShotAmplify = (playerInfo as InGamePlayerInfo)?.FeaturesContext?.GlobalAmmoLastShotInGameAmplify ?? 0f;
-                if (lastShotAmplify > 0f)
-                    sumUnitSource.Properties.InGameAmplify += lastShotAmplify;
-            }
 
             var parentEnv = self.VarEnvRef;
             parentEnv.ReadVar<int>(CvKey.CV_BattleUnitTid, out var battleUnitTid);
@@ -227,12 +223,6 @@ namespace LccHotfix
             var subobjSource = new SubobjectSource(subobjectLogicID, subobjectTid);
 
             self.FillSubobjectBaseVarEnv(varEnv, e);
-            if (varEnv.ReadVar<bool>(CvKey.CV_IsAmmoLastShot, out var isAmmoLastShot) && isAmmoLastShot)
-            {
-                var lastShotAmplify = (playerInfo as InGamePlayerInfo)?.FeaturesContext?.GlobalAmmoLastShotInGameAmplify ?? 0f;
-                if (lastShotAmplify > 0f)
-                    sumUnitSource.Properties.InGameAmplify += lastShotAmplify;
-            }
 
             var parentEnv = self.VarEnvRef;
             parentEnv.ReadVar<int>(CvKey.CV_BattleUnitTid, out var battleUnitTid);

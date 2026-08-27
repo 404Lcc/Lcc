@@ -34,8 +34,10 @@ namespace LccHotfix
         
         public void SetHP(double newHp)
         {
+            var oldHp = Hp;
             _hp.SetValue(newHp);
             _owner.ReplaceComponent(LogicComponentsLookup.ComHp, this);
+            HandleBattleDeathTransition(oldHp, newHp);
         }
 
         public void SetMaxHP(double newMaxHp)
@@ -46,8 +48,44 @@ namespace LccHotfix
 
         public void ChangeHP(double changeHp)
         {
+            var oldHp = Hp;
             _hp.ChangeValue(changeHp);
             _owner.ReplaceComponent(LogicComponentsLookup.ComHp, this);
+            HandleBattleDeathTransition(oldHp, Hp);
+        }
+
+        //这是什么动机产生的？ 为什么Hp组件内要有这个
+        private void HandleBattleDeathTransition(double oldHp, double newHp)
+        {
+            if (_owner == null)
+            {
+                return;
+            }
+
+            if (oldHp > 0 && newHp <= 0)
+            {
+                if (_owner.hasComBattleDeathTriggered)
+                {
+                    return;
+                }
+
+                _owner.AddComBattleDeathTriggered();
+                _owner.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.DamagePolicyService?.DispatchTriggerDeath(_owner);
+                var isIntercepted = new StandaloneEntityCmdPreHandler().PreHandleCommand(_owner, new EntityCommand
+                {
+                    CmdType = EntityCmdType.Nt_Death,
+                });
+                if (isIntercepted && _owner.hasComHp && _owner.comHp.Hp > 0 && _owner.hasComBattleDeathTriggered)
+                {
+                    _owner.RemoveComBattleDeathTriggered();
+                }
+                return;
+            }
+
+            if (oldHp <= 0 && newHp > 0 && _owner.hasComBattleDeathTriggered)
+            {
+                _owner.RemoveComBattleDeathTriggered();
+            }
         }
     }
 
@@ -93,5 +131,44 @@ namespace LccHotfix
     {
         private static ComponentTypeIndex _ComHpIndex = new(typeof(HpComponent));
         public static int ComHp => _ComHpIndex.Index;
+    }
+
+    //这个组件，又是什么思路？
+    public class BattleDeathTriggeredComponent : LogicComponent
+    {
+    }
+
+    public partial class LogicEntity
+    {
+        public BattleDeathTriggeredComponent comBattleDeathTriggered
+        {
+            get { return (BattleDeathTriggeredComponent)GetComponent(LogicComponentsLookup.ComBattleDeathTriggered); }
+        }
+
+        public bool hasComBattleDeathTriggered
+        {
+            get { return HasComponent(LogicComponentsLookup.ComBattleDeathTriggered); }
+        }
+
+        public void AddComBattleDeathTriggered()
+        {
+            var index = LogicComponentsLookup.ComBattleDeathTriggered;
+            var component = (BattleDeathTriggeredComponent)CreateComponent(index, typeof(BattleDeathTriggeredComponent));
+            AddComponent(index, component);
+        }
+
+        public void RemoveComBattleDeathTriggered()
+        {
+            if (hasComBattleDeathTriggered)
+            {
+                RemoveComponent(LogicComponentsLookup.ComBattleDeathTriggered);
+            }
+        }
+    }
+
+    public static partial class LogicComponentsLookup
+    {
+        private static ComponentTypeIndex _ComBattleDeathTriggeredIndex = new(typeof(BattleDeathTriggeredComponent));
+        public static int ComBattleDeathTriggered => _ComBattleDeathTriggeredIndex.Index;
     }
 }

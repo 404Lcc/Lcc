@@ -12,9 +12,9 @@ namespace LccHotfix
         {
             if (e == null || !e.hasComAttributes)
             {
-                BattleLogger.LogError("e.GetAttribute  !HasAttributes");
+                BattleLogger.LogError("e.GetAttributeFixPoint  !HasAttributes");
+                return errorValue;
             }
-
             var rv = errorValue;
             if (e.comAttributes.TryGetValue(key, ref rv))
                 return rv;
@@ -30,6 +30,7 @@ namespace LccHotfix
             if (e == null || !e.hasComAttributes)
             {
                 BattleLogger.LogError("e.GetAttribute  !HasAttributes");
+                return errorValue;
             }
 
             var rv = errorValue;
@@ -47,6 +48,7 @@ namespace LccHotfix
             if (e == null || !e.hasComAttributes)
             {
                 BattleLogger.LogError("e.GetAttribute  !HasAttributes");
+                return errorValue;
             }
 
             var rv = errorValue;
@@ -64,6 +66,7 @@ namespace LccHotfix
             if (e == null || !e.hasComAttributes)
             {
                 BattleLogger.LogError("e.GetAttribute  !HasAttributes");
+                return errorValue;
             }
 
             var rv = errorValue;
@@ -101,6 +104,7 @@ namespace LccHotfix
             if (e == null || !e.hasComAttributes)
             {
                 BattleLogger.LogError("Actor.SetAttribute  !HasAttributes");
+                return;
             }
 
             e.comAttributes.Modify(key, value, flag);
@@ -114,6 +118,7 @@ namespace LccHotfix
             if (e == null || !e.hasComAttributes)
             {
                 BattleLogger.LogError("Actor.SetAttribute  !HasAttributes");
+                return;
             }
 
             e.comAttributes.Modify(key, value, flag);
@@ -127,6 +132,7 @@ namespace LccHotfix
             if (e == null || !e.hasComAttributes)
             {
                 BattleLogger.LogError("Actor.SetAttribute  !HasAttributes");
+                return;
             }
 
             e.comAttributes.Modify(key, value, flag);
@@ -140,6 +146,7 @@ namespace LccHotfix
             if (e == null || !e.hasComAttributes)
             {
                 BattleLogger.LogError("Actor.RemoveAttribute  !HasAttributes");
+                return;
             }
 
             e.comAttributes.RemoveModify<T>(key, flag);

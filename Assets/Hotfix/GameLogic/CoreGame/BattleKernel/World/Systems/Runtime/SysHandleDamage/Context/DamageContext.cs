@@ -1,4 +1,5 @@
 using System;
+using PBConfig;
 
 namespace LccHotfix
 {
@@ -10,6 +11,9 @@ namespace LccHotfix
         public SkillSource? Skill;
         public SubobjectSource? Subobject;
         public HitInfo? HitInfo;
+        public int SourceLogicConfigID;
+        public uint BattleSupplyId; // 出手补给卡tid，没有则为0
+        public uint BattleSupplySetId; // 归属的补给集合id，补给标优先，否则按英雄普攻技能归集
         
         public double SkillDamageFactor;
         public double SkillFixedDamage;
@@ -17,17 +21,14 @@ namespace LccHotfix
         
         public double FinalFixedDamage;
 
-        public double FinalFixedReduceDamage; // 加的值，FinalFixedDamage有好多地方已经在用了，这里直接做一个负数的值吧。
-        //public double FinalFixedDef;
         public EDamageType DamageType;
+        public TElementType ElementType;
 
-        //动态部分        
-        // public int DamageType;
-        // public double BaseDamage;
+
         public long Timestamp;
-        // public double BaseAttack;
         public Random Random;
         public double ExtraCritDamage;
         public float RandomFinalDamageRate; //随机波动
+        public bool ForceCritical; // 强制暴击（跳过暴击概率）
     }
 }

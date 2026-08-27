@@ -11,7 +11,9 @@ namespace LccHotfix
         public const int Nt_Death = 103;
         public const int Nt_OnHurt = 104;
         public const int Nt_Kill = 105;
+        public const int Nt_Move = 107;
         public const int Nt_Skill = 108;
+        public const int Nt_OnHit = 109; // 受击，不一定受伤
         public const int Nt_OnLocomotionEnd = 110;
     }
 

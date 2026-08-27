@@ -1,5 +1,4 @@
 using PBConfig;
-using HotUpdate.Framework.PbCfg;
 
 namespace LccHotfix
 {
@@ -32,13 +31,17 @@ namespace LccHotfix
             ConfigId = -1;
             SkillId = -1;
             SpellEntityId = -1;
+            DestroyLogic();
+            base.DisposeOnRemove();
+        }
+
+        public void DestroyLogic()
+        {
             if (Logic != null)
             {
                 Owner?.OwnerWorld?.GetCreationInfo<BattleKernelCreationInfo>()?.CustomLogicService?.DestroyLogic(Logic);
                 Logic = null;
             }
-
-            base.DisposeOnRemove();
         }
 
 

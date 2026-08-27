@@ -52,10 +52,24 @@ namespace LccHotfix
 
                 var comView = entity.comView;
                 var viewList = comView.ViewList;
+                var scaleVector = new Vector3(scale.x, scale.y, scale.z);
+                var mainView = comView.GetView<IViewWrapper>(EViewCategory.MainGameObject);
+                mainView?.SyncTransform(entity.ID, position, rotation, scaleVector);
+
                 for (int i = 0; i < viewList.Count; i++)
                 {
                     var viewWrapper = viewList[i];
-                    viewWrapper.SyncTransform(entity.ID, position, rotation, new Vector3(scale.x, scale.y, scale.z));
+                    if (viewWrapper.Category == EViewCategory.MainGameObject)
+                    {
+                        continue;
+                    }
+
+                    if (viewWrapper.Category == EViewCategory.Hp)
+                    {
+                        continue;
+                    }
+
+                    viewWrapper.SyncTransform(entity.ID, position, rotation, scaleVector);
                 }
             }
         }

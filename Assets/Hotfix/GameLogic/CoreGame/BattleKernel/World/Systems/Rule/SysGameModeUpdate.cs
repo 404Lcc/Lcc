@@ -18,9 +18,10 @@ namespace LccHotfix
             var comUniGameMode = _world.MetaWorld.comUniGameMode;
             if (comUniGameMode)
             {
-                float dt = BattleTime.GetDeltaTime(_world.LogicWorld);    
+                var dt = BattleTime.GetDeltaTime(_logicWorld);
+                var modeDt = dt;
                 var modeLogic = comUniGameMode.GameModeLogic;
-                modeLogic.Update(dt);
+                modeLogic.Update(modeDt);
             }
         }
 

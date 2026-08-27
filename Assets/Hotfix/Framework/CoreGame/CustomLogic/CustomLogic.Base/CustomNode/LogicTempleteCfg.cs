@@ -9,7 +9,7 @@ namespace LccHotfix
 
         public System.Type NodeType()
         {
-            LogWrapper.LogError("ERROR : try to Initialize LogicTempleteNode!");
+            CLogger.LogError("ERROR : try to Initialize LogicTempleteNode!");
             return null;
         }
 

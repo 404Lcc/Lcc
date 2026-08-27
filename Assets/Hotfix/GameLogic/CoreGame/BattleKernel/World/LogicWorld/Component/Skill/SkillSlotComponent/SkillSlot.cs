@@ -1,5 +1,3 @@
-using HotUpdate.Framework;
-using HotUpdate.Framework.PbCfg;
 using PBConfig;
 
 namespace LccHotfix
@@ -20,6 +18,32 @@ namespace LccHotfix
             {
                 CdTimer = Cfg.Cd;
             }
+        }
+
+        /// <summary>
+        /// 技能释放检查
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public bool Check(LogicEntity self, LogicEntity target)
+        {
+            if (CdTimer > 0)
+            {
+                return false;
+            }
+            if (self.GetTargetingDistance(target) > Cfg.Range)
+            {
+                return false;
+            }
+            if (target.hasComAttributes)
+            {
+                if (!target.GetAttributeBool(AttributeBool.CanBeTargeted))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public void OnRecycle()

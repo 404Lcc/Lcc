@@ -128,17 +128,17 @@ namespace LccHotfix
         {
             if (string.IsNullOrEmpty(target))
             {
-                Log.Error($"目标不能为空");
+                KLogger.LogError($"目标不能为空");
                 return;
             }
             if (string.IsNullOrEmpty(parent))
             {
-                Log.Error($"父节点不能为空");
+                KLogger.LogError($"父节点不能为空");
                 return;
             }
             if (childToParentDict.ContainsKey(target))
             {
-                Log.Error($"{target} 已存在");
+                KLogger.LogError($"{target} 已存在");
                 return;
             }
 
@@ -197,7 +197,7 @@ namespace LccHotfix
 
             if (!IsLeafNode(target))
             {
-                Log.Error("不能删除父节点");
+                KLogger.LogError("不能删除父节点");
                 return;
             }
 
@@ -237,13 +237,13 @@ namespace LccHotfix
 
             if (!IsLeafNode(target))
             {
-                Log.Error("不能在父节点增加");
+                KLogger.LogError("不能在父节点增加");
                 return;
             }
 
             if (nodeCountDict[target].HaveRuntimeData(id))
             {
-                Log.Error($"{target} {id}已存在");
+                KLogger.LogError($"{target} {id}已存在");
                 return;
             }
 
@@ -265,7 +265,7 @@ namespace LccHotfix
 
             if (!IsLeafNode(target))
             {
-                Log.Error("不能删除父节点");
+                KLogger.LogError("不能删除父节点");
                 return;
             }
 
@@ -300,7 +300,7 @@ namespace LccHotfix
         {
             if (!IsLeafNode(target))
             {
-                Log.Error("不能隐藏父节点 " + target);
+                KLogger.LogError("不能隐藏父节点 " + target);
                 return false;
             }
 
@@ -322,7 +322,7 @@ namespace LccHotfix
 
             if (!IsLeafNode(target))
             {
-                Log.Error("不能显示父节点 " + target);
+                KLogger.LogError("不能显示父节点 " + target);
                 return false;
             }
 
@@ -339,13 +339,13 @@ namespace LccHotfix
         {
             if (!nodeCountDict.ContainsKey(target))
             {
-                Log.Error($"{target} 节点不存在");
+                KLogger.LogError($"{target} 节点不存在");
                 return;
             }
 
             if (!IsLeafNode(target))
             {
-                Log.Error($"{target} 不能是父节点");
+                KLogger.LogError($"{target} 不能是父节点");
                 return;
             }
             //提高计数
@@ -353,14 +353,14 @@ namespace LccHotfix
             {
                 if (nodeCountDict[target].GetRuntimeData(id).count == 1)
                 {
-                    Log.Error($"{target} 节点计数已经是1了");
+                    KLogger.LogError($"{target} 节点计数已经是1了");
                     return;
                 }
 
                 nodeCountDict[target].GetRuntimeData(id).count += 1;
                 if (nodeCountDict[target].GetRuntimeData(id).count != 1)
                 {
-                    Log.Error($"{target} 节点计数错误 RetainCount = {nodeCountDict[target]}");
+                    KLogger.LogError($"{target} 节点计数错误 RetainCount = {nodeCountDict[target]}");
                     return;
                 }
             }
@@ -378,7 +378,7 @@ namespace LccHotfix
             int curr = nodeCountDict[target].GetRuntimeData(id).count;
             if (curr < 0 || curr > 1)
             {
-                Log.Error("节点计数错误，节点逻辑错误");
+                KLogger.LogError("节点计数错误，节点逻辑错误");
                 return;
             }
 
@@ -429,7 +429,7 @@ namespace LccHotfix
             nodeCountDict.TryGetValue(key, out var data);
             if (data == null)
             {
-                Log.Error($"没有获取到这个红点数据 {key}");
+                KLogger.LogError($"没有获取到这个红点数据 {key}");
             }
 
             return data;

@@ -1,5 +1,5 @@
+using System;
 using System.Xml;
-using HotUpdate.Framework.PbCfg;
 using PBConfig;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
@@ -21,6 +21,8 @@ namespace LccHotfix
         public float InitAngle { get; set;} = 0f;
         public float AngleAcc { get; set;} = 0f;
         public int Count { get; set;} = 1;
+
+        public Action<CustomNode, VarEnv> SubobjVarInitFuc { get; set; }
 
         public SpawnSubobjectToPosBhvCfg(){}
 
@@ -46,6 +48,12 @@ namespace LccHotfix
         public SpawnSubobjectToPosBhvCfg WithAngleAcc(float angle)
         {
             this.AngleAcc = angle;
+            return this;
+        }
+
+        public SpawnSubobjectToPosBhvCfg WithSubobjVar(Action<CustomNode, VarEnv> initVarEnvAction)
+        {
+            SubobjVarInitFuc = initVarEnvAction;
             return this;
         }
     }
@@ -84,6 +92,7 @@ namespace LccHotfix
             for (int i = 0; i < _cfg.Count; i++)
             {
                 var varEnv = this.GetLogicWorld().GetCreationInfo<BattleKernelCreationInfo>().CustomLogicService.NewVarEnv();
+                _cfg.SubobjVarInitFuc?.Invoke(this, varEnv);
                 var e = this.CreateSubObject(tid, initPos, varEnv);
             }
 

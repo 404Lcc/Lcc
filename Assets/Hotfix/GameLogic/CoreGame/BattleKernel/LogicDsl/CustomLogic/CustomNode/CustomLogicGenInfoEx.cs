@@ -1,4 +1,4 @@
-﻿using PBConfig;
+using PBConfig;
 
 namespace LccHotfix
 {
@@ -31,7 +31,7 @@ namespace LccHotfix
 
     public interface IHasOwnerPlayerInfo
     {
-        IBattlePlayerInfo OwnerPlayerInfo { get; }
+        InGamePlayerInfo OwnerPlayerInfo { get; }
     }
 
     public interface IHasSubobjectSource
