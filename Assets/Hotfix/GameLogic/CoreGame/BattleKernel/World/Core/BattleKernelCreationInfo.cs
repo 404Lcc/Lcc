@@ -83,13 +83,13 @@ namespace LccHotfix
 
         public IUnitOwnerInfoProvider UnitOwnerInfoProvider { get; set; }
 
-        public ICombatPropertyVolumeProvider CombatPropertyVolumeProvider { get; set; }
-
         public ITargetQueryService TargetQueryService { get; set; }
 
         public ISubobjectModelOverrideProvider SubobjectModelOverrideProvider { get; set; }
 
         public ISkillLogicOverrideProvider SkillLogicOverrideProvider { get; set; }
+
+        public ISkillFirePolicy SkillFirePolicy { get; set; }
 
         public IBattleEffectService BattleEffectService { get; set; }
 
@@ -99,7 +99,25 @@ namespace LccHotfix
 
         public IDeathProcessService DeathProcessService { get; set; }
 
+        public IBuffApplyPolicy BuffApplyPolicy { get; set; }
+
+        public IBattleHealthTraceSink HealthTraceSink { get; set; }
+
+        public IMonsterLifecycleSink MonsterLifecycleSink { get; set; }
+
+        public ISubobjectSpawnPolicy SubobjectSpawnPolicy { get; set; }
+
         public IVfxGradeScheduler VfxGradeScheduler { get; set; }
+
+        /// <summary>
+        /// Gameplay 注册的击退实现；未注册时跳过击退。
+        /// </summary>
+        public Action<LogicEntity, Vector3, float, float> HitBackApplier { get; set; }
+
+        /// <summary>
+        /// AddEntity(path) 默认主物体 View 类型。由上层注入（须为 MainGameObjectView 子类）。
+        /// </summary>
+        public Type DefaultMainGameObjectViewType { get; set; }
 
     }
 }

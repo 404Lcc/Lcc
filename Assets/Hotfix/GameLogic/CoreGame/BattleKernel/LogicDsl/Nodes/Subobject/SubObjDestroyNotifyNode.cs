@@ -12,7 +12,7 @@ namespace LccHotfix
             var logicEntity = this.GetOwnerEntity();
             if (logicEntity != null && logicEntity.hasComTransform)
             {
-                this.GetLogicWorld()?.SubobjectLifecycleEventService?.DispatchDestroy(new EvtSubObjDestroy
+                this.GetLogicWorld()?.SubobjectLifecycle?.DispatchDestroy(new EvtSubObjDestroy
                 {
                     Where = logicEntity.comTransform.position,
                 });

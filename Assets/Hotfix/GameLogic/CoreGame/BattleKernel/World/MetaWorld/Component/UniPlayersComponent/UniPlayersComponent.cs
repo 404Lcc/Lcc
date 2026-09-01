@@ -2,13 +2,10 @@ using System.Collections.Generic;
 
 namespace LccHotfix
 {
-
-
     public class UniPlayersComponent : MetaComponent
     {
         private List<InGamePlayerInfo> mPlayerInfoList = new();
         public List<InGamePlayerInfo> PlayerInfoList => mPlayerInfoList;
-
 
         private InGamePlayerInfo mLocalPlayerInfoRef = null;
         public InGamePlayerInfo LocalPlayerInfoRef => mLocalPlayerInfoRef;
@@ -29,6 +26,7 @@ namespace LccHotfix
                     BattleLogger.LogError($"GetPlayerInfo mPlayerInfoList == null, playerUid={playerUid}");
                 return null;
             }
+
             foreach (var info in mPlayerInfoList)
             {
                 if (info.PlayerUid == playerUid)
@@ -36,6 +34,7 @@ namespace LccHotfix
                     return info;
                 }
             }
+
             if (BattleLogger.IsDebugEnabled)
                 BattleLogger.LogError($"GetPlayerInfo return null; playerUid={playerUid}, PlayerCount={PlayerCount}");
             return null;
@@ -49,15 +48,17 @@ namespace LccHotfix
                     BattleLogger.LogError($"GetPlayerInfo mPlayerInfoList == null, index={index}");
                 return null;
             }
+
             if (index >= 0 && index < PlayerCount)
             {
                 return mPlayerInfoList[index];
             }
+
             if (BattleLogger.IsDebugEnabled)
                 BattleLogger.LogError($"GetPlayerInfo return null; index={index}, PlayerCount={PlayerCount}");
             return null;
         }
-        
+
         public void InitPlayerInfoList(List<InGamePlayerInfo> playerInfoList)
         {
             if (playerInfoList == null)

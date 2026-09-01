@@ -19,7 +19,8 @@ namespace LccHotfix
             if (comUniGameMode)
             {
                 var dt = BattleTime.GetDeltaTime(_logicWorld);
-                var modeDt = dt;
+                var mainHero = _logicWorld.GetLogicGroup_Hero();
+                var modeDt = dt * BattleBulletTimeUtility.GetCompensateRatio(mainHero, _metaWorld);
                 var modeLogic = comUniGameMode.GameModeLogic;
                 modeLogic.Update(modeDt);
             }

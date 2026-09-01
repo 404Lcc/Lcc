@@ -12,6 +12,11 @@ namespace LccHotfix
         void LateUpdate();
         void ChangeTarget(Transform target);
         void ShakeCamera(float intensity = 0.5f, float duration = 0.5f);
+
+        /// <summary>
+        /// 每帧 LateUpdate 前绑定 LogicWorld（索敌/小队取景等）。不需要的实现可空实现。
+        /// </summary>
+        void BindLogicWorld(LogicWorld logicWorld);
     }
     
     public class ComUniCameraBlender : MetaComponent

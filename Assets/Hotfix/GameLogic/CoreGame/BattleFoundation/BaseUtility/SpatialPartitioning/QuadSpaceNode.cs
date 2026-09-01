@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace LccHotfix
@@ -18,7 +17,7 @@ namespace LccHotfix
                     return quadrant2;
                 if (index == 3)
                     return quadrant3;
-                throw new ArgumentOutOfRangeException();
+                return null;
             }
         }
         public AQuadSpace quadrant0 { get; internal set; }

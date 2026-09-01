@@ -30,11 +30,6 @@ namespace LccHotfix
             ((LogicEntity)entity).WillBeLeaveWorld();
         }
 
-        public TIndex GetEntityIndex<TComponent, TIndex>()
-        {
-            return (TIndex)GetEntityIndex(typeof(TComponent).Name);
-        }
-
         public T GetCreationInfo<T>() where T : IWorldCreationInfo
         {
             return (T)_creationInfo;

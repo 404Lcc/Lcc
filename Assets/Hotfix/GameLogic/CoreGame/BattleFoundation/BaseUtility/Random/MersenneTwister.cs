@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 namespace LccHotfix
 {
     public class MersenneTwister64

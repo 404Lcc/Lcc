@@ -3,6 +3,40 @@ using PBConfig;
 
 namespace LccHotfix
 {
+    public enum ECategoryVolume
+    {
+        FighterTid, //按局内战斗实体表TID分类，常用于某个战斗实体模板的属性/主技能改写
+        BattleUnit, //按战斗单位属性表TID分类，作用于某类单位属性模板
+        SubobjectTid, //按局内子物体TID分类，常用于子弹/子物体属性与表现覆盖
+        Camp, //按阵营分类，如地球联邦、烈鹰军团、佣兵基地
+        Element, //按元素分类，如弹药、物理、能量、电、力场、暗
+        AttackType, //按攻击类型分类，如弹药系，能量系，机关系
+        UnitType, //按战斗单位类型分类，如敌人、防御者、城墙、召唤物、防御塔、宠物
+        LevelType, //按关卡类型分类，如主线、困难、挑战
+        Skill, //按技能TID分类，作用于具体技能模板
+        Feature, //预留的特性分类，当前未见实际接入
+        EnemyStrength, //按敌人强度分类，如普通、精英、Boss
+        ElementType, //按照伤害类型分类
+    }
+
+    //属性、特性集合（按不确定的各种业务维度分组）
+    public class CategoryVolumeInfo
+    {
+        public PropertySnapshot Property = new();
+    }
+
+    public class CategoryVolumeInfo_Subobject : CategoryVolumeInfo
+    {
+        //分类专属特殊的部分，或者和属性无关的部分，在这里扩展：
+        public string AssetOverride_Main { get; set; } = null; //子弹皮肤 主体
+    }
+
+
+    public class CategoryVolumeInfo_Fighter : CategoryVolumeInfo
+    {
+        public int SkillLogicOverride_Main { get; set; } = -1; //主技能篡改
+    }
+
     //人类、怪物 都可以有一个抽象的归属 Player
     public interface IPlayerInfo : IBattlePlayerInfo
     {
@@ -26,6 +60,25 @@ namespace LccHotfix
 
         public PlayerFeaturesContext FeaturesContext = new();
 
+        /// <summary>
+        /// 被动技能累计的全队固定攻击加成（不含 PropDatas 等其它 Attack 来源）。
+        /// </summary>
+        public double PassiveSkillFlatAtkBonus;
+
+        /// <summary>
+        /// 被动技能累计的全队固定生命加成（不含 PropDatas 等其它 Health 来源）。
+        /// </summary>
+        public double PassiveSkillFlatHpBonus;
+
+        /// <summary>
+        /// 开局快照：天赋侧已激活被动的 LogicId 与等级。局内只读，不回写模块。
+        /// </summary>
+        public List<(int LogicId, int Level)> ActivatedPassiveSkills { get; } = new();
+
+        /// <summary>
+        /// 队长出生时是否已应用过 ActivatedPassiveSkills，避免复活/重建队长双加。
+        /// </summary>
+        public bool ActivatedPassiveSkillsApplied;
 
         public float DebuffDurationAddRate => FeaturesContext.PointDebuffDuration;
 
@@ -54,7 +107,6 @@ namespace LccHotfix
             _categoryVolumes[ECategoryVolume.Skill] = new Dictionary<int, CategoryVolumeInfo>();
             _categoryVolumes[ECategoryVolume.EnemyStrength] = new Dictionary<TEnemyStrengthType, CategoryVolumeInfo>();
             _categoryVolumes[ECategoryVolume.AttackType] = new Dictionary<THeroAttackType, CategoryVolumeInfo>();
-
         }
 
         protected TVolume GetCategory<TKey, TVolume>(ECategoryVolume volumeType, TKey key, bool autoCreate = false) where TKey : notnull where TVolume : CategoryVolumeInfo, new()
@@ -114,11 +166,5 @@ namespace LccHotfix
 
             return Hero.HeroInfos[index];
         }
-
-        public HeroInfo GetCaptainHeroInfo()
-        {
-            return GetHeroInfo(0);
-        }
-        //继续增补
     }
 }

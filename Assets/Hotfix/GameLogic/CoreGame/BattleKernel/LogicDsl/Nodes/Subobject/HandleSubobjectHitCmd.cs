@@ -23,6 +23,7 @@ namespace LccHotfix
         public Vector3? HitBackDirection { get; private set; }
         public float HitBackDistance { get; private set; }
         public Func<CustomNode, float> HitBackEffectAddGetter { get; private set; }
+
         public bool BindHitFxToTarget { get; private set; }
         public float EdgeDamageRatio { get; private set; } = 1f; // 伤害随距离线性递减，边缘的伤害比例
         public float EdgeBuffTimeRatio { get; private set; } = 1f; // buff时间随距离线性递减，边缘的buff时长比例
@@ -197,7 +198,11 @@ namespace LccHotfix
             if (bindTf == null)
                 return false;
 
-            var fx = Main.FxService.Create(hitFxPath, bindTf, mCfg.During);
+            var fx = this.GetLogicWorld()?.GetCreationInfo<BattleKernelCreationInfo>()?.BattleEffectService
+                ?.CreateBoundEffect(hitFxPath, bindTf, mCfg.During);
+            if (fx == null)
+                return false;
+
             TrackBoundHitFx(target, fx);
             return true;
         }
@@ -257,10 +262,19 @@ namespace LccHotfix
 
         private static void ApplyHitBack(HandleSubobjectHitCmd node, LogicEntity ownerEntity, ref HitInfo hitInfo)
         {
-            // var target = ownerEntity.OwnerWorld.GetEntityWithComID(hitInfo.hitEntityID);
-            // var cfg = node.mCfg;
-            // var effectAdd = cfg.HitBackEffectAddGetter != null ? cfg.HitBackEffectAddGetter(node) : 0f;
-            // target.ApplyHitBack(cfg.HitBackDirection.Value, cfg.HitBackDistance, effectAdd);
+            var applier = node.GetLogicWorld()
+                ?.GetCreationInfo<BattleKernelCreationInfo>()
+                ?.HitBackApplier;
+            if (applier == null)
+                return;
+
+            var target = ownerEntity.OwnerWorld?.GetEntityWithComID(hitInfo.hitEntityID);
+            if (target == null)
+                return;
+
+            var cfg = node.mCfg;
+            var effectAdd = cfg.HitBackEffectAddGetter != null ? cfg.HitBackEffectAddGetter(node) : 0f;
+            applier(target, cfg.HitBackDirection.Value, cfg.HitBackDistance, effectAdd);
         }
 
         private void ExecuteHitEffect(CustomNode node, LogicEntity entity, LogicEntity target, HitInfo hitInfo)
@@ -286,6 +300,7 @@ namespace LccHotfix
                 {
                     buffMaxLvlDict.TryGetValue(buffLogicID, out var maxLvl);
                     var genInfo = node.CreateBuffGenInfoFromUnit(target, buffLogicID, maxLvl);
+                    AdjustMeiFreezeBuff(node, buffLogicID, genInfo);
                     mCfg.BuffPreEnvAction?.Invoke(this, genInfo, hitInfo);
                     genInfo.PreEnv.WriteVar(CvKey.CV_SubobjHitInfo, hitInfo);
 
@@ -314,6 +329,27 @@ namespace LccHotfix
                 var killCmd = new EntityCommand { CmdType = EntityCmdType.Nt_Kill };
                 entity.SendCmd(killCmd);
             }
+        }
+
+        private static void AdjustMeiFreezeBuff(CustomNode node, int buffLogicID, BuffGenInfo genInfo)
+        {
+            if (buffLogicID != 5100003 || genInfo == null)
+                return;
+
+            var playerInfo = node.GetOwnerPlayerInfo();
+            var features = playerInfo?.FeaturesContext;
+            if (features == null)
+                return;
+
+            if (genInfo.SumUnitSource.FighterTid != 1993)
+                return;
+
+            genInfo.DurationAddSeconds += features.MeiFreezeDurationAddSeconds;
+            genInfo.SourceDurationAddRate += features.MeiFreezeDurationAddRate;
+            if (BattleLogger.IsDebugEnabled && (features.MeiFreezeSlowAmplify > 0f || features.MeiFreezeDurationAddSeconds > 0f))
+                BattleLogger.LogDebug($"小美 深度减速触发冰冻：slowAmplify={features.MeiFreezeSlowAmplify:F2}, durationAdd={features.MeiFreezeDurationAddSeconds:F2}, buffLevel={genInfo.BuffLevel}, maxLevel={genInfo.BuffMaxLevel}");
+            if (BattleLogger.IsDebugEnabled && (features.MeiFreezeDurationAddRate > 0f || features.MeiFrozenTargetDamageAmplify > 0f))
+                BattleLogger.LogDebug($"小美 永冻延长触发冰冻：durationAddRate={features.MeiFreezeDurationAddRate:F2}, frozenTargetDamageAmplify={features.MeiFrozenTargetDamageAmplify:F0}, buffLevel={genInfo.BuffLevel}, maxLevel={genInfo.BuffMaxLevel}");
         }
     }
 }
