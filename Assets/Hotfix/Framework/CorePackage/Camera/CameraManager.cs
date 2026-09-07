@@ -15,7 +15,7 @@ namespace LccHotfix
             {
                 if (_mainCamera == null)
                 {
-                    _mainCamera = GameObject.Find("Global/MainCamera").GetComponent<Camera>();
+                    _mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
                 }
 
                 return _mainCamera;
@@ -30,7 +30,7 @@ namespace LccHotfix
             {
                 if (_uiCamera == null)
                 {
-                    _uiCamera = GameObject.Find("Global/UI Root/UICamera").GetComponent<Camera>();
+                    _uiCamera = GameObject.Find("UIRoot/UICamera").GetComponent<Camera>();
                 }
 
                 return _uiCamera;
@@ -45,7 +45,7 @@ namespace LccHotfix
             {
                 if (_adaptCamera == null)
                 {
-                    _adaptCamera = GameObject.Find("Global/AdaptCamera").GetComponent<Camera>();
+                    _adaptCamera = GameObject.Find("AdaptCamera").GetComponent<Camera>();
                 }
 
                 return _adaptCamera;
