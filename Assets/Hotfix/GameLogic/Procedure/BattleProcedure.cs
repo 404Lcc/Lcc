@@ -18,6 +18,8 @@ namespace LccHotfix
             //进入
             KLogger.Log("进入Battle");
 
+            Main.UIService.ShowDomain(UIRootDefine.UIRootBattle, UIPanelDefine.UIBattlePanel);
+            
             ProcedureLoadEndHandler();
         }
 

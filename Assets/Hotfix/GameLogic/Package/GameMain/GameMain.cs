@@ -108,9 +108,7 @@ namespace LccHotfix
 
             HotfixBridgeService.Init();
             LanguageService.Init();
-            var uiRootAsset = AssetService.LoadAssetAsync<GameObject>("UIRoot");
-            yield return uiRootAsset;
-            var uiRoot = new UIRoot(GameObject.Instantiate(uiRootAsset.AssetHandle().AssetObject as GameObject));
+            var uiRoot = new UIRoot(GameObject.Find("UIRoot"));
             UIService.Init(uiRoot);
             FishNetService.Init();
             MirrorService.Init();

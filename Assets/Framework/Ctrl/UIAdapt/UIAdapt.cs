@@ -36,16 +36,16 @@ namespace LccModel
         }
         private void Start()
         {
-            _adaptRoot = (RectTransform)GameObject.Find("Global/AdaptCanvas").transform;
-            _uiUpCanvasRoot = (RectTransform)GameObject.Find("Global/AdaptCanvas/UpCanvas").transform;
-            _uiDownCanvasRoot = (RectTransform)GameObject.Find("Global/AdaptCanvas/DownCanvas").transform;
-            _uiLeftCanvasRoot = (RectTransform)GameObject.Find("Global/AdaptCanvas/LeftCanvas").transform;
-            _uiRightCanvasRoot = (RectTransform)GameObject.Find("Global/AdaptCanvas/RightCanvas").transform;
+            _adaptRoot = (RectTransform)GameObject.Find("AdaptCanvas").transform;
+            _uiUpCanvasRoot = (RectTransform)GameObject.Find("AdaptCanvas/UpCanvas").transform;
+            _uiDownCanvasRoot = (RectTransform)GameObject.Find("AdaptCanvas/DownCanvas").transform;
+            _uiLeftCanvasRoot = (RectTransform)GameObject.Find("AdaptCanvas/LeftCanvas").transform;
+            _uiRightCanvasRoot = (RectTransform)GameObject.Find("AdaptCanvas/RightCanvas").transform;
             //urp下设置主相机 buildin下设置ui相机
 #if URP
-            _mainCamera = GameObject.Find("Global/MainCamera").GetComponent<Camera>();
+            _mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
 #else
-            _mainCamera = GameObject.Find("Global/UIRoot/UICamera").GetComponent<Camera>();
+            _mainCamera = GameObject.Find("UIRoot/UICamera").GetComponent<Camera>();
 #endif
             AdaptUIRoot(true, true, leftOffset, rightOffset);
         }

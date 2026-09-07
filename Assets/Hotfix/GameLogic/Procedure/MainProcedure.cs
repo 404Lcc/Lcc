@@ -27,7 +27,7 @@ namespace LccHotfix
         // 初始化显示
         public IEnumerator LoadProcedureCoroutine()
         {
-            Main.UIService.ShowElement(UIPanelDefine.UIMainPanel);
+            Main.UIService.ShowDomain(UIRootDefine.UIRootMain, UIPanelDefine.UIMainPanel);
 
             yield return new WaitForSeconds(1f);
 

@@ -4630,6 +4630,8 @@
     <type fullname="UnityEngine.EventSystems.PhysicsRaycaster" preserve="all" />
     <type fullname="UnityEngine.EventSystems.RaycastResult" preserve="all" />
     <type fullname="UnityEngine.EventSystems.UIBehaviour" preserve="all" />
+    <type fullname="UnityEditor.Rendering.BuiltIn.ShaderGraph.MaterialAccess" preserve="all" />
+    <type fullname="UnityEditor.Rendering.Universal.MaterialAccess" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;" preserve="all" />
     <type fullname="UnitySourceGeneratedAssemblyMonoScriptTypes_v1+MonoScriptData" preserve="all" />
     <type fullname="UnityEngine.UI.Button+ButtonClickedEvent" preserve="all" />
@@ -4717,8 +4719,8 @@
     <type fullname="UnityEngine.EventSystems.StandaloneInputModule+InputMode" preserve="all" />
     <type fullname="UnityEngine.EventSystems.PhysicsRaycaster+RaycastHitComparer" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=12" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=5568" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=7637" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=5680" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=7924" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Model">
     <type fullname="UIAnimCtrl" preserve="all" />

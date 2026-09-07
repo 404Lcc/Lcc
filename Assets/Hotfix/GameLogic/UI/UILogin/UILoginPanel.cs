@@ -12,7 +12,8 @@ namespace LccHotfix
         public override void OnConstruct()
         {
             base.OnConstruct();
-            
+
+            LayerID = UILayerID.Main;
             IsFullScreen = true;
         }
 
@@ -25,18 +26,11 @@ namespace LccHotfix
         public override void OnShow(object[] paramsList)
         {
             base.OnShow(paramsList);
-            Main.UIService.ShowElement(UIPanelDefine.UIMainPanel, null);
         }
-
-
-
-
-
 
         public void OnStartBtn()
         {
-            Main.UIService.ShowElement(UIPanelDefine.UIBattlePanel, null);
-            // Main.ProcedureService.ChangeProcedure(ProcedureType.Main.ToInt());
+            Main.ProcedureService.ChangeProcedure(ProcedureType.Main.ToInt());
         }
     }
 }
