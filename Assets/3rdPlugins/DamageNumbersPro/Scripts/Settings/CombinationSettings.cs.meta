@@ -9,3 +9,10 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 186447
+  packageName: Damage Numbers Pro
+  packageVersion: 4.41
+  assetPath: Assets/DamageNumbersPro/Scripts/Settings/CombinationSettings.cs
+  uploadId: 708824

@@ -90,3 +90,10 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 186447
+  packageName: Damage Numbers Pro
+  packageVersion: 4.41
+  assetPath: Assets/DamageNumbersPro/Demo/Textures/Sprites/Other/DNP_Background.png
+  uploadId: 708824

@@ -108,3 +108,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 186447
+  packageName: Damage Numbers Pro
+  packageVersion: 4.41
+  assetPath: Assets/DamageNumbersPro/Demo/Models/Target/Target.fbx
+  uploadId: 708824
