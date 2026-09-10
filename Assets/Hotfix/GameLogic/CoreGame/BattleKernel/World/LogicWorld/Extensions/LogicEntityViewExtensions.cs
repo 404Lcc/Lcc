@@ -5,7 +5,7 @@ namespace LccHotfix
     /// <summary>
     /// LogicEntity 主视图、挂点和表现 Transform 查询相关扩展。
     /// </summary>
-    public static class LogicEntityViewExtensions
+    public static partial class LogicEntityViewExtensions
     {
         /// <summary>
         /// 获取实体主 GameObject 视图包装器。
