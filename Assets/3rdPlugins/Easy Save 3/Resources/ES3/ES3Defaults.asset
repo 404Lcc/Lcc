@@ -35,11 +35,8 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
-    - andywiecko.BurstTriangulator
-    - AstarPathfindingProject
     - BroAudio
     - DamageNumbersPro
-    - Drawing
     - EasySave3
     - EnhancedScroller_asmdef
     - FishNet.Demos
@@ -58,7 +55,7 @@ MonoBehaviour:
     - Mirror.Authenticators
     - Mirror.Components
     - Mirror.Transports
-    - PackageTools
+    - NavMeshPlus
     - SimpleWebTransport
     - Telepathy
     - Unity.3rdPlugin

@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1472ed1154690b54295b6628da303301, type: 3}
+  m_Name: ModelBindPointSettings
+  m_EditorClassIdentifier: Unity.Editor::ModelBindPointSettings
+  BindPointNameList:
+  - Fire
+  - Weapon
+  ModelRootPath: {fileID: 102900000, guid: 4706ca8d6f4d18649a4dd2579a05bb56, type: 3}
+  folderPath: Assets/Res
+  CodeGeneratePath: /Hotfix/GameLogic/Utility/Model/
+  PrefabPaths:
+  - Assets/Res/Gameplay/Prefabs/Character/Character_1.prefab
+  - Assets/Res/Gameplay/Prefabs/Character/Skeleton_Soldier.prefab
+  - Assets/Res/Gameplay/Prefabs/Maps/Map1.prefab
+  - Assets/Res/Gameplay/Prefabs/Subobject/CoreGrenade.prefab
+  - Assets/Res/Gameplay/Prefabs/Subobject/CoreProjectile.prefab
+  - Assets/Res/Gameplay/Prefabs/Subobject/CoreRocket.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/AcidSplash.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/BodyHit.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/Explosion.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/groundLandDust.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/InvulnerabilityHit.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/ObstacleHit.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/PickUpAmmoFX.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/PickUpGrenadeFX.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/PickUpHealthFX.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/PickUpShieldFX.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/PickUpWeaponFX.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/PlayerSpawn.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/PortalEnterFX.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/PortalExitFX.prefab
+  - Assets/Res/Gameplay/Prefabs/VFX/RocketExplosion.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapon/Axe.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapon/Blunt.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapon/Bow.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapon/Crossbow.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapon/Gun.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapon/Spear.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapon/Staff.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapon/Sword.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapon/Wand.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapons/Pistol.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapons/Rifle.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapons/RocketLauncher.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapons/Shotgun.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapons/SMG.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapons/Sniper.prefab
+  - Assets/Res/Gameplay/Prefabs/Weapons/Uzi.prefab
+  - Assets/Res/Gameplay/Prefabs/WorldElements/JumpPad.prefab
+  - Assets/Res/Gameplay/Prefabs/WorldElements/Portal.prefab
+  - Assets/Res/Prefab/DNP/DNP.prefab
+  - Assets/Res/Prefab/FishNet/FishNetManagerSteam.prefab
+  - Assets/Res/Prefab/FishNet/FishNetManagerTugboat.prefab
+  - Assets/Res/Prefab/Icon/RewardNormal.prefab
+  - Assets/Res/Prefab/Map/Map.prefab
+  - Assets/Res/Prefab/Mirror/MirrorNetworkManagerKCP.prefab
+  - Assets/Res/Prefab/Mirror/MirrorNetworkManagerSteam.prefab
+  - Assets/Res/Prefab/Mirror/MirrorUnit.prefab
+  - Assets/Res/Prefab/Panel/UIBattlePanel.prefab
+  - Assets/Res/Prefab/Panel/UIForceGuide.prefab
+  - Assets/Res/Prefab/Panel/UIForeGroundPanel.prefab
+  - Assets/Res/Prefab/Panel/UIHeadbarPanel.prefab
+  - Assets/Res/Prefab/Panel/UILoginPanel.prefab
+  - Assets/Res/Prefab/Panel/UIMainPanel.prefab
+  - Assets/Res/Prefab/Panel/UIRoot.prefab
