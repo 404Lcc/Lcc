@@ -130,29 +130,47 @@ namespace LccHotfix
 
         public void AddSubLoader(IViewLoader curViewData, int parentCategory, IViewLoader loaderData)
         {
+            if (!TryGetLoaderByCategory(curViewData, parentCategory, out var parent))
+            {
+                UnityEngine.Debug.LogError($"Add view loader failed! Reason : parentCategory = {parentCategory} not found, pls check.");
+                return;
+            }
+
             if (!TryAddAllDoneDict(loaderData))
             {
                 return;
             }
 
-            if (curViewData.Category == parentCategory)
+            if (parent.SubLoaderList == null)
+                parent.SubLoaderList = new List<IViewLoader>();
+            parent.SubLoaderList.Add(loaderData);
+        }
+
+        private bool TryGetLoaderByCategory(IViewLoader curData, int category, out IViewLoader result)
+        {
+            if (curData.Category == category)
             {
-                curViewData.SubLoaderList.Add(loaderData);
+                result = curData;
+                return true;
             }
-            else
+
+            if (curData.SubLoaderList != null)
             {
-                for (int i = 0; i < curViewData.SubLoaderList.Count; i++)
+                for (int i = 0; i < curData.SubLoaderList.Count; i++)
                 {
-                    var subLoader = curViewData.SubLoaderList[i];
-                    AddSubLoader(subLoader, parentCategory, loaderData);
+                    if (TryGetLoaderByCategory(curData.SubLoaderList[i], category, out result))
+                        return true;
                 }
             }
+
+            result = null;
+            return false;
         }
 
         /// <summary>
         /// 每加载完一个物体，接收回来
         /// </summary>
-        public void ReceiveLoaded(int category, IReceiveLoaded loaded, LogicEntity owner, ECWorlds world)
+        public void ReceiveLoaded(int category, IReceiveLoaded loaded, LogicEntity owner, LogicWorld world)
         {
             if (!_allDoneViewDict.TryGetValue(category, out var existLoaded))
             {
@@ -185,12 +203,12 @@ namespace LccHotfix
         /// <summary>
         /// 准备部署
         /// </summary>
-        public void Deploy(ECWorlds world)
+        public void Deploy(LogicWorld world)
         {
             Deploy(mainViewData, null, world);
         }
 
-        private void Deploy(IViewLoader loader, IViewWrapper parentView, ECWorlds world)
+        private void Deploy(IViewLoader loader, IViewWrapper parentView, LogicWorld world)
         {
             if (!_allDoneViewDict.TryGetValue(loader.Category, out var loaded))
             {
@@ -207,7 +225,7 @@ namespace LccHotfix
             }
         }
 
-        private IViewWrapper DeployView(IViewLoader loader, ECWorlds world, IReceiveLoaded loaded, IViewWrapper parentView)
+        private IViewWrapper DeployView(IViewLoader loader, LogicWorld world, IReceiveLoaded loaded, IViewWrapper parentView)
         {
             if (loader.IsDeploy)
             {
@@ -216,7 +234,7 @@ namespace LccHotfix
             }
 
             // 从本局 ViewWrapperPool 取出包装对象，避免每次 Activator
-            var view = world.LogicWorld.ViewWrapperPool.Acquire(loader.ViewClassType);
+            var view = world.ViewWrapperPool.Acquire(loader.ViewClassType);
             if (view != null)
             {
                 view.Bind(loaded, loader.Category, world);
@@ -341,7 +359,7 @@ namespace LccHotfix
                 curData = loaderData;
                 return true;
             }
-            else
+            else if (curData.SubLoaderList != null)
             {
                 for (int i = 0; i < curData.SubLoaderList.Count; i++)
                 {

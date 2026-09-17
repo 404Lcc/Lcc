@@ -15,7 +15,7 @@ namespace LccHotfix
         /// <summary>
         /// 绑定 Category；loaded/world 由子类按需使用。
         /// </summary>
-        public virtual void Bind(IReceiveLoaded loaded, int category, ECWorlds world)
+        public virtual void Bind(IReceiveLoaded loaded, int category, LogicWorld world)
         {
             Category = category;
         }

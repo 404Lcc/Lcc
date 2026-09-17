@@ -15,7 +15,7 @@ namespace LccHotfix
         /// <summary>
         /// 从池取出后绑定 loaded/category/world，替代原构造函数。
         /// </summary>
-        void Bind(IReceiveLoaded loaded, int category, ECWorlds world);
+        void Bind(IReceiveLoaded loaded, int category, LogicWorld world);
         void Init(long entityId, IViewLoader loader, IViewWrapper parent);
         void SyncTransform(long entityId, Vector3 position, Quaternion rotation, Vector3 scale);
         void ModifyVisible(bool visible, int flag);

@@ -6,6 +6,7 @@ namespace LccHotfix
     public class MainGameObjectView : IViewWrapper
     {
         private static readonly int MaterialParam_BuffIndex = Shader.PropertyToID("_Index");
+        private static readonly int MaterialParam_FrozenColor = Shader.PropertyToID("_FrozenColor");
         protected ObjReceiveLoaded _loader;
 
         public GameObject GameObject
@@ -43,7 +44,7 @@ namespace LccHotfix
         /// <summary>
         /// 绑定 ObjReceiveLoaded 与 Category，重置显隐；可被池化复用。
         /// </summary>
-        public virtual void Bind(IReceiveLoaded loaded, int category, ECWorlds world)
+        public virtual void Bind(IReceiveLoaded loaded, int category, LogicWorld world)
         {
             Category = category;
             if (loaded is ObjReceiveLoaded objLoaded)
@@ -172,6 +173,21 @@ namespace LccHotfix
                     continue;
 
                 r.material.SetFloat(MaterialParam_BuffIndex, index);
+            }
+        }
+
+        public void SetFrozenColor(Color color)
+        {
+            if (GameObject == null)
+                return;
+
+            var renderers = GameObject.GetComponentsInChildren<SkinnedMeshRenderer>(true);
+            foreach (var r in renderers)
+            {
+                if (r == null || ShouldSkipMaterialRenderer(r.transform))
+                    continue;
+
+                r.material.SetColor(MaterialParam_FrozenColor, color);
             }
         }
 

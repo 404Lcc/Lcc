@@ -76,7 +76,7 @@ namespace LccHotfix
         {
             if (entity.hasComViewLoader)
             {
-                entity.ComViewLoader.ReceiveLoaded(category, loaded, entity, _worlds);
+                entity.ComViewLoader.ReceiveLoaded(category, loaded, entity, _worlds.LogicWorld);
             }
             else
             {

@@ -10,6 +10,8 @@ namespace LccHotfix
 {
     public class ScrollerProEx : ScrollRect
     {
+        /// <summary>为 false 时禁用拖动滚动，仍可用滚轮。</summary>
+        public bool enableDragScroll = true;
 
         private bool routeToParent = false;
 
@@ -46,6 +48,9 @@ namespace LccHotfix
         /// </summary>
         public override void OnDrag(UnityEngine.EventSystems.PointerEventData eventData)
         {
+            if (!enableDragScroll)
+                return;
+
             if (routeToParent)
                 DoForParents<IDragHandler>((parent) => { parent.OnDrag(eventData); });
             else
@@ -57,6 +62,9 @@ namespace LccHotfix
         /// </summary>
         public override void OnBeginDrag(UnityEngine.EventSystems.PointerEventData eventData)
         {
+            if (!enableDragScroll)
+                return;
+
             if (!horizontal && Math.Abs(eventData.delta.x) > Math.Abs(eventData.delta.y))
                 routeToParent = true;
             else if (!vertical && Math.Abs(eventData.delta.x) < Math.Abs(eventData.delta.y))
@@ -75,6 +83,12 @@ namespace LccHotfix
         /// </summary>
         public override void OnEndDrag(UnityEngine.EventSystems.PointerEventData eventData)
         {
+            if (!enableDragScroll)
+            {
+                routeToParent = false;
+                return;
+            }
+
             if (routeToParent)
                 DoForParents<IEndDragHandler>((parent) => { parent.OnEndDrag(eventData); });
             else
