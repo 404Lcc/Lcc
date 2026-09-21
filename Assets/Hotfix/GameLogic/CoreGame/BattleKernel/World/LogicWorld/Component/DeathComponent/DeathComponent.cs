@@ -9,6 +9,16 @@ namespace LccHotfix
             get { return _deathProcess; }
             set { _deathProcess = value; }
         }
+
+        /// <summary>是否正常击杀。false 表示机制销毁（离开地图等）。</summary>
+        public bool IsNormalKilled = true;
+
+        public override void DisposeOnRemove()
+        {
+            base.DisposeOnRemove();
+            IsNormalKilled = true;
+            _deathProcess = null;
+        }
     }
 
     public partial class LogicEntity
