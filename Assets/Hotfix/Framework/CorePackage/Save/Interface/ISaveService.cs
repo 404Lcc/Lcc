@@ -65,6 +65,16 @@ namespace LccHotfix
         void LoadSaveFile(string name);
 
         /// <summary>
+        /// 只读查看存档（不切换当前存档）
+        /// </summary>
+        SaveData PeekSaveFile(string name);
+
+        /// <summary>
+        /// 删除存档
+        /// </summary>
+        void DeleteSaveFile(string name);
+
+        /// <summary>
         /// 保存存档
         /// </summary>
         void SaveFile();

@@ -335,6 +335,26 @@ namespace LccHotfix
             }
         }
 
+        public SaveData PeekSaveFile(string name)
+        {
+            if (!CheckHaveSaveFile(name))
+                return null;
+            return _saveHelper.LoadSaveFile(name);
+        }
+
+        public void DeleteSaveFile(string name)
+        {
+            if (!CheckHaveSaveFile(name))
+                return;
+            _saveHelper.Delete(name);
+            if (_currentGameSaveName == name)
+            {
+                _currentGameSaveName = null;
+                _currentGameSaveData = null;
+                IsSaveLoaded = false;
+            }
+        }
+
         /// <summary>
         /// 保存当前存档
         /// </summary>
