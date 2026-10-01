@@ -15,6 +15,7 @@ namespace LccHotfix
 
             LayerID = UILayerID.Main;
             IsFullScreen = true;
+            EscapeType = EscapeType.Skip;
         }
 
         public override void OnCreate()
