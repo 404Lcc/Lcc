@@ -1,0 +1,3 @@
+{
+    "InitBanks": ["AudioBankUI", "AudioBankCombat", "AudioBankMusic"]
+}

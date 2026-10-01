@@ -243,5 +243,6 @@ namespace LccHotfix
         public const string CV_SubobjHitInfo = "CV_SubobjHitInfo";
 
         #endregion
+        public const string CV_AudioEventId = "CV_AudioEventId"; // 音频事件 ID
     }
 }

@@ -327,5 +327,25 @@ namespace LccHotfix
         {
             EvtShowForceGuide.Broadcast(guidePath, type, handOffsetPos);
         }
+        public static void PlayCombatSound(string eventName, Vector3 position = default)
+        {
+            var audioEvent = Main.AudioService.CreateEvent("Combat", eventName);
+            if (audioEvent == null)
+            {
+                return;
+            }
+            audioEvent.Pos = position;
+            audioEvent.Play();
+        }
+
+        public static void PlayUISound(string eventName)
+        {
+            Main.AudioService.Play("UI", eventName);
+        }
+
+        public static void PlayMusic(string eventName)
+        {
+            Main.AudioService.Play("Music", eventName);
+        }
     }
 }

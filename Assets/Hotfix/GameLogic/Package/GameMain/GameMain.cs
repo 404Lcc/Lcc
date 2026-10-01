@@ -81,6 +81,7 @@ namespace LccHotfix
             SaveService.Init();
             SettingService.Init();
             AudioService.Init();
+            AudioService.SetStereo(new AudioStereoZombie());
             VibrationService.Init();
             GuideService.SetGuideCheckFinish(new GuideCheckFinish());
             GuideService.SetGuidePersistence(new GuidePersistence());

@@ -101,6 +101,27 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
+    - GroupName: Audio
+      GroupDesc: 
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/Content/Audio/Clip
+        CollectorGUID: e5ce47a24f39ed8439e1088fdbdab56c
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/Content/Audio/Mixer
+        CollectorGUID: 10853ea7d64b5c245b4bfa5ecbc54430
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
   - PackageName: RawFilePackage
     PackageDesc: 
     EnableAddressable: 1
@@ -158,4 +179,26 @@ MonoBehaviour:
         PackRuleName: PackRawFile
         FilterRuleName: CollectAll
         AssetTags: vn;vn_strings
+        UserData: 
+
+    - GroupName: Audio
+      GroupDesc: 
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/Content/Audio/Bank
+        CollectorGUID: c9df1a97dc3fbf9449bb77df102ad9e4
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackRawFile
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/Content/Audio/Meta
+        CollectorGUID: 6c596020920a4d340ad4531e9936399e
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackRawFile
+        FilterRuleName: CollectAll
+        AssetTags: 
         UserData: 

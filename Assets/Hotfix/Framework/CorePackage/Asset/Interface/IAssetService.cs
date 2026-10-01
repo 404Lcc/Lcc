@@ -24,5 +24,9 @@ namespace LccHotfix
         public AssetHandle LoadAssetSync<T>(string location, EAssetGroup group = EAssetGroup.Default) where T : UnityEngine.Object;
 
         public RawFileHandle LoadAssetRawFileSync(string location, EAssetGroup group = EAssetGroup.Default);
+
+        public void Release(EAssetGroup group);
+
+        public void Release(string location, EAssetGroup group = EAssetGroup.Default);
     }
 }
