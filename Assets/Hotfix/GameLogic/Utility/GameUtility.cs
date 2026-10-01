@@ -91,6 +91,11 @@ namespace LccHotfix
             return GetLanguageKey((int)id);
         }
 
+        public static Color GetColor(string str)
+        {
+            return ColorUtility.TryParseHtmlString(str, out var color) ? color : Color.white;
+        }
+
         public static T GetModel<T>() where T : ModelTemplate
         {
             return Main.ModelService.GetModel<T>();
@@ -346,6 +351,15 @@ namespace LccHotfix
         public static void PlayMusic(string eventName)
         {
             Main.AudioService.Play("Music", eventName);
+        }
+
+        public static void StopMusic()
+        {
+            var allMusicEvents = Main.AudioService.GetEvents(typeof(AudioEventMusic).Name);
+            foreach (var musicEvent in allMusicEvents)
+            {
+                musicEvent.Stop();
+            }
         }
     }
 }
