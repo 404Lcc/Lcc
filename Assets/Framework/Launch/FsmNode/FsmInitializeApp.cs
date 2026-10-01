@@ -19,7 +19,7 @@ namespace LccModel
             LoadBuildConfig();
             LoadVersionConfig();
 
-            // Settings > 系统语言 > 默认语言
+            // 对齐 trunk：Settings > 系统语言 > 默认语言
             {
                 var languageName = FileHelper.LoadString(AppConfig.LocalizationSettingsNamePath);
                 if (string.IsNullOrEmpty(languageName))
@@ -60,11 +60,12 @@ namespace LccModel
                 return;
             }
 
-            // 暂统一使用 font_default，后续可按语言换专用 TTF
-            Font fontAssetCur = Resources.Load<Font>("Fonts/font_default");
+            Font fontAssetCur = Resources.Load<Font>("Fonts/" + AppConfig.AppLanguage);
+            if (fontAssetCur == null)
+                fontAssetCur = Resources.Load<Font>("Fonts/font_default");
             if (fontAssetCur == null)
             {
-                Debug.LogError("[Launch] Missing Fonts/font_default");
+                Debug.LogError($"[Launch] Missing Fonts/{AppConfig.AppLanguage} and Fonts/font_default");
                 return;
             }
 

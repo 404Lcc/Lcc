@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,18 +26,22 @@ namespace LccModel
         {
             private MessageBoxParams _params;
             private GameObject _gameObject;
-            private Text _Text_Content;
+            private TextMeshProUGUI _Text_Content;
             private readonly List<Transform> _btnList = new();
             public bool ActiveSelf => _gameObject.activeSelf;
 
             public void Create(GameObject gameObject)
             {
                 _gameObject = gameObject;
-                _Text_Content = gameObject.transform.Find("Text_Content").GetComponent<Text>();
+                _Text_Content = gameObject.transform.Find("Frame/Text_Content").GetComponent<TextMeshProUGUI>();
+                // 启动 UI 在 HotUpdate 加载前实例化，不能挂 LocalizedText；标题走 Launch 字表
+                var title = gameObject.transform.Find("Frame/Titlee")?.GetComponent<TextMeshProUGUI>();
+                if (title != null)
+                    title.text = StringTable.Get("Hint.Title");
 
                 for (var i = 0; i <= 1; i++)
                 {
-                    var trans = gameObject.transform.Find($"HLG_Buttons/Btn_{i + 1}");
+                    var trans = gameObject.transform.Find($"Frame/HLG_Buttons/Btn_{i + 1}");
                     _btnList.Add(trans);
                 }
             }
@@ -52,7 +57,7 @@ namespace LccModel
                     if (i < _params.btnOptionList.Count)
                     {
                         trans.gameObject.SetActive(true);
-                        trans.GetComponentInChildren<Text>().text = _params.btnOptionList[i].name;
+                        trans.GetComponentInChildren<TextMeshProUGUI>().text = _params.btnOptionList[i].name;
                         var btn = trans.GetComponent<Button>();
                         var btnIndex = i;
                         btn.onClick.RemoveAllListeners();
@@ -93,18 +98,18 @@ namespace LccModel
         private readonly EventGroup _uniEventGroup = new();
         private readonly List<MessageBox> _msgBoxList = new();
         private GameObject _messageBoxObj;
-        private Text _Text_Version;
-        private Text _Text_Desc;
-        private Text _Text_Progress;
+        private TextMeshProUGUI _Text_Version;
+        private TextMeshProUGUI _Text_Desc;
+        private TextMeshProUGUI _Text_Progress;
         private Slider _Slider_Progress;
         private float _desiredProgress = 0f;
 
         private void Init()
         {
-            _Text_Version = transform.Find("Canvas/Text_Version").GetComponent<Text>();
-            _Text_Desc = transform.Find("Canvas/Text_Desc").GetComponent<Text>();
+            _Text_Version = transform.Find("Canvas/Text_Version").GetComponent<TextMeshProUGUI>();
+            _Text_Desc = transform.Find("Canvas/Text_Desc").GetComponent<TextMeshProUGUI>();
             _Slider_Progress = transform.Find("Canvas/Slider").GetComponent<Slider>();
-            _Text_Progress = transform.Find("Canvas/Slider/Text_Progress").GetComponent<Text>();
+            _Text_Progress = transform.Find("Canvas/Slider/Text_Progress").GetComponent<TextMeshProUGUI>();
             _messageBoxObj = transform.Find("Canvas/MessageBox").gameObject;
             _messageBoxObj.SetActive(false);
             SetHint(string.Empty);

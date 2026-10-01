@@ -1,0 +1,21 @@
+{
+	"Launch.FsmNode.FsmRequestVersion": "Requesting version info...",
+	"Launch.FsmNode.FsmInitializePackage": "Initializing asset packages...",
+	"Launch.FsmNode.FsmRequestPackageVersion": "Requesting package version info...",
+	"Launch.FsmNode.FsmUpdatePackageManifest": "Updating asset manifest...",
+	"Launch.FsmNode.FsmCreateDownloader": "Creating download handler...",
+	"Launch.FsmNode.FsmDownloadPackageFiles": "Downloading asset files...",
+	"Launch.FsmNode.FsmClearCacheBundle": "Clearing unused cached files...",
+	"Launch.FsmNode.FsmStartGame": "Launching game...",
+	"Hint.FoundPatchFiles": "{0} update files detected. Tap Confirm to proceed.",
+	"Hint.InitializePackageFailed": "Failed to initialize the file system. Tap Retry. {0}",
+	"Hint.UpdatePackageManifestFailed": "Failed to update the asset manifest. Tap Retry. {0}",
+	"Hint.DownloadPackageFilesFailed": "Failed to download update files. Tap Retry. {0}",
+	"Hint.RequestVersionFailed": "Failed to retrieve version info. Tap Retry. {0}",
+	"Hint.Title": "Thông báo",
+	"Hint.BaseVersionTooLow": "The current version is too low. Please download again from the store.",
+	"Op.Confirm": "Confirm",
+	"Op.Cancel": "Cancel",
+	"Op.Retry": "Retry",
+	"Op.Quit": "Quit"
+	}

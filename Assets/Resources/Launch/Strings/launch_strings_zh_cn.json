@@ -12,6 +12,7 @@
 	"Hint.UpdatePackageManifestFailed":"更新资源清单失败，点击重试。{0}",
 	"Hint.DownloadPackageFilesFailed":"下载更新资源失败，点击重试。{0}",
 	"Hint.RequestVersionFailed":"获取版本信息失败，点击重试。{0}",
+	"Hint.Title":"提示",
 	"Hint.BaseVersionTooLow":"当前版本过低，需要更新应用程序。",
 	"Op.Confirm":"确认",
 	"Op.Cancel":"取消",
