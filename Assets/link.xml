@@ -4745,7 +4745,7 @@
     <type fullname="LccModel.UIForeGroundPanel+&lt;&gt;c__DisplayClass6_0" preserve="all" />
     <type fullname="LccModel.UIScreenBackgroundMessage" preserve="all" />
     <type fullname="LccModel.GameConfig" preserve="all" />
-    <type fullname="LccModel.LanguageConfig" preserve="all" />
+    <type fullname="LccModel.AppConfig" preserve="all" />
     <type fullname="LccModel.StringTable" preserve="all" />
     <type fullname="LccModel.Version" preserve="all" />
     <type fullname="LccModel.VersionConfig" preserve="all" />
@@ -4801,6 +4801,7 @@
     <type fullname="LccModel.ByteExtension" preserve="all" />
     <type fullname="LccModel.StringExtension" preserve="all" />
     <type fullname="LccModel.TransformExtension" preserve="all" />
+    <type fullname="LccModel.FileHelper" preserve="all" />
     <type fullname="LccModel.FileUtility" preserve="all" />
     <type fullname="LccModel.ClassInfo" preserve="all" />
     <type fullname="LccModel.HotfixFunc" preserve="all" />
@@ -4821,8 +4822,8 @@
     <type fullname="LccModel.LocalDialog" preserve="all" />
     <type fullname="LccModel.OpenFileName" preserve="all" />
     <type fullname="&lt;PrivateImplementationDetails&gt;" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2076" preserve="all" />
-    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3311" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=2071" preserve="all" />
+    <type fullname="&lt;PrivateImplementationDetails&gt;+__StaticArrayInitTypeSize=3304" preserve="all" />
     <type fullname="Mirror.GeneratedNetworkCode" preserve="all" />
   </assembly>
 </linker>

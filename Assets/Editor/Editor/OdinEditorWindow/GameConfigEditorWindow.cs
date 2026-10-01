@@ -32,9 +32,6 @@ namespace LccEditor
 
             TextAsset version = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/GameConfig/GameConfig_Version.txt");
             FileUtility.SaveAsset("Assets/Resources/GameConfig_Version.txt", version.bytes.ByteXOR(bytes));
-
-            TextAsset language = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/GameConfig/GameConfig_Language.txt");
-            FileUtility.SaveAsset("Assets/Resources/GameConfig_Language.txt", language.bytes.ByteXOR(bytes));
             AssetDatabase.SaveAssets();
         }
 
@@ -47,9 +44,6 @@ namespace LccEditor
 
             var version = FileUtility.GetAsset("Assets/Resources/GameConfig_Version.txt").ByteXOR(bytes).Utf8ToStr();
             Debug.Log("version=" + version);
-            var language = FileUtility.GetAsset("Assets/Resources/GameConfig_Language.txt").ByteXOR(bytes).Utf8ToStr();
-            Debug.Log("language=" + language);
-
         }
     }
 }

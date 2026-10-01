@@ -7,7 +7,7 @@ dotnet %LUBAN_DLL% ^
     -c cs-simple-json ^
     -d json ^
     --conf %CONF_ROOT%\luban.conf ^
-    -x outputCodeDir=..\Assets/Hotfix/GameLogic/Package/Config/Gen ^
-    -x outputDataDir=..\Assets/Res/Config
+    -x outputCodeDir=..\Assets/Hotfix/GameLogic/Package/LubanConfig/Gen ^
+    -x outputDataDir=..\Assets/Res/LubanConfig
 
 pause

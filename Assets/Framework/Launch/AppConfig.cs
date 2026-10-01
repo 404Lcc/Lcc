@@ -1,8 +1,25 @@
 using System.Collections.Generic;
+using UnityEngine;
 using YooAsset;
 
 namespace LccModel
 {
+    public static class AppConfig
+    {
+        public static string AppLanguage = "zh_cn";
+        public const string LocalizationSettingsNamePath = "Settings/localization";
+        public const string DefaultLanguage = "zh_cn";
+
+        public static readonly Dictionary<SystemLanguage, string> LanguageDict = new()
+        {
+            { SystemLanguage.Chinese, "zh_cn" },
+            { SystemLanguage.ChineseSimplified, "zh_cn" },
+            { SystemLanguage.ChineseTraditional, "zh_tw" },
+            { SystemLanguage.English, "en" },
+            { SystemLanguage.Vietnamese, "vn" },
+        };
+    }
+
     public static class StringTable
     {
         public static Dictionary<string, string> Strings = new();

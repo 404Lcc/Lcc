@@ -52,7 +52,7 @@ namespace LccHotfix
             LccModel.Event.RemoveListener(type, handle);
         }
 
-        public static string GetLanguageText(string key, params object[] args)
+        public static string GetLanguage(string key, params object[] args)
         {
             if (string.IsNullOrEmpty(key))
             {
@@ -60,27 +60,35 @@ namespace LccHotfix
                 return "";
             }
 
-            return Main.LanguageService.GetValue(key, args);
+            var value = LocalizationManager.Instance.GetString(key, args);
+            return value != null ? value.Replace("\\n", "\n") : key;
+        }
+
+        public static string GetLanguageText(string key, params object[] args)
+        {
+            return GetLanguage(key, args);
         }
 
         public static string GetLanguageText(int id, params object[] args)
         {
-            return Main.LanguageService.GetValue(id, args);
+            KLogger.LogError($"GetLanguageText(id) 已废弃，请改用 key。id={id}");
+            return id.ToString();
         }
 
         public static string GetLanguageText(uint id, params object[] args)
         {
-            return Main.LanguageService.GetValue(id, args);
+            return GetLanguageText((int)id, args);
         }
 
         public static string GetLanguageKey(int id)
         {
-            return Main.LanguageService.GetKey(id);
+            KLogger.LogError($"GetLanguageKey(id) 已废弃，请改用 key。id={id}");
+            return "";
         }
 
         public static string GetLanguageKey(uint id)
         {
-            return Main.LanguageService.GetKey(id);
+            return GetLanguageKey((int)id);
         }
 
         public static T GetModel<T>() where T : ModelTemplate

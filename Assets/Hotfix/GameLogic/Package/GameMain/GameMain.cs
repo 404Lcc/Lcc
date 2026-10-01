@@ -59,7 +59,6 @@ namespace LccHotfix
             PlatformService = Current.AddModule<PlatformManager>();
             IconService = Current.AddModule<IconManager>();
             HotfixBridgeService = Current.AddModule<HotfixBridge>();
-            LanguageService = Current.AddModule<LanguageManager>();
             FishNetService = Current.AddModule<FishNetManager>();
             FishNetService.SetHelper(new SteamFishNetHelper());
             FishNetService.SetServerMessageDispatcherHelper(new FishNetServerPBMessageDispatcherHelper());
@@ -107,7 +106,7 @@ namespace LccHotfix
             }
 
             HotfixBridgeService.Init();
-            LanguageService.Init();
+            LocalizationManager.Init();
             var uiRoot = new UIRoot(GameObject.Find("UIRoot"));
             UIService.Init(uiRoot);
             FishNetService.Init();
@@ -168,7 +167,6 @@ namespace LccHotfix
         public static IPlatformService PlatformService { get; set; }
         public static IIconService IconService { get; set; }
         public static IHotfixBridgeService HotfixBridgeService { get; set; }
-        public static ILanguageService LanguageService { get; set; }
         public static IFishNetService FishNetService { get; set; }
         public static IMirrorService MirrorService { get; set; }
         public static ISteamService SteamService { get; set; }
