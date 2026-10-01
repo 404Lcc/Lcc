@@ -24,12 +24,12 @@ MonoBehaviour:
     AutoCollectShaders: 1
     IgnoreRuleName: NormalIgnoreRule
     Groups:
-    - GroupName: Default Group
+    - GroupName: AotDlls
       GroupDesc: 
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/Res/AotDlls
+      - CollectPath: Assets/Content/AotDlls
         CollectorGUID: 1af528ad0407c4644bd2eeddf4d2f2a5
         CollectorType: 0
         AddressRuleName: AddressByFileName
@@ -37,15 +37,25 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-      - CollectPath: Assets/Res/LubanConfig
-        CollectorGUID: 85a87c3283d80e648806d4270202367f
+    - GroupName: LubanConfig
+      GroupDesc: 
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/Content/LubanConfig
+        CollectorGUID: b168fa97cfbe3084dad164c014d359e5
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
         FilterRuleName: CollectAll
         AssetTags: luban
         UserData: 
-      - CollectPath: Assets/Res/DLL
+    - GroupName: DLL
+      GroupDesc: 
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/Content/DLL
         CollectorGUID: 59291aea2effad245bb7b8190da3f1fc
         CollectorType: 0
         AddressRuleName: AddressByFileName
@@ -53,48 +63,78 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-      - CollectPath: Assets/Res/Prefab
-        CollectorGUID: 8a795a9c4dd701040acc53899eb1c555
+    - GroupName: FishNet
+      GroupDesc: 
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/Content/FishNet
+        CollectorGUID: 7bf6ea3ee5f69b747800cb52a1151fe4
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-      - CollectPath: Assets/Res/Sprite
-        CollectorGUID: effd061a8c4b2b54eb3672bb57ff9ecb
+    - GroupName: Gameplay
+      GroupDesc: 
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/Content/Gameplay
+        CollectorGUID: d96359addfe47d047afa319ce4e0a24d
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-      - CollectPath: Assets/Res/Texture
-        CollectorGUID: d6266c9619c3dfc4aa3e036866896768
+    - GroupName: Guide
+      GroupDesc: 
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/Content/Guide
+        CollectorGUID: c3b00e8868d03ef449acd6e53d5d3ae5
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-      - CollectPath: Assets/Res/Shader
+    - GroupName: Mirror
+      GroupDesc: 
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/Content/Mirror
+        CollectorGUID: 108e35d157984f545a867cd1d6e167e2
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+    - GroupName: Shader
+      GroupDesc: 
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/Content/Shader
         CollectorGUID: 6db33767d82da51459dd5809e20bf2a8
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
-        FilterRuleName: CollectShader
-        AssetTags: 
-        UserData: 
-      - CollectPath: Assets/Res/Material
-        CollectorGUID: e46501acfb1f98d429f8685b2769eac4
-        CollectorType: 0
-        AddressRuleName: AddressByFileName
-        PackRuleName: PackDirectory
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-      - CollectPath: Assets/Res/Guide
-        CollectorGUID: c3b00e8868d03ef449acd6e53d5d3ae5
+    - GroupName: UI
+      GroupDesc: 
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/Content/UI
+        CollectorGUID: 62ea9ffa3b60abc49a90ad1d66140ecf
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
@@ -130,58 +170,7 @@ MonoBehaviour:
     AutoCollectShaders: 1
     IgnoreRuleName: RawFileIgnoreRule
     Groups:
-    - GroupName: Local
-      GroupDesc: 
-      AssetTags: 
-      ActiveRuleName: EnableGroup
-      Collectors:
-      - CollectPath: Assets/Content/Config/Local
-        CollectorGUID: deb8ccbc7c084c06805e2b1bdf0d8d33
-        CollectorType: 0
-        AddressRuleName: AddressByFileName
-        PackRuleName: PackRawFile
-        FilterRuleName: CollectAll
-        AssetTags: 
-        UserData: 
-    - GroupName: Localization
-      GroupDesc: 
-      AssetTags: 
-      ActiveRuleName: EnableGroup
-      Collectors:
-      - CollectPath: Assets/Content/Config/Localization/zh_cn/Strings
-        CollectorGUID: ecd0b6c17e6b4337bd28c6e9a3e77431
-        CollectorType: 0
-        AddressRuleName: AddressDisable
-        PackRuleName: PackRawFile
-        FilterRuleName: CollectAll
-        AssetTags: zh_cn;zh_cn_strings
-        UserData: 
-      - CollectPath: Assets/Content/Config/Localization/zh_tw/Strings
-        CollectorGUID: 15e239fc4ca24c1aa00d94c23c5e6db9
-        CollectorType: 0
-        AddressRuleName: AddressDisable
-        PackRuleName: PackRawFile
-        FilterRuleName: CollectAll
-        AssetTags: zh_tw;zh_tw_strings
-        UserData: 
-      - CollectPath: Assets/Content/Config/Localization/en/Strings
-        CollectorGUID: 1ea36c68a27245798e1d34a0f6db95fe
-        CollectorType: 0
-        AddressRuleName: AddressDisable
-        PackRuleName: PackRawFile
-        FilterRuleName: CollectAll
-        AssetTags: en;en_strings
-        UserData: 
-      - CollectPath: Assets/Content/Config/Localization/vn
-        CollectorGUID: 579beee7d2394d0c9d705ad7a3318fc7
-        CollectorType: 0
-        AddressRuleName: AddressDisable
-        PackRuleName: PackRawFile
-        FilterRuleName: CollectAll
-        AssetTags: vn;vn_strings
-        UserData: 
-
-    - GroupName: Audio
+    - GroupName: AudioRaw
       GroupDesc: 
       AssetTags: 
       ActiveRuleName: EnableGroup
@@ -201,4 +190,54 @@ MonoBehaviour:
         PackRuleName: PackRawFile
         FilterRuleName: CollectAll
         AssetTags: 
+        UserData: 
+    - GroupName: Local
+      GroupDesc: 
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/Content/Config/Local
+        CollectorGUID: 439daeabf0274661b086e238e38fd101
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackRawFile
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+    - GroupName: Localization
+      GroupDesc: 
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/Content/Config/Localization/zh_cn/Strings
+        CollectorGUID: 55b8170c9c144314968c157ada6291db
+        CollectorType: 0
+        AddressRuleName: AddressDisable
+        PackRuleName: PackRawFile
+        FilterRuleName: CollectAll
+        AssetTags: zh_cn;zh_cn_strings
+        UserData: 
+      - CollectPath: Assets/Content/Config/Localization/zh_tw/Strings
+        CollectorGUID: 29d5650c5b0f4b729f70a885e5488c6e
+        CollectorType: 0
+        AddressRuleName: AddressDisable
+        PackRuleName: PackRawFile
+        FilterRuleName: CollectAll
+        AssetTags: zh_tw;zh_tw_strings
+        UserData: 
+      - CollectPath: Assets/Content/Config/Localization/en/Strings
+        CollectorGUID: 15811ecf9c374fc4a555ec03134070c4
+        CollectorType: 0
+        AddressRuleName: AddressDisable
+        PackRuleName: PackRawFile
+        FilterRuleName: CollectAll
+        AssetTags: en;en_strings
+        UserData: 
+      - CollectPath: Assets/Content/Config/Localization/vn
+        CollectorGUID: 77576208c3dc46458162fd96aa3d8e5f
+        CollectorType: 0
+        AddressRuleName: AddressDisable
+        PackRuleName: PackRawFile
+        FilterRuleName: CollectAll
+        AssetTags: vn;vn_strings
         UserData: 
