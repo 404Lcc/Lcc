@@ -25,5 +25,6 @@ namespace LccHotfix
         public static IBadgeService BadgeService { get; set; }
         public static ICustomLogicService CustomLogicService { get; set; }
         public static IGuideService GuideService { get; set; }
+        public static ILocalizationService LocalizationService { get; set; }
     }
 }

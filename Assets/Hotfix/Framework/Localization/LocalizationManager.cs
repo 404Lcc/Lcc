@@ -4,16 +4,8 @@ using UnityEngine;
 
 namespace LccHotfix
 {
-    public class LocalizationManager : Singleton<LocalizationManager>
+    internal class LocalizationManager : Module, ILocalizationService
     {
-        public static void Init()
-        {
-            var reload = _instance != null;
-            var instance = Instance;
-            if (reload)
-                instance.LoadDefaultLanguage();
-        }
-
         private Language _language = Language.unknown;
         private readonly LocalizationData _localizationData = new();
 
@@ -23,12 +15,16 @@ namespace LccHotfix
             set => SetLanguage(value);
         }
 
-        protected override void OnInit()
+        public void Init()
         {
             LoadDefaultLanguage();
         }
 
-        protected override void OnDestroy()
+        internal override void Update(float elapseSeconds, float realElapseSeconds)
+        {
+        }
+
+        internal override void Shutdown()
         {
             _language = Language.unknown;
             _localizationData.Unload();

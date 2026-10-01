@@ -60,7 +60,7 @@ namespace LccHotfix
                 return "";
             }
 
-            var value = LocalizationManager.Instance.GetString(key, args);
+            var value = Main.LocalizationService.GetString(key, args);
             return value != null ? value.Replace("\\n", "\n") : key;
         }
 

@@ -47,6 +47,7 @@ namespace LccHotfix
             ProcedureService = Current.AddModule<ProcedureManager>();
             ProcedureService.SetProcedureHelper(new DefaultProcedureHelper());
             AtlasService = Current.AddModule<AtlasManager>();
+            LocalizationService = Current.AddModule<LocalizationManager>();
             UIService = Current.AddModule<UIManager>();
             ThreadSyncService = Current.AddModule<ThreadSyncManager>();
             GizmoService = Current.AddModule<GizmoManager>();
@@ -106,7 +107,7 @@ namespace LccHotfix
             }
 
             HotfixBridgeService.Init();
-            LocalizationManager.Init();
+            LocalizationService.Init();
             var uiRoot = new UIRoot(GameObject.Find("UIRoot"));
             UIService.Init(uiRoot);
             FishNetService.Init();
