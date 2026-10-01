@@ -35,7 +35,6 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
-    - BroAudio
     - DamageNumbersPro
     - EasySave3
     - EnhancedScroller_asmdef
