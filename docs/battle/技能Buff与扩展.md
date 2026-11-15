@@ -47,7 +47,7 @@
   → 计算伤害 → 应用结果 → 记录伤害 → 派发 EvtAfterDamage
 ```
 
-[SysHandleDamage.cs](../../Assets/Hotfix/GameLogic/CoreGame/BattleKernel/World/Systems/Battle/SysHandleDamage/SysHandleDamage.cs) 在 `Initialize()` 注册伤害与治疗处理函数，在 `TearDown()` 移除。它没有逐帧 `Execute()`；事件同步还是排队派发取决于注入的服务实现，不能根据它位于 Battle 注册阶段就断言伤害一律在帧末统一结算。
+[SysHandleDamage.cs](../../Assets/Hotfix/GameLogic/CoreGame/BattleKernel/World/Systems/Battle/SysHandleDamage/SysHandleDamage.cs) 在 `Initialize()` 注册伤害与治疗处理函数，在 `TearDown()` 移除。它没有逐帧 `Execute()`；伤害事件的处理时刻由注入的服务实现决定：同步派发时在调用处处理，排队派发时在服务消费队列时处理。
 
 新增技能时优先复用现有伤害入口，让计算、应用和后续通知保持完整，不在某个节点里直接修改生命值绕过这条链路。死亡转换和最终实体清理由相应处理及 `SysDeathProcess` 承接。
 
@@ -73,8 +73,8 @@
 
 当前 `BattleKernelWorld` 是抽象类。实际接入还需要玩法世界子类及 CreationInfo，准备模式配置、服务实现和模式 GenInfo。玩法初始化必须在内核基础初始化之后、模式初始化之前完成；扩展 `AddInitializeSystems` 时先保留基类注册。
 
-这部分属于玩法实现工作，本页未生成对应代码，也没有将旧文档中的世界类当作现成可复制入口。
+玩法世界及初始化系统需要在 Gameplay 层实现，服务注入与初始化顺序见 [玩法接入示例](玩法接入示例.md)。
 
-内容依据当前源码整理，代码示例未在 Unity 中编译运行。完整战斗案例见 [施法到清理案例](施法到清理案例.md)。
+完整战斗案例见 [施法到清理案例](施法到清理案例.md)。
 
 动态前摇、连射、子物体穿透与灼烧 DOT 的实际配置经验，见 [技能与 Buff 示例](技能与Buff示例.md)。

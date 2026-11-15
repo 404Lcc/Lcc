@@ -23,7 +23,7 @@ DSL 是领域专用语言。本项目通过 **C# 方法、配置对象和节点�
 
 配置用 **容器名 + LogicConfigID** 查找。技能表 ID 与 DSL 配置 ID 也不是一回事：技能创建代码先从技能表取得 `LogicID`，必要时再由策略替换，最后到技能逻辑容器中查找。
 
-`DefaultLogicType` 默认是 `CustomLogic`。如果调用方要求 `CreateLogic<SkillLogic>`，配置产生的根类型也必须相容，不能只改容器名就认为普通逻辑已成为技能逻辑。
+`DefaultLogicType` 默认是 `CustomLogic`。如果调用方要求 `CreateLogic<SkillLogic>`，配置产生的根类型也必须与 `SkillLogic` 相容；容器名仅用于查找配置，不决定实例类型。
 
 ### 初始信息、上下文与黑板
 
@@ -36,11 +36,11 @@ DSL 是领域专用语言。本项目通过 **C# 方法、配置对象和节点�
 
 工厂优先使用 `genInfo.PreEnv`；没有输入黑板时从对象池创建。随后调用 `CopyToPreVarEnv`，让特化 GenInfo 写入上下文，再初始化节点。
 
-根配置的缺省黑板在装配时复制到运行黑板，默认跳过已经存在的同类型同 Key 值。因此调用方预先传入的参数可以覆盖配置缺省值。黑板对象中的引用值仍然是引用，不应将这种复制理解为业务对象的深拷贝。
+根配置的缺省黑板在装配时复制到运行黑板，默认跳过已经存在的同类型同 Key 值。因此调用方预先传入的参数可以覆盖配置缺省值。黑板中的引用值按引用复制，指向的业务对象仍由调用方按所有权约定管理。
 
 节点通过 `SetVar<T>`、`GetVar<T>`、`TryGetVar<T>` 访问黑板。`GetVar<T>` 缺值时返回传入的缺省值或 `default(T)`，必要参数应使用 `TryGetVar<T>` 等方式显式检查。
 
-[VarEnv.cs](../../Assets/Hotfix/Framework/CoreGame/CustomLogic/CustomLogic.Base/LogicParts/VariablesLib/VarEnv.cs) 按类型路由存储：普通值类型使用对应桶，引用类型走 `object` 桶，`uint` 使用 `int` 桶路由。不要假定所有泛型类型都严格隔离，也不要依赖隐式数值转换。读写时保持 Key 与类型约定一致。
+[VarEnv.cs](../../Assets/Hotfix/Framework/CoreGame/CustomLogic/CustomLogic.Base/LogicParts/VariablesLib/VarEnv.cs) 按类型路由存储：普通值类型使用对应桶，引用类型走 `object` 桶，`uint` 使用 `int` 桶路由。部分类型共用存储桶，读写时需要保持 Key 与类型约定一致，数值类型转换应由调用方显式处理。
 
 ## 从配置到执行，再到回收
 
@@ -67,7 +67,7 @@ flowchart TD
 
 根逻辑把子节点的更新接口和停止判定接口缓存起来。组合节点负责自己的子节点驱动，因此不是根逻辑每帧把整棵树中所有节点都更新一遍。
 
-`Templete(id)` 保留了源码中的拼写，表示从当前容器引用另一份配置，在装配时展开其节点。当前实现用集合记录已展开 ID，同一根装配过程中重复遇到 ID 也会被拦截；不要把它当成支持任意重复引用的独立子逻辑调用。
+`Templete(id)` 保留了源码中的拼写，表示从当前容器引用另一份配置，在装配时展开其节点。当前实现用集合记录已展开 ID，同一根装配过程中重复遇到 ID 也会被拦截，因此同一模板 ID 在该次装配中只能展开一次。
 
 ### 节点的激活、开始与更新
 
@@ -80,7 +80,7 @@ flowchart TD
 
 `Update(float dt)` 的返回值是**剩余时间片**。顺序节点可以把前一个节点未消耗的时间交给后一个节点；它不是完成百分比，也不是布尔成功值。
 
-尤其要注意：[CustomLogicManager](../../Assets/Hotfix/Framework/CorePackage/CustomLogic/CustomLogicManager.cs) 的模块 `Update` 为空。创建实例不会自动开始持续执行，必须由 System 或其他持有者调用实例的 `Update`。
+[CustomLogicManager](../../Assets/Hotfix/Framework/CorePackage/CustomLogic/CustomLogicManager.cs) 的模块 `Update` 为空。创建实例不会自动开始持续执行，必须由 System 或其他持有者调用实例的 `Update`。
 
 ### 停止与资源所有权
 
@@ -111,6 +111,6 @@ flowchart TD
 
 顺序执行与根节点列表也不同：根列表中的多个可更新节点并不会自动等待前一个完成。需要先后关系时，明确包进 `Seq`。
 
-普通 `DelegateBhv` 默认在 `OnBegin` 调用一次委托。它没有单独的持续停止约束，因此不宜用一个“每帧委托”配置直接冒充可持续的顺序阶段；持续行为应有明确的更新与停止机制。
+普通 `DelegateBhv` 默认在 `OnBegin` 调用一次委托。它没有单独的持续停止约束，需要在 Seq 中持续执行的行为，应同时提供更新逻辑和停止条件。
 
-内容依据当前源码整理，代码示例未在 Unity 中编译运行。完整战斗案例见 [施法到清理案例](施法到清理案例.md)。
+完整战斗案例见 [施法到清理案例](施法到清理案例.md)。
