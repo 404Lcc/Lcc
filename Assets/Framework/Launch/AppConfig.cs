@@ -38,8 +38,8 @@ namespace LccModel
 
     public class Version
     {
-        public int MinVersion;
-        public int MaxVersion;
+        public int MinVersion;//服务器最小支持的app版本
+        public int MaxVersion;//服务器最新版本资源号
     }
 
     public class VersionConfig
